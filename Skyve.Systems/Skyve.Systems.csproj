@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+	<Import Project="../../Skyve/Config.props" />
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<Description>Helps to manage your mods and assets</Description>
+		<Configurations>Debug;Release;Stable</Configurations>
+		<DebugType>embedded</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<Nullable>enable</Nullable>
+		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Deterministic>false</Deterministic>
+		<TargetFramework>net4.7.2</TargetFramework>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
+		<SignAssembly>True</SignAssembly>
+		<NeutralLanguage>en</NeutralLanguage>
+	</PropertyGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Properties\*.json" />
+		<EmbeddedResource Include="Properties\*\*.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+		<ProjectReference Include="..\Skyve.Domain\Skyve.Domain.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="System.Net.Http" />
+		<Reference Include="System.Windows.Forms" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+	</ItemGroup>
+</Project>

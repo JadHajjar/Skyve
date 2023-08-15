@@ -1,0 +1,231 @@
+{
+  "Usage": "Bruk",
+  "Stability": "Stabilitet",
+  "ApplyContinue": "Bruk og fortsett",
+  "Previous": "Forrige",
+  "Skip": "Hopp",
+  "Note": "Notat",
+  "NoteInfo": "Ekstra informasjonstekst som vises for pakken",
+  "BlackListName": "Svarteliste etter navn",
+  "BlackListId": "Black-list by name",
+  "GlobalTags": "Globale merker",
+  "GlobalTagsInfo": "Tagger alle spillere vil se i appen",
+  "Links": "Lenker",
+  "StatusesCount": "Statuses ({0})",
+  "InteractionCount": "Interaksjoner ({0})",
+  "AddStatus": "Legge til status",
+  "AddInteraction": "Legg til samspill",
+  "NotReviewed": "Ikke revidert ennå",
+  "Stable": "Stabil",
+  "NotEnoughInformation": "Ikke nok informasjon",
+  "HasIssues": "Har problemer",
+  "Broken": "Ødelagt",
+  "Incompatible": "Inkompatibel",
+  "CityBuilding": "Bybygging",
+  "AssetCreation": "Opprettelse av ressurs",
+  "MapCreation": "Verdens opprettelse",
+  "NoAction": "Ikke gjør noe",
+  "SubscribeToPackages": "Abonner på koblede pakker",
+  "RequiresConfiguration": "Krever en bestemt konfigurasjon",
+  "SelectOne": "Velg enten en",
+  "UnsubscribeThis": "Avslutt abonnement fra denne pakken",
+  "UnsubscribeOther": "Avslutt abonnement fra linkede pakker",
+  "Switch": "Bytt til lenket pakke",
+  "FlippedSwitch": "Bytt til denne pakken",
+  "Deprecated": "Foreldet",
+  "Reupload": "Re-Last opp",
+  "CausesIssues": "Årsaker saker",
+  "SavesCantLoadWithoutIt": "Lagring kan ikke laste uten det",
+  "TestVersion": "Test versjon",
+  "DependencyMod": "Avhengighet mod",
+  "SourceCodeNotAvailable": "Kilde-kode er ikke tilgjengelig",
+  "MusicCanBeCopyrighted": "Inkludert musikk kan opphavsrett",
+  "IncompleteDescription": "Ufullstendig beskrivelse",
+  "Successor": "Successor",
+  "LoadAfter": "Last inn etter ..",
+  "Alternative": "Alternative",
+  "SameFunctionality": "Same Functionality",
+  "RequirementAlternative": "Requirement Alternative",
+  "IncompatibleWith": "Inkompatibel med ..",
+  "CausesIssuesWith": "Årsaker saker med ..",
+  "RequiredPackages": "Krever ..",
+  "StatusType": "Status^type",
+  "InteractionType": "Interaksjons type",
+  "MissingDependency": "Mangler komponent",
+  "Caution": "Forsiktig",
+  "Warning": "Advarsel",
+  "AttentionRequired": "Merknad kreves",
+  "Website": "Nettside",
+  "Donation": "Doner",
+  "ManageSinglePackage": "Behandle bestemte pakker",
+  "ManageCompatibilityData": "Administrer kompatibilitetsdata",
+  "YourPackages": "Administrer dine pakker",
+  "AddPackages": "Legg til pakker",
+  "ConfirmEndSession": "Er du sikker på at du vil avslutte økten?",
+  "CrDataLoadFailed": "Kunne ikke laste inn data, prøv igjen senere",
+  "AddGlobalTag": "Legg til et globalt merke",
+  "ReuseData": "Gjenbruk tidligere data",
+  "ReuseData_Tip": "Gjenbruk kompatibilitetsdataene fra din siste lagrede pakke for dette alternativet.\r\nHold Shift for å også bruke og fortsett",
+  "PleaseReviewTheStability": "Vennligst se etter stabiliteten på denne pakken før du lagrer.",
+  "PleaseReviewPackageStatuses": "Vennligst se statusene til denne pakken før du lagrer.\r\nNoen har en ugyldig statustype.",
+  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageUsage": "Velg en gyldig bruk for denne pakken.",
+  "Interaction_Alternative": {
+    "One": "'{1}' kan brukes som et alternativ til '{0}'.",
+    "Plural": "En av de følgende pakkene kan brukes som et alternativ til '{0}."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' og '{1}' har samme funksjonalitet.",
+    "Plural": "'{0}' og følgende pakker har samme funksjonalitet."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' og '{1}' er ikke kompatible med hverandre.",
+    "Plural": "'{0}' er ikke kompatibel med noen av følgende pakker."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' kan forårsake problemer når brukt med '{1}'.",
+    "Plural": "'{0}' kan forårsake problemer når den brukes med følgende mods."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "Du mangler en nødvendig pakke for '{0}.",
+    "Plural": "Du mangler følgende nødvendige pakker for '{0}."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "Du mangler en valgfri pakke for '{0}.",
+    "Plural": "Du mangler følgende valgfrie pakker for '{0}."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' fullføres av '{1}'.",
+    "Plural": "'{0}' lykkes med enten en av de følgende pakkene."
+  },
+  "Interaction_LoadAfter": {
+    "One": "'{0}' vil laste inn direkte etter '{1}'.",
+    "Plural": "'{0}' vil laste inn direkte etter følgende pakker."
+  },
+  "Interaction_Identical": "Dette er flere versjoner av samme pakke.\r\n\r\nDu bør bare velge en av dem.",
+  "Status_Succeeded": "'{0}' fullføres av '{1}'.\r\n\r\nDu bruker allerede '{1}' så det er ingen behov for '{0}' lenger.",
+  "Status_Deprecated": "'{0}' er foreldet, den støttes ikke lenger av dens forfatter.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_Reupload": {
+    "Zero": "'{0}' er gjenopplasting av en originalpakke.",
+    "One": "Dette er gjenopplasting av '{1}."
+  },
+  "Status_CausesIssues": "'{0}' forårsaker problemer med ditt spill.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "Når du oppretter en ny lagring med '{0}er aktivert. du vil ikke lenger kunne laste den lagringen hvis '{0}' er deaktivert.",
+    "One": "Når du oppretter en ny lagring med '{0}er aktivert. du vil ikke lenger kunne laste den lagringen hvis '{0}' er deaktivert.\r\n\r\nBruk '{1}' for å gjenopprette lagringen din ved behov. Les Workshop-beskrivelsen for mer informasjon."
+  },
+  "Status_TestVersion": {
+    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_MissingDlc": {
+    "One": "You're missing the '{0}' DLC to use this package.",
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_DependencyMod": "Dette er en avhengighetsmod, men det ser ikke ut til at du bruker alle pakkene som krever det.",
+  "Status_SourceCodeNotAvailable": "Kildekoden til denne modden er ikke tilgjengelig. Du bør ikke bruke den med mindre du stoler på forfatteren.",
+  "SourceAvailable": "Kildekoden er tilgjengelig",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "Musikken i denne pakken kan kanskje bli opphavsrettet. Det er ikke best å bruke den mens den strømmes.",
+  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_SourceAvailable": "Denne pakken vil ikke advare om manglende kildekode.",
+  "Status_StandardMod": "Denne pakken ignoreres under behandling av modifikasjonene for å bli feilsøkt.",
+  "OutputText": "Forventet utgang",
+  "Stability_AssetNotReviewed": "Denne eiendelen er ikke gjennomgått ennå.\r\n\r\nInfo om kompatibilitet kan være unøyaktig, men eiendeler er generelt stabil",
+  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_Stable": "Denne pakken er stabil.",
+  "Stability_NotEnoughInformation": "Det er ikke nok informasjon til å gjennomgå denne pakken på riktig måte.",
+  "Stability_HasIssues": "Denne pakken kan forårsake problemer.\r\nVær forsiktig mens du bruker den.",
+  "Stability_Broken": "Denne pakken er ødelagt.\r\nDet er kjent for å enten ødelegge spillet eller bare ikke fungere.",
+  "Stability_Incompatible": "Denne pakken er ikke kompatibel med eller i stykker, spillet.\r\n\r\nDu bør fjerne den umiddelbart.",
+  "Stability_Local": "Denne pakken er en lokal versjon av dens opprinnelige mod '{0}.\r\n\r\nLokale versjoner brukes vanligvis til testformål eller i tilfelle du ikke har Steam.\r\n\r\nSjekk pakkens lenker for å se etter oppdateringer til moden.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "You should subscribe to the following package.",
+    "Plural": "You should subscribe to these packages."
+  },
+  "Action_RequiresConfiguration": "Du bør følge følgende instruksjoner:",
+  "Action_SelectOne": {
+    "One": "You should only use one between '{0}' and '{1}'.",
+    "Plural": "You should only use one between '{0}' and the following packages."
+  },
+  "Action_UnsubscribeThis": "Du bør avslutte abonnement fra '{0}.",
+  "Action_UnsubscribeOther": {
+    "One": "Du bør avslutte abonnement fra '{1}.",
+    "Plural": "You should unsubscribe from the following packages."
+  },
+  "Action_ExcludeThis": "Du skal ekskludere '{0}.",
+  "ExcludeThis": "Ekskluder denne pakken",
+  "Exclude": "Ekskluder",
+  "Unsubscribe": "Avmeld",
+  "Action_ExcludeOther": {
+    "One": "Du skal ekskludere '{1}.",
+    "Plural": "You should exclude the following packages."
+  },
+  "Action_Switch": {
+    "One": "Du burde bytte til '{1}'.",
+    "Plural": "You should switch to one of the following packages."
+  },
+  "NoRequiredDlcs": "Ingen påkrevde DLC-er",
+  "DlcsSelected": {
+    "One": "DLC valgte {0}",
+    "Plural": "DLC-er valgt ut {0}"
+  },
+  "RequiredDLCs": "Required DLCs/CCPs",
+  "CRT_Stability": "Stabilitet",
+  "CRT_Successors": "Vellykkede",
+  "CRT_RequiredPackages": "Nødvendige pakker",
+  "CRT_OptionalPackages": "Valgfrie pakker",
+  "CRT_DlcMissing": "Manglende DLC-er/CCPer",
+  "CRT_Compatibility": "Kompatibilitetsproblemer",
+  "CRT_Alternatives": "Alternativer",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "Uklarhet",
+  "LastReviewDate": "Det ble sist revidert {0}",
+  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReview": "Request Review",
+  "MissingDependencyCount": {
+    "One": "{0} {1} mangler avhengigheter",
+    "Plural": "{0} {1} mangler avhengigheter"
+  },
+  "CautionCount": "{0} {1} hvor forsiktighet bør utvises",
+  "WarningCount": "{0} {1} med en advarsel",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} krever din oppmerksomhet",
+    "Plural": "{0} {1} krever oppmerksomheten din"
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} burde ekskluderes",
+    "Plural": "{0} {1} burde ekskluderes"
+  },
+  "UnsubscribeCount": "{0} {1} at du bør avslutte abonnementet fra",
+  "SwitchCount": {
+    "One": "{0} {1} krever at du bytter til et annet",
+    "Plural": "{0} {1} krever bytte til annet"
+  },
+  "PackageType": "Pakketype",
+  "GenericPackage": "Generisk pakke",
+  "MusicPack": "Musikk pakke",
+  "ThemeMix": "Tema Blanding",
+  "IMTMarkings": "IMT Markering",
+  "RenderItPreset": "Gjengi den! Forhåndsinnstilling",
+  "POFont": "Skrift/modul for prosedyreobjekt",
+  "NameList": "Navnliste/Spill Oversettelser",
+  "ApplyChangedBeforeExit": "Du har ulagrede endringer.\r\n\r\nØnsker du å bruke disse endringene før du fortsetter?",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "Forfatteren av {0}, {1}, er kjent for å være ondsinnet og/eller for å inkludere skadelig innhold som virus i pakkene sine.",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Slett forespørsel",
+  "ApplyRequestedChanges": "Bruk forespurte endringer",
+  "ManagePackage": "Administrer tilleggsfunksjon",
+  "Banned": "Utestengt",
+  "NoIssues": "Ingen saker",
+  "RequestReviewDisclaimer": "*Din Steam ID og logger sendes ut med din forespørsel",
+  "ScenarioMaking": "Scenarioopptak",
+  "ThemeMaking": "Utforming",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

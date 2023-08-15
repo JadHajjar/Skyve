@@ -1,0 +1,231 @@
+{
+  "Usage": "Folosit",
+  "Stability": "Stabilitate",
+  "ApplyContinue": "Aplică și continuă",
+  "Previous": "Anterior",
+  "Skip": "Treci peste",
+  "Note": "Notă",
+  "NoteInfo": "Text informativ suplimentar afișat pentru pachet",
+  "BlackListName": "Lista neagră după nume",
+  "BlackListId": "Lista neagră după ID-ul Steam",
+  "GlobalTags": "Etichete globale",
+  "GlobalTagsInfo": "Etichete pe care toți jucătorii le vor vedea în aplicație",
+  "Links": "Link-uri",
+  "StatusesCount": "Statuses ({0})",
+  "InteractionCount": "Interacţiuni ({0})",
+  "AddStatus": "Adaugă Stare",
+  "AddInteraction": "Adaugă Interacțiune",
+  "NotReviewed": "Nu a fost revizuită încă",
+  "Stable": "Stabil",
+  "NotEnoughInformation": "Nu sunt suficiente informații",
+  "HasIssues": "Are probleme",
+  "Broken": "Distrugere",
+  "Incompatible": "Incompatibil",
+  "CityBuilding": "Construirea orașelor",
+  "AssetCreation": "Crearea de active",
+  "MapCreation": "Creare hartă",
+  "NoAction": "Nu face nimic",
+  "SubscribeToPackages": "Abonați-vă la pachetele asociate",
+  "RequiresConfiguration": "Necesită o configurație specifică",
+  "SelectOne": "Selecteaza oricare dintre",
+  "UnsubscribeThis": "Dezabonare de la acest pachet",
+  "UnsubscribeOther": "Dezabonare de la pachetele asociate",
+  "Switch": "Comutați la pachetul legat",
+  "FlippedSwitch": "Treceți la acest pachet",
+  "Deprecated": "Dezaprobată",
+  "Reupload": "Re-încărcați",
+  "CausesIssues": "Cauze probleme",
+  "SavesCantLoadWithoutIt": "Salvările nu se pot încărca fără ele",
+  "TestVersion": "Versiunea de test",
+  "DependencyMod": "Mod de dependență",
+  "SourceCodeNotAvailable": "Sursa codului nu este disponibilă",
+  "MusicCanBeCopyrighted": "Muzica inclusă poate avea drepturi de autor",
+  "IncompleteDescription": "Descriere incompletă",
+  "Successor": "Successor",
+  "LoadAfter": "Încărcați după..",
+  "Alternative": "Alternative",
+  "SameFunctionality": "Same Functionality",
+  "RequirementAlternative": "Requirement Alternative",
+  "IncompatibleWith": "Incompatibil cu ..",
+  "CausesIssuesWith": "Cauzează probleme cu ..",
+  "RequiredPackages": "Necesită ..",
+  "StatusType": "Tipul Stării",
+  "InteractionType": "Tip de interacțiune",
+  "MissingDependency": "Lipsește dependența",
+  "Caution": "Precauţie",
+  "Warning": "Avertizare",
+  "AttentionRequired": "Atenție necesară",
+  "Website": "Website",
+  "Donation": "Donează",
+  "ManageSinglePackage": "Gestionează pachete specifice",
+  "ManageCompatibilityData": "Gestionează datele de compatibilitate",
+  "YourPackages": "Gestionează pachetele",
+  "AddPackages": "Adaugă Pachete",
+  "ConfirmEndSession": "Ești sigur că vrei să închizi sesiunea?",
+  "CrDataLoadFailed": "Imposibil de încărcat datele, încercați din nou mai târziu",
+  "AddGlobalTag": "Adaugă o etichetă globală",
+  "ReuseData": "Reutilizarea datelor anterioare",
+  "ReuseData_Tip": "Reutilizează datele de compatibilitate din ultimul pachet salvat pentru acesta.\r\nȚine Shift pentru a aplica și continua",
+  "PleaseReviewTheStability": "Vă rugăm să revizuiți stabilitatea acestui pachet înainte de a salva.",
+  "PleaseReviewPackageStatuses": "Examinați stările acestui pachet înainte de a salva.\r\nUnele au un tip de stare invalid.",
+  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageUsage": "Vă rugăm să selectaţi o utilizare validă pentru acest pachet.",
+  "Interaction_Alternative": {
+    "One": "'{1}' poate fi folosit ca o alternativă la '{0}'.",
+    "Plural": "Unul dintre următoarele pachete poate fi folosit ca o alternativă la '{0}'."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' și '{1}' au aceleași funcționalități.",
+    "Plural": "'{0}' și următoarele pachete au aceleași funcționalități."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' și '{1}' nu sunt compatibile între ele.",
+    "Plural": "'{0}' nu este compatibil cu oricare dintre următoarele pachete."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' poate cauza probleme atunci când este folosit cu '{1}'.",
+    "Plural": "'{0}' poate cauza probleme atunci când este folosit cu următoarele moduri."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "Îți lipsește un pachet necesar pentru '{0}'.",
+    "Plural": "Îți lipsesc următoarele pachete necesare pentru '{0}'."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "Îți lipsește un pachet opțional pentru '{0}'.",
+    "Plural": "Îți lipsesc următoarele pachete opționale pentru '{0}'."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' este succes de '{1}'.",
+    "Plural": "'{0}' este succes de oricare dintre următoarele pachete."
+  },
+  "Interaction_LoadAfter": {
+    "One": "'{0}' se va încărca direct după '{1}'.",
+    "Plural": "'{0}' se va încărca direct după următoarele pachete."
+  },
+  "Interaction_Identical": "Acestea sunt versiuni multiple ale aceluiași pachet.\r\n\r\nAr trebui să alegeți doar una dintre ele.",
+  "Status_Succeeded": "'{0}' este succes de '{1}'.\r\n\r\nDeja folosești '{1}' așa că nu mai este nevoie de '{0}''.",
+  "Status_Deprecated": "'{0}' este învechit, nu mai este susținut de autorul său.",
+  "Status_AutoDeprecated": "'{0}' nu a fost actualizat de mult timp, probabil nu mai este actualizat de autorul său.",
+  "Status_Reupload": {
+    "Zero": "'{0}' este o reîncărcare a unui pachet original.",
+    "One": "Aceasta este o reîncărcare a '{1}'."
+  },
+  "Status_CausesIssues": "'{0}' cauzează probleme cu jocul tău.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "Atunci când se creează o nouă salvare cu '{0}' activată, nu veți mai putea încărca această salvare dacă '{0}' este dezactivat.",
+    "One": "Atunci când se creează o nouă salvare cu '{0}' activată, nu veți mai putea încărca această salvare dacă '{0}' este dezactivat.\r\n\r\nFolosiți '{1}pentru a recupera datele de salvare. Citiți descrierea atelierului pentru mai multe informații."
+  },
+  "Status_TestVersion": {
+    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_MissingDlc": {
+    "One": "You're missing the '{0}' DLC to use this package.",
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_DependencyMod": "Aceasta este o modalitate de dependență, dar se pare că nu utilizați niciun pachet care necesită acest lucru.",
+  "Status_SourceCodeNotAvailable": "Codul sursă al acestui mod nu este disponibil. Ar trebui să îl folosești doar dacă ai încredere în autorul său.",
+  "SourceAvailable": "Codul sursă este disponibil",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "Muzica din interiorul acestui pachet ar putea avea drepturi de autor. Cel mai bine este să nu o folosești în timpul streamingului.",
+  "Status_IncompleteDescription": "Descrierea Atelierului acestui mod este prea scurtă. Nu ar trebui să îl folosești decât dacă ai încredere în autorul său.",
+  "Status_SourceAvailable": "Acest pachet nu va avertiza despre codul sursă lipsă.",
+  "Status_StandardMod": "Acest pachet va fi ignorat în timpul procesării mod-urilor de depanare.",
+  "OutputText": "Ieșire așteptată",
+  "Stability_AssetNotReviewed": "Acest activ nu a fost încă revizuit.\n\nInformațiile de compatibilitate ar putea să nu fie exacte; deși activele sunt în general stabile",
+  "Stability_NotReviewed": "Acest pachet nu a fost revizuit încă.\n\nInformațiile de compatibilitate pot să nu fie exacte.",
+  "Stability_Stable": "Acest pachet este stabil.",
+  "Stability_NotEnoughInformation": "Nu există suficiente informații pentru a revizui în mod corespunzător acest pachet.",
+  "Stability_HasIssues": "Acest pachet poate cauza probleme.\r\nFiţi atent în timp ce îl folosiţi.",
+  "Stability_Broken": "Acest pachet este stricat.\r\nEste cunoscut fie că întrerup jocul, fie că nu funcționează.",
+  "Stability_Incompatible": "Acest pachet nu este compatibil cu, sau pare, jocul.\r\n\r\nAr trebui să îl eliminați imediat.",
+  "Stability_Local": "Acest pachet este o versiune locală a modului original '{0}'.\r\n\r\nVersiunile locale sunt de obicei folosite în scopul testării sau în cazul în care nu aveți Steam.\r\n\r\nVerificați link-urile pachetului pentru a căuta actualizări în modul.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "Trebuie să vă abonați la următorul pachet:",
+    "Plural": "Ar trebui să vă abonați la aceste pachete:"
+  },
+  "Action_RequiresConfiguration": "Trebuie să urmaţi următoarele instrucţiuni:",
+  "Action_SelectOne": {
+    "One": "You should only use one between '{0}' and '{1}'.",
+    "Plural": "You should only use one between '{0}' and the following packages."
+  },
+  "Action_UnsubscribeThis": "Ar trebui să vă dezabonați de la '{0}'.",
+  "Action_UnsubscribeOther": {
+    "One": "Ar trebui să vă dezabonați de la '{1}'.",
+    "Plural": "Ar trebui să vă dezabonați de la următoarele pachete:"
+  },
+  "Action_ExcludeThis": "Ar trebui să excludeți '{0}'.",
+  "ExcludeThis": "Exclude acest pachet",
+  "Exclude": "Excludeți",
+  "Unsubscribe": "Dezabonați-vă",
+  "Action_ExcludeOther": {
+    "One": "Ar trebui să excludeți '{1}'.",
+    "Plural": "Ar trebui să excludeți următoarele ambalaje:"
+  },
+  "Action_Switch": {
+    "One": "Ar trebui să comutați la '{1}'.",
+    "Plural": "Ar trebui să treceți la unul dintre următoarele ambalaje:"
+  },
+  "NoRequiredDlcs": "Nu sunt necesare DLC-uri",
+  "DlcsSelected": {
+    "One": "{0} DLC selectat",
+    "Plural": "{0} DLC-uri selectate"
+  },
+  "RequiredDLCs": "Required DLCs/CCPs",
+  "CRT_Stability": "Stabilitatea",
+  "CRT_Successors": "Succesori",
+  "CRT_RequiredPackages": "Pachete necesare",
+  "CRT_OptionalPackages": "Pachete opționale",
+  "CRT_DlcMissing": "CPC/CPCC lipsă",
+  "CRT_Compatibility": "Probleme de compatibilitate",
+  "CRT_Alternatives": "Alternative",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "Ambiguitate",
+  "LastReviewDate": "A fost revizuit ultima dată la {0}",
+  "RequestReviewInfo": "Aveți probleme cu acest pachet?",
+  "RequestReview": "Solicită o revizuire",
+  "MissingDependencyCount": {
+    "One": "{0} {1} lipsește dependențe",
+    "Plural": "{0} {1} sunt dependențe lipsă"
+  },
+  "CautionCount": "{0} {1} unde se recomandă precauție",
+  "WarningCount": "{0} {1} cu un avertisment",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} necesită atenția dvs.",
+    "Plural": "{0} {1} necesită atenția dvs."
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} trebuie exclus",
+    "Plural": "{0} {1} trebuie exclus"
+  },
+  "UnsubscribeCount": "{0} {1} de care ar trebui să vă dezabonați de la",
+  "SwitchCount": {
+    "One": "{0} {1} necesită trecerea la un altul",
+    "Plural": "{0} {1} necesită comutarea la altul"
+  },
+  "PackageType": "Tip de pachet",
+  "GenericPackage": "Pachet generic",
+  "MusicPack": "Pachet de muzică",
+  "ThemeMix": "Mix temă",
+  "IMTMarkings": "Marcaje IMT",
+  "RenderItPreset": "Randează! Presetare",
+  "POFont": "Obiectul de Procedură Font/Modul",
+  "NameList": "Traduceri pentru Nume/Listă de jocuri",
+  "ApplyChangedBeforeExit": "Aveți modificări nesalvate.\r\n\r\nDoriți să aplicați aceste modificări înainte de a continua?",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "Autorul {0}, {1}, este cunoscut ca fiind răuvoitor și/sau pentru includerea conținutului dăunător precum virușii în pachetele lor.",
+  "ReviewRequests": "Revizuiește solicitările {0}",
+  "DeleteRequest": "Ștergere solicitarea",
+  "ApplyRequestedChanges": "Aplică modificările solicitate",
+  "ManagePackage": "Gestionare pachet",
+  "Banned": "Interzis",
+  "NoIssues": "Nicio problemă",
+  "RequestReviewDisclaimer": "*ID-ul tău de Steam și jurnalele sunt trimise cu solicitarea ta",
+  "ScenarioMaking": "Producere de scenariu",
+  "ThemeMaking": "Crearea de teme",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

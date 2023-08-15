@@ -1,0 +1,231 @@
+{
+  "Usage": "용도",
+  "Stability": "안정성",
+  "ApplyContinue": "적용 및 계속",
+  "Previous": "이전",
+  "Skip": "스킵",
+  "Note": "참고",
+  "NoteInfo": "패키지에 대해 표시되는 추가 정보 텍스트",
+  "BlackListName": "이름별 블랙리스트",
+  "BlackListId": "Steam 아이디별 블랙리스트",
+  "GlobalTags": "전역 태그",
+  "GlobalTagsInfo": "모든 플레이어가 앱에서 볼 수 있는 태그",
+  "Links": "링크",
+  "StatusesCount": "상태({0})",
+  "InteractionCount": "상호작용 ({0})",
+  "AddStatus": "상태 추가",
+  "AddInteraction": "상호작용 추가",
+  "NotReviewed": "아직 검토되지 않음",
+  "Stable": "안정적",
+  "NotEnoughInformation": "충분한 정보 없음",
+  "HasIssues": "문제 있음",
+  "Broken": "망가짐",
+  "Incompatible": "비호환",
+  "CityBuilding": "도시 건설용",
+  "AssetCreation": "에셋 제작용",
+  "MapCreation": "맵 제작용",
+  "NoAction": "아무것도 하지 않음",
+  "SubscribeToPackages": "연결된 패키지 구독",
+  "RequiresConfiguration": "특정 구성을 요구",
+  "SelectOne": "둘 중 하나를 선택하십시오",
+  "UnsubscribeThis": "이 패키지 구독 취소",
+  "UnsubscribeOther": "연결된 패키지 구독 취소",
+  "Switch": "링크된 패키지로 바꾸기",
+  "FlippedSwitch": "이 패키지로 바꾸기",
+  "Deprecated": "사용되지 않는",
+  "Reupload": "재업로드",
+  "CausesIssues": "문제 유발",
+  "SavesCantLoadWithoutIt": "이것 없이 세이브 불러오기 불가",
+  "TestVersion": "테스트 버전",
+  "DependencyMod": "의존성 모드",
+  "SourceCodeNotAvailable": "소스 코드를 공개하지 않았습니다.",
+  "MusicCanBeCopyrighted": "포함된 음악에 저작권이 있을 수 있음",
+  "IncompleteDescription": "불완전한 정보",
+  "Successor": "이하의 계승자 ..",
+  "LoadAfter": "이하 이후에 로드 ..",
+  "Alternative": "이하의 대안 ..",
+  "SameFunctionality": "이하와 같은 기능을 하는 ..",
+  "RequirementAlternative": "이하의 필요한 아이템 대안 ..",
+  "IncompatibleWith": "이하와 비호환되는 ..",
+  "CausesIssuesWith": "이하와 같이 있으면 문제를 일으키는 ..",
+  "RequiredPackages": "이하를 필요로 하는 ..",
+  "StatusType": "상태 유형",
+  "InteractionType": "상호작용 유형",
+  "MissingDependency": "의존성 누락",
+  "Caution": "주의",
+  "Warning": "경고",
+  "AttentionRequired": "주목 필요",
+  "Website": "웹사이트",
+  "Donation": "후원",
+  "ManageSinglePackage": "특정 패키지 관리",
+  "ManageCompatibilityData": "호환성 데이터 관리",
+  "YourPackages": "패키지 관리",
+  "AddPackages": "패키지 추가",
+  "ConfirmEndSession": "정말 이 세션을 종료하시겠습니까?",
+  "CrDataLoadFailed": "데이터를 불러오는 데 실패했습니다. 나중에 다시 시도해 주세요",
+  "AddGlobalTag": "전역 태그 추가",
+  "ReuseData": "이전 데이터 재사용",
+  "ReuseData_Tip": "마지막으로 저장한 패키지의 호환성 데이터를 이 패키지에 재사용합니다.\n적용하고 계속하려면 Shift 키를 누르세요.",
+  "PleaseReviewTheStability": "저장하기 전에 이 패키지의 안정성을 검토하세요.",
+  "PleaseReviewPackageStatuses": "저장하기 전에 이 패키지의 상태를 검토하세요.\n일부가 유효하지 않은 상태 유형을 가지고 있습니다.",
+  "PleaseReviewPackageInteractions": "저장하기 전에 이 패키지의 상호작용을 검토하세요.\n일부가 잘못된 상호작용 유형을 가지고 있거나 연결된 패키지가 없습니다.",
+  "PleaseReviewPackageUsage": "이 패키지에 알맞는 용도를 선택해 주세요.",
+  "Interaction_Alternative": {
+    "One": "'{1}' 는 '{0}'의 대안으로 사용될 수 있습니다.",
+    "Plural": "다음 패키지들 중 하나는 '{0}'의 대안으로 사용될 수 있습니다."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' 와 '{1}' 는 같은 기능을 가집니다.",
+    "Plural": "'{0}' 와 다음 패키지들은 같은 기능을 가집니다."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' 와 '{1}' 는 서로 호환되지 않습니다.",
+    "Plural": "'{0}' 는 다음 패키지 모두와 호환되지 않습니다."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' 는 '{1}' 와 함께 사용할 때 문제를 일으킬 수 있습니다.",
+    "Plural": "'{0}' 는 다음 모드와 함께 사용할 때 문제를 일으킬 수 있습니다."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "'{0}'에 대한 필요한 패키지를 누락했습니다.",
+    "Plural": "'{0}'에 대한 다음 필요한 패키지들을 누락했습니다."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "'{0}'에 대한 선택적 패키지를 누락했습니다.",
+    "Plural": "'{0}'에 대한 다음 선택적 패키지들을 누락했습니다."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' 는 '{1}' 로 계승되었습니다.",
+    "Plural": "'{0}' 는 다음 패키지 중 하나로 계승되었습니다."
+  },
+  "Interaction_LoadAfter": {
+    "One": "'{0}' 는 '{1}' 직후에 로드됩니다.",
+    "Plural": "'{0}' 는 다음 패키지들 직후에 로드됩니다."
+  },
+  "Interaction_Identical": "이것들은 같은 패키지의 여러 버전들입니다.\n\n이 중 하나만 선택해야 합니다.",
+  "Status_Succeeded": "'{0}' 는 '{1}' 로 계승되었습니다.\n\n이미 '{1}' 를 사용하고 있으므로 '{0}' 는 더 이상 필요하지 않습니다.",
+  "Status_Deprecated": "'{0}' 는 더 이상 제작자에 의해 지원되지 않으며 사용되지 않습니다.",
+  "Status_AutoDeprecated": "'{0}' 는 오랫동안 업데이트되지 않았습니다. 더 이상 제작자에 의해 지원되지 않는 것일 수 있습니다.",
+  "Status_Reupload": {
+    "Zero": "'{0}' 는 기존 패키지의 재업로드입니다.",
+    "One": "이것은 '{1}'의 재업로드입니다."
+  },
+  "Status_CausesIssues": "'{0}' 는 게임에 문제를 일으킬 수 있습니다.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "'{0}' 가 활성화된 채로 새 세이브를 생성하고 '{0}' 가 비활성화되면 해당 세이브를 더 이상 불러올 수 없습니다.",
+    "One": "'{0}' 가 활성화된 채로 새 세이브를 생성하고 '{0}' 가 비활성화되면 해당 세이브를 더 이상 불러올 수 없습니다.\n\n세이브 복구가 필요하다면 '{1}' 를 사용하세요. 자세한 정보는 창작마당의 설명을 읽어보세요."
+  },
+  "Status_TestVersion": {
+    "Zero": "이것은 '테스트' 버전입니다. 모드의 테스트 버전은 문제를 일으킬 수 있으며 업데이트는 예기치 않은 오류를 발생시킬 수 있습니다.",
+    "One": "이것은 '{1}'의 테스트 버전입니다.\n\n업데이트는 예기치 않은 오류를 발생시킬 수 있습니다."
+  },
+  "Status_MissingDlc": {
+    "One": "You're missing the '{0}' DLC to use this package.",
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_DependencyMod": "이것은 종속성 모드입니다. 하지만 이를 필요로 하는 어떤 패키지도 사용하고 있지 않은 것 같습니다.",
+  "Status_SourceCodeNotAvailable": "이 모드의 소스 코드를 확인할 수 없습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
+  "SourceAvailable": "소스 코드 확인 가능",
+  "StandardMod": "기본 모드",
+  "Status_MusicCanBeCopyrighted": "이 팩에 포함된 음악은 저작권이 있을 수 있습니다. 스트리밍 중에는 사용하지 않는 것이 가장 좋습니다.",
+  "Status_IncompleteDescription": "이 모드의 창작마당 설명은 너무 짧습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
+  "Status_SourceAvailable": "이 패키지는 누락된 소스 코드를 경고하지 않습니다.",
+  "Status_StandardMod": "이 패키지는 문제 해결할 모드를 프로세스 하는 동안 무시됩니다.",
+  "OutputText": "예상 출력",
+  "Stability_AssetNotReviewed": "이 에셋은 아직 리뷰되지 않았습니다.\n\n에셋들은 일반적으로 안정적이지만 호환성 정보는 정확하지 않을 수 있습니다.",
+  "Stability_NotReviewed": "이 패키지는 아직 리뷰되지 않았습니다.\n\n호환성 정보는 정확하지 않을 수 있습니다.",
+  "Stability_Stable": "이 패키지는 안정적입니다.",
+  "Stability_NotEnoughInformation": "이 패키지를 제대로 검토할 만한 정보가 충분하지 않습니다.",
+  "Stability_HasIssues": "이 패키지는 문제를 일으킬 수 있습니다.\n주의해서 사용하세요.",
+  "Stability_Broken": "이 패키지는 망가졌습니다.\n작동하지 않거나 게임을 망가트리는 것으로 알려져 있습니다.",
+  "Stability_Incompatible": "이 패키지는 게임과 호환되지 않거나 게임을 망가트립니다.\n\n이것은 바로 제거해야 합니다.",
+  "Stability_Local": "이 패키지는 이 패키지의 원본 모드인 '{0}'의 로컬 버전입니다.\n\n로컬 버전은 일반적으로 테스트 목적이나 Steam이 없는 경우에 사용됩니다.\n\n모드에 대한 업데이트를 찾으려면 패키지의 링크를 확인하세요.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "다음 패키지를 구독해야 합니다:",
+    "Plural": "이 패키지들을 구독해야 합니다:"
+  },
+  "Action_RequiresConfiguration": "다음 지침을 따라야 합니다:",
+  "Action_SelectOne": {
+    "One": "'{0}' 와 '{1}' 중 하나만 선택해야 합니다.",
+    "Plural": "다음 패키지들과 '{0}' 중 하나만 선택해야 합니다."
+  },
+  "Action_UnsubscribeThis": "'{0}' 를 구독 취소해야 합니다.",
+  "Action_UnsubscribeOther": {
+    "One": "'{1}' 를 구독 취소해야 합니다.",
+    "Plural": "다음 패키지들을 구독 취소해야 합니다:"
+  },
+  "Action_ExcludeThis": "'{0}' 를 제외해야 합니다.",
+  "ExcludeThis": "이 패키지를 제외하기",
+  "Exclude": "제외 필요",
+  "Unsubscribe": "구독 취소 필요",
+  "Action_ExcludeOther": {
+    "One": "'{1}' 를 제외해야 합니다.",
+    "Plural": "다음 패키지들을 제외해야 합니다:"
+  },
+  "Action_Switch": {
+    "One": "'{1}' 로 바꾸어야 합니다.",
+    "Plural": "다음 패키지 중 하나로 바꿔야 합니다."
+  },
+  "NoRequiredDlcs": "필요한 DLC 없음",
+  "DlcsSelected": {
+    "One": "DLC {0}개 선택됨",
+    "Plural": "DLC {0}개 선택됨"
+  },
+  "RequiredDLCs": "필요한 DLC/CCP",
+  "CRT_Stability": "안정성",
+  "CRT_Successors": "계승자",
+  "CRT_RequiredPackages": "필요한 패키지",
+  "CRT_OptionalPackages": "선택적 패키지",
+  "CRT_DlcMissing": "DLC/CCP 누락",
+  "CRT_Compatibility": "호환성 문제",
+  "CRT_Alternatives": "대안",
+  "CRT_Status": "상태",
+  "CRT_Ambiguous": "모호성",
+  "LastReviewDate": "이것은 {0} 에 마지막으로 리뷰되었습니다.",
+  "RequestReviewInfo": "이 패키지에서 이슈를 경험하고 있습니까?",
+  "RequestReview": "검토 요청",
+  "MissingDependencyCount": {
+    "One": "의존성을 누락한 {1} {0}개가 있습니다",
+    "Plural": "의존성을 누락한 {1} {0}개가 있습니다"
+  },
+  "CautionCount": "주의가 권고되는 {1} {0}개가 있습니다",
+  "WarningCount": "경고가 있는 {1} {0}개가 있습니다",
+  "AttentionRequiredCount": {
+    "One": "주목을 필요로 하는 {1} {0}개가 있습니다",
+    "Plural": "주목을 필요로 하는 {1} {0}개가 있습니다"
+  },
+  "ExcludeCount": {
+    "One": "제외되어야 하는 {1} {0}개가 있습니다",
+    "Plural": "제외되어야 하는 {1} {0}개가 있습니다"
+  },
+  "UnsubscribeCount": "구독을 취소해야 하는 {1} {0}개가 있습니다",
+  "SwitchCount": {
+    "One": "다른 {1}로 바꾸어야 하는 {1} {0}개가 있습니다",
+    "Plural": "다른 {1}로 바꾸어야 하는 {1} {0}개가 있습니다"
+  },
+  "PackageType": "패키지 유형",
+  "GenericPackage": "일반적인 패키지",
+  "MusicPack": "뮤직 팩",
+  "ThemeMix": "테마 믹스",
+  "IMTMarkings": "IMT 마킹",
+  "RenderItPreset": "Render it! 프리셋",
+  "POFont": "Procedural Object 폰트/모듈",
+  "NameList": "이름 목록/게임 번역",
+  "ApplyChangedBeforeExit": "저장되지 않은 변경사항이 있습니다.\n\n계속하기 전에 변경사항을 적용하시겠습니까?",
+  "AuthorRetired": "{0}의 제작자인 {1}는 제작을 그만두었거나 오랫동안 활동하지 않았습니다.\n\n그의 패키지에 대한 앞으로의 업데이트와 안정성은 보장되지 않습니다.",
+  "AuthorMalicious": "{0}의 제작자인 {1}는 바이러스와 같은 유해하거나 악성인 콘텐츠를 자신의 패키지에 포함시키는 것으로 알려져 있습니다.",
+  "ReviewRequests": "검토 요청 {0}",
+  "DeleteRequest": "삭제 요청",
+  "ApplyRequestedChanges": "요청된 변경사항 적용",
+  "ManagePackage": "패키지 관리",
+  "Banned": "차단됨",
+  "NoIssues": "문제 없음",
+  "RequestReviewDisclaimer": "*당신의 Steam ID와 로그가 요청과 함께 전송됩니다",
+  "ScenarioMaking": "시나리오 제작용",
+  "ThemeMaking": "테마 제작용",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

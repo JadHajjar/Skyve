@@ -1,0 +1,231 @@
+{
+  "Usage": "Využití",
+  "Stability": "Stabilita",
+  "ApplyContinue": "Použít a pokračovat",
+  "Previous": "Předchozí",
+  "Skip": "Přeskočit",
+  "Note": "Poznámka",
+  "NoteInfo": "Extra informační text zobrazený pro balíček",
+  "BlackListName": "Černý seznam podle názvu",
+  "BlackListId": "Black-list by name",
+  "GlobalTags": "Globální štítky",
+  "GlobalTagsInfo": "Značky všech hráčů budou vidět v aplikaci",
+  "Links": "Odkazy",
+  "StatusesCount": "Statuses ({0})",
+  "InteractionCount": "Interakce ({0})",
+  "AddStatus": "Přidat stav",
+  "AddInteraction": "Přidat interakci",
+  "NotReviewed": "Zatím nehodnoceno",
+  "Stable": "Stabilní",
+  "NotEnoughInformation": "Nedostatek informací",
+  "HasIssues": "Má problémy",
+  "Broken": "Rozbitý",
+  "Incompatible": "Nekompatibilní",
+  "CityBuilding": "Městská budova",
+  "AssetCreation": "Vytvoření majetku",
+  "MapCreation": "Vytvoření mapy",
+  "NoAction": "Nedělat nic",
+  "SubscribeToPackages": "Přihlásit se k odběru propojených balíčků",
+  "RequiresConfiguration": "Vyžaduje konkrétní konfiguraci",
+  "SelectOne": "Vyberte buď jednu",
+  "UnsubscribeThis": "Odhlásit se z tohoto balíčku",
+  "UnsubscribeOther": "Odhlásit se z propojených balíčků",
+  "Switch": "Přepnout na propojený balíček",
+  "FlippedSwitch": "Přepnout na tento balíček",
+  "Deprecated": "Zastaralé",
+  "Reupload": "Znovu nahrát",
+  "CausesIssues": "Problémy s příčinami",
+  "SavesCantLoadWithoutIt": "Uložené nelze načíst bez toho",
+  "TestVersion": "Testovat verzi",
+  "DependencyMod": "Mód závislosti",
+  "SourceCodeNotAvailable": "Zdrojový kód není k dispozici",
+  "MusicCanBeCopyrighted": "Zahrnutá hudba může být autorská práva",
+  "IncompleteDescription": "Neúplný popis",
+  "Successor": "Successor",
+  "LoadAfter": "Načíst po ..",
+  "Alternative": "Alternative",
+  "SameFunctionality": "Same Functionality",
+  "RequirementAlternative": "Requirement Alternative",
+  "IncompatibleWith": "Nekompatibilní s",
+  "CausesIssuesWith": "Způsobuje problémy s ..",
+  "RequiredPackages": "Vyžaduje ..",
+  "StatusType": "Typ stavu",
+  "InteractionType": "Typ interakce",
+  "MissingDependency": "Chybějící závislost",
+  "Caution": "Pozornost",
+  "Warning": "Varování",
+  "AttentionRequired": "Vyžadována pozornost",
+  "Website": "Webová stránka",
+  "Donation": "Přispět",
+  "ManageSinglePackage": "Spravovat konkrétní balíčky",
+  "ManageCompatibilityData": "Spravovat data kompatibility",
+  "YourPackages": "Spravovat balíčky",
+  "AddPackages": "Přidat balíčky",
+  "ConfirmEndSession": "Jste si jisti, že chcete ukončit vaši relaci?",
+  "CrDataLoadFailed": "Nepodařilo se načíst data, zkuste to znovu později",
+  "AddGlobalTag": "Přidat globální značku",
+  "ReuseData": "Znovu použít předchozí data",
+  "ReuseData_Tip": "Znovu použije data o kompatibilitě z posledního uloženého balíku pro tento balíček.\r\nPodržte Shift pro uplatnění a pokračování",
+  "PleaseReviewTheStability": "Před uložením si prosím zkontrolujte stabilitu tohoto balíčku.",
+  "PleaseReviewPackageStatuses": "Před uložením si prosím zkontrolujte stav tohoto balíčku.\r\nNěkteré mají neplatný typ stavu.",
+  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageUsage": "Vyberte prosím platné použití tohoto balíčku.",
+  "Interaction_Alternative": {
+    "One": "'{1}' může být použito jako alternativa k '{0}'.",
+    "Plural": "Jeden z následujících balíčků může být použit jako alternativa k '{0}'."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' a '{1}' mají stejné funkce.",
+    "Plural": "'{0}' a následující balíčky mají stejné funkce."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' a '{1}' nejsou vzájemně kompatibilní.",
+    "Plural": "'{0}' není kompatibilní s žádným z následujících balíčků."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' může způsobit problémy při použití s '{1}'.",
+    "Plural": "'{0}' může způsobit problémy při použití následujících módů."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "Chybí vám požadovaný balíček pro '{0}'.",
+    "Plural": "Chybí vám následující požadované balíčky pro '{0}'."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "Chybí vám volitelný balíček pro '{0}'.",
+    "Plural": "Chybí vám následující volitelné balíčky pro '{0}'."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' je uspěl '{1}'.",
+    "Plural": "'{0}' je uspuštěn jedním z následujících balíčků."
+  },
+  "Interaction_LoadAfter": {
+    "One": "'{0}' se načítá přímo za '{1}'.",
+    "Plural": "'{0}' bude načteno přímo po následujících balíčcích."
+  },
+  "Interaction_Identical": "Jedná se o více verzí stejného balíčku.\r\n\r\nMěli byste vybrat pouze jednu z nich.",
+  "Status_Succeeded": "'{0}' je uspěl '{1}'.\r\n\r\nJiž používáte '{1}', takže již není potřeba '{0}'.",
+  "Status_Deprecated": "'{0}' je zastaralé, není již podporováno jeho autorem.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_Reupload": {
+    "Zero": "'{0}' je opětovné nahrání původního balíčku.",
+    "One": "Toto je opětovné nahrání '{1}'."
+  },
+  "Status_CausesIssues": "'{0}' způsobuje problémy s vaší hrou.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "Při vytváření nové uložené pozice s povoleným '{0}', již nebudete moci načíst toto uložení, pokud je '{0}' zakázáno.",
+    "One": "Při vytváření nové uložené pozice s povoleným '{0}', již nebudete moci načíst toto uložení, pokud je '{0}' zakázáno.\r\n\r\nPoužijte '{1}' pro obnovení uložení, pokud je to potřeba. Přečtěte si jeho popis dílny pro více informací."
+  },
+  "Status_TestVersion": {
+    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_MissingDlc": {
+    "One": "You're missing the '{0}' DLC to use this package.",
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_DependencyMod": "Toto je režim závislosti, ale nezdá se, že používáte žádný balíček, který to vyžaduje.",
+  "Status_SourceCodeNotAvailable": "Zdrojový kód tohoto modu není k dispozici. Neměli byste jej použít, pokud nedůvěřujete jeho autorovi.",
+  "SourceAvailable": "Zdrojový kód je k dispozici",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "Hudba uvnitř tohoto balíčku může být autorsky chráněná. Je nejlepší ji nepoužívat při streamování.",
+  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_SourceAvailable": "Tento balíček nebude upozorňovat na chybějící zdrojový kód.",
+  "Status_StandardMod": "Tento balíček bude ignorován při zpracování modifikací na řešení problémů.",
+  "OutputText": "Očekávaný výstup",
+  "Stability_AssetNotReviewed": "Toto aktivum ještě nebylo přezkoumáno.\r\n\r\nInformace o kompatibilitě nemusí být přesné; ačkoliv jsou aktiva obecně stabilní",
+  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_Stable": "Tento balíček je stabilní.",
+  "Stability_NotEnoughInformation": "Pro správnou kontrolu tohoto balíčku není dostatek informací.",
+  "Stability_HasIssues": "Tento balíček může způsobit problémy.\r\nBuďte opatrní při jeho používání.",
+  "Stability_Broken": "Tento balíček je nefunkční.\r\nJe známo, že buď rozbije hru, nebo prostě nefunguje.",
+  "Stability_Incompatible": "Tento balíček není kompatibilní se hrou.\r\n\r\nMěli byste jej okamžitě odstranit.",
+  "Stability_Local": "Tento balíček je lokální verzí jeho původního modu '{0}'.\r\n\r\nMístní verze jsou obvykle používány pro testovací účely, nebo v případě, že nemáte Steam.\r\n\r\nZkontrolujte odkazy balíčku pro vyhledání aktualizací v módu.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "You should subscribe to the following package.",
+    "Plural": "You should subscribe to these packages."
+  },
+  "Action_RequiresConfiguration": "Měli byste postupovat podle následujících pokynů:",
+  "Action_SelectOne": {
+    "One": "You should only use one between '{0}' and '{1}'.",
+    "Plural": "You should only use one between '{0}' and the following packages."
+  },
+  "Action_UnsubscribeThis": "Měli byste se odhlásit z '{0}'.",
+  "Action_UnsubscribeOther": {
+    "One": "Měli byste se odhlásit z '{1}'.",
+    "Plural": "You should unsubscribe from the following packages."
+  },
+  "Action_ExcludeThis": "Měli byste vyloučit '{0}'.",
+  "ExcludeThis": "Vynechat tento balíček",
+  "Exclude": "Vyjmout",
+  "Unsubscribe": "Odhlásit odběr",
+  "Action_ExcludeOther": {
+    "One": "Měli byste vyloučit '{1}'.",
+    "Plural": "You should exclude the following packages."
+  },
+  "Action_Switch": {
+    "One": "Měli byste přepnout na '{1}'.",
+    "Plural": "You should switch to one of the following packages."
+  },
+  "NoRequiredDlcs": "Žádné vyžadované DLC",
+  "DlcsSelected": {
+    "One": "{0} DLC vybráno",
+    "Plural": "{0} DLC vybráno"
+  },
+  "RequiredDLCs": "Required DLCs/CCPs",
+  "CRT_Stability": "Stabilita",
+  "CRT_Successors": "Úspěšníci",
+  "CRT_RequiredPackages": "Požadované balíčky",
+  "CRT_OptionalPackages": "Volitelné balíčky",
+  "CRT_DlcMissing": "Chybějící DLC/ústřední protistrany",
+  "CRT_Compatibility": "Problémy s kompatibilitou",
+  "CRT_Alternatives": "Alternativní řešení",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "Nejednoznačnost",
+  "LastReviewDate": "Byla naposledy přezkoumána dne {0}",
+  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReview": "Request Review",
+  "MissingDependencyCount": {
+    "One": "{0} {1} chybí závislosti",
+    "Plural": "{0} {1} chybějí závislosti"
+  },
+  "CautionCount": "{0} {1} , kde je upozorněna opatrnost",
+  "WarningCount": "{0} {1} s varováním",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} vyžaduje vaši pozornost",
+    "Plural": "{0} {1} vyžaduje vaši pozornost"
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} by mělo být vyloučeno",
+    "Plural": "{0} {1} by mělo být vyloučeno"
+  },
+  "UnsubscribeCount": "{0} {1} , ze kterého byste se měli odhlásit",
+  "SwitchCount": {
+    "One": "{0} {1} vyžaduje přepnutí na jiný",
+    "Plural": "{0} {1} vyžaduje přepnutí do jiného"
+  },
+  "PackageType": "Typ balíčku",
+  "GenericPackage": "Obecný balíček",
+  "MusicPack": "Hudební balíček",
+  "ThemeMix": "Smíchání motivů",
+  "IMTMarkings": "IMT označení",
+  "RenderItPreset": "Vykreslit! Předvolba",
+  "POFont": "Font/modul procedurálního objektu",
+  "NameList": "Název/Seznam/Překlady her",
+  "ApplyChangedBeforeExit": "Máte neuložené změny.\r\n\r\nChcete tyto změny použít, než budete pokračovat?",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "Autor {0}, {1}, je známý jako škodlivý a/nebo za zahrnutí škodlivého obsahu jako jsou viry do svých balíčků.",
+  "ReviewRequests": "Žádosti o recenzi {0}",
+  "DeleteRequest": "Odstranit požadavek",
+  "ApplyRequestedChanges": "Použít požadované změny",
+  "ManagePackage": "Spravovat balíček",
+  "Banned": "Zakázáno",
+  "NoIssues": "Žádné problémy",
+  "RequestReviewDisclaimer": "*Vaše Steam ID a logy jsou odeslány s Vaším požadavkem",
+  "ScenarioMaking": "Vytváření scénářů",
+  "ThemeMaking": "Tvorba motivů",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

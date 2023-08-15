@@ -1,0 +1,231 @@
+{
+  "Usage": "Χρήση",
+  "Stability": "Σταθερότητα",
+  "ApplyContinue": "Εφαρμογή & Συνέχεια",
+  "Previous": "Προηγούμενο",
+  "Skip": "Παράλειψη",
+  "Note": "Σημείωση",
+  "NoteInfo": "Επιπλέον ενημερωτικό κείμενο που εμφανίζεται για το πακέτο",
+  "BlackListName": "Μαύρη λίστα με όνομα",
+  "BlackListId": "Μαύρη λίστα από το Steam ID",
+  "GlobalTags": "Καθολικές Ετικέτες",
+  "GlobalTagsInfo": "Ετικέτες όλοι οι παίκτες που θα δουν στην εφαρμογή",
+  "Links": "Σύνδεσμοι",
+  "StatusesCount": "Statuses ({0})",
+  "InteractionCount": "Αλληλεπιδράσεις ({0})",
+  "AddStatus": "Προσθήκη Κατάστασης",
+  "AddInteraction": "Προσθήκη Αλληλεπίδρασης",
+  "NotReviewed": "Δεν έχει αξιολογηθεί ακόμα",
+  "Stable": "Σταθερό",
+  "NotEnoughInformation": "Μη επαρκείς πληροφορίες",
+  "HasIssues": "Έχει προβλήματα",
+  "Broken": "Σπασμένο",
+  "Incompatible": "Ασύμβατο",
+  "CityBuilding": "Πόλη-Κτήριο",
+  "AssetCreation": "Δημιουργία Περιουσιακών Στοιχείων",
+  "MapCreation": "Δημιουργία Χάρτη",
+  "NoAction": "Καμία Ενέργεια",
+  "SubscribeToPackages": "Εγγραφείτε σε συνδεδεμένα πακέτα",
+  "RequiresConfiguration": "Απαιτεί μια συγκεκριμένη διαμόρφωση",
+  "SelectOne": "Επιλέξτε είτε ένα",
+  "UnsubscribeThis": "Διαγραφή από αυτό το πακέτο",
+  "UnsubscribeOther": "Διαγραφή από συνδεδεμένα πακέτα",
+  "Switch": "Εναλλαγή σε συνδεδεμένο πακέτο",
+  "FlippedSwitch": "Εναλλαγή σε αυτό το πακέτο",
+  "Deprecated": "Καταργημένο",
+  "Reupload": "Επαναποστολή",
+  "CausesIssues": "Προκαλεί Ζητήματα",
+  "SavesCantLoadWithoutIt": "Οι αποθηκεύσεις δεν μπορούν να φορτωθούν χωρίς αυτό",
+  "TestVersion": "Δοκιμή Έκδοσης",
+  "DependencyMod": "Λειτουργία Εξάρτησης",
+  "SourceCodeNotAvailable": "Ο πηγαίος κώδικας δεν είναι διαθέσιμος",
+  "MusicCanBeCopyrighted": "Η συμπεριλαμβανόμενη μουσική μπορεί να είναι πνευματική ιδιοκτησία",
+  "IncompleteDescription": "Μη Ολοκληρωμένη Περιγραφή",
+  "Successor": "Επιτυχής του ..",
+  "LoadAfter": "Φόρτωση Μετά Από ..",
+  "Alternative": "Εναλλακτική Προς ..",
+  "SameFunctionality": "Ίδια Λειτουργικότητα Όπως ..",
+  "RequirementAlternative": "Εναλλακτική Απαίτηση Για ..",
+  "IncompatibleWith": "Μη Συμβατό Με ..",
+  "CausesIssuesWith": "Προκαλεί Ζητήματα Με ..",
+  "RequiredPackages": "Απαιτεί ..",
+  "StatusType": "Τύπος Κατάστασης",
+  "InteractionType": "Τύπος Αλληλεπίδρασης",
+  "MissingDependency": "Λείπει Εξάρτηση",
+  "Caution": "Προσοχή",
+  "Warning": "Προειδοποίηση",
+  "AttentionRequired": "Απαιτείται Προσοχή",
+  "Website": "Ιστοσελίδα",
+  "Donation": "Δωρεά",
+  "ManageSinglePackage": "Διαχείριση συγκεκριμένων πακέτων",
+  "ManageCompatibilityData": "Διαχείριση Δεδομένων Συμβατότητας",
+  "YourPackages": "Διαχείριση των πακέτων σας",
+  "AddPackages": "Προσθήκη Πακέτων",
+  "ConfirmEndSession": "Είστε βέβαιοι ότι θέλετε να ολοκληρώσετε τη συνεδρία σας?",
+  "CrDataLoadFailed": "Αποτυχία φόρτωσης δεδομένων, προσπαθήστε ξανά αργότερα",
+  "AddGlobalTag": "Προσθήκη καθολικής ετικέτας",
+  "ReuseData": "Επαναχρησιμοποίηση Προηγούμενων Δεδομένων",
+  "ReuseData_Tip": "Re-uses the compatibility data from your last saved package for this one.\r\nHold Shift to also apply & continue",
+  "PleaseReviewTheStability": "Παρακαλούμε εξετάστε τη σταθερότητα αυτού του πακέτου πριν την αποθήκευση.",
+  "PleaseReviewPackageStatuses": "Please review the statuses of this package before saving.\r\nSome have an invalid Status Type.",
+  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type or don't have a linked package.",
+  "PleaseReviewPackageUsage": "Παρακαλώ επιλέξτε μια έγκυρη χρήση για αυτό το πακέτο.",
+  "Interaction_Alternative": {
+    "One": "'{1}' μπορεί να χρησιμοποιηθεί ως εναλλακτική λύση για το '{0}'.",
+    "Plural": "Ένα από τα ακόλουθα πακέτα μπορεί να χρησιμοποιηθεί ως εναλλακτική λύση για το '{0}'."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' και '{1}' έχουν τις ίδιες λειτουργίες.",
+    "Plural": "'{0}' και τα ακόλουθα πακέτα έχουν τις ίδιες λειτουργίες."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' και '{1}' δεν είναι συμβατά μεταξύ τους.",
+    "Plural": "'{0}' δεν είναι συμβατό με κανένα από τα ακόλουθα πακέτα."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' μπορεί να προκαλέσει προβλήματα όταν χρησιμοποιείται με '{1}'.",
+    "Plural": "'{0}' μπορεί να προκαλέσει προβλήματα όταν χρησιμοποιείται με τα ακόλουθα mods."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "You're missing a required package for '{0}'.",
+    "Plural": "Λείπει τα ακόλουθα απαιτούμενα πακέτα για το '{0}'."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "You're missing an optional package for '{0}'.",
+    "Plural": "Λείπει τα ακόλουθα προαιρετικά πακέτα για το '{0}'."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' έχει πετύχει το '{1}'.",
+    "Plural": "'{0}' πετυχαίνει ένα από τα ακόλουθα πακέτα."
+  },
+  "Interaction_LoadAfter": {
+    "One": "'{0}' θα φορτώσει αμέσως μετά το '{1}'.",
+    "Plural": "'{0}' θα φορτώσει αμέσως μετά τα ακόλουθα πακέτα."
+  },
+  "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
+  "Status_Succeeded": "'{0}' έχει πετύχει το '{1}'.\r\n\r\nΧρησιμοποιείτε ήδη το '{1}' οπότε δεν υπάρχει πλέον ανάγκη για '{0}'.",
+  "Status_Deprecated": "'{0}' έχει καταργηθεί, δεν υποστηρίζεται πλέον από το συγγραφέα του.",
+  "Status_AutoDeprecated": "'{0}' δεν έχει ενημερωθεί εδώ και πολύ καιρό.",
+  "Status_Reupload": {
+    "Zero": "'{0}' είναι μια εκ νέου αποστολή ενός αρχικού πακέτου.",
+    "One": "Αυτό είναι ένα reupload του '{1}'."
+  },
+  "Status_CausesIssues": "'{0}' προκαλεί προβλήματα με το παιχνίδι σας.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "Όταν δημιουργείτε μια νέα αποθήκευση με ενεργοποιημένο το '{0}', δεν θα μπορείτε πλέον να φορτώσετε αυτό το αρχείο αν το '{0}' είναι απενεργοποιημένο.",
+    "One": "Όταν δημιουργείτε μια νέα αποθήκευση με ενεργοποιημένο το '{0}', δεν θα μπορείτε πλέον να φορτώσετε αυτό το αρχείο αν το '{0}' είναι απενεργοποιημένο.\r\n\r\nΧρησιμοποίησε '{1}' για να ανακτήσεις το αποθηκευμένο σου αν χρειαστεί. Διάβασε την περιγραφή του Εργαστηρίου του για περισσότερες πληροφορίες."
+  },
+  "Status_TestVersion": {
+    "Zero": "Αυτή είναι μια \"Δοκιμή\" έκδοση, γνωρίζετε ότι οι δοκιμαστικές εκδόσεις των mods μπορούν να προκαλέσουν προβλήματα και ότι οι ενημερώσεις σε αυτό μπορεί να προκαλέσουν απροσδόκητα σφάλματα.",
+    "One": "Αυτή είναι μια 'Test' έκδοση του '{1}'.\r\n\r\nΝα γνωρίζετε ότι οι ενημερώσεις σε αυτό μπορεί να προκαλέσουν απροσδόκητα ζητήματα."
+  },
+  "Status_MissingDlc": {
+    "One": "Σας λείπει ένα DLC για να χρησιμοποιήσετε αυτό το πακέτο.",
+    "Plural": "Δεν έχετε τα ακόλουθα DLC για να χρησιμοποιήσετε αυτό το πακέτο."
+  },
+  "Status_DependencyMod": "Αυτό είναι ένα mod εξάρτησης, αλλά δεν φαίνεται σαν να χρησιμοποιείτε οποιοδήποτε πακέτο που το απαιτεί.",
+  "Status_SourceCodeNotAvailable": "Ο πηγαίος κώδικας αυτού του mod δεν είναι διαθέσιμος. Δεν πρέπει να τον χρησιμοποιείτε, εκτός αν εμπιστεύεστε το συγγραφέα του.",
+  "SourceAvailable": "Ο πηγαίος κώδικας είναι διαθέσιμος",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "Η μουσική μέσα σε αυτό το πακέτο μπορεί να είναι πνευματικά δικαιώματα. Είναι καλύτερο να μην το χρησιμοποιήσετε κατά τη ροή.",
+  "Status_IncompleteDescription": "Η περιγραφή του εργαστηρίου αυτού του mod είναι πολύ μικρή. Δεν πρέπει να το χρησιμοποιήσετε εκτός αν εμπιστεύεστε τον συντάκτη του.",
+  "Status_SourceAvailable": "Αυτό το πακέτο δεν θα προειδοποιήσει για τον πηγαίο κώδικα που λείπει.",
+  "Status_StandardMod": "Αυτό το πακέτο θα αγνοηθεί κατά την επεξεργασία των mods για αντιμετώπιση προβλημάτων.",
+  "OutputText": "Αναμενόμενη Έξοδος",
+  "Stability_AssetNotReviewed": "Αυτό το στοιχείο δεν έχει εξεταστεί ακόμα.\r\n\r\nΟι πληροφορίες συμβατότητας μπορεί να μην είναι ακριβείς. Αν και τα στοιχεία ενεργητικού είναι γενικά σταθερά",
+  "Stability_NotReviewed": "This package has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
+  "Stability_Stable": "Αυτό το πακέτο είναι σταθερό.",
+  "Stability_NotEnoughInformation": "Δεν υπάρχουν αρκετές πληροφορίες για την κατάλληλη αναθεώρηση αυτού του πακέτου.",
+  "Stability_HasIssues": "Αυτό το πακέτο μπορεί να προκαλέσει προβλήματα.\r\nΝα είστε προσεκτικοί κατά τη χρήση του.",
+  "Stability_Broken": "\r\nΕίναι γνωστό ότι είτε να σπάσει το παιχνίδι ή απλά δεν λειτουργεί.",
+  "Stability_Incompatible": "Αυτό το πακέτο δεν είναι συμβατό με το παιχνίδι ή σπάει.\r\n\r\nΘα πρέπει να το αφαιρέσετε αμέσως.",
+  "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "Θα πρέπει να εγγραφείτε στο ακόλουθο πακέτο:",
+    "Plural": "Θα πρέπει να εγγραφείτε σε αυτά τα πακέτα:"
+  },
+  "Action_RequiresConfiguration": "Θα πρέπει να ακολουθήσετε τις ακόλουθες οδηγίες:",
+  "Action_SelectOne": {
+    "One": "Μεταξύ '{0}' και '{1}', θα πρέπει να επιλέξετε μόνο ένα από αυτά.",
+    "Plural": "Μεταξύ του '{0}' και των παρακάτω πακέτων, θα πρέπει να επιλέξετε μόνο ένα."
+  },
+  "Action_UnsubscribeThis": "Θα πρέπει να διαγραφείτε από το '{0}'.",
+  "Action_UnsubscribeOther": {
+    "One": "Θα πρέπει να διαγραφείτε από το '{1}'.",
+    "Plural": "Θα πρέπει να διαγραφείτε από τα ακόλουθα πακέτα:"
+  },
+  "Action_ExcludeThis": "Θα πρέπει να αποκλείσετε το '{0}'.",
+  "ExcludeThis": "Εξαίρεση αυτού του πακέτου",
+  "Exclude": "Εξαίρεση",
+  "Unsubscribe": "Διαγραφή",
+  "Action_ExcludeOther": {
+    "One": "Θα πρέπει να αποκλείσετε το '{1}'.",
+    "Plural": "Θα πρέπει να αποκλείσετε τα ακόλουθα πακέτα:"
+  },
+  "Action_Switch": {
+    "One": "Θα πρέπει να μεταβείτε σε '{1}'.",
+    "Plural": "Θα πρέπει να μεταβείτε σε ένα από τα ακόλουθα πακέτα:"
+  },
+  "NoRequiredDlcs": "Δεν Απαιτούνται DLCs",
+  "DlcsSelected": {
+    "One": "{0} DLC επιλέχθηκε",
+    "Plural": "{0} DLCs επιλεγμένα"
+  },
+  "RequiredDLCs": "Απαιτούμενοι DLCs / CCP",
+  "CRT_Stability": "Σταθερότητα",
+  "CRT_Successors": "Επιτυχής",
+  "CRT_RequiredPackages": "Απαιτούμενα Πακέτα",
+  "CRT_OptionalPackages": "Προαιρετικά Πακέτα",
+  "CRT_DlcMissing": "Λείπουν DLC/CCP",
+  "CRT_Compatibility": "Ζητήματα Συμβατότητας",
+  "CRT_Alternatives": "Εναλλακτικές",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "Αδιαφάνεια",
+  "LastReviewDate": "Αναθεωρήθηκε τελευταία στις {0}",
+  "RequestReviewInfo": "Είσαι αντιμετωπίζετε προβλήματα με αυτό το πακέτο?",
+  "RequestReview": "Ζητήστε μια αξιολόγηση",
+  "MissingDependencyCount": {
+    "One": "{0} {1} λείπουν εξαρτήσεις",
+    "Plural": "{0} {1} λείπουν εξαρτήσεις"
+  },
+  "CautionCount": "{0} {1} όπου συνιστάται προσοχή",
+  "WarningCount": "{0} {1} με προειδοποίηση",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} απαιτεί την προσοχή σας",
+    "Plural": "{0} {1} require your attention"
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} πρέπει να εξαιρεθούν",
+    "Plural": "{0} {1} πρέπει να εξαιρεθούν"
+  },
+  "UnsubscribeCount": "{0} {1} από το οποίο θα πρέπει να διαγραφείτε",
+  "SwitchCount": {
+    "One": "{0} {1} απαιτεί εναλλαγή σε άλλο",
+    "Plural": "{0} {1} απαιτεί μετάβαση σε άλλο"
+  },
+  "PackageType": "Τύπος Πακέτου",
+  "GenericPackage": "Γενικό Πακέτο",
+  "MusicPack": "Πακέτο Μουσικής",
+  "ThemeMix": "Μείγμα Θέματος",
+  "IMTMarkings": "Σημάνσεις IMT",
+  "RenderItPreset": "Αποτύπωσε το! Προεπιλογή",
+  "POFont": "Γραμματοσειρά Διαδικαστικού Αντικειμένου/Ενότητα",
+  "NameList": "Ονομασία-Λίστα/Μεταφράσεις Παιχνιδιών",
+  "ApplyChangedBeforeExit": "Έχετε μη αποθηκευμένες αλλαγές.\r\n\r\nΘα θέλατε να εφαρμόσετε αυτές τις αλλαγές πριν συνεχίσετε?",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\n\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "Ο συγγραφέας του {0}, {1}, είναι γνωστό ότι είναι κακόβουλο και/ή για τη συμπερίληψη επιβλαβούς περιεχομένου όπως οι ιοί στα πακέτα τους.",
+  "ReviewRequests": "Αιτήσεις Κριτικής {0}",
+  "DeleteRequest": "Διαγραφή Αιτήματος",
+  "ApplyRequestedChanges": "Εφαρμογή Αιτούμενων Αλλαγών",
+  "ManagePackage": "Διαχείριση Πακέτου",
+  "Banned": "Αποκλεισμένος",
+  "NoIssues": "Δεν Υπάρχουν Θέματα",
+  "RequestReviewDisclaimer": "*Το Steam ID και τα αρχεία καταγραφής σας αποστέλλονται με το αίτημά σας",
+  "ScenarioMaking": "Δημιουργία Σεναρίου",
+  "ThemeMaking": "Δημιουργία Θέματος",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

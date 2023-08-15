@@ -1,0 +1,231 @@
+{
+  "Usage": "用途",
+  "Stability": "稳定性",
+  "ApplyContinue": "应用并继续",
+  "Previous": "上一个",
+  "Skip": "跳过",
+  "Note": "备注",
+  "NoteInfo": "在插件页面显示的更多的信息文本",
+  "BlackListName": "按名称列出黑名单",
+  "BlackListId": "Steam ID 黑名单",
+  "GlobalTags": "全局标签",
+  "GlobalTagsInfo": "所有玩家都会在应用程序中看到的标签",
+  "Links": "链接",
+  "StatusesCount": "状态 ({0})",
+  "InteractionCount": "交互方式 ({0})",
+  "AddStatus": "添加状态",
+  "AddInteraction": "添加交互方式",
+  "NotReviewed": "尚未被检查",
+  "Stable": "稳定版",
+  "NotEnoughInformation": "没有足够的信息",
+  "HasIssues": "存在问题",
+  "Broken": "已损坏",
+  "Incompatible": "不兼容",
+  "CityBuilding": "城市建设",
+  "AssetCreation": "制作资产",
+  "MapCreation": "制作地图",
+  "NoAction": "无需采取任何操作",
+  "SubscribeToPackages": "订阅列出的插件",
+  "RequiresConfiguration": "需要特定的配置才能同时使用",
+  "SelectOne": "请选择…",
+  "UnsubscribeThis": "取消订阅此插件",
+  "UnsubscribeOther": "取消订阅列出的插件",
+  "Switch": "需要替换",
+  "FlippedSwitch": "替换为此插件",
+  "Deprecated": "已废弃",
+  "Reupload": "重新上传版本",
+  "CausesIssues": "引发问题",
+  "SavesCantLoadWithoutIt": "是否启用会影响存档能否加载",
+  "TestVersion": "测试版",
+  "DependencyMod": "前置模组",
+  "SourceCodeNotAvailable": "源代码不可用",
+  "MusicCanBeCopyrighted": "其中包含的音乐可能受版权保护",
+  "IncompleteDescription": "描述信息不完整",
+  "Successor": "继任模组",
+  "LoadAfter": "加载顺序在…之后",
+  "Alternative": "备选方案",
+  "SameFunctionality": "功能相同",
+  "RequirementAlternative": "可用的备选方案",
+  "IncompatibleWith": "与…不兼容",
+  "CausesIssuesWith": "与…同时使用会引发问题",
+  "RequiredPackages": "必需的前置",
+  "StatusType": "状态类型",
+  "InteractionType": "交互类型",
+  "MissingDependency": "缺少前置",
+  "Caution": "注意事项",
+  "Warning": "警告",
+  "AttentionRequired": "需要注意",
+  "Website": "网站",
+  "Donation": "赞助",
+  "ManageSinglePackage": "管理特定插件",
+  "ManageCompatibilityData": "管理兼容性报告的数据",
+  "YourPackages": "管理您的插件",
+  "AddPackages": "添加插件",
+  "ConfirmEndSession": "您确定要关闭此会话吗？",
+  "CrDataLoadFailed": "数据加载失败，请稍后重试",
+  "AddGlobalTag": "添加一个全局标签",
+  "ReuseData": "重新使用上一个数据",
+  "ReuseData_Tip": "将上次保存的兼容性数据重新用于此插件。\n按住 Shift 键应用并继续",
+  "PleaseReviewTheStability": "请在保存之前检查此插件的稳定性。",
+  "PleaseReviewPackageStatuses": "请在保存之前检查此插件的状态。\n您选择的部分状态类型是无效的。",
+  "PleaseReviewPackageInteractions": "请在保存之前检查此插件的交互方式。\n部分交互方式是无效的。",
+  "PleaseReviewPackageUsage": "请为此插件选择一个有效的用途。",
+  "Interaction_Alternative": {
+    "One": "'{1}' 可以作为 '{0}' 的备选方案。",
+    "Plural": "下列任意一个插件可以作为 '{0}' 的备选方案："
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' 和 '{1}' 都含有相同的功能。",
+    "Plural": "'{0}' 与下列插件都具有相同的功能："
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' 与 '{1}' 不兼容。",
+    "Plural": "'{0}' 与下列任何一个插件都不兼容："
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "同时使用 '{0}' 和 '{1}' 可能会出现问题。",
+    "Plural": "同时使用 '{0}' 和下列模组，可能会出现问题："
+  },
+  "Interaction_RequiredPackages": {
+    "One": "要使用 '{0}'，您需要一个插件作为前置。",
+    "Plural": "要使用 '{0}'，您需要以下插件作为前置："
+  },
+  "Interaction_OptionalPackages": {
+    "One": "对于插件 '{0}'，您缺少以下可选插件：",
+    "Plural": "对于插件 '{0}'，您缺少以下可选插件："
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' 的功能已被 '{1}' 继承。",
+    "Plural": "'{0}' 的功能已被下列任意一个插件继承："
+  },
+  "Interaction_LoadAfter": {
+    "One": "'{0}'将在'{1}'加载完成后直接加载。",
+    "Plural": "'{0}'将在以下插件加载完成后直接加载。"
+  },
+  "Interaction_Identical": "以下是同一插件的多个不同版本。\n\n您应当只使用其中一个版本，并取消订阅此插件的其它版本。",
+  "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
+  "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
+  "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行更新了。",
+  "Status_Reupload": {
+    "Zero": "'{0}' 是某个插件的重新上传版本。",
+    "One": "此插件是 '{1}' 的重新上传版本。"
+  },
+  "Status_CausesIssues": "'{0}' 可能导致游戏出现问题。",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "一旦存档中使用了 '{0}' ，此后，当 '{0}' 被禁用时，这个存档将无法加载。",
+    "One": "一旦在存档中使用了 '{0}' ，此后，当 '{0}' 被禁用时，这个存档将无法加载。\n\n您可以使用 '{1}' 来恢复无法加载的存档。请阅读其工坊页面描述以获取更多信息。"
+  },
+  "Status_TestVersion": {
+    "Zero": "这是测试版模组。请注意，测试版模组有可能出现意外问题。",
+    "One": "这是 '{1}' 的测试版。\n请注意，测试版模组可能会出现意外问题。"
+  },
+  "Status_MissingDlc": {
+    "One": "要使用这个插件，您需要购买一个 DLC。",
+    "Plural": "要使用这个插件，您需要购买下列 DLC："
+  },
+  "Status_DependencyMod": "这是一个前置模组，但您似乎没有任何依赖于这个前置模组的插件。",
+  "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
+  "SourceAvailable": "源代码可用",
+  "StandardMod": "标准模组",
+  "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
+  "Status_IncompleteDescription": "这个模组创意工坊页面的描述文本非常短。除非您信任此模组的作者，否则不应使用此模组。",
+  "Status_SourceAvailable": "您不会收到关于此插件源代码不可用的警告。",
+  "Status_StandardMod": "在进行故障修复期间，此插件将被忽略。",
+  "OutputText": "预期显示文本",
+  "Stability_AssetNotReviewed": "此资产尚未被检查。\n\n兼容性信息可能不准确；尽管资产一般都是稳定的。",
+  "Stability_NotReviewed": "此插件尚未被检查。\n\n兼容性信息可能不准确。",
+  "Stability_Stable": "此插件能稳定运行。",
+  "Stability_NotEnoughInformation": "没有足够的信息来正确地检查此插件的稳定性。",
+  "Stability_HasIssues": "此插件可能存在稳定性问题。\n请小心使用。",
+  "Stability_Broken": "此插件已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
+  "Stability_Incompatible": "此插件与游戏不兼容，或者会使游戏崩溃。\n\n您应当立刻取消订阅或删除此插件。",
+  "Stability_Local": "此插件是模组 '{0}' 的本地版本。\n\n本地模组通常用于进行测试，或在非 Steam 版本的游戏使用。\n\n请查看插件的链接以查找模组的更新版本。",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "您应当订阅以下插件：",
+    "Plural": "您应当订阅这些插件："
+  },
+  "Action_RequiresConfiguration": "您应当遵循以下使用说明：",
+  "Action_SelectOne": {
+    "One": "对于 '{0}' 和 '{1}'，您应当只选择其中一个插件来使用：",
+    "Plural": "对于 '{0}' 和下列插件，您应当只选择其中一个插件来使用："
+  },
+  "Action_UnsubscribeThis": "您应当取消订阅 '{0}' 。",
+  "Action_UnsubscribeOther": {
+    "One": "您应当取消订阅 '{1}' 。",
+    "Plural": "您应当取消订阅下列插件："
+  },
+  "Action_ExcludeThis": "您应该卸下 '{0}'。",
+  "ExcludeThis": "卸下此插件",
+  "Exclude": "卸下",
+  "Unsubscribe": "取消订阅",
+  "Action_ExcludeOther": {
+    "One": "您应该卸下 '{1}'。",
+    "Plural": "您应该卸下以下插件："
+  },
+  "Action_Switch": {
+    "One": "您应当将其替换为 '{1}'。",
+    "Plural": "您应当将此模组替换为下列任意一个插件："
+  },
+  "NoRequiredDlcs": "没有前置 DLC",
+  "DlcsSelected": {
+    "One": "已选择 {0} 个DLC",
+    "Plural": "已选择 {0} 个DLC"
+  },
+  "RequiredDLCs": "前置 DLC/CCP",
+  "CRT_Stability": "稳定性",
+  "CRT_Successors": "继任模组",
+  "CRT_RequiredPackages": "前置插件",
+  "CRT_OptionalPackages": "可选插件",
+  "CRT_DlcMissing": "缺少的 DLC/CCP",
+  "CRT_Compatibility": "兼容性问题",
+  "CRT_Alternatives": "备选方案",
+  "CRT_Status": "状态",
+  "CRT_Ambiguous": "不明确性",
+  "LastReviewDate": "最近一次检查于 {0}",
+  "RequestReviewInfo": "使用此插件时遇到问题？",
+  "RequestReview": "申请检查",
+  "MissingDependencyCount": {
+    "One": "{0} 个{1} 缺少前置",
+    "Plural": "{0} 个{1} 缺少前置"
+  },
+  "CautionCount": "{0} 个{1} 建议谨慎使用",
+  "WarningCount": "{0} 个{1} 带有警告",
+  "AttentionRequiredCount": {
+    "One": "{0} 个{1} 需要注意",
+    "Plural": "{0} 个{1} 需要注意"
+  },
+  "ExcludeCount": {
+    "One": "{0} 个{1} 应当被卸下",
+    "Plural": "{0} 个{1} 应当被卸下"
+  },
+  "UnsubscribeCount": "{0} 个{1} 应当取消订阅",
+  "SwitchCount": {
+    "One": "{0} 个{1} 需要替换",
+    "Plural": "{0} 个{1} 需要替换"
+  },
+  "PackageType": "插件类型",
+  "GenericPackage": "普通插件",
+  "MusicPack": "音乐包插件",
+  "ThemeMix": "混合主题",
+  "IMTMarkings": "Intersection Marking Tool 标线",
+  "RenderItPreset": "Render it! 的预设",
+  "POFont": "Procedural Object 的字体/效果模块",
+  "NameList": "名称列表/游戏翻译",
+  "ApplyChangedBeforeExit": "当前存在尚未保存的改动。\n\n在继续操作前，要保存并应用这些改动吗？",
+  "AuthorRetired": "{0} 的作者 {1} 已经退坑，或者长期不活跃。\n对于该作者制作的插件，无法保证其将来是否能够稳定运行，以及是否更新。",
+  "AuthorMalicious": "已知 {0} 的作者 {1} 存在恶意，并且其制作的插件中含有病毒等有害内容。",
+  "ReviewRequests": "检查申请 {0}",
+  "DeleteRequest": "删除申请",
+  "ApplyRequestedChanges": "应用申请的改动",
+  "ManagePackage": "管理插件",
+  "Banned": "已被封禁",
+  "NoIssues": "没有问题",
+  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam ID 和日志文件也会一并发送",
+  "ScenarioMaking": "制作剧本",
+  "ThemeMaking": "制作地图主题",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

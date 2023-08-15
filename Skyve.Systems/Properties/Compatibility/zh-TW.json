@@ -1,0 +1,231 @@
+{
+  "Usage": "用法",
+  "Stability": "穩定性",
+  "ApplyContinue": "應用並繼續",
+  "Previous": "返回",
+  "Skip": "跳過",
+  "Note": "備註",
+  "NoteInfo": "在外掛程式頁面顯示的更多的資訊文本",
+  "BlackListName": "按名稱列出黑名單",
+  "BlackListId": "Steam ID 黑名單",
+  "GlobalTags": "全域標籤",
+  "GlobalTagsInfo": "所有玩家都會在應用程式中看到的標籤",
+  "Links": "連結",
+  "StatusesCount": "狀態 ({0})",
+  "InteractionCount": "對話模式 ({0})",
+  "AddStatus": "添加狀態",
+  "AddInteraction": "添加對話模式",
+  "NotReviewed": "尚未檢查",
+  "Stable": "穩定的",
+  "NotEnoughInformation": "沒有足夠的資訊",
+  "HasIssues": "存在問題",
+  "Broken": "損壞的",
+  "Incompatible": "不相容",
+  "CityBuilding": "城市建設用",
+  "AssetCreation": "資產製作用",
+  "MapCreation": "地圖製作用",
+  "NoAction": "不執行任何操作",
+  "SubscribeToPackages": "訂閱此連結的外掛程式",
+  "RequiresConfiguration": "需要一個特定的配置",
+  "SelectOne": "選擇任意一個",
+  "UnsubscribeThis": "取消訂閱此外掛程式",
+  "UnsubscribeOther": "取消訂閱關聯的外掛程式",
+  "Switch": "切換到連結的外掛程式",
+  "FlippedSwitch": "取代為此外掛",
+  "Deprecated": "已廢棄",
+  "Reupload": "重新上傳",
+  "CausesIssues": "導致問題",
+  "SavesCantLoadWithoutIt": "沒有它，存檔將無法載入",
+  "TestVersion": "測試版",
+  "DependencyMod": "前置模組",
+  "SourceCodeNotAvailable": "原始程式碼不可用",
+  "MusicCanBeCopyrighted": "其中包含的音樂可能受版權保護",
+  "IncompleteDescription": "描述不完整",
+  "Successor": "繼任模組",
+  "LoadAfter": "載入之後..",
+  "Alternative": "備選方案",
+  "SameFunctionality": "相同的功能",
+  "RequirementAlternative": "可用的備選方案",
+  "IncompatibleWith": "與…不相容",
+  "CausesIssuesWith": "與…一起使用會導致問題",
+  "RequiredPackages": "需要 ...",
+  "StatusType": "狀態類型",
+  "InteractionType": "交互類型",
+  "MissingDependency": "缺少前置模組",
+  "Caution": "注意事項",
+  "Warning": "警告",
+  "AttentionRequired": "需要注意",
+  "Website": "網站",
+  "Donation": "贊助",
+  "ManageSinglePackage": "管理特定外掛",
+  "ManageCompatibilityData": "管理相容性報告的資料",
+  "YourPackages": "管理您的外掛程式",
+  "AddPackages": "添加外掛程式",
+  "ConfirmEndSession": "您確定要關閉此會話嗎？",
+  "CrDataLoadFailed": "數據載入失敗，請稍後重試",
+  "AddGlobalTag": "添加一個全域標籤",
+  "ReuseData": "重新使用上一個資料",
+  "ReuseData_Tip": "將上次保存的相容性資料重新用於此外掛程式。\n按住 Shift 鍵應用並繼續",
+  "PleaseReviewTheStability": "請在保存之前檢查此外掛程式的穩定性。",
+  "PleaseReviewPackageStatuses": "請在保存之前檢查此外掛程式的狀態。\n部分狀態類型是無效的。",
+  "PleaseReviewPackageInteractions": "請在保存之前檢查此外掛程式的對話模式。\n部分對話模式是無效的。",
+  "PleaseReviewPackageUsage": "請為此外掛程式選擇一個有效的用法。",
+  "Interaction_Alternative": {
+    "One": "'{1}' 可以作為 '{0}' 的替代方案。",
+    "Plural": "下列任意一個外掛程式可以作為 '{0}' 的替代方案："
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' 和 '{1}' 具有相同的功能。",
+    "Plural": "'{0}' 與下列外掛程式都具有相同的功能："
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' 與 '{1}' 不相容。",
+    "Plural": "'{0}' 與下列任何一個外掛程式都不相容："
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "同時使用 '{0}' 與 '{1}' 可能引發問題。",
+    "Plural": "當 '{0}' 與以下模組同時使用時，可能引發問題："
+  },
+  "Interaction_RequiredPackages": {
+    "One": "要使用 '{0}'，您需要訂閱一個必需物品。",
+    "Plural": "要使用 '{0}'，您需要訂閱下列必需物品："
+  },
+  "Interaction_OptionalPackages": {
+    "One": "您缺少 '{0}' 中的可選外掛程式。",
+    "Plural": "您缺少 '{0}' 中以下可選的外掛程式。"
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' 的功能已被 '{1}' 繼承。",
+    "Plural": "'{0}' 的功能已被下列任意一個外掛程式繼承："
+  },
+  "Interaction_LoadAfter": {
+    "One": "「{0}」將在「{1}」之後直接載入。",
+    "Plural": "「{0}」將在以下外掛程式載入完成之後直接載入。"
+  },
+  "Interaction_Identical": "這些是同一個外掛程式的多個不同版本。\n\n您應當只選擇使用其中一個，並取消訂閱其他版本。",
+  "Status_Succeeded": "「{0}」 的功能已被「{1}」繼承。\n\n您已經使用了「{1}」，因此不再需要使用「{0}」。",
+  "Status_Deprecated": "'{0}' 已經廢棄，不再受到作者的支持。",
+  "Status_AutoDeprecated": "「{0}」已經很長時間沒有進行過更新，可能不再受到作者的支援。",
+  "Status_Reupload": {
+    "Zero": "'{0}' 是某個原始外掛程式的重新上傳版本。",
+    "One": "這是 '{1}' 的重新上傳版本。"
+  },
+  "Status_CausesIssues": "'{0}' 會導致遊戲出現問題。",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "一旦在新建存檔時啟用 '{0}' ，此後，當 '{0}' 被禁用時，這個存檔將無法載入。",
+    "One": "一旦在新建存檔時啟用「{0}」，此後，當「{0}」被禁用時，這個存檔將無法載入。\n\n如果需要，可以使用「{1}」來恢復您的存檔。請閱讀其工作坊頁面描述以獲取更多資訊。"
+  },
+  "Status_TestVersion": {
+    "Zero": "這是某個原版模組的測試版。請注意，測試版模組可能會出現意外問題。",
+    "One": "這是 '{1}' 的測試版。\n請注意，測試版模組可能會出現意外問題。"
+  },
+  "Status_MissingDlc": {
+    "One": "要使用這個外掛程式，您必須購買 '{0}' DLC。",
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_DependencyMod": "這是一個前置模組，但你似乎沒有使用任何依賴於該模組的外掛程式。",
+  "Status_SourceCodeNotAvailable": "此模組的原始程式碼不可用。除非您信任此模組的作者，否則不應使用此模組。",
+  "SourceAvailable": "原始程式碼公開",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "此模組所含音樂可能受到版權保護。最好不要在串流直播時使用此模組。",
+  "Status_IncompleteDescription": "這個模組的工作坊頁面描述非常短。除非你信任此模組的作者，否則不應使用此模組。",
+  "Status_SourceAvailable": "This package will not warn about missing source code.",
+  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
+  "OutputText": "預期輸出",
+  "Stability_AssetNotReviewed": "此資產尚未被檢查。\n\n相容性資訊可能不精準；儘管資產一般都是穩定的。",
+  "Stability_NotReviewed": "此外掛程式尚未被檢查。相容性資訊可能不準確。",
+  "Stability_Stable": "此外掛程式能穩定運行。",
+  "Stability_NotEnoughInformation": "沒有足夠的資訊來正確地檢查此外掛程式的穩定性。",
+  "Stability_HasIssues": "此外掛可能引發問題。\n請小心使用。",
+  "Stability_Broken": "此外掛已經損壞。\n目前已知此外掛無法正常運行，或使遊戲崩潰。",
+  "Stability_Incompatible": "此外掛與遊戲不相容，或者會使遊戲崩潰。\n\n您應該立刻取消訂閱或刪除此外掛。",
+  "Stability_Local": "此外掛是「{0}」模組的本地版本。\n\n本地模組通常用於進行測試，或在非 Steam 版本的遊戲使用。\n\n請查看外掛的連結以尋找模組的更新版本。",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "您應該訂閱下列外掛程式：",
+    "Plural": "您應該訂閱這些外掛程式："
+  },
+  "Action_RequiresConfiguration": "您應該遵循以下指令：",
+  "Action_SelectOne": {
+    "One": "You should only use one between '{0}' and '{1}'.",
+    "Plural": "You should only use one between '{0}' and the following packages."
+  },
+  "Action_UnsubscribeThis": "您應該取消訂閱 '{0}' 。",
+  "Action_UnsubscribeOther": {
+    "One": "您應該取消訂閱 '{1}' 。",
+    "Plural": "您應該取消訂閱下列外掛程式："
+  },
+  "Action_ExcludeThis": "您應該卸下 '{0}'。",
+  "ExcludeThis": "卸下此插件",
+  "Exclude": "卸載",
+  "Unsubscribe": "取消訂閱",
+  "Action_ExcludeOther": {
+    "One": "您應該卸下 '{1}'。",
+    "Plural": "您應該卸下以下外掛程式。"
+  },
+  "Action_Switch": {
+    "One": "您應當改為使用 '{1}'。",
+    "Plural": "您應當改為使用下列任意一個外掛程式："
+  },
+  "NoRequiredDlcs": "沒有前置 DLC",
+  "DlcsSelected": {
+    "One": "已選擇 {0} 個DLC",
+    "Plural": "已選擇 {0} 個DLC"
+  },
+  "RequiredDLCs": "前置 DLC/CCP",
+  "CRT_Stability": "穩定性",
+  "CRT_Successors": "繼任模組",
+  "CRT_RequiredPackages": "必需物品",
+  "CRT_OptionalPackages": "可選外掛程式",
+  "CRT_DlcMissing": "缺失 DLCs/CCPs",
+  "CRT_Compatibility": "相容性問題",
+  "CRT_Alternatives": "備選方案",
+  "CRT_Status": "狀態",
+  "CRT_Ambiguous": "不明確的",
+  "LastReviewDate": "最近一次檢查於 {0}",
+  "RequestReviewInfo": "使用此外掛程式時遇到問題？\n請在這裡申請新的審查：",
+  "RequestReview": "申請審查",
+  "MissingDependencyCount": {
+    "One": "{0} {1} 缺少依賴關係",
+    "Plural": "{0} {1} 缺少依賴關係"
+  },
+  "CautionCount": "建議謹慎處理 {0} {1}",
+  "WarningCount": "{0} {1} 存在一個警告",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} 需要您注意。",
+    "Plural": "{0} {1} 需要您注意。"
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} 應該被刪除",
+    "Plural": "{0} {1} 應該被刪除"
+  },
+  "UnsubscribeCount": "您應該取消訂閱 {0} {1}",
+  "SwitchCount": {
+    "One": "{0} {1} 需要切換到另一個",
+    "Plural": "{0} {1} 需要切換到另一個"
+  },
+  "PackageType": "外掛類型",
+  "GenericPackage": "普通外掛",
+  "MusicPack": "音樂外掛",
+  "ThemeMix": "混合主題",
+  "IMTMarkings": "Intersection Marking Tool 標線",
+  "RenderItPreset": "Render it! 的預設",
+  "POFont": "Procedural Object 的字型/效果模組",
+  "NameList": "名稱列表/遊戲翻譯",
+  "ApplyChangedBeforeExit": "當前存在尚未保存的改動。\n\n在繼續操作前，您想保存並應用這些改動嗎？",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "已知 {0} 的作者 {1} 存在惡意，並且其製作的外掛中含有病毒等有害內容。",
+  "ReviewRequests": "檢查請求 {0}",
+  "DeleteRequest": "刪除請求",
+  "ApplyRequestedChanges": "應用請求的改動",
+  "ManagePackage": "管理外掛",
+  "Banned": "封鎖",
+  "NoIssues": "沒有問題",
+  "RequestReviewDisclaimer": "* 傳送請求時，您的 Steam ID 和記錄檔也會一併傳送",
+  "ScenarioMaking": "製作情況用",
+  "ThemeMaking": "制作主题用",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

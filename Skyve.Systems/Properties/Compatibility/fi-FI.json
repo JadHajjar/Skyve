@@ -1,0 +1,231 @@
+{
+  "Usage": "Käyttö",
+  "Stability": "Vakaus",
+  "ApplyContinue": "Käytä & Jatka",
+  "Previous": "Edellinen",
+  "Skip": "Ohita",
+  "Note": "Huomautus",
+  "NoteInfo": "Paketin lisätiedot",
+  "BlackListName": "Lisää mustalle listalle nimen mukaan",
+  "BlackListId": "Lisää mustalle listalle Steam ID:n mukaan",
+  "GlobalTags": "Globaalit Tagit",
+  "GlobalTagsInfo": "Tagit, jotka kaikki pelaajat näkevät sovelluksessa",
+  "Links": "Linkit",
+  "StatusesCount": "Tilat ({0})",
+  "InteractionCount": "Toiminnat ({0})",
+  "AddStatus": "Lisää Tila",
+  "AddInteraction": "Lisää Toiminta",
+  "NotReviewed": "Ei vielä tarkistettu",
+  "Stable": "Vakaa",
+  "NotEnoughInformation": "Ei tarpeeksi tietoja",
+  "HasIssues": "Ongelmia",
+  "Broken": "Epäkunnossa",
+  "Incompatible": "Yhteensopimaton",
+  "CityBuilding": "Kaupunkirakennus",
+  "AssetCreation": "Esineiden Luonti",
+  "MapCreation": "Karttojen Luonti",
+  "NoAction": "Ei Tehtävää",
+  "SubscribeToPackages": "Tilaa linkitetyt paketit",
+  "RequiresConfiguration": "Vaatii tietyn konfiguraation",
+  "SelectOne": "Valitse yksi",
+  "UnsubscribeThis": "Poista tämän paketin tilaus",
+  "UnsubscribeOther": "Poista linkitettyjen pakettien tilaus",
+  "Switch": "Vaihda linkitettyyn pakettiin",
+  "FlippedSwitch": "Vaihda tähän pakettiin",
+  "Deprecated": "Vanhentunut",
+  "Reupload": "Uudelleenlataa",
+  "CausesIssues": "Aiheuttaa Ongelmia",
+  "SavesCantLoadWithoutIt": "Tallennukset eivät lataa ilman",
+  "TestVersion": "Testiversio",
+  "DependencyMod": "Riippuvuusmodi",
+  "SourceCodeNotAvailable": "Lähdekoodi ei ole käytettävissä",
+  "MusicCanBeCopyrighted": "Mukana oleva musiikki voi olla tekijänoikeuksin suojattu",
+  "IncompleteDescription": "Keskeneräinen Kuvaus",
+  "Successor": "Esine on seuraaja esineelle ..",
+  "LoadAfter": "Lataa Jälkeen ..",
+  "Alternative": "Vaihtoehtoinen esineelle ..",
+  "SameFunctionality": "Sama käyttötarkoitus, kuin ..",
+  "RequirementAlternative": "Vaadittu vaihtoehto esineelle ..",
+  "IncompatibleWith": "Yhteensopimaton esineen kanssa: ..",
+  "CausesIssuesWith": "Aiheuttaa Ongelmia esineen kanssa: ..",
+  "RequiredPackages": "Vaatii esineen ..",
+  "StatusType": "Tilatyyppi",
+  "InteractionType": "Toiminnan Tyyppi",
+  "MissingDependency": "Puuttuva Riippuvuus",
+  "Caution": "Varoitus",
+  "Warning": "Varoitus",
+  "AttentionRequired": "Vaaditaan Huomiota",
+  "Website": "Verkkosivusto",
+  "Donation": "Lahjoita",
+  "ManageSinglePackage": "Hallinnoi tiettyjä paketteja",
+  "ManageCompatibilityData": "Hallitse Yhteensopivuustietoja",
+  "YourPackages": "Hallinnoi pakettejasi",
+  "AddPackages": "Lisää Paketteja",
+  "ConfirmEndSession": "Haluatko varmasti päättää istuntosi?",
+  "CrDataLoadFailed": "Tietojen lataaminen epäonnistui, yritä myöhemmin uudelleen",
+  "AddGlobalTag": "Lisää globaali tagi",
+  "ReuseData": "Käytä Edellisiä Tietoja Uudelleen",
+  "ReuseData_Tip": "Käyttää yhteensopivuustietoja viimeisimmästä tallennetusta paketista uudelleen.\nPidä Shift pohjassa käyttääksesi ja jatkaaksesi",
+  "PleaseReviewTheStability": "Tarkista tämän paketin vakaus ennen tallentamista.",
+  "PleaseReviewPackageStatuses": "Tarkista tämän paketin tilat ennen tallentamista.\nJoillakin tiloilla on kelvoton tilatyyppi.",
+  "PleaseReviewPackageInteractions": "Tarkista tämän paketin toiminnot ennen tallentamista.\nJoillakin toiminnoilla on kelvoton toimintotyyppi tai ei linkitettyä pakettia.",
+  "PleaseReviewPackageUsage": "Ole hyvä ja valitse kelvollinen käyttö tälle paketille.",
+  "Interaction_Alternative": {
+    "One": "'{1}' voidaan käyttää vaihtoehtona '{0} ' '",
+    "Plural": "Yhtä seuraavista paketeista voidaan käyttää vaihtoehtona '{0}'."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' ja '{1}' on samat toiminnot.",
+    "Plural": "'{0}' ja seuraavilla paketeilla on samat toiminnot."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' ja '{1}' eivät ole yhteensopivia keskenään.",
+    "Plural": "'{0}' ei ole yhteensopiva seuraavien pakettien kanssa."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' voi aiheuttaa ongelmia, kun käytetään '{1} ' -merkillä.",
+    "Plural": "'{0}' voi aiheuttaa ongelmia käytettäessä seuraavia modeja."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "Sinulta puuttuu vaadittu paketti kohteelle '{0}'.",
+    "Plural": "Sinulta puuttuvat seuraavat vaaditut paketit '{0}'."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "Sinulta puuttuu valinnainen paketti kohteelle '{0}'.",
+    "Plural": "Sinulta puuttuu seuraavat valinnaiset paketit kohteelle '{0}'."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' on seuraaja '{1}'.",
+    "Plural": "Jompikumpi seuraavista paketeista on '{0}' seuraaja."
+  },
+  "Interaction_LoadAfter": {
+    "One": "'{0}' latautuu suoraan '{1} ' jälkeen.",
+    "Plural": "'{0}' latautuu suoraan seuraavien pakettien jälkeen."
+  },
+  "Interaction_Identical": "Nämä ovat useita versioita samasta paketista.\r\n\r\nSinun pitäisi valita vain yksi niistä.",
+  "Status_Succeeded": "'{1}' on seuraaja '{0}'.\n\nKäytät jo '{1}' -toimintoa, joten '{0}' -toimintoa ei enää tarvita.",
+  "Status_Deprecated": "'{0}' on vanhentunut, sen tekijä ei enää tue sitä.",
+  "Status_AutoDeprecated": "'{0}' ei ole päivitetty pitkään aikaan, sen tekijä ei enää välttämättä tue sitä.",
+  "Status_Reupload": {
+    "Zero": "'{0}' on alkuperäisen paketin uudelleenlataus.",
+    "One": "Tämä on '{1} ' uudelleenlataus."
+  },
+  "Status_CausesIssues": "'{0} aiheuttaa ongelmia pelissäsi.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "Kun luodaan uusi tallennus, jossa '{0}' on käytössä, et voi enää ladata että tallenna, jos '{0}' on poistettu käytöstä.",
+    "One": "Kun luodaan uusi tallennus, jossa '{0}' on käytössä, et voi enää ladata että tallenna, jos '{0}' on poistettu käytöstä.\n\nKäytä '{1}' palauttaaksesi tallennuksesi tarvittaessa. Lue sen Workshop kuvaus saadaksesi lisätietoja."
+  },
+  "Status_TestVersion": {
+    "Zero": "Tämä on Testiversio, huomaa että testiversiot voivat aiheuttaa ongelmia, ja sen päivitykset voivat aiheuttaa odottamattomia virheitä.",
+    "One": "Tämä on '{1}' testiversio.\nHuomaa että päivitykset voivat aiheuttaa odottamattomia virheitä."
+  },
+  "Status_MissingDlc": {
+    "One": "Sinulta puuttuu '{0}' DLC käyttääksesi tätä pakettia.",
+    "Plural": "Sinulta puuttuu seuraavat DLC:t käyttääksesi tätä pakettia."
+  },
+  "Status_DependencyMod": "Tämä luomus on vaatimus muille luomuksille, mutta näyttää siltä että, et käytä paketteja jotka vaativat sitä.",
+  "Status_SourceCodeNotAvailable": "Tämän modin lähdekoodi ei ole saatavilla. Sinun ei pitäisi käyttää sitä ellet luota sen tekijään.",
+  "SourceAvailable": "Lähdekoodi on saatavilla",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "Tämän paketin sisältämä musiikki saattaa olla tekijänoikeuksissa. On parasta olla käyttämättä sitä suoratoiston aikana.",
+  "Status_IncompleteDescription": "Tämän modin Workshop kuvaus on liian lyhyt. Sinun ei kannata käyttää sitä ellet luota sen tekijään.",
+  "Status_SourceAvailable": "Tämä paketti ei varoita puuttuvasta lähdekoodista.",
+  "Status_StandardMod": "Tämä paketti jätetään huomiotta käsiteltäessä vianmääritykseen liittyviä modeja.",
+  "OutputText": "Odotettu Ulostulo",
+  "Stability_AssetNotReviewed": "Tätä omaisuutta ei ole vielä tarkistettu.\r\n\r\nYhteensopivuuden tiedot eivät välttämättä ole tarkkoja; vaikka omaisuuserät ovat yleensä vakaita.",
+  "Stability_NotReviewed": "Tätä pakettia ei ole vielä tarkistettu.\n\nYhteensopivuuden tiedot eivät välttämättä ole tarkkoja.",
+  "Stability_Stable": "Tämä paketti on vakaa.",
+  "Stability_NotEnoughInformation": "Paketin asianmukaiseen tarkistukseen ei ole riittävästi tietoa.",
+  "Stability_HasIssues": "Tämä paketti voi aiheuttaa ongelmia.\r\nOle varovainen käyttäessäsi sitä.",
+  "Stability_Broken": "Tämä paketti on rikki.\nSen tiedetään joko rikkovan pelin tai se ei vain toimi.",
+  "Stability_Incompatible": "Tämä paketti ei ole yhteensopiva pelin kanssa tai rikkoo sitä.\r\n\r\nSinun tulee poistaa se välittömästi.",
+  "Stability_Local": "Tämä paketti on paikallinen versio alkuperäisestä modista '{0}'.\n\nPaikallisia versioita käytetään yleensä testaustarkoituksiin tai jos sinulla ei ole Steamia.\n\nTarkista paketin linkit, jotta voit etsiä päivityksiä modiin.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "Sinun pitäisi tilata seuraava paketti:",
+    "Plural": "Sinun pitäisi tilata seuraavat paketit:"
+  },
+  "Action_RequiresConfiguration": "Sinun tulee noudattaa seuraavia ohjeita:",
+  "Action_SelectOne": {
+    "One": "Sinun tulee valita vain '{0}' tai '{1}'.",
+    "Plural": "Sinun tulee valita joko '{0}' tai yksi seuraavista paketeista."
+  },
+  "Action_UnsubscribeThis": "Sinun pitäisi peruuttaa '{0} -tilaus.",
+  "Action_UnsubscribeOther": {
+    "One": "Sinun pitäisi peruuttaa '{1} -tilaus.",
+    "Plural": "Sinun pitäisi peruuttaa seuraavien pakettien tilaus:"
+  },
+  "Action_ExcludeThis": "Sinun pitäisi jättää pois '{0}'.",
+  "ExcludeThis": "Jätä pois tämä paketti",
+  "Exclude": "Ohita",
+  "Unsubscribe": "Peruuta Tilaus",
+  "Action_ExcludeOther": {
+    "One": "Sinun pitäisi jättää pois '{1}'.",
+    "Plural": "Sinun pitäisi jättää pois seuraavat paketit:"
+  },
+  "Action_Switch": {
+    "One": "Sinun pitäisi siirtyä käyttämään '{1}'.",
+    "Plural": "Sinun pitäisi siirtyä käyttämään yhtä seuraavista paketeista:"
+  },
+  "NoRequiredDlcs": "Ei Vaadittuja DLC:itä",
+  "DlcsSelected": {
+    "One": "{0} DLC valittu",
+    "Plural": "{0} DLC:tä valittu"
+  },
+  "RequiredDLCs": "Vaaditut DLC:t/CCP:t",
+  "CRT_Stability": "Vakaus",
+  "CRT_Successors": "Seuraajat",
+  "CRT_RequiredPackages": "Vaaditut Paketit",
+  "CRT_OptionalPackages": "Valinnaiset Paketit",
+  "CRT_DlcMissing": "Puuttuvat DLC:t/CCP:t",
+  "CRT_Compatibility": "Yhteensopivuusongelmat",
+  "CRT_Alternatives": "Vaihtoehdot",
+  "CRT_Status": "Tilat",
+  "CRT_Ambiguous": "Epävarmuus",
+  "LastReviewDate": "Se tarkistettiin viimeksi {0}",
+  "RequestReviewInfo": "Onko sinulla ongelmia tämän paketin kanssa?",
+  "RequestReview": "Pyydä katselmus",
+  "MissingDependencyCount": {
+    "One": "{0} {1} puuttuu riippuvuudet",
+    "Plural": "{0} {1} puuttuu riippuvuudet"
+  },
+  "CautionCount": "{0} {1} , jossa suositellaan varovaisuutta",
+  "WarningCount": "{0} {1} varoituksella",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} vaatii huomiotasi",
+    "Plural": "{0} {1} vaatii huomiotasi"
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} pitäisi jättää pois",
+    "Plural": "{0} {1} pitäisi sulkea pois"
+  },
+  "UnsubscribeCount": "{0} {1} , että sinun pitäisi peruuttaa tilaus",
+  "SwitchCount": {
+    "One": "{0} {1} vaatii vaihtamista toiseen",
+    "Plural": "{0} {1} vaatii vaihtamista toiseen"
+  },
+  "PackageType": "Paketin Tyyppi",
+  "GenericPackage": "Tavallinen Paketti",
+  "MusicPack": "Musiikki Paketti",
+  "ThemeMix": "Teeman Sekoitus",
+  "IMTMarkings": "IMT Merkinnät",
+  "RenderItPreset": "Renderöi se! Esiasetus",
+  "POFont": "Menettelytavan Kohteen Kirjasin/Moduuli",
+  "NameList": "Nimi: Lista/Pelin Käännökset",
+  "ApplyChangedBeforeExit": "Sinulla on tallentamattomia muutoksia.\r\n\r\nHaluatko ottaa nämä muutokset käyttöön ennen jatkamista?",
+  "AuthorRetired": "Modin {0} tekijä {1} on lopetttanut, tai ollut pitkään epäaktiivinen. \n\nPakettien päivityksiä ja vakautta ei voida taata.",
+  "AuthorMalicious": "Tekijän {0}, {1}, tiedetään olevan pahansuopa ja/tai sisällyttää haitallista sisältöä, kuten viruksia paketteihinsa.",
+  "ReviewRequests": "Arvostelupyynnöt {0}",
+  "DeleteRequest": "Poista pyyntö",
+  "ApplyRequestedChanges": "Hyväksy pyydetyt muutokset",
+  "ManagePackage": "Hallinnoi pakettia",
+  "Banned": "Estetty",
+  "NoIssues": "Ei ongelmia",
+  "RequestReviewDisclaimer": "*Sinun Steam-tunnuksesi ja lokisi lähetetään pyyntösi yhteydessä",
+  "ScenarioMaking": "Skenaarion teko",
+  "ThemeMaking": "Teeman teko",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

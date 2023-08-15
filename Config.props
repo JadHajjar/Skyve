@@ -1,0 +1,13 @@
+<Project>
+	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
+		<DefineConstants>$(DefineConstants);Stable</DefineConstants>
+		<DebugType>none</DebugType>
+		<Optimize>true</Optimize>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Company>T. D. W.</Company>
+		<Copyright>@2023 MIT license</Copyright>
+		<Product>Skyve App</Product>
+	</PropertyGroup>
+</Project>

@@ -1,0 +1,231 @@
+{
+  "Usage": "Használat",
+  "Stability": "Stabilitás",
+  "ApplyContinue": "Alkalmazd & Folytasd",
+  "Previous": "Előző",
+  "Skip": "Kihagyás",
+  "Note": "Megjegyzés",
+  "NoteInfo": "Extra tájékoztató szöveg jelenik meg a csomaghoz",
+  "BlackListName": "Feketelista név szerint",
+  "BlackListId": "Feketelista a Steam ID alapján",
+  "GlobalTags": "Globális címkék",
+  "GlobalTagsInfo": "Címkék, amelyeket minden játékos látni fog az alkalmazásban",
+  "Links": "Linkek",
+  "StatusesCount": "Állapotok ({0})",
+  "InteractionCount": "Interakciók ({0})",
+  "AddStatus": "Állapot hozzáadása",
+  "AddInteraction": "Interakció hozzáadása",
+  "NotReviewed": "Még nincs értékelve",
+  "Stable": "Stabil",
+  "NotEnoughInformation": "Nincs elég információ",
+  "HasIssues": "Problémás",
+  "Broken": "Hibás",
+  "Incompatible": "Inkompatibilis",
+  "CityBuilding": "Városépítő",
+  "AssetCreation": "Asset kreáció",
+  "MapCreation": "Térkép (map) kreáció",
+  "NoAction": "Ne tegyen semmit",
+  "SubscribeToPackages": "Leiratkozás ezekről a csomagokról",
+  "RequiresConfiguration": "Speciális konfigurációt igényel",
+  "SelectOne": "Válassza ki valamelyiket",
+  "UnsubscribeThis": "Leiratkozás erről a csomagról",
+  "UnsubscribeOther": "Leiratkozás ezekről a csomagokról",
+  "Switch": "Váltás a linkelt csomagra",
+  "FlippedSwitch": "Váltson erre a csomagra",
+  "Deprecated": "Elavult",
+  "Reupload": "Újra feltöltött",
+  "CausesIssues": "Problémákat okoz",
+  "SavesCantLoadWithoutIt": "A mentések nem tölthetők be nélküle",
+  "TestVersion": "Teszt verzió",
+  "DependencyMod": "Szükséges Mod",
+  "SourceCodeNotAvailable": "A forráskód nem érhető el",
+  "MusicCanBeCopyrighted": "A mellékelt zene szerzői jogvédelem alatt állhat",
+  "IncompleteDescription": "Hiányos leírás",
+  "Successor": "ennek a modnak az utódja: ",
+  "LoadAfter": "Töltsd be miután ..",
+  "Alternative": "Alternatívája ennek: ",
+  "SameFunctionality": "Ugyanolyan a funkcionalitású, mint ez a mod:",
+  "RequirementAlternative": "Követelmény alternatívaként ez a mod:",
+  "IncompatibleWith": "Nem kompatibilis ezzel a moddal: ",
+  "CausesIssuesWith": "Problémás ezzel a moddal együtt:",
+  "RequiredPackages": "Igényli ezt a modot:",
+  "StatusType": "Állapot típusa",
+  "InteractionType": "Az interakció típusa",
+  "MissingDependency": "A szükséges mod hiányzik",
+  "Caution": "Vigyázat",
+  "Warning": "Figyelmeztetés",
+  "AttentionRequired": "Figyelem szükséges",
+  "Website": "Honlap",
+  "Donation": "Adományozz!",
+  "ManageSinglePackage": "Egyes csomagok kezelése",
+  "ManageCompatibilityData": "Kompatibilitási adatok kezelése",
+  "YourPackages": "Kezeld a csomagjaidat",
+  "AddPackages": "Csomagok hozzáadása",
+  "ConfirmEndSession": "Biztosan befejezi a munkamenetet?",
+  "CrDataLoadFailed": "Nem sikerült betölteni az adatokat, próbálkozz újra később",
+  "AddGlobalTag": "Adjon hozzá egy globális címkét",
+  "ReuseData": "Korábbi adatok újrafelhasználása",
+  "ReuseData_Tip": "A legutóbb mentett csomag kompatibilitási adatait újra felhasználja ehhez.\nTartsa lenyomva a Shift billentyűt az alkalmazáshoz és a folytatáshoz is",
+  "PleaseReviewTheStability": "Mentés előtt ellenőrizze a csomag stabilitását.",
+  "PleaseReviewPackageStatuses": "Mentés előtt tekintse át a csomag állapotát.\nNémelyiknek érvénytelen az állapottípusa.",
+  "PleaseReviewPackageInteractions": "Mentés előtt tekintse át a csomag interakcióit.\nNémelyiknek érvénytelen az interakció típusa, vagy nincs csatolt csomagjuk.",
+  "PleaseReviewPackageUsage": "Kérjük, válasszon érvényes használatot ehhez a csomaghoz.",
+  "Interaction_Alternative": {
+    "One": "A(z) „{1}” a(z) „{0}” alternatívájaként használható.",
+    "Plural": "A következő csomagok egyike használható a(z) '{0}' alternatívájaként."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "A(z) „{0}” és a(z) „{1}” ugyanazokkal a funkciókkal rendelkezik.",
+    "Plural": "A(z) „{0}” és a következő csomagok ugyanazokkal a funkciókkal rendelkeznek."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "A(z) „{0}” és a(z) „{1}” nem kompatibilis egymással.",
+    "Plural": "A(z) '{0}' nem kompatibilis a következő csomagok egyikével sem."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "A(z) „{0}” problémákat okozhat, ha a(z) „{1}” elemmel együtt használják.",
+    "Plural": "A(z) „{0}” problémákat okozhat, ha a következő modokkal együtt használják."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "Hiányzik egy szükséges csomag a következőhöz: „{0}”.",
+    "Plural": "Hiányoznak a következő kötelező csomagok a következőhöz: „{0}”."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "Hiányzik egy opcionális csomag a következőhöz: „{0}”.",
+    "Plural": "Hiányoznak a következő opcionális csomagok a(z) „{0}” számára."
+  },
+  "Interaction_SucceededBy": {
+    "One": "A(z) '{0}' utódja a(z) '{1}'.",
+    "Plural": "A(z) '{0}'-t a következő csomagok valamelyike ​​követi."
+  },
+  "Interaction_LoadAfter": {
+    "One": "A(z) „{0}” közvetlenül a(z) „{1}” után töltődik be.",
+    "Plural": "A(z) \"{0}\" közvetlenül a következő csomagok után töltődik be."
+  },
+  "Interaction_Identical": "Ezek ugyanannak a csomagnak a másik verziója.\n\nCsak egyet válassz közülük.",
+  "Status_Succeeded": "A(z) '{0}' utódja a(z) '{1}'.\n\nMár használja a(z) „{1}” fájlt, így nincs többé szükség a(z) „{0}” kifejezésre.",
+  "Status_Deprecated": "A(z) „{0}” elavult, a készítője már nem támogatja.",
+  "Status_AutoDeprecated": "A(z) '{0}' már régóta nem frissült.",
+  "Status_Reupload": {
+    "Zero": "A(z) „{0}” egy eredeti csomag újrafeltöltése.",
+    "One": "Ez a(z) \"{1}\" újrafeltöltése."
+  },
+  "Status_CausesIssues": "A(z) „{0}” problémákat okoz a játékban.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "Ha új mentést hoz létre a(z) \"{0}\" engedélyezésével, a továbbiakban nem tudja betölteni azt a mentést, ha a(z) \"{0}\" le van tiltva.",
+    "One": "Ha új mentést hoz létre a(z) \"{0}\" engedélyezésével, a továbbiakban nem tudja betölteni azt a mentést, ha a(z) \"{0}\" le van tiltva.\n\nSzükség esetén használja a(z) „{1}” parancsot a mentés helyreállításához. További információért olvassa el a műhelyben szereplő leírást."
+  },
+  "Status_TestVersion": {
+    "Zero": "Ez egy \"teszt\" verzió, ügyeljen arra, hogy a modok tesztverziói problémásak lehetnek és a frissítések váratlan hibákat okozhatnak.",
+    "One": "Ez a(z) \"{1}\" \"teszt\" verziója.\n\nÜgyeljen arra, hogy a frissítések váratlan problémákat okozhatnak."
+  },
+  "Status_MissingDlc": {
+    "One": "Hiányzik egy DLC a csomag használatához.",
+    "Plural": "A csomag használatához hiányoznak a következő DLC-k:"
+  },
+  "Status_DependencyMod": "Ez egy függőséget jelentő mod, de úgy tűnik, hogy nem használsz olyan csomagot, amely ezt igényli.",
+  "Status_SourceCodeNotAvailable": "Ennek a modnak a forráskódja nem érhető el. Csak akkor használd, ha megbízol a készítőjében.",
+  "SourceAvailable": "A forráskód elérhető",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "A csomagban található zene szerzői jogvédelem alatt állhat. A legjobb, ha nem használja streamelés közben.",
+  "Status_IncompleteDescription": "Ennek a modnak a Műhely leírása túl rövid. Csak akkor használd, ha megbízol a készítőjében.",
+  "Status_SourceAvailable": "Ez a csomag nem figyelmeztet a hiányzó forráskódra.",
+  "Status_StandardMod": "Ezt a csomagot a rendszer figyelmen kívül hagyja a hibaelhárításra váró modok feldolgozása során.",
+  "OutputText": "Várt eredmények",
+  "Stability_AssetNotReviewed": "Ezt az elemet még nem vizsgálták felül.\n\nElőfordulhat, hogy a kompatibilitási információ nem pontos; bár az eszközök általában stabilak",
+  "Stability_NotReviewed": "Ezt a csomagot még nem vizsgálták felül.\n\nElőfordulhat, hogy a kompatibilitási információ nem pontos.",
+  "Stability_Stable": "Ez a csomag stabil.",
+  "Stability_NotEnoughInformation": "Nincs elég információ a csomag megfelelő áttekintéséhez.",
+  "Stability_HasIssues": "Ez a csomag problémákat okozhat.\nLegyél óvatos használata közben.",
+  "Stability_Broken": "Ez a csomag elromlott. Várhatóan vagy megszakítja a játékot, vagy egyszerűen nem működik.",
+  "Stability_Incompatible": "Ez a csomag nem kompatibilis a játékkal, vagy megszakítja azt.\n\nAzonnal el kell távolítanod.",
+  "Stability_Local": "Ez a csomag az eredeti mod '{0}' helyi változata.\n\nA helyi verziókat általában tesztelési célokra használják, vagy arra az esetre, ha nincs Steam.\n\nTekintsd meg a csomag linkjeit, hogy frissítéseket kereshess a modhoz.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "A következő csomagra kell feliratkoznod:",
+    "Plural": "A következő csomagra kell feliratkoznod:"
+  },
+  "Action_RequiresConfiguration": "A következő műveleteket kell elvégezned:",
+  "Action_SelectOne": {
+    "One": "A(z) '{0}' és '{1}' közül csak egyet válassz.",
+    "Plural": "A(z) '{0}' és a következő csomagok közül csak egyet válassz."
+  },
+  "Action_UnsubscribeThis": "Le kell iratkoznod a következőről: „{0}”.",
+  "Action_UnsubscribeOther": {
+    "One": "Le kell iratkoznod a következőről: \"{1}\".",
+    "Plural": "Le kell iratkoznod az alábbi csomagokról:"
+  },
+  "Action_ExcludeThis": "Ki kell zárnod a következőt: „{0}”.",
+  "ExcludeThis": "Zárd ki ezt a csomagot",
+  "Exclude": "Kihagyott",
+  "Unsubscribe": "Leiratkozás",
+  "Action_ExcludeOther": {
+    "One": "Ki kell zárnod a következőt: „{1}”.",
+    "Plural": "Ki kell zárnod a következő csomagokat:"
+  },
+  "Action_Switch": {
+    "One": "Válts a következőre: „{1}”.",
+    "Plural": "A következő csomagok egyikére kell váltanod:"
+  },
+  "NoRequiredDlcs": "Nincs szükség további DLC-re",
+  "DlcsSelected": {
+    "One": "{0} DLC kiválasztva",
+    "Plural": "{0} DLC kiválasztva"
+  },
+  "RequiredDLCs": "Szükséges DLC-k / CCP-k",
+  "CRT_Stability": "Stabilitás",
+  "CRT_Successors": "Utódok",
+  "CRT_RequiredPackages": "Szükséges csomagok",
+  "CRT_OptionalPackages": "Választható csomagok",
+  "CRT_DlcMissing": "Hiányzó DLC-k/CCP-k",
+  "CRT_Compatibility": "Kompatibilitási problémák",
+  "CRT_Alternatives": "Alternatívák",
+  "CRT_Status": "Státuszok",
+  "CRT_Ambiguous": "Kétértelműség",
+  "LastReviewDate": "Utolsó értékelése ekkor történt: {0}",
+  "RequestReviewInfo": "Problémákat tapasztalsz ezzel a csomaggal?",
+  "RequestReview": "Kérj felülvizsgálatot",
+  "MissingDependencyCount": {
+    "One": "A(z) {0} {1} elemből hiányoznak a függőségek",
+    "Plural": "A(z) {0} {1} elemből hiányoznak a függőségek"
+  },
+  "CautionCount": "{0} {1}, ahol óvatosság javasolt",
+  "WarningCount": "{0} {1} figyelmeztetéssel",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} figyelmet igényel",
+    "Plural": "{0} {1} figyelmet igényel"
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} - ezeket ki kell zárni",
+    "Plural": "{0} {1} - ezeket ki kell zárni"
+  },
+  "UnsubscribeCount": "{0} {1}, amelyről le kell iratkoznia",
+  "SwitchCount": {
+    "One": "A(z) {0} {1} átváltást igényel egy másikra",
+    "Plural": "A(z) {0} {1} másikra váltani szükséges"
+  },
+  "PackageType": "Csomag típus",
+  "GenericPackage": "Általános csomag",
+  "MusicPack": "Zenecsomag",
+  "ThemeMix": "Téma mix",
+  "IMTMarkings": "IMT jelölések",
+  "RenderItPreset": "Render it! beállítások",
+  "POFont": "Procedural Object Font/Modul",
+  "NameList": "Névlista/játék fordítások",
+  "ApplyChangedBeforeExit": "Nem mentett módosításaid vannak.\n\nAlkalmazni szeretnéd ezeket a változtatásokat, mielőtt folytatnád?",
+  "AuthorRetired": "A(z) {0} szerzője, {1} visszavonult, vagy hosszú ideje inaktív.\n\nA csomagok jövőbeli frissítései és stabilitása nem garantált.",
+  "AuthorMalicious": "A(z) {0} szerzője, {1} köztudottan rosszindulatú, és/vagy káros tartalmakat, például vírusokat tartalmaz a csomagjaiban.",
+  "ReviewRequests": "A kérelmek áttekintése {0}",
+  "DeleteRequest": "Kérés visszavonása",
+  "ApplyRequestedChanges": "Alkalmazza a kért módosításokat",
+  "ManagePackage": "Csomagok kezelése",
+  "Banned": "Kitiltott",
+  "NoIssues": "Nincsenek problémák",
+  "RequestReviewDisclaimer": "* A Steam azonosítód és naplóid a kéréssel együtt elküldésre kerülnek",
+  "ScenarioMaking": "Forgatókönyv-készítés",
+  "ThemeMaking": "Témakészítés",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

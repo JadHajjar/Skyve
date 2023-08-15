@@ -1,0 +1,231 @@
+{
+  "Usage": "Gebruik",
+  "Stability": "Stabiliteit",
+  "ApplyContinue": "Toepassen & doorgaan",
+  "Previous": "Vorige",
+  "Skip": "Overslaan",
+  "Note": "Notitie",
+  "NoteInfo": "Extra informatieve tekst weergegeven voor het pakket",
+  "BlackListName": "Zwarte-lijst op naam",
+  "BlackListId": "Zwarte-lijst op Steam ID",
+  "GlobalTags": "Globale Tags",
+  "GlobalTagsInfo": "Tags die alle spelers zullen zien in de app",
+  "Links": "Koppelingen",
+  "StatusesCount": "Statussen ({0})",
+  "InteractionCount": "Interacties ({0})",
+  "AddStatus": "Status toevoegen",
+  "AddInteraction": "Interactie toevoegen",
+  "NotReviewed": "Nog niet beoordeeld",
+  "Stable": "Stabiel",
+  "NotEnoughInformation": "Niet genoeg informatie",
+  "HasIssues": "Heeft problemen",
+  "Broken": "Gebroken",
+  "Incompatible": "Incompatibel",
+  "CityBuilding": "Stadsbouw",
+  "AssetCreation": "Asset creëren",
+  "MapCreation": "Kaart Aanmaken",
+  "NoAction": "Niets doen",
+  "SubscribeToPackages": "Abonneren op gelinkte pakketten",
+  "RequiresConfiguration": "Vereist een specifieke configuratie",
+  "SelectOne": "Selecteer een",
+  "UnsubscribeThis": "Afmelden voor dit pakket",
+  "UnsubscribeOther": "Afmelden voor gekoppelde pakketten",
+  "Switch": "Overschakelen naar gekoppeld pakket",
+  "FlippedSwitch": "Overschakelen naar dit pakket",
+  "Deprecated": "Afgekeurd",
+  "Reupload": "Herladen",
+  "CausesIssues": "Oorzaken problemen",
+  "SavesCantLoadWithoutIt": "Opslaan kan niet laden zonder deze",
+  "TestVersion": "Test versie",
+  "DependencyMod": "Afhankelijkheid Mod",
+  "SourceCodeNotAvailable": "Broncode is niet beschikbaar",
+  "MusicCanBeCopyrighted": "Opgenomen muziek kan worden gekopieerd",
+  "IncompleteDescription": "Onvolledige beschrijving",
+  "Successor": "Opvolger voor ..",
+  "LoadAfter": "Laden na ..",
+  "Alternative": "Alternatief voor..",
+  "SameFunctionality": "Dezelfde functionaliteit als ..",
+  "RequirementAlternative": "Benodigd alternatief voor ..",
+  "IncompatibleWith": "Incompatibel met ..",
+  "CausesIssuesWith": "Conflicteert met ..",
+  "RequiredPackages": "Vereist ..",
+  "StatusType": "Status type",
+  "InteractionType": "Interactie Type",
+  "MissingDependency": "Afhankelijkheid ontbreekt",
+  "Caution": "Voorzichtigheid",
+  "Warning": "Waarschuwing",
+  "AttentionRequired": "Aandacht vereist",
+  "Website": "Website",
+  "Donation": "Doneren",
+  "ManageSinglePackage": "Specifieke pakketten beheren",
+  "ManageCompatibilityData": "Compatibiliteitsgegevens beheren",
+  "YourPackages": "Beheer je pakketten",
+  "AddPackages": "Pakketten toevoegen",
+  "ConfirmEndSession": "Weet u zeker dat u uw sessie wilt afsluiten?",
+  "CrDataLoadFailed": "Laden van gegevens mislukt, probeer het later opnieuw",
+  "AddGlobalTag": "Een globale tag toevoegen",
+  "ReuseData": "Vorige gegevens opnieuw gebruiken",
+  "ReuseData_Tip": "Gebruikt opnieuw de compatibiliteitsgegevens van uw laatste opgeslagen pakket voor deze.\r\nHoud Shift ingedrukt om ook toe te passen en ga door",
+  "PleaseReviewTheStability": "Controleer de stabiliteit van dit pakket voordat u bezuinigt.",
+  "PleaseReviewPackageStatuses": "Controleer de statussen van dit pakket voor het opslaan.\r\nSommige hebben een ongeldig statustype.",
+  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageUsage": "Selecteer een geldig gebruik voor dit pakket.",
+  "Interaction_Alternative": {
+    "One": "'{1}' kan gebruikt worden als alternatief voor '{0}'.",
+    "Plural": "Een van de volgende pakketten kan worden gebruikt als alternatief voor '{0}'."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' en '{1}' hebben dezelfde functionaliteiten.",
+    "Plural": "'{0}' en de volgende pakketten hebben dezelfde functionaliteiten."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' en '{1}' zijn niet compatibel met elkaar.",
+    "Plural": "'{0}' is niet compatibel met een van de volgende pakketten."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' kan problemen veroorzaken bij gebruik met '{1}'.",
+    "Plural": "'{0}' kan problemen veroorzaken bij gebruik met de volgende mods."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "Je mist een noodzakelijk pakket voor '{0}'.",
+    "Plural": "Je mist de volgende vereiste pakketten voor '{0}'."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "Je mist een optioneel pakket voor '{0}'.",
+    "Plural": "Je mist de volgende optionele pakketten voor '{0}'."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' is geslaagd door '{1}'.",
+    "Plural": "'{0}' is gevolgd door een van de volgende pakketten."
+  },
+  "Interaction_LoadAfter": {
+    "One": "'{0}' zal direct na '{1}' laden.",
+    "Plural": "'{0}' zal direct laden na de volgende pakketten laden."
+  },
+  "Interaction_Identical": "Dit zijn meerdere versies van hetzelfde pakket.\r\n\r\nKies slechts één van hen.",
+  "Status_Succeeded": "'{0}' is geslaagd door '{1}'.\r\n\r\nU gebruikt al '{1}' dus er is geen noodzaak meer voor '{0}'.",
+  "Status_Deprecated": "'{0}' is verouderd, het wordt niet langer ondersteund door de auteur.",
+  "Status_AutoDeprecated": "{0} is niet recentelijk geactualiseerd en wordt waarschijnlijk niet langer door de ontwikkelaar ondersteund.",
+  "Status_Reupload": {
+    "Zero": "'{0}' is een heruploaden van een origineel pakket.",
+    "One": "Dit is een herupload van '{1}'."
+  },
+  "Status_CausesIssues": "'{0}' veroorzaakt problemen met uw spel.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "Bij het aanmaken van een nieuwe save met '{0}' ingeschakeld je kunt die save niet meer laden als '{0}' is uitgeschakeld.",
+    "One": "Bij het aanmaken van een nieuwe save met '{0}' ingeschakeld je kunt die save niet meer laden als '{0}' is uitgeschakeld.\r\n\r\nGebruik '{1}' om uw opslag te herstellen indien nodig. Lees de Workshop omschrijving voor meer informatie."
+  },
+  "Status_TestVersion": {
+    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_MissingDlc": {
+    "One": "You're missing the '{0}' DLC to use this package.",
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_DependencyMod": "Dit is een afhankelijkheidsmodus, maar het lijkt er niet op dat je een pakket gebruikt dat het nodig heeft.",
+  "Status_SourceCodeNotAvailable": "De broncode van deze mod is niet beschikbaar. Gebruik deze niet, tenzij je de auteur vertrouwt.",
+  "SourceAvailable": "Broncode is beschikbaar",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "De muziek in dit pakket kan worden gekopieerd. Het is het beste om het niet te gebruiken tijdens het streamen.",
+  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_SourceAvailable": "Dit pakket waarschuwt niet voor ontbrekende broncode.",
+  "Status_StandardMod": "Dit pakket zal genegeerd worden bij het verwerken van de mods om problemen te krijgen.",
+  "OutputText": "Verwachte uitgang",
+  "Stability_AssetNotReviewed": "Dit materiaal is nog niet gereviewd.\r\n\r\nDe compatibiliteitsinformatie is mogelijk niet nauwkeurig; hoewel de activa over het algemeen stabiel zijn",
+  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_Stable": "Dit pakket is stabiel.",
+  "Stability_NotEnoughInformation": "Er is niet genoeg informatie om dit pakket naar behoren te herzien.",
+  "Stability_HasIssues": "Dit pakket kan problemen veroorzaken.\r\nWees voorzichtig met het gebruiken.",
+  "Stability_Broken": "Dit pakket is stuk.\r\nHet is bekend dat het het spel breekt of gewoon niet werkt.",
+  "Stability_Incompatible": "Dit pakket is niet compatibel met of breekt.\r\n\r\nJe moet het onmiddellijk verwijderen.",
+  "Stability_Local": "Dit pakket is een lokale versie van de oorspronkelijke mod '{0}.\r\n\r\nLokale versies worden meestal gebruikt voor testdoeleinden of voor het geval je geen Steam hebt.\r\n\r\nControleer de links van het pakket om naar updates in de mod te zoeken.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "You should subscribe to the following package.",
+    "Plural": "You should subscribe to these packages."
+  },
+  "Action_RequiresConfiguration": "U moet de volgende instructies:",
+  "Action_SelectOne": {
+    "One": "You should only use one between '{0}' and '{1}'.",
+    "Plural": "You should only use one between '{0}' and the following packages."
+  },
+  "Action_UnsubscribeThis": "U moet zich uitschrijven van '{0}'.",
+  "Action_UnsubscribeOther": {
+    "One": "U moet zich uitschrijven van '{1}'.",
+    "Plural": "You should unsubscribe from the following packages."
+  },
+  "Action_ExcludeThis": "U moet '{0} ' uitsluiten.",
+  "ExcludeThis": "Dit pakket uitsluiten",
+  "Exclude": "Uitsluiten",
+  "Unsubscribe": "Uitschrijven",
+  "Action_ExcludeOther": {
+    "One": "U moet '{1} ' uitsluiten.",
+    "Plural": "You should exclude the following packages."
+  },
+  "Action_Switch": {
+    "One": "U moet overschakelen naar '{1}'.",
+    "Plural": "You should switch to one of the following packages."
+  },
+  "NoRequiredDlcs": "Geen Vereiste DLCs",
+  "DlcsSelected": {
+    "One": "{0} DLC geselecteerd",
+    "Plural": "{0} DLCs geselecteerd"
+  },
+  "RequiredDLCs": "Required DLCs/CCPs",
+  "CRT_Stability": "Stabiliteit",
+  "CRT_Successors": "Succes",
+  "CRT_RequiredPackages": "Verplichte pakketten",
+  "CRT_OptionalPackages": "Optionele pakketten",
+  "CRT_DlcMissing": "DLCs/CCPs ontbreekt",
+  "CRT_Compatibility": "Compatibiliteitsproblemen",
+  "CRT_Alternatives": "Alternatieven",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "Ambigïteit",
+  "LastReviewDate": "Het werd voor het laatst beoordeeld op {0}",
+  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReview": "Request Review",
+  "MissingDependencyCount": {
+    "One": "{0} {1} mist afhankelijkheden",
+    "Plural": "{0} {1} ontbrekende afhankelijkheden"
+  },
+  "CautionCount": "{0} {1} waar voorzichtigheid geboden wordt",
+  "WarningCount": "{0} {1} met een waarschuwing",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} vereist uw aandacht",
+    "Plural": "{0} {1} vereist uw aandacht"
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} moeten worden uitgesloten",
+    "Plural": "{0} {1} moeten worden uitgesloten"
+  },
+  "UnsubscribeCount": "{0} {1} waar u zich moet afmelden",
+  "SwitchCount": {
+    "One": "{0} {1} vereist dat wordt overgeschakeld naar een andere",
+    "Plural": "{0} {1} vereist overschakelen naar een andere"
+  },
+  "PackageType": "Pakket Type",
+  "GenericPackage": "Algemeen pakket",
+  "MusicPack": "Muziek Pakket",
+  "ThemeMix": "Thema mixen",
+  "IMTMarkings": "IMT markeringen",
+  "RenderItPreset": "Render het! Voorinstelling",
+  "POFont": "Procedureel object lettertype/module",
+  "NameList": "Naam-Lijst/Spelvertalingen",
+  "ApplyChangedBeforeExit": "U hebt niet-opgeslagen wijzigingen.\r\n\r\nWilt u deze wijzigingen toepassen voordat u doorgaat?",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "De auteur van {0}, {1}, is bekend als kwaadaardig en/of voor het opnemen van schadelijke inhoud zoals virussen in hun pakketten.",
+  "ReviewRequests": "Verzoeken beoordelen",
+  "DeleteRequest": "Verzoek verwijderen",
+  "ApplyRequestedChanges": "Aangevraagde wijzigingen toepassen",
+  "ManagePackage": "Pakket beheren",
+  "Banned": "Geblokkeerd",
+  "NoIssues": "Geen problemen",
+  "RequestReviewDisclaimer": "*Je Steam ID en logs zijn verzonden met je verzoek",
+  "ScenarioMaking": "Creëer een Scenario",
+  "ThemeMaking": "Creëer een Thema",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

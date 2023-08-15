@@ -1,0 +1,231 @@
+{
+  "Usage": "الاستخدام",
+  "Stability": "الاستقرار",
+  "ApplyContinue": "تقديم الطلب و المتابعة",
+  "Previous": "السابق",
+  "Skip": "تخطي",
+  "Note": "ملاحظة",
+  "NoteInfo": "عرض نص معلومات إضافية للحزمة",
+  "BlackListName": "القائمة السوداء بالاسم",
+  "BlackListId": "Black-list by name",
+  "GlobalTags": "العلامات العالمية",
+  "GlobalTagsInfo": "علامات جميع اللاعبين سوف يشاهدون في التطبيق",
+  "Links": "الروابط",
+  "StatusesCount": "Statuses ({0})",
+  "InteractionCount": "التفاعلات ({0})",
+  "AddStatus": "إضافة حالة",
+  "AddInteraction": "إضافة تفاعل",
+  "NotReviewed": "لم يتم مراجعتها بعد",
+  "Stable": "اسطبل",
+  "NotEnoughInformation": "لا توجد معلومات كافية",
+  "HasIssues": "لديه مشاكل",
+  "Broken": "مكسورة",
+  "Incompatible": "غير متوافق",
+  "CityBuilding": "بناء المدينة",
+  "AssetCreation": "إنشاء الأصول",
+  "MapCreation": "إنشاء الخريطة",
+  "NoAction": "لا تفعل شيئا",
+  "SubscribeToPackages": "الاشتراك في الحزم المرتبطة",
+  "RequiresConfiguration": "يتطلب تكوين محدد",
+  "SelectOne": "حدد إما واحدة",
+  "UnsubscribeThis": "إلغاء الاشتراك من هذه الحزمة",
+  "UnsubscribeOther": "إلغاء الاشتراك من الحزم المرتبطة",
+  "Switch": "التبديل إلى الحزمة المرتبطة",
+  "FlippedSwitch": "التبديل إلى هذه الحزمة",
+  "Deprecated": "مهمل",
+  "Reupload": "إعادة التحميل",
+  "CausesIssues": "أسباب المشكلات",
+  "SavesCantLoadWithoutIt": "الحفظ لا يمكن تحميله بدونه",
+  "TestVersion": "اختبار الإصدار",
+  "DependencyMod": "مودي التبعية",
+  "SourceCodeNotAvailable": "الرمز المصدر غير متوفر",
+  "MusicCanBeCopyrighted": "الموسيقى المضمنة يمكن أن تكون محفوظة",
+  "IncompleteDescription": "وصف غير كامل",
+  "Successor": "Successor",
+  "LoadAfter": "تحميل بعد ..",
+  "Alternative": "Alternative",
+  "SameFunctionality": "Same Functionality",
+  "RequirementAlternative": "Requirement Alternative",
+  "IncompatibleWith": "غير متوافق مع..",
+  "CausesIssuesWith": "سبب المشكلات مع ..",
+  "RequiredPackages": "يتطلب ..",
+  "StatusType": "نوع الحالة",
+  "InteractionType": "نوع التفاعل",
+  "MissingDependency": "الإعالة مفقودة",
+  "Caution": "تحذير",
+  "Warning": "تحذير",
+  "AttentionRequired": "مطلوب الانتباه",
+  "Website": "الموقع",
+  "Donation": "تبرع",
+  "ManageSinglePackage": "إدارة حزم محددة",
+  "ManageCompatibilityData": "إدارة بيانات التوافق",
+  "YourPackages": "إدارة الحزم الخاصة بك",
+  "AddPackages": "إضافة حزم",
+  "ConfirmEndSession": "هل أنت متأكد من أنك تريد إنهاء جلستك؟",
+  "CrDataLoadFailed": "فشل تحميل البيانات، حاول مرة أخرى لاحقاً",
+  "AddGlobalTag": "إضافة علامة عامة",
+  "ReuseData": "إعادة استخدام البيانات السابقة",
+  "ReuseData_Tip": "إعادة استخدام بيانات التوافق من آخر حزمة محفوظة لهذه الحزمة.\r\nاضغط على التحويل للتطبيق والاستمرار أيضًا",
+  "PleaseReviewTheStability": "يرجى مراجعة استقرار هذه الحزمة قبل الحفظ.",
+  "PleaseReviewPackageStatuses": "يرجى مراجعة حالات هذه الحزمة قبل الحفظ.\r\nالبعض لديه نوع حالة غير صالح.",
+  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageUsage": "الرجاء تحديد استخدام صالح لهذه الحزمة.",
+  "Interaction_Alternative": {
+    "One": "'{1}' يمكن استخدامه كبديل لـ '{0}'.",
+    "Plural": "يمكن استخدام إحدى الحزم التالية كبديل لـ '{0}'."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' و '{1}' لديهم نفس الوظائف.",
+    "Plural": "'{0}' والحزم التالية لها نفس الوظائف."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' و '{1}' غير متوافق مع بعضهما البعض.",
+    "Plural": "'{0}' غير متوافق مع أي من الحزم التالية."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' يمكن أن يسبب مشكلات عند استخدامها مع '{1}'.",
+    "Plural": "'{0}' يمكن أن يسبب مشاكل عند استخدامها مع الأوضاع التالية."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "أنت تفتقد حزمة مطلوبة لـ '{0}'.",
+    "Plural": "أنت تفتقد الحزم التالية المطلوبة لـ '{0}'."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "أنت تفتقد حزمة اختيارية لـ '{0}'.",
+    "Plural": "أنت تفتقد الحزم الاختيارية التالية ل '{0}'."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' نجح ب '{1}'.",
+    "Plural": "'{0}' نجح بإحدى الحزم التالية ."
+  },
+  "Interaction_LoadAfter": {
+    "One": "سيتم تحميل{0}' مباشرة بعد '{1}'.",
+    "Plural": "{0}' سيتم تحميل مباشرة بعد الحزم التالية."
+  },
+  "Interaction_Identical": "هذه إصدارات متعددة من نفس الحزمة.\r\n\r\nيجب عليك اختيار واحد منها فقط.",
+  "Status_Succeeded": "'{0}' نجح ب '{1}'.\r\n\r\nأنت تستخدم بالفعل '{1}' لذلك لا حاجة إلى '{0}' بعد الآن.",
+  "Status_Deprecated": "'{0}' مهجور, لم يعد مدعوما من قبل مؤلفه.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_Reupload": {
+    "Zero": "'{0}' هو إعادة تحميل الحزمة الأصلية.",
+    "One": "هذا هو إعادة تحميل من '{1}'."
+  },
+  "Status_CausesIssues": "{0}'' يسبب مشاكل مع لعبتك.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "عند إنشاء حفظ جديد مع '{0}' مفعل، لن تتمكن بعد الآن من تحميل الحفظ إذا كان '{0}' معطل.",
+    "One": "عند إنشاء حفظ جديد مع '{0}' مفعل، لن تتمكن بعد الآن من تحميل الحفظ إذا كان '{0}' معطل.\r\n\r\nاستخدم '{1}' لاسترداد حفظك إذا لزم الأمر. اقرأ وصف ورشة العمل لمزيد من المعلومات."
+  },
+  "Status_TestVersion": {
+    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_MissingDlc": {
+    "One": "You're missing the '{0}' DLC to use this package.",
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_DependencyMod": "هذا هو وضع التبعية، ولكن يبدو أنك تستخدم أي حزمة تتطلب ذلك.",
+  "Status_SourceCodeNotAvailable": "الرمز المصدر لهذا التعديل غير متوفر. لا يجب عليك استخدامه إلا إذا كنت تثق بمؤلفه.",
+  "SourceAvailable": "رمز المصدر متاح",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "الموسيقى داخل هذه الحزمة قد تكون محفوظة في حقوق التأليف والنشر. من الأفضل عدم استخدامها أثناء البث.",
+  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_SourceAvailable": "هذه الحزمة لن تحذر من الكود المصدر المفقود.",
+  "Status_StandardMod": "سيتم تجاهل هذه الحزمة أثناء معالجة المودات لتكون مستكشفة عن المشاكل.",
+  "OutputText": "المخرجات المتوقعة",
+  "Stability_AssetNotReviewed": "لم يتم مراجعة هذا الأصل بعد.\r\n\r\nقد لا تكون معلومات التوافق دقيقة؛ على الرغم من أن الأصول مستقرة بشكل عام",
+  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_Stable": "هذه الحزمة مستقرة.",
+  "Stability_NotEnoughInformation": "لا توجد معلومات كافية لاستعراض هذه الحزمة بشكل صحيح.",
+  "Stability_HasIssues": "هذه الحزمة يمكن أن تسبب مشكلات.\r\nكن حذرا عند استخدامها.",
+  "Stability_Broken": "تم كسر هذه الحزمة.\r\nمن المعروف أنها إما كسر اللعبة أو أنها لا تعمل فقط.",
+  "Stability_Incompatible": "هذه الحزمة غير متوافقة مع اللعبة أو كسرها.\r\n\r\nيجب إزالتها فورا.",
+  "Stability_Local": "هذه الحزمة هي نسخة محلية من التعديل الأصلي '{0}'.\r\n\r\nعادة ما تستخدم الإصدارات المحلية لأغراض الاختبار أو في حالة عدم وجود سيفيك.\r\n\r\nتحقق من روابط الحزمة للبحث عن تحديثات للمود.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "You should subscribe to the following package.",
+    "Plural": "You should subscribe to these packages."
+  },
+  "Action_RequiresConfiguration": "ينبغي أن تتبع التعليمات التالية:",
+  "Action_SelectOne": {
+    "One": "You should only use one between '{0}' and '{1}'.",
+    "Plural": "You should only use one between '{0}' and the following packages."
+  },
+  "Action_UnsubscribeThis": "يجب عليك إلغاء الاشتراك من '{0}'.",
+  "Action_UnsubscribeOther": {
+    "One": "يجب عليك إلغاء الاشتراك من '{1}'.",
+    "Plural": "You should unsubscribe from the following packages."
+  },
+  "Action_ExcludeThis": "يجب أن تستبعد ''{0}'.",
+  "ExcludeThis": "استبعاد هذه الحزمة",
+  "Exclude": "استبعاد",
+  "Unsubscribe": "إلغاء الاشتراك",
+  "Action_ExcludeOther": {
+    "One": "يجب أن تستبعد ''{1}'.",
+    "Plural": "You should exclude the following packages."
+  },
+  "Action_Switch": {
+    "One": "يجب عليك الانتقال إلى '{1}'.",
+    "Plural": "You should switch to one of the following packages."
+  },
+  "NoRequiredDlcs": "لا يوجد DLCs مطلوبة",
+  "DlcsSelected": {
+    "One": "تم تحديد {0} DLC",
+    "Plural": "تم تحديد {0} DLC."
+  },
+  "RequiredDLCs": "Required DLCs/CCPs",
+  "CRT_Stability": "الاستقرار",
+  "CRT_Successors": "الفائزون",
+  "CRT_RequiredPackages": "الحزم المطلوبة",
+  "CRT_OptionalPackages": "الحزم الاختيارية",
+  "CRT_DlcMissing": "DLC/CPs مفقودة",
+  "CRT_Compatibility": "مشاكل التوافق",
+  "CRT_Alternatives": "البدائل",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "الغموض",
+  "LastReviewDate": "تمت مراجعة آخر مرة في {0}",
+  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReview": "Request Review",
+  "MissingDependencyCount": {
+    "One": "{0} {1} مفقود التبعية",
+    "Plural": "{0} {1} مفقودة تبعية"
+  },
+  "CautionCount": "{0} {1} حيث يتم تنبيه الحذر",
+  "WarningCount": "{0} {1} مع تحذير",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} يتطلب انتباهك",
+    "Plural": "{0} {1} يتطلب انتباهك"
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} يجب أن يستبعد",
+    "Plural": "{0} {1} يجب أن يستبعد"
+  },
+  "UnsubscribeCount": "{0} {1} يجب عليك إلغاء الاشتراك من",
+  "SwitchCount": {
+    "One": "{0} {1} يتطلب التبديل إلى آخر",
+    "Plural": "{0} {1} يتطلب التبديل إلى آخر"
+  },
+  "PackageType": "نوع الحزمة",
+  "GenericPackage": "حزمة عامة",
+  "MusicPack": "باقة الموسيقى",
+  "ThemeMix": "تصميم الميكس",
+  "IMTMarkings": "علامات IMT",
+  "RenderItPreset": "عرضه! الإعداد المسبق",
+  "POFont": "خط الكائن الإجرائي/موديل",
+  "NameList": "ترجمات الاسم / اللعبة",
+  "ApplyChangedBeforeExit": "لديك تغييرات غير محفوظة.\r\n\r\nهل ترغب في تطبيق هذه التغييرات قبل المتابعة؟",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "مؤلف {0}، {1}، معروف بأنه خبيث و/أو أنه يتضمن محتوى ضار مثل الفيروسات في الحزم الخاصة بهم.",
+  "ReviewRequests": "مراجعة طلبات {0}",
+  "DeleteRequest": "حذف طلب",
+  "ApplyRequestedChanges": "تطبيق التغييرات المطلوبة",
+  "ManagePackage": "إدارة الحزمة",
+  "Banned": "محظور",
+  "NoIssues": "لا توجد مشاكل",
+  "RequestReviewDisclaimer": "*معرف Steam وسجلاتك يتم إرسالها مع طلبك",
+  "ScenarioMaking": "وضع السيناريوهات",
+  "ThemeMaking": "تصميم الموضوع",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "Usage": "Usage",
+  "Stability": "Stability",
+  "ApplyContinue": "Apply & Continue",
+  "Previous": "Previous",
+  "Skip": "Skip",
+  "Note": "Catatan",
+  "NoteInfo": "Extra informational text displayed for the package",
+  "BlackListName": "Black-list by name",
+  "BlackListId": "Black-list by name",
+  "GlobalTags": "Global Tags",
+  "GlobalTagsInfo": "Tags all players will see in the app",
+  "Links": "Links",
+  "StatusesCount": "Statuses ({0})",
+  "InteractionCount": "Interactions ({0})",
+  "AddStatus": "Add Status",
+  "AddInteraction": "Add Interaction",
+  "NotReviewed": "Not reviewed yet",
+  "Stable": "Stable",
+  "NotEnoughInformation": "Not enough information",
+  "HasIssues": "Has issues",
+  "Broken": "Broken",
+  "Incompatible": "Incompatible",
+  "CityBuilding": "City-Building",
+  "AssetCreation": "Asset Creation",
+  "MapCreation": "Map Creation",
+  "NoAction": "Do Nothing",
+  "SubscribeToPackages": "Subscribe to linked packages",
+  "RequiresConfiguration": "Requires a specific configuration",
+  "SelectOne": "Select either one",
+  "UnsubscribeThis": "Berhenti berlangganan dari paket ini",
+  "UnsubscribeOther": "Unsubscribe from linked packages",
+  "Switch": "Switch to linked package",
+  "FlippedSwitch": "Switch to to this package",
+  "Deprecated": "Deprecated",
+  "Reupload": "Re-Upload",
+  "CausesIssues": "Causes Issues",
+  "SavesCantLoadWithoutIt": "Saves can't load without it",
+  "TestVersion": "Test Version",
+  "DependencyMod": "Dependency Mod",
+  "SourceCodeNotAvailable": "Source-code is not available",
+  "MusicCanBeCopyrighted": "Included music may be copyrighted",
+  "IncompleteDescription": "Incomplete Description",
+  "Successor": "Successor",
+  "LoadAfter": "Load After ..",
+  "Alternative": "Alternative",
+  "SameFunctionality": "Same Functionality",
+  "RequirementAlternative": "Requirement Alternative",
+  "IncompatibleWith": "Incompatible",
+  "CausesIssuesWith": "Causes Issues With ..",
+  "RequiredPackages": "Requires ..",
+  "StatusType": "Status Type",
+  "InteractionType": "Interaction Type",
+  "MissingDependency": "Missing Dependency",
+  "Caution": "Caution",
+  "Warning": "Warning",
+  "AttentionRequired": "Attention Required",
+  "Website": "Website",
+  "Donation": "Donate",
+  "ManageSinglePackage": "Manage specific packages",
+  "ManageCompatibilityData": "Manage Compatibility Data",
+  "YourPackages": "Manage your packages",
+  "AddPackages": "Add Packages",
+  "ConfirmEndSession": "Are you sure you want to conclude your session?",
+  "CrDataLoadFailed": "Failed to load data, try again later",
+  "AddGlobalTag": "Add a global tag",
+  "ReuseData": "Re-use Previous Data",
+  "ReuseData_Tip": "Re-uses the compatibility data from your last saved package for this one.\r\nHold Shift to also apply & continue",
+  "PleaseReviewTheStability": "Please review the stability of this package before saving.",
+  "PleaseReviewPackageStatuses": "Please review the statuses of this package before saving.\r\nSome have an invalid Status Type.",
+  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageUsage": "Please select a valid usage for this package.",
+  "Interaction_Alternative": {
+    "One": "'{1}' can be used as an alternative to '{0}'.",
+    "Plural": "One of the following packages can be used as an alternative to '{0}'."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' and '{1}' have the same functionalities.",
+    "Plural": "'{0}' and the following packages have the same functionalities."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' and '{1}' are not compatible with each other.",
+    "Plural": "'{0}' is not compatible with any of the following packages."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' can cause issues when used with '{1}'.",
+    "Plural": "'{0}' can cause issues when used with the following mods."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "You're missing a required package for '{0}'.",
+    "Plural": "You're missing the following required packages for '{0}'."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "You're missing an optional package for '{0}'.",
+    "Plural": "You're missing the following optional packages for '{0}'."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' is succeeded by '{1}'.",
+    "Plural": "'{0}' is succeeded by either one of the following packages."
+  },
+  "Interaction_LoadAfter": {
+    "One": "'{0}' will load directly after '{1}'.",
+    "Plural": "'{0}' will load directly after the following packages."
+  },
+  "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
+  "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
+  "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_Reupload": {
+    "Zero": "'{0}' is a re-upload of an original package.",
+    "One": "This is a re-upload of '{1}'."
+  },
+  "Status_CausesIssues": "'{0}' causes issues with your game.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.",
+    "One": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+  },
+  "Status_TestVersion": {
+    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_MissingDlc": {
+    "One": "You're missing the '{0}' DLC to use this package.",
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
+  "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
+  "SourceAvailable": "Source code is available",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
+  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_SourceAvailable": "This package will not warn about missing source code.",
+  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
+  "OutputText": "Expected Output",
+  "Stability_AssetNotReviewed": "This asset has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate; though assets are generally stable",
+  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_Stable": "This package is stable.",
+  "Stability_NotEnoughInformation": "There is not enough information to properly review this package.",
+  "Stability_HasIssues": "This package can cause issues.\r\nBe careful while using it.",
+  "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_Incompatible": "This package is not compatible with, or breaks, the game.\r\n\r\nYou should remove it immediately.",
+  "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "You should subscribe to the following package.",
+    "Plural": "You should subscribe to these packages."
+  },
+  "Action_RequiresConfiguration": "You should follow the following instructions:",
+  "Action_SelectOne": {
+    "One": "You should only use one between '{0}' and '{1}'.",
+    "Plural": "You should only use one between '{0}' and the following packages."
+  },
+  "Action_UnsubscribeThis": "You should unsubscribe from '{0}'.",
+  "Action_UnsubscribeOther": {
+    "One": "You should unsubscribe from '{1}'.",
+    "Plural": "You should unsubscribe from the following packages."
+  },
+  "Action_ExcludeThis": "You should exclude '{0}'.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Exclude",
+  "Unsubscribe": "Unsubscribe",
+  "Action_ExcludeOther": {
+    "One": "You should exclude '{1}'.",
+    "Plural": "You should exclude the following packages."
+  },
+  "Action_Switch": {
+    "One": "You should switch to '{1}'.",
+    "Plural": "You should switch to one of the following packages."
+  },
+  "NoRequiredDlcs": "No Required DLCs",
+  "DlcsSelected": {
+    "One": "{0} DLC selected",
+    "Plural": "{0} DLCs selected"
+  },
+  "RequiredDLCs": "Required DLCs/CCPs",
+  "CRT_Stability": "Stability",
+  "CRT_Successors": "Penerus",
+  "CRT_RequiredPackages": "Required Packages",
+  "CRT_OptionalPackages": "Optional Packages",
+  "CRT_DlcMissing": "Missing DLCs/CCPs",
+  "CRT_Compatibility": "Compatibility Issues",
+  "CRT_Alternatives": "Alternatif",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "Ambiguity",
+  "LastReviewDate": "It was last reviewed on {0}",
+  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReview": "Request Review",
+  "MissingDependencyCount": {
+    "One": "{0} {1} is missing dependencies",
+    "Plural": "{0} {1} are missing dependencies"
+  },
+  "CautionCount": "{0} {1} where caution is advised",
+  "WarningCount": "{0} {1} with a warning",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} requires your attention",
+    "Plural": "{0} {1} require your attention"
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} should be excluded",
+    "Plural": "{0} {1} should be excluded"
+  },
+  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "SwitchCount": {
+    "One": "{0} {1} requires switching to another",
+    "Plural": "{0} {1} require switching to another"
+  },
+  "PackageType": "Package Type",
+  "GenericPackage": "Generic Package",
+  "MusicPack": "Music Pack",
+  "ThemeMix": "Theme Mix",
+  "IMTMarkings": "IMT Markings",
+  "RenderItPreset": "Render it! Preset",
+  "POFont": "Procedural Object Font/Module",
+  "NameList": "Name-List/Game Translations",
+  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages.",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Delete Request",
+  "ApplyRequestedChanges": "Apply Requested Changes",
+  "ManagePackage": "Manage Package",
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}

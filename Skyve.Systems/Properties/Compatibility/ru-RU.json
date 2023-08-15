@@ -1,0 +1,231 @@
+{
+  "Usage": "Использование",
+  "Stability": "Стабильность",
+  "ApplyContinue": "Применить и продолжить",
+  "Previous": "Предыдущий",
+  "Skip": "Пропустить",
+  "Note": "Примечание",
+  "NoteInfo": "Дополнительный информационный текст, отображаемый для пакета",
+  "BlackListName": "Чёрный список по имени",
+  "BlackListId": "Black-list by name",
+  "GlobalTags": "Глобальные теги",
+  "GlobalTagsInfo": "Теги всех игроков будут видеть в приложении",
+  "Links": "Ссылки",
+  "StatusesCount": "Statuses ({0})",
+  "InteractionCount": "Взаимодействия ({0})",
+  "AddStatus": "Добавить статус",
+  "AddInteraction": "Добавить взаимодействие",
+  "NotReviewed": "Еще не проверено",
+  "Stable": "Конюшня",
+  "NotEnoughInformation": "Недостаточно информации",
+  "HasIssues": "Имеет проблемы",
+  "Broken": "Сломано",
+  "Incompatible": "Несовместимый",
+  "CityBuilding": "Городское строительство",
+  "AssetCreation": "Создание Актива",
+  "MapCreation": "Создание карты",
+  "NoAction": "Ничего не делать",
+  "SubscribeToPackages": "Подписаться на связанные пакеты",
+  "RequiresConfiguration": "Требуется конкретная конфигурация",
+  "SelectOne": "Выберите один",
+  "UnsubscribeThis": "Отписаться от этого пакета",
+  "UnsubscribeOther": "Отписаться от связанных пакетов",
+  "Switch": "Переключиться на связанный пакет",
+  "FlippedSwitch": "Перейти на этот пакет",
+  "Deprecated": "Устаревшие",
+  "Reupload": "Выгрузить повторно",
+  "CausesIssues": "Проблемы причин",
+  "SavesCantLoadWithoutIt": "Сейвы не могут загрузить без него",
+  "TestVersion": "Тестовая версия",
+  "DependencyMod": "Мод зависимостей",
+  "SourceCodeNotAvailable": "Исходный код недоступен",
+  "MusicCanBeCopyrighted": "Включенная музыка может быть защищена авторским правом",
+  "IncompleteDescription": "Неполное описание",
+  "Successor": "Successor",
+  "LoadAfter": "Загрузить после ..",
+  "Alternative": "Alternative",
+  "SameFunctionality": "Same Functionality",
+  "RequirementAlternative": "Requirement Alternative",
+  "IncompatibleWith": "Несовместимо с ..",
+  "CausesIssuesWith": "Причиняет проблемы с ..",
+  "RequiredPackages": "Требуется ..",
+  "StatusType": "Тип статуса",
+  "InteractionType": "Тип взаимодействия",
+  "MissingDependency": "Отсутствует зависимость",
+  "Caution": "Внимание",
+  "Warning": "Предупреждение",
+  "AttentionRequired": "Требуется внимание",
+  "Website": "Сайт",
+  "Donation": "Пожертвовать",
+  "ManageSinglePackage": "Управление определенными пакетами",
+  "ManageCompatibilityData": "Управление данными совместимости",
+  "YourPackages": "Управление пакетами",
+  "AddPackages": "Добавить пакеты",
+  "ConfirmEndSession": "Вы уверены, что хотите завершить сеанс?",
+  "CrDataLoadFailed": "Не удалось загрузить данные, повторите попытку позже",
+  "AddGlobalTag": "Добавить глобальный тег",
+  "ReuseData": "Повторно использовать предыдущие данные",
+  "ReuseData_Tip": "Повторно использует данные о совместимости из вашего последнего сохраненного пакета для этого.\r\nУдерживайте Shift, чтобы применить и продолжить",
+  "PleaseReviewTheStability": "Перед сохранением ознакомьтесь со стабильностью этого пакета.",
+  "PleaseReviewPackageStatuses": "Пожалуйста, ознакомьтесь со статусами этого пакета перед сохранением.\r\nНекоторые имеют неверный тип статуса.",
+  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageUsage": "Пожалуйста, выберите правильное использование для этого пакета.",
+  "Interaction_Alternative": {
+    "One": "'{1}' можно использовать в качестве альтернативы '{0}'.",
+    "Plural": "Один из следующих пакетов может быть использован в качестве альтернативы '{0}'."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' и '{1}' ' имеют одинаковые функции.",
+    "Plural": "'{0}' и следующие пакеты имеют одинаковые функции."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' и '{1}' ' несовместимы друг с другом.",
+    "Plural": "'{0}' не совместим ни с одним из следующих пакетов."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' могут вызвать проблемы при использовании с '{1}'.",
+    "Plural": "'{0}' могут вызвать проблемы при использовании со следующими модами."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "Вы пропустили необходимый пакет для '{0}'.",
+    "Plural": "Вы пропустили следующие необходимые пакеты для '{0}'."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "Вы пропустили необязательный пакет для '{0}'.",
+    "Plural": "Вы пропустили следующие необязательные пакеты для '{0}'."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' успешно '{1}'.",
+    "Plural": "'{0}' успешно выполнено одним из следующих пакетов."
+  },
+  "Interaction_LoadAfter": {
+    "One": "'{0}' будет загружаться непосредственно после '{1}'.",
+    "Plural": "'{0}' будет загружаться сразу после следующих пакетов."
+  },
+  "Interaction_Identical": "Это несколько версий одного и того же пакета.\r\n\r\nВы должны выбрать только один из них.",
+  "Status_Succeeded": "'{0}' успешно '{1}'.\r\n\r\nВы уже используете '{1}', поэтому больше нет необходимости '{0}'.",
+  "Status_Deprecated": "'{0}' является устаревшим, он больше не поддерживается его автором.",
+  "Status_AutoDeprecated": "'{0}' давно не обновлялся, вероятно, больше не поддерживается автором.",
+  "Status_Reupload": {
+    "Zero": "'{0}' является повторной загрузкой оригинального пакета.",
+    "One": "Это повторная загрузка '{1}'."
+  },
+  "Status_CausesIssues": "'{0}' вызывает проблемы с вашей игрой.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "При создании нового сохранения с '{0}' включено, вы больше не сможете загрузить сохранение, если '{0}' отключен.",
+    "One": "При создании нового сохранения с '{0}' включено, вы больше не сможете загрузить сохранение, если '{0}' отключен.\r\n\r\nИспользуйте '{1}' для восстановления сохранения, если необходимо. Прочитайте его описание для дополнительной информации."
+  },
+  "Status_TestVersion": {
+    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_MissingDlc": {
+    "One": "You're missing the '{0}' DLC to use this package.",
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_DependencyMod": "Это мод зависимостей, но он не похож на то, что вы используете любой пакет, который требует его.",
+  "Status_SourceCodeNotAvailable": "Исходный код этого мода недоступен. Вы не должны использовать его, если вы не доверяете его автору.",
+  "SourceAvailable": "Исходный код доступен",
+  "StandardMod": "Standard Mod",
+  "Status_MusicCanBeCopyrighted": "Музыка внутри этого пакета может быть защищена авторским правом. Лучше не использовать ее во время потока.",
+  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_SourceAvailable": "Этот пакет не будет предупреждать об отсутствии исходного кода.",
+  "Status_StandardMod": "Этот пакет будет проигнорирован при обработке выявленных модов.",
+  "OutputText": "Ожидаемый вывод",
+  "Stability_AssetNotReviewed": "Этот актив еще не проверен.\r\n\r\nИнформация о совместимости может быть неточной; хотя ресурсы в целом стабильны",
+  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_Stable": "Пакет стабильный.",
+  "Stability_NotEnoughInformation": "Недостаточно информации для правильного просмотра этого пакета.",
+  "Stability_HasIssues": "Пакет может вызвать проблемы.\r\nБудьте осторожны при его использовании.",
+  "Stability_Broken": "Этот пакет сломан.\r\nИзвестно, что он либо прервал игру, либо просто не работает.",
+  "Stability_Incompatible": "Этот пакет не совместим или ломает игру.\r\n\r\nВы должны удалить его немедленно.",
+  "Stability_Local": "Этот пакет является локальной версией его оригинального мода '{0}'.\r\n\r\nЛокальные версии обычно используются для тестирования или если у вас нет Steam.\r\n\r\nПроверьте ссылки на пакет, чтобы найти обновления к моду.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "You should subscribe to the following package.",
+    "Plural": "You should subscribe to these packages."
+  },
+  "Action_RequiresConfiguration": "Вы должны следовать следующим инструкциям:",
+  "Action_SelectOne": {
+    "One": "You should only use one between '{0}' and '{1}'.",
+    "Plural": "You should only use one between '{0}' and the following packages."
+  },
+  "Action_UnsubscribeThis": "Вы должны отписаться от '{0}'.",
+  "Action_UnsubscribeOther": {
+    "One": "Вы должны отписаться от '{1}'.",
+    "Plural": "You should unsubscribe from the following packages."
+  },
+  "Action_ExcludeThis": "Вы должны исключить '{0}'.",
+  "ExcludeThis": "Исключить этот пакет",
+  "Exclude": "Исключить",
+  "Unsubscribe": "Отписаться",
+  "Action_ExcludeOther": {
+    "One": "Вы должны исключить '{1}'.",
+    "Plural": "You should exclude the following packages."
+  },
+  "Action_Switch": {
+    "One": "Вы должны переключиться на '{1}'.",
+    "Plural": "You should switch to one of the following packages."
+  },
+  "NoRequiredDlcs": "Нет необходимых DLC",
+  "DlcsSelected": {
+    "One": "{0} DLC выбрано",
+    "Plural": "Выбрано {0} DLC"
+  },
+  "RequiredDLCs": "Required DLCs/CCPs",
+  "CRT_Stability": "Стабильность",
+  "CRT_Successors": "Наблюдатели",
+  "CRT_RequiredPackages": "Требуемые пакеты",
+  "CRT_OptionalPackages": "Необязательные пакеты",
+  "CRT_DlcMissing": "Отсутствует DLCs/CCPs",
+  "CRT_Compatibility": "Проблемы совместимости",
+  "CRT_Alternatives": "Альтернативы",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "Неоднозначность",
+  "LastReviewDate": "Последний обзор был рассмотрен {0}",
+  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReview": "Request Review",
+  "MissingDependencyCount": {
+    "One": "{0} {1} не хватает зависимостей",
+    "Plural": "{0} {1} не хватает зависимостей"
+  },
+  "CautionCount": "{0} {1} с предупреждением",
+  "WarningCount": "{0} {1} с предупреждением",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} требует вашего внимания",
+    "Plural": "{0} {1} требует вашего внимания"
+  },
+  "ExcludeCount": {
+    "One": "{0} {1} должно быть исключено",
+    "Plural": "{0} {1} должно быть исключено"
+  },
+  "UnsubscribeCount": "{0} {1} , который вы должны отказаться от подписки",
+  "SwitchCount": {
+    "One": "{0} {1} требует переключения на другой",
+    "Plural": "{0} {1} требует переключения на другой"
+  },
+  "PackageType": "Тип пакета",
+  "GenericPackage": "Универсальный пакет",
+  "MusicPack": "Набор Музыки",
+  "ThemeMix": "Смешивание темы",
+  "IMTMarkings": "Знаки IMT",
+  "RenderItPreset": "Отобразить его! Пресет",
+  "POFont": "Процедурный шрифт/модуль объекта",
+  "NameList": "Переводы имени-списка/игры",
+  "ApplyChangedBeforeExit": "У вас есть несохраненные изменения.\r\n\r\nВы хотите применить эти изменения перед продолжением?",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "Известно, что автор {0}, {1}— вредоносный и/или содержит вредоносный контент, например вирусы.",
+  "ReviewRequests": "Запросы на проверку {0}",
+  "DeleteRequest": "Удалить Запрос",
+  "ApplyRequestedChanges": "Применить запрошенные изменения",
+  "ManagePackage": "Управление Пакетами",
+  "Banned": "Заблокирован",
+  "NoIssues": "Нет замечаний",
+  "RequestReviewDisclaimer": "*Ваш Steam ID и журналы высылаются по вашему запросу",
+  "ScenarioMaking": "Создание сценария",
+  "ThemeMaking": "Создание темы",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
+}
