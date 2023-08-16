@@ -1,6 +1,4 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Lists;
+﻿using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
 using System.IO;
@@ -8,7 +6,7 @@ using System.IO.Compression;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_PlaysetList : PanelContent
 {
 	private readonly PlaysetListControl LC_Items;
@@ -268,7 +266,7 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
 	{
-		_profileManager.SetCurrentPlayset(Playset.TemporaryPlayset);
+		_profileManager.SetCurrentPlayset(_profileManager.TemporaryPlayset);
 	}
 
 	private async void B_Save_Click(object sender, EventArgs e)

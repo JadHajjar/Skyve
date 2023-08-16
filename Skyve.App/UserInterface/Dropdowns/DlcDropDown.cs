@@ -1,9 +1,7 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Dropdowns;
+namespace Skyve.App.UserInterface.Dropdowns;
 internal class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 {
 	protected override void OnHandleCreated(EventArgs e)
@@ -46,7 +44,7 @@ internal class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height * 460 / 215, rectangle.Height), ContentAlignment.MiddleLeft), (int)(4 * UI.FontScale));
 		}
 
-		rectangle = rectangle.Pad((rectangle.Height * 460 / 215) + Padding.Left, 0, 0, 0);
+		rectangle = rectangle.Pad(rectangle.Height * 460 / 215 + Padding.Left, 0, 0, 0);
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 	}

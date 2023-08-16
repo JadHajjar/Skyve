@@ -1,13 +1,13 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Content;
+namespace Skyve.App.UserInterface.Content;
 internal class LinkControl : SlickImageControl
 {
-	public LinkControl()
+	public LinkControl(ILink link, bool display)
 	{
+		Link = link;
+		Display = display;
 	}
 
 	public ILink Link { get; set; }
@@ -63,7 +63,7 @@ internal class LinkControl : SlickImageControl
 
 		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), Padding.Left);
 
-		using (var img = (HoverState.HasFlag(HoverState.Hovered) ? (Display ? "I_Link" : "I_Edit") : Link.Type.GetIcon()).Default)
+		using (var img = (HoverState.HasFlag(HoverState.Hovered) ? Display ? "I_Link" : "I_Edit" : Link.Type.GetIcon()).Default)
 		{
 			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.Pad(Padding).Align(img.Size, ContentAlignment.MiddleLeft));
 

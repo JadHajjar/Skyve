@@ -1,8 +1,9 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Generic;
-using SkyveApp.UserInterface.Lists;
+﻿using Skyve.App.UserInterface.Generic;
+using Skyve.App.UserInterface.Lists;
 
-namespace SkyveApp.UserInterface.Panels;
+using Skyve.Systems.CS1.Utilities;
+
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_DLCs
 {
@@ -46,8 +47,8 @@ partial class PC_DLCs
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Duplicates = new System.Windows.Forms.Label();
 			this.L_Counts = new System.Windows.Forms.Label();
-			this.B_ExInclude = new SkyveApp.UserInterface.Generic.DoubleButton();
-			this.LC_DLCs = new SkyveApp.UserInterface.Lists.DlcListControl();
+			this.B_ExInclude = new Skyve.App.UserInterface.Generic.DoubleButton();
+			this.LC_DLCs = new Skyve.App.UserInterface.Lists.DlcListControl();
 			this.TLP_Main.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();

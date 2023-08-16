@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.Systems.Compatibility.Domain.Api;
+﻿namespace Skyve.Systems.Compatibility.Domain.Api;
 
 public struct ApiResponse
 {

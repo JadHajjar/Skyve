@@ -1,9 +1,9 @@
-﻿using SkyveApp.Domain;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+﻿using Skyve.Domain;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 
-namespace SkyveApp.Systems.Compatibility.Domain;
+namespace Skyve.Systems.Compatibility.Domain;
 public interface ICompatibilityUtil
 {
 	DateTime MinimumModDate { get; }

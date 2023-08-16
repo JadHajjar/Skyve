@@ -1,7 +1,7 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 
 internal class ImageSystem : IImageService
 {

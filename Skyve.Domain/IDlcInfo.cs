@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 public interface IDlcInfo
 {
 	uint Id { get; }

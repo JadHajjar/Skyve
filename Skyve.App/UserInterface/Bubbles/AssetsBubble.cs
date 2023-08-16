@@ -1,8 +1,6 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
+﻿using System.Windows.Forms;
 
-using System.Windows.Forms;
-
-namespace SkyveApp.UserInterface.StatusBubbles;
+namespace Skyve.App.UserInterface.Bubbles;
 
 internal class AssetsBubble : StatusBubbleBase
 {

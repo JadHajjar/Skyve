@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SkyveApp.Domain.Systems;
+namespace Skyve.Domain.Systems;
 public interface INotifier
 {
 	bool BulkUpdating { get; set; }

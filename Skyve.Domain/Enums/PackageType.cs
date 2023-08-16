@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.Domain.Enums;
+﻿namespace Skyve.Domain.Enums;
 public enum PackageType
 {
 	GenericPackage = 0,

@@ -1,7 +1,8 @@
-﻿using SkyveApp.UserInterface.Dropdowns;
-using SkyveApp.UserInterface.Generic;
+﻿using Skyve.App.UserInterface.Dropdowns;
+using Skyve.App.UserInterface.Generic;
+using Skyve.Domain.Enums;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class ContentList<T>
 {
@@ -50,7 +51,7 @@ partial class ContentList<T>
 			this.B_Filters = new SlickControls.SlickLabel();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
-			this.DD_Sorting = new SkyveApp.UserInterface.Dropdowns.SortingDropDown();
+			this.DD_Sorting = new Skyve.App.UserInterface.Dropdowns.SortingDropDown();
 			this.TLP_MiddleBar = new System.Windows.Forms.TableLayoutPanel();
 			this.B_CompactList = new SlickControls.SlickIcon();
 			this.L_Counts = new System.Windows.Forms.Label();
@@ -59,18 +60,18 @@ partial class ContentList<T>
 			this.B_GridView = new SlickControls.SlickIcon();
 			this.P_FiltersContainer = new System.Windows.Forms.Panel();
 			this.P_Filters = new SlickControls.RoundedGroupTableLayoutPanel();
-			this.OT_ModAsset = new SkyveApp.UserInterface.Generic.ThreeOptionToggle();
-			this.OT_Workshop = new SkyveApp.UserInterface.Generic.ThreeOptionToggle();
-			this.OT_Enabled = new SkyveApp.UserInterface.Generic.ThreeOptionToggle();
-			this.OT_Included = new SkyveApp.UserInterface.Generic.ThreeOptionToggle();
+			this.OT_ModAsset = new Skyve.App.UserInterface.Generic.ThreeOptionToggle();
+			this.OT_Workshop = new Skyve.App.UserInterface.Generic.ThreeOptionToggle();
+			this.OT_Enabled = new Skyve.App.UserInterface.Generic.ThreeOptionToggle();
+			this.OT_Included = new Skyve.App.UserInterface.Generic.ThreeOptionToggle();
 			this.I_ClearFilters = new SlickControls.SlickIcon();
 			this.DR_SubscribeTime = new SlickControls.SlickDateRange();
 			this.DR_ServerTime = new SlickControls.SlickDateRange();
-			this.DD_PackageStatus = new SkyveApp.UserInterface.Dropdowns.PackageStatusDropDown();
-			this.DD_Tags = new SkyveApp.UserInterface.Dropdowns.TagsDropDown();
-			this.DD_ReportSeverity = new SkyveApp.UserInterface.Dropdowns.ReportSeverityDropDown();
-			this.DD_Author = new SkyveApp.UserInterface.Dropdowns.AuthorDropDown();
-			this.DD_Profile = new SkyveApp.UserInterface.Dropdowns.ProfilesDropDown();
+			this.DD_PackageStatus = new Skyve.App.UserInterface.Dropdowns.PackageStatusDropDown();
+			this.DD_Tags = new Skyve.App.UserInterface.Dropdowns.TagsDropDown();
+			this.DD_ReportSeverity = new Skyve.App.UserInterface.Dropdowns.ReportSeverityDropDown();
+			this.DD_Author = new Skyve.App.UserInterface.Dropdowns.AuthorDropDown();
+			this.DD_Profile = new Skyve.App.UserInterface.Dropdowns.ProfilesDropDown();
 			this.I_SortOrder = new SlickControls.SlickIcon();
 			this.TLP_Main.SuspendLayout();
 			this.FLP_Search.SuspendLayout();
@@ -207,7 +208,7 @@ partial class ContentList<T>
 			this.DD_Sorting.Location = new System.Drawing.Point(842, 3);
 			this.DD_Sorting.Name = "DD_Sorting";
 			this.DD_Sorting.Size = new System.Drawing.Size(50, 0);
-			this.DD_Sorting.SkyvePage = SkyveApp.Domain.Enums.SkyvePage.None;
+			this.DD_Sorting.SkyvePage = SkyvePage.None;
 			this.DD_Sorting.TabIndex = 2;
 			this.DD_Sorting.Text = "Sort By";
 			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);

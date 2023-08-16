@@ -1,6 +1,8 @@
-﻿using SkyveApp.UserInterface.Generic;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.App.UserInterface.Dropdowns;
+using Skyve.App.UserInterface.Generic;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_RequestReview
 {
@@ -35,23 +37,23 @@ partial class PC_RequestReview
 			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			this.TLP_Actions = new System.Windows.Forms.TableLayoutPanel();
-			this.B_ReportIssue = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
-			this.B_AddStatus = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
-			this.B_AddInteraction = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_ReportIssue = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_AddStatus = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_AddInteraction = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
 			this.P_Main = new SlickControls.RoundedPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.P_Content = new System.Windows.Forms.Panel();
 			this.TLP_MainInfo = new System.Windows.Forms.TableLayoutPanel();
 			this.TB_Note2 = new SlickControls.SlickTextBox();
-			this.DD_Stability = new SkyveApp.UserInterface.Dropdowns.PackageStabilityDropDown();
-			this.DD_DLCs = new SkyveApp.UserInterface.Dropdowns.DlcDropDown();
-			this.DD_Usage = new SkyveApp.UserInterface.Dropdowns.PackageUsageDropDown();
-			this.DD_PackageType = new SkyveApp.UserInterface.Dropdowns.PackageTypeDropDown();
+			this.DD_Stability = new Skyve.App.UserInterface.Dropdowns.PackageStabilityDropDown();
+			this.DD_DLCs = new Skyve.App.UserInterface.Dropdowns.DlcDropDown();
+			this.DD_Usage = new Skyve.App.UserInterface.Dropdowns.PackageUsageDropDown();
+			this.DD_PackageType = new Skyve.App.UserInterface.Dropdowns.PackageTypeDropDown();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.TB_Note = new SlickControls.SlickTextBox();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
-			this.PB_Icon = new SkyveApp.UserInterface.Content.PackageIcon();
-			this.P_Info = new SkyveApp.UserInterface.Content.PackageDescriptionControl();
+			this.PB_Icon = new Skyve.App.UserInterface.Content.PackageIcon();
+			this.P_Info = new Skyve.App.UserInterface.Content.PackageDescriptionControl();
 			this.PB_LoadingPackage = new SlickControls.SlickPictureBox();
 			this.TLP_Button = new System.Windows.Forms.TableLayoutPanel();
 			this.B_Apply = new SlickControls.SlickButton();
@@ -416,26 +418,26 @@ partial class PC_RequestReview
 	#endregion
 
 	private System.Windows.Forms.TableLayoutPanel TLP_Actions;
-	private Generic.BigSelectionOptionControl B_ReportIssue;
-	private Generic.BigSelectionOptionControl B_AddStatus;
-	private Generic.BigSelectionOptionControl B_AddInteraction;
+	private BigSelectionOptionControl B_ReportIssue;
+	private BigSelectionOptionControl B_AddStatus;
+	private BigSelectionOptionControl B_AddInteraction;
 	private SlickControls.RoundedPanel P_Main;
 	private System.Windows.Forms.Panel panel1;
 	private System.Windows.Forms.Panel P_Content;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	private SlickControls.SlickTextBox TB_Note;
 	private System.Windows.Forms.TableLayoutPanel TLP_Top;
-	private Content.PackageIcon PB_Icon;
-	private Content.PackageDescriptionControl P_Info;
+	private PackageIcon PB_Icon;
+	private PackageDescriptionControl P_Info;
 	private SlickControls.SlickPictureBox PB_LoadingPackage;
 	private System.Windows.Forms.TableLayoutPanel TLP_Button;
 	private SlickControls.SlickButton B_Apply;
 	private System.Windows.Forms.TableLayoutPanel TLP_MainInfo;
 	private SlickControls.SlickTextBox TB_Note2;
-	private Dropdowns.PackageStabilityDropDown DD_Stability;
-	private Dropdowns.DlcDropDown DD_DLCs;
-	private Dropdowns.PackageUsageDropDown DD_Usage;
-	private Dropdowns.PackageTypeDropDown DD_PackageType;
+	private PackageStabilityDropDown DD_Stability;
+	private DlcDropDown DD_DLCs;
+	private PackageUsageDropDown DD_Usage;
+	private PackageTypeDropDown DD_PackageType;
 	private System.Windows.Forms.Label L_Disclaimer;
 	private System.Windows.Forms.Label L_English;
 }

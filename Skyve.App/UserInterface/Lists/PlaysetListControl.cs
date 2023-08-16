@@ -1,6 +1,4 @@
-﻿using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -8,7 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Lists;
+namespace Skyve.App.UserInterface.Lists;
 internal class PlaysetListControl : SlickStackedListControl<ICustomPlayset, PlaysetListControl.Rectangles>
 {
 	private ProfileSorting sorting;
@@ -583,14 +581,14 @@ internal class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Play
 			var thumbAvailable = item.Banner is not null;
 			var size = UI.Scale(new Size(32, 32), UI.FontScale);
 
-			rects.Thumbnail = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, thumbAvailable ? (((rectangle.Width + GridPadding.Horizontal) * 2 / 7) - GridPadding.Top) : (rectangle.Height * 1 / 3));
+			rects.Thumbnail = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, thumbAvailable ? (rectangle.Width + GridPadding.Horizontal) * 2 / 7 - GridPadding.Top : rectangle.Height * 1 / 3);
 			rects.Content = new Rectangle(rectangle.X, rectangle.Y + rects.Thumbnail.Height + GridPadding.Top, rectangle.Width, rectangle.Height - rects.Thumbnail.Height - GridPadding.Top);
 
 			rects.Icon = rects.Thumbnail.Pad(GridPadding).Pad(0, 0, 0, thumbAvailable ? 0 : GridPadding.Bottom).Align(size, thumbAvailable ? ContentAlignment.BottomLeft : ContentAlignment.MiddleLeft);
 
 			rects.Favorite = rects.Thumbnail.Pad(GridPadding).Pad(0, 0, 0, thumbAvailable ? 0 : GridPadding.Bottom).Align(size, thumbAvailable ? ContentAlignment.BottomRight : ContentAlignment.MiddleRight);
 
-			rects.Text = new Rectangle(rects.Icon.Right + GridPadding.Left, rects.Icon.Y, rectangle.Width - ((GridPadding.Horizontal + rects.Icon.Width) * 2), rects.Icon.Height);
+			rects.Text = new Rectangle(rects.Icon.Right + GridPadding.Left, rects.Icon.Y, rectangle.Width - (GridPadding.Horizontal + rects.Icon.Width) * 2, rects.Icon.Height);
 
 			if (thumbAvailable)
 			{
@@ -614,9 +612,9 @@ internal class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Play
 			rects.Folder = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight);
 
 
-			rects.Icon = rectangle.Pad(rects.Favorite.Right + (2 * Padding.Left)).Align(rects.Favorite.Size, ContentAlignment.MiddleLeft);
+			rects.Icon = rectangle.Pad(rects.Favorite.Right + 2 * Padding.Left).Align(rects.Favorite.Size, ContentAlignment.MiddleLeft);
 
-			rects.Text = new Rectangle(rects.Icon.Right + Padding.Left, rectangle.Y, rects.Folder.X - rects.Icon.Right - (2 * Padding.Left), rectangle.Height);
+			rects.Text = new Rectangle(rects.Icon.Right + Padding.Left, rectangle.Y, rects.Folder.X - rects.Icon.Right - 2 * Padding.Left, rectangle.Height);
 		}
 
 		if (ReadOnly)
@@ -654,7 +652,7 @@ internal class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Play
 		{
 			return
 				Favorite.Contains(location) ||
-				(Icon.Contains(location) && !(instance as PlaysetListControl)!.ReadOnly) ||
+				Icon.Contains(location) && !(instance as PlaysetListControl)!.ReadOnly ||
 				Load.Contains(location) ||
 				Merge.Contains(location) ||
 				Author.Contains(location) ||

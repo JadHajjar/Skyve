@@ -1,6 +1,8 @@
-﻿using SkyveApp.UserInterface.Content;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.App.UserInterface.Dropdowns;
+using Skyve.App.UserInterface.Lists;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_CompatibilityManagement
 {
@@ -51,15 +53,15 @@ partial class PC_CompatibilityManagement
 			this.TB_Note = new SlickControls.SlickTextBox();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.P_Links = new SlickControls.RoundedGroupFlowLayoutPanel();
-			this.T_NewLink = new SkyveApp.UserInterface.Content.TagControl();
+			this.T_NewLink = new Skyve.App.UserInterface.Content.TagControl();
 			this.P_Tags = new SlickControls.RoundedGroupFlowLayoutPanel();
-			this.T_NewTag = new SkyveApp.UserInterface.Content.TagControl();
-			this.DD_Stability = new SkyveApp.UserInterface.Dropdowns.PackageStabilityDropDown();
-			this.DD_DLCs = new SkyveApp.UserInterface.Dropdowns.DlcDropDown();
-			this.DD_Usage = new SkyveApp.UserInterface.Dropdowns.PackageUsageDropDown();
+			this.T_NewTag = new Skyve.App.UserInterface.Content.TagControl();
+			this.DD_Stability = new Skyve.App.UserInterface.Dropdowns.PackageStabilityDropDown();
+			this.DD_DLCs = new Skyve.App.UserInterface.Dropdowns.DlcDropDown();
+			this.DD_Usage = new Skyve.App.UserInterface.Dropdowns.PackageUsageDropDown();
 			this.CB_BlackListId = new SlickControls.SlickCheckbox();
 			this.CB_BlackListName = new SlickControls.SlickCheckbox();
-			this.DD_PackageType = new SkyveApp.UserInterface.Dropdowns.PackageTypeDropDown();
+			this.DD_PackageType = new Skyve.App.UserInterface.Dropdowns.PackageTypeDropDown();
 			this.T_Statuses = new SlickControls.SlickTabControl.Tab();
 			this.FLP_Statuses = new System.Windows.Forms.FlowLayoutPanel();
 			this.B_AddStatus = new SlickControls.SlickButton();
@@ -67,8 +69,8 @@ partial class PC_CompatibilityManagement
 			this.FLP_Interactions = new System.Windows.Forms.FlowLayoutPanel();
 			this.B_AddInteraction = new SlickControls.SlickButton();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
-			this.PB_Icon = new SkyveApp.UserInterface.Content.PackageIcon();
-			this.P_Info = new SkyveApp.UserInterface.Content.PackageDescriptionControl();
+			this.PB_Icon = new Skyve.App.UserInterface.Content.PackageIcon();
+			this.P_Info = new Skyve.App.UserInterface.Content.PackageDescriptionControl();
 			this.P_Main = new SlickControls.RoundedPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.PB_LoadingPackage = new SlickControls.SlickPictureBox();
@@ -80,7 +82,7 @@ partial class PC_CompatibilityManagement
 			this.B_Apply = new SlickControls.SlickButton();
 			this.L_Page = new System.Windows.Forms.Label();
 			this.TLP_List = new SlickControls.RoundedTableLayoutPanel();
-			this.packageCrList = new SkyveApp.UserInterface.Lists.PackageCrList();
+			this.packageCrList = new Skyve.App.UserInterface.Lists.PackageCrList();
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.I_List = new SlickControls.SlickIcon();
 			this.PB_Loading = new SlickControls.SlickPictureBox();
@@ -736,8 +738,8 @@ partial class PC_CompatibilityManagement
 	private SlickControls.SlickButton B_Apply;
 	private SlickControls.SlickPictureBox PB_Loading;
 	private System.Windows.Forms.TableLayoutPanel TLP_MainInfo;
-	private Dropdowns.PackageStabilityDropDown DD_Stability;
-	private Dropdowns.PackageUsageDropDown DD_Usage;
+	private PackageStabilityDropDown DD_Stability;
+	private PackageUsageDropDown DD_Usage;
 	private SlickControls.RoundedGroupFlowLayoutPanel P_Tags;
 	private TagControl T_NewTag;
 	private SlickControls.RoundedGroupFlowLayoutPanel P_Links;
@@ -754,11 +756,11 @@ partial class PC_CompatibilityManagement
 	private SlickControls.SlickTextBox TB_Note;
 	private System.Windows.Forms.Label L_Page;
 	private SlickControls.SlickButton B_ReuseData;
-	private Dropdowns.DlcDropDown DD_DLCs;
+	private DlcDropDown DD_DLCs;
 	private SlickControls.RoundedTableLayoutPanel TLP_List;
-	private Lists.PackageCrList packageCrList;
+	private PackageCrList packageCrList;
 	private SlickControls.SlickTextBox TB_Search;
 	private SlickControls.SlickIcon I_List;
 	private SlickControls.SlickCheckbox CB_ShowUpToDate;
-	private Dropdowns.PackageTypeDropDown DD_PackageType;
+	private PackageTypeDropDown DD_PackageType;
 }

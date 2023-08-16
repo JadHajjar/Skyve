@@ -1,14 +1,14 @@
-﻿using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.UserInterface.CompatibilityReport;
-using SkyveApp.UserInterface.Content;
-using SkyveApp.UserInterface.Generic;
+﻿using Skyve.App.UserInterface.CompatibilityReport;
+using Skyve.App.UserInterface.Content;
+using Skyve.App.UserInterface.Generic;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_ReviewSingleRequest : PanelContent
 {
 	private ReviewRequest _request;

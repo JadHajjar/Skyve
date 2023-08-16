@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
+using Skyve.Systems.Compatibility.Domain.Api;
 
-namespace SkyveApp.Systems.Compatibility.Domain;
+namespace Skyve.Systems.Compatibility.Domain;
 public class GenericPackageStatus : IGenericPackageStatus
 {
 	public GenericPackageStatus()

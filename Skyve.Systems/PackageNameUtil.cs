@@ -1,8 +1,8 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 
 public class PackageNameUtil : IPackageNameUtil
 {

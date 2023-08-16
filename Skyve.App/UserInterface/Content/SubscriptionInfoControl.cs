@@ -1,9 +1,7 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Content;
+namespace Skyve.App.UserInterface.Content;
 internal class SubscriptionInfoControl : SlickControl
 {
 	private readonly Timer refreshTimer;
@@ -90,13 +88,13 @@ internal class SubscriptionInfoControl : SlickControl
 		var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, LocaleSlickUI.Apply, UI.Font(6.75F), new(4, 2, 2, 2));
 		buttonRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomRight);
 
-		SlickButton.DrawButton(e, buttonRect, LocaleSlickUI.Apply, UI.Font(6.75F), buttonIcon, new Padding(4, 2, 2, 2), buttonRect.Contains(PointToClient(Cursor.Position)) ? (HoverState & ~HoverState.Focused) : HoverState.Normal, ColorStyle.Green);
+		SlickButton.DrawButton(e, buttonRect, LocaleSlickUI.Apply, UI.Font(6.75F), buttonIcon, new Padding(4, 2, 2, 2), buttonRect.Contains(PointToClient(Cursor.Position)) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Green);
 
 		using var cancelButtonIcon = IconManager.GetSmallIcon("I_Cancel");
 		buttonSize = SlickButton.GetSize(e.Graphics, cancelButtonIcon, LocaleSlickUI.Cancel, UI.Font(6.75F), new(4, 2, 2, 2));
 		cancelRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomLeft);
 
-		SlickLabel.DrawLabel(e, cancelRect, LocaleSlickUI.Cancel, UI.Font(6.75F), cancelButtonIcon, new Padding(4, 2, 2, 2), FormDesign.Design.MenuForeColor, cancelRect.Contains(PointToClient(Cursor.Position)) ? (HoverState & ~HoverState.Focused) : HoverState.Normal, ColorStyle.Red);
+		SlickLabel.DrawLabel(e, cancelRect, LocaleSlickUI.Cancel, UI.Font(6.75F), cancelButtonIcon, new Padding(4, 2, 2, 2), FormDesign.Design.MenuForeColor, cancelRect.Contains(PointToClient(Cursor.Position)) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Red);
 
 		Height = y + buttonSize.Height + Padding.Bottom;
 	}
@@ -105,7 +103,7 @@ internal class SubscriptionInfoControl : SlickControl
 	{
 		base.OnMouseClick(e);
 
-		if (e.Button == MouseButtons.None || (e.Button == MouseButtons.Left && buttonRect.Contains(e.Location)))
+		if (e.Button == MouseButtons.None || e.Button == MouseButtons.Left && buttonRect.Contains(e.Location))
 		{
 			ServiceCenter.Get<ICitiesManager>().RunStub();
 		}

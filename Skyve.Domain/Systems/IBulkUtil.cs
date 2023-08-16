@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SkyveApp.Domain.Systems;
+namespace Skyve.Domain.Systems;
 public interface IBulkUtil
 {
 	void SetBulkEnabled(IEnumerable<ILocalPackage> packages, bool value);

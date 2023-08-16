@@ -1,11 +1,10 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.CompatibilityReport;
+namespace Skyve.App.UserInterface.CompatibilityReport;
 
 internal class CompatibilityMessageControl : SlickControl
 {
@@ -65,15 +64,15 @@ internal class CompatibilityMessageControl : SlickControl
 			var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
 			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
-			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - (iconRect.Width * 2) - pad);
-			var noteSize = e.Graphics.Measure(note, UI.Font(8.25F), Width - (iconRect.Width * 2) - pad);
+			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width * 2 - pad);
+			var noteSize = e.Graphics.Measure(note, UI.Font(8.25F), Width - iconRect.Width * 2 - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 			using var brush = new SolidBrush(color);
 
 			GetAllButton(out var allText, out var allIcon, out var colorStyle);
 
 			e.Graphics.FillRoundedRectangle(brush, iconRect, pad);
-			e.Graphics.FillRoundedRectangle(brush, new Rectangle(iconRect.Width - (2 * pad), 0, 2 * pad, Height - pad), pad);
+			e.Graphics.FillRoundedRectangle(brush, new Rectangle(iconRect.Width - 2 * pad, 0, 2 * pad, Height - pad), pad);
 
 			e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
 
@@ -90,20 +89,20 @@ internal class CompatibilityMessageControl : SlickControl
 				{
 					e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(125, purple)), snoozeRect, pad);
 				}
-				else if (isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor)))
+				else if (isSnoozed || HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor))
 				{
 					e.Graphics.FillRoundedRectangle(new SolidBrush(purple), snoozeRect, pad);
 				}
 
 				using var snoozeIcon = IconManager.GetLargeIcon("I_Snooze");
-				e.Graphics.DrawImage(snoozeIcon.Color((isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor))) ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
+				e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor) ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
 			}
 
 			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 
 			if (note is not null)
 			{
-				e.Graphics.DrawString(note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : ((int)messageSize.Height + pad), iconRect.Width, 0));
+				e.Graphics.DrawString(note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0));
 			}
 
 			if (allText is not null)
@@ -117,7 +116,7 @@ internal class CompatibilityMessageControl : SlickControl
 
 				actionHovered |= allButtonRect.Contains(cursor);
 
-				y += allButtonRect.Height + (pad * 2);
+				y += allButtonRect.Height + pad * 2;
 			}
 
 			if (Message.Packages.Length > 0)
@@ -158,7 +157,7 @@ internal class CompatibilityMessageControl : SlickControl
 					}
 					else
 					{
-						e.Graphics.DrawRoundedImage(packageThumbnail ?? (dlc is null ? Properties.Resources.I_ModIcon : Properties.Resources.I_DlcIcon).Color(fore), rect.Align(UI.Scale(new Size(isDlc ? (40 * 460 / 215) : 40, 40), UI.FontScale), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
+						e.Graphics.DrawRoundedImage(packageThumbnail ?? (dlc is null ? Properties.Resources.I_ModIcon : Properties.Resources.I_DlcIcon).Color(fore), rect.Align(UI.Scale(new Size(isDlc ? 40 * 460 / 215 : 40, 40), UI.FontScale), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
 					}
 
 					List<(Color Color, string Text)>? tags = null;

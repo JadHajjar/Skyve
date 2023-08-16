@@ -1,6 +1,6 @@
-﻿using SkyveApp.UserInterface.Dropdowns;
+﻿using Skyve.App.UserInterface.Dropdowns;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_PlaysetList
 {
@@ -43,7 +43,7 @@ partial class PC_PlaysetList
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.TB_Search = new SlickControls.SlickTextBox();
-			this.DD_Sorting = new SkyveApp.UserInterface.Dropdowns.ProfileSortingDropDown();
+			this.DD_Sorting = new Skyve.App.UserInterface.Dropdowns.ProfileSortingDropDown();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_ListView = new SlickControls.SlickIcon();
 			this.B_GridView = new SlickControls.SlickIcon();
@@ -52,7 +52,7 @@ partial class PC_PlaysetList
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.slickScroll1 = new SlickControls.SlickScroll();
 			this.FLP_Profiles = new System.Windows.Forms.FlowLayoutPanel();
-			this.DD_Usage = new SkyveApp.UserInterface.Dropdowns.PackageUsageDropDown();
+			this.DD_Usage = new Skyve.App.UserInterface.Dropdowns.PackageUsageDropDown();
 			this.roundedPanel = new SlickControls.RoundedPanel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_AddProfile = new SlickControls.RoundedTableLayoutPanel();

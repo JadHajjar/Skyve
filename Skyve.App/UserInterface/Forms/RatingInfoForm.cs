@@ -1,10 +1,8 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Forms;
+namespace Skyve.App.UserInterface.Forms;
 public partial class RatingInfoForm : SlickForm
 {
 	public RatingInfoForm()

@@ -1,9 +1,7 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Threading;
+﻿using System.Threading;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 internal partial class PC_MissingPackages : PC_GenericPackageList
 {
 	private readonly IModUtil _modUtil;

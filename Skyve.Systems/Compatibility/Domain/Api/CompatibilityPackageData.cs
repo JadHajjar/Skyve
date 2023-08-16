@@ -1,13 +1,13 @@
 ﻿using Extensions;
 using Extensions.Sql;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
 
 using System;
 using System.Collections.Generic;
 
-namespace SkyveApp.Systems.Compatibility.Domain.Api;
+namespace Skyve.Systems.Compatibility.Domain.Api;
 [DynamicSqlClass("Packages")]
 public class CompatibilityPackageData : IDynamicSql
 #if !API

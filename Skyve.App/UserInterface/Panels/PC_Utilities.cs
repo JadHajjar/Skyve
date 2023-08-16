@@ -1,5 +1,4 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Content;
+﻿using Skyve.App.UserInterface.Content;
 
 using System.Drawing;
 using System.IO;
@@ -7,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_Utilities : PanelContent
 {
 	private readonly ISettings _settings;

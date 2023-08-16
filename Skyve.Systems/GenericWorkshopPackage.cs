@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-using SkyveApp.Domain;
+using Skyve.Domain;
 
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 public class GenericWorkshopPackage : IPackage
 {
 	public GenericWorkshopPackage(IPackageIdentity identity)

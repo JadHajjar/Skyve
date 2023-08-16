@@ -1,12 +1,13 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Forms;
-using SkyveApp.UserInterface.Panels;
+﻿using Skyve.App;
+
+using Skyve.App.UserInterface.Forms;
+using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Lists;
+namespace Skyve.App.UserInterface.Lists;
 internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T>.Rectangles> where T : IPackage
 {
 	private PackageSorting sorting;
@@ -34,10 +35,11 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
+	private readonly ITagsService _tagsService;
 
 	public ItemListControl(SkyvePage page)
 	{
-		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
+		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
 
 		SeparateWithLines = true;
 		EnableSelection = true;
@@ -521,7 +523,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 				color = FormDesign.Design.RedColor;
 				return true;
 			case DownloadStatus.Removed:
-				text = Locale.RemovedFromSteam;
+				text = Locale.RemovedByAuthor;
 				icon = "I_ContentRemoved";
 				color = FormDesign.Design.RedColor;
 				return true;

@@ -1,10 +1,10 @@
 using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility.Domain;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
+using Skyve.Systems.Compatibility.Domain;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace SkyveApp.Systems.Compatibility;
+namespace Skyve.Systems.Compatibility;
 
 public class CompatibilityManager : ICompatibilityManager
 {

@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Content;
+namespace Skyve.App.UserInterface.Content;
 
 internal class UserIcon : SlickImageControl
 {

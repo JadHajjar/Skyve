@@ -1,6 +1,6 @@
-﻿using SkyveApp.UserInterface.Content;
+﻿using Skyve.App.UserInterface.Content;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_UserPage
 {
@@ -41,9 +41,9 @@ partial class PC_UserPage
 			this.T_Profiles = new SlickControls.SlickTabControl.Tab();
 			this.T_Packages = new SlickControls.SlickTabControl.Tab();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
-			this.PB_Icon = new SkyveApp.UserInterface.Content.UserIcon();
+			this.PB_Icon = new Skyve.App.UserInterface.Content.UserIcon();
 			this.P_Back = new System.Windows.Forms.Panel();
-			this.P_Info = new SkyveApp.UserInterface.Content.UserDescriptionControl();
+			this.P_Info = new Skyve.App.UserInterface.Content.UserDescriptionControl();
 			this.P_Content.SuspendLayout();
 			this.smartFlowPanel1.SuspendLayout();
 			this.roundedGroupPanel1.SuspendLayout();

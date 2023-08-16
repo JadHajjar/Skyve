@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 {
 	protected readonly ContentList<T> LC_Items;

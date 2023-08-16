@@ -1,6 +1,4 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-namespace SkyveApp.UserInterface.Panels;
+﻿namespace Skyve.App.UserInterface.Panels;
 internal class PC_GenericPackageList : PC_ContentList<IPackage>
 {
 	private readonly List<IPackage> _items = new();

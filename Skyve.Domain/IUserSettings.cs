@@ -1,8 +1,8 @@
-﻿using SkyveApp.Domain.Enums;
+﻿using Skyve.Domain.Enums;
 
 using System.Collections.Generic;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 
 public interface IUserSettings
 {

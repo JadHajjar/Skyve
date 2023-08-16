@@ -1,22 +1,21 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Forms;
-using SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Forms;
+using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Content;
+namespace Skyve.App.UserInterface.Content;
 internal class PackageDescriptionControl : SlickImageControl
 {
 #pragma warning disable IDE1006
-#pragma warning disable CS0649 
+#pragma warning disable CS0649
 	private Padding GridPadding;
 	private readonly bool GridView;
 	private readonly bool CompactList;
 	private readonly bool IsPackagePage;
-#pragma warning restore CS0649 
+#pragma warning restore CS0649
 #pragma warning restore IDE1006
 
 	public IPackage? Package { get; private set; }
@@ -247,7 +246,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		var workshopInfo = e.Item.GetWorkshopInfo();
 		var partialIncluded = false;
 		var isPressed = false;
-		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(e.Item.LocalPackage!, out partialIncluded)) || partialIncluded;
+		var isIncluded = localPackage is not null && _packageUtil.IsIncluded(e.Item.LocalPackage!, out partialIncluded) || partialIncluded;
 
 		var compatibilityReport = e.Item.GetCompatibilityInfo();
 		var notificationType = compatibilityReport?.GetNotification();
@@ -303,7 +302,7 @@ internal class PackageDescriptionControl : SlickImageControl
 				color = FormDesign.Design.RedColor;
 				return true;
 			case DownloadStatus.Removed:
-				text = Locale.RemovedFromSteam;
+				text = Locale.RemovedByAuthor;
 				icon = "I_ContentRemoved";
 				color = FormDesign.Design.RedColor;
 				return true;
@@ -324,7 +323,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
 
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
-		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : (e.Item is ILocalPackage lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString());
+		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackage lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 		var date = workshopInfo?.ServerTime ?? e.Item.LocalParentPackage?.LocalTime;
 
 		var padding = GridView ? GridPadding : Padding;
@@ -445,7 +444,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			var padding = GridView ? GridPadding : Padding;
 			var height = (int)(24 * UI.FontScale);
 			var labelH = height - padding.Bottom;
-			var scoreRect = new Rectangle(e.Rects.BotRect.X + padding.Horizontal, e.Rects.BotRect.Top + padding.Vertical + (height / 2) - (labelH / 2) + 1, labelH, labelH);
+			var scoreRect = new Rectangle(e.Rects.BotRect.X + padding.Horizontal, e.Rects.BotRect.Top + padding.Vertical + height / 2 - labelH / 2 + 1, labelH, labelH);
 			var small = UI.FontScale < 1.25;
 			var backColor = score > 90 && workshopInfo!.Subscribers >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
 			e.Rects.ScoreRect = scoreRect;
@@ -467,7 +466,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 				e.Graphics.DrawImage(scoreIcon.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
 
-				e.Graphics.SetClip(scoreRect.CenterR(scoreFilled.Size).Pad(0, scoreFilled.Height - (scoreFilled.Height * score / 105), 0, 0));
+				e.Graphics.SetClip(scoreRect.CenterR(scoreFilled.Size).Pad(0, scoreFilled.Height - scoreFilled.Height * score / 105, 0, 0));
 				e.Graphics.DrawImage(scoreFilled.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
 				e.Graphics.SetClip(clip);
 			}
@@ -482,14 +481,14 @@ internal class PackageDescriptionControl : SlickImageControl
 				{
 					using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
 
-					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - (scoreIcon.Height * workshopInfo!.Subscribers / 15000), 0, 0));
+					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - scoreIcon.Height * workshopInfo!.Subscribers / 15000, 0, 0));
 					e.Graphics.DrawImage(scoreIcon.Color(FormDesign.Modern.ActiveColor), scoreRect.CenterR(scoreIcon.Size));
 					e.Graphics.SetClip(clip);
 				}
 				else
 				{
 					using var pen = new Pen(Color.FromArgb(score >= 75 ? 255 : 200, FormDesign.Modern.ActiveColor), (float)(1.5 * UI.FontScale)) { EndCap = LineCap.Round, StartCap = LineCap.Round };
-					e.Graphics.DrawArc(pen, scoreRect.Pad(-1), 90 - (Math.Min(360, 360F * workshopInfo!.Subscribers / 15000) / 2), Math.Min(360, 360F * workshopInfo!.Subscribers / 15000));
+					e.Graphics.DrawArc(pen, scoreRect.Pad(-1), 90 - Math.Min(360, 360F * workshopInfo!.Subscribers / 15000) / 2, Math.Min(360, 360F * workshopInfo!.Subscribers / 15000));
 				}
 			}
 
@@ -508,7 +507,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		var padding = GridView ? GridPadding : Padding;
 		var height = (int)(24 * UI.FontScale);
-		var folderPoint = new Point(scoreX == 0 ? (e.Rects.BotRect.X + padding.Horizontal) : (scoreX + (padding.Left * 3)), e.Rects.BotRect.Y + padding.Vertical);
+		var folderPoint = new Point(scoreX == 0 ? e.Rects.BotRect.X + padding.Horizontal : scoreX + padding.Left * 3, e.Rects.BotRect.Y + padding.Vertical);
 
 		e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "I_Folder", alignment: ContentAlignment.TopLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
 	}
@@ -516,7 +515,7 @@ internal class PackageDescriptionControl : SlickImageControl
 	private void DrawAuthor(ItemPaintEventArgs<IPackage, Rectangles> e, IUser author, int scoreX)
 	{
 		var padding = GridView ? GridPadding : Padding;
-		var authorRect = new Rectangle(scoreX + (padding.Left * 3), e.Rects.BotRect.Y + padding.Vertical, 0, 0);
+		var authorRect = new Rectangle(scoreX + padding.Left * 3, e.Rects.BotRect.Y + padding.Vertical, 0, 0);
 		var authorImg = author.GetUserAvatar();
 
 		var height = (int)(24 * UI.FontScale);
@@ -606,7 +605,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (notificationType > NotificationType.Info)
 		{
-			var point = new Point(e.ClipRectangle.Right - (Padding.Horizontal * 2), e.Rects.BotRect.Y + Padding.Vertical);
+			var point = new Point(e.ClipRectangle.Right - Padding.Horizontal * 2, e.Rects.BotRect.Y + Padding.Vertical);
 
 			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
 				point,
@@ -622,7 +621,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (statusText is not null && statusIcon is not null)
 		{
-			var point = new Point(e.ClipRectangle.Right - (Padding.Horizontal * 2), e.Rects.BotRect.Bottom - Padding.Bottom);
+			var point = new Point(e.ClipRectangle.Right - Padding.Horizontal * 2, e.Rects.BotRect.Bottom - Padding.Bottom);
 
 			e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(
 				point,
@@ -653,7 +652,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		var rects = new Rectangles(item)
 		{
 			TopRect = rectangle.Pad(0, 0, 0, rectangle.Height * 6 / 10),
-			BotRect = rectangle.Pad(Padding.Left, (rectangle.Height * 4 / 10) + Padding.Top, Padding.Right, Padding.Bottom),
+			BotRect = rectangle.Pad(Padding.Left, rectangle.Height * 4 / 10 + Padding.Top, Padding.Right, Padding.Bottom),
 			IconRect = rectangle.Pad(0, 0, rectangle.Width, rectangle.Height * 6 / 10),
 		};
 
@@ -719,7 +718,7 @@ internal class PackageDescriptionControl : SlickImageControl
 				DateRect.Contains(location) ||
 				MoreRect.Contains(location) ||
 				GithubRect.Contains(location) ||
-				(VersionRect.Contains(location) && Item?.LocalParentPackage?.Mod is not null) ||
+				VersionRect.Contains(location) && Item?.LocalParentPackage?.Mod is not null ||
 				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);
 		}

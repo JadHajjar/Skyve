@@ -1,9 +1,6 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using System.Windows.Forms;
 
-using System.Windows.Forms;
-
-namespace SkyveApp.UserInterface.Forms;
+namespace Skyve.App.UserInterface.Forms;
 public partial class EditTagsForm : BaseForm
 {
 	private readonly ITagsService _tagsService = ServiceCenter.Get<ITagsService>();
@@ -84,7 +81,7 @@ public partial class EditTagsForm : BaseForm
 		}
 		else
 		{
-			current = new TagItem(Domain.CS1.Enums.TagSource.Custom, TB_NewTag.Text);
+			current = _tagsService.CreateCustomTag(TB_NewTag.Text);
 
 			TLC.Tags.Insert(0, current);
 			TLC.AllTags.Insert(0, current);

@@ -1,14 +1,14 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Systems.Compatibility.Domain;
+namespace Skyve.Systems.Compatibility.Domain;
 
 public class IndexedPackage : IPackageCompatibilityInfo
 {
@@ -19,7 +19,7 @@ public class IndexedPackage : IPackageCompatibilityInfo
 	public Dictionary<InteractionType, List<IndexedPackageInteraction>> Interactions { get; }
 	public IndexedPackageInteraction? SucceededBy { get; set; }
 
-	public IndexedPackage(Api.CompatibilityPackageData package)
+	public IndexedPackage(CompatibilityPackageData package)
 	{
 		Package = package;
 		Statuses = new();

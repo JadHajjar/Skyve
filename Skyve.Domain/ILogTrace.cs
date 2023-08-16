@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 public interface ILogTrace
 {
 	string Title { get; }

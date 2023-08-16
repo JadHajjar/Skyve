@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 
 public interface IPackageStatus<TType> : IGenericPackageStatus where TType : struct, Enum
 {

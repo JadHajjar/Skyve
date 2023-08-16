@@ -1,6 +1,6 @@
-﻿using SkyveApp.UserInterface.Dropdowns;
+﻿using Skyve.App.UserInterface.Dropdowns;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_Options
 {
@@ -80,7 +80,7 @@ partial class PC_Options
 			this.slickCheckbox17 = new SlickControls.SlickCheckbox();
 			this.TLP_UI = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.B_HelpTranslate = new SlickControls.SlickButton();
-			this.DD_Language = new SkyveApp.UserInterface.Dropdowns.LanguageDropDown();
+			this.DD_Language = new Skyve.App.UserInterface.Dropdowns.LanguageDropDown();
 			this.B_Theme = new SlickControls.SlickButton();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.panel1 = new System.Windows.Forms.Panel();

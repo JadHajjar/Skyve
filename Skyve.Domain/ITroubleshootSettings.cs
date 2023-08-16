@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.Domain;
+﻿namespace Skyve.Domain;
 public interface ITroubleshootSettings
 {
 	bool ItemIsCausingIssues { get; }

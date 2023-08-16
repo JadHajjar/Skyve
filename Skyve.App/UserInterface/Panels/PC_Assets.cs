@@ -1,6 +1,4 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-namespace SkyveApp.UserInterface.Panels;
+﻿namespace Skyve.App.UserInterface.Panels;
 internal class PC_Assets : PC_ContentList<IAsset>
 {
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
@@ -38,7 +36,7 @@ internal class PC_Assets : PC_ContentList<IAsset>
 		return string.Format(Locale.AssetIncludedTotal, assetsIncluded, total);
 	}
 
-	protected override Extensions.LocaleHelper.Translation GetItemText()
+	protected override LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Asset;
 	}

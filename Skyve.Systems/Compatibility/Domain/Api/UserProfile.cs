@@ -1,7 +1,7 @@
 ﻿using Extensions.Sql;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Systems.Compatibility.Domain.Api;
+namespace Skyve.Systems.Compatibility.Domain.Api;
 
 [DynamicSqlClass("UserProfiles")]
 public class UserProfile : IDynamicSql

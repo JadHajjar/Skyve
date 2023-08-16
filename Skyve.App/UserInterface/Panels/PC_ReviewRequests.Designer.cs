@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Lists;
+
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_ReviewRequests
 {
@@ -31,9 +33,9 @@ partial class PC_ReviewRequests
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			this.TLP_List = new SlickControls.RoundedTableLayoutPanel();
-			this.packageCrList = new SkyveApp.UserInterface.Lists.PackageCrList();
+			this.packageCrList = new Skyve.App.UserInterface.Lists.PackageCrList();
 			this.TB_Search = new SlickControls.SlickTextBox();
-			this.reviewRequestList1 = new SkyveApp.UserInterface.Lists.ReviewRequestList();
+			this.reviewRequestList1 = new Skyve.App.UserInterface.Lists.ReviewRequestList();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_DeleteRequests = new SlickControls.SlickButton();
 			this.TLP_List.SuspendLayout();
@@ -151,9 +153,9 @@ partial class PC_ReviewRequests
 	#endregion
 
 	private SlickControls.RoundedTableLayoutPanel TLP_List;
-	private Lists.PackageCrList packageCrList;
+	private PackageCrList packageCrList;
 	private SlickControls.SlickTextBox TB_Search;
-	private Lists.ReviewRequestList reviewRequestList1;
+	private ReviewRequestList reviewRequestList1;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	private SlickControls.SlickButton B_DeleteRequests;
 }

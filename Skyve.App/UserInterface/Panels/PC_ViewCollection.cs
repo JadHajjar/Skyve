@@ -1,10 +1,9 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Content;
+﻿using Skyve.App.UserInterface.Content;
 
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 internal class PC_ViewCollection : PC_GenericPackageList
 {
 	private readonly ulong _id;
@@ -43,7 +42,7 @@ internal class PC_ViewCollection : PC_GenericPackageList
 		LC_Items.TLP_Main.Controls.Add(B_Steam, LC_Items.TLP_Main.ColumnCount - 1, 0);
 	}
 
-	private void B_Steam_Click(object sender, System.EventArgs e)
+	private void B_Steam_Click(object sender, EventArgs e)
 	{
 		PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={_id}");
 	}

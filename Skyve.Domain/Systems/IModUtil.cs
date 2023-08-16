@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SkyveApp.Domain.Systems;
+﻿namespace Skyve.Domain.Systems;
 public interface IModUtil
 {
 	bool IsIncluded(IMod mod);

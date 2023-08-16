@@ -1,13 +1,13 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility.Domain;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+using Skyve.Domain.Systems;
+using Skyve.Systems.Compatibility.Domain;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 public class SkyveApiUtil
 {
 	private readonly IUserService _userService;

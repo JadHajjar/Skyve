@@ -1,11 +1,11 @@
-﻿using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
+﻿using Skyve.Domain;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 public static class SystemExtensions
 {
 	private static IWorkshopService? _workshopService;

@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Generic;
+namespace Skyve.App.UserInterface.Generic;
 public class DoubleButton : SlickControl
 {
 	public event EventHandler? LeftClicked;

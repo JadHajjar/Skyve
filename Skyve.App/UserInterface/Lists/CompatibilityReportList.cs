@@ -1,12 +1,11 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Lists;
+namespace Skyve.App.UserInterface.Lists;
 internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityInfo, CompatibilityReportList.Rectangles>
 {
 	private readonly ISubscriptionsManager _subscriptionsManager;
@@ -72,7 +71,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		var workshopInfo = package.GetWorkshopInfo();
 		var partialIncluded = false;
 		var isPressed = false;
-		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(package.LocalPackage!, out partialIncluded)) || partialIncluded;
+		var isIncluded = localPackage is not null && _packageUtil.IsIncluded(package.LocalPackage!, out partialIncluded) || partialIncluded;
 
 		if (e.IsSelected)
 		{
@@ -113,8 +112,8 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		using var font = UI.Font(8.25F);
 		using var smallFont = UI.Font(7.5F);
 		var iconRect = new Rectangle(e.Rects.IncludedRect.X, baseY, e.Rects.IncludedRect.Width, e.Rects.IncludedRect.Height);
-		var messageSize = e.Graphics.Measure(Message.Message, font, reportRect.Width - (iconRect.Width * 2) - pad);
-		var noteSize = e.Graphics.Measure(note, UI.Font(7.5F), reportRect.Width - (iconRect.Width * 2) - pad);
+		var messageSize = e.Graphics.Measure(Message.Message, font, reportRect.Width - iconRect.Width * 2 - pad);
+		var noteSize = e.Graphics.Measure(note, UI.Font(7.5F), reportRect.Width - iconRect.Width * 2 - pad);
 		using var brush = new SolidBrush(color);
 		using var icon = Message.Status.Notification.GetIcon(false).Get(e.Rects.IncludedRect.Width * 3 / 4);
 		var y = baseY + (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
@@ -140,13 +139,13 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 			{
 				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(125, purple)), e.Rects.SnoozeRect, pad);
 			}
-			else if (isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor)))
+			else if (isSnoozed || HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor))
 			{
 				e.Graphics.FillRoundedRectangle(new SolidBrush(purple), e.Rects.SnoozeRect, pad);
 			}
 
 			using var snoozeIcon = IconManager.GetLargeIcon("I_Snooze");
-			e.Graphics.DrawImage(snoozeIcon.Color((isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor))) ? purple.GetTextColor() : FormDesign.Design.IconColor), e.Rects.SnoozeRect.CenterR(icon.Size));
+			e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor) ? purple.GetTextColor() : FormDesign.Design.IconColor), e.Rects.SnoozeRect.CenterR(icon.Size));
 		}
 
 		using var textBrush = new SolidBrush(FormDesign.Design.ForeColor);
@@ -155,7 +154,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		if (note is not null)
 		{
 			using var smallTextBrush = new SolidBrush(Color.FromArgb(200, ForeColor));
-			e.Graphics.DrawString(note, smallFont, smallTextBrush, reportRect.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : ((int)messageSize.Height + pad), iconRect.Width, 0));
+			e.Graphics.DrawString(note, smallFont, smallTextBrush, reportRect.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0));
 		}
 
 		if (allText is not null || Message.Packages.Length > 0)
@@ -165,7 +164,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 		if (allText is not null)
 		{
-			e.Rects.AllButtonRect = new Rectangle(e.ClipRectangle.X + iconRect.Width, y, e.ClipRectangle.Width - (iconRect.Width * 2), (int)(26 * UI.FontScale));
+			e.Rects.AllButtonRect = new Rectangle(e.ClipRectangle.X + iconRect.Width, y, e.ClipRectangle.Width - iconRect.Width * 2, (int)(26 * UI.FontScale));
 
 			using var buttonIcon = IconManager.GetIcon(allIcon, e.Rects.AllButtonRect.Height * 3 / 4);
 
@@ -209,7 +208,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 					}
 					else
 					{
-						e.Graphics.DrawRoundedImage(packageThumbnail ?? (dlc is null ? Properties.Resources.I_ModIcon : Properties.Resources.I_DlcIcon).Color(fore), rect.Align(new Size(isDlc ? (rect.Height * 460 / 215) : rect.Height, rect.Height), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
+						e.Graphics.DrawRoundedImage(packageThumbnail ?? (dlc is null ? Properties.Resources.I_ModIcon : Properties.Resources.I_DlcIcon).Color(fore), rect.Align(new Size(isDlc ? rect.Height * 460 / 215 : rect.Height, rect.Height), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
 					}
 
 					List<(Color Color, string Text)>? tags = null;
@@ -283,8 +282,8 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		}
 
 		var otherWarnings = e.Item.ReportItems.Count(x => x.Status.Notification >= NotificationType.Caution) - 1;
-		var finalY = y + (int)e.Graphics.Measure(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, reportRect.Width - (2 * iconRect.Width) - GridPadding.Horizontal).Height + GridPadding.Vertical;
-		var bottomRect = new Rectangle(e.ClipRectangle.X, y + (GridPadding.Vertical * 3), e.ClipRectangle.Width, finalY - y).Pad(GridPadding);
+		var finalY = y + (int)e.Graphics.Measure(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, reportRect.Width - 2 * iconRect.Width - GridPadding.Horizontal).Height + GridPadding.Vertical;
+		var bottomRect = new Rectangle(e.ClipRectangle.X, y + GridPadding.Vertical * 3, e.ClipRectangle.Width, finalY - y).Pad(GridPadding);
 
 
 		//if (bottomRect.Y > y + GridPadding.Vertical * 3)
@@ -317,7 +316,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		//	}
 		//}
 
-		DrawDividerLine(e, bottomRect.Y - (GridPadding.Vertical * 4));
+		DrawDividerLine(e, bottomRect.Y - GridPadding.Vertical * 4);
 
 		e.Graphics.DrawString(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, textBrush, bottomRect.Pad(iconRect.Width + GridPadding.Left, 0, iconRect.Width + GridPadding.Left, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
@@ -338,7 +337,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 		e.Rects.CompatibilityRect = rect3;
 
-		e.DrawableItem.CachedHeight = finalY - e.ClipRectangle.Y + (GridPadding.Vertical * 5) + Padding.Vertical;
+		e.DrawableItem.CachedHeight = finalY - e.ClipRectangle.Y + GridPadding.Vertical * 5 + Padding.Vertical;
 	}
 
 	private void GetAllButton(ICompatibilityItem Message, out string? allText, out string? allIcon, out ColorStyle colorStyle)
@@ -350,32 +349,32 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		switch (Message.Status.Action)
 		{
 			case StatusAction.SubscribeToPackages:
+			{
+				var max = Message.Packages.Max(x =>
 				{
-					var max = Message.Packages.Max(x =>
+					var p = x.GetLocalPackage();
+
+					if (p is null)
 					{
-						var p = x.GetLocalPackage();
+						return 3;
+					}
+					else if (!p.IsIncluded())
+					{
+						return 2;
+					}
+					else if (!p.IsEnabled())
+					{
+						return 1;
+					}
 
-						if (p is null)
-						{
-							return 3;
-						}
-						else if (!p.IsIncluded())
-						{
-							return 2;
-						}
-						else if (!p.IsEnabled())
-						{
-							return 1;
-						}
+					return 0;
+				});
 
-						return 0;
-					});
-
-					colorStyle = ColorStyle.Green;
-					allText = max switch { 3 => Locale.SubscribeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
-					allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
-				}
-				break;
+				colorStyle = ColorStyle.Green;
+				allText = max switch { 3 => Locale.SubscribeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
+				allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
+			}
+			break;
 			case StatusAction.RequiresConfiguration:
 				allText = _compatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
 				allIcon = "I_Snooze";
@@ -431,7 +430,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 	private int DrawDividerLine(PaintEventArgs e, int y)
 	{
-		var lineRect = new Rectangle(e.ClipRectangle.X + GridPadding.Horizontal, y + (GridPadding.Vertical * 2), e.ClipRectangle.Width - (GridPadding.Horizontal * 2), (int)(2 * UI.FontScale));
+		var lineRect = new Rectangle(e.ClipRectangle.X + GridPadding.Horizontal, y + GridPadding.Vertical * 2, e.ClipRectangle.Width - GridPadding.Horizontal * 2, (int)(2 * UI.FontScale));
 		using var lineBrush = new LinearGradientBrush(lineRect, default, default, 0F);
 
 		lineBrush.InterpolationColors = new ColorBlend
@@ -442,7 +441,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 		e.Graphics.FillRectangle(lineBrush, lineRect);
 
-		return y + (GridPadding.Vertical * 4);
+		return y + GridPadding.Vertical * 4;
 	}
 
 	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
@@ -455,7 +454,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near });
 
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.Package!.IsBuiltIn && !IsPackagePage;
-		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.Package!.IsBuiltIn ? Locale.Vanilla : (e.Item is ILocalPackage lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString());
+		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.Package!.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackage lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 		var date = workshopInfo?.ServerTime ?? e.Item.Package!.LocalParentPackage?.LocalTime;
 
 		var padding = GridView ? GridPadding : GridPadding;
@@ -580,7 +579,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 	{
 		var padding = GridView ? GridPadding : GridPadding;
 		var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
-		var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + ((e.Rects.IconRect.Height - size.Height) / 2), size.Width, size.Height);
+		var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + (e.Rects.IconRect.Height - size.Height) / 2, size.Width, size.Height);
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 
 		if (parentPackage is not null)
@@ -596,7 +595,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		using var brush = new SolidBrush(e.BackColor);
 		e.Graphics.FillRectangle(brush, new Rectangle(rect.X + rect.Width, e.Rects.IconRect.Y, e.ClipRectangle.Right - rect.X - padding.Left, e.Rects.IconRect.Height));
 
-		rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + ((e.Rects.IconRect.Height - size.Height) / 2), size.Width, size.Height);
+		rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + (e.Rects.IconRect.Height - size.Height) / 2, size.Width, size.Height);
 
 		if (parentPackage is not null)
 		{
@@ -1159,7 +1158,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 				DateRect.Contains(location) ||
 				buttonRects.Values.Any(x => x.Contains(location)) ||
 				modRects.Values.Any(x => x.Contains(location)) ||
-				(VersionRect.Contains(location) && Item?.Package?.LocalParentPackage?.Mod is not null);
+				VersionRect.Contains(location) && Item?.Package?.LocalParentPackage?.Mod is not null;
 		}
 	}
 }

@@ -1,7 +1,7 @@
-﻿using SkyveApp.UserInterface.Generic;
+﻿using Skyve.App.UserInterface.Generic;
 
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_PlaysetAdd
 {
@@ -33,12 +33,12 @@ partial class PC_PlaysetAdd
 	{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PC_PlaysetAdd));
 			this.TLP_New = new System.Windows.Forms.TableLayoutPanel();
-			this.newProfileOptionControl1 = new SkyveApp.UserInterface.Generic.NewProfileOptionControl();
-			this.newProfileOptionControl2 = new SkyveApp.UserInterface.Generic.NewProfileOptionControl();
-			this.newProfileOptionControl3 = new SkyveApp.UserInterface.Generic.NewProfileOptionControl();
+			this.newProfileOptionControl1 = new Skyve.App.UserInterface.Generic.NewProfileOptionControl();
+			this.newProfileOptionControl2 = new Skyve.App.UserInterface.Generic.NewProfileOptionControl();
+			this.newProfileOptionControl3 = new Skyve.App.UserInterface.Generic.NewProfileOptionControl();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_Cancel = new SlickControls.SlickButton();
-			this.DAD_NewProfile = new SkyveApp.UserInterface.Generic.DragAndDropControl();
+			this.DAD_NewProfile = new Skyve.App.UserInterface.Generic.DragAndDropControl();
 			this.TLP_New.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();

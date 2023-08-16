@@ -1,12 +1,12 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 internal class ImageProcessor : PeriodicProcessor<ImageProcessor.ImageRequest, ImageProcessor.TimeStampedImage>
 {
 	private readonly IImageService _imageManager;

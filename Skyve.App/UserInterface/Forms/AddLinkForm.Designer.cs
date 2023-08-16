@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.UserInterface.Forms;
+﻿namespace Skyve.App.UserInterface.Forms;
 
 partial class AddLinkForm
 {

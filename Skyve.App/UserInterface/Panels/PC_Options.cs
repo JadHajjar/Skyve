@@ -1,12 +1,10 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_Options : PanelContent
 {
 	private bool folderPathsChanged;

@@ -1,8 +1,8 @@
-﻿using SkyveApp.Domain.Systems;
+﻿using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 
 public delegate void MonitorTickDelegate(bool isAvailable, bool isRunning);
 

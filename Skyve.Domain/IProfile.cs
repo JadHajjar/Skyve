@@ -1,10 +1,10 @@
-﻿using SkyveApp.Domain.Enums;
+﻿using Skyve.Domain.Enums;
 
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 public interface IPlayset
 {
 	string? Name { get; set; }

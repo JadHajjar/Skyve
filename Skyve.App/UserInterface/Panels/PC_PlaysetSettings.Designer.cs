@@ -1,6 +1,7 @@
-﻿using SkyveApp.UserInterface.Generic;
+﻿using Skyve.App.UserInterface.Dropdowns;
+using Skyve.App.UserInterface.Generic;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_PlaysetSettings
 {
@@ -63,11 +64,11 @@ partial class PC_PlaysetSettings
 			this.TLP_Options = new System.Windows.Forms.TableLayoutPanel();
 			this.TLP_GeneralSettings = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.CB_AutoSave = new SlickControls.SlickCheckbox();
-			this.DD_ProfileUsage = new SkyveApp.UserInterface.Dropdowns.PackageUsageSingleDropDown();
+			this.DD_ProfileUsage = new Skyve.App.UserInterface.Dropdowns.PackageUsageSingleDropDown();
 			this.TLP_LaunchSettings = new SlickControls.RoundedGroupTableLayoutPanel();
-			this.DD_NewMap = new SkyveApp.UserInterface.Generic.DragAndDropControl();
+			this.DD_NewMap = new Skyve.App.UserInterface.Generic.DragAndDropControl();
 			this.CB_LHT = new SlickControls.SlickCheckbox();
-			this.DD_SaveFile = new SkyveApp.UserInterface.Generic.DragAndDropControl();
+			this.DD_SaveFile = new Skyve.App.UserInterface.Generic.DragAndDropControl();
 			this.CB_NoWorkshop = new SlickControls.SlickCheckbox();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.CB_LoadSave = new SlickControls.SlickCheckbox();
@@ -77,7 +78,7 @@ partial class PC_PlaysetSettings
 			this.TLP_LSM = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.CB_LoadEnabled = new SlickControls.SlickCheckbox();
 			this.CB_LoadUsed = new SlickControls.SlickCheckbox();
-			this.DD_SkipFile = new SkyveApp.UserInterface.Generic.DragAndDropControl();
+			this.DD_SkipFile = new Skyve.App.UserInterface.Generic.DragAndDropControl();
 			this.CB_SkipFile = new SlickControls.SlickCheckbox();
 			this.TLP_AdvancedDev = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.CB_NoMods = new SlickControls.SlickCheckbox();
@@ -1035,7 +1036,7 @@ partial class PC_PlaysetSettings
 	private SlickControls.SlickTextBox TB_CustomArgs;
 	private SlickControls.SlickCheckbox CB_NewAsset;
 	private SlickControls.SlickCheckbox CB_LoadAsset;
-	private Dropdowns.PackageUsageSingleDropDown DD_ProfileUsage;
+	private PackageUsageSingleDropDown DD_ProfileUsage;
 	private SlickControls.SlickButton B_ViewProfiles;
 	private SlickControls.RoundedTableLayoutPanel B_TempProfile;
 	private SlickControls.SlickIcon slickIcon1;

@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Dropdowns;
+
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_ReviewSingleRequest
 {
@@ -47,10 +49,10 @@ partial class PC_ReviewSingleRequest
 			this.B_ManagePackage = new SlickControls.SlickButton();
 			this.TLP_Info = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.slickIcon1 = new SlickControls.SlickIcon();
-			this.DD_Stability = new SkyveApp.UserInterface.Dropdowns.PackageStabilityDropDown();
-			this.DD_Usage = new SkyveApp.UserInterface.Dropdowns.PackageUsageDropDown();
-			this.DD_PackageType = new SkyveApp.UserInterface.Dropdowns.PackageTypeDropDown();
-			this.DD_DLCs = new SkyveApp.UserInterface.Dropdowns.DlcDropDown();
+			this.DD_Stability = new Skyve.App.UserInterface.Dropdowns.PackageStabilityDropDown();
+			this.DD_Usage = new Skyve.App.UserInterface.Dropdowns.PackageUsageDropDown();
+			this.DD_PackageType = new Skyve.App.UserInterface.Dropdowns.PackageTypeDropDown();
+			this.DD_DLCs = new Skyve.App.UserInterface.Dropdowns.DlcDropDown();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
@@ -338,9 +340,9 @@ partial class PC_ReviewSingleRequest
 	private SlickControls.SlickButton B_ManagePackage;
 	private SlickControls.SlickSpacer slickSpacer1;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-	private Dropdowns.PackageStabilityDropDown DD_Stability;
-	private Dropdowns.DlcDropDown DD_DLCs;
-	private Dropdowns.PackageUsageDropDown DD_Usage;
-	private Dropdowns.PackageTypeDropDown DD_PackageType;
+	private PackageStabilityDropDown DD_Stability;
+	private DlcDropDown DD_DLCs;
+	private PackageUsageDropDown DD_Usage;
+	private PackageTypeDropDown DD_PackageType;
 	private SlickControls.SlickIcon slickIcon1;
 }

@@ -1,13 +1,12 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.CompatibilityReport;
-using SkyveApp.UserInterface.Content;
-using SkyveApp.UserInterface.Forms;
-using SkyveApp.UserInterface.Lists;
+﻿using Skyve.App.UserInterface.CompatibilityReport;
+using Skyve.App.UserInterface.Content;
+using Skyve.App.UserInterface.Forms;
+using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_PackagePage : PanelContent
 {
 	private readonly ItemListControl<IPackage>? LC_Items;
@@ -81,7 +80,7 @@ public partial class PC_PackagePage : PanelContent
 		{
 			foreach (var item in crdata?.Links ?? new())
 			{
-				FLP_Links.Controls.Add(new LinkControl { Link = item, Display = true });
+				FLP_Links.Controls.Add(new LinkControl(item, true));
 			}
 
 			label5.Visible = FLP_Links.Visible = FLP_Links.Controls.Count > 0;

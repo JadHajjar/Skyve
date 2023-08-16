@@ -2,7 +2,7 @@
 
 using System;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 public interface ILocalPackage : IPackage, ILocalPackageIdentity
 {
 	[CloneIgnore]

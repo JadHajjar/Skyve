@@ -1,9 +1,9 @@
-﻿using SkyveApp.Domain.Enums;
+﻿using Skyve.Domain.Enums;
 
 using System;
 using System.Linq;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 
 public class CRNAttribute : Attribute // Compatibility Report Notification (CRN)
 {

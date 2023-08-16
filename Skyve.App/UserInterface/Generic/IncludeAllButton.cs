@@ -1,9 +1,9 @@
-﻿using SkyveApp.UserInterface.Lists;
+﻿using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Generic;
+namespace Skyve.App.UserInterface.Generic;
 internal class IncludeAllButton<T> : SlickControl where T : IPackage
 {
 	private readonly bool _doubleButtons;
@@ -37,7 +37,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		var ItemHeight = (int)(28 * UI.FontScale);
 		var includeItemHeight = ItemHeight;
 
-		Size = new Size(includeItemHeight * (_doubleButtons ? 3 : 2), includeItemHeight - (int)(4*UI.FontScale));
+		Size = new Size(includeItemHeight * (_doubleButtons ? 3 : 2), includeItemHeight - (int)(4 * UI.FontScale));
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)

@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Generic;
+
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_HelpAndLogs
 {
@@ -65,7 +67,7 @@ partial class PC_HelpAndLogs
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.B_OpenLogFolder = new SlickControls.SlickButton();
 			this.B_CopyLogFile = new SlickControls.SlickButton();
-			this.DD_LogFile = new SkyveApp.UserInterface.Generic.DragAndDropControl();
+			this.DD_LogFile = new Skyve.App.UserInterface.Generic.DragAndDropControl();
 			this.TLP_Errors = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.I_Info = new SlickControls.SlickIcon();
 			this.L_Info = new System.Windows.Forms.Label();
@@ -599,7 +601,7 @@ partial class PC_HelpAndLogs
 	}
 
 	#endregion
-	private Generic.DragAndDropControl DD_LogFile;
+	private DragAndDropControl DD_LogFile;
 	private SlickControls.SlickScroll slickScroll1;
 	private System.Windows.Forms.TableLayoutPanel TLP_Main;
 	private SlickControls.RoundedGroupTableLayoutPanel TLP_Errors;

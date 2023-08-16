@@ -1,10 +1,8 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 
-namespace SkyveApp.UserInterface.Dropdowns;
+namespace Skyve.App.UserInterface.Dropdowns;
 
 internal class PackageStatusTypeDropDown<T> : SlickSelectionDropDown<T> where T : struct, Enum
 {

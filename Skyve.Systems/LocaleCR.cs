@@ -1,11 +1,11 @@
 ﻿using Extensions;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems;
 public class LocaleCR : LocaleHelper
 {
 	private static readonly LocaleCR _instance = new();
 
-	protected LocaleCR() : base($"SkyveApp.Systems.Properties.Compatibility.json") { }
+	protected LocaleCR() : base($"Skyve.Systems.Properties.Compatibility.json") { }
 
 	public static void Load() { _ = _instance; }
 

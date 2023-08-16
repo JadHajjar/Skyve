@@ -1,12 +1,13 @@
-﻿using SkyveApp.Domain.Enums;
+﻿using Skyve.Domain.Enums;
 
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Domain.Systems;
+namespace Skyve.Domain.Systems;
 public interface IWorkshopService
 {
+	void CleanDownload(List<ILocalPackageWithContents> packages);
 	void ClearCache();
 	IEnumerable<IWorkshopInfo> GetAllPackages();
 	IWorkshopInfo? GetInfo(IPackageIdentity identity);

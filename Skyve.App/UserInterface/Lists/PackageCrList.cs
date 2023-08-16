@@ -1,10 +1,9 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Lists;
+namespace Skyve.App.UserInterface.Lists;
 internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectangles>
 {
 	private readonly IWorkshopService _workshopService;
@@ -25,17 +24,17 @@ internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rect
 		Font = UI.Font(7F, FontStyle.Bold);
 	}
 
-	protected override IEnumerable<DrawableItem<ulong, PackageCrList.Rectangles>> OrderItems(IEnumerable<DrawableItem<ulong, PackageCrList.Rectangles>> items)
+	protected override IEnumerable<DrawableItem<ulong, Rectangles>> OrderItems(IEnumerable<DrawableItem<ulong, Rectangles>> items)
 	{
 		return items.OrderByDescending(x => _workshopService.GetInfo(new GenericPackageIdentity(x.Item))?.ServerTime);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<ulong, PackageCrList.Rectangles> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<ulong, Rectangles> item, Point location)
 	{
 		return true;
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<ulong, PackageCrList.Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<ulong, Rectangles> e)
 	{
 		base.OnPaintItemList(e);
 
@@ -45,7 +44,7 @@ internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rect
 		var image = Package?.GetThumbnail();
 		var panel = PanelContent.GetParentPanel(this);
 
-		if ((panel is PC_CompatibilityManagement cm && cm.CurrentPackage?.Id == e.Item) || (panel is PC_ReviewRequests rr && rr.CurrentPackage == e.Item))
+		if (panel is PC_CompatibilityManagement cm && cm.CurrentPackage?.Id == e.Item || panel is PC_ReviewRequests rr && rr.CurrentPackage == e.Item)
 		{
 			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.ActiveColor), imageRect.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleLeft), Padding.Left);
 

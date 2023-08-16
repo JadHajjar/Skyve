@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Bubbles;
+
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_MainPage
 {
@@ -33,10 +35,10 @@ partial class PC_MainPage
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.assetsBubble = new SkyveApp.UserInterface.StatusBubbles.AssetsBubble();
-			this.modsBubble = new SkyveApp.UserInterface.StatusBubbles.ModsBubble();
+			this.assetsBubble = new Skyve.App.UserInterface.Bubbles.AssetsBubble();
+			this.modsBubble = new Skyve.App.UserInterface.Bubbles.ModsBubble();
 			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
-			this.profileBubble = new SkyveApp.UserInterface.StatusBubbles.ProfileBubble();
+			this.profileBubble = new Skyve.App.UserInterface.Bubbles.PlaysetBubble();
 			this.B_StartStop = new SlickControls.SlickButton();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -189,9 +191,9 @@ partial class PC_MainPage
 
 	internal SlickControls.SlickButton B_StartStop;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-	private UserInterface.StatusBubbles.ProfileBubble profileBubble;
-	private UserInterface.StatusBubbles.ModsBubble modsBubble;
-	private UserInterface.StatusBubbles.AssetsBubble assetsBubble;
+	private PlaysetBubble profileBubble;
+	private ModsBubble modsBubble;
+	private AssetsBubble assetsBubble;
 	private System.Windows.Forms.Label label1;
 	private System.Windows.Forms.TableLayoutPanel TLP_Profiles;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

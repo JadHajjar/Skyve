@@ -1,11 +1,10 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Content;
+namespace Skyve.App.UserInterface.Content;
 internal class MiniPackageControl : SlickControl
 {
 	private readonly IPackage? _package;
@@ -78,7 +77,7 @@ internal class MiniPackageControl : SlickControl
 	{
 		e.Graphics.SetUp(BackColor);
 
-		using var backBrush = new SolidBrush(Color.FromArgb(10, FormDesign.Design.Type is	FormDesignType.Light ? Color.Black : Color.White));
+		using var backBrush = new SolidBrush(Color.FromArgb(10, FormDesign.Design.Type is FormDesignType.Light ? Color.Black : Color.White));
 		e.Graphics.FillRoundedRectangle(backBrush, ClientRectangle.Pad(Padding), Padding.Left);
 
 		if (HoverState.HasFlag(HoverState.Hovered))
@@ -112,7 +111,7 @@ internal class MiniPackageControl : SlickControl
 
 		List<(Color Color, string Text)>? tags = null;
 
-		var textRect = ClientRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top, !ReadOnly && HoverState.HasFlag(HoverState.Hovered) ? (imageRect.Right + Padding.Left) : 0, Padding.Bottom).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
+		var textRect = ClientRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top, !ReadOnly && HoverState.HasFlag(HoverState.Hovered) ? imageRect.Right + Padding.Left : 0, Padding.Bottom).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
 		var text = Package?.CleanName(out tags) ?? Locale.UnknownPackage;
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });

@@ -1,9 +1,7 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Generic;
+namespace Skyve.App.UserInterface.Generic;
 internal class NewProfileOptionControl : SlickImageControl
 {
 	public NewProfileOptionControl()
@@ -19,7 +17,7 @@ internal class NewProfileOptionControl : SlickImageControl
 		if (Live)
 		{
 			Font = UI.Font(11.25F, FontStyle.Bold);
-			Margin = UI.Scale(new Padding(100 - (Parent.Controls.IndexOf(this) % 2 * 100), 15, Parent.Controls.IndexOf(this) % 2 * 100, 15), UI.FontScale);
+			Margin = UI.Scale(new Padding(100 - Parent.Controls.IndexOf(this) % 2 * 100, 15, Parent.Controls.IndexOf(this) % 2 * 100, 15), UI.FontScale);
 			Padding = UI.Scale(new Padding(15), UI.FontScale);
 			Size = UI.Scale(new Size(250, 75), UI.FontScale);
 		}

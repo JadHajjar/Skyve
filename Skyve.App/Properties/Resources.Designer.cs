@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SkyveApp.Properties {
+namespace Skyve.App.Properties {
     using System;
     
     

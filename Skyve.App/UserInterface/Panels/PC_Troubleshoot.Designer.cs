@@ -1,7 +1,7 @@
-﻿using SkyveApp.UserInterface.Generic;
+﻿using Skyve.App.UserInterface.Generic;
 
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_Troubleshoot
 {
@@ -40,19 +40,19 @@ partial class PC_Troubleshoot
 			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
 			this.TLP_New = new System.Windows.Forms.TableLayoutPanel();
-			this.B_Caused = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
-			this.B_Missing = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
-			this.B_New = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_Caused = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_Missing = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_New = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
 			this.B_Cancel = new SlickControls.SlickButton();
 			this.L_Title = new System.Windows.Forms.Label();
 			this.TLP_ModAsset = new System.Windows.Forms.TableLayoutPanel();
-			this.B_Mods = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
-			this.B_Assets = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_Mods = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_Assets = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
 			this.slickButton1 = new SlickControls.SlickButton();
 			this.L_ModAssetTitle = new System.Windows.Forms.Label();
 			this.TLP_Comp = new System.Windows.Forms.TableLayoutPanel();
-			this.B_CompView = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
-			this.B_CompSkip = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_CompView = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_CompSkip = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
 			this.slickButton2 = new SlickControls.SlickButton();
 			this.L_CompInfo = new System.Windows.Forms.Label();
 			this.TLP_New.SuspendLayout();

@@ -1,16 +1,16 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility.Domain;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
+using Skyve.Systems.Compatibility.Domain;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Systems.Compatibility;
+namespace Skyve.Systems.Compatibility;
 public class CompatibilityHelper
 {
 	private readonly CompatibilityManager _compatibilityManager;
@@ -265,10 +265,10 @@ public class CompatibilityHelper
 	{
 		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(steamId));
 
-		return (workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved))
-			|| (_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
+		return workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved)
+			|| _compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
 			&& (package.Package.Stability is PackageStability.Broken
-			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false)));
+			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false));
 	}
 
 	public IndexedPackage? GetPackageData(IPackageIdentity identity)

@@ -1,7 +1,7 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 
 public class LoggerSystem : ILogger
 {

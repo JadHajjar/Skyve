@@ -1,10 +1,7 @@
-﻿using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Systems.CS1.Utilities;
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_Troubleshoot : PanelContent
 {
 	private readonly TroubleshootSettings _settings = new();
@@ -143,21 +140,7 @@ public partial class PC_Troubleshoot : PanelContent
 			{
 				new BackgroundAction(() =>
 				{
-					PackageWatcher.Pause();
-					foreach (var item in faultyPackages)
-					{
-						try
-						{
-							CrossIO.DeleteFolder(item.Folder);
-						}
-						catch (Exception ex)
-						{
-							_logger.Exception(ex, $"Failed to delete the folder '{item.Folder}'");
-						}
-					}
-					PackageWatcher.Resume();
-
-					SteamUtil.Download(faultyPackages);
+					ServiceCenter.Get<IWorkshopService>().CleanDownload(faultyPackages);
 				}).Run();
 
 				PushBack();

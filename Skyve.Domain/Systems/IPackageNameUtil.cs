@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace SkyveApp.Domain.Systems;
+namespace Skyve.Domain.Systems;
 public interface IPackageNameUtil
 {
 	string CleanName(IPackageIdentity? package, bool keepTags = false);

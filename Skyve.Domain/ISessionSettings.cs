@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 public interface ISessionSettings
 {
 	string? CurrentPlayset { get; set; }

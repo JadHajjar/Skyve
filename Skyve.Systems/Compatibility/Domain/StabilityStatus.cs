@@ -1,7 +1,7 @@
-﻿using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
+﻿using Skyve.Domain;
+using Skyve.Domain.Enums;
 
-namespace SkyveApp.Systems.Compatibility.Domain;
+namespace Skyve.Systems.Compatibility.Domain;
 internal class StabilityStatus : IPackageStatus<PackageStability>
 {
 	public StabilityStatus(PackageStability type, string? note, bool review)

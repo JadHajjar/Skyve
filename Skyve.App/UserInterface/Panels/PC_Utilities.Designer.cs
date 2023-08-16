@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Generic;
+
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_Utilities
 {
@@ -68,15 +70,15 @@ partial class PC_Utilities
 			this.B_Cleanup = new SlickControls.SlickButton();
 			this.P_Text = new SlickControls.RoundedGroupPanel();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.DD_TextImport = new SkyveApp.UserInterface.Generic.DragAndDropControl();
+			this.DD_TextImport = new Skyve.App.UserInterface.Generic.DragAndDropControl();
 			this.B_ImportClipboard = new SlickControls.SlickButton();
 			this.P_BOB = new SlickControls.RoundedGroupPanel();
 			this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-			this.DD_BOB = new SkyveApp.UserInterface.Generic.DragAndDropControl();
+			this.DD_BOB = new Skyve.App.UserInterface.Generic.DragAndDropControl();
 			this.P_LsmReport = new SlickControls.RoundedGroupPanel();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-			this.DD_Unused = new SkyveApp.UserInterface.Generic.DragAndDropControl();
-			this.DD_Missing = new SkyveApp.UserInterface.Generic.DragAndDropControl();
+			this.DD_Unused = new Skyve.App.UserInterface.Generic.DragAndDropControl();
+			this.DD_Missing = new Skyve.App.UserInterface.Generic.DragAndDropControl();
 			this.P_ModIssues = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.P_OutOfDate = new System.Windows.Forms.Panel();
 			this.B_ReDownload = new SlickControls.SlickButton();
@@ -799,14 +801,14 @@ partial class PC_Utilities
 	private SlickControls.SlickButton B_ReDownload;
 	private SlickControls.RoundedGroupPanel P_LsmReport;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-	private Generic.DragAndDropControl DD_Missing;
-	private Generic.DragAndDropControl DD_Unused;
+	private DragAndDropControl DD_Missing;
+	private DragAndDropControl DD_Unused;
 	private SlickControls.RoundedGroupPanel P_BOB;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-	private Generic.DragAndDropControl DD_BOB;
+	private DragAndDropControl DD_BOB;
 	private SlickControls.RoundedGroupPanel P_Text;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-	private Generic.DragAndDropControl DD_TextImport;
+	private DragAndDropControl DD_TextImport;
 	private SlickControls.SlickButton B_ImportClipboard;
 	private SlickControls.RoundedGroupTableLayoutPanel P_Cleanup;
 	private SlickControls.SlickButton B_Cleanup;

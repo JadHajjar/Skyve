@@ -1,10 +1,7 @@
-﻿using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Dropdowns;
+namespace Skyve.App.UserInterface.Dropdowns;
 internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilter>
 {
 	protected override void OnHandleCreated(EventArgs e)
@@ -72,7 +69,7 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
 				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatusFilter.Removed:
-				text = Locale.RemovedFromSteam;
+				text = Locale.RemovedByAuthor;
 				icon = new DynamicIcon("I_ContentRemoved");
 				color = FormDesign.Design.RedColor;
 				return;

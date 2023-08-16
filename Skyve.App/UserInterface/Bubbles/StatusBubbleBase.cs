@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.StatusBubbles;
+namespace Skyve.App.UserInterface.Bubbles;
 internal abstract class StatusBubbleBase : SlickImageControl
 {
 	public StatusBubbleBase()
@@ -54,7 +54,7 @@ internal abstract class StatusBubbleBase : SlickImageControl
 		{
 			using var icon = ImageName?.Large;
 			var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(Text, UI.Font(9.75F, FontStyle.Bold), Width - Padding.Horizontal).Height);
-			var iconRectangle = new Rectangle(Padding.Left, Padding.Top + ((titleHeight - icon?.Height ?? 0) / 2), icon?.Width ?? 0, icon?.Height ?? 0);
+			var iconRectangle = new Rectangle(Padding.Left, Padding.Top + (titleHeight - icon?.Height ?? 0) / 2, icon?.Width ?? 0, icon?.Height ?? 0);
 
 			if (Loading)
 			{
@@ -70,7 +70,7 @@ internal abstract class StatusBubbleBase : SlickImageControl
 				catch { }
 			}
 
-			e.Graphics.DrawString(Text, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(fore), new Rectangle((icon?.Height ?? 0) + (Padding.Left * 2), Padding.Top, Width - Padding.Horizontal, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
+			e.Graphics.DrawString(Text, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(fore), new Rectangle((icon?.Height ?? 0) + Padding.Left * 2, Padding.Top, Width - Padding.Horizontal, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
 
 			targetHeight = titleHeight + Padding.Vertical;
 		}

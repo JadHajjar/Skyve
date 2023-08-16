@@ -1,9 +1,9 @@
-﻿using SkyveApp.Systems.Compatibility.Domain.Api;
+﻿using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Forms;
+namespace Skyve.App.UserInterface.Forms;
 public partial class AddLinkForm : BaseForm
 {
 	public event Action<IEnumerable<PackageLink>>? LinksReturned;
@@ -122,7 +122,7 @@ public partial class AddLinkForm : BaseForm
 			}
 		}
 
-		public PackageLink Link => new PackageLink
+		public PackageLink Link => new()
 		{
 			Type = link.Type,
 			Title = tbName.Text,

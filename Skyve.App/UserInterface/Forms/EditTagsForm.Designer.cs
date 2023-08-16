@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.Forms;
+﻿using Skyve.App.UserInterface.Lists;
+
+namespace Skyve.App.UserInterface.Forms;
 
 partial class EditTagsForm
 {
@@ -33,7 +35,7 @@ partial class EditTagsForm
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_Apply = new SlickControls.SlickButton();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.TLC = new SkyveApp.UserInterface.Lists.TagListControl();
+			this.TLC = new Skyve.App.UserInterface.Lists.TagListControl();
 			this.slickScroll1 = new SlickControls.SlickScroll();
 			this.TB_NewTag = new SlickControls.SlickTextBox();
 			this.L_MultipleWarning = new System.Windows.Forms.Label();
@@ -190,7 +192,7 @@ partial class EditTagsForm
 	private SlickControls.SlickButton B_Apply;
 	private System.Windows.Forms.Panel panel1;
 	private SlickScroll slickScroll1;
-	private Lists.TagListControl TLC;
+	private TagListControl TLC;
 	private SlickTextBox TB_NewTag;
 	private System.Windows.Forms.Label L_MultipleWarning;
 }

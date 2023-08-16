@@ -1,13 +1,13 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 internal class IOUtil : IIOUtil
 {
 	private readonly ILogger _logger;

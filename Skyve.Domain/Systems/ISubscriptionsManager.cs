@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SkyveApp.Domain.Systems;
+namespace Skyve.Domain.Systems;
 public interface ISubscriptionsManager
 {
 	List<ulong> PendingSubscribingTo { get; }

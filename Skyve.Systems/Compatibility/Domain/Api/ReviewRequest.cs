@@ -2,7 +2,7 @@
 
 using System;
 
-namespace SkyveApp.Systems.Compatibility.Domain.Api;
+namespace Skyve.Systems.Compatibility.Domain.Api;
 [DynamicSqlClass("ReviewRequests")]
 public class ReviewRequest : ReviewRequestNoLog
 {

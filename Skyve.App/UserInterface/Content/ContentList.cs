@@ -1,8 +1,7 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Generic;
-using SkyveApp.UserInterface.Lists;
+﻿using Skyve.App.UserInterface.Dropdowns;
+using Skyve.App.UserInterface.Generic;
+
+using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
 using System.IO;
@@ -11,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 internal partial class ContentList<T> : SlickControl where T : IPackage
 {
 	private bool clearingFilters = true;
@@ -222,11 +221,11 @@ internal partial class ContentList<T> : SlickControl where T : IPackage
 	{
 		if ((int)DD_ReportSeverity.SelectedItem == (int)obj)
 		{
-			DD_ReportSeverity.SelectedItem = Dropdowns.CompatibilityNotificationFilter.Any;
+			DD_ReportSeverity.SelectedItem = CompatibilityNotificationFilter.Any;
 		}
 		else
 		{
-			DD_ReportSeverity.SelectedItem = (Dropdowns.CompatibilityNotificationFilter)obj;
+			DD_ReportSeverity.SelectedItem = (CompatibilityNotificationFilter)obj;
 		}
 
 		if (P_FiltersContainer.Height == 0)
@@ -405,7 +404,7 @@ internal partial class ContentList<T> : SlickControl where T : IPackage
 
 	private bool IsFilteredOut(T item)
 	{
-		if ((_profileManager.CurrentPlayset as Playset)!.LaunchSettings.NoWorkshop)
+		if (!ListControl.IsGenericPage && (_profileManager.CurrentPlayset as Playset)!.LaunchSettings.NoWorkshop)
 		{
 			if (item is ILocalPackage && !item.IsLocal)
 			{
@@ -490,16 +489,16 @@ internal partial class ContentList<T> : SlickControl where T : IPackage
 			}
 		}
 
-		if (DD_ReportSeverity.SelectedItem != Dropdowns.CompatibilityNotificationFilter.Any)
+		if (DD_ReportSeverity.SelectedItem != CompatibilityNotificationFilter.Any)
 		{
-			if (DD_ReportSeverity.SelectedItem == Dropdowns.CompatibilityNotificationFilter.AnyIssue)
+			if (DD_ReportSeverity.SelectedItem == CompatibilityNotificationFilter.AnyIssue)
 			{
 				if (item.GetCompatibilityInfo().GetNotification() <= NotificationType.Info)
 				{
 					return true;
 				}
 			}
-			else if (DD_ReportSeverity.SelectedItem == Dropdowns.CompatibilityNotificationFilter.NoIssues)
+			else if (DD_ReportSeverity.SelectedItem == CompatibilityNotificationFilter.NoIssues)
 			{
 				return item.GetCompatibilityInfo().GetNotification() > NotificationType.Info;
 			}

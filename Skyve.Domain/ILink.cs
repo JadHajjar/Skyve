@@ -1,6 +1,6 @@
-﻿using SkyveApp.Domain.Enums;
+﻿using Skyve.Domain.Enums;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 public interface ILink
 {
 	public LinkType Type { get; set; }

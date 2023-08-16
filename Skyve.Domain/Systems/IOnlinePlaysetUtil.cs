@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace SkyveApp.Domain.Systems;
+namespace Skyve.Domain.Systems;
 public interface IOnlinePlaysetUtil
 {
 	Task Share(IPlayset playset);

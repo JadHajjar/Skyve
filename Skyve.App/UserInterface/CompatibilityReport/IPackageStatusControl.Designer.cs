@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.CompatibilityReport;
+﻿using Skyve.App.UserInterface.Dropdowns;
+
+namespace Skyve.App.UserInterface.CompatibilityReport;
 
 partial class IPackageStatusControl<T, TBase>
 {
@@ -45,7 +47,7 @@ partial class IPackageStatusControl<T, TBase>
 			this.I_Copy = new SlickControls.SlickIcon();
 			this.L_OutputTitle = new System.Windows.Forms.Label();
 			this.L_Output = new SlickControls.SlickControl();
-			this.DD_Action = new SkyveApp.UserInterface.Dropdowns.PackageActionDropDown();
+			this.DD_Action = new Skyve.App.UserInterface.Dropdowns.PackageActionDropDown();
 			((System.ComponentModel.ISupportInitialize)(this.CloseIcon)).BeginInit();
 			this.P_Main.SuspendLayout();
 			this.SuspendLayout();
@@ -265,7 +267,7 @@ partial class IPackageStatusControl<T, TBase>
 	#endregion
 	private SlickControls.TopIcon CloseIcon;
 	private SlickControls.RoundedTableLayoutPanel P_Main;
-	private Dropdowns.PackageActionDropDown DD_Action;
+	private PackageActionDropDown DD_Action;
 	private SlickControls.SlickTextBox TB_Note;
 	private SlickControls.SlickIcon I_Note;
 	private SlickControls.SlickIcon I_AddPackage;

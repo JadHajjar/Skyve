@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.Domain;
+﻿namespace Skyve.Domain;
 public interface IKnownUser : IUser
 {
 	public bool Retired { get; }

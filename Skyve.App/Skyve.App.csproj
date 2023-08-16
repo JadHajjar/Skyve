@@ -16,7 +16,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
     <ApplicationIcon>Resources\Skyve.ico</ApplicationIcon>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <NeutralLanguage>en</NeutralLanguage>
     <Title>Skyve</Title>
   </PropertyGroup>
@@ -31,8 +31,6 @@
     <ProjectReference Include="..\..\SlickControls\SlickControls.csproj" />
 	<ProjectReference Include="..\..\Skyve\Skyve.Domain\Skyve.Domain.csproj" />
 	<ProjectReference Include="..\..\Skyve\Skyve.Systems\Skyve.Systems.csproj" />
-    <ProjectReference Include="..\..\Skyve-CS1\Skyve.Domain.CS1\Skyve.Domain.CS1.csproj" />
-    <ProjectReference Include="..\..\Skyve-CS1\Skyve.Systems.CS1\Skyve.Systems.CS1.csproj" />
   </ItemGroup>
 
   <ItemGroup>

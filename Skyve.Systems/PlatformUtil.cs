@@ -1,7 +1,7 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 public static class PlatformUtil
 {
 	public static void OpenUrl(string? url)

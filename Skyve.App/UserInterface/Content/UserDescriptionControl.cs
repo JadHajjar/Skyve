@@ -1,10 +1,9 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Content;
+namespace Skyve.App.UserInterface.Content;
 internal class UserDescriptionControl : SlickImageControl
 {
 	private Rectangles? rects;
@@ -79,7 +78,7 @@ internal class UserDescriptionControl : SlickImageControl
 		else
 		{
 			e.Graphics.SetUp(FormDesign.Design.AccentBackColor);
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1, (Height / 2) + 1, 1, 1), (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1, Height / 2 + 1, 1, 1), (int)(5 * UI.FontScale));
 		}
 
 		if (User == null)

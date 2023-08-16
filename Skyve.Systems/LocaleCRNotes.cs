@@ -1,11 +1,11 @@
 ﻿using Extensions;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems;
 public class LocaleCRNotes : LocaleHelper
 {
 	private static readonly LocaleCRNotes _instance = new();
 
-	protected LocaleCRNotes() : base($"SkyveApp.Systems.Properties.CompatibilityNotes.json") { }
+	protected LocaleCRNotes() : base($"Skyve.Systems.Properties.CompatibilityNotes.json") { }
 
 	public static Translation Get(string value)
 	{

@@ -1,16 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
-
-using SkyveApp.Systems.CS1;
-using SkyveApp.Systems.CS1.Utilities;
-
-using System.Configuration;
-using System.Diagnostics;
-using System.IO;
-using System.Windows.Forms;
-
-using static System.Environment;
-
-namespace SkyveApp;
+namespace Skyve.App;
 #nullable disable
 public static class Program
 {

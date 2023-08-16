@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
 
-using SkyveApp.Systems.Compatibility.Domain;
-using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.Systems.CS1.Utilities;
+using Skyve.Systems.Compatibility.Domain;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Drawing;
 using System.IO;
@@ -11,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_CompatibilityReport : PanelContent
 {
 	private ReviewRequest[]? reviewRequests;
@@ -194,21 +193,25 @@ public partial class PC_CompatibilityReport : PanelContent
 				_subscriptionsManager.Subscribe(message.Packages.Where(x => x.GetLocalPackage() is null));
 				_bulkUtil.SetBulkIncluded(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
 				_bulkUtil.SetBulkEnabled(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
-			},
+			}
+			,
 			StatusAction.RequiresConfiguration => () =>
 			{
 				_compatibilityManager.ToggleSnoozed(message);
 
-			},
+			}
+			,
 			StatusAction.UnsubscribeThis => () =>
 			{
 				_subscriptionsManager.UnSubscribe(new[] { report.Package! });
-			},
+			}
+			,
 			StatusAction.UnsubscribeOther => () =>
 			{
 				_subscriptionsManager.UnSubscribe(message.Packages!);
 
-			},
+			}
+			,
 			StatusAction.ExcludeThis => () =>
 			{
 				var pp = report.Package?.GetLocalPackage();
@@ -216,7 +219,8 @@ public partial class PC_CompatibilityReport : PanelContent
 				{
 					_packageUtil.SetIncluded(pp, false);
 				}
-			},
+			}
+			,
 			StatusAction.ExcludeOther => () =>
 			{
 				foreach (var p in message.Packages!)
@@ -227,11 +231,13 @@ public partial class PC_CompatibilityReport : PanelContent
 						_packageUtil.SetIncluded(pp, false);
 					}
 				}
-			},
+			}
+			,
 			StatusAction.RequestReview => () =>
 			{
 				Program.MainForm.PushPanel(null, new PC_RequestReview(report.Package!));
-			},
+			}
+			,
 			StatusAction.Switch => message.Packages.Length == 1 ? () =>
 			{
 				var pp1 = report.Package?.LocalParentPackage;
@@ -244,7 +250,8 @@ public partial class PC_CompatibilityReport : PanelContent
 					_packageUtil.SetIncluded(pp2!, true);
 					_packageUtil.SetEnabled(pp2!, true);
 				}
-			} : null
+			}
+			: null
 			,
 			_ => null,
 		};

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace SkyveApp.Domain.Systems;
+namespace Skyve.Domain.Systems;
 public interface IIOUtil
 {
 	Process? Execute(string exeFile, string args, bool useShellExecute = true, bool createNoWindow = false);

@@ -1,9 +1,7 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Lists;
+namespace Skyve.App.UserInterface.Lists;
 internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, OtherProfilePackage.Rectangles>
 {
 	public IEnumerable<ICustomPlayset> FilteredItems => SafeGetItems().Select(x => x.Item);
@@ -52,12 +50,12 @@ internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Oth
 		Padding = UI.Scale(new Padding(3, 1, 3, 1), UI.FontScale);
 	}
 
-	protected override IEnumerable<DrawableItem<ICustomPlayset, OtherProfilePackage.Rectangles>> OrderItems(IEnumerable<DrawableItem<ICustomPlayset, OtherProfilePackage.Rectangles>> items)
+	protected override IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> OrderItems(IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> items)
 	{
 		return items.OrderByDescending(x => x.Item.DateUpdated);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<ICustomPlayset, OtherProfilePackage.Rectangles> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<ICustomPlayset, Rectangles> item, Point location)
 	{
 		var rects = item.Rectangles;
 
@@ -115,7 +113,7 @@ internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Oth
 		}
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, OtherProfilePackage.Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
 	{
 		var large = false;
 		var rects = e.Rects;
@@ -174,7 +172,7 @@ internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Oth
 		}
 	}
 
-	private Rectangle DrawLabel(ItemPaintEventArgs<ICustomPlayset, OtherProfilePackage.Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
+	private Rectangle DrawLabel(ItemPaintEventArgs<ICustomPlayset, Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
 	{
 		if (text == null)
 		{
@@ -197,7 +195,7 @@ internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Oth
 		using var foreBrush = new SolidBrush(color.GetTextColor());
 
 		e.Graphics.FillRoundedRectangle(backBrush, rectangle, (int)(3 * UI.FontScale));
-		e.Graphics.DrawString(text, UI.Font(large ? 9F : 7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + (Padding.Left * 2) - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(text, UI.Font(large ? 9F : 7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + Padding.Left * 2 - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
 		if (icon is not null)
 		{
@@ -215,9 +213,9 @@ internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Oth
 			LoadRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
 		};
 
-		rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + (2 * Padding.Left)).Align(rects.IncludedRect.Size, ContentAlignment.MiddleLeft);
+		rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + 2 * Padding.Left).Align(rects.IncludedRect.Size, ContentAlignment.MiddleLeft);
 
-		rects.TextRect = new Rectangle(rects.IconRect.Right + Padding.Left, rectangle.Y, rects.LoadRect.X - rects.IconRect.Right - (2 * Padding.Left), rectangle.Height);
+		rects.TextRect = new Rectangle(rects.IconRect.Right + Padding.Left, rectangle.Y, rects.LoadRect.X - rects.IconRect.Right - 2 * Padding.Left, rectangle.Height);
 
 		return rects;
 	}

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 public interface IWorkshopInfo : IPackageIdentity
 {
 	IUser? Author { get; }

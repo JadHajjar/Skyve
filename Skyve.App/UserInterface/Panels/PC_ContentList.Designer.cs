@@ -1,7 +1,7 @@
-﻿using SkyveApp.UserInterface.Dropdowns;
-using SkyveApp.UserInterface.Generic;
+﻿using Skyve.App.UserInterface.Dropdowns;
+using Skyve.App.UserInterface.Generic;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_ContentList<T>
 {

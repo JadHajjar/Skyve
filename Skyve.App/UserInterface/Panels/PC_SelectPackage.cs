@@ -1,12 +1,13 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Content;
-using SkyveApp.UserInterface.Lists;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.App.UserInterface.Generic;
+
+using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_SelectPackage : PanelContent
 {
 	private readonly ItemListControl<GenericWorkshopPackage> LC_Items;
@@ -48,12 +49,12 @@ public partial class PC_SelectPackage : PanelContent
 
 		LC_Items.BringToFront();
 
-		OT_ModAsset.SelectedValue = Generic.ThreeOptionToggle.Value.Option1;
+		OT_ModAsset.SelectedValue = ThreeOptionToggle.Value.Option1;
 		TB_Search.Loading = true;
 		_delayedSearch.Run(_ticketBooth.GetTicket());
 	}
 
-	public PC_SelectPackage(string search, Generic.ThreeOptionToggle.Value value) : this()
+	public PC_SelectPackage(string search, ThreeOptionToggle.Value value) : this()
 	{
 		TB_Search.Text = search;
 		LC_Items.IsSelection = false;
@@ -228,8 +229,8 @@ public partial class PC_SelectPackage : PanelContent
 		{
 			items = (await _workshopService.QueryFilesAsync(PackageSorting.Default,
 				TB_Search.Text,
-				OT_ModAsset.SelectedValue == Generic.ThreeOptionToggle.Value.Option1 ? new[] { "Mod" } : null,
-			 	OT_ModAsset.SelectedValue == Generic.ThreeOptionToggle.Value.Option2 ? new[] { "Mod" } : null)).ToDictionary(x => x.Id);
+				OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option1 ? new[] { "Mod" } : null,
+			 	OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 ? new[] { "Mod" } : null)).ToDictionary(x => x.Id);
 		}
 
 		if (!_ticketBooth.IsLast(ticket))

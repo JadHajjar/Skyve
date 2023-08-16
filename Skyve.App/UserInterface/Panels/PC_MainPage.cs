@@ -1,10 +1,9 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.StatusBubbles;
+﻿using Skyve.App.UserInterface.Bubbles;
 
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_MainPage : PanelContent
 {
 	private bool buttonStateRunning;
@@ -12,6 +11,7 @@ public partial class PC_MainPage : PanelContent
 	private readonly ICitiesManager _citiesManager;
 	private readonly IPlaysetManager _playsetManager;
 	private readonly IModLogicManager _modLogicManager;
+
 	public PC_MainPage()
 	{
 		ServiceCenter.Get(out _notifier, out _citiesManager, out _playsetManager, out _modLogicManager);
@@ -133,7 +133,7 @@ public partial class PC_MainPage : PanelContent
 				this.TryInvoke(() =>
 				{
 					B_StartStop.ImageName = "I_CS";
-					B_StartStop.Text = Locale.StartCities;
+					B_StartStop.Text = LocaleHelper.GetGlobalText("StartCities");
 					buttonStateRunning = false;
 				});
 			}
@@ -146,7 +146,7 @@ public partial class PC_MainPage : PanelContent
 			this.TryInvoke(() =>
 			{
 				B_StartStop.ImageName = "I_Stop";
-				B_StartStop.Text = Locale.StopCities;
+				B_StartStop.Text = LocaleHelper.GetGlobalText("StopCities");
 				buttonStateRunning = true;
 			});
 		}

@@ -1,13 +1,13 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Content;
-using SkyveApp.UserInterface.Dropdowns;
-using SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.App.UserInterface.Dropdowns;
+
+using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.CompatibilityReport;
+namespace Skyve.App.UserInterface.CompatibilityReport;
 public partial class IPackageStatusControl<T, TBase> : SlickControl where T : struct, Enum where TBase : IPackageStatus<T>, new()
 {
 	internal readonly PackageStatusTypeDropDown<T> typeDropDown;
@@ -99,7 +99,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		L_Output.Invalidate();
 	}
 
-	public TBase PackageStatus => new TBase()
+	public TBase PackageStatus => new()
 	{
 		Type = typeDropDown.SelectedItem,
 		Action = DD_Action.SelectedItem,

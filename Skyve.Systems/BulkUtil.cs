@@ -1,12 +1,12 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 internal class BulkUtil : IBulkUtil
 {
 	private readonly INotifier _notifier;

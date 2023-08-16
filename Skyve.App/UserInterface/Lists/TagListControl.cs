@@ -1,20 +1,23 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Lists;
+namespace Skyve.App.UserInterface.Lists;
 internal class TagListControl : SlickControl
 {
+	private readonly ITagsService _tagsService;
 	private readonly List<(Rectangle rectangle, string tag)> _tagRects = new();
 
 	public List<ITag> Tags { get; } = new();
 	public List<ITag> AllTags { get; } = new();
 	public string? CurrentSearch { get; set; }
 
-	protected override void UIChanged()
+    public TagListControl()
+    {
+		ServiceCenter.Get(out _tagsService);
+    }
+
+    protected override void UIChanged()
 	{
 		base.UIChanged();
 
@@ -44,7 +47,7 @@ internal class TagListControl : SlickControl
 				if (tagsRect.Y != Padding.Top || tagsRect.X != Padding.Left)
 				{
 					tagsRect.X = Padding.Left;
-					tagsRect.Y += tagsRect.Height + (Padding.Top * 3 / 2);
+					tagsRect.Y += tagsRect.Height + Padding.Top * 3 / 2;
 				}
 
 				e.Graphics.DrawString(autoTags ? Locale.CustomTags : Locale.WorkshopAndGameTags, font, brush, tagsRect.Location);
@@ -52,9 +55,9 @@ internal class TagListControl : SlickControl
 				var textSize = e.Graphics.Measure(autoTags ? Locale.CustomTags : Locale.WorkshopAndGameTags, font);
 
 				using var activePen = new Pen(FormDesign.Design.ActiveColor, (int)(UI.FontScale * 2)) { DashStyle = DashStyle.Dot, DashCap = DashCap.Round };
-				e.Graphics.DrawLine(activePen, tagsRect.X + textSize.Width, tagsRect.Y + ((int)textSize.Height / 2), Width - Padding.Right, tagsRect.Y + ((int)textSize.Height / 2));
+				e.Graphics.DrawLine(activePen, tagsRect.X + textSize.Width, tagsRect.Y + (int)textSize.Height / 2, Width - Padding.Right, tagsRect.Y + (int)textSize.Height / 2);
 
-				tagsRect.Y += (int)textSize.Height + (Padding.Top / 2);
+				tagsRect.Y += (int)textSize.Height + Padding.Top / 2;
 
 				autoTags = !autoTags;
 			}
@@ -115,13 +118,13 @@ internal class TagListControl : SlickControl
 		{
 			if (item.rectangle.Contains(e.Location))
 			{
-				if (e.Button == MouseButtons.Right || (e.Button == MouseButtons.Left && Tags.Any(t => t.Value == item.tag)))
+				if (e.Button == MouseButtons.Right || e.Button == MouseButtons.Left && Tags.Any(t => t.Value == item.tag))
 				{
 					Tags.RemoveAll(t => t.Value == item.tag);
 				}
 				else if (e.Button == MouseButtons.Left)
 				{
-					Tags.Add(new TagItem(Domain.CS1.Enums.TagSource.Custom, item.tag));
+					Tags.Add(_tagsService.CreateCustomTag(item.tag));
 				}
 			}
 		}

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.CompatibilityReport;
+namespace Skyve.App.UserInterface.CompatibilityReport;
 internal class PackageCompatibilityReportControl : TableLayoutPanel
 {
 	private readonly TableLayoutPanel[] _panels;

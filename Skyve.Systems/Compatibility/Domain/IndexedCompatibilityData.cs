@@ -1,13 +1,13 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Enums;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+using Skyve.Domain.Enums;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Systems.Compatibility.Domain;
+namespace Skyve.Systems.Compatibility.Domain;
 
 public class IndexedCompatibilityData
 {

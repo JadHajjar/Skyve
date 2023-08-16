@@ -1,19 +1,15 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Systems.Compatibility;
-using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.CompatibilityReport;
-using SkyveApp.UserInterface.Content;
-using SkyveApp.UserInterface.Forms;
+﻿using Skyve.App.UserInterface.CompatibilityReport;
+using Skyve.App.UserInterface.Content;
+using Skyve.App.UserInterface.Forms;
+using Skyve.Systems.Compatibility;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_CompatibilityManagement : PanelContent
 {
 	private readonly Dictionary<ulong, IPackage?> _packages = new();
@@ -26,12 +22,13 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IWorkshopService _workshopService;
 	private readonly IUserService _userService;
+	private readonly ITagsService _tagsService;
 
 	internal IPackage? CurrentPackage { get; private set; }
 
 	private PC_CompatibilityManagement(bool load) : base(load)
 	{
-		ServiceCenter.Get(out _workshopService, out _compatibilityManager, out _userService);
+		ServiceCenter.Get(out _workshopService, out _compatibilityManager, out _userService, out _tagsService);
 
 		InitializeComponent();
 
@@ -146,7 +143,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var mod in mods)
 		{
-			_packages.Add(mod.Id, new WorkshopPackage(mod));
+			_packages.Add(mod.Id, _workshopService.GetPackage(mod));
 		}
 
 		packageCrList.SetItems(_packages.Keys);
@@ -305,7 +302,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in postPackage.Tags ?? new())
 		{
-			var control = new TagControl { TagInfo = new TagItem(TagSource.Global, item) };
+			var control = new TagControl { TagInfo = _tagsService.CreateCustomTag(item) };
 			control.Click += TagControl_Click;
 			P_Tags.Controls.Add(control);
 			T_NewTag.SendToBack();
@@ -389,7 +386,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 			return;
 		}
 
-		var control = new TagControl { TagInfo = new TagItem(TagSource.Global, prompt.Input) };
+		var control = new TagControl { TagInfo = _tagsService.CreateCustomTag(prompt.Input) };
 		control.Click += TagControl_Click;
 		P_Tags.Controls.Add(control);
 		T_NewTag.SendToBack();
@@ -418,7 +415,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in links.OrderBy(x => x.Type))
 		{
-			var control = new LinkControl { Link = item };
+			var control = new LinkControl(item, false);
 			control.Click += T_NewLink_Click;
 			P_Links.Controls.Add(control);
 		}

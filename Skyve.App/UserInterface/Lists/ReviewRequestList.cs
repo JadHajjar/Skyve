@@ -1,10 +1,9 @@
-﻿using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Lists;
+namespace Skyve.App.UserInterface.Lists;
 internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRequestList.Rectangles>
 {
 	private readonly IWorkshopService _workshopService;
@@ -24,12 +23,12 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, Review
 		Font = UI.Font(8.25F, FontStyle.Bold);
 	}
 
-	protected override IEnumerable<DrawableItem<ReviewRequest, ReviewRequestList.Rectangles>> OrderItems(IEnumerable<DrawableItem<ReviewRequest, ReviewRequestList.Rectangles>> items)
+	protected override IEnumerable<DrawableItem<ReviewRequest, Rectangles>> OrderItems(IEnumerable<DrawableItem<ReviewRequest, Rectangles>> items)
 	{
 		return items.OrderBy(x => x.Item.Timestamp);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<ReviewRequest, ReviewRequestList.Rectangles> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<ReviewRequest, Rectangles> item, Point location)
 	{
 		return true;
 	}
@@ -44,7 +43,7 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, Review
 		base.OnPaint(e);
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<ReviewRequest, ReviewRequestList.Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<ReviewRequest, Rectangles> e)
 	{
 		base.OnPaintItemList(e);
 

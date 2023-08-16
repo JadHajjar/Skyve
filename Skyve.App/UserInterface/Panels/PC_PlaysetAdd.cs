@@ -1,10 +1,7 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Systems.CS1.Utilities;
-
-using System.IO;
+﻿using System.IO;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_PlaysetAdd : PanelContent
 {
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
@@ -26,7 +23,7 @@ public partial class PC_PlaysetAdd : PanelContent
 
 	private void NewProfile_Click(object sender, EventArgs e)
 	{
-		var newProfile = new Playset() { Name = _profileManager.GetNewPlaysetName(), LastEditDate = DateTime.Now };
+		var newProfile = _profileManager.GetNewPlayset();
 
 		if (!_profileManager.Save(newProfile))
 		{

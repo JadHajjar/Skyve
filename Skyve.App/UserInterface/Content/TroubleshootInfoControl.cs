@@ -1,10 +1,8 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Content;
+namespace Skyve.App.UserInterface.Content;
 internal class TroubleshootInfoControl : SlickControl
 {
 	private Rectangle buttonRect;
@@ -117,20 +115,20 @@ internal class TroubleshootInfoControl : SlickControl
 
 		y += Padding.Top;
 
-		if (_troubleshootSystem.WaitingForGameLaunch || (_troubleshootSystem.WaitingForGameClose && CrossIO.CurrentPlatform is Platform.Windows))
+		if (_troubleshootSystem.WaitingForGameLaunch || _troubleshootSystem.WaitingForGameClose && CrossIO.CurrentPlatform is Platform.Windows)
 		{
 			using var launchButtonIcon = IconManager.GetSmallIcon("I_CS");
 			launchRect = new Rectangle(Padding.Left, y + buttonSize.Height + Padding.Bottom, Width - Padding.Horizontal, buttonSize.Height);
 
-			SlickButton.DrawButton(e, launchRect, _citiesManager.IsRunning() ? Locale.StopCities : Locale.StartCities, UI.Font(6.75F), launchButtonIcon, null, launchRect.Contains(PointToClient(Cursor.Position)) ? (HoverState & ~HoverState.Focused) : HoverState.Normal, ColorStyle.Active);
+			SlickButton.DrawButton(e, launchRect, LocaleHelper.GetGlobalText(_citiesManager.IsRunning() ? "StopCities" : "StartCities"), UI.Font(6.75F), launchButtonIcon, null, launchRect.Contains(PointToClient(Cursor.Position)) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Active);
 
 			buttonRect.Y -= buttonSize.Height + Padding.Bottom;
 			cancelRect.Y -= buttonSize.Height + Padding.Bottom;
 			y += buttonSize.Height + Padding.Bottom;
 		}
 
-		SlickLabel.DrawLabel(e, buttonRect, Locale.NextStage, UI.Font(6.75F), buttonIcon, new Padding(4, 2, 2, 2), FormDesign.Design.MenuForeColor, buttonRect.Contains(PointToClient(Cursor.Position)) ? (HoverState & ~HoverState.Focused) : HoverState.Normal, ColorStyle.Green);
-		SlickLabel.DrawLabel(e, cancelRect, LocaleSlickUI.Cancel, UI.Font(6.75F), cancelButtonIcon, new Padding(4, 2, 2, 2), FormDesign.Design.MenuForeColor, cancelRect.Contains(PointToClient(Cursor.Position)) ? (HoverState & ~HoverState.Focused) : HoverState.Normal, ColorStyle.Red);
+		SlickLabel.DrawLabel(e, buttonRect, Locale.NextStage, UI.Font(6.75F), buttonIcon, new Padding(4, 2, 2, 2), FormDesign.Design.MenuForeColor, buttonRect.Contains(PointToClient(Cursor.Position)) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Green);
+		SlickLabel.DrawLabel(e, cancelRect, LocaleSlickUI.Cancel, UI.Font(6.75F), cancelButtonIcon, new Padding(4, 2, 2, 2), FormDesign.Design.MenuForeColor, cancelRect.Contains(PointToClient(Cursor.Position)) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Red);
 
 		Height = y + buttonSize.Height + Padding.Bottom;
 	}
@@ -185,7 +183,7 @@ internal class TroubleshootInfoControl : SlickControl
 	{
 		base.OnMouseClick(e);
 
-		if (e.Button == MouseButtons.None || (e.Button == MouseButtons.Left && buttonRect.Contains(e.Location)))
+		if (e.Button == MouseButtons.None || e.Button == MouseButtons.Left && buttonRect.Contains(e.Location))
 		{
 			if (_troubleshootSystem.WaitingForPrompt)
 			{

@@ -1,15 +1,17 @@
-﻿using SkyveApp.Domain.Enums;
+﻿using Skyve.Domain.Enums;
 
 using System.Collections.Generic;
 
-namespace SkyveApp.Domain.Systems;
+namespace Skyve.Domain.Systems;
 public interface IPlaysetManager
 {
 	ICustomPlayset CurrentPlayset { get; }
 	IEnumerable<ICustomPlayset> Playsets { get; }
+	ICustomPlayset TemporaryPlayset { get; }
 
 	event PromptMissingItemsDelegate PromptMissingItems;
 
+	ICustomPlayset GetNewPlayset();
 	string GetNewPlaysetName();
 	void AddPlayset(ICustomPlayset playset);
 	void DeletePlayset(ICustomPlayset playset);

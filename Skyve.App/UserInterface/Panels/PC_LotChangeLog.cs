@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 internal class PC_LotChangeLog : PC_Changelog
 {
 	public PC_LotChangeLog() : base(
 		Assembly.GetExecutingAssembly(),
-		$"{nameof(SkyveApp)}.Changelog.json",
+		$"Skyve.App.CS1.Changelog.json",
 		Assembly.GetExecutingAssembly().GetName().Version)
 	{
 		LocaleChangelog.Load();

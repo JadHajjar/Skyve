@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 public interface IPackage : IPackageIdentity
 {
 	bool IsMod { get; }

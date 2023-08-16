@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Generic;
+
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_SelectPackage
 {
@@ -32,7 +34,7 @@ partial class PC_SelectPackage
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
-			this.OT_ModAsset = new SkyveApp.UserInterface.Generic.ThreeOptionToggle();
+			this.OT_ModAsset = new Skyve.App.UserInterface.Generic.ThreeOptionToggle();
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -214,7 +216,7 @@ partial class PC_SelectPackage
 	#endregion
 
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-	private Generic.ThreeOptionToggle OT_ModAsset;
+	private ThreeOptionToggle OT_ModAsset;
 	private SlickControls.SlickTextBox TB_Search;
 	private SlickControls.SlickSpacer slickSpacer1;
 	private SlickControls.SlickSpacer slickSpacer2;

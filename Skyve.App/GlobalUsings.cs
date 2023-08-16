@@ -1,9 +1,9 @@
 ﻿global using Extensions;
 
-global using SkyveApp.Domain;
-global using SkyveApp.Domain.Enums;
-global using SkyveApp.Domain.Systems;
-global using SkyveApp.Systems;
+global using Skyve.Domain;
+global using Skyve.Domain.Enums;
+global using Skyve.Domain.Systems;
+global using Skyve.Systems;
 
 global using SlickControls;
 

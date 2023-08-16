@@ -1,13 +1,13 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 public class PackageUtil : IPackageUtil
 {
 	private readonly IModUtil _modUtil;
@@ -107,9 +107,9 @@ public class PackageUtil : IPackageUtil
 	{
 		return package is IMod mod
 			? _modUtil.IsEnabled(mod)
-			: (package is not ILocalPackageWithContents packageWithContents 
+			: package is not ILocalPackageWithContents packageWithContents
 				|| packageWithContents.Mod is null
-				|| _modUtil.IsEnabled(packageWithContents.Mod));
+				|| _modUtil.IsEnabled(packageWithContents.Mod);
 	}
 
 	public bool IsIncludedAndEnabled(ILocalPackage package)

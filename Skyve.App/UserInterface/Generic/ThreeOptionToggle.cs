@@ -1,10 +1,8 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Generic;
+namespace Skyve.App.UserInterface.Generic;
 public class ThreeOptionToggle : SlickControl, ISupportsReset
 {
 	private Value _selectedValue;
@@ -118,9 +116,9 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		var option1Hovered = rectangle1.Contains(cursorLocation) && HoverState.HasFlag(HoverState.Hovered);
 		var option2Hovered = rectangle2.Contains(cursorLocation) && HoverState.HasFlag(HoverState.Hovered);
 		var noneHovered = rectangleNone.Contains(cursorLocation) && HoverState.HasFlag(HoverState.Hovered);
-		var textColor1 = SelectedValue == Value.Option1 || (option1Hovered && HoverState.HasFlag(HoverState.Pressed)) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
-		var textColor2 = SelectedValue == Value.Option2 || (option2Hovered && HoverState.HasFlag(HoverState.Pressed)) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
-		var textColorNone = SelectedValue == Value.None || (noneHovered && HoverState.HasFlag(HoverState.Pressed)) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
+		var textColor1 = SelectedValue == Value.Option1 || option1Hovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
+		var textColor2 = SelectedValue == Value.Option2 || option2Hovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
+		var textColorNone = SelectedValue == Value.None || noneHovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
 
 		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 4, -4))), ClientRectangle, Padding.Left);
 

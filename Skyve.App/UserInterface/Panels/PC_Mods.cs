@@ -1,6 +1,4 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-namespace SkyveApp.UserInterface.Panels;
+﻿namespace Skyve.App.UserInterface.Panels;
 internal class PC_Mods : PC_ContentList<IMod>
 {
 	public PC_Mods()

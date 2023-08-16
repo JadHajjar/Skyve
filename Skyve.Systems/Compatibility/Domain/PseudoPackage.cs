@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-using SkyveApp.Domain;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
 
-using SkyveApp.Domain.Systems;
-
-namespace SkyveApp.Systems.Compatibility.Domain;
+namespace Skyve.Systems.Compatibility.Domain;
 
 public class PseudoPackage : IPackageIdentity
 {

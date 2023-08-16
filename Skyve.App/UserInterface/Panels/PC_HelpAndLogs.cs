@@ -1,5 +1,4 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Generic;
+﻿using Skyve.App.UserInterface.Generic;
 
 using System.Drawing;
 using System.IO;
@@ -7,7 +6,7 @@ using System.IO.Compression;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_HelpAndLogs : PanelContent
 {
 	private readonly ILogUtil _logUtil;

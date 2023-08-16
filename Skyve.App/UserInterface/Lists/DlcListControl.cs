@@ -1,9 +1,7 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Lists;
+namespace Skyve.App.UserInterface.Lists;
 internal class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.Rectangles>
 {
 	public IEnumerable<IDlcInfo> FilteredItems => SafeGetItems().Select(x => x.Item);
@@ -168,7 +166,7 @@ internal class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl
 		using var foreBrush = new SolidBrush(color.GetTextColor());
 
 		e.Graphics.FillRoundedRectangle(backBrush, rectangle, (int)(3 * UI.FontScale));
-		e.Graphics.DrawString(text, UI.Font(large ? 9F : 7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + (Padding.Left * 2) - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(text, UI.Font(large ? 9F : 7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + Padding.Left * 2 - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
 		if (icon is not null)
 		{
@@ -188,7 +186,7 @@ internal class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl
 			SteamRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(includeItemHeight, ItemHeight), ContentAlignment.TopRight)
 		};
 
-		rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + (2 * Padding.Left)).Align(new Size(iconSize * 460 / 215, iconSize), ContentAlignment.MiddleLeft);
+		rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + 2 * Padding.Left).Align(new Size(iconSize * 460 / 215, iconSize), ContentAlignment.MiddleLeft);
 
 		rects.CenterRect = new Rectangle(rects.IconRect.X, rectangle.Y, rects.SteamRect.X - rects.IconRect.X, rectangle.Height);
 

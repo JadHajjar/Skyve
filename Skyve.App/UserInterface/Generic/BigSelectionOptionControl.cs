@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Generic;
+namespace Skyve.App.UserInterface.Generic;
 
 [DefaultEvent("Click")]
 internal class BigSelectionOptionControl : SlickImageControl
@@ -25,7 +25,7 @@ internal class BigSelectionOptionControl : SlickImageControl
 		if (Live)
 		{
 			Font = UI.Font(11.25F, FontStyle.Bold);
-			Margin = UI.Scale(new Padding(Parent.Controls.IndexOf(this) % 2 * 100, 15, 100 - (Parent.Controls.IndexOf(this) % 2 * 100), 15), UI.FontScale);
+			Margin = UI.Scale(new Padding(Parent.Controls.IndexOf(this) % 2 * 100, 15, 100 - Parent.Controls.IndexOf(this) % 2 * 100, 15), UI.FontScale);
 			Padding = UI.Scale(new Padding(15), UI.FontScale);
 			Size = UI.Scale(new Size(250, 90), UI.FontScale);
 		}

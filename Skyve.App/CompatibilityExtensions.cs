@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace SkyveApp;
+namespace Skyve.App;
 
 public static class CompatibilityExtensions
 {

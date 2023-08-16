@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 
 public class IPackageEqualityComparer : IEqualityComparer<IPackage>
 {
@@ -11,7 +11,7 @@ public class IPackageEqualityComparer : IEqualityComparer<IPackage>
 			: y is null
 			? x is null
 			: x.Id == y.Id
-|| (x is ILocalPackage localPackage1 && y is ILocalPackage localPackage2 && localPackage1.Folder == localPackage2.Folder);
+|| x is ILocalPackage localPackage1 && y is ILocalPackage localPackage2 && localPackage1.Folder == localPackage2.Folder;
 	}
 
 	public int GetHashCode(IPackage obj)

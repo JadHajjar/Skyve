@@ -1,12 +1,9 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Lists;
+namespace Skyve.App.UserInterface.Lists;
 
 internal partial class ItemListControl<T>
 {
@@ -126,7 +123,7 @@ internal partial class ItemListControl<T>
 
 		if (!IsPackagePage && e.Item.Id > 0)
 		{
-			e.Rects.SteamIdRect = DrawTag(e, maxTagX, startLocation, ref tagsRect, new TagItem(Domain.CS1.Enums.TagSource.Workshop, e.Item.Id.ToString()), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor));
+			e.Rects.SteamIdRect = DrawTag(e, maxTagX, startLocation, ref tagsRect, _tagsService.CreateWorkshopTag(e.Item.Id.ToString()), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor));
 
 			tagsRect.X += Padding.Left;
 		}

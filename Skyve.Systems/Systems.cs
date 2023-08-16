@@ -1,27 +1,32 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility;
+using Skyve.Domain.Systems;
+using Skyve.Systems.Compatibility;
 
 using System.Windows.Forms;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 public static class SystemsProgram
 {
 	public static Form? MainForm { get; set; }
 
 	public static IServiceCollection AddSkyveSystems(this IServiceCollection services)
 	{
-		services.AddTransient<IBulkUtil, BulkUtil>();
+		services.AddSingleton<IBulkUtil, BulkUtil>();
+		services.AddSingleton<ILocale, Locale>();
 		services.AddSingleton<IImageService, ImageSystem>();
 		services.AddSingleton<IIOUtil, IOUtil>();
 		services.AddSingleton<ILogger, LoggerSystem>();
 		services.AddSingleton<INotifier, NotifierSystem>();
-		services.AddTransient<IPackageNameUtil, PackageNameUtil>();
-		services.AddTransient<IPackageUtil, PackageUtil>();
-		services.AddTransient<SkyveApiUtil>();
-		services.AddTransient<ILoadOrderHelper, LoadOrderHelper>();
+		services.AddSingleton<IPackageNameUtil, PackageNameUtil>();
+		services.AddSingleton<IPackageUtil, PackageUtil>();
+		services.AddSingleton<SkyveApiUtil>();
+		services.AddSingleton<ILoadOrderHelper, LoadOrderHelper>();
 		services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
+
+		Locale.Load();
+		LocaleCR.Load();
+		LocaleCRNotes.Load();
 
 		return services;
 	}

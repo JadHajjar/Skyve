@@ -1,6 +1,6 @@
-﻿using SkyveApp.Domain;
+﻿using Skyve.Domain;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 public readonly struct GenericPackageIdentity : IPackageIdentity
 {
 	public ulong Id { get; }

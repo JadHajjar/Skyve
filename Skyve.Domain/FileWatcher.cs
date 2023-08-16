@@ -3,7 +3,7 @@
 using System;
 using System.IO;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 public class FileWatcher : IDisposable
 {
 	private readonly FileSystemWatcher _watcher;

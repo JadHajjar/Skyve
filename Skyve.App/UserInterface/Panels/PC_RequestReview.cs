@@ -1,13 +1,12 @@
-﻿using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.CompatibilityReport;
+﻿using Skyve.App.UserInterface.CompatibilityReport;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_RequestReview : PanelContent
 {
 	private IPackageStatusControl<StatusType, PackageStatus>? statusControl;

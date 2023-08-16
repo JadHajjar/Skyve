@@ -1,6 +1,6 @@
-﻿using SkyveApp.Domain;
+﻿using Skyve.Domain;
 
-namespace SkyveApp.Systems.Compatibility.Domain;
+namespace Skyve.Systems.Compatibility.Domain;
 internal struct SnoozedItem
 {
 	public SnoozedItem()
@@ -38,10 +38,10 @@ internal struct SnoozedItem
 	public override int GetHashCode()
 	{
 		var hashCode = -143951897;
-		hashCode = (hashCode * -1521134295) + SteamId.GetHashCode();
-		hashCode = (hashCode * -1521134295) + ReportType.GetHashCode();
-		hashCode = (hashCode * -1521134295) + StatusType.GetHashCode();
-		hashCode = (hashCode * -1521134295) + StatusAction.GetHashCode();
+		hashCode = hashCode * -1521134295 + SteamId.GetHashCode();
+		hashCode = hashCode * -1521134295 + ReportType.GetHashCode();
+		hashCode = hashCode * -1521134295 + StatusType.GetHashCode();
+		hashCode = hashCode * -1521134295 + StatusAction.GetHashCode();
 		return hashCode;
 	}
 }

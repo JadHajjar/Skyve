@@ -1,9 +1,7 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Dropdowns;
+namespace Skyve.App.UserInterface.Dropdowns;
 internal class TagsDropDown : SlickMultiSelectionDropDown<ITag>
 {
 	private readonly ITagsService _tagsService = ServiceCenter.Get<ITagsService>();

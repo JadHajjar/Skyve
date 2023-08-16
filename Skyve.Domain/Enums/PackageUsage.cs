@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SkyveApp.Domain.Enums;
+namespace Skyve.Domain.Enums;
 
 [Flags]
 public enum PackageUsage

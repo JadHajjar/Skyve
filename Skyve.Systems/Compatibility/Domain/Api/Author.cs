@@ -1,6 +1,6 @@
 ﻿using Extensions.Sql;
 
-namespace SkyveApp.Systems.Compatibility.Domain.Api;
+namespace Skyve.Systems.Compatibility.Domain.Api;
 
 [DynamicSqlClass("Authors")]
 public class Author : IDynamicSql

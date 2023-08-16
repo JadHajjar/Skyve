@@ -1,9 +1,9 @@
 ﻿using Extensions.Sql;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
 
-namespace SkyveApp.Systems.Compatibility.Domain.Api;
+namespace Skyve.Systems.Compatibility.Domain.Api;
 
 [DynamicSqlClass("PackageLinks")]
 #if API

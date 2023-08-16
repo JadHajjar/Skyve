@@ -1,9 +1,8 @@
-﻿using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_ReviewRequests : PanelContent
 {
 	private List<ReviewRequest> _reviewRequests;

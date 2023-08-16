@@ -1,8 +1,8 @@
-﻿using SkyveApp.Systems.Compatibility.Domain.Api;
+﻿using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Collections.Generic;
 
-namespace SkyveApp.Systems.Compatibility.Domain;
+namespace Skyve.Systems.Compatibility.Domain;
 
 public class IndexedPackageStatus
 {

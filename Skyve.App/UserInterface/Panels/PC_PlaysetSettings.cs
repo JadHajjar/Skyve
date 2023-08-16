@@ -1,12 +1,11 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Generic;
+﻿using Skyve.App;
+using Skyve.App.UserInterface.Generic;
 
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_PlaysetSettings : PanelContent
 {
 	private bool loadingProfile;
@@ -46,8 +45,8 @@ public partial class PC_PlaysetSettings : PanelContent
 
 		LoadProfile(_playsetManager.CurrentPlayset as Playset);
 
-		var saveGameTag = new ITag[] { new TagItem(Domain.CS1.Enums.TagSource.InGame, "SaveGame") };
-		var mapTag = new ITag[] { new TagItem(Domain.CS1.Enums.TagSource.InGame, "Map") };
+		var saveGameTag = new ITag[] { new TagItem(TagSource.InGame, "SaveGame") };
+		var mapTag = new ITag[] { new TagItem(TagSource.InGame, "Map") };
 
 		DD_SaveFile.StartingFolder = CrossIO.Combine(_locationManager.AppDataPath, "Saves");
 		DD_SaveFile.PinnedFolders = new()

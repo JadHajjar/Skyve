@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.StatusBubbles;
+namespace Skyve.App.UserInterface.Bubbles;
 internal class FavoriteProfileBubble : StatusBubbleBase
 {
 	private readonly INotifier _notifier;

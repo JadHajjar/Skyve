@@ -1,6 +1,6 @@
 ﻿using Extensions;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 
 public interface IFolderSettings
 {

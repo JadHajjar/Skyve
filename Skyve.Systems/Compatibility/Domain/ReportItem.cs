@@ -2,14 +2,13 @@
 
 using Newtonsoft.Json;
 
-using SkyveApp.Domain;
-
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
 
 using System.Linq;
 
-namespace SkyveApp.Systems.Compatibility.Domain;
+namespace Skyve.Systems.Compatibility.Domain;
 
 public class ReportItem : ICompatibilityItem
 {
@@ -21,10 +20,10 @@ public class ReportItem : ICompatibilityItem
 	public PseudoPackage[]? Packages { get; set; }
 	public GenericPackageStatus? StatusDTO { get => Status is null ? null : new GenericPackageStatus(Status); set => Status = value?.ToGenericPackage(); }
 
-    public string? LocaleKey { get; set; }
-    public object[]? LocaleParams { get; set; }
+	public string? LocaleKey { get; set; }
+	public object[]? LocaleParams { get; set; }
 
-    [JsonIgnore] public string? Message => message ??= GetMessage();
+	[JsonIgnore] public string? Message => message ??= GetMessage();
 	[JsonIgnore] public IGenericPackageStatus Status { get; set; }
 
 	IPackage[] ICompatibilityItem.Packages => Packages?.Select(x => x.Package).ToArray() ?? new IPackage[0];

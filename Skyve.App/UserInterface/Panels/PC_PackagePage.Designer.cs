@@ -1,6 +1,8 @@
-﻿using SkyveApp.UserInterface.Content;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_PackagePage
 {
@@ -57,9 +59,9 @@ partial class PC_PackagePage
 			this.T_Profiles = new SlickControls.SlickTabControl.Tab();
 			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
-			this.PB_Icon = new SkyveApp.UserInterface.Content.PackageIcon();
+			this.PB_Icon = new Skyve.App.UserInterface.Content.PackageIcon();
 			this.P_Back = new System.Windows.Forms.Panel();
-			this.P_Info = new SkyveApp.UserInterface.Content.PackageDescriptionControl();
+			this.P_Info = new Skyve.App.UserInterface.Content.PackageDescriptionControl();
 			this.L_Requirements = new System.Windows.Forms.Label();
 			this.FLP_Requirements = new SlickControls.SmartFlowPanel();
 			this.P_Content.SuspendLayout();

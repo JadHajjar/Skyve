@@ -1,13 +1,11 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Panels;
 
 using System.Configuration;
-using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace SkyveApp;
+namespace Skyve.App;
 
 public partial class MainForm : BasePanelForm
 {

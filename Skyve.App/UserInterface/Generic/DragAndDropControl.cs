@@ -1,12 +1,10 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Generic;
+namespace Skyve.App.UserInterface.Generic;
 
 [DefaultEvent("FileSelected")]
 internal class DragAndDropControl : SlickControl
@@ -139,7 +137,7 @@ internal class DragAndDropControl : SlickControl
 			return;
 		}
 
-		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : (Width - (int)(125 * UI.FontScale));
+		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : Width - (int)(125 * UI.FontScale);
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
@@ -181,7 +179,7 @@ internal class DragAndDropControl : SlickControl
 		var fileHovered = false;
 		var border = (int)(4 * UI.FontScale);
 		var cursor = PointToClient(MousePosition);
-		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : (Width - (int)(125 * UI.FontScale));
+		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : Width - (int)(125 * UI.FontScale);
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
@@ -223,7 +221,7 @@ internal class DragAndDropControl : SlickControl
 		e.Graphics.DrawRoundedRectangle(pen, ClientRectangle.Pad((int)(1.5 * UI.FontScale)), border);
 
 		var text = LocaleHelper.GetGlobalText(Text);
-		var size = e.Graphics.Measure(text, Font, availableWidth - (2 * Padding.Horizontal) - (UI.FontScale >= 2 ? 48 : 24));
+		var size = e.Graphics.Measure(text, Font, availableWidth - 2 * Padding.Horizontal - (UI.FontScale >= 2 ? 48 : 24));
 		var width = (int)size.Width + 3 + Padding.Left + (UI.FontScale >= 2 ? 48 : 24);
 		var rect = new Rectangle(Width - availableWidth, 0, availableWidth, Height).CenterR(width, Math.Max(UI.FontScale >= 2 ? 48 : 24, (int)size.Height + 3));
 

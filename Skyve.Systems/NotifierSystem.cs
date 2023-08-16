@@ -1,11 +1,11 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Diagnostics;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 internal class NotifierSystem : INotifier
 {
 	private readonly ILogger _logger;

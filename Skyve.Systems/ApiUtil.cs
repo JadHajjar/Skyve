@@ -2,9 +2,9 @@
 
 using Newtonsoft.Json;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 using System.IO;
@@ -14,10 +14,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Systems;
+namespace Skyve.Systems;
 public static class ApiUtil
 {
-	private static readonly ILogger	_logger = ServiceCenter.Get<ILogger>();
+	private static readonly ILogger _logger = ServiceCenter.Get<ILogger>();
 
 	public static async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
 	{

@@ -1,4 +1,6 @@
-﻿namespace SkyveApp
+﻿using Skyve.App.UserInterface.Content;
+
+namespace Skyve.App
 {
 	partial class MainForm
 	{
@@ -51,9 +53,9 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Text = new System.Windows.Forms.Label();
 			this.L_Version = new System.Windows.Forms.Label();
-			this.subscriptionInfoControl1 = new SkyveApp.UserInterface.Content.SubscriptionInfoControl();
+			this.subscriptionInfoControl1 = new Skyve.App.UserInterface.Content.SubscriptionInfoControl();
 			this.PI_DLCs = new SlickControls.PanelItem();
-			this.downloadsInfoControl1 = new SkyveApp.UserInterface.Content.DownloadsInfoControl();
+			this.downloadsInfoControl1 = new Skyve.App.UserInterface.Content.DownloadsInfoControl();
 			this.TroubleshootInfoControl =	new UserInterface.Content.TroubleshootInfoControl();
 			this.base_P_SideControls.SuspendLayout();
 			this.base_P_Container.SuspendLayout();
@@ -318,8 +320,8 @@
 		private System.Windows.Forms.Label L_Text;
 		private System.Windows.Forms.Label L_Version;
 		internal SlickControls.PanelItem PI_DLCs;
-		private UserInterface.Content.SubscriptionInfoControl subscriptionInfoControl1;
-		private UserInterface.Content.DownloadsInfoControl downloadsInfoControl1;
-		private UserInterface.Content.TroubleshootInfoControl TroubleshootInfoControl;
+		private SubscriptionInfoControl subscriptionInfoControl1;
+		private DownloadsInfoControl downloadsInfoControl1;
+		private TroubleshootInfoControl TroubleshootInfoControl;
 	}
 }

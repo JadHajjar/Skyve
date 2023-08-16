@@ -1,11 +1,11 @@
 ﻿using Extensions;
 using Extensions.Sql;
 
-using SkyveApp.Domain;
+using Skyve.Domain;
 
 using System.IO;
 
-namespace SkyveApp.Systems.Compatibility.Domain.Api;
+namespace Skyve.Systems.Compatibility.Domain.Api;
 
 [DynamicSqlClass("UserProfileContents")]
 public class UserProfileContent : IDynamicSql

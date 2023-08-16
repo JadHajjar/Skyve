@@ -2,7 +2,7 @@
 
 using System;
 
-namespace SkyveApp.Domain;
+namespace Skyve.Domain;
 
 #nullable disable
 public static class ServiceCenter

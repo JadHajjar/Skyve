@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Lists;
+
+namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_CompatibilityReport
 {
@@ -44,7 +46,7 @@ partial class PC_CompatibilityReport
 			this.B_Requests = new SlickControls.SlickButton();
 			this.tabHeader = new SlickControls.SlickTabHeader();
 			this.PB_Loader = new SlickControls.SlickPictureBox();
-			this.LC_Items = new SkyveApp.UserInterface.Lists.CompatibilityReportList();
+			this.LC_Items = new Skyve.App.UserInterface.Lists.CompatibilityReportList();
 			this.TLP_Buttons.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.PB_Loader)).BeginInit();
 			this.SuspendLayout();
@@ -243,7 +245,7 @@ partial class PC_CompatibilityReport
 	private SlickControls.SlickButton B_YourPackages;
 	private SlickControls.SlickButton B_ManageSingle;
 	private SlickControls.SlickTabHeader tabHeader;
-	private Lists.CompatibilityReportList LC_Items;
+	private CompatibilityReportList LC_Items;
 	private SlickControls.SlickPictureBox PB_Loader;
 	private SlickControls.SlickButton B_Requests;
 	private SlickTextBox TB_Search;

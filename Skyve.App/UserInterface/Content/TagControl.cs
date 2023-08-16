@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Content;
+namespace Skyve.App.UserInterface.Content;
 internal class TagControl : SlickImageControl
 {
 	public ITag? TagInfo { get; set; }
@@ -46,7 +46,7 @@ internal class TagControl : SlickImageControl
 		if (Live && ImageName is not null)
 		{
 			using var img = Image;
-			return Size.Ceiling(FontMeasuring.Measure(" ", Font)) + new Size(Padding.Horizontal + (img.Width * 2), Padding.Vertical);
+			return Size.Ceiling(FontMeasuring.Measure(" ", Font)) + new Size(Padding.Horizontal + img.Width * 2, Padding.Vertical);
 		}
 
 		using (var img = IconManager.GetIcon(TagInfo?.Icon))
@@ -73,7 +73,7 @@ internal class TagControl : SlickImageControl
 		}
 		else if (TagInfo is not null)
 		{
-			using var img = IconManager.GetIcon(HoverState.HasFlag(HoverState.Hovered) ? (Display && !TagInfo.IsCustom ? "I_Copy" : "I_Disposable") : TagInfo.Icon);
+			using var img = IconManager.GetIcon(HoverState.HasFlag(HoverState.Hovered) ? Display && !TagInfo.IsCustom ? "I_Copy" : "I_Disposable" : TagInfo.Icon);
 			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.Pad(Padding).Align(img.Size, ContentAlignment.MiddleLeft));
 
 			e.Graphics.DrawString(TagInfo.Value, Font, foreBrush, ClientRectangle.Pad(Padding.Horizontal + img.Width, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });

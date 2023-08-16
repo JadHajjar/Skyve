@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SkyveApp.UserInterface.Dropdowns;
+namespace Skyve.App.UserInterface.Dropdowns;
 internal class LanguageDropDown : SlickSelectionDropDown<string>
 {
 	#region Names
@@ -229,7 +229,7 @@ internal class LanguageDropDown : SlickSelectionDropDown<string>
 			var text = _langNames[item][hoverState.HasFlag(HoverState.Hovered)];
 			var textSize1 = Size.Ceiling(e.Graphics.Measure(text.Name, Font));
 			var textSize2 = Size.Ceiling(e.Graphics.Measure(" / " + text.Dialect, UI.Font(7F)));
-			var textRect = rectangle.Pad(iconSize + Padding.Horizontal, (int)(ItemHeight * UI.FontScale) + 1 != rectangle.Height ? -1 : (-Padding.Top + 1), Padding.Right * 3 / 2, (int)(ItemHeight * UI.FontScale) + 1 != rectangle.Height ? -3 : (-Padding.Bottom + 1));
+			var textRect = rectangle.Pad(iconSize + Padding.Horizontal, (int)(ItemHeight * UI.FontScale) + 1 != rectangle.Height ? -1 : -Padding.Top + 1, Padding.Right * 3 / 2, (int)(ItemHeight * UI.FontScale) + 1 != rectangle.Height ? -3 : -Padding.Bottom + 1);
 			var textRect1 = textRect.Align(new Size(textRect.Width, textSize1.Height), textSize1.Width + textSize2.Width > textRect.Width ? ContentAlignment.TopCenter : ContentAlignment.MiddleCenter);
 			var textRect2 = textRect.Align(new Size(textRect.Width, textSize2.Height), textSize1.Width + textSize2.Width > textRect.Width ? ContentAlignment.BottomCenter : ContentAlignment.MiddleCenter);
 

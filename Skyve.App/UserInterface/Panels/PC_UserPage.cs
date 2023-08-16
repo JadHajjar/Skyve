@@ -1,11 +1,9 @@
-﻿using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Lists;
+﻿using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
 using System.Threading.Tasks;
 
-namespace SkyveApp.UserInterface.Panels;
+namespace Skyve.App.UserInterface.Panels;
 public partial class PC_UserPage : PanelContent
 {
 	private readonly ContentList<IPackage> LC_Items;
@@ -14,7 +12,7 @@ public partial class PC_UserPage : PanelContent
 	private readonly ISettings _settings;
 	private readonly IWorkshopService _workshopService;
 
-	private List<WorkshopPackage> userItems = new();
+	private List<IPackage> userItems = new();
 
 	public IUser User { get; }
 
@@ -128,7 +126,7 @@ public partial class PC_UserPage : PanelContent
 
 			var results = await _workshopService.GetWorkshopItemsByUserAsync(User.Id!);
 
-			userItems = results.ToList(x => new WorkshopPackage(x));
+			userItems = results.ToList(_workshopService.GetPackage);
 
 			LC_Items.RefreshItems();
 		}

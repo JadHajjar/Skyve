@@ -2,14 +2,14 @@
 
 using Newtonsoft.Json;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Systems.Compatibility.Domain;
+namespace Skyve.Systems.Compatibility.Domain;
 public class CompatibilityInfo : ICompatibilityInfo
 {
 	private readonly IPackage? package;
@@ -96,6 +96,6 @@ public class CompatibilityInfo : ICompatibilityInfo
 		public string Url { get; set; }
 	}
 
-	#nullable enable
+#nullable enable
 	#endregion
 }
