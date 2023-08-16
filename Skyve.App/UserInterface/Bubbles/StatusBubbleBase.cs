@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Bubbles;
-internal abstract class StatusBubbleBase : SlickImageControl
+public abstract class StatusBubbleBase : SlickImageControl
 {
 	public StatusBubbleBase()
 	{

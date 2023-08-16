@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
-internal class LanguageDropDown : SlickSelectionDropDown<string>
+public class LanguageDropDown : SlickSelectionDropDown<string>
 {
 	#region Names
 	private static readonly Dictionary<string, Dictionary<bool, (string Name, string Dialect)>> _langNames = new()

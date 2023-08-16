@@ -7,7 +7,7 @@ public class Locale : LocaleHelper, ILocale
 {
 	private static readonly Locale _instance = new();
 
-	protected Locale() : base($"Skyve.Systems.Properties.Locale.json") { }
+	public Locale() : base($"Skyve.Systems.Properties.Locale.json") { }
 
 	public static Translation Dashboard => _instance.GetText(nameof(Dashboard));
 	public static Translation PlaysetBubble => _instance.GetText(nameof(PlaysetBubble));

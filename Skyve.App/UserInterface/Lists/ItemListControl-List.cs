@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
 
-internal partial class ItemListControl<T>
+public partial class ItemListControl<T>
 {
 	private void OnPaintItemCompactList(ItemPaintEventArgs<T, Rectangles> e)
 	{

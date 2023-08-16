@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Bubbles;
-internal class UserBubble : StatusBubbleBase
+public class UserBubble : StatusBubbleBase
 {
 	private readonly IUserService _userService = ServiceCenter.Get<IUserService>();
 	public UserBubble()

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
-internal class LogTraceControl : SlickListControl<ILogTrace>
+public class LogTraceControl : SlickListControl<ILogTrace>
 {
 	private ILogTrace? itemHovered;
 

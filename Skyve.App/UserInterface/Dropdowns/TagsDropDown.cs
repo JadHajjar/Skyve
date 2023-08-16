@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
-internal class TagsDropDown : SlickMultiSelectionDropDown<ITag>
+public class TagsDropDown : SlickMultiSelectionDropDown<ITag>
 {
 	private readonly ITagsService _tagsService = ServiceCenter.Get<ITagsService>();
 

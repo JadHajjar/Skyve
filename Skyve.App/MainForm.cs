@@ -1,4 +1,5 @@
-﻿using Skyve.App.UserInterface.Panels;
+﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Panels;
 
 using System.Configuration;
 using System.Drawing;
@@ -96,7 +97,7 @@ public partial class MainForm : BasePanelForm
 		base_PB_Icon.Loading = true;
 	}
 
-	internal void RefreshUI()
+	public void RefreshUI()
 	{
 		this.TryInvoke(() => Invalidate(true));
 	}
@@ -336,7 +337,7 @@ public partial class MainForm : BasePanelForm
 		{
 			if (_settings.SessionSettings.FirstTimeSetupCompleted)
 			{
-				PushPanel<PC_LotChangeLog>(null);
+				PushPanel(ServiceCenter.Get<IInterfaceService>().ChangelogPanel());
 			}
 
 			_settings.SessionSettings.LastVersionNotification = currentVersion.ToString();
@@ -391,7 +392,7 @@ public partial class MainForm : BasePanelForm
 
 	private void PI_ModReview_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel<PC_Utilities>(PI_ModUtilities);
+		SetPanel(PI_ModUtilities, ServiceCenter.Get<IInterfaceService>().UtilitiesPanel());
 	}
 
 	private void PI_Packages_OnClick(object sender, MouseEventArgs e)

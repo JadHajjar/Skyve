@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
 
-internal class PackageUsageSingleDropDown : SlickSelectionDropDown<PackageUsage>
+public class PackageUsageSingleDropDown : SlickSelectionDropDown<PackageUsage>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{

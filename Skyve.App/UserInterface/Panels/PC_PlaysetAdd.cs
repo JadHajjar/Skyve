@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using Skyve.App.Interfaces;
+
+using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
@@ -35,11 +37,11 @@ public partial class PC_PlaysetAdd : PanelContent
 
 		_profileManager.SetCurrentPlayset(newProfile);
 
-		var panel = new PC_PlaysetSettings();
+		var panel = ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel();
 
 		if (Form.SetPanel(null, panel))
 		{
-			panel.B_EditName_Click(sender, e);
+			panel.EditName();
 		}
 	}
 
@@ -58,11 +60,11 @@ public partial class PC_PlaysetAdd : PanelContent
 
 		_profileManager.SetCurrentPlayset(newProfile);
 
-		var panel = new PC_PlaysetSettings();
+		var panel = ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel();	
 
 		if (Form.SetPanel(null, panel))
 		{
-			panel.B_EditName_Click(sender, e);
+			panel.EditName();
 		}
 	}
 
@@ -109,11 +111,11 @@ public partial class PC_PlaysetAdd : PanelContent
 
 		try
 		{
-			var panel = new PC_PlaysetSettings();
+			var panel = ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel();
 
 			if (Form.SetPanel(null, panel))
 			{
-				panel.Ctrl_LoadProfile(profile!);
+				panel.LoadProfile(profile!);
 			}
 		}
 		catch (Exception ex) { ShowPrompt(ex, "Failed to import your playset"); }

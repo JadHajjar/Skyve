@@ -1,11 +1,12 @@
-﻿using Skyve.App.UserInterface.Panels;
+﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
-internal class MiniPackageControl : SlickControl
+public class MiniPackageControl : SlickControl
 {
 	private readonly IPackage? _package;
 	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
@@ -63,7 +64,7 @@ internal class MiniPackageControl : SlickControl
 
 				break;
 			case MouseButtons.Right:
-				var items = PC_PackagePage.GetRightClickMenuItems(Package);
+				var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(Package);
 
 				this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 				break;

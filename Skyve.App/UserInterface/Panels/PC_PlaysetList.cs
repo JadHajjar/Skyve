@@ -1,4 +1,5 @@
-﻿using Skyve.App.UserInterface.Lists;
+﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
 using System.IO;
@@ -287,7 +288,7 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void B_EditName_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel<PC_PlaysetSettings>();
+		Form.PushPanel(ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel());
 	}
 
 	private void I_ProfileIcon_Click(object sender, EventArgs e)
@@ -342,7 +343,7 @@ public partial class PC_PlaysetList : PanelContent
 		B_Discover.Loading = false;
 	}
 
-	internal void Import(string file)
+	public void Import(string file)
 	{
 		try
 		{

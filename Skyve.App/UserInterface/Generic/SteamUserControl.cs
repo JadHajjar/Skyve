@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
-internal class SteamUserControl : SlickControl
+public class SteamUserControl : SlickControl
 {
 	private readonly IUserService _userService = ServiceCenter.Get<IUserService>();
 	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();

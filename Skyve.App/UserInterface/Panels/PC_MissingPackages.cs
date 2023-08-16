@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
-internal partial class PC_MissingPackages : PC_GenericPackageList
+public partial class PC_MissingPackages : PC_GenericPackageList
 {
 	private readonly IModUtil _modUtil;
 	private readonly IAssetUtil _assetUtil;
@@ -84,7 +84,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 		return true;
 	}
 
-	internal static void PromptMissingPackages(BasePanelForm form, IEnumerable<IPlaysetEntry> playsetEntries)
+	public static void PromptMissingPackages(BasePanelForm form, IEnumerable<IPlaysetEntry> playsetEntries)
 	{
 		var pauseEvent = new AutoResetEvent(false);
 

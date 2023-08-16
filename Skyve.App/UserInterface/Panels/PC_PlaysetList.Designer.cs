@@ -532,7 +532,7 @@ partial class PC_PlaysetList
 	protected SlickControls.SlickIcon B_GridView;
 	private SlickControls.RoundedPanel roundedPanel;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-	internal SlickControls.SlickButton B_Discover;
+	public SlickControls.SlickButton B_Discover;
 	private SlickControls.RoundedTableLayoutPanel TLP_ProfileName;
 	private SlickControls.SlickIcon I_ProfileIcon;
 	private System.Windows.Forms.Label L_CurrentProfile;

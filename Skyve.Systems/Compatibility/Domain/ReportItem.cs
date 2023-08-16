@@ -18,13 +18,16 @@ public class ReportItem : ICompatibilityItem
 	public string? PackageName { get; set; }
 	public ReportType Type { get; set; }
 	public PseudoPackage[]? Packages { get; set; }
-	public GenericPackageStatus? StatusDTO { get => Status is null ? null : new GenericPackageStatus(Status); set => Status = value?.ToGenericPackage(); }
 
 	public string? LocaleKey { get; set; }
 	public object[]? LocaleParams { get; set; }
 
 	[JsonIgnore] public string? Message => message ??= GetMessage();
+
+#nullable disable
 	[JsonIgnore] public IGenericPackageStatus Status { get; set; }
+	public GenericPackageStatus StatusDTO { get => Status is null ? null : new GenericPackageStatus(Status); set => Status = value?.ToGenericPackage(); }
+#nullable enable
 
 	IPackage[] ICompatibilityItem.Packages => Packages?.Select(x => x.Package).ToArray() ?? new IPackage[0];
 

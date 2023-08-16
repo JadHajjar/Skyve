@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
-internal partial class ContentList<T> : SlickControl where T : IPackage
+public partial class ContentList<T> : SlickControl where T : IPackage
 {
 	private bool clearingFilters = true;
 	private bool firstFilterPassed;
 	private readonly DelayedAction _delayedSearch;
 	private readonly DelayedAction _delayedAuthorTagsRefresh;
-	internal readonly ItemListControl<T> ListControl;
+	public readonly ItemListControl<T> ListControl;
 	private readonly IncludeAllButton<T> I_Actions;
 	protected int UsageFilteredOut;
 	private bool searchEmpty = true;
@@ -80,7 +80,7 @@ internal partial class ContentList<T> : SlickControl where T : IPackage
 		TLP_Main.SetColumnSpan(ListControl, TLP_Main.ColumnCount);
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
-		OT_Workshop.Visible = !((_profileManager.CurrentPlayset as Playset)?.LaunchSettings.NoWorkshop ?? false);
+		OT_Workshop.Visible = !_profileManager.CurrentPlayset.DisableWorkshop;
 		OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
 
 		ListControl.FilterRequested += FilterChanged;
@@ -404,7 +404,7 @@ internal partial class ContentList<T> : SlickControl where T : IPackage
 
 	private bool IsFilteredOut(T item)
 	{
-		if (!ListControl.IsGenericPage && (_profileManager.CurrentPlayset as Playset)!.LaunchSettings.NoWorkshop)
+		if (!ListControl.IsGenericPage && _profileManager.CurrentPlayset.DisableWorkshop)
 		{
 			if (item is ILocalPackage && !item.IsLocal)
 			{

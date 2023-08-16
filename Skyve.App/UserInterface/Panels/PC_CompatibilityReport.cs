@@ -344,7 +344,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		return base.ProcessCmdKey(ref msg, keyData);
 	}
 
-	internal void Import(string file)
+	public void Import(string file)
 	{
 		if (Path.GetExtension(file).ToLower() is ".zip")
 		{

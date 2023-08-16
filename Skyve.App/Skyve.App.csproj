@@ -78,7 +78,6 @@
     <Compile Update="UserInterface\Panels\PC_UserPage.cs" />
     <Compile Update="UserInterface\Panels\PC_PlaysetList.cs" />
     <Compile Update="UserInterface\Panels\PC_Packages.cs" />
-    <Compile Update="UserInterface\Panels\PC_Utilities.cs" />
     <Compile Update="UserInterface\Generic\NewProfileOptionControl.cs" />
     <Compile Update="UserInterface\Dropdowns\LanguageDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\ProfileSortingDropDown.cs" />

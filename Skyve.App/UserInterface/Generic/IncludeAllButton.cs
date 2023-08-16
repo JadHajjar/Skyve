@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
-internal class IncludeAllButton<T> : SlickControl where T : IPackage
+public class IncludeAllButton<T> : SlickControl where T : IPackage
 {
 	private readonly bool _doubleButtons;
 	private readonly ItemListControl<T>? LC_Items;

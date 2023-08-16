@@ -4,11 +4,11 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
-internal class PC_ViewCollection : PC_GenericPackageList
+public class PC_ViewCollection : PC_GenericPackageList
 {
 	private readonly ulong _id;
 
-	internal PC_ViewCollection(IPackage collection) : base(collection.Requirements, true)
+	public PC_ViewCollection(IPackage collection) : base(collection.Requirements, true)
 	{
 		_id = collection.Id;
 

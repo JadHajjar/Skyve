@@ -17,7 +17,7 @@ public enum CompatibilityNotificationFilter
 	Switch,
 }
 
-internal class ReportSeverityDropDown : SlickSelectionDropDown<CompatibilityNotificationFilter>
+public class ReportSeverityDropDown : SlickSelectionDropDown<CompatibilityNotificationFilter>
 {
 	public override void ResetValue()
 	{

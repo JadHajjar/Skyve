@@ -90,6 +90,7 @@ public class UserProfile : IDynamicSql
 	public IEnumerable<IPackage> Packages => Contents?.Select(x => (IPackage)new PlaysetEntryPackage(x)) ?? Enumerable.Empty<IPackage>();
 	bool ICustomPlayset.AutoSave { get; }
 	bool ICustomPlayset.UnsavedChanges { get; }
+	bool ICustomPlayset.DisableWorkshop { get; }
 
 	bool ICustomPlayset.Save()
 	{

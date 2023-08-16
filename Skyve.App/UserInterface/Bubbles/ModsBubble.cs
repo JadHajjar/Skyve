@@ -2,7 +2,7 @@
 
 namespace Skyve.App.UserInterface.Bubbles;
 
-internal class ModsBubble : StatusBubbleBase
+public class ModsBubble : StatusBubbleBase
 {
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;

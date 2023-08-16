@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
-internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilter>
+public class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilter>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{

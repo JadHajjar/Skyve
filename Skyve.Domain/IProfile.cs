@@ -31,6 +31,7 @@ public interface ICustomPlayset : IPlayset
 	bool Public { get; }
 	bool IsMissingItems { get; }
 	bool UnsavedChanges { get; }
+	bool DisableWorkshop { get; }
 
 	bool Save();
 }

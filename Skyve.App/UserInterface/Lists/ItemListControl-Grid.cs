@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
 
-internal partial class ItemListControl<T>
+public partial class ItemListControl<T>
 {
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e)
 	{

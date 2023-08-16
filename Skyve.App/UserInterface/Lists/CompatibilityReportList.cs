@@ -1,4 +1,5 @@
-﻿using Skyve.App.UserInterface.Panels;
+﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -6,7 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityInfo, CompatibilityReportList.Rectangles>
+public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInfo, CompatibilityReportList.Rectangles>
 {
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly ICompatibilityManager _compatibilityManager;
@@ -784,7 +785,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 				}
 				else if (e.Button == MouseButtons.Right && rect.Key.GetLocalPackage() is not null)
 				{
-					var items = PC_PackagePage.GetRightClickMenuItems(rect.Key.GetLocalPackage()!);
+					var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(rect.Key.GetLocalPackage()!);
 
 					this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 				}
@@ -846,7 +847,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 	public void ShowRightClickMenu(IPackage item)
 	{
-		var items = PC_PackagePage.GetRightClickMenuItems(item);
+		var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item);
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
 	}
@@ -998,25 +999,25 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 	public class Rectangles : IDrawableItemRectangles<ICompatibilityInfo>
 	{
-		internal Rectangle IncludedRect;
-		internal Rectangle EnabledRect;
-		internal Rectangle FolderRect;
-		internal Rectangle IconRect;
-		internal Rectangle TextRect;
-		internal Rectangle SteamRect;
-		internal Rectangle CenterRect;
-		internal Rectangle AuthorRect;
-		internal Rectangle VersionRect;
-		internal Rectangle DateRect;
-		internal Dictionary<IPackageIdentity, Rectangle> buttonRects = new();
-		internal Dictionary<IPackageIdentity, Rectangle> modRects = new();
-		internal Rectangle SteamIdRect;
-		internal Rectangle SnoozeRect;
-		internal Rectangle AllButtonRect;
-		internal Rectangle CompatibilityRect;
+		public Rectangle IncludedRect;
+		public Rectangle EnabledRect;
+		public Rectangle FolderRect;
+		public Rectangle IconRect;
+		public Rectangle TextRect;
+		public Rectangle SteamRect;
+		public Rectangle CenterRect;
+		public Rectangle AuthorRect;
+		public Rectangle VersionRect;
+		public Rectangle DateRect;
+		public Dictionary<IPackageIdentity, Rectangle> buttonRects = new();
+		public Dictionary<IPackageIdentity, Rectangle> modRects = new();
+		public Rectangle SteamIdRect;
+		public Rectangle SnoozeRect;
+		public Rectangle AllButtonRect;
+		public Rectangle CompatibilityRect;
 
 		public ICompatibilityInfo Item { get; set; }
-		public Rectangle FolderNameRect { get; internal set; }
+		public Rectangle FolderNameRect { get; set; }
 
 		public Rectangles(ICompatibilityInfo item)
 		{

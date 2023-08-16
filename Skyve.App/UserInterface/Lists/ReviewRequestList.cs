@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRequestList.Rectangles>
+public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRequestList.Rectangles>
 {
 	private readonly IWorkshopService _workshopService;
 	public ReviewRequestList()
@@ -76,7 +76,7 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, Review
 		e.Graphics.DrawString(e.Item.PackageNote, UI.Font(7.5F), brush, textRect.Pad((int)(125 * UI.FontScale), 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far });
 	}
 
-	internal class Rectangles : IDrawableItemRectangles<ReviewRequest>
+	public class Rectangles : IDrawableItemRectangles<ReviewRequest>
 	{
 		public ReviewRequest Item { get; set; }
 

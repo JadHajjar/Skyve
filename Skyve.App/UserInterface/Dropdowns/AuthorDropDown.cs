@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
-internal class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
+public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 {
 	private readonly Dictionary<IUser, int> _counts = new();
 	private readonly IImageService _imageManager;
@@ -14,7 +14,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 	}
 
-	internal void SetItems<T>(IEnumerable<T> enumerable) where T : IPackage
+	public void SetItems<T>(IEnumerable<T> enumerable) where T : IPackage
 	{
 		foreach (var item in enumerable.SelectWhereNotNull(x => x.GetWorkshopInfo()?.Author))
 		{

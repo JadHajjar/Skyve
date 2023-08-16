@@ -1,4 +1,5 @@
-﻿using Skyve.App.UserInterface.Generic;
+﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Generic;
 
 using System.Drawing;
 using System.IO;
@@ -247,7 +248,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_ChangeLog_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel<PC_LotChangeLog>(null);
+		Form.PushPanel(ServiceCenter.Get<IInterfaceService>().ChangelogPanel());
 	}
 
 	private void B_Donate_Click(object sender, EventArgs e)

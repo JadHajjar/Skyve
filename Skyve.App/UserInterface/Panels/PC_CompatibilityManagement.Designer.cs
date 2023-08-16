@@ -729,7 +729,7 @@ partial class PC_CompatibilityManagement
 	private PackageDescriptionControl P_Info;
 	private SlickControls.SlickTabControl slickTabControl1;
 	private SlickControls.SlickTabControl.Tab T_Info;
-	internal SlickControls.SlickTabControl.Tab T_Statuses;
+	public SlickControls.SlickTabControl.Tab T_Statuses;
 	private SlickControls.SlickTabControl.Tab T_Interactions;
 	private SlickControls.RoundedPanel P_Main;
 	private System.Windows.Forms.TableLayoutPanel TLP_Main;

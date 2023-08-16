@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
 
-internal class UserIcon : SlickImageControl
+public class UserIcon : SlickImageControl
 {
 	[Category("Appearance"), DefaultValue(true)]
 	public bool HalfColor { get; set; } = true;

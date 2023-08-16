@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, OtherProfilePackage.Rectangles>
+public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, OtherProfilePackage.Rectangles>
 {
 	public IEnumerable<ICustomPlayset> FilteredItems => SafeGetItems().Select(x => x.Item);
 
@@ -222,10 +222,10 @@ internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Oth
 
 	public class Rectangles : IDrawableItemRectangles<ICustomPlayset>
 	{
-		internal Rectangle IncludedRect;
-		internal Rectangle IconRect;
-		internal Rectangle LoadRect;
-		internal Rectangle TextRect;
+		public Rectangle IncludedRect;
+		public Rectangle IconRect;
+		public Rectangle LoadRect;
+		public Rectangle TextRect;
 
 		public ICustomPlayset Item { get; set; }
 

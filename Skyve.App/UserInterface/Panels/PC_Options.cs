@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using Skyve.App.Interfaces;
+
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -236,7 +238,7 @@ public partial class PC_Options : PanelContent
 
 	private void B_ChangeLog_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel<PC_LotChangeLog>(null);
+		Form.PushPanel(ServiceCenter.Get<IInterfaceService>().ChangelogPanel());
 	}
 
 	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)

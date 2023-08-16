@@ -1,4 +1,5 @@
-﻿using Skyve.App.UserInterface.Forms;
+﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
@@ -7,7 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
-internal class PackageDescriptionControl : SlickImageControl
+public class PackageDescriptionControl : SlickImageControl
 {
 #pragma warning disable IDE1006
 #pragma warning disable CS0649
@@ -117,7 +118,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (rects.MoreRect.Contains(e.Location))
 		{
-			var items = PC_PackagePage.GetRightClickMenuItems(item.Item);
+			var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item.Item);
 
 			this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 
@@ -676,25 +677,25 @@ internal class PackageDescriptionControl : SlickImageControl
 
 	public class Rectangles : IDrawableItemRectangles<IPackage>
 	{
-		internal Dictionary<ITag, Rectangle> TagRects = new();
-		internal Rectangle IncludedRect;
-		internal Rectangle EnabledRect;
-		internal Rectangle FolderRect;
-		internal Rectangle IconRect;
-		internal Rectangle TextRect;
-		internal Rectangle SteamRect;
-		internal Rectangle SteamIdRect;
-		internal Rectangle AuthorRect;
-		internal Rectangle VersionRect;
-		internal Rectangle CompatibilityRect;
-		internal Rectangle DownloadStatusRect;
-		internal Rectangle DateRect;
-		internal Rectangle ScoreRect;
-		internal Rectangle GithubRect;
-		internal Rectangle FolderNameRect;
-		internal Rectangle TopRect;
-		internal Rectangle BotRect;
-		internal Rectangle MoreRect;
+		public Dictionary<ITag, Rectangle> TagRects = new();
+		public Rectangle IncludedRect;
+		public Rectangle EnabledRect;
+		public Rectangle FolderRect;
+		public Rectangle IconRect;
+		public Rectangle TextRect;
+		public Rectangle SteamRect;
+		public Rectangle SteamIdRect;
+		public Rectangle AuthorRect;
+		public Rectangle VersionRect;
+		public Rectangle CompatibilityRect;
+		public Rectangle DownloadStatusRect;
+		public Rectangle DateRect;
+		public Rectangle ScoreRect;
+		public Rectangle GithubRect;
+		public Rectangle FolderNameRect;
+		public Rectangle TopRect;
+		public Rectangle BotRect;
+		public Rectangle MoreRect;
 
 		public IPackage Item { get; set; }
 

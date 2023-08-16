@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
-internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
+public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 {
 	public SkyvePage SkyvePage { get; set; }
 

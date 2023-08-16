@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-internal class PlaysetListControl : SlickStackedListControl<ICustomPlayset, PlaysetListControl.Rectangles>
+public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, PlaysetListControl.Rectangles>
 {
 	private ProfileSorting sorting;
 	private static ICustomPlayset? downloading;
@@ -51,7 +51,7 @@ internal class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Play
 		};
 	}
 
-	internal void SetSorting(ProfileSorting selectedItem)
+	public void SetSorting(ProfileSorting selectedItem)
 	{
 		if (sorting == selectedItem)
 		{
@@ -635,18 +635,18 @@ internal class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Play
 			Item = item;
 		}
 
-		internal Rectangle Thumbnail;
-		internal Rectangle Favorite;
-		internal Rectangle Icon;
-		internal Rectangle Folder;
-		internal Rectangle Text;
-		internal Rectangle Content;
-		internal Rectangle Load;
-		internal Rectangle Exclude;
-		internal Rectangle Merge;
-		internal Rectangle EditThumbnail;
-		internal Rectangle Author;
-		internal Rectangle ViewContents;
+		public Rectangle Thumbnail;
+		public Rectangle Favorite;
+		public Rectangle Icon;
+		public Rectangle Folder;
+		public Rectangle Text;
+		public Rectangle Content;
+		public Rectangle Load;
+		public Rectangle Exclude;
+		public Rectangle Merge;
+		public Rectangle EditThumbnail;
+		public Rectangle Author;
+		public Rectangle ViewContents;
 
 		public bool IsHovered(Control instance, Point location)
 		{

@@ -1,5 +1,5 @@
 ﻿using Skyve.App;
-
+using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Panels;
 
@@ -8,7 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T>.Rectangles> where T : IPackage
+public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T>.Rectangles> where T : IPackage
 {
 	private PackageSorting sorting;
 	private Rectangle PopupSearchRect1;
@@ -498,7 +498,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 
 	public void ShowRightClickMenu(T item)
 	{
-		var items = PC_PackagePage.GetRightClickMenuItems(SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new T[] { item });
+		var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems((SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new T[] { item }).Cast<IPackage>());
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
 	}
@@ -548,23 +548,23 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 
 	public class Rectangles : IDrawableItemRectangles<T>
 	{
-		internal Dictionary<ITag, Rectangle> TagRects = new();
-		internal Rectangle IncludedRect;
-		internal Rectangle EnabledRect;
-		internal Rectangle FolderRect;
-		internal Rectangle IconRect;
-		internal Rectangle TextRect;
-		internal Rectangle SteamRect;
-		internal Rectangle SteamIdRect;
-		internal Rectangle CenterRect;
-		internal Rectangle AuthorRect;
-		internal Rectangle VersionRect;
-		internal Rectangle CompatibilityRect;
-		internal Rectangle DownloadStatusRect;
-		internal Rectangle DateRect;
-		internal Rectangle ScoreRect;
-		internal Rectangle GithubRect;
-		internal Rectangle FolderNameRect;
+		public Dictionary<ITag, Rectangle> TagRects = new();
+		public Rectangle IncludedRect;
+		public Rectangle EnabledRect;
+		public Rectangle FolderRect;
+		public Rectangle IconRect;
+		public Rectangle TextRect;
+		public Rectangle SteamRect;
+		public Rectangle SteamIdRect;
+		public Rectangle CenterRect;
+		public Rectangle AuthorRect;
+		public Rectangle VersionRect;
+		public Rectangle CompatibilityRect;
+		public Rectangle DownloadStatusRect;
+		public Rectangle DateRect;
+		public Rectangle ScoreRect;
+		public Rectangle GithubRect;
+		public Rectangle FolderNameRect;
 
 		public T Item { get; set; }
 

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
-internal class SubscriptionInfoControl : SlickControl
+public class SubscriptionInfoControl : SlickControl
 {
 	private readonly Timer refreshTimer;
 	private Rectangle buttonRect;

@@ -1,4 +1,5 @@
-﻿using Skyve.App.UserInterface.Bubbles;
+﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Bubbles;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -99,7 +100,7 @@ public partial class PC_MainPage : PanelContent
 	{
 		if (e.Button == MouseButtons.Left)
 		{
-			Form.PushPanel<PC_PlaysetSettings>();
+			Form.PushPanel(ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel());
 		}
 	}
 

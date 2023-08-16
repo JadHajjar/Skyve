@@ -2,9 +2,9 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
-internal class PackageActionDropDown : SlickSelectionDropDown<StatusAction>
+public class PackageActionDropDown : SlickSelectionDropDown<StatusAction>
 {
-	public bool IsFlipped { get; internal set; }
+	public bool IsFlipped { get; set; }
 
 	protected override void UIChanged()
 	{

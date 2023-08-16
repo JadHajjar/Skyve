@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-internal class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.Rectangles>
+public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.Rectangles>
 {
 	public IEnumerable<IDlcInfo> FilteredItems => SafeGetItems().Select(x => x.Item);
 
@@ -197,11 +197,11 @@ internal class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl
 
 	public class Rectangles : IDrawableItemRectangles<IDlcInfo>
 	{
-		internal Rectangle IncludedRect;
-		internal Rectangle IconRect;
-		internal Rectangle TextRect;
-		internal Rectangle SteamRect;
-		internal Rectangle CenterRect;
+		public Rectangle IncludedRect;
+		public Rectangle IconRect;
+		public Rectangle TextRect;
+		public Rectangle SteamRect;
+		public Rectangle CenterRect;
 
 		public IDlcInfo Item { get; set; }
 

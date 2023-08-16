@@ -1,5 +1,5 @@
 ﻿namespace Skyve.App.UserInterface.Panels;
-internal class PC_Mods : PC_ContentList<IMod>
+public class PC_Mods : PC_ContentList<IMod>
 {
 	public PC_Mods()
 	{

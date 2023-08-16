@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
 
-internal class PackageStatusTypeDropDown<T> : SlickSelectionDropDown<T> where T : struct, Enum
+public class PackageStatusTypeDropDown<T> : SlickSelectionDropDown<T> where T : struct, Enum
 {
 	private readonly bool _restricted;
 

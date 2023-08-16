@@ -552,7 +552,7 @@ partial class ContentList<T>
 	}
 
 	#endregion
-	internal SlickControls.SlickTextBox TB_Search;
+	public SlickControls.SlickTextBox TB_Search;
 	private ThreeOptionToggle OT_Workshop;
 	private ThreeOptionToggle OT_Enabled;
 	private ThreeOptionToggle OT_Included;
@@ -565,7 +565,7 @@ partial class ContentList<T>
 	private System.Windows.Forms.TableLayoutPanel TLP_MiddleBar;
 	private SlickControls.SlickSpacer slickSpacer1;
 	private SlickControls.SlickSpacer slickSpacer2;
-	internal System.Windows.Forms.Panel P_FiltersContainer;
+	public System.Windows.Forms.Panel P_FiltersContainer;
 	private SlickControls.SlickLabel B_Filters;
 	private TagsDropDown DD_Tags;
 	private ProfilesDropDown DD_Profile;
@@ -575,9 +575,9 @@ partial class ContentList<T>
 	private AuthorDropDown DD_Author;
 	private SlickControls.SlickIcon I_SortOrder;
 	private System.Windows.Forms.Label L_FilterCount;
-	internal System.Windows.Forms.FlowLayoutPanel FLP_Search;
+	public System.Windows.Forms.FlowLayoutPanel FLP_Search;
 	private ThreeOptionToggle OT_ModAsset;
-	internal System.Windows.Forms.TableLayoutPanel TLP_Main;
+	public System.Windows.Forms.TableLayoutPanel TLP_Main;
 	protected SlickIcon B_ListView;
 	protected SlickIcon B_GridView;
 	protected SlickIcon B_CompactList;

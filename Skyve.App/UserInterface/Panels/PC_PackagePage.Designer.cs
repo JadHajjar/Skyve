@@ -437,7 +437,7 @@ partial class PC_PackagePage
 	private PackageDescriptionControl P_Info;
 	private SlickControls.SlickTabControl slickTabControl1;
 	private SlickControls.SlickTabControl.Tab T_Info;
-	internal SlickControls.SlickTabControl.Tab T_CR;
+	public SlickControls.SlickTabControl.Tab T_CR;
 	private SlickControls.SlickTabControl.Tab T_Profiles;
 	private System.Windows.Forms.TableLayoutPanel TLP_Profiles;
 	private System.Windows.Forms.TableLayoutPanel TLP_Info;

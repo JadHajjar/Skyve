@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
-internal class LinkControl : SlickImageControl
+public class LinkControl : SlickImageControl
 {
 	public LinkControl(ILink link, bool display)
 	{

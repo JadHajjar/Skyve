@@ -307,19 +307,19 @@ namespace Skyve.App
 		}
 
 		#endregion
-		internal SlickControls.PanelItem PI_Dashboard;
-		internal SlickControls.PanelItem PI_Mods;
-		internal SlickControls.PanelItem PI_Assets;
-		internal SlickControls.PanelItem PI_Profiles;
-		internal SlickControls.PanelItem PI_Options;
-		internal SlickControls.PanelItem PI_Compatibility;
-		internal SlickControls.PanelItem PI_ModUtilities;
-		internal SlickControls.PanelItem PI_Troubleshoot;
-		internal SlickControls.PanelItem PI_Packages;
+		public SlickControls.PanelItem PI_Dashboard;
+		public SlickControls.PanelItem PI_Mods;
+		public SlickControls.PanelItem PI_Assets;
+		public SlickControls.PanelItem PI_Profiles;
+		public SlickControls.PanelItem PI_Options;
+		public SlickControls.PanelItem PI_Compatibility;
+		public SlickControls.PanelItem PI_ModUtilities;
+		public SlickControls.PanelItem PI_Troubleshoot;
+		public SlickControls.PanelItem PI_Packages;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Label L_Text;
 		private System.Windows.Forms.Label L_Version;
-		internal SlickControls.PanelItem PI_DLCs;
+		public SlickControls.PanelItem PI_DLCs;
 		private SubscriptionInfoControl subscriptionInfoControl1;
 		private DownloadsInfoControl downloadsInfoControl1;
 		private TroubleshootInfoControl TroubleshootInfoControl;

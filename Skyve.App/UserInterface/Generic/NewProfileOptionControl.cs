@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
-internal class NewProfileOptionControl : SlickImageControl
+public class NewProfileOptionControl : SlickImageControl
 {
 	public NewProfileOptionControl()
 	{

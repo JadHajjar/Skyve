@@ -1,5 +1,5 @@
 ﻿namespace Skyve.App.UserInterface.Panels;
-internal class PC_Packages : PC_ContentList<ILocalPackageWithContents>
+public class PC_Packages : PC_ContentList<ILocalPackageWithContents>
 {
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 	private readonly IPackageManager _contentManager = ServiceCenter.Get<IPackageManager>();

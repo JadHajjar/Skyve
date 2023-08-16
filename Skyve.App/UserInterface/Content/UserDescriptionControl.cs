@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
-internal class UserDescriptionControl : SlickImageControl
+public class UserDescriptionControl : SlickImageControl
 {
 	private Rectangles? rects;
 	public IUser? User { get; private set; }
@@ -144,10 +144,10 @@ internal class UserDescriptionControl : SlickImageControl
 
 	private class Rectangles
 	{
-		internal Rectangle TextRect;
-		internal Rectangle SteamRect;
+		public Rectangle TextRect;
+		public Rectangle SteamRect;
 
-		internal bool Contain(Point location)
+		public bool Contain(Point location)
 		{
 			return
 				SteamRect.Contains(location);

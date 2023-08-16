@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Bubbles;
-internal class PlaysetBubble : StatusBubbleBase
+public class PlaysetBubble : StatusBubbleBase
 {
 	private readonly IPlaysetManager _playsetManager;
 	private readonly INotifier _notifier;

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
-internal class TroubleshootInfoControl : SlickControl
+public class TroubleshootInfoControl : SlickControl
 {
 	private Rectangle buttonRect;
 	private Rectangle cancelRect;

@@ -2,12 +2,12 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
-internal class TagControl : SlickImageControl
+public class TagControl : SlickImageControl
 {
 	public ITag? TagInfo { get; set; }
 	public bool Display { get; set; }
 	public bool ToAddPreview { get; set; }
-	public Func<IEnumerable<string?>> CurrentTagsSource { get; internal set; }
+	//public Func<IEnumerable<string?>> CurrentTagsSource { get; set; }
 
 	public TagControl()
 	{

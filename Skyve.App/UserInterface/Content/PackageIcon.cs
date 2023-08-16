@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
-internal class PackageIcon : SlickImageControl
+public class PackageIcon : SlickImageControl
 {
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 	public IPackage? Package { get; set; }

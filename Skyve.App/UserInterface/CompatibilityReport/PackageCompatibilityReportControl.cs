@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.CompatibilityReport;
-internal class PackageCompatibilityReportControl : TableLayoutPanel
+public class PackageCompatibilityReportControl : TableLayoutPanel
 {
 	private readonly TableLayoutPanel[] _panels;
 	private int controlCount;
@@ -63,7 +63,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		Padding = UI.Scale(new Padding(5), UI.FontScale);
 	}
 
-	internal void Reset()
+	public void Reset()
 	{
 		try
 		{

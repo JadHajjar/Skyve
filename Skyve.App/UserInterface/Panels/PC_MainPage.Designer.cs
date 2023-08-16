@@ -189,7 +189,7 @@ partial class PC_MainPage
 
 	#endregion
 
-	internal SlickControls.SlickButton B_StartStop;
+	public SlickControls.SlickButton B_StartStop;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	private PlaysetBubble profileBubble;
 	private ModsBubble modsBubble;

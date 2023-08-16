@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectangles>
+public class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectangles>
 {
 	private readonly IWorkshopService _workshopService;
 	private readonly ICompatibilityManager _compatibilityManager;
@@ -98,7 +98,7 @@ internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rect
 		}
 	}
 
-	internal class Rectangles : IDrawableItemRectangles<ulong>
+	public class Rectangles : IDrawableItemRectangles<ulong>
 	{
 		public ulong Item { get; set; }
 

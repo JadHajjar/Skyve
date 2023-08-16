@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.CompatibilityReport;
 public partial class IPackageStatusControl<T, TBase> : SlickControl where T : struct, Enum where TBase : IPackageStatus<T>, new()
 {
-	internal readonly PackageStatusTypeDropDown<T> typeDropDown;
+	public readonly PackageStatusTypeDropDown<T> typeDropDown;
 
 	public event EventHandler? ValuesChanged;
 	public IPackage? CurrentPackage { get; }

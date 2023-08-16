@@ -1,4 +1,5 @@
-﻿using Skyve.App.UserInterface.Panels;
+﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -6,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.CompatibilityReport;
 
-internal class CompatibilityMessageControl : SlickControl
+public class CompatibilityMessageControl : SlickControl
 {
 	private readonly List<ulong> _subscribingTo = new();
 	private readonly Dictionary<IPackage, Rectangle> _buttonRects = new();
@@ -335,7 +336,7 @@ internal class CompatibilityMessageControl : SlickControl
 				}
 				else if (e.Button == MouseButtons.Right && item.Key.GetWorkshopPackage() is not null)
 				{
-					var items = PC_PackagePage.GetRightClickMenuItems(item.Key.GetWorkshopPackage()!);
+					var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item.Key.GetWorkshopPackage()!);
 
 					this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 				}

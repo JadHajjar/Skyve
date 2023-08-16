@@ -3,7 +3,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-internal class TagListControl : SlickControl
+public class TagListControl : SlickControl
 {
 	private readonly ITagsService _tagsService;
 	private readonly List<(Rectangle rectangle, string tag)> _tagRects = new();

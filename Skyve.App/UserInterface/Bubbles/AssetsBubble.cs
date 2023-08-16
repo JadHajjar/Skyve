@@ -2,7 +2,7 @@
 
 namespace Skyve.App.UserInterface.Bubbles;
 
-internal class AssetsBubble : StatusBubbleBase
+public class AssetsBubble : StatusBubbleBase
 {
 	private readonly INotifier _notifier;
 	private readonly IPackageUtil _contentUtil;

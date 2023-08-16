@@ -1,4 +1,5 @@
-﻿using Skyve.App.UserInterface.CompatibilityReport;
+﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.CompatibilityReport;
 using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Forms;
 using Skyve.Systems.Compatibility;
@@ -24,7 +25,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private readonly IUserService _userService;
 	private readonly ITagsService _tagsService;
 
-	internal IPackage? CurrentPackage { get; private set; }
+	public IPackage? CurrentPackage { get; private set; }
 
 	private PC_CompatibilityManagement(bool load) : base(load)
 	{
@@ -569,7 +570,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		if (e.Button == MouseButtons.Right)
 		{
-			SlickToolStrip.Show(Form, packageCrList.PointToClient(e.Location), PC_PackagePage.GetRightClickMenuItems(_workshopService.GetPackage(new GenericPackageIdentity((ulong)sender))!));
+			SlickToolStrip.Show(Form, packageCrList.PointToClient(e.Location), ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(_workshopService.GetPackage(new GenericPackageIdentity((ulong)sender))!));
 		}
 	}
 

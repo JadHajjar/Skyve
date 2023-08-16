@@ -1,4 +1,5 @@
-﻿using Skyve.Systems.Compatibility.Domain.Api;
+﻿using Skyve.App.Interfaces;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Windows.Forms;
 
@@ -7,7 +8,7 @@ public partial class PC_ReviewRequests : PanelContent
 {
 	private List<ReviewRequest> _reviewRequests;
 
-	internal ulong CurrentPackage;
+	public ulong CurrentPackage;
 
 	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
 
@@ -59,7 +60,7 @@ public partial class PC_ReviewRequests : PanelContent
 
 		if (e.Button == MouseButtons.Right)
 		{
-			SlickToolStrip.Show(Form, packageCrList.PointToClient(e.Location), PC_PackagePage.GetRightClickMenuItems(_workshopService.GetPackage(new GenericPackageIdentity((ulong)sender)!)!));
+			SlickToolStrip.Show(Form, packageCrList.PointToClient(e.Location), ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(_workshopService.GetPackage(new GenericPackageIdentity((ulong)sender)!)!));
 		}
 	}
 

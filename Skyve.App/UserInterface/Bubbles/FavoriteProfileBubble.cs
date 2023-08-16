@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Bubbles;
-internal class FavoriteProfileBubble : StatusBubbleBase
+public class FavoriteProfileBubble : StatusBubbleBase
 {
 	private readonly INotifier _notifier;
 	private readonly IPlaysetManager _profileManager;

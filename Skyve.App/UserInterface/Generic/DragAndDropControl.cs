@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Generic;
 
 [DefaultEvent("FileSelected")]
-internal class DragAndDropControl : SlickControl
+public class DragAndDropControl : SlickControl
 {
 	private bool isDragActive;
 	private bool isDragAvailable;

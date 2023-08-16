@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
-internal class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
+public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{

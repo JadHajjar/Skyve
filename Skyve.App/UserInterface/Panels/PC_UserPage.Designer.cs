@@ -221,7 +221,7 @@ partial class PC_UserPage
 	private System.Windows.Forms.Panel P_Back;
 	private UserDescriptionControl P_Info;
 	private SlickControls.SlickTabControl tabControl;
-	internal SlickControls.SlickTabControl.Tab T_Packages;
+	public SlickControls.SlickTabControl.Tab T_Packages;
 	private SlickControls.SlickTabControl.Tab T_Profiles;
 	private SlickControls.SmartFlowPanel smartFlowPanel1;
 	private SlickControls.RoundedGroupPanel roundedGroupPanel1;

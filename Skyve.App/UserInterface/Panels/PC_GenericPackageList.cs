@@ -1,5 +1,5 @@
 ﻿namespace Skyve.App.UserInterface.Panels;
-internal class PC_GenericPackageList : PC_ContentList<IPackage>
+public class PC_GenericPackageList : PC_ContentList<IPackage>
 {
 	private readonly List<IPackage> _items = new();
 	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();

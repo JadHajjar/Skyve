@@ -1,5 +1,5 @@
 ﻿namespace Skyve.App.UserInterface.Panels;
-internal class PC_Assets : PC_ContentList<IAsset>
+public class PC_Assets : PC_ContentList<IAsset>
 {
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
