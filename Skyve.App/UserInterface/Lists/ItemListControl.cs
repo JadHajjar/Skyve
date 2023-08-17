@@ -365,6 +365,11 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
+			if (IsPackagePage)
+			{
+				return;
+			}
+
 			if (IsSelection)
 			{
 				PackageSelected?.Invoke(item.Item);
@@ -581,9 +586,8 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				FolderRect.Contains(location) ||
 				SteamRect.Contains(location) ||
 				AuthorRect.Contains(location) ||
-				IconRect.Contains(location) ||
 				FolderNameRect.Contains(location) ||
-				CenterRect.Contains(location) ||
+				((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl<T>)!.IsPackagePage) ||
 				DownloadStatusRect.Contains(location) ||
 				ScoreRect.Contains(location) ||
 				CompatibilityRect.Contains(location) ||
@@ -700,7 +704,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				return true;
 			}
 
-			if (CenterRect.Contains(location) || IconRect.Contains(location))
+			if ((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl<T>)!.IsPackagePage)
 			{
 				if ((instance as ItemListControl<T>)!.IsSelection)
 				{

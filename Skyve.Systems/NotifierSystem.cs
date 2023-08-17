@@ -36,13 +36,13 @@ internal class NotifierSystem : INotifier
 	{
 		_logger = logger;
 
-		_delayedContentLoaded = new(350, () => { _logger.Info("[Auto] ContentLoaded"); ContentLoaded?.Invoke(); });
-		_delayedPackageInformationUpdated = new(300, () => { _logger.Info("[Auto] PackageInformationUpdated"); PackageInformationUpdated?.Invoke(); });
-		_delayedPackageInclusionUpdated = new(250, () => { _logger.Info("[Auto] PackageInclusionUpdated"); PackageInclusionUpdated?.Invoke(); });
-		_delayedWorkshopInfoUpdated = new(200, () => { _logger.Info("[Auto] WorkshopInfoUpdated"); WorkshopInfoUpdated?.Invoke(); });
-		_delayedWorkshopUsersInfoUpdated = new(200, () => { _logger.Info("[Auto] WorkshopUsersInfoLoaded"); WorkshopUsersInfoLoaded?.Invoke(); });
-		_delayedAutoSaveRequested = new(300, () => { _logger.Info("[Auto] AutoSaveRequested"); AutoSaveRequested?.Invoke(); });
-		_delayedImageLoaded = new(300, () => { _logger.Info("[Auto] RefreshUI"); RefreshUI?.Invoke(); });
+		_delayedContentLoaded = new(350, () => RunAndLog(ContentLoaded, nameof(RunAndLog)));
+		_delayedPackageInformationUpdated = new(300, () => RunAndLog(PackageInformationUpdated, nameof(PackageInformationUpdated)));
+		_delayedPackageInclusionUpdated = new(250, () => RunAndLog(PackageInclusionUpdated, nameof(PackageInclusionUpdated)));
+		_delayedWorkshopInfoUpdated = new(200, () => RunAndLog(WorkshopInfoUpdated, nameof(WorkshopInfoUpdated)));
+		_delayedWorkshopUsersInfoUpdated = new(200, () => RunAndLog(WorkshopUsersInfoLoaded, nameof(WorkshopUsersInfoLoaded)));
+		_delayedAutoSaveRequested = new(300, () => RunAndLog(AutoSaveRequested, nameof(AutoSaveRequested)));
+		_delayedImageLoaded = new(300, () => RunAndLog(RefreshUI, nameof(RefreshUI)));
 	}
 
 	public bool IsContentLoaded { get; private set; }
@@ -99,7 +99,7 @@ internal class NotifierSystem : INotifier
 	{
 		if (now)
 		{
-			RefreshUI?.Invoke();
+			RunAndLog(RefreshUI, nameof(RefreshUI));
 		}
 		else
 		{
@@ -109,18 +109,12 @@ internal class NotifierSystem : INotifier
 
 	public void OnPlaysetUpdated()
 	{
-#if DEBUG
-		_logger.Debug("[Auto] Playset Updated \r\n" + new StackTrace());
-#else
-		_logger.Info("[Auto] Playset Updated");
-#endif
-
-		PlaysetUpdated?.Invoke();
+		RunAndLog(PlaysetUpdated, nameof(PlaysetUpdated));
 	}
 
 	public void OnPlaysetChanged()
 	{
-		PlaysetChanged?.Invoke();
+		RunAndLog(PlaysetChanged, nameof(PlaysetChanged));
 	}
 
 	public void OnLoggerFailed(Exception ex)
@@ -130,27 +124,24 @@ internal class NotifierSystem : INotifier
 
 	public void OnCompatibilityReportProcessed()
 	{
-#if DEBUG
-		_logger.Debug("[Auto] Compatibility Report Processed \r\n" + new StackTrace());
-#else
-		_logger.Info("[Auto] Compatibility Report Processed");
-#endif
-
-		CompatibilityReportProcessed?.Invoke();
+		RunAndLog(CompatibilityReportProcessed, nameof(CompatibilityReportProcessed));
 	}
 
 	public void OnWorkshopPackagesInfoLoaded()
 	{
-		_logger.Info("[Auto] Workshop Packages Info Loaded");
-
-		WorkshopPackagesInfoLoaded?.Invoke();
+		RunAndLog(WorkshopPackagesInfoLoaded, nameof(WorkshopPackagesInfoLoaded));
 		WorkshopPackagesInfoLoaded = null;
 	}
 
 	public void OnCompatibilityDataLoaded()
 	{
-		_logger.Info("[Auto] Compatibility Data Loaded");
+		RunAndLog(CompatibilityDataLoaded, nameof(CompatibilityDataLoaded));
+	}
 
-		CompatibilityDataLoaded?.Invoke();
+	private void RunAndLog(Action? action, string name)
+	{
+		_logger.Info("[Auto -   Started] " + name);
+		action?.Invoke();
+		_logger.Info("[Auto - Completed] " + name);
 	}
 }

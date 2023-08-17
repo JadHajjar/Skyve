@@ -19,6 +19,7 @@ public class CompatibilityManager : ICompatibilityManager
 	private const string DATA_CACHE_FILE = "CompatibilityDataCache.json";
 	private const string SNOOZE_FILE = "CompatibilitySnoozed.json";
 
+	private readonly DelayedAction _delayedReportCache;
 	private readonly Dictionary<IPackage, CompatibilityInfo> _cache = new(new IPackageEqualityComparer());
 	private readonly List<SnoozedItem> _snoozedItems = new();
 	private readonly Regex _bracketsRegex = new(@"[\[\(](.+?)[\]\)]", RegexOptions.Compiled);
@@ -59,8 +60,10 @@ public class CompatibilityManager : ICompatibilityManager
 
 		ConnectionHandler.WhenConnected(() => new BackgroundAction(DownloadData).Run());
 
-		_notifier.ContentLoaded += () => new BackgroundAction(CacheReport).Run();
-		_notifier.PackageInclusionUpdated += () => new BackgroundAction(CacheReport).Run();
+		_delayedReportCache = new(1000, CacheReport);
+
+		_notifier.ContentLoaded += _delayedReportCache.Run;
+		_notifier.PackageInclusionUpdated += _delayedReportCache.Run;
 	}
 
 	public void CacheReport()
@@ -74,6 +77,8 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			return;
 		}
+
+		_logger.Info("Caching Compatibility Report");
 
 		foreach (var package in content)
 		{
@@ -145,7 +150,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 				CompatibilityData = new IndexedCompatibilityData(data);
 
-				CacheReport();
+				_delayedReportCache.Run();
 
 				_notifier.OnCompatibilityDataLoaded();
 
@@ -424,7 +429,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (!string.IsNullOrEmpty(packageData.Package.Note))
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.NotReviewed, packageData.Package.Note, false), string.Empty, new PseudoPackage[0]);
+			info.Add(ReportType.Stability, new GenericPackageStatus() { Notification = NotificationType.Info, Note = packageData.Package.Note }, string.Empty, new PseudoPackage[0]);
 		}
 
 		if (package.IsLocal)
@@ -461,7 +466,7 @@ public class CompatibilityManager : ICompatibilityManager
 			_logger.Exception(ex, "Failed to clear CR cache");
 		}
 
-		CacheReport();
+		_delayedReportCache.Run();
 	}
 
 	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)

@@ -30,7 +30,7 @@ public class GenericPackageStatus : IGenericPackageStatus
 	public int IntType { get; set; }
 	public string? Type { get; set; }
 	[JsonIgnore] public string LocaleKey => string.Empty;
-	[JsonIgnore] public NotificationType Notification { get; }
+	[JsonIgnore] public NotificationType Notification { get; set; }
 
 	public IGenericPackageStatus ToGenericPackage()
 	{
