@@ -29,7 +29,7 @@ public partial class MainForm : BasePanelForm
 
 		SlickTip.SetTo(base_PB_Icon, string.Format(Locale.LaunchTooltip, "[F5]"));
 
-		var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+		var currentVersion = Assembly.GetEntryAssembly().GetName().Version;
 
 #if Stable
 		L_Version.Text = "v" + currentVersion.GetString();
@@ -331,7 +331,7 @@ public partial class MainForm : BasePanelForm
 			WindowState = FormWindowState.Maximized;
 		}
 
-		var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+		var currentVersion = Assembly.GetEntryAssembly().GetName().Version;
 
 		if (currentVersion.ToString() != _settings.SessionSettings.LastVersionNotification)
 		{

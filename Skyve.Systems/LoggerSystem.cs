@@ -48,7 +48,7 @@ public class LoggerSystem : ILogger
 
 			_stopwatch = Stopwatch.StartNew();
 
-			var assembly = Assembly.GetExecutingAssembly();
+			var assembly = Assembly.GetEntryAssembly();
 			var details = assembly.GetName();
 
 #if Stable
