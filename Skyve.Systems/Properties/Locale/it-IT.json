@@ -1,8 +1,6 @@
 {
   "CompatibilityInfo": "Informazioni sulla compatibilità",
   "PlaysetBubble": "Playset attuale",
-  "StartCities": "Avvia Cities: Skylines",
-  "StopCities": "Ferma Cities: Skylines",
   "AssetsBubble": "Le tue risorse",
   "ModsBubble": "Le tue mod",
   "Dashboard": "Inizio",
@@ -10,24 +8,6 @@
   "ModOutOfDatePlural": "mod sono obsolete",
   "SearchDlcs": "Cerca nei tuoi DLC..",
   "SearchPackages": "Cerca nei tuoi pacchetti..",
-  "ModIsLocal": "La mod è locale",
-  "ModIsRemoved": "Rimosso da Steam",
-  "ModIsUnknown": "Impossibile ottenere le informazioni di questa mod da Steam",
-  "ModIsNotDownloaded": "Contenuto non trovato",
-  "ModIsOutOfDate": "La mod non è aggiornata",
-  "ModIsMaybeOutOfDate": "La mod potrebbe non essere aggiornata",
-  "ModIsIncomplete": "La mod non è del tutto scaricata o ha dei file mancanti",
-  "ModIsUpToDate": "La mod è aggiornata e del tutto scaricata",
-  "ModIncomplete": "La mod non è del tutto scaricata o ha dei file mancanti",
-  "ModIncompletePlural": "Le mod non sono del tutto scaricate o hanno dei file mancanti",
-  "AssetIsLocal": "La risorsa è locale",
-  "AssetIsRemoved": "Questa risorsa è stata rimossa da Steam",
-  "AssetIsUnknown": "Impossibile ottenere le informazioni di questa risorsa da Steam",
-  "AssetIsNotDownloaded": "Questa risorsa non è scaricata, non è più presente sul tuo computer",
-  "AssetIsOutOfDate": "La risorsa non è aggiornata",
-  "AssetIsMaybeOutOfDate": "La risorsa potrebbe non essere aggiornata",
-  "AssetIsIncomplete": "La risorsa non è del tutto scaricata o ha dei file mancanti",
-  "AssetIsUpToDate": "La risorsa è aggiornata e del tutto scaricata",
   "Vanilla": "Base",
   "UpToDate": "Aggiornato",
   "StatusUnknown": "Stato sconosciuto",
@@ -42,15 +22,13 @@
   "ViewPlaysets": "Visualizza I Tuoi Playset",
   "AddPlayset": "Aggiungi Playset",
   "LHT": "Guida a sinistra",
-  "NoWorkshop": "Disabilita i pacchetti del workshop",
   "NoAssets": "Disabilità tutte le risorse",
   "NoMods": "Disabilita tutte le mod",
   "AutoSave": "Salvataggio automatico",
   "TotalSize": "dimensione totale",
   "CompatibilityStatus": "Stato di compatibilità",
   "AnyStatus": "Qualsiasi stato",
-  "AnyCompatibilityStatus": "Qualsiasi Stato",
-  "ModOwned": "Hai questa mod",
+  "AnyCompatibilityStatus": "Qualsiasi stato",
   "NoLocalPackagesFound": "Nessun pacchetto trovato sul tuo computer.",
   "CheckFolderInOptions": "Controlla il pannello delle opzioni nel caso in cui le cartelle sbagliate siano utilizzate.",
   "NoPackagesMatchFilters": "Nessun pacchetto corrisponde alle impostazioni del filtro",
@@ -106,7 +84,7 @@
   "Sorting_Default": "Ordinamento predefinito",
   "Sorting_LastEdit": "Data Ultima Modifica",
   "Sorting_DateCreated": "Data di Creazione",
-  "Sorting_Usage": "Scopo del profilo",
+  "Sorting_Usage": "Utilizzo Playset",
   "Sorting_Name": "Nome",
   "Sorting_FileSize": "Dimensione Totale dei File",
   "Sorting_UpdateTime": "Data di Aggiornamento",
@@ -483,27 +461,27 @@
   },
   "IncludedCount": {
     "One": "{0} {1} incluso",
-    "Plural": "{0} {1} inclusi"
+    "Plural": "{0} {1} incluso"
   },
   "EnabledCount": {
     "One": "{0} {1} abilitato",
-    "Plural": "{0} {1} abilitati"
+    "Plural": "{0} {1} abilitato"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} incluso e abilitato",
-    "Plural": "{0} {1} inclusi e abilitati"
+    "Plural": "{0} {1} incluso e abilitato"
   },
   "LoadedCount": {
     "One": "{0} {1} caricato",
-    "Plural": "{0} {1} caricati"
+    "Plural": "{0} {1} caricato"
   },
   "ShowingCount": {
     "One": "Mostrato {0} {1}",
-    "Plural": "Mostrate {0} {1}"
+    "Plural": "Mostrato {0} {1}"
   },
   "ShowingCountWarning": {
     "One": "Mostrato {0} {1}, {2}",
-    "Plural": "Mostrate {0} {1}, {2}"
+    "Plural": "Mostrato {0} {1}, {2}"
   },
   "ShowingSelectedCount": {
     "One": "Mostrando {0} {1}, {2} selezionato",
@@ -551,7 +529,7 @@
   "PackageIsOutOfDate": "'{0}' non è aggiornato\n\nSei indietro di {1}",
   "PackageIsMaybeOutOfDate": "'{0}' potrebbe non essere aggiornato, è stato aggiornato {1}",
   "PackageIsIncomplete": "La dimensione locale di '{0}' ({1}) è diversa da quella di {2} di Steam",
-  "RemovedFromSteam": "Rimosso da Steam",
+  "RemovedByAuthor": "Removed by author",
   "Missing": "Mancante",
   "LoggedInAs": "Connesso come",
   "UnknownUser": "Utente Sconosciuto",
@@ -681,5 +659,6 @@
   "CleanupInfoTitle": "Che cos'è una pulizia?",
   "TroubleshootCauseResult": "I seguenti pacchetti potrebbero essere la causa dei tuoi problemi",
   "VerifiedAuthor": "Autore Verificato",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }
