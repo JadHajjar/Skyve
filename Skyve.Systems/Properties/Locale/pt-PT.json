@@ -1,8 +1,6 @@
 {
   "CompatibilityInfo": "Informações de compatibilidade",
   "PlaysetBubble": "Playset atual",
-  "StartCities": "Abrir Cities: Skylines",
-  "StopCities": "Fechar Cities: Skylines",
   "AssetsBubble": "Seus Recursos",
   "ModsBubble": "Seus mods",
   "Dashboard": "Painel",
@@ -10,24 +8,6 @@
   "ModOutOfDatePlural": "mods encontram-se desatualizados",
   "SearchDlcs": "Pesquise nas suas DLCs..",
   "SearchPackages": "Pesquise nos seus pacotes..",
-  "ModIsLocal": "O mod é local",
-  "ModIsRemoved": "Removido da Steam",
-  "ModIsUnknown": "Não foi possível obter as informações deste mod na Steam",
-  "ModIsNotDownloaded": "Conteúdo não encontrado",
-  "ModIsOutOfDate": "Mod está desatualizado",
-  "ModIsMaybeOutOfDate": "Mod pode estar desatualizado",
-  "ModIsIncomplete": "Mod não foi baixado corretamente ou faltam arquivos",
-  "ModIsUpToDate": "Mod está atualizado e baixado por completo",
-  "ModIncomplete": "mod não foi baixado corretamente ou faltam arquivos",
-  "ModIncompletePlural": "mods não foram baixados corretamente ou faltam arquivos",
-  "AssetIsLocal": "O recurso é local",
-  "AssetIsRemoved": "Este recurso foi removido do Steam",
-  "AssetIsUnknown": "Não foi possível obter as informações desse recurso na Steam",
-  "AssetIsNotDownloaded": "Este Recurso não está baixado; não existe mais no seu computador",
-  "AssetIsOutOfDate": "O Recurso está desatualizado",
-  "AssetIsMaybeOutOfDate": "O recurso pode estar desatualizado",
-  "AssetIsIncomplete": "O recurso não foi baixado corretamente ou está faltando arquivos",
-  "AssetIsUpToDate": "O recurso está atualizado e baixado por completo",
   "Vanilla": "Padrão",
   "UpToDate": "Atualizado",
   "StatusUnknown": "Status desconhecido",
@@ -42,7 +22,6 @@
   "ViewPlaysets": "Veja seus Playsets",
   "AddPlayset": "Adicionar Playset",
   "LHT": "Mão-inglesa - Tráfego a Esquerda",
-  "NoWorkshop": "Desativar Pacotes da Oficina",
   "NoAssets": "Desativar todos os Recursos",
   "NoMods": "Desativar Todos os Mods",
   "AutoSave": "Salvamento Automático",
@@ -50,7 +29,6 @@
   "CompatibilityStatus": "Status de compatibilidade",
   "AnyStatus": "Qualquer Status",
   "AnyCompatibilityStatus": "Qualquer Status",
-  "ModOwned": "Você tem este mod",
   "NoLocalPackagesFound": "Não há pacotes encontrados no seu computador.",
   "CheckFolderInOptions": "Verifique o painel de opções caso as pastas erradas estejam sendo usadas.",
   "NoPackagesMatchFilters": "Nenhum pacotes corresponde às configurações do seu filtro",
@@ -106,7 +84,7 @@
   "Sorting_Default": "Classificação padrão",
   "Sorting_LastEdit": "Última hora de edição",
   "Sorting_DateCreated": "Data Criada",
-  "Sorting_Usage": "Uso do perfil",
+  "Sorting_Usage": "Uso da Playset",
   "Sorting_Name": "Nome",
   "Sorting_FileSize": "Tamanho total do arquivo",
   "Sorting_UpdateTime": "Tempo de atualização",
@@ -447,7 +425,7 @@
   "ControlToSelectMultiplePackages": "Ctrl + Clique para selecionar múltiplos pacotes de uma vez.",
   "Local": "Local",
   "Workshop": "Workshop",
-  "CompatibilityReport": "Relatório de Compatibilidade",
+  "CompatibilityReport": "Relatório de compatibilidade",
   "AppDataPath": "Cidades: pasta de dados do aplicativo Skylines",
   "Enabled": "Ativado",
   "Disabled": "Desativado",
@@ -491,11 +469,11 @@
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} incluídos e habilitado",
-    "Plural": "{0} {1} incluídos e habilitados"
+    "Plural": "{0} {1} incluídos e habilitado"
   },
   "LoadedCount": {
     "One": "{0} {1} carregado",
-    "Plural": "{0} {1} carregados"
+    "Plural": "{0} {1} carregado"
   },
   "ShowingCount": {
     "One": "Exibindo {0} {1}",
@@ -551,7 +529,7 @@
   "PackageIsOutOfDate": "'{0}' está desatualizado\r\n\r\nVocê está {1} atrás",
   "PackageIsMaybeOutOfDate": "'{0}' pode estar fora da data, foi atualizado {1}",
   "PackageIsIncomplete": "O tamanho local de '{0}' ({1}) é diferente do da {2} do Steam",
-  "RemovedFromSteam": "Removido do Steam",
+  "RemovedByAuthor": "Removed by author",
   "Missing": "Faltando",
   "LoggedInAs": "Sessão iniciada como",
   "UnknownUser": "Usuário Desconhecido",
@@ -681,5 +659,6 @@
   "CleanupInfoTitle": "O que é uma limpeza?",
   "TroubleshootCauseResult": "Os seguintes pacotes podem ser a causa de seus problemas",
   "VerifiedAuthor": "Autor verificado",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }
