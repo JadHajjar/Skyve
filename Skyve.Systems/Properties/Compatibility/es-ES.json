@@ -140,6 +140,7 @@
   "Stability_Broken": "Este paquete está obsoleto.\nSe sabe que no deja cargar el juego o simplemente no funciona.",
   "Stability_Incompatible": "Este paquete no es compatible con el juego o daña el juego.\n\nDeberías eliminarlo inmediatamente.",
   "Stability_Local": "Este paquete es una versión local de su mod original '{0}'.\n\nLas versiones locales generalmente se usan para propósitos de prueba o en caso de que no tengas Steam.\n\nComprueba los enlaces del paquete para buscar actualizaciones del mod.",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "You should subscribe to the following package.",
@@ -197,7 +198,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} debe ser excluido",
-    "Plural": "{0} {1} que deben ser excluidos"
+    "Plural": "{0} {1} debe ser excluido"
   },
   "UnsubscribeCount": "{0} {1} que debes anular suscripción",
   "SwitchCount": {
