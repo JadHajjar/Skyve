@@ -140,6 +140,7 @@
   "Stability_Broken": "Este pacote está quebrado.\nÉ conhecido por quebrar o jogo ou simplesmente não funcionar.",
   "Stability_Incompatible": "Este pacote não é compatível com, ou quebra, o jogo.\n\nVocê deve removê-lo imediatamente.",
   "Stability_Local": "Este pacote é uma versão local do mod original '{0}'.\n\nVersões locais são geralmente usadas para fins de teste ou no caso de você não ter o Steam.\n\nVerifique os links do pacote para procurar por atualizações no mod.",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Você deve assinar o seguinte pacote.",
@@ -197,7 +198,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} Deve ser excluído",
-    "Plural": "{0} {1} Devem ser excluídos"
+    "Plural": "{0} {1} Deve ser excluído"
   },
   "UnsubscribeCount": "{0} {1} que você deve cancelar a inscrição",
   "SwitchCount": {
@@ -225,7 +226,7 @@
   "ScenarioMaking": "Cenário/Fabricação",
   "ThemeMaking": "Criação de Temas",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "Este pacote tem um outro alerta de compatibilidade",
+    "Plural": "Este pacote tem {0} outros avisos de compatibilidade"
   }
 }
