@@ -140,6 +140,7 @@
   "Stability_Broken": "此外掛已經損壞。\n目前已知此外掛無法正常運行，或使遊戲崩潰。",
   "Stability_Incompatible": "此外掛與遊戲不相容，或者會使遊戲崩潰。\n\n您應該立刻取消訂閱或刪除此外掛。",
   "Stability_Local": "此外掛是「{0}」模組的本地版本。\n\n本地模組通常用於進行測試，或在非 Steam 版本的遊戲使用。\n\n請查看外掛的連結以尋找模組的更新版本。",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "您應該訂閱下列外掛程式：",
