@@ -140,6 +140,7 @@
   "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
   "Stability_Incompatible": "This package is not compatible with, or breaks, the game.\r\n\r\nYou should remove it immediately.",
   "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "คุณควรสมัครสมาชิกแพ็กเกจต่อไปนี้:",
