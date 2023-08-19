@@ -140,7 +140,7 @@
   "Stability_Broken": "이 패키지는 망가졌습니다.\n작동하지 않거나 게임을 망가트리는 것으로 알려져 있습니다.",
   "Stability_Incompatible": "이 패키지는 게임과 호환되지 않거나 게임을 망가트립니다.\n\n이것은 바로 제거해야 합니다.",
   "Stability_Local": "이 패키지는 이 패키지의 원본 모드인 '{0}'의 로컬 버전입니다.\n\n로컬 버전은 일반적으로 테스트 목적이나 Steam이 없는 경우에 사용됩니다.\n\n모드에 대한 업데이트를 찾으려면 패키지의 링크를 확인하세요.",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_BrokenFromPatch": "이 패키지는 최신 패치 이후로 손상되었습니다. 패키지가 업데이트 될 때까지 기다리십시오.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "다음 패키지를 구독해야 합니다:",
