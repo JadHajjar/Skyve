@@ -158,8 +158,8 @@
   },
   "Action_ExcludeThis": "'{0}' 를 제외해야 합니다.",
   "ExcludeThis": "이 패키지를 제외하기",
-  "Exclude": "제외",
-  "Unsubscribe": "구독 취소",
+  "Exclude": "제외 필요",
+  "Unsubscribe": "구독 취소 필요",
   "Action_ExcludeOther": {
     "One": "'{1}' 를 제외해야 합니다.",
     "Plural": "다음 패키지들을 제외해야 합니다:"
