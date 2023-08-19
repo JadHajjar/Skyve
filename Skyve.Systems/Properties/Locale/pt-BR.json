@@ -1,8 +1,6 @@
 {
   "CompatibilityInfo": "Informações de Compatibilidade",
   "PlaysetBubble": "Modo de jogo Atual",
-  "StartCities": "Abrir Cities: Skylines",
-  "StopCities": "Fechar Cities: Skylines",
   "AssetsBubble": "Seus Recursos",
   "ModsBubble": "Seus Mods",
   "Dashboard": "Painel",
@@ -10,24 +8,6 @@
   "ModOutOfDatePlural": "mods encontram-se desatualizados",
   "SearchDlcs": "Pesquise nas suas DLCs..",
   "SearchPackages": "Pesquise nos seus pacotes..",
-  "ModIsLocal": "O mod é local",
-  "ModIsRemoved": "Removido da Steam",
-  "ModIsUnknown": "Não foi possível obter as informações deste mod na Steam",
-  "ModIsNotDownloaded": "Conteúdo não encontrado",
-  "ModIsOutOfDate": "Mod está desatualizado",
-  "ModIsMaybeOutOfDate": "Mod pode estar desatualizado",
-  "ModIsIncomplete": "Mod não foi baixado corretamente ou faltam arquivos",
-  "ModIsUpToDate": "O mod está atualizado e completamente baixado",
-  "ModIncomplete": "mod não foi baixado corretamente ou faltam arquivos",
-  "ModIncompletePlural": "mods não foram baixados corretamente ou faltam arquivos",
-  "AssetIsLocal": "O recurso é local",
-  "AssetIsRemoved": "Este recurso foi removido da Steam",
-  "AssetIsUnknown": "Não foi possível obter as informações desse recurso na Steam",
-  "AssetIsNotDownloaded": "Este recurso não foi baixado, ele não existe mais no seu computador",
-  "AssetIsOutOfDate": "Recurso está desatualizado",
-  "AssetIsMaybeOutOfDate": "Recurso pode estar desatualizado",
-  "AssetIsIncomplete": "O recurso não foi baixado corretamente ou está faltando arquivos",
-  "AssetIsUpToDate": "O recurso está atualizado e completamente baixado",
   "Vanilla": "Padrão",
   "UpToDate": "Atualizado",
   "StatusUnknown": "Estado Desconhecido",
@@ -42,15 +22,13 @@
   "ViewPlaysets": "Veja seus Modos de jogos",
   "AddPlayset": "Adicionar Modo de Jogo",
   "LHT": "Mão-inglesa - Tráfego a Esquerda",
-  "NoWorkshop": "Desativar Pacotes da Oficina",
   "NoAssets": "Desativar todos os Recursos",
   "NoMods": "Desativar Todos os Mods",
   "AutoSave": "Salvamento Automático",
   "TotalSize": "tamanho total",
   "CompatibilityStatus": "Estado de Compatibilidade",
   "AnyStatus": "Algum Estado",
-  "AnyCompatibilityStatus": "Qualquer Estado",
-  "ModOwned": "Você tem este mod",
+  "AnyCompatibilityStatus": "Algum Estado",
   "NoLocalPackagesFound": "Não há pacotes encontrados no seu computador.",
   "CheckFolderInOptions": "Verifique o painel de opções caso as pastas erradas estejam sendo usadas.",
   "NoPackagesMatchFilters": "Nenhum pacotes corresponde às configurações do seu filtro",
@@ -106,7 +84,7 @@
   "Sorting_Default": "Classificação padrão",
   "Sorting_LastEdit": "Última hora de edição",
   "Sorting_DateCreated": "Data Criada",
-  "Sorting_Usage": "Uso do Perfil",
+  "Sorting_Usage": "Uso do Conjunto",
   "Sorting_Name": "Nome",
   "Sorting_FileSize": "Tamanho total do arquivo",
   "Sorting_UpdateTime": "Tempo de Atualização",
@@ -160,7 +138,7 @@
   "YourPlaysets": "Seus conjuntos de jogo",
   "UnFavoriteThisPlayset": "Remover este conjunto dos favoritos",
   "FavoriteThisPlayset": "Adicionar este conjunto aos favoritos",
-  "PlaysetCreationFailed": "Não foi possível criar uma coleção de mods, verifique se suas configurações de pasta estão corretamente configuradas no painel de opções",
+  "PlaysetCreationFailed": "Não foi possível criar um conjunto de jogo. Verifique se suas configurações de pasta estão corretamente definidas no painel de opções",
   "UseDebugMono": "Usar Debug Mono",
   "LaunchThroughCities": "Iniciar através de Cities.exe",
   "UnityProfilerMode": "Usar o perfil Unity",
@@ -483,19 +461,19 @@
   },
   "IncludedCount": {
     "One": "{0} {1} incluído",
-    "Plural": "{0} {1} incluídos"
+    "Plural": "{0} {1} incluído"
   },
   "EnabledCount": {
     "One": "{0} {1} habilitado",
-    "Plural": "{0} {1} habilitados"
+    "Plural": "{0} {1} habilitado"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} incluído e habilitado",
-    "Plural": "{0} {1} incluídos e habilitados"
+    "Plural": "{0} {1} incluído e habilitado"
   },
   "LoadedCount": {
     "One": "{0} {1} carregado",
-    "Plural": "{0} {1} carregados"
+    "Plural": "{0} {1} carregado"
   },
   "ShowingCount": {
     "One": "Exibindo {0} {1}",
@@ -507,11 +485,11 @@
   },
   "ShowingSelectedCount": {
     "One": "Exibindo {0} {1}, {2} selecionado",
-    "Plural": "Exibindo {0} {1}, {2} selecionados"
+    "Plural": "Exibindo {0} {1}, {2} selecionado"
   },
   "ShowingSelectedCountWarning": {
     "One": "Exibindo {0} {1}, {2} selecionado, {3}",
-    "Plural": "Exibindo {0} {1}, {2} selecionados, {3}"
+    "Plural": "Exibindo {0} {1}, {2} selecionado, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} Está oculto devido à configuração do seu perfil",
@@ -551,7 +529,7 @@
   "PackageIsOutOfDate": "'{0}' está desatualizado\r\n\r\nVocê está {1} atrás",
   "PackageIsMaybeOutOfDate": "'{0}' pode estar desatualizado, foi atualizado {1}",
   "PackageIsIncomplete": "O tamanho local de '{0}' ({1}) é diferente da {2} da Steam",
-  "RemovedFromSteam": "Removido da Steam",
+  "RemovedByAuthor": "Removed by author",
   "Missing": "Faltando",
   "LoggedInAs": "Sessão iniciada como",
   "UnknownUser": "Usuário desconhecido",
@@ -598,7 +576,7 @@
   "RequestOption1": "Relatar um problema ou adicionar informações ausentes",
   "RequestOption2": "Adicionar um estado faltando para o pacote",
   "RequestOption3": "Adicionar uma interação ausente com outro pacote",
-  "CurrentPlayset": "Coleção de Mods Atual",
+  "CurrentPlayset": "Modo de jogo Atual",
   "References": "Referências",
   "OpenLog": "Abrir arquivo de registro",
   "Sort By": "Ordenar por",
@@ -681,5 +659,6 @@
   "CleanupInfoTitle": "O que é uma limpeza?",
   "TroubleshootCauseResult": "Os seguintes pacotes podem ser a causa de seus problemas",
   "VerifiedAuthor": "Autor Verificado",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Aplicar todas as ações disponíveis",
+  "FailedToImportPlayset": "Falha ao importar este Perfil."
 }
