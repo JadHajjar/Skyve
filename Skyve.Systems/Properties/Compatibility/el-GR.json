@@ -140,6 +140,7 @@
   "Stability_Broken": "\r\nΕίναι γνωστό ότι είτε να σπάσει το παιχνίδι ή απλά δεν λειτουργεί.",
   "Stability_Incompatible": "Αυτό το πακέτο δεν είναι συμβατό με το παιχνίδι ή σπάει.\r\n\r\nΘα πρέπει να το αφαιρέσετε αμέσως.",
   "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Θα πρέπει να εγγραφείτε στο ακόλουθο πακέτο:",

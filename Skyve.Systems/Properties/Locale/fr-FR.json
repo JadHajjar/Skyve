@@ -1,8 +1,6 @@
 {
   "CompatibilityInfo": "Infos de compatibilité",
   "PlaysetBubble": "Profil actif",
-  "StartCities": "Lancer Cities: Skylines",
-  "StopCities": "Arrêter Cities: Skylines",
   "AssetsBubble": "Vos assets",
   "ModsBubble": "Vos mods",
   "Dashboard": "Tableau de bord",
@@ -10,24 +8,6 @@
   "ModOutOfDatePlural": "mods obsolés",
   "SearchDlcs": "Recherchez dans vos DLC..",
   "SearchPackages": "Cherchez dans vos paquets..",
-  "ModIsLocal": "Ce mod est local",
-  "ModIsRemoved": "Retiré de Steam",
-  "ModIsUnknown": "Impossible d'obtenir les informations de ce mod depuis Steam",
-  "ModIsNotDownloaded": "Contenu introuvable",
-  "ModIsOutOfDate": "Ce mod est obsolète",
-  "ModIsMaybeOutOfDate": "Le mod peut être obsolète",
-  "ModIsIncomplete": "Le mod n'est pas entièrement téléchargé ou manque des fichiers",
-  "ModIsUpToDate": "Le mod est à jour et entièrement téléchargé",
-  "ModIncomplete": "le mod n'est pas entièrement téléchargé ou manque des fichiers",
-  "ModIncompletePlural": "ces mods ne sont pas entièrement téléchargés ou manquent de fichiers",
-  "AssetIsLocal": "L'asset est local",
-  "AssetIsRemoved": "Cet asset a été retiré du Steam",
-  "AssetIsUnknown": "Impossible d'obtenir les informations de cet asset depuis Steam",
-  "AssetIsNotDownloaded": "Cet asset n'est pas téléchargé, il n'existe plus sur votre ordinateur",
-  "AssetIsOutOfDate": "Asset est obsolète",
-  "AssetIsMaybeOutOfDate": "L'asset peut être obsolète",
-  "AssetIsIncomplete": "L'asset n'est pas entièrement téléchargé ou il manque des fichiers",
-  "AssetIsUpToDate": "L'asset est à jour et entièrement téléchargé",
   "Vanilla": "Vanilla",
   "UpToDate": "À jour ",
   "StatusUnknown": "Statut inconnu",
@@ -42,7 +22,6 @@
   "ViewPlaysets": "Voir vos profils",
   "AddPlayset": "Ajouter un profil",
   "LHT": "Circulation à gauche",
-  "NoWorkshop": "Désactiver les paquets du Workshop",
   "NoAssets": "Désactiver tous les assets",
   "NoMods": "Désactiver tous les mods",
   "AutoSave": "Sauvegarde automatique",
@@ -50,7 +29,6 @@
   "CompatibilityStatus": "Statut de compatibilité",
   "AnyStatus": "N'importe quel statut",
   "AnyCompatibilityStatus": "N'importe quel statut",
-  "ModOwned": "Vous avez ce mod",
   "NoLocalPackagesFound": "Aucun paquet trouvé sur votre ordinateur.",
   "CheckFolderInOptions": "Vérifiez le panneau d'options au cas où les mauvais dossiers seraient utilisés.",
   "NoPackagesMatchFilters": "Aucun paquet ne correspond à vos paramètres de filtre",
@@ -377,7 +355,7 @@
   "XMLImportInfo": "Vous pouvez utiliser des fichiers de BOB, Tree Brush, Theme Mixer, etc..",
   "ImportFromTextInfo": "Tout format de texte est pris en charge",
   "LsmImportInfo": "Assurez-vous de sélectionner le fichier 'Report'",
-  "NoPlaysetsFound": "Aucun profil à afficher",
+  "NoPlaysetsFound": "Aucun playset à afficher",
   "NoPlaysetsMatchFilters": "Aucun playset ne correspond à votre recherche",
   "Your Save-games": "Vos sauvegardes de jeux",
   "App Data": "App Data",
@@ -458,7 +436,7 @@
   "Subscribe": "S'abonner",
   "Switch": "Changer",
   "AdvancedIncludeEnable": "Afficher les deux états inclus et activé pour les mods",
-  "PackageStatus": "État du package",
+  "PackageStatus": "État du paquet",
   "Author": "Auteur",
   "Include": "Inclure",
   "Unsubscribe": "Se désabonner",
@@ -487,15 +465,15 @@
   },
   "EnabledCount": {
     "One": "{0} {1} activé",
-    "Plural": "{0} {1} activés"
+    "Plural": "{0} {1} activé"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} inclus et activé",
-    "Plural": "{0} {1} inclus et activés"
+    "Plural": "{0} {1} inclus et activé"
   },
   "LoadedCount": {
     "One": "{0} {1} chargé",
-    "Plural": "{0} {1} chargés"
+    "Plural": "{0} {1} chargé"
   },
   "ShowingCount": {
     "One": "Affichage de {0} {1}",
@@ -507,11 +485,11 @@
   },
   "ShowingSelectedCount": {
     "One": "Affichage de {0} {1}, {2} sélectionné",
-    "Plural": "Affichage de {0} {1}, {2} sélectionnés"
+    "Plural": "Affichage de {0} {1}, {2} sélectionné"
   },
   "ShowingSelectedCountWarning": {
     "One": "Affichage de {0} {1}, {2} sélectionné, {3}",
-    "Plural": "Affichage de {0} {1}, {2} sélectionnés, {3}"
+    "Plural": "Affichage de {0} {1}, {2} sélectionné, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} est masqué à cause de l'utilisation de votre profil",
@@ -551,7 +529,7 @@
   "PackageIsOutOfDate": "'{0}' est obsolète\r\n\r\nVous êtes {1} en retard",
   "PackageIsMaybeOutOfDate": "'{0}' peut être obsolète, il a été mis à jour {1}",
   "PackageIsIncomplete": "La taille locale de '{0}' ({1}) est différente de celle de Steam {2}",
-  "RemovedFromSteam": "Supprimé de Steam",
+  "RemovedByAuthor": "Removed by author",
   "Missing": "Manquant",
   "LoggedInAs": "Connecté en tant que",
   "UnknownUser": "Utilisateur inconnu",
@@ -582,7 +560,7 @@
     "One": "Vous vous désabonnerez de {0} paquet au cours de ce processus.",
     "Plural": "Vous vous désabonnerez de {0} paquets au cours de ce processus."
   },
-  "ViewThisPlaysetsPackages": "Voir le contenu de ce jeu",
+  "ViewThisPlaysetsPackages": "Voir le contenu de ce Playset",
   "PendingDownloads": {
     "One": "{0} élément en attente de téléchargement",
     "Plural": "{0} éléments en attente de téléchargement"
@@ -608,7 +586,7 @@
   "AllUsages": "Toutes utilisations",
   "Invalid": "Invalide",
   "UpdatePlayset": "Mettre à jour le Playset",
-  "FailedToRetrievePlaysets": "Impossible de récupérer la découverte du Playset",
+  "FailedToRetrievePlaysets": "Impossible de récupérer la librairie des Playsets",
   "DownloadPlayset": "Télécharger Playset",
   "ReloadAllData": "Recharger toutes les données",
   "ResetSnoozes": "Réinitialiser tous les rappels",
@@ -681,5 +659,6 @@
   "CleanupInfoTitle": "Qu'est-ce qu'un nettoyage ?",
   "TroubleshootCauseResult": "Les paquets suivants pourraient être la cause de vos problèmes",
   "VerifiedAuthor": "Auteur vérifié",
-  "ApplyAllActions": "Appliquer toutes les actions disponibles"
+  "ApplyAllActions": "Appliquer toutes les actions disponibles",
+  "FailedToImportPlayset": "Impossible d'importer ce profil."
 }

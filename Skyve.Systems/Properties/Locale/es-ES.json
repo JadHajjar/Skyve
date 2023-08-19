@@ -1,8 +1,6 @@
 {
   "CompatibilityInfo": "Informe de Compatibilidad",
   "PlaysetBubble": "Playset actual",
-  "StartCities": "Iniciar Cities: Skylines",
-  "StopCities": "Detener Cities: Skylines",
   "AssetsBubble": "Tus Assets",
   "ModsBubble": "Tus Mods",
   "Dashboard": "Consola",
@@ -10,24 +8,6 @@
   "ModOutOfDatePlural": "los mods están desactualizados",
   "SearchDlcs": "Buscar en la lista de DLC...",
   "SearchPackages": "Buscar en la lista de paquetes...",
-  "ModIsLocal": "Mod es local",
-  "ModIsRemoved": "Eliminado de Steam",
-  "ModIsUnknown": "No se pudo obtener la información de Steam",
-  "ModIsNotDownloaded": "No se econtró el contenido",
-  "ModIsOutOfDate": "El mod está desactualizado",
-  "ModIsMaybeOutOfDate": "El mod puede estar desactualizado",
-  "ModIsIncomplete": "mod no está descargado por completo o no tiene todos los archivos",
-  "ModIsUpToDate": "El mod está actualizado y descargado por completo",
-  "ModIncomplete": "el mod no está descargado por completo o no tiene todos los archivos",
-  "ModIncompletePlural": "los mods no están descargados por completo o no tienen todos los archivos",
-  "AssetIsLocal": "Asset es local",
-  "AssetIsRemoved": "Este asset ha sido eliminado de Steam",
-  "AssetIsUnknown": "No se pudo obtener la información de este asset desde Steam",
-  "AssetIsNotDownloaded": "Este asset no ha sido descargado, no existe en tu computador",
-  "AssetIsOutOfDate": "El asset está desactualizado",
-  "AssetIsMaybeOutOfDate": "El asset puede estar desactualizado",
-  "AssetIsIncomplete": "El asset no está descargado por completo o no tiene todos los archivos",
-  "AssetIsUpToDate": "El asset está actualizado y descargado por completo",
   "Vanilla": "Vanilla",
   "UpToDate": "Al día",
   "StatusUnknown": "Estado deconocido",
@@ -42,7 +22,6 @@
   "ViewPlaysets": "Ver tus Playsets",
   "AddPlayset": "Agregar playset",
   "LHT": "Tráfico de mano izquierda",
-  "NoWorkshop": "Desactivar paquetes del workshop",
   "NoAssets": "Desactivar todos los assets",
   "NoMods": "Desactivar todos los mods",
   "AutoSave": "Guardar Automáticamente",
@@ -50,7 +29,6 @@
   "CompatibilityStatus": "Estado de compatibilidad",
   "AnyStatus": "Cualquier estado",
   "AnyCompatibilityStatus": "Cualquier estado",
-  "ModOwned": "Tienes este mod",
   "NoLocalPackagesFound": "No se encontraron paquetes en tu computadora.",
   "CheckFolderInOptions": "Verifica las opciones, para validar que las rutas a las carpetas son las correctas.",
   "NoPackagesMatchFilters": "No hay paquetes que coincidan con los ajustes del filtro",
@@ -106,7 +84,7 @@
   "Sorting_Default": "Orden Predeterminado",
   "Sorting_LastEdit": "Última Modificación",
   "Sorting_DateCreated": "Fecha de creación",
-  "Sorting_Usage": "Propósito del perfil",
+  "Sorting_Usage": "Propósito del playset",
   "Sorting_Name": "Nombre",
   "Sorting_FileSize": "Tamaño total del archivo",
   "Sorting_UpdateTime": "Fecha de actualización",
@@ -447,7 +425,7 @@
   "ControlToSelectMultiplePackages": "Ctrl + Clic para seleccionar varios paquetes a la vez.",
   "Local": "Local",
   "Workshop": "Workshop",
-  "CompatibilityReport": "Informe de Compatibilidad",
+  "CompatibilityReport": "Informe de compatibilidad",
   "AppDataPath": "Ruta de la carpeta \"AppData\" de Cities: Skylines",
   "Enabled": "Activado",
   "Disabled": "Desactivado",
@@ -483,19 +461,19 @@
   },
   "IncludedCount": {
     "One": "{0} {1} incluido",
-    "Plural": "{0} {1} incluidos"
+    "Plural": "{0} {1} incluido"
   },
   "EnabledCount": {
     "One": "{0} {1} activado",
-    "Plural": "{0} {1} activados"
+    "Plural": "{0} {1} activado"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} incluido y activado",
-    "Plural": "{0} {1} incluidos y activados"
+    "Plural": "{0} {1} incluido y activado"
   },
   "LoadedCount": {
     "One": "{0} {1} cargado",
-    "Plural": "{0} {1} cargados"
+    "Plural": "{0} {1} cargado"
   },
   "ShowingCount": {
     "One": "Mostrando {0} {1}",
@@ -507,11 +485,11 @@
   },
   "ShowingSelectedCount": {
     "One": "Mostrando {0} {1}, {2} seleccionado",
-    "Plural": "Mostrando {0} {1}, {2} seleccionados"
+    "Plural": "Mostrando {0} {1}, {2} seleccionado"
   },
   "ShowingSelectedCountWarning": {
     "One": "Mostrando {0} {1}, {2} seleccionado, {3}",
-    "Plural": "Mostrando {0} {1}, {2} seleccionados, {3}"
+    "Plural": "Mostrando {0} {1}, {2} seleccionado, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} está oculto debido al uso de tu perfil",
@@ -551,7 +529,7 @@
   "PackageIsOutOfDate": "'{0}' está desactualizado\n\nEstás {1} detrás",
   "PackageIsMaybeOutOfDate": "'{0}' puede estar desactualizado, fue actualizado {1}",
   "PackageIsIncomplete": "El tamaño local de '{0}' ({1}) es diferente de {2} en Steam",
-  "RemovedFromSteam": "Eliminado de Steam",
+  "RemovedByAuthor": "Removed by author",
   "Missing": "Faltan",
   "LoggedInAs": "Sesión iniciada como",
   "UnknownUser": "Usuario desconocido",
@@ -681,5 +659,6 @@
   "CleanupInfoTitle": "¿Qué es una limpieza?",
   "TroubleshootCauseResult": "Los siguientes paquetes pueden ser la causa de sus problemas",
   "VerifiedAuthor": "Autor verificado",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }

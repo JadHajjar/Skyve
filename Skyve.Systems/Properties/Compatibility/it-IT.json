@@ -140,6 +140,7 @@
   "Stability_Broken": "Questo pacchetto non è funzionante.\nÈ noto per bloccare il gioco o semplicemente perché non funziona.",
   "Stability_Incompatible": "Questo pacchetto non è compatibile con il gioco o lo interrompe.\n\nÈ necessario rimuoverlo immediatamente.",
   "Stability_Local": "Questo pacchetto è una versione locale della mod originale \"{0}\".\n\nLe versioni locali sono solitamente utilizzate a scopo di test o nel caso in cui non si disponga di Steam.\n\nControllare i link del pacchetto per verificare la presenza di aggiornamenti della mod.",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Dovresti sottoscrivere il seguente pacchetto.",
@@ -197,7 +198,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} dovrebbe essere esclusa",
-    "Plural": "{0} {1} dovrebbero essere escluse"
+    "Plural": "{0} {1} dovrebbe essere esclusa"
   },
   "UnsubscribeCount": "{0} {1} da cui dovreste annullare la sottoscrizione",
   "SwitchCount": {
