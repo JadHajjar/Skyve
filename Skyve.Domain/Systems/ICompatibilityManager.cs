@@ -7,7 +7,7 @@ public interface ICompatibilityManager
 {
 	bool FirstLoadComplete { get; }
 
-	ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false);
+	ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false, bool cacheOnly = false);
 	IPackageIdentity GetFinalSuccessor(IPackageIdentity item);
 	NotificationType GetNotification(ICompatibilityInfo info);
 	IPackageCompatibilityInfo? GetPackageInfo(IPackageIdentity package);

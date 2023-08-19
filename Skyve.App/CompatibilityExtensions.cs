@@ -22,11 +22,11 @@ public static class CompatibilityExtensions
 		};
 	}
 
-	public static ICompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false)
+	public static ICompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false, bool cacheOnly = false)
 	{
 		var manager = ServiceCenter.Get<ICompatibilityManager>();
 
-		return manager.GetCompatibilityInfo(package, noCache);
+		return manager.GetCompatibilityInfo(package, noCache, cacheOnly);
 	}
 
 	public static DynamicIcon GetIcon(this LinkType link)

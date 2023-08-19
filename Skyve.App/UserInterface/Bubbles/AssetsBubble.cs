@@ -8,9 +8,14 @@ public class AssetsBubble : StatusBubbleBase
 	private readonly IPackageUtil _contentUtil;
 	private readonly IPackageManager _contentManager;
 
+	private readonly Dictionary<NotificationType, int> _compatibilityCounts;
+
 	public AssetsBubble()
 	{
+		_compatibilityCounts = new();
+
 		ServiceCenter.Get(out _notifier, out _contentUtil, out _contentManager);
+
 	}
 
 	protected override void OnHandleCreated(EventArgs e)
@@ -31,10 +36,15 @@ public class AssetsBubble : StatusBubbleBase
 
 			_notifier.ContentLoaded += Invalidate;
 		}
+		else
+		{
+			Notifier_CompatibilityReportProcessed();
+		}
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated += Invalidate;
 		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
+		_notifier.CompatibilityReportProcessed += Notifier_CompatibilityReportProcessed;
 	}
 
 	protected override void Dispose(bool disposing)
@@ -45,6 +55,36 @@ public class AssetsBubble : StatusBubbleBase
 		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated -= Invalidate;
 		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
+		_notifier.CompatibilityReportProcessed -= Notifier_CompatibilityReportProcessed;
+	}
+
+	private void Notifier_CompatibilityReportProcessed()
+	{
+		_compatibilityCounts.Clear();
+
+		foreach (var asset in _contentManager.Assets)
+		{
+			if (!_contentUtil.IsIncluded(asset))
+			{
+				continue;
+			}
+
+			if (asset.IsMod || Loading)
+			{
+				continue;
+			}
+
+			var notif = asset.GetCompatibilityInfo(cacheOnly: true).GetNotification();
+
+			if (_compatibilityCounts.ContainsKey(notif))
+			{
+				_compatibilityCounts[notif]++;
+			}
+			else
+			{
+				_compatibilityCounts[notif] = 1;
+			}
+		}
 	}
 
 	private void ProfileManager_ProfileChanged()
@@ -75,8 +115,6 @@ public class AssetsBubble : StatusBubbleBase
 		int assetsIncluded = 0, assetsOutOfDate = 0, assetsIncomplete = 0;
 		var assetSize = 0L;
 
-		var crDic = new Dictionary<NotificationType, int>();
-
 		foreach (var asset in _contentManager.Assets)
 		{
 			if (!_contentUtil.IsIncluded(asset))
@@ -101,17 +139,6 @@ public class AssetsBubble : StatusBubbleBase
 					assetsIncomplete++;
 					break;
 			}
-
-			var notif = asset.GetCompatibilityInfo().GetNotification();
-
-			if (crDic.ContainsKey(notif))
-			{
-				crDic[notif]++;
-			}
-			else
-			{
-				crDic[notif] = 1;
-			}
 		}
 
 		DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower()));
@@ -127,7 +154,7 @@ public class AssetsBubble : StatusBubbleBase
 			DrawText(e, ref targetHeight, Locale.IncompleteCount.FormatPlural(assetsIncomplete, Locale.Asset.FormatPlural(assetsIncomplete).ToLower()), FormDesign.Design.RedColor);
 		}
 
-		foreach (var group in crDic.OrderBy(x => x.Key))
+		foreach (var group in _compatibilityCounts.OrderBy(x => x.Key))
 		{
 			if (group.Key <= NotificationType.Info)
 			{

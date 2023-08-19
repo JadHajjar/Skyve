@@ -61,6 +61,8 @@ public static class ApiUtil
 				request.Headers.Add(item.Item1, item.Item2);
 			}
 
+			_logger.Info($"[API] [GET] {baseUrl}");
+
 			using var response = request.GetResponse();
 			using var dataStream = response.GetResponseStream();
 			using var reader = new StreamReader(dataStream);
@@ -76,6 +78,8 @@ public static class ApiUtil
 		{
 			httpClient.DefaultRequestHeaders.Add(item.Item1, item.Item2);
 		}
+
+		_logger.Info($"[API] [GET] {baseUrl}");
 
 		var httpResponse = await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(method), new Uri(url)));
 
@@ -129,6 +133,8 @@ public static class ApiUtil
 			request.ContentType = "application/json";
 			request.ContentLength = postDataBytes.Length;
 
+			_logger.Info($"[API] [POST] {baseUrl}");
+
 			using (var requestStream = request.GetRequestStream())
 			{
 				requestStream.Write(postDataBytes, 0, postDataBytes.Length);
@@ -152,6 +158,8 @@ public static class ApiUtil
 
 		var content = new StringContent(json, Encoding.UTF8, "application/json");
 		var httpResponse = await httpClient.PostAsync(url, content);
+
+		_logger.Info($"[API] [POST] {baseUrl}");
 
 		if (httpResponse.IsSuccessStatusCode)
 		{

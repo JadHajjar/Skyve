@@ -15,7 +15,6 @@ public interface INotifier
 	event Action? PlaysetUpdated;
 	event Action? PlaysetChanged;
 	event Action? RefreshUI;
-	event Action? WorkshopPackagesInfoLoaded;
 	event Action? WorkshopInfoUpdated;
 	event Action? WorkshopUsersInfoLoaded;
 	event Action? CompatibilityReportProcessed;
@@ -32,7 +31,6 @@ public interface INotifier
 	void OnRefreshUI(bool now = false);
 	void OnCompatibilityReportProcessed();
 	void OnLoggerFailed(Exception ex);
-	void OnWorkshopPackagesInfoLoaded();
 	void OnWorkshopUsersInfoLoaded();
 	void OnCompatibilityDataLoaded();
 }

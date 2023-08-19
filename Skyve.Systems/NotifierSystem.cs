@@ -19,7 +19,6 @@ internal class NotifierSystem : INotifier
 	public event Action? RefreshUI;
 	public event Action<Exception>? LoggerFailed;
 	public event Action? CompatibilityReportProcessed;
-	public event Action? WorkshopPackagesInfoLoaded;
 	public event Action? WorkshopInfoUpdated;
 	public event Action? WorkshopUsersInfoLoaded;
 	public event Action? CompatibilityDataLoaded;
@@ -127,12 +126,6 @@ internal class NotifierSystem : INotifier
 		RunAndLog(CompatibilityReportProcessed, nameof(CompatibilityReportProcessed));
 	}
 
-	public void OnWorkshopPackagesInfoLoaded()
-	{
-		RunAndLog(WorkshopPackagesInfoLoaded, nameof(WorkshopPackagesInfoLoaded));
-		WorkshopPackagesInfoLoaded = null;
-	}
-
 	public void OnCompatibilityDataLoaded()
 	{
 		RunAndLog(CompatibilityDataLoaded, nameof(CompatibilityDataLoaded));
@@ -140,7 +133,7 @@ internal class NotifierSystem : INotifier
 
 	private void RunAndLog(Action? action, string name)
 	{
-		_logger.Info("[Auto -   Started] " + name);
+		_logger.Info("[Auto - Started  ] " + name);
 		action?.Invoke();
 		_logger.Info("[Auto - Completed] " + name);
 	}

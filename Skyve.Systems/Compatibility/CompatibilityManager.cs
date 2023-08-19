@@ -221,7 +221,7 @@ public class CompatibilityManager : ICompatibilityManager
 			|| (package.GetWorkshopInfo()?.IsIncompatible ?? false);
 	}
 
-	public ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false)
+	public ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false, bool cacheOnly = false)
 	{
 		if (!FirstLoadComplete)
 		{
@@ -230,6 +230,10 @@ public class CompatibilityManager : ICompatibilityManager
 		else if (!noCache && _cache.TryGetValue(package, out var info))
 		{
 			return info;
+		}
+		else if (cacheOnly)
+		{
+			return new CompatibilityInfo(package, _compatibilityHelper.GetPackageData(package));
 		}
 		else
 		{

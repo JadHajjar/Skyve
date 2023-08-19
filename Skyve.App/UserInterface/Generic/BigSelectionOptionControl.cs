@@ -25,7 +25,7 @@ public class BigSelectionOptionControl : SlickImageControl
 		if (Live)
 		{
 			Font = UI.Font(11.25F, FontStyle.Bold);
-			Margin = UI.Scale(new Padding(Parent.Controls.IndexOf(this) % 2 * 100, 15, 100 - Parent.Controls.IndexOf(this) % 2 * 100, 15), UI.FontScale);
+			Margin = UI.Scale(new Padding(Parent.Controls.IndexOf(this) % 2 * 100, 15, 100 - (Parent.Controls.IndexOf(this) % 2 * 100), 15), UI.FontScale);
 			Padding = UI.Scale(new Padding(15), UI.FontScale);
 			Size = UI.Scale(new Size(250, 90), UI.FontScale);
 		}
@@ -61,6 +61,13 @@ public class BigSelectionOptionControl : SlickImageControl
 			}
 		}
 
-		e.Graphics.DrawString(LocaleHelper.GetGlobalText(Text), Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + (int)(32 * UI.UIScale), 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
+		var textRect = ClientRectangle.Pad(Padding).Pad(Padding.Left + (int)(32 * UI.UIScale), 0, 0, 0);
+
+		e.Graphics.DrawString(LocaleHelper.GetGlobalText(Text), Font, new SolidBrush(fore), textRect, new StringFormat { LineAlignment = StringAlignment.Center });
+
+		if (textRect.Height < e.Graphics.Measure(LocaleHelper.GetGlobalText(Text), Font, textRect.Width).Height)
+		{
+			Height += (int)e.Graphics.Measure(LocaleHelper.GetGlobalText(Text), Font, textRect.Width).Height - textRect.Height + 1;
+		}
 	}
 }

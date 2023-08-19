@@ -9,8 +9,11 @@ public class ModsBubble : StatusBubbleBase
 	private readonly IPackageUtil _packageUtil;
 	private readonly IPackageManager _contentManager;
 
+	private readonly Dictionary<NotificationType, int> _compatibilityCounts;
+
 	public ModsBubble()
 	{
+		_compatibilityCounts = new();
 		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager);
 	}
 
@@ -32,10 +35,15 @@ public class ModsBubble : StatusBubbleBase
 
 			_notifier.ContentLoaded += Invalidate;
 		}
+		else
+		{
+			Notifier_CompatibilityReportProcessed();
+		}
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated += Invalidate;
 		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
+		_notifier.CompatibilityReportProcessed += Notifier_CompatibilityReportProcessed;
 	}
 
 	protected override void Dispose(bool disposing)
@@ -46,6 +54,31 @@ public class ModsBubble : StatusBubbleBase
 		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated -= Invalidate;
 		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
+		_notifier.CompatibilityReportProcessed -= Notifier_CompatibilityReportProcessed;
+	}
+
+	private void Notifier_CompatibilityReportProcessed()
+	{
+		_compatibilityCounts.Clear();
+
+		foreach (var mod in _contentManager.Mods)
+		{
+			if (!_packageUtil.IsIncluded(mod))
+			{
+				continue;
+			}
+
+			var notif = mod.GetCompatibilityInfo(cacheOnly: true).GetNotification();
+
+			if (_compatibilityCounts.ContainsKey(notif))
+			{
+				_compatibilityCounts[notif]++;
+			}
+			else
+			{
+				_compatibilityCounts[notif] = 1;
+			}
+		}
 	}
 
 	private void ProfileManager_ProfileChanged()
@@ -75,8 +108,6 @@ public class ModsBubble : StatusBubbleBase
 
 		int modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
 
-		var crDic = new Dictionary<NotificationType, int>();
-
 		foreach (var mod in _contentManager.Mods)
 		{
 			if (!_packageUtil.IsIncluded(mod))
@@ -105,17 +136,6 @@ public class ModsBubble : StatusBubbleBase
 					modsIncomplete++;
 					break;
 			}
-
-			var notif = mod.GetCompatibilityInfo().GetNotification();
-
-			if (crDic.ContainsKey(notif))
-			{
-				crDic[notif]++;
-			}
-			else
-			{
-				crDic[notif] = 1;
-			}
 		}
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
@@ -142,7 +162,7 @@ public class ModsBubble : StatusBubbleBase
 			DrawText(e, ref targetHeight, Locale.IncompleteCount.FormatPlural(modsIncomplete, Locale.Mod.FormatPlural(modsIncomplete).ToLower()), FormDesign.Design.RedColor);
 		}
 
-		foreach (var group in crDic.OrderBy(x => x.Key))
+		foreach (var group in _compatibilityCounts.OrderBy(x => x.Key))
 		{
 			if (group.Key <= NotificationType.Info)
 			{
