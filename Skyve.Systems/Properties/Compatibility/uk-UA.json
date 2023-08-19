@@ -140,6 +140,7 @@
   "Stability_Broken": "Цей пакет несправний.\nВідомо, що він або руйнує гру, або просто не працює.",
   "Stability_Incompatible": "Цей пакет несумісний з грою або порушує її роботу.\n\nВам слід видалити його негайно.",
   "Stability_Local": "Цей пакет є локальною версією оригінального моду '{0}'.\n\nЛокальні версії зазвичай використовуються для тестування або в разі відсутності Steam.\n\nПеревірте посилання пакету, щоб переглянути оновлення моду.",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Ви повинні підписатися на наступний пакет:",
