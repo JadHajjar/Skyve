@@ -136,10 +136,11 @@
   "Stability_NotReviewed": "此插件尚未被检查。\n\n兼容性信息可能不准确。",
   "Stability_Stable": "此插件能稳定运行。",
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查此插件的稳定性。",
-  "Stability_HasIssues": "此插件可能存在稳定性问题。\n请小心使用。",
+  "Stability_HasIssues": "此插件可能存在问题。\n请小心使用。",
   "Stability_Broken": "此插件已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
   "Stability_Incompatible": "此插件与游戏不兼容，或者会使游戏崩溃。\n\n您应当立刻取消订阅或删除此插件。",
   "Stability_Local": "此插件是模组 '{0}' 的本地版本。\n\n本地模组通常用于进行测试，或在非 Steam 版本的游戏使用。\n\n请查看插件的链接以查找模组的更新版本。",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "您应当订阅以下插件：",
@@ -225,7 +226,7 @@
   "ScenarioMaking": "制作剧本",
   "ThemeMaking": "制作地图主题",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "此插件还有另一个兼容性警告",
+    "Plural": "此插件还有 {0} 个兼容性警告"
   }
 }
