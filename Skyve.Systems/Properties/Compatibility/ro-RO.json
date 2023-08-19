@@ -140,6 +140,7 @@
   "Stability_Broken": "Acest pachet este stricat.\r\nEste cunoscut fie că întrerup jocul, fie că nu funcționează.",
   "Stability_Incompatible": "Acest pachet nu este compatibil cu, sau pare, jocul.\r\n\r\nAr trebui să îl eliminați imediat.",
   "Stability_Local": "Acest pachet este o versiune locală a modului original '{0}'.\r\n\r\nVersiunile locale sunt de obicei folosite în scopul testării sau în cazul în care nu aveți Steam.\r\n\r\nVerificați link-urile pachetului pentru a căuta actualizări în modul.",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Trebuie să vă abonați la următorul pachet:",
@@ -173,7 +174,7 @@
     "Plural": "{0} DLC-uri selectate"
   },
   "RequiredDLCs": "Required DLCs/CCPs",
-  "CRT_Stability": "Stabilitatea",
+  "CRT_Stability": "Stabilitate",
   "CRT_Successors": "Succesori",
   "CRT_RequiredPackages": "Pachete necesare",
   "CRT_OptionalPackages": "Pachete opționale",
