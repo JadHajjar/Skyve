@@ -120,8 +120,8 @@
     "One": "이것은 '{1}'의 테스트 버전입니다.\n\n업데이트는 예기치 않은 오류를 발생시킬 수 있습니다."
   },
   "Status_MissingDlc": {
-    "One": "You're missing the '{0}' DLC to use this package.",
-    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "이 패키지에 필요한 '{0}' DLC가 누락되었습니다.",
+    "Plural": "이 패키지에 필요한 다음 DLC들을 누락했습니다."
   },
   "Status_DependencyMod": "이것은 종속성 모드입니다. 하지만 이를 필요로 하는 어떤 패키지도 사용하고 있지 않은 것 같습니다.",
   "Status_SourceCodeNotAvailable": "이 모드의 소스 코드를 확인할 수 없습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
@@ -140,6 +140,7 @@
   "Stability_Broken": "이 패키지는 망가졌습니다.\n작동하지 않거나 게임을 망가트리는 것으로 알려져 있습니다.",
   "Stability_Incompatible": "이 패키지는 게임과 호환되지 않거나 게임을 망가트립니다.\n\n이것은 바로 제거해야 합니다.",
   "Stability_Local": "이 패키지는 이 패키지의 원본 모드인 '{0}'의 로컬 버전입니다.\n\n로컬 버전은 일반적으로 테스트 목적이나 Steam이 없는 경우에 사용됩니다.\n\n모드에 대한 업데이트를 찾으려면 패키지의 링크를 확인하세요.",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "다음 패키지를 구독해야 합니다:",
@@ -157,8 +158,8 @@
   },
   "Action_ExcludeThis": "'{0}' 를 제외해야 합니다.",
   "ExcludeThis": "이 패키지를 제외하기",
-  "Exclude": "제외 필요",
-  "Unsubscribe": "구독 취소 필요",
+  "Exclude": "제외",
+  "Unsubscribe": "구독 취소",
   "Action_ExcludeOther": {
     "One": "'{1}' 를 제외해야 합니다.",
     "Plural": "다음 패키지들을 제외해야 합니다:"
@@ -225,7 +226,7 @@
   "ScenarioMaking": "시나리오 제작용",
   "ThemeMaking": "테마 제작용",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "이 패키지에는 또 다른 호환성 경고가 있습니다.",
+    "Plural": "이 패키지에는 {0}개의 다른 호환성 경고가 더 있습니다."
   }
 }
