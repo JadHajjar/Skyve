@@ -140,6 +140,7 @@
   "Stability_Broken": "Tämä paketti on rikki.\nSen tiedetään joko rikkovan pelin tai se ei vain toimi.",
   "Stability_Incompatible": "Tämä paketti ei ole yhteensopiva pelin kanssa tai rikkoo sitä.\r\n\r\nSinun tulee poistaa se välittömästi.",
   "Stability_Local": "Tämä paketti on paikallinen versio alkuperäisestä modista '{0}'.\n\nPaikallisia versioita käytetään yleensä testaustarkoituksiin tai jos sinulla ei ole Steamia.\n\nTarkista paketin linkit, jotta voit etsiä päivityksiä modiin.",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Sinun pitäisi tilata seuraava paketti:",
@@ -197,7 +198,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} pitäisi jättää pois",
-    "Plural": "{0} {1} pitäisi sulkea pois"
+    "Plural": "{0} {1} pitäisi jättää pois"
   },
   "UnsubscribeCount": "{0} {1} , että sinun pitäisi peruuttaa tilaus",
   "SwitchCount": {
