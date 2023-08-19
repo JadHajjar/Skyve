@@ -1,8 +1,6 @@
 {
   "CompatibilityInfo": "Інформація про сумісність",
   "PlaysetBubble": "Поточний набір відтворення",
-  "StartCities": "Запустити Cities: Skylines",
-  "StopCities": "Зупинити Cities: Skylines",
   "AssetsBubble": "Ваші ассети",
   "ModsBubble": "Ваші моди",
   "Dashboard": "Панель керування",
@@ -10,24 +8,6 @@
   "ModOutOfDatePlural": "Застарілі моди",
   "SearchDlcs": "Шукати у ваших DLC..",
   "SearchPackages": "Пошук серед ваших пакунків..",
-  "ModIsLocal": "Мод локальний",
-  "ModIsRemoved": "Видалено з Steam",
-  "ModIsUnknown": "Не вдалося отримати інформацію цього моду з Steam",
-  "ModIsNotDownloaded": "Вміст не знайдено",
-  "ModIsOutOfDate": "Мод застарілий",
-  "ModIsMaybeOutOfDate": "Мод може бути застарілим",
-  "ModIsIncomplete": "Мод не повністю завантажений або деякі файли відсутні",
-  "ModIsUpToDate": "Мод оновлений і повністю завантажений",
-  "ModIncomplete": "Мод не повністю завантажено або деякі файли відсутні",
-  "ModIncompletePlural": "Моди не повністю завантажені або деякі файли відсутні",
-  "AssetIsLocal": "Локальний ассет",
-  "AssetIsRemoved": "Цей ассет видалено з Steam",
-  "AssetIsUnknown": "Не вдалося отримати інформацію цих ассетів з Steam",
-  "AssetIsNotDownloaded": "Цей ассет не завантажується, він більше не існує на вашому комп’ютері",
-  "AssetIsOutOfDate": "Ассет застарів",
-  "AssetIsMaybeOutOfDate": "Ассет може бути застарілим",
-  "AssetIsIncomplete": "Ассет не повністю завантажується або деякі файли відсутні",
-  "AssetIsUpToDate": "Ассет оновлений і повністю завантажений",
   "Vanilla": "Ванільний",
   "UpToDate": "Актуальний",
   "StatusUnknown": "Невідомий статус",
@@ -42,7 +22,6 @@
   "ViewPlaysets": "Переглянути ваші ігри",
   "AddPlayset": "Додати набір відтворення",
   "LHT": "Лівосторонній рух",
-  "NoWorkshop": "Вимкнути вміст майстерні",
   "NoAssets": "Вимкнути всі ассети",
   "NoMods": "Вимкнути всі моди",
   "AutoSave": "Автоматичне збереження",
@@ -50,7 +29,6 @@
   "CompatibilityStatus": "Статус сумісності",
   "AnyStatus": "Будь-який статус",
   "AnyCompatibilityStatus": "Будь-який статус",
-  "ModOwned": "У вас є цей мод",
   "NoLocalPackagesFound": "На вашому комп’ютері не знайдено жодних пакунків.",
   "CheckFolderInOptions": "Перевірте панель параметрів у випадку, якщо використовуються неправильні теки.",
   "NoPackagesMatchFilters": "Нема пакунків що відповідають вашим налаштуванням фільтра",
@@ -106,7 +84,7 @@
   "Sorting_Default": "Сортування за замовчуванням",
   "Sorting_LastEdit": "Дата останнього редагування",
   "Sorting_DateCreated": "Дата створення",
-  "Sorting_Usage": "Використання профілю",
+  "Sorting_Usage": "Використання гри",
   "Sorting_Name": "Ім’я",
   "Sorting_FileSize": "Загальний розмір файлу",
   "Sorting_UpdateTime": "Час оновлення",
@@ -483,19 +461,19 @@
   },
   "IncludedCount": {
     "One": "{0} {1} включений",
-    "Plural": "{0} {1} включено"
+    "Plural": "{0} {1} включений"
   },
   "EnabledCount": {
     "One": "{0} {1} увімкнений",
-    "Plural": "{0} {1} увімкнено"
+    "Plural": "{0} {1} увімкнений"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} включений та увімкнений",
-    "Plural": "{0} {1} включено та увімкнено"
+    "Plural": "{0} {1} включений та увімкнений"
   },
   "LoadedCount": {
     "One": "{0} {1} завантажений",
-    "Plural": "{0} {1} завантажено"
+    "Plural": "{0} {1} завантажений"
   },
   "ShowingCount": {
     "One": "Показано {0} з {1}",
@@ -551,7 +529,7 @@
   "PackageIsOutOfDate": "'{0}' застарілий.\n\nВи відстаєте на {1}",
   "PackageIsMaybeOutOfDate": "'{0}' може бути застарілим, воно було оновлено {1}",
   "PackageIsIncomplete": "Локальний розмір '{0}' ({1}) відрізняється від розміру в Steam {2}",
-  "RemovedFromSteam": "Видалено з воркшопа",
+  "RemovedByAuthor": "Removed by author",
   "Missing": "Відсутний",
   "LoggedInAs": "Ви увійшли як",
   "UnknownUser": "Невідомий користувач",
@@ -681,5 +659,6 @@
   "CleanupInfoTitle": "Що таке прибирання?",
   "TroubleshootCauseResult": "Наступні пакунки можуть бути причиною ваших проблем",
   "VerifiedAuthor": "Перевірений автор",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }
