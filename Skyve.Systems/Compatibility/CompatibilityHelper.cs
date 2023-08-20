@@ -18,16 +18,16 @@ public class CompatibilityHelper
 	private readonly IPackageUtil _contentUtil;
 	private readonly IPackageNameUtil _packageUtil;
 	private readonly IWorkshopService _workshopService;
-	private readonly ILocale _locale;
+	private readonly PackageAvailabilityService _packageAvailabilityService;
 
-	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILocale locale)
+	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService)
 	{
 		_compatibilityManager = compatibilityManager;
 		_contentManager = contentManager;
 		_contentUtil = contentUtil;
 		_packageUtil = packageUtil;
 		_workshopService = workshopService;
-		_locale = locale;
+		_packageAvailabilityService = new(_contentManager, _contentUtil, _compatibilityManager);
 	}
 
 	public void HandleStatus(CompatibilityInfo info, IndexedPackageStatus status)
@@ -56,7 +56,7 @@ public class CompatibilityHelper
 
 		if (status.Status.Action is StatusAction.Switch && status.Status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
 		{
-			packages = packages.Select(x => GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
+			packages = packages.Select(x => _compatibilityManager.GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
 		}
 
 		if (status.Status.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
@@ -110,7 +110,7 @@ public class CompatibilityHelper
 
 		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Interaction.Action is StatusAction.Switch)
 		{
-			packages = packages.Select(x => GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
+			packages = packages.Select(x => _compatibilityManager.GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
 		}
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
@@ -120,11 +120,11 @@ public class CompatibilityHelper
 				return;
 			}
 
-			packages.RemoveAll(x => !IsPackageEnabled(x, false, false));
+			packages.RemoveAll(x => !_packageAvailabilityService.IsPackageEnabled(x, false));
 		}
 		else if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages)
 		{
-			packages.RemoveAll(x => IsPackageEnabled(x, true, true));
+			packages.RemoveAll(x => _packageAvailabilityService.IsPackageEnabled(x, true));
 		}
 
 		if (interaction.Interaction.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
@@ -166,7 +166,7 @@ public class CompatibilityHelper
 	{
 		foreach (var item in packages)
 		{
-			if (IsPackageEnabled(item, true, true))
+			if (_packageAvailabilityService.IsPackageEnabled(item, true))
 			{
 				HandleStatus(info, new PackageStatus(StatusType.Succeeded, StatusAction.UnsubscribeThis) { Packages = new[] { item } });
 
@@ -177,90 +177,6 @@ public class CompatibilityHelper
 		return false;
 	}
 
-	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)
-	{
-		if (!_compatibilityManager.CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
-		{
-			return package;
-		}
-
-		if (indexedPackage.SucceededBy is not null)
-		{
-			return new GenericPackageIdentity(indexedPackage.SucceededBy.Packages.First().Key);
-		}
-
-		if (_contentManager.GetPackageById(package) is null)
-		{
-			foreach (var item in indexedPackage.RequirementAlternatives.Keys)
-			{
-				if (_contentManager.GetPackageById(new GenericPackageIdentity(item)) is IPackageIdentity identity)
-				{
-					return identity;
-				}
-			}
-		}
-
-		return package;
-	}
-
-	private bool IsPackageEnabled(ulong steamId, bool withAlternatives, bool withSuccessors)
-	{
-		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
-
-		if (isEnabled(_contentManager.GetPackageById(new GenericPackageIdentity(steamId))))
-		{
-			return true;
-		}
-
-		if (indexedPackage is null)
-		{
-			return false;
-		}
-
-		if (withAlternatives)
-		{
-			foreach (var item in indexedPackage.RequirementAlternatives)
-			{
-				if (item.Key != steamId)
-				{
-					foreach (var package in FindPackage(item.Value, withSuccessors))
-					{
-						if (isEnabled(package))
-						{
-							return true;
-						}
-					}
-				}
-			}
-		}
-
-		foreach (var package in FindPackage(indexedPackage, withSuccessors))
-		{
-			if (isEnabled(package))
-			{
-				return true;
-			}
-		}
-
-		foreach (var item in indexedPackage.Group)
-		{
-			if (item.Key != steamId)
-			{
-				foreach (var package in FindPackage(item.Value, withSuccessors))
-				{
-					if (isEnabled(package))
-					{
-						return true;
-					}
-				}
-			}
-		}
-
-		return false;
-
-		bool isEnabled(ILocalPackage? package) => package is not null && _contentUtil.IsIncludedAndEnabled(package);
-	}
-
 	private bool ShouldNotBeUsed(ulong steamId)
 	{
 		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(steamId));
@@ -269,27 +185,6 @@ public class CompatibilityHelper
 			|| _compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
 			&& (package.Package.Stability is PackageStability.Broken
 			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false));
-	}
-
-	public IndexedPackage? GetPackageData(IPackageIdentity identity)
-	{
-		var steamId = identity.Id;
-
-		if (steamId > 0)
-		{
-			var packageData = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
-
-			if (packageData is null && identity is IPackage package)
-			{
-				packageData = new IndexedPackage(_compatibilityManager.GetAutomatedReport(package));
-
-				packageData.Load(_compatibilityManager.CompatibilityData.Packages);
-			}
-
-			return packageData;
-		}
-
-		return null;
 	}
 
 	internal IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withSuccessors)

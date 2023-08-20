@@ -85,6 +85,11 @@ public class AssetsBubble : StatusBubbleBase
 				_compatibilityCounts[notif] = 1;
 			}
 		}
+
+		if (Loading)
+		{
+			Loading = false;
+		}
 	}
 
 	private void ProfileManager_ProfileChanged()
