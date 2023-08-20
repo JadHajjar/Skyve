@@ -140,7 +140,7 @@
   "Stability_Broken": "このパッケージは破損しています。\nゲームがプレイできない・既に動作しないことが判明しています。",
   "Stability_Incompatible": "このパッケージはゲームと互換性が無くプレイ出来ません。\n\n直ちに削除する必要があります。",
   "Stability_Local": "このパッケージは、オリジナルMOD 「{0}」のローカルバージョンです。\n\n一般的にローカルバージョンは、テスト目的やSteam以外のプラットホームで使用されます。\n\nMODのアップデートを調べる場合は、パッケージのリンクをチェックして下さい。",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_BrokenFromPatch": "パッケージは最近のパッチで壊れました。アップデートして対応するまでしばらく待って下さい。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "以下のパッケージをサブスクする必要があります。",

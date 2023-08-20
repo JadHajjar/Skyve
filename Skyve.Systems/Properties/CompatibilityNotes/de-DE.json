@@ -129,7 +129,7 @@
   "LOD has too many vertices.": "LOD hat zu viele Vertices.",
   "Various players report, information could not be gathered.": "Verschiedene Spieler melden, Informationen konnten nicht gesammelt werden.",
   "Seems to be a Traffic Manager clone, but tells it is Auto Line Color and the sourcecode is not available.": "Scheint ein Traffic Manager Klon zu sein, aber sagt es ist Auto Line Color und der Quellcode ist nicht verfügbar.",
-  "There are bugs that may cause bad files, unsubscribe as soon as possible!": "There are bugs that may cause bad files, unsubscribe as soon as possible!",
+  "There are bugs that may cause bad files, unsubscribe as soon as possible!": "Es gibt Fehler, die defekte Dateien verursachen können. So schnell wie möglich abbestellen!",
   "After changing styles to be back to none and reloading the save it reverts back to the style that was selected beforehand. It despawns historical buildings of other style. Workaround is to delete the district and paint it again.\r\nFix is in development.": "Nach dem Ändern der Stile zurück zu \"keiner\" und dem neu laden kehrt es zu dem zuvor gewählten Stil zurück. Es löscht dabei historische Gebäude anderer Stile. Der Workaround besteht darin, den Bezirk zu löschen und ihn erneut zu malen.\nFix ist in Entwicklung.",
   "Africa in Miniature buildings don't show up in menus.": "Afrika in Miniatur Gebäude erscheinen nicht in Menüs.",
   "Lumina includes an executable to run LUT Editor that is located in the Workshop folder of Lumina.": "Lumina enthält ein ausführbares Programm, um LUT Editor auszuführen, das sich im Workshop-Ordner von Lumina befindet.",

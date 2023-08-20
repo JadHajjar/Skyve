@@ -529,7 +529,7 @@
   "PackageIsOutOfDate": "'{0}' ist veraltet\n\nDu hängst {1} hinterher",
   "PackageIsMaybeOutOfDate": "'{0}' kann veraltet sein, es wurde aktualisiert {1}",
   "PackageIsIncomplete": "Die lokale Größe von '{0}' ({1}) unterscheidet sich von der in Steam angegebenen {2}",
-  "RemovedByAuthor": "Removed by author",
+  "RemovedByAuthor": "Vom Autor entfernt",
   "Missing": "Fehlend",
   "LoggedInAs": "Angemeldet als",
   "UnknownUser": "Unbekannter Benutzer",

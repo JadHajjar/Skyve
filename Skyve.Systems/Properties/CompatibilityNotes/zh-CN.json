@@ -129,7 +129,7 @@
   "LOD has too many vertices.": "LOD 顶点数量过多。",
   "Various players report, information could not be gathered.": "多个玩家报告说无法收集信息。",
   "Seems to be a Traffic Manager clone, but tells it is Auto Line Color and the sourcecode is not available.": "此模组看起来是 Traffic Manager 的复制品，但其实它是 Auto Line Color ，并且源代码不可用。",
-  "There are bugs that may cause bad files, unsubscribe as soon as possible!": "There are bugs that may cause bad files, unsubscribe as soon as possible!",
+  "There are bugs that may cause bad files, unsubscribe as soon as possible!": "存在可能导致坏档的 Bug，尽快取消订阅！",
   "After changing styles to be back to none and reloading the save it reverts back to the style that was selected beforehand. It despawns historical buildings of other style. Workaround is to delete the district and paint it again.\r\nFix is in development.": "将区划的建筑风格更改为 \"none (无)\" 并重新加载存档后，区划的建筑风格会恢复为之前选择的风格，并且会导致其他建筑风格中的历史建筑消失。\n临时的解决方法是：删除该区划并重新绘制区划。\n作者正在修复此问题。",
   "Africa in Miniature buildings don't show up in menus.": "菜单中，Africa in Miniature DLC 的建筑没有显示。",
   "Lumina includes an executable to run LUT Editor that is located in the Workshop folder of Lumina.": "Lumina 包含了一个可执行文件，用于运行此模组 Workshop 文件夹中的 LUT 编辑器。",

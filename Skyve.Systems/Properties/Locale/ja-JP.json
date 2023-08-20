@@ -529,7 +529,7 @@
   "PackageIsOutOfDate": "「{0}」は古いバージョン\n\n{1} を経過しています",
   "PackageIsMaybeOutOfDate": "「{0}」は古い可能性がありますが、{1} は更新済み",
   "PackageIsIncomplete": "ローカル側の「{0}」 ({1}) とSteam側の {2} でサイズが違う",
-  "RemovedByAuthor": "Removed by author",
+  "RemovedByAuthor": "作者によって削除済み",
   "Missing": "不明",
   "LoggedInAs": "次でログイン中",
   "UnknownUser": "不明なユーザー",

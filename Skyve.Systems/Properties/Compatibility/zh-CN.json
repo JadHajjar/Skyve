@@ -140,7 +140,7 @@
   "Stability_Broken": "此插件已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
   "Stability_Incompatible": "此插件与游戏不兼容，或者会使游戏崩溃。\n\n您应当立刻取消订阅或删除此插件。",
   "Stability_Local": "此插件是模组 '{0}' 的本地版本。\n\n本地模组通常用于进行测试，或在非 Steam 版本的游戏使用。\n\n请查看插件的链接以查找模组的更新版本。",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_BrokenFromPatch": "此插件在最近的一次游戏更新后损坏了。请等待它更新后再使用。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "您应当订阅以下插件：",
