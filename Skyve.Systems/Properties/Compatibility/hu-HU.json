@@ -140,7 +140,7 @@
   "Stability_Broken": "Ez a csomag elromlott. Várhatóan vagy megszakítja a játékot, vagy egyszerűen nem működik.",
   "Stability_Incompatible": "Ez a csomag nem kompatibilis a játékkal, vagy megszakítja azt.\n\nAzonnal el kell távolítanod.",
   "Stability_Local": "Ez a csomag az eredeti mod '{0}' helyi változata.\n\nA helyi verziókat általában tesztelési célokra használják, vagy arra az esetre, ha nincs Steam.\n\nTekintsd meg a csomag linkjeit, hogy frissítéseket kereshess a modhoz.",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_BrokenFromPatch": "Ez a csomag egy legutóbbi javítás után tönkrement. Kérjük, várd meg, amíg frissül, mielőtt használnád.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "A következő csomagra kell feliratkoznod:",
