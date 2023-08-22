@@ -129,7 +129,7 @@
   "LOD has too many vertices.": "A LOD-nak túl sok csúcsa van.",
   "Various players report, information could not be gathered.": "Különböző játékosok jelentették a hibás működést, de több információt erről nem sikerült összegyűjteni.",
   "Seems to be a Traffic Manager clone, but tells it is Auto Line Color and the sourcecode is not available.": "Úgy tűnik, hogy egy Traffic Manager klón, de azt mondja, hogy Auto Line Color, azonban a forráskód nem érhető el.",
-  "There are bugs that may cause bad files, unsubscribe as soon as possible!": "There are bugs that may cause bad files, unsubscribe as soon as possible!",
+  "There are bugs that may cause bad files, unsubscribe as soon as possible!": "Vannak olyan hibák, amelyek hibás fájlokat hoznak létre, mielőbb iratkozz le!",
   "After changing styles to be back to none and reloading the save it reverts back to the style that was selected beforehand. It despawns historical buildings of other style. Workaround is to delete the district and paint it again.\r\nFix is in development.": "Miután megváltoztattad a stílusokat a „nincs” értékre, és a mentés újratöltése után visszaáll az előzőleg kiválasztott stílusodhoz. Elpusztítja a más stílusú történelmi épületeket. A megoldás a kerület törlése és újrafestése. A javítás fejlesztés alatt áll.",
   "Africa in Miniature buildings don't show up in menus.": "Az \"Afrika miniatűr épületek\" nem jelenik meg a menüben.",
   "Lumina includes an executable to run LUT Editor that is located in the Workshop folder of Lumina.": "A Lumina tartalmaz egy végrehajtható fájlt a LUT Editor futtatásához, amely a Lumina Workshop mappájában található.",
