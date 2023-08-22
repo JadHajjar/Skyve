@@ -70,11 +70,10 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PlaysetDelete => _instance.GetText(nameof(PlaysetDelete));
 	public static Translation ShouldNotBeSubscribed => _instance.GetText(nameof(ShouldNotBeSubscribed));
 	public static Translation LoadingScreenMod => _instance.GetText(nameof(LoadingScreenMod));
-	public static Translation ExcludeInclude => _instance.GetText(nameof(ExcludeInclude));
-	public static Translation EnableDisable => _instance.GetText(nameof(EnableDisable));
 	public static Translation OpenPackagePage => _instance.GetText(nameof(OpenPackagePage));
 	public static Translation OpenLocalFolder => _instance.GetText(nameof(OpenLocalFolder));
 	public static Translation ViewOnSteam => _instance.GetText(nameof(ViewOnSteam));
+	public static Translation ViewXOnSteam => _instance.GetText(nameof(ViewXOnSteam));
 	public static Translation ReDownloadPackage => _instance.GetText(nameof(ReDownloadPackage));
 	public static Translation DownloadPackage => _instance.GetText(nameof(DownloadPackage));
 	public static Translation CopySteamId => _instance.GetText(nameof(CopySteamId));
@@ -207,8 +206,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation AddToSearch => _instance.GetText(nameof(AddToSearch));
 	public static Translation CopyToClipboard => _instance.GetText(nameof(CopyToClipboard));
 	public static Translation ViewPackageCR => _instance.GetText(nameof(ViewPackageCR));
-	public static Translation FilterByThisEnabledStatus => _instance.GetText(nameof(FilterByThisEnabledStatus));
-	public static Translation FilterByThisIncludedStatus => _instance.GetText(nameof(FilterByThisIncludedStatus));
 	public static Translation CleanupInfo => _instance.GetText(nameof(CleanupInfo));
 	public static Translation CloseCitiesToClean => _instance.GetText(nameof(CloseCitiesToClean));
 	public static Translation CleanupRequiresGameToOpen => _instance.GetText(nameof(CleanupRequiresGameToOpen));
@@ -326,6 +323,15 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FaultyPackagesTitle => _instance.GetText(nameof(FaultyPackagesTitle));
 	public static Translation CleanupInfoTitle => _instance.GetText(nameof(CleanupInfoTitle));
 	public static Translation TroubleshootCauseResult => _instance.GetText(nameof(TroubleshootCauseResult));
+	public static Translation EnablePackage => _instance.GetText(nameof(EnablePackage));
+	public static Translation DisablePackage => _instance.GetText(nameof(DisablePackage));
+	public static Translation IncludePackage => _instance.GetText(nameof(IncludePackage));
+	public static Translation ExcludePackage => _instance.GetText(nameof(ExcludePackage));
+	public static Translation FilterByEnabled => _instance.GetText(nameof(FilterByEnabled));
+	public static Translation FilterByDisabled => _instance.GetText(nameof(FilterByDisabled));
+	public static Translation FilterByIncluded => _instance.GetText(nameof(FilterByIncluded));
+	public static Translation FilterByExcluded => _instance.GetText(nameof(FilterByExcluded));
+	public static Translation ViewOnGithub => _instance.GetText(nameof(ViewOnGithub));
 
 	public static void Load() { _ = _instance; }
 

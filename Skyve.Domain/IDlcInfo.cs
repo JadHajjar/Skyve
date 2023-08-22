@@ -8,4 +8,6 @@ public interface IDlcInfo
 	string ThumbnailUrl { get; }
 	DateTime ReleaseDate { get; }
 	string Description { get; }
+	string? Price { get; set; }
+	float Discount { get; set; }
 }

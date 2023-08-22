@@ -270,6 +270,8 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
 		DR_ServerTime.Text = Locale.DateUpdated;
 		DD_Author.Text = Locale.Author;
+		OT_ModAsset.Option1 = Locale.Mod.Plural;
+		OT_ModAsset.Option2 = Locale.Asset.Plural;
 	}
 
 	protected override void OnCreateControl()

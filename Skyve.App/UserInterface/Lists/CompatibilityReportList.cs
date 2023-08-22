@@ -1036,16 +1036,38 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 						point = IncludedRect.Location;
 						return true;
 					}
+					else
+					{
+						text = string.Empty;
+						point = default;
+						return false;
+					}
 				}
 
-				text = $"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}";
+				if (Item.Package.LocalPackage.IsIncluded())
+				{
+					text = $"{Locale.ExcludePackage.Format(Item.Package.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
+				}
+				else
+				{
+					text = $"{Locale.IncludePackage.Format(Item.Package.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
+				}
+
 				point = IncludedRect.Location;
 				return true;
 			}
 
-			if (EnabledRect.Contains(location) && Item.Package?.LocalPackage is not null)
+			if (EnabledRect.Contains(location) && Item.Package?.LocalParentPackage?.Mod is IMod mod1)
 			{
-				text = $"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}";
+				if (mod1.IsEnabled())
+				{
+					text = $"{Locale.DisablePackage.Format(mod1.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
+				}
+				else
+				{
+					text = $"{Locale.EnablePackage.Format(mod1.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
+				}
+
 				point = EnabledRect.Location;
 				return true;
 			}
