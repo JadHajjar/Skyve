@@ -529,7 +529,7 @@
   "PackageIsOutOfDate": "\"{0}\" elavult\n\nÖn {1} lemaradt",
   "PackageIsMaybeOutOfDate": "Lehet, hogy a \"{0}\" elavult, frissítve: {1}",
   "PackageIsIncomplete": "A '{0}' ({1}) helyi mérete eltér a Steam {2}-től",
-  "RemovedByAuthor": "Removed by author",
+  "RemovedByAuthor": "A szerző eltávolította",
   "Missing": "Hiányzó",
   "LoggedInAs": "Bejelentkezve mint",
   "UnknownUser": "Ismeretlen felhasználó",

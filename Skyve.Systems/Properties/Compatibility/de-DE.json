@@ -140,7 +140,7 @@
   "Stability_Broken": "Dieses Paket ist defekt.\nEs ist bekannt, dass es entweder Spielfunktionen zerstört oder einfach nicht funktioniert.",
   "Stability_Incompatible": "Dieses Paket ist nicht kompatibel mit dem Spiel oder zerstört Spielfunktionen.\n\nDu solltest es sofort entfernen.",
   "Stability_Local": "Dieses Paket ist eine lokale Version der veröffentlichten Mod '{0}'.\n\nLokale Versionen werden in der Regel für Testzwecke verwendet oder für den Fall, dass du keine Steam-Version des Spiels besitzt.\n\nÜberprüfe die Links des Pakets, um nach Aktualisierungen für die Mod zu suchen.",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_BrokenFromPatch": "Dieses Paket ist seit dem letzten Spiel-Update defekt. Bitte warte, bis es aktualisiert wird, bevor du es wieder verwendest.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Du solltest folgendes Paket abonnieren:",
