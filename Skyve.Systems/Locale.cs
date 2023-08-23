@@ -332,6 +332,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FilterByIncluded => _instance.GetText(nameof(FilterByIncluded));
 	public static Translation FilterByExcluded => _instance.GetText(nameof(FilterByExcluded));
 	public static Translation ViewOnGithub => _instance.GetText(nameof(ViewOnGithub));
+	public static Translation Free => _instance.GetText(nameof(Free));
 
 	public static void Load() { _ = _instance; }
 

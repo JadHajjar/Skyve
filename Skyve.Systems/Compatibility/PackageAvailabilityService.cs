@@ -24,7 +24,12 @@ public class PackageAvailabilityService
 		_compatibilityManager = compatibilityManager;
 		_cache = new();
 
-		foreach (var package in _packageManager.Packages.Select(x => x.Id).Where(x => x > 0))
+		var ids = new List<ulong>();
+
+		ids.AddRange(_packageManager.Packages.Select(x => x.Id));
+		ids.AddRange(_compatibilityManager.CompatibilityData.Packages.Keys);
+
+		foreach (var package in ids.Distinct().Where(x => x > 0))
 		{
 			_cache[package] = (GetPackageEnabled(package, false), GetPackageEnabled(package, true));
 		}
