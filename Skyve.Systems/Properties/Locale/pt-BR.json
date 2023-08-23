@@ -666,5 +666,6 @@
   "FilterByIncluded": "Mostrar apenas itens incluídos.",
   "FilterByExcluded": "Mostrar apenas itens incluídos.",
   "ViewOnGithub": "Ver o repositório do GitHub deste pacote",
-  "ViewXOnSteam": "Ver '{0}' na Steam"
+  "ViewXOnSteam": "Ver '{0}' na Steam",
+  "Free": "Grátis"
 }
