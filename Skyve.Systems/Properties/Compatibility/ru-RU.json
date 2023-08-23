@@ -140,7 +140,7 @@
   "Stability_Broken": "Этот пакет сломан.\r\nИзвестно, что он либо прервал игру, либо просто не работает.",
   "Stability_Incompatible": "Этот пакет не совместим или ломает игру.\r\n\r\nВы должны удалить его немедленно.",
   "Stability_Local": "Этот пакет является локальной версией его оригинального мода '{0}'.\r\n\r\nЛокальные версии обычно используются для тестирования или если у вас нет Steam.\r\n\r\nПроверьте ссылки на пакет, чтобы найти обновления к моду.",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_BrokenFromPatch": "Этот пакет сломался после последнего патча. Пожалуйста, дождитесь его обновления перед его использованием.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "You should subscribe to the following package.",
@@ -226,7 +226,7 @@
   "ScenarioMaking": "Создание сценария",
   "ThemeMaking": "Создание темы",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "Этот пакет имеет еще одно предупреждение о совместимости",
+    "Plural": "В этом пакете есть предупреждения {0} о совместимости"
   }
 }
