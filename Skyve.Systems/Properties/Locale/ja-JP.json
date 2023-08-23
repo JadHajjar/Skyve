@@ -666,5 +666,6 @@
   "FilterByIncluded": "含まれているアイテムのみ表示",
   "FilterByExcluded": "除外されているアイテムのみ表示",
   "ViewOnGithub": "このパッケージの Github リポジトリを見る",
-  "ViewXOnSteam": "Steamで「{0}」を表示"
+  "ViewXOnSteam": "Steamで「{0}」を表示",
+  "Free": "Free"
 }
