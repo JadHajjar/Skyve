@@ -11,8 +11,6 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 	public DlcListControl()
 	{
-		HighlightOnHover = true;
-		SeparateWithLines = true;
 		GridView = true;
 		DynamicSizing = true;
 
@@ -50,13 +48,16 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		var rects = item.Rectangles;
 
-		if (rects.IncludedRect.Contains(e.Location) && _dlcManager.IsAvailable(item.Item.Id))
+		if (e.Button == MouseButtons.Left)
 		{
-			_dlcManager.SetIncluded(item.Item, !_dlcManager.IsIncluded(item.Item));
-		}
-		else
-		{
-			PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.Item.Id}");
+			if (rects.IncludedRect.Contains(e.Location) && _dlcManager.IsAvailable(item.Item.Id))
+			{
+				_dlcManager.SetIncluded(item.Item, !_dlcManager.IsIncluded(item.Item));
+			}
+			else
+			{
+				PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.Item.Id}");
+			}
 		}
 	}
 
@@ -94,7 +95,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		{
 			e.BackColor = (e.IsSelected ? e.BackColor : FormDesign.Design.AccentBackColor).MergeColor(FormDesign.Design.ActiveColor, !e.Rects.IncludedRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
 
-			isPressed = e.HoverState.HasFlag(HoverState.Pressed);
+			isPressed = e.HoverState.HasFlag(HoverState.Pressed) && !e.Rects.IncludedRect.Contains(CursorLocation);
 		}
 
 		base.OnPaintItemGrid(e);
@@ -106,11 +107,11 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		var height = (e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - GridPadding.Vertical) / 2;
 		var dateRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + GridPadding.Top), _settings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), "I_UpdateTime", height: height, smaller: true);
 
-		e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, dateRect.Bottom + GridPadding.Top), e.Item.Price, null, FormDesign.Design.GreenColor, height: height, smaller: true);
+		e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, dateRect.Bottom + GridPadding.Top), e.Item.Price.IfEmpty(Locale.Free), null, FormDesign.Design.GreenColor, height: height, smaller: true);
 
 		var description = System.Net.WebUtility.HtmlDecode(e.Item.Description);
 		using var font = UI.Font(7F);
-		e.Graphics.DrawString(description, font, new SolidBrush(Color.FromArgb(150, e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor)), new Rectangle(e.Rects.IconRect.X, e.Rects.IconRect.Bottom + GridPadding.Vertical, e.ClipRectangle.Width, 9999));
+		e.Graphics.DrawString(description, font, new SolidBrush(Color.FromArgb(180, isPressed ? FormDesign.Design.ActiveForeColor : ForeColor)), new Rectangle(e.Rects.IconRect.X, e.Rects.IconRect.Bottom + GridPadding.Vertical, e.ClipRectangle.Width, 9999));
 
 		e.DrawableItem.CachedHeight = -e.ClipRectangle.Top + e.Rects.IconRect.Bottom + (GridPadding.Vertical * 4) + (int)e.Graphics.Measure(description, font, e.ClipRectangle.Width).Height;
 
@@ -188,39 +189,6 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
 	}
 
-	private Rectangle DrawLabel(ItemPaintEventArgs<IDlcInfo, Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
-	{
-		if (text == null)
-		{
-			return Rectangle.Empty;
-		}
-
-		var large = false;
-		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
-
-		if (icon is not null)
-		{
-			size.Width += icon.Width + Padding.Left;
-		}
-
-		size.Width += Padding.Left;
-
-		rectangle = rectangle.Pad(Padding).Align(size, alignment);
-
-		using var backBrush = rectangle.Gradient(color);
-		using var foreBrush = new SolidBrush(color.GetTextColor());
-
-		e.Graphics.FillRoundedRectangle(backBrush, rectangle, (int)(3 * UI.FontScale));
-		e.Graphics.DrawString(text, UI.Font(large ? 9F : 7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + (Padding.Left * 2) - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-
-		if (icon is not null)
-		{
-			e.Graphics.DrawImage(icon.Color(color.GetTextColor()), rectangle.Pad(Padding.Left, 0, 0, 0).Align(icon.Size, ContentAlignment.MiddleLeft));
-		}
-
-		return rectangle;
-	}
-
 	protected override Rectangles GenerateRectangles(IDlcInfo item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item)
@@ -237,22 +205,6 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		rects.CenterRect = rects.TextRect.Pad(-GridPadding.Horizontal, 0, 0, 0);
 
 		return rects;
-
-		//var includeItemHeight = ItemHeight;
-		//var iconSize = rectangle.Height - Padding.Vertical;
-		//var rects = new Rectangles(item)
-		//{
-		//	IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft),
-		//	SteamRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(includeItemHeight, ItemHeight), ContentAlignment.TopRight)
-		//};
-
-		//rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + (2 * Padding.Left)).Align(new Size(iconSize * 460 / 215, iconSize), ContentAlignment.MiddleLeft);
-
-		//rects.CenterRect = new Rectangle(rects.IconRect.X, rectangle.Y, rects.SteamRect.X - rects.IconRect.X, rectangle.Height);
-
-		//rects.TextRect = rectangle.Pad(rects.IconRect.X + rects.IconRect.Width + Padding.Left, 0, rectangle.Width - rects.CenterRect.Right, 0);
-
-		//return rects;
 	}
 
 	public class Rectangles : IDrawableItemRectangles<IDlcInfo>
