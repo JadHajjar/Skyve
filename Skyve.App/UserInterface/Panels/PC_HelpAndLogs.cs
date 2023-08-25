@@ -29,7 +29,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		foreach (var button in TLP_HelpLogs.GetControls<SlickButton>())
 		{
-			if (button != B_ChangeLog)
+			if (button != B_ChangeLog && button != B_Donate)
 			{
 				SlickTip.SetTo(button, LocaleHelper.GetGlobalText($"{button.Text}_Tip"));
 			}

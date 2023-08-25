@@ -39,8 +39,8 @@ public partial class PC_Options : PanelContent
 
 		if (CrossIO.CurrentPlatform is Platform.MacOSX)
 		{
-			TB_GamePath.Placeholder = TB_GamePath.Placeholder = "/Users/USERNAME/Library/Application Support/Steam/steamapps/common/Cities_Skylines";
-			TB_GamePath.Placeholder = TB_AppDataPath.Placeholder = "/Users/USERNAME/Library/Application Support/Colossal Order/Cities_Skylines";
+			TB_GamePath.Placeholder = "/Users/USERNAME/Library/Application Support/Steam/steamapps/common/Cities_Skylines";
+			TB_AppDataPath.Placeholder = "/Users/USERNAME/Library/Application Support/Colossal Order/Cities_Skylines";
 			TB_SteamPath.Placeholder = "/Applications/Steam.app/Contents";
 		}
 
