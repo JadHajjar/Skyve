@@ -529,7 +529,7 @@
   "Missing": "丢失",
   "LoggedInAs": "登录为",
   "UnknownUser": "未知用户",
-  "AddMeaningfulDescription": "发送申请前，请先添加一个有意义的描述。",
+  "AddMeaningfulDescription": "发送申请前，请提供有效的描述信息。",
   "RedownloadComplete": "Skyve 已重新下载存在问题的插件。",
   "CleanupComplete": "Skyve 已经将您已取消订阅（但没删除干净）的插件清理完毕。",
   "PendingSubscribeTo": {
