@@ -347,7 +347,7 @@
   "Clouds & Fog Toggler overrules the fog options of Hide it, Bobby.": "Clouds & Fog Toggler 会覆盖 Hide it, Bobby 的隐藏云雾选项。",
   "Several users report using these together without issues.": "几个用户报告说，他们同时使用这些模组没有遇到问题。",
   "Prop Painter was not updated to recent Move It updates, creating issues for any mod that try to integrate with Move It.": "Prop Painter 没有适配最新的 Move It 版本，会导致任何与 Move It 搭配使用的模组出现问题。",
-  "If you change the Move It \"enhanced Pillar Control\" option your existing surface paints might disappear.": "如果您改变了 Move It 的“高级桥墩控制”选项，已涂抹的地面可能会重置。",
+  "If you change the Move It \"enhanced Pillar Control\" option your existing surface paints might disappear.": "如果您改变了 Move It 模组的“高级桥墩控制”选项，用 Surface Painter 涂画的地面纹理可能会消失（这种问题更常见于桥墩附近涂画的地面纹理）。",
   "Changing the date may cause a gap in the graph or cause part of the graph to be overwritten.": "更改日期可能会导致图形中出现间隙，或部分图形被覆盖。",
   "Lifecycle Rebalance already includes 'no deathcare' functionality.": "Lifecycle Rebalance Revisited 已经整合了 \"No Deathcare\" 功能。",
   "Use Ploppable RICO Revisited instead.": "请使用 Ploppable RICO Revisited 替换此模组。",
