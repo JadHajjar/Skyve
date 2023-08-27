@@ -57,6 +57,9 @@
     </Compile>
     <Compile Update="UserInterface\Content\DownloadsInfoControl.cs" />
     <Compile Update="UserInterface\Content\UserDescriptionControl.cs" />
+    <Compile Update="UserInterface\Dashboard\D_AssetInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\AuthorDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageTypeDropDown.cs" />

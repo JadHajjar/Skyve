@@ -1,17 +1,24 @@
 ﻿using Skyve.App.Interfaces;
-using Skyve.App.UserInterface.Bubbles;
+using Skyve.App.UserInterface.Dashboard;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_MainPage : PanelContent
 {
-	private bool buttonStateRunning;
+	private readonly bool buttonStateRunning;
 	private readonly INotifier _notifier;
 	private readonly ICitiesManager _citiesManager;
 	private readonly IPlaysetManager _playsetManager;
 	private readonly IModLogicManager _modLogicManager;
+	private IDashboardItem? MoveItem;
+	private IDashboardItem? ResizeItem;
+	private Point CursorStart;
+	private bool layoutInProgress;
+	private readonly Dictionary<string, Rectangle> _dashItemSizes = new();
 
 	public PC_MainPage()
 	{
@@ -19,7 +26,15 @@ public partial class PC_MainPage : PanelContent
 
 		InitializeComponent();
 
-		B_StartStop.Enabled = _notifier.IsContentLoaded && _citiesManager.IsAvailable();
+		P_Board.SuspendLayout();
+
+		var assembly_base = Assembly.GetExecutingAssembly();
+		var assembly = Assembly.GetEntryAssembly();
+
+		LoadItems(assembly_base.GetTypes().Where(type => typeof(IDashboardItem).IsAssignableFrom(type) && !type.IsAbstract));
+		LoadItems(assembly.GetTypes().Where(type => typeof(IDashboardItem).IsAssignableFrom(type) && !type.IsAbstract));
+
+		//B_StartStop.Enabled = _notifier.IsContentLoaded && _citiesManager.IsAvailable();
 
 		if (!_notifier.IsContentLoaded)
 		{
@@ -30,9 +45,9 @@ public partial class PC_MainPage : PanelContent
 
 		RefreshButtonState(_citiesManager.IsRunning(), true);
 
-		SlickTip.SetTo(B_StartStop, string.Format(Locale.LaunchTooltip, "[F5]"));
+		//SlickTip.SetTo(B_StartStop, string.Format(Locale.LaunchTooltip, "[F5]"));
 
-		label1.Text = Locale.MultipleLOM;
+		//label1.Text = Locale.MultipleLOM;
 
 		_notifier.PlaysetUpdated += ProfileManager_ProfileUpdated;
 
@@ -42,30 +57,400 @@ public partial class PC_MainPage : PanelContent
 		}
 	}
 
+	private void LoadItems(IEnumerable<Type> types)
+	{
+		foreach (var type in types)
+		{
+			var control = (IDashboardItem)Activator.CreateInstance(type);
+
+			control.Size = default;
+			control.MouseDown += DashMouseDown;
+			control.MouseMove += DashMouseMove;
+			control.MouseUp += DashMouseUp;
+			control.Paint += Control_Paint;
+			control.ResizeRequested += DashResize;
+
+			P_Board.Controls.Add(control);
+		}
+	}
+
+	private void Control_Paint(object sender, PaintEventArgs e)
+	{
+		if (placeholder.Parent is null)
+		{
+			return;
+		}
+
+		e.Graphics.ResetClip();
+
+		var padding = (int)(12 * UI.FontScale);
+		var border = (int)(10 * UI.FontScale);
+		var color = FormDesign.Design.ForeColor;
+		var rectangle = placeholder.Bounds;
+
+		rectangle.X -= ((Control)sender).Left;
+		rectangle.Y -= ((Control)sender).Top;
+
+		using var brush = new SolidBrush(Color.FromArgb(25, color));
+		e.Graphics.FillRoundedRectangle(brush, rectangle.Pad((int)(1.5 * UI.FontScale) + padding), border);
+
+		using var pen = new Pen(Color.FromArgb(100, color), (float)(1.5 * UI.FontScale)) { DashStyle = DashStyle.Dash };
+		e.Graphics.DrawRoundedRectangle(pen, rectangle.Pad((int)(1.5 * UI.FontScale) + padding), border);
+	}
+
+	private void DashResize(object sender, EventArgs e)
+	{
+		this.TryInvoke(() => P_Board_Layout(sender, null));
+	}
+
+	private void DashMouseDown(object sender, MouseEventArgs e)
+	{
+		if (e.Button != MouseButtons.Left)
+		{
+			return;
+		}
+
+		var dashItem = (IDashboardItem)sender;
+		var moveRect = dashItem.GetMoveArea();
+		var control = dashItem;
+
+		if (control.ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
+		{
+			placeholder.Parent = P_Board;
+			placeholder.Bounds = control.Bounds.Pad(0, 0, -control.Padding.Horizontal, -control.Padding.Vertical);
+			placeholder.SendToBack();
+
+			dashItem.ResizeInProgress = true;
+			ResizeItem = dashItem;
+			CursorStart = new(Cursor.Position.X, control.Width);
+			control.Bounds = control.Bounds.Pad(control.Padding);
+			control.BringToFront();
+		}
+		else if (moveRect.Contains(e.Location))
+		{
+			placeholder.Parent = P_Board;
+			placeholder.Bounds = control.Bounds.Pad(0, 0, -control.Padding.Horizontal, -control.Padding.Vertical);
+			placeholder.SendToBack();
+
+			dashItem.MoveInProgress = true;
+			MoveItem = dashItem;
+			CursorStart = control.PointToClient(Cursor.Position);
+			control.Bounds = control.Bounds.Pad(control.Padding);
+			control.BringToFront();
+		}
+	}
+
+	private void DashMouseMove(object sender, MouseEventArgs e)
+	{
+		var dashItem = (IDashboardItem)sender;
+		var moveRect = dashItem.GetMoveArea();
+
+		if (dashItem.ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
+		{
+			dashItem.Cursor = Cursors.SizeWE;
+		}
+
+		else if (moveRect.Contains(e.Location))
+		{
+			dashItem.Cursor = Cursors.SizeAll;
+		}
+		else
+		{
+			dashItem.Cursor = Cursors.Default;
+		}
+	}
+
+	private void DashMouseUp(object sender, MouseEventArgs e)
+	{
+		var dashItem = (IDashboardItem)sender;
+		dashItem.MoveInProgress = false;
+		dashItem.ResizeInProgress = false;
+
+		if (MoveItem is not null)
+		{
+			MoveItem.Bounds = GetSnappingRect(MoveItem, false);
+			SaveDashItemBounds(MoveItem, false);
+			MoveItem = null;
+		}
+
+		if (ResizeItem is not null)
+		{
+			ResizeItem.Bounds = GetSnappingRect(ResizeItem, false);
+			SaveDashItemBounds(ResizeItem, false);
+			ResizeItem = null;
+		}
+
+		placeholder.Parent = null;
+		P_Board.Invalidate(true);
+		P_Container.PerformLayout();
+	}
+
+	private void SaveDashItemBounds(IDashboardItem item, bool yOnly)
+	{
+		var size = P_Container.Size;
+		var bounds = item.Bounds;
+
+		var rect = new Rectangle(
+			bounds.X * 1_0000 / size.Width,
+			bounds.Y * 1_0000 / size.Height,
+			bounds.Width * 1_0000 / size.Width,
+			bounds.Height * 1_0000 / size.Height);
+
+		if (yOnly && _dashItemSizes.ContainsKey(item.Key))
+		{
+			rect.X = _dashItemSizes[item.Key].X;
+			rect.Width = _dashItemSizes[item.Key].Width;
+		}
+
+		_dashItemSizes[item.Key] = rect;
+	}
+
+	private Rectangle GetSnappingRect(Control control, bool addPadding = true)
+	{
+		var rect = control.Bounds.InvertPad(control.Padding);
+		var margin = (int)(32 * UI.FontScale);
+		var closestX = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Left).OrderBy(number => Math.Abs(number - control.Left)).FirstOrDefault();
+
+		if (Math.Abs(closestX - control.Left) < margin)
+		{
+			rect.X = closestX;
+		}
+		else
+		{
+			var closestRight = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Right).OrderBy(number => Math.Abs(number - control.Left)).FirstOrDefault();
+
+			if (Math.Abs(closestRight - control.Left) < margin)
+			{
+				rect.X = closestRight;
+			}
+			else if (control.Left < margin)
+			{
+				rect.X = 0;
+			}
+		}
+
+		if (rect.Y < margin)
+		{
+			rect.Y = 0;
+		}
+
+		closestX = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Left).OrderBy(number => Math.Abs(number - control.Right - control.Padding.Horizontal)).FirstOrDefault();
+
+		if (Math.Abs(closestX - control.Right - control.Padding.Horizontal) < margin)
+		{
+			rect.Width = closestX - rect.X + (addPadding ? control.Padding.Horizontal : 0);
+		}
+		else
+		{
+			var closestRight = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Right).OrderBy(number => Math.Abs(number - control.Right - control.Padding.Horizontal)).FirstOrDefault();
+
+			if (Math.Abs(closestRight - control.Right - control.Padding.Horizontal) < margin)
+			{
+				rect.Width = closestRight - rect.X + (addPadding ? control.Padding.Horizontal : 0);
+			}
+		}
+
+		if (rect.Right > P_Container.Width)
+		{
+			rect.Width -= rect.Right - P_Container.Width;
+		}
+
+		return rect;
+	}
+
+	protected override void GlobalMouseMove(Point p)
+	{
+		if (MoveItem is not null)
+		{
+			p.Offset(-CursorStart.X + MoveItem.Padding.Left, -CursorStart.Y + MoveItem.Padding.Top);
+
+			MoveItem.Location = P_Board.PointToClient(p);
+
+			placeholder.Bounds = GetSnappingRect(MoveItem, false).Pad(0, 0, -MoveItem.Padding.Horizontal, -MoveItem.Padding.Vertical);
+
+			P_Board.Size = P_Board.GetPreferredSize(P_Board.Size);
+
+			P_Board.Controls.Where(x => x.Bounds.IntersectsWith(placeholder.Bounds)).Foreach(x => x.Invalidate());
+		}
+
+		if (ResizeItem is not null)
+		{
+			ResizeItem.Width = Math.Max((int)(50 * UI.FontScale), CursorStart.Y + p.X - CursorStart.X - ResizeItem.Padding.Horizontal);
+
+			placeholder.Bounds = GetSnappingRect(ResizeItem, false).Pad(0, 0, -ResizeItem.Padding.Horizontal, -ResizeItem.Padding.Vertical);
+
+			P_Board.Size = P_Board.GetPreferredSize(P_Board.Size);
+
+			P_Board.Controls.Where(x => x.Bounds.IntersectsWith(placeholder.Bounds)).Foreach(x => x.Invalidate());
+		}
+	}
+
+	private void P_Board_Layout(object sender, LayoutEventArgs? e)
+	{
+		if (MoveItem is not null || ResizeItem is not null || layoutInProgress || !Live)
+		{
+			return;
+		}
+
+		layoutInProgress = true;
+		using var g = CreateGraphics();
+		using var pe = new PaintEventArgs(g, default);
+
+		P_Board.SuspendLayout();
+
+		var small = P_Container.Width < (int)(500 * UI.FontScale);
+		var controls = P_Board.Controls.OfType<IDashboardItem>().ToList(x => new DashItemRect(x));
+
+		foreach (var dashItem in controls)
+		{
+			var rect = _dashItemSizes.ContainsKey(dashItem.Item.Key) ? _dashItemSizes[dashItem.Item.Key] : GetNewRect(dashItem.Item);
+			var maxWidth = P_Container.Width;
+
+			if (small)
+			{
+				rect.X = 0;
+				rect.Width = maxWidth;
+			}
+			else
+			{
+				rect.X = (int)Math.Ceiling(rect.X * maxWidth / 1_0000D);
+				rect.Width = (int)Math.Ceiling(rect.Width * maxWidth / 1_0000D);
+			}
+
+			rect.Y = (int)Math.Ceiling(rect.Y * P_Container.Height / 1_0000D);
+			rect.Height = dashItem.Item.CalculateHeight(rect.Width, pe);
+
+			dashItem.Rectangle = rect;
+		}
+
+		if (small)
+		{
+			var y = 0;
+
+			foreach (var dashItem in controls.OrderBy(x => _dashItemSizes[x.Item.Key].X).ThenBy(x => _dashItemSizes[x.Item.Key].Y))
+			{
+				dashItem.Item.Bounds = new Rectangle(dashItem.Rectangle.X, y, dashItem.Rectangle.Width, dashItem.Rectangle.Height);
+
+				y += dashItem.Rectangle.Height;
+			}
+		}
+		else
+		{
+			//foreach (var group in controls.GroupBy(x => x.Rectangle.Left))
+			//{
+			//	var y = 0;
+
+			//	foreach (var dashItem in group.OrderBy(x => x.Rectangle.Y))
+			//	{
+			//		dashItem.Rectangle = new Rectangle(dashItem.Rectangle.X, y, dashItem.Rectangle.Width, dashItem.Rectangle.Height);
+
+			//		y += dashItem.Rectangle.Height;
+			//	}
+			//}
+
+			bool intersected, nudged;
+
+			do
+			{
+				do
+				{
+					nudged = false;
+
+					foreach (var dashItem in controls.OrderBy(x => x.Rectangle.Top))
+					{
+						var rect = new Rectangle(dashItem.Rectangle.X, 0, dashItem.Rectangle.Width, dashItem.Rectangle.Y);
+
+						var intersecting = controls.Where(x => x.Item != dashItem.Item && x.Rectangle.IntersectsWith(rect.Pad(3)));
+
+						if (intersecting.Any() && intersecting.Max(x => x.Rectangle.Bottom) != dashItem.Rectangle.Y)
+						{
+							nudged = true;
+							intersected = true;
+
+							dashItem.Rectangle = new Rectangle(dashItem.Rectangle.X, intersecting.Max(x => x.Rectangle.Bottom), dashItem.Rectangle.Width, dashItem.Rectangle.Height);
+						}
+					}
+				}
+				while (nudged);
+
+				do
+				{
+					intersected = false;
+
+					foreach (var dashItem in controls.OrderByDescending(x => x.Item.Top))
+					{
+						var intersecting = controls.Where(x => x.Item != dashItem.Item && x.Rectangle.IntersectsWith(dashItem.Rectangle.Pad(3)));
+
+						if (intersecting.Any() && intersecting.Max(x => x.Rectangle.Bottom) != dashItem.Rectangle.Y)
+						{
+							intersected = true;
+							nudged = true;
+
+							dashItem.Rectangle = new Rectangle(dashItem.Rectangle.X, intersecting.Max(x => x.Rectangle.Bottom), dashItem.Rectangle.Width, dashItem.Rectangle.Height);
+						}
+					}
+				}
+				while (intersected);
+			}
+			while (intersected || nudged);
+
+			foreach (var item in controls)
+			{
+				item.Item.Bounds = item.Rectangle;
+
+				SaveDashItemBounds(item.Item, true);
+			}
+		}
+
+		P_Board.ResumeLayout(true);
+		layoutInProgress = false;
+	}
+
+	private class DashItemRect
+	{
+		public IDashboardItem Item { get; set; }
+		public Rectangle Rectangle { get; set; }
+
+		public DashItemRect(IDashboardItem item)
+		{
+			Item = item;
+		}
+	}
+
+	private Rectangle GetNewRect(IDashboardItem dashItem)
+	{
+		return _dashItemSizes[dashItem.Key] = new(0, 0, 2_000, 1_000);
+	}
+
+	public override Color GetTopBarColor()
+	{
+		return FormDesign.Design.AccentBackColor;
+	}
+
 	private void ProfileManager_ProfileUpdated()
 	{
-		this.TryInvoke(() =>
-		{
-			TLP_Profiles.Controls.Clear(true, x => x is FavoriteProfileBubble);
-			TLP_Profiles.RowStyles.Clear();
-			TLP_Profiles.RowStyles.Add(new());
+		//this.TryInvoke(() =>
+		//{
+		//	TLP_Profiles.Controls.Clear(true, x => x is FavoriteProfileBubble);
+		//	TLP_Profiles.RowStyles.Clear();
+		//	TLP_Profiles.RowStyles.Add(new());
 
-			foreach (var item in _playsetManager.Playsets.Where(x => x.IsFavorite))
-			{
-				TLP_Profiles.RowStyles.Add(new());
-				TLP_Profiles.Controls.Add(new FavoriteProfileBubble(item) { Dock = DockStyle.Top }, 0, TLP_Profiles.RowStyles.Count - 1);
-			}
-		});
+		//	foreach (var item in _playsetManager.Playsets.Where(x => x.IsFavorite))
+		//	{
+		//		TLP_Profiles.RowStyles.Add(new());
+		//		TLP_Profiles.Controls.Add(new FavoriteProfileBubble(item) { Dock = DockStyle.Top }, 0, TLP_Profiles.RowStyles.Count - 1);
+		//	}
+		//});
 	}
 
 	private void SetButtonEnabledOnLoad()
 	{
-		this.TryInvoke(() =>
-		{
-			B_StartStop.Enabled = _citiesManager.IsAvailable();
+		//this.TryInvoke(() =>
+		//{
+		//	B_StartStop.Enabled = _citiesManager.IsAvailable();
 
-			label1.Visible = _modLogicManager.AreMultipleSkyvesPresent();
-		});
+		//	label1.Visible = _modLogicManager.AreMultipleSkyvesPresent();
+		//});
 	}
 
 	protected override void LocaleChanged()
@@ -75,7 +460,7 @@ public partial class PC_MainPage : PanelContent
 
 	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
 	{
-		this.TryInvoke(() => B_StartStop.Enabled = isAvailable);
+		//this.TryInvoke(() => B_StartStop.Enabled = isAvailable);
 
 		RefreshButtonState(isRunning);
 	}
@@ -84,16 +469,18 @@ public partial class PC_MainPage : PanelContent
 	{
 		base.UIChanged();
 
-		B_StartStop.Font = UI.Font(9.75F, FontStyle.Bold);
-		label1.Font = UI.Font(10.5F, FontStyle.Bold);
-		label1.Margin = UI.Scale(new Padding(10), UI.FontScale);
+		//B_StartStop.Font = UI.Font(9.75F, FontStyle.Bold);
+		//label1.Font = UI.Font(10.5F, FontStyle.Bold);
+		//label1.Margin = UI.Scale(new Padding(10), UI.FontScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
 	{
 		base.DesignChanged(design);
 
-		label1.ForeColor = design.RedColor;
+		BackColor = FormDesign.Design.AccentBackColor;
+
+		//label1.ForeColor = design.RedColor;
 	}
 
 	private void ProfileBubble_MouseClick(object sender, MouseEventArgs e)
@@ -127,29 +514,29 @@ public partial class PC_MainPage : PanelContent
 
 	private void RefreshButtonState(bool running, bool firstTime = false)
 	{
-		if (!running)
-		{
-			if (buttonStateRunning || firstTime)
-			{
-				this.TryInvoke(() =>
-				{
-					B_StartStop.ImageName = "I_CS";
-					B_StartStop.Text = LocaleHelper.GetGlobalText("StartCities");
-					buttonStateRunning = false;
-				});
-			}
+		//if (!running)
+		//{
+		//	if (buttonStateRunning || firstTime)
+		//	{
+		//		this.TryInvoke(() =>
+		//		{
+		//			B_StartStop.ImageName = "I_CS";
+		//			B_StartStop.Text = LocaleHelper.GetGlobalText("StartCities");
+		//			buttonStateRunning = false;
+		//		});
+		//	}
 
-			return;
-		}
+		//	return;
+		//}
 
-		if (!buttonStateRunning || firstTime)
-		{
-			this.TryInvoke(() =>
-			{
-				B_StartStop.ImageName = "I_Stop";
-				B_StartStop.Text = LocaleHelper.GetGlobalText("StopCities");
-				buttonStateRunning = true;
-			});
-		}
+		//if (!buttonStateRunning || firstTime)
+		//{
+		//	this.TryInvoke(() =>
+		//	{
+		//		B_StartStop.ImageName = "I_Stop";
+		//		B_StartStop.Text = LocaleHelper.GetGlobalText("StopCities");
+		//		buttonStateRunning = true;
+		//	});
+		//}
 	}
 }

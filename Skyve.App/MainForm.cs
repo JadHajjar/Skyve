@@ -125,10 +125,10 @@ public partial class MainForm : BasePanelForm
 		buttonStateRunning = null;
 		//base_PB_Icon.Loading = false;
 
-		if (CurrentPanel is PC_MainPage mainPage)
-		{
-			mainPage.B_StartStop.Loading = false;
-		}
+		//if (CurrentPanel is PC_MainPage mainPage)
+		//{
+		//	mainPage.B_StartStop.Loading = false;
+		//}
 	}
 
 	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
@@ -151,10 +151,10 @@ public partial class MainForm : BasePanelForm
 
 			buttonStateRunning = null;
 
-			if (CurrentPanel is PC_MainPage mainPage)
-			{
-				mainPage.B_StartStop.Loading = false;
-			}
+			//if (CurrentPanel is PC_MainPage mainPage)
+			//{
+			//	mainPage.B_StartStop.Loading = false;
+			//}
 		}
 	}
 
@@ -284,10 +284,10 @@ public partial class MainForm : BasePanelForm
 		{
 			if (CrossIO.CurrentPlatform is Platform.Windows)
 			{
-				if (CurrentPanel is PC_MainPage mainPage)
-				{
-					mainPage.B_StartStop.Loading = true;
-				}
+				//if (CurrentPanel is PC_MainPage mainPage)
+				//{
+				//	mainPage.B_StartStop.Loading = true;
+				//}
 
 				//base_PB_Icon.Loading = true;
 				base_PB_Icon.LoaderSpeed = 1;
