@@ -236,7 +236,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Padding.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -245,7 +245,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncludedEnabledCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Padding.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -254,14 +254,14 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Padding.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
 				, ref preferredHeight
 				, applyDrawing);
 
 			e.Graphics.DrawStringItem(Locale.EnabledCount.FormatPlural(modsEnabled, Locale.Mod.FormatPlural(modsEnabled).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Padding.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -271,7 +271,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.OutOfDateCount.FormatPlural(modsOutOfDate, Locale.Mod.FormatPlural(modsOutOfDate).ToLower())
 				, Font
 				, FormDesign.Design.YellowColor
-				, e.ClipRectangle.Pad(Padding.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -281,19 +281,19 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncompleteCount.FormatPlural(modsIncomplete, Locale.Mod.FormatPlural(modsIncomplete).ToLower())
 				, Font
 				, FormDesign.Design.RedColor
-				, e.ClipRectangle.Pad(Padding.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
 
-		preferredHeight += Padding.Top;
+		preferredHeight += Margin.Top;
 
 		mainSectionHeight = preferredHeight - e.ClipRectangle.Y;
 
 		if (_compatibilityCounts.Count == 0)
 			return;
 
-		preferredHeight += Padding.Top;
+		preferredHeight += Margin.Top;
 
 		DrawSection(e, applyDrawing, new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, e.ClipRectangle.Bottom - preferredHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out _, ref preferredHeight);
 
@@ -307,11 +307,11 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Mod.FormatPlural(group.Value).ToLower())
 				, Font
 				, group.Key.GetColor()
-				, e.ClipRectangle.Pad(Padding.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
 
-		preferredHeight += Padding.Top;
+		preferredHeight += Margin.Top;
 	}
 }
