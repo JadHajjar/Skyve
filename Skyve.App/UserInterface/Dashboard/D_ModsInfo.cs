@@ -12,7 +12,7 @@ internal class D_ModsInfo :  IDashboardItem
 	private readonly INotifier _notifier;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IPackageManager _contentManager;
-	private readonly INotificationsService _notificationsService;
+	private readonly IUpdateManager _updateManager;
 
 	private readonly Dictionary<NotificationType, int> _compatibilityCounts;
 	private int mainSectionHeight;
@@ -21,7 +21,7 @@ internal class D_ModsInfo :  IDashboardItem
 	public D_ModsInfo()
 	{
 		_compatibilityCounts = new();
-		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _notificationsService);
+		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _updateManager);
 	}
 
 	protected override void OnHandleCreated(EventArgs e)
@@ -139,10 +139,13 @@ internal class D_ModsInfo :  IDashboardItem
 	{
 		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.ModsBubble, "I_Mods", out var fore, ref preferredHeight);
 
-		int modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
+		int modsTotal = 0, modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
+		var newMods = _updateManager.GetNewPackages().ToList();
 
 		foreach (var mod in _contentManager.Mods)
 		{
+			modsTotal++;
+
 			if (!_packageUtil.IsIncluded(mod))
 			{
 				continue;
@@ -201,6 +204,23 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.EnabledCount.FormatPlural(modsEnabled, Locale.Mod.FormatPlural(modsEnabled).ToLower())
 				, Font
 				, fore
+				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+				, ref preferredHeight
+				, applyDrawing);
+		}
+
+		e.Graphics.DrawStringItem(Locale.TotalCount.FormatPlural(modsTotal, Locale.Mod.FormatPlural(modsTotal).ToLower())
+			, Font
+			, fore
+			, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+			, ref preferredHeight
+			, applyDrawing);
+
+		if (newMods.Count > 0)
+		{
+			e.Graphics.DrawStringItem(Locale.NewUpdatedCount.FormatPlural(newMods.Count, Locale.Mod.FormatPlural(newMods.Count).ToLower())
+				, Font
+				, FormDesign.Design.ActiveColor
 				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
 				, ref preferredHeight
 				, applyDrawing);

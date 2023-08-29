@@ -333,11 +333,13 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FilterByExcluded => _instance.GetText(nameof(FilterByExcluded));
 	public static Translation ViewOnGithub => _instance.GetText(nameof(ViewOnGithub));
 	public static Translation Free => _instance.GetText(nameof(Free));
+	public static Translation NewUpdatedCount => _instance.GetText(nameof(NewUpdatedCount));
+	public static Translation TotalCount => _instance.GetText(nameof(TotalCount));
 
 	public static void Load() { _ = _instance; }
 
 	public Translation Get(string key)
 	{
-		return LocaleHelper.GetGlobalText(key);
+		return GetGlobalText(key);
 	}
 }

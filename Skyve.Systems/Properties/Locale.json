@@ -519,6 +519,14 @@
     "One": "{0} {1} does not match its size from the Workshop",
     "Plural": "{0} {1} do not match their respective sizes from the Workshop"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "'{0}' was removed from Steam",
   "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
   "PackageIsNotDownloaded": "'{0}' was removed from your computer",

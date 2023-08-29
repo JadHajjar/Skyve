@@ -35,7 +35,6 @@ partial class PC_MainPage
 			this.P_Container = new System.Windows.Forms.Panel();
 			this.P_Board = new System.Windows.Forms.Panel();
 			this.slickScroll1 = new SlickControls.SlickScroll();
-			this.placeholder = new Skyve.App.UserInterface.Dashboard.D_Placeholder();
 			this.P_Container.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -77,22 +76,16 @@ partial class PC_MainPage
 			// 
 			// placeholder
 			// 
-			this.placeholder.Location = new System.Drawing.Point(-100, -100);
-			this.placeholder.Name = "placeholder";
-			this.placeholder.Size = new System.Drawing.Size(0, 0);
-			this.placeholder.TabIndex = 4;
 			// 
 			// PC_MainPage
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.Controls.Add(this.slickScroll1);
 			this.Controls.Add(this.P_Container);
-			this.Controls.Add(this.placeholder);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Name = "PC_MainPage";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 12, 0);
 			this.Text = "Dashboard";
-			this.Controls.SetChildIndex(this.placeholder, 0);
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.Controls.SetChildIndex(this.P_Container, 0);
 			this.Controls.SetChildIndex(this.slickScroll1, 0);
@@ -108,5 +101,4 @@ partial class PC_MainPage
 	private System.Windows.Forms.Panel P_Container;
 	private System.Windows.Forms.Panel P_Board;
 	private SlickScroll slickScroll1;
-	private Dashboard.D_Placeholder placeholder;
 }

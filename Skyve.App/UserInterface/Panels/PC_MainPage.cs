@@ -2,7 +2,6 @@
 using Skyve.App.UserInterface.Dashboard;
 
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -59,49 +58,30 @@ public partial class PC_MainPage : PanelContent
 		}
 	}
 
+	protected override void OnShown()
+	{
+		base.OnShown();
+
+		P_Container.PerformLayout();
+	}
+
 	private void LoadItems(IEnumerable<Type> types)
 	{
 		foreach (var type in types)
 		{
 			var control = (IDashboardItem)Activator.CreateInstance(type);
 
-			//control.Placeholder = placeholder;
 			control.Size = default;
 			control.MouseDown += DashMouseDown;
 			control.MouseMove += DashMouseMove;
 			control.MouseUp += DashMouseUp;
-			//control.Paint += Control_Paint;
-			control.ResizeRequested += DashResize;
+			control.ResizeRequested += DashResizeRequested;
 
 			P_Board.Controls.Add(control);
 		}
 	}
 
-	//private void Control_Paint(object sender, PaintEventArgs e)
-	//{
-	//	if (placeholder.Parent is null)
-	//	{
-	//		return;
-	//	}
-
-	//	e.Graphics.ResetClip();
-
-	//	var padding = (int)(12 * UI.FontScale);
-	//	var border = (int)(10 * UI.FontScale);
-	//	var color = FormDesign.Design.ForeColor;
-	//	var rectangle = placeholder.Bounds;
-
-	//	rectangle.X -= ((Control)sender).Left;
-	//	rectangle.Y -= ((Control)sender).Top;
-
-	//	using var brush = new SolidBrush(Color.FromArgb(25, color));
-	//	e.Graphics.FillRoundedRectangle(brush, rectangle.Pad((int)(1.5 * UI.FontScale) + padding), border);
-
-	//	using var pen = new Pen(Color.FromArgb(100, color), (float)(1.5 * UI.FontScale)) { DashStyle = DashStyle.Dash };
-	//	e.Graphics.DrawRoundedRectangle(pen, rectangle.Pad((int)(1.5 * UI.FontScale) + padding), border);
-	//}
-
-	private void DashResize(object sender, EventArgs e)
+	private void DashResizeRequested(object sender, EventArgs e)
 	{
 		this.TryInvoke(() => P_Board_Layout(sender, null));
 	}
@@ -113,33 +93,22 @@ public partial class PC_MainPage : PanelContent
 			return;
 		}
 
-		var dashItem = (IDashboardItem)sender;
-		var control = dashItem;
+		var control = (IDashboardItem)sender;
 
 		if (control.ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
 		{
-			//placeholder.Parent = P_Board;
-			//placeholder.Bounds = control.Bounds.Pad(0, 0, -control.Padding.Horizontal, -control.Padding.Vertical);
-			//placeholder.BringToFront();
-
-			dashItem.ResizeInProgress = true;
-			ResizeItem = dashItem;
+			ResizeItem = control;
 			CursorStart = new(Cursor.Position.X, control.Width);
 			savedRect = control.Bounds;
-			//control.Bounds = control.Bounds.Pad(control.Padding);
+			control.ResizeInProgress = true;
 			control.BringToFront();
 		}
-		else if (dashItem.MoveAreaContains(e.Location))
+		else if (control.MoveAreaContains(e.Location))
 		{
-			//placeholder.Parent = P_Board;
-			//placeholder.Bounds = control.Bounds.Pad(0, 0, -control.Padding.Horizontal, -control.Padding.Vertical);
-			//placeholder.BringToFront();
-
-			dashItem.MoveInProgress = true;
-			MoveItem = dashItem;
+			MoveItem = control;
 			CursorStart = control.PointToClient(Cursor.Position);
 			savedRect = control.Bounds;
-			//control.Bounds = control.Bounds.Pad(control.Padding);
+			control.MoveInProgress = true;
 			control.BringToFront();
 		}
 	}
@@ -152,7 +121,6 @@ public partial class PC_MainPage : PanelContent
 		{
 			dashItem.Cursor = Cursors.SizeWE;
 		}
-
 		else if (dashItem.MoveInProgress || dashItem.MoveAreaContains(e.Location))
 		{
 			dashItem.Cursor = Cursors.SizeAll;
@@ -166,29 +134,26 @@ public partial class PC_MainPage : PanelContent
 	private void DashMouseUp(object sender, MouseEventArgs e)
 	{
 		var dashItem = (IDashboardItem)sender;
-		dashItem.MoveInProgress = false;
-		dashItem.ResizeInProgress = false;
 
 		if (MoveItem is not null)
 		{
-			MoveItem.Bounds = GetSnappingRect(MoveItem, false, savedRect);
-			SaveDashItemBounds(MoveItem, false);
+			SaveDashItemBounds(MoveItem, GetSnappingRect(MoveItem, false, savedRect));
 			MoveItem = null;
 		}
 
 		if (ResizeItem is not null)
 		{
-			ResizeItem.Bounds = GetSnappingRect(ResizeItem, false, savedRect);
-			SaveDashItemBounds(ResizeItem, false);
+			SaveDashItemBounds(ResizeItem, GetSnappingRect(ResizeItem, false, savedRect));
 			ResizeItem = null;
 		}
 
-		//placeholder.Parent = null;
-		//P_Board.Invalidate(true);
+		dashItem.MoveInProgress = false;
+		dashItem.ResizeInProgress = false;
+
 		P_Container.PerformLayout();
 	}
 
-	private void SaveDashItemBounds(IDashboardItem item, bool yOnly, Rectangle? rectangle=null)
+	private void SaveDashItemBounds(IDashboardItem item, Rectangle? rectangle = null)
 	{
 		var size = P_Container.Size;
 		var bounds = rectangle ?? item.Bounds;
@@ -199,7 +164,7 @@ public partial class PC_MainPage : PanelContent
 			bounds.Width * 1_0000 / size.Width,
 			bounds.Height * 1_0000 / size.Height);
 
-		if (yOnly && _dashItemSizes.ContainsKey(item.Key))
+		if (rectangle is null && _dashItemSizes.ContainsKey(item.Key))
 		{
 			rect.X = _dashItemSizes[item.Key].X;
 			rect.Width = _dashItemSizes[item.Key].Width;
@@ -210,7 +175,7 @@ public partial class PC_MainPage : PanelContent
 
 	private Rectangle GetSnappingRect(IDashboardItem control, bool addPadding = true, Rectangle? savedRect = null)
 	{
-		var rect = savedRect??control.Bounds.InvertPad(control.Padding);
+		var rect = savedRect ?? control.Bounds.InvertPad(control.Padding);
 
 		rect.Width = Math.Max(rect.Width, (int)(100 * UI.FontScale));
 
@@ -233,7 +198,7 @@ public partial class PC_MainPage : PanelContent
 			{
 				rect.X = 0;
 			}
-			else if (rect.Right + margin > P_Container.Width)
+			else if (MoveItem is not null && rect.Right + margin > P_Container.Width)
 			{
 				rect.X = P_Container.Width - rect.Width;
 			}
@@ -241,7 +206,7 @@ public partial class PC_MainPage : PanelContent
 
 		if (rect.Y < margin)
 		{
-			rect.Y = 0;
+			rect.Y = -margin;
 		}
 
 		closestX = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Left).OrderBy(number => Math.Abs(number - rect.Right - control.Padding.Horizontal)).FirstOrDefault();
@@ -260,10 +225,10 @@ public partial class PC_MainPage : PanelContent
 			}
 		}
 
-		//if (rect.Right > P_Container.Width)
-		//{
-		//	rect.Width -= rect.Right - P_Container.Width;
-		//}
+		if (ResizeItem is not null && rect.Right > P_Container.Width)
+		{
+			rect.Width = P_Container.Width - rect.X;
+		}
 
 		using var g = _control.CreateGraphics();
 
@@ -276,24 +241,20 @@ public partial class PC_MainPage : PanelContent
 	{
 		if (MoveItem is not null)
 		{
-			p.Offset(-CursorStart.X , -CursorStart.Y );
+			p.Offset(-CursorStart.X, -CursorStart.Y);
 
 			savedRect.Location = P_Board.PointToClient(p);
 
-			var rect = GetSnappingRect(MoveItem, false, savedRect);//.Pad(0, 0, -MoveItem.Padding.Horizontal, -MoveItem.Padding.Vertical);
+			var rect = GetSnappingRect(MoveItem, false, savedRect);
 
-			SaveDashItemBounds(MoveItem, false,rect);
+			SaveDashItemBounds(MoveItem, rect);
 
 			P_Container.PerformLayout();
-
-			//MoveItem.Invalidate();
-
-			//P_Board.Controls.Where(x => x.Bounds.IntersectsWith(placeholder.Bounds)).Foreach(x => x.Invalidate());
 		}
 
 		if (ResizeItem is not null)
 		{
-			var width =  CursorStart.Y + p.X - CursorStart.X;
+			var width = CursorStart.Y + p.X - CursorStart.X;
 
 			using var g = _control.CreateGraphics();
 
@@ -301,27 +262,21 @@ public partial class PC_MainPage : PanelContent
 
 			var rect = GetSnappingRect(ResizeItem, false, savedRect);
 
-			SaveDashItemBounds(ResizeItem, false, rect);
+			SaveDashItemBounds(ResizeItem, rect);
 
 			P_Container.PerformLayout();
-
-			//P_Board.Size = P_Board.GetPreferredSize(P_Board.Size);
-
-			//ResizeItem.Invalidate();
-
-			//P_Board.Controls.Where(x => x.Bounds.IntersectsWith(placeholder.Bounds)).Foreach(x => x.Invalidate());
 		}
 	}
 
 	private void P_Board_Layout(object sender, LayoutEventArgs? e)
 	{
-		if (/*MoveItem is not null || ResizeItem is not null ||*/ layoutInProgress || !Live)
+		if (layoutInProgress || !Live)
 		{
 			return;
 		}
 
 		layoutInProgress = true;
-		using var g =  _control.CreateGraphics();
+		using var g = _control.CreateGraphics();
 
 		P_Board.SuspendLayout();
 
@@ -363,18 +318,6 @@ public partial class PC_MainPage : PanelContent
 		}
 		else
 		{
-			//foreach (var group in controls.GroupBy(x => x.Rectangle.Left))
-			//{
-			//	var y = 0;
-
-			//	foreach (var dashItem in group.OrderBy(x => x.Rectangle.Y))
-			//	{
-			//		dashItem.Rectangle = new Rectangle(dashItem.Rectangle.X, y, dashItem.Rectangle.Width, dashItem.Rectangle.Height);
-
-			//		y += dashItem.Rectangle.Height;
-			//	}
-			//}
-
 			bool intersected, nudged;
 
 			do
@@ -418,6 +361,12 @@ public partial class PC_MainPage : PanelContent
 					}
 				}
 				while (intersected);
+
+				foreach (var dashItem in controls.Where(x => x.Rectangle.Y < 0))
+				{
+					nudged = true;
+					dashItem.Rectangle = new(dashItem.Rectangle.X, 0, dashItem.Rectangle.Width, dashItem.Rectangle.Height);
+				}
 			}
 			while (intersected || nudged);
 
@@ -425,8 +374,10 @@ public partial class PC_MainPage : PanelContent
 			{
 				item.Item.Bounds = item.Rectangle;
 
-				if(MoveItem is null && ResizeItem is null)
-				SaveDashItemBounds(item.Item, true);
+				if (MoveItem is null && ResizeItem is null)
+				{
+					SaveDashItemBounds(item.Item);
+				}
 			}
 		}
 
@@ -448,11 +399,6 @@ public partial class PC_MainPage : PanelContent
 	private Rectangle GetNewRect(IDashboardItem dashItem)
 	{
 		return _dashItemSizes[dashItem.Key] = new(0, 0, 2_000, 1_000);
-	}
-
-	public override Color GetTopBarColor()
-	{
-		return FormDesign.Design.AccentBackColor;
 	}
 
 	private void ProfileManager_ProfileUpdated()
@@ -506,9 +452,14 @@ public partial class PC_MainPage : PanelContent
 	{
 		base.DesignChanged(design);
 
-		BackColor = FormDesign.Design.AccentBackColor;
+		BackColor = GetTopBarColor();
 
 		//label1.ForeColor = design.RedColor;
+	}
+
+	public override Color GetTopBarColor()
+	{
+		return FormDesign.Design.BackColor;//.Tint(Lum: FormDesign.Design.Type == FormDesignType.Light ? -3 : 3, Sat: FormDesign.Design.Type == FormDesignType.Light ? -25 : 0);
 	}
 
 	private void ProfileBubble_MouseClick(object sender, MouseEventArgs e)

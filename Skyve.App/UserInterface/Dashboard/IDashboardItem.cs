@@ -5,6 +5,8 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Dashboard;
 public abstract class IDashboardItem : SlickImageControl
 {
+	private readonly List<Rectangle> _sections = new();
+
 	public event EventHandler? ResizeRequested;
 
 	public string Key { get; }
@@ -21,7 +23,7 @@ public abstract class IDashboardItem : SlickImageControl
 
 	public virtual bool MoveAreaContains(Point point)
 	{
-		return new Rectangle(Padding.Left, Padding.Top, Width - Padding.Horizontal, (int)(25 * UI.FontScale)).Contains(point);
+		return _sections.Any(x => x.Contains(point));
 	}
 
 	public int CalculateHeight(int width, Graphics graphics)
@@ -35,6 +37,8 @@ public abstract class IDashboardItem : SlickImageControl
 		graphics.SetClip(pe.ClipRectangle);
 
 		var height = pe.ClipRectangle.Y;
+
+		_sections.Clear();
 
 		try
 		{
@@ -58,17 +62,16 @@ public abstract class IDashboardItem : SlickImageControl
 		if (MoveInProgress || ResizeInProgress)
 		{
 			var border = (int)(10 * UI.FontScale);
-			var color = FormDesign.Design.ForeColor;
+			var rect = ClientRectangle.Pad((int)(1.5 * UI.FontScale)).Pad(Padding);
 
-			using var brush = new SolidBrush(Color.FromArgb(25, color));
-			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad((int)(1.5 * UI.FontScale)).Pad(Padding), border);
+			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 6, -6)));
+			e.Graphics.FillRoundedRectangle(brush, rect, border);
 
-			using var pen = new Pen(Color.FromArgb(100, color), (float)(1.5 * UI.FontScale)) { DashStyle = DashStyle.Dash };
-			e.Graphics.DrawRoundedRectangle(pen, ClientRectangle.Pad((int)(1.5 * UI.FontScale)).Pad(Padding), border);
+			using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale));
+			e.Graphics.DrawRoundedRectangle(pen, rect, border);
 
 			return;
 		}
-
 
 		try
 		{
@@ -84,37 +87,78 @@ public abstract class IDashboardItem : SlickImageControl
 
 		base.OnPaint(e);
 
-		e.Graphics.ResetClip();
+		var dragRect = ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight);
+
+		using var dotBrush = new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Hovered) ? 110 : 45, FormDesign.Design.MenuForeColor));
+
+		for (var i = 3; i > 0; i--)
+		{
+			var y = dragRect.Y + ((3 - i) * dragRect.Height / 3.75F);
+
+			for (var j = i; j > 0; j--)
+			{
+				var x = dragRect.X + ((j - 1) * dragRect.Width / 3.75F);
+
+				e.Graphics.FillEllipse(dotBrush, x, y, dragRect.Width / 5F, dragRect.Width / 5F);
+			}
+		}
+
+		if (HoverState.HasFlag(HoverState.Hovered))
+		{
+			using var grabberBrush = new SolidBrush(Color.FromArgb(25, FormDesign.Design.MenuForeColor));
+
+			foreach (var rectangle in _sections)
+			{
+				e.Graphics.FillRoundedRectangle(grabberBrush, rectangle.Pad(2), Padding.Left, botLeft: false, botRight: false);
+			}
+		}
 	}
 
 	protected void DrawSection(PaintEventArgs e, bool applyDrawing, Rectangle rectangle, string text, DynamicIcon dynamicIcon, out Color fore, ref int preferredHeight, Color? tintColor = null)
 	{
 		var hoverState = rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
 
-		SlickButton.GetColors(out fore, out var back, hoverState);
+		Color back;
+
+		//if (hoverState.HasFlag(HoverState.Pressed))
+		//{
+		//	fore = ColorStyle.Active.GetBackColor().Tint(tintColor?.GetHue());
+		//	back = tintColor == null ? ColorStyle.Active.GetColor() : ColorStyle.Active.GetColor().Tint(tintColor.Value.GetHue()).MergeColor(tintColor.Value);
+		//}
+		//else if (hoverState.HasFlag(HoverState.Hovered))
+		//{
+		//	fore = FormDesign.Design.MenuForeColor.Tint(Lum: FormDesign.Design.Type == FormDesignType.Light ? -3 : 3);
+		//	back = FormDesign.Design.MenuColor.Tint(Lum: FormDesign.Design.Type == FormDesignType.Light ? -3 : 3);
+		//}
+		//else
+		{
+			fore = FormDesign.Design.MenuForeColor;
+			back = FormDesign.Design.MenuColor;
+		}
 
 		if (applyDrawing)
 		{
-			if (tintColor != null)
-			{
-				if (hoverState.HasFlag(HoverState.Pressed))
-				{
-					back = tintColor.Value;
-				}
-				else
-				{
-					back = back.MergeColor(tintColor.Value, 25);
-				}
+			//if (tintColor != null)
+			//{
+			//	if (hoverState.HasFlag(HoverState.Pressed))
+			//	{
+			//		back = tintColor.Value;
+			//	}
+			//	else
+			//	{
+			//		back = back.MergeColor(tintColor.Value, 25);
+			//	}
 
-				fore = Color.FromArgb(220, back.GetTextColor());
-			}
+			//	fore = Color.FromArgb(220, back.GetTextColor());
+			//}
 
-			if (!hoverState.HasFlag(HoverState.Pressed) && FormDesign.Design.Type == FormDesignType.Light)
-			{
-				back = back.Tint(Lum: 1.5F);
-			}
+			//if (!hoverState.HasFlag(HoverState.Pressed) && FormDesign.Design.Type == FormDesignType.Light)
+			//{
+			//	back = back.Tint(Lum: 1.5F);
+			//}
 
-			e.Graphics.FillRoundedRectangle(rectangle.Gradient(back, 0.8F), rectangle.Pad(2), Padding.Left);
+			using var gradient = rectangle.Gradient(back, hoverState.HasFlag(HoverState.Pressed) ? 1F : 0.5F);
+			e.Graphics.FillRoundedRectangle(gradient, rectangle.Pad(2), Padding.Left);
 		}
 
 		if (!string.IsNullOrEmpty(text))
@@ -139,6 +183,10 @@ public abstract class IDashboardItem : SlickImageControl
 				using var brush = new SolidBrush(fore);
 				e.Graphics.DrawString(text, UI.Font(9.75F, FontStyle.Bold), brush, new Rectangle(iconRectangle.Right + Margin.Left, Margin.Top + rectangle.Y, rectangle.Right - Margin.Horizontal - iconRectangle.Right, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
 			}
+			else
+			{
+				_sections.Add(new(rectangle.X, rectangle.Y, rectangle.Width, titleHeight + (Margin.Top * 2)));
+			}
 
 			preferredHeight += titleHeight + (Margin.Top * 2);
 		}
@@ -155,6 +203,6 @@ public abstract class IDashboardItem : SlickImageControl
 
 		DrawLoader(e.Graphics, e.ClipRectangle.Pad(Margin).Align(UI.Scale(new Size(32, 32), UI.FontScale), ContentAlignment.BottomCenter));
 
-		preferredHeight += (int)(32 * UI.FontScale) + Margin.Vertical ;
+		preferredHeight += (int)(32 * UI.FontScale) + Margin.Vertical;
 	}
 }
