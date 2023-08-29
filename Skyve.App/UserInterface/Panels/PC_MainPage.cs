@@ -114,7 +114,6 @@ public partial class PC_MainPage : PanelContent
 		}
 
 		var dashItem = (IDashboardItem)sender;
-		var moveRect = dashItem.GetMoveArea();
 		var control = dashItem;
 
 		if (control.ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
@@ -130,7 +129,7 @@ public partial class PC_MainPage : PanelContent
 			//control.Bounds = control.Bounds.Pad(control.Padding);
 			control.BringToFront();
 		}
-		else if (moveRect.Contains(e.Location))
+		else if (dashItem.MoveAreaContains(e.Location))
 		{
 			//placeholder.Parent = P_Board;
 			//placeholder.Bounds = control.Bounds.Pad(0, 0, -control.Padding.Horizontal, -control.Padding.Vertical);
@@ -148,14 +147,13 @@ public partial class PC_MainPage : PanelContent
 	private void DashMouseMove(object sender, MouseEventArgs e)
 	{
 		var dashItem = (IDashboardItem)sender;
-		var moveRect = dashItem.GetMoveArea();
 
-		if (dashItem.ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
+		if (dashItem.ResizeInProgress || dashItem.ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
 		{
 			dashItem.Cursor = Cursors.SizeWE;
 		}
 
-		else if (moveRect.Contains(e.Location))
+		else if (dashItem.MoveInProgress || dashItem.MoveAreaContains(e.Location))
 		{
 			dashItem.Cursor = Cursors.SizeAll;
 		}
@@ -213,6 +211,9 @@ public partial class PC_MainPage : PanelContent
 	private Rectangle GetSnappingRect(IDashboardItem control, bool addPadding = true, Rectangle? savedRect = null)
 	{
 		var rect = savedRect??control.Bounds.InvertPad(control.Padding);
+
+		rect.Width = Math.Max(rect.Width, (int)(100 * UI.FontScale));
+
 		var margin = (int)(32 * UI.FontScale);
 		var closestX = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Left).OrderBy(number => Math.Abs(number - rect.Left)).FirstOrDefault();
 
@@ -231,6 +232,10 @@ public partial class PC_MainPage : PanelContent
 			else if (rect.Left < margin)
 			{
 				rect.X = 0;
+			}
+			else if (rect.Right + margin > P_Container.Width)
+			{
+				rect.X = P_Container.Width - rect.Width;
 			}
 		}
 
@@ -255,10 +260,10 @@ public partial class PC_MainPage : PanelContent
 			}
 		}
 
-		if (rect.Right > P_Container.Width)
-		{
-			rect.Width -= rect.Right - P_Container.Width;
-		}
+		//if (rect.Right > P_Container.Width)
+		//{
+		//	rect.Width -= rect.Right - P_Container.Width;
+		//}
 
 		using var g = _control.CreateGraphics();
 
@@ -271,7 +276,7 @@ public partial class PC_MainPage : PanelContent
 	{
 		if (MoveItem is not null)
 		{
-			p.Offset(-CursorStart.X + MoveItem.Padding.Left, -CursorStart.Y + MoveItem.Padding.Top);
+			p.Offset(-CursorStart.X , -CursorStart.Y );
 
 			savedRect.Location = P_Board.PointToClient(p);
 
@@ -288,7 +293,7 @@ public partial class PC_MainPage : PanelContent
 
 		if (ResizeItem is not null)
 		{
-			var width = Math.Max((int)(50 * UI.FontScale), CursorStart.Y + p.X - CursorStart.X - ResizeItem.Padding.Horizontal);
+			var width =  CursorStart.Y + p.X - CursorStart.X;
 
 			using var g = _control.CreateGraphics();
 

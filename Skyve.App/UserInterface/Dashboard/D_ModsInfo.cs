@@ -16,6 +16,7 @@ internal class D_ModsInfo :  IDashboardItem
 
 	private readonly Dictionary<NotificationType, int> _compatibilityCounts;
 	private int mainSectionHeight;
+	private bool contentLoading;
 
 	public D_ModsInfo()
 	{
@@ -32,14 +33,9 @@ internal class D_ModsInfo :  IDashboardItem
 			return;
 		}
 
-		ImageName = "I_Mods";
-		Text = Locale.ModsBubble;
-
 		if (!_notifier.IsContentLoaded)
 		{
-			Loading = true;
-
-			_notifier.ContentLoaded += Invalidate;
+			Loading = contentLoading = true;
 		}
 		else
 		{
@@ -47,7 +43,7 @@ internal class D_ModsInfo :  IDashboardItem
 		}
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
-		_notifier.PackageInformationUpdated += Invalidate;
+		_notifier.PackageInformationUpdated += PackageInformationUpdated;
 		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 		_notifier.CompatibilityReportProcessed += Notifier_CompatibilityReportProcessed;
 	}
@@ -56,11 +52,15 @@ internal class D_ModsInfo :  IDashboardItem
 	{
 		base.Dispose(disposing);
 
-		_notifier.ContentLoaded -= Invalidate;
 		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
-		_notifier.PackageInformationUpdated -= Invalidate;
+		_notifier.PackageInformationUpdated -= PackageInformationUpdated;
 		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
 		_notifier.CompatibilityReportProcessed -= Notifier_CompatibilityReportProcessed;
+	}
+
+	private void PackageInformationUpdated()
+	{
+		OnResizeRequested();
 	}
 
 	private void Notifier_CompatibilityReportProcessed()
@@ -103,6 +103,8 @@ internal class D_ModsInfo :  IDashboardItem
 	{
 		if (Loading)
 		{
+			OnResizeRequested();
+
 			Loading = false;
 		}
 		else
@@ -111,88 +113,26 @@ internal class D_ModsInfo :  IDashboardItem
 		}
 	}
 
-	//public override void DrawItem(PaintEventArgs e)
-	//{
-	//	DrawSection(e, e.ClipRectangle, null);
-
-		//if (!_notifier.IsContentLoaded)
-		//{
-		//	DrawText(e, ref targetHeight, Locale.Loading, FormDesign.Design.InfoColor);
-		//	return;
-		//}
-
-		//int modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
-
-		//foreach (var mod in _contentManager.Mods)
-		//{
-		//	if (!_packageUtil.IsIncluded(mod))
-		//	{
-		//		continue;
-		//	}
-
-		//	modsIncluded++;
-
-		//	if (_packageUtil.IsEnabled(mod))
-		//	{
-		//		modsEnabled++;
-		//	}
-
-		//	if (Loading)
-		//	{
-		//		continue;
-		//	}
-
-		//	switch (_packageUtil.GetStatus(mod, out _))
-		//	{
-		//		case DownloadStatus.OutOfDate:
-		//			modsOutOfDate++;
-		//			break;
-		//		case DownloadStatus.PartiallyDownloaded:
-		//			modsIncomplete++;
-		//			break;
-		//	}
-		//}
-
-		//if (!_settings.UserSettings.AdvancedIncludeEnable)
-		//{
-		//	DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower()));
-		//}
-		//else if (modsIncluded == modsEnabled)
-		//{
-		//	DrawText(e, ref targetHeight, Locale.IncludedEnabledCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower()));
-		//}
-		//else
-		//{
-		//	DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower()));
-		//	DrawText(e, ref targetHeight, Locale.EnabledCount.FormatPlural(modsEnabled, Locale.Mod.FormatPlural(modsEnabled).ToLower()));
-		//}
-
-		//if (modsOutOfDate > 0)
-		//{
-		//	DrawText(e, ref targetHeight, Locale.OutOfDateCount.FormatPlural(modsOutOfDate, Locale.Mod.FormatPlural(modsOutOfDate).ToLower()), FormDesign.Design.YellowColor);
-		//}
-
-		//if (modsIncomplete > 0)
-		//{
-		//	DrawText(e, ref targetHeight, Locale.IncompleteCount.FormatPlural(modsIncomplete, Locale.Mod.FormatPlural(modsIncomplete).ToLower()), FormDesign.Design.RedColor);
-		//}
-
-		//foreach (var group in _compatibilityCounts.OrderBy(x => x.Key))
-		//{
-		//	if (group.Key <= NotificationType.Info)
-		//	{
-		//		continue;
-		//	}
-
-		//	DrawText(e, ref targetHeight, LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Mod.FormatPlural(group.Value).ToLower()), group.Key.GetColor());
-		//}
-
-		//height = targetHeight;
-	//}
-
 	protected override DrawingDelegate GetDrawingMethod(int width)
 	{
+		if (contentLoading)
+		{
+			if (_notifier.IsContentLoaded)
+			{
+				contentLoading = false;
+
+				OnResizeRequested();
+			}
+
+			return DrawLoading;
+		}
+
 		return Draw;
+	}
+
+	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
+	{
+		DrawLoadingSection(e, applyDrawing, Locale.ModsBubble, "I_Mods", ref preferredHeight);
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
@@ -236,7 +176,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -245,7 +185,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncludedEnabledCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -254,14 +194,14 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
 				, ref preferredHeight
 				, applyDrawing);
 
 			e.Graphics.DrawStringItem(Locale.EnabledCount.FormatPlural(modsEnabled, Locale.Mod.FormatPlural(modsEnabled).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -271,7 +211,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.OutOfDateCount.FormatPlural(modsOutOfDate, Locale.Mod.FormatPlural(modsOutOfDate).ToLower())
 				, Font
 				, FormDesign.Design.YellowColor
-				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -281,7 +221,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncompleteCount.FormatPlural(modsIncomplete, Locale.Mod.FormatPlural(modsIncomplete).ToLower())
 				, Font
 				, FormDesign.Design.RedColor
-				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -307,7 +247,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Mod.FormatPlural(group.Value).ToLower())
 				, Font
 				, group.Key.GetColor()
-				, e.ClipRectangle.Pad(Margin.Left, 0, 0, 0)
+				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
 				, ref preferredHeight
 				, applyDrawing);
 		}

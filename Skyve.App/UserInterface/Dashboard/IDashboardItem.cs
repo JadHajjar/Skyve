@@ -5,7 +5,6 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Dashboard;
 public abstract class IDashboardItem : SlickImageControl
 {
-
 	public event EventHandler? ResizeRequested;
 
 	public string Key { get; }
@@ -20,29 +19,28 @@ public abstract class IDashboardItem : SlickImageControl
 	protected delegate void DrawingDelegate(PaintEventArgs e, bool applyDrawing, ref int preferredHeight);
 	protected abstract DrawingDelegate GetDrawingMethod(int width);
 
-	public virtual Rectangle GetMoveArea()
+	public virtual bool MoveAreaContains(Point point)
 	{
-		return new Rectangle(Padding.Left, Padding.Top, Width - Padding.Horizontal, (int)(25 * UI.FontScale));
+		return new Rectangle(Padding.Left, Padding.Top, Width - Padding.Horizontal, (int)(25 * UI.FontScale)).Contains(point);
 	}
 
 	public int CalculateHeight(int width, Graphics graphics)
 	{
 		var clip = ClientRectangle;
-		var height = clip.Y;
 
 		clip.Width = width;
-		clip = /*MoveInProgress || ResizeInProgress ? clip :*/ clip.Pad(Padding);
 
-		using var pe = new PaintEventArgs(graphics, clip);
+		using var pe = new PaintEventArgs(graphics, clip.Pad(Padding));
+
+		graphics.SetClip(pe.ClipRectangle);
+
+		var height = pe.ClipRectangle.Y;
 
 		try
 		{
-			GetDrawingMethod(clip.Width).Invoke(pe, false, ref height);
+			GetDrawingMethod(pe.ClipRectangle.Width).Invoke(pe, false, ref height);
 		}
 		catch { }
-
-		//if (!MoveInProgress && !ResizeInProgress)
-		//	height+=Padding.Vertical;
 
 		return height;
 	}
@@ -71,25 +69,18 @@ public abstract class IDashboardItem : SlickImageControl
 			return;
 		}
 
-		var clip = MoveInProgress || ResizeInProgress ? ClientRectangle : ClientRectangle.Pad(Padding);
-
-		e.Graphics.SetClip(clip);
 
 		try
 		{
-			using var pe = new PaintEventArgs(e.Graphics, clip);
-			var height = clip.Y;
+			using var pe = new PaintEventArgs(e.Graphics, ClientRectangle.Pad(Padding));
 
-			GetDrawingMethod(clip.Width).Invoke(pe, true, ref height);
+			e.Graphics.SetClip(pe.ClipRectangle);
+
+			var height = pe.ClipRectangle.Y;
+
+			GetDrawingMethod(pe.ClipRectangle.Width).Invoke(pe, true, ref height);
 		}
 		catch { }
-
-		//if (MoveInProgress || ResizeInProgress)
-		//{
-		//	using var brush = new SolidBrush(Color.FromArgb(100, FormDesign.Design.AccentBackColor));
-
-		//	e.Graphics.FillRectangle(brush, ClientRectangle);
-		//}
 
 		base.OnPaint(e);
 
@@ -129,16 +120,14 @@ public abstract class IDashboardItem : SlickImageControl
 		if (!string.IsNullOrEmpty(text))
 		{
 			using var icon = dynamicIcon?.Large;
-			var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, UI.Font(9.75F, FontStyle.Bold), rectangle.Width - Margin.Horizontal).Height);
-			var iconRectangle = new Rectangle(Margin.Left + rectangle.X, Margin.Top + ((titleHeight - icon?.Height ?? 0) / 2) + rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
+			var iconRectangle = new Rectangle(Margin.Left + rectangle.X, rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
+			var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, UI.Font(9.75F, FontStyle.Bold), rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height);
+
+			iconRectangle.Y += Margin.Top + ((titleHeight - icon?.Height ?? 0) / 2);
 
 			if (applyDrawing)
 			{
-				if (Loading)
-				{
-					DrawLoader(e.Graphics, iconRectangle);
-				}
-				else if (icon is not null)
+				if (icon is not null)
 				{
 					try
 					{
@@ -147,7 +136,8 @@ public abstract class IDashboardItem : SlickImageControl
 					catch { }
 				}
 
-				e.Graphics.DrawString(text, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(fore), new Rectangle((icon?.Height ?? 0) + (Margin.Left * 2) + rectangle.X, Margin.Top + rectangle.Y, rectangle.Width - Padding.Horizontal, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
+				using var brush = new SolidBrush(fore);
+				e.Graphics.DrawString(text, UI.Font(9.75F, FontStyle.Bold), brush, new Rectangle(iconRectangle.Right + Margin.Left, Margin.Top + rectangle.Y, rectangle.Right - Margin.Horizontal - iconRectangle.Right, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
 			}
 
 			preferredHeight += titleHeight + (Margin.Top * 2);
@@ -157,5 +147,14 @@ public abstract class IDashboardItem : SlickImageControl
 	protected void OnResizeRequested()
 	{
 		ResizeRequested?.Invoke(this, EventArgs.Empty);
+	}
+
+	protected void DrawLoadingSection(PaintEventArgs e, bool applyDrawing, string text, DynamicIcon icon, ref int preferredHeight)
+	{
+		DrawSection(e, applyDrawing, e.ClipRectangle, text, icon, out _, ref preferredHeight);
+
+		DrawLoader(e.Graphics, e.ClipRectangle.Pad(Margin).Align(UI.Scale(new Size(32, 32), UI.FontScale), ContentAlignment.BottomCenter));
+
+		preferredHeight += (int)(32 * UI.FontScale) + Margin.Vertical ;
 	}
 }
