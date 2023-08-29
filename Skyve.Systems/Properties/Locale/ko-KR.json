@@ -525,7 +525,7 @@
   "PackageIsOutOfDate": "'{0}' 가 업데이트되지 않았습니다\n\n{1} 지났습니다",
   "PackageIsMaybeOutOfDate": "'{0}' 는 업데이트되지 않았을 수 있습니다. '{0}' 는 {1} 에 업데이트가 있었습니다.",
   "PackageIsIncomplete": "'{0}' 의 로컬 크기 ({1}) 가 Steam에서의 크기 {2} 와 다릅니다.",
-  "RemovedByAuthor": "제작자가 제거했습니다",
+  "RemovedByAuthor": "제작자가 삭제함",
   "Missing": "누락",
   "LoggedInAs": "로그인됨",
   "UnknownUser": "알 수 없는 사용자",
@@ -665,7 +665,7 @@
   "FilterByDisabled": "Only show disabbled items.",
   "FilterByIncluded": "Only show included items.",
   "FilterByExcluded": "Only show excluded items.",
-  "ViewOnGithub": "View this package's Github repository",
-  "ViewXOnSteam": "View '{0}' on Steam",
-  "Free": "Free"
+  "ViewOnGithub": "이 패키지의 Github 저장소 보기",
+  "ViewXOnSteam": "'{0}' Steam에서 보기",
+  "Free": "무료"
 }
