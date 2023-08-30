@@ -68,8 +68,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		{
 			if (button is not SlickLabel)
 			{
-				button.Padding = UI.Scale(new Padding(7), UI.FontScale);
-				button.Margin = UI.Scale(new Padding(10, 5, 10, 5), UI.UIScale);
+				button.Margin = UI.Scale(new Padding(10, 7, 10, 7), UI.UIScale);
 			}
 		}
 

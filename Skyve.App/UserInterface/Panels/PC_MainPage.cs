@@ -381,7 +381,8 @@ public partial class PC_MainPage : PanelContent
 			}
 		}
 
-		P_Board.ResumeLayout(true);
+		P_Board.Size = P_Board.GetPreferredSize(P_Board.Size);
+		P_Board.ResumeLayout(false);
 		layoutInProgress = false;
 	}
 

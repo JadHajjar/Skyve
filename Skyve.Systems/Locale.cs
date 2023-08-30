@@ -35,7 +35,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ContentAndInfo => _instance.GetText(nameof(ContentAndInfo));
 	public static Translation OtherPlaysets => _instance.GetText(nameof(OtherPlaysets));
 	public static Translation Filters => _instance.GetText(nameof(Filters));
-	public static Translation TotalSize => _instance.GetText(nameof(TotalSize));
+	public static Translation TotalAssetSize => _instance.GetText(nameof(TotalAssetSize));
 	public static Translation AssetStatus => _instance.GetText(nameof(AssetStatus));
 	public static Translation ModStatus => _instance.GetText(nameof(ModStatus));
 	public static Translation CompatibilityStatus => _instance.GetText(nameof(CompatibilityStatus));
@@ -337,6 +337,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TotalCount => _instance.GetText(nameof(TotalCount));
 	public static Translation ViewAllYourItems => _instance.GetText(nameof(ViewAllYourItems));
 	public static Translation ViewRecentlyUpdatedItems => _instance.GetText(nameof(ViewRecentlyUpdatedItems));
+	public static Translation NoCompatibilityIssues => _instance.GetText(nameof(NoCompatibilityIssues));
 
 	public static void Load() { _ = _instance; }
 

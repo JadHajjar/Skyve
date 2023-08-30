@@ -25,7 +25,7 @@
   "NoAssets": "Disable All Assets",
   "NoMods": "Disable All Mods",
   "AutoSave": "Automatic Save",
-  "TotalSize": "total size",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "Any Status",
   "AnyCompatibilityStatus": "Any Status",
@@ -677,5 +677,9 @@
   "ViewXOnSteam": "View '{0}' on Steam",
   "Free": "Free",
   "ViewAllYourItems": "View all your {0}",
-  "ViewRecentlyUpdatedItems": "View recently updated {0}"
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  }
 }

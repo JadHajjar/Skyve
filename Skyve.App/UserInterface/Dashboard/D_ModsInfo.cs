@@ -1,13 +1,9 @@
-﻿using Skyve.App.UserInterface.Bubbles;
-
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dashboard;
 
-internal class D_ModsInfo :  IDashboardItem
+internal class D_ModsInfo : IDashboardItem
 {
-
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
 	private readonly IPackageUtil _packageUtil;
@@ -17,11 +13,62 @@ internal class D_ModsInfo :  IDashboardItem
 	private readonly Dictionary<NotificationType, int> _compatibilityCounts;
 	private int mainSectionHeight;
 	private bool contentLoading;
+	private int modsTotal, modsIncluded, modsEnabled, modsOutOfDate, modsIncomplete;
+	private readonly List<ILocalPackage> newMods;
 
 	public D_ModsInfo()
 	{
 		_compatibilityCounts = new();
 		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _updateManager);
+
+		newMods = _updateManager.GetNewPackages().ToList();
+		RefreshModCounts();
+	}
+
+	private void RefreshModCounts()
+	{
+		lock (this)
+		{
+			int modsTotal = 0, modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
+
+			foreach (var mod in _contentManager.Mods)
+			{
+				modsTotal++;
+
+				if (!_packageUtil.IsIncluded(mod))
+				{
+					continue;
+				}
+
+				modsIncluded++;
+
+				if (_packageUtil.IsEnabled(mod))
+				{
+					modsEnabled++;
+				}
+
+				if (Loading)
+				{
+					continue;
+				}
+
+				switch (_packageUtil.GetStatus(mod, out _))
+				{
+					case DownloadStatus.OutOfDate:
+						modsOutOfDate++;
+						break;
+					case DownloadStatus.PartiallyDownloaded:
+						modsIncomplete++;
+						break;
+				}
+			}
+
+			this.modsEnabled = modsEnabled;
+			this.modsTotal = modsTotal;
+			this.modsIncluded = modsIncluded;
+			this.modsOutOfDate = modsOutOfDate;
+			this.modsIncomplete = modsIncomplete;
+		}
 	}
 
 	protected override void OnHandleCreated(EventArgs e)
@@ -37,15 +84,10 @@ internal class D_ModsInfo :  IDashboardItem
 		{
 			Loading = contentLoading = true;
 		}
-		else
-		{
-			Notifier_CompatibilityReportProcessed();
-		}
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated += PackageInformationUpdated;
 		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
-		_notifier.CompatibilityReportProcessed += Notifier_CompatibilityReportProcessed;
 	}
 
 	protected override void Dispose(bool disposing)
@@ -55,57 +97,28 @@ internal class D_ModsInfo :  IDashboardItem
 		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated -= PackageInformationUpdated;
 		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
-		_notifier.CompatibilityReportProcessed -= Notifier_CompatibilityReportProcessed;
 	}
 
 	private void PackageInformationUpdated()
 	{
-		OnResizeRequested();
-	}
-
-	private void Notifier_CompatibilityReportProcessed()
-	{
-		_compatibilityCounts.Clear();
-
-		foreach (var mod in _contentManager.Mods)
-		{
-			if (!_packageUtil.IsIncluded(mod))
-			{
-				continue;
-			}
-
-			var notif = mod.GetCompatibilityInfo(cacheOnly: true).GetNotification();
-
-			if (_compatibilityCounts.ContainsKey(notif))
-			{
-				_compatibilityCounts[notif]++;
-			}
-			else
-			{
-				_compatibilityCounts[notif] = 1;
-			}
-		}
-
-		if (Loading)
-		{
-			Loading = false;
-		}
-
+		RefreshModCounts();
 		OnResizeRequested();
 	}
 
 	private void ProfileManager_ProfileChanged()
 	{
-		Invalidate();
+		RefreshModCounts();
+		OnResizeRequested();
 	}
 
 	private void CentralManager_WorkshopInfoUpdated()
 	{
 		if (Loading)
 		{
-			OnResizeRequested();
-
 			Loading = false;
+
+			RefreshModCounts();
+			OnResizeRequested();
 		}
 		else
 		{
@@ -120,15 +133,19 @@ internal class D_ModsInfo :  IDashboardItem
 			if (_notifier.IsContentLoaded)
 			{
 				contentLoading = false;
-
+				RefreshModCounts();
 				OnResizeRequested();
 			}
-
-			return DrawLoading;
+			else
+			{
+				return DrawLoading;
+			}
 		}
 
 		if (width > 450 * UI.FontScale)
+		{
 			return DrawLandscape;
+		}
 
 		return Draw;
 	}
@@ -142,41 +159,7 @@ internal class D_ModsInfo :  IDashboardItem
 	{
 		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.ModsBubble, "I_Mods", out var fore, ref preferredHeight);
 
-		int modsTotal = 0, modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
-		var newMods = _updateManager.GetNewPackages().ToList();
 		var textRect = e.ClipRectangle.Pad(Padding.Left, 0, Margin.Right, 0);
-
-		foreach (var mod in _contentManager.Mods)
-		{
-			modsTotal++;
-
-			if (!_packageUtil.IsIncluded(mod))
-			{
-				continue;
-			}
-
-			modsIncluded++;
-
-			if (_packageUtil.IsEnabled(mod))
-			{
-				modsEnabled++;
-			}
-
-			if (Loading)
-			{
-				continue;
-			}
-
-			switch (_packageUtil.GetStatus(mod, out _))
-			{
-				case DownloadStatus.OutOfDate:
-					modsOutOfDate++;
-					break;
-				case DownloadStatus.PartiallyDownloaded:
-					modsIncomplete++;
-					break;
-			}
-		}
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
@@ -269,32 +252,7 @@ internal class D_ModsInfo :  IDashboardItem
 			Icon = "I_UpdateTime",
 			Rectangle = e.ClipRectangle
 		});
-
-		preferredHeight += (int)(16 * UI.FontScale);
-
-		//if (_compatibilityCounts.Count == 0)
-		//	return;
-
-		//preferredHeight += Margin.Top;
-
-		//DrawSection(e, applyDrawing, new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, e.ClipRectangle.Bottom - preferredHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out _, ref preferredHeight);
-
-		//foreach (var group in _compatibilityCounts.OrderBy(x => x.Key))
-		//{
-		//	if (group.Key <= NotificationType.Info)
-		//	{
-		//		continue;
-		//	}
-
-		//	e.Graphics.DrawStringItem(LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Mod.FormatPlural(group.Value).ToLower())
-		//		, Font
-		//		, group.Key.GetColor()
-		//		, textRect
-		//		, ref preferredHeight
-		//		, applyDrawing);
-		//}
-
-		//preferredHeight += Margin.Top;
+		preferredHeight -= Margin.Top;
 	}
 
 	private void DrawLandscape(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
@@ -303,41 +261,7 @@ internal class D_ModsInfo :  IDashboardItem
 
 		DrawSection(e, applyDrawing, mainRect.ClipTo(mainSectionHeight), Locale.ModsBubble, "I_Mods", out var fore, ref preferredHeight);
 
-		int modsTotal = 0, modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
-		var newMods = _updateManager.GetNewPackages().ToList();
 		var textRect = mainRect.Pad(Padding.Left, 0, Margin.Right, 0);
-
-		foreach (var mod in _contentManager.Mods)
-		{
-			modsTotal++;
-
-			if (!_packageUtil.IsIncluded(mod))
-			{
-				continue;
-			}
-
-			modsIncluded++;
-
-			if (_packageUtil.IsEnabled(mod))
-			{
-				modsEnabled++;
-			}
-
-			if (Loading)
-			{
-				continue;
-			}
-
-			switch (_packageUtil.GetStatus(mod, out _))
-			{
-				case DownloadStatus.OutOfDate:
-					modsOutOfDate++;
-					break;
-				case DownloadStatus.PartiallyDownloaded:
-					modsIncomplete++;
-					break;
-			}
-		}
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
@@ -415,9 +339,9 @@ internal class D_ModsInfo :  IDashboardItem
 
 		mainSectionHeight = preferredHeight - mainRect.Y;
 
-		preferredHeight =e.ClipRectangle.Y;
+		preferredHeight = e.ClipRectangle.Y;
 
-		mainRect.X += mainRect.Width+Padding.Left;
+		mainRect.X += mainRect.Width + Padding.Left;
 		mainRect.Width -= Padding.Left;
 
 		DrawButton(e, applyDrawing, ref preferredHeight, new()
@@ -434,8 +358,9 @@ internal class D_ModsInfo :  IDashboardItem
 			Rectangle = mainRect
 		});
 
-		preferredHeight += (int)(16 * UI.FontScale);
+		preferredHeight -= Margin.Top;
+		//preferredHeight += (int)(16 * UI.FontScale);
 
-		preferredHeight = Math.Max(mainSectionHeight+ mainRect.Y, preferredHeight);
+		preferredHeight = Math.Max(mainSectionHeight + mainRect.Y, preferredHeight);
 	}
 }

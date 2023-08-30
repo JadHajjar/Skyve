@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dashboard;
@@ -143,26 +142,26 @@ public abstract class IDashboardItem : SlickImageControl
 
 		if (applyDrawing)
 		{
-			//if (tintColor != null)
-			//{
-			//	if (hoverState.HasFlag(HoverState.Pressed))
-			//	{
-			//		back = tintColor.Value;
-			//	}
-			//	else
-			//	{
-			//		back = back.MergeColor(tintColor.Value, 25);
-			//	}
+			if (tintColor != null)
+			{
+				//	if (hoverState.HasFlag(HoverState.Pressed))
+				//	{
+				//		back = tintColor.Value;
+				//	}
+				//	else
+				//	{
+				back = back.MergeColor(tintColor.Value, 25);
+				//}
 
-			//	fore = Color.FromArgb(220, back.GetTextColor());
-			//}
+				fore = Color.FromArgb(220, back.GetTextColor());
+			}
 
 			//if (!hoverState.HasFlag(HoverState.Pressed) && FormDesign.Design.Type == FormDesignType.Light)
 			//{
 			//	back = back.Tint(Lum: 1.5F);
 			//}
 
-			using var gradient = rectangle.Gradient(back, hoverState.HasFlag(HoverState.Pressed) ? 1F : 0.5F);
+			using var gradient = rectangle.Gradient(back, /*hoverState.HasFlag(HoverState.Pressed) ? 1F :*/ 0.5F);
 			e.Graphics.FillRoundedRectangle(gradient, rectangle.Pad(2), Padding.Left);
 		}
 
@@ -213,7 +212,8 @@ public abstract class IDashboardItem : SlickImageControl
 
 		buttonArgs.Image = icon;
 		buttonArgs.Font ??= Font;
-		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, SlickButton.GetSize(e.Graphics, icon, buttonArgs.Text, buttonArgs.Font, buttonArgs.Padding).Height);
+		buttonArgs.Padding = Margin;
+		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, SlickButton.GetSize(e.Graphics, icon, buttonArgs.Text, buttonArgs.Font, buttonArgs.Padding, buttonArgs.Rectangle.Width).Height);
 		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
 
 		preferredHeight += buttonArgs.Rectangle.Height + Margin.Bottom;

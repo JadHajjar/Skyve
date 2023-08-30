@@ -147,7 +147,7 @@ public class AssetsBubble : StatusBubbleBase
 		}
 
 		DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower()));
-		DrawValue(e, ref targetHeight, assetSize.SizeString(), Locale.TotalSize);
+		DrawValue(e, ref targetHeight, assetSize.SizeString(), Locale.TotalAssetSize);
 
 		if (assetsOutOfDate > 0)
 		{
