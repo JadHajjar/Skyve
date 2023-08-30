@@ -335,6 +335,8 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Free => _instance.GetText(nameof(Free));
 	public static Translation NewUpdatedCount => _instance.GetText(nameof(NewUpdatedCount));
 	public static Translation TotalCount => _instance.GetText(nameof(TotalCount));
+	public static Translation ViewAllYourItems => _instance.GetText(nameof(ViewAllYourItems));
+	public static Translation ViewRecentlyUpdatedItems => _instance.GetText(nameof(ViewRecentlyUpdatedItems));
 
 	public static void Load() { _ = _instance; }
 

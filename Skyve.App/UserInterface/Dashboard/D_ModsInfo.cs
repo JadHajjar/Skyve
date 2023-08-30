@@ -127,6 +127,9 @@ internal class D_ModsInfo :  IDashboardItem
 			return DrawLoading;
 		}
 
+		if (width > 450 * UI.FontScale)
+			return DrawLandscape;
+
 		return Draw;
 	}
 
@@ -141,6 +144,7 @@ internal class D_ModsInfo :  IDashboardItem
 
 		int modsTotal = 0, modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
 		var newMods = _updateManager.GetNewPackages().ToList();
+		var textRect = e.ClipRectangle.Pad(Padding.Left, 0, Margin.Right, 0);
 
 		foreach (var mod in _contentManager.Mods)
 		{
@@ -179,7 +183,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+				, textRect
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -188,7 +192,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncludedEnabledCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+				, textRect
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -197,14 +201,14 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+				, textRect
 				, ref preferredHeight
 				, applyDrawing);
 
 			e.Graphics.DrawStringItem(Locale.EnabledCount.FormatPlural(modsEnabled, Locale.Mod.FormatPlural(modsEnabled).ToLower())
 				, Font
 				, fore
-				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+				, textRect
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -212,7 +216,7 @@ internal class D_ModsInfo :  IDashboardItem
 		e.Graphics.DrawStringItem(Locale.TotalCount.FormatPlural(modsTotal, Locale.Mod.FormatPlural(modsTotal).ToLower())
 			, Font
 			, fore
-			, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+			, textRect
 			, ref preferredHeight
 			, applyDrawing);
 
@@ -221,7 +225,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.NewUpdatedCount.FormatPlural(newMods.Count, Locale.Mod.FormatPlural(newMods.Count).ToLower())
 				, Font
 				, FormDesign.Design.ActiveColor
-				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+				, textRect
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -231,7 +235,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.OutOfDateCount.FormatPlural(modsOutOfDate, Locale.Mod.FormatPlural(modsOutOfDate).ToLower())
 				, Font
 				, FormDesign.Design.YellowColor
-				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+				, textRect
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -241,7 +245,7 @@ internal class D_ModsInfo :  IDashboardItem
 			e.Graphics.DrawStringItem(Locale.IncompleteCount.FormatPlural(modsIncomplete, Locale.Mod.FormatPlural(modsIncomplete).ToLower())
 				, Font
 				, FormDesign.Design.RedColor
-				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+				, textRect
 				, ref preferredHeight
 				, applyDrawing);
 		}
@@ -250,28 +254,188 @@ internal class D_ModsInfo :  IDashboardItem
 
 		mainSectionHeight = preferredHeight - e.ClipRectangle.Y;
 
-		if (_compatibilityCounts.Count == 0)
-			return;
-
 		preferredHeight += Margin.Top;
 
-		DrawSection(e, applyDrawing, new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, e.ClipRectangle.Bottom - preferredHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out _, ref preferredHeight);
-
-		foreach (var group in _compatibilityCounts.OrderBy(x => x.Key))
+		DrawButton(e, applyDrawing, ref preferredHeight, new()
 		{
-			if (group.Key <= NotificationType.Info)
+			Text = Locale.ViewAllYourItems.Format(Locale.Mod.Plural.ToLower()),
+			Icon = "I_ViewFile",
+			Rectangle = e.ClipRectangle
+		});
+
+		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		{
+			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Mod.Plural.ToLower()),
+			Icon = "I_UpdateTime",
+			Rectangle = e.ClipRectangle
+		});
+
+		preferredHeight += (int)(16 * UI.FontScale);
+
+		//if (_compatibilityCounts.Count == 0)
+		//	return;
+
+		//preferredHeight += Margin.Top;
+
+		//DrawSection(e, applyDrawing, new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, e.ClipRectangle.Bottom - preferredHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out _, ref preferredHeight);
+
+		//foreach (var group in _compatibilityCounts.OrderBy(x => x.Key))
+		//{
+		//	if (group.Key <= NotificationType.Info)
+		//	{
+		//		continue;
+		//	}
+
+		//	e.Graphics.DrawStringItem(LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Mod.FormatPlural(group.Value).ToLower())
+		//		, Font
+		//		, group.Key.GetColor()
+		//		, textRect
+		//		, ref preferredHeight
+		//		, applyDrawing);
+		//}
+
+		//preferredHeight += Margin.Top;
+	}
+
+	private void DrawLandscape(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
+	{
+		var mainRect = e.ClipRectangle.Pad(0, 0, e.ClipRectangle.Width / 2, 0);
+
+		DrawSection(e, applyDrawing, mainRect.ClipTo(mainSectionHeight), Locale.ModsBubble, "I_Mods", out var fore, ref preferredHeight);
+
+		int modsTotal = 0, modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
+		var newMods = _updateManager.GetNewPackages().ToList();
+		var textRect = mainRect.Pad(Padding.Left, 0, Margin.Right, 0);
+
+		foreach (var mod in _contentManager.Mods)
+		{
+			modsTotal++;
+
+			if (!_packageUtil.IsIncluded(mod))
 			{
 				continue;
 			}
 
-			e.Graphics.DrawStringItem(LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Mod.FormatPlural(group.Value).ToLower())
+			modsIncluded++;
+
+			if (_packageUtil.IsEnabled(mod))
+			{
+				modsEnabled++;
+			}
+
+			if (Loading)
+			{
+				continue;
+			}
+
+			switch (_packageUtil.GetStatus(mod, out _))
+			{
+				case DownloadStatus.OutOfDate:
+					modsOutOfDate++;
+					break;
+				case DownloadStatus.PartiallyDownloaded:
+					modsIncomplete++;
+					break;
+			}
+		}
+
+		if (!_settings.UserSettings.AdvancedIncludeEnable)
+		{
+			e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
 				, Font
-				, group.Key.GetColor()
-				, e.ClipRectangle.Pad(Margin.Left, 0, Margin.Right, 0)
+				, fore
+				, textRect
+				, ref preferredHeight
+				, applyDrawing);
+		}
+		else if (modsIncluded == modsEnabled)
+		{
+			e.Graphics.DrawStringItem(Locale.IncludedEnabledCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
+				, Font
+				, fore
+				, textRect
+				, ref preferredHeight
+				, applyDrawing);
+		}
+		else
+		{
+			e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower())
+				, Font
+				, fore
+				, textRect
+				, ref preferredHeight
+				, applyDrawing);
+
+			e.Graphics.DrawStringItem(Locale.EnabledCount.FormatPlural(modsEnabled, Locale.Mod.FormatPlural(modsEnabled).ToLower())
+				, Font
+				, fore
+				, textRect
+				, ref preferredHeight
+				, applyDrawing);
+		}
+
+		e.Graphics.DrawStringItem(Locale.TotalCount.FormatPlural(modsTotal, Locale.Mod.FormatPlural(modsTotal).ToLower())
+			, Font
+			, fore
+			, textRect
+			, ref preferredHeight
+			, applyDrawing);
+
+		if (newMods.Count > 0)
+		{
+			e.Graphics.DrawStringItem(Locale.NewUpdatedCount.FormatPlural(newMods.Count, Locale.Mod.FormatPlural(newMods.Count).ToLower())
+				, Font
+				, FormDesign.Design.ActiveColor
+				, textRect
+				, ref preferredHeight
+				, applyDrawing);
+		}
+
+		if (modsOutOfDate > 0)
+		{
+			e.Graphics.DrawStringItem(Locale.OutOfDateCount.FormatPlural(modsOutOfDate, Locale.Mod.FormatPlural(modsOutOfDate).ToLower())
+				, Font
+				, FormDesign.Design.YellowColor
+				, textRect
+				, ref preferredHeight
+				, applyDrawing);
+		}
+
+		if (modsIncomplete > 0)
+		{
+			e.Graphics.DrawStringItem(Locale.IncompleteCount.FormatPlural(modsIncomplete, Locale.Mod.FormatPlural(modsIncomplete).ToLower())
+				, Font
+				, FormDesign.Design.RedColor
+				, textRect
 				, ref preferredHeight
 				, applyDrawing);
 		}
 
 		preferredHeight += Margin.Top;
+
+		mainSectionHeight = preferredHeight - mainRect.Y;
+
+		preferredHeight =e.ClipRectangle.Y;
+
+		mainRect.X += mainRect.Width+Padding.Left;
+		mainRect.Width -= Padding.Left;
+
+		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		{
+			Text = Locale.ViewAllYourItems.Format(Locale.Mod.Plural.ToLower()),
+			Icon = "I_ViewFile",
+			Rectangle = mainRect
+		});
+
+		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		{
+			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Mod.Plural.ToLower()),
+			Icon = "I_UpdateTime",
+			Rectangle = mainRect
+		});
+
+		preferredHeight += (int)(16 * UI.FontScale);
+
+		preferredHeight = Math.Max(mainSectionHeight+ mainRect.Y, preferredHeight);
 	}
 }

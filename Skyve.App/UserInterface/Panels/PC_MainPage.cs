@@ -443,6 +443,8 @@ public partial class PC_MainPage : PanelContent
 	{
 		base.UIChanged();
 
+		P_Scroll.Width = (int)(15 * UI.FontScale);
+
 		//B_StartStop.Font = UI.Font(9.75F, FontStyle.Bold);
 		//label1.Font = UI.Font(10.5F, FontStyle.Bold);
 		//label1.Margin = UI.Scale(new Padding(10), UI.FontScale);

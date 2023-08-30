@@ -20,14 +20,14 @@ public class CompatibilityHelper
 	private readonly IWorkshopService _workshopService;
 	private readonly PackageAvailabilityService _packageAvailabilityService;
 
-	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService)
+	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILogger logger)
 	{
 		_compatibilityManager = compatibilityManager;
 		_contentManager = contentManager;
 		_contentUtil = contentUtil;
 		_packageUtil = packageUtil;
 		_workshopService = workshopService;
-		_packageAvailabilityService = new(_contentManager, _contentUtil, _compatibilityManager);
+		_packageAvailabilityService = new(_contentManager, _contentUtil, logger, _compatibilityManager);
 	}
 
 	public void HandleStatus(CompatibilityInfo info, IndexedPackageStatus status)
@@ -185,41 +185,5 @@ public class CompatibilityHelper
 			|| _compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
 			&& (package.Package.Stability is PackageStability.Broken
 			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false));
-	}
-
-	internal IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withSuccessors)
-	{
-		var localPackage = _contentManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
-
-		if (localPackage is not null)
-		{
-			yield return localPackage;
-		}
-
-		localPackage = _contentManager.Mods.FirstOrDefault(x => x.IsLocal && Path.GetFileName(x.FilePath) == package.Package.FileName)?.LocalParentPackage;
-
-		if (localPackage is not null)
-		{
-			yield return localPackage;
-		}
-
-		if (!withSuccessors || !package.Interactions.ContainsKey(InteractionType.SucceededBy))
-		{
-			yield break;
-		}
-
-		var packages = package.Interactions[InteractionType.SucceededBy]
-					.SelectMany(x => x.Packages.Values)
-					.Where(x => x.Package != package.Package)
-					.Select(x => FindPackage(x, true))
-					.FirstOrDefault(x => x is not null);
-
-		if (packages is not null)
-		{
-			foreach (var item in packages)
-			{
-				yield return item;
-			}
-		}
 	}
 }

@@ -11,14 +11,12 @@ namespace Skyve.Systems.Compatibility;
 internal class LoadOrderHelper : ILoadOrderHelper
 {
 	private readonly CompatibilityManager _compatibilityManager;
-	private readonly CompatibilityHelper _compatibilityHelper;
 	private readonly IPackageManager _packageManager;
 
-	public LoadOrderHelper(IPackageManager packageManager, ICompatibilityManager compatibilityManager, IPackageUtil packageUtil, IPackageNameUtil packageNameUtil, IWorkshopService workshopService, ILocale locale)
+	public LoadOrderHelper(IPackageManager packageManager, ICompatibilityManager compatibilityManager)
 	{
 		_packageManager = packageManager;
 		_compatibilityManager = (CompatibilityManager)compatibilityManager;
-		_compatibilityHelper = new CompatibilityHelper(_compatibilityManager, packageManager, packageUtil, packageNameUtil, workshopService);
 	}
 
 	private List<ModInfo> GetEntities()
@@ -119,7 +117,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		{
 			if (item.Key != steamId)
 			{
-				foreach (var package in _compatibilityHelper.FindPackage(item.Value, true))
+				foreach (var package in _compatibilityManager.FindPackage(item.Value, true))
 				{
 					if (original.Id != package.Id)
 					{
@@ -132,7 +130,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 			}
 		}
 
-		foreach (var package in _compatibilityHelper.FindPackage(indexedPackage, true))
+		foreach (var package in _compatibilityManager.FindPackage(indexedPackage, true))
 		{
 			if (original.Id != package.Id)
 			{

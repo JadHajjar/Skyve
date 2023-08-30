@@ -55,6 +55,11 @@ public abstract class IDashboardItem : SlickImageControl
 		Margin = UI.Scale(new Padding(8), UI.FontScale);
 	}
 
+	protected void OnResizeRequested()
+	{
+		ResizeRequested?.Invoke(this, EventArgs.Empty);
+	}
+
 	protected override void OnPaint(PaintEventArgs e)
 	{
 		e.Graphics.SetUp(BackColor);
@@ -64,7 +69,7 @@ public abstract class IDashboardItem : SlickImageControl
 			var border = (int)(10 * UI.FontScale);
 			var rect = ClientRectangle.Pad((int)(1.5 * UI.FontScale)).Pad(Padding);
 
-			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 6, -6)));
+			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 8, -8)));
 			e.Graphics.FillRoundedRectangle(brush, rect, border);
 
 			using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale));
@@ -163,9 +168,10 @@ public abstract class IDashboardItem : SlickImageControl
 
 		if (!string.IsNullOrEmpty(text))
 		{
-			using var icon = dynamicIcon?.Large;
+			using var font = UI.Font(9.75F, FontStyle.Bold);
+			using var icon = dynamicIcon?.Get(font.Height + Margin.Top);
 			var iconRectangle = new Rectangle(Margin.Left + rectangle.X, rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
-			var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, UI.Font(9.75F, FontStyle.Bold), rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height);
+			var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, font, rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height);
 
 			iconRectangle.Y += Margin.Top + ((titleHeight - icon?.Height ?? 0) / 2);
 
@@ -181,7 +187,7 @@ public abstract class IDashboardItem : SlickImageControl
 				}
 
 				using var brush = new SolidBrush(fore);
-				e.Graphics.DrawString(text, UI.Font(9.75F, FontStyle.Bold), brush, new Rectangle(iconRectangle.Right + Margin.Left, Margin.Top + rectangle.Y, rectangle.Right - Margin.Horizontal - iconRectangle.Right, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
+				e.Graphics.DrawString(text, font, brush, new Rectangle(iconRectangle.Right + Margin.Left, Margin.Top + rectangle.Y, rectangle.Right - Margin.Horizontal - iconRectangle.Right, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
 			}
 			else
 			{
@@ -192,11 +198,6 @@ public abstract class IDashboardItem : SlickImageControl
 		}
 	}
 
-	protected void OnResizeRequested()
-	{
-		ResizeRequested?.Invoke(this, EventArgs.Empty);
-	}
-
 	protected void DrawLoadingSection(PaintEventArgs e, bool applyDrawing, string text, DynamicIcon icon, ref int preferredHeight)
 	{
 		DrawSection(e, applyDrawing, e.ClipRectangle, text, icon, out _, ref preferredHeight);
@@ -204,5 +205,24 @@ public abstract class IDashboardItem : SlickImageControl
 		DrawLoader(e.Graphics, e.ClipRectangle.Pad(Margin).Align(UI.Scale(new Size(32, 32), UI.FontScale), ContentAlignment.BottomCenter));
 
 		preferredHeight += (int)(32 * UI.FontScale) + Margin.Vertical;
+	}
+
+	protected void DrawButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ButtonDrawArgs buttonArgs)
+	{
+		using var icon = buttonArgs.Icon.Default;
+
+		buttonArgs.Image = icon;
+		buttonArgs.Font ??= Font;
+		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, SlickButton.GetSize(e.Graphics, icon, buttonArgs.Text, buttonArgs.Font, buttonArgs.Padding).Height);
+		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
+
+		preferredHeight += buttonArgs.Rectangle.Height + Margin.Bottom;
+
+		if (!applyDrawing)
+		{
+			return;
+		}
+
+		SlickButton.Draw(e, buttonArgs);
 	}
 }

@@ -82,24 +82,31 @@ public class CompatibilityManager : ICompatibilityManager
 
 		_logger.Info("[Compatibility] Caching Compatibility Report");
 
-		cancellationTokenSource?.Cancel();
-		cancellationTokenSource = new();
-
-		compatibilityService = new CompatibilityService(_locale, _logger, _contentManager, _compatibilityUtil, _contentUtil, _packageUtil, _workshopService, _dlcManager,
-			new CompatibilityHelper(this, _contentManager, _contentUtil, _packageUtil, _workshopService), this);
-
-		_logger.Info("[Compatibility] Package Availability Cached");
-
-		compatibilityService.CacheReport(_cache, cancellationTokenSource.Token);
-
-		if (first)
+		try
 		{
-			FirstLoadComplete = true;
+			cancellationTokenSource?.Cancel();
+			cancellationTokenSource = new();
+
+			compatibilityService = new CompatibilityService(_locale, _logger, _contentManager, _compatibilityUtil, _contentUtil, _packageUtil, _workshopService, _dlcManager,
+				new CompatibilityHelper(this, _contentManager, _contentUtil, _packageUtil, _workshopService, _logger), this);
+
+			_logger.Info("[Compatibility] Compatibility Service Ready");
+
+			compatibilityService.CacheReport(_cache, cancellationTokenSource.Token);
+
+			if (first)
+			{
+				FirstLoadComplete = true;
+			}
+
+			_notifier.OnInformationUpdated();
+
+			_notifier.OnCompatibilityReportProcessed();
 		}
-
-		_notifier.OnInformationUpdated();
-
-		_notifier.OnCompatibilityReportProcessed();
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, "Error while caching the Compatibility Report");
+		}
 	}
 
 	internal void LoadSnoozedData()
@@ -398,5 +405,41 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 
 		return package;
+	}
+
+	internal IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withSuccessors)
+	{
+		var localPackage = _contentManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
+
+		if (localPackage is not null)
+		{
+			yield return localPackage;
+		}
+
+		localPackage = _contentManager.Mods.FirstOrDefault(x => x.IsLocal && Path.GetFileName(x.FilePath) == package.Package.FileName)?.LocalParentPackage;
+
+		if (localPackage is not null)
+		{
+			yield return localPackage;
+		}
+
+		if (!withSuccessors || !package.Interactions.ContainsKey(InteractionType.SucceededBy))
+		{
+			yield break;
+		}
+
+		var packages = package.Interactions[InteractionType.SucceededBy]
+					.SelectMany(x => x.Packages.Values)
+					.Where(x => x.Package != package.Package)
+					.Select(x => FindPackage(x, true))
+					.FirstOrDefault(x => x is not null);
+
+		if (packages is not null)
+		{
+			foreach (var item in packages)
+			{
+				yield return item;
+			}
+		}
 	}
 }

@@ -5,6 +5,7 @@ using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility.Domain;
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,7 +18,7 @@ public class PackageAvailabilityService
 	private readonly CompatibilityManager _compatibilityManager;
 	private readonly Dictionary<ulong, (bool enabled, bool enabledWithAlternatives)> _cache;
 
-	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil contentUtil, CompatibilityManager compatibilityManager)
+	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil contentUtil, ILogger logger, CompatibilityManager compatibilityManager)
 	{
 		_packageManager = packageManager;
 		_contentUtil = contentUtil;
@@ -29,10 +30,14 @@ public class PackageAvailabilityService
 		ids.AddRange(_packageManager.Packages.Select(x => x.Id));
 		ids.AddRange(_compatibilityManager.CompatibilityData.Packages.Keys);
 
+		logger.Info($"[Compatibility] Caching package availability for {ids.Distinct().Count(x => x > 0)} items");
+
 		foreach (var package in ids.Distinct().Where(x => x > 0))
 		{
 			_cache[package] = (GetPackageEnabled(package, false), GetPackageEnabled(package, true));
 		}
+
+		logger.Info("[Compatibility] Package Availability Cached");
 	}
 
 	public bool IsPackageEnabled(ulong steamId, bool withAlternativesAndSuccessors)
