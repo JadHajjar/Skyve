@@ -26,5 +26,6 @@ public interface IUserSettings
 	bool ShowDatesRelatively { get; set; }
 	bool ShowFolderSettings { get; set; }
 	bool TreatOptionalAsRequired { get; set; }
+	bool SnapDashToGrid { get; set; }
 	Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; }
 }

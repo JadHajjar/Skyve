@@ -22,7 +22,12 @@ public abstract class IDashboardItem : SlickImageControl
 
 	public virtual bool MoveAreaContains(Point point)
 	{
-		return _sections.Any(x => x.Contains(point));
+		if (_sections.Count > 0)
+		{
+			return _sections.Any(x => x.Contains(point));
+		}
+
+		return point.Y < Padding.Top *3/2;
 	}
 
 	public int CalculateHeight(int width, Graphics graphics)
@@ -93,7 +98,7 @@ public abstract class IDashboardItem : SlickImageControl
 
 		var dragRect = ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight);
 
-		using var dotBrush = new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Hovered) ? 110 : 45, FormDesign.Design.MenuForeColor));
+		using var dotBrush = new SolidBrush(HoverState.HasFlag(HoverState.Hovered) ? Color.FromArgb(150, FormDesign.Design.ActiveColor) : Color.FromArgb(50, FormDesign.Design.AccentColor));
 
 		for (var i = 3; i > 0; i--)
 		{
@@ -113,7 +118,7 @@ public abstract class IDashboardItem : SlickImageControl
 
 			foreach (var rectangle in _sections)
 			{
-				e.Graphics.FillRoundedRectangle(grabberBrush, rectangle.Pad(2), Padding.Left, botLeft: false, botRight: false);
+				e.Graphics.FillRoundedRectangle(grabberBrush, rectangle.Pad(2), Padding.Left/*, botLeft: false, botRight: false*/);
 			}
 		}
 	}
@@ -206,14 +211,30 @@ public abstract class IDashboardItem : SlickImageControl
 		preferredHeight += (int)(32 * UI.FontScale) + Margin.Vertical;
 	}
 
+	protected void DrawSquareButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ButtonDrawArgs buttonArgs)
+	{
+		using var icon = buttonArgs.Icon.Get(Math.Min(buttonArgs.Rectangle.Width, buttonArgs.Rectangle.Height) *3/ 5);
+
+		buttonArgs.Image = icon;
+		buttonArgs.BorderRadius = Padding.Left;
+
+		DrawButtonInternal(e, applyDrawing, ref preferredHeight, true, buttonArgs);
+	}
+
 	protected void DrawButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ButtonDrawArgs buttonArgs)
 	{
 		using var icon = buttonArgs.Icon.Default;
 
 		buttonArgs.Image = icon;
+
+		DrawButtonInternal(e, applyDrawing, ref preferredHeight, false, buttonArgs);
+	}
+
+	private void DrawButtonInternal(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, bool square, ButtonDrawArgs buttonArgs)
+	{
 		buttonArgs.Font ??= Font;
 		buttonArgs.Padding = Margin;
-		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, SlickButton.GetSize(e.Graphics, icon, buttonArgs.Text, buttonArgs.Font, buttonArgs.Padding, buttonArgs.Rectangle.Width).Height);
+		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, square ? buttonArgs.Rectangle.Height : SlickButton.GetSize(e.Graphics, buttonArgs.Image, buttonArgs.Text, buttonArgs.Font, buttonArgs.Padding, buttonArgs.Rectangle.Width).Height);
 		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
 
 		preferredHeight += buttonArgs.Rectangle.Height + Margin.Bottom;

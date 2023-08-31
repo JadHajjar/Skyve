@@ -53,6 +53,7 @@ partial class PC_MainPage
 			this.P_Container.Name = "P_Container";
 			this.P_Container.Size = new System.Drawing.Size(771, 408);
 			this.P_Container.TabIndex = 2;
+			this.P_Container.Paint += new System.Windows.Forms.PaintEventHandler(this.P_Container_Paint);
 			this.P_Container.Layout += new System.Windows.Forms.LayoutEventHandler(this.P_Board_Layout);
 			// 
 			// P_Board
@@ -63,14 +64,15 @@ partial class PC_MainPage
 			this.P_Board.Name = "P_Board";
 			this.P_Board.Size = new System.Drawing.Size(0, 0);
 			this.P_Board.TabIndex = 0;
+			this.P_Board.Paint += new System.Windows.Forms.PaintEventHandler(this.P_Container_Paint);
 			// 
 			// slickScroll1
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll1.LinkedControl = this.P_Board;
-			this.slickScroll1.Location = new System.Drawing.Point(6, 0);
+			this.slickScroll1.Location = new System.Drawing.Point(2, 0);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(6, 408);
+			this.slickScroll1.Size = new System.Drawing.Size(10, 408);
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 3;
 			this.slickScroll1.TabStop = false;

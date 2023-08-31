@@ -39,7 +39,6 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 	private readonly Func<LocaleHelper.Translation> GetItemText;
 	private readonly Func<string> GetCountText;
 
-
 	public SkyvePage Page { get; }
 	public int ItemCount => ListControl.ItemCount;
 
@@ -451,7 +450,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (item.IsMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option2 == item.LocalPackage?.IsEnabled())
+			if (!item.IsMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.LocalPackage?.IsEnabled()))
 			{
 				return true;
 			}

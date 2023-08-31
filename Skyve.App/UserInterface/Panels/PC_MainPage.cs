@@ -13,6 +13,7 @@ public partial class PC_MainPage : PanelContent
 	private readonly ICitiesManager _citiesManager;
 	private readonly IPlaysetManager _playsetManager;
 	private readonly IModLogicManager _modLogicManager;
+	private readonly ISettings _settings;
 	private IDashboardItem? MoveItem;
 	private IDashboardItem? ResizeItem;
 	private Rectangle savedRect;
@@ -23,7 +24,7 @@ public partial class PC_MainPage : PanelContent
 
 	public PC_MainPage()
 	{
-		ServiceCenter.Get(out _notifier, out _citiesManager, out _playsetManager, out _modLogicManager);
+		ServiceCenter.Get(out _notifier, out _citiesManager, out _playsetManager, out _modLogicManager, out _settings);
 
 		InitializeComponent();
 
@@ -102,6 +103,8 @@ public partial class PC_MainPage : PanelContent
 			savedRect = control.Bounds;
 			control.ResizeInProgress = true;
 			control.BringToFront();
+			P_Board.Invalidate();
+			P_Container.Invalidate();
 		}
 		else if (control.MoveAreaContains(e.Location))
 		{
@@ -110,6 +113,8 @@ public partial class PC_MainPage : PanelContent
 			savedRect = control.Bounds;
 			control.MoveInProgress = true;
 			control.BringToFront();
+			P_Board.Invalidate();
+			P_Container.Invalidate();
 		}
 	}
 
@@ -150,6 +155,8 @@ public partial class PC_MainPage : PanelContent
 		dashItem.MoveInProgress = false;
 		dashItem.ResizeInProgress = false;
 
+		P_Board.Invalidate();
+		P_Container.Invalidate();
 		P_Container.PerformLayout();
 	}
 
@@ -180,11 +187,21 @@ public partial class PC_MainPage : PanelContent
 		rect.Width = Math.Max(rect.Width, (int)(100 * UI.FontScale));
 
 		var margin = (int)(32 * UI.FontScale);
-		var closestX = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Left).OrderBy(number => Math.Abs(number - rect.Left)).FirstOrDefault();
+		var closestX = P_Board.Controls
+			.Where(x => x != control && x is IDashboardItem)
+			.Select(x => x.Left)
+				.Concat(GetGridSnapping())
+			.OrderBy(number => Math.Abs(number - rect.Left))
+			.FirstOrDefault();
 
 		if (Math.Abs(closestX - rect.Left) < margin)
 		{
 			rect.X = closestX;
+
+			if (MoveItem is not null && rect.Right > P_Container.Width)
+			{
+				rect.Width = P_Container.Width - rect.X;
+			}
 		}
 		else
 		{
@@ -209,7 +226,12 @@ public partial class PC_MainPage : PanelContent
 			rect.Y = -margin;
 		}
 
-		closestX = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Left).OrderBy(number => Math.Abs(number - rect.Right - control.Padding.Horizontal)).FirstOrDefault();
+		closestX = P_Board.Controls
+			.Where(x => x != control && x is IDashboardItem)
+			.Select(x => x.Left)
+				.Concat(GetGridSnapping())
+			.OrderBy(number => Math.Abs(number - rect.Right - control.Padding.Horizontal))
+			.FirstOrDefault();
 
 		if (Math.Abs(closestX - rect.Right - control.Padding.Horizontal) < margin)
 		{
@@ -235,6 +257,19 @@ public partial class PC_MainPage : PanelContent
 		rect.Height = control.CalculateHeight(rect.Width, g);
 
 		return rect;
+	}
+
+	private IEnumerable<int> GetGridSnapping()
+	{
+		if (!_settings.UserSettings.SnapDashToGrid)
+		{
+			yield break;
+		}
+
+		for (var i = 0; i < 12; i++)
+		{
+			yield return P_Container.Width * i / 12;
+		}
 	}
 
 	protected override void GlobalMouseMove(Point p)
@@ -399,7 +434,7 @@ public partial class PC_MainPage : PanelContent
 
 	private Rectangle GetNewRect(IDashboardItem dashItem)
 	{
-		return _dashItemSizes[dashItem.Key] = new(0, 0, 2_000, 1_000);
+		return _dashItemSizes[dashItem.Key] = new(dashItem.Parent.Controls.GetChildIndex(dashItem) % 3 * 3_333, 0, 3_333, 1_000);
 	}
 
 	private void ProfileManager_ProfileUpdated()
@@ -520,5 +555,23 @@ public partial class PC_MainPage : PanelContent
 		//		buttonStateRunning = true;
 		//	});
 		//}
+	}
+
+	private void P_Container_Paint(object sender, PaintEventArgs e)
+	{
+		if (!_settings.UserSettings.SnapDashToGrid || (MoveItem == null && ResizeItem == null))
+		{
+			return;
+		}
+
+		using var pen = new Pen(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor), 5F) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dash };
+
+		foreach (var x in GetGridSnapping())
+		{
+			if (x > 0)
+			{
+				e.Graphics.DrawLine(pen, x - 1, e.Graphics.VisibleClipBounds.Y, x - 1, e.Graphics.VisibleClipBounds.Height);
+			}
+		}
 	}
 }

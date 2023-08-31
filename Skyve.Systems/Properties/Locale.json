@@ -681,5 +681,7 @@
   "NoCompatibilityIssues": {
     "One": "No Compatibility issues detected.",
     "Plural": "No compatibility issues with your {0} were detected."
-  }
+  },
+  "SnapDashToGrid": "Show, and snap dashboard items to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard items, displays a 12-column grid which items snap to."
 }
