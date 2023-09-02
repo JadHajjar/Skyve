@@ -25,7 +25,7 @@
   "NoAssets": "Ingen tilpassede eiendeler",
   "NoMods": "Deaktivere alle modifikasjoner",
   "AutoSave": "Automatisk lagring",
-  "TotalSize": "Total størrelse",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "Kompatibilitet Status",
   "AnyStatus": "Noen status",
   "AnyCompatibilityStatus": "Noen status",
@@ -124,8 +124,8 @@
     "Plural": "Slett de valgte pakkene"
   },
   "UnsubscribePackage": {
-    "One": "Avslutt abonnement fra denne pakken",
-    "Plural": "Avslutt abonnement på de valgte pakkene"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "Kopier pakkens Workshop-ID",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Pakkene inkludert og aktivert: {0}, Totalt: {1}",
   "AssetIncludedTotal": "Eiendeler inkludert: {0}, Totalt: {1}",
   "NewPlayset_Tip": "Opprett eller importer et nytt spillsett",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "Bytt til en midlertidig avspilling med dine nåværende innstillinger",
   "ViewPlaysets_Tip": "Se og administrer dine lagrede spillesett",
   "AutoSave_Tip": "Lagre endringer av mods & eiendeler automatisk på profilen din",
@@ -519,6 +520,14 @@
     "One": "{0} {1} samsvarer ikke med størrelsen fra Verkstedet",
     "Plural": "{0} {1} samsvarer ikke med deres respektive størrelser fra Workshop"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "'{0}' er fjernet fra Steam",
   "PackageIsUnknown": "Informasjonen fra Steam har ikke blitt lastet for '{0}enda",
   "PackageIsNotDownloaded": "'{0}' er fjernet fra datamaskinen",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
   "ViewXOnSteam": "View '{0}' on Steam",
-  "Free": "Free"
+  "Free": "Free",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  }
 }
