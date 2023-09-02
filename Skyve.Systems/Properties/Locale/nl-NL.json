@@ -25,7 +25,7 @@
   "NoAssets": "Alle activa uitschakelen",
   "NoMods": "Alle mods uitschakelen",
   "AutoSave": "Automatisch opslaan",
-  "TotalSize": "totale grootte",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "Compatibiliteitsstatus",
   "AnyStatus": "Elke status",
   "AnyCompatibilityStatus": "Elke status",
@@ -124,8 +124,8 @@
     "Plural": "Verwijder de geselecteerde pakketten"
   },
   "UnsubscribePackage": {
-    "One": "Afmelden voor dit pakket",
-    "Plural": "Afmelden van de geselecteerde pakketten"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "Kopieer de ID van dit pakket",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Pakketten opgenomen & ingeschakeld: {0}, Totaal: {1}",
   "AssetIncludedTotal": "Assets omvatten: {0}, Totaal: {1}",
   "NewPlayset_Tip": "Nieuwe afspeelset maken of importeren",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "Schakel over naar een tijdelijke afspeelset met je huidige instellingen",
   "ViewPlaysets_Tip": "Bekijk en beheer je opgeslagen afspeelsets",
   "AutoSave_Tip": "Wijzigingen in mods & assets automatisch opslaan in je profiel",
@@ -519,6 +520,14 @@
     "One": "{0} {1} komt niet overeen met zijn grootte van de Werkplaats",
     "Plural": "{0} {1} komen niet overeen met hun respectieve maten van de Werkplaats"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "'{0}' was verwijderd uit Steam",
   "PackageIsUnknown": "De informatie van Steam is nog niet geladen voor '{0}'",
   "PackageIsNotDownloaded": "'{0}' is verwijderd van uw computer",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
   "ViewXOnSteam": "View '{0}' on Steam",
-  "Free": "Free"
+  "Free": "Free",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  }
 }
