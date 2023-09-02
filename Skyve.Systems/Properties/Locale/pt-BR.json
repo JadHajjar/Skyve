@@ -25,7 +25,7 @@
   "NoAssets": "Desativar todos os Recursos",
   "NoMods": "Desativar Todos os Mods",
   "AutoSave": "Salvamento Automático",
-  "TotalSize": "tamanho total",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "Estado de Compatibilidade",
   "AnyStatus": "Algum Estado",
   "AnyCompatibilityStatus": "Algum Estado",
@@ -124,8 +124,8 @@
     "Plural": "Excluir os pacotes selecionados"
   },
   "UnsubscribePackage": {
-    "One": "Cancelar a assinatura deste pacote",
-    "Plural": "Cancelar assinatura dos pacotes selecionados"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "Copie o ID da Oficina deste pacote",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Pacotes incluídos e habilitados: {0}, Total: {1}",
   "AssetIncludedTotal": "Recursos incluídos: {0}, Total: {1}",
   "NewPlayset_Tip": "Criar ou importar uma nova Coleção de Mods",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "Trocar para uma Coleção de Mods temporária com suas configurações atuais",
   "ViewPlaysets_Tip": "Ver e gerenciar seus perfis salvos",
   "AutoSave_Tip": "Salvar mudanças para os mods e arquivos no seu perfil automaticamente",
@@ -519,6 +520,14 @@
     "One": "{0} {1} não corresponde ao seu tamanho na Oficina",
     "Plural": "{0} {1} não corresponde aos tamanhos respectivos na Oficina"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "'{0}' foi removido da Steam",
   "PackageIsUnknown": "As informações do Steam ainda não carregaram para '{0}'",
   "PackageIsNotDownloaded": "'{0}' foi removido do seu computador",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Mostrar apenas itens incluídos.",
   "ViewOnGithub": "Ver o repositório do GitHub deste pacote",
   "ViewXOnSteam": "Ver '{0}' na Steam",
-  "Free": "Grátis"
+  "Free": "Grátis",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  }
 }
