@@ -25,7 +25,7 @@
   "NoAssets": "Απενεργοποίηση Όλων Των Αντικειμένων",
   "NoMods": "Απενεργοποίηση Όλων Των Mods",
   "AutoSave": "Αυτόματη Αποθήκευση",
-  "TotalSize": "συνολικό μέγεθος",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "Κατάσταση Συμβατότητας",
   "AnyStatus": "Οποιαδήποτε Κατάσταση",
   "AnyCompatibilityStatus": "Οποιαδήποτε Κατάσταση",
@@ -124,8 +124,8 @@
     "Plural": "Διαγραφή των επιλεγμένων πακέτων"
   },
   "UnsubscribePackage": {
-    "One": "Διαγραφή από αυτό το πακέτο",
-    "Plural": "Διαγραφή από τα επιλεγμένα πακέτα"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "Αντιγραφή του ID εργαστηρίου αυτού του πακέτου",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Τα πακέτα συμπεριλαμβάνονται: {0}, Σύνολο: {1}",
   "AssetIncludedTotal": "Περιλαμβανόμενα περιουσιακά στοιχεία: {0}, Σύνολο: {1}",
   "NewPlayset_Tip": "Δημιουργία ή εισαγωγή ενός νέου συνόλου αναπαραγωγής",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "Εναλλαγή σε μια προσωρινή συσκευή αναπαραγωγής με τις τρέχουσες ρυθμίσεις σας",
   "ViewPlaysets_Tip": "Προβολή & διαχείριση των αποθηκευμένων παιχνιδιών σας",
   "AutoSave_Tip": "Αυτόματη αποθήκευση αλλαγών σε mods & assets στο σύνολο αναπαραγωγής σας",
@@ -519,6 +520,14 @@
     "One": "{0} {1} δεν ταιριάζει με το μέγεθός του από το Εργαστήριο",
     "Plural": "{0} {1} δεν ταιριάζουν με τα αντίστοιχα μεγέθη τους από το Εργαστήρι"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "'{0}' αφαιρέθηκε από το Steam",
   "PackageIsUnknown": "Οι πληροφορίες από το Steam δεν έχουν φορτωθεί για το '{0}' ακόμα",
   "PackageIsNotDownloaded": "'{0}' αφαιρέθηκε από τον υπολογιστή σας",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
   "ViewXOnSteam": "View '{0}' on Steam",
-  "Free": "Free"
+  "Free": "Free",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  }
 }
