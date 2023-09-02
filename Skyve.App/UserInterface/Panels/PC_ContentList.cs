@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using Skyve.App.UserInterface.Dropdowns;
+
+using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_ContentList<T> : PanelContent where T : IPackage
@@ -78,5 +80,20 @@ public partial class PC_ContentList<T> : PanelContent where T : IPackage
 	protected virtual string GetCountText()
 	{
 		throw new NotImplementedException();
+	}
+
+	public void SetSorting(PackageSorting packageSorting, bool desc)
+	{
+		LC_Items.ListControl.SetSorting(packageSorting, desc);
+	}
+
+	public void SetCompatibilityFilter(CompatibilityNotificationFilter filter)
+	{
+		LC_Items.DD_ReportSeverity.SelectedItem = filter;
+	}
+
+	public void SetIncludedFilter(Generic.ThreeOptionToggle.Value filter)
+	{
+		LC_Items.OT_Included.SelectedValue = filter;
 	}
 }

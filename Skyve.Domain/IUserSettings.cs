@@ -28,4 +28,6 @@ public interface IUserSettings
 	bool TreatOptionalAsRequired { get; set; }
 	bool SnapDashToGrid { get; set; }
 	Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; }
+
+	void Save();
 }

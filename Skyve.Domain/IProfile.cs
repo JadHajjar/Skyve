@@ -28,7 +28,7 @@ public interface ICustomPlayset : IPlayset
 	Bitmap? Banner { get; set; }
 	bool AutoSave { get; }
 	int ProfileId { get; }
-	bool Public { get; }
+	bool Public { get; set; }
 	bool IsMissingItems { get; }
 	bool UnsavedChanges { get; }
 	bool DisableWorkshop { get; }

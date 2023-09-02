@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.App.UserInterface.Panels;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dashboard;
@@ -11,7 +13,6 @@ internal class D_AssetsInfo : IDashboardItem
 	private readonly IPackageManager _contentManager;
 	private readonly IUpdateManager _updateManager;
 
-	private readonly Dictionary<NotificationType, int> _compatibilityCounts;
 	private int mainSectionHeight;
 	private bool contentLoading;
 	private long assetsSize;
@@ -19,15 +20,27 @@ internal class D_AssetsInfo : IDashboardItem
 	private int assetsIncluded;
 	private int assetsOutOfDate;
 	private int assetsIncomplete;
-	private readonly List<ILocalPackage> newAssets;
+	private readonly List<ILocalPackageWithContents> newAssets;
 
 	public D_AssetsInfo()
 	{
-		_compatibilityCounts = new();
 		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _updateManager);
 
-		newAssets = _updateManager.GetNewPackages().ToList();
+		newAssets = _updateManager.GetNewOrUpdatedPackages().ToList();
 		RefreshAssetCounts();
+	}
+
+	private void OpenRecentAssetsPanel()
+	{
+		if (Program.MainForm.PushPanel<PC_Assets>())
+		{
+			(Program.MainForm.CurrentPanel as PC_Assets)?.SetSorting(PackageSorting.UpdateTime, true); 
+		}
+	}
+
+	private void OpenAssetsPanel()
+	{
+		Program.MainForm.PushPanel<PC_Assets>();
 	}
 
 	private void RefreshAssetCounts()
@@ -90,6 +103,7 @@ internal class D_AssetsInfo : IDashboardItem
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated += PackageInformationUpdated;
+		_notifier.PackageInclusionUpdated += PackageInformationUpdated;
 		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
 
@@ -99,6 +113,7 @@ internal class D_AssetsInfo : IDashboardItem
 
 		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated -= PackageInformationUpdated;
+		_notifier.PackageInclusionUpdated -= PackageInformationUpdated;
 		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
 	}
 
@@ -162,7 +177,7 @@ internal class D_AssetsInfo : IDashboardItem
 	{
 		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.AssetsBubble, "I_Assets", out var fore, ref preferredHeight);
 
-		var textRect = e.ClipRectangle.Pad(Padding.Left, 0, Margin.Right, 0);
+		var textRect = e.ClipRectangle.Pad(Margin);
 
 		e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower())
 			, Font
@@ -216,20 +231,18 @@ internal class D_AssetsInfo : IDashboardItem
 				, applyDrawing);
 		}
 
-		preferredHeight += Margin.Top;
-
 		mainSectionHeight = preferredHeight - e.ClipRectangle.Y;
 
 		preferredHeight += Margin.Top;
 
-		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		DrawButton(e, applyDrawing, ref preferredHeight, OpenAssetsPanel, new()
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "I_ViewFile",
 			Rectangle = e.ClipRectangle
 		});
 
-		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		DrawButton(e, applyDrawing, ref preferredHeight, OpenRecentAssetsPanel, new()
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "I_UpdateTime",
@@ -244,7 +257,7 @@ internal class D_AssetsInfo : IDashboardItem
 
 		DrawSection(e, applyDrawing, mainRect.ClipTo(mainSectionHeight), Locale.AssetsBubble, "I_Assets", out var fore, ref preferredHeight);
 
-		var textRect = mainRect.Pad(Padding.Left, 0, Margin.Right, 0);
+		var textRect = mainRect.Pad(Margin);
 
 		e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower())
 			, Font
@@ -298,8 +311,6 @@ internal class D_AssetsInfo : IDashboardItem
 				, applyDrawing);
 		}
 
-		preferredHeight += Margin.Top;
-
 		mainSectionHeight = preferredHeight - mainRect.Y;
 
 		preferredHeight = e.ClipRectangle.Y;
@@ -307,14 +318,14 @@ internal class D_AssetsInfo : IDashboardItem
 		mainRect.X += mainRect.Width + Padding.Left;
 		mainRect.Width -= Padding.Left;
 
-		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		DrawButton(e, applyDrawing, ref preferredHeight, OpenAssetsPanel, new()
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "I_ViewFile",
 			Rectangle = mainRect
 		});
 
-		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		DrawButton(e, applyDrawing, ref preferredHeight, OpenRecentAssetsPanel, new()
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "I_UpdateTime",

@@ -46,7 +46,7 @@ public class CompatibilityHelper
 
 		if (type is StatusType.Deprecated && status.Status.Action is StatusAction.Switch && (status.Status.Packages?.Any() ?? false))
 		{
-			if ((info.Data?.Interactions.ContainsKey(InteractionType.SucceededBy) ?? false) || HandleSucceededBy(info, status.Status.Packages))
+			if (info.Data?.SucceededBy is not null || HandleSucceededBy(info, status.Status.Packages))
 			{
 				return;
 			}

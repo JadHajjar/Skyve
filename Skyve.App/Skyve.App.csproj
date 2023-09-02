@@ -49,6 +49,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="UserInterface\Bubbles\FavoriteProfileBubble.cs" />
+    <Compile Update="UserInterface\Bubbles\PlaysetBubble.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Content\ContentList.cs">
       <SubType>UserControl</SubType>
     </Compile>

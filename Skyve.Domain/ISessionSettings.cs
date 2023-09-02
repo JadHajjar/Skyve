@@ -12,6 +12,7 @@ public interface ISessionSettings
 	bool SubscribeFirstTimeShown { get; set; }
 	bool WindowWasMaximized { get; set; }
 	int LastVersioningNumber { get; set; }
+	bool DashboardFirstTimeShown { get; set; }
 
 	void Save();
 }

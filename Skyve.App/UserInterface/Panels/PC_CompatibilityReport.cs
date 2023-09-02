@@ -6,6 +6,7 @@ using Skyve.Systems.Compatibility.Domain.Api;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -92,11 +93,19 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		if (_compatibilityManager.FirstLoadComplete && !customReportLoaded)
 		{
-			var packages = _contentManager.Packages.ToList(x => x.GetCompatibilityInfo());
+			var packages = _contentManager.Packages.SelectWhereNotNull(x =>
+			{
+				var info = x.GetCompatibilityInfo(cacheOnly: true);
 
-			packages.RemoveAll(x => x.GetNotification() < NotificationType.Unsubscribe && !(x.Package?.IsIncluded() == true));
+				if (info.GetNotification() < NotificationType.Unsubscribe && !_packageUtil.IsIncluded(x))
+				{
+					return null;
+				}
 
-			this.TryInvoke(() => { LoadReport(packages); PB_Loader.Dispose(); });
+				return info;
+			}).ToList();
+
+			this.TryInvoke(() => { LoadReport(packages!); PB_Loader.Hide(); });
 		}
 
 		this.TryInvoke(SetManagementButtons);
@@ -134,7 +143,16 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		try
 		{
-			var notifs = reports.GroupBy(x => x.GetNotification()).Where(x => x.Key > NotificationType.Info).OrderByDescending(x => x.Key).ToList();
+			reports.RemoveAll(x => x.GetNotification() <= NotificationType.Info);
+
+			if (reports.Count == 0)
+			{
+				label1.Location = ClientRectangle.Center(label1.Size);
+				label1.Show();
+			}
+			else label1.Hide();
+
+			var notifs = reports.GroupBy(x => x.GetNotification()).OrderByDescending(x => x.Key).ToList();
 
 			if (tabHeader.Tabs.Select(x => (NotificationType)x.Tag).SequenceEqual(notifs.Select(x => x.Key)))
 			{

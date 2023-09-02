@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Skyve.App.Interfaces;
 public interface IInterfaceService
 {
+	INotificationInfo GetLastVersionNotification();
 	PC_Changelog ChangelogPanel();
 	PlaysetSettingsPanel PlaysetSettingsPanel();
 	PanelContent UtilitiesPanel();

@@ -3,6 +3,7 @@ using Skyve.App.UserInterface.Panels;
 
 using System.Configuration;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -125,6 +126,8 @@ public partial class MainForm : BasePanelForm
 		buttonStateRunning = null;
 		//base_PB_Icon.Loading = false;
 
+		_citiesManager.SetLaunchingStatus(false);
+
 		//if (CurrentPanel is PC_MainPage mainPage)
 		//{
 		//	mainPage.B_StartStop.Loading = false;
@@ -151,6 +154,7 @@ public partial class MainForm : BasePanelForm
 
 			buttonStateRunning = null;
 
+			_citiesManager.SetLaunchingStatus(false);
 			//if (CurrentPanel is PC_MainPage mainPage)
 			//{
 			//	mainPage.B_StartStop.Loading = false;
@@ -284,6 +288,7 @@ public partial class MainForm : BasePanelForm
 		{
 			if (CrossIO.CurrentPlatform is Platform.Windows)
 			{
+				_citiesManager.SetLaunchingStatus(true);
 				//if (CurrentPanel is PC_MainPage mainPage)
 				//{
 				//	mainPage.B_StartStop.Loading = true;
@@ -331,7 +336,14 @@ public partial class MainForm : BasePanelForm
 			WindowState = FormWindowState.Maximized;
 		}
 
-		var currentVersion = Assembly.GetEntryAssembly().GetName().Version;
+		var assembly = Assembly.GetEntryAssembly();
+		var currentVersion = assembly.GetName().Version;
+		var date = File.GetLastWriteTime(assembly.Location);
+
+		if (date > DateTime.Now.AddDays(-7))
+		{
+			ServiceCenter.Get<INotificationsService>().SendNotification(ServiceCenter.Get<IInterfaceService>().GetLastVersionNotification());
+		}
 
 		if (currentVersion.ToString() != _settings.SessionSettings.LastVersionNotification)
 		{

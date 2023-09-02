@@ -17,9 +17,10 @@ public partial class PC_MainPage : PanelContent
 	private IDashboardItem? MoveItem;
 	private IDashboardItem? ResizeItem;
 	private Rectangle savedRect;
+	private Rectangle initialRect;
 	private Point CursorStart;
 	private bool layoutInProgress;
-	private readonly Dictionary<string, Rectangle> _dashItemSizes = new();
+	private readonly Dictionary<string, Rectangle> _dashItemSizes;
 	private readonly Control _control = new();
 
 	public PC_MainPage()
@@ -27,6 +28,11 @@ public partial class PC_MainPage : PanelContent
 		ServiceCenter.Get(out _notifier, out _citiesManager, out _playsetManager, out _modLogicManager, out _settings);
 
 		InitializeComponent();
+
+		TLP_FirstTime.Visible = !_settings.SessionSettings.DashboardFirstTimeShown;
+
+		ISave.Load(out _dashItemSizes, "DashboardLayout.json");
+		_dashItemSizes ??= GetDefaultLayout();
 
 		P_Board.SuspendLayout();
 
@@ -59,6 +65,24 @@ public partial class PC_MainPage : PanelContent
 		}
 	}
 
+	private void SaveLayout()
+	{
+		ISave.Save(_dashItemSizes, "DashboardLayout.json");
+	}
+
+	private Dictionary<string, Rectangle> GetDefaultLayout()
+	{
+		return new()
+		{
+		  { "D_AssetsInfo", new Rectangle(2500, 100, 2500, 100) },
+		  { "D_CompatibilityInfo", new Rectangle(0, 0, 5000, 100) },
+		  { "D_ModsInfo", new Rectangle(0, 100, 2500, 100) },
+		  { "D_Playsets", new Rectangle(5250, 0, 2250, 100) },
+		  { "D_LaunchGame", new Rectangle(7750, 0, 2250, 100) },
+		  { "D_NotificationCenter", new Rectangle(7750, 100, 2250, 100) },
+		};
+	}
+
 	protected override void OnShown()
 	{
 		base.OnShown();
@@ -74,7 +98,6 @@ public partial class PC_MainPage : PanelContent
 
 			control.Size = default;
 			control.MouseDown += DashMouseDown;
-			control.MouseMove += DashMouseMove;
 			control.MouseUp += DashMouseUp;
 			control.ResizeRequested += DashResizeRequested;
 
@@ -100,7 +123,7 @@ public partial class PC_MainPage : PanelContent
 		{
 			ResizeItem = control;
 			CursorStart = new(Cursor.Position.X, control.Width);
-			savedRect = control.Bounds;
+			initialRect = savedRect = control.Bounds;
 			control.ResizeInProgress = true;
 			control.BringToFront();
 			P_Board.Invalidate();
@@ -110,29 +133,11 @@ public partial class PC_MainPage : PanelContent
 		{
 			MoveItem = control;
 			CursorStart = control.PointToClient(Cursor.Position);
-			savedRect = control.Bounds;
+			initialRect = savedRect = control.Bounds;
 			control.MoveInProgress = true;
 			control.BringToFront();
 			P_Board.Invalidate();
 			P_Container.Invalidate();
-		}
-	}
-
-	private void DashMouseMove(object sender, MouseEventArgs e)
-	{
-		var dashItem = (IDashboardItem)sender;
-
-		if (dashItem.ResizeInProgress || dashItem.ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
-		{
-			dashItem.Cursor = Cursors.SizeWE;
-		}
-		else if (dashItem.MoveInProgress || dashItem.MoveAreaContains(e.Location))
-		{
-			dashItem.Cursor = Cursors.SizeAll;
-		}
-		else
-		{
-			dashItem.Cursor = Cursors.Default;
 		}
 	}
 
@@ -144,12 +149,24 @@ public partial class PC_MainPage : PanelContent
 		{
 			SaveDashItemBounds(MoveItem, GetSnappingRect(MoveItem, false, savedRect));
 			MoveItem = null;
+
+			if (!_settings.SessionSettings.DashboardFirstTimeShown)
+			{
+				_settings.SessionSettings.DashboardFirstTimeShown = true;
+				_settings.SessionSettings.Save();
+			}
 		}
 
 		if (ResizeItem is not null)
 		{
 			SaveDashItemBounds(ResizeItem, GetSnappingRect(ResizeItem, false, savedRect));
 			ResizeItem = null;
+
+			if (!_settings.SessionSettings.DashboardFirstTimeShown)
+			{
+				_settings.SessionSettings.DashboardFirstTimeShown = true;
+				_settings.SessionSettings.Save();
+			}
 		}
 
 		dashItem.MoveInProgress = false;
@@ -184,7 +201,7 @@ public partial class PC_MainPage : PanelContent
 	{
 		var rect = savedRect ?? control.Bounds.InvertPad(control.Padding);
 
-		rect.Width = Math.Max(rect.Width, (int)(100 * UI.FontScale));
+		rect.Width = Math.Max(rect.Width, control.MinimumWidth * P_Container.Width / 6 / 100);
 
 		var margin = (int)(32 * UI.FontScale);
 		var closestX = P_Board.Controls
@@ -414,6 +431,8 @@ public partial class PC_MainPage : PanelContent
 					SaveDashItemBounds(item.Item);
 				}
 			}
+
+			SaveLayout();
 		}
 
 		P_Board.Size = P_Board.GetPreferredSize(P_Board.Size);
@@ -466,6 +485,7 @@ public partial class PC_MainPage : PanelContent
 	protected override void LocaleChanged()
 	{
 		Text = Locale.Dashboard;
+		L_Info.Text = Locale.DashboardCustomizationInfo;
 	}
 
 	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
@@ -480,6 +500,8 @@ public partial class PC_MainPage : PanelContent
 		base.UIChanged();
 
 		P_Scroll.Width = (int)(15 * UI.FontScale);
+
+		TLP_FirstTime.Padding = UI.Scale(new Padding(12, 12, 0, 0), UI.FontScale);
 
 		//B_StartStop.Font = UI.Font(9.75F, FontStyle.Bold);
 		//label1.Font = UI.Font(10.5F, FontStyle.Bold);
@@ -573,5 +595,47 @@ public partial class PC_MainPage : PanelContent
 				e.Graphics.DrawLine(pen, x - 1, e.Graphics.VisibleClipBounds.Y, x - 1, e.Graphics.VisibleClipBounds.Height);
 			}
 		}
+	}
+
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		Form.Deactivate += Form_Deactivate;
+	}
+
+	private void Form_Deactivate(object sender, EventArgs e)
+	{
+		if (MoveItem is not null)
+		{
+			MoveItem.MoveInProgress = false;
+			SaveDashItemBounds(MoveItem, initialRect);
+			MoveItem = null;
+		}
+		else if (ResizeItem is not null)
+		{
+			ResizeItem.ResizeInProgress = false;
+			SaveDashItemBounds(ResizeItem, initialRect);
+			ResizeItem = null;
+		}
+		else
+		{
+			return;
+		}
+
+		P_Board.Invalidate(true);
+		P_Container.Invalidate();
+		P_Container.PerformLayout();
+	}
+
+	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+	{
+		if (keyData == Keys.Escape && (MoveItem is not null || ResizeItem is not null))
+		{
+			Form_Deactivate(this, EventArgs.Empty);
+			return true;
+		}
+
+		return base.ProcessCmdKey(ref msg, keyData);
 	}
 }

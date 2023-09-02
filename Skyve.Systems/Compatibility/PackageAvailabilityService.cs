@@ -70,7 +70,7 @@ public class PackageAvailabilityService
 			{
 				if (item.Key != steamId)
 				{
-					foreach (var package in FindPackage(item.Value, withAlternativesAndSuccessors))
+					foreach (var package in _compatibilityManager.FindPackage(item.Value, withAlternativesAndSuccessors))
 					{
 						if (isEnabled(package))
 						{
@@ -81,7 +81,7 @@ public class PackageAvailabilityService
 			}
 		}
 
-		foreach (var package in FindPackage(indexedPackage, withAlternativesAndSuccessors))
+		foreach (var package in _compatibilityManager.FindPackage(indexedPackage, withAlternativesAndSuccessors))
 		{
 			if (isEnabled(package))
 			{
@@ -93,7 +93,7 @@ public class PackageAvailabilityService
 		{
 			if (item.Key != steamId)
 			{
-				foreach (var package in FindPackage(item.Value, withAlternativesAndSuccessors))
+				foreach (var package in _compatibilityManager.FindPackage(item.Value, withAlternativesAndSuccessors))
 				{
 					if (isEnabled(package))
 					{
@@ -106,41 +106,5 @@ public class PackageAvailabilityService
 		return false;
 
 		bool isEnabled(ILocalPackage? package) => package is not null && _contentUtil.IsIncludedAndEnabled(package);
-	}
-
-	private IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withAlternativesAndSuccessors)
-	{
-		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
-
-		if (localPackage is not null)
-		{
-			yield return localPackage;
-		}
-
-		localPackage = _packageManager.Mods.FirstOrDefault(x => x.IsLocal && Path.GetFileName(x.FilePath) == package.Package.FileName)?.LocalParentPackage;
-
-		if (localPackage is not null)
-		{
-			yield return localPackage;
-		}
-
-		if (!withAlternativesAndSuccessors || !package.Interactions.ContainsKey(InteractionType.SucceededBy))
-		{
-			yield break;
-		}
-
-		var packages = package.Interactions[InteractionType.SucceededBy]
-					.SelectMany(x => x.Packages.Values)
-					.Where(x => x.Package != package.Package)
-					.Select(x => FindPackage(x, true))
-					.FirstOrDefault(x => x is not null);
-
-		if (packages is not null)
-		{
-			foreach (var item in packages)
-			{
-				yield return item;
-			}
-		}
 	}
 }

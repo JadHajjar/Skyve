@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using Skyve.App.UserInterface.Panels;
+
+using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dashboard;
 
@@ -10,19 +12,30 @@ internal class D_ModsInfo : IDashboardItem
 	private readonly IPackageManager _contentManager;
 	private readonly IUpdateManager _updateManager;
 
-	private readonly Dictionary<NotificationType, int> _compatibilityCounts;
 	private int mainSectionHeight;
 	private bool contentLoading;
 	private int modsTotal, modsIncluded, modsEnabled, modsOutOfDate, modsIncomplete;
-	private readonly List<ILocalPackage> newMods;
+	private readonly List<ILocalPackageWithContents> newMods;
 
 	public D_ModsInfo()
 	{
-		_compatibilityCounts = new();
 		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _updateManager);
 
-		newMods = _updateManager.GetNewPackages().ToList();
+		newMods = _updateManager.GetNewOrUpdatedPackages().ToList();
 		RefreshModCounts();
+	}
+
+	private void OpenRecentModsPanel()
+	{
+		if (Program.MainForm.PushPanel<PC_Mods>())
+		{
+			(Program.MainForm.CurrentPanel as PC_Mods)?.SetSorting(PackageSorting.UpdateTime, true);
+		}
+	}
+
+	private void OpenModsPanel()
+	{
+		Program.MainForm.PushPanel<PC_Mods>();
 	}
 
 	private void RefreshModCounts()
@@ -87,6 +100,7 @@ internal class D_ModsInfo : IDashboardItem
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated += PackageInformationUpdated;
+		_notifier.PackageInclusionUpdated += PackageInformationUpdated;
 		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
 
@@ -96,6 +110,7 @@ internal class D_ModsInfo : IDashboardItem
 
 		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated -= PackageInformationUpdated;
+		_notifier.PackageInclusionUpdated -= PackageInformationUpdated;
 		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
 	}
 
@@ -159,7 +174,7 @@ internal class D_ModsInfo : IDashboardItem
 	{
 		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.ModsBubble, "I_Mods", out var fore, ref preferredHeight);
 
-		var textRect = e.ClipRectangle.Pad(Padding.Left, 0, Margin.Right, 0);
+		var textRect = e.ClipRectangle.Pad(Margin);
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
@@ -233,20 +248,18 @@ internal class D_ModsInfo : IDashboardItem
 				, applyDrawing);
 		}
 
-		preferredHeight += Margin.Top;
-
 		mainSectionHeight = preferredHeight - e.ClipRectangle.Y;
 
 		preferredHeight += Margin.Top;
 
-		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		DrawButton(e, applyDrawing, ref preferredHeight, OpenModsPanel, new()
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Mod.Plural.ToLower()),
 			Icon = "I_ViewFile",
 			Rectangle = e.ClipRectangle
 		});
 
-		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		DrawButton(e, applyDrawing, ref preferredHeight, OpenRecentModsPanel, new()
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Mod.Plural.ToLower()),
 			Icon = "I_UpdateTime",
@@ -261,7 +274,7 @@ internal class D_ModsInfo : IDashboardItem
 
 		DrawSection(e, applyDrawing, mainRect.ClipTo(mainSectionHeight), Locale.ModsBubble, "I_Mods", out var fore, ref preferredHeight);
 
-		var textRect = mainRect.Pad(Padding.Left, 0, Margin.Right, 0);
+		var textRect = mainRect.Pad(Margin);
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
@@ -335,8 +348,6 @@ internal class D_ModsInfo : IDashboardItem
 				, applyDrawing);
 		}
 
-		preferredHeight += Margin.Top;
-
 		mainSectionHeight = preferredHeight - mainRect.Y;
 
 		preferredHeight = e.ClipRectangle.Y;
@@ -344,14 +355,14 @@ internal class D_ModsInfo : IDashboardItem
 		mainRect.X += mainRect.Width + Padding.Left;
 		mainRect.Width -= Padding.Left;
 
-		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		DrawButton(e, applyDrawing, ref preferredHeight, OpenModsPanel, new()
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Mod.Plural.ToLower()),
 			Icon = "I_ViewFile",
 			Rectangle = mainRect
 		});
 
-		DrawButton(e, applyDrawing, ref preferredHeight, new()
+		DrawButton(e, applyDrawing, ref preferredHeight, OpenRecentModsPanel, new()
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Mod.Plural.ToLower()),
 			Icon = "I_UpdateTime",

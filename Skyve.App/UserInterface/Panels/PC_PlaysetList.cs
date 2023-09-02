@@ -60,7 +60,7 @@ public partial class PC_PlaysetList : PanelContent
 		SlickTip.SetTo(B_AddProfile.Controls[0], "NewPlayset_Tip");
 		SlickTip.SetTo(B_TempProfile.Controls[0], "TempPlayset_Tip");
 		SlickTip.SetTo(I_ProfileIcon, "ChangePlaysetColor");
-		SlickTip.SetTo(B_EditName, "EditPlaysetName");
+		SlickTip.SetTo(B_EditName, "ChangePlaysetSettings");
 		SlickTip.SetTo(B_Save, "SavePlaysetChanges");
 
 		RefreshCounts();

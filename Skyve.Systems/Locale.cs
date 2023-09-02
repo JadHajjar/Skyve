@@ -338,6 +338,26 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ViewAllYourItems => _instance.GetText(nameof(ViewAllYourItems));
 	public static Translation ViewRecentlyUpdatedItems => _instance.GetText(nameof(ViewRecentlyUpdatedItems));
 	public static Translation NoCompatibilityIssues => _instance.GetText(nameof(NoCompatibilityIssues));
+	public static Translation UnsavedChangesPlayset => _instance.GetText(nameof(UnsavedChangesPlayset));
+	public static Translation ChangePlaysetSettings => _instance.GetText(nameof(ChangePlaysetSettings));
+	public static Translation TempPlayset => _instance.GetText(nameof(TempPlayset));
+	public static Translation ViewCompatibilityReport => _instance.GetText(nameof(ViewCompatibilityReport));
+	public static Translation DashboardCustomizationInfo => _instance.GetText(nameof(DashboardCustomizationInfo));
+	public static Translation ViewModsWithIssues => _instance.GetText(nameof(ViewModsWithIssues));
+	public static Translation ViewAssetsWithIssues => _instance.GetText(nameof(ViewAssetsWithIssues));
+	public static Translation StartsNewGameOnLaunch => _instance.GetText(nameof(StartsNewGameOnLaunch));
+	public static Translation StartsNewGameWithMap => _instance.GetText(nameof(StartsNewGameWithMap));
+	public static Translation LoadsSaveGameOnLaunch => _instance.GetText(nameof(LoadsSaveGameOnLaunch));
+	public static Translation LoadsSaveGameWithMap => _instance.GetText(nameof(LoadsSaveGameWithMap));
+	public static Translation StartsNewAssetOnLaunch => _instance.GetText(nameof(StartsNewAssetOnLaunch));
+	public static Translation LoadsAssetOnLaunch => _instance.GetText(nameof(LoadsAssetOnLaunch));
+	public static Translation Notifications => _instance.GetText(nameof(Notifications));
+	public static Translation NoNotifications => _instance.GetText(nameof(NoNotifications));
+	public static Translation MultipleSkyvesDetected => _instance.GetText(nameof(MultipleSkyvesDetected));
+	public static Translation PackageUpdates => _instance.GetText(nameof(PackageUpdates));
+	public static Translation PackagesUpdatedSinceSession => _instance.GetText(nameof(PackagesUpdatedSinceSession));
+	public static Translation NewPackages => _instance.GetText(nameof(NewPackages));
+	public static Translation NewPackagesSinceSession => _instance.GetText(nameof(NewPackagesSinceSession));
 
 	public static void Load() { _ = _instance; }
 

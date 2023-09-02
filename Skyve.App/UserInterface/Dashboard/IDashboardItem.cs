@@ -4,13 +4,15 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Dashboard;
 public abstract class IDashboardItem : SlickImageControl
 {
-	private readonly List<Rectangle> _sections = new();
+	private readonly List<(Rectangle rectangle, int height)> _sections = new();
+	private readonly Dictionary<Rectangle, ExtensionClass.action> _buttonActions = new();
 
 	public event EventHandler? ResizeRequested;
 
 	public string Key { get; }
 	public bool MoveInProgress { get; internal set; }
 	public bool ResizeInProgress { get; internal set; }
+	public int MinimumWidth { get; protected set; } = 100;
 
 	public IDashboardItem()
 	{
@@ -24,10 +26,10 @@ public abstract class IDashboardItem : SlickImageControl
 	{
 		if (_sections.Count > 0)
 		{
-			return _sections.Any(x => x.Contains(point));
+			return _sections.Any(x => x.rectangle.ClipTo(x.height).Contains(point));
 		}
 
-		return point.Y < Padding.Top *3/2;
+		return point.Y < Padding.Top * 3 / 2;
 	}
 
 	public int CalculateHeight(int width, Graphics graphics)
@@ -61,12 +63,57 @@ public abstract class IDashboardItem : SlickImageControl
 
 	protected void OnResizeRequested()
 	{
-		ResizeRequested?.Invoke(this, EventArgs.Empty);
+		this.TryInvoke(() =>
+		{
+			Invalidate();
+			ResizeRequested?.Invoke(this, EventArgs.Empty);
+		});
+	}
+
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		base.OnMouseMove(e);
+
+		if (ResizeInProgress || ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
+		{
+			Cursor = Cursors.SizeWE;
+		}
+		else if (MoveInProgress || MoveAreaContains(e.Location))
+		{
+			Cursor = Cursors.SizeAll;
+		}
+		else if (_buttonActions.Keys.Any(x => x.Contains(e.Location)))
+		{
+			Cursor = Cursors.Hand;
+		}
+		else
+		{
+			Cursor = Cursors.Default;
+		}
+	}
+
+	protected override void OnMouseClick(MouseEventArgs e)
+	{
+		base.OnMouseClick(e);
+
+		if (e.Button == MouseButtons.Left)
+		{
+			foreach (var item in _buttonActions)
+			{
+				if (item.Key.Contains(e.Location))
+				{
+					item.Value();
+					return;
+				}
+			}
+		}
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
 		e.Graphics.SetUp(BackColor);
+
+		_buttonActions.Clear();
 
 		if (MoveInProgress || ResizeInProgress)
 		{
@@ -118,12 +165,15 @@ public abstract class IDashboardItem : SlickImageControl
 
 			foreach (var rectangle in _sections)
 			{
-				e.Graphics.FillRoundedRectangle(grabberBrush, rectangle.Pad(2), Padding.Left/*, botLeft: false, botRight: false*/);
+				if (rectangle.rectangle.Contains(CursorLocation))
+				{
+					e.Graphics.FillRoundedRectangle(grabberBrush, rectangle.rectangle.ClipTo(rectangle.height).Pad(2), Padding.Left/*, botLeft: false, botRight: false*/);
+				}
 			}
 		}
 	}
 
-	protected void DrawSection(PaintEventArgs e, bool applyDrawing, Rectangle rectangle, string text, DynamicIcon dynamicIcon, out Color fore, ref int preferredHeight, Color? tintColor = null)
+	protected void DrawSection(PaintEventArgs e, bool applyDrawing, Rectangle rectangle, string text, DynamicIcon dynamicIcon, out Color fore, ref int preferredHeight, Color? tintColor = null, string? subText = null, bool drawBackground = true)
 	{
 		var hoverState = rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
 
@@ -145,7 +195,7 @@ public abstract class IDashboardItem : SlickImageControl
 			back = FormDesign.Design.MenuColor;
 		}
 
-		if (applyDrawing)
+		if (applyDrawing&& drawBackground)
 		{
 			if (tintColor != null)
 			{
@@ -176,6 +226,22 @@ public abstract class IDashboardItem : SlickImageControl
 			using var icon = dynamicIcon?.Get(font.Height + Margin.Top);
 			var iconRectangle = new Rectangle(Margin.Left + rectangle.X, rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
 			var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, font, rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height);
+			var textRect = new Rectangle(iconRectangle.Right + Margin.Left, Margin.Top + rectangle.Y, rectangle.Right - Margin.Horizontal - iconRectangle.Right, titleHeight);
+
+			if (subText is not null)
+			{
+				using var smallFont = UI.Font(7F);
+				var textHeight = (int)e.Graphics.Measure(subText, smallFont, rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height;
+
+				if (applyDrawing)
+				{
+					using var brush = new SolidBrush(Color.FromArgb(150, fore));
+					e.Graphics.DrawString(subText, smallFont, brush, textRect.Pad((int)(2 * UI.FontScale), Margin.Top / -2, 0, 0));
+				}
+
+				titleHeight += textHeight - (Margin.Top / 2);
+				textRect.Y += textHeight - (Margin.Top / 2);
+			}
 
 			iconRectangle.Y += Margin.Top + ((titleHeight - icon?.Height ?? 0) / 2);
 
@@ -191,11 +257,11 @@ public abstract class IDashboardItem : SlickImageControl
 				}
 
 				using var brush = new SolidBrush(fore);
-				e.Graphics.DrawString(text, font, brush, new Rectangle(iconRectangle.Right + Margin.Left, Margin.Top + rectangle.Y, rectangle.Right - Margin.Horizontal - iconRectangle.Right, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
+				e.Graphics.DrawString(text, font, brush, textRect, new StringFormat { LineAlignment = StringAlignment.Center });
 			}
 			else
 			{
-				_sections.Add(new(rectangle.X, rectangle.Y, rectangle.Width, titleHeight + (Margin.Top * 2)));
+				_sections.Add((rectangle, titleHeight + (Margin.Top * 2)));
 			}
 
 			preferredHeight += titleHeight + (Margin.Top * 2);
@@ -211,31 +277,36 @@ public abstract class IDashboardItem : SlickImageControl
 		preferredHeight += (int)(32 * UI.FontScale) + Margin.Vertical;
 	}
 
-	protected void DrawSquareButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ButtonDrawArgs buttonArgs)
+	protected void DrawSquareButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ExtensionClass.action? clickAction, ButtonDrawArgs buttonArgs)
 	{
-		using var icon = buttonArgs.Icon.Get(Math.Min(buttonArgs.Rectangle.Width, buttonArgs.Rectangle.Height) *3/ 5);
+		using var icon = buttonArgs.Icon.Get(Math.Min(buttonArgs.Rectangle.Width, buttonArgs.Rectangle.Height) * 3 / 5);
 
 		buttonArgs.Image = icon;
 		buttonArgs.BorderRadius = Padding.Left;
 
-		DrawButtonInternal(e, applyDrawing, ref preferredHeight, true, buttonArgs);
+		DrawButtonInternal(e, applyDrawing, ref preferredHeight, true, buttonArgs, clickAction);
 	}
 
-	protected void DrawButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ButtonDrawArgs buttonArgs)
+	protected void DrawButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ExtensionClass.action? clickAction, ButtonDrawArgs buttonArgs)
 	{
 		using var icon = buttonArgs.Icon.Default;
 
 		buttonArgs.Image = icon;
 
-		DrawButtonInternal(e, applyDrawing, ref preferredHeight, false, buttonArgs);
+		DrawButtonInternal(e, applyDrawing, ref preferredHeight, false, buttonArgs, clickAction);
 	}
 
-	private void DrawButtonInternal(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, bool square, ButtonDrawArgs buttonArgs)
+	private void DrawButtonInternal(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, bool square, ButtonDrawArgs buttonArgs, ExtensionClass.action? clickAction)
 	{
 		buttonArgs.Font ??= Font;
 		buttonArgs.Padding = Margin;
 		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, square ? buttonArgs.Rectangle.Height : SlickButton.GetSize(e.Graphics, buttonArgs.Image, buttonArgs.Text, buttonArgs.Font, buttonArgs.Padding, buttonArgs.Rectangle.Width).Height);
 		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
+
+		if (buttonArgs.BackColor.A != 0 && buttonArgs.HoverState.HasFlag(HoverState.Hovered))
+		{
+			buttonArgs.BackColor = buttonArgs.BackColor.MergeColor(FormDesign.Design.ButtonColor, buttonArgs.HoverState.HasFlag(HoverState.Pressed) ? 25 : 65);
+		}
 
 		preferredHeight += buttonArgs.Rectangle.Height + Margin.Bottom;
 
@@ -244,6 +315,36 @@ public abstract class IDashboardItem : SlickImageControl
 			return;
 		}
 
+		if (clickAction is not null)
+		{
+			_buttonActions.Add(buttonArgs.Rectangle, clickAction);
+		}
+
 		SlickButton.Draw(e, buttonArgs);
+	}
+
+	protected void DrawDivider(PaintEventArgs e, Rectangle rect, bool applyDrawing, ref int preferredHeight, bool vertical = false)
+	{
+		if (!applyDrawing)
+		{
+			if (!vertical)
+			{
+				preferredHeight += Margin.Top;
+			}
+
+			return;
+		}
+
+		using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale));
+
+		if (vertical)
+		{
+			e.Graphics.DrawLine(pen, rect.X, rect.Y, rect.X, rect.Bottom);
+			return;
+		}
+
+		e.Graphics.DrawLine(pen, rect.X, preferredHeight, rect.Right, preferredHeight);
+
+		preferredHeight += Margin.Top;
 	}
 }

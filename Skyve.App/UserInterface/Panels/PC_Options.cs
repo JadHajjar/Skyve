@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
@@ -32,6 +33,7 @@ public partial class PC_Options : PanelContent
 
 		if (CrossIO.CurrentPlatform is Platform.Linux)
 		{
+			B_CreateShortcut.Visible = false;
 			TB_GamePath.Placeholder = "Z:\\...\\Steam\\SteamLibrary\\steamapps\\common\\Cities_Skylines";
 			TB_AppDataPath.Placeholder = "Z:\\home\\USERNAME\\.local\\share\\Colossal Order\\Cities_Skylines";
 			TB_SteamPath.Placeholder = "/usr/bin/steam";
@@ -39,6 +41,7 @@ public partial class PC_Options : PanelContent
 
 		if (CrossIO.CurrentPlatform is Platform.MacOSX)
 		{
+			B_CreateShortcut.Visible = false;
 			TB_GamePath.Placeholder = "/Users/USERNAME/Library/Application Support/Steam/steamapps/common/Cities_Skylines";
 			TB_AppDataPath.Placeholder = "/Users/USERNAME/Library/Application Support/Colossal Order/Cities_Skylines";
 			TB_SteamPath.Placeholder = "/Applications/Steam.app/Contents";
@@ -98,7 +101,7 @@ public partial class PC_Options : PanelContent
 		DD_Language.Width = (int)(220 * UI.FontScale);
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
 		B_Theme.Margin = TLP_UI.Margin = TLP_Settings.Margin = TLP_Advanced.Margin = B_HelpTranslate.Margin = TLP_HelpLogs.Margin =
-			B_ClearFolders.Margin = B_Discord.Margin = B_Guide.Margin = B_Reset.Margin = B_ChangeLog.Margin =
+			B_ClearFolders.Margin = B_Discord.Margin = B_Guide.Margin = B_Reset.Margin = B_ChangeLog.Margin = B_CreateShortcut.Margin =
 			TLP_Preferences.Margin = TLP_Folders.Margin = UI.Scale(new Padding(10), UI.UIScale);
 		DD_Language.Margin = UI.Scale(new Padding(10, 7, 10, 5), UI.UIScale);
 		slickSpacer1.Height = slickSpacer2.Height = (int)(1.5 * UI.FontScale);
@@ -248,5 +251,16 @@ public partial class PC_Options : PanelContent
 	private void AssumeInternetConnectivity_CheckChanged(object sender, EventArgs e)
 	{
 		ConnectionHandler.AssumeInternetConnectivity = CB_AssumeInternetConnectivity.Checked;
+	}
+
+	private async void B_CreateShortcut_Click(object sender, EventArgs e)
+	{
+		ServiceCenter.Get<ILocationManager>().CreateShortcut();
+
+		B_CreateShortcut.ImageName = "I_Check";
+
+		await Task.Delay(3000);
+
+		B_CreateShortcut.ImageName = "I_Link";
 	}
 }

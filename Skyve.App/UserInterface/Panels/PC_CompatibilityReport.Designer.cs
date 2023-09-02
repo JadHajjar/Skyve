@@ -47,6 +47,7 @@ partial class PC_CompatibilityReport
 			this.tabHeader = new SlickControls.SlickTabHeader();
 			this.PB_Loader = new SlickControls.SlickPictureBox();
 			this.LC_Items = new Skyve.App.UserInterface.Lists.CompatibilityReportList();
+			this.label1 = new System.Windows.Forms.Label();
 			this.TLP_Buttons.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.PB_Loader)).BeginInit();
 			this.SuspendLayout();
@@ -54,6 +55,7 @@ partial class PC_CompatibilityReport
 			// base_Text
 			// 
 			this.base_Text.Location = new System.Drawing.Point(-2, 3);
+			this.base_Text.Size = new System.Drawing.Size(150, 32);
 			// 
 			// TLP_Buttons
 			// 
@@ -78,7 +80,7 @@ partial class PC_CompatibilityReport
 			this.TLP_Buttons.Name = "TLP_Buttons";
 			this.TLP_Buttons.RowCount = 1;
 			this.TLP_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Buttons.Size = new System.Drawing.Size(1312, 36);
+			this.TLP_Buttons.Size = new System.Drawing.Size(1312, 38);
 			this.TLP_Buttons.TabIndex = 0;
 			// 
 			// B_ApplyAll
@@ -91,9 +93,9 @@ partial class PC_CompatibilityReport
 			this.B_ApplyAll.Enabled = false;
 			dynamicIcon1.Name = "I_CompatibilityReport";
 			this.B_ApplyAll.ImageName = dynamicIcon1;
-			this.B_ApplyAll.Location = new System.Drawing.Point(747, 3);
+			this.B_ApplyAll.Location = new System.Drawing.Point(351, 3);
 			this.B_ApplyAll.Name = "B_ApplyAll";
-			this.B_ApplyAll.Size = new System.Drawing.Size(119, 30);
+			this.B_ApplyAll.Size = new System.Drawing.Size(161, 32);
 			this.B_ApplyAll.SpaceTriggersClick = true;
 			this.B_ApplyAll.TabIndex = 1;
 			this.B_ApplyAll.Text = "ApplyAllActions";
@@ -104,15 +106,14 @@ partial class PC_CompatibilityReport
 			this.TB_Search.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			dynamicIcon2.Name = "I_Search";
 			this.TB_Search.ImageName = dynamicIcon2;
-			this.TB_Search.Location = new System.Drawing.Point(3, 5);
+			this.TB_Search.Location = new System.Drawing.Point(3, 6);
 			this.TB_Search.Name = "TB_Search";
-			this.TB_Search.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
 			this.TB_Search.Placeholder = "SearchGenericPackages";
 			this.TB_Search.SelectedText = "";
 			this.TB_Search.SelectionLength = 0;
 			this.TB_Search.SelectionStart = 0;
 			this.TB_Search.ShowLabel = false;
-			this.TB_Search.Size = new System.Drawing.Size(372, 26);
+			this.TB_Search.Size = new System.Drawing.Size(342, 26);
 			this.TB_Search.TabIndex = 0;
 			this.TB_Search.TextChanged += new System.EventHandler(this.TB_Search_TextChanged);
 			this.TB_Search.IconClicked += new System.EventHandler(this.TB_Search_IconClicked);
@@ -125,9 +126,9 @@ partial class PC_CompatibilityReport
 			this.B_Manage.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon3.Name = "I_Cog";
 			this.B_Manage.ImageName = dynamicIcon3;
-			this.B_Manage.Location = new System.Drawing.Point(1209, 3);
+			this.B_Manage.Location = new System.Drawing.Point(1049, 3);
 			this.B_Manage.Name = "B_Manage";
-			this.B_Manage.Size = new System.Drawing.Size(100, 30);
+			this.B_Manage.Size = new System.Drawing.Size(260, 32);
 			this.B_Manage.SpaceTriggersClick = true;
 			this.B_Manage.TabIndex = 5;
 			this.B_Manage.Text = "ManageCompatibilityData";
@@ -141,9 +142,9 @@ partial class PC_CompatibilityReport
 			this.B_YourPackages.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon4.Name = "I_User";
 			this.B_YourPackages.ImageName = dynamicIcon4;
-			this.B_YourPackages.Location = new System.Drawing.Point(872, 3);
+			this.B_YourPackages.Location = new System.Drawing.Point(518, 3);
 			this.B_YourPackages.Name = "B_YourPackages";
-			this.B_YourPackages.Size = new System.Drawing.Size(119, 30);
+			this.B_YourPackages.Size = new System.Drawing.Size(144, 32);
 			this.B_YourPackages.SpaceTriggersClick = true;
 			this.B_YourPackages.TabIndex = 2;
 			this.B_YourPackages.Text = "YourPackages";
@@ -157,9 +158,9 @@ partial class PC_CompatibilityReport
 			this.B_ManageSingle.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon5.Name = "I_Edit";
 			this.B_ManageSingle.ImageName = dynamicIcon5;
-			this.B_ManageSingle.Location = new System.Drawing.Point(997, 3);
+			this.B_ManageSingle.Location = new System.Drawing.Point(668, 3);
 			this.B_ManageSingle.Name = "B_ManageSingle";
-			this.B_ManageSingle.Size = new System.Drawing.Size(100, 30);
+			this.B_ManageSingle.Size = new System.Drawing.Size(226, 32);
 			this.B_ManageSingle.SpaceTriggersClick = true;
 			this.B_ManageSingle.TabIndex = 3;
 			this.B_ManageSingle.Text = "ManageSinglePackage";
@@ -173,9 +174,9 @@ partial class PC_CompatibilityReport
 			this.B_Requests.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon6.Name = "I_RequestReview";
 			this.B_Requests.ImageName = dynamicIcon6;
-			this.B_Requests.Location = new System.Drawing.Point(1103, 3);
+			this.B_Requests.Location = new System.Drawing.Point(900, 3);
 			this.B_Requests.Name = "B_Requests";
-			this.B_Requests.Size = new System.Drawing.Size(100, 30);
+			this.B_Requests.Size = new System.Drawing.Size(143, 32);
 			this.B_Requests.SpaceTriggersClick = true;
 			this.B_Requests.TabIndex = 4;
 			this.B_Requests.Text = "ViewRequests";
@@ -184,7 +185,7 @@ partial class PC_CompatibilityReport
 			// tabHeader
 			// 
 			this.tabHeader.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tabHeader.Location = new System.Drawing.Point(0, 66);
+			this.tabHeader.Location = new System.Drawing.Point(0, 68);
 			this.tabHeader.Name = "tabHeader";
 			this.tabHeader.Padding = new System.Windows.Forms.Padding(0);
 			this.tabHeader.Size = new System.Drawing.Size(1312, 60);
@@ -210,14 +211,26 @@ partial class PC_CompatibilityReport
 			this.LC_Items.DynamicSizing = true;
 			this.LC_Items.GridView = true;
 			this.LC_Items.ItemHeight = 75;
-			this.LC_Items.Location = new System.Drawing.Point(0, 126);
+			this.LC_Items.Location = new System.Drawing.Point(0, 128);
 			this.LC_Items.Name = "LC_Items";
-			this.LC_Items.Size = new System.Drawing.Size(1312, 691);
+			this.LC_Items.Size = new System.Drawing.Size(1312, 689);
 			this.LC_Items.TabIndex = 1;
+			// 
+			// label1
+			// 
+			this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(0, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(189, 30);
+			this.label1.TabIndex = 103;
+			this.label1.Text = "No issues detected";
+			this.label1.Visible = false;
 			// 
 			// PC_CompatibilityReport
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.Controls.Add(this.label1);
 			this.Controls.Add(this.PB_Loader);
 			this.Controls.Add(this.LC_Items);
 			this.Controls.Add(this.tabHeader);
@@ -231,6 +244,7 @@ partial class PC_CompatibilityReport
 			this.Controls.SetChildIndex(this.tabHeader, 0);
 			this.Controls.SetChildIndex(this.LC_Items, 0);
 			this.Controls.SetChildIndex(this.PB_Loader, 0);
+			this.Controls.SetChildIndex(this.label1, 0);
 			this.TLP_Buttons.ResumeLayout(false);
 			this.TLP_Buttons.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.PB_Loader)).EndInit();
@@ -250,4 +264,5 @@ partial class PC_CompatibilityReport
 	private SlickControls.SlickButton B_Requests;
 	private SlickTextBox TB_Search;
 	private SlickButton B_ApplyAll;
+	private System.Windows.Forms.Label label1;
 }

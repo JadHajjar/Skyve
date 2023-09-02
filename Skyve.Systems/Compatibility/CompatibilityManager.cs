@@ -29,7 +29,7 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly ILocale _locale;
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
-	private readonly IPackageManager _contentManager;
+	private readonly IPackageManager _packageManager;
 	private readonly ICompatibilityUtil _compatibilityUtil;
 	private readonly IPackageUtil _contentUtil;
 	private readonly IPackageNameUtil _packageUtil;
@@ -45,7 +45,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public CompatibilityManager(IPackageManager contentManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, SkyveApiUtil skyveApiUtil, IDlcManager dlcManager)
 	{
-		_contentManager = contentManager;
+		_packageManager = contentManager;
 		_logger = logger;
 		_notifier = notifier;
 		_compatibilityUtil = compatibilityUtil;
@@ -87,8 +87,8 @@ public class CompatibilityManager : ICompatibilityManager
 			cancellationTokenSource?.Cancel();
 			cancellationTokenSource = new();
 
-			compatibilityService = new CompatibilityService(_locale, _logger, _contentManager, _compatibilityUtil, _contentUtil, _packageUtil, _workshopService, _dlcManager,
-				new CompatibilityHelper(this, _contentManager, _contentUtil, _packageUtil, _workshopService, _logger), this);
+			compatibilityService = new CompatibilityService(_locale, _logger, _packageManager, _compatibilityUtil, _contentUtil, _packageUtil, _workshopService, _dlcManager,
+				new CompatibilityHelper(this, _packageManager, _contentUtil, _packageUtil, _workshopService, _logger), this);
 
 			_logger.Info("[Compatibility] Compatibility Service Ready");
 
@@ -393,11 +393,11 @@ public class CompatibilityManager : ICompatibilityManager
 			return new GenericPackageIdentity(indexedPackage.SucceededBy.Packages.First().Key);
 		}
 
-		if (_contentManager.GetPackageById(package) is null)
+		if (_packageManager.GetPackageById(package) is null)
 		{
 			foreach (var item in indexedPackage.RequirementAlternatives.Keys)
 			{
-				if (_contentManager.GetPackageById(new GenericPackageIdentity(item)) is IPackageIdentity identity)
+				if (_packageManager.GetPackageById(new GenericPackageIdentity(item)) is IPackageIdentity identity)
 				{
 					return identity;
 				}
@@ -407,39 +407,33 @@ public class CompatibilityManager : ICompatibilityManager
 		return package;
 	}
 
-	internal IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withSuccessors)
+	internal IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withAlternativesAndSuccessors)
 	{
-		var localPackage = _contentManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
+		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
 
 		if (localPackage is not null)
 		{
 			yield return localPackage;
 		}
 
-		localPackage = _contentManager.Mods.FirstOrDefault(x => x.IsLocal && Path.GetFileName(x.FilePath) == package.Package.FileName)?.LocalParentPackage;
+		localPackage = _packageManager.GetModsByName(Path.GetFileName(package.Package.FileName)).FirstOrDefault(x => x.IsLocal)?.LocalParentPackage;
 
 		if (localPackage is not null)
 		{
 			yield return localPackage;
 		}
 
-		if (!withSuccessors || !package.Interactions.ContainsKey(InteractionType.SucceededBy))
+		if (!withAlternativesAndSuccessors || package.SucceededBy is null)
 		{
 			yield break;
 		}
 
-		var packages = package.Interactions[InteractionType.SucceededBy]
-					.SelectMany(x => x.Packages.Values)
-					.Where(x => x.Package != package.Package)
-					.Select(x => FindPackage(x, true))
-					.FirstOrDefault(x => x is not null);
+		var packages = package.SucceededBy.Packages
+			.SelectMany(x => FindPackage(x.Value, false));
 
-		if (packages is not null)
+		foreach (var item in packages)
 		{
-			foreach (var item in packages)
-			{
-				yield return item;
-			}
+			yield return item;
 		}
 	}
 }

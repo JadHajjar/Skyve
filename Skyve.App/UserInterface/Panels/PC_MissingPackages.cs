@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Management.Instrumentation;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
@@ -7,12 +8,13 @@ public partial class PC_MissingPackages : PC_GenericPackageList
 	private readonly IModUtil _modUtil;
 	private readonly IAssetUtil _assetUtil;
 	private readonly INotifier _notifier;
-
+	private readonly AutoResetEvent _pauseEvent;
 	private bool allowExit;
 
-	public PC_MissingPackages(IEnumerable<IPlaysetEntry> playsetEntries) : base(playsetEntries, false)
+	public PC_MissingPackages(IEnumerable<IPlaysetEntry> playsetEntries, AutoResetEvent pauseEvent) : base(playsetEntries, false)
 	{
 		ServiceCenter.Get(out _notifier, out _modUtil, out _assetUtil);
+		_pauseEvent = pauseEvent;
 	}
 
 	protected override void Dispose(bool disposing)
@@ -20,6 +22,8 @@ public partial class PC_MissingPackages : PC_GenericPackageList
 		_notifier.ContentLoaded -= CentralManager_ContentLoaded;
 
 		base.Dispose(disposing);
+
+		_pauseEvent.Set();
 	}
 
 	protected override void LocaleChanged()
@@ -90,14 +94,9 @@ public partial class PC_MissingPackages : PC_GenericPackageList
 
 		form.TryInvoke(() =>
 		{
-			var panel = new PC_MissingPackages(playsetEntries);
+			var panel = new PC_MissingPackages(playsetEntries, pauseEvent);
 
 			form.PushPanel(null, panel);
-
-			panel.Disposed += (s, e) =>
-			{
-				pauseEvent.Set();
-			};
 		});
 
 		pauseEvent.WaitOne();
