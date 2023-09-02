@@ -25,7 +25,7 @@
   "NoAssets": "모든 에셋 비활성화",
   "NoMods": "모든 모드 사용 안함",
   "AutoSave": "자동 저장",
-  "TotalSize": "총 크기",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "호환성 상태",
   "AnyStatus": "모든 상태",
   "AnyCompatibilityStatus": "모든 상태",
@@ -124,8 +124,8 @@
     "Plural": "선택된 패키지를 삭제"
   },
   "UnsubscribePackage": {
-    "One": "이 패키지 구독 취소",
-    "Plural": "선택된 패키지를 구독 취소"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "이 패키지의 창작마당 ID 복사",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "포함된 & 활성화된 패키지: {0}개, 총: {1}개",
   "AssetIncludedTotal": "포함된 에셋: {0}개, 총: {1}개",
   "NewPlayset_Tip": "새 프로필을 생성하거나 가져오기",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "현재 설정을 사용하여 임시 프로필로 전환하기",
   "ViewPlaysets_Tip": "저장된 내 모든 프로필 표시 및 관리하기",
   "AutoSave_Tip": "모드 및 자산에 대한 변경 사항을 프로필에 자동으로 저장합니다",
@@ -519,6 +520,14 @@
     "One": "{1} {0}개가 창작마당에서의 용량과 일치하지 않습니다",
     "Plural": "{1} {0}개가 각각 창작마당에서의 용량과 일치하지 않습니다"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "Steam에서 '{0}'이(가) 제거되었습니다.",
   "PackageIsUnknown": "'{0}'에 대한 정보를 아직 Steam에서 불러오지 않았습니다",
   "PackageIsNotDownloaded": "컴퓨터에서 '{0}'이(가) 제거되었습니다.",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "이 패키지의 Github 저장소 보기",
   "ViewXOnSteam": "'{0}' Steam에서 보기",
-  "Free": "무료"
+  "Free": "무료",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  }
 }
