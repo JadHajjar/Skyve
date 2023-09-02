@@ -25,7 +25,7 @@
   "NoAssets": "禁用自訂資產",
   "NoMods": "禁用全部模組",
   "AutoSave": "自動保存",
-  "TotalSize": "總大小",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "相容性狀態",
   "AnyStatus": "任何狀態",
   "AnyCompatibilityStatus": "任何狀態",
@@ -124,8 +124,8 @@
     "Plural": "刪除選中的外掛程式"
   },
   "UnsubscribePackage": {
-    "One": "取消訂閱此外掛程式",
-    "Plural": "取消訂閱選中的外掛程式"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "複製此外掛程式的工作坊 ID",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "您總共有 {1} 個外掛程式，已裝載且已啟用 {0} 個",
   "AssetIncludedTotal": "您總共有 {1} 個資產，已裝載 {0} 個",
   "NewPlayset_Tip": "Create or import a new playset",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
   "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "啟用此選項後，對模組和資產狀態進行的改動，將自動保存到設定檔中。",
@@ -519,6 +520,14 @@
     "One": "{0} {1} 與工作坊版本的檔案大小不匹配",
     "Plural": "{0} {1} 與工作坊版本的檔案大小不匹配"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "外掛 「{0}」 已從 Steam 工坊移除",
   "PackageIsUnknown": "外掛 「{0}」 的 Steam 工坊資訊尚未載入",
   "PackageIsNotDownloaded": "「{0}」已從您的電腦中刪除",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
   "ViewXOnSteam": "View '{0}' on Steam",
-  "Free": "Free"
+  "Free": "Free",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  }
 }
