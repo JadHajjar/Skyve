@@ -25,7 +25,7 @@
   "NoAssets": "Inaktivera alla speltillgångar",
   "NoMods": "Inaktivera alla mods",
   "AutoSave": "Spara automatiskt",
-  "TotalAssetSize": "{0} of included assets",
+  "TotalAssetSize": "{0} av inkluderade tillgångar",
   "CompatibilityStatus": "Kompatibilitetsstatus",
   "AnyStatus": "Någon status",
   "AnyCompatibilityStatus": "Någon status",
@@ -124,8 +124,8 @@
     "Plural": "Ta bort de valda paketen"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe to this package",
-    "Plural": "Unsubscribe to the selected packages"
+    "One": "Avsluta prenumerationen på detta paket",
+    "Plural": "Avsluta prenumerationen på de valda paketen"
   },
   "CopyWorkshopId": {
     "One": "Kopiera detta pakets verkstads-id",
@@ -272,7 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Paket inkluderade och aktiverade: {0}, Totalt: {1}",
   "AssetIncludedTotal": "Tillgångar inkluderade: {0}, Totalt: {1}",
   "NewPlayset_Tip": "Skapa eller importera en ny speluppsättning",
-  "TempPlayset": "Switch to a temporary playset",
+  "TempPlayset": "Växla till en tillfällig speluppsättning",
   "TempPlayset_Tip": "Växla till en tillfällig uppspelning med dina nuvarande inställningar",
   "ViewPlaysets_Tip": "Visa och hantera dina sparade speluppsättningar",
   "AutoSave_Tip": "Spara automatiskt ändringar i moddar och tillgångar till din profil",
@@ -521,12 +521,12 @@
     "Plural": "{0} {1} matchar inte sina respektive storlekar från verkstaden"
   },
   "NewUpdatedCount": {
-    "One": "{0} new or updated {1}",
-    "Plural": "{0} new or updated {1}"
+    "One": "{0} nya eller uppdaterade {1}",
+    "Plural": "{0} nya eller uppdaterade {1}"
   },
   "TotalCount": {
-    "One": "{0} {1} in total",
-    "Plural": "{0} {1} in total"
+    "One": "{0} {1} totalt",
+    "Plural": "{0} {1} totalt"
   },
   "PackageIsRemoved": "'{0}' togs bort från Steam",
   "PackageIsUnknown": "Informationen från Steam har inte laddats för '{0}' ännu",
@@ -677,10 +677,10 @@
   "ViewOnGithub": "View this package's Github repository",
   "ViewXOnSteam": "View '{0}' on Steam",
   "Free": "Free",
-  "ViewAllYourItems": "View all your {0}",
-  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "ViewAllYourItems": "Visa alla dina {0}",
+  "ViewRecentlyUpdatedItems": "Visa nyligen uppdaterade {0}",
   "NoCompatibilityIssues": {
-    "One": "No Compatibility issues detected.",
+    "One": "Inga kompatibilitetsproblem upptäcktes.",
     "Plural": "No compatibility issues with your {0} were detected."
   },
   "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
