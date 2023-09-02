@@ -25,7 +25,7 @@
   "NoAssets": "Desativar todos os Recursos",
   "NoMods": "Desativar Todos os Mods",
   "AutoSave": "Salvamento Automático",
-  "TotalAssetSize": "{0} of included assets",
+  "TotalAssetSize": "{0} dos recursos incluídos",
   "CompatibilityStatus": "Estado de Compatibilidade",
   "AnyStatus": "Algum Estado",
   "AnyCompatibilityStatus": "Algum Estado",
@@ -124,8 +124,8 @@
     "Plural": "Excluir os pacotes selecionados"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe to this package",
-    "Plural": "Unsubscribe to the selected packages"
+    "One": "Cancelar a assinatura deste pacote",
+    "Plural": "Cancelar assinatura dos pacotes selecionados"
   },
   "CopyWorkshopId": {
     "One": "Copie o ID da Oficina deste pacote",
@@ -272,7 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Pacotes incluídos e habilitados: {0}, Total: {1}",
   "AssetIncludedTotal": "Recursos incluídos: {0}, Total: {1}",
   "NewPlayset_Tip": "Criar ou importar uma nova Coleção de Mods",
-  "TempPlayset": "Switch to a temporary playset",
+  "TempPlayset": "Mudar para um Perfil temporário",
   "TempPlayset_Tip": "Trocar para uma Coleção de Mods temporária com suas configurações atuais",
   "ViewPlaysets_Tip": "Ver e gerenciar seus perfis salvos",
   "AutoSave_Tip": "Salvar mudanças para os mods e arquivos no seu perfil automaticamente",
