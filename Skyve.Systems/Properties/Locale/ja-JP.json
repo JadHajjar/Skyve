@@ -25,7 +25,7 @@
   "NoAssets": "カスタムアセットを全て無効化",
   "NoMods": "MODを全て無効化",
   "AutoSave": "オートセーブ",
-  "TotalSize": "合計サイズ",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "互換性ステータス",
   "AnyStatus": "全てのステータス",
   "AnyCompatibilityStatus": "全てのステータス",
@@ -124,8 +124,8 @@
     "Plural": "選択したパッケージを削除"
   },
   "UnsubscribePackage": {
-    "One": "パッケージのサブスクを解除",
-    "Plural": "選択したパッケージのサブスクを解除"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "パッケージのワークショップIDをコピー",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "パッケージを含める&有効化: {0} 個 / 合計: {1} 個",
   "AssetIncludedTotal": "アセットを含める: {0} 個 / 合計: {1} 個",
   "NewPlayset_Tip": "新しいプレイセットを作成するか、もしくはインポートします。",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "現在の設定を保持して、一時的なプレイセットに切り替えます。",
   "ViewPlaysets_Tip": "保存したプレイセットの確認や管理が出来ます。",
   "AutoSave_Tip": "MODやアセットの変更を使用中のプレイセットに自動で保存されます。",
@@ -519,6 +520,14 @@
     "One": "{0} {1} はワークショップのサイズと不一致",
     "Plural": "{0} {1} はワークショップのいずれかとサイズが不一致"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "「{0}」はSteamから削除済",
   "PackageIsUnknown": "「{0}」はSteamから情報が未取得",
   "PackageIsNotDownloaded": "「{0}」はPCから削除済",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "除外されているアイテムのみ表示",
   "ViewOnGithub": "このパッケージの Github リポジトリを見る",
   "ViewXOnSteam": "Steamで「{0}」を表示",
-  "Free": "無料"
+  "Free": "無料",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  }
 }
