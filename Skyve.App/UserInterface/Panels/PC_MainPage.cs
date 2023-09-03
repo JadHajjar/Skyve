@@ -1,5 +1,4 @@
-﻿using Skyve.App.Interfaces;
-using Skyve.App.UserInterface.Dashboard;
+﻿using Skyve.App.UserInterface.Dashboard;
 
 using System.Drawing;
 using System.Reflection;
@@ -8,24 +7,19 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_MainPage : PanelContent
 {
-	private readonly bool buttonStateRunning;
-	private readonly INotifier _notifier;
-	private readonly ICitiesManager _citiesManager;
-	private readonly IPlaysetManager _playsetManager;
-	private readonly IModLogicManager _modLogicManager;
+	private readonly Control _control = new();
+	private readonly Dictionary<string, Rectangle> _dashItemSizes;
 	private readonly ISettings _settings;
+	private Point CursorStart;
+	private Rectangle initialRect;
+	private bool layoutInProgress;
 	private IDashboardItem? MoveItem;
 	private IDashboardItem? ResizeItem;
 	private Rectangle savedRect;
-	private Rectangle initialRect;
-	private Point CursorStart;
-	private bool layoutInProgress;
-	private readonly Dictionary<string, Rectangle> _dashItemSizes;
-	private readonly Control _control = new();
 
 	public PC_MainPage()
 	{
-		ServiceCenter.Get(out _notifier, out _citiesManager, out _playsetManager, out _modLogicManager, out _settings);
+		ServiceCenter.Get(out _settings);
 
 		InitializeComponent();
 
@@ -41,46 +35,50 @@ public partial class PC_MainPage : PanelContent
 
 		LoadItems(assembly_base.GetTypes().Where(type => typeof(IDashboardItem).IsAssignableFrom(type) && !type.IsAbstract));
 		LoadItems(assembly.GetTypes().Where(type => typeof(IDashboardItem).IsAssignableFrom(type) && !type.IsAbstract));
+	}
 
-		//B_StartStop.Enabled = _notifier.IsContentLoaded && _citiesManager.IsAvailable();
-
-		if (!_notifier.IsContentLoaded)
+	protected override void GlobalMouseMove(Point p)
+	{
+		if (MoveItem is not null)
 		{
-			_notifier.ContentLoaded += SetButtonEnabledOnLoad;
+			p.Offset(-CursorStart.X, -CursorStart.Y);
+
+			savedRect.Location = P_Board.PointToClient(p);
+
+			var rect = GetSnappingRect(MoveItem, false, savedRect);
+
+			SaveDashItemBounds(MoveItem, rect);
+
+			P_Container.PerformLayout();
 		}
 
-		_citiesManager.MonitorTick += CitiesManager_MonitorTick;
-
-		RefreshButtonState(_citiesManager.IsRunning(), true);
-
-		//SlickTip.SetTo(B_StartStop, string.Format(Locale.LaunchTooltip, "[F5]"));
-
-		//label1.Text = Locale.MultipleLOM;
-
-		_notifier.PlaysetUpdated += ProfileManager_ProfileUpdated;
-
-		if (ServiceCenter.Get<INotifier>().PlaysetsLoaded)
+		if (ResizeItem is not null)
 		{
-			ProfileManager_ProfileUpdated();
+			var width = CursorStart.Y + p.X - CursorStart.X;
+
+			using var g = _control.CreateGraphics();
+
+			savedRect.Size = new(width, ResizeItem.CalculateHeight(width, g));
+
+			var rect = GetSnappingRect(ResizeItem, false, savedRect);
+
+			SaveDashItemBounds(ResizeItem, rect);
+
+			P_Container.PerformLayout();
 		}
 	}
 
-	private void SaveLayout()
+	protected override void LocaleChanged()
 	{
-		ISave.Save(_dashItemSizes, "DashboardLayout.json");
+		Text = Locale.Dashboard;
+		L_Info.Text = Locale.DashboardCustomizationInfo;
 	}
 
-	private Dictionary<string, Rectangle> GetDefaultLayout()
+	protected override void OnCreateControl()
 	{
-		return new()
-		{
-		  { "D_AssetsInfo", new Rectangle(2500, 100, 2500, 100) },
-		  { "D_CompatibilityInfo", new Rectangle(0, 0, 5000, 100) },
-		  { "D_ModsInfo", new Rectangle(0, 100, 2500, 100) },
-		  { "D_Playsets", new Rectangle(5250, 0, 2250, 100) },
-		  { "D_LaunchGame", new Rectangle(7750, 0, 2250, 100) },
-		  { "D_NotificationCenter", new Rectangle(7750, 100, 2250, 100) },
-		};
+		base.OnCreateControl();
+
+		Form.Deactivate += Form_Deactivate;
 	}
 
 	protected override void OnShown()
@@ -90,24 +88,31 @@ public partial class PC_MainPage : PanelContent
 		P_Container.PerformLayout();
 	}
 
-	private void LoadItems(IEnumerable<Type> types)
+	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 	{
-		foreach (var type in types)
+		if (keyData == Keys.Escape && (MoveItem is not null || ResizeItem is not null))
 		{
-			var control = (IDashboardItem)Activator.CreateInstance(type);
-
-			control.Size = default;
-			control.MouseDown += DashMouseDown;
-			control.MouseUp += DashMouseUp;
-			control.ResizeRequested += DashResizeRequested;
-
-			P_Board.Controls.Add(control);
+			Form_Deactivate(this, EventArgs.Empty);
+			return true;
 		}
+
+		return base.ProcessCmdKey(ref msg, keyData);
 	}
 
-	private void DashResizeRequested(object sender, EventArgs e)
+	protected override void UIChanged()
 	{
-		this.TryInvoke(() => P_Board_Layout(sender, null));
+		base.UIChanged();
+
+		P_Scroll.Width = (int)(15 * UI.FontScale);
+
+		TLP_FirstTime.Padding = UI.Scale(new Padding(12, 12, 12, 0), UI.FontScale);
+	}
+
+	private void B_Dismiss_Click(object sender, EventArgs e)
+	{
+		TLP_FirstTime.Hide();
+		_settings.SessionSettings.DashboardFirstTimeShown = true;
+		_settings.SessionSettings.Save();
 	}
 
 	private void DashMouseDown(object sender, MouseEventArgs e)
@@ -177,24 +182,64 @@ public partial class PC_MainPage : PanelContent
 		P_Container.PerformLayout();
 	}
 
-	private void SaveDashItemBounds(IDashboardItem item, Rectangle? rectangle = null)
+	private void DashResizeRequested(object sender, EventArgs e)
 	{
-		var size = P_Container.Size;
-		var bounds = rectangle ?? item.Bounds;
+		this.TryInvoke(() => P_Board_Layout(sender, null));
+	}
 
-		var rect = new Rectangle(
-			bounds.X * 1_0000 / size.Width,
-			bounds.Y * 1_0000 / size.Height,
-			bounds.Width * 1_0000 / size.Width,
-			bounds.Height * 1_0000 / size.Height);
-
-		if (rectangle is null && _dashItemSizes.ContainsKey(item.Key))
+	private void Form_Deactivate(object sender, EventArgs e)
+	{
+		if (MoveItem is not null)
 		{
-			rect.X = _dashItemSizes[item.Key].X;
-			rect.Width = _dashItemSizes[item.Key].Width;
+			MoveItem.MoveInProgress = false;
+			SaveDashItemBounds(MoveItem, initialRect);
+			MoveItem = null;
+		}
+		else if (ResizeItem is not null)
+		{
+			ResizeItem.ResizeInProgress = false;
+			SaveDashItemBounds(ResizeItem, initialRect);
+			ResizeItem = null;
+		}
+		else
+		{
+			return;
 		}
 
-		_dashItemSizes[item.Key] = rect;
+		P_Board.Invalidate(true);
+		P_Container.Invalidate();
+		P_Container.PerformLayout();
+	}
+
+	private Dictionary<string, Rectangle> GetDefaultLayout()
+	{
+		return new()
+		{
+		  { "D_AssetsInfo", new Rectangle(2500, 100, 2500, 100) },
+		  { "D_CompatibilityInfo", new Rectangle(0, 0, 5000, 100) },
+		  { "D_ModsInfo", new Rectangle(0, 100, 2500, 100) },
+		  { "D_Playsets", new Rectangle(5250, 0, 2250, 100) },
+		  { "D_LaunchGame", new Rectangle(7750, 0, 2250, 100) },
+		  { "D_NotificationCenter", new Rectangle(7750, 100, 2250, 100) },
+		};
+	}
+
+	private IEnumerable<int> GetGridSnapping()
+	{
+		if (!_settings.UserSettings.SnapDashToGrid)
+		{
+			yield break;
+		}
+
+		for (var i = 0; i < 12; i++)
+		{
+			yield return P_Container.Width * i / 12;
+		}
+	}
+
+	private Rectangle GetNewRect(IDashboardItem dashItem)
+	{
+		return _dashItemSizes[dashItem.Key] = new(dashItem.Parent.Controls.GetChildIndex(dashItem) % 3 * 3_333, 0, 3_333, 1_000);
 	}
 
 	private Rectangle GetSnappingRect(IDashboardItem control, bool addPadding = true, Rectangle? savedRect = null)
@@ -276,47 +321,18 @@ public partial class PC_MainPage : PanelContent
 		return rect;
 	}
 
-	private IEnumerable<int> GetGridSnapping()
+	private void LoadItems(IEnumerable<Type> types)
 	{
-		if (!_settings.UserSettings.SnapDashToGrid)
+		foreach (var type in types)
 		{
-			yield break;
-		}
+			var control = (IDashboardItem)Activator.CreateInstance(type);
 
-		for (var i = 0; i < 12; i++)
-		{
-			yield return P_Container.Width * i / 12;
-		}
-	}
+			control.Size = default;
+			control.MouseDown += DashMouseDown;
+			control.MouseUp += DashMouseUp;
+			control.ResizeRequested += DashResizeRequested;
 
-	protected override void GlobalMouseMove(Point p)
-	{
-		if (MoveItem is not null)
-		{
-			p.Offset(-CursorStart.X, -CursorStart.Y);
-
-			savedRect.Location = P_Board.PointToClient(p);
-
-			var rect = GetSnappingRect(MoveItem, false, savedRect);
-
-			SaveDashItemBounds(MoveItem, rect);
-
-			P_Container.PerformLayout();
-		}
-
-		if (ResizeItem is not null)
-		{
-			var width = CursorStart.Y + p.X - CursorStart.X;
-
-			using var g = _control.CreateGraphics();
-
-			savedRect.Size = new(width, ResizeItem.CalculateHeight(width, g));
-
-			var rect = GetSnappingRect(ResizeItem, false, savedRect);
-
-			SaveDashItemBounds(ResizeItem, rect);
-
-			P_Container.PerformLayout();
+			P_Board.Controls.Add(control);
 		}
 	}
 
@@ -440,145 +456,6 @@ public partial class PC_MainPage : PanelContent
 		layoutInProgress = false;
 	}
 
-	private class DashItemRect
-	{
-		public IDashboardItem Item { get; set; }
-		public Rectangle Rectangle { get; set; }
-
-		public DashItemRect(IDashboardItem item)
-		{
-			Item = item;
-		}
-	}
-
-	private Rectangle GetNewRect(IDashboardItem dashItem)
-	{
-		return _dashItemSizes[dashItem.Key] = new(dashItem.Parent.Controls.GetChildIndex(dashItem) % 3 * 3_333, 0, 3_333, 1_000);
-	}
-
-	private void ProfileManager_ProfileUpdated()
-	{
-		//this.TryInvoke(() =>
-		//{
-		//	TLP_Profiles.Controls.Clear(true, x => x is FavoriteProfileBubble);
-		//	TLP_Profiles.RowStyles.Clear();
-		//	TLP_Profiles.RowStyles.Add(new());
-
-		//	foreach (var item in _playsetManager.Playsets.Where(x => x.IsFavorite))
-		//	{
-		//		TLP_Profiles.RowStyles.Add(new());
-		//		TLP_Profiles.Controls.Add(new FavoriteProfileBubble(item) { Dock = DockStyle.Top }, 0, TLP_Profiles.RowStyles.Count - 1);
-		//	}
-		//});
-	}
-
-	private void SetButtonEnabledOnLoad()
-	{
-		//this.TryInvoke(() =>
-		//{
-		//	B_StartStop.Enabled = _citiesManager.IsAvailable();
-
-		//	label1.Visible = _modLogicManager.AreMultipleSkyvesPresent();
-		//});
-	}
-
-	protected override void LocaleChanged()
-	{
-		Text = Locale.Dashboard;
-		L_Info.Text = Locale.DashboardCustomizationInfo;
-	}
-
-	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
-	{
-		//this.TryInvoke(() => B_StartStop.Enabled = isAvailable);
-
-		RefreshButtonState(isRunning);
-	}
-
-	protected override void UIChanged()
-	{
-		base.UIChanged();
-
-		P_Scroll.Width = (int)(15 * UI.FontScale);
-
-		TLP_FirstTime.Padding = UI.Scale(new Padding(12, 12, 0, 0), UI.FontScale);
-
-		//B_StartStop.Font = UI.Font(9.75F, FontStyle.Bold);
-		//label1.Font = UI.Font(10.5F, FontStyle.Bold);
-		//label1.Margin = UI.Scale(new Padding(10), UI.FontScale);
-	}
-
-	protected override void DesignChanged(FormDesign design)
-	{
-		base.DesignChanged(design);
-
-		BackColor = GetTopBarColor();
-
-		//label1.ForeColor = design.RedColor;
-	}
-
-	public override Color GetTopBarColor()
-	{
-		return FormDesign.Design.BackColor;//.Tint(Lum: FormDesign.Design.Type == FormDesignType.Light ? -3 : 3, Sat: FormDesign.Design.Type == FormDesignType.Light ? -25 : 0);
-	}
-
-	private void ProfileBubble_MouseClick(object sender, MouseEventArgs e)
-	{
-		if (e.Button == MouseButtons.Left)
-		{
-			Form.PushPanel(ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel());
-		}
-	}
-
-	private void ModsBubble_MouseClick(object sender, MouseEventArgs e)
-	{
-		if (e.Button == MouseButtons.Left)
-		{
-			Form.PushPanel<PC_Mods>((Form as MainForm)?.PI_Mods);
-		}
-	}
-
-	private void AssetsBubble_MouseClick(object sender, MouseEventArgs e)
-	{
-		if (e.Button == MouseButtons.Left)
-		{
-			Form.PushPanel<PC_Assets>((Form as MainForm)?.PI_Assets);
-		}
-	}
-
-	private void B_StartStop_Click(object sender, EventArgs e)
-	{
-		Program.MainForm.LaunchStopCities();
-	}
-
-	private void RefreshButtonState(bool running, bool firstTime = false)
-	{
-		//if (!running)
-		//{
-		//	if (buttonStateRunning || firstTime)
-		//	{
-		//		this.TryInvoke(() =>
-		//		{
-		//			B_StartStop.ImageName = "I_CS";
-		//			B_StartStop.Text = LocaleHelper.GetGlobalText("StartCities");
-		//			buttonStateRunning = false;
-		//		});
-		//	}
-
-		//	return;
-		//}
-
-		//if (!buttonStateRunning || firstTime)
-		//{
-		//	this.TryInvoke(() =>
-		//	{
-		//		B_StartStop.ImageName = "I_Stop";
-		//		B_StartStop.Text = LocaleHelper.GetGlobalText("StopCities");
-		//		buttonStateRunning = true;
-		//	});
-		//}
-	}
-
 	private void P_Container_Paint(object sender, PaintEventArgs e)
 	{
 		if (!_settings.UserSettings.SnapDashToGrid || (MoveItem == null && ResizeItem == null))
@@ -597,45 +474,38 @@ public partial class PC_MainPage : PanelContent
 		}
 	}
 
-	protected override void OnCreateControl()
+	private void SaveDashItemBounds(IDashboardItem item, Rectangle? rectangle = null)
 	{
-		base.OnCreateControl();
+		var size = P_Container.Size;
+		var bounds = rectangle ?? item.Bounds;
 
-		Form.Deactivate += Form_Deactivate;
+		var rect = new Rectangle(
+			bounds.X * 1_0000 / size.Width,
+			bounds.Y * 1_0000 / size.Height,
+			bounds.Width * 1_0000 / size.Width,
+			bounds.Height * 1_0000 / size.Height);
+
+		if (rectangle is null && _dashItemSizes.ContainsKey(item.Key))
+		{
+			rect.X = _dashItemSizes[item.Key].X;
+			rect.Width = _dashItemSizes[item.Key].Width;
+		}
+
+		_dashItemSizes[item.Key] = rect;
 	}
 
-	private void Form_Deactivate(object sender, EventArgs e)
+	private void SaveLayout()
 	{
-		if (MoveItem is not null)
-		{
-			MoveItem.MoveInProgress = false;
-			SaveDashItemBounds(MoveItem, initialRect);
-			MoveItem = null;
-		}
-		else if (ResizeItem is not null)
-		{
-			ResizeItem.ResizeInProgress = false;
-			SaveDashItemBounds(ResizeItem, initialRect);
-			ResizeItem = null;
-		}
-		else
-		{
-			return;
-		}
-
-		P_Board.Invalidate(true);
-		P_Container.Invalidate();
-		P_Container.PerformLayout();
+		ISave.Save(_dashItemSizes, "DashboardLayout.json");
 	}
-
-	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+	private class DashItemRect
 	{
-		if (keyData == Keys.Escape && (MoveItem is not null || ResizeItem is not null))
+		public DashItemRect(IDashboardItem item)
 		{
-			Form_Deactivate(this, EventArgs.Empty);
-			return true;
+			Item = item;
 		}
 
-		return base.ProcessCmdKey(ref msg, keyData);
+		public IDashboardItem Item { get; set; }
+		public Rectangle Rectangle { get; set; }
 	}
 }

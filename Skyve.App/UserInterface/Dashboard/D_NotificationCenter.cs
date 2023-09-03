@@ -49,6 +49,10 @@ internal class D_NotificationCenter : IDashboardItem
 
 			preferredHeight += (int)(25 * UI.FontScale);
 		}
+		else
+		{
+			preferredHeight -= Margin.Top;
+		}
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, INotificationInfo notification)
@@ -59,9 +63,18 @@ internal class D_NotificationCenter : IDashboardItem
 		var maxWidth = e.ClipRectangle.Width - Margin.Horizontal - icon.Width - Margin.Left;
 		var titleBounds = e.Graphics.Measure(notification.Title, titleFont, maxWidth + (Margin.Left / 2));
 		var descBounds = notification.Description is null ? default : e.Graphics.Measure(notification.Description, smallFont, maxWidth);
+		var rectangle = new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, Math.Max(icon.Height, (int)titleBounds.Height) + (int)descBounds.Height);
 
 		if (applyDrawing)
 		{
+			if (notification.HasAction && rectangle.Contains(CursorLocation))
+			{
+				using var backBrush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 6, -6)));
+				e.Graphics.FillRoundedRectangle(backBrush, rectangle, Margin.Left);
+
+				_buttonActions[rectangle] = notification.OnClick;
+			}
+
 			e.Graphics.DrawImage(icon.Color(notification.Color ?? FormDesign.Design.ForeColor), new Rectangle(e.ClipRectangle.X + Margin.Left, preferredHeight, e.ClipRectangle.Width, Math.Max(icon.Height, (int)titleBounds.Height + (int)descBounds.Height)).Align(icon.Size, ContentAlignment.MiddleLeft));
 
 			using var brush = new SolidBrush(notification.Color ?? FormDesign.Design.ForeColor);

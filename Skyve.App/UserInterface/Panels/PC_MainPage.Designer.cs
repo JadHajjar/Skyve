@@ -17,8 +17,7 @@ partial class PC_MainPage
 	{
 		if (disposing && (components != null))
 		{
-			_notifier.ContentLoaded -= SetButtonEnabledOnLoad;
-			_citiesManager.MonitorTick -= CitiesManager_MonitorTick;
+			_control?.Dispose();
 			components.Dispose();
 		}
 		base.Dispose(disposing);
@@ -33,13 +32,15 @@ partial class PC_MainPage
 	private void InitializeComponent()
 	{
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			this.P_Container = new System.Windows.Forms.Panel();
 			this.P_Board = new System.Windows.Forms.Panel();
 			this.slickScroll1 = new SlickControls.SlickScroll();
 			this.P_Scroll = new System.Windows.Forms.Panel();
 			this.TLP_FirstTime = new System.Windows.Forms.TableLayoutPanel();
-			this.I_Info = new SlickControls.SlickIcon();
 			this.L_Info = new System.Windows.Forms.Label();
+			this.I_Info = new SlickControls.SlickIcon();
+			this.B_Dismiss = new SlickControls.SlickButton();
 			this.P_Container.SuspendLayout();
 			this.P_Scroll.SuspendLayout();
 			this.TLP_FirstTime.SuspendLayout();
@@ -96,11 +97,13 @@ partial class PC_MainPage
 			// 
 			this.TLP_FirstTime.AutoSize = true;
 			this.TLP_FirstTime.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TLP_FirstTime.ColumnCount = 2;
+			this.TLP_FirstTime.ColumnCount = 3;
 			this.TLP_FirstTime.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_FirstTime.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.TLP_FirstTime.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_FirstTime.Controls.Add(this.L_Info, 1, 0);
 			this.TLP_FirstTime.Controls.Add(this.I_Info, 0, 0);
+			this.TLP_FirstTime.Controls.Add(this.B_Dismiss, 2, 0);
 			this.TLP_FirstTime.Dock = System.Windows.Forms.DockStyle.Top;
 			this.TLP_FirstTime.Location = new System.Drawing.Point(0, 24);
 			this.TLP_FirstTime.Name = "TLP_FirstTime";
@@ -108,6 +111,18 @@ partial class PC_MainPage
 			this.TLP_FirstTime.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_FirstTime.Size = new System.Drawing.Size(783, 50);
 			this.TLP_FirstTime.TabIndex = 5;
+			// 
+			// L_Info
+			// 
+			this.L_Info.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.L_Info.AutoSize = true;
+			this.L_Info.Location = new System.Drawing.Point(48, 10);
+			this.L_Info.Margin = new System.Windows.Forms.Padding(3, 10, 10, 10);
+			this.L_Info.Name = "L_Info";
+			this.L_Info.Size = new System.Drawing.Size(68, 30);
+			this.L_Info.TabIndex = 21;
+			this.L_Info.Text = "label1";
+			this.L_Info.UseMnemonic = false;
 			// 
 			// I_Info
 			// 
@@ -126,17 +141,21 @@ partial class PC_MainPage
 			this.I_Info.TabIndex = 20;
 			this.I_Info.TabStop = false;
 			// 
-			// L_Info
+			// B_Dismiss
 			// 
-			this.L_Info.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.L_Info.AutoSize = true;
-			this.L_Info.Location = new System.Drawing.Point(48, 10);
-			this.L_Info.Margin = new System.Windows.Forms.Padding(3, 10, 10, 10);
-			this.L_Info.Name = "L_Info";
-			this.L_Info.Size = new System.Drawing.Size(68, 30);
-			this.L_Info.TabIndex = 21;
-			this.L_Info.Text = "label1";
-			this.L_Info.UseMnemonic = false;
+			this.B_Dismiss.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.B_Dismiss.AutoSize = true;
+			this.B_Dismiss.ColorShade = null;
+			this.B_Dismiss.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon2.Name = "I_Ok";
+			this.B_Dismiss.ImageName = dynamicIcon2;
+			this.B_Dismiss.Location = new System.Drawing.Point(741, 9);
+			this.B_Dismiss.Name = "B_Dismiss";
+			this.B_Dismiss.Size = new System.Drawing.Size(39, 32);
+			this.B_Dismiss.SpaceTriggersClick = true;
+			this.B_Dismiss.TabIndex = 22;
+			this.B_Dismiss.Text = "Ok";
+			this.B_Dismiss.Click += new System.EventHandler(this.B_Dismiss_Click);
 			// 
 			// PC_MainPage
 			// 
@@ -171,4 +190,5 @@ partial class PC_MainPage
 	private System.Windows.Forms.TableLayoutPanel TLP_FirstTime;
 	private System.Windows.Forms.Label L_Info;
 	private SlickIcon I_Info;
+	private SlickButton B_Dismiss;
 }

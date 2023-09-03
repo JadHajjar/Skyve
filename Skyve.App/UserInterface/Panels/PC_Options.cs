@@ -240,7 +240,7 @@ public partial class PC_Options : PanelContent
 
 	private void B_ChangeLog_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel(ServiceCenter.Get<IInterfaceService>().ChangelogPanel());
+		Form.PushPanel(ServiceCenter.Get<IAppInterfaceService>().ChangelogPanel());
 	}
 
 	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)

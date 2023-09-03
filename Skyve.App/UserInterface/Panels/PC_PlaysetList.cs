@@ -288,7 +288,7 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void B_EditName_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel(ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel());
+		Form.PushPanel(ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel());
 	}
 
 	private void I_ProfileIcon_Click(object sender, EventArgs e)

@@ -671,7 +671,7 @@
   "IncludePackage": "Include {0}",
   "ExcludePackage": "Exclude {0}",
   "FilterByEnabled": "Only show enabled items.",
-  "FilterByDisabled": "Only show disabbled items.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "Only show included items.",
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
