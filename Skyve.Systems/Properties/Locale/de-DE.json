@@ -25,7 +25,7 @@
   "NoAssets": "Alle Gegenstände deaktivieren",
   "NoMods": "Alle Mods deaktivieren",
   "AutoSave": "Automatisch Speichern",
-  "TotalAssetSize": "{0} of included assets",
+  "TotalAssetSize": "{0} der enthaltenen Assets",
   "CompatibilityStatus": "Kompatibilitätsstatus",
   "AnyStatus": "Beliebiger Status",
   "AnyCompatibilityStatus": "Beliebiger Status",
@@ -124,8 +124,8 @@
     "Plural": "Ausgewählte Pakete löschen"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe to this package",
-    "Plural": "Unsubscribe to the selected packages"
+    "One": "Dieses Paket abbestellen",
+    "Plural": "Ausgewählte Pakete abbestellen"
   },
   "CopyWorkshopId": {
     "One": "Workshop-ID dieses Pakets kopieren",
@@ -272,7 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Pakete enthalten & aktiviert: {0}, Gesamt: {1}",
   "AssetIncludedTotal": "Gegenstände enthalten: {0}, Gesamt: {1}",
   "NewPlayset_Tip": "Neues Spielset erstellen oder importieren",
-  "TempPlayset": "Switch to a temporary playset",
+  "TempPlayset": "Zu einem temporären Spielset wechseln",
   "TempPlayset_Tip": "Wechsel zu einem temporären Spielset mit den aktuellen Einstellungen",
   "ViewPlaysets_Tip": "Gespeicherte Spielsets anzeigen und verwalten",
   "AutoSave_Tip": "Änderungen an Mods & Gegenständen automatisch in das aktuelle Profil speichern",
@@ -454,7 +454,7 @@
   },
   "Playset": {
     "One": "Profil",
-    "Plural": "Playset"
+    "Plural": "Spielsets"
   },
   "IncludedCount": {
     "One": "{0} {1} enthalten",
@@ -521,12 +521,12 @@
     "Plural": "{0} {1} stimmen nicht mit den entsprechenden Größen des Workshops überein"
   },
   "NewUpdatedCount": {
-    "One": "{0} new or updated {1}",
-    "Plural": "{0} new or updated {1}"
+    "One": "{0} neu oder aktualisiert {1}",
+    "Plural": "{0} neu oder aktualisiert {1}"
   },
   "TotalCount": {
-    "One": "{0} {1} in total",
-    "Plural": "{0} {1} in total"
+    "One": "{0} {1} insgesamt",
+    "Plural": "{0} {1} insgesamt"
   },
   "PackageIsRemoved": "'{0}' wurde von Steam entfernt",
   "PackageIsUnknown": "Die Informationen von Steam für '{0}' wurden noch nicht geladen",
@@ -676,40 +676,40 @@
   "FilterByExcluded": "Nur ausgeschlossene Elemente anzeigen.",
   "ViewOnGithub": "Github Repository dieses Paketes ansehen",
   "ViewXOnSteam": "'{0}' auf Steam ansehen",
-  "Free": "Free",
-  "ViewAllYourItems": "View all your {0}",
-  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "Free": "Kostenlos",
+  "ViewAllYourItems": "Zeige alle deine {0}",
+  "ViewRecentlyUpdatedItems": "Zuletzt aktualisierte {0} anzeigen",
   "NoCompatibilityIssues": {
-    "One": "No Compatibility issues detected.",
-    "Plural": "No compatibility issues with your {0} were detected."
+    "One": "Keine Kompatibilitätsprobleme erkannt.",
+    "Plural": "Es wurden keine Kompatibilitätsprobleme mit {0} erkannt."
   },
-  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
-  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
-  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
-  "ChangePlaysetSettings": "Change this playset's settings",
-  "ViewCompatibilityReport": "View the full compatibility report",
-  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
-  "ViewAssetsWithIssues": "View Assets with issues",
-  "ViewModsWithIssues": "View Mods with issues",
-  "CreateShortcut": "Create shortcut",
-  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
-  "StartsNewGameOnLaunch": "Starts a new game on launch",
-  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
-  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
-  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
-  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
-  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
-  "Notifications": "Notifications",
-  "NoNotifications": "No notifications",
-  "MultipleSkyvesDetected": "Multiple Skyves Detected",
-  "PackageUpdates": "Package Updates",
+  "SnapDashToGrid": "Dashboard-Abschnitte anzeigen und an Gitter einrasten",
+  "SnapDashToGrid_Tip": "Beim Bearbeiten von Dashboard-Abschnitten wird ein 12-spaltiges Raster angezeigt, an dem Abschnitte einrasten.",
+  "UnsavedChangesPlayset": "Es gibt ungespeicherte Änderungen an den Paketen dieses Spielsets",
+  "ChangePlaysetSettings": "Einstellungen dieses Spielsets ändern",
+  "ViewCompatibilityReport": "Den vollständigen Kompatibilitätsbericht anzeigen",
+  "DashboardCustomizationInfo": "Du kannst das Dashboard anpassen, indem du jeden Abschnitt an seiner Überschrift anklickst und ziehst.\nDu kannst auch die Größe eines Bereichs ändern, indem du das gepunktete Dreieck unten rechts nutzt.",
+  "ViewAssetsWithIssues": "Gegenstände mit Problemen anzeigen",
+  "ViewModsWithIssues": "Mods mit Problemen anzeigen",
+  "CreateShortcut": "Verknüpfung erstellen",
+  "CreateShortcut_Tip": "Erstelle eine Verknüpfung für diese App auf deinem Desktop.",
+  "StartsNewGameOnLaunch": "Beginnt beim Start ein neues Spiel",
+  "StartsNewGameWithMap": "Beginnt beim Start ein neues Spiel mit der Karte '{0}'",
+  "LoadsSaveGameOnLaunch": "Setzt den letzten Spielstand beim Start fort",
+  "LoadsSaveGameWithMap": "Setzt den Spielstand '{0}' beim Start fort",
+  "StartsNewAssetOnLaunch": "Öffnet den Editor mit einem neuen Gegenstand beim Start",
+  "LoadsAssetOnLaunch": "Öffnet den Editor beim Start",
+  "Notifications": "Benachrichtigungen",
+  "NoNotifications": "Keine Benachrichtigungen",
+  "MultipleSkyvesDetected": "Mehrere Skyve Versionen erkannt",
+  "PackageUpdates": "Paketaktualisierungen",
   "PackagesUpdatedSinceSession": {
-    "One": "'{1}' got updated since your last session",
-    "Plural": "{0} packages got updated since your last session"
+    "One": "'{1}' wurde seit deiner letzten Sitzung aktualisiert",
+    "Plural": "{0} Pakete wurden seit deiner letzten Sitzung aktualisiert"
   },
-  "NewPackages": "New Packages",
+  "NewPackages": "Neue Pakete",
   "NewPackagesSinceSession": {
-    "One": "'{1}' got installed since your last session",
-    "Plural": "{0} new packages got installed since your last session"
+    "One": "'{1}' wurde seit deiner letzten Sitzung installiert",
+    "Plural": "{0} neue Pakete wurden seit deiner letzten Sitzung installiert"
   }
 }
