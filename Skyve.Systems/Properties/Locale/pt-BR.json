@@ -521,12 +521,12 @@
     "Plural": "{0} {1} não corresponde aos tamanhos respectivos na Oficina"
   },
   "NewUpdatedCount": {
-    "One": "{0} new or updated {1}",
-    "Plural": "{0} new or updated {1}"
+    "One": "{0} novo ou atualizado {1}",
+    "Plural": "{0} novo ou atualizado {1}"
   },
   "TotalCount": {
-    "One": "{0} {1} in total",
-    "Plural": "{0} {1} in total"
+    "One": "{0} {1} no total",
+    "Plural": "{0} {1} no total"
   },
   "PackageIsRemoved": "'{0}' foi removido da Steam",
   "PackageIsUnknown": "As informações do Steam ainda não carregaram para '{0}'",
@@ -677,39 +677,39 @@
   "ViewOnGithub": "Ver o repositório do GitHub deste pacote",
   "ViewXOnSteam": "Ver '{0}' na Steam",
   "Free": "Grátis",
-  "ViewAllYourItems": "View all your {0}",
-  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "ViewAllYourItems": "Visualizar todos os seus {0}",
+  "ViewRecentlyUpdatedItems": "Ver atualizado recentemente {0}",
   "NoCompatibilityIssues": {
-    "One": "No Compatibility issues detected.",
-    "Plural": "No compatibility issues with your {0} were detected."
+    "One": "Nenhum problema de Compatibilidade detectado.",
+    "Plural": "Nenhum problema de compatibilidade com {0} foi detectado."
   },
-  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
-  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
-  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
-  "ChangePlaysetSettings": "Change this playset's settings",
-  "ViewCompatibilityReport": "View the full compatibility report",
-  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
-  "ViewAssetsWithIssues": "View Assets with issues",
-  "ViewModsWithIssues": "View Mods with issues",
-  "CreateShortcut": "Create shortcut",
-  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
-  "StartsNewGameOnLaunch": "Starts a new game on launch",
-  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
-  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
-  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
-  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
-  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
-  "Notifications": "Notifications",
-  "NoNotifications": "No notifications",
-  "MultipleSkyvesDetected": "Multiple Skyves Detected",
-  "PackageUpdates": "Package Updates",
+  "SnapDashToGrid": "Mostrar e encaixar seções do painel no guia da grade",
+  "SnapDashToGrid_Tip": "Ao editar as seções do painel, exibe uma grade de 12 colunas à qual as seções se encaixam.",
+  "UnsavedChangesPlayset": "Há alterações não salvas nos pacotes deste perfil",
+  "ChangePlaysetSettings": "Alterar as configurações deste perfil",
+  "ViewCompatibilityReport": "Ver o relatório de compatibilidade completa",
+  "DashboardCustomizationInfo": "Você pode personalizar o seu painel arrastando cada seção a partir do seu cabeçalho. Também pode redimensionar uma seção usando o triângulo pontilhado na parte inferior direita.",
+  "ViewAssetsWithIssues": "Ver Recursos com problemas",
+  "ViewModsWithIssues": "Ver Mods com problemas",
+  "CreateShortcut": "Criar atalho",
+  "CreateShortcut_Tip": "Cria um atalho para o aplicativo em sua área de trabalho.",
+  "StartsNewGameOnLaunch": "Inicia um novo jogo ao iniciar",
+  "StartsNewGameWithMap": "Inicia um novo jogo com o mapa '{0}' ao iniciar",
+  "LoadsSaveGameOnLaunch": "Continua seu último salvamento ao iniciar",
+  "LoadsSaveGameWithMap": "Continuar a partir do salvamento '{0} ao iniciar",
+  "StartsNewAssetOnLaunch": "Inicia no editor com um novo recurso ao iniciar",
+  "LoadsAssetOnLaunch": "Iniciar na tela de Carregamento do Editor",
+  "Notifications": "Notificações",
+  "NoNotifications": "Sem notificações",
+  "MultipleSkyvesDetected": "Vários Skyves Detectados",
+  "PackageUpdates": "Atualizações de Pacote",
   "PackagesUpdatedSinceSession": {
-    "One": "'{1}' got updated since your last session",
-    "Plural": "{0} packages got updated since your last session"
+    "One": "'{1}' foi atualizado desde a sua última sessão",
+    "Plural": "{0} Pacotes foram atualizados desde a sua última sessão"
   },
-  "NewPackages": "New Packages",
+  "NewPackages": "Novos Pacotes",
   "NewPackagesSinceSession": {
-    "One": "'{1}' got installed since your last session",
-    "Plural": "{0} new packages got installed since your last session"
+    "One": "'{1}' foi instalado desde a sua última sessão",
+    "Plural": "{0} Novos pacotes foram instalados desde a sua última sessão"
   }
 }
