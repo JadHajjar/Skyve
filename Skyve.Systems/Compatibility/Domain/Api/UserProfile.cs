@@ -88,7 +88,7 @@ public class UserProfile : IDynamicSql
 		}
 	}
 
-	IUser? IPlayset.Author => ServiceCenter.Get<IWorkshopService>().GetUser(Author);
+	IUser? IPlayset.Author => ServiceCenter.Get<Skyve.Domain.Systems.IWorkshopService>().GetUser(Author);
 	string? IPlayset.BannerUrl { get; }
 	DateTime IPlayset.DateUsed { get; }
 	[JsonIgnore] public IEnumerable<IPlaysetEntry> Entries => Contents ?? Enumerable.Empty<IPlaysetEntry>();
