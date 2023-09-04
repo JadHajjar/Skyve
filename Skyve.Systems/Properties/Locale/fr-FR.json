@@ -25,7 +25,7 @@
   "NoAssets": "Désactiver tous les assets",
   "NoMods": "Désactiver tous les mods",
   "AutoSave": "Sauvegarde automatique",
-  "TotalAssetSize": "{0} of included assets",
+  "TotalAssetSize": "{0} d'assets inclus",
   "CompatibilityStatus": "Statut de compatibilité",
   "AnyStatus": "N'importe quel statut",
   "AnyCompatibilityStatus": "N'importe quel statut",
@@ -124,8 +124,8 @@
     "Plural": "Supprimer les paquets sélectionnés"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe to this package",
-    "Plural": "Unsubscribe to the selected packages"
+    "One": "Se désabonner de ce paquet",
+    "Plural": "Se désabonner des paquets sélectionnés"
   },
   "CopyWorkshopId": {
     "One": "Copier l'ID du Workshop de ce paquet",
@@ -272,7 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Paquets inclus & activés : {0}, Total : {1}",
   "AssetIncludedTotal": "Assets inclus : {0}, Total : {1}",
   "NewPlayset_Tip": "Créer ou importer un nouveau profil",
-  "TempPlayset": "Switch to a temporary playset",
+  "TempPlayset": "Basculer sur un profil temporaire",
   "TempPlayset_Tip": "Passer à un profil temporaire avec les paramètres actuels",
   "ViewPlaysets_Tip": "Voir et gérer les profils enregistrés",
   "AutoSave_Tip": "Enregistrer automatiquement les modifications des mods et des assets dans votre profil",
@@ -525,8 +525,8 @@
     "Plural": "{0} new or updated {1}"
   },
   "TotalCount": {
-    "One": "{0} {1} in total",
-    "Plural": "{0} {1} in total"
+    "One": "{0} {1} au total",
+    "Plural": "{0} {1} au total"
   },
   "PackageIsRemoved": "'{0}' a été retiré de Steam",
   "PackageIsUnknown": "Les informations de Steam n'ont pas encore été chargées pour '{0}'",
@@ -677,39 +677,39 @@
   "ViewOnGithub": "Voir le dépôt Github de ce paquet",
   "ViewXOnSteam": "Voir \"{0}\" sur Steam",
   "Free": "Gratuit",
-  "ViewAllYourItems": "View all your {0}",
-  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "ViewAllYourItems": "Voir tous vos {0}",
+  "ViewRecentlyUpdatedItems": "Voir les {0} récemment mis à jour",
   "NoCompatibilityIssues": {
-    "One": "No Compatibility issues detected.",
-    "Plural": "No compatibility issues with your {0} were detected."
+    "One": "Pas de problèmes de compatibilité détectés.",
+    "Plural": "Pas de problèmes de compatibilités détectés pour vos {0}."
   },
-  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
-  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
-  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
-  "ChangePlaysetSettings": "Change this playset's settings",
-  "ViewCompatibilityReport": "View the full compatibility report",
+  "SnapDashToGrid": "Afficher, et accrocher les sections du tableau de bord à, un guide en grille",
+  "SnapDashToGrid_Tip": "Lors de l'édition des sections du tableau de bord, affiche une grille à 12 colonnes auxquelles les sections s'accrochent.",
+  "UnsavedChangesPlayset": "Il y a des modifications non enregistrées aux paquets de ce profil",
+  "ChangePlaysetSettings": "Modifier les paramètres de ce profil",
+  "ViewCompatibilityReport": "Voir le rapport de compatibilité complet",
   "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
-  "ViewAssetsWithIssues": "View Assets with issues",
-  "ViewModsWithIssues": "View Mods with issues",
-  "CreateShortcut": "Create shortcut",
-  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
-  "StartsNewGameOnLaunch": "Starts a new game on launch",
-  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
-  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
-  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
-  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "ViewAssetsWithIssues": "Voir les assets avec des problèmes",
+  "ViewModsWithIssues": "Voir les mods avec des problèmes",
+  "CreateShortcut": "Créer un raccourci",
+  "CreateShortcut_Tip": "Crée un raccourci vers l'application sur le bureau.",
+  "StartsNewGameOnLaunch": "Commencer une nouvelle partie au lancement",
+  "StartsNewGameWithMap": "Commencer une nouvelle partie avec la carte \"{0}\" au lancement",
+  "LoadsSaveGameOnLaunch": "Reprendre votre dernière sauvegarde au lancement",
+  "LoadsSaveGameWithMap": "Reprendre la sauvegarde \"{0}\" au lancement",
+  "StartsNewAssetOnLaunch": "Lancer l'éditeur avec un nouvel asset au lancement",
   "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
   "Notifications": "Notifications",
-  "NoNotifications": "No notifications",
-  "MultipleSkyvesDetected": "Multiple Skyves Detected",
-  "PackageUpdates": "Package Updates",
+  "NoNotifications": "Aucune notification",
+  "MultipleSkyvesDetected": "Plusieurs Skyves Détectés",
+  "PackageUpdates": "Mises à jour de paquet",
   "PackagesUpdatedSinceSession": {
-    "One": "'{1}' got updated since your last session",
-    "Plural": "{0} packages got updated since your last session"
+    "One": "\"{1}\" a été mis à jour depuis votre dernière session",
+    "Plural": "{0} paquets ont été mis à jour depuis votre dernière session"
   },
-  "NewPackages": "New Packages",
+  "NewPackages": "Nouveaux paquets",
   "NewPackagesSinceSession": {
-    "One": "'{1}' got installed since your last session",
-    "Plural": "{0} new packages got installed since your last session"
+    "One": "\"{1}\" a été installé depuis votre dernière session",
+    "Plural": "{0} paquets ont été installés depuis votre dernière session"
   }
 }
