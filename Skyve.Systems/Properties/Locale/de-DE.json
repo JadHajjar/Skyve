@@ -25,7 +25,7 @@
   "NoAssets": "Alle Gegenstände deaktivieren",
   "NoMods": "Alle Mods deaktivieren",
   "AutoSave": "Automatisch Speichern",
-  "TotalSize": "Gesamtgröße",
+  "TotalAssetSize": "{0} der enthaltenen Assets",
   "CompatibilityStatus": "Kompatibilitätsstatus",
   "AnyStatus": "Beliebiger Status",
   "AnyCompatibilityStatus": "Beliebiger Status",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Pakete enthalten & aktiviert: {0}, Gesamt: {1}",
   "AssetIncludedTotal": "Gegenstände enthalten: {0}, Gesamt: {1}",
   "NewPlayset_Tip": "Neues Spielset erstellen oder importieren",
+  "TempPlayset": "Zu einem temporären Spielset wechseln",
   "TempPlayset_Tip": "Wechsel zu einem temporären Spielset mit den aktuellen Einstellungen",
   "ViewPlaysets_Tip": "Gespeicherte Spielsets anzeigen und verwalten",
   "AutoSave_Tip": "Änderungen an Mods & Gegenständen automatisch in das aktuelle Profil speichern",
@@ -453,7 +454,7 @@
   },
   "Playset": {
     "One": "Profil",
-    "Plural": "Playset"
+    "Plural": "Spielsets"
   },
   "IncludedCount": {
     "One": "{0} {1} enthalten",
@@ -518,6 +519,14 @@
   "IncompleteCount": {
     "One": "{0} {1} entspricht nicht seiner Größe aus dem Workshop",
     "Plural": "{0} {1} stimmen nicht mit den entsprechenden Größen des Workshops überein"
+  },
+  "NewUpdatedCount": {
+    "One": "{0} neu oder aktualisiert {1}",
+    "Plural": "{0} neu oder aktualisiert {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} insgesamt",
+    "Plural": "{0} {1} insgesamt"
   },
   "PackageIsRemoved": "'{0}' wurde von Steam entfernt",
   "PackageIsUnknown": "Die Informationen von Steam für '{0}' wurden noch nicht geladen",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Nur ausgeschlossene Elemente anzeigen.",
   "ViewOnGithub": "Github Repository dieses Paketes ansehen",
   "ViewXOnSteam": "'{0}' auf Steam ansehen",
-  "Free": "Free"
+  "Free": "Kostenlos",
+  "ViewAllYourItems": "Zeige alle deine {0}",
+  "ViewRecentlyUpdatedItems": "Zuletzt aktualisierte {0} anzeigen",
+  "NoCompatibilityIssues": {
+    "One": "Keine Kompatibilitätsprobleme erkannt.",
+    "Plural": "Es wurden keine Kompatibilitätsprobleme mit {0} erkannt."
+  },
+  "SnapDashToGrid": "Dashboard-Abschnitte anzeigen und an Gitter einrasten",
+  "SnapDashToGrid_Tip": "Beim Bearbeiten von Dashboard-Abschnitten wird ein 12-spaltiges Raster angezeigt, an dem Abschnitte einrasten.",
+  "UnsavedChangesPlayset": "Es gibt ungespeicherte Änderungen an den Paketen dieses Spielsets",
+  "ChangePlaysetSettings": "Einstellungen dieses Spielsets ändern",
+  "ViewCompatibilityReport": "Den vollständigen Kompatibilitätsbericht anzeigen",
+  "DashboardCustomizationInfo": "Du kannst das Dashboard anpassen, indem du jeden Abschnitt an seiner Überschrift anklickst und ziehst.\nDu kannst auch die Größe eines Bereichs ändern, indem du das gepunktete Dreieck unten rechts nutzt.",
+  "ViewAssetsWithIssues": "Gegenstände mit Problemen anzeigen",
+  "ViewModsWithIssues": "Mods mit Problemen anzeigen",
+  "CreateShortcut": "Verknüpfung erstellen",
+  "CreateShortcut_Tip": "Erstelle eine Verknüpfung für diese App auf deinem Desktop.",
+  "StartsNewGameOnLaunch": "Beginnt beim Start ein neues Spiel",
+  "StartsNewGameWithMap": "Beginnt beim Start ein neues Spiel mit der Karte '{0}'",
+  "LoadsSaveGameOnLaunch": "Setzt den letzten Spielstand beim Start fort",
+  "LoadsSaveGameWithMap": "Setzt den Spielstand '{0}' beim Start fort",
+  "StartsNewAssetOnLaunch": "Öffnet den Editor mit einem neuen Gegenstand beim Start",
+  "LoadsAssetOnLaunch": "Öffnet den Editor beim Start",
+  "Notifications": "Benachrichtigungen",
+  "NoNotifications": "Keine Benachrichtigungen",
+  "MultipleSkyvesDetected": "Mehrere Skyve Versionen erkannt",
+  "PackageUpdates": "Paketaktualisierungen",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' wurde seit deiner letzten Sitzung aktualisiert",
+    "Plural": "{0} Pakete wurden seit deiner letzten Sitzung aktualisiert"
+  },
+  "NewPackages": "Neue Pakete",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' wurde seit deiner letzten Sitzung installiert",
+    "Plural": "{0} neue Pakete wurden seit deiner letzten Sitzung installiert"
+  }
 }

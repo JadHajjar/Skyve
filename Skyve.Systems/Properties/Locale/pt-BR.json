@@ -25,7 +25,7 @@
   "NoAssets": "Desativar todos os Recursos",
   "NoMods": "Desativar Todos os Mods",
   "AutoSave": "Salvamento Automático",
-  "TotalSize": "tamanho total",
+  "TotalAssetSize": "{0} dos recursos incluídos",
   "CompatibilityStatus": "Estado de Compatibilidade",
   "AnyStatus": "Algum Estado",
   "AnyCompatibilityStatus": "Algum Estado",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Pacotes incluídos e habilitados: {0}, Total: {1}",
   "AssetIncludedTotal": "Recursos incluídos: {0}, Total: {1}",
   "NewPlayset_Tip": "Criar ou importar uma nova Coleção de Mods",
+  "TempPlayset": "Mudar para um Perfil temporário",
   "TempPlayset_Tip": "Trocar para uma Coleção de Mods temporária com suas configurações atuais",
   "ViewPlaysets_Tip": "Ver e gerenciar seus perfis salvos",
   "AutoSave_Tip": "Salvar mudanças para os mods e arquivos no seu perfil automaticamente",
@@ -519,6 +520,14 @@
     "One": "{0} {1} não corresponde ao seu tamanho na Oficina",
     "Plural": "{0} {1} não corresponde aos tamanhos respectivos na Oficina"
   },
+  "NewUpdatedCount": {
+    "One": "{0} novo ou atualizado {1}",
+    "Plural": "{0} novo ou atualizado {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} no total",
+    "Plural": "{0} {1} no total"
+  },
   "PackageIsRemoved": "'{0}' foi removido da Steam",
   "PackageIsUnknown": "As informações do Steam ainda não carregaram para '{0}'",
   "PackageIsNotDownloaded": "'{0}' foi removido do seu computador",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Mostrar apenas itens incluídos.",
   "ViewOnGithub": "Ver o repositório do GitHub deste pacote",
   "ViewXOnSteam": "Ver '{0}' na Steam",
-  "Free": "Grátis"
+  "Free": "Grátis",
+  "ViewAllYourItems": "Visualizar todos os seus {0}",
+  "ViewRecentlyUpdatedItems": "Ver atualizado recentemente {0}",
+  "NoCompatibilityIssues": {
+    "One": "Nenhum problema de Compatibilidade detectado.",
+    "Plural": "Nenhum problema de compatibilidade com {0} foi detectado."
+  },
+  "SnapDashToGrid": "Mostrar e encaixar seções do painel no guia da grade",
+  "SnapDashToGrid_Tip": "Ao editar as seções do painel, exibe uma grade de 12 colunas à qual as seções se encaixam.",
+  "UnsavedChangesPlayset": "Há alterações não salvas nos pacotes deste perfil",
+  "ChangePlaysetSettings": "Alterar as configurações deste perfil",
+  "ViewCompatibilityReport": "Ver o relatório de compatibilidade completa",
+  "DashboardCustomizationInfo": "Você pode personalizar o seu painel arrastando cada seção a partir do seu cabeçalho. Também pode redimensionar uma seção usando o triângulo pontilhado na parte inferior direita.",
+  "ViewAssetsWithIssues": "Ver Recursos com problemas",
+  "ViewModsWithIssues": "Ver Mods com problemas",
+  "CreateShortcut": "Criar atalho",
+  "CreateShortcut_Tip": "Cria um atalho para o aplicativo em sua área de trabalho.",
+  "StartsNewGameOnLaunch": "Inicia um novo jogo ao iniciar",
+  "StartsNewGameWithMap": "Inicia um novo jogo com o mapa '{0}' ao iniciar",
+  "LoadsSaveGameOnLaunch": "Continua seu último salvamento ao iniciar",
+  "LoadsSaveGameWithMap": "Continuar a partir do salvamento '{0} ao iniciar",
+  "StartsNewAssetOnLaunch": "Inicia no editor com um novo recurso ao iniciar",
+  "LoadsAssetOnLaunch": "Iniciar na tela de Carregamento do Editor",
+  "Notifications": "Notificações",
+  "NoNotifications": "Sem notificações",
+  "MultipleSkyvesDetected": "Vários Skyves Detectados",
+  "PackageUpdates": "Atualizações de Pacote",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' foi atualizado desde a sua última sessão",
+    "Plural": "{0} Pacotes foram atualizados desde a sua última sessão"
+  },
+  "NewPackages": "Novos Pacotes",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' foi instalado desde a sua última sessão",
+    "Plural": "{0} Novos pacotes foram instalados desde a sua última sessão"
+  }
 }

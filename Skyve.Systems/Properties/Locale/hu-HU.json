@@ -25,7 +25,7 @@
   "NoAssets": "Az Assetek üzemen kívül helyezése",
   "NoMods": "Minden mod letiltása",
   "AutoSave": "Automatikus mentés",
-  "TotalSize": "teljes méret",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "Kompabilitási Infó",
   "AnyStatus": "Bármilyen állapot",
   "AnyCompatibilityStatus": "Bármilyen állapot",
@@ -124,8 +124,8 @@
     "Plural": "Kiválasztott csomagok törlése"
   },
   "UnsubscribePackage": {
-    "One": "Leiratkozás erről a csomagról",
-    "Plural": "Leiratkozás ezekről a csomagokról"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "Másolja ki a csomag műhelyazonosítóját",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Tartalmazott és engedélyezett csomagok: {0}, összesen: {1}",
   "AssetIncludedTotal": "Assetek: {0}, összesen: {1}",
   "NewPlayset_Tip": "Hozzon létre vagy importáljon új profilt",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "Váltson ideiglenes profilra az aktuális beállításokkal",
   "ViewPlaysets_Tip": "Megtekintheti és kezelheti mentett játékkészleteit",
   "AutoSave_Tip": "Automatikusan menteni a változott módokat vagy eszközöket a profilodban",
@@ -519,6 +520,14 @@
     "One": "A(z) {0} {1} nem egyezik a műhelyben található méretével",
     "Plural": "A(z) {0} {1} nem egyezik a műhelyben található megfelelő méretükkel"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "A(z) „{0}” eltávolítva a Steamből",
   "PackageIsUnknown": "A Steam információi még nem töltődnek be a(z) „{0}”-hoz",
   "PackageIsNotDownloaded": "A(z) „{0}” eltávolítva a számítógépről",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Csak a kizárt elemek megjelenítése.",
   "ViewOnGithub": "Tekintse meg a csomag Github tárházát",
   "ViewXOnSteam": "A(z) „{0}” megtekintése Steamen",
-  "Free": "Ingyenes"
+  "Free": "Ingyenes",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  }
 }

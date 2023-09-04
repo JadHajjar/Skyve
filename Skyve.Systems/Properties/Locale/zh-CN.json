@@ -25,7 +25,7 @@
   "NoAssets": "禁用自定义资产",
   "NoMods": "禁用全部模组",
   "AutoSave": "自动保存",
-  "TotalSize": "总大小",
+  "TotalAssetSize": "已装载的资产中的 {0}",
   "CompatibilityStatus": "兼容性状态",
   "AnyStatus": "任意状态",
   "AnyCompatibilityStatus": "任意状态",
@@ -50,7 +50,7 @@
   "PlaysetName": "配置文件名称",
   "RenamePlayset": "重命名当前配置文件",
   "StartScratch": "新建一个空白配置文件",
-  "ContinueFromCurrent": "复制当前的配置",
+  "ContinueFromCurrent": "保留当前配置",
   "GamePlay": "建设城市",
   "EditorPlay": "制作资产",
   "PlaysetUsage": "配置文件用途",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "共 {1} 个插件，已装载且已启用 {0} 个",
   "AssetIncludedTotal": "您总共有 {1} 个资产，已装载 {0} 个",
   "NewPlayset_Tip": "新建或导入配置文件",
+  "TempPlayset": "切换到临时配置文件",
   "TempPlayset_Tip": "保留当前配置并切换到临时配置文件",
   "ViewPlaysets_Tip": "查看并管理已保存的配置文件",
   "AutoSave_Tip": "启用此选项后，对模组和资产状态进行的改动，将自动保存到配置文件中。",
@@ -378,7 +379,7 @@
   "DeleteAll": "删除当前显示的所有项目",
   "FlipItemCopyFilterAction": "无需按住 Alt 键，左键点击标签可直接将其添加到筛选标签",
   "FlipItemCopyFilterAction_Tip": "启用此选项后，如果按住 Alt 键 + 鼠标左键点击一个标签，则可以查看该标签相关信息；如果不按住 Alt 键，鼠标左键点击一个标签，则可以将该标签添加到筛选选项的标签中。",
-  "AltClickTo": "按住 Alt 键 + 鼠标单击，来{0}",
+  "AltClickTo": "按住 Alt + 左键点击，{0}",
   "FilterByThisAuthor": "将 “{0}” 添加到筛选标签",
   "AddToSearch": "将“ {0} ”添加到筛选标签",
   "CopyToClipboard": "将 '{0}' 复制到您的剪贴板",
@@ -519,6 +520,14 @@
     "One": "{0} 个{1} 与创意工坊版本的文件大小不匹配",
     "Plural": "{0} 个{1} 与创意工坊版本的文件大小不匹配"
   },
+  "NewUpdatedCount": {
+    "One": "新增或更新了 {0} 个{1}",
+    "Plural": "新增或更新了 {0} 个{1}"
+  },
+  "TotalCount": {
+    "One": "共 {0} 个{1}",
+    "Plural": "共 {0} 个{1}"
+  },
   "PackageIsRemoved": "插件 '{0}' 已从 Steam 工坊移除",
   "PackageIsUnknown": "插件 '{0}' 的 Steam 工坊信息尚未加载",
   "PackageIsNotDownloaded": "插件 '{0}' 已从您的电脑中删除",
@@ -636,10 +645,10 @@
   "UseEnglishPlease": "* 在您的描述中，请尽可能使用英语。",
   "StageCounter": "故障修复步骤 {0} / {1}",
   "NextStage": "下一步",
-  "CancelTroubleshootMessage": "要恢复到故障修复之前的配置文件吗？\n\n选择“取消”将保留当前所有插件的配置。",
+  "CancelTroubleshootMessage": "要恢复到故障修复之前的配置文件吗？\n\n选择“否”将保留当前所有插件的配置。",
   "CancelTroubleshootTitle": "取消故障修复并恢复",
   "TroubleshootAskIfFixed": "故障修复是否解决了您遇到的问题？",
-  "TroubleshootAskToStop": "你想要退出故障修复，并保留当前所有插件的配置吗？\n\n选择“取消”以继续进行故障修复。",
+  "TroubleshootAskToStop": "你想要退出故障修复，并保留当前所有插件的配置吗？\n\n选择“否”以继续进行故障修复。",
   "StopTroubleshootTitle": "退出故障修复？",
   "TroubleshootCancelTip": "退出故障修复程序",
   "TroubleshootNextStageTip": "跳过当前步骤。如果您已完成此步骤，可以点击此按钮以继续。",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "只显示已卸下的项目。",
   "ViewOnGithub": "查看此插件的 Github 代码存储库",
   "ViewXOnSteam": "在 Steam 上查看 '{0}'",
-  "Free": "免费"
+  "Free": "免费",
+  "ViewAllYourItems": "查看全部 {0}",
+  "ViewRecentlyUpdatedItems": "查看最近更新的 {0}",
+  "NoCompatibilityIssues": {
+    "One": "没有检查到兼容性问题。",
+    "Plural": "未检测到 {0} 的兼容性问题。"
+  },
+  "SnapDashToGrid": "显示网格状辅助线，并将统计面板吸附到网格上",
+  "SnapDashToGrid_Tip": "在编辑统计面板页面时，显示分为 12 列的网格状辅助线，便于将统计面板吸附到网格上",
+  "UnsavedChangesPlayset": "此配置文件中的改动还没有保存",
+  "ChangePlaysetSettings": "更改此配置文件的设置",
+  "ViewCompatibilityReport": "查看完整的兼容性报告",
+  "DashboardCustomizationInfo": "您可以拖动各个统计面板的标题来自定义它们，\n还可以使用右下角的三角虚线调整面板的大小。",
+  "ViewAssetsWithIssues": "查看存在问题的资产",
+  "ViewModsWithIssues": "查看存在问题的模组",
+  "CreateShortcut": "创建快捷方式",
+  "CreateShortcut_Tip": "为 Skyve 应用程序创建桌面快捷方式。",
+  "StartsNewGameOnLaunch": "启动游戏时新建存档",
+  "StartsNewGameWithMap": "启用游戏时，使用 '{0}' 地图新建存档",
+  "LoadsSaveGameOnLaunch": "启动游戏时，继续游玩最近一次保存的存档",
+  "LoadsSaveGameWithMap": "启动游戏时，继续游玩 '{0}' 存档",
+  "StartsNewAssetOnLaunch": "启动游戏时，打开资产编辑器并新建资产",
+  "LoadsAssetOnLaunch": "启动游戏时，打开资产编辑器并加载资产",
+  "Notifications": "通知",
+  "NoNotifications": "没有通知",
+  "MultipleSkyvesDetected": "检测到多个 Skyve！",
+  "PackageUpdates": "插件更新",
+  "PackagesUpdatedSinceSession": {
+    "One": "在您上次使用 Skyve 后，插件 '{1}' 已更新",
+    "Plural": "在您上次使用 Skyve 后，{0} 个插件已更新"
+  },
+  "NewPackages": "新增的插件",
+  "NewPackagesSinceSession": {
+    "One": "在您上次使用 Skyve 后，新增的插件 '{1}' 已安装",
+    "Plural": "在您上次使用 Skyve 后，新增的 {0} 个插件已安装"
+  }
 }
