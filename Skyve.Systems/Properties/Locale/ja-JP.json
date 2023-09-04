@@ -25,7 +25,7 @@
   "NoAssets": "カスタムアセットを全て無効化",
   "NoMods": "MODを全て無効化",
   "AutoSave": "オートセーブ",
-  "TotalSize": "合計サイズ",
+  "TotalAssetSize": "{0} が含むアセット",
   "CompatibilityStatus": "互換性ステータス",
   "AnyStatus": "全てのステータス",
   "AnyCompatibilityStatus": "全てのステータス",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "パッケージを含める&有効化: {0} 個 / 合計: {1} 個",
   "AssetIncludedTotal": "アセットを含める: {0} 個 / 合計: {1} 個",
   "NewPlayset_Tip": "新しいプレイセットを作成するか、もしくはインポートします。",
+  "TempPlayset": "一時的なプレイセットに切り替え",
   "TempPlayset_Tip": "現在の設定を保持して、一時的なプレイセットに切り替えます。",
   "ViewPlaysets_Tip": "保存したプレイセットの確認や管理が出来ます。",
   "AutoSave_Tip": "MODやアセットの変更を使用中のプレイセットに自動で保存されます。",
@@ -519,6 +520,14 @@
     "One": "{0} {1} はワークショップのサイズと不一致",
     "Plural": "{0} {1} はワークショップのいずれかとサイズが不一致"
   },
+  "NewUpdatedCount": {
+    "One": "{0} は新規や更新済 {1}",
+    "Plural": "{0} は新規や更新済 {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} の合計",
+    "Plural": "{0} {1} の合計"
+  },
   "PackageIsRemoved": "「{0}」はSteamから削除済",
   "PackageIsUnknown": "「{0}」はSteamから情報が未取得",
   "PackageIsNotDownloaded": "「{0}」はPCから削除済",
@@ -657,15 +666,50 @@
   "VerifiedAuthor": "確認済み作者",
   "ApplyAllActions": "使用できるアクションを全て適用",
   "FailedToImportPlayset": "プレイセットのインポートに失敗！",
-  "EnablePackage": "{0} を有効にする",
-  "DisablePackage": "{0} を無効にする",
+  "EnablePackage": "{0} を有効化",
+  "DisablePackage": "{0} を無効化",
   "IncludePackage": "{0} を含める",
-  "ExcludePackage": "{0} を除外する",
+  "ExcludePackage": "{0} を除外",
   "FilterByEnabled": "有効なアイテムのみ表示",
   "FilterByDisabled": "無効なアイテムのみ表示",
-  "FilterByIncluded": "含まれているアイテムのみ表示",
-  "FilterByExcluded": "除外されているアイテムのみ表示",
-  "ViewOnGithub": "このパッケージの Github リポジトリを見る",
-  "ViewXOnSteam": "Steamで「{0}」を表示",
-  "Free": "無料"
+  "FilterByIncluded": "含まれるアイテムのみ表示",
+  "FilterByExcluded": "除外されたアイテムのみ表示",
+  "ViewOnGithub": "パッケージのGithubリポジトリを表示",
+  "ViewXOnSteam": "「{0}」をSteamで表示",
+  "Free": "無料",
+  "ViewAllYourItems": "{0} を全て表示",
+  "ViewRecentlyUpdatedItems": "最近更新された {0} を表示",
+  "NoCompatibilityIssues": {
+    "One": "互換性の問題は検出されませんでした。",
+    "Plural": "{0} との互換性の問題は検出されませんでした。"
+  },
+  "SnapDashToGrid": "ダッシュボードのセクションをグリッドガイドで表示してスナップ",
+  "SnapDashToGrid_Tip": "ダッシュボードのセクションを編集中に、セクションにスナップする12列のグリッドで表示します。",
+  "UnsavedChangesPlayset": "プレイセットのパッケージに未保存の変更有り",
+  "ChangePlaysetSettings": "プレイセットの設定を変更",
+  "ViewCompatibilityReport": "完全な互換性レポートを表示",
+  "DashboardCustomizationInfo": "各セクションのヘッダー部からドラッグすると、ダッシュボードがカスタマイズできます。\nまた、セクション右下にある点線の三角形を使用して、セクションのサイズも変更可能です。",
+  "ViewAssetsWithIssues": "問題のあるアセットを表示",
+  "ViewModsWithIssues": "問題のあるMODを表示",
+  "CreateShortcut": "ショートカットを作成",
+  "CreateShortcut_Tip": "デスクトップにアプリへのショートカットを作成",
+  "StartsNewGameOnLaunch": "起動時は新しいゲームで開始",
+  "StartsNewGameWithMap": "起動時は「{0}」のマップで新しいゲームを開始",
+  "LoadsSaveGameOnLaunch": "起動時は最新のセーブゲームから再開",
+  "LoadsSaveGameWithMap": "起動時は「{0}」のセーブゲームで再開",
+  "StartsNewAssetOnLaunch": "起動時は新規アセットでエディタを起動",
+  "LoadsAssetOnLaunch": "起動時は「ロード」画面でエディタを起動",
+  "Notifications": "通知有り",
+  "NoNotifications": "通知無し",
+  "MultipleSkyvesDetected": "複数のSkyveが検出されました！",
+  "PackageUpdates": "パッケージの更新",
+  "PackagesUpdatedSinceSession": {
+    "One": "「{1}」は前回のセッション以降に更新済み",
+    "Plural": "「{0}」のパッケージは前回のセッション以降に更新済み"
+  },
+  "NewPackages": "新規パッケージ",
+  "NewPackagesSinceSession": {
+    "One": "「{1}」は最後のセッション以降にインストール済み",
+    "Plural": "「{0}」の新規パッケージは前回のセッション以降にインストール済み"
+  }
 }

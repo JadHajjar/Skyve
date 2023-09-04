@@ -25,7 +25,7 @@
   "NoAssets": "Désactiver tous les assets",
   "NoMods": "Désactiver tous les mods",
   "AutoSave": "Sauvegarde automatique",
-  "TotalSize": "taille totale",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "Statut de compatibilité",
   "AnyStatus": "N'importe quel statut",
   "AnyCompatibilityStatus": "N'importe quel statut",
@@ -124,8 +124,8 @@
     "Plural": "Supprimer les paquets sélectionnés"
   },
   "UnsubscribePackage": {
-    "One": "Se désabonner de ce paquet",
-    "Plural": "Se désabonner des paquets sélectionnés"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "Copier l'ID du Workshop de ce paquet",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Paquets inclus & activés : {0}, Total : {1}",
   "AssetIncludedTotal": "Assets inclus : {0}, Total : {1}",
   "NewPlayset_Tip": "Créer ou importer un nouveau profil",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "Passer à un profil temporaire avec les paramètres actuels",
   "ViewPlaysets_Tip": "Voir et gérer les profils enregistrés",
   "AutoSave_Tip": "Enregistrer automatiquement les modifications des mods et des assets dans votre profil",
@@ -519,6 +520,14 @@
     "One": "{0} {1} ne correspond pas à sa taille de l'Atelier",
     "Plural": "{0} {1} ne correspond pas à leurs tailles respectives de l'Atelier"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "'{0}' a été retiré de Steam",
   "PackageIsUnknown": "Les informations de Steam n'ont pas encore été chargées pour '{0}'",
   "PackageIsNotDownloaded": "'{0}' a été retiré de votre ordinateur",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Afficher uniquement les éléments exclus.",
   "ViewOnGithub": "Voir le dépôt Github de ce paquet",
   "ViewXOnSteam": "Voir \"{0}\" sur Steam",
-  "Free": "Gratuit"
+  "Free": "Gratuit",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  }
 }

@@ -25,7 +25,7 @@
   "NoAssets": "Desactivar todos los assets",
   "NoMods": "Desactivar todos los mods",
   "AutoSave": "Guardar Automáticamente",
-  "TotalSize": "tamaño total",
+  "TotalAssetSize": "{0} de los recursos incluidos",
   "CompatibilityStatus": "Estado de compatibilidad",
   "AnyStatus": "Cualquier estado",
   "AnyCompatibilityStatus": "Cualquier estado",
@@ -125,7 +125,7 @@
   },
   "UnsubscribePackage": {
     "One": "Anular suscripción a este paquete",
-    "Plural": "Anular suscripción a paquetes vinculados"
+    "Plural": "Anular suscripción a paquetes seleccionados"
   },
   "CopyWorkshopId": {
     "One": "Copiar indentificador (ID) del workshop de este paquete",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Mods incluidos y habilitados: {0}, Total: {1}",
   "AssetIncludedTotal": "Assets incluidos: {0}, Total: {1}",
   "NewPlayset_Tip": "Crear o importar un playset nuevo",
+  "TempPlayset": "Cambiar a un playset temporal",
   "TempPlayset_Tip": "Cambiar a un playset temporal con los ajustes actuales",
   "ViewPlaysets_Tip": "Ver y administrar tus playsets guardados",
   "AutoSave_Tip": "Guardar automáticamente los cambios en mods y assets a tu perfil",
@@ -457,7 +458,7 @@
   },
   "IncludedCount": {
     "One": "{0} {1} incluido",
-    "Plural": "{0} {1} incluido"
+    "Plural": "{0} {1} incluidos"
   },
   "EnabledCount": {
     "One": "{0} {1} activado",
@@ -465,7 +466,7 @@
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} incluido y activado",
-    "Plural": "{0} {1} incluido y activado"
+    "Plural": "{0} {1} incluidos y activados"
   },
   "LoadedCount": {
     "One": "{0} {1} cargado",
@@ -518,6 +519,14 @@
   "IncompleteCount": {
     "One": "{0} {1} no coincide con el tamaño en el workshop de Steam",
     "Plural": "{0} {1} no coinciden con sus respectivos tamaños en el workshop de Steam"
+  },
+  "NewUpdatedCount": {
+    "One": "{0} nuevo o actualizado {1}",
+    "Plural": "{0} nuevo o actualizado {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} en total",
+    "Plural": "{0} {1} en total"
   },
   "PackageIsRemoved": "'{0}' ha sido eliminado de Steam",
   "PackageIsUnknown": "La información de Steam no ha sido cargada aún para '{0}'",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Mostrar solo elementos excluidos.",
   "ViewOnGithub": "Ver el repositorio Github de este paquete",
   "ViewXOnSteam": "Ver '{0}' en Steam",
-  "Free": "Gratis"
+  "Free": "Gratis",
+  "ViewAllYourItems": "Ver todos tus {0}",
+  "ViewRecentlyUpdatedItems": "Ver {0} actualizados recientemente",
+  "NoCompatibilityIssues": {
+    "One": "No se detectaron problemas de compatibilidad.",
+    "Plural": "No se detectaron problemas de compatibilidad con tus {0}."
+  },
+  "SnapDashToGrid": "Mostrar y pegar secciones de tablero en una guía de cuadrícula",
+  "SnapDashToGrid_Tip": "Durante la edición de las secciones de la consola, se muestra una cuadrícula de 12 columnas a la que se añaden las secciones.",
+  "UnsavedChangesPlayset": "Hay cambios no guardados en los paquetes de este playset",
+  "ChangePlaysetSettings": "Cambiar la configuración del playset",
+  "ViewCompatibilityReport": "Ver el informe de compatibilidad completo",
+  "DashboardCustomizationInfo": "Puede personalizar su tablero arrastrando cada sección desde su cabecera.\nTambién puedes cambiar el tamaño de una sección usando el triángulo punteado en la parte inferior derecha.",
+  "ViewAssetsWithIssues": "Ver assets con problemas",
+  "ViewModsWithIssues": "Ver mods con problemas",
+  "CreateShortcut": "Crear acceso directo",
+  "CreateShortcut_Tip": "Crear acceso directo en el escritorio.",
+  "StartsNewGameOnLaunch": "Comienza una nueva partida al iniciar",
+  "StartsNewGameWithMap": "Comienza una nueva partida con el mapa '{0}' al iniciar",
+  "LoadsSaveGameOnLaunch": "Continua tu última partida de guardada al iniciar",
+  "LoadsSaveGameWithMap": "Continúa la partida guardada '{0}' al iniciar",
+  "StartsNewAssetOnLaunch": "Inicia el editor con un nuevo activo al iniciar",
+  "LoadsAssetOnLaunch": "Comienza con la pantalla de carga del editor al iniciar",
+  "Notifications": "Notificaciones",
+  "NoNotifications": "No hay notificaciones",
+  "MultipleSkyvesDetected": "Múltiples versiones de Skyve detectadas",
+  "PackageUpdates": "Actualizaciones de paquetes",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' se actualizó desde tu última sesión",
+    "Plural": "{0} paquetes se actualizaron desde tu última sesión"
+  },
+  "NewPackages": "Paquetes nuevos",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' se instalaron desde tu última sesión",
+    "Plural": "{0} paquetes nuevos se instalaron desde tu última sesión"
+  }
 }

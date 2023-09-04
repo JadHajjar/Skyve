@@ -25,7 +25,7 @@
   "NoAssets": "لا أصول مخصصة",
   "NoMods": "تعطيل جميع المودات",
   "AutoSave": "حفظ تلقائي",
-  "TotalSize": "الحجم الإجمالي",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "حالة التوافق",
   "AnyStatus": "أي حال أو أية حالة",
   "AnyCompatibilityStatus": "أي حال أو أية حالة",
@@ -124,8 +124,8 @@
     "Plural": "حذف الحزم المحددة"
   },
   "UnsubscribePackage": {
-    "One": "إلغاء الاشتراك من هذه الحزمة",
-    "Plural": "إلغاء الاشتراك من الحزم المحددة"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "نسخ معرف ورشة هذه الحزمة",
@@ -272,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "الحزم متضمنة ومفعلة: {0}، المجموع: {1}",
   "AssetIncludedTotal": "تشمل الأصول: {0}، المجموع: {1}",
   "NewPlayset_Tip": "إنشاء أو استيراد مجموعة تشغيل جديدة",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "التبديل إلى مجموعة تشغيل مؤقتة مع الإعدادات الحالية",
   "ViewPlaysets_Tip": "عرض وإدارة مجموعات التشغيل المحفوظة",
   "AutoSave_Tip": "حفظ التغييرات تلقائياً إلى الموديلات والأصول إلى ملفك الشخصي",
@@ -519,6 +520,14 @@
     "One": "{0} {1} لا يتطابق مع حجمه من الورشة",
     "Plural": "{0} {1} لا يتطابق مع أحجام كل منهم من الورشة"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "'{0}' تمت إزالته من ستيم",
   "PackageIsUnknown": "لم يتم تحميل المعلومات من Steam لـ '{0}' بعد",
   "PackageIsNotDownloaded": "تمت إزالة{0}' من جهاز الكمبيوتر الخاص بك",
@@ -667,5 +676,40 @@
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
   "ViewXOnSteam": "View '{0}' on Steam",
-  "Free": "Free"
+  "Free": "Free",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  }
 }
