@@ -25,7 +25,7 @@
   "NoAssets": "Вимкнути всі ассети",
   "NoMods": "Вимкнути всі моди",
   "AutoSave": "Автоматичне збереження",
-  "TotalAssetSize": "{0} of included assets",
+  "TotalAssetSize": "{0} з включених активів",
   "CompatibilityStatus": "Статус сумісності",
   "AnyStatus": "Будь-який статус",
   "AnyCompatibilityStatus": "Будь-який статус",
@@ -124,8 +124,8 @@
     "Plural": "Видалити обрані пакети"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe to this package",
-    "Plural": "Unsubscribe to the selected packages"
+    "One": "Відписатись від цього пакунку",
+    "Plural": "Відписатись від вибраних пакунків"
   },
   "CopyWorkshopId": {
     "One": "Скопіювати ID Майстерні цього пакету",
@@ -292,7 +292,7 @@
   "ABANDONED": "ЗАКИНУТО",
   "ActionUnreversible": {
     "One": "Цю дію не можна скасувати.",
-    "Plural": "This action can not be reversed. And will affect {0} packages"
+    "Plural": "Ця дія не може бути скасована. Це вплине на {0} пакунки"
   },
   "AlwaysOpenFiltersAndActions": "Показувати розділ фільтрів за замовчуванням",
   "AlwaysOpenFiltersAndActions_Tip": "Завжди відкривати фільтри при вході у вкладку вмісту",
@@ -521,12 +521,12 @@
     "Plural": "Розміри {0} {1} не збігаються зі своїми розмірами з воркшопа"
   },
   "NewUpdatedCount": {
-    "One": "{0} new or updated {1}",
-    "Plural": "{0} new or updated {1}"
+    "One": "{0} новий або оновлений {1}",
+    "Plural": "{0} новий або оновлений {1}"
   },
   "TotalCount": {
-    "One": "{0} {1} in total",
-    "Plural": "{0} {1} in total"
+    "One": "{0} {1} загалом",
+    "Plural": "{0} {1} загалом"
   },
   "PackageIsRemoved": "'{0}' видалено з воркшопа",
   "PackageIsUnknown": "Інформація з Steam ще не завантажена для '{0}'",
@@ -534,7 +534,7 @@
   "PackageIsOutOfDate": "'{0}' застарілий.\n\nВи відстаєте на {1}",
   "PackageIsMaybeOutOfDate": "'{0}' може бути застарілим, воно було оновлено {1}",
   "PackageIsIncomplete": "Локальний розмір '{0}' ({1}) відрізняється від розміру в Steam {2}",
-  "RemovedByAuthor": "Removed by author",
+  "RemovedByAuthor": "Видалено автором",
   "Missing": "Відсутний",
   "LoggedInAs": "Ви увійшли як",
   "UnknownUser": "Невідомий користувач",
