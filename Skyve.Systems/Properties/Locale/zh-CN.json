@@ -14,7 +14,7 @@
   "PartiallyDownloaded": "没有完整下载",
   "AutoPlaysetSaveOn": "自动保存功能已启用",
   "AutoPlaysetSaveOff": "自动保存功能已关闭",
-  "TemporaryPlaysetCanNotBeEdited": "重新打开 Skyve 应用程序时，临时配置文件会被重置！",
+  "TemporaryPlaysetCanNotBeEdited": "重新打开 Skyve 应用程序时，临时配置文件的配置会被重置！",
   "LaunchSettings": "启动选项",
   "IncludesItemsYouDoNotHave": "警告：其中的一些插件已丢失",
   "ContentAndInfo": "内容和信息",
