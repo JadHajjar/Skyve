@@ -71,6 +71,7 @@ public partial class PC_ReviewRequests : PanelContent
 		packageCrList.Invalidate();
 		reviewRequestList1.SetItems(_reviewRequests.Where(x => x.PackageId == sender));
 
+		B_DeleteRequests.Text = LocaleCR.DeleteRequests.FormatPlural(reviewRequestList1.ItemCount);
 		B_DeleteRequests.Visible = sender != 0;
 	}
 

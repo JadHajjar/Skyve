@@ -200,7 +200,7 @@ partial class PC_ReviewSingleRequest
 			this.B_DeleteRequest.Size = new System.Drawing.Size(174, 30);
 			this.B_DeleteRequest.SpaceTriggersClick = true;
 			this.B_DeleteRequest.TabIndex = 2;
-			this.B_DeleteRequest.Text = "DeleteRequest";
+			this.B_DeleteRequest.Text = "DeleteRequests";
 			this.B_DeleteRequest.Click += new System.EventHandler(this.B_DeleteRequest_Click);
 			// 
 			// B_ApplyChanges

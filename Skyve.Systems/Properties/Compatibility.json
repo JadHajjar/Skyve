@@ -217,7 +217,6 @@
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\n\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages.",
   "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
   "Banned": "Banned",
@@ -228,5 +227,10 @@
   "OtherCompatibilityWarnings": {
     "One": "This package has one other compatibility warning",
     "Plural": "This package has {0} other compatibility warnings"
-  }
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request"
 }
