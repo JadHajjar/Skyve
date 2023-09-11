@@ -25,6 +25,14 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 #pragma warning restore CS0649
 #pragma warning restore IDE1006
 
+	private NotificationType selectedGroup;
+	private bool headerHovered;
+	private readonly Dictionary<NotificationType, Rectangle> _headerRects = new();
+
+	public NotificationType CurrentGroup => selectedGroup;
+
+	public event EventHandler? GroupChanged;
+
 	public CompatibilityReportList()
 	{
 		GridView = true;
@@ -32,16 +40,6 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		AllowDrop = true;
 
 		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _bulkUtil, out _settings, out _modUtil, out _modLogicManager);
-
-		CanDrawItem += CompatibilityReportList_CanDrawItem;
-	}
-
-	private void CompatibilityReportList_CanDrawItem(object sender, CanDrawItemEventArgs<ICompatibilityInfo> e)
-	{
-		if (e.Item.Package is null)
-		{
-			e.DoNotDraw = true;
-		}
 	}
 
 	protected override void UIChanged()
@@ -52,11 +50,150 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		Padding = UI.Scale(new Padding(5), UI.FontScale);
 		GridPadding = UI.Scale(new Padding(3), UI.FontScale);
+		StartHeight = (int)(32 * UI.FontScale);
+	}
+
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo> args)
+	{
+		args.DoNotDraw = args.Item.Package is null || args.Item.GetNotification() != selectedGroup;
+
+		base.CanDrawItemInternal(args);
+	}
+
+	public override void SetItems(IEnumerable<ICompatibilityInfo> items)
+	{
+		selectedGroup = items.Max(x => x.GetNotification());
+
+		base.SetItems(items);
+
+		GroupChanged?.Invoke(this, EventArgs.Empty);
 	}
 
 	protected override IEnumerable<DrawableItem<ICompatibilityInfo, Rectangles>> OrderItems(IEnumerable<DrawableItem<ICompatibilityInfo, Rectangles>> items)
 	{
 		return items.OrderByDescending(x => x.Item.Package.CleanName());
+	}
+
+	protected override void DrawHeader(PaintEventArgs e)
+	{
+		var items = Items.GroupBy(x => x.GetNotification()).OrderByDescending(x => x.Key).ToList();
+
+		var smaller = Width < items.Count * 175 * UI.FontScale;
+		var xpos = 0;
+
+		using var brush = new SolidBrush(FormDesign.Design.AccentBackColor);
+		using var accentBrush = new SolidBrush(FormDesign.Design.AccentColor);
+
+		_headerRects.Clear();
+
+		e.Graphics.FillRectangle(brush, new Rectangle(0, 0, Width, StartHeight));
+
+		foreach (var item in items)
+		{
+			int width;
+
+			using var font = UI.Font(9.75F);
+			using var icon = item.Key.GetIcon(true).Get(font.Height + Padding.Top);
+			var text = LocaleCR.Get(item.Key.ToString()) + $" ({item.Count()})";
+
+			if (!smaller)
+			{
+				width = Math.Min(Width / items.Count, (int)(300 * UI.FontScale));
+			}
+			else if (selectedGroup == item.Key)
+			{
+				width = SlickButton.GetSize(e.Graphics, icon, text, font, Padding).Width;
+			}
+			else
+			{
+				width = StartHeight;
+			}
+
+			var rectangle = new Rectangle(xpos, 0, width, StartHeight);
+
+			_headerRects[item.Key] = rectangle;
+
+			using var foreBrush = new SolidBrush(selectedGroup == item.Key ? item.Key.GetColor().GetTextColor() : item.Key.GetColor().MergeColor(ForeColor, 80));
+			var textSize = e.Graphics.Measure(text, font, rectangle.Width - icon.Width - Padding.Left);
+			var textBounds = rectangle.CenterR(Size.Ceiling(textSize));
+			var iconBounds = textBounds;
+
+			if (selectedGroup == item.Key)
+			{
+				using var backBrush = Gradient(item.Key.GetColor(), 0.3F);
+				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(Padding.Top * 3 / 4), Padding.Left);
+			}
+			else if (rectangle.Contains(CursorLocation) && HoverState.HasFlag(HoverState.Hovered))
+			{
+				using var backBrush = new SolidBrush(Color.FromArgb(50, item.Key.GetColor()));
+				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(Padding.Top * 3 / 4), Padding.Left);
+			}
+
+			if (!smaller || selectedGroup == item.Key)
+			{
+				textBounds.X += (icon.Width + Padding.Left) / 2;
+				iconBounds.X -= (icon.Width + Padding.Left) / 2;
+				iconBounds.Y = (StartHeight - icon.Height) / 2;
+				iconBounds.Width = iconBounds.Height = icon.Height;
+
+				e.Graphics.DrawString(text, font, foreBrush, textBounds, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+			}
+			else
+			{
+				iconBounds = rectangle.CenterR(icon.Size);
+			}
+
+			e.Graphics.DrawImage(icon.Color(foreBrush.Color), iconBounds);
+
+			xpos += rectangle.Width;
+
+			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos + 1, Padding.Top, 1, StartHeight - Padding.Vertical));
+		}
+
+		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, 0, Width, (int)UI.FontScale));
+		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, StartHeight - (int)UI.FontScale, Width, (int)UI.FontScale));
+	}
+
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		var headerHovered = e.Y.IsWithin(0, StartHeight + 1);
+
+		if (headerHovered || headerHovered != this.headerHovered)
+		{
+			Invalidate(new Rectangle(0, 0, Width, StartHeight));
+		}
+
+		this.headerHovered = headerHovered;
+
+		base.OnMouseMove(e);
+	}
+
+	protected override void OnMouseLeave(EventArgs e)
+	{
+		Invalidate(new Rectangle(0, 0, Width, StartHeight));
+
+		base.OnMouseLeave(e);
+	}
+
+	protected override void OnMouseClick(MouseEventArgs e)
+	{
+		foreach (var item in _headerRects)
+		{
+			if (item.Value.Contains(e.Location))
+			{
+				selectedGroup = item.Key;
+				FilterChanged();
+				GroupChanged?.Invoke(this, EventArgs.Empty);
+				return;
+			}
+		}
+
+		base.OnMouseClick(e);
+	}
+
+	protected override bool IsHeaderActionHovered(Point location)
+	{
+		return _headerRects.Values.Any(x => x.Contains(location));
 	}
 
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
@@ -995,6 +1132,16 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 
 		Invalidate();
+	}
+
+	internal void Next()
+	{
+		throw new NotImplementedException();
+	}
+
+	internal void Previous()
+	{
+		throw new NotImplementedException();
 	}
 
 	public class Rectangles : IDrawableItemRectangles<ICompatibilityInfo>

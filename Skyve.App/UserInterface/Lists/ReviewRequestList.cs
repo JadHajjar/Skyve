@@ -128,7 +128,7 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 			Icon = "I_Copy"
 		}, e.ClipRectangle.Pad(0, e.Rects.ViewRectangle.Height + Padding.Vertical, Padding.Right, 0), ContentAlignment.MiddleRight, (e.HoverState, CursorLocation)).Rectangle;
 
-		using var smallfont = UI.Font(7.5F);
+		using var smallfont = UI.Font(8.25F);
 		var noteRect = e.ClipRectangle.Pad((int)(125 * UI.FontScale), e.Rects.ViewRectangle.Height + Padding.Vertical, e.Rects.TextRectangle.Width + Padding.Horizontal, 0);
 		e.Graphics.DrawString(e.Item.PackageNote, smallfont, textBrush, noteRect, new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far });
 

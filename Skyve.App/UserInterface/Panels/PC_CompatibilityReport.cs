@@ -6,7 +6,6 @@ using Skyve.Systems.Compatibility.Domain.Api;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
-using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,7 +14,6 @@ namespace Skyve.App.UserInterface.Panels;
 public partial class PC_CompatibilityReport : PanelContent
 {
 	private ReviewRequest[]? reviewRequests;
-	private NotificationType CurrentKey;
 	private bool customReportLoaded;
 	private bool searchEmpty = true;
 	private List<ExtensionClass.action>? recommendedActions;
@@ -42,6 +40,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		LC_Items.Visible = false;
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
+		LC_Items.GroupChanged += LC_Items_GroupChanged;
 
 		if (!_compatibilityManager.FirstLoadComplete)
 		{
@@ -150,45 +149,11 @@ public partial class PC_CompatibilityReport : PanelContent
 				label1.Location = ClientRectangle.Center(label1.Size);
 				label1.Show();
 			}
-			else label1.Hide();
-
-			var notifs = reports.GroupBy(x => x.GetNotification()).OrderByDescending(x => x.Key).ToList();
-
-			if (tabHeader.Tabs.Select(x => (NotificationType)x.Tag).SequenceEqual(notifs.Select(x => x.Key)))
+			else
 			{
-				LC_Items.SetItems(reports);
-
-				recommendedActions = LC_Items.Items.SelectWhereNotNull(GetAction).ToList()!;
-
-				this.TryInvoke(() =>
-				{
-					B_ApplyAll.Enabled = recommendedActions.Count > 0;
-					foreach (var item in tabHeader.Tabs)
-					{
-						item.Text = LocaleCR.Get(item.Tag.ToString()) + $" ({(notifs.FirstOrDefault(x => x.Key == (NotificationType)item.Tag)?.Count() ?? 0)})";
-					}
-				});
-
-				return;
+				label1.Hide();
 			}
 
-			var tabs = new List<SlickTab>();
-			foreach (var report in notifs)
-			{
-				var tab = new SlickTab()
-				{
-					Tag = report.Key,
-					Text = LocaleCR.Get(report.Key.ToString()) + $" ({report.Count()})",
-					Tint = report.Key.GetColor(),
-					IconName = report.Key.GetIcon(true)
-				};
-
-				tab.TabSelected += Tab_TabSelected;
-
-				tabs.Add(tab);
-			}
-
-			tabHeader.Tabs = tabs.ToArray();
 			LC_Items.SetItems(reports);
 			LC_Items.Visible = true;
 		}
@@ -197,7 +162,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private ExtensionClass.action? GetAction(ICompatibilityInfo report)
 	{
-		var message = report.ReportItems.FirstOrDefault(x => x.Status.Notification == CurrentKey && !_compatibilityManager.IsSnoozed(x));
+		var message = report.ReportItems.FirstOrDefault(x => x.Status.Notification == LC_Items.CurrentGroup && !_compatibilityManager.IsSnoozed(x));
 
 		if (message is null || report.Package is null)
 		{
@@ -275,21 +240,15 @@ public partial class PC_CompatibilityReport : PanelContent
 		};
 	}
 
-	private void Tab_TabSelected(object sender, EventArgs e)
+	private void LC_Items_GroupChanged(object sender, EventArgs e)
 	{
-		CurrentKey = (NotificationType)(sender as SlickTab)!.Tag;
-
 		recommendedActions = LC_Items.Items.SelectWhereNotNull(GetAction).ToList()!;
-
-		LC_Items.FilterChanged();
 
 		this.TryInvoke(() => B_ApplyAll.Enabled = recommendedActions.Count > 0);
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<ICompatibilityInfo> e)
 	{
-		e.DoNotDraw = e.Item.GetNotification() != CurrentKey;
-
 		if (!searchEmpty && !e.DoNotDraw && e.Item.Package is not null)
 		{
 			for (var i = 0; i < searchTermsExclude.Count; i++)
@@ -348,14 +307,14 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (keyData == (Keys.Control | Keys.Tab))
 		{
-			tabHeader.Next();
+			LC_Items.Next();
 			return true;
 		}
 
 		if (keyData == (Keys.Control | Keys.Shift | Keys.Tab))
 		{
 
-			tabHeader.Previous();
+			LC_Items.Previous();
 			return true;
 		}
 
