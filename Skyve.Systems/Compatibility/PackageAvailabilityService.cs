@@ -50,6 +50,11 @@ public class PackageAvailabilityService
 		return false;
 	}
 
+	internal void UpdateInclusionStatus(ulong id)
+	{
+		_cache[id] = (GetPackageEnabled(id, false), GetPackageEnabled(id, true));
+	}
+
 	private bool GetPackageEnabled(ulong steamId, bool withAlternativesAndSuccessors)
 	{
 		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);

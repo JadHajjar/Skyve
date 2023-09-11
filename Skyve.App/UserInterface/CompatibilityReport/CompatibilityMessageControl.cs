@@ -65,15 +65,15 @@ public class CompatibilityMessageControl : SlickControl
 			var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
 			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
-			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width * 2 - pad);
-			var noteSize = e.Graphics.Measure(note, UI.Font(8.25F), Width - iconRect.Width * 2 - pad);
+			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - (iconRect.Width * 2) - pad);
+			var noteSize = e.Graphics.Measure(note, UI.Font(8.25F), Width - (iconRect.Width * 2) - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 			using var brush = new SolidBrush(color);
 
 			GetAllButton(out var allText, out var allIcon, out var colorStyle);
 
 			e.Graphics.FillRoundedRectangle(brush, iconRect, pad);
-			e.Graphics.FillRoundedRectangle(brush, new Rectangle(iconRect.Width - 2 * pad, 0, 2 * pad, Height - pad), pad);
+			e.Graphics.FillRoundedRectangle(brush, new Rectangle(iconRect.Width - (2 * pad), 0, 2 * pad, Height - pad), pad);
 
 			e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
 
@@ -117,7 +117,7 @@ public class CompatibilityMessageControl : SlickControl
 
 				actionHovered |= allButtonRect.Contains(cursor);
 
-				y += allButtonRect.Height + pad * 2;
+				y += allButtonRect.Height + (pad * 2);
 			}
 
 			if (Message.Packages.Length > 0)
@@ -391,6 +391,7 @@ public class CompatibilityMessageControl : SlickControl
 					Program.MainForm.PushPanel(null, new PC_RequestReview(PackageCompatibilityReportControl.Package));
 					break;
 			}
+			_compatibilityManager.PackageInclusionQuickUpdate(Message);
 		}
 	}
 
@@ -459,5 +460,7 @@ public class CompatibilityMessageControl : SlickControl
 			}
 			break;
 		}
+
+		_compatibilityManager.PackageInclusionQuickUpdate(Message);
 	}
 }

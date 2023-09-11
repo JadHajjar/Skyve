@@ -109,6 +109,54 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 	}
 
+	public void PackageInclusionQuickUpdate(ICompatibilityItem compatibilityItem)
+	{
+		if (compatibilityService is null)
+		{
+			return;
+		}
+
+		var reportItem = (ReportItem)compatibilityItem;
+
+		if (reportItem.Package is not null)
+		{
+			compatibilityService.UpdateInclusionStatus(reportItem.Package);
+		}
+
+		if (reportItem.Packages is not null)
+		{
+			foreach (var item in reportItem.Packages)
+			{
+				var package = item.Package;
+
+				if (package is not null)
+				{
+					compatibilityService.UpdateInclusionStatus(package);
+				}
+			}
+		}
+
+		if (reportItem.Package is not null)
+		{
+			_cache[reportItem.Package] = compatibilityService.GenerateCompatibilityInfo(reportItem.Package);
+		}
+
+		if (reportItem.Packages is not null)
+		{
+			foreach (var item in reportItem.Packages)
+			{
+				var package = item.Package;
+
+				if (package is not null)
+				{
+					_cache[package] = compatibilityService.GenerateCompatibilityInfo(package);
+				}
+			}
+		}
+
+		_notifier.OnCompatibilityReportProcessed();
+	}
+
 	internal void LoadSnoozedData()
 	{
 		try

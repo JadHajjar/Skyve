@@ -52,6 +52,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			CompatibilityManager_ReportProcessed();
 		}
 
+		_notifier.ContentLoaded += CompatibilityManager_ReportProcessed;
 		_notifier.CompatibilityReportProcessed += CompatibilityManager_ReportProcessed;
 	}
 
@@ -96,7 +97,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			{
 				var info = x.GetCompatibilityInfo(cacheOnly: true);
 
-				if (info.GetNotification() < NotificationType.Unsubscribe && !_packageUtil.IsIncluded(x))
+				if (info.GetNotification() is not NotificationType.Unsubscribe && !_packageUtil.IsIncluded(x))
 				{
 					return null;
 				}
@@ -176,23 +177,26 @@ public partial class PC_CompatibilityReport : PanelContent
 				_subscriptionsManager.Subscribe(message.Packages.Where(x => x.GetLocalPackage() is null));
 				_bulkUtil.SetBulkIncluded(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
 				_bulkUtil.SetBulkEnabled(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+				_compatibilityManager.PackageInclusionQuickUpdate(message);
+
 			}
 			,
 			StatusAction.RequiresConfiguration => () =>
 			{
 				_compatibilityManager.ToggleSnoozed(message);
-
+				_compatibilityManager.PackageInclusionQuickUpdate(message);
 			}
 			,
 			StatusAction.UnsubscribeThis => () =>
 			{
 				_subscriptionsManager.UnSubscribe(new[] { report.Package! });
+				_compatibilityManager.PackageInclusionQuickUpdate(message);
 			}
 			,
 			StatusAction.UnsubscribeOther => () =>
 			{
 				_subscriptionsManager.UnSubscribe(message.Packages!);
-
+				_compatibilityManager.PackageInclusionQuickUpdate(message);
 			}
 			,
 			StatusAction.ExcludeThis => () =>
@@ -202,6 +206,7 @@ public partial class PC_CompatibilityReport : PanelContent
 				{
 					_packageUtil.SetIncluded(pp, false);
 				}
+				_compatibilityManager.PackageInclusionQuickUpdate(message);
 			}
 			,
 			StatusAction.ExcludeOther => () =>
@@ -214,6 +219,7 @@ public partial class PC_CompatibilityReport : PanelContent
 						_packageUtil.SetIncluded(pp, false);
 					}
 				}
+				_compatibilityManager.PackageInclusionQuickUpdate(message);
 			}
 			,
 			StatusAction.RequestReview => () =>
@@ -233,6 +239,7 @@ public partial class PC_CompatibilityReport : PanelContent
 					_packageUtil.SetIncluded(pp2!, true);
 					_packageUtil.SetEnabled(pp2!, true);
 				}
+				_compatibilityManager.PackageInclusionQuickUpdate(message);
 			}
 			: null
 			,

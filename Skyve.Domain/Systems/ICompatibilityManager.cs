@@ -22,4 +22,5 @@ public interface ICompatibilityManager
 	void CacheReport();
 	bool IsUserVerified(IUser author);
 	void DoFirstCache();
+	void PackageInclusionQuickUpdate(ICompatibilityItem compatibilityItem);
 }

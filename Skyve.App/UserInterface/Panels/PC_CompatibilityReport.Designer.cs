@@ -17,6 +17,7 @@ partial class PC_CompatibilityReport
 	{
 		if (disposing && (components != null))
 		{
+			_notifier.ContentLoaded -= CompatibilityManager_ReportProcessed;
 			_notifier.CompatibilityReportProcessed -= CompatibilityManager_ReportProcessed;
 			components.Dispose();
 		}

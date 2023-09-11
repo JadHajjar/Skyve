@@ -44,6 +44,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
+			Package = localPackage,
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
@@ -56,6 +57,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
+			Package = localPackage,
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
@@ -68,6 +70,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
+			Package = localPackage,
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,

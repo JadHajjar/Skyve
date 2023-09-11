@@ -236,4 +236,9 @@ internal class CompatibilityService
 
 		return info;
 	}
+
+	internal void UpdateInclusionStatus(IPackage package)
+	{
+		_compatibilityHelper.UpdateInclusionStatus(package);
+	}
 }

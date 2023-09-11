@@ -6,6 +6,7 @@ using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility.Domain;
 using Skyve.Systems.Compatibility.Domain.Api;
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -185,5 +186,10 @@ public class CompatibilityHelper
 			|| _compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
 			&& (package.Package.Stability is PackageStability.Broken
 			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false));
+	}
+
+	internal void UpdateInclusionStatus(IPackage package)
+	{
+		_packageAvailabilityService.UpdateInclusionStatus(package.Id);
 	}
 }

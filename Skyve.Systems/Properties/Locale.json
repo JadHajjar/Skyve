@@ -553,6 +553,7 @@
   "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
   "ApplyDownloads": "Force Steam to download all pending packages",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
   "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
