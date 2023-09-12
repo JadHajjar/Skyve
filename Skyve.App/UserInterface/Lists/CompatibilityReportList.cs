@@ -61,7 +61,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	public override void SetItems(IEnumerable<ICompatibilityInfo> items)
 	{
-		if (CurrentGroup == default)
+		if (items.All(x => x.GetNotification() != CurrentGroup))
 		{
 			CurrentGroup = items.Max(x => x.GetNotification());
 		}
@@ -982,7 +982,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					break;
 			}
 
-			_compatibilityManager.PackageInclusionQuickUpdate(Message);
+			_compatibilityManager.QuickUpdate(Message);
 		}
 	}
 
@@ -1052,7 +1052,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				break;
 		}
 
-		_compatibilityManager.PackageInclusionQuickUpdate(Message);
+		_compatibilityManager.QuickUpdate(Message);
 	}
 
 	protected override Rectangles GenerateRectangles(ICompatibilityInfo item, Rectangle rectangle)

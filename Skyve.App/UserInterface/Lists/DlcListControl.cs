@@ -4,8 +4,6 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Lists;
 public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.Rectangles>
 {
-	public IEnumerable<IDlcInfo> FilteredItems => SafeGetItems().Select(x => x.Item);
-
 	private readonly ISettings _settings;
 	private readonly IDlcManager _dlcManager;
 

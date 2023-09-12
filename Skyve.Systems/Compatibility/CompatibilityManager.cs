@@ -40,6 +40,8 @@ public class CompatibilityManager : ICompatibilityManager
 	private CompatibilityService? compatibilityService;
 	private CancellationTokenSource? cancellationTokenSource;
 
+	public event Action? SnoozeChanged;
+
 	public IndexedCompatibilityData CompatibilityData { get; private set; }
 	public bool FirstLoadComplete { get; private set; }
 
@@ -109,7 +111,7 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 	}
 
-	public void PackageInclusionQuickUpdate(ICompatibilityItem compatibilityItem)
+	public void QuickUpdate(ICompatibilityItem compatibilityItem)
 	{
 		if (compatibilityService is null)
 		{
@@ -248,23 +250,29 @@ public class CompatibilityManager : ICompatibilityManager
 		return _snoozedItems.Any(x => x.Equals(reportItem));
 	}
 
-	public void ToggleSnoozed(ICompatibilityItem reportItem)
+	public void ToggleSnoozed(ICompatibilityItem compatibilityItem)
 	{
 		lock (this)
 		{
-			if (IsSnoozed(reportItem))
+			if (IsSnoozed(compatibilityItem))
 			{
-				_snoozedItems.RemoveAll(x => x.Equals(reportItem));
+				_snoozedItems.RemoveAll(x => x.Equals(compatibilityItem));
 			}
 			else
 			{
-				_snoozedItems.Add(new SnoozedItem(reportItem));
+				_snoozedItems.Add(new SnoozedItem(compatibilityItem));
 			}
 
 			ISave.Save(_snoozedItems, SNOOZE_FILE);
-
-			_notifier.OnRefreshUI();
 		}
+
+		if (compatibilityItem is ReportItem reportItem && reportItem.Package is not null && compatibilityService is not null)
+		{
+			_cache[reportItem.Package] = compatibilityService.GenerateCompatibilityInfo(reportItem.Package);
+		}
+
+		SnoozeChanged?.Invoke();
+		_notifier.OnRefreshUI();
 	}
 
 	public bool IsBlacklisted(IPackageIdentity package)

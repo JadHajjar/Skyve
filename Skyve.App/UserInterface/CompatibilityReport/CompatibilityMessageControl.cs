@@ -391,7 +391,7 @@ public class CompatibilityMessageControl : SlickControl
 					Program.MainForm.PushPanel(null, new PC_RequestReview(PackageCompatibilityReportControl.Package));
 					break;
 			}
-			_compatibilityManager.PackageInclusionQuickUpdate(Message);
+			_compatibilityManager.QuickUpdate(Message);
 		}
 	}
 
@@ -461,6 +461,6 @@ public class CompatibilityMessageControl : SlickControl
 			break;
 		}
 
-		_compatibilityManager.PackageInclusionQuickUpdate(Message);
+		_compatibilityManager.QuickUpdate(Message);
 	}
 }

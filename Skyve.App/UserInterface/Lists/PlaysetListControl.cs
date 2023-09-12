@@ -14,8 +14,6 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 	private static ICustomPlayset? opening;
 	private readonly IOSelectionDialog imagePrompt;
 
-	public IEnumerable<ICustomPlayset> FilteredItems => SafeGetItems().Select(x => x.Item);
-
 	public bool ReadOnly { get; set; }
 
 	public event Action<ICustomPlayset>? LoadProfile;
