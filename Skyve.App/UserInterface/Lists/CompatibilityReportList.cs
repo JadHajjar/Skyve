@@ -31,6 +31,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	public NotificationType CurrentGroup { get; private set; }
 
 	public event EventHandler? GroupChanged;
+	public event EventHandler? FilterRequested;
 
 	public CompatibilityReportList()
 	{
@@ -68,6 +69,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		base.SetItems(items);
 
+		DoFilterChanged();
+	
 		GroupChanged?.Invoke(this, EventArgs.Empty);
 	}
 
@@ -184,7 +187,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			if (item.Value.Contains(e.Location))
 			{
 				CurrentGroup = item.Key;
-				FilterChanged();
+				DoFilterChanged();
 				GroupChanged?.Invoke(this, EventArgs.Empty);
 				return;
 			}
@@ -242,6 +245,9 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	private void DrawReport(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, int baseY, bool isPressed)
 	{
 		var Message = e.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == e.Item.GetNotification() && !_compatibilityManager.IsSnoozed(x));
+
+		if (Message is null)
+			return;
 
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 		var reportRect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, 9999).Pad(0, baseY - e.ClipRectangle.Y, 0, 0);
@@ -1143,15 +1149,34 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	internal void Next()
 	{
 		CurrentGroup = _headerRects.Keys.Next(CurrentGroup, true);
-		FilterChanged();
+		DoFilterChanged();
 		GroupChanged?.Invoke(this, EventArgs.Empty);
 	}
 
 	internal void Previous()
 	{
 		CurrentGroup = _headerRects.Keys.Previous(CurrentGroup, true);
-		FilterChanged();
+		DoFilterChanged();
 		GroupChanged?.Invoke(this, EventArgs.Empty);
+	}
+
+	public void DoFilterChanged()
+	{
+		base.FilterChanged();
+
+		AutoInvalidate = !Loading && Items.Any() && !SafeGetItems().Any();
+	}
+
+	public override void FilterChanged()
+	{
+		if (!IsHandleCreated)
+		{
+			base.FilterChanged();
+		}
+		else
+		{
+			FilterRequested?.Invoke(this, EventArgs.Empty);
+		}
 	}
 
 	public class Rectangles : IDrawableItemRectangles<ICompatibilityInfo>

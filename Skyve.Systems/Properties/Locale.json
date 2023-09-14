@@ -712,5 +712,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' got installed since your last session",
     "Plural": "{0} new packages got installed since your last session"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }

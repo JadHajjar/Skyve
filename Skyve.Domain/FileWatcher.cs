@@ -21,7 +21,7 @@ public class FileWatcher : IDisposable
 		_watcher.Deleted += FileDeleted;
 	}
 
-	public string Path { get => _watcher.Path; set => _watcher.Path = value; }
+	public string Path { get => _watcher.Path; set { if (Directory.Exists(value)) _watcher.Path = value; } }
 	public NotifyFilters NotifyFilter { get => _watcher.NotifyFilter; set => _watcher.NotifyFilter = value; }
 	public string Filter { get => _watcher.Filter; set => _watcher.Filter = value; }
 	public bool IncludeSubdirectories { get => _watcher.IncludeSubdirectories; set => _watcher.IncludeSubdirectories = value; }
