@@ -525,8 +525,8 @@
     "Plural": "{0} new or updated {1}"
   },
   "TotalCount": {
-    "One": "{0} {1} in total",
-    "Plural": "{0} {1} in total"
+    "One": "{0} {1} всего",
+    "Plural": "{0} {1} всего"
   },
   "PackageIsRemoved": "'{0}' был удален из Steam",
   "PackageIsUnknown": "Информация из Steam еще не загружена для '{0}' '",
@@ -699,8 +699,8 @@
   "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
   "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
   "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
-  "Notifications": "Notifications",
-  "NoNotifications": "No notifications",
+  "Notifications": "Уведомления",
+  "NoNotifications": "Нет уведомлений",
   "MultipleSkyvesDetected": "Multiple Skyves Detected",
   "PackageUpdates": "Package Updates",
   "PackagesUpdatedSinceSession": {
