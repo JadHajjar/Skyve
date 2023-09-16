@@ -25,7 +25,7 @@
   "NoAssets": "禁用自定义资产",
   "NoMods": "禁用全部模组",
   "AutoSave": "自动保存",
-  "TotalAssetSize": "已装载的资产中的 {0}",
+  "TotalAssetSize": "已装载的资产 {0}",
   "CompatibilityStatus": "兼容性状态",
   "AnyStatus": "任意状态",
   "AnyCompatibilityStatus": "任意状态",
