@@ -37,7 +37,7 @@
   "EnableAll": "Habilitar todos los artículos mostrados",
   "DisableAll": "Deshabilitar todos los artículos mostrados",
   "CollectionLink": "URL de la colección de Steam o identificador (ID)",
-  "PasteCollection": "Pegue la URL o el identificador (ID) de la colección que deseas ver",
+  "PasteCollection": "URL o el identificador (ID) de la colección que deseas ver",
   "LoadCollection": "Cargar colección",
   "CollectionTitle": "Colecciones de workshop",
   "HelpLogs": "Ayuda y Registros",
