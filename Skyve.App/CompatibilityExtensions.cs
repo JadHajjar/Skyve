@@ -54,6 +54,7 @@ public static class CompatibilityExtensions
 			NotificationType.Switch => "I_Switch",
 			NotificationType.Unsubscribe => "I_Broken",
 			NotificationType.Exclude => "I_X",
+			NotificationType.RequiredItem => "I_Important",
 			NotificationType.None or _ => status ? "I_Ok" : "I_Info",
 		};
 	}

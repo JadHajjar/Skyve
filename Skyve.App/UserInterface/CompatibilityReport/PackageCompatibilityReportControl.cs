@@ -114,6 +114,7 @@ public class PackageCompatibilityReportControl : TableLayoutPanel
 			ReportType.Status => "I_Statuses",
 			ReportType.OptionalPackages => "I_Recommendations",
 			ReportType.Compatibility => "I_Compatibilities",
+			ReportType.RequiredItem => "I_Important",
 			_ => "I_CompatibilityReport",
 		};
 	}

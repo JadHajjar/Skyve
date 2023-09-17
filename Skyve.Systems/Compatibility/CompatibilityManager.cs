@@ -492,4 +492,9 @@ public class CompatibilityManager : ICompatibilityManager
 			yield return item;
 		}
 	}
+
+	internal List<ulong>? GetRequiredFor(ulong id)
+	{
+		return compatibilityService?.GetRequiredFor(id);
+	}
 }

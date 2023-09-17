@@ -102,6 +102,10 @@
     "One": "'{0}' will load directly after '{1}'.",
     "Plural": "'{0}' will load directly after the following packages."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
@@ -168,6 +172,11 @@
     "One": "You should switch to '{1}'.",
     "Plural": "You should switch to one of the following packages:"
   },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
+  },
   "NoRequiredDlcs": "No Required DLCs",
   "DlcsSelected": {
     "One": "{0} DLC selected",
@@ -232,5 +241,7 @@
     "One": "Delete this request",
     "Plural": "Delete these requests"
   },
-  "ViewRequest": "View Request"
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item"
 }

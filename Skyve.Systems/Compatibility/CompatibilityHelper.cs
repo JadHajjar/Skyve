@@ -6,9 +6,7 @@ using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility.Domain;
 using Skyve.Systems.Compatibility.Domain.Api;
 
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Skyve.Systems.Compatibility;
@@ -20,6 +18,8 @@ public class CompatibilityHelper
 	private readonly IPackageNameUtil _packageUtil;
 	private readonly IWorkshopService _workshopService;
 	private readonly PackageAvailabilityService _packageAvailabilityService;
+
+	private readonly Dictionary<ulong, List<ulong>> _missingItems = new();
 
 	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILogger logger)
 	{
@@ -155,6 +155,24 @@ public class CompatibilityHelper
 			_ => ReportType.Compatibility
 		};
 
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && _packageAvailabilityService.IsPackageEnabled(info.Data.Package.SteamId, false))
+		{
+			lock (_missingItems)
+			{
+				foreach (var item in packages)
+				{
+					if (_missingItems.ContainsKey(item))
+					{
+						_missingItems[item].AddIfNotExist(info.Data.Package.SteamId);
+					}
+					else
+					{
+						_missingItems[item] = new() { info.Data.Package.SteamId };
+					}
+				}
+			}
+		}
+
 		if (interaction.Interaction.Action is StatusAction.SelectOne)
 		{
 			packages.Add(info.Package?.Id ?? 0);
@@ -182,14 +200,22 @@ public class CompatibilityHelper
 	{
 		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(steamId));
 
-		return workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved)
-			|| _compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
+		return (workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved))
+			|| (_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
 			&& (package.Package.Stability is PackageStability.Broken
-			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false));
+			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false)));
 	}
 
 	internal void UpdateInclusionStatus(IPackage package)
 	{
 		_packageAvailabilityService.UpdateInclusionStatus(package.Id);
+	}
+
+	internal List<ulong>? GetRequiredFor(ulong id)
+	{
+		lock (_missingItems)
+		{
+			return _missingItems.TryGet(id);
+		}
 	}
 }

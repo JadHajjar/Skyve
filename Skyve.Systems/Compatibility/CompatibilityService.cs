@@ -237,6 +237,11 @@ internal class CompatibilityService
 		return info;
 	}
 
+	internal List<ulong>? GetRequiredFor(ulong id)
+	{
+		return _compatibilityHelper.GetRequiredFor(id);
+	}
+
 	internal void UpdateInclusionStatus(IPackage package)
 	{
 		_compatibilityHelper.UpdateInclusionStatus(package);
