@@ -424,7 +424,7 @@
   "Workshop": "Workshop",
   "CompatibilityReport": "Informe de compatibilidad",
   "AppDataPath": "Ruta de la carpeta \"AppData\" de Cities: Skylines",
-  "Enabled": "Activado",
+  "Enabled": "Activo",
   "Disabled": "Desactivado",
   "Included": "Incluido",
   "Excluded": "Excluido",
@@ -461,12 +461,12 @@
     "Plural": "{0} {1} incluidos"
   },
   "EnabledCount": {
-    "One": "{0} {1} activado",
-    "Plural": "{0} {1} activado"
+    "One": "{0} {1} activos",
+    "Plural": "{0} {1} activos"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} incluido y activado",
-    "Plural": "{0} {1} incluidos y activados"
+    "One": "{0} {1} incluido y activo",
+    "Plural": "{0} {1} incluidos y activos"
   },
   "LoadedCount": {
     "One": "{0} {1} cargado",
