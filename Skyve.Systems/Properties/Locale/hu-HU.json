@@ -25,7 +25,7 @@
   "NoAssets": "Az Assetek üzemen kívül helyezése",
   "NoMods": "Minden mod letiltása",
   "AutoSave": "Automatikus mentés",
-  "TotalAssetSize": "{0} of included assets",
+  "TotalAssetSize": "{0} a benne foglalt elemekből",
   "CompatibilityStatus": "Kompabilitási Infó",
   "AnyStatus": "Bármilyen állapot",
   "AnyCompatibilityStatus": "Bármilyen állapot",
@@ -124,8 +124,8 @@
     "Plural": "Kiválasztott csomagok törlése"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe to this package",
-    "Plural": "Unsubscribe to the selected packages"
+    "One": "Leiratkozás erről a csomagról",
+    "Plural": "Leiratkozás ezekről a csomagokról"
   },
   "CopyWorkshopId": {
     "One": "Másolja ki a csomag műhelyazonosítóját",
@@ -272,7 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Tartalmazott és engedélyezett csomagok: {0}, összesen: {1}",
   "AssetIncludedTotal": "Assetek: {0}, összesen: {1}",
   "NewPlayset_Tip": "Hozzon létre vagy importáljon új profilt",
-  "TempPlayset": "Switch to a temporary playset",
+  "TempPlayset": "Válts ideiglenes játékkészletre",
   "TempPlayset_Tip": "Váltson ideiglenes profilra az aktuális beállításokkal",
   "ViewPlaysets_Tip": "Megtekintheti és kezelheti mentett játékkészleteit",
   "AutoSave_Tip": "Automatikusan menteni a változott módokat vagy eszközöket a profilodban",
@@ -521,12 +521,12 @@
     "Plural": "A(z) {0} {1} nem egyezik a műhelyben található megfelelő méretükkel"
   },
   "NewUpdatedCount": {
-    "One": "{0} new or updated {1}",
-    "Plural": "{0} new or updated {1}"
+    "One": "{0} új vagy frissített {1}",
+    "Plural": "{0} új vagy frissített {1}"
   },
   "TotalCount": {
-    "One": "{0} {1} in total",
-    "Plural": "{0} {1} in total"
+    "One": "Összesen {0} {1}",
+    "Plural": "Összesen {0} {1}"
   },
   "PackageIsRemoved": "A(z) „{0}” eltávolítva a Steamből",
   "PackageIsUnknown": "A Steam információi még nem töltődnek be a(z) „{0}”-hoz",
@@ -677,39 +677,39 @@
   "ViewOnGithub": "Tekintse meg a csomag Github tárházát",
   "ViewXOnSteam": "A(z) „{0}” megtekintése Steamen",
   "Free": "Ingyenes",
-  "ViewAllYourItems": "View all your {0}",
-  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "ViewAllYourItems": "Az összes {0} megtekintése",
+  "ViewRecentlyUpdatedItems": "Nemrég frissített {0} megtekintése",
   "NoCompatibilityIssues": {
-    "One": "No Compatibility issues detected.",
-    "Plural": "No compatibility issues with your {0} were detected."
+    "One": "Nem észleltek kompatibilitási problémákat.",
+    "Plural": "Nem észleltünk kompatibilitási problémákat a(z) {0} eszközzel."
   },
-  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
-  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
-  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
-  "ChangePlaysetSettings": "Change this playset's settings",
-  "ViewCompatibilityReport": "View the full compatibility report",
-  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
-  "ViewAssetsWithIssues": "View Assets with issues",
-  "ViewModsWithIssues": "View Mods with issues",
-  "CreateShortcut": "Create shortcut",
-  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
-  "StartsNewGameOnLaunch": "Starts a new game on launch",
-  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
-  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
-  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
-  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
-  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
-  "Notifications": "Notifications",
-  "NoNotifications": "No notifications",
-  "MultipleSkyvesDetected": "Multiple Skyves Detected",
-  "PackageUpdates": "Package Updates",
+  "SnapDashToGrid": "Az irányítópult-szakaszok megjelenítése és hozzáillesztése rács útmutatóhoz",
+  "SnapDashToGrid_Tip": "Az irányítópult szakaszainak szerkesztésekor egy 12 oszlopos rácsot jelenít meg, amelyhez a szakaszok illeszkednek.",
+  "UnsavedChangesPlayset": "Ennek a játékkészletnek a csomagjain nem mentett változtatások vannak",
+  "ChangePlaysetSettings": "Módosítsd a játékkészlet beállításait",
+  "ViewCompatibilityReport": "Tekintsd meg a teljes kompatibilitási jelentést",
+  "DashboardCustomizationInfo": "Testreszabhatod az irányítópultot az egyes szakaszok fejlécéből való húzásával.\nA szakaszt a jobb alsó sarokban lévő pontozott háromszög segítségével is átméretezheted.",
+  "ViewAssetsWithIssues": "Tekintsd meg a problémákkal rendelkező eszközöket",
+  "ViewModsWithIssues": "Tekintsd meg a problémákkal rendelkező modokat",
+  "CreateShortcut": "Parancsikon létrehozás",
+  "CreateShortcut_Tip": "Hozzon létre hozzá egy parancsikont az asztalon.",
+  "StartsNewGameOnLaunch": "Indításkor új játékot indít",
+  "StartsNewGameWithMap": "Indításkor új játékot indít a „{0}” térképpel",
+  "LoadsSaveGameOnLaunch": "Indításkor folytatja a legutóbbi mentési játékát",
+  "LoadsSaveGameWithMap": "Indításkor folytatja a „{0}” mentési játékot",
+  "StartsNewAssetOnLaunch": "Indításkor elindítja a szerkesztőt egy új elemmel",
+  "LoadsAssetOnLaunch": "Indításkor a szerkesztő „Betöltés” ​​képernyőjével kezdődik",
+  "Notifications": "Értesítések",
+  "NoNotifications": "Nincsenek értesítések",
+  "MultipleSkyvesDetected": "Több Skyve észlelve",
+  "PackageUpdates": "Csomag státusza",
   "PackagesUpdatedSinceSession": {
-    "One": "'{1}' got updated since your last session",
-    "Plural": "{0} packages got updated since your last session"
+    "One": "A(z) \"{1}\" az utolsó munkameneted óta frissült",
+    "Plural": "{0} csomag frissült az utolsó munkameneted óta"
   },
-  "NewPackages": "New Packages",
+  "NewPackages": "Új csomagok",
   "NewPackagesSinceSession": {
-    "One": "'{1}' got installed since your last session",
-    "Plural": "{0} new packages got installed since your last session"
+    "One": "A(z) „{1}” a legutóbbi munkamenete óta telepítve lett",
+    "Plural": "{0} új csomag lett telepítve az utolsó munkamenet óta"
   }
 }
