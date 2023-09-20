@@ -49,12 +49,12 @@
   "Preferences": "กำหนดลักษณะ",
   "PlaysetName": "ชื่อเพลย์เซ็ต",
   "RenamePlayset": "เปลี่ยนชื่อเพลย์เซ็ตปัจจุบัน",
-  "StartScratch": "เริ่มสร้างโพร์ไฟล์ใหม่ตั้งแต่ต้น",
+  "StartScratch": "เริ่มสร้างเพลย์เซ็ตใหม่ตั้งแต่ต้น",
   "ContinueFromCurrent": "รักษาการตั้งค่าปัจจุบันของคุณ",
   "GamePlay": "สร้างเมือง",
   "EditorPlay": "สร้างแอสเซท",
   "PlaysetUsage": "เพลย์เซ็ตที่ใช้งานอยู่",
-  "SomePackagesWillBeDisabled": "บางแพ็กเกจอาจถูกลบออกหากเปลี่ยนมาใช้โพร์ไฟล์นี้",
+  "SomePackagesWillBeDisabled": "บางแพ็กเกจอาจถูกลบออกไปหากเปลี่ยนมาใช้เพลย์เซ็ตนี้",
   "AffectedPackagesAre": "มีผลกระทบต่อแพ็กเกจ",
   "ConfirmDeletePlayset": "แน่ใจไหมว่าต้องการลบเพลย์เซ็ต '{0}'?",
   "PlaysetReplace": "โหลดการตั้งค่าของเพลย์เซ็ตนี้",
@@ -124,8 +124,8 @@
     "Plural": "ลบแพ็กเกจทั้งหมดที่เลือก"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe to this package",
-    "Plural": "Unsubscribe to the selected packages"
+    "One": "ยกเลิกการสมัครสมาชิกจากแพ็กเกจนี้",
+    "Plural": "ยกเลิกการสมัครสมาชิกจากแพ็กเกจที่เลือก"
   },
   "CopyWorkshopId": {
     "One": "คัดลอก ID เวิร์คชอปของแพ็กเกจนี้",
@@ -165,7 +165,7 @@
   "SubscribeAll": "สมัครสมาชิกไอเทมทั้งหมดที่แสดงอยู่",
   "DownloadAll": "ดาวน์โหลดไอเทมที่สูญหายและที่แสดงอยู่ทั้งหมด",
   "ReDownloadAll": "ดาวน์โหลดไอเทมที่โหลดแล้วและที่แสดงอยู่ทั้งหมดอีกครั้ง",
-  "MissingItemsRemain": "ยังคงไม่พบไอเทมบางรายการของโพร์ไฟล์นี้ การบันทึกโพร์ไฟล์ในครั้งต่อไปจะลบไอเทมเหล่านั้นออกไปจากโพร์ไฟล์",
+  "MissingItemsRemain": "ไอเทมบางรายการยังคงขาดหายไปจากเพลย์เซ็ตนี้ การบันทึกเพลย์เซ็ตในครั้งต่อไปจะเป็นการลบไอเทมเหล่านั้นออกไปจากรายการ",
   "ModIsPrivate": "ไอเทมส่วนตัว",
   "HidePseudoMods": "ซ่อนม็อดแฝง (อย่างเช่นม็อดที่สร้างมาจาก Theme mixes)",
   "YourDlcs": "DLC ของคุณ",
@@ -208,7 +208,7 @@
   "OverrideGameChanges_Tip": "การเปิดโปรแกรมสกายวีทิ้งไว้ในระหว่างที่คุณเล่นเกม แล้วทำการปรับเปลี่ยนการเปิดใช้งานม็อดต่าง ๆ ภายในเมนูของตัวเกม เมื่อคุณเข้าเกมครั้งถัดไป ค่าการเปิดใช้งานม็อดเหล่านั้นที่เกิดขึ้นในตัวเกม จะถูกแทนที่โดยอัตโนมัติด้วยค่าที่คุณตั้งไว้บนสกายวี",
   "HidePseudoMods_Tip": "Theme mixes จะสร้างไฟล์ม็อดเพื่อให้สามารถนำไปแบ่งปันบนเวิร์กชอปได้ การเปิดใช้งานตัวเลือกนี้จะซ่อนไฟล์ดังกล่าวจากรายการม็อดแต่จะยังรวมอยู่ในเกม",
   "AdvancedIncludeEnable_Tip": "การเปิดใช้งานตัวเลือกนี้จะทำให้คุณสามารถเปลี่ยนสถานะการรวมเข้าและการแยกม็อดออกออกจากตัวเกม คล้ายกันกับม็อด Load Order Tool ดั้งเดิม",
-  "AdvancedLaunchOptions_Tip": "แสดงตัวเลือกเพิ่มเติมที่นักพัฒนาใช้สำหรับการเปิดเกม ในหน้าการตั้งค่าของโพร์ไฟล์",
+  "AdvancedLaunchOptions_Tip": "แสดงตัวเลือกเพิ่มเติมที่นักพัฒนาใช้สำหรับการเปิดเกม ในหน้าการตั้งค่าของเพลย์เช็ต",
   "ShowFolderSettings_Tip": "แสดงการตั้งค่าโฟลเดอร์ที่ถูกใช้โดยเครื่องมือในหน้าการตัวเลือก",
   "HelpTranslate_Tip": "ช่วยแปลเครื่องมือนี้ให้เป็นภาษาท้องถิ่นของคุณได้ที่ Crowdin",
   "ThemeUIScale_Tip": "เปลี่ยนสีและธิม หรือเพิ่มขนาดของ UI ของแอป",
@@ -272,10 +272,10 @@
   "PackageIncludedAndEnabledTotal": "แพ็กเกจที่รวมอยู่ในเกม และเปิดใช้งาน: {0}, ทั้งหมด: {1}",
   "AssetIncludedTotal": "แอสเซทที่รวมอยู่ในเกม: {0}, ทั้งหมด: {1}",
   "NewPlayset_Tip": "สร้างหรือนำเข้าเพลย์เซ็ตใหม่",
-  "TempPlayset": "Switch to a temporary playset",
+  "TempPlayset": "สลับไปใช้เพลย์เซ็ตชั่วคราว",
   "TempPlayset_Tip": "เปลี่ยนไปเป็นเพลย์เซ็ตชั่วคราวด้วยการตั้งค่าปัจจุบันของคุณ",
-  "ViewPlaysets_Tip": "View & manage your saved playsets",
-  "AutoSave_Tip": "บันทึกการเปลี่ยนแปลงม็อดและแอสเซท ไปยังโพร์ไฟล์ของคุณโดยอัตโนมัติ",
+  "ViewPlaysets_Tip": "ดูและจัดการเพลย์เซ็ตที่คุณบันทึกไว้",
+  "AutoSave_Tip": "บันทึกการเปลี่ยนแปลงม็อดและแอสเซท ไปยังเพลย์เซ็ตของคุณโดยอัตโนมัติ",
   "LoadEnabled_Tip": "โหลดแอสเซทที่เปิดใช้งานในระหว่างการโหลดเกม ควรเปิดใช้งานไว้ เว้นแต่คุณทราบอยู่แล้วว่าคุณกำลังทำอะไรอยู่",
   "LoadUsed_Tip": "โหลดแอสเซทที่ใช้ในแผนที่ของคุณ แม้ว่ามันจะถูกปิดการใช้งานในเกมก็ตาม ตัวเลือกนี้จะไม่เกี่ยวข้องกับการตั้งค่าแอสเซทภายใน Skyve",
   "UseSkipFile_Tip": "ใช้ตัวเลือกนี้เพื่อแยกแอสเซทดั้งเดิมออกจากเกมของคุณ",
@@ -300,7 +300,7 @@
   "XMLImportMissingInfo": "อ่านไฟล์ XML การกำหนดค่า แล้วสมัครสมาชิกแพ็กเกจในไฟล์เหล่านั้น",
   "XMLTip": "เลือก หรือลากแล้วปล่อย เพื่อจัดการแพ็กเกจที่อยู่ในรายการ ของไฟล์ XML config",
   "FavoritePlaysetTotal": "เพลย์เซ็ตที่ชื่นชอบ: {0} ทั้งหมด: {1}",
-  "FavoriteTotal": "Total playsets: {0}",
+  "FavoriteTotal": "เพลย์เซ็ตทั้งหมด: {0}",
   "PlaysetFilter": "กรองเพลย์เซ็ต",
   "CheckDocumentsFolder": "ตรวจสอบให้แน่ใจว่า Skyve สามารถเข้าถึงโฟลเดอร์เอกสารของคุณ เพื่อใช้จัดเก็บข้อมูลการตั้งค่า UI และภาษาของคุณ",
   "FailedToSaveLanguage": "ล้มเหลวในการบันทึกภาษาที่เลือก",
@@ -312,12 +312,12 @@
   },
   "OpenChangelog": "เปิดบันทึกการเปลี่ยนแปลง",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your playsets",
-    "Plural": "Include the selected items in all your playsets"
+    "One": "รวมไอเทมนี้ไว้ในเพลย์เซ็ตทั้งหมดของคุณ",
+    "Plural": "รวมไอเทมที่เลือกไว้ในเพลย์เซ็ตทั้งหมดของคุณ"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your playsets",
-    "Plural": "Exclude the selected items in all your playsets"
+    "One": "แยกไอเทมนี้ออกจากเพลย์เซ็ตทั้งหมดของคุณ",
+    "Plural": "แยกไอเทมที่เลือกออกจากเพลย์เซ็ตทั้งหมดของคุณ"
   },
   "CopyPackageName": {
     "One": "คัดลอกชื่อแพ็กเกจนี้",
@@ -345,17 +345,17 @@
   "ChangePlaysetColor": "เปลี่ยนสีเพลย์เซ็ตนี้",
   "EditPlaysetName": "แก้ไขชื่อเพลย์เซ็ต",
   "SavePlaysetChanges": "บันทึกการตั้งค่าแพ็กเกจปัจจุบันไปยังไฟล์ของเพลย์เซ็ตนี้",
-  "Sorting_Color": "สีโพร์ไฟล์",
+  "Sorting_Color": "สีเพลย์เซ็ต",
   "CreateShortcutPlayset": "สร้างทางลัดบนเดสก์ท็อปของคุณ",
-  "AskToLaunchGameForShortcut": "คุณต้องการสร้างคำสั่งลัดเพื่อเปิดเกมด้วยโพร์ไฟล์ของคุณใช่หรือไม่?",
+  "AskToLaunchGameForShortcut": "คุณต้องการสร้างคำสั่งลัดเพื่อเปิดเกมด้วยเพลย์เซ็ตของคุณใช่หรือไม่?",
   "TextImportMissingInfo": "โหลดไฟล์ข้อความที่มีสตีมไอดี เพื่อให้ง่ายต่อการจัดการ หรือสมัครสมาชิก",
   "ImportFromText": "นำเข้าจากข้อความ",
   "ImportFromClipboard": "โหลดข้อความจากคลิปบอร์ดของคุณ",
   "XMLImportInfo": "คุณสามารถใช้ไฟล์จาก BOB, Tree Brush, Theme Mix และอื่น ๆ",
   "ImportFromTextInfo": "รองรับฟอร์แมตที่เป็นข้อความ",
   "LsmImportInfo": "ตรวจสอบให้แน่ใจว่าได้เลือกไฟล์ 'รายงาน' แล้ว",
-  "NoPlaysetsFound": "No playsets to display",
-  "NoPlaysetsMatchFilters": "No playsets match your search",
+  "NoPlaysetsFound": "ไม่มีเพลย์เซ็ตที่แสดง",
+  "NoPlaysetsMatchFilters": "ไม่มีเพลย์เซ็ตที่ตรงกับการค้นหาของคุณ",
   "Your Save-games": "เซฟเกมของคุณ",
   "App Data": "App Data",
   "Custom Maps": "แผนที่ปรับแต่ง",
@@ -380,7 +380,7 @@
   "FlipItemCopyFilterAction": "สับเปลี่ยนวิธีการคลิกเพิ่มเงื่อนไข ไปยังการกรองเนื้อหา",
   "FlipItemCopyFilterAction_Tip": "สลับค่าเริ่มต้นของการคลิกที่ป้าย จากปกติที่ต้องกด Ctrl ค้างไว้แล้วคลิกที่ป้าย เพื่อเพิ่มเงื่อนไขไปยังการกรองการแสดงผล เปลี่ยนไปเป็น แค่คลิกธรรมดาก็เพิ่มไปยังเงื่อนไขการกรองได้",
   "AltClickTo": "Alt+Click เพื่อ {0}",
-  "FilterByThisAuthor": "Add '{0}' to your filters",
+  "FilterByThisAuthor": "เพิ่ม '{0}' ไปยังตัวกรอง",
   "AddToSearch": "เพิ่ม '{0}' ไปยังการค้นหาของคุณ",
   "CopyToClipboard": "คัดลอก '{0}' ไปยังคลิปบอร์ดของคุณ",
   "ViewPackageCR": "ดูข้อมูลความเข้ากันได้ของแพ็กเกจนี้",
@@ -453,8 +453,8 @@
     "Plural": "แพ็กเกจ"
   },
   "Playset": {
-    "One": "โพร์ไฟล์",
-    "Plural": "โพร์ไฟล์"
+    "One": "เพลย์เซ็ต",
+    "Plural": "เพลย์เซ็ต"
   },
   "IncludedCount": {
     "One": "{0} {1} รวมอยู่ในเกม",
@@ -489,8 +489,8 @@
     "Plural": "แสดง {0} {1}, {2} ที่เลือก, {3}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} ถูกซ่อนเนื่องจากถูกใช้งานในโพร์ไฟล์ของคุณ",
-    "Plural": "{0} {1} ถูกซ่อนเนื่องจากถูกใช้งานในโพร์ไฟล์ของคุณ"
+    "One": "{0} {1} ถูกซ่อนเนื่องจากถูกใช้งานในเพลย์เซ็ตของคุณ",
+    "Plural": "{0} {1} ถูกซ่อนเนื่องจากถูกใช้งานในเพลย์เซ็ตของคุณ"
   },
   "EditCompatibility": {
     "One": "แก้ไขข้อมูลความเข้ากันได้ของแพ็กเกจนี้",
@@ -521,12 +521,12 @@
     "Plural": "{0} {1} ขนาดที่เกี่ยวข้องไม่ตรงกันกับขนาดจากเวิร์กชอป"
   },
   "NewUpdatedCount": {
-    "One": "{0} new or updated {1}",
-    "Plural": "{0} new or updated {1}"
+    "One": "{0} ใหม่ หรือ อัปเดต {1}",
+    "Plural": "{0} ใหม่ หรือ อัปเดต {1}"
   },
   "TotalCount": {
-    "One": "{0} {1} in total",
-    "Plural": "{0} {1} in total"
+    "One": "{0} {1} จากทั้งหมด",
+    "Plural": "{0} {1} จากทั้งหมด"
   },
   "PackageIsRemoved": "'{0}' ถูกลบออกจากสตีม",
   "PackageIsUnknown": "ยังไม่ได้โหลดข้อมูลจากสตีมของ '{0}'",
@@ -534,7 +534,7 @@
   "PackageIsOutOfDate": "'{0}' ล้าสมัย\n\nคุณตามหลัง {1}",
   "PackageIsMaybeOutOfDate": "'{0}' อาจล้าสมัย {1} อัปเดตแล้ว",
   "PackageIsIncomplete": "ขนาดของ '{0}' ({1}) ที่อยู่ในเครื่องแตกต่างกันกับ {2} ของสตีม",
-  "RemovedByAuthor": "Removed by author",
+  "RemovedByAuthor": "ลบโดยผู้สร้าง",
   "Missing": "หายไป",
   "LoggedInAs": "เข้าระบบในชื่อ",
   "UnknownUser": "ผู้ใช้ที่ไม่รู้จัก",
@@ -605,13 +605,13 @@
   "UpdatePlaysetTip": "อัปเดตเพลย์เซ็ตนี้ให้กับเวอร์ชันที่อยู่ในเครื่องของคุณ",
   "DownloadPlaysetTip": "ดาวน์โหลดเพลย์เซ็ตนี้ไปยังเครื่องคอมพิวเตอร์ของคุณ",
   "EditPlaysetThumbnail": "แก้ไขภาพตัวอย่างของเพลย์เซ็ตนี้",
-  "MakePublic": "ทำให้โพร์ไฟล์นี้เป็นสาธารณะ",
-  "MakePrivate": "ทำให้โพร์ไฟล์นี้เป็นส่วนตัว",
+  "MakePublic": "ทำให้เพลย์เซ็ตนี้เป็นสาธารณะ",
+  "MakePrivate": "ทำให้เพลย์เซ็ตนี้เป็นส่วนตัว",
   "CopyPlaysetLink": "คัดลอก ID ของเพลย์เซ็ตนี้",
   "FailedToUploadPlayset": "ล้มเหลวในการอัปโหลดเพลย์เซ็ตของคุณ",
   "FailedToDeletePlayset": "ล้มเหลวในการลบเพลย์เซ็ตของคุณ",
   "FailedToUpdatePlayset": "ล้มเหลวในการอัปเดตเพลย์เซ็ตของคุณ",
-  "ImportFromLink": "นำเข้าโพร์ไฟล์โดยใช้ ID ของโพร์ไฟล์",
+  "ImportFromLink": "นำเข้าเพลย์เซ็ตโดยใช้ ID ของเพลย์เซ็ต",
   "PastePlaysetId": "วาง ID ของเพลย์เซ็ตที่คุณต้องการนำเข้า",
   "AssumeInternetConnectivity": "ละเว้นการตรวจสอบการเชื่อมต่ออินเทอร์เน็ต",
   "AssumeInternetConnectivity_Tip": "ข้ามการตรวจสอบอินเทอร์เน็ตแล้วสมมติว่าคุณได้มีการเชื่อมต่อแล้วโดยอัตโนมัติ",
@@ -686,7 +686,7 @@
   "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
   "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
   "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
-  "ChangePlaysetSettings": "Change this playset's settings",
+  "ChangePlaysetSettings": "เปลี่ยนการตั้งค่าเพลย์เซ็ตนี้",
   "ViewCompatibilityReport": "View the full compatibility report",
   "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
   "ViewAssetsWithIssues": "View Assets with issues",
