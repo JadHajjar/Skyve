@@ -99,4 +99,6 @@ public class LocaleCR : LocaleHelper
 	public static Translation OtherCompatibilityWarnings => _instance.GetText(nameof(OtherCompatibilityWarnings));
 	public static Translation DeleteRequests => _instance.GetText(nameof(DeleteRequests));
 	public static Translation ViewRequest => _instance.GetText(nameof(ViewRequest));
+	public static Translation ApplyAllActions => _instance.GetText(nameof(ApplyAllActions));
+	public static Translation SnoozeAll => _instance.GetText(nameof(SnoozeAll));
 }

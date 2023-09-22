@@ -243,5 +243,7 @@
   },
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "Required Item",
-  "RequiredItem": "Required Item"
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }

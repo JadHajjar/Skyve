@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 
-using Skyve.App.UserInterface.Dropdowns;
 using Skyve.App.UserInterface.Generic;
 using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility.Domain;
@@ -18,12 +17,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_CompatibilityReport : PanelContent
 {
-	private ReviewRequest[]? reviewRequests;
 	private bool customReportLoaded;
 	private bool searchEmpty = true;
-	private List<ExtensionClass.action>? recommendedActions;
 	private bool clearingFilters;
 	private bool firstFilterPassed;
+	private bool massSnoozeing;
 	private readonly DelayedAction _delayedSearch;
 	private readonly List<string> searchTermsOr = new();
 	private readonly List<string> searchTermsAnd = new();
@@ -36,24 +34,21 @@ public partial class PC_CompatibilityReport : PanelContent
 	private readonly IPackageManager _contentManager;
 	private readonly INotifier _notifier;
 	private readonly IPackageUtil _packageUtil;
-	private readonly IUserService _userService;
 	private readonly ISettings _settings;
 	private readonly IDownloadService _downloadService;
 	private readonly IPlaysetManager _playsetManager;
 	private readonly ITagsService _tagUtil;
-	private readonly SkyveApiUtil _skyveApiUtil;
+
+	private static SkyvePage Page { get; } = SkyvePage.CompatibilityReport;
 
 	public PC_CompatibilityReport() : base(ServiceCenter.Get<IUserService>().User.Manager && !ServiceCenter.Get<IUserService>().User.Malicious)
 	{
-		ServiceCenter.Get(out _subscriptionsManager, out _tagUtil, out _playsetManager, out _downloadService, out _settings, out _packageUtil, out _bulkUtil, out _compatibilityManager, out _contentManager, out _notifier, out _userService, out _skyveApiUtil);
+		ServiceCenter.Get(out _subscriptionsManager, out _tagUtil, out _playsetManager, out _downloadService, out _settings, out _packageUtil, out _bulkUtil, out _compatibilityManager, out _contentManager, out _notifier, out IUserService userService);
 
 		InitializeComponent();
 
-		SetManagementButtons();
-
 		ListControl.Visible = false;
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
-		ListControl.GroupChanged += LC_Items_GroupChanged;
 
 		I_Actions = new IncludeAllButton<ILocalPackage>(() => ListControl.FilteredItems.SelectWhereNotNull(x => x.Package).ToList()!);
 		I_Actions.ActionClicked += I_Actions_Click;
@@ -66,6 +61,9 @@ public partial class PC_CompatibilityReport : PanelContent
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
 		OT_Workshop.Visible = !_playsetManager.CurrentPlayset.DisableWorkshop;
+
+		var hasPackages = userService.User.Id is not null && _contentManager.Packages.Any(x => userService.User.Equals(x.GetWorkshopInfo()?.Author));
+		B_Manage.Visible = (hasPackages || userService.User.Manager) && !userService.User.Malicious;
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
@@ -95,18 +93,6 @@ public partial class PC_CompatibilityReport : PanelContent
 	protected void RefreshAuthorAndTags()
 	{
 		DD_Tags.Items = _tagUtil.GetDistinctTags().ToArray();
-	}
-
-	protected override async Task<bool> LoadDataAsync()
-	{
-		reviewRequests = await _skyveApiUtil.GetReviewRequests();
-
-		return true;
-	}
-
-	protected override void OnDataLoad()
-	{
-		B_Requests.Text = LocaleCR.ReviewRequests.Format(reviewRequests is null ? string.Empty : $"({reviewRequests.Length})");
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -163,7 +149,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void CompatibilityManager_ReportProcessed()
 	{
-		if (_compatibilityManager.FirstLoadComplete && !customReportLoaded)
+		if (_compatibilityManager.FirstLoadComplete && !customReportLoaded && !massSnoozeing)
 		{
 			var packages = _contentManager.Packages.SelectWhereNotNull(x =>
 			{
@@ -179,36 +165,11 @@ public partial class PC_CompatibilityReport : PanelContent
 
 			this.TryInvoke(() => { LoadReport(packages!); PB_Loader.Hide(); });
 		}
-
-		this.TryInvoke(SetManagementButtons);
-	}
-
-	private void SetManagementButtons()
-	{
-		var hasPackages = _userService.User.Id is not null && _contentManager.Packages.Any(x => _userService.User.Equals(x.GetWorkshopInfo()?.Author));
-		B_Manage.Visible = B_Requests.Visible = B_ManageSingle.Visible = _userService.User.Manager && !_userService.User.Malicious;
-		B_YourPackages.Visible = hasPackages && !_userService.User.Manager && !_userService.User.Malicious;
-		B_Requests.Text = LocaleCR.ReviewRequests.Format(reviewRequests is null ? string.Empty : $"({reviewRequests.Length})");
 	}
 
 	private void B_Manage_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel(null, new PC_CompatibilityManagement());
-	}
-
-	private void B_ManageSingle_Click(object sender, EventArgs e)
-	{
-		var form = new PC_SelectPackage() { Text = LocaleHelper.GetGlobalText("Select a package") };
-
-		form.PackageSelected += Form_PackageSelected;
-
-		Program.MainForm.PushPanel(null, form);
-
-	}
-
-	private void Form_PackageSelected(IEnumerable<ulong> packages)
-	{
-		Form.PushPanel(null, new PC_CompatibilityManagement(packages));
+		Form.PushPanel<PC_ManageCompatibilitySelection>();
 	}
 
 	private void LoadReport(List<ICompatibilityInfo> reports)
@@ -228,7 +189,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			}
 
 			ListControl.SetItems(reports);
-			ListControl.Visible = true;
+			ListControl.Visible = reports.Count > 0;
 
 			DD_Author.SetItems(reports.Select(x => x.Package));
 		}
@@ -321,13 +282,6 @@ public partial class PC_CompatibilityReport : PanelContent
 		};
 	}
 
-	private void LC_Items_GroupChanged(object sender, EventArgs e)
-	{
-		recommendedActions = ListControl.Items.SelectWhereNotNull(GetAction).ToList()!;
-
-		this.TryInvoke(() => B_ApplyAll.Enabled = recommendedActions.Count > 0);
-	}
-
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<ICompatibilityInfo> e)
 	{
 		if (!e.DoNotDraw && e.Item.Package is not null)
@@ -388,28 +342,12 @@ public partial class PC_CompatibilityReport : PanelContent
 
 			this.TryInvoke(() =>
 			{
-				B_ApplyAll.Hide();
 				LoadReport(items.ToList(x => (ICompatibilityInfo)x));
 			});
 
 			customReportLoaded = true;
 		}
 		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report"); }
-	}
-
-	private async void B_Requests_Click(object sender, EventArgs e)
-	{
-		if (reviewRequests == null)
-		{
-			B_Requests.Loading = true;
-			reviewRequests = await _skyveApiUtil.GetReviewRequests();
-		}
-
-		B_Requests.Loading = false;
-		if (reviewRequests != null)
-		{
-			Form.Invoke(() => Form.PushPanel(null, new PC_ReviewRequests(reviewRequests)));
-		}
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)
@@ -464,15 +402,23 @@ public partial class PC_CompatibilityReport : PanelContent
 		FilterChanged(sender, e);
 	}
 
-	private async void B_ApplyAll_Click(object sender, EventArgs e)
+	private async void ApplyAll()
 	{
-		if (!B_ApplyAll.Loading && recommendedActions is not null)
+		await Task.Run(() => Parallelism.ForEach(ListControl.FilteredItems.SelectWhereNotNull(GetAction).ToList(), 4));
+		ListControl.DoFilterChanged();
+	}
+
+	private void SnoozeAll()
+	{
+		massSnoozeing = true;
+		foreach (var item in ListControl.FilteredItems.ToList())
 		{
-			B_ApplyAll.Loading = true;
-			await Task.Run(() => Parallelism.ForEach(recommendedActions, 4));
-			ListControl.FilterChanged();
-			B_ApplyAll.Loading = false;
+			var Message = item.ReportItems.FirstOrDefault(x => x.Status.Notification == item.GetNotification() && !_compatibilityManager.IsSnoozed(x));
+			_compatibilityManager.ToggleSnoozed(Message);
 		}
+		massSnoozeing = false;
+
+		CompatibilityManager_ReportProcessed();
 	}
 
 	protected virtual void SetIncluded(IEnumerable<ICompatibilityInfo> filteredItems, bool included)
@@ -495,11 +441,8 @@ public partial class PC_CompatibilityReport : PanelContent
 			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
 			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: () => DisableAll(this, EventArgs.Empty))
 			, new (string.Empty)
-			, new (Locale.SelectAll, "I_DragDrop", ListControl.SelectedItemsCount < ListControl.FilteredItems.Count(), action: ListControl.SelectAll)
-			, new (Locale.DeselectAll, "I_Select", ListControl.SelectedItemsCount > 0, action: ListControl.DeselectAll)
-			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.Package?.IsLocal == true ? $"Local: {x.Package?.Name}" : $"{x.Package?.Id}: {x.Package?.Name}", CrossIO.NewLine)))
-			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.Package is null), action: () => DownloadAll(this, EventArgs.Empty))
-			, new (Locale.ReDownloadAll, "I_ReDownload", ListControl.FilteredItems.Any(x => x.Package is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
+			, new (LocaleCR.ApplyAllActions, "I_CompatibilityReport", ListControl.FilteredItems.Any(x => GetAction(x) is not null), action: ApplyAll)
+			, new (LocaleCR.SnoozeAll, "I_Snooze", action: SnoozeAll)
 			, new (string.Empty)
 			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
@@ -860,5 +803,25 @@ public partial class PC_CompatibilityReport : PanelContent
 		CompatibilityManager_ReportProcessed();
 
 		FilterChanged(sender, e);
+	}
+
+	private void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
+	{
+		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
+		settings.Sorting = (int)DD_Sorting.SelectedItem;
+		_settings.SessionSettings.Save();
+
+		ListControl.SetSorting(DD_Sorting.SelectedItem, ListControl.SortDescending);
+	}
+
+	private void I_SortOrder_Click(object sender, EventArgs e)
+	{
+		ListControl.SetSorting(DD_Sorting.SelectedItem, !ListControl.SortDescending);
+
+		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
+		settings.DescendingSort = ListControl.SortDescending;
+		_settings.SessionSettings.Save();
+
+		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
 	}
 }

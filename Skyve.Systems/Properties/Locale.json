@@ -665,7 +665,6 @@
   "CleanupInfoTitle": "What is a cleanup?",
   "TroubleshootCauseResult": "The following packages might be the cause of your issues",
   "VerifiedAuthor": "Verified Author",
-  "ApplyAllActions": "Apply all available actions",
   "FailedToImportPlayset": "Failed to import this playset.",
   "EnablePackage": "Enable {0}",
   "DisablePackage": "Disable {0}",
