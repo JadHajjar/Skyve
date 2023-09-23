@@ -102,6 +102,10 @@
     "One": "'{0}' se cargará directamente después de '{1}'.",
     "Plural": "'{0}' se cargará directamente después de los siguientes paquetes."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "Estas son varias versiones del mismo paquete.\n\nDebería elegir sólo uno de ellos.",
   "Status_Succeeded": "'{0}' ha sido reemplazado por '{1}'.\n\nYa estás utilizando '{1}', no necesitas '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto, ya no está soportado por su autor.",
@@ -168,6 +172,11 @@
     "One": "Deberías cambiar a '{1}'.",
     "Plural": "You should switch to one of the following packages."
   },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
+  },
   "NoRequiredDlcs": "No requiere DLCs",
   "DlcsSelected": {
     "One": "{0} DLC seleccionado",
@@ -217,7 +226,6 @@
   "AuthorRetired": "El autor de {0}, {1}, se ha retirado o ha estado inactivo durante mucho tiempo.\n\nLas actualizaciones futuras y la estabilidad de sus paquetes no están garantizadas.",
   "AuthorMalicious": "El autor de {0}, {1}, es conocido por ser malicioso y/o por incluir contenido perjudicial como virus en sus paquetes.",
   "ReviewRequests": "Confirmar Revisiones {0}",
-  "DeleteRequest": "Eliminar revisión",
   "ApplyRequestedChanges": "Aplicar cambios solicitados",
   "ManagePackage": "Gestionar Paquete",
   "Banned": "Suspendido",
@@ -228,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "Este paquete tiene otra advertencia de compatibilidad",
     "Plural": "Este paquete tiene {0} advertencias de compatibilidad"
-  }
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }
