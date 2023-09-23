@@ -521,8 +521,8 @@
     "Plural": "{0} {1} ne correspond pas à leurs tailles respectives de l'Atelier"
   },
   "NewUpdatedCount": {
-    "One": "{0} new or updated {1}",
-    "Plural": "{0} new or updated {1}"
+    "One": "{0} {1} nouveaux ou mis à jour",
+    "Plural": "{0} {1} nouveaux ou mis à jour"
   },
   "TotalCount": {
     "One": "{0} {1} au total",
@@ -553,6 +553,7 @@
   "CancelDownloads": "Annuler tous les téléchargements en attente",
   "ApplySubs": "Lancez le jeu pour un bref instant pour appliquer les abonnements en attente",
   "ApplyDownloads": "Forcer Steam à télécharger tous les paquets en attente",
+  "ApplyRemoval": "Supprimer tous les paquets en attente",
   "SubsPendingInfo": "Les paquets auxquels vous vous êtes abonné ont regroupés ici.\nUne fois que vous ouvriez le jeu, ces éléments seront abonnés sur Steam.",
   "DownloadsPendingInfo": "Les paquets auxquels vous vous êtes abonné et qui n'ont pas encore été téléchargés sont regroupés ici.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Démarrer le téléchargement ou la suppression des paquets immédiatement après l'abonnement/le désabonnement",
@@ -664,7 +665,6 @@
   "CleanupInfoTitle": "Qu'est-ce qu'un nettoyage ?",
   "TroubleshootCauseResult": "Les paquets suivants pourraient être la cause de vos problèmes",
   "VerifiedAuthor": "Auteur vérifié",
-  "ApplyAllActions": "Appliquer toutes les actions disponibles",
   "FailedToImportPlayset": "Impossible d'importer ce profil.",
   "EnablePackage": "Activer {0}",
   "DisablePackage": "Désactiver {0}",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "\"{1}\" a été installé depuis votre dernière session",
     "Plural": "{0} paquets ont été installés depuis votre dernière session"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }
