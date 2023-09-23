@@ -681,7 +681,7 @@
   "ViewRecentlyUpdatedItems": "최근에 업데이트된 {0} 보기",
   "NoCompatibilityIssues": {
     "One": "발견된 호환성 문제가 없습니다.",
-    "Plural": "No compatibility issues with your {0} were detected."
+    "Plural": "내 {0}에서는 발견된 호환성 문제가 없습니다."
   },
   "SnapDashToGrid": "가이드 그리드를 표시하고 대시보드 섹션을 스냅하기",
   "SnapDashToGrid_Tip": "대시보드 섹션을 편집할 때 섹션이 스냅되는 12열 그리드를 보여줍니다.",
@@ -692,7 +692,7 @@
   "ViewAssetsWithIssues": "문제가 있는 에셋 보기",
   "ViewModsWithIssues": "문제가 있는 모드 보기",
   "CreateShortcut": "바로가기 만들기",
-  "CreateShortcut_Tip": "바탕화면에 앱 바로 가기 만들기.",
+  "CreateShortcut_Tip": "바탕화면에 앱 바로 가기를 만듭니다.",
   "StartsNewGameOnLaunch": "실행 시 새 게임을 시작합니다",
   "StartsNewGameWithMap": "실행 시 '{0}' 맵으로 새 게임을 시작합니다",
   "LoadsSaveGameOnLaunch": "실행 시 마지막 세이브를 이어합니다",
