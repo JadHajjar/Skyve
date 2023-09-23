@@ -103,8 +103,8 @@
     "Plural": "'{0}' carregará diretamente após os seguintes pacotes."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' é necessário para '{1}'.",
+    "Plural": "'{0}' é necessário para os seguintes pacotes."
   },
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
   "Status_Succeeded": "'{0}' foi substituído por '{1}'.\n\nVocê já está usando '{1}', então não precisa mais de '{0}'.",
@@ -172,10 +172,10 @@
     "One": "Você deve mudar para '{1}'.",
     "Plural": "Você deve mudar para um dos seguintes pacotes."
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "Você precisa incluir '{0}'",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "Você deve incluir o seguinte pacote:",
+    "Plural": "Você deve incluir estes pacotes:"
   },
   "NoRequiredDlcs": "DLC não requerido",
   "DlcsSelected": {
@@ -238,12 +238,12 @@
     "Plural": "Este pacote tem {0} outros avisos de compatibilidade"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "Excluir este pedido",
+    "Plural": "Excluir estes pedidos"
   },
-  "ViewRequest": "View Request",
-  "CRT_RequiredItem": "Required Item",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "ViewRequest": "Ver pedido",
+  "CRT_RequiredItem": "Item Necessário",
+  "RequiredItem": "Item Necessário",
+  "ApplyAllActions": "Aplicar todas as ações disponíveis",
+  "SnoozeAll": "Adiar todos os problemas exibidos"
 }
