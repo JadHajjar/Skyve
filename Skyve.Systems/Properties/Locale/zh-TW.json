@@ -553,6 +553,7 @@
   "CancelDownloads": "取消所有等待下載的項目",
   "ApplySubs": "啟動遊戲片刻以開始進行訂閱",
   "ApplyDownloads": "強制 Steam 下載所有等待處理的外掛",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "這裡將顯示您要訂閱的外掛。\n一旦啟動遊戲，將從 Steam 創意工坊訂閱這些外掛。",
   "DownloadsPendingInfo": "這裡顯示的是您已訂閱但尚未下載的外掛。",
   "ForceDownloadAndDeleteAsSoonAsRequested": "訂閱外掛後立即開始下載，取消訂閱外掛後立即刪除殘留檔案",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "What is a cleanup?",
   "TroubleshootCauseResult": "The following packages might be the cause of your issues",
   "VerifiedAuthor": "Verified Author",
-  "ApplyAllActions": "Apply all available actions",
   "FailedToImportPlayset": "Failed to import this playset.",
   "EnablePackage": "Enable {0}",
   "DisablePackage": "Disable {0}",
   "IncludePackage": "Include {0}",
   "ExcludePackage": "Exclude {0}",
   "FilterByEnabled": "Only show enabled items.",
-  "FilterByDisabled": "Only show disabbled items.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "Only show included items.",
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' got installed since your last session",
     "Plural": "{0} new packages got installed since your last session"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }
