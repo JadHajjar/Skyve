@@ -553,6 +553,7 @@
   "CancelDownloads": "대기 중인 모든 다운로드를 취소합니다",
   "ApplySubs": "대기 중인 구독을 적용하기 위해 잠시 게임을 실행합니다",
   "ApplyDownloads": "Steam이 대기 중인 모든 패키지를 강제로 다운로드하도록 합니다",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "구독하려는 패키지들이 여기에 모입니다.\n게임을 열면 이 항목들이 Steam에서 구독됩니다.",
   "DownloadsPendingInfo": "구독한 뒤 아직 다운로드되지 않은 패키지가 여기에 모입니다.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "구독/구독 취소하는 즉시 패키지를 다운로드/제거 시작하기",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "정리가 무엇인가요?",
   "TroubleshootCauseResult": "다음 패키지들이 문제의 원인일 수 있습니다",
   "VerifiedAuthor": "인증된 제작자",
-  "ApplyAllActions": "가능한 모든 작업 적용하기",
   "FailedToImportPlayset": "이 플레이셋을 가져오는 데 실패했습니다.",
   "EnablePackage": "{0} 활성화",
   "DisablePackage": "{0} 비활성화",
   "IncludePackage": "{0} 포함",
   "ExcludePackage": "{0} 제외",
   "FilterByEnabled": "활성화된 항목만 보기.",
-  "FilterByDisabled": "비활성화된 항목만 보기.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "포함된 항목만 보기.",
   "FilterByExcluded": "제외된 항목만 보기.",
   "ViewOnGithub": "이 패키지의 Github 저장소 보기",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "마지막 세션 이후 '{1}' 가 설치되었습니다",
     "Plural": "마지막 세션 이후 {0}개의 새 패키지가 설치되었습니다"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }
