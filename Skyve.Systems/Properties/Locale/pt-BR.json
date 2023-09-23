@@ -553,6 +553,7 @@
   "CancelDownloads": "Cancelar todos os downloads pendentes",
   "ApplySubs": "Inicie o jogo por um instante para aplicar assinaturas pendentes",
   "ApplyDownloads": "Forçar o Steam a baixar todos os pacotes pendentes",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "Os pacotes aos quais você se inscreveu estão agrupados aqui.\nAssim que você abrir o jogo, esses itens serão inscritos na Steam.",
   "DownloadsPendingInfo": "Os pacotes que você assinou e ainda não baixou estão agrupados aqui.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Comece a baixar ou remover os pacotes imediatamente ao assinar, ou cancelar assinatura",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "O que é uma limpeza?",
   "TroubleshootCauseResult": "Os seguintes pacotes podem ser a causa de seus problemas",
   "VerifiedAuthor": "Autor Verificado",
-  "ApplyAllActions": "Aplicar todas as ações disponíveis",
   "FailedToImportPlayset": "Falha ao importar este Perfil.",
   "EnablePackage": "Habilitar {0}",
   "DisablePackage": "Desabilitar {0}",
   "IncludePackage": "Incluir {0}",
   "ExcludePackage": "Excluir {0}",
   "FilterByEnabled": "Mostrar apenas itens habilitados.",
-  "FilterByDisabled": "Mostra apenas itens desabilitados.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "Mostrar apenas itens incluídos.",
   "FilterByExcluded": "Mostrar apenas itens incluídos.",
   "ViewOnGithub": "Ver o repositório do GitHub deste pacote",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' foi instalado desde a sua última sessão",
     "Plural": "{0} Novos pacotes foram instalados desde a sua última sessão"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }
