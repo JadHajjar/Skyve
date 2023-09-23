@@ -553,7 +553,7 @@
   "CancelDownloads": "Cancelar todos os downloads pendentes",
   "ApplySubs": "Inicie o jogo por um instante para aplicar assinaturas pendentes",
   "ApplyDownloads": "Forçar o Steam a baixar todos os pacotes pendentes",
-  "ApplyRemoval": "Delete all pending packages",
+  "ApplyRemoval": "Excluir todos os pacotes pendentes",
   "SubsPendingInfo": "Os pacotes aos quais você se inscreveu estão agrupados aqui.\nAssim que você abrir o jogo, esses itens serão inscritos na Steam.",
   "DownloadsPendingInfo": "Os pacotes que você assinou e ainda não baixou estão agrupados aqui.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Comece a baixar ou remover os pacotes imediatamente ao assinar, ou cancelar assinatura",
@@ -671,7 +671,7 @@
   "IncludePackage": "Incluir {0}",
   "ExcludePackage": "Excluir {0}",
   "FilterByEnabled": "Mostrar apenas itens habilitados.",
-  "FilterByDisabled": "Only show disabled items.",
+  "FilterByDisabled": "Mostra apenas itens desabilitados.",
   "FilterByIncluded": "Mostrar apenas itens incluídos.",
   "FilterByExcluded": "Mostrar apenas itens incluídos.",
   "ViewOnGithub": "Ver o repositório do GitHub deste pacote",
@@ -712,6 +712,6 @@
     "One": "'{1}' foi instalado desde a sua última sessão",
     "Plural": "{0} Novos pacotes foram instalados desde a sua última sessão"
   },
-  "IncorrectFolderSettings": "Incorrect Folder Settings",
-  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
+  "IncorrectFolderSettings": "Configurações de pasta incorretas",
+  "IncorrectFolderSettingsInfo": "As configurações da sua pasta não estão configuradas corretamente, clique aqui para alterar ou redefini-las na página de Opções."
 }
