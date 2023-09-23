@@ -247,7 +247,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_ChangeLog_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel(ServiceCenter.Get<IInterfaceService>().ChangelogPanel());
+		Form.PushPanel(ServiceCenter.Get<IAppInterfaceService>().ChangelogPanel());
 	}
 
 	private void B_Donate_Click(object sender, EventArgs e)

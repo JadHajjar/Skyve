@@ -67,7 +67,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		DD_Sorting.SkyvePage = Page;
 
-		I_Actions = new IncludeAllButton<T>(ListControl);
+		I_Actions = new IncludeAllButton<T>(() => ListControl.FilteredItems.ToList());
 		I_Actions.ActionClicked += I_Actions_Click;
 		I_Actions.IncludeAllClicked += IncludeAll;
 		I_Actions.ExcludeAllClicked += ExcludeAll;

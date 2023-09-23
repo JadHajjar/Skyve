@@ -36,9 +36,7 @@ public interface ICustomPlayset : IPlayset
 	bool Save();
 }
 
-public interface IOnlinePlayset : IPlayset
+public interface IOnlinePlayset : ICustomPlayset
 {
-	int ProfileId { get; }
-	bool Public { get; set; }
 	int Downloads { get; }
 }

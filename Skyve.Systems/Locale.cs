@@ -358,6 +358,8 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PackagesUpdatedSinceSession => _instance.GetText(nameof(PackagesUpdatedSinceSession));
 	public static Translation NewPackages => _instance.GetText(nameof(NewPackages));
 	public static Translation NewPackagesSinceSession => _instance.GetText(nameof(NewPackagesSinceSession));
+	public static Translation IncorrectFolderSettings => _instance.GetText(nameof(IncorrectFolderSettings));
+	public static Translation IncorrectFolderSettingsInfo => _instance.GetText(nameof(IncorrectFolderSettingsInfo));
 
 	public static void Load() { _ = _instance; }
 

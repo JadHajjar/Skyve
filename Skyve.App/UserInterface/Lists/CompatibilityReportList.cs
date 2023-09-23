@@ -1,10 +1,13 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
 
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
+
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Skyve.App.UserInterface.Lists;
 public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInfo, CompatibilityReportList.Rectangles>
@@ -25,6 +28,16 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 #pragma warning restore CS0649
 #pragma warning restore IDE1006
 
+	private PackageSorting sorting;
+	private bool headerHovered;
+	private readonly Dictionary<NotificationType, Rectangle> _headerRects = new();
+
+	public bool SortDescending { get; private set; }
+	public NotificationType CurrentGroup { get; private set; }
+
+	public event EventHandler? GroupChanged;
+	public event EventHandler? FilterRequested;
+
 	public CompatibilityReportList()
 	{
 		GridView = true;
@@ -33,14 +46,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _bulkUtil, out _settings, out _modUtil, out _modLogicManager);
 
-		CanDrawItem += CompatibilityReportList_CanDrawItem;
-	}
-
-	private void CompatibilityReportList_CanDrawItem(object sender, CanDrawItemEventArgs<ICompatibilityInfo> e)
-	{
-		if (e.Item.Package is null)
+		if (_settings.UserSettings.PageSettings.ContainsKey(SkyvePage.CompatibilityReport))
 		{
-			e.DoNotDraw = true;
+			sorting = (PackageSorting)_settings.UserSettings.PageSettings[SkyvePage.CompatibilityReport].Sorting;
+			SortDescending = _settings.UserSettings.PageSettings[SkyvePage.CompatibilityReport].DescendingSort;
 		}
 	}
 
@@ -52,11 +61,231 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		Padding = UI.Scale(new Padding(5), UI.FontScale);
 		GridPadding = UI.Scale(new Padding(3), UI.FontScale);
+		StartHeight = (int)(32 * UI.FontScale);
+	}
+
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo> args)
+	{
+		args.DoNotDraw = args.Item.Package is null || (CurrentGroup != NotificationType.None && args.Item.GetNotification() != CurrentGroup);
+
+		base.CanDrawItemInternal(args);
+	}
+
+	public override void SetItems(IEnumerable<ICompatibilityInfo> items)
+	{
+		if (CurrentGroup != NotificationType.None && items.All(x => x.GetNotification() != CurrentGroup))
+		{
+			CurrentGroup = NotificationType.None;
+		}
+
+		base.SetItems(items);
+
+		DoFilterChanged();
+	
+		GroupChanged?.Invoke(this, EventArgs.Empty);
+	}
+
+	public void SetSorting(PackageSorting packageSorting, bool desc)
+	{
+		if (sorting == packageSorting && SortDescending == desc)
+		{
+			return;
+		}
+
+		SortDescending = desc;
+		sorting = packageSorting;
+
+		if (!IsHandleCreated)
+		{
+			SortingChanged();
+		}
+		else
+		{
+			new BackgroundAction(() => SortingChanged()).Run();
+		}
 	}
 
 	protected override IEnumerable<DrawableItem<ICompatibilityInfo, Rectangles>> OrderItems(IEnumerable<DrawableItem<ICompatibilityInfo, Rectangles>> items)
 	{
-		return items.OrderByDescending(x => x.Item.Package.CleanName());
+		items = sorting switch
+		{
+			PackageSorting.FileSize => items
+				.OrderBy(x => x.Item.Package?.LocalSize),
+
+			PackageSorting.Name => items
+				.OrderBy(x => x.Item.Package?.ToString()),
+
+			PackageSorting.Author => items
+				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.Author?.Name ?? string.Empty),
+
+			PackageSorting.Status => items
+				.OrderBy(x => x.Item.Package is null ? default : _packageUtil.GetStatus(x.Item.Package, out _)),
+
+			PackageSorting.UpdateTime => items
+				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.ServerTime ?? x.Item.Package?.LocalTime),
+
+			PackageSorting.SubscribeTime => items
+				.OrderBy(x => x.Item.Package?.LocalTime),
+
+			PackageSorting.Mod => items
+				.OrderBy(x => Path.GetFileName(x.Item.Package?.FilePath ?? string.Empty)),
+
+			PackageSorting.None => items,
+
+			PackageSorting.CompatibilityReport => items
+				.OrderByDescending(x => x.Item.GetNotification())
+				.ThenBy(x => x.Item.Package?.ToString()),
+
+			PackageSorting.Subscribers => items
+				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.Subscribers),
+
+			PackageSorting.Votes => items
+				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.Score),
+
+			PackageSorting.LoadOrder => items
+				.OrderBy(x => !x.Item.Package?.IsIncluded())
+				.ThenByDescending(x => x.Item.Package is null ? 0 : _modUtil.GetLoadOrder(x.Item.Package))
+				.ThenBy(x => x.Item.Package?.ToString()),
+
+			_ => items
+				.OrderByDescending(x => x.Item.GetNotification())
+				.ThenBy(x => !(x.Item.Package is ILocalPackageWithContents lp && (lp.IsIncluded(out var partial) || partial)))
+				.ThenBy(x => x.Item.Package?.IsLocal)
+				.ThenBy(x => !x.Item.Package?.IsMod)
+				.ThenBy(x => x.Item.Package?.CleanName() ?? x.Item.Package?.CleanName())
+		};
+
+		if (SortDescending)
+		{
+			return items.Reverse();
+		}
+
+		return items;
+	}
+
+	protected override void DrawHeader(PaintEventArgs e)
+	{
+		var items = Items.GroupBy(x => x.GetNotification()).OrderByDescending(x => x.Key).ToList();
+
+		items.Insert(0, Items.GroupBy(x => NotificationType.None).FirstOrDefault());
+
+		var smaller = Width < items.Count * 175 * UI.FontScale;
+		var xpos = 0;
+
+		using var brush = new SolidBrush(FormDesign.Design.AccentBackColor);
+		using var accentBrush = new SolidBrush(FormDesign.Design.AccentColor);
+
+		_headerRects.Clear();
+
+		e.Graphics.FillRectangle(brush, new Rectangle(0, 0, Width, StartHeight));
+
+		foreach (var item in items)
+		{
+			int width;
+
+			using var font = UI.Font(9.75F);
+			using var icon = (item.Key == NotificationType.None ? "I_CompatibilityReport": item.Key.GetIcon(true)).Get(font.Height + Padding.Top);
+			var text = (item.Key == NotificationType.None ? LocaleHelper.GetGlobalText("All") : LocaleCR.Get(item.Key.ToString())) + $" ({item.Count()})";
+
+			if (!smaller)
+			{
+				width = Math.Min(Width / items.Count, (int)(300 * UI.FontScale));
+			}
+			else if (CurrentGroup == item.Key)
+			{
+				width = SlickButton.GetSize(e.Graphics, icon, text, font, Padding).Width;
+			}
+			else
+			{
+				width = StartHeight;
+			}
+
+			var rectangle = new Rectangle(xpos, 0, width, StartHeight);
+
+			_headerRects[item.Key] = rectangle;
+
+			var baseColor = item.Key == NotificationType.None ? FormDesign.Design.ActiveColor : item.Key.GetColor();
+			using var foreBrush = new SolidBrush(CurrentGroup == item.Key ? baseColor.GetTextColor() : baseColor.MergeColor(ForeColor, 80));
+			var textSize = e.Graphics.Measure(text, font, rectangle.Width - icon.Width - Padding.Left);
+			var textBounds = rectangle.CenterR(Size.Ceiling(textSize));
+			var iconBounds = textBounds;
+
+			if (CurrentGroup == item.Key)
+			{
+				using var backBrush = Gradient(baseColor, 0.3F);
+				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(Padding.Top * 3 / 4), Padding.Left);
+			}
+			else if (rectangle.Contains(CursorLocation) && HoverState.HasFlag(HoverState.Hovered))
+			{
+				using var backBrush = new SolidBrush(Color.FromArgb(50, baseColor));
+				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(Padding.Top * 3 / 4), Padding.Left);
+			}
+
+			if (!smaller || CurrentGroup == item.Key)
+			{
+				textBounds.X += (icon.Width + Padding.Left) / 2;
+				iconBounds.X -= (icon.Width + Padding.Left) / 2;
+				iconBounds.Y = (StartHeight - icon.Height) / 2;
+				iconBounds.Width = iconBounds.Height = icon.Height;
+
+				e.Graphics.DrawString(text, font, foreBrush, textBounds, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+			}
+			else
+			{
+				iconBounds = rectangle.CenterR(icon.Size);
+			}
+
+			e.Graphics.DrawImage(icon.Color(foreBrush.Color), iconBounds);
+
+			xpos += rectangle.Width;
+
+			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos + 1, Padding.Top, 1, StartHeight - Padding.Vertical));
+		}
+
+		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, 0, Width, (int)UI.FontScale));
+		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, StartHeight - (int)UI.FontScale, Width, (int)UI.FontScale));
+	}
+
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		var headerHovered = e.Y.IsWithin(0, StartHeight + 1);
+
+		if (headerHovered || headerHovered != this.headerHovered)
+		{
+			Invalidate(new Rectangle(0, 0, Width, StartHeight));
+		}
+
+		this.headerHovered = headerHovered;
+
+		base.OnMouseMove(e);
+	}
+
+	protected override void OnMouseLeave(EventArgs e)
+	{
+		Invalidate(new Rectangle(0, 0, Width, StartHeight));
+
+		base.OnMouseLeave(e);
+	}
+
+	protected override void OnMouseClick(MouseEventArgs e)
+	{
+		foreach (var item in _headerRects)
+		{
+			if (item.Value.Contains(e.Location))
+			{
+				CurrentGroup = item.Key;
+				DoFilterChanged();
+				GroupChanged?.Invoke(this, EventArgs.Empty);
+				return;
+			}
+		}
+
+		base.OnMouseClick(e);
+	}
+
+	protected override bool IsHeaderActionHovered(Point location)
+	{
+		return _headerRects.Values.Any(x => x.Contains(location));
 	}
 
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
@@ -72,7 +301,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		var workshopInfo = package.GetWorkshopInfo();
 		var partialIncluded = false;
 		var isPressed = false;
-		var isIncluded = localPackage is not null && _packageUtil.IsIncluded(package.LocalPackage!, out partialIncluded) || partialIncluded;
+		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(package.LocalPackage!, out partialIncluded)) || partialIncluded;
 
 		if (e.IsSelected)
 		{
@@ -104,6 +333,9 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	{
 		var Message = e.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == e.Item.GetNotification() && !_compatibilityManager.IsSnoozed(x));
 
+		if (Message is null)
+			return;
+
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 		var reportRect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, 9999).Pad(0, baseY - e.ClipRectangle.Y, 0, 0);
 		var cursor = PointToClient(Cursor.Position);
@@ -113,8 +345,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		using var font = UI.Font(8.25F);
 		using var smallFont = UI.Font(7.5F);
 		var iconRect = new Rectangle(e.Rects.IncludedRect.X, baseY, e.Rects.IncludedRect.Width, e.Rects.IncludedRect.Height);
-		var messageSize = e.Graphics.Measure(Message.Message, font, reportRect.Width - iconRect.Width * 2 - pad);
-		var noteSize = e.Graphics.Measure(note, UI.Font(7.5F), reportRect.Width - iconRect.Width * 2 - pad);
+		var messageSize = e.Graphics.Measure(Message.Message, font, reportRect.Width - (iconRect.Width * 2) - pad);
+		var noteSize = e.Graphics.Measure(note, smallFont, reportRect.Width - (iconRect.Width * 2) - pad);
 		using var brush = new SolidBrush(color);
 		using var icon = Message.Status.Notification.GetIcon(false).Get(e.Rects.IncludedRect.Width * 3 / 4);
 		var y = baseY + (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
@@ -140,13 +372,13 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			{
 				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(125, purple)), e.Rects.SnoozeRect, pad);
 			}
-			else if (isSnoozed || HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor))
+			else if (isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor)))
 			{
 				e.Graphics.FillRoundedRectangle(new SolidBrush(purple), e.Rects.SnoozeRect, pad);
 			}
 
 			using var snoozeIcon = IconManager.GetLargeIcon("I_Snooze");
-			e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor) ? purple.GetTextColor() : FormDesign.Design.IconColor), e.Rects.SnoozeRect.CenterR(icon.Size));
+			e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor)) ? purple.GetTextColor() : FormDesign.Design.IconColor), e.Rects.SnoozeRect.CenterR(icon.Size));
 		}
 
 		using var textBrush = new SolidBrush(FormDesign.Design.ForeColor);
@@ -165,7 +397,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (allText is not null)
 		{
-			e.Rects.AllButtonRect = new Rectangle(e.ClipRectangle.X + iconRect.Width, y, e.ClipRectangle.Width - iconRect.Width * 2, (int)(26 * UI.FontScale));
+			e.Rects.AllButtonRect = new Rectangle(e.ClipRectangle.X + iconRect.Width, y, e.ClipRectangle.Width - (iconRect.Width * 2), (int)(26 * UI.FontScale));
 
 			using var buttonIcon = IconManager.GetIcon(allIcon, e.Rects.AllButtonRect.Height * 3 / 4);
 
@@ -283,8 +515,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 
 		var otherWarnings = e.Item.ReportItems.Count(x => x.Status.Notification >= NotificationType.Caution) - 1;
-		var finalY = y + (int)e.Graphics.Measure(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, reportRect.Width - 2 * iconRect.Width - GridPadding.Horizontal).Height + GridPadding.Vertical;
-		var bottomRect = new Rectangle(e.ClipRectangle.X, y + GridPadding.Vertical * 3, e.ClipRectangle.Width, finalY - y).Pad(GridPadding);
+		var finalY = y + (int)e.Graphics.Measure(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, reportRect.Width - (2 * iconRect.Width) - GridPadding.Horizontal).Height + GridPadding.Vertical;
+		var bottomRect = new Rectangle(e.ClipRectangle.X, y + (GridPadding.Vertical * 3), e.ClipRectangle.Width, finalY - y).Pad(GridPadding);
 
 
 		//if (bottomRect.Y > y + GridPadding.Vertical * 3)
@@ -317,7 +549,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		//	}
 		//}
 
-		DrawDividerLine(e, bottomRect.Y - GridPadding.Vertical * 4);
+		DrawDividerLine(e, bottomRect.Y - (GridPadding.Vertical * 4));
 
 		e.Graphics.DrawString(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, textBrush, bottomRect.Pad(iconRect.Width + GridPadding.Left, 0, iconRect.Width + GridPadding.Left, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
@@ -338,7 +570,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		e.Rects.CompatibilityRect = rect3;
 
-		e.DrawableItem.CachedHeight = finalY - e.ClipRectangle.Y + GridPadding.Vertical * 5 + Padding.Vertical;
+		e.DrawableItem.CachedHeight = finalY - e.ClipRectangle.Y + (GridPadding.Vertical * 5) + Padding.Vertical;
 	}
 
 	private void GetAllButton(ICompatibilityItem Message, out string? allText, out string? allIcon, out ColorStyle colorStyle)
@@ -431,7 +663,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	private int DrawDividerLine(PaintEventArgs e, int y)
 	{
-		var lineRect = new Rectangle(e.ClipRectangle.X + GridPadding.Horizontal, y + GridPadding.Vertical * 2, e.ClipRectangle.Width - GridPadding.Horizontal * 2, (int)(2 * UI.FontScale));
+		var lineRect = new Rectangle(e.ClipRectangle.X + GridPadding.Horizontal, y + (GridPadding.Vertical * 2), e.ClipRectangle.Width - (GridPadding.Horizontal * 2), (int)(2 * UI.FontScale));
 		using var lineBrush = new LinearGradientBrush(lineRect, default, default, 0F);
 
 		lineBrush.InterpolationColors = new ColorBlend
@@ -442,7 +674,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		e.Graphics.FillRectangle(lineBrush, lineRect);
 
-		return y + GridPadding.Vertical * 4;
+		return y + (GridPadding.Vertical * 4);
 	}
 
 	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
@@ -580,7 +812,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	{
 		var padding = GridView ? GridPadding : GridPadding;
 		var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
-		var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + (e.Rects.IconRect.Height - size.Height) / 2, size.Width, size.Height);
+		var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + ((e.Rects.IconRect.Height - size.Height) / 2), size.Width, size.Height);
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 
 		if (parentPackage is not null)
@@ -596,7 +828,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		using var brush = new SolidBrush(e.BackColor);
 		e.Graphics.FillRectangle(brush, new Rectangle(rect.X + rect.Width, e.Rects.IconRect.Y, e.ClipRectangle.Right - rect.X - padding.Left, e.Rects.IconRect.Height));
 
-		rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + (e.Rects.IconRect.Height - size.Height) / 2, size.Width, size.Height);
+		rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + ((e.Rects.IconRect.Height - size.Height) / 2), size.Width, size.Height);
 
 		if (parentPackage is not null)
 		{
@@ -797,7 +1029,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		if (e.Button == MouseButtons.Left && rects.SnoozeRect.Contains(e.Location))
 		{
 			_compatibilityManager.ToggleSnoozed(Message);
-			FilterChanged();
+			DoFilterChanged();
 		}
 
 		if (e.Button == MouseButtons.Left && rects.AllButtonRect.Contains(e.Location))
@@ -842,6 +1074,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					Program.MainForm.PushPanel(null, new PC_RequestReview(item.Item.Package!));
 					break;
 			}
+
+			_compatibilityManager.QuickUpdate(Message);
 		}
 	}
 
@@ -910,6 +1144,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				_packageUtil.SetIncluded(info.Package!.LocalParentPackage!, false);
 				break;
 		}
+
+		_compatibilityManager.QuickUpdate(Message);
 	}
 
 	protected override Rectangles GenerateRectangles(ICompatibilityInfo item, Rectangle rectangle)
@@ -995,6 +1231,39 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 
 		Invalidate();
+	}
+
+	internal void Next()
+	{
+		CurrentGroup = _headerRects.Keys.Next(CurrentGroup, true);
+		DoFilterChanged();
+		GroupChanged?.Invoke(this, EventArgs.Empty);
+	}
+
+	internal void Previous()
+	{
+		CurrentGroup = _headerRects.Keys.Previous(CurrentGroup, true);
+		DoFilterChanged();
+		GroupChanged?.Invoke(this, EventArgs.Empty);
+	}
+
+	public void DoFilterChanged()
+	{
+		base.FilterChanged();
+
+		AutoInvalidate = !Loading && Items.Any() && !SafeGetItems().Any();
+	}
+
+	public override void FilterChanged()
+	{
+		if (!IsHandleCreated)
+		{
+			base.FilterChanged();
+		}
+		else
+		{
+			FilterRequested?.Invoke(this, EventArgs.Empty);
+		}
 	}
 
 	public class Rectangles : IDrawableItemRectangles<ICompatibilityInfo>
@@ -1181,7 +1450,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				DateRect.Contains(location) ||
 				buttonRects.Values.Any(x => x.Contains(location)) ||
 				modRects.Values.Any(x => x.Contains(location)) ||
-				VersionRect.Contains(location) && Item?.Package?.LocalParentPackage?.Mod is not null;
+				(VersionRect.Contains(location) && Item?.Package?.LocalParentPackage?.Mod is not null);
 		}
 	}
 }

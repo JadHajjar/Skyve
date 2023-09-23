@@ -18,7 +18,7 @@ namespace Skyve.Systems.Compatibility.Domain.Api;
 [DynamicSqlClass("UserProfiles")]
 public class UserProfile : IDynamicSql
 #if !API
-	, ICustomPlayset
+	, IOnlinePlayset
 #endif
 {
 	[DynamicSqlProperty(PrimaryKey = true, Identity = true)]
@@ -87,7 +87,8 @@ public class UserProfile : IDynamicSql
 			}
 		}
 	}
-	IUser? IPlayset.Author { get; }
+
+	IUser? IPlayset.Author => ServiceCenter.Get<Skyve.Domain.Systems.IWorkshopService>().GetUser(Author);
 	string? IPlayset.BannerUrl { get; }
 	DateTime IPlayset.DateUsed { get; }
 	[JsonIgnore] public IEnumerable<IPlaysetEntry> Entries => Contents ?? Enumerable.Empty<IPlaysetEntry>();

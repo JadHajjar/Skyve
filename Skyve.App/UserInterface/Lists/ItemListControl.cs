@@ -66,8 +66,6 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		GridItemSize = new Size(390, 140);
 	}
 
-	public IEnumerable<T> FilteredItems => SafeGetItems().Select(x => x.Item);
-	public int FilteredCount => SafeGetItems().Count;
 	public bool SortDescending { get; private set; }
 	public bool IsPackagePage { get; set; }
 	public bool IsTextSearchNotEmpty { get; set; }

@@ -59,21 +59,23 @@ public class CompatibilityMessageControl : SlickControl
 			e.Graphics.SetUp(BackColor);
 
 			using var icon = Message.Status.Notification.GetIcon(false).Default;
+			using var font = UI.Font(9F);
+			using var smallFont = UI.Font(8.25F);
 			var actionHovered = false;
 			var cursor = PointToClient(Cursor.Position);
 			var pad = (int)(6 * UI.FontScale);
 			var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
 			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
-			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width * 2 - pad);
-			var noteSize = e.Graphics.Measure(note, UI.Font(8.25F), Width - iconRect.Width * 2 - pad);
+			var messageSize = e.Graphics.Measure(Message.Message, font, Width - (iconRect.Width * 2) - pad);
+			var noteSize = e.Graphics.Measure(note, smallFont, Width - (iconRect.Width * 2) - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 			using var brush = new SolidBrush(color);
 
 			GetAllButton(out var allText, out var allIcon, out var colorStyle);
 
 			e.Graphics.FillRoundedRectangle(brush, iconRect, pad);
-			e.Graphics.FillRoundedRectangle(brush, new Rectangle(iconRect.Width - 2 * pad, 0, 2 * pad, Height - pad), pad);
+			e.Graphics.FillRoundedRectangle(brush, new Rectangle(iconRect.Width - (2 * pad), 0, 2 * pad, Height - pad), pad);
 
 			e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
 
@@ -99,25 +101,25 @@ public class CompatibilityMessageControl : SlickControl
 				e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor) ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
 			}
 
-			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y <= Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
+			e.Graphics.DrawString(Message.Message, font, new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 
 			if (note is not null)
 			{
-				e.Graphics.DrawString(note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0), new StringFormat { LineAlignment = y <= Height && string.IsNullOrWhiteSpace(Message.Message) && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
+				e.Graphics.DrawString(note, smallFont, new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0), new StringFormat { LineAlignment = y <= Height && string.IsNullOrWhiteSpace(Message.Message) && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 			}
 
 			if (allText is not null)
 			{
 				var buttonIcon = IconManager.GetIcon(allIcon);
-				var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, allText, UI.Font(8.25F), UI.Scale(new Padding(4), UI.FontScale));
+				var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, allText, smallFont, UI.Scale(new Padding(4), UI.FontScale));
 
 				allButtonRect = new Rectangle(0, y, Width, 0).Pad(iconRect.Width + pad, pad, 0, 0).Align(buttonSize, Message.Packages.Length > 0 ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
 
-				SlickButton.DrawButton(e, allButtonRect, allText, UI.Font(8.25F), buttonIcon, UI.Scale(new Padding(4), UI.FontScale), allButtonRect.Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, colorStyle);
+				SlickButton.DrawButton(e, allButtonRect, allText, smallFont, buttonIcon, UI.Scale(new Padding(4), UI.FontScale), allButtonRect.Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, colorStyle);
 
 				actionHovered |= allButtonRect.Contains(cursor);
 
-				y += allButtonRect.Height + pad * 2;
+				y += allButtonRect.Height + (pad * 2);
 			}
 
 			if (Message.Packages.Length > 0)
@@ -391,6 +393,7 @@ public class CompatibilityMessageControl : SlickControl
 					Program.MainForm.PushPanel(null, new PC_RequestReview(PackageCompatibilityReportControl.Package));
 					break;
 			}
+			_compatibilityManager.QuickUpdate(Message);
 		}
 	}
 
@@ -459,5 +462,7 @@ public class CompatibilityMessageControl : SlickControl
 			}
 			break;
 		}
+
+		_compatibilityManager.QuickUpdate(Message);
 	}
 }

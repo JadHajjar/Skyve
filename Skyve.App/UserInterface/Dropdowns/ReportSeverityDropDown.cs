@@ -8,13 +8,16 @@ public enum CompatibilityNotificationFilter
 	Any = -2,
 	AnyIssue = -1,
 	NoIssues,
-	Caution = 2,
-	MissingDependency,
-	Warning,
-	AttentionRequired,
-	Exclude,
-	Unsubscribe,
-	Switch,
+	RequiredItem = 20,
+
+	Caution = 30,
+	MissingDependency = 40,
+	Warning = 50,
+
+	AttentionRequired = 60,
+	Exclude = 70,
+	Unsubscribe = 80,
+	Switch = 90,
 }
 
 public class ReportSeverityDropDown : SlickSelectionDropDown<CompatibilityNotificationFilter>

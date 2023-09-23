@@ -34,6 +34,9 @@ public enum InteractionType
 
 	/***********************************/
 
+	[CRN(NotificationType.RequiredItem, false)]
+	RequiredItem = 9999,
+
 	[CRN(NotificationType.Info, false)]
 	SucceededBy = 1000,
 

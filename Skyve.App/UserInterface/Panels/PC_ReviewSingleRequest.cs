@@ -84,6 +84,8 @@ public partial class PC_ReviewSingleRequest : PanelContent
 		{
 			var fileName = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().SkyveAppDataPath, "Support Logs", logControl.Text + ".zip");
 
+			Directory.CreateDirectory(Path.GetDirectoryName(fileName));
+
 			File.WriteAllBytes(fileName, _request.LogFile);
 
 			PlatformUtil.OpenFolder(fileName);

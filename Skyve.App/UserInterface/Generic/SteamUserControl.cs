@@ -10,16 +10,11 @@ public class SteamUserControl : SlickControl
 
 	public SteamUserControl()
 	{
-		Visible = false;
-		Enabled = false;
 		Cursor = Cursors.Hand;
 	}
 
-	public SteamUserControl(ulong steamId)
+	public SteamUserControl(ulong steamId) : this()
 	{
-		Visible = false;
-		Enabled = false;
-		Cursor = Cursors.Hand;
 		_steamId = steamId;
 	}
 
@@ -45,6 +40,7 @@ public class SteamUserControl : SlickControl
 	{
 		if (User is null)
 		{
+			Height = 1;
 			return;
 		}
 

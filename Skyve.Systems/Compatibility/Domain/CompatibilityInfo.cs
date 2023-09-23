@@ -4,10 +4,14 @@ using Newtonsoft.Json;
 
 using Skyve.Domain;
 using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Skyve.Systems.Compatibility.Domain;
 public class CompatibilityInfo : ICompatibilityInfo
@@ -24,7 +28,36 @@ public class CompatibilityInfo : ICompatibilityInfo
 
 	ILocalPackage? ICompatibilityInfo.Package => LocalPackage;
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data?.Package;
-	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast<ICompatibilityItem>();
+	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems
+	{ 
+		get
+		{
+			foreach (var item in ReportItems)
+			{
+				yield return item;
+			}
+
+			var id = Data?.Package.SteamId;
+			
+			if (id is not null and not 0 && LocalPackage?.IsIncluded() == false)
+			{
+				var requiredFor = ServiceCenter.Get<ICompatibilityManager, CompatibilityManager>().GetRequiredFor(id.Value);
+
+				if (requiredFor is not null)
+				{
+					yield return new ReportItem
+					{
+						Package = localPackage,
+						PackageId = Data?.Package.SteamId ?? 0,
+						Type = ReportType.RequiredItem,
+						Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
+						PackageName = localPackage?.CleanName(true),
+						Packages = requiredFor.ToArray(x => new PseudoPackage(x))
+					};
+				}
+			}
+		}
+	}
 
 	[Obsolete("Reserved for DTO", true)]
 	public CompatibilityInfo()
@@ -44,6 +77,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
+			Package = localPackage,
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
@@ -56,6 +90,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
+			Package = localPackage,
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
@@ -68,6 +103,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
+			Package = localPackage,
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,

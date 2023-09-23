@@ -4,8 +4,8 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Dashboard;
 public abstract class IDashboardItem : SlickImageControl
 {
-	private readonly List<(Rectangle rectangle, int height)> _sections = new();
-	private readonly Dictionary<Rectangle, ExtensionClass.action> _buttonActions = new();
+	protected readonly List<(Rectangle rectangle, int height)> _sections = new();
+	protected readonly Dictionary<Rectangle, ExtensionClass.action> _buttonActions = new();
 
 	public event EventHandler? ResizeRequested;
 

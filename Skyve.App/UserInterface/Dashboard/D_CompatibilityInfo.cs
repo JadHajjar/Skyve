@@ -71,8 +71,8 @@ internal class D_CompatibilityInfo : IDashboardItem
 		}
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
-		_notifier.PackageInformationUpdated += PackageInformationUpdated;
-		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
+		_notifier.PackageInformationUpdated += Notifier_CompatibilityReportProcessed;
+		_notifier.PlaysetChanged += Notifier_CompatibilityReportProcessed;
 		_notifier.CompatibilityReportProcessed += Notifier_CompatibilityReportProcessed;
 	}
 
@@ -82,14 +82,9 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 		_notifier.ContentLoaded -= Invalidate;
 		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
-		_notifier.PackageInformationUpdated -= PackageInformationUpdated;
-		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
+		_notifier.PackageInformationUpdated -= Notifier_CompatibilityReportProcessed;
+		_notifier.PlaysetChanged -= Notifier_CompatibilityReportProcessed;
 		_notifier.CompatibilityReportProcessed -= Notifier_CompatibilityReportProcessed;
-	}
-
-	private void PackageInformationUpdated()
-	{
-		OnResizeRequested();
 	}
 
 	private void Notifier_CompatibilityReportProcessed()
@@ -149,14 +144,9 @@ internal class D_CompatibilityInfo : IDashboardItem
 		}
 	}
 
-	private void ProfileManager_ProfileChanged()
-	{
-		Invalidate();
-	}
-
 	private void CentralManager_WorkshopInfoUpdated()
 	{
-		if (Loading)
+		if (Loading && _compatibilityManager.FirstLoadComplete)
 		{
 			OnResizeRequested();
 

@@ -46,6 +46,7 @@ public class SubscriptionInfoControl : SlickControl
 		if (Visible != _subscriptionsManager.SubscriptionsPending)
 		{
 			Visible = !Visible;
+			Loading = false;
 
 			Program.MainForm.TryInvoke(() => Program.MainForm.Invalidate(true));
 		}
@@ -85,16 +86,27 @@ public class SubscriptionInfoControl : SlickControl
 		}
 
 		using var buttonIcon = IconManager.GetSmallIcon("I_AppIcon");
-		var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, LocaleSlickUI.Apply, UI.Font(6.75F), new(4, 2, 2, 2));
+		using var font = UI.Font(6.75F);
+		var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, LocaleSlickUI.Apply, font, new(4, 2, 2, 2));
 		buttonRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomRight);
 
-		SlickButton.DrawButton(e, buttonRect, LocaleSlickUI.Apply, UI.Font(6.75F), buttonIcon, new Padding(4, 2, 2, 2), buttonRect.Contains(PointToClient(Cursor.Position)) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Green);
+		SlickButton.Draw(e, new ButtonDrawArgs
+		{
+			Rectangle = buttonRect,
+			Text = LocaleSlickUI.Apply,
+			Font = font,
+			Image = buttonIcon,
+			Padding = new Padding(4, 2, 2, 2),
+			HoverState = buttonRect.Contains(PointToClient(Cursor.Position)) ? base.HoverState & ~HoverState.Focused : HoverState.Normal,
+			ColorStyle = ColorStyle.Green,
+			Control = this
+		});
 
 		using var cancelButtonIcon = IconManager.GetSmallIcon("I_Cancel");
-		buttonSize = SlickButton.GetSize(e.Graphics, cancelButtonIcon, LocaleSlickUI.Cancel, UI.Font(6.75F), new(4, 2, 2, 2));
+		buttonSize = SlickButton.GetSize(e.Graphics, cancelButtonIcon, LocaleSlickUI.Cancel, font, new(4, 2, 2, 2));
 		cancelRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomLeft);
 
-		SlickLabel.DrawLabel(e, cancelRect, LocaleSlickUI.Cancel, UI.Font(6.75F), cancelButtonIcon, new Padding(4, 2, 2, 2), FormDesign.Design.MenuForeColor, cancelRect.Contains(PointToClient(Cursor.Position)) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Red);
+		SlickLabel.DrawLabel(e, cancelRect, LocaleSlickUI.Cancel, font, cancelButtonIcon, new Padding(4, 2, 2, 2), FormDesign.Design.MenuForeColor, cancelRect.Contains(PointToClient(Cursor.Position)) ? base.HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Red);
 
 		Height = y + buttonSize.Height + Padding.Bottom;
 	}
@@ -105,11 +117,13 @@ public class SubscriptionInfoControl : SlickControl
 
 		if (e.Button == MouseButtons.None || e.Button == MouseButtons.Left && buttonRect.Contains(e.Location))
 		{
+			Loading = true;
 			ServiceCenter.Get<ICitiesManager>().RunStub();
 		}
 		else if (e.Button == MouseButtons.Left && cancelRect.Contains(e.Location))
 		{
 			_subscriptionsManager.CancelPendingItems();
+			Hide();
 		}
 	}
 }

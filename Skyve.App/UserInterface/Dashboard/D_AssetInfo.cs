@@ -26,7 +26,7 @@ internal class D_AssetsInfo : IDashboardItem
 	{
 		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _updateManager);
 
-		newAssets = _updateManager.GetNewOrUpdatedPackages().ToList();
+		newAssets = _updateManager.GetNewOrUpdatedPackages().Where(x => !x.IsMod).ToList();
 		RefreshAssetCounts();
 	}
 

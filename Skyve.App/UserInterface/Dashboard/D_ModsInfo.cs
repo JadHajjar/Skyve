@@ -21,7 +21,7 @@ internal class D_ModsInfo : IDashboardItem
 	{
 		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _updateManager);
 
-		newMods = _updateManager.GetNewOrUpdatedPackages().ToList();
+		newMods = _updateManager.GetNewOrUpdatedPackages().Where(x => x.IsMod).ToList();
 		RefreshModCounts();
 	}
 

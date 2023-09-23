@@ -7,7 +7,7 @@ namespace Skyve.App.UserInterface.Generic;
 public class IncludeAllButton<T> : SlickControl where T : IPackage
 {
 	private readonly bool _doubleButtons;
-	private readonly ItemListControl<T>? LC_Items;
+	private readonly Func<List<T>> GetPackages;
 	private Rectangle IncludedRect;
 	private Rectangle EnabledRect;
 	private Rectangle ActionRect;
@@ -21,11 +21,11 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 
 	private readonly ISettings _settings;
 
-	public IncludeAllButton(ItemListControl<T>? lC_Items)
+	public IncludeAllButton(Func<List<T>> getMethod)
 	{
 		Margin = default;
 		Cursor = Cursors.Hand;
-		LC_Items = lC_Items;
+		GetPackages = getMethod;
 		_settings = ServiceCenter.Get<ISettings>();
 		_doubleButtons = _settings.UserSettings.AdvancedIncludeEnable;
 	}
@@ -44,8 +44,8 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 	{
 		base.OnMouseMove(e);
 
-		var packages = LC_Items?.SafeGetItems() ?? new();
-		var subscribe = packages.Any(x => x.Item.LocalPackage is null);
+		var packages = GetPackages();
+		var subscribe = packages.Any(x => x.LocalPackage is null);
 
 		if (IncludedRect.Contains(e.Location))
 		{
@@ -53,7 +53,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "SubscribeAll");
 			}
-			else if (packages.SelectWhereNotNull(x => x.Item.LocalPackage).All(x => x!.IsIncluded()))
+			else if (packages.SelectWhereNotNull(x => x.LocalPackage).All(x => x!.IsIncluded()))
 			{
 				SlickTip.SetTo(this, "ExcludeAll");
 			}
@@ -68,7 +68,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "SubscribeAll");
 			}
-			else if (packages.SelectWhereNotNull(x => x.Item.LocalParentPackage?.Mod).All(x => x!.IsEnabled()))
+			else if (packages.SelectWhereNotNull(x => x.LocalParentPackage?.Mod).All(x => x!.IsEnabled()))
 			{
 				SlickTip.SetTo(this, "DisableAll");
 			}
@@ -89,8 +89,8 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 
 		if (e.Button == MouseButtons.Left)
 		{
-			var packages = LC_Items?.SafeGetItems() ?? new();
-			var subscribe = packages.Any(x => x.Item.LocalPackage is null);
+			var packages = GetPackages();
+			var subscribe = packages.Any(x => x.LocalPackage is null);
 
 			if (IncludedRect.Contains(e.Location))
 			{
@@ -98,7 +98,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 				{
 					SubscribeAllClicked?.Invoke(this, e);
 				}
-				else if (packages.SelectWhereNotNull(x => x.Item.LocalPackage).All(x => x!.IsIncluded()))
+				else if (packages.SelectWhereNotNull(x => x.LocalPackage).All(x => x!.IsIncluded()))
 				{
 					ExcludeAllClicked?.Invoke(this, e);
 				}
@@ -113,7 +113,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 				{
 					SubscribeAllClicked?.Invoke(this, e);
 				}
-				else if (packages.SelectWhereNotNull(x => x.Item.LocalParentPackage?.Mod).All(x => x!.IsEnabled()))
+				else if (packages.SelectWhereNotNull(x => x.LocalParentPackage?.Mod).All(x => x!.IsEnabled()))
 				{
 					DisableAllClicked?.Invoke(this, e);
 				}
@@ -141,10 +141,10 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 		var rectangle = ClientRectangle;
 		var CursorLocation = PointToClient(Cursor.Position);
 		var color = FormDesign.Design.ActiveColor;
-		var packages = LC_Items?.SafeGetItems() ?? new();
-		var subscribe = packages.Any(x => x.Item.LocalPackage is null);
-		var include = !subscribe && packages.All(x => x.Item.LocalPackage!.IsIncluded());
-		var enable = !subscribe && packages.SelectWhereNotNull(x => x.Item.LocalParentPackage?.Mod).All(x => x!.IsEnabled());
+		var packages = GetPackages();
+		var subscribe = packages.Any(x => x.LocalPackage is null);
+		var include = !subscribe && packages.All(x => x.LocalPackage!.IsIncluded());
+		var enable = !subscribe && packages.SelectWhereNotNull(x => x.LocalParentPackage?.Mod).All(x => x!.IsEnabled());
 
 		if (_doubleButtons && !subscribe)
 		{
@@ -179,6 +179,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			using var brush1 = IncludedRect.Gradient(HoverState.HasFlag(HoverState.Pressed) ? color : Color.FromArgb(30, ForeColor), 1.5F);
 			e.Graphics.FillRoundedRectangle(brush1, IncludedRect, 4);
 		}
+
 		e.Graphics.DrawImage(inclIcon.Color(!IncludedRect.Contains(CursorLocation) ? ForeColor : HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : color), IncludedRect.CenterR(inclIcon.Size));
 
 		if (_doubleButtons && EnabledRect != default)

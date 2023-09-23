@@ -342,14 +342,14 @@ public partial class MainForm : BasePanelForm
 
 		if (date > DateTime.Now.AddDays(-7))
 		{
-			ServiceCenter.Get<INotificationsService>().SendNotification(ServiceCenter.Get<IInterfaceService>().GetLastVersionNotification());
+			ServiceCenter.Get<INotificationsService>().SendNotification(ServiceCenter.Get<IAppInterfaceService>().GetLastVersionNotification());
 		}
 
 		if (currentVersion.ToString() != _settings.SessionSettings.LastVersionNotification)
 		{
 			if (_settings.SessionSettings.FirstTimeSetupCompleted)
 			{
-				PushPanel(ServiceCenter.Get<IInterfaceService>().ChangelogPanel());
+				PushPanel(ServiceCenter.Get<IAppInterfaceService>().ChangelogPanel());
 			}
 
 			_settings.SessionSettings.LastVersionNotification = currentVersion.ToString();
@@ -404,7 +404,7 @@ public partial class MainForm : BasePanelForm
 
 	private void PI_ModReview_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel(PI_ModUtilities, ServiceCenter.Get<IInterfaceService>().UtilitiesPanel());
+		SetPanel(PI_ModUtilities, ServiceCenter.Get<IAppInterfaceService>().UtilitiesPanel());
 	}
 
 	private void PI_Packages_OnClick(object sender, MouseEventArgs e)

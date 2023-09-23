@@ -29,6 +29,12 @@ public enum StatusAction
 	[CRN(NotificationType.AttentionRequired)]
 	ExcludeOther = 8,
 
+	[CRN(NotificationType.RequiredItem)]
+	IncludeThis = 9,
+
+	[CRN(NotificationType.Info)]
+	IncludeOther = 10,
+
 	[CRN(NotificationType.None, false)]
 	RequestReview = 99,
 }

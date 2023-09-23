@@ -4,8 +4,6 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Lists;
 public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, OtherProfilePackage.Rectangles>
 {
-	public IEnumerable<ICustomPlayset> FilteredItems => SafeGetItems().Select(x => x.Item);
-
 	public IPackage Package { get; }
 
 	private readonly IPlaysetManager _profileManager;
@@ -23,7 +21,6 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 		_notifier.PlaysetUpdated += ProfileManager_ProfileUpdated;
 		_notifier.PlaysetChanged += ProfileManager_ProfileUpdated;
 	}
-
 
 	private void ProfileManager_ProfileUpdated()
 	{

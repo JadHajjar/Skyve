@@ -11,4 +11,5 @@ public enum ReportType
 	Alternatives,
 	Status,
 	Ambiguous,
+	RequiredItem,
 }
