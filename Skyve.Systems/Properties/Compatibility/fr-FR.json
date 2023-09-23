@@ -102,6 +102,10 @@
     "One": "'{0}' chargera juste après '{1}'.",
     "Plural": "'{0}' chargera juste après les paquets suivants."
   },
+  "Interaction_RequiredItem": {
+    "One": "\"{0}\" est requis pour \"{1}\".",
+    "Plural": "\"{0}\" est requis pour les paquets suivants."
+  },
   "Interaction_Identical": "Il existe plusieurs versions du même paquet.\n\nVous ne devriez en choisir qu'une seule.",
   "Status_Succeeded": "'{0}' est succédé par '{1}'.\n\nVous utilisez déjà '{1}' donc il n'y a plus besoin de '{0}'.",
   "Status_Deprecated": "'{0}' est obsolète, il n'est plus supporté par son auteur.",
@@ -168,6 +172,11 @@
     "One": "Vous devriez basculer vers '{1}'.",
     "Plural": "Vous devriez basculer vers un des paquets suivants :"
   },
+  "Action_IncludeThis": "Vous devriez inclure \"{0}\"",
+  "Action_IncludeOther": {
+    "One": "Vous devriez inclure le paquet suivant :",
+    "Plural": "Vous devriez inclure ces paquets :"
+  },
   "NoRequiredDlcs": "Aucun DLC requis",
   "DlcsSelected": {
     "One": "{0} DLC sélectionné",
@@ -217,7 +226,6 @@
   "AuthorRetired": "L'auteur de {0}, {1}, a pris sa retraite ou est inactif depuis longtemps.\n\nLes mises à jour futures et la stabilité de leurs paquets ne sont pas garanties.",
   "AuthorMalicious": "L'auteur de {0}, {1} est connu pour être malveillant et/ou pour avoir inclus des contenus nuisibles comme des virus dans leurs paquets.",
   "ReviewRequests": "Examiner les demandes {0}",
-  "DeleteRequest": "Supprimer la demande",
   "ApplyRequestedChanges": "Appliquer les changements demandés",
   "ManagePackage": "Gérer le paquet",
   "Banned": "Banni",
@@ -228,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "Ce paquet a un autre avertissement de compatibilité",
     "Plural": "Ce paquet a {0} autres avertissements de compatibilité"
-  }
+  },
+  "DeleteRequests": {
+    "One": "Supprimer cette demande",
+    "Plural": "Supprimer ces demandes"
+  },
+  "ViewRequest": "Voir la demande",
+  "CRT_RequiredItem": "Élément requis",
+  "RequiredItem": "Élément requis",
+  "ApplyAllActions": "Appliquer toutes les actions disponibles",
+  "SnoozeAll": "Reporter tous les problèmes affichés"
 }
