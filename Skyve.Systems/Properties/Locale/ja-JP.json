@@ -553,6 +553,7 @@
   "CancelDownloads": "保留中のDLを全てキャンセル",
   "ApplySubs": "保留中のサブスク操作が適用されるまで、しばらくゲームを起動中にして下さい。",
   "ApplyDownloads": "Steamから保留中のパッケージを強制的に全てDL",
+  "ApplyRemoval": "待機中のパッケージを全て削除",
   "SubsPendingInfo": "サブスクしたいパッケージは、ここにグループ化してまとめます。\nゲームを起動すると、それらのアイテムはSteam上でサブスク操作されます。",
   "DownloadsPendingInfo": "サブスクをしてまだDLが始まっていないパッケージは、ここにまとめてグループ化されます。",
   "ForceDownloadAndDeleteAsSoonAsRequested": "サブスクの開始/解除をすると、すぐにパッケージをDL開始や削除を実行",
@@ -664,7 +665,6 @@
   "CleanupInfoTitle": "クリーンアップとは?",
   "TroubleshootCauseResult": "以下のパッケージが問題の原因かも知れません。",
   "VerifiedAuthor": "確認済み作者",
-  "ApplyAllActions": "使用できるアクションを全て適用",
   "FailedToImportPlayset": "プレイセットのインポートに失敗！",
   "EnablePackage": "{0} を有効化",
   "DisablePackage": "{0} を無効化",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "「{1}」は最後のセッション以降にインストール済み",
     "Plural": "「{0}」の新規パッケージは前回のセッション以降にインストール済み"
-  }
+  },
+  "IncorrectFolderSettings": "不正なフォルダ設定！",
+  "IncorrectFolderSettingsInfo": "フォルダの設定が間違っています。ここをクリックして、オプションページから再設定やリセットをして下さい。"
 }
