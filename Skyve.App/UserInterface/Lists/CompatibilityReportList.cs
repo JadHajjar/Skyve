@@ -133,7 +133,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			PackageSorting.None => items,
 
 			PackageSorting.CompatibilityReport => items
-				.OrderBy(x => x.Item.GetNotification())
+				.OrderByDescending(x => x.Item.GetNotification())
 				.ThenBy(x => x.Item.Package?.ToString()),
 
 			PackageSorting.Subscribers => items
@@ -148,7 +148,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				.ThenBy(x => x.Item.Package?.ToString()),
 
 			_ => items
-				.OrderBy(x => x.Item.GetNotification())
+				.OrderByDescending(x => x.Item.GetNotification())
 				.ThenBy(x => !(x.Item.Package is ILocalPackageWithContents lp && (lp.IsIncluded(out var partial) || partial)))
 				.ThenBy(x => x.Item.Package?.IsLocal)
 				.ThenBy(x => !x.Item.Package?.IsMod)

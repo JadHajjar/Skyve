@@ -65,7 +65,7 @@ public partial class PC_ManageCompatibilitySelection : PanelContent
 	{
 		var hasPackages = _userService.User.Id is not null && _contentManager.Packages.Any(x => _userService.User.Equals(x.GetWorkshopInfo()?.Author));
 		B_Manage.Visible = B_Requests.Visible = B_ManageSingle.Visible = _userService.User.Manager && !_userService.User.Malicious;
-		B_YourPackages.Visible = hasPackages && !_userService.User.Manager && !_userService.User.Malicious;
+		B_YourPackages.Visible = hasPackages && !_userService.User.Malicious;
 		B_Requests.Text = LocaleCR.ReviewRequests.Format(reviewRequests is null ? string.Empty : $"({reviewRequests.Length})");
 		B_Requests.Enabled = reviewRequests is null || reviewRequests.Length > 0;
 		B_Requests.Invalidate();
