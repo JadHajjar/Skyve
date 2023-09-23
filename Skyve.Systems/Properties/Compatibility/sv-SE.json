@@ -102,6 +102,10 @@
     "One": "'{0}' kommer att laddas direkt efter '{1}'.",
     "Plural": "'{0}' kommer att laddas direkt efter följande paket."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "Dessa är flera versioner av samma paket.\r\n\r\nDu bör endast välja en av dem.",
   "Status_Succeeded": "'{0}' efterträds av '{1}'.\r\n\r\nDu använder redan '{1}' så det finns inget behov av '{0}' längre.",
   "Status_Deprecated": "'{0}' är föråldrad, den stöds inte längre av dess författare.",
@@ -168,6 +172,11 @@
     "One": "Du bör byta till '{1}'.",
     "Plural": "You should switch to one of the following packages."
   },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
+  },
   "NoRequiredDlcs": "Inga nödvändiga DLC:er",
   "DlcsSelected": {
     "One": "{0} DLC vald",
@@ -217,7 +226,6 @@
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Författaren till {0}, {1}, är känd för att vara skadlig och/eller för att inkludera skadligt innehåll som virus i sina paket.",
   "ReviewRequests": "Granska förfrågningar {0}",
-  "DeleteRequest": "Ta bort förfrågan",
   "ApplyRequestedChanges": "Tillämpa begärda ändringar",
   "ManagePackage": "Hantera paket",
   "Banned": "Bannlyst",
@@ -228,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "This package has one other compatibility warning",
     "Plural": "This package has {0} other compatibility warnings"
-  }
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }
