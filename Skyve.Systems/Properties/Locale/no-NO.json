@@ -553,6 +553,7 @@
   "CancelDownloads": "Avbryt alle ventende nedlastinger",
   "ApplySubs": "Start spillet for et kort øyeblikk for å anvende ventende abonnementer",
   "ApplyDownloads": "Tving Steam til å laste ned alle ventende pakker",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "Du abonnerer på pakkene her.\r\nNår du åpner spillet vil disse elementene abonnere på Steam.",
   "DownloadsPendingInfo": "Pakkene du abonnerer på, og er ikke nedlastet ennå ikke gruppert her.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Start nedlasting eller fjerning av pakker umiddelbart etter abonnement/avslutt abonnementet",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "Hva er en opprydding?",
   "TroubleshootCauseResult": "Følgende pakker kan være årsaken til dine problemer",
   "VerifiedAuthor": "Bekreftet forfatter",
-  "ApplyAllActions": "Apply all available actions",
   "FailedToImportPlayset": "Failed to import this playset.",
   "EnablePackage": "Enable {0}",
   "DisablePackage": "Disable {0}",
   "IncludePackage": "Include {0}",
   "ExcludePackage": "Exclude {0}",
   "FilterByEnabled": "Only show enabled items.",
-  "FilterByDisabled": "Only show disabbled items.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "Only show included items.",
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' got installed since your last session",
     "Plural": "{0} new packages got installed since your last session"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }

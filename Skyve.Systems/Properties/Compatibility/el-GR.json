@@ -102,6 +102,10 @@
     "One": "'{0}' θα φορτώσει αμέσως μετά το '{1}'.",
     "Plural": "'{0}' θα φορτώσει αμέσως μετά τα ακόλουθα πακέτα."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Succeeded": "'{0}' έχει πετύχει το '{1}'.\r\n\r\nΧρησιμοποιείτε ήδη το '{1}' οπότε δεν υπάρχει πλέον ανάγκη για '{0}'.",
   "Status_Deprecated": "'{0}' έχει καταργηθεί, δεν υποστηρίζεται πλέον από το συγγραφέα του.",
@@ -168,6 +172,11 @@
     "One": "Θα πρέπει να μεταβείτε σε '{1}'.",
     "Plural": "Θα πρέπει να μεταβείτε σε ένα από τα ακόλουθα πακέτα:"
   },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
+  },
   "NoRequiredDlcs": "Δεν Απαιτούνται DLCs",
   "DlcsSelected": {
     "One": "{0} DLC επιλέχθηκε",
@@ -217,7 +226,6 @@
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\n\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Ο συγγραφέας του {0}, {1}, είναι γνωστό ότι είναι κακόβουλο και/ή για τη συμπερίληψη επιβλαβούς περιεχομένου όπως οι ιοί στα πακέτα τους.",
   "ReviewRequests": "Αιτήσεις Κριτικής {0}",
-  "DeleteRequest": "Διαγραφή Αιτήματος",
   "ApplyRequestedChanges": "Εφαρμογή Αιτούμενων Αλλαγών",
   "ManagePackage": "Διαχείριση Πακέτου",
   "Banned": "Αποκλεισμένος",
@@ -228,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "This package has one other compatibility warning",
     "Plural": "This package has {0} other compatibility warnings"
-  }
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }

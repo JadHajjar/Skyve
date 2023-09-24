@@ -102,6 +102,10 @@
     "One": "'{0}' załaduje się bezpośrednio po '{1}'.",
     "Plural": "'{0}' załaduje się bezpośrednio po następujących pakietach."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "Są to różne wersje tego samego pakietu.\r\n\r\nPowinieneś wybrać tylko jeden z nich.",
   "Status_Succeeded": "'{0}' zakończył się sukcesem '{1}'.\r\n\r\nJuż używasz '{1}' więc nie ma już potrzeby '{0}'.",
   "Status_Deprecated": "'{0}' jest przestarzały, nie jest już obsługiwany przez jego autora.",
@@ -168,6 +172,11 @@
     "One": "Powinieneś przełączyć się na '{1}'.",
     "Plural": "You should switch to one of the following packages."
   },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
+  },
   "NoRequiredDlcs": "Brak wymaganych DLC",
   "DlcsSelected": {
     "One": "Wybrano {0} DLC",
@@ -217,7 +226,6 @@
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Autor {0}, {1}, znany jest jako złośliwy i/lub zawierający szkodliwe treści, takie jak wirusy w ich opakowaniach.",
   "ReviewRequests": "Przejrzyj żądania {0}",
-  "DeleteRequest": "Usuń żądanie",
   "ApplyRequestedChanges": "Zastosuj żądane zmiany",
   "ManagePackage": "Zarządzaj pakietem",
   "Banned": "Zbanowano",
@@ -228,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "Ten pakiet zawiera jedno inne ostrzeżenie dotyczące zgodności",
     "Plural": "Ten pakiet zawiera {0} innych ostrzeżeń dotyczących zgodności"
-  }
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }

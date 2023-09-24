@@ -553,6 +553,7 @@
   "CancelDownloads": "Alle ausstehenden Downloads abbrechen",
   "ApplySubs": "Starte das Spiel für einen kurzen Moment, um ausstehende Abonnements anzuwenden",
   "ApplyDownloads": "Zwinge Steam, alle ausstehenden Pakete herunterzuladen",
+  "ApplyRemoval": "Lösche alle ausstehenden Pakete",
   "SubsPendingInfo": "Pakete, die du abonnierst, sind hier gruppiert.\nSobald du das Spiel öffnest, werden diese Elemente auf Steam abonniert.",
   "DownloadsPendingInfo": "Abonnierte Pakete, die noch nicht heruntergeladen wurden, werden hier gruppiert.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Starte das Herunterladen oder Entfernen von Paketen direkt nach dem Abonnieren/Abbestellen",
@@ -664,7 +665,6 @@
   "CleanupInfoTitle": "Was ist eine Bereinigung?",
   "TroubleshootCauseResult": "Die folgenden Pakete könnten die Ursache für die Probleme sein",
   "VerifiedAuthor": "Verifizierter Autor",
-  "ApplyAllActions": "Alle verfügbaren Aktionen anwenden",
   "FailedToImportPlayset": "Importieren dieses Spielsets fehlgeschlagen.",
   "EnablePackage": "{0} aktivieren",
   "DisablePackage": "{0} deaktivieren",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' wurde seit deiner letzten Sitzung installiert",
     "Plural": "{0} neue Pakete wurden seit deiner letzten Sitzung installiert"
-  }
+  },
+  "IncorrectFolderSettings": "Falsche Ordnereinstellungen",
+  "IncorrectFolderSettingsInfo": "Deine Ordnereinstellungen sind nicht korrekt. Klicke hier, um sie in den Einstellungen zu ändern oder zurückzusetzen."
 }

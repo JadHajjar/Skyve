@@ -102,6 +102,10 @@
     "One": "'{0}' latautuu suoraan '{1} ' jälkeen.",
     "Plural": "'{0}' latautuu suoraan seuraavien pakettien jälkeen."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "Nämä ovat useita versioita samasta paketista.\r\n\r\nSinun pitäisi valita vain yksi niistä.",
   "Status_Succeeded": "'{1}' on seuraaja '{0}'.\n\nKäytät jo '{1}' -toimintoa, joten '{0}' -toimintoa ei enää tarvita.",
   "Status_Deprecated": "'{0}' on vanhentunut, sen tekijä ei enää tue sitä.",
@@ -168,6 +172,11 @@
     "One": "Sinun pitäisi siirtyä käyttämään '{1}'.",
     "Plural": "Sinun pitäisi siirtyä käyttämään yhtä seuraavista paketeista:"
   },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
+  },
   "NoRequiredDlcs": "Ei Vaadittuja DLC:itä",
   "DlcsSelected": {
     "One": "{0} DLC valittu",
@@ -217,7 +226,6 @@
   "AuthorRetired": "Modin {0} tekijä {1} on lopetttanut, tai ollut pitkään epäaktiivinen. \n\nPakettien päivityksiä ja vakautta ei voida taata.",
   "AuthorMalicious": "Tekijän {0}, {1}, tiedetään olevan pahansuopa ja/tai sisällyttää haitallista sisältöä, kuten viruksia paketteihinsa.",
   "ReviewRequests": "Arvostelupyynnöt {0}",
-  "DeleteRequest": "Poista pyyntö",
   "ApplyRequestedChanges": "Hyväksy pyydetyt muutokset",
   "ManagePackage": "Hallinnoi pakettia",
   "Banned": "Estetty",
@@ -228,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "This package has one other compatibility warning",
     "Plural": "This package has {0} other compatibility warnings"
-  }
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }

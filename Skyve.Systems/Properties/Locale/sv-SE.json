@@ -553,6 +553,7 @@
   "CancelDownloads": "Avbryt alla väntande nedladdningar",
   "ApplySubs": "Starta spelet för en kort stund för att tillämpa väntande prenumerationer",
   "ApplyDownloads": "Tvinga Steam att ladda ner alla väntande paket",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "Paket du prenumererar på är grupperade här.\nNär du öppnar spelet kommer dessa objekt att prenumereras på på Steam.",
   "DownloadsPendingInfo": "Paket som du prenumererar på och inte har laddats ned ännu är grupperade här.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Starta hämtning eller borttagning av paket omedelbart efter prenumeration / avprenumeration",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "Vad är en sanering?",
   "TroubleshootCauseResult": "Följande paket kan vara orsaken till dina problem",
   "VerifiedAuthor": "Verifierad författare",
-  "ApplyAllActions": "Apply all available actions",
   "FailedToImportPlayset": "Failed to import this playset.",
   "EnablePackage": "Enable {0}",
   "DisablePackage": "Disable {0}",
   "IncludePackage": "Include {0}",
   "ExcludePackage": "Exclude {0}",
   "FilterByEnabled": "Only show enabled items.",
-  "FilterByDisabled": "Only show disabbled items.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "Only show included items.",
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' got installed since your last session",
     "Plural": "{0} new packages got installed since your last session"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }

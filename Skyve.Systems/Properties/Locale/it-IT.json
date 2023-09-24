@@ -553,6 +553,7 @@
   "CancelDownloads": "Annulla tutti i download in attesa",
   "ApplySubs": "Avvia il gioco per un breve momento per applicare le sottoscrizioni in corso",
   "ApplyDownloads": "Forza Steam a scaricare tutti i pacchetti in attesa",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "I pacchetti sottoscritti sono raggruppati qui.\nUna volta aperto il gioco, questi oggetti verranno sottoscritti su Steam.",
   "DownloadsPendingInfo": "I pacchetti a cui si è sottoscritti e che non sono ancora stati scaricati sono raggruppati qui.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Avvia lo scaricamento o la rimozione dei pacchetti subito dopo l'iscrizione/disiscrizione",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "Che cos'è una pulizia?",
   "TroubleshootCauseResult": "I seguenti pacchetti potrebbero essere la causa dei tuoi problemi",
   "VerifiedAuthor": "Autore Verificato",
-  "ApplyAllActions": "Apply all available actions",
   "FailedToImportPlayset": "Failed to import this playset.",
   "EnablePackage": "Enable {0}",
   "DisablePackage": "Disable {0}",
   "IncludePackage": "Include {0}",
   "ExcludePackage": "Exclude {0}",
   "FilterByEnabled": "Only show enabled items.",
-  "FilterByDisabled": "Only show disabbled items.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "Only show included items.",
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' got installed since your last session",
     "Plural": "{0} new packages got installed since your last session"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }

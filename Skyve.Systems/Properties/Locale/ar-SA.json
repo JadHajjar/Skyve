@@ -553,6 +553,7 @@
   "CancelDownloads": "إلغاء جميع التنزيلات المعلقة",
   "ApplySubs": "ابدأ اللعبة لحظة وجيزة لتطبيق الاشتراكات المعلقة",
   "ApplyDownloads": "إجبار ستيم على تنزيل جميع الحزم المعلقة",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
   "DownloadsPendingInfo": "الحزم التي اشتركت فيها ولم يتم تنزيلها حتى الآن تم تجميعها هنا.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "بدء تحميل أو إزالة الحزم مباشرة بعد الاشتراك/إلغاء الاشتراك",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "ما هو تنظيف؟",
   "TroubleshootCauseResult": "الحزم التالية قد تكون سبب مشاكلك",
   "VerifiedAuthor": "المؤلف المتحقق منه",
-  "ApplyAllActions": "Apply all available actions",
   "FailedToImportPlayset": "Failed to import this playset.",
   "EnablePackage": "Enable {0}",
   "DisablePackage": "Disable {0}",
   "IncludePackage": "Include {0}",
   "ExcludePackage": "Exclude {0}",
   "FilterByEnabled": "Only show enabled items.",
-  "FilterByDisabled": "Only show disabbled items.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "Only show included items.",
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' got installed since your last session",
     "Plural": "{0} new packages got installed since your last session"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }

@@ -553,6 +553,7 @@
   "CancelDownloads": "Zrušit všechna čekající stahování",
   "ApplySubs": "Spusťte hru na krátký okamžik pro uplatnění čekajících předplatného",
   "ApplyDownloads": "Vynutit Steam ke stažení všech čekajících balíčků",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "Předplatné balíčky jsou seskupeny zde.\r\nJakmile otevřete hru, budou tyto položky odebírány na Steamu.",
   "DownloadsPendingInfo": "Balíčky, ke kterým se přihlásíte, a které ještě nebyly staženy, jsou zde seskupeny.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Začněte stahovat nebo odebírat balíčky ihned po odebírání/odhlášení",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "Co je to sanace?",
   "TroubleshootCauseResult": "Následující balíčky mohou být příčinou vašich problémů",
   "VerifiedAuthor": "Ověřený autor",
-  "ApplyAllActions": "Apply all available actions",
   "FailedToImportPlayset": "Failed to import this playset.",
   "EnablePackage": "Enable {0}",
   "DisablePackage": "Disable {0}",
   "IncludePackage": "Include {0}",
   "ExcludePackage": "Exclude {0}",
   "FilterByEnabled": "Only show enabled items.",
-  "FilterByDisabled": "Only show disabbled items.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "Only show included items.",
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' got installed since your last session",
     "Plural": "{0} new packages got installed since your last session"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }

@@ -553,6 +553,7 @@
   "CancelDownloads": "取消所有等待下载的项目",
   "ApplySubs": "启动游戏片刻，以订阅这些插件",
   "ApplyDownloads": "强制 Steam 下载所有等待处理的插件",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "这里将显示您要订阅的插件。\n一旦启动游戏，将从 Steam 创意工坊订阅这些插件。",
   "DownloadsPendingInfo": "这里显示的是您已订阅但尚未下载的插件。",
   "ForceDownloadAndDeleteAsSoonAsRequested": "订阅插件后立即开始下载，取消订阅插件后立即删除残留文件",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "什么是清理程序？",
   "TroubleshootCauseResult": "以下插件可能是出现问题的原因",
   "VerifiedAuthor": "已认证的作者",
-  "ApplyAllActions": "应用所有可用的操作",
   "FailedToImportPlayset": "无法导入此配置文件。",
   "EnablePackage": "启用 {0}",
   "DisablePackage": "禁用 {0}",
   "IncludePackage": "装载 {0}",
   "ExcludePackage": "卸下 {0}",
   "FilterByEnabled": "只显示已启用的项目。",
-  "FilterByDisabled": "只显示已禁用的项目。",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "只显示已装载的项目。",
   "FilterByExcluded": "只显示已卸下的项目。",
   "ViewOnGithub": "查看此插件的 Github 代码存储库",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "在您上次使用 Skyve 后，新增的插件 '{1}' 已安装",
     "Plural": "在您上次使用 Skyve 后，新增的 {0} 个插件已安装"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }
