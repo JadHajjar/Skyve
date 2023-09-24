@@ -49,6 +49,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		ListControl.Visible = false;
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
+		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
 		I_Actions = new IncludeAllButton<ILocalPackage>(() => ListControl.FilteredItems.SelectWhereNotNull(x => x.Package).ToList()!);
 		I_Actions.ActionClicked += I_Actions_Click;
