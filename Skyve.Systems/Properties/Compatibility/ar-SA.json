@@ -102,6 +102,10 @@
     "One": "سيتم تحميل{0}' مباشرة بعد '{1}'.",
     "Plural": "{0}' سيتم تحميل مباشرة بعد الحزم التالية."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "هذه إصدارات متعددة من نفس الحزمة.\r\n\r\nيجب عليك اختيار واحد منها فقط.",
   "Status_Succeeded": "'{0}' نجح ب '{1}'.\r\n\r\nأنت تستخدم بالفعل '{1}' لذلك لا حاجة إلى '{0}' بعد الآن.",
   "Status_Deprecated": "'{0}' مهجور, لم يعد مدعوما من قبل مؤلفه.",
@@ -168,6 +172,11 @@
     "One": "يجب عليك الانتقال إلى '{1}'.",
     "Plural": "You should switch to one of the following packages."
   },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
+  },
   "NoRequiredDlcs": "لا يوجد DLCs مطلوبة",
   "DlcsSelected": {
     "One": "تم تحديد {0} DLC",
@@ -217,7 +226,6 @@
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "مؤلف {0}، {1}، معروف بأنه خبيث و/أو أنه يتضمن محتوى ضار مثل الفيروسات في الحزم الخاصة بهم.",
   "ReviewRequests": "مراجعة طلبات {0}",
-  "DeleteRequest": "حذف طلب",
   "ApplyRequestedChanges": "تطبيق التغييرات المطلوبة",
   "ManagePackage": "إدارة الحزمة",
   "Banned": "محظور",
@@ -228,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "This package has one other compatibility warning",
     "Plural": "This package has {0} other compatibility warnings"
-  }
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }

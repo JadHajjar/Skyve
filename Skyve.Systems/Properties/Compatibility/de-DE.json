@@ -102,6 +102,10 @@
     "One": "\"{0}\" wird direkt nach \"{1}\" geladen.",
     "Plural": "\"{0}\" wird direkt nach den folgenden Paketen geladen."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' ist für '{1}' erforderlich.",
+    "Plural": "'{0}' ist für die folgenden Pakete erforderlich."
+  },
   "Interaction_Identical": "Dies sind mehrere Versionen des gleichen Paketes.\n\nNur eines von ihnen auswählen.",
   "Status_Succeeded": "'{0}' wurde von '{1}' abgelöst.\n\nDu verwendest bereits '{1}', sodass es keine Notwendigkeit mehr für '{0}' gibt.",
   "Status_Deprecated": "'{0}' ist veraltet, es wird nicht mehr vom Autor unterstützt.",
@@ -168,6 +172,11 @@
     "One": "Sie sollten zu '{1}' wechseln.",
     "Plural": "Sie sollten zu einem der folgenden Pakete wechseln:"
   },
+  "Action_IncludeThis": "Du solltest '{0}' hinzufügen",
+  "Action_IncludeOther": {
+    "One": "Folgende Pakete sollten hinzugefügt werden:",
+    "Plural": "Du solltest diese Pakete hinzufügen:"
+  },
   "NoRequiredDlcs": "Keine erforderlichen DLCs",
   "DlcsSelected": {
     "One": "{0} DLC ausgewählt",
@@ -217,7 +226,6 @@
   "AuthorRetired": "Der Autor von {0}, {1}, hat sich zurückgezogen oder ist seit langem inaktiv.\n\nZukünftige Updates & Stabilität für deren Pakete sind nicht garantiert.",
   "AuthorMalicious": "Der Autor von {0}, {1}, ist als böswillig bekannt und/oder dafür, schädliche Inhalte wie Viren in deren Pakete einzubauen.",
   "ReviewRequests": "Überprüfungsanfragen {0}",
-  "DeleteRequest": "Anfrage löschen",
   "ApplyRequestedChanges": "Angeforderte Änderungen anwenden",
   "ManagePackage": "Paket verwalten",
   "Banned": "Gesperrt",
@@ -228,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "Dieses Paket hat eine weitere Kompatibilitätswarnung",
     "Plural": "Dieses Paket hat {0} andere Kompatibilitätswarnungen"
-  }
+  },
+  "DeleteRequests": {
+    "One": "Diese Anfrage löschen",
+    "Plural": "Diese Anfragen löschen"
+  },
+  "ViewRequest": "Anfrage anzeigen",
+  "CRT_RequiredItem": "Erforderlicher Gegenstand",
+  "RequiredItem": "Erforderlicher Gegenstand",
+  "ApplyAllActions": "Alle verfügbaren Aktionen anwenden",
+  "SnoozeAll": "Alle angezeigten Probleme ausblenden"
 }

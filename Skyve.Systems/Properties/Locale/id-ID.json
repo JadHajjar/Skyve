@@ -553,6 +553,7 @@
   "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Luncurkan game sebentar untuk menerapkan subscribe yang tertunda",
   "ApplyDownloads": "Paksa Steam untuk download semua paket yang tertunda",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "Paket subscribe anda dikelompokkan di sini.\nSetelah anda membuka game, item tersebut akan disubsribe di Steam.",
   "DownloadsPendingInfo": "Paket subscribe anda dan belum didownload dikelompokkan di sini.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Mulai download atau penghapusan paket segera setelah subscribe/unsubsribe",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "What is a cleanup?",
   "TroubleshootCauseResult": "The following packages might be the cause of your issues",
   "VerifiedAuthor": "Verified Author",
-  "ApplyAllActions": "Apply all available actions",
   "FailedToImportPlayset": "Failed to import this playset.",
   "EnablePackage": "Enable {0}",
   "DisablePackage": "Disable {0}",
   "IncludePackage": "Include {0}",
   "ExcludePackage": "Exclude {0}",
   "FilterByEnabled": "Only show enabled items.",
-  "FilterByDisabled": "Hanya tampilkan item yang dinonaktifkan.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "Hanya tampilkan item yang disertakan.",
   "FilterByExcluded": "Hanya tampilkan item yang dikecualikan.",
   "ViewOnGithub": "Lihat repositori Github paket ini",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' got installed since your last session",
     "Plural": "{0} new packages got installed since your last session"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }

@@ -553,6 +553,7 @@
   "CancelDownloads": "Cancelar todos os downloads pendentes",
   "ApplySubs": "Inicie o jogo por um instante para aplicar assinaturas pendentes",
   "ApplyDownloads": "Forçar o Steam a baixar todos os pacotes pendentes",
+  "ApplyRemoval": "Excluir todos os pacotes pendentes",
   "SubsPendingInfo": "Os pacotes aos quais você se inscreveu estão agrupados aqui.\nAssim que você abrir o jogo, esses itens serão inscritos na Steam.",
   "DownloadsPendingInfo": "Os pacotes que você assinou e ainda não baixou estão agrupados aqui.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Comece a baixar ou remover os pacotes imediatamente ao assinar, ou cancelar assinatura",
@@ -664,7 +665,6 @@
   "CleanupInfoTitle": "O que é uma limpeza?",
   "TroubleshootCauseResult": "Os seguintes pacotes podem ser a causa de seus problemas",
   "VerifiedAuthor": "Autor Verificado",
-  "ApplyAllActions": "Aplicar todas as ações disponíveis",
   "FailedToImportPlayset": "Falha ao importar este Perfil.",
   "EnablePackage": "Habilitar {0}",
   "DisablePackage": "Desabilitar {0}",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' foi instalado desde a sua última sessão",
     "Plural": "{0} Novos pacotes foram instalados desde a sua última sessão"
-  }
+  },
+  "IncorrectFolderSettings": "Configurações de pasta incorretas",
+  "IncorrectFolderSettingsInfo": "As configurações da sua pasta não estão configuradas corretamente, clique aqui para alterar ou redefini-las na página de Opções."
 }

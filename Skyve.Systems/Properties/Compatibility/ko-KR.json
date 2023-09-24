@@ -102,6 +102,10 @@
     "One": "'{0}' 는 '{1}' 직후에 로드됩니다.",
     "Plural": "'{0}' 는 다음 패키지들 직후에 로드됩니다."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "이것들은 같은 패키지의 여러 버전들입니다.\n\n이 중 하나만 선택해야 합니다.",
   "Status_Succeeded": "'{0}' 는 '{1}' 로 계승되었습니다.\n\n이미 '{1}' 를 사용하고 있으므로 '{0}' 는 더 이상 필요하지 않습니다.",
   "Status_Deprecated": "'{0}' 는 더 이상 제작자에 의해 지원되지 않으며 사용되지 않습니다.",
@@ -168,6 +172,11 @@
     "One": "'{1}' 로 바꾸어야 합니다.",
     "Plural": "다음 패키지 중 하나로 바꿔야 합니다."
   },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
+  },
   "NoRequiredDlcs": "필요한 DLC 없음",
   "DlcsSelected": {
     "One": "DLC {0}개 선택됨",
@@ -217,7 +226,6 @@
   "AuthorRetired": "{0}의 제작자인 {1}는 제작을 그만두었거나 오랫동안 활동하지 않았습니다.\n\n그의 패키지에 대한 앞으로의 업데이트와 안정성은 보장되지 않습니다.",
   "AuthorMalicious": "{0}의 제작자인 {1}는 바이러스와 같은 유해하거나 악성인 콘텐츠를 자신의 패키지에 포함시키는 것으로 알려져 있습니다.",
   "ReviewRequests": "검토 요청 {0}",
-  "DeleteRequest": "삭제 요청",
   "ApplyRequestedChanges": "요청된 변경사항 적용",
   "ManagePackage": "패키지 관리",
   "Banned": "차단됨",
@@ -228,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "이 패키지에는 또 다른 호환성 경고가 있습니다.",
     "Plural": "이 패키지에는 {0}개의 다른 호환성 경고가 더 있습니다."
-  }
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }

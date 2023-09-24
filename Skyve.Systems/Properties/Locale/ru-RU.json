@@ -553,6 +553,7 @@
   "CancelDownloads": "Отменить все ожидающие загрузки",
   "ApplySubs": "Запустите игру на короткое время, чтобы применить ожидающие подписки",
   "ApplyDownloads": "Принудительно загрузить все пакеты в очереди",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "Пакеты, на которые вы подписаны, сгруппированы здесь.\nКак только вы откроете игру, на эти предметы будет оформлена подписка в Steam.",
   "DownloadsPendingInfo": "Пакеты, на которые вы подписаны и которые еще не были загружены, сгруппированы здесь.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Начинать загрузку или удаление пакетов сразу после подписки/отписки",
@@ -664,14 +665,13 @@
   "CleanupInfoTitle": "Что такое очистка?",
   "TroubleshootCauseResult": "Причиной проблем могут быть следующие пакеты",
   "VerifiedAuthor": "Проверенный автор",
-  "ApplyAllActions": "Показать все доступные действия",
   "FailedToImportPlayset": "Не удалось импортировать этот плейсет.",
   "EnablePackage": "Включить {0}",
   "DisablePackage": "Выключить {0}",
   "IncludePackage": "Добавить {0}",
   "ExcludePackage": "Исключить {0}",
   "FilterByEnabled": "Показывать только включенные элементы.",
-  "FilterByDisabled": "Показывать только выключенные элементы.",
+  "FilterByDisabled": "Only show disabled items.",
   "FilterByIncluded": "Показыать только добавленные элементы.",
   "FilterByExcluded": "Показывать только исключенные элементы.",
   "ViewOnGithub": "Просмотреть GitHub репозиторий этого пакета",
@@ -711,5 +711,7 @@
   "NewPackagesSinceSession": {
     "One": "'{1}' got installed since your last session",
     "Plural": "{0} new packages got installed since your last session"
-  }
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }
