@@ -553,7 +553,7 @@
   "CancelDownloads": "Alle ausstehenden Downloads abbrechen",
   "ApplySubs": "Starte das Spiel für einen kurzen Moment, um ausstehende Abonnements anzuwenden",
   "ApplyDownloads": "Zwinge Steam, alle ausstehenden Pakete herunterzuladen",
-  "ApplyRemoval": "Delete all pending packages",
+  "ApplyRemoval": "Lösche alle ausstehenden Pakete",
   "SubsPendingInfo": "Pakete, die du abonnierst, sind hier gruppiert.\nSobald du das Spiel öffnest, werden diese Elemente auf Steam abonniert.",
   "DownloadsPendingInfo": "Abonnierte Pakete, die noch nicht heruntergeladen wurden, werden hier gruppiert.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Starte das Herunterladen oder Entfernen von Paketen direkt nach dem Abonnieren/Abbestellen",
@@ -671,7 +671,7 @@
   "IncludePackage": "{0} einschließen",
   "ExcludePackage": "{0} ausschließen",
   "FilterByEnabled": "Nur aktivierte Elemente anzeigen.",
-  "FilterByDisabled": "Only show disabled items.",
+  "FilterByDisabled": "Nur deaktivierte Elemente anzeigen.",
   "FilterByIncluded": "Nur eingeschlossene Elemente anzeigen.",
   "FilterByExcluded": "Nur ausgeschlossene Elemente anzeigen.",
   "ViewOnGithub": "Github Repository dieses Paketes ansehen",
@@ -712,6 +712,6 @@
     "One": "'{1}' wurde seit deiner letzten Sitzung installiert",
     "Plural": "{0} neue Pakete wurden seit deiner letzten Sitzung installiert"
   },
-  "IncorrectFolderSettings": "Incorrect Folder Settings",
-  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
+  "IncorrectFolderSettings": "Falsche Ordnereinstellungen",
+  "IncorrectFolderSettingsInfo": "Deine Ordnereinstellungen sind nicht korrekt. Klicke hier, um sie in den Einstellungen zu ändern oder zurückzusetzen."
 }
