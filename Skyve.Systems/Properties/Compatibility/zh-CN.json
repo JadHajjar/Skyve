@@ -16,7 +16,7 @@
   "AddStatus": "添加状态",
   "AddInteraction": "添加交互方式",
   "NotReviewed": "尚未被检查",
-  "Stable": "稳定版",
+  "Stable": "稳定",
   "NotEnoughInformation": "没有足够的信息",
   "HasIssues": "存在问题",
   "Broken": "已损坏",
@@ -102,6 +102,10 @@
     "One": "'{0}'将在'{1}'加载完成后直接加载。",
     "Plural": "'{0}'将在以下插件加载完成后直接加载。"
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "以下是同一插件的多个不同版本。\n\n您应当只使用其中一个版本，并取消订阅此插件的其它版本。",
   "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
   "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
@@ -136,10 +140,11 @@
   "Stability_NotReviewed": "此插件尚未被检查。\n\n兼容性信息可能不准确。",
   "Stability_Stable": "此插件能稳定运行。",
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查此插件的稳定性。",
-  "Stability_HasIssues": "此插件可能存在稳定性问题。\n请小心使用。",
+  "Stability_HasIssues": "此插件可能存在问题。\n请小心使用。",
   "Stability_Broken": "此插件已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
   "Stability_Incompatible": "此插件与游戏不兼容，或者会使游戏崩溃。\n\n您应当立刻取消订阅或删除此插件。",
   "Stability_Local": "此插件是模组 '{0}' 的本地版本。\n\n本地模组通常用于进行测试，或在非 Steam 版本的游戏使用。\n\n请查看插件的链接以查找模组的更新版本。",
+  "Stability_BrokenFromPatch": "此插件在最近的一次游戏更新后损坏了。请等待它更新适配后再使用。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "您应当订阅以下插件：",
@@ -166,6 +171,11 @@
   "Action_Switch": {
     "One": "您应当将其替换为 '{1}'。",
     "Plural": "您应当将此模组替换为下列任意一个插件："
+  },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
   },
   "NoRequiredDlcs": "没有前置 DLC",
   "DlcsSelected": {
@@ -216,7 +226,6 @@
   "AuthorRetired": "{0} 的作者 {1} 已经退坑，或者长期不活跃。\n对于该作者制作的插件，无法保证其将来是否能够稳定运行，以及是否更新。",
   "AuthorMalicious": "已知 {0} 的作者 {1} 存在恶意，并且其制作的插件中含有病毒等有害内容。",
   "ReviewRequests": "检查申请 {0}",
-  "DeleteRequest": "删除申请",
   "ApplyRequestedChanges": "应用申请的改动",
   "ManagePackage": "管理插件",
   "Banned": "已被封禁",
@@ -225,7 +234,16 @@
   "ScenarioMaking": "制作剧本",
   "ThemeMaking": "制作地图主题",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
-  }
+    "One": "此插件还有另一个兼容性警告",
+    "Plural": "此插件还有 {0} 个兼容性警告"
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }

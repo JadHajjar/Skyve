@@ -85,6 +85,11 @@ public class AssetsBubble : StatusBubbleBase
 				_compatibilityCounts[notif] = 1;
 			}
 		}
+
+		if (Loading)
+		{
+			Loading = false;
+		}
 	}
 
 	private void ProfileManager_ProfileChanged()
@@ -142,7 +147,7 @@ public class AssetsBubble : StatusBubbleBase
 		}
 
 		DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower()));
-		DrawValue(e, ref targetHeight, assetSize.SizeString(), Locale.TotalSize);
+		DrawValue(e, ref targetHeight, assetSize.SizeString(), Locale.TotalAssetSize);
 
 		if (assetsOutOfDate > 0)
 		{

@@ -35,7 +35,7 @@ internal class NotifierSystem : INotifier
 	{
 		_logger = logger;
 
-		_delayedContentLoaded = new(350, () => RunAndLog(ContentLoaded, nameof(RunAndLog)));
+		_delayedContentLoaded = new(3000, () => RunAndLog(ContentLoaded, nameof(ContentLoaded)));
 		_delayedPackageInformationUpdated = new(300, () => RunAndLog(PackageInformationUpdated, nameof(PackageInformationUpdated)));
 		_delayedPackageInclusionUpdated = new(250, () => RunAndLog(PackageInclusionUpdated, nameof(PackageInclusionUpdated)));
 		_delayedWorkshopInfoUpdated = new(200, () => RunAndLog(WorkshopInfoUpdated, nameof(WorkshopInfoUpdated)));

@@ -1,8 +1,6 @@
 {
   "CompatibilityInfo": "Informazioni sulla compatibilità",
   "PlaysetBubble": "Playset attuale",
-  "StartCities": "Avvia Cities: Skylines",
-  "StopCities": "Ferma Cities: Skylines",
   "AssetsBubble": "Le tue risorse",
   "ModsBubble": "Le tue mod",
   "Dashboard": "Inizio",
@@ -10,24 +8,6 @@
   "ModOutOfDatePlural": "mod sono obsolete",
   "SearchDlcs": "Cerca nei tuoi DLC..",
   "SearchPackages": "Cerca nei tuoi pacchetti..",
-  "ModIsLocal": "La mod è locale",
-  "ModIsRemoved": "Rimosso da Steam",
-  "ModIsUnknown": "Impossibile ottenere le informazioni di questa mod da Steam",
-  "ModIsNotDownloaded": "Contenuto non trovato",
-  "ModIsOutOfDate": "La mod non è aggiornata",
-  "ModIsMaybeOutOfDate": "La mod potrebbe non essere aggiornata",
-  "ModIsIncomplete": "La mod non è del tutto scaricata o ha dei file mancanti",
-  "ModIsUpToDate": "La mod è aggiornata e del tutto scaricata",
-  "ModIncomplete": "La mod non è del tutto scaricata o ha dei file mancanti",
-  "ModIncompletePlural": "Le mod non sono del tutto scaricate o hanno dei file mancanti",
-  "AssetIsLocal": "La risorsa è locale",
-  "AssetIsRemoved": "Questa risorsa è stata rimossa da Steam",
-  "AssetIsUnknown": "Impossibile ottenere le informazioni di questa risorsa da Steam",
-  "AssetIsNotDownloaded": "Questa risorsa non è scaricata, non è più presente sul tuo computer",
-  "AssetIsOutOfDate": "La risorsa non è aggiornata",
-  "AssetIsMaybeOutOfDate": "La risorsa potrebbe non essere aggiornata",
-  "AssetIsIncomplete": "La risorsa non è del tutto scaricata o ha dei file mancanti",
-  "AssetIsUpToDate": "La risorsa è aggiornata e del tutto scaricata",
   "Vanilla": "Base",
   "UpToDate": "Aggiornato",
   "StatusUnknown": "Stato sconosciuto",
@@ -42,15 +22,13 @@
   "ViewPlaysets": "Visualizza I Tuoi Playset",
   "AddPlayset": "Aggiungi Playset",
   "LHT": "Guida a sinistra",
-  "NoWorkshop": "Disabilita i pacchetti del workshop",
   "NoAssets": "Disabilità tutte le risorse",
   "NoMods": "Disabilita tutte le mod",
   "AutoSave": "Salvataggio automatico",
-  "TotalSize": "dimensione totale",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "Stato di compatibilità",
   "AnyStatus": "Qualsiasi stato",
-  "AnyCompatibilityStatus": "Qualsiasi Stato",
-  "ModOwned": "Hai questa mod",
+  "AnyCompatibilityStatus": "Qualsiasi stato",
   "NoLocalPackagesFound": "Nessun pacchetto trovato sul tuo computer.",
   "CheckFolderInOptions": "Controlla il pannello delle opzioni nel caso in cui le cartelle sbagliate siano utilizzate.",
   "NoPackagesMatchFilters": "Nessun pacchetto corrisponde alle impostazioni del filtro",
@@ -88,8 +66,6 @@
   "LoadingScreenMod": "Loading Screen Mod",
   "LoadEnabled": "Carica tutte le risorse abilitate",
   "LoadUsed": "Carica le risorse in uso",
-  "ExcludeInclude": "Includi / Escludi",
-  "EnableDisable": "Abilita / Disabilita",
   "OpenPackagePage": "Apri la pagina di questo pacchetto",
   "OpenLocalFolder": "Apri la cartella locale contenente questo pacchetto",
   "ViewOnSteam": "Visualizza questo pacchetto su Steam",
@@ -105,8 +81,8 @@
   "OpenAuthorPage": "Apri pagina dell'autore",
   "Sorting_Default": "Ordinamento predefinito",
   "Sorting_LastEdit": "Data Ultima Modifica",
-  "Sorting_DateCreated": "Data di Creazione",
-  "Sorting_Usage": "Scopo del profilo",
+  "Sorting_DateCreated": "Data di creazione",
+  "Sorting_Usage": "Utilizzo Playset",
   "Sorting_Name": "Nome",
   "Sorting_FileSize": "Dimensione Totale dei File",
   "Sorting_UpdateTime": "Data di Aggiornamento",
@@ -148,8 +124,8 @@
     "Plural": "Elimina i pacchetti selezionati"
   },
   "UnsubscribePackage": {
-    "One": "Annulla la sottoscrizione a questo pacchetto",
-    "Plural": "Annulla la sottoscrizione ai pacchetti selezionati"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "Copia l'ID Workshop di questo pacchetto",
@@ -296,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Pacchetti inclusi e abilitati: {0}, Totale: {1}",
   "AssetIncludedTotal": "Risorse incluse: {0}, Totale: {1}",
   "NewPlayset_Tip": "Crea o importa una nuova playset",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "Passa a un playset temporaneo con le impostazioni correnti",
   "ViewPlaysets_Tip": "Visualizza e gestisci i tuoi playset salvati",
   "AutoSave_Tip": "Salva automaticamente le modifiche alle mod e alle risorse nel tuo profilo",
@@ -407,8 +384,6 @@
   "AddToSearch": "Aggiungi '{0}' alla tua ricerca",
   "CopyToClipboard": "Copia '{0}' negli appunti",
   "ViewPackageCR": "Visualizza il report di compatibilità di questo pacchetto",
-  "FilterByThisEnabledStatus": "Filtra per questo stato di 'Attivazione'",
-  "FilterByThisIncludedStatus": "Filtra per questo stato di 'Inclusione'",
   "CleanupInfo": "Esegue una veloce pulizia che cancella dal tuo computer tutti i pacchetti a cui non si è iscritti, e forza lo scaricamento dei pacchetti sottoscritti mancanti.",
   "CleanupTitle": "Pulizia Pacchetti del Workshop",
   "RunCleanup": "Esegui Pulizia",
@@ -483,27 +458,27 @@
   },
   "IncludedCount": {
     "One": "{0} {1} incluso",
-    "Plural": "{0} {1} inclusi"
+    "Plural": "{0} {1} incluso"
   },
   "EnabledCount": {
     "One": "{0} {1} abilitato",
-    "Plural": "{0} {1} abilitati"
+    "Plural": "{0} {1} abilitato"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} incluso e abilitato",
-    "Plural": "{0} {1} inclusi e abilitati"
+    "Plural": "{0} {1} incluso e abilitato"
   },
   "LoadedCount": {
     "One": "{0} {1} caricato",
-    "Plural": "{0} {1} caricati"
+    "Plural": "{0} {1} caricato"
   },
   "ShowingCount": {
     "One": "Mostrato {0} {1}",
-    "Plural": "Mostrate {0} {1}"
+    "Plural": "Mostrato {0} {1}"
   },
   "ShowingCountWarning": {
     "One": "Mostrato {0} {1}, {2}",
-    "Plural": "Mostrate {0} {1}, {2}"
+    "Plural": "Mostrato {0} {1}, {2}"
   },
   "ShowingSelectedCount": {
     "One": "Mostrando {0} {1}, {2} selezionato",
@@ -545,13 +520,21 @@
     "One": "{0} {1} non corrisponde alla sua dimensione nel Workshop",
     "Plural": "{0} {1} non corrispondono alle rispettive dimensioni del Workshop"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "'{0}' è stato rimosso da Steam",
   "PackageIsUnknown": "Le informazioni di Steam non sono ancora state caricate per '{0}'",
   "PackageIsNotDownloaded": "'{0}' è stato rimosso dal computer",
   "PackageIsOutOfDate": "'{0}' non è aggiornato\n\nSei indietro di {1}",
   "PackageIsMaybeOutOfDate": "'{0}' potrebbe non essere aggiornato, è stato aggiornato {1}",
   "PackageIsIncomplete": "La dimensione locale di '{0}' ({1}) è diversa da quella di {2} di Steam",
-  "RemovedFromSteam": "Rimosso da Steam",
+  "RemovedByAuthor": "Removed by author",
   "Missing": "Mancante",
   "LoggedInAs": "Connesso come",
   "UnknownUser": "Utente Sconosciuto",
@@ -570,6 +553,7 @@
   "CancelDownloads": "Annulla tutti i download in attesa",
   "ApplySubs": "Avvia il gioco per un breve momento per applicare le sottoscrizioni in corso",
   "ApplyDownloads": "Forza Steam a scaricare tutti i pacchetti in attesa",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "I pacchetti sottoscritti sono raggruppati qui.\nUna volta aperto il gioco, questi oggetti verranno sottoscritti su Steam.",
   "DownloadsPendingInfo": "I pacchetti a cui si è sottoscritti e che non sono ancora stati scaricati sono raggruppati qui.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Avvia lo scaricamento o la rimozione dei pacchetti subito dopo l'iscrizione/disiscrizione",
@@ -681,5 +665,53 @@
   "CleanupInfoTitle": "Che cos'è una pulizia?",
   "TroubleshootCauseResult": "I seguenti pacchetti potrebbero essere la causa dei tuoi problemi",
   "VerifiedAuthor": "Autore Verificato",
-  "ApplyAllActions": "Apply all available actions"
+  "FailedToImportPlayset": "Failed to import this playset.",
+  "EnablePackage": "Enable {0}",
+  "DisablePackage": "Disable {0}",
+  "IncludePackage": "Include {0}",
+  "ExcludePackage": "Exclude {0}",
+  "FilterByEnabled": "Only show enabled items.",
+  "FilterByDisabled": "Only show disabled items.",
+  "FilterByIncluded": "Only show included items.",
+  "FilterByExcluded": "Only show excluded items.",
+  "ViewOnGithub": "View this package's Github repository",
+  "ViewXOnSteam": "View '{0}' on Steam",
+  "Free": "Free",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }

@@ -11,16 +11,12 @@ namespace Skyve.Systems.Compatibility;
 internal class LoadOrderHelper : ILoadOrderHelper
 {
 	private readonly CompatibilityManager _compatibilityManager;
-	private readonly IModLogicManager _modLogicManager;
-	private readonly CompatibilityHelper _compatibilityHelper;
 	private readonly IPackageManager _packageManager;
 
-	public LoadOrderHelper(IPackageManager packageManager, ICompatibilityManager compatibilityManager, IModLogicManager modLogicManager, IPackageUtil packageUtil, IPackageNameUtil packageNameUtil, IWorkshopService workshopService, ILocale locale)
+	public LoadOrderHelper(IPackageManager packageManager, ICompatibilityManager compatibilityManager)
 	{
 		_packageManager = packageManager;
 		_compatibilityManager = (CompatibilityManager)compatibilityManager;
-		_modLogicManager = modLogicManager;
-		_compatibilityHelper = new CompatibilityHelper(_compatibilityManager, packageManager, packageUtil, packageNameUtil, workshopService, locale);
 	}
 
 	private List<ModInfo> GetEntities()
@@ -29,7 +25,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 
 		foreach (var mod in _packageManager.Mods)
 		{
-			var info = _compatibilityManager.GetPackageInfo(mod);
+			var info = (_compatibilityManager as ICompatibilityManager).GetPackageInfo(mod);
 
 			var interaction = info?.Interactions?.FirstOrDefault(x => x.Type is InteractionType.RequiredPackages);
 			var loadOrder = info?.Interactions?.FirstOrDefault(x => x.Type is InteractionType.LoadAfter);
@@ -121,7 +117,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		{
 			if (item.Key != steamId)
 			{
-				foreach (var package in _compatibilityHelper.FindPackage(item.Value, true))
+				foreach (var package in _compatibilityManager.FindPackage(item.Value, true))
 				{
 					if (original.Id != package.Id)
 					{
@@ -134,7 +130,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 			}
 		}
 
-		foreach (var package in _compatibilityHelper.FindPackage(indexedPackage, true))
+		foreach (var package in _compatibilityManager.FindPackage(indexedPackage, true))
 		{
 			if (original.Id != package.Id)
 			{

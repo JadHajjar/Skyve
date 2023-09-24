@@ -4,29 +4,35 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Lists;
 public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.Rectangles>
 {
-	public IEnumerable<IDlcInfo> FilteredItems => SafeGetItems().Select(x => x.Item);
-
 	private readonly ISettings _settings;
 	private readonly IDlcManager _dlcManager;
 
 	public DlcListControl()
 	{
-		HighlightOnHover = true;
-		SeparateWithLines = true;
+		GridView = true;
+		DynamicSizing = true;
 
 		_settings = ServiceCenter.Get<ISettings>();
 		_dlcManager = ServiceCenter.Get<IDlcManager>();
-
-		Loading = _dlcManager.Dlcs.Count() == 0;
 	}
 
 	protected override void UIChanged()
 	{
-		ItemHeight = 46;
+		GridItemSize = new Size(450, 120);
+		Padding = UI.Scale(new Padding(6), UI.UIScale);
+		GridPadding = UI.Scale(new Padding(4), UI.UIScale);
 
 		base.UIChanged();
+	}
 
-		Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		if (Live)
+		{
+			Loading = _dlcManager.Dlcs.Count() == 0;
+		}
 	}
 
 	protected override IEnumerable<DrawableItem<IDlcInfo, Rectangles>> OrderItems(IEnumerable<DrawableItem<IDlcInfo, Rectangles>> items)
@@ -40,14 +46,16 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		var rects = item.Rectangles;
 
-		if (rects.IncludedRect.Contains(e.Location) && _dlcManager.IsAvailable(item.Item.Id))
+		if (e.Button == MouseButtons.Left)
 		{
-			_dlcManager.SetIncluded(item.Item, !_dlcManager.IsIncluded(item.Item));
-		}
-
-		if (rects.SteamRect.Contains(e.Location))
-		{
-			PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.Item.Id}");
+			if (rects.IncludedRect.Contains(e.Location) && _dlcManager.IsAvailable(item.Item.Id))
+			{
+				_dlcManager.SetIncluded(item.Item, !_dlcManager.IsIncluded(item.Item));
+			}
+			else
+			{
+				PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.Item.Id}");
+			}
 		}
 	}
 
@@ -71,126 +79,128 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		}
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<IDlcInfo, Rectangles> e)
+	protected override void OnPaintItemGrid(ItemPaintEventArgs<IDlcInfo, Rectangles> e)
 	{
-		var large = false;
-		var rects = e.Rects;
-		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
+		var isPressed = false;
+		var isIncluded = _dlcManager.IsIncluded(e.Item);
 
-		e.HoverState &= ~HoverState.Pressed;
-
-		base.OnPaintItemList(e);
-
-		var owned = _dlcManager.IsAvailable(e.Item.Id);
-		var isIncluded = owned && _dlcManager.IsIncluded(e.Item);
-
-		if (owned)
+		if (e.IsSelected)
 		{
-			if (isIncluded)
-			{
-				e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(rects.IncludedRect.Contains(CursorLocation) ? 150 : 255, FormDesign.Design.GreenColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
-			}
-			else if (rects.IncludedRect.Contains(CursorLocation))
-			{
-				e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
-			}
+			e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
 		}
 
-		var dIcon = new DynamicIcon(!owned ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled");
-		using (var icon = large ? dIcon.Large : dIcon.Get(rects.IncludedRect.Height / 2))
+		if (e.HoverState.HasFlag(HoverState.Hovered))
 		{
-			e.Graphics.DrawImage(icon.Color(owned && rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
+			e.BackColor = (e.IsSelected ? e.BackColor : FormDesign.Design.AccentBackColor).MergeColor(FormDesign.Design.ActiveColor, !e.Rects.IncludedRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
+
+			isPressed = e.HoverState.HasFlag(HoverState.Pressed) && !e.Rects.IncludedRect.Contains(CursorLocation);
 		}
 
-		var iconRectangle = rects.IconRect;
-		var textRect = rects.TextRect;
+		base.OnPaintItemGrid(e);
 
-		var iconImg = e.Item.GetThumbnail();
+		DrawThumbnail(e);
+		DrawTitleAndTagsAndVersion(e, isPressed);
+		DrawIncludedButton(e, isIncluded, out var activeColor);
 
-		if (iconImg is null)
+		var height = (e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - GridPadding.Vertical) / 2;
+		var dateRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + GridPadding.Top), _settings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), "I_UpdateTime", height: height, smaller: true);
+
+		e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, dateRect.Bottom + GridPadding.Top), e.Item.Price.IfEmpty(Locale.Free), null, FormDesign.Design.GreenColor, height: height, smaller: true);
+
+		var description = System.Net.WebUtility.HtmlDecode(e.Item.Description);
+		using var font = UI.Font(7F);
+		e.Graphics.DrawString(description, font, new SolidBrush(Color.FromArgb(180, isPressed ? FormDesign.Design.ActiveForeColor : ForeColor)), new Rectangle(e.Rects.IconRect.X, e.Rects.IconRect.Bottom + GridPadding.Vertical, e.ClipRectangle.Width, 9999));
+
+		e.DrawableItem.CachedHeight = -e.ClipRectangle.Top + e.Rects.IconRect.Bottom + (GridPadding.Vertical * 4) + (int)e.Graphics.Measure(description, font, e.ClipRectangle.Width).Height;
+
+		if (isIncluded)
 		{
-			using var authorIcon = Properties.Resources.I_DlcIcon.Color(FormDesign.Design.IconColor);
+			var outerColor = Color.FromArgb(FormDesign.Design.Type == FormDesignType.Dark ? 65 : 100, activeColor);
 
-			e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+			using var pen = new Pen(outerColor, (float)(1.5 * UI.FontScale));
 
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.IconColor), iconRectangle, (int)(4 * UI.FontScale));
-			e.Graphics.FillRectangle(new SolidBrush(BackColor), iconRectangle.CenterR(iconRectangle.Height - 4, iconRectangle.Height - 4));
-			e.Graphics.DrawImage(authorIcon, iconRectangle.CenterR(iconRectangle.Height - 2, iconRectangle.Height - 2));
+			e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
 		}
-		else
+		else if (!_dlcManager.IsAvailable(e.Item.Id))
 		{
-			e.Graphics.DrawRoundedImage(iconImg, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
-		}
-
-		e.Graphics.DrawString(e.Item.Name.Remove("Cities: Skylines - "), UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
-		e.Graphics.DrawString(System.Net.WebUtility.HtmlDecode(e.Item.Description), UI.Font(large ? 9.75F : 7F), new SolidBrush(Color.FromArgb(150, e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor)), textRect.Pad(0, (int)e.Graphics.Measure(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold)).Height, 0, 0), new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Far });
-
-		if (e.Item.ReleaseDate != DateTime.MinValue)
-		{
-			DrawLabel(e, _settings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.TopRight);
-		}
-
-		using (var steamIcon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height / 2))
-		{
-			SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, steamIcon, null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
-		}
-
-		if (!isIncluded)
-		{
-			var filledRect = e.ClipRectangle.Pad(0, -Padding.Top, 0, -Padding.Bottom);
-			e.Graphics.SetClip(filledRect);
-			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 30 : 85, BackColor)), filledRect);
+			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
+			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
 		}
 	}
 
-	private Rectangle DrawLabel(ItemPaintEventArgs<IDlcInfo, Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
+	private void DrawThumbnail(ItemPaintEventArgs<IDlcInfo, Rectangles> e)
 	{
-		if (text == null)
+		var thumbnail = e.Item.GetThumbnail();
+
+		if (thumbnail is null)
 		{
-			return Rectangle.Empty;
+			using var generic = Properties.Resources.I_DlcIcon.Color(FormDesign.Design.IconColor);
+
+			drawThumbnail(generic);
+		}
+		else
+		{
+			drawThumbnail(thumbnail);
 		}
 
-		var large = false;
-		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
+	}
 
-		if (icon is not null)
+	private void DrawTitleAndTagsAndVersion(ItemPaintEventArgs<IDlcInfo, Rectangles> e, bool isPressed)
+	{
+		var text = e.Item.Name.Remove("Cities: Skylines - ");
+		using var font = UI.Font(10.5F, FontStyle.Bold);
+		using var brush = new SolidBrush(isPressed ? FormDesign.Design.ActiveForeColor : (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : ForeColor);
+
+		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Near });
+	}
+
+	private void DrawIncludedButton(ItemPaintEventArgs<IDlcInfo, Rectangles> e, bool isIncluded, out Color activeColor)
+	{
+		activeColor = default;
+
+		var incl = new DynamicIcon(!_dlcManager.IsAvailable(e.Item.Id) ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled");
+
+		if (isIncluded)
 		{
-			size.Width += icon.Width + Padding.Left;
+			activeColor = !_dlcManager.IsAvailable(e.Item.Id) ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
 		}
 
-		size.Width += Padding.Left;
+		Color iconColor;
 
-		rectangle = rectangle.Pad(Padding).Align(size, alignment);
-
-		using var backBrush = rectangle.Gradient(color);
-		using var foreBrush = new SolidBrush(color.GetTextColor());
-
-		e.Graphics.FillRoundedRectangle(backBrush, rectangle, (int)(3 * UI.FontScale));
-		e.Graphics.DrawString(text, UI.Font(large ? 9F : 7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + Padding.Left * 2 - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-
-		if (icon is not null)
+		if (activeColor == default && e.Rects.IncludedRect.Contains(CursorLocation))
 		{
-			e.Graphics.DrawImage(icon.Color(color.GetTextColor()), rectangle.Pad(Padding.Left, 0, 0, 0).Align(icon.Size, ContentAlignment.MiddleLeft));
+			activeColor = Color.FromArgb(20, ForeColor);
+			iconColor = FormDesign.Design.ForeColor;
+		}
+		else
+		{
+			iconColor = activeColor.GetTextColor();
 		}
 
-		return rectangle;
+		using var brush = e.Rects.IncludedRect.Gradient(activeColor);
+
+		e.Graphics.FillRoundedRectangle(brush, e.Rects.IncludedRect, (int)(4 * UI.FontScale));
+
+		using var includedIcon = incl.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
+
+		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
 	}
 
 	protected override Rectangles GenerateRectangles(IDlcInfo item, Rectangle rectangle)
 	{
-		var includeItemHeight = ItemHeight;
-		var iconSize = rectangle.Height - Padding.Vertical;
 		var rects = new Rectangles(item)
 		{
-			IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft),
-			SteamRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(includeItemHeight, ItemHeight), ContentAlignment.TopRight)
+			IconRect = rectangle.Align(UI.Scale(new Size(64 * 460 / 215, 64), UI.UIScale), ContentAlignment.TopLeft)
 		};
 
-		rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + 2 * Padding.Left).Align(new Size(iconSize * 460 / 215, iconSize), ContentAlignment.MiddleLeft);
+		rects.TextRect = rectangle.Pad(rects.IconRect.Width + GridPadding.Left, 0, 0, rectangle.Height).AlignToFontSize(UI.Font(10.5F, FontStyle.Bold), ContentAlignment.TopLeft);
 
-		rects.CenterRect = new Rectangle(rects.IconRect.X, rectangle.Y, rects.SteamRect.X - rects.IconRect.X, rectangle.Height);
+		rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.TopRight);
 
-		rects.TextRect = rectangle.Pad(rects.IconRect.X + rects.IconRect.Width + Padding.Left, 0, rectangle.Width - rects.CenterRect.Right, 0);
+		rects.TextRect.Width = rects.IncludedRect.X - rects.TextRect.X;
+
+		rects.CenterRect = rects.TextRect.Pad(-GridPadding.Horizontal, 0, 0, 0);
 
 		return rects;
 	}
@@ -200,7 +210,6 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		public Rectangle IncludedRect;
 		public Rectangle IconRect;
 		public Rectangle TextRect;
-		public Rectangle SteamRect;
 		public Rectangle CenterRect;
 
 		public IDlcInfo Item { get; set; }
@@ -214,29 +223,27 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		{
 			if (IncludedRect.Contains(location) && ServiceCenter.Get<IDlcManager>().IsAvailable(Item.Id))
 			{
-				text = Locale.ExcludeInclude;
+				if (ServiceCenter.Get<IDlcManager>().IsIncluded(Item))
+				{
+					text = Locale.ExcludePackage.Format(Item.Name);
+				}
+				else
+				{
+					text = Locale.IncludePackage.Format(Item.Name);
+				}
+
 				point = IncludedRect.Location;
 				return true;
 			}
-			else if (SteamRect.Contains(location))
-			{
-				text = Locale.ViewOnSteam;
-				point = SteamRect.Location;
-				return true;
-			}
-			else
-			{
-				text = Locale.ViewOnSteam;
-				point = default;
-				return true;
-			}
+
+			text = Locale.ViewXOnSteam.Format(Item.Name.Remove("Cities: Skylines - "));
+			point = IconRect.Location;
+			return true;
 		}
 
 		public bool IsHovered(Control instance, Point location)
 		{
-			return
-				IncludedRect.Contains(location) ||
-				SteamRect.Contains(location);
+			return true;
 		}
 	}
 }

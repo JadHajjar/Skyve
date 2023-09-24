@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Skyve.Systems.Compatibility;
 
@@ -28,21 +29,25 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly ILocale _locale;
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
-	private readonly IPackageManager _contentManager;
+	private readonly IPackageManager _packageManager;
 	private readonly ICompatibilityUtil _compatibilityUtil;
 	private readonly IPackageUtil _contentUtil;
 	private readonly IPackageNameUtil _packageUtil;
 	private readonly IWorkshopService _workshopService;
 	private readonly IDlcManager _dlcManager;
 	private readonly SkyveApiUtil _skyveApiUtil;
-	private readonly CompatibilityHelper _compatibilityHelper;
+
+	private CompatibilityService? compatibilityService;
+	private CancellationTokenSource? cancellationTokenSource;
+
+	public event Action? SnoozeChanged;
 
 	public IndexedCompatibilityData CompatibilityData { get; private set; }
 	public bool FirstLoadComplete { get; private set; }
 
 	public CompatibilityManager(IPackageManager contentManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, SkyveApiUtil skyveApiUtil, IDlcManager dlcManager)
 	{
-		_contentManager = contentManager;
+		_packageManager = contentManager;
 		_logger = logger;
 		_notifier = notifier;
 		_compatibilityUtil = compatibilityUtil;
@@ -52,7 +57,6 @@ public class CompatibilityManager : ICompatibilityManager
 		_workshopService = workshopService;
 		_skyveApiUtil = skyveApiUtil;
 		_dlcManager = dlcManager;
-		_compatibilityHelper = new CompatibilityHelper(this, contentManager, contentUtil, packageUtil, workshopService, locale);
 
 		CompatibilityData = new(null);
 
@@ -68,24 +72,89 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public void CacheReport()
 	{
-		CacheReport(_contentManager.Packages);
+		CacheReport(false);
 	}
 
-	internal void CacheReport(IEnumerable<IPackage> content)
+	private void CacheReport(bool first)
 	{
-		if (!FirstLoadComplete)
+		if (!FirstLoadComplete && !first)
 		{
 			return;
 		}
 
-		_logger.Info("Caching Compatibility Report");
+		_logger.Info("[Compatibility] Caching Compatibility Report");
 
-		foreach (var package in content)
+		try
 		{
-			GetCompatibilityInfo(package, true);
+			cancellationTokenSource?.Cancel();
+			cancellationTokenSource = new();
+
+			compatibilityService = new CompatibilityService(_locale, _logger, _packageManager, _compatibilityUtil, _contentUtil, _packageUtil, _workshopService, _dlcManager,
+				new CompatibilityHelper(this, _packageManager, _contentUtil, _packageUtil, _workshopService, _logger), this);
+
+			_logger.Info("[Compatibility] Compatibility Service Ready");
+
+			compatibilityService.CacheReport(_cache, cancellationTokenSource.Token);
+
+			if (first)
+			{
+				FirstLoadComplete = true;
+			}
+
+			_notifier.OnInformationUpdated();
+
+			_notifier.OnCompatibilityReportProcessed();
+		}
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, "Error while caching the Compatibility Report");
+		}
+	}
+
+	public void QuickUpdate(ICompatibilityItem compatibilityItem)
+	{
+		if (compatibilityService is null)
+		{
+			return;
 		}
 
-		_notifier.OnInformationUpdated();
+		var reportItem = (ReportItem)compatibilityItem;
+
+		if (reportItem.Package is not null)
+		{
+			compatibilityService.UpdateInclusionStatus(reportItem.Package);
+		}
+
+		if (reportItem.Packages is not null)
+		{
+			foreach (var item in reportItem.Packages)
+			{
+				var package = item.Package;
+
+				if (package is not null)
+				{
+					compatibilityService.UpdateInclusionStatus(package);
+				}
+			}
+		}
+
+		if (reportItem.Package is not null)
+		{
+			_cache[reportItem.Package] = compatibilityService.GenerateCompatibilityInfo(reportItem.Package);
+		}
+
+		if (reportItem.Packages is not null)
+		{
+			foreach (var item in reportItem.Packages)
+			{
+				var package = item.Package;
+
+				if (package is not null)
+				{
+					_cache[package] = compatibilityService.GenerateCompatibilityInfo(package);
+				}
+			}
+		}
 
 		_notifier.OnCompatibilityReportProcessed();
 	}
@@ -115,27 +184,13 @@ public class CompatibilityManager : ICompatibilityManager
 			ISave.Load(out CompatibilityData? data, DATA_CACHE_FILE);
 
 			CompatibilityData = new IndexedCompatibilityData(data);
-
-			//foreach (var package in packages)
-			//{
-			//	_cache[package] = GenerateCompatibilityInfo(package);
-			//}
-
-			//FirstLoadComplete = true;
 		}
 		catch { }
 	}
 
 	public void DoFirstCache()
 	{
-		var packages = _contentManager.Packages.ToList();
-
-		foreach (var package in packages)
-		{
-			_cache[package] = GenerateCompatibilityInfo(package);
-		}
-
-		FirstLoadComplete = true;
+		CacheReport(true);
 	}
 
 	public async void DownloadData()
@@ -195,23 +250,29 @@ public class CompatibilityManager : ICompatibilityManager
 		return _snoozedItems.Any(x => x.Equals(reportItem));
 	}
 
-	public void ToggleSnoozed(ICompatibilityItem reportItem)
+	public void ToggleSnoozed(ICompatibilityItem compatibilityItem)
 	{
 		lock (this)
 		{
-			if (IsSnoozed(reportItem))
+			if (IsSnoozed(compatibilityItem))
 			{
-				_snoozedItems.RemoveAll(x => x.Equals(reportItem));
+				_snoozedItems.RemoveAll(x => x.Equals(compatibilityItem));
 			}
 			else
 			{
-				_snoozedItems.Add(new SnoozedItem(reportItem));
+				_snoozedItems.Add(new SnoozedItem(compatibilityItem));
 			}
 
 			ISave.Save(_snoozedItems, SNOOZE_FILE);
-
-			_notifier.OnRefreshUI();
 		}
+
+		if (compatibilityItem is ReportItem reportItem && reportItem.Package is not null && compatibilityService is not null)
+		{
+			_cache[reportItem.Package] = compatibilityService.GenerateCompatibilityInfo(reportItem.Package);
+		}
+
+		SnoozeChanged?.Invoke();
+		_notifier.OnRefreshUI();
 	}
 
 	public bool IsBlacklisted(IPackageIdentity package)
@@ -225,7 +286,6 @@ public class CompatibilityManager : ICompatibilityManager
 	{
 		if (!FirstLoadComplete)
 		{
-			return new CompatibilityInfo(package, _compatibilityHelper.GetPackageData(package));
 		}
 		else if (!noCache && _cache.TryGetValue(package, out var info))
 		{
@@ -233,12 +293,13 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 		else if (cacheOnly)
 		{
-			return new CompatibilityInfo(package, _compatibilityHelper.GetPackageData(package));
 		}
-		else
+		else if (compatibilityService is not null)
 		{
-			return _cache[package] = GenerateCompatibilityInfo(package);
+			return _cache[package] = compatibilityService.GenerateCompatibilityInfo(package);
 		}
+
+		return new CompatibilityInfo(package, GetPackageData(package));
 	}
 
 	public CompatibilityPackageData GetAutomatedReport(IPackage package)
@@ -319,144 +380,6 @@ public class CompatibilityManager : ICompatibilityManager
 		return info;
 	}
 
-	private CompatibilityInfo GenerateCompatibilityInfo(IPackage package)
-	{
-#if DEBUG
-		var sw = new System.Diagnostics.Stopwatch();
-		sw.Start();
-#endif
-
-		var packageData = _compatibilityHelper.GetPackageData(package);
-		var info = new CompatibilityInfo(package, packageData);
-		var workshopInfo = package.GetWorkshopInfo();
-
-		if (package.LocalParentPackage?.Mod is IMod mod)
-		{
-			var modName = Path.GetFileName(mod.FilePath);
-			var duplicate = _contentManager.GetModsByName(modName);
-
-			if (duplicate.Count > 1 && duplicate.Count(_contentUtil.IsIncluded) > 1)
-			{
-				info.Add(ReportType.Compatibility
-					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
-					, string.Empty
-					, duplicate.Select(x => new PseudoPackage(x)).ToArray());
-			}
-		}
-
-		if (workshopInfo?.IsIncompatible == true)
-		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), string.Empty, new PseudoPackage[0]);
-		}
-
-		if (packageData is null)
-		{
-			return info;
-		}
-
-		_compatibilityUtil.PopulatePackageReport(packageData, info, _compatibilityHelper);
-
-		var author = CompatibilityData.Authors.TryGet(packageData.Package.AuthorId) ?? new();
-
-		if (packageData.Package.Stability is not PackageStability.Stable && workshopInfo?.IsIncompatible != true && !author.Malicious)
-		{
-			info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, null, false), string.Empty, new PseudoPackage[0]);
-		}
-
-		foreach (var status in packageData.Statuses)
-		{
-			foreach (var item in status.Value)
-			{
-				if (item.Status.Action is StatusAction.Switch && packageData.SucceededBy is not null)
-				{
-					continue;
-				}
-
-				_compatibilityHelper.HandleStatus(info, item);
-			}
-		}
-
-		if (!package.IsLocal && package.IsMod && packageData.Package.Type is PackageType.GenericPackage)
-		{
-			if (!packageData.Statuses.ContainsKey(StatusType.TestVersion) && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true)
-			{
-				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.NoAction });
-			}
-
-			if (!packageData.Statuses.ContainsKey(StatusType.TestVersion) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 30)
-			{
-				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.UnsubscribeThis });
-			}
-
-			if (!author.Malicious && workshopInfo?.ServerTime.Date < _compatibilityUtil.MinimumModDate && DateTime.UtcNow - workshopInfo?.ServerTime > TimeSpan.FromDays(365) && !packageData.Statuses.ContainsKey(StatusType.Deprecated))
-			{
-				_compatibilityHelper.HandleStatus(info, new PackageStatus(StatusType.AutoDeprecated));
-			}
-		}
-
-		if (packageData.SucceededBy is not null)
-		{
-			_compatibilityHelper.HandleInteraction(info, packageData.SucceededBy);
-		}
-
-		foreach (var interaction in packageData.Interactions)
-		{
-			foreach (var item in interaction.Value)
-			{
-				_compatibilityHelper.HandleInteraction(info, item);
-			}
-		}
-
-		if (packageData.Package.RequiredDLCs?.Any() ?? false)
-		{
-			var missing = packageData.Package.RequiredDLCs.Where(x => !_dlcManager.IsAvailable(x));
-
-			if (missing.Any())
-			{
-				_compatibilityHelper.HandleStatus(info, new PackageStatus
-				{
-					Type = StatusType.MissingDlc,
-					Action = StatusAction.NoAction,
-					Packages = missing.Select(x => (ulong)x).ToArray()
-				});
-			}
-		}
-
-		if (author.Malicious)
-		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, "AuthorMalicious", new object[] { _packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
-		}
-		else if (package.IsMod && author.Retired)
-		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), "AuthorRetired", new object[] { _packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
-		}
-
-		if (!string.IsNullOrEmpty(packageData.Package.Note))
-		{
-			info.Add(ReportType.Stability, new GenericPackageStatus() { Notification = NotificationType.Info, Note = packageData.Package.Note }, string.Empty, new PseudoPackage[0]);
-		}
-
-		if (package.IsLocal)
-		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Package.SteamId)), true), new PseudoPackage[] { new(packageData.Package.SteamId) });
-		}
-
-		if (!package.IsLocal && !author.Malicious && workshopInfo?.IsIncompatible != true)
-		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), (packageData.Package.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.Package.ReviewDate.ToReadableString(packageData.Package.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"), new object[0]);
-		}
-
-#if DEBUG
-		sw.Stop();
-		if (sw.ElapsedMilliseconds > 100)
-		{
-			_logger.Debug($"CR ({sw.Elapsed.ToReadableString()}) for {package.Name}");
-		}
-#endif
-
-		return info;
-	}
-
 	public void ResetCache()
 	{
 		_cache.Clear();
@@ -473,14 +396,9 @@ public class CompatibilityManager : ICompatibilityManager
 		_delayedReportCache.Run();
 	}
 
-	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)
+	IPackageCompatibilityInfo? ICompatibilityManager.GetPackageInfo(IPackageIdentity package)
 	{
-		return _compatibilityHelper.GetFinalSuccessor(package);
-	}
-
-	public IPackageCompatibilityInfo? GetPackageInfo(IPackageIdentity package)
-	{
-		return _compatibilityHelper.GetPackageData(package);
+		return GetPackageData(package);
 	}
 
 	public NotificationType GetNotification(ICompatibilityInfo info)
@@ -496,5 +414,87 @@ public class CompatibilityManager : ICompatibilityManager
 	public bool IsUserVerified(IUser author)
 	{
 		return CompatibilityData.Authors.TryGet(ulong.Parse(author.Id?.ToString()))?.Verified ?? false;
+	}
+
+	public IndexedPackage? GetPackageData(IPackageIdentity identity)
+	{
+		var steamId = identity.Id;
+
+		if (steamId > 0)
+		{
+			var packageData = CompatibilityData.Packages.TryGet(steamId);
+
+			if (packageData is null && identity is IPackage package)
+			{
+				packageData = new IndexedPackage(GetAutomatedReport(package));
+
+				packageData.Load(CompatibilityData.Packages);
+			}
+
+			return packageData;
+		}
+
+		return null;
+	}
+
+	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)
+	{
+		if (!CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
+		{
+			return package;
+		}
+
+		if (indexedPackage.SucceededBy is not null)
+		{
+			return new GenericPackageIdentity(indexedPackage.SucceededBy.Packages.First().Key);
+		}
+
+		if (_packageManager.GetPackageById(package) is null)
+		{
+			foreach (var item in indexedPackage.RequirementAlternatives.Keys)
+			{
+				if (_packageManager.GetPackageById(new GenericPackageIdentity(item)) is IPackageIdentity identity)
+				{
+					return identity;
+				}
+			}
+		}
+
+		return package;
+	}
+
+	internal IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withAlternativesAndSuccessors)
+	{
+		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
+
+		if (localPackage is not null)
+		{
+			yield return localPackage;
+		}
+
+		localPackage = _packageManager.GetModsByName(Path.GetFileName(package.Package.FileName)).FirstOrDefault(x => x.IsLocal)?.LocalParentPackage;
+
+		if (localPackage is not null)
+		{
+			yield return localPackage;
+		}
+
+		if (!withAlternativesAndSuccessors || package.SucceededBy is null)
+		{
+			yield break;
+		}
+
+		var packages = package.SucceededBy.Packages
+			.SelectMany(x => FindPackage(x.Value, false));
+
+		foreach (var item in packages)
+		{
+			yield return item;
+		}
+	}
+
+	internal List<ulong>? GetRequiredFor(ulong id)
+	{
+		return compatibilityService?.GetRequiredFor(id);
 	}
 }

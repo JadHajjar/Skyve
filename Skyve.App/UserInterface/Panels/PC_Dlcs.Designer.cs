@@ -236,12 +236,9 @@ partial class PC_DLCs
 			this.LC_DLCs.AutoScroll = true;
 			this.TLP_Main.SetColumnSpan(this.LC_DLCs, 2);
 			this.LC_DLCs.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.LC_DLCs.HighlightOnHover = true;
-			this.LC_DLCs.Loading = true;
 			this.LC_DLCs.Location = new System.Drawing.Point(0, 71);
 			this.LC_DLCs.Margin = new System.Windows.Forms.Padding(0);
 			this.LC_DLCs.Name = "LC_DLCs";
-			this.LC_DLCs.SeparateWithLines = true;
 			this.LC_DLCs.Size = new System.Drawing.Size(932, 612);
 			this.LC_DLCs.TabIndex = 15;
 			// 

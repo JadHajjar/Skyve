@@ -21,8 +21,8 @@ public static class SystemsProgram
 		services.AddSingleton<IPackageNameUtil, PackageNameUtil>();
 		services.AddSingleton<IPackageUtil, PackageUtil>();
 		services.AddSingleton<SkyveApiUtil>();
-		services.AddSingleton<ILoadOrderHelper, LoadOrderHelper>();
 		services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
+		services.AddTransient<ILoadOrderHelper, LoadOrderHelper>();
 
 		Locale.Load();
 		LocaleCR.Load();

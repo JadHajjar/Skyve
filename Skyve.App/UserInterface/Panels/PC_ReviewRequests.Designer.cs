@@ -94,7 +94,6 @@ partial class PC_ReviewRequests
 			this.reviewRequestList1.AutoInvalidate = false;
 			this.reviewRequestList1.AutoScroll = true;
 			this.reviewRequestList1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.reviewRequestList1.HighlightOnHover = true;
 			this.reviewRequestList1.ItemHeight = 64;
 			this.reviewRequestList1.Location = new System.Drawing.Point(3, 3);
 			this.reviewRequestList1.Name = "reviewRequestList1";

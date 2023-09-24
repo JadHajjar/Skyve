@@ -102,6 +102,10 @@
     "One": "'{0}' carregará diretamente após '{1}'.",
     "Plural": "'{0}' carregará diretamente após os seguintes pacotes."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
   "Status_Succeeded": "'{0}' foi bem-sucedido por '{1}'.\r\n\r\nVocê já está usando '{1}' então não há mais necessidade de '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto, não é mais suportado pelo seu autor.",
@@ -140,6 +144,7 @@
   "Stability_Broken": "Este pacote está quebrado.\r\nÉ conhecido por quebrar o jogo ou simplesmente não funciona.",
   "Stability_Incompatible": "Este pacote não é compatível com, ou quebra, o jogo.\r\n\r\nVocê deve removê-lo imediatamente.",
   "Stability_Local": "Este pacote é uma versão local do mod original '{0}'.\r\n\r\nVersões locais são geralmente usadas para fins de teste ou no caso de você não ter o Steam.\r\n\r\nVerifique os links do pacote para procurar por atualizações no mod.",
+  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "You should subscribe to the following package.",
@@ -166,6 +171,11 @@
   "Action_Switch": {
     "One": "Você deve mudar para '{1}'.",
     "Plural": "You should switch to one of the following packages."
+  },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
   },
   "NoRequiredDlcs": "DLCs não necessários",
   "DlcsSelected": {
@@ -216,7 +226,6 @@
   "AuthorRetired": "O autor de {0}, {1}, se aposentou ou está inativo há muito tempo.\n\nAs atualizações futuras e a estabilidade dos pacotes não são garantidas.",
   "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus em suas embalagens.",
   "ReviewRequests": "Solicitações de revisão {0}",
-  "DeleteRequest": "Excluir Requisição",
   "ApplyRequestedChanges": "Aplicar alterações solicitadas",
   "ManagePackage": "Gerenciar pacote",
   "Banned": "Banido",
@@ -227,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "This package has one other compatibility warning",
     "Plural": "This package has {0} other compatibility warnings"
-  }
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }

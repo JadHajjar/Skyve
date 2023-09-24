@@ -475,7 +475,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		postPackage.FileName = Path.GetFileName(CurrentPackage.LocalParentPackage?.Mod?.FilePath ?? string.Empty).IfEmpty(postPackage.FileName);
 		postPackage.Name = CurrentPackage.Name;
 		postPackage.ReviewDate = DateTime.UtcNow;
-		postPackage.AuthorId = (ulong)(CurrentPackage.GetWorkshopInfo()?.Author?.Id ?? 0);
+		postPackage.AuthorId = (ulong)(CurrentPackage.GetWorkshopInfo()?.Author?.Id ?? 0UL);
 		postPackage.Author = new Author
 		{
 			SteamId = postPackage.AuthorId,

@@ -1,5 +1,9 @@
 ﻿using Extensions.Sql;
 
+#if !API
+using Newtonsoft.Json;
+#endif
+
 using Skyve.Domain;
 using Skyve.Domain.Enums;
 
@@ -14,7 +18,7 @@ namespace Skyve.Systems.Compatibility.Domain.Api;
 [DynamicSqlClass("UserProfiles")]
 public class UserProfile : IDynamicSql
 #if !API
-	, ICustomPlayset
+	, IOnlinePlayset
 #endif
 {
 	[DynamicSqlProperty(PrimaryKey = true, Identity = true)]
@@ -46,12 +50,12 @@ public class UserProfile : IDynamicSql
 
 #if !API
 	private Bitmap? _banner;
-	public bool IsFavorite { get; set; }
-	public bool IsMissingItems => false;
-	public DateTime LastEditDate => DateUpdated;
-	public DateTime LastUsed => DateUpdated;
-	public PackageUsage Usage => (PackageUsage)(ProfileUsage ?? -1);
-	public bool Temporary => false;
+	[JsonIgnore] public bool IsFavorite { get; set; }
+	[JsonIgnore] public bool IsMissingItems => false;
+	[JsonIgnore] public DateTime LastEditDate => DateUpdated;
+	[JsonIgnore] public DateTime LastUsed => DateUpdated;
+	[JsonIgnore] public PackageUsage Usage => (PackageUsage)(ProfileUsage ?? -1);
+	[JsonIgnore] public bool Temporary => false;
 	Color? ICustomPlayset.Color { get => Color == null ? null : System.Drawing.Color.FromArgb(Color.Value); set { } }
 	Bitmap? ICustomPlayset.Banner
 	{
@@ -83,11 +87,12 @@ public class UserProfile : IDynamicSql
 			}
 		}
 	}
-	IUser? IPlayset.Author { get; }
+
+	IUser? IPlayset.Author => ServiceCenter.Get<Skyve.Domain.Systems.IWorkshopService>().GetUser(Author);
 	string? IPlayset.BannerUrl { get; }
 	DateTime IPlayset.DateUsed { get; }
-	public IEnumerable<IPlaysetEntry> Entries => Contents ?? Enumerable.Empty<IPlaysetEntry>();
-	public IEnumerable<IPackage> Packages => Contents?.Select(x => (IPackage)new PlaysetEntryPackage(x)) ?? Enumerable.Empty<IPackage>();
+	[JsonIgnore] public IEnumerable<IPlaysetEntry> Entries => Contents ?? Enumerable.Empty<IPlaysetEntry>();
+	[JsonIgnore] public IEnumerable<IPackage> Packages => Contents?.Select(x => (IPackage)new PlaysetEntryPackage(x)) ?? Enumerable.Empty<IPackage>();
 	bool ICustomPlayset.AutoSave { get; }
 	bool ICustomPlayset.UnsavedChanges { get; }
 	bool ICustomPlayset.DisableWorkshop { get; }

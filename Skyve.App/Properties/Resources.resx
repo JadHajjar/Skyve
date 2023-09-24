@@ -1168,4 +1168,31 @@
   <data name="Lang_SR-CS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_SR-CS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="I_Assets_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Assets_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Assets_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Assets_96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Mods_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Mods_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Mods_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Mods_96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_New_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_New_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_New_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_New_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Important_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Important_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Important_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Important_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Important_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Important_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

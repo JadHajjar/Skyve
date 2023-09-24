@@ -3,6 +3,7 @@ using Skyve.App.UserInterface.Panels;
 
 using System.Configuration;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -125,10 +126,12 @@ public partial class MainForm : BasePanelForm
 		buttonStateRunning = null;
 		//base_PB_Icon.Loading = false;
 
-		if (CurrentPanel is PC_MainPage mainPage)
-		{
-			mainPage.B_StartStop.Loading = false;
-		}
+		_citiesManager.SetLaunchingStatus(false);
+
+		//if (CurrentPanel is PC_MainPage mainPage)
+		//{
+		//	mainPage.B_StartStop.Loading = false;
+		//}
 	}
 
 	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
@@ -151,10 +154,11 @@ public partial class MainForm : BasePanelForm
 
 			buttonStateRunning = null;
 
-			if (CurrentPanel is PC_MainPage mainPage)
-			{
-				mainPage.B_StartStop.Loading = false;
-			}
+			_citiesManager.SetLaunchingStatus(false);
+			//if (CurrentPanel is PC_MainPage mainPage)
+			//{
+			//	mainPage.B_StartStop.Loading = false;
+			//}
 		}
 	}
 
@@ -284,10 +288,11 @@ public partial class MainForm : BasePanelForm
 		{
 			if (CrossIO.CurrentPlatform is Platform.Windows)
 			{
-				if (CurrentPanel is PC_MainPage mainPage)
-				{
-					mainPage.B_StartStop.Loading = true;
-				}
+				_citiesManager.SetLaunchingStatus(true);
+				//if (CurrentPanel is PC_MainPage mainPage)
+				//{
+				//	mainPage.B_StartStop.Loading = true;
+				//}
 
 				//base_PB_Icon.Loading = true;
 				base_PB_Icon.LoaderSpeed = 1;
@@ -331,13 +336,20 @@ public partial class MainForm : BasePanelForm
 			WindowState = FormWindowState.Maximized;
 		}
 
-		var currentVersion = Assembly.GetEntryAssembly().GetName().Version;
+		var assembly = Assembly.GetEntryAssembly();
+		var currentVersion = assembly.GetName().Version;
+		var date = File.GetLastWriteTime(assembly.Location);
+
+		if (date > DateTime.Now.AddDays(-7))
+		{
+			ServiceCenter.Get<INotificationsService>().SendNotification(ServiceCenter.Get<IAppInterfaceService>().GetLastVersionNotification());
+		}
 
 		if (currentVersion.ToString() != _settings.SessionSettings.LastVersionNotification)
 		{
 			if (_settings.SessionSettings.FirstTimeSetupCompleted)
 			{
-				PushPanel(ServiceCenter.Get<IInterfaceService>().ChangelogPanel());
+				PushPanel(ServiceCenter.Get<IAppInterfaceService>().ChangelogPanel());
 			}
 
 			_settings.SessionSettings.LastVersionNotification = currentVersion.ToString();
@@ -392,7 +404,7 @@ public partial class MainForm : BasePanelForm
 
 	private void PI_ModReview_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel(PI_ModUtilities, ServiceCenter.Get<IInterfaceService>().UtilitiesPanel());
+		SetPanel(PI_ModUtilities, ServiceCenter.Get<IAppInterfaceService>().UtilitiesPanel());
 	}
 
 	private void PI_Packages_OnClick(object sender, MouseEventArgs e)

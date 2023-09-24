@@ -39,7 +39,6 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 	private readonly Func<LocaleHelper.Translation> GetItemText;
 	private readonly Func<string> GetCountText;
 
-
 	public SkyvePage Page { get; }
 	public int ItemCount => ListControl.ItemCount;
 
@@ -68,7 +67,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		DD_Sorting.SkyvePage = Page;
 
-		I_Actions = new IncludeAllButton<T>(ListControl);
+		I_Actions = new IncludeAllButton<T>(() => ListControl.FilteredItems.ToList());
 		I_Actions.ActionClicked += I_Actions_Click;
 		I_Actions.IncludeAllClicked += IncludeAll;
 		I_Actions.ExcludeAllClicked += ExcludeAll;
@@ -270,6 +269,8 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
 		DR_ServerTime.Text = Locale.DateUpdated;
 		DD_Author.Text = Locale.Author;
+		OT_ModAsset.Option1 = Locale.Mod.Plural;
+		OT_ModAsset.Option2 = Locale.Asset.Plural;
 	}
 
 	protected override void OnCreateControl()
@@ -449,7 +450,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (item.IsMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option2 == item.LocalPackage?.IsEnabled())
+			if (!item.IsMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.LocalPackage?.IsEnabled()))
 			{
 				return true;
 			}

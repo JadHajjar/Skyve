@@ -102,6 +102,10 @@
     "One": "A(z) „{0}” közvetlenül a(z) „{1}” után töltődik be.",
     "Plural": "A(z) \"{0}\" közvetlenül a következő csomagok után töltődik be."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "Ezek ugyanannak a csomagnak a másik verziója.\n\nCsak egyet válassz közülük.",
   "Status_Succeeded": "A(z) '{0}' utódja a(z) '{1}'.\n\nMár használja a(z) „{1}” fájlt, így nincs többé szükség a(z) „{0}” kifejezésre.",
   "Status_Deprecated": "A(z) „{0}” elavult, a készítője már nem támogatja.",
@@ -140,6 +144,7 @@
   "Stability_Broken": "Ez a csomag elromlott. Várhatóan vagy megszakítja a játékot, vagy egyszerűen nem működik.",
   "Stability_Incompatible": "Ez a csomag nem kompatibilis a játékkal, vagy megszakítja azt.\n\nAzonnal el kell távolítanod.",
   "Stability_Local": "Ez a csomag az eredeti mod '{0}' helyi változata.\n\nA helyi verziókat általában tesztelési célokra használják, vagy arra az esetre, ha nincs Steam.\n\nTekintsd meg a csomag linkjeit, hogy frissítéseket kereshess a modhoz.",
+  "Stability_BrokenFromPatch": "Ez a csomag egy legutóbbi javítás után tönkrement. Kérjük, várd meg, amíg frissül, mielőtt használnád.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "A következő csomagra kell feliratkoznod:",
@@ -166,6 +171,11 @@
   "Action_Switch": {
     "One": "Válts a következőre: „{1}”.",
     "Plural": "A következő csomagok egyikére kell váltanod:"
+  },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
   },
   "NoRequiredDlcs": "Nincs szükség további DLC-re",
   "DlcsSelected": {
@@ -216,7 +226,6 @@
   "AuthorRetired": "A(z) {0} szerzője, {1} visszavonult, vagy hosszú ideje inaktív.\n\nA csomagok jövőbeli frissítései és stabilitása nem garantált.",
   "AuthorMalicious": "A(z) {0} szerzője, {1} köztudottan rosszindulatú, és/vagy káros tartalmakat, például vírusokat tartalmaz a csomagjaiban.",
   "ReviewRequests": "A kérelmek áttekintése {0}",
-  "DeleteRequest": "Kérés visszavonása",
   "ApplyRequestedChanges": "Alkalmazza a kért módosításokat",
   "ManagePackage": "Csomagok kezelése",
   "Banned": "Kitiltott",
@@ -225,7 +234,16 @@
   "ScenarioMaking": "Forgatókönyv-készítés",
   "ThemeMaking": "Témakészítés",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
-  }
+    "One": "Ez a csomag egy másik kompatibilitási figyelmeztetést is tartalmaz",
+    "Plural": "Ez a csomag {0} másik kompatibilitási figyelmeztetést tartalmaz"
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }

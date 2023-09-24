@@ -102,6 +102,10 @@
     "One": "'{0}' carregará diretamente após '{1}'.",
     "Plural": "'{0}' carregará diretamente após os seguintes pacotes."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' é necessário para '{1}'.",
+    "Plural": "'{0}' é necessário para os seguintes pacotes."
+  },
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
   "Status_Succeeded": "'{0}' foi substituído por '{1}'.\n\nVocê já está usando '{1}', então não precisa mais de '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto e não é mais suportado pelo seu autor.",
@@ -140,6 +144,7 @@
   "Stability_Broken": "Este pacote está quebrado.\nÉ conhecido por quebrar o jogo ou simplesmente não funcionar.",
   "Stability_Incompatible": "Este pacote não é compatível com, ou quebra, o jogo.\n\nVocê deve removê-lo imediatamente.",
   "Stability_Local": "Este pacote é uma versão local do mod original '{0}'.\n\nVersões locais são geralmente usadas para fins de teste ou no caso de você não ter o Steam.\n\nVerifique os links do pacote para procurar por atualizações no mod.",
+  "Stability_BrokenFromPatch": "Este pacote quebrou após uma atualização recente. Por favor, aguarde até que seja atualizado antes de usá-lo.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Você deve assinar o seguinte pacote.",
@@ -166,6 +171,11 @@
   "Action_Switch": {
     "One": "Você deve mudar para '{1}'.",
     "Plural": "Você deve mudar para um dos seguintes pacotes."
+  },
+  "Action_IncludeThis": "Você precisa incluir '{0}'",
+  "Action_IncludeOther": {
+    "One": "Você deve incluir o seguinte pacote:",
+    "Plural": "Você deve incluir estes pacotes:"
   },
   "NoRequiredDlcs": "DLC não requerido",
   "DlcsSelected": {
@@ -197,7 +207,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} Deve ser excluído",
-    "Plural": "{0} {1} Devem ser excluídos"
+    "Plural": "{0} {1} Deve ser excluído"
   },
   "UnsubscribeCount": "{0} {1} que você deve cancelar a inscrição",
   "SwitchCount": {
@@ -216,7 +226,6 @@
   "AuthorRetired": "O autor de {0}, {1}, se aposentou ou está inativo há muito tempo.\nAs atualizações futuras e a estabilidade de seus pacotes não são garantidas.",
   "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus nos seus pacotes.",
   "ReviewRequests": "Pedido de revisão {0}",
-  "DeleteRequest": "Excluir pedido",
   "ApplyRequestedChanges": "Aplicar as Alterações Solicitadas",
   "ManagePackage": "Gerenciar Pacote",
   "Banned": "Banido",
@@ -225,7 +234,16 @@
   "ScenarioMaking": "Cenário/Fabricação",
   "ThemeMaking": "Criação de Temas",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
-  }
+    "One": "Este pacote tem um outro alerta de compatibilidade",
+    "Plural": "Este pacote tem {0} outros avisos de compatibilidade"
+  },
+  "DeleteRequests": {
+    "One": "Excluir este pedido",
+    "Plural": "Excluir estes pedidos"
+  },
+  "ViewRequest": "Ver pedido",
+  "CRT_RequiredItem": "Item Necessário",
+  "RequiredItem": "Item Necessário",
+  "ApplyAllActions": "Aplicar todas as ações disponíveis",
+  "SnoozeAll": "Adiar todos os problemas exibidos"
 }

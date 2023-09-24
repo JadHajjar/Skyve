@@ -28,7 +28,7 @@ public interface ICustomPlayset : IPlayset
 	Bitmap? Banner { get; set; }
 	bool AutoSave { get; }
 	int ProfileId { get; }
-	bool Public { get; }
+	bool Public { get; set; }
 	bool IsMissingItems { get; }
 	bool UnsavedChanges { get; }
 	bool DisableWorkshop { get; }
@@ -36,9 +36,7 @@ public interface ICustomPlayset : IPlayset
 	bool Save();
 }
 
-public interface IOnlinePlayset : IPlayset
+public interface IOnlinePlayset : ICustomPlayset
 {
-	int ProfileId { get; }
-	bool Public { get; set; }
 	int Downloads { get; }
 }

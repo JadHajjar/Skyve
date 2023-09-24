@@ -9,5 +9,6 @@ public enum SkyvePage
 	Assets,
 	SinglePackage,
 	User,
-	Generic
+	Generic,
+	CompatibilityReport
 }

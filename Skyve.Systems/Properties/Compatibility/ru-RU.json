@@ -102,6 +102,10 @@
     "One": "'{0}' будет загружаться непосредственно после '{1}'.",
     "Plural": "'{0}' будет загружаться сразу после следующих пакетов."
   },
+  "Interaction_RequiredItem": {
+    "One": "'{0}' is required for '{1}'.",
+    "Plural": "'{0}' is required for the following packages."
+  },
   "Interaction_Identical": "Это несколько версий одного и того же пакета.\r\n\r\nВы должны выбрать только один из них.",
   "Status_Succeeded": "'{0}' успешно '{1}'.\r\n\r\nВы уже используете '{1}', поэтому больше нет необходимости '{0}'.",
   "Status_Deprecated": "'{0}' является устаревшим, он больше не поддерживается его автором.",
@@ -140,6 +144,7 @@
   "Stability_Broken": "Этот пакет сломан.\r\nИзвестно, что он либо прервал игру, либо просто не работает.",
   "Stability_Incompatible": "Этот пакет не совместим или ломает игру.\r\n\r\nВы должны удалить его немедленно.",
   "Stability_Local": "Этот пакет является локальной версией его оригинального мода '{0}'.\r\n\r\nЛокальные версии обычно используются для тестирования или если у вас нет Steam.\r\n\r\nПроверьте ссылки на пакет, чтобы найти обновления к моду.",
+  "Stability_BrokenFromPatch": "Этот пакет сломался после последнего патча. Пожалуйста, дождитесь его обновления перед его использованием.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "You should subscribe to the following package.",
@@ -166,6 +171,11 @@
   "Action_Switch": {
     "One": "Вы должны переключиться на '{1}'.",
     "Plural": "You should switch to one of the following packages."
+  },
+  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeOther": {
+    "One": "You should include the following package:",
+    "Plural": "You should include these packages:"
   },
   "NoRequiredDlcs": "Нет необходимых DLC",
   "DlcsSelected": {
@@ -216,7 +226,6 @@
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Известно, что автор {0}, {1}— вредоносный и/или содержит вредоносный контент, например вирусы.",
   "ReviewRequests": "Запросы на проверку {0}",
-  "DeleteRequest": "Удалить Запрос",
   "ApplyRequestedChanges": "Применить запрошенные изменения",
   "ManagePackage": "Управление Пакетами",
   "Banned": "Заблокирован",
@@ -225,7 +234,16 @@
   "ScenarioMaking": "Создание сценария",
   "ThemeMaking": "Создание темы",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
-  }
+    "One": "Этот пакет имеет еще одно предупреждение о совместимости",
+    "Plural": "В этом пакете есть предупреждения {0} о совместимости"
+  },
+  "DeleteRequests": {
+    "One": "Delete this request",
+    "Plural": "Delete these requests"
+  },
+  "ViewRequest": "View Request",
+  "CRT_RequiredItem": "Required Item",
+  "RequiredItem": "Required Item",
+  "ApplyAllActions": "Apply all available actions",
+  "SnoozeAll": "Snooze all displayed issues"
 }

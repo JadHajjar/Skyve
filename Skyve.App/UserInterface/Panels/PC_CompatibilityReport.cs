@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 
+using Skyve.App.UserInterface.Generic;
+using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility.Domain;
 using Skyve.Systems.Compatibility.Domain.Api;
 
@@ -10,17 +12,21 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_CompatibilityReport : PanelContent
 {
-	private ReviewRequest[]? reviewRequests;
-	private NotificationType CurrentKey;
 	private bool customReportLoaded;
 	private bool searchEmpty = true;
-	private List<ExtensionClass.action>? recommendedActions;
+	private bool clearingFilters;
+	private bool firstFilterPassed;
+	private bool massSnoozeing;
+	private readonly DelayedAction _delayedSearch;
 	private readonly List<string> searchTermsOr = new();
 	private readonly List<string> searchTermsAnd = new();
 	private readonly List<string> searchTermsExclude = new();
+	private readonly IncludeAllButton<ILocalPackage> I_Actions;
 
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly IBulkUtil _bulkUtil;
@@ -28,19 +34,44 @@ public partial class PC_CompatibilityReport : PanelContent
 	private readonly IPackageManager _contentManager;
 	private readonly INotifier _notifier;
 	private readonly IPackageUtil _packageUtil;
-	private readonly IUserService _userService;
-	private readonly SkyveApiUtil _skyveApiUtil;
+	private readonly ISettings _settings;
+	private readonly IDownloadService _downloadService;
+	private readonly IPlaysetManager _playsetManager;
+	private readonly ITagsService _tagUtil;
+
+	private static SkyvePage Page { get; } = SkyvePage.CompatibilityReport;
 
 	public PC_CompatibilityReport() : base(ServiceCenter.Get<IUserService>().User.Manager && !ServiceCenter.Get<IUserService>().User.Malicious)
 	{
-		ServiceCenter.Get(out _subscriptionsManager, out _packageUtil, out _bulkUtil, out _compatibilityManager, out _contentManager, out _notifier, out _userService, out _skyveApiUtil);
+		ServiceCenter.Get(out _subscriptionsManager, out _tagUtil, out _playsetManager, out _downloadService, out _settings, out _packageUtil, out _bulkUtil, out _compatibilityManager, out _contentManager, out _notifier, out IUserService userService);
 
 		InitializeComponent();
 
-		SetManagementButtons();
+		ListControl.Visible = false;
+		ListControl.CanDrawItem += LC_Items_CanDrawItem;
+		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
-		LC_Items.Visible = false;
-		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
+		I_Actions = new IncludeAllButton<ILocalPackage>(() => ListControl.FilteredItems.SelectWhereNotNull(x => x.Package).ToList()!);
+		I_Actions.ActionClicked += I_Actions_Click;
+		I_Actions.IncludeAllClicked += IncludeAll;
+		I_Actions.ExcludeAllClicked += ExcludeAll;
+		I_Actions.EnableAllClicked += EnableAll;
+		I_Actions.DisableAllClicked += DisableAll;
+		I_Actions.SubscribeAllClicked += SubscribeAll;
+
+		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
+
+		OT_Workshop.Visible = !_playsetManager.CurrentPlayset.DisableWorkshop;
+
+		var hasPackages = userService.User.Id is not null && _contentManager.Packages.Any(x => userService.User.Equals(x.GetWorkshopInfo()?.Author));
+		B_Manage.Visible = (hasPackages || userService.User.Manager) && !userService.User.Malicious;
+
+		if (!_settings.UserSettings.AdvancedIncludeEnable)
+		{
+			OT_Enabled.Hide();
+			P_Filters.SetRow(OT_Workshop, 2);
+			P_Filters.SetRow(OT_ModAsset, 3);
+		}
 
 		if (!_compatibilityManager.FirstLoadComplete)
 		{
@@ -52,24 +83,41 @@ public partial class PC_CompatibilityReport : PanelContent
 			CompatibilityManager_ReportProcessed();
 		}
 
+		_delayedSearch = new(350, DelayedSearch);
+
+		_notifier.ContentLoaded += CompatibilityManager_ReportProcessed;
 		_notifier.CompatibilityReportProcessed += CompatibilityManager_ReportProcessed;
+		_compatibilityManager.SnoozeChanged += CompatibilityManager_ReportProcessed;
+		new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
 	}
 
-	protected override async Task<bool> LoadDataAsync()
+	protected void RefreshAuthorAndTags()
 	{
-		reviewRequests = await _skyveApiUtil.GetReviewRequests();
-
-		return true;
+		DD_Tags.Items = _tagUtil.GetDistinctTags().ToArray();
 	}
 
-	protected override void OnDataLoad()
+	protected override void DesignChanged(FormDesign design)
 	{
-		B_Requests.Text = LocaleCR.ReviewRequests.Format(reviewRequests is null ? string.Empty : $"({reviewRequests.Length})");
+		base.DesignChanged(design);
+
+		TLP_MiddleBar.BackColor = design.AccentBackColor;
+		P_Filters.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
+		ListControl.BackColor = design.BackColor;
+		L_FilterCount.ForeColor = design.InfoColor;
 	}
 
 	protected override void LocaleChanged()
 	{
 		Text = Locale.CompatibilityReport;
+
+		DD_PackageStatus.Text = Locale.PackageStatus;
+		DD_Tags.Text = Locale.Tags;
+		DD_Profile.Text = Locale.PlaysetFilter;
+		DR_SubscribeTime.Text = Locale.DateSubscribed;
+		DR_ServerTime.Text = Locale.DateUpdated;
+		DD_Author.Text = Locale.Author;
+		OT_ModAsset.Option1 = Locale.Mod.Plural;
+		OT_ModAsset.Option2 = Locale.Asset.Plural;
 	}
 
 	protected override void UIChanged()
@@ -79,107 +127,79 @@ public partial class PC_CompatibilityReport : PanelContent
 		PB_Loader.Size = UI.Scale(new System.Drawing.Size(32, 32), UI.FontScale);
 		PB_Loader.Location = ClientRectangle.Center(PB_Loader.Size);
 
-		TB_Search.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
+			= L_FilterCount.Margin = I_SortOrder.Padding
+			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
+
+		B_Filters.Size = B_Filters.GetAutoSize(true);
+
+		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin = OT_ModAsset.Margin
+			= DR_SubscribeTime.Margin = DR_ServerTime.Margin
+			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
+
+		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
+		L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
+		DD_Sorting.Width = (int)(175 * UI.FontScale);
 		TB_Search.Width = (int)(250 * UI.FontScale);
 
 		var size = (int)(30 * UI.FontScale) - 6;
 
-		TB_Search.MaximumSize = new Size(9999, size);
-		TB_Search.MinimumSize = new Size(0, size);
+		TB_Search.MaximumSize = I_Refresh.MaximumSize = B_Filters.MaximumSize = I_SortOrder.MaximumSize = DD_Sorting.MaximumSize = new Size(9999, size);
+		TB_Search.MinimumSize = I_Refresh.MinimumSize = B_Filters.MinimumSize = I_SortOrder.MinimumSize = DD_Sorting.MinimumSize = new Size(0, size);
 	}
 
 	private void CompatibilityManager_ReportProcessed()
 	{
-		if (_compatibilityManager.FirstLoadComplete && !customReportLoaded)
+		if (_compatibilityManager.FirstLoadComplete && !customReportLoaded && !massSnoozeing)
 		{
-			var packages = _contentManager.Packages.ToList(x => x.GetCompatibilityInfo());
+			var packages = _contentManager.Packages.SelectWhereNotNull(x =>
+			{
+				var info = x.GetCompatibilityInfo(cacheOnly: true);
 
-			packages.RemoveAll(x => x.GetNotification() < NotificationType.Unsubscribe && !(x.Package?.IsIncluded() == true));
+				if (info.GetNotification() is not NotificationType.Unsubscribe && !_packageUtil.IsIncluded(x))
+				{
+					return null;
+				}
 
-			this.TryInvoke(() => { LoadReport(packages); PB_Loader.Dispose(); });
+				return info;
+			}).ToList();
+
+			this.TryInvoke(() => { LoadReport(packages!); PB_Loader.Hide(); });
 		}
-
-		this.TryInvoke(SetManagementButtons);
-	}
-
-	private void SetManagementButtons()
-	{
-		var hasPackages = _userService.User.Id is not null && _contentManager.Packages.Any(x => _userService.User.Equals(x.GetWorkshopInfo()?.Author));
-		B_Manage.Visible = B_Requests.Visible = B_ManageSingle.Visible = _userService.User.Manager && !_userService.User.Malicious;
-		B_YourPackages.Visible = hasPackages && !_userService.User.Manager && !_userService.User.Malicious;
-		B_Requests.Text = LocaleCR.ReviewRequests.Format(reviewRequests is null ? string.Empty : $"({reviewRequests.Length})");
 	}
 
 	private void B_Manage_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel(null, new PC_CompatibilityManagement());
-	}
-
-	private void B_ManageSingle_Click(object sender, EventArgs e)
-	{
-		var form = new PC_SelectPackage() { Text = LocaleHelper.GetGlobalText("Select a package") };
-
-		form.PackageSelected += Form_PackageSelected;
-
-		Program.MainForm.PushPanel(null, form);
-
-	}
-
-	private void Form_PackageSelected(IEnumerable<ulong> packages)
-	{
-		Form.PushPanel(null, new PC_CompatibilityManagement(packages));
+		Form.PushPanel<PC_ManageCompatibilitySelection>();
 	}
 
 	private void LoadReport(List<ICompatibilityInfo> reports)
 	{
 		try
 		{
-			var notifs = reports.GroupBy(x => x.GetNotification()).Where(x => x.Key > NotificationType.Info).OrderByDescending(x => x.Key).ToList();
+			reports.RemoveAll(x => x.GetNotification() <= NotificationType.Info);
 
-			if (tabHeader.Tabs.Select(x => (NotificationType)x.Tag).SequenceEqual(notifs.Select(x => x.Key)))
+			if (reports.Count == 0)
 			{
-				LC_Items.SetItems(reports);
-
-				recommendedActions = LC_Items.Items.SelectWhereNotNull(GetAction).ToList()!;
-
-				this.TryInvoke(() =>
-				{
-					B_ApplyAll.Enabled = recommendedActions.Count > 0;
-					foreach (var item in tabHeader.Tabs)
-					{
-						item.Text = LocaleCR.Get(item.Tag.ToString()) + $" ({(notifs.FirstOrDefault(x => x.Key == (NotificationType)item.Tag)?.Count() ?? 0)})";
-					}
-				});
-
-				return;
+				label1.Location = ClientRectangle.Center(label1.Size);
+				label1.Show();
+			}
+			else
+			{
+				label1.Hide();
 			}
 
-			var tabs = new List<SlickTab>();
-			foreach (var report in notifs)
-			{
-				var tab = new SlickTab()
-				{
-					Tag = report.Key,
-					Text = LocaleCR.Get(report.Key.ToString()) + $" ({report.Count()})",
-					Tint = report.Key.GetColor(),
-					IconName = report.Key.GetIcon(true)
-				};
+			ListControl.SetItems(reports);
+			ListControl.Visible = reports.Count > 0;
 
-				tab.TabSelected += Tab_TabSelected;
-
-				tabs.Add(tab);
-			}
-
-			tabHeader.Tabs = tabs.ToArray();
-			LC_Items.SetItems(reports);
-			LC_Items.Visible = true;
+			DD_Author.SetItems(reports.Select(x => x.Package));
 		}
 		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report"); }
 	}
 
 	private ExtensionClass.action? GetAction(ICompatibilityInfo report)
 	{
-		var message = report.ReportItems.FirstOrDefault(x => x.Status.Notification == CurrentKey && !_compatibilityManager.IsSnoozed(x));
+		var message = report.ReportItems.FirstOrDefault(x => x.Status.Notification == ListControl.CurrentGroup && !_compatibilityManager.IsSnoozed(x));
 
 		if (message is null || report.Package is null)
 		{
@@ -193,23 +213,26 @@ public partial class PC_CompatibilityReport : PanelContent
 				_subscriptionsManager.Subscribe(message.Packages.Where(x => x.GetLocalPackage() is null));
 				_bulkUtil.SetBulkIncluded(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
 				_bulkUtil.SetBulkEnabled(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+				_compatibilityManager.QuickUpdate(message);
+
 			}
 			,
 			StatusAction.RequiresConfiguration => () =>
 			{
 				_compatibilityManager.ToggleSnoozed(message);
-
+				_compatibilityManager.QuickUpdate(message);
 			}
 			,
 			StatusAction.UnsubscribeThis => () =>
 			{
 				_subscriptionsManager.UnSubscribe(new[] { report.Package! });
+				_compatibilityManager.QuickUpdate(message);
 			}
 			,
 			StatusAction.UnsubscribeOther => () =>
 			{
 				_subscriptionsManager.UnSubscribe(message.Packages!);
-
+				_compatibilityManager.QuickUpdate(message);
 			}
 			,
 			StatusAction.ExcludeThis => () =>
@@ -219,6 +242,7 @@ public partial class PC_CompatibilityReport : PanelContent
 				{
 					_packageUtil.SetIncluded(pp, false);
 				}
+				_compatibilityManager.QuickUpdate(message);
 			}
 			,
 			StatusAction.ExcludeOther => () =>
@@ -231,6 +255,7 @@ public partial class PC_CompatibilityReport : PanelContent
 						_packageUtil.SetIncluded(pp, false);
 					}
 				}
+				_compatibilityManager.QuickUpdate(message);
 			}
 			,
 			StatusAction.RequestReview => () =>
@@ -250,6 +275,7 @@ public partial class PC_CompatibilityReport : PanelContent
 					_packageUtil.SetIncluded(pp2!, true);
 					_packageUtil.SetEnabled(pp2!, true);
 				}
+				_compatibilityManager.QuickUpdate(message);
 			}
 			: null
 			,
@@ -257,67 +283,13 @@ public partial class PC_CompatibilityReport : PanelContent
 		};
 	}
 
-	private void Tab_TabSelected(object sender, EventArgs e)
-	{
-		CurrentKey = (NotificationType)(sender as SlickTab)!.Tag;
-
-		recommendedActions = LC_Items.Items.SelectWhereNotNull(GetAction).ToList()!;
-
-		LC_Items.FilterChanged();
-
-		this.TryInvoke(() => B_ApplyAll.Enabled = recommendedActions.Count > 0);
-	}
-
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<ICompatibilityInfo> e)
 	{
-		e.DoNotDraw = e.Item.GetNotification() != CurrentKey;
-
-		if (!searchEmpty && !e.DoNotDraw && e.Item.Package is not null)
+		if (!e.DoNotDraw && e.Item.Package is not null)
 		{
-			for (var i = 0; i < searchTermsExclude.Count; i++)
-			{
-				if (Search(searchTermsExclude[i], e.Item.Package))
-				{
-					e.DoNotDraw = true;
-					return;
-				}
-			}
-
-			var orMatched = searchTermsOr.Count == 0;
-
-			for (var i = 0; i < searchTermsOr.Count; i++)
-			{
-				if (Search(searchTermsOr[i], e.Item.Package))
-				{
-					orMatched = true;
-					break;
-				}
-			}
-
-			if (!orMatched)
-			{
-				e.DoNotDraw = true;
-				return;
-			}
-
-			for (var i = 0; i < searchTermsAnd.Count; i++)
-			{
-				if (!Search(searchTermsAnd[i], e.Item.Package))
-				{
-					e.DoNotDraw = true;
-					return;
-				}
-			}
+			e.DoNotDraw = IsFilteredOut(e.Item.Package);
 		}
 	}
-
-	private bool Search(string searchTerm, IPackage item)
-	{
-		return searchTerm.SearchCheck(item.ToString())
-			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)
-			|| (!item.IsLocal ? item.Id.ToString() : Path.GetFileName(item.LocalParentPackage?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
-	}
-
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 	{
@@ -330,14 +302,14 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (keyData == (Keys.Control | Keys.Tab))
 		{
-			tabHeader.Next();
+			ListControl.Next();
 			return true;
 		}
 
 		if (keyData == (Keys.Control | Keys.Shift | Keys.Tab))
 		{
 
-			tabHeader.Previous();
+			ListControl.Previous();
 			return true;
 		}
 
@@ -371,28 +343,12 @@ public partial class PC_CompatibilityReport : PanelContent
 
 			this.TryInvoke(() =>
 			{
-				B_ApplyAll.Hide();
 				LoadReport(items.ToList(x => (ICompatibilityInfo)x));
 			});
 
 			customReportLoaded = true;
 		}
 		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report"); }
-	}
-
-	private async void B_Requests_Click(object sender, EventArgs e)
-	{
-		if (reviewRequests == null)
-		{
-			B_Requests.Loading = true;
-			reviewRequests = await _skyveApiUtil.GetReviewRequests();
-		}
-
-		B_Requests.Loading = false;
-		if (reviewRequests != null)
-		{
-			Form.Invoke(() => Form.PushPanel(null, new PC_ReviewRequests(reviewRequests)));
-		}
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)
@@ -444,17 +400,429 @@ public partial class PC_CompatibilityReport : PanelContent
 			}
 		}
 
-		LC_Items.FilterChanged();
+		FilterChanged(sender, e);
 	}
 
-	private async void B_ApplyAll_Click(object sender, EventArgs e)
+	private async void ApplyAll()
 	{
-		if (!B_ApplyAll.Loading && recommendedActions is not null)
+		await Task.Run(() => Parallelism.ForEach(ListControl.FilteredItems.SelectWhereNotNull(GetAction).ToList(), 4));
+		ListControl.DoFilterChanged();
+	}
+
+	private void SnoozeAll()
+	{
+		massSnoozeing = true;
+		foreach (var item in ListControl.FilteredItems.ToList())
 		{
-			B_ApplyAll.Loading = true;
-			await Task.Run(() => Parallelism.ForEach(recommendedActions, 4));
-			LC_Items.FilterChanged();
-			B_ApplyAll.Loading = false;
+			var Message = item.ReportItems.FirstOrDefault(x => x.Status.Notification == item.GetNotification() && !_compatibilityManager.IsSnoozed(x));
+			_compatibilityManager.ToggleSnoozed(Message);
 		}
+		massSnoozeing = false;
+
+		CompatibilityManager_ReportProcessed();
+	}
+
+	protected virtual void SetIncluded(IEnumerable<ICompatibilityInfo> filteredItems, bool included)
+	{
+		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.Package)!, included);
+	}
+
+	protected virtual void SetEnabled(IEnumerable<ICompatibilityInfo> filteredItems, bool enabled)
+	{
+		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.Package)!, enabled);
+	}
+
+	private void I_Actions_Click(object sender, EventArgs e)
+	{
+		var items = new SlickStripItem[]
+		{
+			  new (Locale.IncludeAll, "I_Check", action: () => IncludeAll(this, EventArgs.Empty))
+			, new (Locale.ExcludeAll, "I_X", action: () =>ExcludeAll(this, EventArgs.Empty))
+			, new (string.Empty)
+			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
+			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: () => DisableAll(this, EventArgs.Empty))
+			, new (string.Empty)
+			, new (LocaleCR.ApplyAllActions, "I_CompatibilityReport", ListControl.FilteredItems.Any(x => GetAction(x) is not null), action: ApplyAll)
+			, new (LocaleCR.SnoozeAll, "I_Snooze", action: SnoozeAll)
+			, new (string.Empty)
+			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
+			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
+		};
+
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
+	}
+
+	private void DisableAll(object sender, EventArgs e)
+	{
+		SetEnabled(ListControl.FilteredItems, false);
+		ListControl.Invalidate();
+		I_Actions.Invalidate();
+	}
+
+	private void EnableAll(object sender, EventArgs e)
+	{
+		SetEnabled(ListControl.FilteredItems, true);
+		ListControl.Invalidate();
+		I_Actions.Invalidate();
+	}
+
+	private void ExcludeAll(object sender, EventArgs e)
+	{
+		SetIncluded(ListControl.FilteredItems, false);
+		ListControl.Invalidate();
+		I_Actions.Invalidate();
+	}
+
+	private void IncludeAll(object sender, EventArgs e)
+	{
+		SetIncluded(ListControl.FilteredItems, true);
+		ListControl.Invalidate();
+		I_Actions.Invalidate();
+	}
+
+	private void DownloadAll(object sender, EventArgs e)
+	{
+		_downloadService.Download(ListControl.FilteredItems.Where(x => x.Package is null).Select(x => (IPackageIdentity)x));
+		ListControl.Invalidate();
+		I_Actions.Invalidate();
+	}
+
+	private void ReDownloadAll(object sender, EventArgs e)
+	{
+		_downloadService.Download(ListControl.FilteredItems.Where(x => x.Package is not null).Cast<IPackageIdentity>());
+		ListControl.Invalidate();
+		I_Actions.Invalidate();
+	}
+
+	private void UnsubscribeAll(object sender, EventArgs e)
+	{
+		if (MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisUnsubscribesFrom.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		I_Actions.Loading = true;
+		ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.FilteredItems.Cast<IPackageIdentity>());
+		I_Actions.Loading = false;
+		ListControl.Invalidate();
+		I_Actions.Invalidate();
+	}
+
+	private void SubscribeAll(object sender, EventArgs e)
+	{
+		var removeBadPackages = false;
+		var steamIds = ListControl.SafeGetItems().AllWhere(x => x.Item.Package == null && x.Item.Package?.Id != 0);
+
+		foreach (var item in steamIds.ToList())
+		{
+			var report = item.Item;
+
+			if (report.GetNotification() >= NotificationType.Unsubscribe)
+			{
+				if (!removeBadPackages && MessagePrompt.Show(Locale.ItemsShouldNotBeSubscribedInfo + "\r\n\r\n" + Locale.WouldYouLikeToSkipThose, PromptButtons.YesNo, PromptIcons.Hand, form: Program.MainForm) == DialogResult.No)
+				{
+					break;
+				}
+				else
+				{
+					removeBadPackages = true;
+				}
+
+				steamIds.Remove(item);
+				ListControl.RemoveAll(x => x.Package?.Id == item.Item.Package?.Id);
+			}
+		}
+
+		if (steamIds.Count == 0 || MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisSubscribesTo.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x => (IPackageIdentity)x.Item));
+		ListControl.Invalidate();
+		I_Actions.Invalidate();
+	}
+
+	private async void DeleteAll(object sender, EventArgs e)
+	{
+		if (MessagePrompt.Show(Locale.AreYouSure, PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		I_Actions.Loading = true;
+		await Task.Run(() =>
+		{
+			var items = ListControl.FilteredItems.ToList();
+			foreach (var item in items)
+			{
+				if (item.Package?.IsLocal == true && item is IAsset asset)
+				{
+					CrossIO.DeleteFile(asset.FilePath);
+				}
+				else if (item is ILocalPackage package)
+				{
+					ServiceCenter.Get<IPackageManager>().DeleteAll(package.Folder);
+				}
+			}
+		});
+		I_Actions.Loading = false;
+	}
+
+	private void I_Refresh_SizeChanged(object sender, EventArgs e)
+	{
+		(sender as Control)!.Width = (sender as Control)!.Height;
+	}
+
+	private void B_Filters_Click(object sender, MouseEventArgs e)
+	{
+		if (e is null || e.Button is MouseButtons.Left or MouseButtons.None)
+		{
+			B_Filters.Text = P_FiltersContainer.Height == 0 ? "HideFilters" : "ShowFilters";
+			AnimationHandler.Animate(P_FiltersContainer, P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty, 3, AnimationOption.IgnoreWidth);
+			P_FiltersContainer.AutoSize = false;
+		}
+		else if (e?.Button == MouseButtons.Middle)
+		{
+			I_ClearFilters_Click(sender, e);
+		}
+	}
+
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		RefreshCounts();
+
+		firstFilterPassed = true;
+
+		if (_settings.UserSettings.AlwaysOpenFiltersAndActions)
+		{
+			P_FiltersContainer.Visible = true;
+			P_FiltersContainer.AutoSize = true;
+			B_Filters.Text = "HideFilters";
+		}
+		else
+		{
+			P_FiltersContainer.Height = 0;
+			P_FiltersContainer.Visible = true;
+		}
+	}
+
+	private void RefreshCounts()
+	{
+		var format = ListControl.SelectedItemsCount == 0 ? Locale.ShowingCount : Locale.ShowingSelectedCount;
+		var filteredText = format.FormatPlural(
+			ListControl.FilteredCount,
+			Locale.Package.FormatPlural(ListControl.FilteredCount).ToLower(),
+			ListControl.SelectedItemsCount,
+			string.Empty);
+
+		if (L_FilterCount.Text != filteredText)
+		{
+			L_FilterCount.Visible = !string.IsNullOrEmpty(filteredText);
+			L_FilterCount.Text = filteredText;
+		}
+
+		I_Actions.Invalidate();
+	}
+
+	private void DelayedSearch()
+	{
+		ListControl.DoFilterChanged();
+		this.TryInvoke(RefreshCounts);
+		I_Refresh.Loading = false;
+	}
+
+	private void FilterChanged(object sender, EventArgs e)
+	{
+		if (!clearingFilters)
+		{
+			I_Refresh.Loading = true;
+			_delayedSearch.Run();
+
+			if (sender == I_Refresh)
+			{
+				ListControl.SortingChanged();
+			}
+		}
+	}
+
+	private void I_ClearFilters_Click(object sender, EventArgs e)
+	{
+		clearingFilters = true;
+		this.ClearForm();
+		clearingFilters = false;
+		FilterChanged(sender, e);
+	}
+
+	private bool IsFilteredOut(ILocalPackage item)
+	{
+		if (!firstFilterPassed)
+		{
+			return false;
+		}
+
+		if (OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)
+		{
+			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.IsLocal)
+			{
+				return true;
+			}
+		}
+
+		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
+		{
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.LocalPackage is not null && (item.LocalPackage.IsIncluded(out var partiallyIncluded) || partiallyIncluded)))
+			{
+				return true;
+			}
+		}
+
+		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
+		{
+			if (!item.IsMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.LocalPackage?.IsEnabled()))
+			{
+				return true;
+			}
+		}
+
+		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
+		{
+			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsMod)
+			{
+				return true;
+			}
+		}
+
+		if (DD_PackageStatus.SelectedItem != DownloadStatusFilter.Any)
+		{
+			//if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.None)
+			//{
+			//	if (item.Workshop)
+			//	{
+			//		return true;
+			//	}
+			//}
+			//else
+			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
+			{
+				if (item.IsLocal || _packageUtil.GetStatus(item, out _) <= DownloadStatus.OK)
+				{
+					return true;
+				}
+			}
+			else
+			{
+				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)_packageUtil.GetStatus(item, out _))
+				{
+					return true;
+				}
+			}
+		}
+
+		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.LocalPackage?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
+		{
+			return true;
+		}
+
+		if (DR_ServerTime.Set && !DR_ServerTime.Match(item.GetWorkshopInfo()?.ServerTime.ToLocalTime() ?? default))
+		{
+			return true;
+		}
+
+		if (DD_Author.SelectedItems.Any())
+		{
+			if (!DD_Author.SelectedItems.Any(x => item.GetWorkshopInfo()?.Author?.Equals(x) ?? false))
+			{
+				return true;
+			}
+		}
+
+		if (DD_Tags.SelectedItems.Any())
+		{
+			if (!_tagUtil.HasAllTags(item, DD_Tags.SelectedItems))
+			{
+				return true;
+			}
+		}
+
+		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
+		{
+			return !_playsetManager.IsPackageIncludedInPlayset(item, DD_Profile.SelectedItem);
+		}
+
+		if (!searchEmpty)
+		{
+			for (var i = 0; i < searchTermsExclude.Count; i++)
+			{
+				if (Search(searchTermsExclude[i], item))
+				{
+					return true;
+				}
+			}
+
+			var orMatched = searchTermsOr.Count == 0;
+
+			for (var i = 0; i < searchTermsOr.Count; i++)
+			{
+				if (Search(searchTermsOr[i], item))
+				{
+					orMatched = true;
+					break;
+				}
+			}
+
+			if (!orMatched)
+			{
+				return true;
+			}
+
+			for (var i = 0; i < searchTermsAnd.Count; i++)
+			{
+				if (!Search(searchTermsAnd[i], item))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		return false;
+	}
+
+	private bool Search(string searchTerm, ILocalPackage item)
+	{
+		return searchTerm.SearchCheck(item.ToString())
+			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)
+			|| (!item.IsLocal ? item.Id.ToString() : Path.GetFileName(item.LocalParentPackage?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+	}
+
+	private void I_Refresh_Click(object sender, EventArgs e)
+	{
+		CompatibilityManager_ReportProcessed();
+
+		FilterChanged(sender, e);
+	}
+
+	private void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
+	{
+		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
+		settings.Sorting = (int)DD_Sorting.SelectedItem;
+		_settings.SessionSettings.Save();
+
+		ListControl.SetSorting(DD_Sorting.SelectedItem, ListControl.SortDescending);
+	}
+
+	private void I_SortOrder_Click(object sender, EventArgs e)
+	{
+		ListControl.SetSorting(DD_Sorting.SelectedItem, !ListControl.SortDescending);
+
+		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
+		settings.DescendingSort = ListControl.SortDescending;
+		_settings.SessionSettings.Save();
+
+		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
 	}
 }

@@ -7,12 +7,29 @@ namespace Skyve.App.UserInterface.Lists;
 public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRequestList.Rectangles>
 {
 	private readonly IWorkshopService _workshopService;
+	private readonly INotifier _notifier;
+
 	public ReviewRequestList()
 	{
-		_workshopService = ServiceCenter.Get<IWorkshopService>();
-		HighlightOnHover = true;
+		ServiceCenter.Get(out _workshopService, out _notifier);
+
 		SeparateWithLines = true;
+		DynamicSizing = true;
 		ItemHeight = 64;
+
+		_notifier.WorkshopUsersInfoLoaded += _notifier_WorkshopUsersInfoLoaded;
+	}
+
+	protected override void Dispose(bool disposing)
+	{
+		_notifier.WorkshopUsersInfoLoaded -= _notifier_WorkshopUsersInfoLoaded;
+
+		base.Dispose(disposing);
+	}
+
+	private void _notifier_WorkshopUsersInfoLoaded()
+	{
+		Invalidate();
 	}
 
 	protected override void UIChanged()
@@ -28,14 +45,35 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		return items.OrderBy(x => x.Item.Timestamp);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<ReviewRequest, Rectangles> item, Point location)
+	protected override Rectangles GenerateRectangles(ReviewRequest item, Rectangle rectangle)
 	{
-		return true;
+		return new Rectangles(item);
+	}
+
+	protected override void OnItemMouseClick(DrawableItem<ReviewRequest, Rectangles> item, MouseEventArgs e)
+	{
+		if (item.Rectangles.TextRectangle.Contains(e.Location))
+		{
+			Clipboard.SetText(item.Item.PackageNote);
+		}
+		else if (item.Rectangles.UserRectangle.Contains(e.Location))
+		{
+			var user = _workshopService.GetUser(item.Item.UserId);
+
+			if (user != null)
+			{
+				PlatformUtil.OpenUrl(user.ProfileUrl);
+			}
+		}
+		else if (item.Rectangles.ViewRectangle.Contains(e.Location))
+		{
+			base.OnItemMouseClick(item, e);
+		}
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
-		if (!Items.Any())
+		if (ItemCount == 0)
 		{
 			e.Graphics.DrawString(Locale.SelectPackage, UI.Font(9F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 		}
@@ -47,10 +85,15 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 	{
 		base.OnPaintItemList(e);
 
-		var User = _workshopService.GetUser(e.Item.UserId);
-		var imageRect = e.ClipRectangle.Pad(Padding);
-		imageRect.Width = imageRect.Height /= 2;
-		var image = User?.GetUserAvatar();
+		var user = _workshopService.GetUser(e.Item.UserId);
+		var imageRect = e.ClipRectangle.Pad(Padding).Align(new Size(ItemHeight / 2, ItemHeight / 2), ContentAlignment.TopLeft);
+		var image = user?.GetUserAvatar();
+
+		e.Rects.ViewRectangle = SlickButton.AlignAndDraw(e, new ButtonDrawArgs
+		{
+			Text = LocaleCR.ViewRequest,
+			Icon = "I_Link"
+		}, e.ClipRectangle.Pad(Padding), ContentAlignment.TopRight, (e.HoverState, CursorLocation)).Rectangle;
 
 		if (image is not null)
 		{
@@ -63,22 +106,42 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 			e.Graphics.DrawRoundedImage(generic, imageRect, (int)(3 * UI.FontScale), FormDesign.Design.AccentBackColor);
 		}
 
-		var textRect = e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0);
-		using var brush = new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor);
-		e.Graphics.DrawString(User?.Name ?? Locale.UnknownUser, Font, brush, textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		var textRect = e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, e.Rects.ViewRectangle.Width + Padding.Horizontal, 0);
+		using var textBrush = new SolidBrush(ForeColor);
+		e.Graphics.DrawString(user?.Name ?? Locale.UnknownUser, Font, textBrush, textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+
+		e.Rects.UserRectangle = Rectangle.Union(imageRect, new Rectangle(textRect.Location, e.Graphics.Measure(user?.Name ?? Locale.UnknownUser, Font, textRect.Width).ToSize()));
+
+		if (e.Rects.UserRectangle.Contains(CursorLocation))
+		{
+			using var brush = new SolidBrush(Color.FromArgb(40, FormDesign.Design.ActiveColor));
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.UserRectangle, Padding.Left);
+		}
 
 		using var typeIcon = IconManager.GetSmallIcon(e.Item.IsInteraction ? "I_Switch" : e.Item.IsStatus ? "I_Statuses" : "I_Content");
 		using var dateIcon = IconManager.GetSmallIcon("I_UpdateTime");
 		var r = e.Graphics.DrawLabel(e.Item.Timestamp.ToLocalTime().ToString("g"), dateIcon, FormDesign.Design.AccentColor, e.ClipRectangle, ContentAlignment.BottomLeft, true);
-		e.Graphics.DrawLabel(e.Item.IsInteraction ? "Interaction" : e.Item.IsStatus ? "Status" : "Other", typeIcon, FormDesign.Design.AccentColor, e.ClipRectangle.Pad(0, 0, 0, r.Height + Padding.Top), ContentAlignment.BottomLeft, true);
+		e.Graphics.DrawLabel(LocaleHelper.GetGlobalText(e.Item.IsInteraction ? "Interaction" : e.Item.IsStatus ? "Status" : "Other"), typeIcon, FormDesign.Design.AccentColor, e.ClipRectangle.Pad(0, 0, 0, r.Height + Padding.Top), ContentAlignment.BottomLeft, true);
 
+		e.Rects.TextRectangle = SlickButton.AlignAndDraw(e, new ButtonDrawArgs
+		{
+			Icon = "I_Copy"
+		}, e.ClipRectangle.Pad(0, e.Rects.ViewRectangle.Height + Padding.Vertical, Padding.Right, 0), ContentAlignment.MiddleRight, (e.HoverState, CursorLocation)).Rectangle;
 
-		e.Graphics.DrawString(e.Item.PackageNote, UI.Font(7.5F), brush, textRect.Pad((int)(125 * UI.FontScale), 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far });
+		using var smallfont = UI.Font(8.25F);
+		var noteRect = e.ClipRectangle.Pad((int)(125 * UI.FontScale), e.Rects.ViewRectangle.Height + Padding.Vertical, e.Rects.TextRectangle.Width + Padding.Horizontal, 0);
+		e.Graphics.DrawString(e.Item.PackageNote, smallfont, textBrush, noteRect, new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far });
+
+		e.DrawableItem.CachedHeight = Math.Max(ItemHeight, noteRect.Top + Padding.Bottom + (int)e.Graphics.Measure(e.Item.PackageNote, smallfont, noteRect.Width).Height);
 	}
 
 	public class Rectangles : IDrawableItemRectangles<ReviewRequest>
 	{
 		public ReviewRequest Item { get; set; }
+
+		public Rectangle UserRectangle;
+		public Rectangle TextRectangle;
+		public Rectangle ViewRectangle;
 
 		public Rectangles(ReviewRequest item)
 		{
@@ -94,7 +157,7 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 
 		public bool IsHovered(Control instance, Point location)
 		{
-			return true;
+			return UserRectangle.Contains(location) || TextRectangle.Contains(location) || ViewRectangle.Contains(location);
 		}
 	}
 }

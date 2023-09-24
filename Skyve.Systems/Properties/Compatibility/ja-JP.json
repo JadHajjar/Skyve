@@ -102,6 +102,10 @@
     "One": "「{0}」は「{1}」の直後にロードします。",
     "Plural": "「{0}」は次のパッケージの直後にロードします。"
   },
+  "Interaction_RequiredItem": {
+    "One": "「{1}」には「{0}」が必要です。",
+    "Plural": "「{0}」 は以下のパッケージに必要です。"
+  },
   "Interaction_Identical": "これらは同じパッケージで複数のバージョンがあります。\n\nその中から「1つだけ」選択して下さい。",
   "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要です。",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
@@ -140,6 +144,7 @@
   "Stability_Broken": "このパッケージは破損しています。\nゲームがプレイできない・既に動作しないことが判明しています。",
   "Stability_Incompatible": "このパッケージはゲームと互換性が無くプレイ出来ません。\n\n直ちに削除する必要があります。",
   "Stability_Local": "このパッケージは、オリジナルMOD 「{0}」のローカルバージョンです。\n\n一般的にローカルバージョンは、テスト目的やSteam以外のプラットホームで使用されます。\n\nMODのアップデートを調べる場合は、パッケージのリンクをチェックして下さい。",
+  "Stability_BrokenFromPatch": "パッケージは最近のパッチで壊れました。アップデートして対応するまでしばらく待って下さい。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "以下のパッケージをサブスクする必要があります。",
@@ -166,6 +171,11 @@
   "Action_Switch": {
     "One": "「{1}」に切り替えて下さい。",
     "Plural": "以下のいずれかのパッケージに切り替える必要があります。"
+  },
+  "Action_IncludeThis": "「{0}」を含める必要があります。",
+  "Action_IncludeOther": {
+    "One": "以下のパッケージを含めて下さい:",
+    "Plural": "以下のパッケージを含めて下さい:"
   },
   "NoRequiredDlcs": "必須DLCは無し",
   "DlcsSelected": {
@@ -216,7 +226,6 @@
   "AuthorRetired": "{0} / {1} の作者は引退済みか長期間で活動していません。\n\n今後のアップデートやパッケージの安定性は保証されません。",
   "AuthorMalicious": "{0} / {1} の作者は、マルウェアなどのウイルスのような有害コンテンツをパッケージに含めたことで知られています。",
   "ReviewRequests": "レビューをリクエスト {0}",
-  "DeleteRequest": "リクエストを削除",
   "ApplyRequestedChanges": "リクエストの変更を適用",
   "ManagePackage": "パッケージの管理",
   "Banned": "BAN済み",
@@ -227,5 +236,14 @@
   "OtherCompatibilityWarnings": {
     "One": "パッケージには他で互換性の警告があります",
     "Plural": "パッケージには他で互換性の警告が {0} 個あります"
-  }
+  },
+  "DeleteRequests": {
+    "One": "リクエストを削除",
+    "Plural": "リクエストを削除"
+  },
+  "ViewRequest": "リクエストを表示",
+  "CRT_RequiredItem": "必要アイテム",
+  "RequiredItem": "必要アイテム",
+  "ApplyAllActions": "使用できるアクションを全て適用",
+  "SnoozeAll": "表示中の問題点を全てスヌーズ"
 }

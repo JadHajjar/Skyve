@@ -14,8 +14,6 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 	private static ICustomPlayset? opening;
 	private readonly IOSelectionDialog imagePrompt;
 
-	public IEnumerable<ICustomPlayset> FilteredItems => SafeGetItems().Select(x => x.Item);
-
 	public bool ReadOnly { get; set; }
 
 	public event Action<ICustomPlayset>? LoadProfile;
@@ -257,9 +255,9 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 			, new (Locale.OpenPlaysetFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(_profileManager.GetFileName(item!)))
 			, new (string.Empty, show: local)
 			, new (Locale.SharePlayset, "I_Share", local && item.ProfileId == 0 && _userService.User.Id is not null && downloading != item, action: async () => await ShareProfile(item))
-			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && _userService.User.Equals(item.Author), action: async () => await ServiceCenter.Get<IOnlinePlaysetUtil>().SetVisibility((item as IOnlinePlayset)!, !item.Public))
+			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && _userService.User.Equals(item.Author), action: async () => await ServiceCenter.Get<IOnlinePlaysetUtil>().SetVisibility((item as ICustomPlayset)!, !item.Public))
 			, new (Locale.UpdatePlayset, "I_Share", local && item.ProfileId != 0 && _userService.User.Equals(item.Author), action: async () => await ShareProfile(item))
-			, new (Locale.UpdatePlayset, "I_Refresh", local && item.ProfileId != 0 && item.Author != _userService.User.Id, action: () => DownloadProfile(item))
+			, new (Locale.DownloadPlayset, "I_Refresh", local && item.ProfileId != 0 && item.Author != _userService.User.Id, action: () => DownloadProfile(item))
 			, new (Locale.CopyPlaysetLink, "I_LinkChain", local && item.ProfileId != 0, action: () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)))
 			, new (string.Empty, show: local)
 			, new (Locale.PlaysetReplace, "I_Import", local, action: () => LoadProfile?.Invoke(item!))

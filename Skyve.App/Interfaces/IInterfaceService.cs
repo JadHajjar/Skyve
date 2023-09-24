@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Skyve.App.Interfaces;
-public interface IInterfaceService
+public interface IAppInterfaceService : IInterfaceService
 {
+	INotificationInfo GetLastVersionNotification();
 	PC_Changelog ChangelogPanel();
 	PlaysetSettingsPanel PlaysetSettingsPanel();
 	PanelContent UtilitiesPanel();

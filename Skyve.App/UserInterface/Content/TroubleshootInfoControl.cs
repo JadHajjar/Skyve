@@ -159,12 +159,12 @@ public class TroubleshootInfoControl : SlickControl
 	{
 		if (MessagePrompt.Show(Locale.TroubleshootAskIfFixed, LocaleSlickUI.Confirmation, PromptButtons.YesNo, PromptIcons.Question, form: Program.MainForm) == DialogResult.Yes)
 		{
-			if (_troubleshootSystem.CurrentStage * 2 >= _troubleshootSystem.TotalStages && MessagePrompt.Show(Locale.TroubleshootAskToStop, Locale.StopTroubleshootTitle, PromptButtons.YesNo, PromptIcons.Hand, form: Program.MainForm) == DialogResult.Yes)
-			{
-				this.TryInvoke(Hide);
-				await Task.Run(() => _troubleshootSystem.Stop(true));
-				return;
-			}
+			//if (_troubleshootSystem.CurrentStage * 2 >= _troubleshootSystem.TotalStages && MessagePrompt.Show(Locale.TroubleshootAskToStop, Locale.StopTroubleshootTitle, PromptButtons.YesNo, PromptIcons.Hand, form: Program.MainForm) == DialogResult.Yes)
+			//{
+			//	this.TryInvoke(Hide);
+			//	await Task.Run(() => _troubleshootSystem.Stop(true));
+			//	return;
+			//}
 
 			await Task.Run(() => _troubleshootSystem.ApplyConfirmation(true));
 		}
@@ -214,11 +214,11 @@ public class TroubleshootInfoControl : SlickControl
 			{
 				case DialogResult.Yes:
 					Hide();
-					await Task.Run(() => _troubleshootSystem.Stop(true));
+					await Task.Run(() => _troubleshootSystem.Stop(false));
 					break;
 				case DialogResult.No:
 					Hide();
-					await Task.Run(() => _troubleshootSystem.Stop(false));
+					await Task.Run(() => _troubleshootSystem.Stop(true));
 					break;
 			}
 		}

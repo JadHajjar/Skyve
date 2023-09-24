@@ -123,7 +123,7 @@ partial class ContentList<T>
 			this.FLP_Search.Margin = new System.Windows.Forms.Padding(0);
 			this.FLP_Search.Name = "FLP_Search";
 			this.TLP_Main.SetRowSpan(this.FLP_Search, 2);
-			this.FLP_Search.Size = new System.Drawing.Size(819, 20);
+			this.FLP_Search.Size = new System.Drawing.Size(819, 31);
 			this.FLP_Search.TabIndex = 0;
 			// 
 			// TB_Search
@@ -169,7 +169,7 @@ partial class ContentList<T>
 			this.B_Filters.Location = new System.Drawing.Point(43, 3);
 			this.B_Filters.Name = "B_Filters";
 			this.B_Filters.Selected = false;
-			this.B_Filters.Size = new System.Drawing.Size(50, 14);
+			this.B_Filters.Size = new System.Drawing.Size(83, 25);
 			this.B_Filters.SpaceTriggersClick = true;
 			this.B_Filters.TabIndex = 1;
 			this.B_Filters.Text = "ShowFilters";
@@ -179,7 +179,7 @@ partial class ContentList<T>
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer2, 4);
 			this.slickSpacer2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer2.Location = new System.Drawing.Point(0, 158);
+			this.slickSpacer2.Location = new System.Drawing.Point(0, 169);
 			this.slickSpacer2.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer2.Name = "slickSpacer2";
 			this.slickSpacer2.Size = new System.Drawing.Size(895, 2);
@@ -191,7 +191,7 @@ partial class ContentList<T>
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer1, 4);
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 192);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 203);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(895, 2);
@@ -207,8 +207,8 @@ partial class ContentList<T>
 			this.DD_Sorting.HideLabel = true;
 			this.DD_Sorting.Location = new System.Drawing.Point(842, 3);
 			this.DD_Sorting.Name = "DD_Sorting";
-			this.DD_Sorting.Size = new System.Drawing.Size(50, 0);
-			this.DD_Sorting.SkyvePage = SkyvePage.None;
+			this.DD_Sorting.Size = new System.Drawing.Size(50, 22);
+			this.DD_Sorting.SkyvePage = Skyve.Domain.Enums.SkyvePage.None;
 			this.DD_Sorting.TabIndex = 2;
 			this.DD_Sorting.Text = "Sort By";
 			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
@@ -232,7 +232,7 @@ partial class ContentList<T>
 			this.TLP_MiddleBar.Controls.Add(this.B_ListView, 5, 0);
 			this.TLP_MiddleBar.Controls.Add(this.B_GridView, 6, 0);
 			this.TLP_MiddleBar.Dock = System.Windows.Forms.DockStyle.Top;
-			this.TLP_MiddleBar.Location = new System.Drawing.Point(0, 160);
+			this.TLP_MiddleBar.Location = new System.Drawing.Point(0, 171);
 			this.TLP_MiddleBar.Margin = new System.Windows.Forms.Padding(0);
 			this.TLP_MiddleBar.Name = "TLP_MiddleBar";
 			this.TLP_MiddleBar.RowCount = 1;
@@ -313,7 +313,7 @@ partial class ContentList<T>
 			this.TLP_Main.SetColumnSpan(this.P_FiltersContainer, 3);
 			this.P_FiltersContainer.Controls.Add(this.P_Filters);
 			this.P_FiltersContainer.Dock = System.Windows.Forms.DockStyle.Top;
-			this.P_FiltersContainer.Location = new System.Drawing.Point(0, 20);
+			this.P_FiltersContainer.Location = new System.Drawing.Point(0, 31);
 			this.P_FiltersContainer.Margin = new System.Windows.Forms.Padding(0);
 			this.P_FiltersContainer.Name = "P_FiltersContainer";
 			this.P_FiltersContainer.Size = new System.Drawing.Size(895, 138);
@@ -553,30 +553,30 @@ partial class ContentList<T>
 
 	#endregion
 	public SlickControls.SlickTextBox TB_Search;
-	private ThreeOptionToggle OT_Workshop;
-	private ThreeOptionToggle OT_Enabled;
-	private ThreeOptionToggle OT_Included;
-	private SlickControls.RoundedGroupTableLayoutPanel P_Filters;
-	private ReportSeverityDropDown DD_ReportSeverity;
-	private PackageStatusDropDown DD_PackageStatus;
-	private SlickControls.SlickIcon I_ClearFilters;
-	private System.Windows.Forms.Label L_Counts;
-	private SortingDropDown DD_Sorting;
-	private System.Windows.Forms.TableLayoutPanel TLP_MiddleBar;
-	private SlickControls.SlickSpacer slickSpacer1;
-	private SlickControls.SlickSpacer slickSpacer2;
+	internal ThreeOptionToggle OT_Workshop;
+	internal ThreeOptionToggle OT_Enabled;
+	internal ThreeOptionToggle OT_Included;
+	internal SlickControls.RoundedGroupTableLayoutPanel P_Filters;
+	internal ReportSeverityDropDown DD_ReportSeverity;
+	internal PackageStatusDropDown DD_PackageStatus;
+	internal SlickControls.SlickIcon I_ClearFilters;
+	internal System.Windows.Forms.Label L_Counts;
+	internal SortingDropDown DD_Sorting;
+	internal System.Windows.Forms.TableLayoutPanel TLP_MiddleBar;
+	internal SlickControls.SlickSpacer slickSpacer1;
+	internal SlickControls.SlickSpacer slickSpacer2;
 	public System.Windows.Forms.Panel P_FiltersContainer;
-	private SlickControls.SlickLabel B_Filters;
-	private TagsDropDown DD_Tags;
-	private ProfilesDropDown DD_Profile;
-	private SlickControls.SlickIcon I_Refresh;
-	private SlickControls.SlickDateRange DR_SubscribeTime;
-	private SlickControls.SlickDateRange DR_ServerTime;
-	private AuthorDropDown DD_Author;
-	private SlickControls.SlickIcon I_SortOrder;
-	private System.Windows.Forms.Label L_FilterCount;
+	internal SlickControls.SlickLabel B_Filters;
+	internal TagsDropDown DD_Tags;
+	internal ProfilesDropDown DD_Profile;
+	internal SlickControls.SlickIcon I_Refresh;
+	internal SlickControls.SlickDateRange DR_SubscribeTime;
+	internal SlickControls.SlickDateRange DR_ServerTime;
+	internal AuthorDropDown DD_Author;
+	internal SlickControls.SlickIcon I_SortOrder;
+	internal System.Windows.Forms.Label L_FilterCount;
 	public System.Windows.Forms.FlowLayoutPanel FLP_Search;
-	private ThreeOptionToggle OT_ModAsset;
+	internal ThreeOptionToggle OT_ModAsset;
 	public System.Windows.Forms.TableLayoutPanel TLP_Main;
 	protected SlickIcon B_ListView;
 	protected SlickIcon B_GridView;

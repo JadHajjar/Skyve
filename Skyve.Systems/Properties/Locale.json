@@ -25,7 +25,7 @@
   "NoAssets": "Disable All Assets",
   "NoMods": "Disable All Mods",
   "AutoSave": "Automatic Save",
-  "TotalSize": "total size",
+  "TotalAssetSize": "{0} of included assets",
   "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "Any Status",
   "AnyCompatibilityStatus": "Any Status",
@@ -66,8 +66,6 @@
   "LoadingScreenMod": "Loading Screen Mod",
   "LoadEnabled": "Load all enabled assets",
   "LoadUsed": "Load used assets",
-  "ExcludeInclude": "Include / Exclude",
-  "EnableDisable": "Enable / Disable",
   "OpenPackagePage": "Open this Package's page",
   "OpenLocalFolder": "Open the local folder containing this package",
   "ViewOnSteam": "View this package on Steam",
@@ -126,8 +124,8 @@
     "Plural": "Delete the selected packages"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
-    "Plural": "Unsubscribe from the selected packages"
+    "One": "Unsubscribe to this package",
+    "Plural": "Unsubscribe to the selected packages"
   },
   "CopyWorkshopId": {
     "One": "Copy this package's Workshop ID",
@@ -274,6 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Packages included & enabled: {0}, Total: {1}",
   "AssetIncludedTotal": "Assets included: {0}, Total: {1}",
   "NewPlayset_Tip": "Create or import a new playset",
+  "TempPlayset": "Switch to a temporary playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
   "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Automatically save changes to mods & assets to your playset",
@@ -385,8 +384,6 @@
   "AddToSearch": "Add '{0}' to your search",
   "CopyToClipboard": "Copy '{0}' to your clipboard",
   "ViewPackageCR": "View this package's compatibility info",
-  "FilterByThisEnabledStatus": "Filter by this 'Enabled' status",
-  "FilterByThisIncludedStatus": "Filter by this 'Included' status",
   "CleanupInfo": "Run a quick cleanup that deletes any package you're not actually subscribed to from your computer as well as forcing the download of missing subscribed packages.",
   "CleanupTitle": "Workshop Packages Cleanup",
   "RunCleanup": "Run Cleanup",
@@ -523,6 +520,14 @@
     "One": "{0} {1} does not match its size from the Workshop",
     "Plural": "{0} {1} do not match their respective sizes from the Workshop"
   },
+  "NewUpdatedCount": {
+    "One": "{0} new or updated {1}",
+    "Plural": "{0} new or updated {1}"
+  },
+  "TotalCount": {
+    "One": "{0} {1} in total",
+    "Plural": "{0} {1} in total"
+  },
   "PackageIsRemoved": "'{0}' was removed from Steam",
   "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
   "PackageIsNotDownloaded": "'{0}' was removed from your computer",
@@ -548,6 +553,7 @@
   "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
   "ApplyDownloads": "Force Steam to download all pending packages",
+  "ApplyRemoval": "Delete all pending packages",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
   "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
@@ -659,6 +665,53 @@
   "CleanupInfoTitle": "What is a cleanup?",
   "TroubleshootCauseResult": "The following packages might be the cause of your issues",
   "VerifiedAuthor": "Verified Author",
-  "ApplyAllActions": "Apply all available actions",
-  "FailedToImportPlayset": "Failed to import this playset."
+  "FailedToImportPlayset": "Failed to import this playset.",
+  "EnablePackage": "Enable {0}",
+  "DisablePackage": "Disable {0}",
+  "IncludePackage": "Include {0}",
+  "ExcludePackage": "Exclude {0}",
+  "FilterByEnabled": "Only show enabled items.",
+  "FilterByDisabled": "Only show disabled items.",
+  "FilterByIncluded": "Only show included items.",
+  "FilterByExcluded": "Only show excluded items.",
+  "ViewOnGithub": "View this package's Github repository",
+  "ViewXOnSteam": "View '{0}' on Steam",
+  "Free": "Free",
+  "ViewAllYourItems": "View all your {0}",
+  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "NoCompatibilityIssues": {
+    "One": "No Compatibility issues detected.",
+    "Plural": "No compatibility issues with your {0} were detected."
+  },
+  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
+  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
+  "ChangePlaysetSettings": "Change this playset's settings",
+  "ViewCompatibilityReport": "View the full compatibility report",
+  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewModsWithIssues": "View Mods with issues",
+  "CreateShortcut": "Create shortcut",
+  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "StartsNewGameOnLaunch": "Starts a new game on launch",
+  "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
+  "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
+  "LoadsSaveGameWithMap": "Continues the '{0}' save-game on launch",
+  "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
+  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "Notifications": "Notifications",
+  "NoNotifications": "No notifications",
+  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "PackageUpdates": "Package Updates",
+  "PackagesUpdatedSinceSession": {
+    "One": "'{1}' got updated since your last session",
+    "Plural": "{0} packages got updated since your last session"
+  },
+  "NewPackages": "New Packages",
+  "NewPackagesSinceSession": {
+    "One": "'{1}' got installed since your last session",
+    "Plural": "{0} new packages got installed since your last session"
+  },
+  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }

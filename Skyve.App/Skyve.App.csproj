@@ -49,6 +49,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="UserInterface\Bubbles\FavoriteProfileBubble.cs" />
+    <Compile Update="UserInterface\Bubbles\PlaysetBubble.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Content\ContentList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -57,6 +60,9 @@
     </Compile>
     <Compile Update="UserInterface\Content\DownloadsInfoControl.cs" />
     <Compile Update="UserInterface\Content\UserDescriptionControl.cs" />
+    <Compile Update="UserInterface\Dashboard\D_AssetInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\AuthorDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageTypeDropDown.cs" />
@@ -71,6 +77,9 @@
     <Compile Update="UserInterface\Lists\ReviewRequestList.cs" />
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs" />
+    <Compile Update="UserInterface\Panels\PC_ManageCompatibilitySelection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Panels\PC_Troubleshoot.cs">
       <SubType>UserControl</SubType>
     </Compile>

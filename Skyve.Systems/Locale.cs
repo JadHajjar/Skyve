@@ -35,7 +35,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ContentAndInfo => _instance.GetText(nameof(ContentAndInfo));
 	public static Translation OtherPlaysets => _instance.GetText(nameof(OtherPlaysets));
 	public static Translation Filters => _instance.GetText(nameof(Filters));
-	public static Translation TotalSize => _instance.GetText(nameof(TotalSize));
+	public static Translation TotalAssetSize => _instance.GetText(nameof(TotalAssetSize));
 	public static Translation AssetStatus => _instance.GetText(nameof(AssetStatus));
 	public static Translation ModStatus => _instance.GetText(nameof(ModStatus));
 	public static Translation CompatibilityStatus => _instance.GetText(nameof(CompatibilityStatus));
@@ -70,11 +70,10 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PlaysetDelete => _instance.GetText(nameof(PlaysetDelete));
 	public static Translation ShouldNotBeSubscribed => _instance.GetText(nameof(ShouldNotBeSubscribed));
 	public static Translation LoadingScreenMod => _instance.GetText(nameof(LoadingScreenMod));
-	public static Translation ExcludeInclude => _instance.GetText(nameof(ExcludeInclude));
-	public static Translation EnableDisable => _instance.GetText(nameof(EnableDisable));
 	public static Translation OpenPackagePage => _instance.GetText(nameof(OpenPackagePage));
 	public static Translation OpenLocalFolder => _instance.GetText(nameof(OpenLocalFolder));
 	public static Translation ViewOnSteam => _instance.GetText(nameof(ViewOnSteam));
+	public static Translation ViewXOnSteam => _instance.GetText(nameof(ViewXOnSteam));
 	public static Translation ReDownloadPackage => _instance.GetText(nameof(ReDownloadPackage));
 	public static Translation DownloadPackage => _instance.GetText(nameof(DownloadPackage));
 	public static Translation CopySteamId => _instance.GetText(nameof(CopySteamId));
@@ -207,8 +206,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation AddToSearch => _instance.GetText(nameof(AddToSearch));
 	public static Translation CopyToClipboard => _instance.GetText(nameof(CopyToClipboard));
 	public static Translation ViewPackageCR => _instance.GetText(nameof(ViewPackageCR));
-	public static Translation FilterByThisEnabledStatus => _instance.GetText(nameof(FilterByThisEnabledStatus));
-	public static Translation FilterByThisIncludedStatus => _instance.GetText(nameof(FilterByThisIncludedStatus));
 	public static Translation CleanupInfo => _instance.GetText(nameof(CleanupInfo));
 	public static Translation CloseCitiesToClean => _instance.GetText(nameof(CloseCitiesToClean));
 	public static Translation CleanupRequiresGameToOpen => _instance.GetText(nameof(CleanupRequiresGameToOpen));
@@ -326,11 +323,48 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FaultyPackagesTitle => _instance.GetText(nameof(FaultyPackagesTitle));
 	public static Translation CleanupInfoTitle => _instance.GetText(nameof(CleanupInfoTitle));
 	public static Translation TroubleshootCauseResult => _instance.GetText(nameof(TroubleshootCauseResult));
+	public static Translation EnablePackage => _instance.GetText(nameof(EnablePackage));
+	public static Translation DisablePackage => _instance.GetText(nameof(DisablePackage));
+	public static Translation IncludePackage => _instance.GetText(nameof(IncludePackage));
+	public static Translation ExcludePackage => _instance.GetText(nameof(ExcludePackage));
+	public static Translation FilterByEnabled => _instance.GetText(nameof(FilterByEnabled));
+	public static Translation FilterByDisabled => _instance.GetText(nameof(FilterByDisabled));
+	public static Translation FilterByIncluded => _instance.GetText(nameof(FilterByIncluded));
+	public static Translation FilterByExcluded => _instance.GetText(nameof(FilterByExcluded));
+	public static Translation ViewOnGithub => _instance.GetText(nameof(ViewOnGithub));
+	public static Translation Free => _instance.GetText(nameof(Free));
+	public static Translation NewUpdatedCount => _instance.GetText(nameof(NewUpdatedCount));
+	public static Translation TotalCount => _instance.GetText(nameof(TotalCount));
+	public static Translation ViewAllYourItems => _instance.GetText(nameof(ViewAllYourItems));
+	public static Translation ViewRecentlyUpdatedItems => _instance.GetText(nameof(ViewRecentlyUpdatedItems));
+	public static Translation NoCompatibilityIssues => _instance.GetText(nameof(NoCompatibilityIssues));
+	public static Translation UnsavedChangesPlayset => _instance.GetText(nameof(UnsavedChangesPlayset));
+	public static Translation ChangePlaysetSettings => _instance.GetText(nameof(ChangePlaysetSettings));
+	public static Translation TempPlayset => _instance.GetText(nameof(TempPlayset));
+	public static Translation ViewCompatibilityReport => _instance.GetText(nameof(ViewCompatibilityReport));
+	public static Translation DashboardCustomizationInfo => _instance.GetText(nameof(DashboardCustomizationInfo));
+	public static Translation ViewModsWithIssues => _instance.GetText(nameof(ViewModsWithIssues));
+	public static Translation ViewAssetsWithIssues => _instance.GetText(nameof(ViewAssetsWithIssues));
+	public static Translation StartsNewGameOnLaunch => _instance.GetText(nameof(StartsNewGameOnLaunch));
+	public static Translation StartsNewGameWithMap => _instance.GetText(nameof(StartsNewGameWithMap));
+	public static Translation LoadsSaveGameOnLaunch => _instance.GetText(nameof(LoadsSaveGameOnLaunch));
+	public static Translation LoadsSaveGameWithMap => _instance.GetText(nameof(LoadsSaveGameWithMap));
+	public static Translation StartsNewAssetOnLaunch => _instance.GetText(nameof(StartsNewAssetOnLaunch));
+	public static Translation LoadsAssetOnLaunch => _instance.GetText(nameof(LoadsAssetOnLaunch));
+	public static Translation Notifications => _instance.GetText(nameof(Notifications));
+	public static Translation NoNotifications => _instance.GetText(nameof(NoNotifications));
+	public static Translation MultipleSkyvesDetected => _instance.GetText(nameof(MultipleSkyvesDetected));
+	public static Translation PackageUpdates => _instance.GetText(nameof(PackageUpdates));
+	public static Translation PackagesUpdatedSinceSession => _instance.GetText(nameof(PackagesUpdatedSinceSession));
+	public static Translation NewPackages => _instance.GetText(nameof(NewPackages));
+	public static Translation NewPackagesSinceSession => _instance.GetText(nameof(NewPackagesSinceSession));
+	public static Translation IncorrectFolderSettings => _instance.GetText(nameof(IncorrectFolderSettings));
+	public static Translation IncorrectFolderSettingsInfo => _instance.GetText(nameof(IncorrectFolderSettingsInfo));
 
 	public static void Load() { _ = _instance; }
 
 	public Translation Get(string key)
 	{
-		return LocaleHelper.GetGlobalText(key);
+		return GetGlobalText(key);
 	}
 }

@@ -32,4 +32,5 @@ public interface IPlaysetManager
 	List<ILocalPackageWithContents> GetInvalidPackages(PackageUsage usage);
 	void SaveLsmSettings(IPlayset profile);
 	ICustomPlayset? ConvertLegacyPlayset(string profilePath, bool removeLegacyFile = true);
+	void RunFirstTimeSetup();
 }

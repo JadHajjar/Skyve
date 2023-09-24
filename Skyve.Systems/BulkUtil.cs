@@ -55,11 +55,14 @@ internal class BulkUtil : IBulkUtil
 
 		_notifier.BulkUpdating = false;
 
-		_notifier.OnRefreshUI(true);
-		_notifier.OnInformationUpdated();
-		_modUtil.SaveChanges();
-		_assetUtil.SaveChanges();
-		_notifier.TriggerAutoSave();
+		if (_notifier.IsContentLoaded)
+		{
+			_notifier.OnRefreshUI(true);
+			_notifier.OnInclusionUpdated();
+			_modUtil.SaveChanges();
+			_assetUtil.SaveChanges();
+			_notifier.TriggerAutoSave();
+		}
 
 		static IEnumerable<ILocalPackage> getPackageContents(ILocalPackage package)
 		{
@@ -107,9 +110,12 @@ internal class BulkUtil : IBulkUtil
 
 		_notifier.BulkUpdating = false;
 
-		_notifier.OnRefreshUI(true);
-		_notifier.OnInformationUpdated();
-		_modUtil.SaveChanges();
-		_notifier.TriggerAutoSave();
+		if (_notifier.IsContentLoaded)
+		{
+			_notifier.OnRefreshUI(true);
+			_notifier.OnInclusionUpdated();
+			_modUtil.SaveChanges();
+			_notifier.TriggerAutoSave();
+		}
 	}
 }

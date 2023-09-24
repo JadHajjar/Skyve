@@ -29,7 +29,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		foreach (var button in TLP_HelpLogs.GetControls<SlickButton>())
 		{
-			if (button != B_ChangeLog)
+			if (button != B_ChangeLog && button != B_Donate)
 			{
 				SlickTip.SetTo(button, LocaleHelper.GetGlobalText($"{button.Text}_Tip"));
 			}
@@ -68,8 +68,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		{
 			if (button is not SlickLabel)
 			{
-				button.Padding = UI.Scale(new Padding(7), UI.FontScale);
-				button.Margin = UI.Scale(new Padding(10, 5, 10, 5), UI.UIScale);
+				button.Margin = UI.Scale(new Padding(10, 7, 10, 7), UI.UIScale);
 			}
 		}
 
@@ -248,7 +247,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_ChangeLog_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel(ServiceCenter.Get<IInterfaceService>().ChangelogPanel());
+		Form.PushPanel(ServiceCenter.Get<IAppInterfaceService>().ChangelogPanel());
 	}
 
 	private void B_Donate_Click(object sender, EventArgs e)

@@ -37,7 +37,7 @@ public partial class PC_PlaysetAdd : PanelContent
 
 		_profileManager.SetCurrentPlayset(newProfile);
 
-		var panel = ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel();
+		var panel = ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel();
 
 		if (Form.SetPanel(null, panel))
 		{
@@ -60,7 +60,7 @@ public partial class PC_PlaysetAdd : PanelContent
 
 		_profileManager.SetCurrentPlayset(newProfile);
 
-		var panel = ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel();	
+		var panel = ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel();	
 
 		if (Form.SetPanel(null, panel))
 		{
@@ -111,7 +111,7 @@ public partial class PC_PlaysetAdd : PanelContent
 
 		try
 		{
-			var panel = ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel();
+			var panel = ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel();
 
 			if (Form.SetPanel(null, panel))
 			{

@@ -7,7 +7,6 @@ using Skyve.Systems.Compatibility.Domain;
 using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Skyve.Systems.Compatibility;
@@ -18,16 +17,18 @@ public class CompatibilityHelper
 	private readonly IPackageUtil _contentUtil;
 	private readonly IPackageNameUtil _packageUtil;
 	private readonly IWorkshopService _workshopService;
-	private readonly ILocale _locale;
+	private readonly PackageAvailabilityService _packageAvailabilityService;
 
-	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILocale locale)
+	private readonly Dictionary<ulong, List<ulong>> _missingItems = new();
+
+	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILogger logger)
 	{
 		_compatibilityManager = compatibilityManager;
 		_contentManager = contentManager;
 		_contentUtil = contentUtil;
 		_packageUtil = packageUtil;
 		_workshopService = workshopService;
-		_locale = locale;
+		_packageAvailabilityService = new(_contentManager, _contentUtil, logger, _compatibilityManager);
 	}
 
 	public void HandleStatus(CompatibilityInfo info, IndexedPackageStatus status)
@@ -46,7 +47,7 @@ public class CompatibilityHelper
 
 		if (type is StatusType.Deprecated && status.Status.Action is StatusAction.Switch && (status.Status.Packages?.Any() ?? false))
 		{
-			if ((info.Data?.Interactions.ContainsKey(InteractionType.SucceededBy) ?? false) || HandleSucceededBy(info, status.Status.Packages))
+			if (info.Data?.SucceededBy is not null || HandleSucceededBy(info, status.Status.Packages))
 			{
 				return;
 			}
@@ -56,7 +57,7 @@ public class CompatibilityHelper
 
 		if (status.Status.Action is StatusAction.Switch && status.Status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
 		{
-			packages = packages.Select(x => GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
+			packages = packages.Select(x => _compatibilityManager.GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
 		}
 
 		if (status.Status.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
@@ -110,7 +111,7 @@ public class CompatibilityHelper
 
 		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Interaction.Action is StatusAction.Switch)
 		{
-			packages = packages.Select(x => GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
+			packages = packages.Select(x => _compatibilityManager.GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
 		}
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
@@ -120,11 +121,11 @@ public class CompatibilityHelper
 				return;
 			}
 
-			packages.RemoveAll(x => !IsPackageEnabled(x, false, false));
+			packages.RemoveAll(x => !_packageAvailabilityService.IsPackageEnabled(x, false));
 		}
 		else if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages)
 		{
-			packages.RemoveAll(x => IsPackageEnabled(x, true, true));
+			packages.RemoveAll(x => _packageAvailabilityService.IsPackageEnabled(x, true));
 		}
 
 		if (interaction.Interaction.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
@@ -154,6 +155,24 @@ public class CompatibilityHelper
 			_ => ReportType.Compatibility
 		};
 
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && _packageAvailabilityService.IsPackageEnabled(info.Data.Package.SteamId, false))
+		{
+			lock (_missingItems)
+			{
+				foreach (var item in packages)
+				{
+					if (_missingItems.ContainsKey(item))
+					{
+						_missingItems[item].AddIfNotExist(info.Data.Package.SteamId);
+					}
+					else
+					{
+						_missingItems[item] = new() { info.Data.Package.SteamId };
+					}
+				}
+			}
+		}
+
 		if (interaction.Interaction.Action is StatusAction.SelectOne)
 		{
 			packages.Add(info.Package?.Id ?? 0);
@@ -166,7 +185,7 @@ public class CompatibilityHelper
 	{
 		foreach (var item in packages)
 		{
-			if (IsPackageEnabled(item, true, true))
+			if (_packageAvailabilityService.IsPackageEnabled(item, true))
 			{
 				HandleStatus(info, new PackageStatus(StatusType.Succeeded, StatusAction.UnsubscribeThis) { Packages = new[] { item } });
 
@@ -177,154 +196,26 @@ public class CompatibilityHelper
 		return false;
 	}
 
-	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)
-	{
-		if (!_compatibilityManager.CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
-		{
-			return package;
-		}
-
-		if (indexedPackage.SucceededBy is not null)
-		{
-			return new GenericPackageIdentity(indexedPackage.SucceededBy.Packages.First().Key);
-		}
-
-		if (_contentManager.GetPackageById(package) is null)
-		{
-			foreach (var item in indexedPackage.RequirementAlternatives.Keys)
-			{
-				if (_contentManager.GetPackageById(new GenericPackageIdentity(item)) is IPackageIdentity identity)
-				{
-					return identity;
-				}
-			}
-		}
-
-		return package;
-	}
-
-	private bool IsPackageEnabled(ulong steamId, bool withAlternatives, bool withSuccessors)
-	{
-		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
-
-		if (isEnabled(_contentManager.GetPackageById(new GenericPackageIdentity(steamId))))
-		{
-			return true;
-		}
-
-		if (indexedPackage is null)
-		{
-			return false;
-		}
-
-		if (withAlternatives)
-		{
-			foreach (var item in indexedPackage.RequirementAlternatives)
-			{
-				if (item.Key != steamId)
-				{
-					foreach (var package in FindPackage(item.Value, withSuccessors))
-					{
-						if (isEnabled(package))
-						{
-							return true;
-						}
-					}
-				}
-			}
-		}
-
-		foreach (var package in FindPackage(indexedPackage, withSuccessors))
-		{
-			if (isEnabled(package))
-			{
-				return true;
-			}
-		}
-
-		foreach (var item in indexedPackage.Group)
-		{
-			if (item.Key != steamId)
-			{
-				foreach (var package in FindPackage(item.Value, withSuccessors))
-				{
-					if (isEnabled(package))
-					{
-						return true;
-					}
-				}
-			}
-		}
-
-		return false;
-
-		bool isEnabled(ILocalPackage? package) => package is not null && _contentUtil.IsIncludedAndEnabled(package);
-	}
-
 	private bool ShouldNotBeUsed(ulong steamId)
 	{
 		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(steamId));
 
-		return workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved)
-			|| _compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
+		return (workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved))
+			|| (_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
 			&& (package.Package.Stability is PackageStability.Broken
-			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false));
+			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false)));
 	}
 
-	public IndexedPackage? GetPackageData(IPackageIdentity identity)
+	internal void UpdateInclusionStatus(IPackage package)
 	{
-		var steamId = identity.Id;
-
-		if (steamId > 0)
-		{
-			var packageData = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
-
-			if (packageData is null && identity is IPackage package)
-			{
-				packageData = new IndexedPackage(_compatibilityManager.GetAutomatedReport(package));
-
-				packageData.Load(_compatibilityManager.CompatibilityData.Packages);
-			}
-
-			return packageData;
-		}
-
-		return null;
+		_packageAvailabilityService.UpdateInclusionStatus(package.Id);
 	}
 
-	internal IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withSuccessors)
+	internal List<ulong>? GetRequiredFor(ulong id)
 	{
-		var localPackage = _contentManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
-
-		if (localPackage is not null)
+		lock (_missingItems)
 		{
-			yield return localPackage;
-		}
-
-		localPackage = _contentManager.Mods.FirstOrDefault(x => x.IsLocal && Path.GetFileName(x.FilePath) == package.Package.FileName)?.LocalParentPackage;
-
-		if (localPackage is not null)
-		{
-			yield return localPackage;
-		}
-
-		if (!withSuccessors || !package.Interactions.ContainsKey(InteractionType.SucceededBy))
-		{
-			yield break;
-		}
-
-		var packages = package.Interactions[InteractionType.SucceededBy]
-					.SelectMany(x => x.Packages.Values)
-					.Where(x => x.Package != package.Package)
-					.Select(x => FindPackage(x, true))
-					.FirstOrDefault(x => x is not null);
-
-		if (packages is not null)
-		{
-			foreach (var item in packages)
-			{
-				yield return item;
-			}
+			return _missingItems.TryGet(id);
 		}
 	}
 }
