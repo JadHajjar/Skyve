@@ -1,4 +1,6 @@
-﻿using Skyve.Domain.Enums;
+﻿using Extensions;
+
+using Skyve.Domain.Enums;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ namespace Skyve.Domain;
 public interface IPlayset
 {
 	string? Name { get; set; }
-	IUser? Author { get; }
+	[CloneIgnore] IUser? Author { get; }
 	string? BannerUrl { get; }
 	PackageUsage Usage { get; }
 	DateTime DateUpdated { get; }
