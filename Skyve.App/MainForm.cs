@@ -1,4 +1,5 @@
 ﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Panels;
 
 using System.Configuration;
@@ -15,6 +16,10 @@ public partial class MainForm : BasePanelForm
 	private bool isGameRunning;
 	private bool? buttonStateRunning;
 
+	private SubscriptionInfoControl subscriptionInfoControl;
+	private DownloadsInfoControl downloadsInfoControl;
+	private TroubleshootInfoControl TroubleshootInfoControl;
+
 	private readonly ISubscriptionsManager _subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly ICitiesManager _citiesManager = ServiceCenter.Get<ICitiesManager>();
@@ -24,6 +29,18 @@ public partial class MainForm : BasePanelForm
 	public MainForm()
 	{
 		InitializeComponent();
+
+		subscriptionInfoControl = new() { Dock = DockStyle.Top };
+		downloadsInfoControl = new() { Dock = DockStyle.Top };
+		TroubleshootInfoControl = new() { Dock = DockStyle.Top };
+
+		TLP_SideBarTools.Controls.Add(downloadsInfoControl, 0, 0);
+		TLP_SideBarTools.Controls.Add(subscriptionInfoControl, 0, 1);
+		TLP_SideBarTools.Controls.Add(TroubleshootInfoControl, 0, 2);
+
+		TLP_SideBarTools.SetColumnSpan(subscriptionInfoControl, 2);
+		TLP_SideBarTools.SetColumnSpan(downloadsInfoControl, 2);
+		TLP_SideBarTools.SetColumnSpan(TroubleshootInfoControl, 2);
 
 		base_PB_Icon.UserDraw = true;
 		base_PB_Icon.Paint += Base_PB_Icon_Paint;
@@ -112,7 +129,7 @@ public partial class MainForm : BasePanelForm
 	{
 		PI_Packages.Text = Locale.Package.Plural;
 		PI_Assets.Text = Locale.Asset.Plural;
-		PI_Profiles.Text = Locale.Playset.Plural;
+		PI_Playsets.Text = Locale.Playset.Plural;
 		PI_Mods.Text = Locale.Mod.Plural;
 	}
 
@@ -397,11 +414,6 @@ public partial class MainForm : BasePanelForm
 		SetPanel<PC_Assets>(PI_Assets);
 	}
 
-	private void PI_Profiles_OnClick(object sender, MouseEventArgs e)
-	{
-		SetPanel<PC_PlaysetList>(PI_Profiles);
-	}
-
 	private void PI_ModReview_OnClick(object sender, MouseEventArgs e)
 	{
 		SetPanel(PI_ModUtilities, ServiceCenter.Get<IAppInterfaceService>().UtilitiesPanel());
@@ -430,5 +442,20 @@ public partial class MainForm : BasePanelForm
 	private void PI_Compatibility_OnClick(object sender, MouseEventArgs e)
 	{
 		SetPanel<PC_CompatibilityReport>(PI_Compatibility);
+	}
+
+	private void PI_ViewPlaysets_OnClick(object sender, MouseEventArgs e)
+	{
+		SetPanel<PC_PlaysetList>(PI_ViewPlaysets);
+	}
+
+	private void PI_AddPlayset_OnClick(object sender, MouseEventArgs e)
+	{
+		SetPanel<PC_PlaysetAdd>(PI_AddPlayset);
+	}
+
+	private void PI_CurrentPlayset_OnClick(object sender, MouseEventArgs e)
+	{
+		PushPanel(PI_CurrentPlayset, ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel());
 	}
 }
