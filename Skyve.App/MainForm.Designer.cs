@@ -374,6 +374,18 @@ namespace Skyve.App
 			this.IconBounds = new System.Drawing.Rectangle(108, 26, 14, 42);
 			this.MaximizeBox = true;
 			this.MaximizedBounds = new System.Drawing.Rectangle(0, 0, 1920, 1032);
+			this.SidebarItems = new SlickControls.PanelItem[] {
+		this.PI_Dashboard,
+		this.PI_Playsets,
+		this.PI_Packages,
+		this.PI_Mods,
+		this.PI_Assets,
+		this.PI_DLCs,
+		this.PI_ModUtilities,
+		this.PI_Compatibility,
+		this.PI_CompatibilityManagement,
+		this.PI_Troubleshoot,
+		this.PI_Options};
 			this.MinimizeBox = true;
 			this.Name = "MainForm";
 			this.Text = "Skyve";
