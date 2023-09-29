@@ -85,8 +85,8 @@ namespace Skyve.App
 			this.base_P_SideControls.Controls.Add(this.TLP_SideBarTools);
 			this.base_P_SideControls.Font = new System.Drawing.Font("Nirmala UI", 6.75F);
 			this.base_P_SideControls.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(129)))), ((int)(((byte)(150)))));
-			this.base_P_SideControls.Location = new System.Drawing.Point(7, 545);
-			this.base_P_SideControls.Size = new System.Drawing.Size(230, 16);
+			this.base_P_SideControls.Location = new System.Drawing.Point(6, 548);
+			this.base_P_SideControls.Size = new System.Drawing.Size(216, 16);
 			// 
 			// base_P_Container
 			// 
@@ -265,7 +265,7 @@ namespace Skyve.App
 			this.TLP_SideBarTools.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_SideBarTools.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_SideBarTools.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLP_SideBarTools.Size = new System.Drawing.Size(230, 16);
+			this.TLP_SideBarTools.Size = new System.Drawing.Size(216, 16);
 			this.TLP_SideBarTools.TabIndex = 34;
 			// 
 			// L_Text
@@ -284,7 +284,7 @@ namespace Skyve.App
 			// 
 			this.L_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Version.AutoSize = true;
-			this.L_Version.Location = new System.Drawing.Point(192, 0);
+			this.L_Version.Location = new System.Drawing.Point(178, 0);
 			this.L_Version.Margin = new System.Windows.Forms.Padding(0);
 			this.L_Version.Name = "L_Version";
 			this.L_Version.Padding = new System.Windows.Forms.Padding(2);
@@ -309,6 +309,7 @@ namespace Skyve.App
 			// 
 			this.PI_CompatibilityManagement.Data = null;
 			this.PI_CompatibilityManagement.Group = "Maintenance";
+			this.PI_CompatibilityManagement.Hidden = true;
 			this.PI_CompatibilityManagement.Highlighted = false;
 			dynamicIcon14.Name = "I_Cog";
 			this.PI_CompatibilityManagement.IconName = dynamicIcon14;
@@ -324,6 +325,7 @@ namespace Skyve.App
 			// PI_ManageYourPackages
 			// 
 			this.PI_ManageYourPackages.Data = null;
+			this.PI_ManageYourPackages.Hidden = true;
 			this.PI_ManageYourPackages.Highlighted = false;
 			dynamicIcon15.Name = "I_User";
 			this.PI_ManageYourPackages.IconName = dynamicIcon15;
@@ -331,10 +333,12 @@ namespace Skyve.App
 			this.PI_ManageYourPackages.Selected = false;
 			this.PI_ManageYourPackages.SubItems = new SlickControls.PanelItem[0];
 			this.PI_ManageYourPackages.Text = "YourPackages";
+			this.PI_ManageYourPackages.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ManageYourPackages_OnClick);
 			// 
 			// PI_ManageSinglePackage
 			// 
 			this.PI_ManageSinglePackage.Data = null;
+			this.PI_ManageSinglePackage.Hidden = true;
 			this.PI_ManageSinglePackage.Highlighted = false;
 			dynamicIcon16.Name = "I_Edit";
 			this.PI_ManageSinglePackage.IconName = dynamicIcon16;
@@ -342,21 +346,25 @@ namespace Skyve.App
 			this.PI_ManageSinglePackage.Selected = false;
 			this.PI_ManageSinglePackage.SubItems = new SlickControls.PanelItem[0];
 			this.PI_ManageSinglePackage.Text = "ManageSinglePackage";
+			this.PI_ManageSinglePackage.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ManageSinglePackage_OnClick);
 			// 
 			// PI_ReviewRequests
 			// 
 			this.PI_ReviewRequests.Data = null;
+			this.PI_ReviewRequests.Hidden = true;
 			this.PI_ReviewRequests.Highlighted = false;
 			dynamicIcon17.Name = "I_RequestReview";
 			this.PI_ReviewRequests.IconName = dynamicIcon17;
 			this.PI_ReviewRequests.Loading = false;
 			this.PI_ReviewRequests.Selected = false;
 			this.PI_ReviewRequests.SubItems = new SlickControls.PanelItem[0];
-			this.PI_ReviewRequests.Text = "ViewRequests";
+			this.PI_ReviewRequests.Text = "ReviewRequests";
+			this.PI_ReviewRequests.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ReviewRequests_OnClick);
 			// 
 			// PI_ManageAllCompatibility
 			// 
 			this.PI_ManageAllCompatibility.Data = null;
+			this.PI_ManageAllCompatibility.Hidden = true;
 			this.PI_ManageAllCompatibility.Highlighted = false;
 			dynamicIcon18.Name = "I_Cog";
 			this.PI_ManageAllCompatibility.IconName = dynamicIcon18;
@@ -364,6 +372,7 @@ namespace Skyve.App
 			this.PI_ManageAllCompatibility.Selected = false;
 			this.PI_ManageAllCompatibility.SubItems = new SlickControls.PanelItem[0];
 			this.PI_ManageAllCompatibility.Text = "ManageCompatibilityData";
+			this.PI_ManageAllCompatibility.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ManageAllCompatibility_OnClick);
 			// 
 			// MainForm
 			// 
@@ -371,23 +380,23 @@ namespace Skyve.App
 			this.ClientSize = new System.Drawing.Size(1002, 595);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.IconBounds = new System.Drawing.Rectangle(108, 26, 14, 42);
+			this.IconBounds = new System.Drawing.Rectangle(101, 23, 14, 42);
 			this.MaximizeBox = true;
 			this.MaximizedBounds = new System.Drawing.Rectangle(0, 0, 1920, 1032);
-			this.SidebarItems = new SlickControls.PanelItem[] {
-		this.PI_Dashboard,
-		this.PI_Playsets,
-		this.PI_Packages,
-		this.PI_Mods,
-		this.PI_Assets,
-		this.PI_DLCs,
-		this.PI_ModUtilities,
-		this.PI_Compatibility,
-		this.PI_CompatibilityManagement,
-		this.PI_Troubleshoot,
-		this.PI_Options};
 			this.MinimizeBox = true;
 			this.Name = "MainForm";
+			this.SidebarItems = new SlickControls.PanelItem[] {
+        this.PI_Dashboard,
+        this.PI_Playsets,
+        this.PI_Packages,
+        this.PI_Mods,
+        this.PI_Assets,
+        this.PI_DLCs,
+        this.PI_ModUtilities,
+        this.PI_Compatibility,
+        this.PI_CompatibilityManagement,
+        this.PI_Troubleshoot,
+        this.PI_Options};
 			this.Text = "Skyve";
 			this.base_P_SideControls.ResumeLayout(false);
 			this.base_P_SideControls.PerformLayout();
