@@ -242,8 +242,8 @@
     "Plural": "删除这些请求"
   },
   "ViewRequest": "查看请求",
-  "CRT_RequiredItem": "Required Item",
-  "RequiredItem": "Required Item",
+  "CRT_RequiredItem": "前置项目",
+  "RequiredItem": "前置项目",
   "ApplyAllActions": "应用所有可用的操作",
   "SnoozeAll": "关闭当前显示的所有问题的提醒"
 }
