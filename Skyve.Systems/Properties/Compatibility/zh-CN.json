@@ -103,8 +103,8 @@
     "Plural": "'{0}'将在以下插件加载完成后直接加载。"
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' 是 '{1}' 的前置。",
+    "Plural": "'{0}' 是以下插件的前置："
   },
   "Interaction_Identical": "以下是同一插件的多个不同版本。\n\n您应当只使用其中一个版本，并取消订阅此插件的其它版本。",
   "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
@@ -172,10 +172,10 @@
     "One": "您应当将其替换为 '{1}'。",
     "Plural": "您应当将此模组替换为下列任意一个插件："
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "您应当装载 '{0}'。",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "您应当装载以下插件：",
+    "Plural": "您应当装载这些插件："
   },
   "NoRequiredDlcs": "没有前置 DLC",
   "DlcsSelected": {
@@ -238,12 +238,12 @@
     "Plural": "此插件还有 {0} 个兼容性警告"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "删除此请求",
+    "Plural": "删除这些请求"
   },
-  "ViewRequest": "View Request",
+  "ViewRequest": "查看请求",
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "ApplyAllActions": "应用所有可用的操作",
+  "SnoozeAll": "关闭当前显示的所有问题的提醒"
 }
