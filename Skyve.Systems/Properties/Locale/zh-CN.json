@@ -713,5 +713,5 @@
     "Plural": "在您上次使用 Skyve 后，新增的 {0} 个插件已安装"
   },
   "IncorrectFolderSettings": "文件夹设置不正确",
-  "IncorrectFolderSettingsInfo": "文件夹目录设置不正确，请点击此处在“选项”页面修改或重置文件夹位置。"
+  "IncorrectFolderSettingsInfo": "文件夹设置不正确，请点击此处在“选项”页面中修改，或重新设置。"
 }
