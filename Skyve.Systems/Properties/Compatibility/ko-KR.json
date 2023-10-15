@@ -103,8 +103,8 @@
     "Plural": "'{0}' 는 다음 패키지들 직후에 로드됩니다."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' 는 '{1}' 에 필요합니다.",
+    "Plural": "'{0}' 는 다음 패키지들에 필요합니다."
   },
   "Interaction_Identical": "이것들은 같은 패키지의 여러 버전들입니다.\n\n이 중 하나만 선택해야 합니다.",
   "Status_Succeeded": "'{0}' 는 '{1}' 로 계승되었습니다.\n\n이미 '{1}' 를 사용하고 있으므로 '{0}' 는 더 이상 필요하지 않습니다.",
@@ -172,7 +172,7 @@
     "One": "'{1}' 로 바꾸어야 합니다.",
     "Plural": "다음 패키지 중 하나로 바꿔야 합니다."
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "'{0}' 를 포함해야 합니다",
   "Action_IncludeOther": {
     "One": "You should include the following package:",
     "Plural": "You should include these packages:"
@@ -242,8 +242,8 @@
     "Plural": "Delete these requests"
   },
   "ViewRequest": "View Request",
-  "CRT_RequiredItem": "Required Item",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "CRT_RequiredItem": "필요한 항목",
+  "RequiredItem": "필요한 항목",
+  "ApplyAllActions": "가능한 모든 작업 적용하기",
+  "SnoozeAll": "표시된 모든 이슈 나중에 다시 알림"
 }

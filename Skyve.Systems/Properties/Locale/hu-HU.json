@@ -553,7 +553,7 @@
   "CancelDownloads": "Törölje az összes függőben lévő letöltést",
   "ApplySubs": "Indítsa el a játékot egy rövid pillanatra a függőben lévő feliratkozások alkalmazásához",
   "ApplyDownloads": "Kényszerítsd a Steamet az összes függőben lévő csomag letöltésére",
-  "ApplyRemoval": "Delete all pending packages",
+  "ApplyRemoval": "Törölje az összes függőben lévő csomagot",
   "SubsPendingInfo": "Itt vannak csoportosítva azok a csomagok, amelyekre feliratkoztál.\nAmint megnyitod a játékot, ezekre az elemekre felíratkozól a Steamen.",
   "DownloadsPendingInfo": "Itt vannak csoportosítva azok a csomagok, amelyekre feliratkoztál, és amelyeket még nem töltött le.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Az előfizetés/leiratkozás után azonnal indítsa el a csomagok letöltését vagy eltávolítását",
@@ -671,7 +671,7 @@
   "IncludePackage": "Tartalmazza a következőt: {0}",
   "ExcludePackage": "{0} kizárása",
   "FilterByEnabled": "Csak az engedélyezett elemek megjelenítése.",
-  "FilterByDisabled": "Only show disabled items.",
+  "FilterByDisabled": "Csak a letiltott elemek megjelenítése.",
   "FilterByIncluded": "Csak a benne foglalt elemek megjelenítése.",
   "FilterByExcluded": "Csak a kizárt elemek megjelenítése.",
   "ViewOnGithub": "Tekintse meg a csomag Github tárházát",
@@ -712,6 +712,6 @@
     "One": "A(z) „{1}” a legutóbbi munkamenete óta telepítve lett",
     "Plural": "{0} új csomag lett telepítve az utolsó munkamenet óta"
   },
-  "IncorrectFolderSettings": "Incorrect Folder Settings",
-  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
+  "IncorrectFolderSettings": "Helytelen mappabeállítások",
+  "IncorrectFolderSettingsInfo": "A mappabeállítások nincsenek megfelelően beállítva, kattints ide, hogy módosítsd vagy visszaállítsd azokat a Beállítások oldalon."
 }
