@@ -678,7 +678,7 @@
   "ViewXOnSteam": "Pokaż '{0}' na Steam",
   "Free": "Bezpłatne",
   "ViewAllYourItems": "View all your {0}",
-  "ViewRecentlyUpdatedItems": "View recently updated {0}",
+  "ViewRecentlyUpdatedItems": "Zobacz ostatnio zaktualizowane {0}",
   "NoCompatibilityIssues": {
     "One": "Nie wykryto problemów ze zgodnością.",
     "Plural": "Nie wykryto problemów ze zgodnością z Twoimi {0}."
@@ -689,7 +689,7 @@
   "ChangePlaysetSettings": "Zmień ustawienia tego zestawu",
   "ViewCompatibilityReport": "Zobacz pełny raport zgodności",
   "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
-  "ViewAssetsWithIssues": "View Assets with issues",
+  "ViewAssetsWithIssues": "Zobacz obiekty z problemami",
   "ViewModsWithIssues": "View Mods with issues",
   "CreateShortcut": "Utwórz skrót",
   "CreateShortcut_Tip": "Tworzy skrót do aplikacji na pulpicie.",
@@ -713,5 +713,5 @@
     "Plural": "{0} nowe pakiety zostały zainstalowane od ostatniej sesji"
   },
   "IncorrectFolderSettings": "Nieprawidłowe ustawienia folderu",
-  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
+  "IncorrectFolderSettingsInfo": "Twoje ustawienia folderu nie są poprawnie skonfigurowane, kliknij tutaj, aby zmienić lub zresetować je na stronie Opcje."
 }
