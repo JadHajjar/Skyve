@@ -49,6 +49,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		ListControl.Visible = false;
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
+		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
 		I_Actions = new IncludeAllButton<ILocalPackage>(() => ListControl.FilteredItems.SelectWhereNotNull(x => x.Package).ToList()!);
 		I_Actions.ActionClicked += I_Actions_Click;
@@ -61,9 +62,6 @@ public partial class PC_CompatibilityReport : PanelContent
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
 		OT_Workshop.Visible = !_playsetManager.CurrentPlayset.DisableWorkshop;
-
-		var hasPackages = userService.User.Id is not null && _contentManager.Packages.Any(x => userService.User.Equals(x.GetWorkshopInfo()?.Author));
-		B_Manage.Visible = (hasPackages || userService.User.Manager) && !userService.User.Malicious;
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{

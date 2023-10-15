@@ -123,66 +123,6 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap I_AppIcon_128 {
-            get {
-                object obj = ResourceManager.GetObject("I_AppIcon_128", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_AppIcon_16 {
-            get {
-                object obj = ResourceManager.GetObject("I_AppIcon_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_AppIcon_24 {
-            get {
-                object obj = ResourceManager.GetObject("I_AppIcon_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_AppIcon_32 {
-            get {
-                object obj = ResourceManager.GetObject("I_AppIcon_32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_AppIcon_48 {
-            get {
-                object obj = ResourceManager.GetObject("I_AppIcon_48", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_AppIcon_64 {
-            get {
-                object obj = ResourceManager.GetObject("I_AppIcon_64", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap I_AskHelp_16 {
             get {
                 object obj = ResourceManager.GetObject("I_AskHelp_16", resourceCulture);
@@ -1296,66 +1236,6 @@ namespace Skyve.App.Properties {
         internal static System.Drawing.Bitmap I_Globe_48 {
             get {
                 object obj = ResourceManager.GetObject("I_Globe_48", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_GlowAppIcon_128 {
-            get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_128", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_GlowAppIcon_16 {
-            get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_GlowAppIcon_24 {
-            get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_GlowAppIcon_32 {
-            get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_GlowAppIcon_48 {
-            get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_48", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_GlowAppIcon_64 {
-            get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

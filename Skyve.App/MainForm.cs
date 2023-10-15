@@ -1,4 +1,5 @@
 ﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Panels;
 
 using System.Configuration;
@@ -14,16 +15,38 @@ public partial class MainForm : BasePanelForm
 	private readonly System.Timers.Timer _startTimeoutTimer = new(15000) { AutoReset = false };
 	private bool isGameRunning;
 	private bool? buttonStateRunning;
+	private readonly SubscriptionInfoControl subscriptionInfoControl;
+	private readonly DownloadsInfoControl downloadsInfoControl;
+	private readonly TroubleshootInfoControl TroubleshootInfoControl;
 
-	private readonly ISubscriptionsManager _subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
-	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
-	private readonly ICitiesManager _citiesManager = ServiceCenter.Get<ICitiesManager>();
-	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
-	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
+	private readonly ISubscriptionsManager _subscriptionsManager;
+	private readonly IPlaysetManager _playsetManager;
+	private readonly IPackageManager _packageManager;
+	private readonly ICitiesManager _citiesManager;
+	private readonly ISettings _settings;
+	private readonly INotifier _notifier;
+	private readonly IUserService _userService;
+	private readonly SkyveApiUtil _skyveApiUtil;
 
 	public MainForm()
 	{
+		ServiceCenter.Get(out _skyveApiUtil, out _packageManager, out _subscriptionsManager, out _playsetManager, out _citiesManager, out _settings, out _notifier, out _userService);
+
 		InitializeComponent();
+
+		_userService.UserInfoUpdated += _userService_UserInfoUpdated;
+
+		subscriptionInfoControl = new() { Dock = DockStyle.Top };
+		downloadsInfoControl = new() { Dock = DockStyle.Top };
+		TroubleshootInfoControl = new() { Dock = DockStyle.Top };
+
+		TLP_SideBarTools.Controls.Add(downloadsInfoControl, 0, 0);
+		TLP_SideBarTools.Controls.Add(subscriptionInfoControl, 0, 1);
+		TLP_SideBarTools.Controls.Add(TroubleshootInfoControl, 0, 2);
+
+		TLP_SideBarTools.SetColumnSpan(subscriptionInfoControl, 2);
+		TLP_SideBarTools.SetColumnSpan(downloadsInfoControl, 2);
+		TLP_SideBarTools.SetColumnSpan(TroubleshootInfoControl, 2);
 
 		base_PB_Icon.UserDraw = true;
 		base_PB_Icon.Paint += Base_PB_Icon_Paint;
@@ -83,6 +106,7 @@ public partial class MainForm : BasePanelForm
 		_notifier.RefreshUI += RefreshUI;
 		_notifier.WorkshopInfoUpdated += RefreshUI;
 		_notifier.WorkshopUsersInfoLoaded += RefreshUI;
+		_notifier.ContentLoaded += _userService_UserInfoUpdated;
 
 		ConnectionHandler.ConnectionChanged += ConnectionHandler_ConnectionChanged;
 
@@ -96,6 +120,26 @@ public partial class MainForm : BasePanelForm
 		}
 
 		base_PB_Icon.Loading = true;
+		PI_Compatibility.Loading = true;
+
+		_notifier.CompatibilityReportProcessed += _notifier_CompatibilityReportProcessed;
+	}
+
+	private void _notifier_CompatibilityReportProcessed()
+	{
+		_notifier.CompatibilityReportProcessed -= _notifier_CompatibilityReportProcessed;
+
+		PI_Compatibility.Loading = false;
+	}
+
+	private void _userService_UserInfoUpdated()
+	{
+		var hasPackages = _userService.User.Id is not null && _packageManager.Packages.Any(x => _userService.User.Equals(x.GetWorkshopInfo()?.Author));
+		PI_CompatibilityManagement.Hidden = !((hasPackages || _userService.User.Manager) && !_userService.User.Malicious);
+		PI_ManageAllCompatibility.Hidden = PI_ReviewRequests.Hidden = PI_ManageSinglePackage.Hidden = !(_userService.User.Manager && !_userService.User.Malicious);
+		PI_ManageYourPackages.Hidden = !(hasPackages && !_userService.User.Malicious);
+
+		base_P_Tabs.FilterChanged();
 	}
 
 	public void RefreshUI()
@@ -112,8 +156,9 @@ public partial class MainForm : BasePanelForm
 	{
 		PI_Packages.Text = Locale.Package.Plural;
 		PI_Assets.Text = Locale.Asset.Plural;
-		PI_Profiles.Text = Locale.Playset.Plural;
+		PI_Playsets.Text = Locale.Playset.Plural;
 		PI_Mods.Text = Locale.Mod.Plural;
+		PI_ReviewRequests.Text = LocaleCR.ReviewRequests.Format(string.Empty).Trim();
 	}
 
 	private void ConnectionHandler_ConnectionChanged(ConnectionState newState)
@@ -175,7 +220,7 @@ public partial class MainForm : BasePanelForm
 			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
 			|| isGameRunning
 			|| _subscriptionsManager.SubscriptionsPending
-			|| _profileManager.CurrentPlayset.UnsavedChanges
+			|| _playsetManager.CurrentPlayset.UnsavedChanges
 			|| base_PB_Icon.HoverState.HasFlag(HoverState.Pressed);
 
 		e.Graphics.DrawImage(icon, base_PB_Icon.ClientRectangle);
@@ -193,7 +238,7 @@ public partial class MainForm : BasePanelForm
 				color = Color.FromArgb(194, 38, 33);
 			}
 
-			if (_profileManager.CurrentPlayset.UnsavedChanges)
+			if (_playsetManager.CurrentPlayset.UnsavedChanges)
 			{
 				minimum = 0;
 				color = Color.FromArgb(122, 81, 207);
@@ -397,11 +442,6 @@ public partial class MainForm : BasePanelForm
 		SetPanel<PC_Assets>(PI_Assets);
 	}
 
-	private void PI_Profiles_OnClick(object sender, MouseEventArgs e)
-	{
-		SetPanel<PC_PlaysetList>(PI_Profiles);
-	}
-
 	private void PI_ModReview_OnClick(object sender, MouseEventArgs e)
 	{
 		SetPanel(PI_ModUtilities, ServiceCenter.Get<IAppInterfaceService>().UtilitiesPanel());
@@ -430,5 +470,92 @@ public partial class MainForm : BasePanelForm
 	private void PI_Compatibility_OnClick(object sender, MouseEventArgs e)
 	{
 		SetPanel<PC_CompatibilityReport>(PI_Compatibility);
+	}
+
+	private void PI_ViewPlaysets_OnClick(object sender, MouseEventArgs e)
+	{
+		SetPanel<PC_PlaysetList>(PI_ViewPlaysets);
+	}
+
+	private void PI_AddPlayset_OnClick(object sender, MouseEventArgs e)
+	{
+		SetPanel<PC_PlaysetAdd>(PI_AddPlayset);
+	}
+
+	private void PI_CurrentPlayset_OnClick(object sender, MouseEventArgs e)
+	{
+		PushPanel(PI_CurrentPlayset, ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel());
+	}
+
+	private async void PI_ManageYourPackages_OnClick(object sender, MouseEventArgs e)
+	{
+		if (PI_ManageYourPackages.Loading)
+		{
+			return;
+		}
+
+		PI_ManageYourPackages.Loading = true;
+
+		try
+		{
+			var results = await ServiceCenter.Get<IWorkshopService>().GetWorkshopItemsByUserAsync(_userService.User.Id ?? 0);
+
+			if (results != null)
+			{
+				Invoke(() => PushPanel(PI_ManageYourPackages, new PC_CompatibilityManagement(results.Select(x => x.Id))));
+			}
+		}
+		catch (Exception ex)
+		{
+			MessagePrompt.Show(ex, "Failed to load your packages", form: this);
+		}
+
+		PI_ManageYourPackages.Loading = false;
+
+	}
+
+	private void PI_ManageSinglePackage_OnClick(object sender, MouseEventArgs e)
+	{
+		var panel = new PC_SelectPackage() { Text = LocaleHelper.GetGlobalText("Select a package") };
+
+		panel.PackageSelected += Form_PackageSelected;
+
+		Program.MainForm.PushPanel(PI_ManageSinglePackage, panel);
+	}
+
+	private void Form_PackageSelected(IEnumerable<ulong> packages)
+	{
+		PushPanel(PI_ManageSinglePackage, new PC_CompatibilityManagement(packages));
+	}
+
+	private async void PI_ReviewRequests_OnClick(object sender, MouseEventArgs e)
+	{
+		if (PI_ReviewRequests.Loading)
+		{
+			return;
+		}
+
+		PI_ReviewRequests.Loading = true;
+
+		try
+		{
+			var reviewRequests = await _skyveApiUtil.GetReviewRequests();
+
+			if (reviewRequests is not null)
+			{
+				Invoke(() => PushPanel(PI_ReviewRequests, new PC_ReviewRequests(reviewRequests)));
+			}
+		}
+		catch (Exception ex)
+		{
+			MessagePrompt.Show(ex, "Failed to load your packages", form: this);
+		}
+
+		PI_ReviewRequests.Loading = false;
+	}
+
+	private void PI_ManageAllCompatibility_OnClick(object sender, MouseEventArgs e)
+	{
+		PushPanel<PC_CompatibilityManagement>(PI_ManageAllCompatibility);
 	}
 }

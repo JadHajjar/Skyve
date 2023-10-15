@@ -1,7 +1,7 @@
 ﻿namespace Skyve.App.Interfaces;
 
-public abstract class PlaysetSettingsPanel : PanelContent
+public class PlaysetSettingsPanel : PanelContent
 {
-	public abstract void EditName();
-	public abstract void LoadProfile(ICustomPlayset customPlayset);
+	public virtual void EditName() { }
+	public virtual void LoadProfile(ICustomPlayset customPlayset) { }
 }

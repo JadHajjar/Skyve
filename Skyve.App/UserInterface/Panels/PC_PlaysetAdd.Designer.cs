@@ -162,7 +162,7 @@ partial class PC_PlaysetAdd
 			this.Name = "PC_ProfileAdd";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(1182, 819);
-			this.Text = "AddProfile";
+			this.Text = "AddPlayset";
 			this.Controls.SetChildIndex(this.TLP_New, 0);
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.TLP_New.ResumeLayout(false);
