@@ -688,7 +688,7 @@
   "UnsavedChangesPlayset": "Il y a des modifications non enregistrées aux paquets de ce profil",
   "ChangePlaysetSettings": "Modifier les paramètres de ce profil",
   "ViewCompatibilityReport": "Voir le rapport de compatibilité complet",
-  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "DashboardCustomizationInfo": "Vous pouvez personnaliser le tableau de bord en faisant glisser chaque section depuis son en-tête.\nVous pouvez aussi redimensionner une section à l'aide du triangle pointillé dans le coin en bas à droite.",
   "ViewAssetsWithIssues": "Voir les assets avec des problèmes",
   "ViewModsWithIssues": "Voir les mods avec des problèmes",
   "CreateShortcut": "Créer un raccourci",
@@ -712,6 +712,6 @@
     "One": "\"{1}\" a été installé depuis votre dernière session",
     "Plural": "{0} paquets ont été installés depuis votre dernière session"
   },
-  "IncorrectFolderSettings": "Incorrect Folder Settings",
-  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
+  "IncorrectFolderSettings": "Paramètres des dossiers incorrects",
+  "IncorrectFolderSettingsInfo": "Vos paramètres de dossier ne sont pas définis correctement, cliquez ici pour les changer ou les réinitialiser dans la page Options."
 }
