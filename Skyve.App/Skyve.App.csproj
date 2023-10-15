@@ -1,21 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
 	<Import Project="../../Skyve/Config.props" />
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
-    <Description>Helps to manage your mods and assets</Description>
-    <Configurations>Debug;Release;Stable</Configurations>
-    <DebugType>embedded</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-    <Nullable>enable</Nullable>
-    <DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
+	  <Description>Helps to manage your mods and assets</Description>
+	  <Configurations>Debug;Release;Stable</Configurations>
+	  <DebugType>embedded</DebugType>
+	  <DebugSymbols>true</DebugSymbols>
+	  <Nullable>enable</Nullable>
+	  <DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
-    <Deterministic>false</Deterministic>
-    <TargetFramework>net4.7.2</TargetFramework>
+	  <Deterministic>false</Deterministic>
+	  <LangVersion>latest</LangVersion>
+	  <TargetFramework>net4.7.2</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
-    <ApplicationIcon>Resources\Skyve.ico</ApplicationIcon>
     <SignAssembly>true</SignAssembly>
     <NeutralLanguage>en</NeutralLanguage>
     <Title>Skyve</Title>

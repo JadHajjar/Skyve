@@ -1,14 +1,11 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Panels;
-using Skyve.Domain.Systems;
-using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App;
@@ -18,7 +15,6 @@ public partial class MainForm : BasePanelForm
 	private readonly System.Timers.Timer _startTimeoutTimer = new(15000) { AutoReset = false };
 	private bool isGameRunning;
 	private bool? buttonStateRunning;
-	private ReviewRequest[]? reviewRequests;
 	private readonly SubscriptionInfoControl subscriptionInfoControl;
 	private readonly DownloadsInfoControl downloadsInfoControl;
 	private readonly TroubleshootInfoControl TroubleshootInfoControl;
@@ -110,6 +106,7 @@ public partial class MainForm : BasePanelForm
 		_notifier.RefreshUI += RefreshUI;
 		_notifier.WorkshopInfoUpdated += RefreshUI;
 		_notifier.WorkshopUsersInfoLoaded += RefreshUI;
+		_notifier.ContentLoaded += _userService_UserInfoUpdated;
 
 		ConnectionHandler.ConnectionChanged += ConnectionHandler_ConnectionChanged;
 
@@ -123,6 +120,16 @@ public partial class MainForm : BasePanelForm
 		}
 
 		base_PB_Icon.Loading = true;
+		PI_Compatibility.Loading = true;
+
+		_notifier.CompatibilityReportProcessed += _notifier_CompatibilityReportProcessed;
+	}
+
+	private void _notifier_CompatibilityReportProcessed()
+	{
+		_notifier.CompatibilityReportProcessed -= _notifier_CompatibilityReportProcessed;
+
+		PI_Compatibility.Loading = false;
 	}
 
 	private void _userService_UserInfoUpdated()
@@ -523,22 +530,18 @@ public partial class MainForm : BasePanelForm
 
 	private async void PI_ReviewRequests_OnClick(object sender, MouseEventArgs e)
 	{
-
 		if (PI_ReviewRequests.Loading)
 		{
 			return;
 		}
 
-		PI_ReviewRequests.Loading = reviewRequests == null;
+		PI_ReviewRequests.Loading = true;
 
 		try
 		{
-			if (reviewRequests == null)
-			{
-				reviewRequests = await _skyveApiUtil.GetReviewRequests();
-			}
+			var reviewRequests = await _skyveApiUtil.GetReviewRequests();
 
-			if (reviewRequests != null)
+			if (reviewRequests is not null)
 			{
 				Invoke(() => PushPanel(PI_ReviewRequests, new PC_ReviewRequests(reviewRequests)));
 			}

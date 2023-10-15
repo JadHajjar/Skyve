@@ -63,9 +63,6 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		OT_Workshop.Visible = !_playsetManager.CurrentPlayset.DisableWorkshop;
 
-		var hasPackages = userService.User.Id is not null && _contentManager.Packages.Any(x => userService.User.Equals(x.GetWorkshopInfo()?.Author));
-		B_Manage.Visible = (hasPackages || userService.User.Manager) && !userService.User.Malicious;
-
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
 			OT_Enabled.Hide();

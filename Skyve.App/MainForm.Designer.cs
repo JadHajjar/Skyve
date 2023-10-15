@@ -48,7 +48,6 @@ namespace Skyve.App
 			SlickControls.DynamicIcon dynamicIcon16 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon17 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon18 = new SlickControls.DynamicIcon();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.PI_Dashboard = new SlickControls.PanelItem();
 			this.PI_Mods = new SlickControls.PanelItem();
 			this.PI_Assets = new SlickControls.PanelItem();
@@ -75,6 +74,11 @@ namespace Skyve.App
 			this.TLP_SideBarTools.SuspendLayout();
 			this.SuspendLayout();
 			// 
+			// base_P_Tabs
+			// 
+			this.base_P_Tabs.Location = new System.Drawing.Point(9, 134);
+			this.base_P_Tabs.Size = new System.Drawing.Size(310, 402);
+			// 
 			// base_P_Content
 			// 
 			this.base_P_Content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(248)))));
@@ -85,8 +89,8 @@ namespace Skyve.App
 			this.base_P_SideControls.Controls.Add(this.TLP_SideBarTools);
 			this.base_P_SideControls.Font = new System.Drawing.Font("Nirmala UI", 6.75F);
 			this.base_P_SideControls.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(129)))), ((int)(((byte)(150)))));
-			this.base_P_SideControls.Location = new System.Drawing.Point(6, 548);
-			this.base_P_SideControls.Size = new System.Drawing.Size(216, 16);
+			this.base_P_SideControls.Location = new System.Drawing.Point(9, 536);
+			this.base_P_SideControls.Size = new System.Drawing.Size(310, 19);
 			// 
 			// base_P_Container
 			// 
@@ -265,7 +269,7 @@ namespace Skyve.App
 			this.TLP_SideBarTools.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_SideBarTools.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_SideBarTools.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLP_SideBarTools.Size = new System.Drawing.Size(216, 16);
+			this.TLP_SideBarTools.Size = new System.Drawing.Size(310, 19);
 			this.TLP_SideBarTools.TabIndex = 34;
 			// 
 			// L_Text
@@ -276,7 +280,7 @@ namespace Skyve.App
 			this.L_Text.Margin = new System.Windows.Forms.Padding(0);
 			this.L_Text.Name = "L_Text";
 			this.L_Text.Padding = new System.Windows.Forms.Padding(2);
-			this.L_Text.Size = new System.Drawing.Size(31, 16);
+			this.L_Text.Size = new System.Drawing.Size(41, 19);
 			this.L_Text.TabIndex = 31;
 			this.L_Text.Text = "Skyve";
 			// 
@@ -284,11 +288,11 @@ namespace Skyve.App
 			// 
 			this.L_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Version.AutoSize = true;
-			this.L_Version.Location = new System.Drawing.Point(178, 0);
+			this.L_Version.Location = new System.Drawing.Point(261, 0);
 			this.L_Version.Margin = new System.Windows.Forms.Padding(0);
 			this.L_Version.Name = "L_Version";
 			this.L_Version.Padding = new System.Windows.Forms.Padding(2);
-			this.L_Version.Size = new System.Drawing.Size(38, 16);
+			this.L_Version.Size = new System.Drawing.Size(49, 19);
 			this.L_Version.TabIndex = 30;
 			this.L_Version.Text = "Version";
 			// 
@@ -379,8 +383,7 @@ namespace Skyve.App
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.ClientSize = new System.Drawing.Size(1002, 595);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.IconBounds = new System.Drawing.Rectangle(101, 23, 14, 42);
+			this.IconBounds = new System.Drawing.Rectangle(148, 41, 14, 42);
 			this.MaximizeBox = true;
 			this.MaximizedBounds = new System.Drawing.Rectangle(0, 0, 1920, 1032);
 			this.MinimizeBox = true;
