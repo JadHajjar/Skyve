@@ -712,6 +712,6 @@
     "One": "마지막 세션 이후 '{1}' 가 설치되었습니다",
     "Plural": "마지막 세션 이후 {0}개의 새 패키지가 설치되었습니다"
   },
-  "IncorrectFolderSettings": "Incorrect Folder Settings",
+  "IncorrectFolderSettings": "잘못된 폴더 설정",
   "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
 }

@@ -20,6 +20,16 @@ public class DownloadsInfoControl : SlickControl
 		refreshTimer.Enabled = true;
 	}
 
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		if (Live)
+		{
+			refreshTimer.Start();
+		}
+	}
+
 	protected override void OnMouseMove(MouseEventArgs e)
 	{
 		base.OnMouseMove(e);

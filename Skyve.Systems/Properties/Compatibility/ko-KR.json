@@ -17,6 +17,9 @@
   "AddInteraction": "상호작용 추가",
   "NotReviewed": "아직 검토되지 않음",
   "Stable": "안정적",
+  "StableNoNewFeatures": "안정적임, 버그 픽스 업데이트 있을 수 있음",
+  "StableNoFutureUpdates": "안정적임, 더 이상 업데이트 없음",
+  "HasIssuesNoFutureUpdates": "문제 있음, 더 이상 업데이트 없음",
   "NotEnoughInformation": "충분한 정보 없음",
   "HasIssues": "문제 있음",
   "Broken": "망가짐",
@@ -103,8 +106,8 @@
     "Plural": "'{0}' 는 다음 패키지들 직후에 로드됩니다."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' 는 '{1}' 에 필요합니다.",
+    "Plural": "'{0}' 는 다음 패키지들에 필요합니다."
   },
   "Interaction_Identical": "이것들은 같은 패키지의 여러 버전들입니다.\n\n이 중 하나만 선택해야 합니다.",
   "Status_Succeeded": "'{0}' 는 '{1}' 로 계승되었습니다.\n\n이미 '{1}' 를 사용하고 있으므로 '{0}' 는 더 이상 필요하지 않습니다.",
@@ -138,7 +141,10 @@
   "OutputText": "예상 출력",
   "Stability_AssetNotReviewed": "이 에셋은 아직 리뷰되지 않았습니다.\n\n에셋들은 일반적으로 안정적이지만 호환성 정보는 정확하지 않을 수 있습니다.",
   "Stability_NotReviewed": "이 패키지는 아직 리뷰되지 않았습니다.\n\n호환성 정보는 정확하지 않을 수 있습니다.",
-  "Stability_Stable": "이 패키지는 안정적입니다.",
+  "Stability_Stable": "이 패키지는 안정적입니다. 제작자는 이 패키지에 대해 여전히 활동적으로 작업하며 업데이트하고 있습니다.",
+  "Stability_StableNoNewFeatures": "이 패키지는 안정적입니다. 하지만 제작자는 더 이상 기능 업데이트를 출시하지 않습니다.\n그렇지만 새로운 버그가 생긴 경우에는 업데이트가 있을 것입니다.",
+  "Stability_StableNoFutureUpdates": "이 패키지는 안정적입니다. 하지만 제작자는 이를 지원하고 있지 않습니다. 향후 업데이트나 버그 수정이 있을 가능성은 거의 없습니다.",
+  "Stability_HasIssuesNoFutureUpdates": "이 패키지는 문제를 일으킬 수 있습니다. 제작자는 이를 지원하고 있지 않습니다. 향후 업데이트나 버그 수정이 있을 가능성은 거의 없습니다.",
   "Stability_NotEnoughInformation": "이 패키지를 제대로 검토할 만한 정보가 충분하지 않습니다.",
   "Stability_HasIssues": "이 패키지는 문제를 일으킬 수 있습니다.\n주의해서 사용하세요.",
   "Stability_Broken": "이 패키지는 망가졌습니다.\n작동하지 않거나 게임을 망가트리는 것으로 알려져 있습니다.",
@@ -172,10 +178,10 @@
     "One": "'{1}' 로 바꾸어야 합니다.",
     "Plural": "다음 패키지 중 하나로 바꿔야 합니다."
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "'{0}' 를 포함해야 합니다",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "다음 패키지를 포함해야 합니다:",
+    "Plural": "이 패키지들을 포함해야 합니다:"
   },
   "NoRequiredDlcs": "필요한 DLC 없음",
   "DlcsSelected": {
@@ -242,8 +248,8 @@
     "Plural": "Delete these requests"
   },
   "ViewRequest": "View Request",
-  "CRT_RequiredItem": "Required Item",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "CRT_RequiredItem": "필요한 항목",
+  "RequiredItem": "필요한 항목",
+  "ApplyAllActions": "가능한 모든 작업 적용하기",
+  "SnoozeAll": "표시된 모든 이슈 나중에 다시 알림"
 }

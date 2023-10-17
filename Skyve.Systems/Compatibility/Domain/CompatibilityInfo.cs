@@ -24,7 +24,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	[JsonIgnore] public ILocalPackage? LocalPackage => dtoPackage ?? localPackage;
 	[JsonIgnore] public IndexedPackage? Data { get; }
 	public List<ReportItem> ReportItems { get; set; }
-	public DtoLocalPackage? DtoPackage { get => dtoPackage ??= localPackage?.CloneTo<ILocalPackage, DtoLocalPackage>(); set => dtoPackage = value; }
+	public DtoLocalPackage? DtoPackage { get => dtoPackage ?? localPackage?.CloneTo<ILocalPackage, DtoLocalPackage>(); set => dtoPackage = value; }
 
 	ILocalPackage? ICompatibilityInfo.Package => LocalPackage;
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data?.Package;

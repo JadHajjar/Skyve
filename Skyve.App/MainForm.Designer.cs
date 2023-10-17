@@ -40,176 +40,237 @@ namespace Skyve.App
 			SlickControls.DynamicIcon dynamicIcon8 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon9 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon10 = new SlickControls.DynamicIcon();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+			SlickControls.DynamicIcon dynamicIcon11 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon12 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon13 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon14 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon15 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon16 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon17 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon18 = new SlickControls.DynamicIcon();
 			this.PI_Dashboard = new SlickControls.PanelItem();
 			this.PI_Mods = new SlickControls.PanelItem();
 			this.PI_Assets = new SlickControls.PanelItem();
-			this.PI_Profiles = new SlickControls.PanelItem();
+			this.PI_Playsets = new SlickControls.PanelItem();
+			this.PI_CurrentPlayset = new SlickControls.PanelItem();
+			this.PI_ViewPlaysets = new SlickControls.PanelItem();
+			this.PI_AddPlayset = new SlickControls.PanelItem();
 			this.PI_Options = new SlickControls.PanelItem();
 			this.PI_Compatibility = new SlickControls.PanelItem();
 			this.PI_ModUtilities = new SlickControls.PanelItem();
 			this.PI_Troubleshoot = new SlickControls.PanelItem();
 			this.PI_Packages = new SlickControls.PanelItem();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.TLP_SideBarTools = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Text = new System.Windows.Forms.Label();
 			this.L_Version = new System.Windows.Forms.Label();
-			this.subscriptionInfoControl1 = new Skyve.App.UserInterface.Content.SubscriptionInfoControl();
 			this.PI_DLCs = new SlickControls.PanelItem();
-			this.downloadsInfoControl1 = new Skyve.App.UserInterface.Content.DownloadsInfoControl();
-			this.TroubleshootInfoControl =	new UserInterface.Content.TroubleshootInfoControl();
+			this.PI_CompatibilityManagement = new SlickControls.PanelItem();
+			this.PI_ManageYourPackages = new SlickControls.PanelItem();
+			this.PI_ManageSinglePackage = new SlickControls.PanelItem();
+			this.PI_ReviewRequests = new SlickControls.PanelItem();
+			this.PI_ManageAllCompatibility = new SlickControls.PanelItem();
 			this.base_P_SideControls.SuspendLayout();
 			this.base_P_Container.SuspendLayout();
-			this.tableLayoutPanel1.SuspendLayout();
+			this.TLP_SideBarTools.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// base_P_Tabs
+			// 
+			this.base_P_Tabs.Location = new System.Drawing.Point(9, 134);
+			this.base_P_Tabs.Size = new System.Drawing.Size(310, 402);
 			// 
 			// base_P_Content
 			// 
 			this.base_P_Content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(248)))));
-			this.base_P_Content.Size = new System.Drawing.Size(987, 562);
+			this.base_P_Content.Size = new System.Drawing.Size(989, 582);
 			// 
 			// base_P_SideControls
 			// 
-			this.base_P_SideControls.Controls.Add(this.tableLayoutPanel1);
+			this.base_P_SideControls.Controls.Add(this.TLP_SideBarTools);
 			this.base_P_SideControls.Font = new System.Drawing.Font("Nirmala UI", 6.75F);
 			this.base_P_SideControls.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(129)))), ((int)(((byte)(150)))));
-			this.base_P_SideControls.Location = new System.Drawing.Point(7, 522);
-			this.base_P_SideControls.Size = new System.Drawing.Size(236, 19);
+			this.base_P_SideControls.Location = new System.Drawing.Point(9, 536);
+			this.base_P_SideControls.Size = new System.Drawing.Size(310, 19);
 			// 
 			// base_P_Container
 			// 
 			this.base_P_Container.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(203)))), ((int)(((byte)(145)))));
-			this.base_P_Container.Size = new System.Drawing.Size(989, 564);
+			this.base_P_Container.Size = new System.Drawing.Size(991, 584);
 			// 
 			// PI_Dashboard
 			// 
 			this.PI_Dashboard.Data = null;
-			this.PI_Dashboard.ForceReopen = false;
 			this.PI_Dashboard.Group = "";
 			this.PI_Dashboard.Highlighted = false;
 			dynamicIcon1.Name = "I_Dashboard";
 			this.PI_Dashboard.IconName = dynamicIcon1;
+			this.PI_Dashboard.Loading = false;
 			this.PI_Dashboard.Selected = false;
+			this.PI_Dashboard.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Dashboard.Text = "Dashboard";
 			this.PI_Dashboard.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Dashboard_OnClick);
 			// 
 			// PI_Mods
 			// 
 			this.PI_Mods.Data = null;
-			this.PI_Mods.ForceReopen = false;
 			this.PI_Mods.Group = "Content";
 			this.PI_Mods.Highlighted = false;
 			dynamicIcon2.Name = "I_Mods";
 			this.PI_Mods.IconName = dynamicIcon2;
+			this.PI_Mods.Loading = false;
 			this.PI_Mods.Selected = false;
+			this.PI_Mods.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Mods.Text = "Mods";
 			this.PI_Mods.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Mods_OnClick);
 			// 
 			// PI_Assets
 			// 
 			this.PI_Assets.Data = null;
-			this.PI_Assets.ForceReopen = false;
 			this.PI_Assets.Group = "Content";
 			this.PI_Assets.Highlighted = false;
 			dynamicIcon3.Name = "I_Assets";
 			this.PI_Assets.IconName = dynamicIcon3;
+			this.PI_Assets.Loading = false;
 			this.PI_Assets.Selected = false;
+			this.PI_Assets.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Assets.Text = "Assets";
 			this.PI_Assets.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Assets_OnClick);
 			// 
-			// PI_Profiles
+			// PI_Playsets
 			// 
-			this.PI_Profiles.Data = null;
-			this.PI_Profiles.ForceReopen = false;
-			this.PI_Profiles.Group = "";
-			this.PI_Profiles.Highlighted = false;
+			this.PI_Playsets.Data = null;
+			this.PI_Playsets.Group = "";
+			this.PI_Playsets.Highlighted = false;
 			dynamicIcon4.Name = "I_ProfileSettings";
-			this.PI_Profiles.IconName = dynamicIcon4;
-			this.PI_Profiles.Selected = false;
-			this.PI_Profiles.Text = "Profiles";
-			this.PI_Profiles.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Profiles_OnClick);
+			this.PI_Playsets.IconName = dynamicIcon4;
+			this.PI_Playsets.Loading = false;
+			this.PI_Playsets.Selected = false;
+			this.PI_Playsets.SubItems = new SlickControls.PanelItem[] {
+        this.PI_CurrentPlayset,
+        this.PI_ViewPlaysets,
+        this.PI_AddPlayset};
+			this.PI_Playsets.Text = "Playsets";
+			// 
+			// PI_CurrentPlayset
+			// 
+			this.PI_CurrentPlayset.Data = null;
+			this.PI_CurrentPlayset.Highlighted = false;
+			dynamicIcon5.Name = "I_ProfileSettings";
+			this.PI_CurrentPlayset.IconName = dynamicIcon5;
+			this.PI_CurrentPlayset.Loading = false;
+			this.PI_CurrentPlayset.Selected = false;
+			this.PI_CurrentPlayset.SubItems = new SlickControls.PanelItem[0];
+			this.PI_CurrentPlayset.Text = "CurrentPlayset";
+			this.PI_CurrentPlayset.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_CurrentPlayset_OnClick);
+			// 
+			// PI_ViewPlaysets
+			// 
+			this.PI_ViewPlaysets.Data = null;
+			this.PI_ViewPlaysets.Highlighted = false;
+			dynamicIcon6.Name = "I_Pages";
+			this.PI_ViewPlaysets.IconName = dynamicIcon6;
+			this.PI_ViewPlaysets.Loading = false;
+			this.PI_ViewPlaysets.Selected = false;
+			this.PI_ViewPlaysets.SubItems = new SlickControls.PanelItem[0];
+			this.PI_ViewPlaysets.Text = "YourPlaysets";
+			this.PI_ViewPlaysets.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ViewPlaysets_OnClick);
+			// 
+			// PI_AddPlayset
+			// 
+			this.PI_AddPlayset.Data = null;
+			this.PI_AddPlayset.Highlighted = false;
+			dynamicIcon7.Name = "I_Add";
+			this.PI_AddPlayset.IconName = dynamicIcon7;
+			this.PI_AddPlayset.Loading = false;
+			this.PI_AddPlayset.Selected = false;
+			this.PI_AddPlayset.SubItems = new SlickControls.PanelItem[0];
+			this.PI_AddPlayset.Text = "AddPlayset";
+			this.PI_AddPlayset.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_AddPlayset_OnClick);
 			// 
 			// PI_Options
 			// 
 			this.PI_Options.Data = null;
-			this.PI_Options.ForceReopen = false;
 			this.PI_Options.Group = "Other";
 			this.PI_Options.Highlighted = false;
-			dynamicIcon5.Name = "I_UserOptions";
-			this.PI_Options.IconName = dynamicIcon5;
+			dynamicIcon8.Name = "I_UserOptions";
+			this.PI_Options.IconName = dynamicIcon8;
+			this.PI_Options.Loading = false;
 			this.PI_Options.Selected = false;
+			this.PI_Options.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Options.Text = "Options";
 			this.PI_Options.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Options_OnClick);
 			// 
 			// PI_Compatibility
 			// 
 			this.PI_Compatibility.Data = null;
-			this.PI_Compatibility.ForceReopen = false;
 			this.PI_Compatibility.Group = "Maintenance";
 			this.PI_Compatibility.Highlighted = false;
-			dynamicIcon6.Name = "I_CompatibilityReport";
-			this.PI_Compatibility.IconName = dynamicIcon6;
+			dynamicIcon9.Name = "I_CompatibilityReport";
+			this.PI_Compatibility.IconName = dynamicIcon9;
+			this.PI_Compatibility.Loading = false;
 			this.PI_Compatibility.Selected = false;
+			this.PI_Compatibility.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Compatibility.Text = "CompatibilityReport";
 			this.PI_Compatibility.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Compatibility_OnClick);
 			// 
 			// PI_ModUtilities
 			// 
 			this.PI_ModUtilities.Data = null;
-			this.PI_ModUtilities.ForceReopen = false;
 			this.PI_ModUtilities.Group = "Maintenance";
 			this.PI_ModUtilities.Highlighted = false;
-			dynamicIcon7.Name = "I_Wrench";
-			this.PI_ModUtilities.IconName = dynamicIcon7;
+			dynamicIcon10.Name = "I_Wrench";
+			this.PI_ModUtilities.IconName = dynamicIcon10;
+			this.PI_ModUtilities.Loading = false;
 			this.PI_ModUtilities.Selected = false;
+			this.PI_ModUtilities.SubItems = new SlickControls.PanelItem[0];
 			this.PI_ModUtilities.Text = "Utilities";
 			this.PI_ModUtilities.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ModReview_OnClick);
 			// 
 			// PI_Troubleshoot
 			// 
 			this.PI_Troubleshoot.Data = null;
-			this.PI_Troubleshoot.ForceReopen = false;
 			this.PI_Troubleshoot.Group = "Maintenance";
 			this.PI_Troubleshoot.Highlighted = false;
-			dynamicIcon8.Name = "I_AskHelp";
-			this.PI_Troubleshoot.IconName = dynamicIcon8;
+			dynamicIcon11.Name = "I_AskHelp";
+			this.PI_Troubleshoot.IconName = dynamicIcon11;
+			this.PI_Troubleshoot.Loading = false;
 			this.PI_Troubleshoot.Selected = false;
+			this.PI_Troubleshoot.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Troubleshoot.Text = "HelpLogs";
 			this.PI_Troubleshoot.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Troubleshoot_OnClick);
 			// 
 			// PI_Packages
 			// 
 			this.PI_Packages.Data = null;
-			this.PI_Packages.ForceReopen = false;
 			this.PI_Packages.Group = "Content";
 			this.PI_Packages.Highlighted = false;
-			dynamicIcon9.Name = "I_Package";
-			this.PI_Packages.IconName = dynamicIcon9;
+			dynamicIcon12.Name = "I_Package";
+			this.PI_Packages.IconName = dynamicIcon12;
+			this.PI_Packages.Loading = false;
 			this.PI_Packages.Selected = false;
+			this.PI_Packages.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Packages.Text = "Packages";
 			this.PI_Packages.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Packages_OnClick);
 			// 
-			// tableLayoutPanel1
+			// TLP_SideBarTools
 			// 
-			this.tableLayoutPanel1.AutoSize = true;
-			this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel1.ColumnCount = 2;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Controls.Add(this.L_Text, 0, 3);
-			this.tableLayoutPanel1.Controls.Add(this.L_Version, 1, 3);
-			this.tableLayoutPanel1.Controls.Add(this.TroubleshootInfoControl, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.subscriptionInfoControl1, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.downloadsInfoControl1, 0, 0);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 4;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(236, 19);
-			this.tableLayoutPanel1.TabIndex = 34;
+			this.TLP_SideBarTools.AutoSize = true;
+			this.TLP_SideBarTools.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TLP_SideBarTools.ColumnCount = 2;
+			this.TLP_SideBarTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.TLP_SideBarTools.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.TLP_SideBarTools.Controls.Add(this.L_Text, 0, 3);
+			this.TLP_SideBarTools.Controls.Add(this.L_Version, 1, 3);
+			this.TLP_SideBarTools.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.TLP_SideBarTools.Location = new System.Drawing.Point(0, 0);
+			this.TLP_SideBarTools.Name = "TLP_SideBarTools";
+			this.TLP_SideBarTools.RowCount = 4;
+			this.TLP_SideBarTools.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_SideBarTools.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_SideBarTools.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_SideBarTools.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.TLP_SideBarTools.Size = new System.Drawing.Size(310, 19);
+			this.TLP_SideBarTools.TabIndex = 34;
 			// 
 			// L_Text
 			// 
@@ -227,7 +288,7 @@ namespace Skyve.App
 			// 
 			this.L_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Version.AutoSize = true;
-			this.L_Version.Location = new System.Drawing.Point(187, 0);
+			this.L_Version.Location = new System.Drawing.Point(261, 0);
 			this.L_Version.Margin = new System.Windows.Forms.Padding(0);
 			this.L_Version.Name = "L_Version";
 			this.L_Version.Padding = new System.Windows.Forms.Padding(2);
@@ -235,73 +296,116 @@ namespace Skyve.App
 			this.L_Version.TabIndex = 30;
 			this.L_Version.Text = "Version";
 			// 
-			// subscriptionInfoControl1
-			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.subscriptionInfoControl1, 2);
-			this.subscriptionInfoControl1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.subscriptionInfoControl1.Location = new System.Drawing.Point(3, 3);
-			this.subscriptionInfoControl1.Name = "subscriptionInfoControl1";
-			this.subscriptionInfoControl1.Size = new System.Drawing.Size(230, 25);
-			this.subscriptionInfoControl1.TabIndex = 32;
-			this.subscriptionInfoControl1.Visible = false;
-			// 
 			// PI_DLCs
 			// 
 			this.PI_DLCs.Data = null;
-			this.PI_DLCs.ForceReopen = false;
 			this.PI_DLCs.Group = "Content";
 			this.PI_DLCs.Highlighted = false;
-			dynamicIcon10.Name = "I_Dlc";
-			this.PI_DLCs.IconName = dynamicIcon10;
+			dynamicIcon13.Name = "I_Dlc";
+			this.PI_DLCs.IconName = dynamicIcon13;
+			this.PI_DLCs.Loading = false;
 			this.PI_DLCs.Selected = false;
+			this.PI_DLCs.SubItems = new SlickControls.PanelItem[0];
 			this.PI_DLCs.Text = "DLCs";
 			this.PI_DLCs.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_DLCs_OnClick);
 			// 
-			// downloadsInfoControl1
+			// PI_CompatibilityManagement
 			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.downloadsInfoControl1, 2);
-			this.downloadsInfoControl1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.downloadsInfoControl1.Location = new System.Drawing.Point(0, 0);
-			this.downloadsInfoControl1.Name = "downloadsInfoControl1";
-			this.downloadsInfoControl1.Size = new System.Drawing.Size(150, 43);
-			this.downloadsInfoControl1.TabIndex = 33;
-			this.downloadsInfoControl1.Visible = false;
-
-			this.tableLayoutPanel1.SetColumnSpan(this.TroubleshootInfoControl, 2);
-			this.TroubleshootInfoControl.Dock = System.Windows.Forms.DockStyle.Top;
-			this.TroubleshootInfoControl.Location = new System.Drawing.Point(0, 0);
-			this.TroubleshootInfoControl.Name = "TroubleshootInfoControl";
-			this.TroubleshootInfoControl.Size = new System.Drawing.Size(150, 43);
-			this.TroubleshootInfoControl.TabIndex = 33;
+			this.PI_CompatibilityManagement.Data = null;
+			this.PI_CompatibilityManagement.Group = "Maintenance";
+			this.PI_CompatibilityManagement.Hidden = true;
+			this.PI_CompatibilityManagement.Highlighted = false;
+			dynamicIcon14.Name = "I_Cog";
+			this.PI_CompatibilityManagement.IconName = dynamicIcon14;
+			this.PI_CompatibilityManagement.Loading = false;
+			this.PI_CompatibilityManagement.Selected = false;
+			this.PI_CompatibilityManagement.SubItems = new SlickControls.PanelItem[] {
+        this.PI_ManageYourPackages,
+        this.PI_ManageSinglePackage,
+        this.PI_ReviewRequests,
+        this.PI_ManageAllCompatibility};
+			this.PI_CompatibilityManagement.Text = "ManageCompatibilityData";
+			// 
+			// PI_ManageYourPackages
+			// 
+			this.PI_ManageYourPackages.Data = null;
+			this.PI_ManageYourPackages.Hidden = true;
+			this.PI_ManageYourPackages.Highlighted = false;
+			dynamicIcon15.Name = "I_User";
+			this.PI_ManageYourPackages.IconName = dynamicIcon15;
+			this.PI_ManageYourPackages.Loading = false;
+			this.PI_ManageYourPackages.Selected = false;
+			this.PI_ManageYourPackages.SubItems = new SlickControls.PanelItem[0];
+			this.PI_ManageYourPackages.Text = "YourPackages";
+			this.PI_ManageYourPackages.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ManageYourPackages_OnClick);
+			// 
+			// PI_ManageSinglePackage
+			// 
+			this.PI_ManageSinglePackage.Data = null;
+			this.PI_ManageSinglePackage.Hidden = true;
+			this.PI_ManageSinglePackage.Highlighted = false;
+			dynamicIcon16.Name = "I_Edit";
+			this.PI_ManageSinglePackage.IconName = dynamicIcon16;
+			this.PI_ManageSinglePackage.Loading = false;
+			this.PI_ManageSinglePackage.Selected = false;
+			this.PI_ManageSinglePackage.SubItems = new SlickControls.PanelItem[0];
+			this.PI_ManageSinglePackage.Text = "ManageSinglePackage";
+			this.PI_ManageSinglePackage.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ManageSinglePackage_OnClick);
+			// 
+			// PI_ReviewRequests
+			// 
+			this.PI_ReviewRequests.Data = null;
+			this.PI_ReviewRequests.Hidden = true;
+			this.PI_ReviewRequests.Highlighted = false;
+			dynamicIcon17.Name = "I_RequestReview";
+			this.PI_ReviewRequests.IconName = dynamicIcon17;
+			this.PI_ReviewRequests.Loading = false;
+			this.PI_ReviewRequests.Selected = false;
+			this.PI_ReviewRequests.SubItems = new SlickControls.PanelItem[0];
+			this.PI_ReviewRequests.Text = "ReviewRequests";
+			this.PI_ReviewRequests.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ReviewRequests_OnClick);
+			// 
+			// PI_ManageAllCompatibility
+			// 
+			this.PI_ManageAllCompatibility.Data = null;
+			this.PI_ManageAllCompatibility.Hidden = true;
+			this.PI_ManageAllCompatibility.Highlighted = false;
+			dynamicIcon18.Name = "I_Cog";
+			this.PI_ManageAllCompatibility.IconName = dynamicIcon18;
+			this.PI_ManageAllCompatibility.Loading = false;
+			this.PI_ManageAllCompatibility.Selected = false;
+			this.PI_ManageAllCompatibility.SubItems = new SlickControls.PanelItem[0];
+			this.PI_ManageAllCompatibility.Text = "ManageCompatibilityData";
+			this.PI_ManageAllCompatibility.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ManageAllCompatibility_OnClick);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(1000, 575);
+			this.ClientSize = new System.Drawing.Size(1002, 595);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.IconBounds = new System.Drawing.Rectangle(111, 31, 14, 42);
+			this.IconBounds = new System.Drawing.Rectangle(148, 41, 14, 42);
 			this.MaximizeBox = true;
 			this.MaximizedBounds = new System.Drawing.Rectangle(0, 0, 1920, 1032);
 			this.MinimizeBox = true;
 			this.Name = "MainForm";
 			this.SidebarItems = new SlickControls.PanelItem[] {
         this.PI_Dashboard,
-        this.PI_Profiles,
+        this.PI_Playsets,
         this.PI_Packages,
         this.PI_Mods,
         this.PI_Assets,
         this.PI_DLCs,
         this.PI_ModUtilities,
         this.PI_Compatibility,
+        this.PI_CompatibilityManagement,
         this.PI_Troubleshoot,
         this.PI_Options};
 			this.Text = "Skyve";
 			this.base_P_SideControls.ResumeLayout(false);
 			this.base_P_SideControls.PerformLayout();
 			this.base_P_Container.ResumeLayout(false);
-			this.tableLayoutPanel1.ResumeLayout(false);
-			this.tableLayoutPanel1.PerformLayout();
+			this.TLP_SideBarTools.ResumeLayout(false);
+			this.TLP_SideBarTools.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -310,18 +414,23 @@ namespace Skyve.App
 		public SlickControls.PanelItem PI_Dashboard;
 		public SlickControls.PanelItem PI_Mods;
 		public SlickControls.PanelItem PI_Assets;
-		public SlickControls.PanelItem PI_Profiles;
+		public SlickControls.PanelItem PI_Playsets;
 		public SlickControls.PanelItem PI_Options;
 		public SlickControls.PanelItem PI_Compatibility;
 		public SlickControls.PanelItem PI_ModUtilities;
 		public SlickControls.PanelItem PI_Troubleshoot;
 		public SlickControls.PanelItem PI_Packages;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private System.Windows.Forms.TableLayoutPanel TLP_SideBarTools;
 		private System.Windows.Forms.Label L_Text;
 		private System.Windows.Forms.Label L_Version;
 		public SlickControls.PanelItem PI_DLCs;
-		private SubscriptionInfoControl subscriptionInfoControl1;
-		private DownloadsInfoControl downloadsInfoControl1;
-		private TroubleshootInfoControl TroubleshootInfoControl;
+		private PanelItem PI_ViewPlaysets;
+		private PanelItem PI_CurrentPlayset;
+		private PanelItem PI_AddPlayset;
+		private PanelItem PI_CompatibilityManagement;
+		private PanelItem PI_ManageYourPackages;
+		private PanelItem PI_ManageSinglePackage;
+		private PanelItem PI_ReviewRequests;
+		private PanelItem PI_ManageAllCompatibility;
 	}
 }

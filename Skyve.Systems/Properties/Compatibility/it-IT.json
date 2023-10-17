@@ -17,35 +17,38 @@
   "AddInteraction": "Aggiungi interazione",
   "NotReviewed": "Non ancora revisionato",
   "Stable": "Stabile",
-  "NotEnoughInformation": "Non ci sono abbastanza informazioni",
-  "HasIssues": "Con problemi",
+  "StableNoNewFeatures": "Stabile, solo aggiornamenti per correzioni di bug",
+  "StableNoFutureUpdates": "Stabile, nessun altro aggiornamento",
+  "HasIssuesNoFutureUpdates": "Ha problemi, niente più aggiornamenti",
+  "NotEnoughInformation": "Informazioni insufficienti",
+  "HasIssues": "Ha problemi",
   "Broken": "Non funziona",
   "Incompatible": "Incompatibile",
-  "CityBuilding": "Costruzione della città",
+  "CityBuilding": "Costruzione di città",
   "AssetCreation": "Creazione di risorse",
   "MapCreation": "Creazione di mappe",
   "NoAction": "Non fare nulla",
   "SubscribeToPackages": "Sottoscrivi ai pacchetti collegati",
   "RequiresConfiguration": "Richiede una configurazione specifica",
-  "SelectOne": "Selezionane uno dei due",
+  "SelectOne": "Seleziona uno dei due",
   "UnsubscribeThis": "Annulla la sottoscrizione a questo pacchetto",
   "UnsubscribeOther": "Annulla la sottoscrizione ai pacchetti collegati",
   "Switch": "Passa al pacchetto collegato",
   "FlippedSwitch": "Passa a questo pacchetto",
   "Deprecated": "Deprecato",
-  "Reupload": "Ri-carica",
+  "Reupload": "Ricarica",
   "CausesIssues": "Causa problemi",
   "SavesCantLoadWithoutIt": "I salvataggi non possono essere aperti senza",
   "TestVersion": "Versione di prova",
   "DependencyMod": "Mod di dipendenza",
   "SourceCodeNotAvailable": "Il codice sorgente non è disponibile",
-  "MusicCanBeCopyrighted": "La musica inclusa potrebbe essere coperta da copyright",
+  "MusicCanBeCopyrighted": "La musica inclusa potrebbe essere protetta da copyright",
   "IncompleteDescription": "Descrizione incompleta",
   "Successor": "Successore di ..",
   "LoadAfter": "Carica Dopo ..",
   "Alternative": "Alternativa a ..",
   "SameFunctionality": "Stessa funzionalità di ..",
-  "RequirementAlternative": "Requirement Alternative",
+  "RequirementAlternative": "Requisito alternativo a ...",
   "IncompatibleWith": "Incompatibile con ..",
   "CausesIssuesWith": "Causa problemi con ..",
   "RequiredPackages": "Richiede ..",
@@ -57,19 +60,19 @@
   "AttentionRequired": "È richiesta attenzione",
   "Website": "Sito web",
   "Donation": "Dona",
-  "ManageSinglePackage": "Gestire pacchetti specifici",
+  "ManageSinglePackage": "Gestisci pacchetti specifici",
   "ManageCompatibilityData": "Gestisci dati di compatibilità",
   "YourPackages": "Gestisci i tuoi pacchetti",
   "AddPackages": "Aggiungi pacchetti",
   "ConfirmEndSession": "Sei sicuro di voler concludere la sessione?",
   "CrDataLoadFailed": "Impossibile caricare i dati, riprova più tardi",
   "AddGlobalTag": "Aggiungi un tag globale",
-  "ReuseData": "Riutilizza Dati Precedenti",
-  "ReuseData_Tip": "Riutilizza i dati di compatibilità del tuo ultimo pacchetto salvato per questo pacchetto.\nTieni premuto Maiusc se vuoi anche applicare e continuare",
+  "ReuseData": "Riutilizza dati precedenti",
+  "ReuseData_Tip": "Riutilizza i dati di compatibilità dell'ultimo pacchetto salvato per questo.\nTieni premuto Maiusc se vuoi anche applicare e continuare",
   "PleaseReviewTheStability": "Per favore, controlla la stabilità di questo pacchetto prima di salvare.",
   "PleaseReviewPackageStatuses": "Per favore, ricontrolla gli status di questo pacchetto prima di salvare.\nAlcuni hanno un Tipo di Status non valido.",
-  "PleaseReviewPackageInteractions": "Per favore, controlla le interazioni di questo pacchetto prima di salvare.\nAlcune di esse hanno un Interaction Type non valido, o non hanno un pacchetto collegato.",
-  "PleaseReviewPackageUsage": "Seleziona un uso valido per questo pacchetto per favore.",
+  "PleaseReviewPackageInteractions": "Per favore, controlla le interazioni di questo pacchetto prima di salvare.\nAlcune hanno un tipo di interazione non valido o non hanno un pacchetto collegato.",
+  "PleaseReviewPackageUsage": "Seleziona un uso valido per questo pacchetto.",
   "Interaction_Alternative": {
     "One": "'{1}' può essere usata come alternativa a '{0}'.",
     "Plural": "Uno dei seguenti pacchetti può essere usato come alternativa a '{0}'."
@@ -79,7 +82,7 @@
     "Plural": "'{0}' e i pacchetti seguenti hanno le stesse funzionalità."
   },
   "Interaction_IncompatibleWith": {
-    "One": "'{0}' e '{1}' non sono compatibili tra di loro.",
+    "One": "'{0}' e '{1}' non sono compatibili tra loro.",
     "Plural": "'{0}' non è compatibile con alcuno dei pacchetti seguenti."
   },
   "Interaction_CausesIssuesWith": {
@@ -87,8 +90,8 @@
     "Plural": "'{0}' può causare problemi quando usato con le mod seguenti."
   },
   "Interaction_RequiredPackages": {
-    "One": "Ti manca un pacchetto che è richiesto per '{0}'.",
-    "Plural": "Ti mancano i seguenti pacchetti che sono richiesti per '{0}'."
+    "One": "Manca un pacchetto richiesto per '{0}'.",
+    "Plural": "Mancano i seguenti pacchetti richiesti per '{0}'."
   },
   "Interaction_OptionalPackages": {
     "One": "Manca un pacchetto opzionale per '{0}'.",
@@ -103,13 +106,13 @@
     "Plural": "'{0}' verrà caricato direttamente dopo i seguenti pacchetti."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' è richiesto per '{1}'.",
+    "Plural": "'{0}' è richiesto per i seguenti pacchetti."
   },
   "Interaction_Identical": "Si tratta di versioni multiple dello stesso pacchetto.\n\nSi dovrebbe scegliere solo una di esse.",
   "Status_Succeeded": "'{0}' è stato sostituito da '{1}'.\n\nSi sta già usando '{1}', quindi non c'è più bisogno di '{0}'.",
   "Status_Deprecated": "'{0}' è superato, non è più supportato dal suo autore.",
-  "Status_AutoDeprecated": "'{0}' non è stato aggiornato da molto tempo, probabilmente non è più supportato dal suo autore.",
+  "Status_AutoDeprecated": "'{0}' non viene aggiornata da molto tempo.",
   "Status_Reupload": {
     "Zero": "'{0}' è un doppione di un pacchetto originale.",
     "One": "Questo è un doppione di '{1}'."
@@ -125,26 +128,29 @@
   },
   "Status_MissingDlc": {
     "One": "Ti serve il DLC '{0}' per usare questo pacchetto.",
-    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "Plural": "Per utilizzare questo pacchetto mancano i seguenti DLC."
   },
   "Status_DependencyMod": "Questa è una mod di dipendenza, ma non sembra che tu stia usando alcun pacchetto che la richiede.",
   "Status_SourceCodeNotAvailable": "Il codice sorgente di questa mod non è disponibile. Non dovresti usarla, a meno che non ti fidi del suo autore.",
   "SourceAvailable": "Il codice sorgente è disponibile",
-  "StandardMod": "Standard Mod",
-  "Status_MusicCanBeCopyrighted": "La musica contenuta in questo pacchetto potrebbe essere coperta da copyright. È meglio non usarlo se stai trasmettendo.",
+  "StandardMod": "Mod standard",
+  "Status_MusicCanBeCopyrighted": "La musica contenuta in questo pacchetto potrebbe essere protetta da copyright. È meglio non utilizzarla durante lo streaming.",
   "Status_IncompleteDescription": "La descrizione del workshop di questa mod è troppo breve. Non dovresti usarla, a meno che non ti fidi del suo autore.",
   "Status_SourceAvailable": "Questo pacchetto non avviserà circa il codice sorgente mancante.",
   "Status_StandardMod": "Questo pacchetto verrà ignorato durante l'elaborazione delle mod per la risoluzione dei problemi.",
   "OutputText": "Output atteso",
   "Stability_AssetNotReviewed": "Questa risorsa non è stata ancora recensita.\n\nLe informazioni sulla compatibilità potrebbero non essere accurate, anche se le risorse sono generalmente stabili",
   "Stability_NotReviewed": "Questo pacchetto non è stato ancora recensito.\n\nLe informazioni di compatibilità potrebbero non essere accurate.",
-  "Stability_Stable": "Questo pacchetto è stabile.",
+  "Stability_Stable": "Questo pacchetto è stabile. Il suo autore ci sta lavorando attivamente e lo sta aggiornando.",
+  "Stability_StableNoNewFeatures": "Questo pacchetto è stabile, l'autore però non rilascerà più aggiornamenti delle funzionalità.\nTuttavia, continuerà ad aggiornarlo in caso di nuovi bug.",
+  "Stability_StableNoFutureUpdates": "Questo pacchetto è stabile, anche se l'autore non lo supporta più; aggiornamenti o correzioni di bug sono improbabili.",
+  "Stability_HasIssuesNoFutureUpdates": "Questo pacchetto può causare problemi e l'autore non lo supporta più; aggiornamenti o correzioni di bug sono improbabili.",
   "Stability_NotEnoughInformation": "Non ci sono abbastanza informazioni per poter recensire adeguatamente questo pacchetto.",
   "Stability_HasIssues": "Questo pacchetto può causare problemi.\nFai attenzione mentre lo usi.",
   "Stability_Broken": "Questo pacchetto non è funzionante.\nÈ noto per bloccare il gioco o semplicemente perché non funziona.",
   "Stability_Incompatible": "Questo pacchetto non è compatibile con il gioco o lo interrompe.\n\nÈ necessario rimuoverlo immediatamente.",
   "Stability_Local": "Questo pacchetto è una versione locale della mod originale \"{0}\".\n\nLe versioni locali sono solitamente utilizzate a scopo di test o nel caso in cui non si disponga di Steam.\n\nControllare i link del pacchetto per verificare la presenza di aggiornamenti della mod.",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_BrokenFromPatch": "Questo pacchetto è corrotto a causa di una patch recente. Attendi l'aggiornamento prima di utilizzarlo.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Dovresti sottoscrivere il seguente pacchetto.",
@@ -172,10 +178,10 @@
     "One": "Dovresti passare a '{1}'.",
     "Plural": "Dovresti passare a uno dei seguenti pacchetti."
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "È necessario includere '{0}'",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "È necessario includere questo pacchetto:",
+    "Plural": "È necessario includere questi pacchetti:"
   },
   "NoRequiredDlcs": "Nessun DLC richiesto",
   "DlcsSelected": {
@@ -223,7 +229,7 @@
   "POFont": "Oggetto Procedurale Font/Modulo",
   "NameList": "Elenco dei nomi/traduzioni dei giochi",
   "ApplyChangedBeforeExit": "Le modifiche non sono state salvate.\n\nVolete applicare queste modifiche prima di continuare?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorRetired": "L'autore di {0}, {1}, si è ritirato o è inattivo da molto tempo.\n\nI futuri aggiornamenti e la stabilità dei loro pacchetti non sono garantiti.",
   "AuthorMalicious": "L'autore di {0}, {1}, è noto per essere malintenzionato e/o per includere contenuti dannosi come i virus nei suoi pacchetti.",
   "ReviewRequests": "Richieste di Revisione {0}",
   "ApplyRequestedChanges": "Applica le Modifiche Richieste",
@@ -234,16 +240,16 @@
   "ScenarioMaking": "Creazione di scenari",
   "ThemeMaking": "Creazione di temi",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "Questo pacchetto presenta un altro avviso di compatibilità",
+    "Plural": "Questo pacchetto ha altri {0} avvisi di compatibilità"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "Elimina questa richiesta",
+    "Plural": "Elimina queste richieste"
   },
-  "ViewRequest": "View Request",
-  "CRT_RequiredItem": "Required Item",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "ViewRequest": "Mostra richiesta",
+  "CRT_RequiredItem": "Elemento richiesto",
+  "RequiredItem": "Elemento richiesto",
+  "ApplyAllActions": "Applica tutte le azioni disponibili",
+  "SnoozeAll": "Nascondi tutti i problemi visualizzati"
 }

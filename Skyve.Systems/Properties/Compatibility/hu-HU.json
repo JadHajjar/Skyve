@@ -17,6 +17,9 @@
   "AddInteraction": "Interakció hozzáadása",
   "NotReviewed": "Még nincs értékelve",
   "Stable": "Stabil",
+  "StableNoNewFeatures": "Stable, only bug-fix updates",
+  "StableNoFutureUpdates": "Stable, no more updates",
+  "HasIssuesNoFutureUpdates": "Has issues, no more updates",
   "NotEnoughInformation": "Nincs elég információ",
   "HasIssues": "Problémás",
   "Broken": "Hibás",
@@ -103,8 +106,8 @@
     "Plural": "A(z) \"{0}\" közvetlenül a következő csomagok után töltődik be."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "A(z) '{0}' kötelező a következőhöz: '{1}'.",
+    "Plural": "\"{0}\" szükséges a következő csomagokhoz."
   },
   "Interaction_Identical": "Ezek ugyanannak a csomagnak a másik verziója.\n\nCsak egyet válassz közülük.",
   "Status_Succeeded": "A(z) '{0}' utódja a(z) '{1}'.\n\nMár használja a(z) „{1}” fájlt, így nincs többé szükség a(z) „{0}” kifejezésre.",
@@ -138,7 +141,10 @@
   "OutputText": "Várt eredmények",
   "Stability_AssetNotReviewed": "Ezt az elemet még nem vizsgálták felül.\n\nElőfordulhat, hogy a kompatibilitási információ nem pontos; bár az eszközök általában stabilak",
   "Stability_NotReviewed": "Ezt a csomagot még nem vizsgálták felül.\n\nElőfordulhat, hogy a kompatibilitási információ nem pontos.",
-  "Stability_Stable": "Ez a csomag stabil.",
+  "Stability_Stable": "This package is stable. It's author is still actively working on it and updating it.",
+  "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
+  "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_NotEnoughInformation": "Nincs elég információ a csomag megfelelő áttekintéséhez.",
   "Stability_HasIssues": "Ez a csomag problémákat okozhat.\nLegyél óvatos használata közben.",
   "Stability_Broken": "Ez a csomag elromlott. Várhatóan vagy megszakítja a játékot, vagy egyszerűen nem működik.",
@@ -172,10 +178,10 @@
     "One": "Válts a következőre: „{1}”.",
     "Plural": "A következő csomagok egyikére kell váltanod:"
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "Fel kell vennie a következőt: „{0}”",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "A következő csomagot kell tartalmaznia:",
+    "Plural": "A következő csomagra kell feliratkoznod:"
   },
   "NoRequiredDlcs": "Nincs szükség további DLC-re",
   "DlcsSelected": {
@@ -238,12 +244,12 @@
     "Plural": "Ez a csomag {0} másik kompatibilitási figyelmeztetést tartalmaz"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "Törölje ezt a kérést",
+    "Plural": "Törölje ezeket a kéréseket"
   },
-  "ViewRequest": "View Request",
-  "CRT_RequiredItem": "Required Item",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "ViewRequest": "Kérelem megtekintése",
+  "CRT_RequiredItem": "Szükséges elem",
+  "RequiredItem": "Szükséges elem",
+  "ApplyAllActions": "Alkalmazza az összes elérhető műveletet",
+  "SnoozeAll": "Az összes megjelenített probléma elhalasztása"
 }
