@@ -698,7 +698,7 @@
   "LoadsSaveGameOnLaunch": "Continua l'ultimo salvataggio all'avvio",
   "LoadsSaveGameWithMap": "Continua il salvataggio '{0}' all'avvio",
   "StartsNewAssetOnLaunch": "Avvia l'editor con una nuova risorsa al momento del lancio",
-  "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
+  "LoadsAssetOnLaunch": "Parte con schermata di 'Caricamento' dell'editor all'avvio",
   "Notifications": "Notifiche",
   "NoNotifications": "Nessuna notifica",
   "MultipleSkyvesDetected": "Rilevati più Skyves",
