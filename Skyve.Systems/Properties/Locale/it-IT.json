@@ -152,7 +152,7 @@
     "One": "Escludi tutti gli elementi in questo pacchetto",
     "Plural": "Escludi tutti i pacchetti selezionati"
   },
-  "Unfiltered": "Senza filtri",
+  "Unfiltered": "Nessun filtro",
   "AnyTags": "Qualsiasi tag",
   "AdvancedLaunchOptions": "Mostra opzioni di lancio extra",
   "MovePackageToLocalFolder": {
@@ -220,7 +220,7 @@
   "NewGame": "Inizia una nuova partita",
   "LoadSaveGame": "Continua una partita precedente",
   "DevOptions": "Opzioni di Lancio per Sviluppatori",
-  "ResetButton": "Ripristina Opzioni",
+  "ResetButton": "Ripristina opzioni",
   "ResetFolderButton_Tip": "Dopo questa azione dovrai aprire il gioco prima di poter utilizzare nuovamente lo strumento.",
   "UseSkipFile": "Usa un file esclusione per escludere risorse vanilla",
   "ClearFoldersPrompt": "Dopo aver ripristinato le impostazioni delle cartelle dovrai avviare il gioco prima di poter aprire nuovamente lo strumento.",
@@ -364,7 +364,7 @@
   "ResetScrollOnPackageClick_Tip": "Quando si apre la pagina di un pacchetto, lo scorrimento è reimpostato in modo che il pacchetto selezionato sia in cima all'elenco.",
   "Workshop Save-games": "Salvataggi del Workshop",
   "Workshop Maps": "Mappe del Workshop",
-  "AnyAuthor": "Qualsiasi Autore",
+  "AnyAuthor": "Qualsiasi autore",
   "ItemsCount": {
     "One": "{0} elemento",
     "Plural": "{0} elementi"
@@ -375,13 +375,13 @@
   },
   "Use the System's Theme": "Usa il tema di sistema",
   "Donate": "Dona",
-  "CopyAllIds": "Copia tutti gli ID Workshop degli elementi visualizzati",
-  "DeleteAll": "Elimina tutti gli elementi visualizzati",
+  "CopyAllIds": "Copia tutti gli ID Workshop degli elementi mostrati",
+  "DeleteAll": "Elimina tutti gli elementi mostrati",
   "FlipItemCopyFilterAction": "Inverti il comportamento di Ctrl+Clic per filtrare nelle liste dei contenuti",
   "FlipItemCopyFilterAction_Tip": "Scambia il comportamento predefinito del clic sulle etichette in modo che un Clic normale filtri, e Ctrl+Clic esegua l'azione predefinita.",
   "AltClickTo": "Alt+Clic per {0}",
   "FilterByThisAuthor": "Aggiungere '{0}' ai tuoi filtri",
-  "AddToSearch": "Aggiungi '{0}' alla tua ricerca",
+  "AddToSearch": "Aggiungere '{0}' alla tua ricerca",
   "CopyToClipboard": "Copia '{0}' negli appunti",
   "ViewPackageCR": "Visualizza il rapporto di compatibilità di questo pacchetto",
   "CleanupInfo": "Esegue una veloce pulizia che cancella dal tuo computer tutti i pacchetti a cui non si è iscritti, e forza lo scaricamento dei pacchetti sottoscritti mancanti.",
@@ -473,12 +473,12 @@
     "Plural": "{0} {1} caricato"
   },
   "ShowingCount": {
-    "One": "Mostrato {0} {1}",
-    "Plural": "Mostrato {0} {1}"
+    "One": "Mostrate {0} {1}",
+    "Plural": "Mostrate {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "Mostrato {0} {1}, {3}",
-    "Plural": "Mostrato {0} {1}, {3}"
+    "One": "Mostrate {0} {1}, {3}",
+    "Plural": "Mostrate {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
     "One": "Mostrando {0} {1}, {2} selezionato",
@@ -616,8 +616,8 @@
   "PastePlaysetId": "Incolla l'ID del playset che vuoi importare",
   "AssumeInternetConnectivity": "Non controllare la presenza di una connessione Internet",
   "AssumeInternetConnectivity_Tip": "Non viene verificata la presenza di una connessione a Internet, viene assunto che tu sia già connesso.",
-  "SelectAll": "Seleziona tutti gli elementi visualizzati",
-  "DeselectAll": "Deseleziona tutti gli elementi visualizzati",
+  "SelectAll": "Seleziona tutti gli elementi mostrati",
+  "DeselectAll": "Deseleziona tutti gli elementi mostrati",
   "AddTagBox": "Aggiungi qui una nuova etichetta",
   "EditingMultipleTags": "La modifica di tag di pacchetti multipli sovrascriverà ciascuno dei loro tag personalizzati.",
   "EditTagsOfPackage": {
