@@ -145,12 +145,12 @@
   "DlcUpdateNotice": "หาก DLC ของคุณไม่ปรากฏตรงนี้ ลองเปิดเกมอย่างน้อยครั้งหนึ่ง",
   "DlcCount": "{0} DLC ที่เป็นเจ้าของ",
   "IncludeAllItemsInThisPackage": {
-    "One": "Include all items in this package",
-    "Plural": "Include all of the selected packages"
+    "One": "บรรจุไอเทมทั้งหมดในแพ็กเกจนี้",
+    "Plural": "บรรจุไอเทมทั้งหมดในแพ็กเกจที่เลือก"
   },
   "ExcludeAllItemsInThisPackage": {
-    "One": "Exclude all items in this package",
-    "Plural": "Exclude all of the selected packages"
+    "One": "แยกไอเทมทั้งหมดออกจากแพ็กเกจนี้",
+    "Plural": "แยกไอเทมทั้งหมดออกจากแพ็กเกจที่เลือก"
   },
   "Unfiltered": "ไม่มีการกรอง",
   "AnyTags": "ทุกแท็ก",
@@ -201,7 +201,7 @@
   "ResetFolderButton": "รีเซ็ตการตั้งค่าโฟลเดอร์ทั้งหมด",
   "LinkModAssets_Tip": "ม็อดบางตัวประกอบไปด้วยแอสเซทที่จำเป็นต้องใช้เพื่อให้สามารถทำงานได้อย่างถูกต้อง การเปิดใช้งานตัวเลือกนี้จะเชื่อมโยงแอสเซทดังกล่าวเข้ากับตัวม็อดของมันเอง และจะไม่แสดงมันในหน้าแอสเซท เพื่อป้องกันไม่ให้คุณเผลอไปแยกมันออกจากกันโดยไม่ได้ตั้งใจ",
   "ShowDatesRelatively_Tip": "เปลี่ยนรูปแบบของวันที่ที่แสดงในรายการเนื้อหาให้สอดคล้องกับเวลาปัจจุบัน ยกตัวอย่างเช่น เมื่อวาน 14:10 น.",
-  "DisableNewModsByDefault_Tip": "When you s`ubscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
+  "DisableNewModsByDefault_Tip": "หลังจากที่คุณสมัครสมาชิกหรือเพิ่มม็อด เมื่อเครื่องมือนี้ถูกเรียกใช้งาน เครื่องมือจะทำการแยกหรือบรรจุม็อดโดยอัตโนมัติตามการตั้งค่าบนตัวเลือกนี้",
   "DisableNewAssetsByDefault_Tip": "เมื่อเปิดใช้งานเครื่องมือ หากคุณได้ตั้งค่าในส่วนนี้ไว้ เครื่องมือจะทำการแยกหรือรวมแอสเซทโดยอัตโนมัติ เมื่อคุณสมัครสมาชิกหรือเพิ่มแอสเซท",
   "FilterOutPackagesWithOneAsset_Tip": "แพ็กเกจที่มีแอสเซทเพียงรายการเดียวจะไม่แสดงในหน้าแพ็กเกจ แต่จะยังคงแสดงในหน้าแอสเซท",
   "FilterOutPackagesWithMods_Tip": "แพ็กเกจที่ประกอบไปด้วยม็อด จะไม่แสดงในหน้าแพ็กเกจ แต่ยังคงแสดงในหน้าม็อด",
@@ -677,7 +677,7 @@
   "ViewOnGithub": "View this package's Github repository",
   "ViewXOnSteam": "View '{0}' on Steam",
   "Free": "Free",
-  "ViewAllYourItems": "View all your {0}",
+  "ViewAllYourItems": "ดู {0} ของคุณทั้งหมด",
   "ViewRecentlyUpdatedItems": "View recently updated {0}",
   "NoCompatibilityIssues": {
     "One": "No Compatibility issues detected.",
