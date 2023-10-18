@@ -25,7 +25,7 @@
   "NoAssets": "ปิดการใช้งานแอสเซททั้งหมด",
   "NoMods": "ปิดการใช้งานม็อดทั้งหมด",
   "AutoSave": "บันทึกอัตโนมัติ",
-  "TotalAssetSize": "{0} of included assets",
+  "TotalAssetSize": "{0} ที่มีแอสเซทรวมอยู่ด้วย",
   "CompatibilityStatus": "สถานะความเข้ากันได้",
   "AnyStatus": "ทุกสถานะ",
   "AnyCompatibilityStatus": "ทุกสถานะ",
