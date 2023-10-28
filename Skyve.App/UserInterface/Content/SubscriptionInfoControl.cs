@@ -19,14 +19,9 @@ public class SubscriptionInfoControl : SlickControl
 		refreshTimer.Tick += RefreshTimer_Tick;
 	}
 
-	protected override void OnCreateControl()
+	public void Start()
 	{
-		base.OnCreateControl();
-
-		if (Live)
-		{
-			refreshTimer.Start();
-		}
+		refreshTimer.Start();
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)
