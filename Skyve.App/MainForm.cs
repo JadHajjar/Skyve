@@ -123,6 +123,9 @@ public partial class MainForm : BasePanelForm
 		PI_Compatibility.Loading = true;
 
 		_notifier.CompatibilityReportProcessed += _notifier_CompatibilityReportProcessed;
+
+		subscriptionInfoControl.Start();
+		downloadsInfoControl.Start();
 	}
 
 	private void _notifier_CompatibilityReportProcessed()

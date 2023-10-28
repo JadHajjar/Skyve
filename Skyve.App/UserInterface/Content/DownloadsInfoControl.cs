@@ -17,23 +17,16 @@ public class DownloadsInfoControl : SlickControl
 		Visible = false;
 		refreshTimer = new Timer() { Interval = 1000 };
 		refreshTimer.Tick += RefreshTimer_Tick;
-		refreshTimer.Enabled = true;
 	}
 
-	protected override void OnCreateControl()
+	public void Start()
 	{
-		base.OnCreateControl();
-
-		if (Live)
-		{
-			refreshTimer.Start();
-		}
+		refreshTimer.Start();
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)
 	{
 		base.OnMouseMove(e);
-
 
 		if (cancelRect.Contains(e.Location))
 		{
