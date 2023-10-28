@@ -49,12 +49,12 @@
   "Preferences": "Preferenze",
   "PlaysetName": "Nome Playset",
   "RenamePlayset": "Rinomina la riproduzione corrente",
-  "StartScratch": "Crea un profilo da zero",
+  "StartScratch": "Crea un playset da zero",
   "ContinueFromCurrent": "Mantieni le tue impostazioni correnti",
   "GamePlay": "Costruisci città",
   "EditorPlay": "Crea risorse",
   "PlaysetUsage": "Utilizzo Playset",
-  "SomePackagesWillBeDisabled": "Alcuni pacchetti verranno rimossi se cambi lo scopo di questo profilo.",
+  "SomePackagesWillBeDisabled": "Alcuni pacchetti verranno rimossi se cambi lo scopo di questo playset.",
   "AffectedPackagesAre": "I pacchetti interessati sono:",
   "ConfirmDeletePlayset": "Sei sicuro di voler eliminare il playset '{0}'?",
   "PlaysetReplace": "Carica le impostazioni di questo playset",
@@ -152,7 +152,7 @@
     "One": "Escludi tutti gli elementi in questo pacchetto",
     "Plural": "Escludi tutti i pacchetti selezionati"
   },
-  "Unfiltered": "Senza filtri",
+  "Unfiltered": "Nessun filtro",
   "AnyTags": "Qualsiasi tag",
   "AdvancedLaunchOptions": "Mostra opzioni di lancio extra",
   "MovePackageToLocalFolder": {
@@ -165,7 +165,7 @@
   "SubscribeAll": "Sottoscrivi tutti gli elementi mostrati",
   "DownloadAll": "Scarica tutti gli elementi mostrati e mancanti",
   "ReDownloadAll": "Scarica nuovamente tutti gli elementi visualizzati e scaricati",
-  "MissingItemsRemain": "Mancano ancora alcuni elementi di questo profilo. Se in futuro salverai il profilo, quegli elementi verranno rimossi.",
+  "MissingItemsRemain": "Mancano ancora alcuni elementi di questo playset. Se in futuro salverai il playset, quegli elementi verranno rimossi.",
   "ModIsPrivate": "L'elemento è privato",
   "HidePseudoMods": "Nascondi pseudo-mod come le miscele di temi",
   "YourDlcs": "I tuoi DLC",
@@ -208,7 +208,7 @@
   "OverrideGameChanges_Tip": "Le modifiche apportate in gioco allo stato di abilitazione delle mod saranno automaticamente sovrascritte dalle impostazioni all'interno di Skyve; le modifiche saranno applicate al lancio successivo. Questo funziona solo quando l'app è aperta.",
   "HidePseudoMods_Tip": "I mix di temi generano un file di tipo mod per poter essere condivisi nel workshop. Abilitare questa opzione nasconderà questi file dalla lista delle tue mod e li manterrà sempre inclusi.",
   "AdvancedIncludeEnable_Tip": "Abilitando questa opzione potrai modificare sia lo stato incluso che quello abilitato delle mod, in modo simile a Load Order Tool originale.",
-  "AdvancedLaunchOptions_Tip": "Visualizza le opzioni di avvio aggiuntive utilizzate dagli sviluppatori nelle impostazioni del profilo.",
+  "AdvancedLaunchOptions_Tip": "Visualizza le opzioni di avvio aggiuntive utilizzate dagli sviluppatori nelle impostazioni del playset.",
   "ShowFolderSettings_Tip": "Mostra le impostazioni delle cartelle utilizzate dallo strumento nella pagina delle opzioni.",
   "HelpTranslate_Tip": "Aiuta a tradurre questo strumento nella tua lingua madre su Crowdin.",
   "ThemeUIScale_Tip": "Cambia il colore e il tema dell'app o aumenta la scala dell'interfaccia utente.",
@@ -220,7 +220,7 @@
   "NewGame": "Inizia una nuova partita",
   "LoadSaveGame": "Continua una partita precedente",
   "DevOptions": "Opzioni di Lancio per Sviluppatori",
-  "ResetButton": "Ripristina Opzioni",
+  "ResetButton": "Ripristina opzioni",
   "ResetFolderButton_Tip": "Dopo questa azione dovrai aprire il gioco prima di poter utilizzare nuovamente lo strumento.",
   "UseSkipFile": "Usa un file esclusione per escludere risorse vanilla",
   "ClearFoldersPrompt": "Dopo aver ripristinato le impostazioni delle cartelle dovrai avviare il gioco prima di poter aprire nuovamente lo strumento.",
@@ -275,7 +275,7 @@
   "TempPlayset": "Passa a un playset temporaneo",
   "TempPlayset_Tip": "Passa a un playset temporaneo con le impostazioni correnti",
   "ViewPlaysets_Tip": "Visualizza e gestisci i tuoi playset salvati",
-  "AutoSave_Tip": "Salva automaticamente le modifiche alle mod e alle risorse nel tuo profilo",
+  "AutoSave_Tip": "Salva automaticamente le modifiche alle mod e alle risorse nel tuo playset",
   "LoadEnabled_Tip": "Carica le risorse abilitate quando si carica un salvataggio. Questa opzione andrebbe lasciata attiva a meno che tu non sappia cosa stai facendo",
   "LoadUsed_Tip": "Carica le risorse utilizzate nella mappa, anche se sono disattivate nel gioco. Questo non è legato alle impostazioni delle risorse in Skyve",
   "UseSkipFile_Tip": "Usa questa opzione per escludere risorse vanilla dalla tua partita",
@@ -312,11 +312,11 @@
   },
   "OpenChangelog": "Apri Changelog",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Includi questo oggetto in tutti i tuoi playset",
+    "One": "Includi quest'oggetto in tutti i tuoi playset",
     "Plural": "Includi gli elementi selezionati in tutti i tuoi playset"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Escludi questo oggetto in tutti i tuoi playset",
+    "One": "Escludi quest'oggetto da tutti i tuoi playset",
     "Plural": "Escludi gli elementi selezionati in tutti i tuoi playset"
   },
   "CopyPackageName": {
@@ -345,7 +345,7 @@
   "ChangePlaysetColor": "Cambia il colore di questo playset",
   "EditPlaysetName": "Modifica il nome di questo playset",
   "SavePlaysetChanges": "Salva le impostazioni del pacchetto corrente nel file di questo playset",
-  "Sorting_Color": "Colore Profilo",
+  "Sorting_Color": "Colore playset",
   "CreateShortcutPlayset": "Crea una scorciatoia sul tuo desktop",
   "AskToLaunchGameForShortcut": "Vuoi che la scorciatoia avvii anche il gioco con il tuo profilo?",
   "TextImportMissingInfo": "Carica un file di testo contenente ID di Steam per sottoscriverli o gestirli facilmente",
@@ -364,7 +364,7 @@
   "ResetScrollOnPackageClick_Tip": "Quando si apre la pagina di un pacchetto, lo scorrimento è reimpostato in modo che il pacchetto selezionato sia in cima all'elenco.",
   "Workshop Save-games": "Salvataggi del Workshop",
   "Workshop Maps": "Mappe del Workshop",
-  "AnyAuthor": "Qualsiasi Autore",
+  "AnyAuthor": "Qualsiasi autore",
   "ItemsCount": {
     "One": "{0} elemento",
     "Plural": "{0} elementi"
@@ -375,13 +375,13 @@
   },
   "Use the System's Theme": "Usa il tema di sistema",
   "Donate": "Dona",
-  "CopyAllIds": "Copia tutti gli ID Workshop degli elementi visualizzati",
-  "DeleteAll": "Elimina tutti gli elementi visualizzati",
+  "CopyAllIds": "Copia tutti gli ID Workshop degli elementi mostrati",
+  "DeleteAll": "Elimina tutti gli elementi mostrati",
   "FlipItemCopyFilterAction": "Inverti il comportamento di Ctrl+Clic per filtrare nelle liste dei contenuti",
   "FlipItemCopyFilterAction_Tip": "Scambia il comportamento predefinito del clic sulle etichette in modo che un Clic normale filtri, e Ctrl+Clic esegua l'azione predefinita.",
   "AltClickTo": "Alt+Clic per {0}",
   "FilterByThisAuthor": "Aggiungere '{0}' ai tuoi filtri",
-  "AddToSearch": "Aggiungi '{0}' alla tua ricerca",
+  "AddToSearch": "Aggiungere '{0}' alla tua ricerca",
   "CopyToClipboard": "Copia '{0}' negli appunti",
   "ViewPackageCR": "Visualizza il rapporto di compatibilità di questo pacchetto",
   "CleanupInfo": "Esegue una veloce pulizia che cancella dal tuo computer tutti i pacchetti a cui non si è iscritti, e forza lo scaricamento dei pacchetti sottoscritti mancanti.",
@@ -453,7 +453,7 @@
     "Plural": "Pacchetti"
   },
   "Playset": {
-    "One": "Profilo",
+    "One": "Playset",
     "Plural": "Profili"
   },
   "IncludedCount": {
@@ -473,12 +473,12 @@
     "Plural": "{0} {1} caricato"
   },
   "ShowingCount": {
-    "One": "Mostrato {0} {1}",
-    "Plural": "Mostrato {0} {1}"
+    "One": "Mostrate {0} {1}",
+    "Plural": "Mostrate {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "Mostrato {0} {1}, {3}",
-    "Plural": "Mostrato {0} {1}, {3}"
+    "One": "Mostrate {0} {1}, {3}",
+    "Plural": "Mostrate {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
     "One": "Mostrando {0} {1}, {2} selezionato",
@@ -489,8 +489,8 @@
     "Plural": "Mostrando {0} {1}, {2} selezionato, {3}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} è nascosto a causa dell'utilizzo del vostro profilo",
-    "Plural": "{0} {1} sono nascosti a causa dell'utilizzo del tuo profilo"
+    "One": "{0} {1} è nascosto a causa dell'utilizzo del tuo playset",
+    "Plural": "{0} {1} sono nascosti a causa dell'utilizzo del tuo playset"
   },
   "EditCompatibility": {
     "One": "Modifica la compatibilità di questo pacchetto",
@@ -606,8 +606,8 @@
   "UpdatePlaysetTip": "Aggiorna la tua versione locale di questo playset",
   "DownloadPlaysetTip": "Scarica questo playset sul tuo computer locale",
   "EditPlaysetThumbnail": "Modifica la miniatura di questo playset",
-  "MakePublic": "Rendi questo profilo Pubblico",
-  "MakePrivate": "Rendi questo profilo Privato",
+  "MakePublic": "Rendi pubblico il playset",
+  "MakePrivate": "Rendi privato il playset",
   "CopyPlaysetLink": "Copia l'ID di questo playset",
   "FailedToUploadPlayset": "Impossibile caricare il tuo playset",
   "FailedToDeletePlayset": "Impossibile eliminare il tuo playset",
@@ -616,8 +616,8 @@
   "PastePlaysetId": "Incolla l'ID del playset che vuoi importare",
   "AssumeInternetConnectivity": "Non controllare la presenza di una connessione Internet",
   "AssumeInternetConnectivity_Tip": "Non viene verificata la presenza di una connessione a Internet, viene assunto che tu sia già connesso.",
-  "SelectAll": "Seleziona tutti gli elementi visualizzati",
-  "DeselectAll": "Deseleziona tutti gli elementi visualizzati",
+  "SelectAll": "Seleziona tutti gli elementi mostrati",
+  "DeselectAll": "Deseleziona tutti gli elementi mostrati",
   "AddTagBox": "Aggiungi qui una nuova etichetta",
   "EditingMultipleTags": "La modifica di tag di pacchetti multipli sovrascriverà ciascuno dei loro tag personalizzati.",
   "EditTagsOfPackage": {
@@ -676,9 +676,9 @@
   "FilterByExcluded": "Mostra solo elementi esclusi.",
   "ViewOnGithub": "Mostra il repository di questo pacchetto GitHub",
   "ViewXOnSteam": "Mostra '{0}' su Steam",
-  "Free": "Libero",
-  "ViewAllYourItems": "Visualizza tutti i tuoi {0}",
-  "ViewRecentlyUpdatedItems": "Mostra aggiornati di recente {0}",
+  "Free": "Gratuito",
+  "ViewAllYourItems": "Visualizza tutti le tue {0}",
+  "ViewRecentlyUpdatedItems": "Mostra {0} aggiornate di recente",
   "NoCompatibilityIssues": {
     "One": "Nessun problema di compatibilità rilevato.",
     "Plural": "Non sono stati rilevati problemi di compatibilità con le tue {0}."
