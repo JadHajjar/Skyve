@@ -10,4 +10,8 @@
 		<Copyright>@2023 MIT license</Copyright>
 		<Product>Skyve App</Product>
 	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Stable' OR '$(Configuration)' == 'Debug' OR '$(Configuration)' == 'Release'">
+		<DefineConstants>CS1</DefineConstants>
+	</PropertyGroup>
 </Project>

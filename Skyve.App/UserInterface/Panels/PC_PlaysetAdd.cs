@@ -88,6 +88,7 @@ public partial class PC_PlaysetAdd : PanelContent
 	{
 		var profile = _profileManager.Playsets.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(obj), StringComparison.InvariantCultureIgnoreCase));
 
+#if CS1
 		if (obj.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
 		{
 			if (profile is not null)
@@ -104,7 +105,9 @@ public partial class PC_PlaysetAdd : PanelContent
 				return;
 			}
 		}
-		else if (profile is null)
+		else
+#endif
+		if (profile is null)
 		{
 			profile = _profileManager.ImportPlayset(obj);
 		}
