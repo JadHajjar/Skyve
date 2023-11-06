@@ -25,7 +25,7 @@
   "NoAssets": "Нет пользовательских ассетов",
   "NoMods": "Отключить все моды",
   "AutoSave": "Автоматическое сохранение",
-  "TotalAssetSize": "{0} of included assets",
+  "TotalAssetSize": "{0} включенных объектов",
   "CompatibilityStatus": "Статус совместимости",
   "AnyStatus": "Любое состояние",
   "AnyCompatibilityStatus": "Любое состояние",
@@ -124,8 +124,8 @@
     "Plural": "Удалить выбранные пакеты"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe to this package",
-    "Plural": "Unsubscribe to the selected packages"
+    "One": "Отписаться от этого пакета",
+    "Plural": "Отписаться от выбранных пакетов"
   },
   "CopyWorkshopId": {
     "One": "Копировать код Мастерской",
@@ -272,7 +272,7 @@
   "PackageIncludedAndEnabledTotal": "Пакетов добавлено в игру и активировано: {0}, Всего: {1}",
   "AssetIncludedTotal": "Ассетов добавлено в игру: {0}, Всего: {1}",
   "NewPlayset_Tip": "Создать или импортировать новый плейсет",
-  "TempPlayset": "Switch to a temporary playset",
+  "TempPlayset": "Переключить на временный игровой набор",
   "TempPlayset_Tip": "Переключиться на временный набор воспроизведения с текущими настройками",
   "ViewPlaysets_Tip": "Просмотр и управление сохранёнными плеерами",
   "AutoSave_Tip": "Автоматическое сохранение изменений модов и ассетов в ваш профиль",
@@ -521,8 +521,8 @@
     "Plural": "{0} {1} не соответствуют их размерам из Мастерской"
   },
   "NewUpdatedCount": {
-    "One": "{0} new or updated {1}",
-    "Plural": "{0} new or updated {1}"
+    "One": "{0} новый или обновлено {1}",
+    "Plural": "{0} новый или обновлено {1}"
   },
   "TotalCount": {
     "One": "{0} {1} всего",
@@ -553,7 +553,7 @@
   "CancelDownloads": "Отменить все ожидающие загрузки",
   "ApplySubs": "Запустите игру на короткое время, чтобы применить ожидающие подписки",
   "ApplyDownloads": "Принудительно загрузить все пакеты в очереди",
-  "ApplyRemoval": "Delete all pending packages",
+  "ApplyRemoval": "Удалить все отложенные пакеты",
   "SubsPendingInfo": "Пакеты, на которые вы подписаны, сгруппированы здесь.\nКак только вы откроете игру, на эти предметы будет оформлена подписка в Steam.",
   "DownloadsPendingInfo": "Пакеты, на которые вы подписаны и которые еще не были загружены, сгруппированы здесь.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Начинать загрузку или удаление пакетов сразу после подписки/отписки",
@@ -671,7 +671,7 @@
   "IncludePackage": "Добавить {0}",
   "ExcludePackage": "Исключить {0}",
   "FilterByEnabled": "Показывать только включенные элементы.",
-  "FilterByDisabled": "Only show disabled items.",
+  "FilterByDisabled": "Показывать только отключённые элементы.",
   "FilterByIncluded": "Показыать только добавленные элементы.",
   "FilterByExcluded": "Показывать только исключенные элементы.",
   "ViewOnGithub": "Просмотреть GitHub репозиторий этого пакета",
@@ -681,18 +681,18 @@
   "ViewRecentlyUpdatedItems": "Просмотреть недавно обновленные {0}",
   "NoCompatibilityIssues": {
     "One": "Проблемы совместимости не обнаружены.",
-    "Plural": "No compatibility issues with your {0} were detected."
+    "Plural": "Никаких проблем совместимости с вашим {0} обнаружено не было."
   },
-  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
-  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "SnapDashToGrid": "Отображение разделов инфопанели и привязка их к направляющей сетке",
+  "SnapDashToGrid_Tip": "При редактировании разделов информационной панели отображается сетка из 12 столбцов, к которой привязываются разделы.",
   "UnsavedChangesPlayset": "Есть несохраненные изменения в пакетах этого игрового набора",
-  "ChangePlaysetSettings": "Change this playset's settings",
-  "ViewCompatibilityReport": "View the full compatibility report",
-  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
-  "ViewAssetsWithIssues": "View Assets with issues",
-  "ViewModsWithIssues": "View Mods with issues",
-  "CreateShortcut": "Create shortcut",
-  "CreateShortcut_Tip": "Creates a shortcut to the app on your desktop.",
+  "ChangePlaysetSettings": "Изменить настройки этого игрового набора",
+  "ViewCompatibilityReport": "Посмотреть полный отчёт о совместимости",
+  "DashboardCustomizationInfo": "Вы можете настроить свою панель управления, перетаскивая каждый раздел её заголовка.\nВы также можете изменить размер раздела, используя пунктирный треугольник в правом нижнем углу.",
+  "ViewAssetsWithIssues": "Просмотр объектов с проблемами",
+  "ViewModsWithIssues": "Просмотр модов с проблемами",
+  "CreateShortcut": "Создать ярлык",
+  "CreateShortcut_Tip": "Создаёт ярлык приложения на рабочем столе.",
   "StartsNewGameOnLaunch": "Starts a new game on launch",
   "StartsNewGameWithMap": "Starts a new game with the '{0}' map on launch",
   "LoadsSaveGameOnLaunch": "Continues your latest save-game on launch",
