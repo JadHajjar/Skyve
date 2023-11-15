@@ -287,16 +287,16 @@
   "TESTING": "TESTIRANJE",
   "STABLE": "STABILNO",
   "EXPERIMENTAL": "EKSPERIMENTALNO",
-  "DEPRECATED": "DEPRECATED",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "DEPRECATED": "PREVAZIĐENO",
+  "OBSOLETE": "ZASTARELO",
+  "ABANDONED": "NAPUŠTENO",
   "ActionUnreversible": {
-    "One": "This action can not be reversed.",
-    "Plural": "This action can not be reversed. And will affect {0} packages"
+    "One": "Ova radnja se ne može poništiti.",
+    "Plural": "Ova radnja se ne može poništiti. I uticaće na {0} paketa"
   },
-  "AlwaysOpenFiltersAndActions": "Show the Filters section by default",
+  "AlwaysOpenFiltersAndActions": "Podrazumevano prikaži deo Filteri",
   "AlwaysOpenFiltersAndActions_Tip": "Always have the filters section open when entering a content tab",
-  "XMLImport": "Import XML Configuration",
+  "XMLImport": "Uvezi XML konfiguraciju",
   "XMLImportMissingInfo": "View and subscribe to packages in any XML configuration",
   "XMLTip": "Select or drag & drop an XML config file to manage the packages listed inside of it.",
   "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
@@ -676,7 +676,7 @@
   "FilterByExcluded": "Only show excluded items.",
   "ViewOnGithub": "View this package's Github repository",
   "ViewXOnSteam": "View '{0}' on Steam",
-  "Free": "Free",
+  "Free": "Besplatno",
   "ViewAllYourItems": "View all your {0}",
   "ViewRecentlyUpdatedItems": "View recently updated {0}",
   "NoCompatibilityIssues": {
@@ -700,7 +700,7 @@
   "StartsNewAssetOnLaunch": "Starts the editor with a new asset on launch",
   "LoadsAssetOnLaunch": "Starts with the editor's 'Load' screen on launch",
   "Notifications": "Notifications",
-  "NoNotifications": "No notifications",
+  "NoNotifications": "Nema obaveštenja",
   "MultipleSkyvesDetected": "Multiple Skyves Detected",
   "PackageUpdates": "Package Updates",
   "PackagesUpdatedSinceSession": {
