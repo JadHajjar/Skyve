@@ -6,7 +6,6 @@ public interface ILocationManager
 	string AssetsPath { get; }
 	string CitiesPathWithExe { get; }
 	string DataPath { get; }
-	string GameContentPath { get; }
 	string GamePath { get; set; }
 	string ManagedDLL { get; }
 	string MapsPath { get; }
@@ -18,7 +17,6 @@ public interface ILocationManager
 	string SteamPath { get; set; }
 	string SteamPathWithExe { get; }
 	string StylesPath { get; }
-	string WorkshopContentPath { get; }
 
 	void CreateShortcut();
 	void RunFirstTimeSetup();

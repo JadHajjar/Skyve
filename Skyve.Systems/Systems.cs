@@ -16,7 +16,6 @@ public static class SystemsProgram
 		services.AddSingleton<ILocale, Locale>();
 		services.AddSingleton<IImageService, ImageSystem>();
 		services.AddSingleton<IIOUtil, IOUtil>();
-		services.AddSingleton<ILogger, LoggerSystem>();
 		services.AddSingleton<INotifier, NotifierSystem>();
 		services.AddSingleton<IPackageNameUtil, PackageNameUtil>();
 		services.AddSingleton<IPackageUtil, PackageUtil>();

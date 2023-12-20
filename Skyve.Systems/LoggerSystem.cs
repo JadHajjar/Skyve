@@ -91,7 +91,7 @@ public class LoggerSystem : ILogger
 		ProcessLog("FATAL", $"{message}\r\n{exception}\r\n");
 	}
 
-	private void ProcessLog(string type, object content)
+	protected void ProcessLog(string type, object content)
 	{
 		if (_disabled)
 		{

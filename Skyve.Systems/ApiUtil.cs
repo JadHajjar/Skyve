@@ -67,6 +67,13 @@ public static class ApiUtil
 			using var dataStream = response.GetResponseStream();
 			using var reader = new StreamReader(dataStream);
 
+			if (typeof(T) == typeof(byte[]))
+			{
+				using var memstream = new MemoryStream();
+				reader.BaseStream.CopyTo(memstream);
+				return (T)(object)memstream.ToArray();
+			}
+
 			var responseContent = reader.ReadToEnd();
 
 			return JsonConvert.DeserializeObject<T>(responseContent);
@@ -85,6 +92,11 @@ public static class ApiUtil
 
 		if (httpResponse.IsSuccessStatusCode)
 		{
+			if (typeof(T) == typeof(byte[]))
+			{
+				return (T)(object)await httpResponse.Content.ReadAsByteArrayAsync();
+			}
+
 			var response = await httpResponse.Content.ReadAsStringAsync();
 
 			return JsonConvert.DeserializeObject<T>(response);
@@ -144,6 +156,13 @@ public static class ApiUtil
 			using var dataStream = response.GetResponseStream();
 			using var reader = new StreamReader(dataStream);
 
+			if (typeof(T) == typeof(byte[]))
+			{
+				using var memstream = new MemoryStream();
+				reader.BaseStream.CopyTo(memstream);
+				return (T)(object)memstream.ToArray();
+			}
+
 			var responseContent = reader.ReadToEnd();
 
 			return JsonConvert.DeserializeObject<T>(responseContent);
@@ -163,6 +182,11 @@ public static class ApiUtil
 
 		if (httpResponse.IsSuccessStatusCode)
 		{
+			if (typeof(T) == typeof(byte[]))
+			{
+				return (T)(object)await httpResponse.Content.ReadAsByteArrayAsync();
+			}
+
 			var response = await httpResponse.Content.ReadAsStringAsync();
 
 			return JsonConvert.DeserializeObject<T>(response);
