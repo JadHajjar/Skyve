@@ -129,7 +129,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		{
 			try
 			{
-				var folder = CrossIO.Combine(_locationManager.SkyveAppDataPath, "Support Logs");
+				var folder = CrossIO.Combine(_locationManager.SkyveSettingsPath, "Support Logs");
 
 				Directory.CreateDirectory(folder);
 

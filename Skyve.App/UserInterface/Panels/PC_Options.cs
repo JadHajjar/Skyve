@@ -229,7 +229,7 @@ public partial class PC_Options : PanelContent
 			return;
 		}
 
-		CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyveAppDataPath, "SetupComplete.txt"));
+		CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyveSettingsPath, "SetupComplete.txt"));
 
 		_settings.SessionSettings.FirstTimeSetupCompleted = false;
 		_settings.SessionSettings.Save();

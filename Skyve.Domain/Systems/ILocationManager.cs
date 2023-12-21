@@ -1,22 +1,13 @@
-﻿namespace Skyve.Domain.Systems;
+﻿using Skyve.Domain.Enums;
+
+namespace Skyve.Domain.Systems;
 public interface ILocationManager
 {
-	string AddonsPath { get; }
-	string AppDataPath { get; set; }
-	string AssetsPath { get; }
-	string CitiesPathWithExe { get; }
 	string DataPath { get; }
-	string GamePath { get; set; }
 	string ManagedDLL { get; }
-	string MapsPath { get; }
-	string MapThemesPath { get; }
-	string ModsPath { get; }
-	string MonoPath { get; }
-	string SkyveAppDataPath { get; }
-	string SkyvePlaysetsAppDataPath { get; }
-	string SteamPath { get; set; }
+	string SkyveDataPath { get; }
+	string SkyveSettingsPath { get; }
 	string SteamPathWithExe { get; }
-	string StylesPath { get; }
 
 	void CreateShortcut();
 	void RunFirstTimeSetup();
