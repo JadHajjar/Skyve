@@ -1,9 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
 	<Import Project="../../Skyve/Config.props" />
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
 		<Description>Helps to manage your mods and assets</Description>
-		<Configurations>Debug;Release;Stable</Configurations>
 		<DebugType>embedded</DebugType>
 		<DebugSymbols>true</DebugSymbols>
 		<Nullable>enable</Nullable>

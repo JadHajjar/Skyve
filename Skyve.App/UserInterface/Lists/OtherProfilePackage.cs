@@ -72,7 +72,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 		return false;
 	}
 
-	protected override void OnItemMouseClick(DrawableItem<ICustomPlayset, Rectangles> item, MouseEventArgs e)
+	protected override async void OnItemMouseClick(DrawableItem<ICustomPlayset, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -80,7 +80,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			var isIncluded = _profileManager.IsPackageIncludedInPlayset(Package, item.Item);
+			var isIncluded = await _profileManager.IsPackageIncludedInPlayset(Package, item.Item);
 			_profileManager.SetIncludedFor(Package, item.Item, !isIncluded);
 		}
 
@@ -110,7 +110,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 		}
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
+	protected override async void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
 	{
 		var large = false;
 		var rects = e.Rects;
@@ -120,7 +120,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 
 		base.OnPaintItemList(e);
 
-		var isIncluded = _profileManager.IsPackageIncludedInPlayset(Package, e.Item);
+		var isIncluded = await _profileManager.IsPackageIncludedInPlayset(Package, e.Item);
 
 		if (isIncluded)
 		{

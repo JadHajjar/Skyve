@@ -12,7 +12,7 @@ public partial class PC_PlaysetAdd : PanelContent
 	{
 		InitializeComponent();
 
-		DAD_NewProfile.StartingFolder = ServiceCenter.Get<ILocationManager>().AppDataPath;
+		DAD_NewProfile.StartingFolder = ServiceCenter.Get<ISettings>().FolderSettings.AppDataPath;
 	}
 
 	protected override void UIChanged()
@@ -25,47 +25,47 @@ public partial class PC_PlaysetAdd : PanelContent
 
 	private void NewProfile_Click(object sender, EventArgs e)
 	{
-		var newProfile = _profileManager.GetNewPlayset();
+		//var newProfile = _profileManager.CreateNewPlayset("New Playset");
 
-		if (!_profileManager.Save(newProfile))
-		{
-			ShowPrompt(Locale.PlaysetCreationFailed, icon: PromptIcons.Error);
-			return;
-		}
+		//if (!_profileManager.Save(newProfile))
+		//{
+		//	ShowPrompt(Locale.PlaysetCreationFailed, icon: PromptIcons.Error);
+		//	return;
+		//}
 
-		_profileManager.AddPlayset(newProfile);
+		//_profileManager.AddPlayset(newProfile);
 
-		_profileManager.SetCurrentPlayset(newProfile);
+		//_profileManager.SetCurrentPlayset(newProfile);
 
-		var panel = ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel();
+		//var panel = ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel();
 
-		if (Form.SetPanel(null, panel))
-		{
-			panel.EditName();
-		}
+		//if (Form.SetPanel(null, panel))
+		//{
+		//	panel.EditName();
+		//}
 	}
 
 	private void CopyProfile_Click(object sender, EventArgs e)
 	{
-		var newProfile = _profileManager.CurrentPlayset.Clone();
-		newProfile.Name = _profileManager.GetNewPlaysetName();
+		//var newProfile = _profileManager.CurrentPlayset.Clone();
+		//newProfile.Name = _profileManager.GetNewPlaysetName();
 
-		if (!newProfile.Save())
-		{
-			ShowPrompt(Locale.CouldNotCreatePlayset, icon: PromptIcons.Error);
-			return;
-		}
+		//if (!newProfile.Save())
+		//{
+		//	ShowPrompt(Locale.CouldNotCreatePlayset, icon: PromptIcons.Error);
+		//	return;
+		//}
 
-		_profileManager.AddPlayset(newProfile);
+		//_profileManager.AddPlayset(newProfile);
 
-		_profileManager.SetCurrentPlayset(newProfile);
+		//_profileManager.SetCurrentPlayset(newProfile);
 
-		var panel = ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel();	
+		//var panel = ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel();	
 
-		if (Form.SetPanel(null, panel))
-		{
-			panel.EditName();
-		}
+		//if (Form.SetPanel(null, panel))
+		//{
+		//	panel.EditName();
+		//}
 	}
 
 	private void B_Cancel_Click(object sender, EventArgs e)

@@ -34,7 +34,15 @@ public partial class PC_PackagePage : PanelContent
 		Package = package;
 
 		PB_Icon.Package = package;
-		PB_Icon.LoadImage(package.GetWorkshopInfo()?.ThumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
+
+		if (package.GetThumbnail(out var thumbnail, out var thumbnailUrl))
+		{
+			PB_Icon.Image = new Bitmap(thumbnail);
+		}
+		else
+		{
+			PB_Icon.LoadImage(thumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
+		}
 
 		P_Info.SetPackage(package, this);
 

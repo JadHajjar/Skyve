@@ -49,7 +49,7 @@ internal class ImageSystem : IImageService
 
 	public FileInfo File(string url, string? fileName = null)
 	{
-		var filePath = CrossIO.Combine(ISave.DocsFolder, "Thumbs", fileName ?? Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
+		var filePath = CrossIO.Combine(ISave.SaveFolder, "Thumbs", fileName ?? Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
 
 		return new FileInfo(filePath);
 	}
@@ -67,9 +67,9 @@ internal class ImageSystem : IImageService
 		return image is not null ? new(image) : null;
 	}
 
-	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true)
+	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true, bool isFilePath = false)
 	{
-		if (url is null || !await Ensure(url, localOnly, fileName, square))
+		if (url is null || !await Ensure(url, localOnly, fileName, square, isFilePath))
 		{
 			return null;
 		}
@@ -81,7 +81,7 @@ internal class ImageSystem : IImageService
 			return cache;
 		}
 
-		var filePath = File(url, fileName);
+		var filePath = isFilePath ? new FileInfo(url) : File(url, fileName);
 
 		if (filePath.Exists)
 		{
@@ -98,14 +98,14 @@ internal class ImageSystem : IImageService
 		return null;
 	}
 
-	public async Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true)
+	public async Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true, bool isFilePath = false)
 	{
 		if (url is null or "")
 		{
 			return false;
 		}
 
-		var filePath = File(url, fileName);
+		var filePath = isFilePath ? new FileInfo(url) : File(url, fileName);
 
 		lock (LockObj(url))
 		{
@@ -263,7 +263,7 @@ internal class ImageSystem : IImageService
 
 			_cache.Clear();
 
-			foreach (var item in Directory.EnumerateFiles(CrossIO.Combine(ISave.DocsFolder, "Thumbs")))
+			foreach (var item in Directory.EnumerateFiles(CrossIO.Combine(ISave.SaveFolder, "Thumbs")))
 			{
 				try
 				{

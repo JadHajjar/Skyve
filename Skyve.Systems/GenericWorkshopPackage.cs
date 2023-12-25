@@ -3,6 +3,7 @@
 using Skyve.Domain;
 
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace Skyve.Systems;
@@ -10,7 +11,7 @@ public class GenericWorkshopPackage : IPackage
 {
 	public GenericWorkshopPackage(IPackageIdentity identity)
 	{
-		Id = identity.Id;
+		Id = (ulong)identity.Id;
 		Name = identity.Name;
 		Url = identity.Url;
 	}
@@ -41,5 +42,19 @@ public class GenericWorkshopPackage : IPackage
 	public override string ToString()
 	{
 		return this.GetWorkshopInfo()?.Name ?? Name;
+	}
+
+	public bool GetThumbnail(out Bitmap? thumbnail, out string? thumbnailUrl)
+	{
+		var info = this.GetWorkshopInfo();
+
+		if (info is not null)
+		{
+			return info.GetThumbnail(out thumbnail, out thumbnailUrl);
+		}
+
+		thumbnail = null;
+		thumbnailUrl = null;
+		return false;
 	}
 }

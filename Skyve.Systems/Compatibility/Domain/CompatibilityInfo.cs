@@ -9,6 +9,7 @@ using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -130,6 +131,20 @@ public class CompatibilityInfo : ICompatibilityInfo
 		public ulong Id { get; set; }
 		public string Name { get; set; }
 		public string Url { get; set; }
+
+		public bool GetThumbnail(out Bitmap thumbnail, out string thumbnailUrl)
+		{
+			var info = this.GetWorkshopInfo();
+
+			if (info is not null)
+			{
+				return info.GetThumbnail(out thumbnail, out thumbnailUrl);
+			}
+
+			thumbnail = null;
+			thumbnailUrl = null;
+			return false;
+		}
 	}
 
 #nullable enable

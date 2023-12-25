@@ -79,7 +79,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		TLP_Main.SetColumnSpan(ListControl, TLP_Main.ColumnCount);
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
-		OT_Workshop.Visible = !_profileManager.CurrentPlayset.DisableWorkshop;
+		OT_Workshop.Visible = _profileManager.CurrentPlayset is not null && !_profileManager.CurrentPlayset.DisableWorkshop;
 		OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
 
 		ListControl.FilterRequested += FilterChanged;
@@ -405,7 +405,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 	private bool IsFilteredOut(T item)
 	{
-		if (!ListControl.IsGenericPage && _profileManager.CurrentPlayset.DisableWorkshop)
+		if (!ListControl.IsGenericPage && (_profileManager.CurrentPlayset?.DisableWorkshop ?? false))
 		{
 			if (item is ILocalPackage && !item.IsLocal)
 			{
@@ -418,7 +418,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 			return true;
 		}
 
-		if (_profileManager.CurrentPlayset.Usage > 0)
+		if (_profileManager.CurrentPlayset?.Usage > 0)
 		{
 			if (!(_compatibilityManager.GetPackageInfo(item)?.Usage.HasFlag(_profileManager.CurrentPlayset.Usage) ?? true))
 			{
@@ -537,7 +537,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
 		{
-			return !_profileManager.IsPackageIncludedInPlayset(item, DD_Profile.SelectedItem);
+			return !_profileManager.IsPackageIncludedInPlayset(item, DD_Profile.SelectedItem).Result;
 		}
 
 		if (!searchEmpty)

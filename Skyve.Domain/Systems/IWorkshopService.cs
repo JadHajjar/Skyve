@@ -16,6 +16,11 @@ public interface IWorkshopService
 	Task<IPackage> GetPackageAsync(IPackageIdentity identity);
 	IUser? GetUser(object authorId);
 	Task<IEnumerable<IWorkshopInfo>> GetWorkshopItemsByUserAsync(object userId);
-	Task Initialize();
 	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(PackageSorting sorting, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null, bool all = false);
+#if CS2
+	Task Initialize();
+	Task<List<ILocalPackageWithContents>> GetInstalledPackages();
+	Task<List<ICustomPlayset>> GetAllPlaysets(bool localOnly);
+	Task Login();
+#endif
 }

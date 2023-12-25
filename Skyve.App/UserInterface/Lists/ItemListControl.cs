@@ -496,7 +496,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				base.OnPaint(e);
 			}
 		}
-		catch { }
+		catch (Exception ex) { if (System.Diagnostics.Debugger.IsAttached) MessagePrompt.Show(ex); }
 	}
 
 	public void ShowRightClickMenu(T item)

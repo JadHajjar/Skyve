@@ -103,7 +103,7 @@ public partial class PC_Troubleshoot : PanelContent
 
 		await Task.Run(() => ServiceCenter.Get<ITroubleshootSystem>().Start(_settings));
 
-		Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
+		//Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
 	}
 
 	private async void B_Assets_Click(object sender, EventArgs e)
@@ -117,12 +117,12 @@ public partial class PC_Troubleshoot : PanelContent
 
 		await Task.Run(() => ServiceCenter.Get<ITroubleshootSystem>().Start(_settings));
 
-		Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
+		//Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
 	}
 
 	private void B_CompView_Click(object sender, EventArgs e)
 	{
-		Form.SetPanel<PC_CompatibilityReport>(Program.MainForm.PI_Compatibility);
+		//Form.SetPanel<PC_CompatibilityReport>(Program.MainForm.PI_Compatibility);
 	}
 
 	private void B_CompSkip_Click(object sender, EventArgs e)

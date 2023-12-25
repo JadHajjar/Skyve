@@ -1,8 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
 	<Import Project="../../Skyve/Config.props" />
   <PropertyGroup>
 	  <Description>Helps to manage your mods and assets</Description>
-	  <Configurations>Debug;Release;Stable</Configurations>
 	  <DebugType>embedded</DebugType>
 	  <DebugSymbols>true</DebugSymbols>
 	  <Nullable>enable</Nullable>
@@ -59,9 +58,7 @@
     </Compile>
     <Compile Update="UserInterface\Content\DownloadsInfoControl.cs" />
     <Compile Update="UserInterface\Content\UserDescriptionControl.cs" />
-    <Compile Update="UserInterface\Dashboard\D_AssetInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Dashboard\D_AssetInfo.cs" />
     <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\AuthorDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageTypeDropDown.cs" />

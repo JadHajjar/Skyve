@@ -14,7 +14,7 @@ public class PC_Assets : PC_ContentList<IAsset>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset.Name}";
+		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
 	protected override IEnumerable<IAsset> GetItems()

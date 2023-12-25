@@ -39,30 +39,32 @@ public partial class PC_MissingPackages : PC_GenericPackageList
 		{
 			if (item is IPlaysetModEntry mod)
 			{
-				var localMod = ServiceCenter.Get<IPlaysetManager>().GetMod(mod);
+				throw new NotImplementedException();
+				//var localMod = ServiceCenter.Get<IPlaysetManager>().GetMod(mod);
 
-				if (localMod is null)
-				{
-					continue;
-				}
+				//if (localMod is null)
+				//{
+				//	continue;
+				//}
 
-				_modUtil.SetIncluded(localMod, true);
-				_modUtil.SetEnabled(localMod, mod.IsEnabled);
+				//_modUtil.SetIncluded(localMod, true);
+				//_modUtil.SetEnabled(localMod, mod.IsEnabled);
 
-				LC_Items.Remove(item);
+				//LC_Items.Remove(item);
 			}
 			else if (item is IPlaysetEntry asset)
 			{
-				var localAsset = ServiceCenter.Get<IPlaysetManager>().GetAsset(asset);
+				throw new NotImplementedException();
+				//var localAsset = ServiceCenter.Get<IPlaysetManager>().GetAsset(asset);
 
-				if (localAsset is null)
-				{
-					continue;
-				}
+				//if (localAsset is null)
+				//{
+				//	continue;
+				//}
 
-				_assetUtil.SetIncluded(localAsset, true);
+				//_assetUtil.SetIncluded(localAsset, true);
 
-				LC_Items.Remove(item);
+				//LC_Items.Remove(item);
 			}
 		}
 

@@ -202,27 +202,27 @@ public partial class PC_PlaysetList : PanelContent
 	private void LoadProfile()
 	{
 		this.TryInvoke(() =>
-	{
-		var profile = _profileManager.CurrentPlayset;
-		TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
-		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
-		I_ProfileIcon.ImageName = profile.GetIcon();
-		I_Favorite.ImageName = profile.IsFavorite ? "I_StarFilled" : "I_Star";
-		B_TempProfile.Visible = !profile.Temporary;
-		I_ProfileIcon.Enabled = !profile.Temporary;
+		{
+			var profile = _profileManager.CurrentPlayset;
+			TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
+			TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
+			I_ProfileIcon.ImageName = profile.GetIcon();
+			I_Favorite.ImageName = profile.IsFavorite ? "I_StarFilled" : "I_Star";
+			B_TempProfile.Visible = !profile.Temporary;
+			I_ProfileIcon.Enabled = !profile.Temporary;
 
-		tableLayoutPanel1.SetColumn(B_TempProfile, profile.Temporary ? 2 : 1);
-		tableLayoutPanel1.SetColumn(B_AddProfile, profile.Temporary ? 1 : 2);
+			tableLayoutPanel1.SetColumn(B_TempProfile, profile.Temporary ? 2 : 1);
+			tableLayoutPanel1.SetColumn(B_AddProfile, profile.Temporary ? 1 : 2);
 
-		SlickTip.SetTo(I_Favorite, profile.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
+			SlickTip.SetTo(I_Favorite, profile.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
 
-		I_Favorite.Visible = B_Save.Visible = !profile.Temporary;
+			I_Favorite.Visible = B_Save.Visible = !profile.Temporary;
 
-		I_ProfileIcon.Loading = false;
-		L_CurrentProfile.Text = profile.Name;
+			I_ProfileIcon.Loading = false;
+			L_CurrentProfile.Text = profile.Name;
 
-		LC_Items.Invalidate();
-	});
+			LC_Items.Invalidate();
+		});
 	}
 
 	private void FilterChanged(object sender, EventArgs e)
@@ -267,7 +267,7 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
 	{
-		_profileManager.SetCurrentPlayset(_profileManager.TemporaryPlayset);
+		//_profileManager.SetCurrentPlayset(_profileManager.TemporaryPlayset);
 	}
 
 	private async void B_Save_Click(object sender, EventArgs e)
@@ -308,7 +308,7 @@ public partial class PC_PlaysetList : PanelContent
 		TLP_ProfileName.BackColor = colorDialog.Color;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
 		_profileManager.CurrentPlayset.Color = colorDialog.Color;
-		_profileManager.Save(_profileManager.CurrentPlayset);
+		//_profileManager.Save(_profileManager.CurrentPlayset);
 	}
 
 	private void I_Favorite_Click(object sender, EventArgs e)
@@ -319,7 +319,7 @@ public partial class PC_PlaysetList : PanelContent
 		}
 
 		_profileManager.CurrentPlayset.IsFavorite = !_profileManager.CurrentPlayset.IsFavorite;
-		_profileManager.Save(_profileManager.CurrentPlayset);
+		//_profileManager.Save(_profileManager.CurrentPlayset);
 
 		I_Favorite.ImageName = _profileManager.CurrentPlayset.IsFavorite ? "I_StarFilled" : "I_Star";
 		SlickTip.SetTo(I_Favorite, _profileManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
@@ -378,7 +378,7 @@ public partial class PC_PlaysetList : PanelContent
 					return;
 				}
 
-				profile = _profileManager.ConvertLegacyPlayset(file, false);
+				//profile = _profileManager.ConvertLegacyPlayset(file, false);
 
 				if (profile is null)
 				{

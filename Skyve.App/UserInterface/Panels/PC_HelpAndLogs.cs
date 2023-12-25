@@ -12,13 +12,12 @@ public partial class PC_HelpAndLogs : PanelContent
 {
 	private readonly ILogUtil _logUtil;
 	private readonly ILogger _logger;
-	private readonly ILocationManager _locationManager;
+	private readonly ISettings _settings;
+	private readonly ILocationService _locationManager;
 
 	public PC_HelpAndLogs() : base(true)
 	{
-		_logUtil = ServiceCenter.Get<ILogUtil>();
-		_logger = ServiceCenter.Get<ILogger>();
-		_locationManager = ServiceCenter.Get<ILocationManager>();
+		ServiceCenter.Get(out _logger, out _logUtil, out _settings, out _locationManager);
 
 		InitializeComponent();
 
@@ -267,7 +266,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_OpenAppData_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenFolder(_locationManager.AppDataPath);
+		PlatformUtil.OpenFolder(_settings.FolderSettings.AppDataPath);
 	}
 
 	private async void B_Troubleshoot_Click(object sender, EventArgs e)

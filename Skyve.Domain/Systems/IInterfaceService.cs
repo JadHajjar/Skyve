@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Skyve.Domain.Systems;
 public interface IInterfaceService
 {
+	void OpenParadoxLogin();
 	void OpenOptionsPage();
 	void ViewSpecificPackages(List<ILocalPackageWithContents> packages, string title);
 }

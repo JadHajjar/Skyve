@@ -3,6 +3,8 @@
 using Skyve.Domain;
 using Skyve.Domain.Systems;
 
+using System.Drawing;
+
 namespace Skyve.Systems.Compatibility.Domain;
 
 public class PseudoPackage : IPackageIdentity
@@ -16,7 +18,7 @@ public class PseudoPackage : IPackageIdentity
 
 	public PseudoPackage(IPackage iPackage)
 	{
-		Id = iPackage.Id;
+		Id = (ulong)iPackage.Id;
 		_iPackage = iPackage;
 	}
 
@@ -32,6 +34,20 @@ public class PseudoPackage : IPackageIdentity
 	public IWorkshopInfo? GetWorkshopInfo()
 	{
 		return Package?.GetWorkshopInfo();
+	}
+
+	public bool GetThumbnail(out Bitmap? thumbnail, out string? thumbnailUrl)
+	{
+		var info = GetWorkshopInfo();
+
+		if (info is not null)
+		{
+			return info.GetThumbnail(out thumbnail, out thumbnailUrl);
+		}
+
+		thumbnail = null;
+		thumbnailUrl = null;
+		return false;
 	}
 
 	public static implicit operator ulong(PseudoPackage pkg)

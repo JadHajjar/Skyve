@@ -12,7 +12,7 @@ public class PC_Mods : PC_ContentList<IMod>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Mod.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
+		Text = $"{Locale.Mod.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
 	protected override IEnumerable<IMod> GetItems()

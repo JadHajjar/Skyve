@@ -47,9 +47,10 @@ public class UserProfile : IDynamicSql
 	public int? ProfileUsage { get; set; }
 
 	public UserProfileContent[]? Contents { get; set; }
+    public int Id { get; set; }
 
 #if !API
-	private Bitmap? _banner;
+    private Bitmap? _banner;
 	[JsonIgnore] public bool IsFavorite { get; set; }
 	[JsonIgnore] public bool IsMissingItems => false;
 	[JsonIgnore] public DateTime LastEditDate => DateUpdated;

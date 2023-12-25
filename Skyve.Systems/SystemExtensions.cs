@@ -59,16 +59,19 @@ public static class SystemExtensions
 		return PackageManager.GetPackageById(package);
 	}
 
-	public static Bitmap? GetThumbnail(this IPackageIdentity? package)
+	public static Bitmap? GetThumbnail(this IThumbnailObject? thumbnailObject)
 	{
-		return (package?.GetWorkshopInfo()).GetThumbnail();
-	}
+		if (thumbnailObject is null)
+		{
+			return null;
+		}
 
-	public static Bitmap? GetThumbnail(this IWorkshopInfo? workshopInfo)
-	{
-		var url = workshopInfo?.ThumbnailUrl;
+		if (thumbnailObject.GetThumbnail(out var thumbnail, out var thumbnailUrl))
+		{
+			return thumbnail;
+		}
 
-		return url is null or "" ? null : ImageService.GetImage(url, true).Result;
+		return thumbnailUrl is null or "" ? null : ImageService.GetImage(thumbnailUrl, true).Result;
 	}
 
 	public static Bitmap? GetUserAvatar(this IPackageIdentity? package)
@@ -100,11 +103,17 @@ public static class SystemExtensions
 
 	public static IWorkshopInfo? GetWorkshopInfo(this IPackageIdentity identity)
 	{
+		if (identity is IWorkshopInfo workshopInfo)
+			return workshopInfo;
+
 		return WorkshopService.GetInfo(identity);
 	}
 
 	public static IPackage? GetWorkshopPackage(this IPackageIdentity identity)
 	{
+		if (identity is IWorkshopInfo and IPackage package)
+			return package;
+
 		return WorkshopService.GetPackage(identity);
 	}
 

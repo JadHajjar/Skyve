@@ -23,7 +23,7 @@ public class LoggerSystem : ILogger
 
 	public LoggerSystem(ISettings _)
 	{
-		var folder = CrossIO.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
+		var folder = CrossIO.Combine(ISave.SaveFolder, "Logs");
 
 		PreviousLogFilePath = CrossIO.Combine(folder, $"SkyveApp_Previous.log");
 		LogFilePath = CrossIO.Combine(folder, $"SkyveApp.log");
@@ -51,7 +51,7 @@ public class LoggerSystem : ILogger
 			var assembly = Assembly.GetEntryAssembly();
 			var details = assembly.GetName();
 
-#if Stable
+#if STABLE
 			Info($"Skyve Stable v{details.Version}");
 #else
 			Info($"Skyve Beta v{details.Version}");

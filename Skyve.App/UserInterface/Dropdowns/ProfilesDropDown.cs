@@ -12,7 +12,7 @@ public class ProfilesDropDown : SlickSelectionDropDown<IPlayset>
 		{
 			Items = ServiceCenter.Get<IPlaysetManager>().Playsets.ToArray();
 
-			selectedItem = Items[0];
+			selectedItem = Items.FirstOrDefault();
 		}
 	}
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 public interface ISubscriptionsManager
@@ -13,6 +14,6 @@ public interface ISubscriptionsManager
 	void Start();
 	void CancelPendingItems();
 	bool IsSubscribing(IPackage package);
-	bool Subscribe(IEnumerable<IPackageIdentity> ids);
-	bool UnSubscribe(IEnumerable<IPackageIdentity> ids);
+	Task<bool> Subscribe(IEnumerable<IPackageIdentity> ids);
+	Task<bool> UnSubscribe(IEnumerable<IPackageIdentity> ids);
 }

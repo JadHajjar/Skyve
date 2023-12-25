@@ -277,7 +277,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public bool IsBlacklisted(IPackageIdentity package)
 	{
-		return CompatibilityData.BlackListedIds.Contains(package.Id)
+		return CompatibilityData.BlackListedIds.Contains((ulong)package.Id)
 			|| CompatibilityData.BlackListedNames.Contains(package.Name ?? string.Empty)
 			|| (package.GetWorkshopInfo()?.IsIncompatible ?? false);
 	}
@@ -307,7 +307,7 @@ public class CompatibilityManager : ICompatibilityManager
 		var info = new CompatibilityPackageData
 		{
 			Stability = package.IsMod ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
-			SteamId = package.Id,
+			//SteamId = package.Id,
 			Name = package.Name,
 			FileName = package.LocalParentPackage?.Mod?.FilePath,
 			Links = new(),
@@ -324,7 +324,7 @@ public class CompatibilityManager : ICompatibilityManager
 				{
 					Type = o.Key ? InteractionType.OptionalPackages : InteractionType.RequiredPackages,
 					Action = StatusAction.SubscribeToPackages,
-					Packages = o.ToArray(x => x.Id)
+					Packages = o.ToArray(x => (ulong)x.Id)
 				}));
 		}
 
@@ -422,16 +422,16 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (steamId > 0)
 		{
-			var packageData = CompatibilityData.Packages.TryGet(steamId);
+			//var packageData = CompatibilityData.Packages.TryGet(steamId);
 
-			if (packageData is null && identity is IPackage package)
-			{
-				packageData = new IndexedPackage(GetAutomatedReport(package));
+			//if (packageData is null && identity is IPackage package)
+			//{
+			//	packageData = new IndexedPackage(GetAutomatedReport(package));
 
-				packageData.Load(CompatibilityData.Packages);
-			}
+			//	packageData.Load(CompatibilityData.Packages);
+			//}
 
-			return packageData;
+			//return packageData;
 		}
 
 		return null;
@@ -439,7 +439,8 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)
 	{
-		if (!CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
+		throw new NotImplementedException();
+		if (!CompatibilityData.Packages.TryGetValue((ulong)package.Id, out var indexedPackage))
 		{
 			return package;
 		}

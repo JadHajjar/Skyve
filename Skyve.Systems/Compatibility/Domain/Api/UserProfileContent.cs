@@ -3,6 +3,7 @@ using Extensions.Sql;
 
 using Skyve.Domain;
 
+using System.Drawing;
 using System.IO;
 
 namespace Skyve.Systems.Compatibility.Domain.Api;
@@ -40,6 +41,20 @@ public class UserProfileContent : IDynamicSql
 				? Path.GetFileNameWithoutExtension(RelativePath)
 				: (string)LocaleHelper.GetGlobalText("UnknownPackage");
 		}
+	}
+
+	public bool GetThumbnail(out Bitmap? thumbnail, out string? thumbnailUrl)
+	{
+		var info = this.GetWorkshopInfo();
+
+		if (info is not null)
+		{
+			return info.GetThumbnail(out thumbnail, out thumbnailUrl);
+		}
+
+		thumbnail = null;
+		thumbnailUrl = null;
+		return false;
 	}
 #endif
 }

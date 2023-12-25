@@ -15,7 +15,7 @@ public abstract class ConfigFile
 	private FileWatcher? watcher;
 	private bool autoRefresh;
 
-	protected string FilePath { get; }
+	protected string FilePath { get; set; }
 	protected bool AutoRefresh
 	{
 		get => autoRefresh;

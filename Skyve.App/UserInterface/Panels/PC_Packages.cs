@@ -14,7 +14,7 @@ public class PC_Packages : PC_ContentList<ILocalPackageWithContents>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Package.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
+		Text = $"{Locale.Package.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
 	protected override IEnumerable<ILocalPackageWithContents> GetItems()

@@ -9,6 +9,9 @@ using System.Drawing;
 namespace Skyve.Domain;
 public interface IPlayset
 {
+#if CS2
+	int Id { get; }
+#endif
 	string? Name { get; set; }
 	[CloneIgnore] IUser? Author { get; }
 	string? BannerUrl { get; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Skyve.Domain;
 public interface IWorkshopInfo : IPackageIdentity
@@ -20,4 +21,6 @@ public interface IWorkshopInfo : IPackageIdentity
 	bool IsInvalid { get; }
 	Dictionary<string, string> Tags { get; }
 	IEnumerable<IPackageRequirement> Requirements { get; }
+
+	bool GetThumbnail(out Bitmap? thumbnail, out string? thumbnailUrl);
 }

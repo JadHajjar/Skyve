@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 
 public interface IContentManager
 {
-	List<ILocalPackageWithContents> LoadContents();
+	Task<List<ILocalPackageWithContents>> LoadContents();
 	void ContentUpdated(string path, bool builtIn, bool workshop, bool self);
 	IEnumerable<ILocalPackage> GetReferencingPackage(ulong steamId, bool includedOnly);
 	void RefreshPackage(ILocalPackage package, bool self);

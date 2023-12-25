@@ -13,7 +13,9 @@ public interface IPackageManager
 	void AddPackage(ILocalPackageWithContents package);
 	void RemovePackage(ILocalPackageWithContents package);
 	void SetPackages(List<ILocalPackageWithContents> content);
-	void DeleteAll(IEnumerable<ulong> ids);
 	void DeleteAll(string folder);
 	void MoveToLocalFolder(ILocalPackage package);
+#if CS1
+	void DeleteAll(IEnumerable<ulong> ids);
+#endif
 }

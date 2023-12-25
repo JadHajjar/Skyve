@@ -128,11 +128,12 @@ public class DownloadsInfoControl : SlickControl
 			{
 				ServiceCenter.Get<IDownloadService>().Download(_subscriptionsManager.PendingSubscribingTo.Select(x => (IPackageIdentity)new GenericPackageIdentity(x)));
 			}
-
+#if CS1
 			if (_subscriptionsManager.PendingUnsubscribingFrom.Count > 0)
 			{
 				ServiceCenter.Get<IPackageManager>().DeleteAll(_subscriptionsManager.PendingUnsubscribingFrom);
 			}
+#endif
 		}
 		else if (e.Button == MouseButtons.Left && cancelRect.Contains(e.Location))
 		{

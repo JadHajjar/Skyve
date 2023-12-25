@@ -23,10 +23,6 @@ public static class SystemsProgram
 		services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
 		services.AddTransient<ILoadOrderHelper, LoadOrderHelper>();
 
-		Locale.Load();
-		LocaleCR.Load();
-		LocaleCRNotes.Load();
-
 		return services;
 	}
 }

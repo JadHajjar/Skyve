@@ -139,16 +139,17 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 		if (e.Button == MouseButtons.Middle)
 		{
-			if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
-			{
-				item.Item.Color = null;
-				_profileManager.Save(item.Item!);
-			}
-			else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is ICustomPlayset profile)
-			{
-				profile.Banner = null;
-				_profileManager.Save(profile);
-			}
+				throw new NotImplementedException();
+			//if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
+			//{
+			//	item.Item.Color = null;
+			//	_profileManager.Save(item.Item!);
+			//}
+			//else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is ICustomPlayset profile)
+			//{
+			//	profile.Banner = null;
+			//	_profileManager.Save(profile);
+			//}
 		}
 
 		if (e.Button != MouseButtons.Left)
@@ -158,8 +159,9 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 		if (item.Rectangles.Favorite.Contains(e.Location) && !ReadOnly)
 		{
-			item.Item.IsFavorite = !item.Item.IsFavorite;
-			_profileManager.Save(item.Item!);
+				throw new NotImplementedException();
+			//item.Item.IsFavorite = !item.Item.IsFavorite;
+			//_profileManager.Save(item.Item!);
 		}
 		else if (item.Rectangles.Load.Contains(e.Location))
 		{
@@ -190,28 +192,29 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 		}
 		else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is ICustomPlayset profile)
 		{
-			if (imagePrompt.PromptFile(Program.MainForm) == DialogResult.OK)
-			{
-				try
-				{
-					using var img = Image.FromFile(imagePrompt.SelectedPath);
+				throw new NotImplementedException();
+			//if (imagePrompt.PromptFile(Program.MainForm) == DialogResult.OK)
+			//{
+			//	try
+			//	{
+			//		using var img = Image.FromFile(imagePrompt.SelectedPath);
 
-					if (img.Width > 700 || img.Height > 700)
-					{
-						using var smallImg = new Bitmap(img, img.Size.GetProportionalDownscaledSize(700));
-						profile.Banner = smallImg;
-					}
-					else
-					{
-						profile.Banner = img as Bitmap;
-					}
+			//		if (img.Width > 700 || img.Height > 700)
+			//		{
+			//			using var smallImg = new Bitmap(img, img.Size.GetProportionalDownscaledSize(700));
+			//			profile.Banner = smallImg;
+			//		}
+			//		else
+			//		{
+			//			profile.Banner = img as Bitmap;
+			//		}
 
-					_profileManager.Save(profile);
+			//		_profileManager.Save(profile);
 
-					Invalidate(item.Item);
-				}
-				catch { }
-			}
+			//		Invalidate(item.Item);
+			//	}
+			//	catch { }
+			//}
 		}
 	}
 
@@ -230,26 +233,28 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 	private void ChangeColor(ICustomPlayset item)
 	{
-		var colorDialog = new SlickColorPicker(item.Color ?? Color.Red);
+				throw new NotImplementedException();
+		//var colorDialog = new SlickColorPicker(item.Color ?? Color.Red);
 
-		if (colorDialog.ShowDialog() != DialogResult.OK)
-		{
-			return;
-		}
+		//if (colorDialog.ShowDialog() != DialogResult.OK)
+		//{
+		//	return;
+		//}
 
-		item.Color = colorDialog.Color;
-		_profileManager.Save(item!);
+		//item.Color = colorDialog.Color;
+		//_profileManager.Save(item!);
 	}
 
 	private void ShowRightClickMenu(ICustomPlayset item)
 	{
+				throw new NotImplementedException();
 		var local = item is not IOnlinePlayset;
 
 		var items = new SlickStripItem[]
 		{
 			  new (Locale.DownloadPlayset, "I_Import", !local, action: () => DownloadProfile(item))
 			, new (Locale.ViewThisPlaysetsPackages, "I_ViewFile", action: () => ShowProfileContents(item))
-			, new (item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item); })
+		//	, new (item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item); })
 			, new (Locale.ChangePlaysetColor, "I_Paint", local, action: () => this.TryBeginInvoke(() => ChangeColor(item)))
 			, new (Locale.CreateShortcutPlayset, "I_Link", local && CrossIO.CurrentPlatform is Platform.Windows, action: () => _profileManager.CreateShortcut(item!))
 			, new (Locale.OpenPlaysetFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(_profileManager.GetFileName(item!)))

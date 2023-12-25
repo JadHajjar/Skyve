@@ -61,7 +61,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
-		OT_Workshop.Visible = !_playsetManager.CurrentPlayset.DisableWorkshop;
+		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !_playsetManager.CurrentPlayset.DisableWorkshop;
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
@@ -746,7 +746,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
 		{
-			return !_playsetManager.IsPackageIncludedInPlayset(item, DD_Profile.SelectedItem);
+			return !_playsetManager.IsPackageIncludedInPlayset(item, DD_Profile.SelectedItem).Result;
 		}
 
 		if (!searchEmpty)

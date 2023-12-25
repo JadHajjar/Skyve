@@ -11,7 +11,7 @@ namespace Skyve.App.UserInterface.Panels;
 public partial class PC_Options : PanelContent
 {
 	private bool folderPathsChanged;
-	private readonly ILocationManager _locationManager = ServiceCenter.Get<ILocationManager>();
+	private readonly ILocationService _locationManager = ServiceCenter.Get<ILocationService>();
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 
 	public PC_Options()
@@ -27,9 +27,9 @@ public partial class PC_Options : PanelContent
 			}
 		}
 
-		TB_GamePath.Text = _locationManager.GamePath;
-		TB_AppDataPath.Text = _locationManager.AppDataPath;
-		TB_SteamPath.Text = _locationManager.SteamPath;
+		TB_GamePath.Text = _settings.FolderSettings.GamePath;
+		TB_AppDataPath.Text = _settings.FolderSettings.AppDataPath;
+		TB_SteamPath.Text = _settings.FolderSettings.SteamPath;
 
 		if (CrossIO.CurrentPlatform is Platform.Linux)
 		{
@@ -143,20 +143,23 @@ public partial class PC_Options : PanelContent
 
 	private void CB_CheckChanged(object sender, EventArgs e)
 	{
-		TLP_Folders.Visible = CB_ShowFolderSettings.Checked;
-
-		if (!IsHandleCreated)
+		try
 		{
-			return;
-		}
+			TLP_Folders.Visible = CB_ShowFolderSettings.Checked;
 
-		var cb = (sender as SlickCheckbox)!;
+			if (!IsHandleCreated)
+			{
+				return;
+			}
 
-		_settings.UserSettings.GetType()
-			.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
-			.SetValue(_settings.UserSettings, cb.Checked);
+			var cb = (sender as SlickCheckbox)!;
 
-		_settings.SessionSettings.Save();
+			_settings.UserSettings.GetType()
+				.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
+				.SetValue(_settings.UserSettings, cb.Checked);
+
+			_settings.UserSettings.Save();
+		}catch( Exception ex) { MessageBox.Show(ex.ToString()); }
 	}
 
 	private void TB_FolderPath_TextChanged(object sender, EventArgs e)
@@ -255,7 +258,7 @@ public partial class PC_Options : PanelContent
 
 	private async void B_CreateShortcut_Click(object sender, EventArgs e)
 	{
-		ServiceCenter.Get<ILocationManager>().CreateShortcut();
+		ServiceCenter.Get<ILocationService>().CreateShortcut();
 
 		B_CreateShortcut.ImageName = "I_Check";
 
