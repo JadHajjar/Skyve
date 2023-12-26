@@ -1,11 +1,11 @@
 ﻿namespace Skyve.Domain.Systems;
 public interface IModUtil
 {
-	bool IsIncluded(IMod mod);
-	bool IsEnabled(IMod mod);
-	void SetIncluded(IMod mod, bool value);
-	void SetEnabled(IMod mod, bool value);
+	bool IsIncluded(ILocalPackageData mod);
+	bool IsEnabled(ILocalPackageData mod);
+	void SetIncluded(ILocalPackageData mod, bool value);
+	void SetEnabled(ILocalPackageData mod, bool value);
 	void SaveChanges();
-	IMod? GetMod(ILocalPackageWithContents package);
+	ILocalPackageData? GetMod(ILocalPackageData package);
 	int GetLoadOrder(IPackage package);
 }

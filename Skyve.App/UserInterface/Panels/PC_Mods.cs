@@ -17,7 +17,7 @@ public class PC_Mods : PC_ContentList<IMod>
 
 	protected override IEnumerable<IMod> GetItems()
 	{
-		return ServiceCenter.Get<IPackageManager>().Mods;
+		return ServiceCenter.Get<IPackageManager>().Packages;
 	}
 
 	protected override string GetCountText()

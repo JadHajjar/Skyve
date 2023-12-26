@@ -72,7 +72,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			if (item.Item.LocalPackage is not ILocalPackage localPackage)
+			if (item.Item.LocalPackage is not ILocalPackageData localPackage)
 			{
 				if (!item.Item.IsLocal)
 				{
@@ -314,7 +314,7 @@ public class PackageDescriptionControl : SlickImageControl
 		return false;
 	}
 
-	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<IPackage, Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo)
+	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<IPackage, Rectangles> e, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo)
 	{
 		using var font = UI.Font(14.5F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
@@ -324,7 +324,7 @@ public class PackageDescriptionControl : SlickImageControl
 		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
 
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
-		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackage lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 		var date = workshopInfo?.ServerTime ?? e.Item.LocalParentPackage?.LocalTime;
 
 		var padding = GridView ? GridPadding : Padding;
@@ -371,7 +371,7 @@ public class PackageDescriptionControl : SlickImageControl
 		}
 	}
 
-	private void DrawIncludedButton(ItemPaintEventArgs<IPackage, Rectangles> e, bool isIncluded, bool partialIncluded, ILocalPackageWithContents? package, out Color activeColor)
+	private void DrawIncludedButton(ItemPaintEventArgs<IPackage, Rectangles> e, bool isIncluded, bool partialIncluded, ILocalPackageData? package, out Color activeColor)
 	{
 		activeColor = default;
 
@@ -499,7 +499,7 @@ public class PackageDescriptionControl : SlickImageControl
 		return 0;
 	}
 
-	private void DrawFolderName(ItemPaintEventArgs<IPackage, Rectangles> e, ILocalPackageWithContents package, int scoreX)
+	private void DrawFolderName(ItemPaintEventArgs<IPackage, Rectangles> e, ILocalPackageData package, int scoreX)
 	{
 		if (package is null)
 		{
@@ -547,7 +547,7 @@ public class PackageDescriptionControl : SlickImageControl
 		e.Rects.AuthorRect = authorRect;
 	}
 
-	private int DrawButtons(ItemPaintEventArgs<IPackage, Rectangles> e, bool isPressed, ILocalPackageWithContents? parentPackage, IWorkshopInfo? workshopInfo)
+	private int DrawButtons(ItemPaintEventArgs<IPackage, Rectangles> e, bool isPressed, ILocalPackageData? parentPackage, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : Padding;
 		var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);

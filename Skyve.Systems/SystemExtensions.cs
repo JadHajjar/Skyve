@@ -34,24 +34,24 @@ public static class SystemExtensions
 		return PackageNameUtil.CleanName(package, out tags, keepTags);
 	}
 
-	public static bool IsIncluded(this ILocalPackage package)
+	public static bool IsIncluded(this ILocalPackageData package)
 	{
 		return PackageUtil.IsIncluded(package);
 	}
 
-	public static bool IsIncluded(this ILocalPackage package, out bool partiallyIncluded)
+	public static bool IsIncluded(this ILocalPackageData package, out bool partiallyIncluded)
 	{
 		return PackageUtil.IsIncluded(package, out partiallyIncluded);
 	}
 
-	public static bool IsEnabled(this ILocalPackage package)
+	public static bool IsEnabled(this ILocalPackageData package)
 	{
 		return PackageUtil.IsEnabled(package);
 	}
 
-	public static ILocalPackage? GetLocalPackage(this IPackageIdentity package)
+	public static ILocalPackageData? GetLocalPackage(this IPackageIdentity package)
 	{
-		if (package is ILocalPackage local)
+		if (package is ILocalPackageData local)
 		{
 			return local;
 		}

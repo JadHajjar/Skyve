@@ -149,9 +149,9 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			_ => items
 				.OrderByDescending(x => x.Item.GetNotification())
-				.ThenBy(x => !(x.Item.Package is ILocalPackageWithContents lp && (lp.IsIncluded(out var partial) || partial)))
+				.ThenBy(x => !(x.Item.Package is ILocalPackageData lp && (lp.IsIncluded(out var partial) || partial)))
 				.ThenBy(x => x.Item.Package?.IsLocal)
-				.ThenBy(x => !x.Item.Package?.IsMod)
+				.ThenBy(x => !x.Item.Package?.IsCodeMod)
 				.ThenBy(x => x.Item.Package?.CleanName() ?? x.Item.Package?.CleanName())
 		};
 
@@ -643,7 +643,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (thumbnail is null)
 		{
-			using var generic = (e.Item is ILocalPackageWithContents ? Properties.Resources.I_CollectionIcon : e.Item.Package!.IsMod ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
+			using var generic = (e.Item is ILocalPackageData ? Properties.Resources.I_CollectionIcon : e.Item.Package!.IsCodeMod ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
 
 			drawThumbnail(generic);
 		}
@@ -677,7 +677,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		return y + (GridPadding.Vertical * 4);
 	}
 
-	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
 	{
 		using var font = UI.Font(9F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
@@ -687,7 +687,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near });
 
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.Package!.IsBuiltIn && !IsPackagePage;
-		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.Package!.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackage lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.Package!.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 		var date = workshopInfo?.ServerTime ?? e.Item.Package!.LocalParentPackage?.LocalTime;
 
 		var padding = GridView ? GridPadding : GridPadding;
@@ -744,7 +744,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 	}
 
-	private void DrawIncludedButton(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, bool isIncluded, bool partialIncluded, ILocalPackageWithContents? package, out Color activeColor)
+	private void DrawIncludedButton(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, bool isIncluded, bool partialIncluded, ILocalPackageData? package, out Color activeColor)
 	{
 		activeColor = default;
 
@@ -808,7 +808,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 	}
 
-	private void DrawButtons(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, bool isPressed, ILocalPackageWithContents? parentPackage, IWorkshopInfo? workshopInfo)
+	private void DrawButtons(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, bool isPressed, ILocalPackageData? parentPackage, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : GridPadding;
 		var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
@@ -878,7 +878,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			if (item.Item.Package!.LocalPackage is not ILocalPackage localPackage)
+			if (item.Item.Package!.LocalPackage is not ILocalPackageData localPackage)
 			{
 				if (!item.Item.Package!.IsLocal)
 				{

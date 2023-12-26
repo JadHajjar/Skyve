@@ -174,7 +174,7 @@ public class TroubleshootInfoControl : SlickControl
 		}
 	}
 
-	private void PromptResult(List<ILocalPackage> list)
+	private void PromptResult(List<ILocalPackageData> list)
 	{
 		MessagePrompt.Show(Locale.TroubleshootCauseResult + "\r\n\r\n" + list.ListStrings("\r\n"), icon: PromptIcons.Ok, form: Program.MainForm);
 	}

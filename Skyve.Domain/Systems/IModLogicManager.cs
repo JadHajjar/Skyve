@@ -3,11 +3,11 @@
 namespace Skyve.Domain.Systems;
 public interface IModLogicManager
 {
-	void Analyze(IMod mod, IModUtil modUtil);
+	void Analyze(ILocalPackageData mod, IModUtil modUtil);
 	void ApplyRequiredStates(IModUtil modUtil);
-	bool AreMultipleSkyvesPresent(out List<ILocalPackageWithContents> skyveInstances);
-	bool IsForbidden(IMod mod);
+	bool AreMultipleSkyvesPresent(out List<ILocalPackageData> skyveInstances);
+	bool IsForbidden(ILocalPackageData mod);
 	bool IsPseudoMod(IPackage package);
-	bool IsRequired(IMod mod, IModUtil modUtil);
-	void ModRemoved(IMod mod);
+	bool IsRequired(ILocalPackageData mod, IModUtil modUtil);
+	void ModRemoved(ILocalPackageData mod);
 }

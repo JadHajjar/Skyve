@@ -11,11 +11,11 @@ public class IPackageEqualityComparer : IEqualityComparer<IPackage>
 			: y is null
 			? x is null
 			: x.Id == y.Id
-|| x is ILocalPackage localPackage1 && y is ILocalPackage localPackage2 && localPackage1.Folder == localPackage2.Folder;
+|| x is ILocalPackageData localPackage1 && y is ILocalPackageData localPackage2 && localPackage1.Folder == localPackage2.Folder;
 	}
 
 	public int GetHashCode(IPackage obj)
 	{
-		return -1586376059 + obj.Id.GetHashCode() + (obj is ILocalPackage localPackage ? localPackage.Folder : string.Empty).GetHashCode();
+		return -1586376059 + obj.Id.GetHashCode() + (obj is ILocalPackageData localPackage ? localPackage.Folder : string.Empty).GetHashCode();
 	}
 }

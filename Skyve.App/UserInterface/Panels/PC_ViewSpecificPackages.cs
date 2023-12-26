@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace Skyve.App.UserInterface.Panels;
 public class PC_ViewSpecificPackages : PC_Packages
 {
-	private readonly List<ILocalPackageWithContents> _packages;
+	private readonly List<ILocalPackageData> _packages;
 	private readonly string _title;
 
-	public PC_ViewSpecificPackages(List<ILocalPackageWithContents> packages, string title)
+	public PC_ViewSpecificPackages(List<ILocalPackageData> packages, string title)
     {
 		_packages = packages;
 		_title = title;
@@ -18,7 +18,7 @@ public class PC_ViewSpecificPackages : PC_Packages
 		LC_Items.RefreshItems();
 	}
 
-	protected override IEnumerable<ILocalPackageWithContents> GetItems()
+	protected override IEnumerable<ILocalPackageData> GetItems()
 	{
 		return _packages ?? new();
 	}

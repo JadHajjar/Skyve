@@ -20,7 +20,7 @@ internal class BulkUtil : IBulkUtil
 		_assetUtil = assetUtil;
 	}
 
-	public void SetBulkIncluded(IEnumerable<ILocalPackage> packages, bool value)
+	public void SetBulkIncluded(IEnumerable<ILocalPackageData> packages, bool value)
 	{
 		var packageList = packages.ToList();
 
@@ -29,7 +29,7 @@ internal class BulkUtil : IBulkUtil
 			return;
 		}
 
-		if (packageList[0] is ILocalPackageWithContents)
+		if (packageList[0] is ILocalPackageData)
 		{
 			packageList = packageList.SelectMany(getPackageContents).ToList();
 		}
@@ -64,9 +64,9 @@ internal class BulkUtil : IBulkUtil
 			_notifier.TriggerAutoSave();
 		}
 
-		static IEnumerable<ILocalPackage> getPackageContents(ILocalPackage package)
+		static IEnumerable<ILocalPackageData> getPackageContents(ILocalPackageData package)
 		{
-			var packageContainer = (package as ILocalPackageWithContents)!;
+			var packageContainer = (package as ILocalPackageData)!;
 
 			if (packageContainer.Mod is not null)
 			{
@@ -80,7 +80,7 @@ internal class BulkUtil : IBulkUtil
 		}
 	}
 
-	public void SetBulkEnabled(IEnumerable<ILocalPackage> packages, bool value)
+	public void SetBulkEnabled(IEnumerable<ILocalPackageData> packages, bool value)
 	{
 		var modList = packages.ToList();
 

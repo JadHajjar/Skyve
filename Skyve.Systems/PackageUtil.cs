@@ -6,6 +6,7 @@ using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 
 namespace Skyve.Systems;
 public class PackageUtil : IPackageUtil
@@ -14,34 +15,26 @@ public class PackageUtil : IPackageUtil
 	private readonly IAssetUtil _assetUtil;
 	private readonly IBulkUtil _bulkUtil;
 	private readonly ILocale _locale;
-	private readonly IPackageManager _contentManager;
+	private readonly IPackageManager  _packageManager;
 	private readonly IPackageNameUtil _packageUtil;
 	private readonly ISettings _settings;
 
-	public PackageUtil(IModUtil modUtil, IAssetUtil assetUtil, IBulkUtil bulkUtil, ILocale locale, IPackageNameUtil packageUtil, IPackageManager contentManager, ISettings settings)
+	public PackageUtil(IModUtil modUtil, IAssetUtil assetUtil, IBulkUtil bulkUtil, ILocale locale, IPackageNameUtil packageUtil, IPackageManager packageManager, ISettings settings)
 	{
 		_modUtil = modUtil;
 		_assetUtil = assetUtil;
 		_bulkUtil = bulkUtil;
 		_locale = locale;
 		_packageUtil = packageUtil;
-		_contentManager = contentManager;
+		_packageManager = packageManager;
 		_settings = settings;
 	}
 
-	public bool IsIncluded(ILocalPackage localPackage)
+	public bool IsIncluded(IPackageIdentity identity)
 	{
-		if (localPackage is ILocalPackageWithContents packageWithContents)
+		if (identity is IPackage localPackage && localPackage.LocalData is not null)
 		{
-			if (packageWithContents.Mod is not null)
-			{
-				if (_modUtil.IsIncluded(packageWithContents.Mod))
-				{
-					return true;
-				}
-			}
-
-			foreach (var item in packageWithContents.Assets)
+			foreach (var item in localPackage.LocalData.Assets)
 			{
 				if (_assetUtil.IsIncluded(item))
 				{
@@ -49,34 +42,34 @@ public class PackageUtil : IPackageUtil
 				}
 			}
 
-			return false;
+			return _modUtil.IsIncluded(localPackage.LocalData);
 		}
 
-		return localPackage is IMod mod ? _modUtil.IsIncluded(mod) : localPackage is IAsset asset && _assetUtil.IsIncluded(asset);
+		if (identity is IAsset asset)
+		{
+			return _assetUtil.IsIncluded(asset);
+		}
+
+		var package = _packageManager.GetPackageById(identity);
+
+		return package is not null && IsIncluded(package);
 	}
 
-	public bool IsIncluded(ILocalPackage localPackage, out bool partiallyIncluded)
+	public bool IsIncluded(IPackage identity, out bool partiallyIncluded)
 	{
-		if (localPackage is ILocalPackageWithContents packageWithContents)
+		var included = false;
+		var excluded = false;
+
+		if (identity is IPackage localPackage && localPackage.LocalData is not null)
 		{
-			var included = false;
-			var excluded = false;
+			if (_modUtil.IsIncluded(localPackage.LocalData))
+				included = true;
+			else
+				excluded = true;
 
-			if (packageWithContents.Mod is not null)
+			foreach (var item in localPackage.LocalData.Assets)
 			{
-				if (IsIncluded(packageWithContents.Mod, out _))
-				{
-					included = true;
-				}
-				else
-				{
-					excluded = true;
-				}
-			}
-
-			foreach (var item in packageWithContents.Assets)
-			{
-				if (IsIncluded(item, out _))
+				if (_assetUtil.IsIncluded(item))
 				{
 					included = true;
 				}
@@ -98,28 +91,32 @@ public class PackageUtil : IPackageUtil
 			return included;
 		}
 
+		if (identity is IAsset asset)
+		{
+			partiallyIncluded = false;
+			return _assetUtil.IsIncluded(asset);
+		}
+
+		var package = _packageManager.GetPackageById(identity);
+
 		partiallyIncluded = false;
 
-		return localPackage is IMod mod ? _modUtil.IsIncluded(mod) : localPackage is IAsset asset && _assetUtil.IsIncluded(asset);
+		return package is not null && IsIncluded(package, out partiallyIncluded);
 	}
 
-	public bool IsEnabled(ILocalPackage package)
+	public bool IsEnabled(IPackage package)
 	{
-		return package is IMod mod
-			? _modUtil.IsEnabled(mod)
-			: package is not ILocalPackageWithContents packageWithContents
-				|| packageWithContents.Mod is null
-				|| _modUtil.IsEnabled(packageWithContents.Mod);
+		return package.LocalData is null || _modUtil.IsEnabled(package.LocalData);
 	}
 
-	public bool IsIncludedAndEnabled(ILocalPackage package)
+	public bool IsIncludedAndEnabled(IPackage package)
 	{
 		return IsIncluded(package) && IsEnabled(package);
 	}
 
-	public void SetIncluded(ILocalPackage localPackage, bool value)
+	public void SetIncluded(IPackage localPackage, bool value)
 	{
-		if (localPackage is ILocalPackageWithContents localPackageWithContents)
+		if (localPackage is ILocalPackageData localPackageWithContents)
 		{
 			_bulkUtil.SetBulkIncluded(new[] { localPackage }, value);
 		}
@@ -140,14 +137,14 @@ public class PackageUtil : IPackageUtil
 		}
 	}
 
-	public void SetEnabled(ILocalPackage package, bool value)
+	public void SetEnabled(IPackage package, bool value)
 	{
 		if (package is IMod mod)
 		{
 			_modUtil.SetEnabled(mod, value);
 		}
 
-		if (package is ILocalPackageWithContents packageWithContents && packageWithContents.Mod is not null)
+		if (package is ILocalPackageData packageWithContents && packageWithContents.Mod is not null)
 		{
 			_modUtil.SetEnabled(packageWithContents.Mod, value);
 		}
@@ -204,12 +201,12 @@ public class PackageUtil : IPackageUtil
 		return DownloadStatus.OK;
 	}
 
-	public IEnumerable<ILocalPackage> GetPackagesThatReference(IPackage package, bool withExcluded = false)
+	public IEnumerable<IPackage> GetPackagesThatReference(IPackage package, bool withExcluded = false)
 	{
 		var compatibilityUtil = ServiceCenter.Get<ICompatibilityManager>();
 		var packages = withExcluded || ServiceCenter.Get<ISettings>().UserSettings.ShowAllReferencedPackages
-			? _contentManager.Packages.ToList()
-			: _contentManager.Packages.AllWhere(IsIncluded);
+			? _packageManager.Packages.ToList()
+			: _packageManager.Packages.AllWhere(IsIncluded);
 
 		foreach (var localPackage in packages)
 		{

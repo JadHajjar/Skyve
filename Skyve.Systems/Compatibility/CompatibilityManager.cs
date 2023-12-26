@@ -175,7 +175,7 @@ public class CompatibilityManager : ICompatibilityManager
 		catch { }
 	}
 
-	public void Start(List<ILocalPackageWithContents> packages)
+	public void Start(List<ILocalPackageData> packages)
 	{
 		try
 		{
@@ -306,7 +306,7 @@ public class CompatibilityManager : ICompatibilityManager
 	{
 		var info = new CompatibilityPackageData
 		{
-			Stability = package.IsMod ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
+			Stability = package.IsCodeMod ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
 			//SteamId = package.Id,
 			Name = package.Name,
 			FileName = package.LocalParentPackage?.Mod?.FilePath,
@@ -464,7 +464,7 @@ public class CompatibilityManager : ICompatibilityManager
 		return package;
 	}
 
-	internal IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withAlternativesAndSuccessors)
+	internal IEnumerable<ILocalPackageData> FindPackage(IndexedPackage package, bool withAlternativesAndSuccessors)
 	{
 		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
 

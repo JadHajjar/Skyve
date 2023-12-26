@@ -8,5 +8,5 @@ public interface IAssetUtil
 	void SetIncluded(IAsset asset, bool value);
 	void SaveChanges();
 	IAsset? GetAssetByFile(string? fileName);
-	IEnumerable<IAsset> GetAssets(ILocalPackageWithContents package, bool withSubDirectories = true);
+	IEnumerable<IAsset> GetAssets(ILocalPackageData package, bool withSubDirectories = true);
 }

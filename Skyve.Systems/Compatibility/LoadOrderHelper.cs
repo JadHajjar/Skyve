@@ -23,7 +23,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 	{
 		var entities = new List<ModInfo>();
 
-		foreach (var mod in _packageManager.Mods)
+		foreach (var mod in _packageManager.Packages)
 		{
 			var info = (_compatibilityManager as ICompatibilityManager).GetPackageInfo(mod);
 
@@ -38,7 +38,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		return entities;
 	}
 
-	public IEnumerable<IMod> GetOrderedMods()
+	public IEnumerable<ILocalPackageData> GetOrderedMods()
 	{
 		var entities = GetEntities();
 
@@ -145,11 +145,11 @@ internal class LoadOrderHelper : ILoadOrderHelper
 	private class ModInfo
 	{
 		public int Order;
-		public IMod Mod;
+		public ILocalPackageData Mod;
 		public IPackageIdentity[] RequiredMods;
 		public IPackageIdentity[] LoadAfterMods;
 
-		public ModInfo(IMod mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
+		public ModInfo(ILocalPackageData mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
 		{
 			Mod = mod;
 			RequiredMods = requiredMods;

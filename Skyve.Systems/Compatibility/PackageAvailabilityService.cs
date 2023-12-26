@@ -110,6 +110,6 @@ public class PackageAvailabilityService
 
 		return false;
 
-		bool isEnabled(ILocalPackage? package) => package is not null && _contentUtil.IsIncludedAndEnabled(package);
+		bool isEnabled(ILocalPackageData? package) => package is not null && _contentUtil.IsIncludedAndEnabled(package);
 	}
 }

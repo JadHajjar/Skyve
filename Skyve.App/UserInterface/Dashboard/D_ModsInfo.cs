@@ -15,13 +15,13 @@ internal class D_ModsInfo : IDashboardItem
 	private int mainSectionHeight;
 	private bool contentLoading;
 	private int modsTotal, modsIncluded, modsEnabled, modsOutOfDate, modsIncomplete;
-	private readonly List<ILocalPackageWithContents> newMods;
+	private readonly List<ILocalPackageData> newMods;
 
 	public D_ModsInfo()
 	{
 		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _updateManager);
 
-		newMods = _updateManager.GetNewOrUpdatedPackages().Where(x => x.IsMod).ToList();
+		newMods = _updateManager.GetNewOrUpdatedPackages().Where(x => x.IsCodeMod).ToList();
 		RefreshModCounts();
 	}
 
@@ -44,7 +44,7 @@ internal class D_ModsInfo : IDashboardItem
 		{
 			int modsTotal = 0, modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
 
-			foreach (var mod in _contentManager.Mods)
+			foreach (var mod in _contentManager.Packages)
 			{
 				modsTotal++;
 

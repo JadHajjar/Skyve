@@ -153,7 +153,7 @@ public partial class PC_Troubleshoot : PanelContent
 		TLP_New.Hide();
 	}
 
-	private bool CheckStrict(ILocalPackageWithContents localPackage)
+	private bool CheckStrict(ILocalPackageData localPackage)
 	{
 		var workshopInfo = localPackage.GetWorkshopInfo();
 

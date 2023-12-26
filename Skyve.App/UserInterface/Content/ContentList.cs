@@ -407,7 +407,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 	{
 		if (!ListControl.IsGenericPage && (_profileManager.CurrentPlayset?.DisableWorkshop ?? false))
 		{
-			if (item is ILocalPackage && !item.IsLocal)
+			if (item is ILocalPackageData && !item.IsLocal)
 			{
 				return true;
 			}
@@ -450,7 +450,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (!item.IsMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.LocalPackage?.IsEnabled()))
+			if (!item.IsCodeMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.LocalPackage?.IsEnabled()))
 			{
 				return true;
 			}
@@ -458,7 +458,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsMod)
+			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsCodeMod)
 			{
 				return true;
 			}
@@ -818,7 +818,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 				{
 					CrossIO.DeleteFile(asset.FilePath);
 				}
-				else if (item is ILocalPackage package)
+				else if (item is ILocalPackageData package)
 				{
 					ServiceCenter.Get<IPackageManager>().DeleteAll(package.Folder);
 				}

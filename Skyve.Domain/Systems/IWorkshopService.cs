@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Skyve.Domain.Systems;
 public interface IWorkshopService
 {
-	void CleanDownload(List<ILocalPackageWithContents> packages);
+	void CleanDownload(List<ILocalPackageData> packages);
 	void ClearCache();
 	IEnumerable<IWorkshopInfo> GetAllPackages();
 	IWorkshopInfo? GetInfo(IPackageIdentity identity);
@@ -19,7 +19,7 @@ public interface IWorkshopService
 	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(PackageSorting sorting, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null, bool all = false);
 #if CS2
 	Task Initialize();
-	Task<List<ILocalPackageWithContents>> GetInstalledPackages();
+	Task<List<ILocalPackageData>> GetInstalledPackages();
 	Task<List<ICustomPlayset>> GetAllPlaysets(bool localOnly);
 	Task Login();
 #endif

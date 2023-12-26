@@ -61,7 +61,7 @@ public class ModsBubble : StatusBubbleBase
 	{
 		_compatibilityCounts.Clear();
 
-		foreach (var mod in _contentManager.Mods)
+		foreach (var mod in _contentManager.Packages)
 		{
 			if (!_packageUtil.IsIncluded(mod))
 			{
@@ -113,7 +113,7 @@ public class ModsBubble : StatusBubbleBase
 
 		int modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
 
-		foreach (var mod in _contentManager.Mods)
+		foreach (var mod in _contentManager.Packages)
 		{
 			if (!_packageUtil.IsIncluded(mod))
 			{

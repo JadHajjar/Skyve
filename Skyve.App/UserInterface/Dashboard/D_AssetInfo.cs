@@ -20,13 +20,13 @@ internal class D_AssetsInfo : IDashboardItem
 	private int assetsIncluded;
 	private int assetsOutOfDate;
 	private int assetsIncomplete;
-	private readonly List<ILocalPackageWithContents> newAssets;
+	private readonly List<ILocalPackageData> newAssets;
 
 	public D_AssetsInfo()
 	{
 		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _updateManager);
 
-		newAssets = _updateManager.GetNewOrUpdatedPackages().Where(x => !x.IsMod).ToList();
+		newAssets = _updateManager.GetNewOrUpdatedPackages().Where(x => !x.IsCodeMod).ToList();
 		RefreshAssetCounts();
 	}
 

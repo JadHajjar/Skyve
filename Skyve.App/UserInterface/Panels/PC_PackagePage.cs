@@ -22,7 +22,7 @@ public partial class PC_PackagePage : PanelContent
 
 	public PC_PackagePage(IPackage package, bool compatibilityPage = false)
 	{
-		if (package is not ILocalPackage && package.LocalPackage is ILocalPackage localPackage)
+		if (package is not ILocalPackageData && package.LocalPackage is ILocalPackageData localPackage)
 		{
 			package = localPackage;
 		}
@@ -57,7 +57,7 @@ public partial class PC_PackagePage : PanelContent
 			TLP_Info.ColumnStyles[1].Width = 0;
 		}
 
-		if (Package is ILocalPackageWithContents p && p.Assets is not null && p.Assets.Length > 0)
+		if (Package is ILocalPackageData p && p.Assets is not null && p.Assets.Length > 0)
 		{
 			LC_Items = new ItemListControl<IPackage>(SkyvePage.SinglePackage)
 			{
@@ -217,7 +217,7 @@ public partial class PC_PackagePage : PanelContent
 		};
 	}
 
-	private static EditTagsForm EditTags(IEnumerable<ILocalPackage> item)
+	private static EditTagsForm EditTags(IEnumerable<ILocalPackageData> item)
 	{
 		var frm = new EditTagsForm(item);
 
@@ -281,7 +281,7 @@ public partial class PC_PackagePage : PanelContent
 		label1.Text = LocaleCR.Usage;
 		label2.Text = cr.Usage.GetValues().If(x => x.Count() == Enum.GetValues(typeof(PackageUsage)).Length, x => Locale.AnyUsage.One, x => x.ListStrings(x => LocaleCR.Get(x.ToString()), ", "));
 		label3.Text = LocaleCR.PackageType;
-		label4.Text = cr.Type == PackageType.GenericPackage ? (Package.IsMod ? Locale.Mod : Locale.Asset) : LocaleCR.Get(cr.Type.ToString());
+		label4.Text = cr.Type == PackageType.GenericPackage ? (Package.IsCodeMod ? Locale.Mod : Locale.Asset) : LocaleCR.Get(cr.Type.ToString());
 		label5.Text = LocaleCR.Links;
 		label6.Text = LocaleSlickUI.Tags;
 		L_Requirements.Text = LocaleHelper.GetGlobalText("CRT_RequiredPackages");

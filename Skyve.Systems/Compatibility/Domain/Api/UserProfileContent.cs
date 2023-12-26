@@ -21,7 +21,7 @@ public class UserProfileContent : IDynamicSql
 	[DynamicSqlProperty]
 	public ulong SteamId { get; set; }
 	[DynamicSqlProperty]
-	public bool IsMod { get; set; }
+	public bool IsCodeMod { get; set; }
 	[DynamicSqlProperty]
 	public bool Enabled { get; set; }
 

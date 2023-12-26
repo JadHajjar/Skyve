@@ -79,9 +79,9 @@ internal class CompatibilityService
 		sw2.Restart();
 #endif
 
-		if (package.LocalParentPackage?.Mod is IMod mod)
+		if (package.IsCodeMod && package.LocalData is not null)
 		{
-			var modName = Path.GetFileName(mod.FilePath);
+			var modName = Path.GetFileName(package.LocalData.ModFilePath);
 			var duplicate = _contentManager.GetModsByName(modName);
 
 			if (duplicate.Count > 1 && duplicate.Count(_contentUtil.IsIncluded) > 1)
@@ -140,7 +140,7 @@ internal class CompatibilityService
 		sw2.Restart();
 #endif
 
-		if (!package.IsLocal && package.IsMod && packageData.Package.Type is PackageType.GenericPackage)
+		if (!package.IsLocal && package.IsCodeMod && packageData.Package.Type is PackageType.GenericPackage)
 		{
 			if (!packageData.Statuses.ContainsKey(StatusType.TestVersion) && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true)
 			{
@@ -205,7 +205,7 @@ internal class CompatibilityService
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, "AuthorMalicious", new object[] { _packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
 		}
-		else if (package.IsMod && author.Retired)
+		else if (package.IsCodeMod && author.Retired)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), "AuthorRetired", new object[] { _packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
 		}

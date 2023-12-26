@@ -1,5 +1,5 @@
 ﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_Packages : PC_ContentList<ILocalPackageWithContents>
+public class PC_Packages : PC_ContentList<ILocalPackageData>
 {
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 	private readonly IPackageManager _contentManager = ServiceCenter.Get<IPackageManager>();
@@ -17,7 +17,7 @@ public class PC_Packages : PC_ContentList<ILocalPackageWithContents>
 		Text = $"{Locale.Package.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override IEnumerable<ILocalPackageWithContents> GetItems()
+	protected override IEnumerable<ILocalPackageData> GetItems()
 	{
 		if (_settings.UserSettings.FilterOutPackagesWithOneAsset || _settings.UserSettings.FilterOutPackagesWithMods)
 		{

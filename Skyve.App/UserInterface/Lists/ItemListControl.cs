@@ -190,9 +190,9 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				.ThenBy(x => x.Item.ToString()),
 
 			_ => items
-				.OrderBy(x => !(x.Item.LocalParentPackage is ILocalPackageWithContents lp && (lp.IsIncluded(out var partial) || partial)))
+				.OrderBy(x => !(x.Item.LocalParentPackage is ILocalPackageData lp && (lp.IsIncluded(out var partial) || partial)))
 				.ThenBy(x => x.Item.IsLocal)
-				.ThenBy(x => !x.Item.IsMod)
+				.ThenBy(x => !x.Item.IsCodeMod)
 				.ThenBy(x => x.Item.LocalParentPackage?.CleanName() ?? x.Item.CleanName())
 		};
 
@@ -224,7 +224,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			if (item.Item.LocalPackage is not ILocalPackage localPackage)
+			if (item.Item.LocalPackage is not ILocalPackageData localPackage)
 			{
 				if (!item.Item.IsLocal)
 				{

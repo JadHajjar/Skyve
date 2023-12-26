@@ -26,7 +26,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	private readonly List<string> searchTermsOr = new();
 	private readonly List<string> searchTermsAnd = new();
 	private readonly List<string> searchTermsExclude = new();
-	private readonly IncludeAllButton<ILocalPackage> I_Actions;
+	private readonly IncludeAllButton<ILocalPackageData> I_Actions;
 
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly IBulkUtil _bulkUtil;
@@ -51,7 +51,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
 		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
-		I_Actions = new IncludeAllButton<ILocalPackage>(() => ListControl.FilteredItems.SelectWhereNotNull(x => x.Package).ToList()!);
+		I_Actions = new IncludeAllButton<ILocalPackageData>(() => ListControl.FilteredItems.SelectWhereNotNull(x => x.Package).ToList()!);
 		I_Actions.ActionClicked += I_Actions_Click;
 		I_Actions.IncludeAllClicked += IncludeAll;
 		I_Actions.ExcludeAllClicked += ExcludeAll;
@@ -557,7 +557,7 @@ public partial class PC_CompatibilityReport : PanelContent
 				{
 					CrossIO.DeleteFile(asset.FilePath);
 				}
-				else if (item is ILocalPackage package)
+				else if (item is ILocalPackageData package)
 				{
 					ServiceCenter.Get<IPackageManager>().DeleteAll(package.Folder);
 				}
@@ -653,7 +653,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		FilterChanged(sender, e);
 	}
 
-	private bool IsFilteredOut(ILocalPackage item)
+	private bool IsFilteredOut(ILocalPackageData item)
 	{
 		if (!firstFilterPassed)
 		{
@@ -678,7 +678,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (!item.IsMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.LocalPackage?.IsEnabled()))
+			if (!item.IsCodeMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.LocalPackage?.IsEnabled()))
 			{
 				return true;
 			}
@@ -686,7 +686,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsMod)
+			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsCodeMod)
 			{
 				return true;
 			}
@@ -789,7 +789,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		return false;
 	}
 
-	private bool Search(string searchTerm, ILocalPackage item)
+	private bool Search(string searchTerm, ILocalPackageData item)
 	{
 		return searchTerm.SearchCheck(item.ToString())
 			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)

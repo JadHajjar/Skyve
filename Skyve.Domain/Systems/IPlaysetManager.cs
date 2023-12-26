@@ -14,7 +14,7 @@ public interface IPlaysetManager
 	Task<bool> DeletePlayset(ICustomPlayset playset);
 	Task<bool> ExcludeFromCurrentPlayset(IPlayset playset);
 	string GetFileName(IPlayset playset);
-	List<ILocalPackageWithContents> GetInvalidPackages(PackageUsage usage);
+	List<ILocalPackageData> GetInvalidPackages(PackageUsage usage);
 	Task<ICustomPlayset> CreateNewPlayset(string playsetName);
 	ICustomPlayset? ImportPlayset(string obj);
 	Task<bool> IsPackageIncludedInPlayset(IPackage package, IPlayset playset);

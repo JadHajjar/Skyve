@@ -18,16 +18,16 @@ namespace Skyve.Systems.Compatibility.Domain;
 public class CompatibilityInfo : ICompatibilityInfo
 {
 	private readonly IPackage? package;
-	private readonly ILocalPackage? localPackage;
+	private readonly ILocalPackageData? localPackage;
 	private DtoLocalPackage? dtoPackage;
 
 	[JsonIgnore] public IPackage? Package => dtoPackage ?? localPackage ?? package;
-	[JsonIgnore] public ILocalPackage? LocalPackage => dtoPackage ?? localPackage;
+	[JsonIgnore] public ILocalPackageData? LocalPackage => dtoPackage ?? localPackage;
 	[JsonIgnore] public IndexedPackage? Data { get; }
 	public List<ReportItem> ReportItems { get; set; }
-	public DtoLocalPackage? DtoPackage { get => dtoPackage ?? localPackage?.CloneTo<ILocalPackage, DtoLocalPackage>(); set => dtoPackage = value; }
+	public DtoLocalPackage? DtoPackage { get => dtoPackage ?? localPackage?.CloneTo<ILocalPackageData, DtoLocalPackage>(); set => dtoPackage = value; }
 
-	ILocalPackage? ICompatibilityInfo.Package => LocalPackage;
+	ILocalPackageData? ICompatibilityInfo.Package => LocalPackage;
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data?.Package;
 	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems
 	{ 
@@ -69,7 +69,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	public CompatibilityInfo(IPackage package, IndexedPackage? packageData)
 	{
 		this.package = package;
-		localPackage = package is ILocalPackage lp ? lp : package.LocalPackage;
+		localPackage = package is ILocalPackageData lp ? lp : package.LocalPackage;
 		Data = packageData;
 		ReportItems = new();
 	}
@@ -116,21 +116,22 @@ public class CompatibilityInfo : ICompatibilityInfo
 	#region DtoLocalPackage
 #nullable disable
 
-	public class DtoLocalPackage : ILocalPackage
+	public class DtoLocalPackage : ILocalPackageData
 	{
-		[JsonIgnore] public ILocalPackageWithContents LocalParentPackage { get; set; }
-		[JsonIgnore] public ILocalPackage LocalPackage => this;
+		[JsonIgnore] public ILocalPackageData LocalPackage => this;
 		[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => this.GetWorkshopInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
+		[JsonIgnore] public IAsset[] Assets => Array.Empty<IAsset>();
 		public long LocalSize { get; set; }
 		public DateTime LocalTime { get; set; }
 		public string Folder { get; set; }
-		public bool IsMod { get; set; }
+		[JsonProperty("IsMod")] public bool IsCodeMod { get; set; }
 		public bool IsLocal { get; set; }
 		public bool IsBuiltIn { get; set; }
 		public string FilePath { get; set; }
 		public ulong Id { get; set; }
 		public string Name { get; set; }
 		public string Url { get; set; }
+		public string Version { get; set; }
 
 		public bool GetThumbnail(out Bitmap thumbnail, out string thumbnailUrl)
 		{

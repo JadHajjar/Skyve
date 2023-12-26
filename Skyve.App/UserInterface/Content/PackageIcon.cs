@@ -35,7 +35,7 @@ public class PackageIcon : SlickImageControl
 
 		if (Image == null)
 		{
-			using var image = (Collection ? Properties.Resources.I_CollectionIcon : Package?.IsMod ?? false ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
+			using var image = (Collection ? Properties.Resources.I_CollectionIcon : Package?.IsCodeMod ?? false ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
 			var iconRect = ClientRectangle.CenterR(image.Size);
 
 			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.IconColor), ClientRectangle, (int)(10 * UI.FontScale));
