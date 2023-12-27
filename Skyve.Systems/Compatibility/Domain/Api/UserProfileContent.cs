@@ -43,6 +43,8 @@ public class UserProfileContent : IDynamicSql
 		}
 	}
 
+	string ILocalPackageIdentity.Folder => Path.GetDirectoryName(RelativePath);
+
 	public bool GetThumbnail(out Bitmap? thumbnail, out string? thumbnailUrl)
 	{
 		var info = this.GetWorkshopInfo();

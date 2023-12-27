@@ -309,7 +309,7 @@ public class CompatibilityManager : ICompatibilityManager
 			Stability = package.IsCodeMod ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
 			//SteamId = package.Id,
 			Name = package.Name,
-			FileName = package.LocalParentPackage?.Mod?.FilePath,
+			FileName = package.LocalData?.FilePath,
 			Links = new(),
 			Interactions = new(),
 			Statuses = new(),
@@ -464,7 +464,7 @@ public class CompatibilityManager : ICompatibilityManager
 		return package;
 	}
 
-	internal IEnumerable<ILocalPackageData> FindPackage(IndexedPackage package, bool withAlternativesAndSuccessors)
+	internal IEnumerable<IPackage> FindPackage(IndexedPackage package, bool withAlternativesAndSuccessors)
 	{
 		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
 
@@ -473,7 +473,7 @@ public class CompatibilityManager : ICompatibilityManager
 			yield return localPackage;
 		}
 
-		localPackage = _packageManager.GetModsByName(Path.GetFileName(package.Package.FileName)).FirstOrDefault(x => x.IsLocal)?.LocalParentPackage;
+		localPackage = _packageManager.GetModsByName(Path.GetFileName(package.Package.FileName)).FirstOrDefault(x => x.IsLocal);
 
 		if (localPackage is not null)
 		{

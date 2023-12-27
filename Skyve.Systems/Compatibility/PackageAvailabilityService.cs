@@ -59,7 +59,7 @@ public class PackageAvailabilityService
 	{
 		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
 
-		if (isEnabled(_packageManager.GetPackageById(new GenericPackageIdentity(steamId))))
+		if (isEnabled(_packageManager.GetPackageById(new GenericPackageIdentity(steamId))?.LocalData))
 		{
 			return true;
 		}
@@ -77,7 +77,7 @@ public class PackageAvailabilityService
 				{
 					foreach (var package in _compatibilityManager.FindPackage(item.Value, withAlternativesAndSuccessors))
 					{
-						if (isEnabled(package))
+						if (isEnabled(package.LocalData))
 						{
 							return true;
 						}
@@ -88,7 +88,7 @@ public class PackageAvailabilityService
 
 		foreach (var package in _compatibilityManager.FindPackage(indexedPackage, withAlternativesAndSuccessors))
 		{
-			if (isEnabled(package))
+			if (isEnabled(package.LocalData))
 			{
 				return true;
 			}
@@ -100,7 +100,7 @@ public class PackageAvailabilityService
 			{
 				foreach (var package in _compatibilityManager.FindPackage(item.Value, withAlternativesAndSuccessors))
 				{
-					if (isEnabled(package))
+					if (isEnabled(package.LocalData))
 					{
 						return true;
 					}
@@ -110,6 +110,6 @@ public class PackageAvailabilityService
 
 		return false;
 
-		bool isEnabled(ILocalPackageData? package) => package is not null && _contentUtil.IsIncludedAndEnabled(package);
+		bool isEnabled(ILocalPackageIdentity? package) => package is not null && _contentUtil.IsIncludedAndEnabled(package);
 	}
 }

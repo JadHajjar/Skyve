@@ -81,10 +81,10 @@ internal class CompatibilityService
 
 		if (package.IsCodeMod && package.LocalData is not null)
 		{
-			var modName = Path.GetFileName(package.LocalData.ModFilePath);
+			var modName = Path.GetFileName(package.LocalData.FilePath);
 			var duplicate = _contentManager.GetModsByName(modName);
 
-			if (duplicate.Count > 1 && duplicate.Count(_contentUtil.IsIncluded) > 1)
+			if (duplicate.Count > 1 && duplicate.Count(x => x.LocalData is not null && _contentUtil.IsIncluded(x.LocalData)) > 1)
 			{
 				info.Add(ReportType.Compatibility
 					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }

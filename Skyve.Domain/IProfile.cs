@@ -23,7 +23,7 @@ public interface IPlayset
 	int AssetCount { get; }
 	int ModCount { get; }
 	IEnumerable<IPlaysetEntry> Entries { get; }
-	IEnumerable<IPackage> Packages { get; }
+	//IEnumerable<IPackage> Packages { get; }
 	bool Temporary { get; }
 }
 

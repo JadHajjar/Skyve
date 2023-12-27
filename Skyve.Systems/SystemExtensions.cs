@@ -49,14 +49,19 @@ public static class SystemExtensions
 		return PackageUtil.IsEnabled(package);
 	}
 
-	public static ILocalPackageData? GetLocalPackage(this IPackageIdentity package)
+	public static ILocalPackageData? GetLocalPackage(this IPackageIdentity identity)
 	{
-		if (package is ILocalPackageData local)
+		if (identity is ILocalPackageData packageData)
 		{
-			return local;
+			return packageData;
 		}
 
-		return PackageManager.GetPackageById(package);
+		if (identity is IPackage package)
+		{
+			return package.LocalData;
+		}
+
+		return PackageManager.GetPackageById(identity)?.LocalData;
 	}
 
 	public static Bitmap? GetThumbnail(this IThumbnailObject? thumbnailObject)

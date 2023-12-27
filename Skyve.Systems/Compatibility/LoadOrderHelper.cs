@@ -38,7 +38,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		return entities;
 	}
 
-	public IEnumerable<ILocalPackageData> GetOrderedMods()
+	public IEnumerable<IPackage> GetOrderedMods()
 	{
 		var entities = GetEntities();
 
@@ -142,19 +142,11 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		}
 	}
 
-	private class ModInfo
+	private class ModInfo(IPackage mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
 	{
-		public int Order;
-		public ILocalPackageData Mod;
-		public IPackageIdentity[] RequiredMods;
-		public IPackageIdentity[] LoadAfterMods;
-
-		public ModInfo(ILocalPackageData mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
-		{
-			Mod = mod;
-			RequiredMods = requiredMods;
-			LoadAfterMods = afterLoadMods;
-			Order = 1000;
-		}
+		public int Order = 1000;
+		public IPackage Mod = mod;
+		public IPackageIdentity[] RequiredMods = requiredMods;
+		public IPackageIdentity[] LoadAfterMods = afterLoadMods;
 	}
 }

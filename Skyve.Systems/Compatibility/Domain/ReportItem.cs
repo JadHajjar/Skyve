@@ -26,7 +26,7 @@ public class ReportItem : ICompatibilityItem
 
 #nullable disable
 	[JsonIgnore] public IGenericPackageStatus Status { get; set; }
-	[JsonIgnore] internal ILocalPackageData Package { get; set; }
+	[JsonIgnore] internal IPackage Package { get; set; }
 	public GenericPackageStatus StatusDTO { get => Status is null ? null : new GenericPackageStatus(Status); set => Status = value?.ToGenericPackage(); }
 #nullable enable
 

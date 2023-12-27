@@ -3,7 +3,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
-public partial class PC_ContentList<T> : PanelContent where T : IPackage
+public partial class PC_ContentList<T> : PanelContent where T : IPackageIdentity
 {
 	protected readonly ContentList<T> LC_Items;
 

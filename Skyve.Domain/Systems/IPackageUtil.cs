@@ -6,12 +6,12 @@ namespace Skyve.Domain.Systems;
 
 public interface IPackageUtil
 {
-	IEnumerable<IPackage> GetPackagesThatReference(IPackage package, bool withExcluded = false);
-	DownloadStatus GetStatus(IPackage mod, out string reason);
-	bool IsEnabled(IPackage package);
-	bool IsIncluded(IPackage localPackage);
-	bool IsIncluded(IPackage localPackage, out bool partiallyIncluded);
-	bool IsIncludedAndEnabled(IPackage package);
-	void SetIncluded(IPackage localPackage, bool value);
-	void SetEnabled(IPackage localPackage, bool value);
+	IEnumerable<IPackage> GetPackagesThatReference(IPackageIdentity package, bool withExcluded = false);
+	DownloadStatus GetStatus(ILocalPackageIdentity mod, out string reason);
+	bool IsEnabled(ILocalPackageIdentity package);
+	bool IsIncluded(ILocalPackageIdentity localPackage);
+	bool IsIncluded(ILocalPackageIdentity localPackage, out bool partiallyIncluded);
+	bool IsIncludedAndEnabled(ILocalPackageIdentity package);
+	void SetIncluded(ILocalPackageIdentity localPackage, bool value);
+	void SetEnabled(ILocalPackageIdentity localPackage, bool value);
 }

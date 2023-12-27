@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
-public partial class ContentList<T> : SlickControl where T : IPackage
+public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 {
 	private bool clearingFilters = true;
 	private bool firstFilterPassed;

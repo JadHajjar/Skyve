@@ -3,6 +3,6 @@
 namespace Skyve.Domain.Systems;
 public interface IBulkUtil
 {
-	void SetBulkEnabled(IEnumerable<ILocalPackageData> packages, bool value);
-	void SetBulkIncluded(IEnumerable<ILocalPackageData> packages, bool value);
+	void SetBulkEnabled(IEnumerable<ILocalPackageIdentity> packages, bool value);
+	void SetBulkIncluded(IEnumerable<ILocalPackageIdentity> packages, bool value);
 }

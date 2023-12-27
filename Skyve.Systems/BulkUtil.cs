@@ -20,7 +20,7 @@ internal class BulkUtil : IBulkUtil
 		_assetUtil = assetUtil;
 	}
 
-	public void SetBulkIncluded(IEnumerable<ILocalPackageData> packages, bool value)
+	public void SetBulkIncluded(IEnumerable<ILocalPackageIdentity> packages, bool value)
 	{
 		var packageList = packages.ToList();
 
@@ -43,13 +43,13 @@ internal class BulkUtil : IBulkUtil
 
 		foreach (var package in packageList)
 		{
-			if (package is IMod mod)
-			{
-				_modUtil.SetIncluded(mod, value);
-			}
-			else if (package is IAsset asset)
+			if (package is IAsset asset)
 			{
 				_assetUtil.SetIncluded(asset, value);
+			}
+			else
+			{
+				_modUtil.SetIncluded(package, value);
 			}
 		}
 
@@ -64,23 +64,19 @@ internal class BulkUtil : IBulkUtil
 			_notifier.TriggerAutoSave();
 		}
 
-		static IEnumerable<ILocalPackageData> getPackageContents(ILocalPackageData package)
+		static IEnumerable<ILocalPackageIdentity> getPackageContents(ILocalPackageIdentity package)
 		{
-			var packageContainer = (package as ILocalPackageData)!;
-
-			if (packageContainer.Mod is not null)
+			if (package is ILocalPackageData packageContainer)
 			{
-				yield return packageContainer.Mod;
-			}
-
-			for (var i = 0; i < packageContainer.Assets.Length; i++)
-			{
-				yield return packageContainer.Assets[i];
+				for (var i = 0; i < packageContainer.Assets.Length; i++)
+				{
+					yield return packageContainer.Assets[i];
+				}
 			}
 		}
 	}
 
-	public void SetBulkEnabled(IEnumerable<ILocalPackageData> packages, bool value)
+	public void SetBulkEnabled(IEnumerable<ILocalPackageIdentity> packages, bool value)
 	{
 		var modList = packages.ToList();
 
@@ -98,14 +94,7 @@ internal class BulkUtil : IBulkUtil
 				_notifier.BulkUpdating = false;
 			}
 
-			if (modList[i] is IMod mod)
-			{
-				_modUtil.SetEnabled(mod, value);
-			}
-			else if (modList[i].LocalParentPackage?.Mod is IMod mod_)
-			{
-				_modUtil.SetEnabled(mod_, value);
-			}
+			_modUtil.SetEnabled(modList[i], value);
 		}
 
 		_notifier.BulkUpdating = false;

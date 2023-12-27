@@ -93,7 +93,7 @@ public class UserProfile : IDynamicSql
 	string? IPlayset.BannerUrl { get; }
 	DateTime IPlayset.DateUsed { get; }
 	[JsonIgnore] public IEnumerable<IPlaysetEntry> Entries => Contents ?? Enumerable.Empty<IPlaysetEntry>();
-	[JsonIgnore] public IEnumerable<IPackage> Packages => Contents?.Select(x => (IPackage)new PlaysetEntryPackage(x)) ?? Enumerable.Empty<IPackage>();
+	//[JsonIgnore] public IEnumerable<IPackage> Packages => Contents?.Select(x => (IPackage)new PlaysetEntryPackage(x)) ?? Enumerable.Empty<IPackage>();
 	bool ICustomPlayset.AutoSave { get; }
 	bool ICustomPlayset.UnsavedChanges { get; }
 	bool ICustomPlayset.DisableWorkshop { get; }
