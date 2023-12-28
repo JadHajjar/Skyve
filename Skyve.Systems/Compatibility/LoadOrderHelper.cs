@@ -142,11 +142,18 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		}
 	}
 
-	private class ModInfo(IPackage mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
+	private class ModInfo
 	{
 		public int Order = 1000;
-		public IPackage Mod = mod;
-		public IPackageIdentity[] RequiredMods = requiredMods;
-		public IPackageIdentity[] LoadAfterMods = afterLoadMods;
-	}
+		public IPackage Mod;
+		public IPackageIdentity[] RequiredMods;
+		public IPackageIdentity[] LoadAfterMods;
+
+        public ModInfo(IPackage mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
+		{
+			Mod = mod;
+			RequiredMods = requiredMods;
+			LoadAfterMods = afterLoadMods;
+		}
+    }
 }

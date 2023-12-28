@@ -8,7 +8,7 @@ public class PC_ViewCollection : PC_GenericPackageList
 {
 	private readonly ulong _id;
 
-	public PC_ViewCollection(IPackage collection) : base(collection.Requirements, true)
+	public PC_ViewCollection(IPackage collection) : base(collection.WorkshopInfo!.Requirements, true)
 	{
 		_id = collection.Id;
 

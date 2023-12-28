@@ -297,7 +297,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		var package = e.Item.Package;
 		var localPackage = package.LocalPackage;
-		var localParentPackage = localPackage?.LocalParentPackage;
+		var localParentPackage = localPackage?.GetLocalPackage();
 		var workshopInfo = package.GetWorkshopInfo();
 		var partialIncluded = false;
 		var isPressed = false;
@@ -466,7 +466,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					switch (Message.Status.Action)
 					{
 						case StatusAction.SubscribeToPackages:
-							var p = package?.LocalParentPackage;
+							var p = package?.GetLocalPackage();
 
 							if (p is null)
 							{
@@ -688,7 +688,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.Package!.IsBuiltIn && !IsPackagePage;
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.Package!.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
-		var date = workshopInfo?.ServerTime ?? e.Item.Package!.LocalParentPackage?.LocalTime;
+		var date = workshopInfo?.ServerTime ?? e.Item.Package!.GetLocalPackage()?.LocalTime;
 
 		var padding = GridView ? GridPadding : GridPadding;
 		var textSize = e.Graphics.Measure(text, font);
@@ -961,7 +961,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			return;
 		}
 
-		if (rects.VersionRect.Contains(e.Location) && item.Item.Package!.LocalParentPackage?.Mod is IMod mod)
+		if (rects.VersionRect.Contains(e.Location) && item.Item.Package!.GetLocalPackage()?.Mod is IMod mod)
 		{
 			Clipboard.SetText(mod.Version.GetString());
 		}
@@ -980,7 +980,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (rects.DateRect.Contains(e.Location))
 		{
-			var date = item.Item.Package!.GetWorkshopInfo()?.ServerTime ?? item.Item.Package!.LocalParentPackage?.LocalTime;
+			var date = item.Item.Package!.GetWorkshopInfo()?.ServerTime ?? item.Item.Package!.GetLocalPackage()?.LocalTime;
 
 			if (date.HasValue)
 			{
@@ -1108,7 +1108,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			return;
 		}
 
-		var p = package?.LocalParentPackage;
+		var p = package?.GetLocalPackage();
 
 		if (p is null)
 		{
@@ -1141,7 +1141,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				}
 				break;
 			case StatusAction.Switch:
-				_packageUtil.SetIncluded(info.Package!.LocalParentPackage!, false);
+				_packageUtil.SetIncluded(info.Package!.GetLocalPackage()!, false);
 				break;
 		}
 
@@ -1159,7 +1159,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		var includedSize = 28;
 
-		if (_settings.UserSettings.AdvancedIncludeEnable && item.Package?.LocalParentPackage?.Mod is not null)
+		if (_settings.UserSettings.AdvancedIncludeEnable && item.Package?.GetLocalPackage()?.Mod is not null)
 		{
 			rects.EnabledRect = rects.IncludedRect = rectangle.Pad(GridPadding).Align(UI.Scale(new Size(includedSize, includedSize), UI.FontScale), ContentAlignment.MiddleLeft);
 
@@ -1326,7 +1326,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				return true;
 			}
 
-			if (EnabledRect.Contains(location) && Item.Package?.LocalParentPackage?.Mod is IMod mod1)
+			if (EnabledRect.Contains(location) && Item.Package?.GetLocalPackage()?.Mod is IMod mod1)
 			{
 				if (mod1.IsEnabled())
 				{
@@ -1384,7 +1384,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				return true;
 			}
 
-			if (VersionRect.Contains(location) && Item.Package?.LocalParentPackage?.Mod is IMod mod)
+			if (VersionRect.Contains(location) && Item.Package?.GetLocalPackage()?.Mod is IMod mod)
 			{
 				text = Locale.CopyVersionNumber;
 				point = VersionRect.Location;
@@ -1403,7 +1403,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (DateRect.Contains(location))
 			{
-				var date = Item.Package?.GetWorkshopInfo()?.ServerTime ?? Item.Package?.LocalParentPackage?.LocalTime;
+				var date = Item.Package?.GetWorkshopInfo()?.ServerTime ?? Item.Package?.GetLocalPackage()?.LocalTime;
 				if (date.HasValue)
 				{
 					text = getFilterTip(string.Format(Locale.CopyToClipboard, date.Value.ToString("g")), Locale.FilterSinceThisDate);
@@ -1450,7 +1450,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				DateRect.Contains(location) ||
 				buttonRects.Values.Any(x => x.Contains(location)) ||
 				modRects.Values.Any(x => x.Contains(location)) ||
-				(VersionRect.Contains(location) && Item?.Package?.LocalParentPackage?.Mod is not null);
+				(VersionRect.Contains(location) && Item?.Package?.GetLocalPackage()?.Mod is not null);
 		}
 	}
 }

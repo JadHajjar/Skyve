@@ -136,10 +136,10 @@ public class PackageUtil : IPackageUtil
 		_modUtil.SetEnabled(package, value);
 	}
 
-	public DownloadStatus GetStatus(ILocalPackageIdentity mod, out string reason)
+	public DownloadStatus GetStatus(ILocalPackageIdentity? mod, out string reason)
 	{
-		var workshopInfo = mod.GetWorkshopInfo();
-		var localPackage = mod.GetLocalPackage();
+		var workshopInfo = mod?.GetWorkshopInfo();
+		var localPackage = mod?.GetLocalPackage();
 
 		if (workshopInfo is null)
 		{

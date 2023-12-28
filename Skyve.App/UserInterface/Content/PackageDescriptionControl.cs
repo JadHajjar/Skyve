@@ -166,7 +166,7 @@ public class PackageDescriptionControl : SlickImageControl
 			return;
 		}
 
-		if (rects.VersionRect.Contains(e.Location) && item.Item.LocalParentPackage?.Mod is IMod mod)
+		if (rects.VersionRect.Contains(e.Location) && item.Item.GetLocalPackage()?.Mod is IMod mod)
 		{
 			Clipboard.SetText(mod.Version.GetString());
 		}
@@ -179,7 +179,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (rects.DateRect.Contains(e.Location))
 		{
-			var date = item.Item.GetWorkshopInfo()?.ServerTime ?? item.Item.LocalParentPackage?.LocalTime;
+			var date = item.Item.GetWorkshopInfo()?.ServerTime ?? item.Item.GetLocalPackage()?.LocalTime;
 
 			if (date.HasValue)
 			{
@@ -243,7 +243,7 @@ public class PackageDescriptionControl : SlickImageControl
 	protected void OnPaintItemList(ItemPaintEventArgs<IPackage, Rectangles> e)
 	{
 		var localPackage = e.Item.LocalPackage;
-		var localParentPackage = localPackage?.LocalParentPackage;
+		var localParentPackage = localPackage?.GetLocalPackage();
 		var workshopInfo = e.Item.GetWorkshopInfo();
 		var partialIncluded = false;
 		var isPressed = false;
@@ -325,7 +325,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
-		var date = workshopInfo?.ServerTime ?? e.Item.LocalParentPackage?.LocalTime;
+		var date = workshopInfo?.ServerTime ?? e.Item.GetLocalPackage()?.LocalTime;
 
 		var padding = GridView ? GridPadding : Padding;
 		var textSize = e.Graphics.Measure(text, font);
@@ -661,7 +661,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		rects.IncludedRect = rects.TopRect.Pad(Padding).Align(UI.Scale(new Size(includedSize, CompactList ? 22 : includedSize), UI.FontScale), ContentAlignment.BottomLeft);
 
-		if (_settings.UserSettings.AdvancedIncludeEnable && item.LocalParentPackage?.Mod is not null)
+		if (_settings.UserSettings.AdvancedIncludeEnable && item.GetLocalPackage()?.Mod is not null)
 		{
 			rects.EnabledRect = rects.IncludedRect;
 			rects.EnabledRect.X += rects.EnabledRect.Width;
@@ -719,7 +719,7 @@ public class PackageDescriptionControl : SlickImageControl
 				DateRect.Contains(location) ||
 				MoreRect.Contains(location) ||
 				GithubRect.Contains(location) ||
-				VersionRect.Contains(location) && Item?.LocalParentPackage?.Mod is not null ||
+				VersionRect.Contains(location) && Item?.GetLocalPackage()?.Mod is not null ||
 				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);
 		}
@@ -757,7 +757,7 @@ public class PackageDescriptionControl : SlickImageControl
 				return true;
 			}
 
-			if (EnabledRect.Contains(location) && Item.LocalParentPackage?.Mod is IMod mod1)
+			if (EnabledRect.Contains(location) && Item.GetLocalPackage()?.Mod is IMod mod1)
 			{
 				if (mod1.IsEnabled())
 				{
@@ -852,7 +852,7 @@ public class PackageDescriptionControl : SlickImageControl
 				}
 			}
 
-			if (VersionRect.Contains(location) && Item.LocalParentPackage?.Mod is IMod mod)
+			if (VersionRect.Contains(location) && Item.GetLocalPackage()?.Mod is IMod mod)
 			{
 				text = Locale.CopyVersionNumber;
 				point = VersionRect.Location;
@@ -861,7 +861,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 			if (DateRect.Contains(location))
 			{
-				var date = Item.GetWorkshopInfo()?.ServerTime ?? Item.LocalParentPackage?.LocalTime;
+				var date = Item.GetWorkshopInfo()?.ServerTime ?? Item.GetLocalPackage()?.LocalTime;
 				if (date.HasValue)
 				{
 					text = getFilterTip(string.Format(Locale.CopyToClipboard, date.Value.ToString("g")), Locale.FilterSinceThisDate);

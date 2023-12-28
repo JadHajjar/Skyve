@@ -10,7 +10,7 @@ public partial class ItemListControl<T>
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e)
 	{
 		var localPackage = e.Item.LocalPackage;
-		var localParentPackage = localPackage?.LocalParentPackage;
+		var localParentPackage = localPackage?.GetLocalPackage();
 		var workshopInfo = e.Item.GetWorkshopInfo();
 		var partialIncluded = false;
 		var isPressed = false;
@@ -315,7 +315,7 @@ public partial class ItemListControl<T>
 
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : (e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString());
-		var date = workshopInfo?.ServerTime ?? e.Item.LocalParentPackage?.LocalTime;
+		var date = workshopInfo?.ServerTime ?? e.Item.GetLocalPackage()?.LocalTime;
 
 		var padding = GridView ? GridPadding : Padding;
 		var textSize = e.Graphics.Measure(text, font);
@@ -442,7 +442,7 @@ public partial class ItemListControl<T>
 
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : (e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString());
-		var date = workshopInfo?.ServerTime ?? e.Item.LocalParentPackage?.LocalTime;
+		var date = workshopInfo?.ServerTime ?? e.Item.GetLocalPackage()?.LocalTime;
 
 		if (!string.IsNullOrEmpty(versionText))
 		{
@@ -507,7 +507,7 @@ public partial class ItemListControl<T>
 
 		rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.TopRight);
 
-		if (_settings.UserSettings.AdvancedIncludeEnable && item.LocalParentPackage?.Mod is not null)
+		if (_settings.UserSettings.AdvancedIncludeEnable && item.GetLocalPackage()?.Mod is not null)
 		{
 			rects.EnabledRect = rects.IncludedRect;
 

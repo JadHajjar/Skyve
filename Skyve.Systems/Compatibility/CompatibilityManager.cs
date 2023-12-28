@@ -21,7 +21,7 @@ public class CompatibilityManager : ICompatibilityManager
 	private const string SNOOZE_FILE = "CompatibilitySnoozed.json";
 
 	private readonly DelayedAction _delayedReportCache;
-	private readonly Dictionary<IPackage, CompatibilityInfo> _cache = new(new IPackageEqualityComparer());
+	private readonly Dictionary<IPackageIdentity, CompatibilityInfo> _cache = new(new IPackageEqualityComparer());
 	private readonly List<SnoozedItem> _snoozedItems = new();
 	private readonly Regex _bracketsRegex = new(@"[\[\(](.+?)[\]\)]", RegexOptions.Compiled);
 	private readonly Regex _urlRegex = new(@"(https?|ftp)://(?:www\.)?([\w-]+(?:\.[\w-]+)*)(?:/[^?\s]*)?(?:\?[^#\s]*)?(?:#.*)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -282,7 +282,7 @@ public class CompatibilityManager : ICompatibilityManager
 			|| (package.GetWorkshopInfo()?.IsIncompatible ?? false);
 	}
 
-	public ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false, bool cacheOnly = false)
+	public ICompatibilityInfo GetCompatibilityInfo(IPackageIdentity package, bool noCache = false, bool cacheOnly = false)
 	{
 		if (!FirstLoadComplete)
 		{
@@ -302,14 +302,14 @@ public class CompatibilityManager : ICompatibilityManager
 		return new CompatibilityInfo(package, GetPackageData(package));
 	}
 
-	public CompatibilityPackageData GetAutomatedReport(IPackage package)
+	public CompatibilityPackageData GetAutomatedReport(IPackageIdentity package)
 	{
 		var info = new CompatibilityPackageData
 		{
-			Stability = package.IsCodeMod ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
+			Stability = package.GetPackage()?.IsCodeMod == true ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
 			//SteamId = package.Id,
 			Name = package.Name,
-			FileName = package.LocalData?.FilePath,
+			FileName = package.GetLocalPackageIdentity()?.FilePath,
 			Links = new(),
 			Interactions = new(),
 			Statuses = new(),

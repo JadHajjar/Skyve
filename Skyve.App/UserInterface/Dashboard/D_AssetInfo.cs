@@ -60,7 +60,7 @@ internal class D_AssetsInfo : IDashboardItem
 				}
 
 				assetsIncluded++;
-				assetsSize += asset.LocalSize;
+				assetsSize += asset.FileSize;
 
 				if (Loading)
 				{

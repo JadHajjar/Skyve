@@ -10,7 +10,7 @@ public interface ICompatibilityManager
 
 	event Action? SnoozeChanged;
 
-	ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false, bool cacheOnly = false);
+	ICompatibilityInfo GetCompatibilityInfo(IPackageIdentity package, bool noCache = false, bool cacheOnly = false);
 	IPackageIdentity GetFinalSuccessor(IPackageIdentity item);
 	NotificationType GetNotification(ICompatibilityInfo info);
 	IPackageCompatibilityInfo? GetPackageInfo(IPackageIdentity package);

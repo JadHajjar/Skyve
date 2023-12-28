@@ -96,7 +96,7 @@ public class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		foreach (var item in _items)
 		{
-			var package = item.LocalParentPackage;
+			var package = item.GetLocalPackage();
 
 			if (package is null)
 			{

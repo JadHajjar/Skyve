@@ -15,14 +15,14 @@ using System.Linq;
 namespace Skyve.Systems.Compatibility.Domain;
 public class CompatibilityInfo : ICompatibilityInfo
 {
-	private IPackage? package;
+	private IPackageIdentity? identity;
 	private DtoLocalPackage? dtoPackage;
 
-	[JsonIgnore] public IPackage? Package => package ?? (dtoPackage is null ? null : package = ServiceCenter.Get<IPackageManager>().GetPackageById(dtoPackage));
-	[JsonIgnore] public ILocalPackageData? LocalPackage => Package?.LocalData;
+	[JsonIgnore] public IPackage? Package => (dtoPackage ?? identity)?.GetPackage();
+	[JsonIgnore] public ILocalPackageData? LocalPackage => (dtoPackage ?? identity)?.GetLocalPackage();
 	[JsonIgnore] public IndexedPackage? Data { get; }
 	public List<ReportItem> ReportItems { get; set; }
-	public DtoLocalPackage? DtoPackage { get => dtoPackage ?? package?.CloneTo<IPackageIdentity, DtoLocalPackage>(); set => dtoPackage = value; }
+	public DtoLocalPackage? DtoPackage { get => dtoPackage ?? identity?.CloneTo<IPackageIdentity, DtoLocalPackage>(); set => dtoPackage = value; }
 
 	ILocalPackageData? ICompatibilityInfo.Package => LocalPackage;
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data?.Package;
@@ -63,9 +63,9 @@ public class CompatibilityInfo : ICompatibilityInfo
 		ReportItems = new();
 	}
 
-	public CompatibilityInfo(IPackage package, IndexedPackage? packageData)
+	public CompatibilityInfo(IPackageIdentity package, IndexedPackage? packageData)
 	{
-		this.package = package;
+		identity = package;
 		Data = packageData;
 		ReportItems = new();
 	}

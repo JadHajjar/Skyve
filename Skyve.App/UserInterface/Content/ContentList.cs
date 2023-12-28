@@ -407,7 +407,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 	{
 		if (!ListControl.IsGenericPage && (_profileManager.CurrentPlayset?.DisableWorkshop ?? false))
 		{
-			if (item is ILocalPackageData && !item.IsLocal)
+			if (item.GetPackage()?.IsLocal == true)
 			{
 				return true;
 			}
@@ -434,7 +434,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 		if (OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.IsLocal)
+			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.GetPackage()?.IsLocal)
 			{
 				return true;
 			}
@@ -442,7 +442,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.LocalPackage is not null && (item.LocalPackage.IsIncluded(out var partiallyIncluded) || partiallyIncluded)))
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.IsIncluded(out _, out var partiallyIncluded) || partiallyIncluded))
 			{
 				return true;
 			}
@@ -450,7 +450,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (!item.IsCodeMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.LocalPackage?.IsEnabled()))
+			if (item.GetPackage()?.IsCodeMod == false || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.GetLocalPackage()?.IsEnabled()))
 			{
 				return true;
 			}
@@ -458,7 +458,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsCodeMod)
+			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.GetPackage()?.IsCodeMod)
 			{
 				return true;
 			}
@@ -476,14 +476,14 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 			//else
 			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
 			{
-				if (item.IsLocal || _packageUtil.GetStatus(item, out _) <= DownloadStatus.OK)
+				if (item.GetPackage()?.IsLocal == true || _packageUtil.GetStatus(item.GetLocalPackageIdentity(), out _) <= DownloadStatus.OK)
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)_packageUtil.GetStatus(item, out _))
+				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)_packageUtil.GetStatus(item.GetLocalPackageIdentity(), out _))
 				{
 					return true;
 				}
@@ -509,7 +509,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 			}
 		}
 
-		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.LocalPackage?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
+		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.GetLocalPackage()?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
 		{
 			return true;
 		}
@@ -529,7 +529,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 		if (DD_Tags.SelectedItems.Any())
 		{
-			if (!_tagUtil.HasAllTags(item, DD_Tags.SelectedItems))
+			if (!_tagUtil.HasAllTags(item.GetPackage(), DD_Tags.SelectedItems))
 			{
 				return true;
 			}
@@ -537,7 +537,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
 		{
-			return !_profileManager.IsPackageIncludedInPlayset(item, DD_Profile.SelectedItem).Result;
+			return !_profileManager.IsPackageIncludedInPlayset(item.GetPackage(), DD_Profile.SelectedItem).Result;
 		}
 
 		if (!searchEmpty)
@@ -584,7 +584,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 	{
 		return searchTerm.SearchCheck(item.ToString())
 			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)
-			|| (!item.IsLocal ? item.Id.ToString() : Path.GetFileName(item.LocalParentPackage?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+			|| (!item.IsLocal() ? item.Id.ToString() : Path.GetFileName(item.GetLocalPackage()?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<T> e)
@@ -698,10 +698,10 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 			, new (string.Empty)
 			, new (Locale.SelectAll, "I_DragDrop", ListControl.SelectedItemsCount < ListControl.FilteredItems.Count(), action: ListControl.SelectAll)
 			, new (Locale.DeselectAll, "I_Select", ListControl.SelectedItemsCount > 0, action: ListControl.DeselectAll)
-			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
+			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
-			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.LocalPackage is null), action: () => DownloadAll(this, EventArgs.Empty))
-			, new (Locale.ReDownloadAll, "I_ReDownload", ListControl.FilteredItems.Any(x => x.LocalPackage is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
+			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))
+			, new (Locale.ReDownloadAll, "I_ReDownload", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
 			, new (string.Empty)
 			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
@@ -740,14 +740,14 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 	private void DownloadAll(object sender, EventArgs e)
 	{
-		_downloadService.Download(ListControl.FilteredItems.Where(x => x.LocalPackage is null).Select(x => (IPackageIdentity)x));
+		_downloadService.Download(ListControl.FilteredItems.Where(x => x.GetLocalPackage() is null).Select(x => (IPackageIdentity)x));
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
 	private void ReDownloadAll(object sender, EventArgs e)
 	{
-		_downloadService.Download(ListControl.FilteredItems.Where(x => x.LocalPackage is not null).Cast<IPackageIdentity>());
+		_downloadService.Download(ListControl.FilteredItems.Where(x => x.GetLocalPackage() is not null).Cast<IPackageIdentity>());
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
@@ -769,7 +769,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 	private void SubscribeAll(object sender, EventArgs e)
 	{
 		var removeBadPackages = false;
-		var steamIds = ListControl.SafeGetItems().AllWhere(x => x.Item.LocalPackage == null && x.Item.Id != 0);
+		var steamIds = ListControl.SafeGetItems().AllWhere(x => x.Item.GetLocalPackage() == null && x.Item.Id != 0);
 
 		foreach (var item in steamIds.ToList())
 		{
@@ -814,7 +814,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 			var items = ListControl.FilteredItems.ToList();
 			foreach (var item in items)
 			{
-				if (item.IsLocal && item is IAsset asset)
+				if (item.IsLocal() && item is IAsset asset)
 				{
 					CrossIO.DeleteFile(asset.FilePath);
 				}

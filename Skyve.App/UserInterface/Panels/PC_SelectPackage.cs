@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_SelectPackage : PanelContent
 {
-	private readonly ItemListControl<GenericWorkshopPackage> LC_Items;
+	private readonly ItemListControl<IWorkshopInfo> LC_Items;
 	private readonly DelayedAction<TicketBooth.Ticket> _delayedSearch;
 	private readonly TicketBooth _ticketBooth = new();
 	private bool searchEmpty = true;
@@ -62,7 +62,7 @@ public partial class PC_SelectPackage : PanelContent
 		L_Selected.Visible = false;
 	}
 
-	private void LC_Items_PackageSelected(GenericWorkshopPackage obj)
+	private void LC_Items_PackageSelected(IPackageIdentity obj)
 	{
 		if (ModifierKeys.HasFlag(Keys.Control))
 		{
@@ -238,7 +238,7 @@ public partial class PC_SelectPackage : PanelContent
 			return;
 		}
 
-		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)).Select(x => new GenericWorkshopPackage(x)));
+		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)).Select(x => (x)));
 		LC_Items.Loading = false;
 
 		this.TryInvoke(() => L_Totals.Text = Locale.ShowingCount.FormatPlural(LC_Items.ItemCount, Locale.Package.FormatPlural(LC_Items.ItemCount)));

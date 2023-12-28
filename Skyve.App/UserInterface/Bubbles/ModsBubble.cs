@@ -63,7 +63,7 @@ public class ModsBubble : StatusBubbleBase
 
 		foreach (var mod in _contentManager.Packages)
 		{
-			if (!_packageUtil.IsIncluded(mod))
+			if (!mod.IsIncluded(out _))
 			{
 				continue;
 			}
@@ -115,14 +115,14 @@ public class ModsBubble : StatusBubbleBase
 
 		foreach (var mod in _contentManager.Packages)
 		{
-			if (!_packageUtil.IsIncluded(mod))
+			if (!mod.IsIncluded(out _))
 			{
 				continue;
 			}
 
 			modsIncluded++;
 
-			if (_packageUtil.IsEnabled(mod))
+			if (mod.IsEnabled(out _))
 			{
 				modsEnabled++;
 			}
@@ -132,7 +132,7 @@ public class ModsBubble : StatusBubbleBase
 				continue;
 			}
 
-			switch (_packageUtil.GetStatus(mod, out _))
+			switch (_packageUtil.GetStatus(mod.GetLocalPackageIdentity(), out _))
 			{
 				case DownloadStatus.OutOfDate:
 					modsOutOfDate++;

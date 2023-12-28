@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
-public class IncludeAllButton<T> : SlickControl where T : IPackage
+public class IncludeAllButton<T> : SlickControl where T : IPackageIdentity
 {
 	private readonly bool _doubleButtons;
 	private readonly Func<List<T>> GetPackages;
@@ -20,13 +20,16 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 	public event EventHandler? SubscribeAllClicked;
 
 	private readonly ISettings _settings;
+	private readonly IPackageManager _packageManager;
+	private readonly IPackageUtil _packageUtil;
 
 	public IncludeAllButton(Func<List<T>> getMethod)
 	{
+		ServiceCenter.Get(out _settings, out _packageManager, out _packageUtil);
+
 		Margin = default;
 		Cursor = Cursors.Hand;
 		GetPackages = getMethod;
-		_settings = ServiceCenter.Get<ISettings>();
 		_doubleButtons = _settings.UserSettings.AdvancedIncludeEnable;
 	}
 
@@ -45,7 +48,8 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 		base.OnMouseMove(e);
 
 		var packages = GetPackages();
-		var subscribe = packages.Any(x => x.LocalPackage is null);
+		var localPackages = packages.ToList(x => _packageManager.GetPackageById(x));
+		var subscribe = localPackages.Any(x => x is null);
 
 		if (IncludedRect.Contains(e.Location))
 		{
@@ -53,7 +57,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "SubscribeAll");
 			}
-			else if (packages.SelectWhereNotNull(x => x.LocalPackage).All(x => x!.IsIncluded()))
+			else if (localPackages.SelectWhereNotNull().All(x => _packageUtil.IsIncluded(x!.LocalData!)))
 			{
 				SlickTip.SetTo(this, "ExcludeAll");
 			}
@@ -68,7 +72,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "SubscribeAll");
 			}
-			else if (packages.SelectWhereNotNull(x => x.LocalParentPackage?.Mod).All(x => x!.IsEnabled()))
+			else if (localPackages.SelectWhereNotNull().All(x => _packageUtil.IsEnabled(x!.LocalData!)))
 			{
 				SlickTip.SetTo(this, "DisableAll");
 			}
@@ -90,7 +94,8 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 		if (e.Button == MouseButtons.Left)
 		{
 			var packages = GetPackages();
-			var subscribe = packages.Any(x => x.LocalPackage is null);
+			var localPackages = packages.ToList(x => _packageManager.GetPackageById(x));
+			var subscribe = localPackages.Any(x => x is null);
 
 			if (IncludedRect.Contains(e.Location))
 			{
@@ -98,7 +103,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 				{
 					SubscribeAllClicked?.Invoke(this, e);
 				}
-				else if (packages.SelectWhereNotNull(x => x.LocalPackage).All(x => x!.IsIncluded()))
+				else if (localPackages.SelectWhereNotNull().All(x => _packageUtil.IsIncluded(x!.LocalData!)))
 				{
 					ExcludeAllClicked?.Invoke(this, e);
 				}
@@ -113,7 +118,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 				{
 					SubscribeAllClicked?.Invoke(this, e);
 				}
-				else if (packages.SelectWhereNotNull(x => x.LocalParentPackage?.Mod).All(x => x!.IsEnabled()))
+				else if (localPackages.SelectWhereNotNull().All(x => _packageUtil.IsEnabled(x!.LocalData!)))
 				{
 					DisableAllClicked?.Invoke(this, e);
 				}
@@ -142,9 +147,10 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 		var CursorLocation = PointToClient(Cursor.Position);
 		var color = FormDesign.Design.ActiveColor;
 		var packages = GetPackages();
-		var subscribe = packages.Any(x => x.LocalPackage is null);
-		var include = !subscribe && packages.All(x => x.LocalPackage!.IsIncluded());
-		var enable = !subscribe && packages.SelectWhereNotNull(x => x.LocalParentPackage?.Mod).All(x => x!.IsEnabled());
+		var localPackages = packages.ToList(x => _packageManager.GetPackageById(x));
+		var subscribe = localPackages.Any(x => x is null);
+		var include = !subscribe && localPackages.All(x => _packageUtil.IsEnabled(x!.LocalData!));
+		var enable = !subscribe && localPackages.All(x => _packageUtil.IsEnabled(x!.LocalData!));
 
 		if (_doubleButtons && !subscribe)
 		{

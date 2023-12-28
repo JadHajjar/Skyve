@@ -76,7 +76,7 @@ public partial class PC_Troubleshoot : PanelContent
 
 	private void Next()
 	{
-		var showComp = ServiceCenter.Get<IPackageManager>().Packages.Count(x => x.IsIncluded() && x.GetCompatibilityInfo().GetNotification() > NotificationType.Warning);
+		var showComp = ServiceCenter.Get<IPackageManager>().Packages.Count(x => x.IsIncluded(out _) && x.GetCompatibilityInfo().GetNotification() > NotificationType.Warning);
 
 		if (showComp > 0)
 		{
@@ -134,13 +134,13 @@ public partial class PC_Troubleshoot : PanelContent
 	{
 		if (_settings.ItemIsCausingIssues || _settings.NewItemCausingIssues)
 		{
-			var faultyPackages = ServiceCenter.Get<IPackageManager>().Packages.AllWhere(x => x.IsIncluded() && CheckStrict(x));
+			var faultyPackages = ServiceCenter.Get<IPackageManager>().Packages.AllWhere(x => x.IsIncluded(out _) && CheckStrict(x));
 
 			if (faultyPackages.Count > 0 && ShowPrompt(Locale.SkyveDetectedFaultyPackages, Locale.FaultyPackagesTitle, PromptButtons.YesNo, PromptIcons.Warning) == DialogResult.Yes)
 			{
 				new BackgroundAction(() =>
 				{
-					ServiceCenter.Get<IWorkshopService>().CleanDownload(faultyPackages);
+					ServiceCenter.Get<IWorkshopService>().CleanDownload(faultyPackages.ToList(x=>x.LocalData));
 				}).Run();
 
 				PushBack();
@@ -153,7 +153,7 @@ public partial class PC_Troubleshoot : PanelContent
 		TLP_New.Hide();
 	}
 
-	private bool CheckStrict(ILocalPackageData localPackage)
+	private bool CheckStrict(IPackage localPackage)
 	{
 		var workshopInfo = localPackage.GetWorkshopInfo();
 
@@ -162,7 +162,7 @@ public partial class PC_Troubleshoot : PanelContent
 			return false;
 		}
 
-		if (localPackage.Mod is not null && _modLogicManager.IsRequired(localPackage.Mod, _modUtil))
+		if (localPackage.IsCodeMod && _modLogicManager.IsRequired(localPackage.LocalData, _modUtil))
 		{
 			return false;
 		}
@@ -173,7 +173,7 @@ public partial class PC_Troubleshoot : PanelContent
 		}
 
 		var sizeServer = workshopInfo.ServerSize;
-		var localSize = localPackage.LocalSize;
+		var localSize = localPackage.LocalData.LocalSize;
 
 		if (sizeServer != 0 && localSize != 0 && sizeServer != localSize)
 		{
@@ -181,7 +181,7 @@ public partial class PC_Troubleshoot : PanelContent
 		}
 
 		var updatedServer = workshopInfo.ServerTime;
-		var updatedLocal = localPackage.LocalTime;
+		var updatedLocal = localPackage.LocalData.LocalTime;
 
 		if (updatedServer != default && updatedLocal != default && updatedServer > updatedLocal)
 		{

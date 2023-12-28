@@ -69,7 +69,7 @@ public class AssetsBubble : StatusBubbleBase
 				continue;
 			}
 
-			if (asset.IsCodeMod || Loading)
+			if (asset.Package.IsCodeMod || Loading)
 			{
 				continue;
 			}
@@ -128,9 +128,9 @@ public class AssetsBubble : StatusBubbleBase
 			}
 
 			assetsIncluded++;
-			assetSize += asset.LocalSize;
+			assetSize += asset.FileSize;
 
-			if (asset.IsCodeMod || Loading)
+			if (asset.Package.IsCodeMod || Loading)
 			{
 				continue;
 			}

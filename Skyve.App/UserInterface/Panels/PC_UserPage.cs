@@ -49,12 +49,12 @@ public partial class PC_UserPage : PanelContent
 
 	protected void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, included);
+		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, included);
 	}
 
 	protected void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, enabled);
+		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, enabled);
 	}
 
 	protected LocaleHelper.Translation GetItemText()
@@ -66,17 +66,17 @@ public partial class PC_UserPage : PanelContent
 	{
 		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
 
-		foreach (var item in userItems.SelectWhereNotNull(x => x.LocalParentPackage))
+		foreach (var item in userItems.SelectWhereNotNull(x => x.GetLocalPackage()))
 		{
 			if (item?.IsIncluded() == true)
 			{
 				packagesIncluded++;
 
-				if (item.Mod is not null)
+				if (item.Package.IsCodeMod)
 				{
 					modsIncluded++;
 
-					if (item.Mod.IsEnabled())
+					if (item.IsEnabled())
 					{
 						modsEnabled++;
 					}

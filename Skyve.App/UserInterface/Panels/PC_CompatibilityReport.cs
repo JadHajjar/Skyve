@@ -262,8 +262,8 @@ public partial class PC_CompatibilityReport : PanelContent
 			,
 			StatusAction.Switch => message.Packages.Length == 1 ? () =>
 			{
-				var pp1 = report.Package?.LocalParentPackage;
-				var pp2 = message.Packages[0]?.LocalParentPackage;
+				var pp1 = report.Package?.GetLocalPackage();
+				var pp2 = message.Packages[0]?.GetLocalPackage();
 
 				if (pp1 is not null && pp2 is not null)
 				{
@@ -793,7 +793,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		return searchTerm.SearchCheck(item.ToString())
 			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)
-			|| (!item.IsLocal ? item.Id.ToString() : Path.GetFileName(item.LocalParentPackage?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+			|| (!item.IsLocal ? item.Id.ToString() : Path.GetFileName(item.GetLocalPackage()?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
 	private void I_Refresh_Click(object sender, EventArgs e)

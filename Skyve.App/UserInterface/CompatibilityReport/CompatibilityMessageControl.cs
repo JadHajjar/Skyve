@@ -185,7 +185,7 @@ public class CompatibilityMessageControl : SlickControl
 					switch (Message.Status.Action)
 					{
 						case StatusAction.SubscribeToPackages:
-							var p = package?.LocalParentPackage;
+							var p = package?.GetLocalPackage();
 
 							if (p is null)
 							{
@@ -197,7 +197,7 @@ public class CompatibilityMessageControl : SlickControl
 								buttonText = Locale.Include;
 								iconName = "I_Check";
 							}
-							else if (!(p.Mod?.IsEnabled() ?? true))
+							else if (!(p.IsEnabled()))
 							{
 								buttonText = Locale.Enable;
 								iconName = "I_Enabled";
@@ -269,7 +269,7 @@ public class CompatibilityMessageControl : SlickControl
 						{
 							return 2;
 						}
-						else if (!(p.LocalParentPackage.Mod?.IsEnabled() ?? true))
+						else if (!(p.GetLocalPackageIdentity()?.IsEnabled() ?? true))
 						{
 							return 1;
 						}

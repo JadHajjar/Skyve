@@ -96,7 +96,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 			foreach (var mod in _contentManager.Packages)
 			{
-				if (!_packageUtil.IsIncluded(mod))
+				if (!mod.IsIncluded(out _))
 				{
 					continue;
 				}

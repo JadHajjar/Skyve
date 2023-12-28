@@ -8,7 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T>.Rectangles> where T : IPackage
+public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T>.Rectangles> where T : IPackageIdentity
 {
 	private PackageSorting sorting;
 	private Rectangle PopupSearchRect1;
@@ -153,7 +153,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		items = sorting switch
 		{
 			PackageSorting.FileSize => items
-				.OrderBy(x => x.Item.LocalParentPackage?.LocalSize),
+				.OrderBy(x => x.Item.GetLocalPackage()?.LocalSize),
 
 			PackageSorting.Name => items
 				.OrderBy(x => x.Item.ToString()),
@@ -162,16 +162,16 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				.OrderBy(x => x.Item.GetWorkshopInfo()?.Author?.Name ?? string.Empty),
 
 			PackageSorting.Status => items
-				.OrderBy(x => _packageUtil.GetStatus(x.Item, out _)),
+				.OrderBy(x => _packageUtil.GetStatus(x.Item.GetLocalPackage(), out _)),
 
 			PackageSorting.UpdateTime => items
-				.OrderBy(x => x.Item.GetWorkshopInfo()?.ServerTime ?? x.Item.LocalParentPackage?.LocalTime),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.ServerTime ?? x.Item.GetLocalPackage()?.LocalTime),
 
 			PackageSorting.SubscribeTime => items
-				.OrderBy(x => x.Item.LocalParentPackage?.LocalTime),
+				.OrderBy(x => x.Item.GetLocalPackage()?.LocalTime),
 
 			PackageSorting.Mod => items
-				.OrderBy(x => Path.GetFileName(x.Item.LocalParentPackage?.FilePath ?? string.Empty)),
+				.OrderBy(x => Path.GetFileName(x.Item.GetLocalPackage()?.FilePath ?? string.Empty)),
 
 			PackageSorting.None => items,
 
@@ -185,15 +185,15 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				.OrderBy(x => x.Item.GetWorkshopInfo()?.Score),
 
 			PackageSorting.LoadOrder => items
-				.OrderBy(x => !x.Item.LocalPackage?.IsIncluded())
-				.ThenByDescending(x => _modUtil.GetLoadOrder(x.Item))
+				.OrderBy(x => !x.Item.GetLocalPackage()?.IsIncluded())
+				.ThenByDescending(x => x.Item.GetPackage() is IPackage package ? _modUtil.GetLoadOrder(package) : 0)
 				.ThenBy(x => x.Item.ToString()),
 
 			_ => items
-				.OrderBy(x => !(x.Item.LocalParentPackage is ILocalPackageData lp && (lp.IsIncluded(out var partial) || partial)))
-				.ThenBy(x => x.Item.IsLocal)
-				.ThenBy(x => !x.Item.IsCodeMod)
-				.ThenBy(x => x.Item.LocalParentPackage?.CleanName() ?? x.Item.CleanName())
+				.OrderBy(x => !(x.Item.GetLocalPackage() is ILocalPackageData lp && (lp.IsIncluded(out var partial) || partial)))
+				.ThenBy(x => x.Item.GetPackage()?.IsLocal)
+				.ThenBy(x => !x.Item.GetPackage()?.IsCodeMod)
+				.ThenBy(x => x.Item.GetLocalPackage()?.CleanName() ?? x.Item.CleanName())
 		};
 
 		if (SortDescending)
@@ -224,11 +224,11 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			if (item.Item.LocalPackage is not ILocalPackageData localPackage)
+			if (item.Item.GetLocalPackage() is not ILocalPackageData localPackage)
 			{
-				if (!item.Item.IsLocal)
+				if (item.Item.GetPackage()?.IsLocal != true)
 				{
-					_subscriptionsManager.Subscribe(new IPackage[] { item.Item });
+					_subscriptionsManager.Subscribe(new IPackageIdentity[] { item.Item });
 				}
 
 				return;
@@ -246,15 +246,15 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 			return;
 		}
 
-		if (rects.EnabledRect.Contains(e.Location) && item.Item.LocalPackage is not null)
+		if (rects.EnabledRect.Contains(e.Location) && item.Item.GetLocalPackageIdentity() is ILocalPackageIdentity packageIdentity)
 		{
 			if (ModifierKeys.HasFlag(Keys.Alt))
 			{
-				FilterByEnabled?.Invoke(_packageUtil.IsEnabled(item.Item.LocalPackage));
+				FilterByEnabled?.Invoke(_packageUtil.IsEnabled(packageIdentity));
 			}
 			else
 			{
-				_packageUtil.SetEnabled(item.Item.LocalPackage, !_packageUtil.IsEnabled(item.Item.LocalPackage));
+				_packageUtil.SetEnabled(packageIdentity, !_packageUtil.IsEnabled(packageIdentity));
 			}
 
 			return;
@@ -262,7 +262,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 		if (rects.FolderRect.Contains(e.Location))
 		{
-			PlatformUtil.OpenFolder(item.Item.LocalPackage?.FilePath);
+			PlatformUtil.OpenFolder(item.Item.GetLocalPackage()?.FilePath);
 			return;
 		}
 
@@ -294,15 +294,15 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 			return;
 		}
 
-		if (rects.FolderNameRect.Contains(e.Location) && item.Item.IsLocal)
+		if (rects.FolderNameRect.Contains(e.Location) && item.Item.GetPackage()?.IsLocal == true)
 		{
 			if (filter)
 			{
-				AddToSearch?.Invoke(Path.GetFileName(item.Item.LocalPackage?.Folder ?? string.Empty));
+				AddToSearch?.Invoke(Path.GetFileName(item.Item.GetLocalPackage()?.Folder ?? string.Empty));
 			}
 			else
 			{
-				Clipboard.SetText(Path.GetFileName(item.Item.LocalPackage?.Folder ?? string.Empty));
+				Clipboard.SetText(Path.GetFileName(item.Item.GetLocalPackage()?.Folder ?? string.Empty));
 
 			}
 
@@ -329,9 +329,9 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 			{
 				CompatibilityReportSelected?.Invoke(item.Item.GetCompatibilityInfo().GetNotification());
 			}
-			else
+			else if (item.Item.GetPackage() is IPackage package)
 			{
-				var pc = new PC_PackagePage((IPackage?)item.Item.LocalParentPackage ?? item.Item, true);
+				var pc = new PC_PackagePage(package, true);
 
 				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
 
@@ -345,14 +345,14 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 		if (rects.DownloadStatusRect.Contains(e.Location) && filter)
 		{
-			DownloadStatusSelected?.Invoke(_packageUtil.GetStatus(item.Item, out _));
+			DownloadStatusSelected?.Invoke(_packageUtil.GetStatus(item.Item.GetLocalPackageIdentity(), out _));
 
 			return;
 		}
 
-		if (rects.VersionRect.Contains(e.Location) && item.Item.LocalParentPackage?.Mod is IMod mod)
+		if (rects.VersionRect.Contains(e.Location) && item.Item.GetLocalPackage() is ILocalPackageData localPackageData)
 		{
-			Clipboard.SetText(mod.Version.GetString());
+			Clipboard.SetText(localPackageData.Version);
 		}
 
 		if (rects.ScoreRect.Contains(e.Location))
@@ -374,7 +374,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				return;
 			}
 
-			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item) : new PC_PackagePage((IPackage?)item.Item.LocalParentPackage ?? item.Item));
+			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) : new PC_PackagePage(item.Item.GetPackage()));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{
@@ -386,7 +386,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 		if (rects.DateRect.Contains(e.Location))
 		{
-			var date = item.Item.GetWorkshopInfo()?.ServerTime ?? item.Item.LocalParentPackage?.LocalTime;
+			var date = item.Item.GetWorkshopInfo()?.ServerTime ?? item.Item.GetLocalPackage()?.LocalTime;
 
 			if (date.HasValue)
 			{
@@ -508,7 +508,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 	private bool GetStatusDescriptors(T mod, out string text, out DynamicIcon? icon, out Color color)
 	{
-		switch (_packageUtil.GetStatus(mod, out text))
+		switch (_packageUtil.GetStatus(mod.GetLocalPackageIdentity(), out text))
 		{
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
@@ -591,7 +591,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				CompatibilityRect.Contains(location) ||
 				DateRect.Contains(location) ||
 				GithubRect.Contains(location) ||
-				(VersionRect.Contains(location) && Item?.LocalParentPackage?.Mod is not null) ||
+				(VersionRect.Contains(location) && Item?.GetPackage()?.IsCodeMod == true) ||
 				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);
 		}
@@ -600,9 +600,9 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		{
 			if (IncludedRect.Contains(location))
 			{
-				if (Item.LocalPackage is null)
+				if (Item.GetLocalPackage() is null)
 				{
-					if (!Item.IsLocal)
+					if (!Item.GetPackage()!.IsLocal)
 					{
 						text = Locale.SubscribeToItem;
 						point = IncludedRect.Location;
@@ -616,7 +616,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 					}
 				}
 
-				if (Item.LocalPackage.IsIncluded())
+				if (Item.GetLocalPackageIdentity().IsIncluded())
 				{
 					text = $"{Locale.ExcludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
 				}
@@ -629,15 +629,15 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				return true;
 			}
 
-			if (EnabledRect.Contains(location) && Item.LocalParentPackage?.Mod is IMod mod1)
+			if (EnabledRect.Contains(location) && Item.GetLocalPackage().IsCodeMod)
 			{
-				if (mod1.IsEnabled())
+				if (Item.GetLocalPackageIdentity().IsEnabled())
 				{
-					text = $"{Locale.DisablePackage.Format(mod1.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
+					text = $"{Locale.DisablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
 				}
 				else
 				{
-					text = $"{Locale.EnablePackage.Format(mod1.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
+					text = $"{Locale.EnablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
 				}
 
 				point = EnabledRect.Location;
@@ -667,7 +667,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 			if (FolderNameRect.Contains(location))
 			{
-				var folder = Path.GetFileName(Item.LocalPackage?.Folder ?? string.Empty);
+				var folder = Path.GetFileName(Item.GetLocalPackageIdentity()?.Folder ?? string.Empty);
 				text = getFilterTip(string.Format(Locale.CopyToClipboard, folder), string.Format(Locale.AddToSearch, folder));
 				point = FolderNameRect.Location;
 				return true;
@@ -697,7 +697,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 			if (DownloadStatusRect.Contains(location))
 			{
 				var packageUtil = ServiceCenter.Get<IPackageUtil>();
-				packageUtil.GetStatus(Item, out var reason);
+				packageUtil.GetStatus(Item.GetLocalPackageIdentity(), out var reason);
 
 				if (ServiceCenter.Get<ISettings>().UserSettings.FlipItemCopyFilterAction)
 				{
@@ -724,7 +724,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				}
 			}
 
-			if (VersionRect.Contains(location) && Item.LocalParentPackage?.Mod is IMod mod)
+			if (VersionRect.Contains(location) && Item.GetLocalPackage()?.Version is not null)
 			{
 				text = Locale.CopyVersionNumber;
 				point = VersionRect.Location;
@@ -748,7 +748,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 			if (DateRect.Contains(location))
 			{
-				var date = Item.GetWorkshopInfo()?.ServerTime ?? Item.LocalParentPackage?.LocalTime;
+				var date = Item.GetWorkshopInfo()?.ServerTime ?? Item.GetLocalPackage()?.LocalTime;
 				if (date.HasValue)
 				{
 					text = getFilterTip(string.Format(Locale.CopyToClipboard, date.Value.ToString("g")), Locale.FilterSinceThisDate);

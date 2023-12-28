@@ -1,5 +1,5 @@
 ﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_Mods : PC_ContentList<IMod>
+public class PC_Mods : PC_ContentList<IPackage>
 {
 	public PC_Mods()
 	{
@@ -15,7 +15,7 @@ public class PC_Mods : PC_ContentList<IMod>
 		Text = $"{Locale.Mod.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override IEnumerable<IMod> GetItems()
+	protected override IEnumerable<IPackage> GetItems()
 	{
 		return ServiceCenter.Get<IPackageManager>().Packages;
 	}
@@ -23,8 +23,8 @@ public class PC_Mods : PC_ContentList<IMod>
 	protected override string GetCountText()
 	{
 		var mods = LC_Items.Items;
-		var modsIncluded = mods.Count(x => x.IsIncluded());
-		var modsEnabled = mods.Count(x => x.IsEnabled() && x.IsIncluded());
+		var modsIncluded = mods.Count(x => x.LocalData!.IsIncluded());
+		var modsEnabled = mods.Count(x => x.LocalData!.IsEnabled() && x.LocalData!.IsIncluded());
 		var total = LC_Items.ItemCount;
 
 		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)

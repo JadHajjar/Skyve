@@ -48,14 +48,14 @@ internal class D_ModsInfo : IDashboardItem
 			{
 				modsTotal++;
 
-				if (!_packageUtil.IsIncluded(mod))
+				if (!mod.IsIncluded(out _))
 				{
 					continue;
 				}
 
 				modsIncluded++;
 
-				if (_packageUtil.IsEnabled(mod))
+				if (mod.IsEnabled(out _))
 				{
 					modsEnabled++;
 				}
@@ -65,7 +65,7 @@ internal class D_ModsInfo : IDashboardItem
 					continue;
 				}
 
-				switch (_packageUtil.GetStatus(mod, out _))
+				switch (_packageUtil.GetStatus(mod.GetLocalPackageIdentity(), out _))
 				{
 					case DownloadStatus.OutOfDate:
 						modsOutOfDate++;

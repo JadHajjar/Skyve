@@ -8,6 +8,6 @@ public interface ICompatibilityUtil
 {
 	DateTime MinimumModDate { get; }
 
-	void PopulateAutomaticPackageInfo(CompatibilityPackageData info, IPackage package, IWorkshopInfo? workshopInfo);
+	void PopulateAutomaticPackageInfo(CompatibilityPackageData info, IPackageIdentity package, IWorkshopInfo? workshopInfo);
 	void PopulatePackageReport(IndexedPackage packageData, CompatibilityInfo info, CompatibilityHelper compatibilityHelper);
 }

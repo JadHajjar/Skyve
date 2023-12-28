@@ -9,7 +9,7 @@ public partial class ItemListControl<T>
 	private void OnPaintItemCompactList(ItemPaintEventArgs<T, Rectangles> e)
 	{
 		var localPackage = e.Item.LocalPackage;
-		var localParentPackage = localPackage?.LocalParentPackage;
+		var localParentPackage = localPackage?.GetLocalPackage();
 		var workshopInfo = e.Item.GetWorkshopInfo();
 		var partialIncluded = false;
 		var isPressed = false;
@@ -88,7 +88,7 @@ public partial class ItemListControl<T>
 		}
 
 		var localPackage = e.Item.LocalPackage;
-		var localParentPackage = localPackage?.LocalParentPackage;
+		var localParentPackage = localPackage?.GetLocalPackage();
 		var workshopInfo = e.Item.GetWorkshopInfo();
 		var partialIncluded = false;
 		var isPressed = false;
@@ -415,7 +415,7 @@ public partial class ItemListControl<T>
 
 		var includedSize = 28;
 
-		if (_settings.UserSettings.AdvancedIncludeEnable && item.LocalParentPackage?.Mod is not null)
+		if (_settings.UserSettings.AdvancedIncludeEnable && item.GetLocalPackage()?.Mod is not null)
 		{
 			rects.EnabledRect = rects.IncludedRect = rectangle.Pad(Padding).Align(new Size((int)(includedSize * UI.FontScale), CompactList ? (int)(22 * UI.FontScale) : (rects.IconRect.Height / 2)), ContentAlignment.MiddleLeft);
 

@@ -7,7 +7,7 @@ namespace Skyve.Domain.Systems;
 public interface IPackageUtil
 {
 	IEnumerable<IPackage> GetPackagesThatReference(IPackageIdentity package, bool withExcluded = false);
-	DownloadStatus GetStatus(ILocalPackageIdentity mod, out string reason);
+	DownloadStatus GetStatus(ILocalPackageIdentity? mod, out string reason);
 	bool IsEnabled(ILocalPackageIdentity package);
 	bool IsIncluded(ILocalPackageIdentity localPackage);
 	bool IsIncluded(ILocalPackageIdentity localPackage, out bool partiallyIncluded);
