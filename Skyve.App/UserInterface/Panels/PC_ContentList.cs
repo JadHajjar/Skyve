@@ -64,12 +64,12 @@ public partial class PC_ContentList<T> : PanelContent where T : IPackageIdentity
 
 	protected virtual void SetIncluded(IEnumerable<T> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, included);
+		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, included);
 	}
 
 	protected virtual void SetEnabled(IEnumerable<T> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, enabled);
+		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, enabled);
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()

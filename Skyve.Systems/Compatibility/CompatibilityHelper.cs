@@ -40,7 +40,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is StatusType.DependencyMod && info.Package is not null && _contentUtil.GetPackagesThatReference(info.Package, true).Any())
+		if (type is StatusType.DependencyMod && _contentUtil.GetPackagesThatReference(info, true).Any())
 		{
 			return;
 		}
@@ -82,10 +82,10 @@ public class CompatibilityHelper
 
 		if (status.Status.Action is StatusAction.SelectOne)
 		{
-			packages.Insert(0, info.Package?.Id ?? 0);
+			packages.Insert(0, info.Id);
 		}
 
-		info.Add(reportType, status.Status, _packageUtil.CleanName(info.Package, true), packages.ToArray());
+		info.Add(reportType, status.Status, info.CleanName(true), packages.ToArray());
 	}
 
 	public void HandleInteraction(CompatibilityInfo info, IndexedPackageInteraction interaction)
@@ -102,7 +102,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.LocalPackage?.IsIncluded() != true)
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.IsIncluded(out _) != true)
 		{
 			return;
 		}
@@ -116,7 +116,7 @@ public class CompatibilityHelper
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
 		{
-			if (info.LocalPackage?.IsIncluded() != true)
+			if (info.IsIncluded(out _) != true)
 			{
 				return;
 			}
@@ -133,7 +133,7 @@ public class CompatibilityHelper
 			packages.RemoveAll(ShouldNotBeUsed);
 		}
 
-		packages.Remove(info.Package?.Id ?? 0);
+		packages.Remove(info.Id);
 
 		if (packages.Count == 0)
 		{
@@ -175,10 +175,10 @@ public class CompatibilityHelper
 
 		if (interaction.Interaction.Action is StatusAction.SelectOne)
 		{
-			packages.Add(info.Package?.Id ?? 0);
+			packages.Add(info.Id);
 		}
 
-		info.Add(reportType, interaction.Interaction, _packageUtil.CleanName(info.Package, true), packages.ToArray());
+		info.Add(reportType, interaction.Interaction, info.CleanName(true), packages.ToArray());
 	}
 
 	private bool HandleSucceededBy(CompatibilityInfo info, IEnumerable<ulong> packages)

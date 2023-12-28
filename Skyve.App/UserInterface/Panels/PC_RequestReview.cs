@@ -14,7 +14,7 @@ public partial class PC_RequestReview : PanelContent
 
 	private readonly ICompatibilityManager _compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 
-	public PC_RequestReview(IPackage package)
+	public PC_RequestReview(IPackageIdentity package)
 	{
 		CurrentPackage = package;
 
@@ -26,7 +26,7 @@ public partial class PC_RequestReview : PanelContent
 		P_Info.SetPackage(CurrentPackage, null);
 	}
 
-	public IPackage CurrentPackage { get; }
+	public IPackageIdentity CurrentPackage { get; }
 
 	protected override void LocaleChanged()
 	{

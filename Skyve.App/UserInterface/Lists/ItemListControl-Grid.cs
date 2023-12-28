@@ -9,12 +9,10 @@ public partial class ItemListControl<T>
 {
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e)
 	{
-		var localPackage = e.Item.LocalPackage;
-		var localParentPackage = localPackage?.GetLocalPackage();
+		var package = e.Item.GetPackage();
 		var workshopInfo = e.Item.GetWorkshopInfo();
-		var partialIncluded = false;
 		var isPressed = false;
-		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(e.Item.LocalPackage!, out partialIncluded)) || partialIncluded;
+		var isIncluded = e.Item.IsIncluded(out _, out var partialIncluded) || partialIncluded;
 
 		if (e.IsSelected)
 		{
@@ -31,8 +29,8 @@ public partial class ItemListControl<T>
 		base.OnPaintItemGrid(e);
 
 		DrawThumbnail(e);
-		DrawTitleAndTagsAndVersion(e, localParentPackage, workshopInfo, isPressed);
-		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
+		DrawTitleAndTagsAndVersion(e, package?.LocalData, workshopInfo, isPressed);
+		DrawIncludedButton(e, isIncluded, partialIncluded, package?.LocalData, out var activeColor);
 
 		var scoreX = DrawScore(e, workshopInfo);
 
@@ -40,14 +38,14 @@ public partial class ItemListControl<T>
 		{
 			DrawAuthor(e, workshopInfo.Author, scoreX);
 		}
-		else if (e.Item.IsLocal)
+		else if (e.Item.IsLocal())
 		{
-			DrawFolderName(e, localParentPackage!, scoreX);
+			DrawFolderName(e, package!.LocalData!, scoreX);
 		}
 
 		DrawDividerLine(e);
 
-		var maxTagX = DrawButtons(e, isPressed, localParentPackage, workshopInfo);
+		var maxTagX = DrawButtons(e, isPressed, package?.LocalData, workshopInfo);
 
 		DrawTags(e, maxTagX);
 
@@ -66,7 +64,7 @@ public partial class ItemListControl<T>
 
 			e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
 		}
-		else if (!IsPackagePage && localPackage is not null && !e.HoverState.HasFlag(HoverState.Hovered))
+		else if (!IsPackagePage && package?.LocalData is not null && !e.HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
@@ -313,8 +311,13 @@ public partial class ItemListControl<T>
 		using var brush = new SolidBrush(isPressed ? FormDesign.Design.ActiveForeColor : (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) && !IsPackagePage ? FormDesign.Design.ActiveColor : ForeColor);
 		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near });
 
+#if CS1
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
-		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : (e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString());
+		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+#else
+		var isVersion = !string.IsNullOrWhiteSpace(localParentPackage?.Version);
+		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+# endif
 		var date = workshopInfo?.ServerTime ?? e.Item.GetLocalPackage()?.LocalTime;
 
 		var padding = GridView ? GridPadding : Padding;
@@ -349,7 +352,7 @@ public partial class ItemListControl<T>
 
 			if (!string.IsNullOrEmpty(versionText))
 			{
-				e.Rects.VersionRect = DrawCell(e, Columns.Version, versionText!, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), active: localParentPackage?.Mod is not null);
+				e.Rects.VersionRect = DrawCell(e, Columns.Version, versionText!, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), active: isVersion);
 			}
 
 			if (date.HasValue && !IsPackagePage)
@@ -366,7 +369,7 @@ public partial class ItemListControl<T>
 
 		if (!string.IsNullOrEmpty(versionText))
 		{
-			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: localParentPackage?.Mod is not null ? CursorLocation : null);
+			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: isVersion ? CursorLocation : null);
 
 			tagRect.X += padding.Left + e.Rects.VersionRect.Width;
 		}
@@ -440,8 +443,13 @@ public partial class ItemListControl<T>
 		using var brush = new SolidBrush(isPressed ? FormDesign.Design.ActiveForeColor : (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) && !IsPackagePage ? FormDesign.Design.ActiveColor : ForeColor);
 		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near });
 
+#if CS1
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
-		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : (e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString());
+		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+#else
+		var isVersion = !string.IsNullOrWhiteSpace(localParentPackage?.Version);
+		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+#endif
 		var date = workshopInfo?.ServerTime ?? e.Item.GetLocalPackage()?.LocalTime;
 
 		if (!string.IsNullOrEmpty(versionText))
@@ -454,7 +462,7 @@ public partial class ItemListControl<T>
 
 		for (var i = 0; i < tags.Count; i++)
 		{
-			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: i == 0 && localParentPackage?.Mod is not null ? CursorLocation : null);
+			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: i == 0 && isVersion ? CursorLocation : null);
 
 			if (i == 0 && !string.IsNullOrEmpty(versionText))
 			{
@@ -478,11 +486,11 @@ public partial class ItemListControl<T>
 
 		if (thumbnail is null)
 		{
-			using var generic = (e.Item is ILocalPackageData ? Properties.Resources.I_CollectionIcon : e.Item.IsCodeMod ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
+			using var generic = (e.Item is ILocalPackageData ? Properties.Resources.I_CollectionIcon : e.Item.GetPackage()?.IsCodeMod ==true? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
 
 			drawThumbnail(generic);
 		}
-		else if (e.Item.IsLocal)
+		else if (e.Item.IsLocal())
 		{
 			using var unsatImg = new Bitmap(thumbnail, e.Rects.IconRect.Size).Tint(Sat: 0);
 
@@ -507,7 +515,7 @@ public partial class ItemListControl<T>
 
 		rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.TopRight);
 
-		if (_settings.UserSettings.AdvancedIncludeEnable && item.GetLocalPackage()?.Mod is not null)
+		if (_settings.UserSettings.AdvancedIncludeEnable && item.GetPackage()?.IsCodeMod == true)
 		{
 			rects.EnabledRect = rects.IncludedRect;
 

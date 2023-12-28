@@ -172,7 +172,7 @@ public static class SystemExtensions
 		return dlc?.ThumbnailUrl is null or "" ? null : ImageService.GetImage(dlc.ThumbnailUrl, true, $"{dlc.Id}.png", false).Result;
 	}
 
-	public static IEnumerable<ITag> GetTags(this IPackage package, bool ignoreParent = false)
+	public static IEnumerable<ITag> GetTags(this IPackageIdentity package, bool ignoreParent = false)
 	{
 		return TagsService.GetTags(package, ignoreParent);
 	}

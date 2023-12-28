@@ -329,9 +329,9 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 			{
 				CompatibilityReportSelected?.Invoke(item.Item.GetCompatibilityInfo().GetNotification());
 			}
-			else if (item.Item.GetPackage() is IPackage package)
+			else
 			{
-				var pc = new PC_PackagePage(package, true);
+				var pc = new PC_PackagePage(item.Item, true);
 
 				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
 
@@ -374,7 +374,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				return;
 			}
 
-			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) : new PC_PackagePage(item.Item.GetPackage()));
+			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) : new PC_PackagePage(item.Item));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{

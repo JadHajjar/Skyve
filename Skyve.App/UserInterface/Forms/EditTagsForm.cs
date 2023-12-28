@@ -6,9 +6,9 @@ public partial class EditTagsForm : BaseForm
 	private readonly ITagsService _tagsService = ServiceCenter.Get<ITagsService>();
 	private readonly List<ITag> _tags;
 
-	public List<ILocalPackageData> Packages { get; }
+	public List<IPackageIdentity> Packages { get; }
 
-	public EditTagsForm(IEnumerable<ILocalPackageData> packages)
+	public EditTagsForm(IEnumerable<IPackageIdentity> packages)
 	{
 		InitializeComponent();
 

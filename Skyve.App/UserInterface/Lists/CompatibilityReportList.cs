@@ -66,7 +66,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo> args)
 	{
-		args.DoNotDraw = args.Item.Package is null || (CurrentGroup != NotificationType.None && args.Item.GetNotification() != CurrentGroup);
+		args.DoNotDraw = (CurrentGroup != NotificationType.None && args.Item.GetNotification() != CurrentGroup);
 
 		base.CanDrawItemInternal(args);
 	}
@@ -110,49 +110,49 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		items = sorting switch
 		{
 			PackageSorting.FileSize => items
-				.OrderBy(x => x.Item.Package?.LocalSize),
+				.OrderBy(x => x.Item.GetLocalPackage()?.LocalSize),
 
 			PackageSorting.Name => items
-				.OrderBy(x => x.Item.Package?.ToString()),
+				.OrderBy(x => x.Item.ToString()),
 
 			PackageSorting.Author => items
-				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.Author?.Name ?? string.Empty),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.Author?.Name ?? string.Empty),
 
 			PackageSorting.Status => items
-				.OrderBy(x => x.Item.Package is null ? default : _packageUtil.GetStatus(x.Item.Package, out _)),
+				.OrderBy(x => _packageUtil.GetStatus(x.Item.GetLocalPackageIdentity(), out _)),
 
 			PackageSorting.UpdateTime => items
-				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.ServerTime ?? x.Item.Package?.LocalTime),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.ServerTime ?? x.Item.GetLocalPackage()?.LocalTime ?? default),
 
 			PackageSorting.SubscribeTime => items
-				.OrderBy(x => x.Item.Package?.LocalTime),
+				.OrderBy(x => x.Item.GetLocalPackage()?.LocalTime),
 
 			PackageSorting.Mod => items
-				.OrderBy(x => Path.GetFileName(x.Item.Package?.FilePath ?? string.Empty)),
+				.OrderBy(x => Path.GetFileName(x.Item.GetLocalPackage()?.FilePath ?? string.Empty)),
 
 			PackageSorting.None => items,
 
 			PackageSorting.CompatibilityReport => items
 				.OrderByDescending(x => x.Item.GetNotification())
-				.ThenBy(x => x.Item.Package?.ToString()),
+				.ThenBy(x => x.Item.ToString()),
 
 			PackageSorting.Subscribers => items
-				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.Subscribers),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.Subscribers),
 
 			PackageSorting.Votes => items
-				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.Score),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.Score),
 
 			PackageSorting.LoadOrder => items
-				.OrderBy(x => !x.Item.Package?.IsIncluded())
-				.ThenByDescending(x => x.Item.Package is null ? 0 : _modUtil.GetLoadOrder(x.Item.Package))
-				.ThenBy(x => x.Item.Package?.ToString()),
+				.OrderBy(x => !x.Item.IsIncluded(out _))
+				.ThenByDescending(x => x.Item.GetPackage() is null ? 0 : _modUtil.GetLoadOrder(x.Item.GetPackage()!))
+				.ThenBy(x => x.Item.ToString()),
 
 			_ => items
 				.OrderByDescending(x => x.Item.GetNotification())
-				.ThenBy(x => !(x.Item.Package is ILocalPackageData lp && (lp.IsIncluded(out var partial) || partial)))
-				.ThenBy(x => x.Item.Package?.IsLocal)
-				.ThenBy(x => !x.Item.Package?.IsCodeMod)
-				.ThenBy(x => x.Item.Package?.CleanName() ?? x.Item.Package?.CleanName())
+				.ThenBy(x => !(x.Item.IsIncluded(out _, out var partial) || partial))
+				.ThenBy(x => x.Item.IsLocal())
+				.ThenBy(x => !x.Item.GetLocalPackage()?.IsCodeMod)
+				.ThenBy(x => x.Item.CleanName() ?? x.Item.CleanName())
 		};
 
 		if (SortDescending)
@@ -290,18 +290,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
 	{
-		if (e.Item.Package is null)
-		{
-			return;
-		}
-
-		var package = e.Item.Package;
-		var localPackage = package.LocalPackage;
-		var localParentPackage = localPackage?.GetLocalPackage();
-		var workshopInfo = package.GetWorkshopInfo();
-		var partialIncluded = false;
+		var package = e.Item.GetPackage();
+		var workshopInfo = e.Item.GetWorkshopInfo();
 		var isPressed = false;
-		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(package.LocalPackage!, out partialIncluded)) || partialIncluded;
+		var isIncluded = e.Item.IsIncluded(out _, out var partialIncluded) || partialIncluded;
 
 		if (e.IsSelected)
 		{
@@ -322,9 +314,9 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		base.OnPaintItemGrid(e);
 
 		DrawThumbnail(e);
-		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
-		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out _);
-		DrawButtons(e, isPressed, localParentPackage, workshopInfo);
+		DrawTitleAndTagsAndVersionForList(e, package?.LocalData, workshopInfo, isPressed);
+		DrawIncludedButton(e, isIncluded, partialIncluded, package?.LocalData, out _);
+		DrawButtons(e, isPressed, package?.LocalData, workshopInfo);
 
 		DrawReport(e, DrawDividerLine(e, e.Rects.IconRect.Bottom), isPressed);
 	}
@@ -434,7 +426,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					var package = dlc is null ? packageID : null;
 					var packageThumbnail = dlc?.GetThumbnail() ?? package.GetThumbnail();
 
-					if ((package?.IsLocal ?? false) && packageThumbnail is not null)
+					if (e.Item.IsLocal() && packageThumbnail is not null)
 					{
 						using var unsatImg = new Bitmap(packageThumbnail, new Size(rect.Height, rect.Height)).Tint(Sat: 0);
 						e.Graphics.DrawRoundedImage(unsatImg, rect.Align(new Size(rect.Height, rect.Height), ContentAlignment.TopLeft), (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
@@ -448,7 +440,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 					var textRect = rect.Pad((isDlc ? rect.Height * 460 / 215 : rect.Height) + GridPadding.Horizontal, 0, 0, 0).AlignToFontSize(UI.Font(7.5F, FontStyle.Bold), ContentAlignment.TopLeft);
 
-					e.Graphics.DrawString(dlc?.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP") ?? package?.CleanName(out tags) ?? Locale.UnknownPackage, UI.Font(7.5F, FontStyle.Bold), new SolidBrush(fore), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+					e.Graphics.DrawString(dlc?.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP") ?? e.Item.CleanName(out tags) ?? Locale.UnknownPackage, UI.Font(7.5F, FontStyle.Bold), new SolidBrush(fore), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
 					var tagRect = new Rectangle(textRect.Left, textRect.Y, 0, textRect.Height);
 
@@ -466,7 +458,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					switch (Message.Status.Action)
 					{
 						case StatusAction.SubscribeToPackages:
-							var p = package?.GetLocalPackage();
+							var p = e.Item.GetLocalPackage();
 
 							if (p is null)
 							{
@@ -478,7 +470,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 								buttonText = Locale.Include;
 								iconName = "I_Check";
 							}
-							else if (!(p.Mod?.IsEnabled() ?? true))
+							else if (!(p.IsEnabled() ))
 							{
 								buttonText = Locale.Enable;
 								iconName = "I_Enabled";
@@ -494,7 +486,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 							break;
 					}
 
-					if (buttonText is null || package?.GetWorkshopInfo()?.IsCollection == true)
+					if (buttonText is null ||e.Item. GetWorkshopInfo()?.IsCollection == true)
 					{
 						rect.Y += e.Rects.modRects[packageID].Height + GridPadding.Vertical;
 						continue;
@@ -639,15 +631,15 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	private void DrawThumbnail(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
 	{
-		var thumbnail = e.Item.Package.GetThumbnail();
+		var thumbnail = e.Item.GetThumbnail();
 
 		if (thumbnail is null)
 		{
-			using var generic = (e.Item is ILocalPackageData ? Properties.Resources.I_CollectionIcon : e.Item.Package!.IsCodeMod ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
+			using var generic = (e.Item is ILocalPackageData ? Properties.Resources.I_CollectionIcon : e.Item.GetPackage()?.IsCodeMod == true ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
 
 			drawThumbnail(generic);
 		}
-		else if (e.Item.Package!.IsLocal)
+		else if (e.Item.IsLocal())
 		{
 			using var unsatImg = new Bitmap(thumbnail, e.Rects.IconRect.Size).Tint(Sat: 0);
 
@@ -682,13 +674,18 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		using var font = UI.Font(9F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
 		var tags = new List<(Color Color, string Text)>();
-		var text = mod ? e.Item.Package!.CleanName(out tags) : e.Item.ToString();
+		var text = mod ? e.Item.CleanName(out tags) : e.Item.ToString();
 		using var brush = new SolidBrush(isPressed ? FormDesign.Design.ActiveForeColor : (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) && !IsPackagePage ? FormDesign.Design.ActiveColor : ForeColor);
 		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near });
 
-		var isVersion = localParentPackage?.Mod is not null && !e.Item.Package!.IsBuiltIn && !IsPackagePage;
-		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.Package!.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
-		var date = workshopInfo?.ServerTime ?? e.Item.Package!.GetLocalPackage()?.LocalTime;
+#if CS1
+		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
+		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+#else
+		var isVersion = !string.IsNullOrWhiteSpace(localParentPackage?.Version);
+		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+#endif
+		var date = workshopInfo?.ServerTime ?? localParentPackage?.LocalTime;
 
 		var padding = GridView ? GridPadding : GridPadding;
 		var textSize = e.Graphics.Measure(text, font);
@@ -708,11 +705,11 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.IconRect.Y, 0, e.Rects.IconRect.Height);
 
-		if (e.Item.Package!.Id > 0)
+		if (e.Item.Id > 0)
 		{
 			using var icon = IconManager.GetSmallIcon("I_Steam");
 
-			e.Rects.SteamIdRect = e.Graphics.DrawLabel(e.Item.Package.Id.ToString(), icon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: CursorLocation);
+			e.Rects.SteamIdRect = e.Graphics.DrawLabel(e.Item.Id.ToString(), icon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: CursorLocation);
 
 			tagRect.X += padding.Left + e.Rects.SteamIdRect.Width;
 		}
@@ -731,7 +728,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (!string.IsNullOrEmpty(versionText))
 		{
-			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: localParentPackage?.Mod is not null ? CursorLocation : null);
+			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: localParentPackage is not null ? CursorLocation : null);
 
 			tagRect.X += padding.Left + e.Rects.VersionRect.Width;
 		}
@@ -748,26 +745,25 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	{
 		activeColor = default;
 
-		if (package is null && e.Item.Package!.IsLocal)
+		if (package is null && e.Item.IsLocal())
 		{
 			return; // missing local item
 		}
 
 		var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
-		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item.Package!) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
-		var mod = package?.Mod;
-		var required = mod is not null && _modLogicManager.IsRequired(mod, _modUtil);
+		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
+		var required  = package is not null &&_modLogicManager.IsRequired(package, _modUtil);
 
 		DynamicIcon? enabl = null;
-		if (_settings.UserSettings.AdvancedIncludeEnable && mod is not null)
+		if (_settings.UserSettings.AdvancedIncludeEnable && package is not null)
 		{
-			enabl = new DynamicIcon(mod.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
+			enabl = new DynamicIcon(package.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
 
 			if (isIncluded)
 			{
-				activeColor = partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled() ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor;
+				activeColor = partialIncluded ? FormDesign.Design.YellowColor : package.IsEnabled() ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor;
 			}
-			else if (mod.IsEnabled())
+			else if (package.IsEnabled())
 			{
 				activeColor = FormDesign.Design.YellowColor;
 			}
@@ -865,7 +861,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (e.Button == MouseButtons.Right)
 		{
-			ShowRightClickMenu(item.Item.Package!);
+			ShowRightClickMenu(item.Item);
 			return;
 		}
 
@@ -878,11 +874,11 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			if (item.Item.Package!.LocalPackage is not ILocalPackageData localPackage)
+			if (item.Item.GetLocalPackage() is not ILocalPackageData localPackage)
 			{
-				if (!item.Item.Package!.IsLocal)
+				if (!item.Item.IsLocal())
 				{
-					_subscriptionsManager.Subscribe(new IPackage[] { item.Item.Package! });
+					_subscriptionsManager.Subscribe(new IPackageIdentity[] { item.Item });
 				}
 
 				return;
@@ -895,10 +891,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			return;
 		}
 
-		if (rects.EnabledRect.Contains(e.Location) && item.Item.Package!.LocalPackage is not null)
+		if (rects.EnabledRect.Contains(e.Location) && item.Item.GetLocalPackage() is ILocalPackageData localPackage1)
 		{
 			{
-				_packageUtil.SetEnabled(item.Item.Package!.LocalPackage, !_packageUtil.IsEnabled(item.Item.Package!.LocalPackage));
+				_packageUtil.SetEnabled(localPackage1, !_packageUtil.IsEnabled(localPackage1));
 			}
 
 			return;
@@ -906,17 +902,17 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (rects.FolderRect.Contains(e.Location))
 		{
-			PlatformUtil.OpenFolder(item.Item.Package!.LocalPackage?.FilePath);
+			PlatformUtil.OpenFolder(item.Item.GetLocalPackageIdentity()?.FilePath);
 			return;
 		}
 
-		if (rects.SteamRect.Contains(e.Location) && item.Item.Package!.GetWorkshopInfo()?.Url is string url)
+		if (rects.SteamRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Url is string url)
 		{
 			PlatformUtil.OpenUrl(url);
 			return;
 		}
 
-		if (rects.AuthorRect.Contains(e.Location) && item.Item.Package!.GetWorkshopInfo()?.Author is IUser user)
+		if (rects.AuthorRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Author is IUser user)
 		{
 			{
 				var pc = new PC_UserPage(user);
@@ -927,21 +923,16 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			return;
 		}
 
-		if (rects.FolderNameRect.Contains(e.Location) && item.Item.Package!.IsLocal)
+		if (rects.FolderNameRect.Contains(e.Location) && item.Item.IsLocal())
 		{
-			{
-				Clipboard.SetText(Path.GetFileName(item.Item.Package.LocalPackage?.Folder ?? string.Empty));
-
-			}
+			Clipboard.SetText(Path.GetFileName(item.Item.GetLocalPackageIdentity()?.Folder ?? string.Empty));
 
 			return;
 		}
 
 		if (rects.SteamIdRect.Contains(e.Location))
 		{
-			{
-				Clipboard.SetText(item.Item.Package!.Id.ToString());
-			}
+			Clipboard.SetText(item.Item.Id.ToString());
 
 			return;
 		}
@@ -949,7 +940,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		if (rects.CompatibilityRect.Contains(e.Location))
 		{
 			{
-				var pc = new PC_PackagePage((IPackage?)item.Item.Package!.GetLocalPackage() ?? item.Item.Package!, true);
+				var pc = new PC_PackagePage(item.Item, true);
 
 				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
 
@@ -961,14 +952,14 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			return;
 		}
 
-		if (rects.VersionRect.Contains(e.Location) && item.Item.Package!.GetLocalPackage()?.Mod is IMod mod)
+		if (rects.VersionRect.Contains(e.Location) && item.Item.GetLocalPackage() is ILocalPackageData mod)
 		{
-			Clipboard.SetText(mod.Version.GetString());
+			Clipboard.SetText(mod.Version);
 		}
 
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
-			Program.MainForm.PushPanel(null, item.Item.Package!.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.Package!) : new PC_PackagePage((IPackage?)item.Item.Package!.GetLocalPackage() ?? item.Item.Package!));
+			Program.MainForm.PushPanel(null, item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetPackage()) : new PC_PackagePage(item.Item));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{
@@ -980,7 +971,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (rects.DateRect.Contains(e.Location))
 		{
-			var date = item.Item.Package!.GetWorkshopInfo()?.ServerTime ?? item.Item.Package!.GetLocalPackage()?.LocalTime;
+			var date = item.Item.GetWorkshopInfo()?.ServerTime ?? item.Item.GetLocalPackage()?.LocalTime;
 
 			if (date.HasValue)
 			{
@@ -1046,14 +1037,14 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					FilterChanged();
 					break;
 				case StatusAction.UnsubscribeThis:
-					_subscriptionsManager.UnSubscribe(new[] { item.Item.Package! });
+					_subscriptionsManager.UnSubscribe(new[] { item.Item });
 					break;
 				case StatusAction.UnsubscribeOther:
 					_subscriptionsManager.UnSubscribe(Message.Packages!);
 					break;
 				case StatusAction.ExcludeThis:
 				{
-					var pp = item.Item.Package!.GetLocalPackage();
+					var pp = item.Item.GetLocalPackage();
 					if (pp is not null)
 					{
 						_packageUtil.SetIncluded(pp, false);
@@ -1071,7 +1062,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					}
 					break;
 				case StatusAction.RequestReview:
-					Program.MainForm.PushPanel(null, new PC_RequestReview(item.Item.Package!));
+					Program.MainForm.PushPanel(null, new PC_RequestReview(item.Item));
 					break;
 			}
 
@@ -1079,7 +1070,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 	}
 
-	public void ShowRightClickMenu(IPackage item)
+	public void ShowRightClickMenu(IPackageIdentity item)
 	{
 		var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item);
 
@@ -1108,7 +1099,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			return;
 		}
 
-		var p = package?.GetLocalPackage();
+		var p = item.GetLocalPackage();
 
 		if (p is null)
 		{
@@ -1141,7 +1132,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				}
 				break;
 			case StatusAction.Switch:
-				_packageUtil.SetIncluded(info.Package!.GetLocalPackage()!, false);
+				if (p is not null)
+				_packageUtil.SetIncluded(p, false);
 				break;
 		}
 
@@ -1159,7 +1151,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		var includedSize = 28;
 
-		if (_settings.UserSettings.AdvancedIncludeEnable && item.Package?.GetLocalPackage()?.Mod is not null)
+		if (_settings.UserSettings.AdvancedIncludeEnable && item.GetPackage()?.IsCodeMod == true)
 		{
 			rects.EnabledRect = rects.IncludedRect = rectangle.Pad(GridPadding).Align(UI.Scale(new Size(includedSize, includedSize), UI.FontScale), ContentAlignment.MiddleLeft);
 
@@ -1297,9 +1289,9 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		{
 			if (IncludedRect.Contains(location))
 			{
-				if (Item.Package?.LocalPackage is null)
+				if (Item.GetLocalPackage() is null)
 				{
-					if (Item.Package?.IsLocal == false)
+					if (!Item.IsLocal())
 					{
 						text = Locale.SubscribeToItem;
 						point = IncludedRect.Location;
@@ -1313,28 +1305,28 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					}
 				}
 
-				if (Item.Package.LocalPackage.IsIncluded())
+				if (Item.IsIncluded(out _))
 				{
-					text = $"{Locale.ExcludePackage.Format(Item.Package.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
+					text = $"{Locale.ExcludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
 				}
 				else
 				{
-					text = $"{Locale.IncludePackage.Format(Item.Package.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
+					text = $"{Locale.IncludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
 				}
 
 				point = IncludedRect.Location;
 				return true;
 			}
 
-			if (EnabledRect.Contains(location) && Item.Package?.GetLocalPackage()?.Mod is IMod mod1)
+			if (EnabledRect.Contains(location) && Item.GetPackage()?.IsCodeMod == true)
 			{
-				if (mod1.IsEnabled())
+				if (Item.IsEnabled(out _))
 				{
-					text = $"{Locale.DisablePackage.Format(mod1.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
+					text = $"{Locale.DisablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
 				}
 				else
 				{
-					text = $"{Locale.EnablePackage.Format(mod1.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
+					text = $"{Locale.EnablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
 				}
 
 				point = EnabledRect.Location;
@@ -1350,14 +1342,14 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (SteamIdRect.Contains(location))
 			{
-				text = getFilterTip(string.Format(Locale.CopyToClipboard, Item.Package?.Id), string.Format(Locale.AddToSearch, Item.Package?.Id));
+				text = getFilterTip(string.Format(Locale.CopyToClipboard, Item.Id), string.Format(Locale.AddToSearch, Item.Id));
 				point = SteamIdRect.Location;
 				return true;
 			}
 
 			if (FolderNameRect.Contains(location))
 			{
-				var folder = Path.GetFileName(Item.Package?.LocalPackage?.Folder ?? string.Empty);
+				var folder = Path.GetFileName(Item.GetLocalPackageIdentity()?.FilePath ?? string.Empty);
 				text = getFilterTip(string.Format(Locale.CopyToClipboard, folder), string.Format(Locale.AddToSearch, folder));
 				point = FolderNameRect.Location;
 				return true;
@@ -1365,7 +1357,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (AuthorRect.Contains(location))
 			{
-				text = getFilterTip(Locale.OpenAuthorPage, Locale.FilterByThisAuthor.Format(Item.Package?.GetWorkshopInfo()?.Author?.Name ?? "this author"));
+				text = getFilterTip(Locale.OpenAuthorPage, Locale.FilterByThisAuthor.Format(Item.GetWorkshopInfo()?.Author?.Name ?? "this author"));
 				point = AuthorRect.Location;
 				return true;
 			}
@@ -1384,7 +1376,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				return true;
 			}
 
-			if (VersionRect.Contains(location) && Item.Package?.GetLocalPackage()?.Mod is IMod mod)
+			if (VersionRect.Contains(location) && Item.GetPackage()?.IsCodeMod == true)
 			{
 				text = Locale.CopyVersionNumber;
 				point = VersionRect.Location;
@@ -1403,7 +1395,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (DateRect.Contains(location))
 			{
-				var date = Item.Package?.GetWorkshopInfo()?.ServerTime ?? Item.Package?.GetLocalPackage()?.LocalTime;
+				var date = Item.GetWorkshopInfo()?.ServerTime ?? Item.GetLocalPackage()?.LocalTime;
 				if (date.HasValue)
 				{
 					text = getFilterTip(string.Format(Locale.CopyToClipboard, date.Value.ToString("g")), Locale.FilterSinceThisDate);
@@ -1450,7 +1442,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				DateRect.Contains(location) ||
 				buttonRects.Values.Any(x => x.Contains(location)) ||
 				modRects.Values.Any(x => x.Contains(location)) ||
-				(VersionRect.Contains(location) && Item?.Package?.GetLocalPackage()?.Mod is not null);
+				(VersionRect.Contains(location) && Item?.GetPackage()?.IsCodeMod == true);
 		}
 	}
 }

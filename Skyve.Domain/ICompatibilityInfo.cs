@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
 namespace Skyve.Domain;
-public interface ICompatibilityInfo
+public interface ICompatibilityInfo : IPackageIdentity
 {
-	ILocalPackageData? Package { get; }
 	IPackageCompatibilityInfo? Info { get; }
 	IEnumerable<ICompatibilityItem> ReportItems { get; }
 }

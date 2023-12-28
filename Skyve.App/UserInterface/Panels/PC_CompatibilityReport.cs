@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 
+using Skyve.App.UserInterface.Dropdowns;
 using Skyve.App.UserInterface.Generic;
 using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility.Domain;
@@ -26,7 +27,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	private readonly List<string> searchTermsOr = new();
 	private readonly List<string> searchTermsAnd = new();
 	private readonly List<string> searchTermsExclude = new();
-	private readonly IncludeAllButton<ILocalPackageData> I_Actions;
+	private readonly IncludeAllButton<ICompatibilityInfo> I_Actions;
 
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly IBulkUtil _bulkUtil;
@@ -51,7 +52,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
 		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
-		I_Actions = new IncludeAllButton<ILocalPackageData>(() => ListControl.FilteredItems.SelectWhereNotNull(x => x.Package).ToList()!);
+		I_Actions = new IncludeAllButton<ICompatibilityInfo>(() => ListControl.FilteredItems.ToList()!);
 		I_Actions.ActionClicked += I_Actions_Click;
 		I_Actions.IncludeAllClicked += IncludeAll;
 		I_Actions.ExcludeAllClicked += ExcludeAll;
@@ -153,7 +154,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			{
 				var info = x.GetCompatibilityInfo(cacheOnly: true);
 
-				if (info.GetNotification() is not NotificationType.Unsubscribe && !_packageUtil.IsIncluded(x))
+				if (info.GetNotification() is not NotificationType.Unsubscribe && !_packageUtil.IsIncluded(x.LocalData!))
 				{
 					return null;
 				}
@@ -189,7 +190,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			ListControl.SetItems(reports);
 			ListControl.Visible = reports.Count > 0;
 
-			DD_Author.SetItems(reports.Select(x => x.Package));
+			DD_Author.SetItems(reports);
 		}
 		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report"); }
 	}
@@ -198,7 +199,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		var message = report.ReportItems.FirstOrDefault(x => x.Status.Notification == ListControl.CurrentGroup && !_compatibilityManager.IsSnoozed(x));
 
-		if (message is null || report.Package is null)
+		if (message is null || report.GetLocalPackage() is null)
 		{
 			return null;
 		}
@@ -211,7 +212,6 @@ public partial class PC_CompatibilityReport : PanelContent
 				_bulkUtil.SetBulkIncluded(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
 				_bulkUtil.SetBulkEnabled(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
 				_compatibilityManager.QuickUpdate(message);
-
 			}
 			,
 			StatusAction.RequiresConfiguration => () =>
@@ -222,7 +222,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			,
 			StatusAction.UnsubscribeThis => () =>
 			{
-				_subscriptionsManager.UnSubscribe(new[] { report.Package! });
+				_subscriptionsManager.UnSubscribe(new[] { report });
 				_compatibilityManager.QuickUpdate(message);
 			}
 			,
@@ -234,7 +234,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			,
 			StatusAction.ExcludeThis => () =>
 			{
-				var pp = report.Package?.GetLocalPackage();
+				var pp = report.GetLocalPackage();
 				if (pp is not null)
 				{
 					_packageUtil.SetIncluded(pp, false);
@@ -257,12 +257,12 @@ public partial class PC_CompatibilityReport : PanelContent
 			,
 			StatusAction.RequestReview => () =>
 			{
-				Program.MainForm.PushPanel(null, new PC_RequestReview(report.Package!));
+				Program.MainForm.PushPanel(null, new PC_RequestReview(report));
 			}
 			,
 			StatusAction.Switch => message.Packages.Length == 1 ? () =>
 			{
-				var pp1 = report.Package?.GetLocalPackage();
+				var pp1 = report.GetLocalPackage();
 				var pp2 = message.Packages[0]?.GetLocalPackage();
 
 				if (pp1 is not null && pp2 is not null)
@@ -282,9 +282,9 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<ICompatibilityInfo> e)
 	{
-		if (!e.DoNotDraw && e.Item.Package is not null)
+		if (!e.DoNotDraw)
 		{
-			e.DoNotDraw = IsFilteredOut(e.Item.Package);
+			e.DoNotDraw = IsFilteredOut(e.Item);
 		}
 	}
 
@@ -421,12 +421,12 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	protected virtual void SetIncluded(IEnumerable<ICompatibilityInfo> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.Package)!, included);
+		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, included);
 	}
 
 	protected virtual void SetEnabled(IEnumerable<ICompatibilityInfo> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.Package)!, enabled);
+		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, enabled);
 	}
 
 	private void I_Actions_Click(object sender, EventArgs e)
@@ -479,14 +479,14 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void DownloadAll(object sender, EventArgs e)
 	{
-		_downloadService.Download(ListControl.FilteredItems.Where(x => x.Package is null).Select(x => (IPackageIdentity)x));
+		_downloadService.Download(ListControl.FilteredItems);
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
 	private void ReDownloadAll(object sender, EventArgs e)
 	{
-		_downloadService.Download(ListControl.FilteredItems.Where(x => x.Package is not null).Cast<IPackageIdentity>());
+		_downloadService.Download(ListControl.FilteredItems);
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
@@ -508,7 +508,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	private void SubscribeAll(object sender, EventArgs e)
 	{
 		var removeBadPackages = false;
-		var steamIds = ListControl.SafeGetItems().AllWhere(x => x.Item.Package == null && x.Item.Package?.Id != 0);
+		var steamIds = ListControl.SafeGetItems().AllWhere(x => !x.Item.IsLocal() && x.Item.GetLocalPackage() is null);
 
 		foreach (var item in steamIds.ToList())
 		{
@@ -526,7 +526,7 @@ public partial class PC_CompatibilityReport : PanelContent
 				}
 
 				steamIds.Remove(item);
-				ListControl.RemoveAll(x => x.Package?.Id == item.Item.Package?.Id);
+				ListControl.RemoveAll(x => x.Id == item.Item.Id);
 			}
 		}
 
@@ -553,7 +553,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			var items = ListControl.FilteredItems.ToList();
 			foreach (var item in items)
 			{
-				if (item.Package?.IsLocal == true && item is IAsset asset)
+				if (item.IsLocal() && item is IAsset asset)
 				{
 					CrossIO.DeleteFile(asset.FilePath);
 				}
@@ -653,7 +653,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		FilterChanged(sender, e);
 	}
 
-	private bool IsFilteredOut(ILocalPackageData item)
+	private bool IsFilteredOut(IPackageIdentity item)
 	{
 		if (!firstFilterPassed)
 		{
@@ -662,7 +662,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.IsLocal)
+			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.GetPackage()?.IsLocal)
 			{
 				return true;
 			}
@@ -670,7 +670,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.LocalPackage is not null && (item.LocalPackage.IsIncluded(out var partiallyIncluded) || partiallyIncluded)))
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.IsIncluded(out _, out var partiallyIncluded) || partiallyIncluded))
 			{
 				return true;
 			}
@@ -678,7 +678,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (!item.IsCodeMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.LocalPackage?.IsEnabled()))
+			if (item.GetPackage()?.IsCodeMod == false || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.GetLocalPackage()?.IsEnabled()))
 			{
 				return true;
 			}
@@ -686,7 +686,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsCodeMod)
+			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.GetPackage()?.IsCodeMod)
 			{
 				return true;
 			}
@@ -704,21 +704,21 @@ public partial class PC_CompatibilityReport : PanelContent
 			//else
 			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
 			{
-				if (item.IsLocal || _packageUtil.GetStatus(item, out _) <= DownloadStatus.OK)
+				if (item.GetPackage()?.IsLocal == true || _packageUtil.GetStatus(item.GetLocalPackageIdentity(), out _) <= DownloadStatus.OK)
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)_packageUtil.GetStatus(item, out _))
+				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)_packageUtil.GetStatus(item.GetLocalPackageIdentity(), out _))
 				{
 					return true;
 				}
 			}
 		}
 
-		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.LocalPackage?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
+		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.GetLocalPackage()?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
 		{
 			return true;
 		}
@@ -738,7 +738,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (DD_Tags.SelectedItems.Any())
 		{
-			if (!_tagUtil.HasAllTags(item, DD_Tags.SelectedItems))
+			if (!_tagUtil.HasAllTags(item.GetPackage(), DD_Tags.SelectedItems))
 			{
 				return true;
 			}
@@ -746,7 +746,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
 		{
-			return !_playsetManager.IsPackageIncludedInPlayset(item, DD_Profile.SelectedItem).Result;
+			return !_playsetManager.IsPackageIncludedInPlayset(item.GetPackage(), DD_Profile.SelectedItem).Result;
 		}
 
 		if (!searchEmpty)
@@ -789,11 +789,11 @@ public partial class PC_CompatibilityReport : PanelContent
 		return false;
 	}
 
-	private bool Search(string searchTerm, ILocalPackageData item)
+	private bool Search(string searchTerm, IPackageIdentity item)
 	{
 		return searchTerm.SearchCheck(item.ToString())
 			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)
-			|| (!item.IsLocal ? item.Id.ToString() : Path.GetFileName(item.GetLocalPackage()?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+			|| (!item.IsLocal() ? item.Id.ToString() : Path.GetFileName(item.GetLocalPackage()?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
 	private void I_Refresh_Click(object sender, EventArgs e)

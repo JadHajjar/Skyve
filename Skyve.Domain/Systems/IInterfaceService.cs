@@ -9,5 +9,5 @@ public interface IInterfaceService
 {
 	void OpenParadoxLogin();
 	void OpenOptionsPage();
-	void ViewSpecificPackages(List<ILocalPackageData> packages, string title);
+	void ViewSpecificPackages(List<IPackageIdentity> packages, string title);
 }

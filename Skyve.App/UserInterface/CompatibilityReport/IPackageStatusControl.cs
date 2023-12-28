@@ -13,9 +13,9 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 	public readonly PackageStatusTypeDropDown<T> typeDropDown;
 
 	public event EventHandler? ValuesChanged;
-	public IPackage? CurrentPackage { get; }
+	public IPackageIdentity? CurrentPackage { get; }
 
-	public IPackageStatusControl(IPackage? currentPackage, TBase? item = default, bool restricted = false)
+	public IPackageStatusControl(IPackageIdentity? currentPackage, TBase? item = default, bool restricted = false)
 	{
 		InitializeComponent();
 

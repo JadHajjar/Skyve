@@ -1,5 +1,5 @@
 ﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_Packages : PC_ContentList<ILocalPackageData>
+public class PC_Packages : PC_ContentList<IPackage>
 {
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 	private readonly IPackageManager _contentManager = ServiceCenter.Get<IPackageManager>();
@@ -17,18 +17,18 @@ public class PC_Packages : PC_ContentList<ILocalPackageData>
 		Text = $"{Locale.Package.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override IEnumerable<ILocalPackageData> GetItems()
+	protected override IEnumerable<IPackage> GetItems()
 	{
 		if (_settings.UserSettings.FilterOutPackagesWithOneAsset || _settings.UserSettings.FilterOutPackagesWithMods)
 		{
 			return _contentManager.Packages.Where(x =>
 			{
-				if (_settings.UserSettings.FilterOutPackagesWithOneAsset && (x.Assets?.Count() ?? 0) == 1)
+				if (_settings.UserSettings.FilterOutPackagesWithOneAsset && (x.LocalData!.Assets.Length == 1))
 				{
 					return false;
 				}
 
-				if (_settings.UserSettings.FilterOutPackagesWithMods && x.Mod is not null)
+				if (_settings.UserSettings.FilterOutPackagesWithMods && x.IsCodeMod)
 				{
 					return false;
 				}
@@ -46,15 +46,15 @@ public class PC_Packages : PC_ContentList<ILocalPackageData>
 
 		foreach (var item in _contentManager.Packages)
 		{
-			if (item.IsIncluded())
+			if (item.LocalData!.IsIncluded())
 			{
 				packagesIncluded++;
 
-				if (item.Mod is not null)
+				if (item.IsCodeMod)
 				{
 					modsIncluded++;
 
-					if (item.Mod.IsEnabled())
+					if (item.LocalData!.IsEnabled())
 					{
 						modsEnabled++;
 					}

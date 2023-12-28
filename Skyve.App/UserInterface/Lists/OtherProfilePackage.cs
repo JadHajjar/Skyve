@@ -4,13 +4,13 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Lists;
 public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, OtherProfilePackage.Rectangles>
 {
-	public IPackage Package { get; }
+	public IPackageIdentity Package { get; }
 
 	private readonly IPlaysetManager _profileManager;
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
 
-	public OtherProfilePackage(IPackage package)
+	public OtherProfilePackage(IPackageIdentity package)
 	{
 		ServiceCenter.Get(out _notifier, out _settings, out _profileManager);
 		HighlightOnHover = true;
@@ -80,8 +80,8 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			var isIncluded = await _profileManager.IsPackageIncludedInPlayset(Package, item.Item);
-			_profileManager.SetIncludedFor(Package, item.Item, !isIncluded);
+			var isIncluded = await _profileManager.IsPackageIncludedInPlayset(Package.GetPackage(), item.Item);
+			_profileManager.SetIncludedFor(Package.GetPackage(), item.Item, !isIncluded);
 		}
 
 		if (rects.LoadRect.Contains(e.Location))
@@ -120,7 +120,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 
 		base.OnPaintItemList(e);
 
-		var isIncluded = await _profileManager.IsPackageIncludedInPlayset(Package, e.Item);
+		var isIncluded = await _profileManager.IsPackageIncludedInPlayset(Package.GetPackage(), e.Item);
 
 		if (isIncluded)
 		{

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_PackagePage : PanelContent
 {
-	private readonly ItemListControl<IPackage>? LC_Items;
+	private readonly ItemListControl<IPackageIdentity>? LC_Items;
 	private readonly ContentList<IPackage>? LC_References;
 	private TagControl? addTagControl;
 
@@ -18,15 +18,10 @@ public partial class PC_PackagePage : PanelContent
 	private readonly IPackageUtil _packageUtil;
 	private readonly ISettings _settings;
 
-	public IPackage Package { get; }
+	public IPackageIdentity Package { get; }
 
-	public PC_PackagePage(IPackage package, bool compatibilityPage = false)
+	public PC_PackagePage(IPackageIdentity package, bool compatibilityPage = false)
 	{
-		if (package is not ILocalPackageData && package.LocalPackage is ILocalPackageData localPackage)
-		{
-			package = localPackage;
-		}
-
 		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _packageUtil, out _settings);
 
 		InitializeComponent();
@@ -59,7 +54,7 @@ public partial class PC_PackagePage : PanelContent
 
 		if (Package is ILocalPackageData p && p.Assets is not null && p.Assets.Length > 0)
 		{
-			LC_Items = new ItemListControl<IPackage>(SkyvePage.SinglePackage)
+			LC_Items = new ItemListControl<IPackageIdentity>(SkyvePage.SinglePackage)
 			{
 				IsPackagePage = true,
 				Dock = DockStyle.Fill
@@ -114,7 +109,7 @@ public partial class PC_PackagePage : PanelContent
 			tabs.Remove(T_References);
 		}
 
-		var requirements = package.Requirements.ToList();
+		var requirements = package.GetWorkshopInfo()?.Requirements.ToList() ?? new();
 		if (requirements.Count > 0)
 		{
 			foreach (var requirement in requirements)
@@ -149,12 +144,12 @@ public partial class PC_PackagePage : PanelContent
 
 	protected void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, included);
+		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, included);
 	}
 
 	protected void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, enabled);
+		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, enabled);
 	}
 
 	protected LocaleHelper.Translation GetItemText()
@@ -166,17 +161,17 @@ public partial class PC_PackagePage : PanelContent
 	{
 		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
 
-		foreach (var item in LC_References!.Items.SelectWhereNotNull(x => x.LocalParentPackage))
+		foreach (var item in LC_References!.Items.SelectWhereNotNull(x => x.GetLocalPackageIdentity()))
 		{
 			if (item?.IsIncluded() == true)
 			{
 				packagesIncluded++;
 
-				if (item.Mod is not null)
+				if (item.GetPackage()?.IsCodeMod == true)
 				{
 					modsIncluded++;
 
-					if (item.Mod.IsEnabled())
+					if (item.IsEnabled())
 					{
 						modsEnabled++;
 					}
@@ -201,12 +196,7 @@ public partial class PC_PackagePage : PanelContent
 
 	private void AddTagControl_MouseClick(object sender, MouseEventArgs e)
 	{
-		if (Package.LocalPackage is null)
-		{
-			return;
-		}
-
-		var frm = EditTags(new[] { Package.LocalPackage });
+		var frm = EditTags(new[] { Package });
 
 		frm.FormClosed += (_, _) =>
 		{
@@ -217,7 +207,7 @@ public partial class PC_PackagePage : PanelContent
 		};
 	}
 
-	private static EditTagsForm EditTags(IEnumerable<ILocalPackageData> item)
+	private static EditTagsForm EditTags(IEnumerable<IPackageIdentity> item)
 	{
 		var frm = new EditTagsForm(item);
 
@@ -242,7 +232,7 @@ public partial class PC_PackagePage : PanelContent
 			FLP_Tags.Controls.Add(control);
 		}
 
-		if (Package.LocalPackage is not null)
+		//if (Package.LocalPackage is not null)
 		{
 			addTagControl = new TagControl { ImageName = "I_Add" };
 			addTagControl.MouseClick += AddTagControl_MouseClick;
@@ -281,7 +271,7 @@ public partial class PC_PackagePage : PanelContent
 		label1.Text = LocaleCR.Usage;
 		label2.Text = cr.Usage.GetValues().If(x => x.Count() == Enum.GetValues(typeof(PackageUsage)).Length, x => Locale.AnyUsage.One, x => x.ListStrings(x => LocaleCR.Get(x.ToString()), ", "));
 		label3.Text = LocaleCR.PackageType;
-		label4.Text = cr.Type == PackageType.GenericPackage ? (Package.IsCodeMod ? Locale.Mod : Locale.Asset) : LocaleCR.Get(cr.Type.ToString());
+		label4.Text = cr.Type == PackageType.GenericPackage ? (Package.GetPackage()?.IsCodeMod == true ? Locale.Mod : Locale.Asset) : LocaleCR.Get(cr.Type.ToString());
 		label5.Text = LocaleCR.Links;
 		label6.Text = LocaleSlickUI.Tags;
 		L_Requirements.Text = LocaleHelper.GetGlobalText("CRT_RequiredPackages");

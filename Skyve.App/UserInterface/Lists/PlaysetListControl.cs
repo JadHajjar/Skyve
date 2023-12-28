@@ -294,19 +294,20 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 			{
 				Loading = true;
 				opening = item;
-				packages = (await ServiceCenter.Get<SkyveApiUtil>().GetUserProfileContents(item.ProfileId))?.Packages;
+				throw new NotImplementedException();
+				//packages = (await ServiceCenter.Get<SkyveApiUtil>().GetUserProfileContents(item.ProfileId))?.Packages;
 				opening = null;
 				Loading = false;
 			}
 			else
 			{
-				packages = item.Packages;
+				//packages = item.Packages;
 			}
 
-			Program.MainForm.PushPanel(new PC_GenericPackageList(packages ?? Enumerable.Empty<IPackage>(), true)
-			{
-				Text = item.Name
-			});
+			//Program.MainForm.PushPanel(new PC_GenericPackageList(packages ?? Enumerable.Empty<IPackage>(), true)
+			//{
+			//	Text = item.Name
+			//});
 		}
 		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadPlayset, form: Program.MainForm)); }
 	}

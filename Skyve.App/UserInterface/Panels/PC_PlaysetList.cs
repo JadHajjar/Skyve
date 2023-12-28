@@ -393,12 +393,13 @@ public partial class PC_PlaysetList : PanelContent
 
 			if (profile is not null)
 			{
-				var panel = new PC_GenericPackageList(profile.Packages, true)
-				{
-					Text = profile.Name
-				};
+				throw new NotImplementedException();
+				//var panel = new PC_GenericPackageList(profile.Packages, true)
+				//{
+				//	Text = profile.Name
+				//};
 
-				Form.PushPanel(panel);
+				//Form.PushPanel(panel);
 			}
 		}
 		catch (Exception ex) { ShowPrompt(ex, Locale.FailedToImportPlayset); }

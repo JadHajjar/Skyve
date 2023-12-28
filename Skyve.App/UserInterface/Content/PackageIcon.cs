@@ -6,7 +6,7 @@ namespace Skyve.App.UserInterface.Content;
 public class PackageIcon : SlickImageControl
 {
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-	public IPackage? Package { get; set; }
+	public IPackageIdentity? Package { get; set; }
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 	public bool Collection { get; set; }
 	[Category("Appearance"), DefaultValue(true)]
@@ -35,7 +35,7 @@ public class PackageIcon : SlickImageControl
 
 		if (Image == null)
 		{
-			using var image = (Collection ? Properties.Resources.I_CollectionIcon : Package?.IsCodeMod ?? false ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
+			using var image = (Collection ? Properties.Resources.I_CollectionIcon : Package?.GetPackage()?.IsCodeMod ?? false ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
 			var iconRect = ClientRectangle.CenterR(image.Size);
 
 			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.IconColor), ClientRectangle, (int)(10 * UI.FontScale));
@@ -45,7 +45,7 @@ public class PackageIcon : SlickImageControl
 		}
 		else
 		{
-			if (Package?.IsLocal ?? false)
+			if (Package?.IsLocal() ?? false)
 			{
 				using var unsatImg = new Bitmap(Image, Size).Tint(Sat: 0);
 				e.Graphics.DrawRoundedImage(unsatImg, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);

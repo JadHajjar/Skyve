@@ -1,7 +1,7 @@
 ﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_GenericPackageList : PC_ContentList<IPackage>
+public class PC_GenericPackageList : PC_ContentList<IPackageIdentity>
 {
-	private readonly List<IPackage> _items = new();
+	private readonly List<IPackageIdentity> _items = new();
 	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
 	public override SkyvePage Page => SkyvePage.Generic;
@@ -16,50 +16,33 @@ public class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		if (!groupItems)
 		{
-			foreach (var item in items)
-			{
-				if (item is IPackage localPackage)
-				{
-					_items.Add(localPackage);
-				}
-				else
-				{
-					_items.Add(new GenericWorkshopPackage(item));
-				}
-			}
+			_items.AddRange(items);
 		}
 		else
 		{
-			foreach (var package in items.GroupBy(x => x.Id))
+			foreach (var packages in items.GroupBy(x => x.Id))
 			{
-				if (package.Key != 0)
+				if (packages.Key != 0)
 				{
-					if (compatibilityManager.IsBlacklisted(package.First()))
+					if (compatibilityManager.IsBlacklisted(packages.First()))
 					{
 						continue;
 					}
 
-					var steamPackage = package.Last();
+					var package = packages.Last();
 
-					if (steamPackage.GetWorkshopInfo()?.IsRemoved == true)
+					if (package.GetWorkshopInfo()?.IsRemoved == true)
 					{
 						continue;
 					}
 
-					_items.Add(steamPackage is IPackage localPackage ? localPackage : new GenericWorkshopPackage(steamPackage));
+					_items.Add(package);
 				}
 				else
 				{
-					foreach (var item in package)
+					foreach (var item in packages)
 					{
-						if (item is IPackage localPackage)
-						{
-							_items.Add(localPackage);
-						}
-						else
-						{
-							_items.Add(new GenericWorkshopPackage(item));
-						}
+						_items.Add(item);
 					}
 				}
 			}
@@ -85,7 +68,7 @@ public class PC_GenericPackageList : PC_ContentList<IPackage>
 		LC_Items.ListControl.Invalidate();
 	}
 
-	protected override IEnumerable<IPackage> GetItems()
+	protected override IEnumerable<IPackageIdentity> GetItems()
 	{
 		return _items;
 	}
@@ -107,11 +90,11 @@ public class PC_GenericPackageList : PC_ContentList<IPackage>
 			{
 				packagesIncluded++;
 
-				if (package.Mod is not null)
+				if (package.Package.IsCodeMod)
 				{
 					modsIncluded++;
 
-					if (package.Mod.IsEnabled())
+					if (package.IsEnabled())
 					{
 						modsEnabled++;
 					}

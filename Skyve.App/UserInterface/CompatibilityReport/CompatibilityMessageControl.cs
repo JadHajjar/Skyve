@@ -409,7 +409,7 @@ public class CompatibilityMessageControl : SlickControl
 			}
 			else if (package is not null)
 			{
-				Program.MainForm.PushPanel(null, package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) : new PC_PackagePage(package));
+				Program.MainForm.PushPanel(null, package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) : new PC_PackagePage(item));
 			}
 			else
 			{

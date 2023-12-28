@@ -15,16 +15,12 @@ using System.Linq;
 namespace Skyve.Systems.Compatibility.Domain;
 public class CompatibilityInfo : ICompatibilityInfo
 {
-	private IPackageIdentity? identity;
-	private DtoLocalPackage? dtoPackage;
-
-	[JsonIgnore] public IPackage? Package => (dtoPackage ?? identity)?.GetPackage();
-	[JsonIgnore] public ILocalPackageData? LocalPackage => (dtoPackage ?? identity)?.GetLocalPackage();
-	[JsonIgnore] public IndexedPackage? Data { get; }
+	public ulong Id { get; set; }
+	public string Name { get; set; }
+	public string Url { get; set; }
 	public List<ReportItem> ReportItems { get; set; }
-	public DtoLocalPackage? DtoPackage { get => dtoPackage ?? identity?.CloneTo<IPackageIdentity, DtoLocalPackage>(); set => dtoPackage = value; }
+	[JsonIgnore] public IndexedPackage? Data { get; }
 
-	ILocalPackageData? ICompatibilityInfo.Package => LocalPackage;
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data?.Package;
 	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems
 	{
@@ -37,7 +33,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 
 			var id = Data?.Package.SteamId;
 
-			if (id is not null and not 0 && LocalPackage?.IsIncluded() == false)
+			if (id is not null and not 0 && this.IsIncluded(out _) == false)
 			{
 				var requiredFor = ServiceCenter.Get<ICompatibilityManager, CompatibilityManager>().GetRequiredFor(id.Value);
 
@@ -45,11 +41,11 @@ public class CompatibilityInfo : ICompatibilityInfo
 				{
 					yield return new ReportItem
 					{
-						Package = Package,
+						Package = this.GetPackage(),
 						PackageId = Data?.Package.SteamId ?? 0,
 						Type = ReportType.RequiredItem,
 						Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
-						PackageName = Package?.CleanName(true),
+						PackageName = this.CleanName(true),
 						Packages = requiredFor.ToArray(x => new PseudoPackage(x))
 					};
 				}
@@ -60,12 +56,16 @@ public class CompatibilityInfo : ICompatibilityInfo
 	[Obsolete("Reserved for DTO", true)]
 	public CompatibilityInfo()
 	{
+		Name = string.Empty;
+		Url = string.Empty;
 		ReportItems = new();
 	}
 
 	public CompatibilityInfo(IPackageIdentity package, IndexedPackage? packageData)
 	{
-		identity = package;
+		Id = package.Id;
+		Name = package.Name;
+		Url = package.Url ?? string.Empty;
 		Data = packageData;
 		ReportItems = new();
 	}
@@ -74,7 +74,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
-			Package = Package,
+			Package = this.GetPackage(),
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
@@ -87,7 +87,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
-			Package = Package,
+			Package = this.GetPackage(),
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
@@ -100,7 +100,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
-			Package = Package,
+			Package = this.GetPackage(),
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
@@ -109,30 +109,22 @@ public class CompatibilityInfo : ICompatibilityInfo
 		});
 	}
 
-	#region DtoLocalPackage
-#nullable disable
-
-	public class DtoLocalPackage : IPackageIdentity
+	public bool GetThumbnail(out Bitmap? thumbnail, out string? thumbnailUrl)
 	{
-		public ulong Id { get; }
-		public string Name { get; }
-		public string Url { get; }
+		var info = this.GetWorkshopInfo();
 
-		public bool GetThumbnail(out Bitmap thumbnail, out string thumbnailUrl)
+		if (info is not null)
 		{
-			var info = this.GetWorkshopInfo();
-
-			if (info is not null)
-			{
-				return info.GetThumbnail(out thumbnail, out thumbnailUrl);
-			}
-
-			thumbnail = null;
-			thumbnailUrl = null;
-			return false;
+			return info.GetThumbnail(out thumbnail, out thumbnailUrl);
 		}
+
+		thumbnail = null;
+		thumbnailUrl = null;
+		return false;
 	}
 
-#nullable enable
-	#endregion
+	public override string ToString()
+	{
+		return Name;
+	}
 }

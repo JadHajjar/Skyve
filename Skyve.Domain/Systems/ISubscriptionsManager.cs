@@ -13,7 +13,7 @@ public interface ISubscriptionsManager
 
 	void Start();
 	void CancelPendingItems();
-	bool IsSubscribing(IPackage package);
+	bool IsSubscribing(IPackageIdentity package);
 	Task<bool> Subscribe(IEnumerable<IPackageIdentity> ids);
 	Task<bool> UnSubscribe(IEnumerable<IPackageIdentity> ids);
 }

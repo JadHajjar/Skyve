@@ -8,12 +8,10 @@ public partial class ItemListControl<T>
 {
 	private void OnPaintItemCompactList(ItemPaintEventArgs<T, Rectangles> e)
 	{
-		var localPackage = e.Item.LocalPackage;
-		var localParentPackage = localPackage?.GetLocalPackage();
+		var package = e.Item.GetPackage();
 		var workshopInfo = e.Item.GetWorkshopInfo();
-		var partialIncluded = false;
 		var isPressed = false;
-		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(e.Item.LocalPackage!, out partialIncluded)) || partialIncluded;
+		var isIncluded = e.Item.IsIncluded(out _, out var partialIncluded) || partialIncluded;
 
 		var compatibilityReport = e.Item.GetCompatibilityInfo();
 		var notificationType = compatibilityReport?.GetNotification();
@@ -51,19 +49,19 @@ public partial class ItemListControl<T>
 
 		e.Graphics.SetClip(new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y - Padding.Top + 1, e.ClipRectangle.Width, e.ClipRectangle.Height + Padding.Vertical - 2));
 
-		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
-		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
+		DrawTitleAndTagsAndVersionForList(e, package?.LocalData, workshopInfo, isPressed);
+		DrawIncludedButton(e, isIncluded, partialIncluded, package?.LocalData, out var activeColor);
 
 		if (workshopInfo?.Author is not null)
 		{
 			DrawAuthor(e, workshopInfo.Author, 0);
 		}
-		else if (e.Item.IsLocal)
+		else if (e.Item.IsLocal())
 		{
-			DrawFolderName(e, localParentPackage!, 0);
+			DrawFolderName(e, package!.LocalData!, 0);
 		}
 
-		DrawButtons(e, isPressed, localParentPackage, workshopInfo);
+		DrawButtons(e, isPressed, package?.LocalData, workshopInfo);
 
 		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
 
@@ -71,7 +69,7 @@ public partial class ItemListControl<T>
 
 		e.Graphics.ResetClip();
 
-		if (!isIncluded && localPackage is not null && !e.HoverState.HasFlag(HoverState.Hovered))
+		if (!isIncluded && package?.LocalData is not null && !e.HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(Padding));
@@ -87,12 +85,10 @@ public partial class ItemListControl<T>
 			return;
 		}
 
-		var localPackage = e.Item.LocalPackage;
-		var localParentPackage = localPackage?.GetLocalPackage();
+		var package = e.Item.GetPackage();
 		var workshopInfo = e.Item.GetWorkshopInfo();
-		var partialIncluded = false;
 		var isPressed = false;
-		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(e.Item.LocalPackage!, out partialIncluded)) || partialIncluded;
+		var isIncluded = e.Item.IsIncluded(out _, out var partialIncluded) || partialIncluded;
 
 		var compatibilityReport = e.Item.GetCompatibilityInfo();
 		var notificationType = compatibilityReport?.GetNotification();
@@ -129,8 +125,8 @@ public partial class ItemListControl<T>
 		base.OnPaintItemList(e);
 
 		DrawThumbnail(e);
-		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
-		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
+		DrawTitleAndTagsAndVersionForList(e, package?.LocalData, workshopInfo, isPressed);
+		DrawIncludedButton(e, isIncluded, partialIncluded, package?.LocalData, out var activeColor);
 
 		var scoreX = IsPackagePage ? 0 : DrawScore(e, workshopInfo);
 
@@ -145,13 +141,13 @@ public partial class ItemListControl<T>
 			{
 				DrawAuthor(e, workshopInfo.Author, scoreX);
 			}
-			else if (e.Item.IsLocal)
+			else if (e.Item.IsLocal())
 			{
-				DrawFolderName(e, localParentPackage!, scoreX);
+				DrawFolderName(e, package!.LocalData!, scoreX);
 			}
 		}
 
-		var maxTagX = DrawButtons(e, isPressed, localParentPackage, workshopInfo);
+		var maxTagX = DrawButtons(e, isPressed, package?.LocalData, workshopInfo);
 
 		if (!IsPackagePage)
 		{
@@ -171,7 +167,7 @@ public partial class ItemListControl<T>
 
 		e.Graphics.ResetClip();
 
-		if (!isIncluded && localPackage is not null && !e.HoverState.HasFlag(HoverState.Hovered))
+		if (!isIncluded && package?.LocalData is not null && !e.HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(Padding));
@@ -344,26 +340,25 @@ public partial class ItemListControl<T>
 	{
 		activeColor = default;
 
-		if (package is null && e.Item.IsLocal)
+		if (package is null && e.Item.IsLocal())
 		{
 			return; // missing local item
 		}
 
 		var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
 		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
-		var mod = package?.Mod;
-		var required = mod is not null && _modLogicManager.IsRequired(mod, _modUtil);
+		var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
 
 		DynamicIcon? enabl = null;
-		if (_settings.UserSettings.AdvancedIncludeEnable && mod is not null)
+		if (_settings.UserSettings.AdvancedIncludeEnable && package is not null)
 		{
-			enabl = new DynamicIcon(mod.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
+			enabl = new DynamicIcon(package.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
 
 			if (isIncluded)
 			{
-				activeColor = partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled() ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor;
+				activeColor = partialIncluded ? FormDesign.Design.YellowColor : package.IsEnabled() ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor;
 			}
-			else if (mod.IsEnabled())
+			else if (package.IsEnabled())
 			{
 				activeColor = FormDesign.Design.YellowColor;
 			}
@@ -415,7 +410,7 @@ public partial class ItemListControl<T>
 
 		var includedSize = 28;
 
-		if (_settings.UserSettings.AdvancedIncludeEnable && item.GetLocalPackage()?.Mod is not null)
+		if (_settings.UserSettings.AdvancedIncludeEnable && item.GetPackage()?.IsCodeMod == true)
 		{
 			rects.EnabledRect = rects.IncludedRect = rectangle.Pad(Padding).Align(new Size((int)(includedSize * UI.FontScale), CompactList ? (int)(22 * UI.FontScale) : (rects.IconRect.Height / 2)), ContentAlignment.MiddleLeft);
 
