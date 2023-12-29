@@ -175,7 +175,7 @@ public class CompatibilityManager : ICompatibilityManager
 		catch { }
 	}
 
-	public void Start(List<ILocalPackageData> packages)
+	public void Start(List<IPackage> packages)
 	{
 		try
 		{

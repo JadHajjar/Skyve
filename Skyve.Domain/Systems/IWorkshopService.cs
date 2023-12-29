@@ -19,7 +19,7 @@ public interface IWorkshopService
 	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(PackageSorting sorting, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null, bool all = false);
 #if CS2
 	Task Initialize();
-	Task<List<ILocalPackageData>> GetInstalledPackages();
+	Task<List<IPackage>> GetInstalledPackages();
 	Task<List<ICustomPlayset>> GetAllPlaysets(bool localOnly);
 	Task Login();
 #endif

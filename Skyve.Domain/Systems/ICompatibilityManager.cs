@@ -17,7 +17,7 @@ public interface ICompatibilityManager
 	ulong GetIdFromModName(string fileName);
 	bool IsBlacklisted(IPackageIdentity package);
 	bool IsSnoozed(ICompatibilityItem reportItem);
-	void Start(List<ILocalPackageData> packages);
+	void Start(List<IPackage> packages);
 	void ResetCache();
 	void ResetSnoozes();
 	void ToggleSnoozed(ICompatibilityItem reportItem);

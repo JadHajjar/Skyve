@@ -8,6 +8,6 @@ public interface IModUtil
 	void SetIncluded(ILocalPackageIdentity mod, bool value);
 	void SetEnabled(ILocalPackageIdentity mod, bool value);
 	void SaveChanges();
-	bool GetModInfo(ILocalPackageIdentity package, out string? modDll, out Version? version);
+	bool GetModInfo(string folder, out string? modDll, out Version? version);
 	int GetLoadOrder(IPackage package);
 }

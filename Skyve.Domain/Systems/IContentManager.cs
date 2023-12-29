@@ -5,9 +5,9 @@ namespace Skyve.Domain.Systems;
 
 public interface IContentManager
 {
-	Task<List<ILocalPackageData>> LoadContents();
+	Task<List<IPackage>> LoadContents();
 	void ContentUpdated(string path, bool builtIn, bool workshop, bool self);
-	IEnumerable<ILocalPackageData> GetReferencingPackage(ulong steamId, bool includedOnly);
-	void RefreshPackage(ILocalPackageData package, bool self);
+	IEnumerable<IPackage> GetReferencingPackage(ulong steamId, bool includedOnly);
+	void RefreshPackage(IPackage package, bool self);
 	void StartListeners();
 }
