@@ -319,7 +319,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (workshopInfo?.Requirements.Any() ?? false)
 		{
-			info.Interactions.AddRange(workshopInfo.Requirements.GroupBy(x => x.Optional).Select(o =>
+			info.Interactions.AddRange(workshopInfo.Requirements.GroupBy(x => x.IsOptional).Select(o =>
 				new PackageInteraction
 				{
 					Type = o.Key ? InteractionType.OptionalPackages : InteractionType.RequiredPackages,
