@@ -15,7 +15,7 @@ public class CompatibilityPackageData : IDynamicSql
 #endif
 {
 	[DynamicSqlProperty(PrimaryKey = true)]
-	public ulong SteamId { get; set; }
+	public ulong Id { get; set; }
 	[DynamicSqlProperty]
 	public string? Name { get; set; }
 	[DynamicSqlProperty]

@@ -1,9 +1,9 @@
 <Project>
-	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
+	<PropertyGroup Condition="'$(BuildType)' == 'Stable'">
 		<AssemblyVersion>3.3.2.1</AssemblyVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)' != 'Stable'">
+	<PropertyGroup Condition="'$(BuildType)' != 'Stable'">
 		<AssemblyVersion>3.3.2.1</AssemblyVersion>
 	</PropertyGroup>
 

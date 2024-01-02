@@ -37,7 +37,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 	private readonly IModUtil _modUtil;
 	private readonly ITagsService _tagsService;
 
-	public ItemListControl(SkyvePage page)
+	protected ItemListControl(SkyvePage page)
 	{
 		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
 
@@ -62,8 +62,6 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		{
 			CompactList = false;
 		}
-
-		GridItemSize = new Size(390, 140);
 	}
 
 	public bool SortDescending { get; private set; }
@@ -153,7 +151,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		items = sorting switch
 		{
 			PackageSorting.FileSize => items
-				.OrderBy(x => x.Item.GetLocalPackage()?.LocalSize),
+				.OrderBy(x => x.Item.GetLocalPackage()?.FileSize),
 
 			PackageSorting.Name => items
 				.OrderBy(x => x.Item.ToString()),
@@ -182,7 +180,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				.OrderBy(x => x.Item.GetWorkshopInfo()?.Subscribers),
 
 			PackageSorting.Votes => items
-				.OrderBy(x => x.Item.GetWorkshopInfo()?.Score),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.VoteCount),
 
 			PackageSorting.LoadOrder => items
 				.OrderBy(x => !x.Item.GetLocalPackage()?.IsIncluded())
@@ -204,7 +202,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		return items;
 	}
 
-	protected override void OnItemMouseClick(DrawableItem<T, Rectangles> item, MouseEventArgs e)
+	protected override async void OnItemMouseClick(DrawableItem<T, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -221,6 +219,23 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 		var rects = item.Rectangles;
 		var filter = ModifierKeys.HasFlag(Keys.Alt) != _settings.UserSettings.FlipItemCopyFilterAction;
+
+#if CS2
+		if (rects.IncludedRect.Contains(e.Location))
+		{
+			var isIncluded = item.Item.IsIncluded(out _, out var partialIncluded) || partialIncluded;
+			var isEnabled = item.Item.IsEnabled(out _);
+
+			if (!isIncluded)
+			{
+				await _subscriptionsManager.Subscribe([item.Item]);
+			}
+			else
+			{
+				_packageUtil.SetEnabled(item.Item.GetLocalPackageIdentity()!, !isEnabled);
+			}
+		}
+#else
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
@@ -259,8 +274,9 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 			return;
 		}
+#endif
 
-		if (rects.FolderRect.Contains(e.Location))
+			if (rects.FolderRect.Contains(e.Location))
 		{
 			PlatformUtil.OpenFolder(item.Item.GetLocalPackage()?.FilePath);
 			return;
@@ -357,7 +373,11 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 		if (rects.ScoreRect.Contains(e.Location))
 		{
+#if CS1
 			new RatingInfoForm { Icon = Program.MainForm?.Icon }.ShowDialog(Program.MainForm);
+#else
+			await ServiceCenter.Get<IWorkshopService>().ToggleVote(item.Item);
+#endif
 			return;
 		}
 
@@ -537,18 +557,6 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		return false;
 	}
 
-	protected override ItemListControl<T>.Rectangles GenerateRectangles(T item, Rectangle rectangle)
-	{
-		if (GridView)
-		{
-			return GenerateGridRectangles(item, rectangle);
-		}
-		else
-		{
-			return GenerateListRectangles(item, rectangle);
-		}
-	}
-
 	public class Rectangles : IDrawableItemRectangles<T>
 	{
 		public Dictionary<ITag, Rectangle> TagRects = new();
@@ -718,7 +726,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				var workshopInfo = Item.GetWorkshopInfo();
 				if (workshopInfo is not null)
 				{
-					text = string.Format(Locale.RatingCount, workshopInfo.ScoreVoteCount.ToString("N0"), $"({workshopInfo.Score}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0"));
+					text = string.Format(Locale.RatingCount, workshopInfo.VoteCount.ToString("N0"), $"({workshopInfo.VoteCount}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0"));
 					point = ScoreRect.Location;
 					return true;
 				}

@@ -61,7 +61,10 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _profileManager, out _tagUtil, out _packageUtil, out _downloadService);
 
-		ListControl = new(Page) { Dock = DockStyle.Fill, Margin = new() };
+		if (_settings.UserSettings.ExtendedListInfo)
+			ListControl = new ItemListControl<T>.Complex(Page) { Dock = DockStyle.Fill, Margin = new() };
+		else
+			ListControl = new ItemListControl<T>.Simple(Page) { Dock = DockStyle.Fill, Margin = new() };
 
 		InitializeComponent();
 
@@ -368,7 +371,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 	{
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.Sorting = (int)DD_Sorting.SelectedItem;
-		_settings.SessionSettings.Save();
+		_settings.UserSettings.Save();
 
 		ListControl.SetSorting(DD_Sorting.SelectedItem, ListControl.SortDescending);
 	}
@@ -681,7 +684,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.DescendingSort = ListControl.SortDescending;
-		_settings.SessionSettings.Save();
+		_settings.UserSettings.Save();
 
 		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
 	}
@@ -699,9 +702,13 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 			, new (Locale.SelectAll, "I_DragDrop", ListControl.SelectedItemsCount < ListControl.FilteredItems.Count(), action: ListControl.SelectAll)
 			, new (Locale.DeselectAll, "I_Select", ListControl.SelectedItemsCount > 0, action: ListControl.DeselectAll)
 			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
+#if CS2
+			, new (Locale.SubscribeAll, "I_Paradox", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
+#else
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))
 			, new (Locale.ReDownloadAll, "I_ReDownload", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
+#endif
 			, new (string.Empty)
 			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
@@ -738,6 +745,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		I_Actions.Invalidate();
 	}
 
+#if CS1
 	private void DownloadAll(object sender, EventArgs e)
 	{
 		_downloadService.Download(ListControl.FilteredItems.Where(x => x.GetLocalPackage() is null).Select(x => (IPackageIdentity)x));
@@ -751,6 +759,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
+#endif
 
 	private void UnsubscribeAll(object sender, EventArgs e)
 	{
@@ -838,7 +847,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = ListControl.GridView;
 		settings.Compact = ListControl.CompactList;
-		_settings.SessionSettings.Save();
+		_settings.UserSettings.Save();
 	}
 
 	private void B_GridView_Click(object sender, EventArgs e)
@@ -852,7 +861,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = ListControl.GridView;
 		settings.Compact = ListControl.CompactList;
-		_settings.SessionSettings.Save();
+		_settings.UserSettings.Save();
 	}
 
 	private void B_CompactList_Click(object sender, EventArgs e)
@@ -866,6 +875,6 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = ListControl.GridView;
 		settings.Compact = ListControl.CompactList;
-		_settings.SessionSettings.Save();
+		_settings.UserSettings.Save();
 	}
 }

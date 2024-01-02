@@ -122,7 +122,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		base.UIChanged();
 
-		PB_Loader.Size = UI.Scale(new System.Drawing.Size(32, 32), UI.FontScale);
+		PB_Loader.Size = UI.Scale(new Size(32, 32), UI.FontScale);
 		PB_Loader.Location = ClientRectangle.Center(PB_Loader.Size);
 
 		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
@@ -477,19 +477,19 @@ public partial class PC_CompatibilityReport : PanelContent
 		I_Actions.Invalidate();
 	}
 
-	private void DownloadAll(object sender, EventArgs e)
-	{
-		_downloadService.Download(ListControl.FilteredItems);
-		ListControl.Invalidate();
-		I_Actions.Invalidate();
-	}
+	//private void DownloadAll(object sender, EventArgs e)
+	//{
+	//	_downloadService.Download(ListControl.FilteredItems);
+	//	ListControl.Invalidate();
+	//	I_Actions.Invalidate();
+	//}
 
-	private void ReDownloadAll(object sender, EventArgs e)
-	{
-		_downloadService.Download(ListControl.FilteredItems);
-		ListControl.Invalidate();
-		I_Actions.Invalidate();
-	}
+	//private void ReDownloadAll(object sender, EventArgs e)
+	//{
+	//	_downloadService.Download(ListControl.FilteredItems);
+	//	ListControl.Invalidate();
+	//	I_Actions.Invalidate();
+	//}
 
 	private void UnsubscribeAll(object sender, EventArgs e)
 	{

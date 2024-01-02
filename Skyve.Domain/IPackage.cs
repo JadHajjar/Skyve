@@ -1,6 +1,7 @@
 ﻿namespace Skyve.Domain;
 public interface IPackage : IPackageIdentity
 {
+	string? Version { get; }
 	bool IsCodeMod { get; }
 	bool IsLocal { get; }
 #if CS1
@@ -8,4 +9,8 @@ public interface IPackage : IPackageIdentity
 #endif
 	ILocalPackageData? LocalData { get; }
 	IWorkshopInfo? WorkshopInfo { get; }
+//#if CS2
+//	bool IsIncluded(int playsetId);
+//	bool IsEnabled(int playsetId);
+//#endif
 }

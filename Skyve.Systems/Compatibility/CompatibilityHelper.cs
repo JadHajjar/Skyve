@@ -155,7 +155,7 @@ public class CompatibilityHelper
 			_ => ReportType.Compatibility
 		};
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && _packageAvailabilityService.IsPackageEnabled(info.Data.Package.SteamId, false))
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && _packageAvailabilityService.IsPackageEnabled(info.Data.Package.Id, false))
 		{
 			lock (_missingItems)
 			{
@@ -163,11 +163,11 @@ public class CompatibilityHelper
 				{
 					if (_missingItems.ContainsKey(item))
 					{
-						_missingItems[item].AddIfNotExist(info.Data.Package.SteamId);
+						_missingItems[item].AddIfNotExist(info.Data.Package.Id);
 					}
 					else
 					{
-						_missingItems[item] = new() { info.Data.Package.SteamId };
+						_missingItems[item] = new() { info.Data.Package.Id };
 					}
 				}
 			}
@@ -196,12 +196,12 @@ public class CompatibilityHelper
 		return false;
 	}
 
-	private bool ShouldNotBeUsed(ulong steamId)
+	private bool ShouldNotBeUsed(ulong id)
 	{
-		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(steamId));
+		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(id));
 
 		return (workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved))
-			|| (_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
+			|| (_compatibilityManager.CompatibilityData.Packages.TryGetValue(id, out var package)
 			&& (package.Package.Stability is PackageStability.Broken
 			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false)));
 	}

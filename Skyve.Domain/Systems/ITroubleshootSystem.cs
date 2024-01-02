@@ -17,6 +17,7 @@ public interface ITroubleshootSystem
 	event Action<List<ILocalPackageIdentity>>? PromptResult;
 
 	void ApplyConfirmation(bool issuePersists);
+	void CleanDownload(List<ILocalPackageData> localPackageDatas);
 	void NextStage();
 	void Start(ITroubleshootSettings settings);
 	void Stop(bool keepSettings);

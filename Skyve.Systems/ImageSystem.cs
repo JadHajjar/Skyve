@@ -81,7 +81,7 @@ internal class ImageSystem : IImageService
 			return cache;
 		}
 
-		var filePath = isFilePath ? new FileInfo(url) : File(url, fileName);
+		var filePath = File(url, fileName);
 
 		if (filePath.Exists)
 		{
@@ -105,12 +105,19 @@ internal class ImageSystem : IImageService
 			return false;
 		}
 
-		var filePath = isFilePath ? new FileInfo(url) : File(url, fileName);
+		var filePath = File(url, fileName);
 
 		lock (LockObj(url))
 		{
 			if (filePath.Exists)
 			{
+				return true;
+			}
+
+			if (isFilePath)
+			{
+				System.IO.File.Copy(url, filePath.FullName);
+
 				return true;
 			}
 

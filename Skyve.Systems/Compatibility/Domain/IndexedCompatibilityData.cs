@@ -13,9 +13,9 @@ public class IndexedCompatibilityData
 {
 	public IndexedCompatibilityData(CompatibilityData? data)
 	{
-		Packages = data?.Packages?.ToDictionary(x => x.SteamId, x => NewMethod(x, data.Packages)) ?? new();
+		Packages = data?.Packages?.ToDictionary(x => x.Id, x => NewMethod(x, data.Packages)) ?? new();
 		PackageNames = new(StringComparer.InvariantCultureIgnoreCase);
-		Authors = data?.Authors?.ToDictionary(x => x.SteamId) ?? new();
+		Authors = data?.Authors?.ToDictionary(x => x.Id) ?? new();
 		BlackListedIds = new(data?.BlackListedIds ?? new());
 		BlackListedNames = new(data?.BlackListedNames ?? new());
 
@@ -23,7 +23,7 @@ public class IndexedCompatibilityData
 		{
 			if (item.Package.FileName is not null and not "")
 			{
-				PackageNames[item.Package.FileName] = item.Package.SteamId;
+				PackageNames[item.Package.FileName] = item.Package.Id;
 			}
 
 			item.Load(Packages);
@@ -42,7 +42,7 @@ public class IndexedCompatibilityData
 		if (nonTest is not null)
 		{
 			var id = nonTest.Packages![0];
-			var stable = packages.FirstOrDefault(x => x.SteamId == id);
+			var stable = packages.FirstOrDefault(x => x.Id == id);
 
 			if (stable is not null)
 			{

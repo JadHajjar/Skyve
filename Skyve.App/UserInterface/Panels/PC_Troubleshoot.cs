@@ -140,7 +140,7 @@ public partial class PC_Troubleshoot : PanelContent
 			{
 				new BackgroundAction(() =>
 				{
-					ServiceCenter.Get<IWorkshopService>().CleanDownload(faultyPackages.ToList(x=>x.LocalData));
+					ServiceCenter.Get<ITroubleshootSystem>().CleanDownload(faultyPackages.ToList(x=>x.LocalData!));
 				}).Run();
 
 				PushBack();
@@ -173,7 +173,7 @@ public partial class PC_Troubleshoot : PanelContent
 		}
 
 		var sizeServer = workshopInfo.ServerSize;
-		var localSize = localPackage.LocalData.LocalSize;
+		var localSize = localPackage.LocalData.FileSize;
 
 		if (sizeServer != 0 && localSize != 0 && sizeServer != localSize)
 		{

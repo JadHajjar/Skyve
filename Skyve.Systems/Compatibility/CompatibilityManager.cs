@@ -307,7 +307,7 @@ public class CompatibilityManager : ICompatibilityManager
 		var info = new CompatibilityPackageData
 		{
 			Stability = package.GetPackage()?.IsCodeMod == true ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
-			//SteamId = package.Id,
+			Id = package.Id,
 			Name = package.Name,
 			FileName = package.GetLocalPackageIdentity()?.FilePath,
 			Links = new(),
@@ -413,25 +413,27 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public bool IsUserVerified(IUser author)
 	{
+#if CS2
+		return false;
+#else
 		return CompatibilityData.Authors.TryGet(ulong.Parse(author.Id?.ToString()))?.Verified ?? false;
+#endif
 	}
 
 	public IndexedPackage? GetPackageData(IPackageIdentity identity)
 	{
-		var steamId = identity.Id;
-
-		if (steamId > 0)
+		if (identity.Id > 0)
 		{
-			//var packageData = CompatibilityData.Packages.TryGet(steamId);
+			var packageData = CompatibilityData.Packages.TryGet(identity.Id);
 
-			//if (packageData is null && identity is IPackage package)
-			//{
-			//	packageData = new IndexedPackage(GetAutomatedReport(package));
+			if (packageData is null)
+			{
+				packageData = new IndexedPackage(GetAutomatedReport(identity));
 
-			//	packageData.Load(CompatibilityData.Packages);
-			//}
+				packageData.Load(CompatibilityData.Packages);
+			}
 
-			//return packageData;
+			return packageData;
 		}
 
 		return null;
@@ -466,7 +468,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	internal IEnumerable<IPackage> FindPackage(IndexedPackage package, bool withAlternativesAndSuccessors)
 	{
-		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
+		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Package.Id));
 
 		if (localPackage is not null)
 		{

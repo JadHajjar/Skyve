@@ -31,7 +31,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 				yield return item;
 			}
 
-			var id = Data?.Package.SteamId;
+			var id = Data?.Package.Id;
 
 			if (id is not null and not 0 && this.IsIncluded(out _) == false)
 			{
@@ -42,7 +42,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 					yield return new ReportItem
 					{
 						Package = this.GetPackage(),
-						PackageId = Data?.Package.SteamId ?? 0,
+						PackageId = Data?.Package.Id ?? 0,
 						Type = ReportType.RequiredItem,
 						Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
 						PackageName = this.CleanName(true),
@@ -75,7 +75,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 		ReportItems.Add(new ReportItem
 		{
 			Package = this.GetPackage(),
-			PackageId = Data?.Package.SteamId ?? 0,
+			PackageId = Data?.Package.Id ?? 0,
 			Type = type,
 			Status = status,
 			PackageName = packageName,
@@ -88,7 +88,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 		ReportItems.Add(new ReportItem
 		{
 			Package = this.GetPackage(),
-			PackageId = Data?.Package.SteamId ?? 0,
+			PackageId = Data?.Package.Id ?? 0,
 			Type = type,
 			Status = status,
 			PackageName = packageName,
@@ -101,7 +101,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 		ReportItems.Add(new ReportItem
 		{
 			Package = this.GetPackage(),
-			PackageId = Data?.Package.SteamId ?? 0,
+			PackageId = Data?.Package.Id ?? 0,
 			Type = type,
 			Status = status,
 			LocaleKey = localeKey,
@@ -109,13 +109,13 @@ public class CompatibilityInfo : ICompatibilityInfo
 		});
 	}
 
-	public bool GetThumbnail(out Bitmap? thumbnail, out string? thumbnailUrl)
+	public bool GetThumbnail(IImageService imageService, out Bitmap? thumbnail, out string? thumbnailUrl)
 	{
 		var info = this.GetWorkshopInfo();
 
 		if (info is not null)
 		{
-			return info.GetThumbnail(out thumbnail, out thumbnailUrl);
+			return info.GetThumbnail(imageService, out thumbnail, out thumbnailUrl);
 		}
 
 		thumbnail = null;

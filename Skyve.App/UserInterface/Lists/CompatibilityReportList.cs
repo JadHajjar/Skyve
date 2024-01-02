@@ -110,7 +110,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		items = sorting switch
 		{
 			PackageSorting.FileSize => items
-				.OrderBy(x => x.Item.GetLocalPackage()?.LocalSize),
+				.OrderBy(x => x.Item.GetLocalPackage()?.FileSize),
 
 			PackageSorting.Name => items
 				.OrderBy(x => x.Item.ToString()),
@@ -140,7 +140,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				.OrderBy(x => x.Item.GetWorkshopInfo()?.Subscribers),
 
 			PackageSorting.Votes => items
-				.OrderBy(x => x.Item.GetWorkshopInfo()?.Score),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.VoteCount),
 
 			PackageSorting.LoadOrder => items
 				.OrderBy(x => !x.Item.IsIncluded(out _))
@@ -683,7 +683,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
 		var isVersion = !string.IsNullOrWhiteSpace(localParentPackage?.Version);
-		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.FileSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #endif
 		var date = workshopInfo?.ServerTime ?? localParentPackage?.LocalTime;
 

@@ -6,6 +6,8 @@ using Skyve.App.UserInterface.Lists;
 using System.Drawing;
 using System.Windows.Forms;
 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_PackagePage : PanelContent
 {
@@ -22,7 +24,7 @@ public partial class PC_PackagePage : PanelContent
 
 	public PC_PackagePage(IPackageIdentity package, bool compatibilityPage = false)
 	{
-		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _packageUtil, out _settings);
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _packageUtil, out _settings, out IImageService imageService);
 
 		InitializeComponent();
 
@@ -30,13 +32,13 @@ public partial class PC_PackagePage : PanelContent
 
 		PB_Icon.Package = package;
 
-		if (package.GetThumbnail(out var thumbnail, out var thumbnailUrl))
+		if (package.GetThumbnail(imageService, out var thumbnail, out var thumbnailUrl))
 		{
 			PB_Icon.Image = new Bitmap(thumbnail);
 		}
 		else
 		{
-			PB_Icon.LoadImage(thumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
+			PB_Icon.LoadImage(thumbnailUrl, imageService.GetImage);
 		}
 
 		P_Info.SetPackage(package, this);
@@ -54,11 +56,10 @@ public partial class PC_PackagePage : PanelContent
 
 		if (Package is ILocalPackageData p && p.Assets is not null && p.Assets.Length > 0)
 		{
-			LC_Items = new ItemListControl<IPackageIdentity>(SkyvePage.SinglePackage)
-			{
-				IsPackagePage = true,
-				Dock = DockStyle.Fill
-			};
+			if (_settings.UserSettings.ExtendedListInfo)
+				LC_Items = new ItemListControl<IPackageIdentity>.Complex(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
+			else
+				LC_Items = new ItemListControl<IPackageIdentity>.Simple(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
 
 			LC_Items.AddRange(p.Assets);
 

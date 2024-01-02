@@ -6,7 +6,7 @@ namespace Skyve.Systems.Compatibility.Domain.Api;
 public class Author : IDynamicSql
 {
 	[DynamicSqlProperty(PrimaryKey = true)]
-	public ulong SteamId { get; set; }
+	public ulong Id { get; set; }
 	[DynamicSqlProperty]
 	public string? Name { get; set; }
 	[DynamicSqlProperty]

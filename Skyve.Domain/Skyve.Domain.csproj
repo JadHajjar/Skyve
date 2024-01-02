@@ -13,7 +13,6 @@
 		<Deterministic>false</Deterministic>
 		<TargetFramework>net4.7.2</TargetFramework>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
 		<SignAssembly>True</SignAssembly>
 		<NeutralLanguage>en</NeutralLanguage>
 	</PropertyGroup>

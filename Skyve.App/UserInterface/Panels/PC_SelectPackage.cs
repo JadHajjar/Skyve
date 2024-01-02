@@ -33,13 +33,26 @@ public partial class PC_SelectPackage : PanelContent
 
 		L_Selected.Text = Locale.ControlToSelectMultiplePackages;
 
-		LC_Items = new(SkyvePage.None)
+		if (ServiceCenter.Get<ISettings>().UserSettings.ExtendedListInfo)
 		{
-			Loading = true,
-			IsSelection = true,
-			IsGenericPage = true,
-			Dock = DockStyle.Fill
-		};
+			LC_Items = new ItemListControl<IWorkshopInfo>.Complex(SkyvePage.None)
+			{
+				Loading = true,
+				IsSelection = true,
+				IsGenericPage = true,
+				Dock = DockStyle.Fill
+			};
+		}
+		else
+		{
+			LC_Items = new ItemListControl<IWorkshopInfo>.Simple(SkyvePage.None)
+			{
+				Loading = true,
+				IsSelection = true,
+				IsGenericPage = true,
+				Dock = DockStyle.Fill
+			};
+		}
 
 		LC_Items.PackageSelected += LC_Items_PackageSelected;
 
@@ -227,10 +240,9 @@ public partial class PC_SelectPackage : PanelContent
 		}
 		else
 		{
-			items = (await _workshopService.QueryFilesAsync(PackageSorting.Default,
+			items = (await _workshopService.QueryFilesAsync(WorkshopQuerySorting.Popularity,
 				TB_Search.Text,
-				OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option1 ? new[] { "Mod" } : null,
-			 	OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 ? new[] { "Mod" } : null)).ToDictionary(x => x.Id);
+				OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option1 ? ["Mod"] : null)).ToDictionary(x => x.Id);
 		}
 
 		if (!_ticketBooth.IsLast(ticket))

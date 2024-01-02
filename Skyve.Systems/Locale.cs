@@ -361,11 +361,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation IncorrectFolderSettings => _instance.GetText(nameof(IncorrectFolderSettings));
 	public static Translation IncorrectFolderSettingsInfo => _instance.GetText(nameof(IncorrectFolderSettingsInfo));
 	public static Translation NoActivePlayset => _instance.GetText(nameof(NoActivePlayset));
-	public static Translation ParadoxLoginFailedTitle => _instance.GetText(nameof(ParadoxLoginFailedTitle));
-	public static Translation ParadoxLoginFailedNoConnectionTitle => _instance.GetText(nameof(ParadoxLoginFailedNoConnectionTitle));
-	public static Translation ParadoxLoginFailedNoConnection => _instance.GetText(nameof(ParadoxLoginFailedNoConnection));
-	public static Translation ParadoxLoginFailedBadCredentials => _instance.GetText(nameof(ParadoxLoginFailedBadCredentials));
-	public static Translation ParadoxLoginFailedEmpty => _instance.GetText(nameof(ParadoxLoginFailedEmpty));
+	public static Translation RecentlyUpdated => _instance.GetText(nameof(RecentlyUpdated));
 
 	public static void Load() { _ = _instance; }
 

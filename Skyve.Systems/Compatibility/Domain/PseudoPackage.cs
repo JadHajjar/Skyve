@@ -11,14 +11,14 @@ public class PseudoPackage : IPackageIdentity
 {
 	private readonly IPackage? _iPackage;
 
-	public PseudoPackage(ulong steamId)
+	public PseudoPackage(ulong id)
 	{
-		Id = steamId;
+		Id = id;
 	}
 
 	public PseudoPackage(IPackage iPackage)
 	{
-		Id = (ulong)iPackage.Id;
+		Id = Package.Id;
 		_iPackage = iPackage;
 	}
 
@@ -36,13 +36,13 @@ public class PseudoPackage : IPackageIdentity
 		return Package?.GetWorkshopInfo();
 	}
 
-	public bool GetThumbnail(out Bitmap? thumbnail, out string? thumbnailUrl)
+	public bool GetThumbnail(IImageService imageService, out Bitmap? thumbnail, out string? thumbnailUrl)
 	{
 		var info = GetWorkshopInfo();
 
 		if (info is not null)
 		{
-			return info.GetThumbnail(out thumbnail, out thumbnailUrl);
+			return info.GetThumbnail(imageService, out thumbnail, out thumbnailUrl);
 		}
 
 		thumbnail = null;

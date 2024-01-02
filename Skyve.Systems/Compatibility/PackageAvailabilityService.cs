@@ -40,9 +40,9 @@ public class PackageAvailabilityService
 		logger.Info("[Compatibility] Package Availability Cached");
 	}
 
-	public bool IsPackageEnabled(ulong steamId, bool withAlternativesAndSuccessors)
+	public bool IsPackageEnabled(ulong id, bool withAlternativesAndSuccessors)
 	{
-		if (_cache.TryGetValue(steamId, out var status))
+		if (_cache.TryGetValue(id, out var status))
 		{
 			return withAlternativesAndSuccessors ? status.enabledWithAlternatives : status.enabled;
 		}
@@ -55,11 +55,11 @@ public class PackageAvailabilityService
 		_cache[id] = (GetPackageEnabled(id, false), GetPackageEnabled(id, true));
 	}
 
-	private bool GetPackageEnabled(ulong steamId, bool withAlternativesAndSuccessors)
+	private bool GetPackageEnabled(ulong id, bool withAlternativesAndSuccessors)
 	{
-		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
+		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(id);
 
-		if (isEnabled(_packageManager.GetPackageById(new GenericPackageIdentity(steamId))?.LocalData))
+		if (isEnabled(_packageManager.GetPackageById(new GenericPackageIdentity(id))?.LocalData))
 		{
 			return true;
 		}
@@ -73,7 +73,7 @@ public class PackageAvailabilityService
 		{
 			foreach (var item in indexedPackage.RequirementAlternatives)
 			{
-				if (item.Key != steamId)
+				if (item.Key != id)
 				{
 					foreach (var package in _compatibilityManager.FindPackage(item.Value, withAlternativesAndSuccessors))
 					{
@@ -96,7 +96,7 @@ public class PackageAvailabilityService
 
 		foreach (var item in indexedPackage.Group)
 		{
-			if (item.Key != steamId)
+			if (item.Key != id)
 			{
 				foreach (var package in _compatibilityManager.FindPackage(item.Value, withAlternativesAndSuccessors))
 				{

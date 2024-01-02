@@ -7,7 +7,6 @@ public interface IContentManager
 {
 	Task<List<IPackage>> LoadContents();
 	void ContentUpdated(string path, bool builtIn, bool workshop, bool self);
-	IEnumerable<IPackage> GetReferencingPackage(ulong steamId, bool includedOnly);
 	void RefreshPackage(IPackage package, bool self);
 	void StartListeners();
 }

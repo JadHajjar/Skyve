@@ -7,20 +7,21 @@ using System.Threading.Tasks;
 namespace Skyve.Domain.Systems;
 public interface IWorkshopService
 {
-	void CleanDownload(List<ILocalPackageData> packages);
 	void ClearCache();
-	IEnumerable<IWorkshopInfo> GetAllPackages();
+	Task<IEnumerable<ITag>> GetAvailableTags();
 	IWorkshopInfo? GetInfo(IPackageIdentity identity);
 	Task<IWorkshopInfo?> GetInfoAsync(IPackageIdentity identity);
 	IPackage GetPackage(IPackageIdentity identity);
 	Task<IPackage> GetPackageAsync(IPackageIdentity identity);
 	IUser? GetUser(object authorId);
 	Task<IEnumerable<IWorkshopInfo>> GetWorkshopItemsByUserAsync(object userId);
-	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(PackageSorting sorting, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null, bool all = false);
+	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, string? query = null, string[]? requiredTags = null, bool all = false);
 #if CS2
 	Task Initialize();
-	Task<List<IPackage>> GetInstalledPackages();
-	Task<List<ICustomPlayset>> GetAllPlaysets(bool localOnly);
+	Task<List<IPackage>> GetLocalPackages();
+	Task<List<ICustomPlayset>> GetPlaysets(bool localOnly);
 	Task Login();
+	Task<bool> ToggleVote(IPackageIdentity packageIdentity);
+	Task<int> GetActivePlaysetId();
 #endif
 }

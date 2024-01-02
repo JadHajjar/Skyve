@@ -53,7 +53,8 @@ internal class NotifierSystem : INotifier
 	{
 		IsContentLoaded = true;
 
-		_delayedContentLoaded.Run();
+		RunAndLog(ContentLoaded, nameof(ContentLoaded));
+		//_delayedContentLoaded.Run();
 	}
 
 	public void OnWorkshopInfoUpdated()

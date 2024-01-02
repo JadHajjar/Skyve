@@ -327,7 +327,7 @@ public class PackageDescriptionControl : SlickImageControl
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
 		var isVersion = !string.IsNullOrWhiteSpace(localParentPackage?.Version);
-		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.FileSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #endif
 		var date = workshopInfo?.ServerTime ?? e.Item.GetLocalPackage()?.LocalTime;
 
@@ -440,7 +440,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 	private int DrawScore(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo)
 	{
-		var score = workshopInfo?.Score ?? -1;
+		var score = workshopInfo?.VoteCount ?? -1;
 
 		if (score != -1)
 		{
@@ -463,38 +463,6 @@ public class PackageDescriptionControl : SlickImageControl
 			}
 
 			using var scoreFilled = IconManager.GetIcon("I_VoteFilled", scoreRect.Width * 3 / 4);
-
-			if (score < 75)
-			{
-				using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
-
-				e.Graphics.DrawImage(scoreIcon.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
-
-				e.Graphics.SetClip(scoreRect.CenterR(scoreFilled.Size).Pad(0, scoreFilled.Height - scoreFilled.Height * score / 105, 0, 0));
-				e.Graphics.DrawImage(scoreFilled.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
-				e.Graphics.SetClip(clip);
-			}
-			else
-			{
-				e.Graphics.DrawImage(scoreFilled.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
-			}
-
-			if (workshopInfo!.Subscribers < 50000 || score <= 90)
-			{
-				if (small)
-				{
-					using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
-
-					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - scoreIcon.Height * workshopInfo!.Subscribers / 15000, 0, 0));
-					e.Graphics.DrawImage(scoreIcon.Color(FormDesign.Modern.ActiveColor), scoreRect.CenterR(scoreIcon.Size));
-					e.Graphics.SetClip(clip);
-				}
-				else
-				{
-					using var pen = new Pen(Color.FromArgb(score >= 75 ? 255 : 200, FormDesign.Modern.ActiveColor), (float)(1.5 * UI.FontScale)) { EndCap = LineCap.Round, StartCap = LineCap.Round };
-					e.Graphics.DrawArc(pen, scoreRect.Pad(-1), 90 - Math.Min(360, 360F * workshopInfo!.Subscribers / 15000) / 2, Math.Min(360, 360F * workshopInfo!.Subscribers / 15000));
-				}
-			}
 
 			return labelH + Padding.Left;
 		}
@@ -849,7 +817,7 @@ public class PackageDescriptionControl : SlickImageControl
 				var workshopInfo = Item.GetWorkshopInfo();
 				if (workshopInfo is not null)
 				{
-					text = string.Format(Locale.RatingCount, workshopInfo.ScoreVoteCount.ToString("N0"), $"({workshopInfo.Score}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0"));
+					text = string.Format(Locale.RatingCount, workshopInfo.VoteCount.ToString("N0"), $"({workshopInfo.VoteCount}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0"));
 					point = ScoreRect.Location;
 					return true;
 				}

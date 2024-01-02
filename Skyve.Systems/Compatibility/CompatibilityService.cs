@@ -149,7 +149,7 @@ internal class CompatibilityService
 
 			if (!packageData.Statuses.ContainsKey(StatusType.TestVersion) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 30)
 			{
-				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.UnsubscribeThis });
+				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.NoAction });
 			}
 
 			if (!author.Malicious && workshopInfo?.ServerTime.Date < _compatibilityUtil.MinimumModDate && DateTime.UtcNow - workshopInfo?.ServerTime > TimeSpan.FromDays(365) && !packageData.Statuses.ContainsKey(StatusType.Deprecated))
@@ -216,7 +216,7 @@ internal class CompatibilityService
 		}
 		if (package.IsLocal())
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Package.SteamId)), true), new PseudoPackage[] { new(packageData.Package.SteamId) });
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Package.Id)), true), new PseudoPackage[] { new(packageData.Package.Id) });
 		}
 		if (!package.IsLocal() && !author.Malicious && workshopInfo?.IsIncompatible != true)
 		{

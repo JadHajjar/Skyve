@@ -2,7 +2,9 @@
 using Extensions.Sql;
 
 using Skyve.Domain;
+using Skyve.Domain.Systems;
 
+using System;
 using System.Drawing;
 using System.IO;
 
@@ -45,13 +47,16 @@ public class UserProfileContent : IDynamicSql
 
 	string ILocalPackageIdentity.Folder => Path.GetDirectoryName(RelativePath);
 
-	public bool GetThumbnail(out Bitmap? thumbnail, out string? thumbnailUrl)
+	long ILocalPackageIdentity.FileSize { get; }
+	DateTime ILocalPackageIdentity.LocalTime { get; }
+
+	public bool GetThumbnail(IImageService imageService, out Bitmap? thumbnail, out string? thumbnailUrl)
 	{
 		var info = this.GetWorkshopInfo();
 
 		if (info is not null)
 		{
-			return info.GetThumbnail(out thumbnail, out thumbnailUrl);
+			return info.GetThumbnail(imageService, out thumbnail, out thumbnailUrl);
 		}
 
 		thumbnail = null;

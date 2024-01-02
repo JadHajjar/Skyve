@@ -142,7 +142,7 @@ public static class SystemExtensions
 			return null;
 		}
 
-		if (thumbnailObject.GetThumbnail(out var thumbnail, out var thumbnailUrl))
+		if (thumbnailObject.GetThumbnail(ImageService, out var thumbnail, out var thumbnailUrl))
 		{
 			return thumbnail;
 		}
@@ -179,14 +179,14 @@ public static class SystemExtensions
 
 	public static IWorkshopInfo? GetWorkshopInfo(this IPackageIdentity identity)
 	{
+		if (identity is IPackage package)
+		{
+			return WorkshopService.GetInfo(identity) ?? package.WorkshopInfo;
+		}
+
 		if (identity is IWorkshopInfo workshopInfo)
 		{
 			return workshopInfo;
-		}
-
-		if (identity is IPackage package)
-		{
-			return package.WorkshopInfo;
 		}
 
 		return WorkshopService.GetInfo(identity);

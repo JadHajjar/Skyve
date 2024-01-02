@@ -153,6 +153,11 @@ public class PackageUtil : IPackageUtil
 			return DownloadStatus.Removed;
 		}
 
+#if CS2
+		reason = string.Empty;
+		return DownloadStatus.OK;
+#endif
+
 		if (workshopInfo.ServerTime == default)
 		{
 			reason = _locale.Get("PackageIsUnknown").Format(_packageUtil.CleanName(mod));
@@ -164,7 +169,7 @@ public class PackageUtil : IPackageUtil
 			var updatedServer = workshopInfo.ServerTime;
 			var updatedLocal = localPackage.LocalTime;
 			var sizeServer = workshopInfo.ServerSize;
-			var localSize = localPackage.LocalSize;
+			var localSize = localPackage.FileSize;
 
 			if (updatedLocal < updatedServer)
 			{
@@ -189,22 +194,20 @@ public class PackageUtil : IPackageUtil
 
 	public IEnumerable<IPackage> GetPackagesThatReference(IPackageIdentity package, bool withExcluded = false)
 	{
-		throw new NotImplementedException();
+		var compatibilityUtil = ServiceCenter.Get<ICompatibilityManager>();
+		var packages = withExcluded || ServiceCenter.Get<ISettings>().UserSettings.ShowAllReferencedPackages
+			? _packageManager.Packages.ToList()
+			: _packageManager.Packages.AllWhere(x => x.IsIncluded(out _));
 
-		//var compatibilityUtil = ServiceCenter.Get<ICompatibilityManager>();
-		//var packages = withExcluded || ServiceCenter.Get<ISettings>().UserSettings.ShowAllReferencedPackages
-		//	? _packageManager.Packages.ToList()
-		//	: _packageManager.Packages.AllWhere(IsIncluded);
-
-		//foreach (var localPackage in packages)
-		//{
-		//	foreach (var requirement in localPackage.Requirements)
-		//	{
-		//		if (compatibilityUtil.GetFinalSuccessor(requirement)?.Id == package.Id)
-		//		{
-		//			yield return localPackage;
-		//		}
-		//	}
-		//}
+		foreach (var localPackage in packages)
+		{
+			foreach (var requirement in localPackage.GetWorkshopInfo()?.Requirements ?? [])
+			{
+				if (compatibilityUtil.GetFinalSuccessor(requirement)?.Id == package.Id)
+				{
+					yield return localPackage;
+				}
+			}
+		}
 	}
 }

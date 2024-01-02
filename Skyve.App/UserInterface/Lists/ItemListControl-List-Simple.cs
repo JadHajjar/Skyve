@@ -1,15 +1,17 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
 
 public partial class ItemListControl<T>
 {
-	public partial class Complex : ItemListControl<T>
+	public partial class Simple : ItemListControl<T>
 	{
-		public Complex(SkyvePage page) : base(page)
+		public Simple(SkyvePage page) : base(page)
 		{
-			GridItemSize = new Size(390, 140);
+			GridItemSize = new Size(200, 236);
+			DynamicSizing = true;
 		}
 
 		private void OnPaintItemCompactList(ItemPaintEventArgs<T, Rectangles> e)

@@ -52,7 +52,7 @@ public class IndexedPackage : IPackageCompatibilityInfo
 			{
 				Group[item.Key] = item.Value;
 
-				item.Value.Group[Package.SteamId] = this;
+				item.Value.Group[Package.Id] = this;
 			}
 		}
 
@@ -143,12 +143,12 @@ public class IndexedPackage : IPackageCompatibilityInfo
 		{
 			foreach (var package in item.Packages.Values)
 			{
-				if (package.Package.SteamId == Package.SteamId)
+				if (package.Package.Id == Package.Id)
 				{
 					continue;
 				}
 
-				if (package.SucceededBy?.Packages.ContainsKey(Package.SteamId) ?? false)
+				if (package.SucceededBy?.Packages.ContainsKey(Package.Id) ?? false)
 				{
 					continue;
 				}
@@ -158,8 +158,8 @@ public class IndexedPackage : IPackageCompatibilityInfo
 					Type = InteractionType.SucceededBy,
 					Action = item.Interaction.Action,
 					Note = item.Interaction.Note,
-					Packages = new[] { Package.SteamId }
-				}, new() { [Package.SteamId] = this });
+					Packages = new[] { Package.Id }
+				}, new() { [Package.Id] = this });
 
 				if (package.Interactions.ContainsKey(InteractionType.Successor))
 				{
@@ -171,12 +171,12 @@ public class IndexedPackage : IPackageCompatibilityInfo
 
 	public override bool Equals(object? obj)
 	{
-		return obj is IndexedPackage package && Package.SteamId == package.Package.SteamId;
+		return obj is IndexedPackage package && Package.Id == package.Package.Id;
 	}
 
 	public override int GetHashCode()
 	{
-		return Package.SteamId.GetHashCode();
+		return Package.Id.GetHashCode();
 	}
 
 	#region IPackageCompatibilityInfo
