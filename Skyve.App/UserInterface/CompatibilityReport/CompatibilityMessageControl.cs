@@ -160,7 +160,12 @@ public class CompatibilityMessageControl : SlickControl
 					}
 					else
 					{
-						e.Graphics.DrawRoundedImage(packageThumbnail ?? (dlc is null ? Properties.Resources.I_ModIcon : Properties.Resources.I_DlcIcon).Color(fore), rect.Align(UI.Scale(new Size(isDlc ? 40 * 460 / 215 : 40, 40), UI.FontScale), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
+						using var img = IconManager.GetIcon(dlc is null ? "I_Mods" : "I_Dlc", (int)(40 * UI.FontScale)).Color(BackColor);
+						using var brush2 = new SolidBrush(fore);
+						var imgRect = rect.Align(UI.Scale(new Size(isDlc ? 40 * 460 / 215 : 40, 40), UI.FontScale), ContentAlignment.TopLeft);
+
+						e.Graphics.FillRoundedRectangle(brush2, imgRect, pad);
+						e.Graphics.DrawImage(img, imgRect.CenterR(img.Size));
 					}
 
 					List<(Color Color, string Text)>? tags = null;

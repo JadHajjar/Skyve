@@ -105,9 +105,11 @@ public class MiniPackageControl : SlickControl
 		}
 		else
 		{
-			using var generic = Properties.Resources.I_CollectionIcon.Color(FormDesign.Design.IconColor);
+			using var generic = IconManager.GetIcon("I_Package", imageRect.Height).Color(BackColor);
+			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			e.Graphics.DrawRoundedImage(generic, imageRect, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			e.Graphics.FillRoundedRectangle(brush, imageRect, (int)(4 * UI.FontScale));
+			e.Graphics.DrawImage(generic, imageRect.CenterR(generic.Size));
 		}
 
 		List<(Color Color, string Text)>? tags = null;

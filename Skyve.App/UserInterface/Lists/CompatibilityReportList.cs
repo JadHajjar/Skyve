@@ -143,13 +143,13 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				.OrderBy(x => x.Item.GetWorkshopInfo()?.VoteCount),
 
 			PackageSorting.LoadOrder => items
-				.OrderBy(x => !x.Item.IsIncluded(out _))
+				.OrderBy(x => !x.Item.IsIncluded())
 				.ThenByDescending(x => x.Item.GetPackage() is null ? 0 : _modUtil.GetLoadOrder(x.Item.GetPackage()!))
 				.ThenBy(x => x.Item.ToString()),
 
 			_ => items
 				.OrderByDescending(x => x.Item.GetNotification())
-				.ThenBy(x => !(x.Item.IsIncluded(out _, out var partial) || partial))
+				.ThenBy(x => !(x.Item.IsIncluded(out var partial) || partial))
 				.ThenBy(x => x.Item.IsLocal())
 				.ThenBy(x => !x.Item.GetLocalPackage()?.IsCodeMod)
 				.ThenBy(x => x.Item.CleanName() ?? x.Item.CleanName())
@@ -293,7 +293,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		var package = e.Item.GetPackage();
 		var workshopInfo = e.Item.GetWorkshopInfo();
 		var isPressed = false;
-		var isIncluded = e.Item.IsIncluded(out _, out var partialIncluded) || partialIncluded;
+		var isIncluded = e.Item.IsIncluded(out var partialIncluded) || partialIncluded;
 
 		if (e.IsSelected)
 		{
@@ -433,7 +433,12 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					}
 					else
 					{
-						e.Graphics.DrawRoundedImage(packageThumbnail ?? (dlc is null ? Properties.Resources.I_ModIcon : Properties.Resources.I_DlcIcon).Color(fore), rect.Align(new Size(isDlc ? rect.Height * 460 / 215 : rect.Height, rect.Height), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
+						using var img = IconManager.GetIcon(dlc is null ? "I_Mods" : "I_Dlc", (int)(40 * UI.FontScale)).Color(BackColor);
+						using var brush2 = new SolidBrush(fore);
+						var imgRect = rect.Align(UI.Scale(new Size(isDlc ? 40 * 460 / 215 : 40, 40), UI.FontScale), ContentAlignment.TopLeft);
+
+						e.Graphics.FillRoundedRectangle(brush2, imgRect, pad);
+						e.Graphics.DrawImage(img, imgRect.CenterR(img.Size));
 					}
 
 					List<(Color Color, string Text)>? tags = null;
@@ -635,9 +640,11 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (thumbnail is null)
 		{
-			using var generic = (e.Item is ILocalPackageData ? Properties.Resources.I_CollectionIcon : e.Item.GetPackage()?.IsCodeMod == true ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
+			using var generic = IconManager.GetIcon(e.Item is IAsset ? "I_Assets" : e.Item is ILocalPackageData ? "I_Mods" : "I_Package", e.Rects.IconRect.Height).Color(e.BackColor);
+			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			drawThumbnail(generic);
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
+			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
 		}
 		else if (e.Item.IsLocal())
 		{
@@ -716,7 +723,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (workshopInfo?.Author is not null)
 		{
-			using var icon = IconManager.GetSmallIcon("I_Developer");
+			using var icon = IconManager.GetSmallIcon("I_Author");
 
 			e.Rects.AuthorRect = e.Graphics.DrawLabel(workshopInfo?.Author.Name, icon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: CursorLocation);
 
@@ -1305,7 +1312,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					}
 				}
 
-				if (Item.IsIncluded(out _))
+				if (Item.IsIncluded())
 				{
 					text = $"{Locale.ExcludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
 				}
@@ -1320,7 +1327,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (EnabledRect.Contains(location) && Item.GetPackage()?.IsCodeMod == true)
 			{
-				if (Item.IsEnabled(out _))
+				if (Item.IsEnabled())
 				{
 					text = $"{Locale.DisablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
 				}

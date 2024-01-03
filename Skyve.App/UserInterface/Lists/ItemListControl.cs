@@ -223,16 +223,16 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 #if CS2
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			var isIncluded = item.Item.IsIncluded(out _, out var partialIncluded) || partialIncluded;
-			var isEnabled = item.Item.IsEnabled(out _);
+			var isIncluded = item.Item.IsIncluded(out var partialIncluded) || partialIncluded;
+			var isEnabled = item.Item.IsEnabled();
 
 			if (!isIncluded)
 			{
-				await _subscriptionsManager.Subscribe([item.Item]);
+				_packageUtil.SetIncluded(item.Item, isIncluded);
 			}
 			else
 			{
-				_packageUtil.SetEnabled(item.Item.GetLocalPackageIdentity()!, !isEnabled);
+				_packageUtil.SetEnabled(item.Item, !isEnabled);
 			}
 		}
 #else

@@ -134,9 +134,11 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		if (thumbnail is null)
 		{
-			using var generic = Properties.Resources.I_DlcIcon.Color(FormDesign.Design.IconColor);
+			using var generic = IconManager.GetIcon("I_Dlc", e.Rects.IconRect.Height).Color(BackColor);
+			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			drawThumbnail(generic);
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
+			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
 		}
 		else
 		{

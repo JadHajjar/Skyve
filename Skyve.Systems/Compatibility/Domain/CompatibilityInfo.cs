@@ -33,7 +33,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 
 			var id = Data?.Package.Id;
 
-			if (id is not null and not 0 && this.IsIncluded(out _) == false)
+			if (id is not null and not 0 && this.IsIncluded() == false)
 			{
 				var requiredFor = ServiceCenter.Get<ICompatibilityManager, CompatibilityManager>().GetRequiredFor(id.Value);
 

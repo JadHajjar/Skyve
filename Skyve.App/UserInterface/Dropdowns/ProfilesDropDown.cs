@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
-public class ProfilesDropDown : SlickSelectionDropDown<IPlayset>
+public class ProfilesDropDown : SlickSelectionDropDown<IPlayset?>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -10,30 +10,27 @@ public class ProfilesDropDown : SlickSelectionDropDown<IPlayset>
 
 		if (Live)
 		{
-			Items = ServiceCenter.Get<IPlaysetManager>().Playsets.ToArray();
+			Items = [null, .. ServiceCenter.Get<IPlaysetManager>().Playsets];
 
-			selectedItem = Items.FirstOrDefault();
+			selectedItem = null;
 		}
 	}
 
-	protected override IEnumerable<IPlayset> OrderItems(IEnumerable<IPlayset> items)
+	protected override IEnumerable<IPlayset?> OrderItems(IEnumerable<IPlayset?> items)
 	{
-		return items.OrderByDescending(x => x.Temporary).ThenByDescending(x => x.DateUpdated);
+		return items.OrderByDescending(x => x?.Temporary ?? true).ThenByDescending(x => x?.DateUpdated);
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IPlayset item)
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IPlayset? item)
 	{
-		if (item is null)
-		{ return; }
+		var text = item?.Name;
 
-		var text = item.Name;
-
-		if (item.Temporary)
+		if (item?.Temporary ?? true)
 		{
 			text = Locale.Unfiltered;
 		}
 
-		using var icon = (item.Temporary ? new DynamicIcon("I_Slash") : item.GetIcon()).Get(rectangle.Height - 2).Color(foreColor);
+		using var icon = (item?.Temporary ?? true ? new DynamicIcon("I_Slash") : item.GetIcon()).Get(rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

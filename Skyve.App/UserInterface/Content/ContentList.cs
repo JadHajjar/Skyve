@@ -445,7 +445,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.IsIncluded(out _, out var partiallyIncluded) || partiallyIncluded))
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.IsIncluded(out var partiallyIncluded) || partiallyIncluded))
 			{
 				return true;
 			}
@@ -585,7 +585,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 	private bool Search(string searchTerm, T item)
 	{
-		return searchTerm.SearchCheck(item.ToString())
+		return searchTerm.SearchCheck(item.Name)
 			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)
 			|| (!item.IsLocal() ? item.Id.ToString() : Path.GetFileName(item.GetLocalPackage()?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}

@@ -246,7 +246,7 @@ public class PackageDescriptionControl : SlickImageControl
 		var localParentPackage = localPackage?.GetLocalPackage();
 		var workshopInfo = e.Item.GetWorkshopInfo();
 		var isPressed = false;
-		var isIncluded = e.Item.IsIncluded(out _, out var partialIncluded) || partialIncluded;
+		var isIncluded = e.Item.IsIncluded(out var partialIncluded) || partialIncluded;
 
 		var compatibilityReport = e.Item.GetCompatibilityInfo();
 		var notificationType = compatibilityReport?.GetNotification();
@@ -494,7 +494,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (authorImg is null)
 		{
-			using var authorIcon = Properties.Resources.I_AuthorIcon.Color(FormDesign.Design.IconColor);
+			using var authorIcon = IconManager.GetIcon("I_Author", height);
 
 			authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorIcon, alignment: ContentAlignment.TopLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 		}
@@ -715,7 +715,7 @@ public class PackageDescriptionControl : SlickImageControl
 					}
 				}
 
-				if (Item.IsIncluded(out _))
+				if (Item.IsIncluded())
 				{
 					text = $"{Locale.ExcludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
 				}

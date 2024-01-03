@@ -32,12 +32,12 @@ public class UserIcon : SlickImageControl
 
 		if (Image == null)
 		{
-			using var image = Properties.Resources.I_AssetIcon.Color(FormDesign.Design.IconColor);
+			using var image = IconManager.GetIcon("I_User", ClientRectangle.Height).Color(FormDesign.Design.AccentBackColor);
 
 			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.IconColor), ClientRectangle, (int)(10 * UI.FontScale));
 			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1), (int)(10 * UI.FontScale));
 
-			e.Graphics.DrawRoundedImage(image, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			e.Graphics.DrawImage(image, ClientRectangle.CenterR(image.Size));
 		}
 		else
 		{

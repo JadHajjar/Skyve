@@ -208,7 +208,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			StatusAction.SubscribeToPackages => () =>
 			{
-				_subscriptionsManager.Subscribe(message.Packages.Where(x => x.GetLocalPackage() is null));
+				_subscriptionsManager.Subscribe(message.Packages.Where(x => !x.IsInstalled()));
 				_bulkUtil.SetBulkIncluded(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
 				_bulkUtil.SetBulkEnabled(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
 				_compatibilityManager.QuickUpdate(message);
@@ -670,7 +670,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.IsIncluded(out _, out var partiallyIncluded) || partiallyIncluded))
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.IsIncluded(out var partiallyIncluded) || partiallyIncluded))
 			{
 				return true;
 			}

@@ -101,9 +101,11 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		}
 		else
 		{
-			using var generic = Properties.Resources.I_GenericUser.Color(FormDesign.Design.IconColor);
+			using var generic = IconManager.GetIcon("I_User", imageRect.Height).Color(e.BackColor);
+			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			e.Graphics.DrawRoundedImage(generic, imageRect, (int)(3 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			e.Graphics.FillRoundedRectangle(brush, imageRect, (int)(5 * UI.FontScale));
+			e.Graphics.DrawImage(generic, imageRect.CenterR(generic.Size));
 		}
 
 		var textRect = e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, e.Rects.ViewRectangle.Width + Padding.Horizontal, 0);

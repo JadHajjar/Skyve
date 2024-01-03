@@ -76,7 +76,7 @@ public partial class PC_Troubleshoot : PanelContent
 
 	private void Next()
 	{
-		var showComp = ServiceCenter.Get<IPackageManager>().Packages.Count(x => x.IsIncluded(out _) && x.GetCompatibilityInfo().GetNotification() > NotificationType.Warning);
+		var showComp = ServiceCenter.Get<IPackageManager>().Packages.Count(x => x.IsIncluded() && x.GetCompatibilityInfo().GetNotification() > NotificationType.Warning);
 
 		if (showComp > 0)
 		{
@@ -134,7 +134,7 @@ public partial class PC_Troubleshoot : PanelContent
 	{
 		if (_settings.ItemIsCausingIssues || _settings.NewItemCausingIssues)
 		{
-			var faultyPackages = ServiceCenter.Get<IPackageManager>().Packages.AllWhere(x => x.IsIncluded(out _) && CheckStrict(x));
+			var faultyPackages = ServiceCenter.Get<IPackageManager>().Packages.AllWhere(x => x.IsIncluded() && CheckStrict(x));
 
 			if (faultyPackages.Count > 0 && ShowPrompt(Locale.SkyveDetectedFaultyPackages, Locale.FaultyPackagesTitle, PromptButtons.YesNo, PromptIcons.Warning) == DialogResult.Yes)
 			{

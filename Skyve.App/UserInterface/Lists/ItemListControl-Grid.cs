@@ -14,8 +14,8 @@ public partial class ItemListControl<T>
 			var package = e.Item.GetPackage();
 			var workshopInfo = e.Item.GetWorkshopInfo();
 			var isPressed = false;
-			var isIncluded = e.Item.IsIncluded(out _, out var partialIncluded) || partialIncluded;
-			var isEnabled = e.Item.IsEnabled(out _);
+			var isIncluded = e.Item.IsIncluded(out var partialIncluded) || partialIncluded;
+			var isEnabled = e.Item.IsEnabled();
 
 			if (e.IsSelected)
 			{
@@ -279,7 +279,7 @@ public partial class ItemListControl<T>
 			{
 				if (authorImg is null)
 				{
-					authorRect = DrawCell(e, Columns.Author, author.Name, "I_Developer", font: UI.Font(8.25F, FontStyle.Bold));
+					authorRect = DrawCell(e, Columns.Author, author.Name, "I_Author", font: UI.Font(8.25F, FontStyle.Bold));
 				}
 				else
 				{
@@ -290,7 +290,7 @@ public partial class ItemListControl<T>
 			}
 			else if (authorImg is null)
 			{
-				using var authorIcon = Properties.Resources.I_AuthorIcon.Color(FormDesign.Design.IconColor);
+				using var authorIcon = IconManager.GetIcon("I_Author", height);
 
 				authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorIcon, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 			}

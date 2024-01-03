@@ -148,7 +148,7 @@ public partial class PC_SelectPackage : PanelContent
 
 	private bool Search(string searchTerm, IWorkshopInfo item)
 	{
-		return searchTerm.SearchCheck(item.ToString())
+		return searchTerm.SearchCheck(item.Name)
 			|| searchTerm.SearchCheck(item.Author?.Name)
 			|| item.Id.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}

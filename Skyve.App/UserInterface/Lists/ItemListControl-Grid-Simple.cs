@@ -14,8 +14,8 @@ public partial class ItemListControl<T>
 			var package = e.Item.GetPackage();
 			var workshopInfo = e.Item.GetWorkshopInfo();
 			var isPressed = false;
-			var isIncluded = e.Item.IsIncluded(out _, out var partialIncluded) || partialIncluded;
-			var isEnabled = e.Item.IsEnabled(out _);
+			var isIncluded = e.Item.IsIncluded(out var partialIncluded) || partialIncluded;
+			var isEnabled = e.Item.IsEnabled();
 
 			e.BackColor = BackColor;
 
@@ -65,9 +65,10 @@ public partial class ItemListControl<T>
 
 			if (GetStatusDescriptors(e.Item, out var text, out var icon, out var color))
 			{
-				outerColor = color;
-
 				var rect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y + e.DrawableItem.CachedHeight - Padding.Vertical, e.ClipRectangle.Width, height);
+				
+				outerColor = Color.FromArgb(rect.Contains(CursorLocation) ? 200 : 255, color);
+
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
 				using var font = UI.Font(9F, FontStyle.Bold);
@@ -89,9 +90,10 @@ public partial class ItemListControl<T>
 
 			if (notificationType > NotificationType.Info)
 			{
-				outerColor = notificationType.Value.GetColor();
-
 				var rect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y + e.DrawableItem.CachedHeight - Padding.Vertical, e.ClipRectangle.Width, height);
+
+				outerColor = Color.FromArgb(rect.Contains(CursorLocation) ? 200 : 255, notificationType.Value.GetColor());
+
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
 				using var font = UI.Font(9F, FontStyle.Bold);
@@ -285,7 +287,7 @@ public partial class ItemListControl<T>
 			{
 				if (authorImg is null)
 				{
-					authorRect = DrawCell(e, Columns.Author, author.Name, "I_Developer", font: UI.Font(8.25F, FontStyle.Bold));
+					authorRect = DrawCell(e, Columns.Author, author.Name, "I_Author", font: UI.Font(8.25F, FontStyle.Bold));
 				}
 				else
 				{
@@ -296,7 +298,7 @@ public partial class ItemListControl<T>
 			}
 			else if (authorImg is null)
 			{
-				using var authorIcon = Properties.Resources.I_AuthorIcon.Color(FormDesign.Design.IconColor);
+				using var authorIcon = IconManager.GetIcon("I_Author", height);
 
 				authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorIcon, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 			}
@@ -508,10 +510,13 @@ public partial class ItemListControl<T>
 				var rect = new Rectangle(e.Rects.TextRect.X, e.Rects.IncludedRect.Y, e.Rects.TextRect.Width, e.Rects.IncludedRect.Height);
 				var size = e.Graphics.Measure(author.Name, authorFont).ToSize();
 
-				e.Rects.AuthorRect = rect.Align(size, ContentAlignment.BottomRight);
+				using var authorIcon = IconManager.GetIcon("I_Author", size.Height);
+
+				e.Rects.AuthorRect = rect.Align(size + new Size(authorIcon.Width + (int)(UI.FontScale)-2, 0), ContentAlignment.BottomRight);
 
 				var isHovered = e.Rects.AuthorRect.Contains(CursorLocation);
 
+				e.Graphics.DrawImage(authorIcon.Color(brush.Color, (byte)(isHovered ? 255 : 125)), e.Rects.AuthorRect.Align(authorIcon.Size, ContentAlignment.MiddleLeft));
 				e.Graphics.DrawString(author.Name, isHovered ? authorFontUnderline : authorFont, isHovered ? brush : fadedBrush, rect, new StringFormat { LineAlignment = StringAlignment.Far, Alignment = StringAlignment.Far });
 			}
 

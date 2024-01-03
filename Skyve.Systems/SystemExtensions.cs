@@ -39,53 +39,17 @@ public static class SystemExtensions
 		return identity.Id <= 0;
 	}
 
-	public static bool IsEnabled(this IPackageIdentity package, out bool isAvailable)
-	{
-		if (GetLocalPackageIdentity(package) is ILocalPackageIdentity localPackageIdentity)
-		{
-			isAvailable = true;
-
-			return IsEnabled(localPackageIdentity);
-		}
-
-		return isAvailable = false;
-	}
-
-	public static bool IsIncluded(this IPackageIdentity package, out bool isAvailable)
-	{
-		if (GetLocalPackageIdentity(package) is ILocalPackageIdentity localPackageIdentity)
-		{
-			isAvailable = true;
-
-			return IsIncluded(localPackageIdentity);
-		}
-
-		return isAvailable = false;
-	}
-
-	public static bool IsIncluded(this IPackageIdentity package, out bool isAvailable, out bool partiallyIncluded)
-	{
-		if (GetLocalPackageIdentity(package) is ILocalPackageIdentity localPackageIdentity)
-		{
-			isAvailable = true;
-
-			return IsIncluded(localPackageIdentity, out partiallyIncluded);
-		}
-
-		return isAvailable = partiallyIncluded = false;
-	}
-
-	public static bool IsIncluded(this ILocalPackageIdentity package)
+	public static bool IsIncluded(this IPackageIdentity package)
 	{
 		return PackageUtil.IsIncluded(package);
 	}
 
-	public static bool IsIncluded(this ILocalPackageIdentity package, out bool partiallyIncluded)
+	public static bool IsIncluded(this IPackageIdentity package, out bool partiallyIncluded)
 	{
 		return PackageUtil.IsIncluded(package, out partiallyIncluded);
 	}
 
-	public static bool IsEnabled(this ILocalPackageIdentity package)
+	public static bool IsEnabled(this IPackageIdentity package)
 	{
 		return PackageUtil.IsEnabled(package);
 	}
@@ -103,6 +67,11 @@ public static class SystemExtensions
 		}
 
 		return PackageManager.GetPackageById(identity);
+	}
+
+	public static bool IsInstalled(this IPackageIdentity identity)
+	{
+		return PackageManager.GetPackageById(identity) != null;
 	}
 
 	public static ILocalPackageData? GetLocalPackage(this IPackageIdentity identity)

@@ -63,7 +63,7 @@ public class ModsBubble : StatusBubbleBase
 
 		foreach (var mod in _contentManager.Packages)
 		{
-			if (!mod.IsIncluded(out _))
+			if (!mod.IsIncluded())
 			{
 				continue;
 			}
@@ -115,14 +115,14 @@ public class ModsBubble : StatusBubbleBase
 
 		foreach (var mod in _contentManager.Packages)
 		{
-			if (!mod.IsIncluded(out _))
+			if (!mod.IsIncluded())
 			{
 				continue;
 			}
 
 			modsIncluded++;
 
-			if (mod.IsEnabled(out _))
+			if (mod.IsEnabled())
 			{
 				modsEnabled++;
 			}

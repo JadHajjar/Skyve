@@ -26,9 +26,11 @@ public partial class ItemListControl<T>
 
 		if (thumbnail is null)
 		{
-			using var generic = (e.Item is ILocalPackageData ? Properties.Resources.I_CollectionIcon : e.Item.GetPackage()?.IsCodeMod == true ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
+			using var generic = IconManager.GetIcon(e.Item is IAsset ? "I_Assets" : e.Item is ILocalPackageData ? "I_Mods" : "I_Package", e.Rects.IconRect.Height).Color(e.BackColor);
+			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			drawThumbnail(generic);
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
+			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
 		}
 		else if (e.Item.IsLocal())
 		{
@@ -47,7 +49,10 @@ public partial class ItemListControl<T>
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
 		}
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
+		void drawThumbnail(Bitmap generic)
+		{
+			e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor, blur: e.Rects.IconRect.Contains(CursorLocation));
+		}
 	}
 
 
@@ -65,7 +70,7 @@ public partial class ItemListControl<T>
 		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
 		var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
 
-		if (isIncluded)
+		if (isEnabled)
 		{
 			activeColor = isPartialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
 		}
@@ -79,7 +84,7 @@ public partial class ItemListControl<T>
 		}
 		else if (activeColor == default && inclEnableRect.Contains(CursorLocation))
 		{
-			activeColor = Color.FromArgb(40, FormDesign.Design.ActiveColor);
+			activeColor = Color.FromArgb(40, isIncluded ? FormDesign.Design.GreenColor : FormDesign.Design.ActiveColor);
 			iconColor = FormDesign.Design.ActiveColor;
 		}
 		else

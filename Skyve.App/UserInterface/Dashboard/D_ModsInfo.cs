@@ -48,14 +48,14 @@ internal class D_ModsInfo : IDashboardItem
 			{
 				modsTotal++;
 
-				if (!mod.IsIncluded(out _))
+				if (!mod.IsIncluded())
 				{
 					continue;
 				}
 
 				modsIncluded++;
 
-				if (mod.IsEnabled(out _))
+				if (mod.IsEnabled())
 				{
 					modsEnabled++;
 				}
