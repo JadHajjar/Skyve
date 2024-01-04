@@ -189,7 +189,7 @@
     "Plural": "Copier les ID des auteurs des paquets sélectionnés"
   },
   "ShowingFilteredItems": "Affichage de {0} éléments sur {1} au total",
-  "DropNewPlayset": "Déposez ou sélectionnez un fichier .json ou .xml pour l'importer",
+  "DropNewPlayset": "Déposez ou sélectionnez le fichier .json ou .xml du playset pour l'importer",
   "ThemeUIScale": "Thème et échelle de l'interface utilisateur",
   "SearchPlaysets": "Chercher parmi les profils..",
   "AdvancedSettings": "Paramètres avancés",
@@ -608,7 +608,7 @@
   "EditPlaysetThumbnail": "Modifier l'image miniature de ce jeu",
   "MakePublic": "Rendre ce profil Public",
   "MakePrivate": "Rendre ce profil Privé",
-  "CopyPlaysetLink": "Copier l'ID de ce jeu de lecture",
+  "CopyPlaysetLink": "Copier l'ID de ce playset",
   "FailedToUploadPlayset": "Impossible de télécharger votre playset",
   "FailedToDeletePlayset": "Impossible de supprimer votre playset",
   "FailedToUpdatePlayset": "Impossible de mettre à jour votre playset",
