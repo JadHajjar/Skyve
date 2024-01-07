@@ -1,10 +1,7 @@
 ﻿using Newtonsoft.Json;
 
-using Skyve.App.UserInterface.Dropdowns;
 using Skyve.App.UserInterface.Generic;
-using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility.Domain;
-using Skyve.Systems.Compatibility.Domain.Api;
 
 using System.Drawing;
 using System.IO;
@@ -12,8 +9,6 @@ using System.IO.Compression;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_CompatibilityReport : PanelContent
@@ -24,13 +19,12 @@ public partial class PC_CompatibilityReport : PanelContent
 	private bool firstFilterPassed;
 	private bool massSnoozeing;
 	private readonly DelayedAction _delayedSearch;
-	private readonly List<string> searchTermsOr = new();
-	private readonly List<string> searchTermsAnd = new();
-	private readonly List<string> searchTermsExclude = new();
+	private readonly List<string> searchTermsOr = [];
+	private readonly List<string> searchTermsAnd = [];
+	private readonly List<string> searchTermsExclude = [];
 	private readonly IncludeAllButton<ICompatibilityInfo> I_Actions;
 
 	private readonly ISubscriptionsManager _subscriptionsManager;
-	private readonly IBulkUtil _bulkUtil;
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IPackageManager _contentManager;
 	private readonly INotifier _notifier;
@@ -44,7 +38,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	public PC_CompatibilityReport() : base(ServiceCenter.Get<IUserService>().User.Manager && !ServiceCenter.Get<IUserService>().User.Malicious)
 	{
-		ServiceCenter.Get(out _subscriptionsManager, out _tagUtil, out _playsetManager, out _downloadService, out _settings, out _packageUtil, out _bulkUtil, out _compatibilityManager, out _contentManager, out _notifier, out IUserService userService);
+		ServiceCenter.Get(out _subscriptionsManager, out _tagUtil, out _playsetManager, out _downloadService, out _settings, out _packageUtil, out _compatibilityManager, out _contentManager, out _notifier, out IUserService userService);
 
 		InitializeComponent();
 
@@ -154,15 +148,14 @@ public partial class PC_CompatibilityReport : PanelContent
 			{
 				var info = x.GetCompatibilityInfo(cacheOnly: true);
 
-				if (info.GetNotification() is not NotificationType.Unsubscribe && !_packageUtil.IsIncluded(x.LocalData!))
-				{
-					return null;
-				}
-
-				return info;
+				return info.GetNotification() is not NotificationType.Unsubscribe && !_packageUtil.IsIncluded(x) ? null : info;
 			}).ToList();
 
-			this.TryInvoke(() => { LoadReport(packages!); PB_Loader.Hide(); });
+			this.TryInvoke(() =>
+			{
+				LoadReport(packages!);
+				PB_Loader.Hide();
+			});
 		}
 	}
 
@@ -192,92 +185,95 @@ public partial class PC_CompatibilityReport : PanelContent
 
 			DD_Author.SetItems(reports);
 		}
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report"); }
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report");
+		}
 	}
 
 	private ExtensionClass.action? GetAction(ICompatibilityInfo report)
 	{
 		var message = report.ReportItems.FirstOrDefault(x => x.Status.Notification == ListControl.CurrentGroup && !_compatibilityManager.IsSnoozed(x));
 
-		if (message is null || report.GetLocalPackage() is null)
-		{
-			return null;
-		}
-
-		return message.Status.Action switch
-		{
-			StatusAction.SubscribeToPackages => () =>
+		return message is null || report.GetLocalPackage() is null
+			? null
+			: message.Status.Action switch
 			{
-				_subscriptionsManager.Subscribe(message.Packages.Where(x => !x.IsInstalled()));
-				_bulkUtil.SetBulkIncluded(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
-				_bulkUtil.SetBulkEnabled(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
-				_compatibilityManager.QuickUpdate(message);
-			}
-			,
-			StatusAction.RequiresConfiguration => () =>
-			{
-				_compatibilityManager.ToggleSnoozed(message);
-				_compatibilityManager.QuickUpdate(message);
-			}
-			,
-			StatusAction.UnsubscribeThis => () =>
-			{
-				_subscriptionsManager.UnSubscribe(new[] { report });
-				_compatibilityManager.QuickUpdate(message);
-			}
-			,
-			StatusAction.UnsubscribeOther => () =>
-			{
-				_subscriptionsManager.UnSubscribe(message.Packages!);
-				_compatibilityManager.QuickUpdate(message);
-			}
-			,
-			StatusAction.ExcludeThis => () =>
-			{
-				var pp = report.GetLocalPackage();
-				if (pp is not null)
+				StatusAction.SubscribeToPackages => () =>
 				{
-					_packageUtil.SetIncluded(pp, false);
+					_subscriptionsManager.Subscribe(message.Packages.Where(x => !x.IsInstalled()));
+					_packageUtil.SetIncluded(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+					_packageUtil.SetEnabled(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+					_compatibilityManager.QuickUpdate(message);
 				}
-				_compatibilityManager.QuickUpdate(message);
-			}
-			,
-			StatusAction.ExcludeOther => () =>
-			{
-				foreach (var p in message.Packages!)
+				,
+				StatusAction.RequiresConfiguration => () =>
 				{
-					var pp = p.GetLocalPackage();
+					_compatibilityManager.ToggleSnoozed(message);
+					_compatibilityManager.QuickUpdate(message);
+				}
+				,
+				StatusAction.UnsubscribeThis => () =>
+				{
+					_subscriptionsManager.UnSubscribe(new[] { report });
+					_compatibilityManager.QuickUpdate(message);
+				}
+				,
+				StatusAction.UnsubscribeOther => () =>
+				{
+					_subscriptionsManager.UnSubscribe(message.Packages!);
+					_compatibilityManager.QuickUpdate(message);
+				}
+				,
+				StatusAction.ExcludeThis => () =>
+				{
+					var pp = report.GetLocalPackage();
 					if (pp is not null)
 					{
 						_packageUtil.SetIncluded(pp, false);
 					}
-				}
-				_compatibilityManager.QuickUpdate(message);
-			}
-			,
-			StatusAction.RequestReview => () =>
-			{
-				Program.MainForm.PushPanel(null, new PC_RequestReview(report));
-			}
-			,
-			StatusAction.Switch => message.Packages.Length == 1 ? () =>
-			{
-				var pp1 = report.GetLocalPackage();
-				var pp2 = message.Packages[0]?.GetLocalPackage();
 
-				if (pp1 is not null && pp2 is not null)
-				{
-					_packageUtil.SetIncluded(pp1!, false);
-					_packageUtil.SetEnabled(pp1!, false);
-					_packageUtil.SetIncluded(pp2!, true);
-					_packageUtil.SetEnabled(pp2!, true);
+					_compatibilityManager.QuickUpdate(message);
 				}
-				_compatibilityManager.QuickUpdate(message);
-			}
-			: null
+				,
+				StatusAction.ExcludeOther => () =>
+				{
+					foreach (var p in message.Packages!)
+					{
+						var pp = p.GetLocalPackage();
+						if (pp is not null)
+						{
+							_packageUtil.SetIncluded(pp, false);
+						}
+					}
+
+					_compatibilityManager.QuickUpdate(message);
+				}
+				,
+				StatusAction.RequestReview => () =>
+				{
+					Program.MainForm.PushPanel(null, new PC_RequestReview(report));
+				}
+				,
+				StatusAction.Switch => message.Packages.Length == 1 ? () =>
+				{
+					var pp1 = report.GetLocalPackage();
+					var pp2 = message.Packages[0]?.GetLocalPackage();
+
+					if (pp1 is not null && pp2 is not null)
+					{
+						_packageUtil.SetIncluded(pp1!, false);
+						_packageUtil.SetEnabled(pp1!, false);
+						_packageUtil.SetIncluded(pp2!, true);
+						_packageUtil.SetEnabled(pp2!, true);
+					}
+
+					_compatibilityManager.QuickUpdate(message);
+				}
+				: null
 			,
-			_ => null,
-		};
+				_ => null,
+			};
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<ICompatibilityInfo> e)
@@ -345,7 +341,10 @@ public partial class PC_CompatibilityReport : PanelContent
 
 			customReportLoaded = true;
 		}
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report"); }
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report");
+		}
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)
@@ -414,84 +413,87 @@ public partial class PC_CompatibilityReport : PanelContent
 			var Message = item.ReportItems.FirstOrDefault(x => x.Status.Notification == item.GetNotification() && !_compatibilityManager.IsSnoozed(x));
 			_compatibilityManager.ToggleSnoozed(Message);
 		}
+
 		massSnoozeing = false;
 
 		CompatibilityManager_ReportProcessed();
 	}
 
-	protected virtual void SetIncluded(IEnumerable<ICompatibilityInfo> filteredItems, bool included)
+	protected virtual async Task SetIncluded(IEnumerable<ICompatibilityInfo> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, included);
+		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems, included);
 	}
 
-	protected virtual void SetEnabled(IEnumerable<ICompatibilityInfo> filteredItems, bool enabled)
+	protected virtual async Task SetEnabled(IEnumerable<ICompatibilityInfo> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, enabled);
+		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems, enabled);
 	}
 
 	private void I_Actions_Click(object sender, EventArgs e)
 	{
 		var items = new SlickStripItem[]
 		{
-			  new (Locale.IncludeAll, "I_Check", action: () => IncludeAll(this, EventArgs.Empty))
-			, new (Locale.ExcludeAll, "I_X", action: () =>ExcludeAll(this, EventArgs.Empty))
+			  new (Locale.IncludeAll, "I_Check", action: async () => await IncludeAll())
+			, new (Locale.ExcludeAll, "I_X", action: async () => await ExcludeAll())
 			, new (string.Empty)
-			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
-			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: () => DisableAll(this, EventArgs.Empty))
+			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action: async () => await EnableAll())
+			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: async () => await DisableAll())
 			, new (string.Empty)
 			, new (LocaleCR.ApplyAllActions, "I_CompatibilityReport", ListControl.FilteredItems.Any(x => GetAction(x) is not null), action: ApplyAll)
 			, new (LocaleCR.SnoozeAll, "I_Snooze", action: SnoozeAll)
 			, new (string.Empty)
-			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
+			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: async () => await UnsubscribeAll())
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
 	}
 
-	private void DisableAll(object sender, EventArgs e)
+	private async Task DisableAll()
 	{
-		SetEnabled(ListControl.FilteredItems, false);
+		await SetEnabled(ListControl.FilteredItems, false);
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
-	private void EnableAll(object sender, EventArgs e)
+	private async Task EnableAll()
 	{
-		SetEnabled(ListControl.FilteredItems, true);
+		await SetEnabled(ListControl.FilteredItems, true);
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
-	private void ExcludeAll(object sender, EventArgs e)
+	private async Task ExcludeAll()
 	{
-		SetIncluded(ListControl.FilteredItems, false);
+		await SetIncluded(ListControl.FilteredItems, false);
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
-	private void IncludeAll(object sender, EventArgs e)
+	private async Task IncludeAll()
 	{
-		SetIncluded(ListControl.FilteredItems, true);
+		await SetIncluded(ListControl.FilteredItems, true);
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
-	//private void DownloadAll(object sender, EventArgs e)
-	//{
-	//	_downloadService.Download(ListControl.FilteredItems);
-	//	ListControl.Invalidate();
-	//	I_Actions.Invalidate();
-	//}
+#if CS1
+	private void DownloadAll(object sender, EventArgs e)
+	{
+		_downloadService.Download(ListControl.FilteredItems.Where(x => x.GetLocalPackage() is null).Select(x => (IPackageIdentity)x));
+		ListControl.Invalidate();
+		I_Actions.Invalidate();
+	}
 
-	//private void ReDownloadAll(object sender, EventArgs e)
-	//{
-	//	_downloadService.Download(ListControl.FilteredItems);
-	//	ListControl.Invalidate();
-	//	I_Actions.Invalidate();
-	//}
+	private void ReDownloadAll(object sender, EventArgs e)
+	{
+		_downloadService.Download(ListControl.FilteredItems.Where(x => x.GetLocalPackage() is not null).Cast<IPackageIdentity>());
+		ListControl.Invalidate();
+		I_Actions.Invalidate();
+	}
+#endif
 
-	private void UnsubscribeAll(object sender, EventArgs e)
+	private async Task UnsubscribeAll()
 	{
 		if (MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisUnsubscribesFrom.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
 		{
@@ -499,20 +501,20 @@ public partial class PC_CompatibilityReport : PanelContent
 		}
 
 		I_Actions.Loading = true;
-		ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.FilteredItems.Cast<IPackageIdentity>());
+		await ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.FilteredItems.Cast<IPackageIdentity>());
 		I_Actions.Loading = false;
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
-	private void SubscribeAll(object sender, EventArgs e)
+	private async Task SubscribeAll()
 	{
 		var removeBadPackages = false;
-		var steamIds = ListControl.SafeGetItems().AllWhere(x => !x.Item.IsLocal() && x.Item.GetLocalPackage() is null);
+		var steamIds = ListControl.SafeGetItems().AllWhere(x => x.Item.GetLocalPackage() == null && x.Item.Id != 0);
 
 		foreach (var item in steamIds.ToList())
 		{
-			var report = item.Item;
+			var report = item.Item.GetCompatibilityInfo();
 
 			if (report.GetNotification() >= NotificationType.Unsubscribe)
 			{
@@ -535,7 +537,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			return;
 		}
 
-		ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x => (IPackageIdentity)x.Item));
+		await ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x => (IPackageIdentity)x.Item));
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
@@ -738,7 +740,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (DD_Tags.SelectedItems.Any())
 		{
-			if (!_tagUtil.HasAllTags(item.GetPackage(), DD_Tags.SelectedItems))
+			if (!_tagUtil.HasAllTags(item, DD_Tags.SelectedItems))
 			{
 				return true;
 			}
@@ -746,7 +748,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
 		{
-			return !_playsetManager.IsPackageIncludedInPlayset(item.GetPackage(), DD_Profile.SelectedItem).Result;
+			return !_packageUtil.IsIncluded(item, DD_Profile.SelectedItem.Id);
 		}
 
 		if (!searchEmpty)

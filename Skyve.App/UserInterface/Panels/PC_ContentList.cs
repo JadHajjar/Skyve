@@ -1,5 +1,6 @@
 ﻿using Skyve.App.UserInterface.Dropdowns;
 
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
@@ -62,14 +63,14 @@ public partial class PC_ContentList<T> : PanelContent where T : IPackageIdentity
 		throw new NotImplementedException();
 	}
 
-	protected virtual void SetIncluded(IEnumerable<T> filteredItems, bool included)
+	protected virtual async Task SetIncluded(IEnumerable<T> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, included);
+		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems.Cast<IPackageIdentity>(), included);
 	}
 
-	protected virtual void SetEnabled(IEnumerable<T> filteredItems, bool enabled)
+	protected virtual async Task SetEnabled(IEnumerable<T> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, enabled);
+		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems.Cast<IPackageIdentity>(), enabled);
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()

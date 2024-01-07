@@ -518,5 +518,15 @@ public partial class ItemListControl<T>
 
 			return rects;
 		}
+
+		protected override void OnViewChanged()
+		{
+			base.OnViewChanged();
+
+			if (GridView)
+			{
+				GridPadding = UI.Scale(new Padding(4), UI.UIScale);
+			}
+		}
 	}
 }

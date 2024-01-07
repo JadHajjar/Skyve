@@ -19,7 +19,7 @@ public class CompatibilityHelper
 	private readonly IWorkshopService _workshopService;
 	private readonly PackageAvailabilityService _packageAvailabilityService;
 
-	private readonly Dictionary<ulong, List<ulong>> _missingItems = new();
+	private readonly Dictionary<ulong, List<ulong>> _missingItems = [];
 
 	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILogger logger)
 	{
@@ -53,7 +53,7 @@ public class CompatibilityHelper
 			}
 		}
 
-		var packages = status.Status.Packages?.ToList() ?? new();
+		var packages = status.Status.Packages?.ToList() ?? [];
 
 		if (status.Status.Action is StatusAction.Switch && status.Status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
 		{
@@ -107,7 +107,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		var packages = interaction.Interaction.Packages?.ToList() ?? new();
+		var packages = interaction.Interaction.Packages?.ToList() ?? [];
 
 		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Interaction.Action is StatusAction.Switch)
 		{
@@ -167,7 +167,7 @@ public class CompatibilityHelper
 					}
 					else
 					{
-						_missingItems[item] = new() { info.Data.Package.Id };
+						_missingItems[item] = [info.Data.Package.Id];
 					}
 				}
 			}

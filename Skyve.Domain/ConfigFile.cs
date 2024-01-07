@@ -132,12 +132,9 @@ public abstract class ConfigFile
 	{
 		var fileContents = ISave.Read(filePath);
 
-		if (string.IsNullOrEmpty(fileContents))
-		{
-			throw new Exception("File contents empty");
-		}
-
-		return JsonConvert.DeserializeObject<T>(fileContents);
+		return string.IsNullOrEmpty(fileContents)
+			? throw new Exception("File contents empty")
+			: JsonConvert.DeserializeObject<T>(fileContents);
 	}
 
 	private void SerializeXml()
@@ -217,12 +214,9 @@ public abstract class ConfigFile
 	{
 		var fileContents = ISave.Read(filePath);
 
-		if (string.IsNullOrEmpty(fileContents))
-		{
-			throw new Exception("File contents empty");
-		}
-
-		return JsonConvert.DeserializeObject(fileContents, type);
+		return string.IsNullOrEmpty(fileContents)
+			? throw new Exception("File contents empty")
+			: JsonConvert.DeserializeObject(fileContents, type);
 	}
 
 	private static object DeserializeXml(string filePath, Type type)

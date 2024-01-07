@@ -1,6 +1,5 @@
 ﻿using Skyve.App;
 using Skyve.App.Interfaces;
-using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
@@ -128,7 +127,6 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		{
 			HighlightOnHover = false;
 			Padding = UI.Scale(new Padding(6), UI.UIScale);
-			GridPadding = UI.Scale(new Padding(4), UI.UIScale);
 		}
 		else
 		{
@@ -194,12 +192,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				.ThenBy(x => x.Item.GetLocalPackage()?.CleanName() ?? x.Item.CleanName())
 		};
 
-		if (SortDescending)
-		{
-			return items.Reverse();
-		}
-
-		return items;
+		return SortDescending ? items.Reverse() : items;
 	}
 
 	protected override async void OnItemMouseClick(DrawableItem<T, Rectangles> item, MouseEventArgs e)
@@ -212,7 +205,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 			return;
 		}
 
-		if (e.Button != MouseButtons.Left)
+		if (e.Button != MouseButtons.Left || item.Loading)
 		{
 			return;
 		}
@@ -220,20 +213,28 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		var rects = item.Rectangles;
 		var filter = ModifierKeys.HasFlag(Keys.Alt) != _settings.UserSettings.FlipItemCopyFilterAction;
 
+		if (rects.DotsRect.Contains(e.Location))
+		{
+			ShowRightClickMenu(item.Item);
+			return;
+		}
+
 #if CS2
 		if (rects.IncludedRect.Contains(e.Location))
 		{
 			var isIncluded = item.Item.IsIncluded(out var partialIncluded) || partialIncluded;
 			var isEnabled = item.Item.IsEnabled();
 
+			Loading = item.Loading = true;
 			if (!isIncluded)
 			{
-				_packageUtil.SetIncluded(item.Item, isIncluded);
+				await _packageUtil.SetIncluded(item.Item, !isIncluded);
 			}
 			else
 			{
-				_packageUtil.SetEnabled(item.Item, !isEnabled);
+				await _packageUtil.SetEnabled(item.Item, !isEnabled);
 			}
+			Loading = item.Loading = false;
 		}
 #else
 
@@ -276,7 +277,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		}
 #endif
 
-			if (rects.FolderRect.Contains(e.Location))
+		if (rects.FolderRect.Contains(e.Location))
 		{
 			PlatformUtil.OpenFolder(item.Item.GetLocalPackage()?.FilePath);
 			return;
@@ -356,6 +357,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 					ScrollTo(item.Item);
 				}
 			}
+
 			return;
 		}
 
@@ -516,7 +518,13 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				base.OnPaint(e);
 			}
 		}
-		catch (Exception ex) { if (System.Diagnostics.Debugger.IsAttached) MessagePrompt.Show(ex); }
+		catch (Exception ex)
+		{
+			if (System.Diagnostics.Debugger.IsAttached)
+			{
+				MessagePrompt.Show(ex);
+			}
+		}
 	}
 
 	public void ShowRightClickMenu(T item)
@@ -559,7 +567,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 	public class Rectangles : IDrawableItemRectangles<T>
 	{
-		public Dictionary<ITag, Rectangle> TagRects = new();
+		public Dictionary<ITag, Rectangle> TagRects = [];
 		public Rectangle IncludedRect;
 		public Rectangle EnabledRect;
 		public Rectangle FolderRect;
@@ -576,6 +584,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		public Rectangle ScoreRect;
 		public Rectangle GithubRect;
 		public Rectangle FolderNameRect;
+		public Rectangle DotsRect;
 
 		public T Item { get; set; }
 
@@ -596,6 +605,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl<T>)!.IsPackagePage) ||
 				DownloadStatusRect.Contains(location) ||
 				ScoreRect.Contains(location) ||
+				DotsRect.Contains(location) ||
 				CompatibilityRect.Contains(location) ||
 				DateRect.Contains(location) ||
 				GithubRect.Contains(location) ||
@@ -624,14 +634,9 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 					}
 				}
 
-				if (Item.GetLocalPackageIdentity().IsIncluded())
-				{
-					text = $"{Locale.ExcludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
-				}
-				else
-				{
-					text = $"{Locale.IncludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
-				}
+				text = Item.GetLocalPackageIdentity().IsIncluded()
+					? $"{Locale.ExcludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}"
+					: $"{Locale.IncludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
 
 				point = IncludedRect.Location;
 				return true;
@@ -639,14 +644,9 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 			if (EnabledRect.Contains(location) && Item.GetLocalPackage().IsCodeMod)
 			{
-				if (Item.GetLocalPackageIdentity().IsEnabled())
-				{
-					text = $"{Locale.DisablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
-				}
-				else
-				{
-					text = $"{Locale.EnablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
-				}
+				text = Item.GetLocalPackageIdentity().IsEnabled()
+					? $"{Locale.DisablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}"
+					: $"{Locale.EnablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
 
 				point = EnabledRect.Location;
 				return true;
@@ -741,14 +741,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 			if ((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl<T>)!.IsPackagePage)
 			{
-				if ((instance as ItemListControl<T>)!.IsSelection)
-				{
-					text = Locale.SelectThisPackage;
-				}
-				else
-				{
-					text = Locale.OpenPackagePage;
-				}
+				text = (instance as ItemListControl<T>)!.IsSelection ? (string)Locale.SelectThisPackage : (string)Locale.OpenPackagePage;
 
 				point = CenterRect.Location;
 				return true;

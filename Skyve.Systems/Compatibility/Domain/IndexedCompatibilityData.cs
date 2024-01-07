@@ -13,11 +13,11 @@ public class IndexedCompatibilityData
 {
 	public IndexedCompatibilityData(CompatibilityData? data)
 	{
-		Packages = data?.Packages?.ToDictionary(x => x.Id, x => NewMethod(x, data.Packages)) ?? new();
+		Packages = data?.Packages?.ToDictionary(x => x.Id, x => NewMethod(x, data.Packages)) ?? [];
 		PackageNames = new(StringComparer.InvariantCultureIgnoreCase);
-		Authors = data?.Authors?.ToDictionary(x => x.Id) ?? new();
-		BlackListedIds = new(data?.BlackListedIds ?? new());
-		BlackListedNames = new(data?.BlackListedNames ?? new());
+		Authors = data?.Authors?.ToDictionary(x => x.Id) ?? [];
+		BlackListedIds = new(data?.BlackListedIds ?? []);
+		BlackListedNames = new(data?.BlackListedNames ?? []);
 
 		foreach (var item in Packages.Values)
 		{
@@ -52,9 +52,9 @@ public class IndexedCompatibilityData
 				package.Note = stable.Note;
 				package.Usage = stable.Usage;
 				package.Type = stable.Type;
-				package.Statuses ??= new();
-				package.Statuses.AddRange(stable.Statuses ?? new());
-				package.Interactions ??= new();
+				package.Statuses ??= [];
+				package.Statuses.AddRange(stable.Statuses ?? []);
+				package.Interactions ??= [];
 				package.Interactions.AddRange(stable.Interactions?.Where(x => x.Type > InteractionType.Alternative) ?? Enumerable.Empty<PackageInteraction>());
 			}
 		}

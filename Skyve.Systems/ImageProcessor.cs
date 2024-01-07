@@ -32,7 +32,7 @@ internal class ImageProcessor : PeriodicProcessor<ImageProcessor.ImageRequest, I
 			}
 		}
 
-		return (new(), false);
+		return ([], false);
 	}
 
 	protected override void CacheItems(Dictionary<ImageRequest, TimeStampedImage> results)

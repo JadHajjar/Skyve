@@ -39,7 +39,7 @@ public class PC_ViewSpecificPackages : PC_ContentList<IPackageIdentity>
 
 		foreach (var item in _contentManager.Packages)
 		{
-			if (item.LocalData!.IsIncluded())
+			if (item.IsIncluded())
 			{
 				packagesIncluded++;
 
@@ -47,7 +47,7 @@ public class PC_ViewSpecificPackages : PC_ContentList<IPackageIdentity>
 				{
 					modsIncluded++;
 
-					if (item.LocalData!.IsEnabled())
+					if (item.IsEnabled())
 					{
 						modsEnabled++;
 					}

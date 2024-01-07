@@ -22,7 +22,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	private readonly DelayedAction _delayedReportCache;
 	private readonly Dictionary<IPackageIdentity, CompatibilityInfo> _cache = new(new IPackageEqualityComparer());
-	private readonly List<SnoozedItem> _snoozedItems = new();
+	private readonly List<SnoozedItem> _snoozedItems = [];
 	private readonly Regex _bracketsRegex = new(@"[\[\(](.+?)[\]\)]", RegexOptions.Compiled);
 	private readonly Regex _urlRegex = new(@"(https?|ftp)://(?:www\.)?([\w-]+(?:\.[\w-]+)*)(?:/[^?\s]*)?(?:\?[^#\s]*)?(?:#.*)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
@@ -277,7 +277,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public bool IsBlacklisted(IPackageIdentity package)
 	{
-		return CompatibilityData.BlackListedIds.Contains((ulong)package.Id)
+		return CompatibilityData.BlackListedIds.Contains(package.Id)
 			|| CompatibilityData.BlackListedNames.Contains(package.Name ?? string.Empty)
 			|| (package.GetWorkshopInfo()?.IsIncompatible ?? false);
 	}
@@ -310,9 +310,9 @@ public class CompatibilityManager : ICompatibilityManager
 			Id = package.Id,
 			Name = package.Name,
 			FileName = package.GetLocalPackageIdentity()?.FilePath,
-			Links = new(),
-			Interactions = new(),
-			Statuses = new(),
+			Links = [],
+			Interactions = [],
+			Statuses = [],
 		};
 
 		var workshopInfo = package.GetWorkshopInfo();
@@ -324,7 +324,7 @@ public class CompatibilityManager : ICompatibilityManager
 				{
 					Type = o.Key ? InteractionType.OptionalPackages : InteractionType.RequiredPackages,
 					Action = StatusAction.SubscribeToPackages,
-					Packages = o.ToArray(x => (ulong)x.Id)
+					Packages = o.ToArray(x => x.Id)
 				}));
 		}
 
@@ -442,7 +442,7 @@ public class CompatibilityManager : ICompatibilityManager
 	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)
 	{
 		throw new NotImplementedException();
-		if (!CompatibilityData.Packages.TryGetValue((ulong)package.Id, out var indexedPackage))
+		if (!CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
 		{
 			return package;
 		}

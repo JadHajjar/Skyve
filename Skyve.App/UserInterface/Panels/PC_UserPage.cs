@@ -47,14 +47,14 @@ public partial class PC_UserPage : PanelContent
 		return userItems;
 	}
 
-	protected void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
+	protected async Task SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, included);
+		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems, included);
 	}
 
-	protected void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
+	protected async Task SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, enabled);
+		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems, enabled);
 	}
 
 	protected LocaleHelper.Translation GetItemText()

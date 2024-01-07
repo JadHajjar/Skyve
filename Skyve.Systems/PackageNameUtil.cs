@@ -45,7 +45,7 @@ public class PackageNameUtil : IPackageNameUtil
 
 	public string CleanName(IPackageIdentity? package, out List<(Color Color, string Text)> tags, bool keepTags = false)
 	{
-		tags = new();
+		tags = [];
 
 		if (package?.Name is null or "")
 		{

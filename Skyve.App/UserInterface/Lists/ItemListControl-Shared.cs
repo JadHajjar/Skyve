@@ -51,7 +51,7 @@ public partial class ItemListControl<T>
 
 		void drawThumbnail(Bitmap generic)
 		{
-			e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor, blur: e.Rects.IconRect.Contains(CursorLocation));
+			e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor/*, blur: e.Rects.IconRect.Contains(CursorLocation)*/);
 		}
 	}
 
@@ -98,9 +98,16 @@ public partial class ItemListControl<T>
 		}
 
 		using var brush = inclEnableRect.Gradient(activeColor);
+		e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(4 * UI.FontScale));
+
+		if (e.DrawableItem.Loading)
+		{
+			DrawLoader(e.Graphics, e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Width / 2, e.Rects.IncludedRect.Width / 2), iconColor);
+			return;
+		}
+
 		using var includedIcon = incl.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
 
-		e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(4 * UI.FontScale));
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
 	}
 #else

@@ -3,7 +3,6 @@
 using Skyve.Domain.Systems;
 
 using System;
-using System.Diagnostics;
 
 namespace Skyve.Systems;
 internal class NotifierSystem : INotifier

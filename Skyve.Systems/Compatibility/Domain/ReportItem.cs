@@ -35,7 +35,9 @@ public class ReportItem : ICompatibilityItem
 	private string GetMessage()
 	{
 		if (LocaleKey is not null && LocaleParams is not null)
+		{
 			return LocaleHelper.GetGlobalText(LocaleKey).Format(LocaleParams);
+		}
 
 		var workshopService = ServiceCenter.Get<IWorkshopService>();
 		var packageUtil = ServiceCenter.Get<IPackageNameUtil>();

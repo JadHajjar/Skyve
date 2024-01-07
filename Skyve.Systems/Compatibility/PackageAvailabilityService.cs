@@ -1,13 +1,9 @@
 ﻿using Extensions;
 
 using Skyve.Domain;
-using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
-using Skyve.Systems.Compatibility.Domain;
 
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Skyve.Systems.Compatibility;
@@ -23,7 +19,7 @@ public class PackageAvailabilityService
 		_packageManager = packageManager;
 		_contentUtil = contentUtil;
 		_compatibilityManager = compatibilityManager;
-		_cache = new();
+		_cache = [];
 
 		var ids = new List<ulong>();
 
@@ -42,12 +38,8 @@ public class PackageAvailabilityService
 
 	public bool IsPackageEnabled(ulong id, bool withAlternativesAndSuccessors)
 	{
-		if (_cache.TryGetValue(id, out var status))
-		{
-			return withAlternativesAndSuccessors ? status.enabledWithAlternatives : status.enabled;
-		}
-
-		return false;
+		return _cache.TryGetValue(id, out var status)
+&& (withAlternativesAndSuccessors ? status.enabledWithAlternatives : status.enabled);
 	}
 
 	internal void UpdateInclusionStatus(ulong id)

@@ -56,17 +56,9 @@ public static class SystemExtensions
 
 	public static IPackage? GetPackage(this IPackageIdentity identity)
 	{
-		if (identity is ILocalPackageData packageData)
-		{
-			return packageData.Package;
-		}
-
-		if (identity is IPackage package)
-		{
-			return package;
-		}
-
-		return PackageManager.GetPackageById(identity);
+		return identity is ILocalPackageData packageData
+			? packageData.Package
+			: identity is IPackage package ? package : PackageManager.GetPackageById(identity);
 	}
 
 	public static bool IsInstalled(this IPackageIdentity identity)
@@ -76,47 +68,25 @@ public static class SystemExtensions
 
 	public static ILocalPackageData? GetLocalPackage(this IPackageIdentity identity)
 	{
-		if (identity is ILocalPackageData packageData)
-		{
-			return packageData;
-		}
-
-		if (identity is IPackage package)
-		{
-			return package.LocalData;
-		}
-
-		return PackageManager.GetPackageById(identity)?.LocalData;
+		return identity is ILocalPackageData packageData
+			? packageData
+			: identity is IPackage package ? package.LocalData : (PackageManager.GetPackageById(identity)?.LocalData);
 	}
 
 	public static ILocalPackageIdentity? GetLocalPackageIdentity(this IPackageIdentity identity)
 	{
-		if (identity is ILocalPackageIdentity packageData)
-		{
-			return packageData;
-		}
-
-		if (identity is IPackage package)
-		{
-			return package.LocalData;
-		}
-
-		return PackageManager.GetPackageById(identity)?.LocalData;
+		return identity is ILocalPackageIdentity packageData
+			? packageData
+			: identity is IPackage package ? package.LocalData : (ILocalPackageIdentity?)(PackageManager.GetPackageById(identity)?.LocalData);
 	}
 
 	public static Bitmap? GetThumbnail(this IThumbnailObject? thumbnailObject)
 	{
-		if (thumbnailObject is null)
-		{
-			return null;
-		}
-
-		if (thumbnailObject.GetThumbnail(ImageService, out var thumbnail, out var thumbnailUrl))
-		{
-			return thumbnail;
-		}
-
-		return thumbnailUrl is null or "" ? null : ImageService.GetImage(thumbnailUrl, true).Result;
+		return thumbnailObject is null
+			? null
+			: thumbnailObject.GetThumbnail(ImageService, out var thumbnail, out var thumbnailUrl)
+			? thumbnail
+			: thumbnailUrl is null or "" ? null : ImageService.GetImage(thumbnailUrl, true).Result;
 	}
 
 	public static Bitmap? GetUserAvatar(this IPackageIdentity? package)
@@ -148,27 +118,12 @@ public static class SystemExtensions
 
 	public static IWorkshopInfo? GetWorkshopInfo(this IPackageIdentity identity)
 	{
-		if (identity is IPackage package)
-		{
-			return WorkshopService.GetInfo(identity) ?? package.WorkshopInfo;
-		}
-
-		if (identity is IWorkshopInfo workshopInfo)
-		{
-			return workshopInfo;
-		}
-
-		return WorkshopService.GetInfo(identity);
+		return identity is IWorkshopInfo workshopInfo ? WorkshopService.GetInfo(identity) ?? workshopInfo : WorkshopService.GetInfo(identity);
 	}
 
 	public static IPackage? GetWorkshopPackage(this IPackageIdentity identity)
 	{
-		if (identity is IWorkshopInfo and IPackage package)
-		{
-			return package;
-		}
-
-		return WorkshopService.GetPackage(identity);
+		return identity is IWorkshopInfo and IPackage package ? package : WorkshopService.GetPackage(identity);
 	}
 
 	public static ICompatibilityInfo GetCompatibilityInfo(this IPackageIdentity package, bool noCache = false, bool cacheOnly = false)

@@ -8,9 +8,8 @@ public interface IPackage : IPackageIdentity
 	bool IsBuiltIn { get; }
 #endif
 	ILocalPackageData? LocalData { get; }
-	IWorkshopInfo? WorkshopInfo { get; }
-//#if CS2
-//	bool IsIncluded(int playsetId);
-//	bool IsEnabled(int playsetId);
-//#endif
+	//#if CS2
+	//	bool IsIncluded(int playsetId);
+	//	bool IsEnabled(int playsetId);
+	//#endif
 }

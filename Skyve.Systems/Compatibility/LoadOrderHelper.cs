@@ -149,11 +149,11 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		public IPackageIdentity[] RequiredMods;
 		public IPackageIdentity[] LoadAfterMods;
 
-        public ModInfo(IPackage mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
+		public ModInfo(IPackage mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
 		{
 			Mod = mod;
 			RequiredMods = requiredMods;
 			LoadAfterMods = afterLoadMods;
 		}
-    }
+	}
 }

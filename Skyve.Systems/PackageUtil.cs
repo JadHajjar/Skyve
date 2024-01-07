@@ -4,77 +4,76 @@ using Skyve.Domain;
 using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
+using System.Threading.Tasks;
 
 namespace Skyve.Systems;
 public class PackageUtil : IPackageUtil
 {
 	private readonly IModUtil _modUtil;
 	private readonly IAssetUtil _assetUtil;
-	private readonly IBulkUtil _bulkUtil;
 	private readonly ILocale _locale;
-	private readonly IPackageManager  _packageManager;
+	private readonly IPackageManager _packageManager;
 	private readonly IPackageNameUtil _packageUtil;
 	private readonly ISettings _settings;
+	private readonly INotifier _notifier;
 
-	public PackageUtil(IModUtil modUtil, IAssetUtil assetUtil, IBulkUtil bulkUtil, ILocale locale, IPackageNameUtil packageUtil, IPackageManager packageManager, ISettings settings)
+	public PackageUtil(IModUtil modUtil, IAssetUtil assetUtil, ILocale locale, IPackageNameUtil packageUtil, IPackageManager packageManager, ISettings settings, INotifier notifier)
 	{
 		_modUtil = modUtil;
 		_assetUtil = assetUtil;
-		_bulkUtil = bulkUtil;
 		_locale = locale;
 		_packageUtil = packageUtil;
 		_packageManager = packageManager;
 		_settings = settings;
+		_notifier = notifier;
 	}
 
-	public bool IsIncluded(IPackageIdentity identity)
+	public bool IsIncluded(IPackageIdentity identity, int? playsetId = null)
 	{
 		if (identity is ILocalPackageData localPackage)
 		{
 			foreach (var item in localPackage.Assets)
 			{
-				if (_assetUtil.IsIncluded(item))
+				if (_assetUtil.IsIncluded(item, playsetId))
 				{
 					return true;
 				}
 			}
 
-			return _modUtil.IsIncluded(identity);
+			return _modUtil.IsIncluded(identity, playsetId);
 		}
 
 		if (identity is IAsset asset)
 		{
-			return _assetUtil.IsIncluded(asset);
+			return _assetUtil.IsIncluded(asset, playsetId);
 		}
 
-		var package = _packageManager.GetPackageById(identity);
+		var package = identity.GetLocalPackage();
 
-		if (package?.LocalData is not null)
-
-			return IsIncluded(package.LocalData);
-
-		return _modUtil.IsIncluded(identity);
+		return package is not null ? IsIncluded(package, playsetId) : _modUtil.IsIncluded(identity, playsetId);
 	}
 
-	public bool IsIncluded(IPackageIdentity identity, out bool partiallyIncluded)
+	public bool IsIncluded(IPackageIdentity identity, out bool partiallyIncluded, int? playsetId = null)
 	{
 		var included = false;
 		var excluded = false;
 
 		if (identity is ILocalPackageData localPackage)
 		{
-			if (_modUtil.IsIncluded(localPackage))
+			if (_modUtil.IsIncluded(localPackage, playsetId))
+			{
 				included = true;
+			}
 			else
+			{
 				excluded = true;
+			}
 
 			foreach (var item in localPackage.Assets)
 			{
-				if (_assetUtil.IsIncluded(item))
+				if (_assetUtil.IsIncluded(item, playsetId))
 				{
 					included = true;
 				}
@@ -99,56 +98,91 @@ public class PackageUtil : IPackageUtil
 		if (identity is IAsset asset)
 		{
 			partiallyIncluded = false;
-			return _assetUtil.IsIncluded(asset);
+			return _assetUtil.IsIncluded(asset, playsetId);
 		}
 
-		var package = _packageManager.GetPackageById(identity);
+		var package = identity.GetLocalPackage();
 
-		if (package?.LocalData is not null)
-
-			return IsIncluded(package.LocalData, out partiallyIncluded);
+		if (package is not null)
+		{
+			return IsIncluded(package, out partiallyIncluded, playsetId);
+		}
 
 		partiallyIncluded = false;
 
-		return _modUtil.IsIncluded(identity);
+		return _modUtil.IsIncluded(identity, playsetId);
 	}
 
-	public bool IsEnabled(IPackageIdentity package)
+	public bool IsEnabled(IPackageIdentity package, int? playsetId = null)
 	{
-		return _modUtil.IsEnabled(package);
+		return _modUtil.IsEnabled(package, playsetId);
 	}
 
-	public bool IsIncludedAndEnabled(IPackageIdentity package)
+	public bool IsIncludedAndEnabled(IPackageIdentity package, int? playsetId = null)
 	{
-		return IsIncluded(package) && IsEnabled(package);
+		return IsIncluded(package, playsetId) && IsEnabled(package, playsetId);
 	}
 
-	public void SetIncluded(IPackageIdentity localPackage, bool value)
+	public async Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null)
+	{
+		var packageList = packages.ToList();
+
+		if (packageList.Count == 0)
+		{
+			return;
+		}
+
+		_notifier.BulkUpdating = true;
+
+		var assets = packageList.SelectMany(x => x.GetLocalPackage()?.Assets ?? []);
+
+		foreach (var asset in assets)
+		{
+			await _assetUtil.SetIncluded(asset, value, playsetId);
+		}
+
+		await _modUtil.SetIncluded(packages, value, playsetId);
+
+		_notifier.BulkUpdating = false;
+
+		if (_notifier.IsContentLoaded)
+		{
+			_notifier.OnInclusionUpdated();
+			_assetUtil.SaveChanges();
+			_notifier.OnRefreshUI(true);
+		}
+	}
+
+	public async Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null)
+	{
+		await _modUtil.SetEnabled(packages, value, playsetId);
+	}
+
+	public async Task SetIncluded(IPackageIdentity localPackage, bool value, int? playsetId = null)
 	{
 		//if (localPackage is ILocalPackageData localPackageData && localPackageData.Assets.Length > 0)
 		//{
-		//	_bulkUtil.SetBulkIncluded(new[] { localPackage }, value);
+		//	_bulkUtil.SetIncluded(new[] { localPackage }, value);
 		//}
 		//else
 		if (localPackage is IAsset asset)
 		{
-			_assetUtil.SetIncluded(asset, value);
+			await _assetUtil.SetIncluded(asset, value, playsetId);
 		}
 		else
 		{
-			_modUtil.SetIncluded(localPackage, value);
+			await _modUtil.SetIncluded(localPackage, value, playsetId);
 		}
 	}
 
-	public void SetEnabled(IPackageIdentity package, bool value)
+	public async Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null)
 	{
-		_modUtil.SetEnabled(package, value);
+		await _modUtil.SetEnabled(package, value, playsetId);
 	}
 
 	public DownloadStatus GetStatus(IPackageIdentity? mod, out string reason)
 	{
 		var workshopInfo = mod?.GetWorkshopInfo();
-		var localPackage = mod?.GetLocalPackage();
 
 		if (workshopInfo is null)
 		{
@@ -172,6 +206,8 @@ public class PackageUtil : IPackageUtil
 			reason = _locale.Get("PackageIsUnknown").Format(_packageUtil.CleanName(mod));
 			return DownloadStatus.Unknown;
 		}
+
+		var localPackage = mod?.GetLocalPackage();
 
 		if (localPackage is not null)
 		{

@@ -23,7 +23,7 @@ public class PC_Packages : PC_ContentList<IPackage>
 		{
 			return _contentManager.Packages.Where(x =>
 			{
-				if (_settings.UserSettings.FilterOutPackagesWithOneAsset && (x.LocalData!.Assets.Length == 1))
+				if (_settings.UserSettings.FilterOutPackagesWithOneAsset && (x.LocalData?.Assets.Length == 1))
 				{
 					return false;
 				}
@@ -46,7 +46,7 @@ public class PC_Packages : PC_ContentList<IPackage>
 
 		foreach (var item in _contentManager.Packages)
 		{
-			if (item.LocalData!.IsIncluded())
+			if (item.IsIncluded())
 			{
 				packagesIncluded++;
 
@@ -54,7 +54,7 @@ public class PC_Packages : PC_ContentList<IPackage>
 				{
 					modsIncluded++;
 
-					if (item.LocalData!.IsEnabled())
+					if (item.IsEnabled())
 					{
 						modsEnabled++;
 					}

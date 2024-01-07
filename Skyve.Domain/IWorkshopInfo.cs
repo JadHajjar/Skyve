@@ -6,6 +6,7 @@ public interface IWorkshopInfo : IPackageIdentity
 {
 	IUser? Author { get; }
 	string? ThumbnailUrl { get; }
+	string? ShortDescription { get; }
 	string? Description { get; }
 	string? Version { get; }
 	DateTime ServerTime { get; }
@@ -21,4 +22,5 @@ public interface IWorkshopInfo : IPackageIdentity
 	bool IsInvalid { get; }
 	Dictionary<string, string> Tags { get; }
 	IEnumerable<IPackageRequirement> Requirements { get; }
+	IEnumerable<IModChangelog> Changelog { get; }
 }

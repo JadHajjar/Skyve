@@ -89,7 +89,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 		if (!ReadOnly)
 		{
-			SetItems(_profileManager.Playsets.Skip(1));
+			SetItems(_profileManager.Playsets);
 		}
 	}
 

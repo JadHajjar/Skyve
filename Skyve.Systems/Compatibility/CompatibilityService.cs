@@ -214,10 +214,12 @@ internal class CompatibilityService
 		{
 			info.Add(ReportType.Stability, new GenericPackageStatus() { Notification = NotificationType.Info, Note = packageData.Package.Note }, string.Empty, new PseudoPackage[0]);
 		}
+
 		if (package.IsLocal())
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Package.Id)), true), new PseudoPackage[] { new(packageData.Package.Id) });
 		}
+
 		if (!package.IsLocal() && !author.Malicious && workshopInfo?.IsIncompatible != true)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), (packageData.Package.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.Package.ReviewDate.ToReadableString(packageData.Package.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"), new object[0]);

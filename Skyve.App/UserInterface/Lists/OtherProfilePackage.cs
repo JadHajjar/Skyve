@@ -6,17 +6,17 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 {
 	public IPackageIdentity Package { get; }
 
-	private readonly IPlaysetManager _profileManager;
-	private readonly ISettings _settings;
+	private readonly IPlaysetManager  _playsetManager;
+	private readonly IPackageUtil _packageUtil;
 	private readonly INotifier _notifier;
 
 	public OtherProfilePackage(IPackageIdentity package)
 	{
-		ServiceCenter.Get(out _notifier, out _settings, out _profileManager);
+		ServiceCenter.Get(out _notifier, out _packageUtil, out _playsetManager);
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 		Package = package;
-		SetItems(_profileManager.Playsets.Skip(1));
+		SetItems(_playsetManager.Playsets);
 
 		_notifier.PlaysetUpdated += ProfileManager_ProfileUpdated;
 		_notifier.PlaysetChanged += ProfileManager_ProfileUpdated;
@@ -72,7 +72,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 		return false;
 	}
 
-	protected override async void OnItemMouseClick(DrawableItem<ICustomPlayset, Rectangles> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<ICustomPlayset, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -80,13 +80,13 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			var isIncluded = await _profileManager.IsPackageIncludedInPlayset(Package.GetPackage(), item.Item);
-			_profileManager.SetIncludedFor(Package.GetPackage(), item.Item, !isIncluded);
+			var isIncluded = _packageUtil.IsIncluded(Package, item.Item.Id);
+			_packageUtil.SetIncluded(Package, !isIncluded, item.Item.Id);
 		}
 
 		if (rects.LoadRect.Contains(e.Location))
 		{
-			_profileManager.SetCurrentPlayset(item.Item);
+			_playsetManager.SetCurrentPlayset(item.Item);
 		}
 	}
 
@@ -110,7 +110,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 		}
 	}
 
-	protected override async void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
 	{
 		var large = false;
 		var rects = e.Rects;
@@ -120,7 +120,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 
 		base.OnPaintItemList(e);
 
-		var isIncluded = await _profileManager.IsPackageIncludedInPlayset(Package.GetPackage(), e.Item);
+		var isIncluded = _packageUtil.IsIncluded(Package, e.Item.Id);
 
 		if (isIncluded)
 		{
@@ -154,7 +154,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 		var rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
 		rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0, 0, rect.Width + Padding.Left, 0), ContentAlignment.MiddleRight);
 
-		if (e.Item == _profileManager.CurrentPlayset)
+		if (e.Item == _playsetManager.CurrentPlayset)
 		{
 			DrawLabel(e, Locale.CurrentPlayset, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, rects.TextRect.Pad(0, 0, rects.TextRect.Right - rect.X + Padding.Left, 0), ContentAlignment.MiddleRight);
 		}

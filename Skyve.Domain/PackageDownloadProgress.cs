@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Skyve.Domain;
+﻿namespace Skyve.Domain;
 
 public class PackageDownloadProgress
 {

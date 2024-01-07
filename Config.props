@@ -12,6 +12,7 @@
 		<BuildType>$([System.String]::Copy($(Configuration)).Substring(4))</BuildType>
 		<DefineConstants>$(DefineConstants);$(GameVersion)</DefineConstants>
 		<OutputPath>bin\$(BuildType)</OutputPath>
+		<PublishDir>bin\Publish_$(BuildType)</PublishDir>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(BuildType)' == 'Debug'">
@@ -21,15 +22,15 @@
 		<DebugSymbols>true</DebugSymbols>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(BuildType)' == 'Stable'">
-		<DefineConstants>$(DefineConstants);STABLE</DefineConstants>
-		<DebugType>none</DebugType>
+	<PropertyGroup Condition="'$(BuildType)' == 'Release'">
+		<DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+		<DebugType>pdbonly</DebugType>
 		<Optimize>true</Optimize>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(BuildType)' == 'Release'">
-		<DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
-		<DebugType>pbonly</DebugType>
+	<PropertyGroup Condition="'$(BuildType)' == 'Stable'">
+		<DefineConstants>$(DefineConstants);STABLE</DefineConstants>
+		<DebugType>none</DebugType>
 		<Optimize>true</Optimize>
 	</PropertyGroup>
 </Project>

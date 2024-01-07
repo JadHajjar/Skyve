@@ -1,12 +1,13 @@
 ﻿using Skyve.Domain.Enums;
 
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 public interface IWorkshopService
 {
+	bool IsReady { get; }
+
 	void ClearCache();
 	Task<IEnumerable<ITag>> GetAvailableTags();
 	IWorkshopInfo? GetInfo(IPackageIdentity identity);
@@ -18,10 +19,10 @@ public interface IWorkshopService
 	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, string? query = null, string[]? requiredTags = null, bool all = false);
 #if CS2
 	Task Initialize();
-	Task<List<IPackage>> GetLocalPackages();
-	Task<List<ICustomPlayset>> GetPlaysets(bool localOnly);
 	Task Login();
-	Task<bool> ToggleVote(IPackageIdentity packageIdentity);
+	Task WaitUntilReady();
 	Task<int> GetActivePlaysetId();
+	Task<List<ICustomPlayset>> GetPlaysets(bool localOnly);
+	Task<bool> ToggleVote(IPackageIdentity packageIdentity);
 #endif
 }

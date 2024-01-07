@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
 namespace Skyve.Domain.Systems;
-public interface IBulkUtil
-{
-	void SetBulkEnabled(IEnumerable<ILocalPackageIdentity> packages, bool value);
-	void SetBulkIncluded(IEnumerable<ILocalPackageIdentity> packages, bool value);
-}
+//public interface IPackageUtil
+//{
+//	void SetEnabled(IEnumerable<ILocalPackageIdentity> packages, bool value);
+//	void SetIncluded(IEnumerable<ILocalPackageIdentity> packages, bool value);
+//}

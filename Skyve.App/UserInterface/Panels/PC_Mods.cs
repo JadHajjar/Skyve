@@ -23,8 +23,8 @@ public class PC_Mods : PC_ContentList<IPackage>
 	protected override string GetCountText()
 	{
 		var mods = LC_Items.Items;
-		var modsIncluded = mods.Count(x => x.LocalData!.IsIncluded());
-		var modsEnabled = mods.Count(x => x.LocalData!.IsEnabled() && x.LocalData!.IsIncluded());
+		var modsIncluded = mods.Count(x => x.IsIncluded());
+		var modsEnabled = mods.Count(x => x.IsEnabled() && x.IsIncluded());
 		var total = LC_Items.ItemCount;
 
 		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)

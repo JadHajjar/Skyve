@@ -37,7 +37,7 @@ public partial class PC_PlaysetList : PanelContent
 
 			if (!LC_Items.Loading)
 			{
-				LC_Items.SetItems(_profileManager.Playsets.Skip(1));
+				LC_Items.SetItems(_profileManager.Playsets);
 			}
 
 			_notifier.PlaysetChanged += LoadProfile;

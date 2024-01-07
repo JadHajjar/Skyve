@@ -1,6 +1,4 @@
-﻿using Skyve.Domain.Enums;
-
-namespace Skyve.Domain.Systems;
+﻿namespace Skyve.Domain.Systems;
 public interface ILocationService
 {
 	string DataPath { get; }

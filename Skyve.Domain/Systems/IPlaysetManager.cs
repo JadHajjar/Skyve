@@ -15,14 +15,12 @@ public interface IPlaysetManager
 	Task<bool> ExcludeFromCurrentPlayset(IPlayset playset);
 	string GetFileName(IPlayset playset);
 	List<IPackage> GetInvalidPackages(PackageUsage usage);
-	Task<ICustomPlayset> CreateNewPlayset(string playsetName);
+	Task<ICustomPlayset?> CreateNewPlayset(string playsetName);
 	ICustomPlayset? ImportPlayset(string obj);
-	Task<bool> IsPackageIncludedInPlayset(IPackage package, IPlayset playset);
 	Task<bool> MergeIntoCurrentPlayset(IPlayset playset);
 	Task<bool> RenamePlayset(IPlayset playset, string text);
 	void SetCurrentPlayset(ICustomPlayset playset);
-	void SetIncludedFor(IPackage package, IPlayset playset, bool value);
-	void SetIncludedForAll(IPackage package, bool value);
+	Task SetIncludedForAll(IPackageIdentity package, bool value);
 	Task Initialize();
 
 #if CS1

@@ -1,8 +1,4 @@
-﻿using Extensions;
-
-using System;
-
-namespace Skyve.Domain;
+﻿namespace Skyve.Domain;
 public interface ILocalPackageData : ILocalPackageIdentity
 {
 	IPackage Package { get; }

@@ -17,15 +17,13 @@ public class CompatibilityMessageControl : SlickControl
 
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly ISubscriptionsManager _subscriptionsManager;
-	private readonly IPackageManager _packageManager;
-	private readonly IBulkUtil _bulkUtil;
 	private readonly IPackageUtil _packageUtil;
 	private readonly INotifier _notifier;
 	private readonly IDlcManager _dlcManager;
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
-		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _subscriptionsManager, out _packageManager, out _bulkUtil, out _packageUtil, out _dlcManager);
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _subscriptionsManager, out _packageUtil, out _dlcManager);
 
 		Dock = DockStyle.Top;
 		Type = type;
@@ -363,8 +361,8 @@ public class CompatibilityMessageControl : SlickControl
 			{
 				case StatusAction.SubscribeToPackages:
 					_subscriptionsManager.Subscribe(Message.Packages.Where(x => x.GetLocalPackage() is null));
-					_bulkUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
-					_bulkUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+					_packageUtil.SetIncluded(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+					_packageUtil.SetEnabled(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
 					break;
 				case StatusAction.RequiresConfiguration:
 					_compatibilityManager.ToggleSnoozed(Message);

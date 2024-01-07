@@ -4,6 +4,7 @@ using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -143,14 +144,14 @@ public partial class PC_PackagePage : PanelContent
 		return _packageUtil.GetPackagesThatReference(Package, _settings.UserSettings.ShowAllReferencedPackages);
 	}
 
-	protected void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
+	protected async Task SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, included);
+		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems, included);
 	}
 
-	protected void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
+	protected async Task SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.GetLocalPackageIdentity())!, enabled);
+		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems, enabled);
 	}
 
 	protected LocaleHelper.Translation GetItemText()

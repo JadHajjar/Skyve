@@ -58,7 +58,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		Name = string.Empty;
 		Url = string.Empty;
-		ReportItems = new();
+		ReportItems = [];
 	}
 
 	public CompatibilityInfo(IPackageIdentity package, IndexedPackage? packageData)
@@ -67,7 +67,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 		Name = package.Name;
 		Url = package.Url ?? string.Empty;
 		Data = packageData;
-		ReportItems = new();
+		ReportItems = [];
 	}
 
 	public void Add(ReportType type, IGenericPackageStatus status, string packageName, ulong[] packages)

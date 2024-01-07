@@ -22,10 +22,10 @@ public class IndexedPackage : IPackageCompatibilityInfo
 	public IndexedPackage(CompatibilityPackageData package)
 	{
 		Package = package;
-		Statuses = new();
-		Group = new();
-		RequirementAlternatives = new();
-		Interactions = new();
+		Statuses = [];
+		Group = [];
+		RequirementAlternatives = [];
+		Interactions = [];
 	}
 
 	public void Load(Dictionary<ulong, IndexedPackage> packages)

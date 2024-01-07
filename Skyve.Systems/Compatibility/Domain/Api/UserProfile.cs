@@ -47,10 +47,10 @@ public class UserProfile : IDynamicSql
 	public int? ProfileUsage { get; set; }
 
 	public UserProfileContent[]? Contents { get; set; }
-    public int Id { get; set; }
+	public int Id { get; set; }
 
 #if !API
-    private Bitmap? _banner;
+	private Bitmap? _banner;
 	[JsonIgnore] public bool IsFavorite { get; set; }
 	[JsonIgnore] public bool IsMissingItems => false;
 	[JsonIgnore] public DateTime LastEditDate => DateUpdated;
@@ -76,17 +76,7 @@ public class UserProfile : IDynamicSql
 
 			return _banner = new Bitmap(ms);
 		}
-		set
-		{
-			if (value is null)
-			{
-				Banner = null;
-			}
-			else
-			{
-				Banner = (byte[])new ImageConverter().ConvertTo(value, typeof(byte[]));
-			}
-		}
+		set => Banner = value is null ? null : (byte[])new ImageConverter().ConvertTo(value, typeof(byte[]));
 	}
 
 	IUser? IPlayset.Author => ServiceCenter.Get<Skyve.Domain.Systems.IWorkshopService>().GetUser(Author);

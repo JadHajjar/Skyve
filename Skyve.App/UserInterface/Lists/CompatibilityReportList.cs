@@ -16,7 +16,6 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IDlcManager _dlcManager;
-	private readonly IBulkUtil _bulkUtil;
 	private readonly ISettings _settings;
 	private readonly IModLogicManager _modLogicManager;
 	private readonly IModUtil _modUtil;
@@ -44,7 +43,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		DynamicSizing = true;
 		AllowDrop = true;
 
-		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _bulkUtil, out _settings, out _modUtil, out _modLogicManager);
+		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _settings, out _modUtil, out _modLogicManager);
 
 		if (_settings is not null && _settings.UserSettings.PageSettings.ContainsKey(SkyvePage.CompatibilityReport))
 		{
@@ -1036,8 +1035,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			{
 				case StatusAction.SubscribeToPackages:
 					_subscriptionsManager.Subscribe(Message.Packages.Where(x => x.GetLocalPackage() is null));
-					_bulkUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
-					_bulkUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+					_packageUtil.SetIncluded(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+					_packageUtil.SetEnabled(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
 					break;
 				case StatusAction.RequiresConfiguration:
 					_compatibilityManager.ToggleSnoozed(Message);

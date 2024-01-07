@@ -362,6 +362,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation IncorrectFolderSettingsInfo => _instance.GetText(nameof(IncorrectFolderSettingsInfo));
 	public static Translation NoActivePlayset => _instance.GetText(nameof(NoActivePlayset));
 	public static Translation RecentlyUpdated => _instance.GetText(nameof(RecentlyUpdated));
+	public static Translation Manage => _instance.GetText(nameof(Manage));
 
 	public static void Load() { _ = _instance; }
 
