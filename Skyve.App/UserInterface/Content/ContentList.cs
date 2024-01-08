@@ -20,7 +20,7 @@ public partial class ContentList : SlickControl
 	private readonly DelayedAction _delayedSearch;
 	private readonly DelayedAction _delayedAuthorTagsRefresh;
 	public readonly ItemListControl ListControl;
-	private readonly IncludeAllButton<IPackageIdentity> I_Actions;
+	private readonly IncludeAllButton I_Actions;
 	protected int UsageFilteredOut;
 	private bool searchEmpty = true;
 	private readonly List<string> searchTermsOr = [];
@@ -71,7 +71,7 @@ public partial class ContentList : SlickControl
 
 		DD_Sorting.SkyvePage = Page;
 
-		I_Actions = new IncludeAllButton<IPackageIdentity>(() => ListControl.FilteredItems.ToList());
+		I_Actions = new IncludeAllButton(() => ListControl.FilteredItems.ToList());
 		I_Actions.ActionClicked += I_Actions_Click;
 		I_Actions.IncludeAllClicked = IncludeAll;
 		I_Actions.ExcludeAllClicked = ExcludeAll;

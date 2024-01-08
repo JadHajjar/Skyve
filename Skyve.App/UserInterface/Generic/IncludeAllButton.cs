@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
-public class IncludeAllButton<T> : SlickControl where T : IPackageIdentity
+public class IncludeAllButton : SlickControl
 {
 	public delegate Task TaskAction();
 
 	private readonly bool _doubleButtons;
-	private readonly Func<List<T>> GetPackages;
+	private readonly Func<List<IPackageIdentity>> GetPackages;
 	private Rectangle IncludedRect;
 	private Rectangle EnabledRect;
 	private Rectangle ActionRect;
@@ -26,7 +26,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackageIdentity
 
     public bool IsSelected { get; set; }
 
-    public IncludeAllButton(Func<List<T>> getMethod)
+    public IncludeAllButton(Func<List<IPackageIdentity>> getMethod)
 	{
 		ServiceCenter.Get(out _settings, out _packageManager, out _packageUtil);
 

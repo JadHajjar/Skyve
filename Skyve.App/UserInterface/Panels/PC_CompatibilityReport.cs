@@ -22,7 +22,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	private readonly List<string> searchTermsOr = [];
 	private readonly List<string> searchTermsAnd = [];
 	private readonly List<string> searchTermsExclude = [];
-	private readonly IncludeAllButton<ICompatibilityInfo> I_Actions;
+	private readonly IncludeAllButton I_Actions;
 
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly ICompatibilityManager _compatibilityManager;
@@ -46,7 +46,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
 		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
-		I_Actions = new IncludeAllButton<ICompatibilityInfo>(() => ListControl.FilteredItems.ToList()!);
+		I_Actions = new IncludeAllButton(() => ListControl.FilteredItems.Cast<IPackageIdentity>().ToList()!);
 		I_Actions.ActionClicked += I_Actions_Click;
 		I_Actions.IncludeAllClicked += IncludeAll;
 		I_Actions.ExcludeAllClicked += ExcludeAll;

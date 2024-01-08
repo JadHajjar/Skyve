@@ -22,6 +22,7 @@ public interface IPlaysetManager
 	void SetCurrentPlayset(ICustomPlayset playset);
 	Task SetIncludedForAll(IPackageIdentity package, bool value);
 	Task Initialize();
+	Task SetIncludedForAll(IEnumerable<IPackageIdentity> packages, bool value);
 
 #if CS1
 	ICustomPlayset TemporaryPlayset { get; }
