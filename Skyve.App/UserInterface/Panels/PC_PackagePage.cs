@@ -12,8 +12,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_PackagePage : PanelContent
 {
-	private readonly ItemListControl<IPackageIdentity>? LC_Items;
-	private readonly ContentList<IPackage>? LC_References;
+	private readonly ItemListControl? LC_Items;
+	private readonly ContentList? LC_References;
 	private TagControl? addTagControl;
 
 	private readonly INotifier _notifier;
@@ -58,9 +58,9 @@ public partial class PC_PackagePage : PanelContent
 		if (Package is ILocalPackageData p && p.Assets is not null && p.Assets.Length > 0)
 		{
 			if (_settings.UserSettings.ExtendedListInfo)
-				LC_Items = new ItemListControl<IPackageIdentity>.Complex(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
+				LC_Items = new ItemListControl.Complex(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
 			else
-				LC_Items = new ItemListControl<IPackageIdentity>.Simple(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
+				LC_Items = new ItemListControl.Simple(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
 
 			LC_Items.AddRange(p.Assets);
 
@@ -95,7 +95,7 @@ public partial class PC_PackagePage : PanelContent
 
 		if (GetItems().Any())
 		{
-			LC_References = new ContentList<IPackage>(SkyvePage.SinglePackage, true, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+			LC_References = new ContentList(SkyvePage.SinglePackage, true, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
 			{
 				Dock = DockStyle.Fill
 			};
@@ -144,12 +144,12 @@ public partial class PC_PackagePage : PanelContent
 		return _packageUtil.GetPackagesThatReference(Package, _settings.UserSettings.ShowAllReferencedPackages);
 	}
 
-	protected async Task SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
+	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
 	{
 		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems, included);
 	}
 
-	protected async Task SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
+	protected async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
 	{
 		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems, enabled);
 	}
@@ -163,7 +163,7 @@ public partial class PC_PackagePage : PanelContent
 	{
 		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
 
-		foreach (var item in LC_References!.Items.SelectWhereNotNull(x => x.GetLocalPackageIdentity()))
+		foreach (var item in LC_References!.Items)
 		{
 			if (item?.IsIncluded() == true)
 			{

@@ -796,7 +796,7 @@ public class PackageDescriptionControl : SlickImageControl
 			if (DownloadStatusRect.Contains(location))
 			{
 				var packageUtil = ServiceCenter.Get<IPackageUtil>();
-				packageUtil.GetStatus(Item.GetLocalPackageIdentity(), out var reason);
+				packageUtil.GetStatus(Item, out var reason);
 
 				if (ServiceCenter.Get<ISettings>().UserSettings.FlipItemCopyFilterAction)
 				{

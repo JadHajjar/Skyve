@@ -24,7 +24,9 @@ public class IncludeAllButton<T> : SlickControl where T : IPackageIdentity
 	private readonly IPackageManager _packageManager;
 	private readonly IPackageUtil _packageUtil;
 
-	public IncludeAllButton(Func<List<T>> getMethod)
+    public bool IsSelected { get; set; }
+
+    public IncludeAllButton(Func<List<T>> getMethod)
 	{
 		ServiceCenter.Get(out _settings, out _packageManager, out _packageUtil);
 
@@ -150,6 +152,9 @@ public class IncludeAllButton<T> : SlickControl where T : IPackageIdentity
 		var packages = GetPackages();
 		var subscribe = packages.Any(x => !_packageUtil.IsIncluded(x));
 		var enable = subscribe || packages.Any(x => !_packageUtil.IsEnabled(x));
+
+		if (IncludedRect.Contains(cursorLocation))
+			enable = !enable;
 
 		{
 			SlickButton.GetColors(out var fore, out var back, IncludedRect.Contains(cursorLocation) ? HoverState : default, subscribe ? ColorStyle.Active : enable ? ColorStyle.Red : ColorStyle.Green);

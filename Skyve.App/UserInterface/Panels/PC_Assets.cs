@@ -1,5 +1,5 @@
 ﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_Assets : PC_ContentList<IAsset>
+public class PC_Assets : PC_ContentList
 {
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
@@ -17,7 +17,7 @@ public class PC_Assets : PC_ContentList<IAsset>
 		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override IEnumerable<IAsset> GetItems()
+	protected override IEnumerable<IPackageIdentity> GetItems()
 	{
 		if (_settings.UserSettings.LinkModAssets)
 		{

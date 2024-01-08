@@ -706,14 +706,14 @@ public partial class PC_CompatibilityReport : PanelContent
 			//else
 			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
 			{
-				if (item.GetPackage()?.IsLocal == true || _packageUtil.GetStatus(item.GetLocalPackageIdentity(), out _) <= DownloadStatus.OK)
+				if (item.GetPackage()?.IsLocal == true || _packageUtil.GetStatus(item, out _) <= DownloadStatus.OK)
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)_packageUtil.GetStatus(item.GetLocalPackageIdentity(), out _))
+				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)_packageUtil.GetStatus(item, out _))
 				{
 					return true;
 				}

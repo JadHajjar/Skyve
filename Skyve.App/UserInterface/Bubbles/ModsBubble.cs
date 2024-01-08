@@ -132,7 +132,7 @@ public class ModsBubble : StatusBubbleBase
 				continue;
 			}
 
-			switch (_packageUtil.GetStatus(mod.GetLocalPackageIdentity(), out _))
+			switch (_packageUtil.GetStatus(mod, out _))
 			{
 				case DownloadStatus.OutOfDate:
 					modsOutOfDate++;

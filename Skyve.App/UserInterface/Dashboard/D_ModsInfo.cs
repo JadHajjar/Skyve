@@ -65,7 +65,7 @@ internal class D_ModsInfo : IDashboardItem
 					continue;
 				}
 
-				switch (_packageUtil.GetStatus(mod.GetLocalPackageIdentity(), out _))
+				switch (_packageUtil.GetStatus(mod, out _))
 				{
 					case DownloadStatus.OutOfDate:
 						modsOutOfDate++;

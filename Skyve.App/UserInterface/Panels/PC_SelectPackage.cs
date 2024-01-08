@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_SelectPackage : PanelContent
 {
-	private readonly ItemListControl<IWorkshopInfo> LC_Items;
+	private readonly ItemListControl LC_Items;
 	private readonly DelayedAction<TicketBooth.Ticket> _delayedSearch;
 	private readonly TicketBooth _ticketBooth = new();
 	private bool searchEmpty = true;
@@ -35,7 +35,7 @@ public partial class PC_SelectPackage : PanelContent
 
 		if (ServiceCenter.Get<ISettings>().UserSettings.ExtendedListInfo)
 		{
-			LC_Items = new ItemListControl<IWorkshopInfo>.Complex(SkyvePage.None)
+			LC_Items = new ItemListControl.Complex(SkyvePage.None)
 			{
 				Loading = true,
 				IsSelection = true,
@@ -45,7 +45,7 @@ public partial class PC_SelectPackage : PanelContent
 		}
 		else
 		{
-			LC_Items = new ItemListControl<IWorkshopInfo>.Simple(SkyvePage.None)
+			LC_Items = new ItemListControl.Simple(SkyvePage.None)
 			{
 				Loading = true,
 				IsSelection = true,

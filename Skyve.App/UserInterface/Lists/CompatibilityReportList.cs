@@ -118,7 +118,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				.OrderBy(x => x.Item.GetWorkshopInfo()?.Author?.Name ?? string.Empty),
 
 			PackageSorting.Status => items
-				.OrderBy(x => _packageUtil.GetStatus(x.Item.GetLocalPackageIdentity(), out _)),
+				.OrderBy(x => _packageUtil.GetStatus(x.Item, out _)),
 
 			PackageSorting.UpdateTime => items
 				.OrderBy(x => x.Item.GetWorkshopInfo()?.ServerTime ?? x.Item.GetLocalPackage()?.LocalTime ?? default),

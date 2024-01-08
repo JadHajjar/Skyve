@@ -204,6 +204,9 @@ public partial class PC_PlaysetList : PanelContent
 		this.TryInvoke(() =>
 		{
 			var profile = _profileManager.CurrentPlayset;
+
+			if (profile is null)
+				return;
 			TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
 			TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
 			I_ProfileIcon.ImageName = profile.GetIcon();

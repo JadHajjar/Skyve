@@ -3,7 +3,7 @@ using Skyve.App.UserInterface.Generic;
 
 namespace Skyve.App.UserInterface.Panels;
 
-partial class PC_ContentList<T>
+partial class PC_ContentList
 {
 	/// <summary> 
 	/// Required designer variable.

@@ -5,11 +5,11 @@ using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
 
-public partial class ItemListControl<T>
+public partial class ItemListControl
 {
-	public partial class Complex : ItemListControl<T>
+	public partial class Complex : ItemListControl
 	{
-		protected override void OnPaintItemGrid(ItemPaintEventArgs<T, Rectangles> e)
+		protected override void OnPaintItemGrid(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 		{
 			var package = e.Item.GetPackage();
 			var workshopInfo = e.Item.GetWorkshopInfo();
@@ -77,7 +77,7 @@ public partial class ItemListControl<T>
 			}
 		}
 
-		private void DrawCompatibilityAndStatus(ItemPaintEventArgs<T, Rectangles> e, out Color outerColor)
+		private void DrawCompatibilityAndStatus(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, out Color outerColor)
 		{
 			var compatibilityReport = e.Item.GetCompatibilityInfo();
 			var notificationType = compatibilityReport?.GetNotification();
@@ -108,7 +108,7 @@ public partial class ItemListControl<T>
 			}
 		}
 
-		private void DrawTags(ItemPaintEventArgs<T, Rectangles> e, int maxTagX)
+		private void DrawTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, int maxTagX)
 		{
 			var startLocation = GridView
 				? new Point(e.ClipRectangle.X, e.Rects.IconRect.Bottom + (GridPadding.Vertical * 2))
@@ -158,7 +158,7 @@ public partial class ItemListControl<T>
 			}
 		}
 
-		private void DrawDividerLine(ItemPaintEventArgs<T, Rectangles> e)
+		private void DrawDividerLine(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 		{
 			var lineRect = new Rectangle(e.ClipRectangle.X, e.Rects.IconRect.Bottom + GridPadding.Vertical, e.ClipRectangle.Width, (int)(2 * UI.FontScale));
 			using var lineBrush = new LinearGradientBrush(lineRect, default, default, 0F);
@@ -172,7 +172,7 @@ public partial class ItemListControl<T>
 			e.Graphics.FillRectangle(lineBrush, lineRect);
 		}
 
-		private Rectangle DrawTag(ItemPaintEventArgs<T, Rectangles> e, int maxTagX, Point startLocation, ref Rectangle tagsRect, ITag item, Color? color = null)
+		private Rectangle DrawTag(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, int maxTagX, Point startLocation, ref Rectangle tagsRect, ITag item, Color? color = null)
 		{
 			using var tagIcon = IconManager.GetSmallIcon(item.Icon);
 
@@ -198,7 +198,7 @@ public partial class ItemListControl<T>
 			return tagRect;
 		}
 
-		private int DrawButtons(ItemPaintEventArgs<T, Rectangles> e, bool isPressed, ILocalPackageData? parentPackage, IWorkshopInfo? workshopInfo)
+		private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, bool isPressed, ILocalPackageData? parentPackage, IWorkshopInfo? workshopInfo)
 		{
 			var padding = GridView ? GridPadding : Padding;
 			var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
@@ -245,7 +245,7 @@ public partial class ItemListControl<T>
 			return rect.X + rect.Width;
 		}
 
-		private int DrawFolderName(ItemPaintEventArgs<T, Rectangles> e, ILocalPackageData? package)
+		private int DrawFolderName(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageData? package)
 		{
 			if (package is null)
 			{
@@ -267,7 +267,7 @@ public partial class ItemListControl<T>
 			return e.Rects.FolderNameRect.Width;
 		}
 
-		private int DrawAuthor(ItemPaintEventArgs<T, Rectangles> e, IUser author)
+		private int DrawAuthor(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IUser author)
 		{
 			var padding = GridView ? GridPadding : Padding;
 			var authorRect = new Rectangle(e.Rects.TextRect.X, e.Rects.IconRect.Bottom, 0, 0);
@@ -316,7 +316,7 @@ public partial class ItemListControl<T>
 			return authorRect.Width;
 		}
 
-		private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<T, Rectangles> e, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+		private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
 		{
 			using var font = UI.Font(GridView ? 10.5F : CompactList ? 8.25F : 9F, FontStyle.Bold);
 			var mod = e.Item is not IAsset;
@@ -396,7 +396,7 @@ public partial class ItemListControl<T>
 			}
 		}
 
-		private Rectangle DrawCell(ItemPaintEventArgs<T, Rectangles> e, Columns column, string text, DynamicIcon? dIcon, Color? backColor = null, Font? font = null, bool active = true, Padding padding = default)
+		private Rectangle DrawCell(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, Columns column, string text, DynamicIcon? dIcon, Color? backColor = null, Font? font = null, bool active = true, Padding padding = default)
 		{
 			var cell = _columnSizes[column];
 			var rect = new Rectangle(cell.X, e.ClipRectangle.Y, cell.Width, e.ClipRectangle.Height).Pad(0, -Padding.Top, 0, -Padding.Bottom);
@@ -439,7 +439,7 @@ public partial class ItemListControl<T>
 			return rect;
 		}
 
-		private static void DrawSeam(ItemPaintEventArgs<T, Rectangles> e, int x)
+		private static void DrawSeam(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, int x)
 		{
 			var seamRectangle = new Rectangle(x - (int)(40 * UI.UIScale), e.ClipRectangle.Y, (int)(40 * UI.UIScale), e.ClipRectangle.Height);
 
@@ -448,7 +448,7 @@ public partial class ItemListControl<T>
 			e.Graphics.FillRectangle(seamBrush, seamRectangle);
 		}
 
-		private void DrawTitleAndTagsAndVersion(ItemPaintEventArgs<T, Rectangles> e, IPackage? package, ILocalPackageIdentity? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+		private void DrawTitleAndTagsAndVersion(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
 		{
 			using var font = UI.Font(GridView ? 10.5F : CompactList ? 8.25F : 9F, FontStyle.Bold);
 			var mod = e.Item is not IAsset;
@@ -494,7 +494,7 @@ public partial class ItemListControl<T>
 			}
 		}
 
-		private Rectangles GenerateGridRectangles(T item, Rectangle rectangle)
+		private Rectangles GenerateGridRectangles(IPackageIdentity item, Rectangle rectangle)
 		{
 			var rects = new Rectangles(item)
 			{

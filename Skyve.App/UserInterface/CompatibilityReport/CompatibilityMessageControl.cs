@@ -272,7 +272,7 @@ public class CompatibilityMessageControl : SlickControl
 						{
 							return 2;
 						}
-						else if (!(p.GetLocalPackageIdentity()?.IsEnabled() ?? true))
+						else if (!(p.IsEnabled()))
 						{
 							return 1;
 						}

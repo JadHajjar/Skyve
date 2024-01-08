@@ -7,7 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T>.Rectangles> where T : IPackageIdentity
+public partial class ItemListControl : SlickStackedListControl<IPackageIdentity, ItemListControl.Rectangles>
 {
 	private PackageSorting sorting;
 	private Rectangle PopupSearchRect1;
@@ -22,7 +22,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 	public event Action<bool>? FilterByIncluded;
 	public event Action<bool>? FilterByEnabled;
 	public event Action<string>? AddToSearch;
-	public event Action<T>? PackageSelected;
+	public event Action<IPackageIdentity>? PackageSelected;
 	public event Action? OpenWorkshopSearch;
 	public event Action? OpenWorkshopSearchInBrowser;
 	public event EventHandler? FilterRequested;
@@ -35,6 +35,8 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
 	private readonly ITagsService _tagsService;
+
+	public IEnumerable<IPackageIdentity> GetSelectedItems() => SelectedItems.Select(x => x.Item);
 
 	protected ItemListControl(SkyvePage page)
 	{
@@ -144,7 +146,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		StartHeight = _compactList ? (int)(24 * UI.FontScale) : 0;
 	}
 
-	protected override IEnumerable<DrawableItem<T, Rectangles>> OrderItems(IEnumerable<DrawableItem<T, Rectangles>> items)
+	protected override IEnumerable<DrawableItem<IPackageIdentity, Rectangles>> OrderItems(IEnumerable<DrawableItem<IPackageIdentity, Rectangles>> items)
 	{
 		items = sorting switch
 		{
@@ -195,7 +197,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		return SortDescending ? items.Reverse() : items;
 	}
 
-	protected override async void OnItemMouseClick(DrawableItem<T, Rectangles> item, MouseEventArgs e)
+	protected override async void OnItemMouseClick(DrawableItem<IPackageIdentity, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -363,7 +365,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 		if (rects.DownloadStatusRect.Contains(e.Location) && filter)
 		{
-			DownloadStatusSelected?.Invoke(_packageUtil.GetStatus(item.Item.GetLocalPackageIdentity(), out _));
+			DownloadStatusSelected?.Invoke(_packageUtil.GetStatus(item.Item, out _));
 
 			return;
 		}
@@ -527,16 +529,16 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		}
 	}
 
-	public void ShowRightClickMenu(T item)
+	public void ShowRightClickMenu(IPackageIdentity item)
 	{
-		var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems((SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new T[] { item }).Cast<IPackage>());
+		var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems((SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new IPackageIdentity[] { item }).Cast<IPackage>());
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
 	}
 
-	private bool GetStatusDescriptors(T mod, out string text, out DynamicIcon? icon, out Color color)
+	private bool GetStatusDescriptors(IPackageIdentity mod, out string text, out DynamicIcon? icon, out Color color)
 	{
-		switch (_packageUtil.GetStatus(mod.GetLocalPackageIdentity(), out text))
+		switch (_packageUtil.GetStatus(mod, out text))
 		{
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
@@ -565,7 +567,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		return false;
 	}
 
-	public class Rectangles : IDrawableItemRectangles<T>
+	public class Rectangles : IDrawableItemRectangles<IPackageIdentity>
 	{
 		public Dictionary<ITag, Rectangle> TagRects = [];
 		public Rectangle IncludedRect;
@@ -586,9 +588,9 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		public Rectangle FolderNameRect;
 		public Rectangle DotsRect;
 
-		public T Item { get; set; }
+		public IPackageIdentity Item { get; set; }
 
-		public Rectangles(T item)
+		public Rectangles(IPackageIdentity item)
 		{
 			Item = item;
 		}
@@ -602,7 +604,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				SteamRect.Contains(location) ||
 				AuthorRect.Contains(location) ||
 				FolderNameRect.Contains(location) ||
-				((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl<T>)!.IsPackagePage) ||
+				((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl)!.IsPackagePage) ||
 				DownloadStatusRect.Contains(location) ||
 				ScoreRect.Contains(location) ||
 				DotsRect.Contains(location) ||
@@ -634,7 +636,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 					}
 				}
 
-				text = Item.GetLocalPackageIdentity().IsIncluded()
+				text = Item.IsIncluded()
 					? $"{Locale.ExcludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}"
 					: $"{Locale.IncludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
 
@@ -642,9 +644,9 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				return true;
 			}
 
-			if (EnabledRect.Contains(location) && Item.GetLocalPackage().IsCodeMod)
+			if (EnabledRect.Contains(location) && Item.GetPackage()?.IsCodeMod == true)
 			{
-				text = Item.GetLocalPackageIdentity().IsEnabled()
+				text = Item.IsEnabled()
 					? $"{Locale.DisablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}"
 					: $"{Locale.EnablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
 
@@ -705,7 +707,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 			if (DownloadStatusRect.Contains(location))
 			{
 				var packageUtil = ServiceCenter.Get<IPackageUtil>();
-				packageUtil.GetStatus(Item.GetLocalPackageIdentity(), out var reason);
+				packageUtil.GetStatus(Item, out var reason);
 
 				if (ServiceCenter.Get<ISettings>().UserSettings.FlipItemCopyFilterAction)
 				{
@@ -739,11 +741,19 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 				return true;
 			}
 
-			if ((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl<T>)!.IsPackagePage)
+			if ((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl)!.IsPackagePage)
 			{
-				text = (instance as ItemListControl<T>)!.IsSelection ? (string)Locale.SelectThisPackage : (string)Locale.OpenPackagePage;
+				text = (instance as ItemListControl)!.IsSelection ? (string)Locale.SelectThisPackage : (string)Locale.OpenPackagePage;
 
-				point = CenterRect.Location;
+				if ((instance as ItemListControl)!.GridView)
+				{
+					point = IconRect.Location;
+				}
+				else
+				{
+					point = CenterRect.Location;
+				}
+
 				return true;
 			}
 

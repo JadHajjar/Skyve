@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
 
-public partial class ItemListControl<T>
+public partial class ItemListControl
 {
-	public partial class Simple : ItemListControl<T>
+	public partial class Simple : ItemListControl
 	{
 		public Simple(SkyvePage page) : base(page)
 		{
@@ -14,7 +14,7 @@ public partial class ItemListControl<T>
 			DynamicSizing = true;
 		}
 
-		private void OnPaintItemCompactList(ItemPaintEventArgs<T, Rectangles> e)
+		private void OnPaintItemCompactList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 		{
 			var package = e.Item.GetPackage();
 			var workshopInfo = e.Item.GetWorkshopInfo();
@@ -85,7 +85,7 @@ public partial class ItemListControl<T>
 			}
 		}
 
-		protected override void OnPaintItemList(ItemPaintEventArgs<T, Rectangles> e)
+		protected override void OnPaintItemList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 		{
 			if (CompactList)
 			{
@@ -181,7 +181,7 @@ public partial class ItemListControl<T>
 			}
 		}
 
-		private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<T, Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor)
+		private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor)
 		{
 			var height = CompactList ? ((int)(24 * UI.FontScale) - 4) : (Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
 
@@ -279,7 +279,7 @@ public partial class ItemListControl<T>
 			}
 		}
 
-		protected override Rectangles GenerateRectangles(T item, Rectangle rectangle)
+		protected override Rectangles GenerateRectangles(IPackageIdentity item, Rectangle rectangle)
 		{
 			if (GridView)
 			{
@@ -291,7 +291,7 @@ public partial class ItemListControl<T>
 			}
 		}
 
-		private Rectangles GenerateListRectangles(T item, Rectangle rectangle)
+		private Rectangles GenerateListRectangles(IPackageIdentity item, Rectangle rectangle)
 		{
 			rectangle = rectangle.Pad(Padding.Left, 0, Padding.Right, 0);
 

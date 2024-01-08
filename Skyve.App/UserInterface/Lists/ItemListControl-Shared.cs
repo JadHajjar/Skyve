@@ -2,9 +2,9 @@
 
 namespace Skyve.App.UserInterface.Lists;
 
-public partial class ItemListControl<T>
+public partial class ItemListControl
 {
-	private int DrawScore(ItemPaintEventArgs<T, Rectangles> e, IWorkshopInfo? workshopInfo, int xdiff)
+	private int DrawScore(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo, int xdiff)
 	{
 		if (workshopInfo is null)
 		{
@@ -20,7 +20,7 @@ public partial class ItemListControl<T>
 		return 0;
 	}
 
-	private void DrawThumbnail(ItemPaintEventArgs<T, Rectangles> e)
+	private void DrawThumbnail(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 	{
 		var thumbnail = e.Item.GetThumbnail();
 
@@ -43,27 +43,30 @@ public partial class ItemListControl<T>
 			drawThumbnail(thumbnail);
 		}
 
-		if (e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
+		if (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IconRect.Contains(CursorLocation))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(75, 255, 255, 255));
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
 		}
 
-		void drawThumbnail(Bitmap generic)
-		{
-			e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor/*, blur: e.Rects.IconRect.Contains(CursorLocation)*/);
-		}
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor/*, blur: e.Rects.IconRect.Contains(CursorLocation)*/);
 	}
 
 
 #if CS2
-	private void DrawIncludedButton(ItemPaintEventArgs<T, Rectangles> e, bool isIncluded, bool isPartialIncluded, bool isEnabled, ILocalPackageData? package, out Color activeColor)
+	private void DrawIncludedButton(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, bool isIncluded, bool isPartialIncluded, bool isEnabled, ILocalPackageData? package, out Color activeColor)
 	{
 		activeColor = default;
 
 		if (package is null && e.Item.IsLocal())
 		{
 			return; // missing local item
+		}
+
+		if (e.Rects.IncludedRect.Contains(CursorLocation))
+		{
+			isPartialIncluded = false;
+			isEnabled = !isEnabled;
 		}
 
 		var inclEnableRect = e.Rects.IncludedRect;
@@ -90,9 +93,13 @@ public partial class ItemListControl<T>
 		else
 		{
 			if (activeColor == default)
+			{
 				activeColor = Color.FromArgb(20, ForeColor);
+			}
 			else if (inclEnableRect.Contains(CursorLocation))
+			{
 				activeColor = activeColor.MergeColor(ForeColor, 75);
+			}
 
 			iconColor = activeColor.GetTextColor();
 		}

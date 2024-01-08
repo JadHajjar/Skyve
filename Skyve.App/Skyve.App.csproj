@@ -64,9 +64,7 @@
     <Compile Update="UserInterface\Forms\EditTagsForm.cs" />
     <Compile Update="UserInterface\Generic\BigSelectionOptionControl.cs" />
     <Compile Update="UserInterface\Generic\SteamUserControl.cs" />
-    <Compile Update="UserInterface\Lists\ItemListControl-Shared.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Lists\ItemListControl-Shared.cs" />
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs" />
     <Compile Update="UserInterface\Content\PackageDescriptionControl.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageStatusDropDown.cs" />

@@ -11,16 +11,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
-public partial class ContentList<T> : SlickControl where T : IPackageIdentity
+public partial class ContentList : SlickControl
 {
-	public delegate Task ApplyAll(IEnumerable<T> filteredItems, bool included);
+	public delegate Task ApplyAll(IEnumerable<IPackageIdentity> filteredItems, bool included);
 
 	private bool clearingFilters = true;
 	private bool firstFilterPassed;
 	private readonly DelayedAction _delayedSearch;
 	private readonly DelayedAction _delayedAuthorTagsRefresh;
-	public readonly ItemListControl<T> ListControl;
-	private readonly IncludeAllButton<T> I_Actions;
+	public readonly ItemListControl ListControl;
+	private readonly IncludeAllButton<IPackageIdentity> I_Actions;
 	protected int UsageFilteredOut;
 	private bool searchEmpty = true;
 	private readonly List<string> searchTermsOr = [];
@@ -35,7 +35,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 	private readonly IPackageUtil _packageUtil;
 	private readonly IDownloadService _downloadService;
 
-	private readonly Func<IEnumerable<T>> GetItems;
+	private readonly Func<IEnumerable<IPackageIdentity>> GetItems;
 	private readonly ApplyAll SetIncluded;
 	private readonly ApplyAll SetEnabled;
 	private readonly Func<LocaleHelper.Translation> GetItemText;
@@ -45,14 +45,14 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 	public int ItemCount => ListControl.ItemCount;
 
 	public bool IsGenericPage { get => ListControl.IsGenericPage; set => ListControl.IsGenericPage = value; }
-	public IEnumerable<T> Items => ListControl.Items;
+	public IEnumerable<IPackageIdentity> Items => ListControl.Items;
 
-	public void Remove(T item)
+	public void Remove(IPackageIdentity item)
 	{
 		ListControl.Remove(item);
 	}
 
-	public ContentList(SkyvePage page, bool loaded, Func<IEnumerable<T>> getItems, ApplyAll setIncluded, ApplyAll setEnabled, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
+	public ContentList(SkyvePage page, bool loaded, Func<IEnumerable<IPackageIdentity>> getItems, ApplyAll setIncluded, ApplyAll setEnabled, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
 	{
 		Page = page;
 		GetItems = getItems;
@@ -64,14 +64,14 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _playsetManager, out _tagUtil, out _packageUtil, out _downloadService);
 
 		ListControl = _settings.UserSettings.ExtendedListInfo
-			? new ItemListControl<T>.Complex(Page) { Dock = DockStyle.Fill, Margin = new() }
-			: new ItemListControl<T>.Simple(Page) { Dock = DockStyle.Fill, Margin = new() };
+			? new ItemListControl.Complex(Page) { Dock = DockStyle.Fill, Margin = new() }
+			: new ItemListControl.Simple(Page) { Dock = DockStyle.Fill, Margin = new() };
 
 		InitializeComponent();
 
 		DD_Sorting.SkyvePage = Page;
 
-		I_Actions = new IncludeAllButton<T>(() => ListControl.FilteredItems.ToList());
+		I_Actions = new IncludeAllButton<IPackageIdentity>(() => ListControl.FilteredItems.ToList());
 		I_Actions.ActionClicked += I_Actions_Click;
 		I_Actions.IncludeAllClicked = IncludeAll;
 		I_Actions.ExcludeAllClicked = ExcludeAll;
@@ -84,7 +84,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
 		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !_playsetManager.CurrentPlayset.DisableWorkshop;
-		OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
+		//OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
 
 		ListControl.FilterRequested += FilterChanged;
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
@@ -137,7 +137,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 
 	protected void RefreshAuthorAndTags()
 	{
-		var items = new List<T>(ListControl.Items);
+		var items = new List<IPackageIdentity>(ListControl.Items);
 
 		DD_Author.SetItems(items);
 		DD_Tags.Items = _tagUtil.GetDistinctTags().ToArray();
@@ -293,6 +293,8 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
 
+		TLP_MiddleBar.Padding = UI.Scale(new Padding(3, 0, 3, 0), UI.FontScale);
+
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
 		L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
@@ -309,7 +311,8 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		if (e is null || e.Button is MouseButtons.Left or MouseButtons.None)
 		{
 			B_Filters.Text = P_FiltersContainer.Height == 0 ? "HideFilters" : "ShowFilters";
-			AnimationHandler.Animate(P_FiltersContainer, P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty, 3, AnimationOption.IgnoreWidth);
+			P_FiltersContainer.Size = P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty;
+			//AnimationHandler.Animate(P_FiltersContainer, P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty, 3, AnimationOption.IgnoreWidth);
 			P_FiltersContainer.AutoSize = false;
 		}
 		else if (e?.Button == MouseButtons.Middle)
@@ -386,7 +389,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		FilterChanged(sender, e);
 	}
 
-	private bool IsFilteredOut(T item)
+	private bool IsFilteredOut(IPackageIdentity item)
 	{
 		if (!ListControl.IsGenericPage && (_playsetManager.CurrentPlayset?.DisableWorkshop ?? false))
 		{
@@ -459,14 +462,14 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 			//else
 			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
 			{
-				if (item.GetPackage()?.IsLocal == true || _packageUtil.GetStatus(item.GetLocalPackageIdentity(), out _) <= DownloadStatus.OK)
+				if (item.GetPackage()?.IsLocal == true || _packageUtil.GetStatus(item, out _) <= DownloadStatus.OK)
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)_packageUtil.GetStatus(item.GetLocalPackageIdentity(), out _))
+				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)_packageUtil.GetStatus(item, out _))
 				{
 					return true;
 				}
@@ -563,14 +566,14 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		return false;
 	}
 
-	private bool Search(string searchTerm, T item)
+	private bool Search(string searchTerm, IPackageIdentity item)
 	{
 		return searchTerm.SearchCheck(item.Name)
 			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)
 			|| (!item.IsLocal() ? item.Id.ToString() : Path.GetFileName(item.GetLocalPackage()?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
-	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<T> e)
+	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<IPackageIdentity> e)
 	{
 		e.DoNotDraw = IsFilteredOut(e.Item);
 	}
@@ -749,7 +752,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 		}
 
 		I_Actions.Loading = true;
-		await ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.FilteredItems.Cast<IPackageIdentity>());
+		await ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.FilteredItems.Cast<Domain.IPackageIdentity>());
 		I_Actions.Loading = false;
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
@@ -785,7 +788,7 @@ public partial class ContentList<T> : SlickControl where T : IPackageIdentity
 			return;
 		}
 
-		await ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x => (IPackageIdentity)x.Item));
+		await ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select<DrawableItem<Domain.IPackageIdentity, ItemListControl.Rectangles>, Domain.IPackageIdentity>(x => (Domain.IPackageIdentity)x.Item));
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}

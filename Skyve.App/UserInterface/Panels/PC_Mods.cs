@@ -1,5 +1,5 @@
 ﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_Mods : PC_ContentList<IPackage>
+public class PC_Mods : PC_ContentList
 {
 	public PC_Mods()
 	{
@@ -15,7 +15,7 @@ public class PC_Mods : PC_ContentList<IPackage>
 		Text = $"{Locale.Mod.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override IEnumerable<IPackage> GetItems()
+	protected override IEnumerable<IPackageIdentity> GetItems()
 	{
 		return ServiceCenter.Get<IPackageManager>().Packages;
 	}

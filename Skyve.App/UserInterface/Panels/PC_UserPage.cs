@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_UserPage : PanelContent
 {
-	private readonly ContentList<IPackage> LC_Items;
+	private readonly ContentList LC_Items;
 	private readonly PlaysetListControl L_Profiles;
 
 	private readonly ISettings _settings;
@@ -32,7 +32,7 @@ public partial class PC_UserPage : PanelContent
 			GridView = true,
 		};
 
-		LC_Items = new ContentList<IPackage>(SkyvePage.User, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+		LC_Items = new ContentList(SkyvePage.User, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
 		{
 			IsGenericPage = true
 		};
@@ -47,12 +47,12 @@ public partial class PC_UserPage : PanelContent
 		return userItems;
 	}
 
-	protected async Task SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
+	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
 	{
 		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems, included);
 	}
 
-	protected async Task SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
+	protected async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
 	{
 		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems, enabled);
 	}

@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
-public partial class PC_ContentList<T> : PanelContent where T : IPackageIdentity
+public partial class PC_ContentList : PanelContent
 {
-	protected readonly ContentList<T> LC_Items;
+	protected readonly ContentList LC_Items;
 
 	public virtual SkyvePage Page { get; }
 
@@ -58,19 +58,19 @@ public partial class PC_ContentList<T> : PanelContent where T : IPackageIdentity
 		return false;
 	}
 
-	protected virtual IEnumerable<T> GetItems()
+	protected virtual IEnumerable<IPackageIdentity> GetItems()
 	{
 		throw new NotImplementedException();
 	}
 
-	protected virtual async Task SetIncluded(IEnumerable<T> filteredItems, bool included)
+	protected virtual async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
 	{
-		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems.Cast<IPackageIdentity>(), included);
+		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems.Cast<Domain.IPackageIdentity>(), included);
 	}
 
-	protected virtual async Task SetEnabled(IEnumerable<T> filteredItems, bool enabled)
+	protected virtual async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
 	{
-		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems.Cast<IPackageIdentity>(), enabled);
+		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems.Cast<Domain.IPackageIdentity>(), enabled);
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()
