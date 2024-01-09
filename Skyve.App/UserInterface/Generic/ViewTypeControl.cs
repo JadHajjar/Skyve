@@ -100,7 +100,7 @@ internal class ViewTypeControl : SlickControl
 				SlickButton.GetColors(out var fore, out var back, HoverState);
 				using var brush1 = rect.Gradient(back, 1.5F);
 				e.Graphics.FillRoundedRectangle(brush1, rect, Padding.Left);
-				e.Graphics.DrawImage(icon.Color(CompactList ? FormDesign.Design.ActiveColor : fore), rect.CenterR(icon.Size));
+				e.Graphics.DrawImage(icon.Color(CompactList && !HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveColor : fore), rect.CenterR(icon.Size));
 			}
 			else
 			{
@@ -117,7 +117,7 @@ internal class ViewTypeControl : SlickControl
 				SlickButton.GetColors(out var fore, out var back, HoverState);
 				using var brush1 = rect.Gradient(back, 1.5F);
 				e.Graphics.FillRoundedRectangle(brush1, rect, Padding.Left);
-				e.Graphics.DrawImage(icon.Color(!CompactList && !GridView ? FormDesign.Design.ActiveColor : fore), rect.CenterR(icon.Size));
+				e.Graphics.DrawImage(icon.Color(!CompactList && !GridView && !HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveColor : fore), rect.CenterR(icon.Size));
 			}
 			else
 			{
@@ -134,7 +134,7 @@ internal class ViewTypeControl : SlickControl
 				SlickButton.GetColors(out var fore, out var back, HoverState);
 				using var brush1 = rect.Gradient(back, 1.5F);
 				e.Graphics.FillRoundedRectangle(brush1, rect, Padding.Left);
-				e.Graphics.DrawImage(icon.Color(GridView ? FormDesign.Design.ActiveColor : fore), rect.CenterR(icon.Size));
+				e.Graphics.DrawImage(icon.Color(GridView && !HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveColor : fore), rect.CenterR(icon.Size));
 			}
 			else
 			{

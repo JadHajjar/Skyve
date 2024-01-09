@@ -98,7 +98,7 @@ public partial class ContentList : SlickControl
 		ListControl.AddToSearch += LC_Items_AddToSearch;
 		ListControl.OpenWorkshopSearch += LC_Items_OpenWorkshopSearch;
 		ListControl.OpenWorkshopSearchInBrowser += LC_Items_OpenWorkshopSearchInBrowser;
-		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
+		ListControl.SelectedItemsChanged += ListControl_SelectedItemsChanged;
 
 		_delayedSearch = new(350, DelayedSearch);
 		_delayedAuthorTagsRefresh = new(350, RefreshAuthorAndTags);
@@ -133,6 +133,13 @@ public partial class ContentList : SlickControl
 		{
 			new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
 		}
+	}
+
+	private void ListControl_SelectedItemsChanged(object sender, EventArgs e)
+	{
+		RefreshCounts();
+
+		I_Actions.IsSelected = ListControl.SelectedItemsCount > 0;
 	}
 
 	protected void RefreshAuthorAndTags()
@@ -674,9 +681,17 @@ public partial class ContentList : SlickControl
 
 	private void I_Actions_Click(object sender, EventArgs e)
 	{
-		var items = new SlickStripItem[]
+		var items = ListControl.SelectedOrFilteredItems.ToList();
+		var anyIncluded = items.Any(x => _packageUtil.IsIncluded(x));
+		var anyExcluded = items.Any(x => !_packageUtil.IsIncluded(x));
+		var anyEnabled = items.Any(x => _packageUtil.IsIncluded(x) && _packageUtil.IsEnabled(x));
+		var anyDisabled = items.Any(x => _packageUtil.IsIncluded(x) &&!_packageUtil.IsEnabled(x));
+		var allLocal = items.Any(x => !x.IsLocal());
+		var allWorkshop = items.Any(x => x.IsLocal());
+
+		var stripItems = new SlickStripItem[]
 		{
-			  new (Locale.IncludeAll, "I_Check", action: async() => await IncludeAll())
+			  new (Locale.IncludeAll, "I_Check", , action: async() => await IncludeAll())
 			, new (Locale.ExcludeAll, "I_X", action: async() => await ExcludeAll())
 			, new (string.Empty)
 			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:async () => await EnableAll())
@@ -697,33 +712,33 @@ public partial class ContentList : SlickControl
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
 		};
 
-		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), stripItems));
 	}
 
 	private async Task DisableAll()
 	{
-		await SetEnabled(ListControl.FilteredItems, false);
+		await SetEnabled(ListControl.SelectedOrFilteredItems, false);
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
 	private async Task EnableAll()
 	{
-		await SetEnabled(ListControl.FilteredItems, true);
+		await SetEnabled(ListControl.SelectedOrFilteredItems, true);
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
 	private async Task ExcludeAll()
 	{
-		await SetIncluded(ListControl.FilteredItems, false);
+		await SetIncluded(ListControl.SelectedOrFilteredItems, false);
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
 	private async Task IncludeAll()
 	{
-		await SetIncluded(ListControl.FilteredItems, true);
+		await SetIncluded(ListControl.SelectedOrFilteredItems, true);
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
@@ -731,14 +746,14 @@ public partial class ContentList : SlickControl
 #if CS1
 	private void DownloadAll(object sender, EventArgs e)
 	{
-		_downloadService.Download(ListControl.FilteredItems.Where(x => x.GetLocalPackage() is null).Select(x => (IPackageIdentity)x));
+		_downloadService.Download(ListControl.SelectedOrFilteredItems.Where(x => x.GetLocalPackage() is null).Select(x => (IPackageIdentity)x));
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
 	private void ReDownloadAll(object sender, EventArgs e)
 	{
-		_downloadService.Download(ListControl.FilteredItems.Where(x => x.GetLocalPackage() is not null).Cast<IPackageIdentity>());
+		_downloadService.Download(ListControl.SelectedOrFilteredItems.Where(x => x.GetLocalPackage() is not null).Cast<IPackageIdentity>());
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
@@ -746,13 +761,13 @@ public partial class ContentList : SlickControl
 
 	private async Task UnsubscribeAll()
 	{
-		if (MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisUnsubscribesFrom.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
+		if (MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisUnsubscribesFrom.FormatPlural(ListControl.SelectedOrFilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
 		{
 			return;
 		}
 
 		I_Actions.Loading = true;
-		await ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.FilteredItems.Cast<Domain.IPackageIdentity>());
+		await ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.SelectedOrFilteredItems.Cast<Domain.IPackageIdentity>());
 		I_Actions.Loading = false;
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
@@ -783,7 +798,7 @@ public partial class ContentList : SlickControl
 			}
 		}
 
-		if (steamIds.Count == 0 || MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisSubscribesTo.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
+		if (steamIds.Count == 0 || MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisSubscribesTo.FormatPlural(ListControl.SelectedOrFilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
 		{
 			return;
 		}
@@ -803,7 +818,7 @@ public partial class ContentList : SlickControl
 		I_Actions.Loading = true;
 		await Task.Run(() =>
 		{
-			var items = ListControl.FilteredItems.ToList();
+			var items = ListControl.SelectedOrFilteredItems.ToList();
 			foreach (var item in items)
 			{
 				if (item.IsLocal() && item is IAsset asset)

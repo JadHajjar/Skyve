@@ -35,11 +35,13 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
 	private readonly ITagsService _tagsService;
+	private readonly SkyvePage _page;
 
 	public IEnumerable<IPackageIdentity> GetSelectedItems() => SelectedItems.Select(x => x.Item);
 
 	protected ItemListControl(SkyvePage page)
 	{
+		_page = page;
 		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
 
 		SeparateWithLines = true;

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Skyve.App.UserInterface.Lists;
 
@@ -26,7 +27,7 @@ public partial class ItemListControl
 
 		if (thumbnail is null)
 		{
-			using var generic = IconManager.GetIcon(e.Item is IAsset ? "I_Assets" : e.Item is ILocalPackageData ? "I_Mods" : "I_Package", e.Rects.IconRect.Height).Color(e.BackColor);
+			using var generic = IconManager.GetIcon(e.Item is IAsset ? "I_Assets" : _page is SkyvePage.Mods ? "I_Mods" : _page is SkyvePage.Packages ? "I_Package" : "I_Paradox", e.Rects.IconRect.Height).Color(e.BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
@@ -49,9 +50,25 @@ public partial class ItemListControl
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
 		}
 
+		var date = e.Item.GetLocalPackageIdentity()?.LocalTime ?? default;
+		var isRecent = date > DateTime.UtcNow.AddDays(-7);
+
+		if (isRecent && !IsPackagePage)
+		{
+			using var font = UI.Font(GridView ? 9F : 8.25F, FontStyle.Bold);
+			using var pen = new Pen(FormDesign.Modern.ActiveColor, (float)(UI.FontScale));
+			using var gradientBrush = new LinearGradientBrush(e.Rects.IconRect.Pad(0, e.Rects.IconRect.Height * 2 / 3, 0, 0), Color.Empty, FormDesign.Modern.ActiveColor, 90);
+			using var dateBrush = new SolidBrush(FormDesign.Modern.ActiveForeColor);
+			using var stringFormat = new StringFormat { LineAlignment = StringAlignment.Far, Alignment = StringAlignment.Center };
+
+			e.Graphics.FillRoundedRectangle(gradientBrush, e.Rects.IconRect.Pad(0, e.Rects.IconRect.Height * 2 / 3, 0, 0), (int)(5 * UI.FontScale));
+			e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, (int)(5 * UI.FontScale));
+
+			e.Graphics.DrawString(Locale.RecentlyUpdated, font, dateBrush, e.Rects.IconRect.Pad(GridPadding), stringFormat);
+		}
+
 		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor/*, blur: e.Rects.IconRect.Contains(CursorLocation)*/);
 	}
-
 
 #if CS2
 	private void DrawIncludedButton(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, bool isIncluded, bool isPartialIncluded, bool isEnabled, ILocalPackageData? package, out Color activeColor)
@@ -63,15 +80,13 @@ public partial class ItemListControl
 			return; // missing local item
 		}
 
-		if (e.Rects.IncludedRect.Contains(CursorLocation))
+		var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
+
+		if (!required && e.Rects.IncludedRect.Contains(CursorLocation))
 		{
 			isPartialIncluded = false;
 			isEnabled = !isEnabled;
 		}
-
-		var inclEnableRect = e.Rects.IncludedRect;
-		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
-		var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
 
 		if (isEnabled)
 		{
@@ -85,7 +100,7 @@ public partial class ItemListControl
 			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
 			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
 		}
-		else if (activeColor == default && inclEnableRect.Contains(CursorLocation))
+		else if (activeColor == default && e.Rects.IncludedRect.Contains(CursorLocation))
 		{
 			activeColor = Color.FromArgb(40, isIncluded ? FormDesign.Design.GreenColor : FormDesign.Design.ActiveColor);
 			iconColor = FormDesign.Design.ActiveColor;
@@ -96,7 +111,7 @@ public partial class ItemListControl
 			{
 				activeColor = Color.FromArgb(20, ForeColor);
 			}
-			else if (inclEnableRect.Contains(CursorLocation))
+			else if (e.Rects.IncludedRect.Contains(CursorLocation))
 			{
 				activeColor = activeColor.MergeColor(ForeColor, 75);
 			}
@@ -104,8 +119,8 @@ public partial class ItemListControl
 			iconColor = activeColor.GetTextColor();
 		}
 
-		using var brush = inclEnableRect.Gradient(activeColor);
-		e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(4 * UI.FontScale));
+		using var brush = e.Rects.IncludedRect.Gradient(activeColor);
+		e.Graphics.FillRoundedRectangle(brush, e.Rects.IncludedRect, (int)(4 * UI.FontScale));
 
 		if (e.DrawableItem.Loading)
 		{
@@ -113,7 +128,8 @@ public partial class ItemListControl
 			return;
 		}
 
-		using var includedIcon = incl.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
+		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
+		using var includedIcon = icon.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
 	}

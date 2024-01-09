@@ -52,8 +52,10 @@ public class PackageNameUtil : IPackageNameUtil
 			return _locale.Get("UnknownPackage");
 		}
 
-		var lp = package as IPackage;
-		var isLocal = lp?.IsLocal ?? false;
+		if (package is IAsset)
+			return package.Name;
+
+		var isLocal = package.IsLocal();
 		var text = _tagRegex.Replace(package.Name, string.Empty);
 		var tagMatches = _bracketsRegex.Matches(text);
 

@@ -228,7 +228,7 @@
   "AreYouSure": "Are you sure you want to proceed?",
   "MapFileInfo": "Select a map file to start a new game with",
   "AssetOutOfDate": "asset is out of date",
-  "OtherActions": "Other Actions...",
+  "BulkActions": "Bulk Actions",
   "AssetOutOfDatePlural": "assets are out of date",
   "CopyVersionNumber": "Copy version number",
   "SubscribeToItem": {
