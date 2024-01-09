@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace Skyve.Domain;
-public interface IWorkshopInfo : IPackageIdentity
+public interface IWorkshopInfo : IPackageIdentity, IThumbnailObject
 {
 	IUser? Author { get; }
 	string? ThumbnailUrl { get; }

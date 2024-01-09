@@ -80,13 +80,34 @@ public static class SystemExtensions
 			: identity is IPackage package ? package.LocalData : (ILocalPackageIdentity?)(PackageManager.GetPackageById(identity)?.LocalData);
 	}
 
+	public static Bitmap? GetThumbnail<T>(this T? identity) where T : IPackageIdentity
+	{
+		if (identity is IThumbnailObject thumbnailObject)
+		{
+			return GetThumbnail(thumbnailObject);
+		}
+
+		return GetThumbnail((IThumbnailObject?)identity?.GetWorkshopInfo());
+	}
+
 	public static Bitmap? GetThumbnail(this IThumbnailObject? thumbnailObject)
 	{
-		return thumbnailObject is null
-			? null
-			: thumbnailObject.GetThumbnail(ImageService, out var thumbnail, out var thumbnailUrl)
-			? thumbnail
-			: thumbnailUrl is null or "" ? null : ImageService.GetImage(thumbnailUrl, true).Result;
+		if (thumbnailObject is null)
+		{
+			return null;
+		}
+
+		if (thumbnailObject.GetThumbnail(ImageService, out var thumbnail, out var thumbnailUrl))
+		{
+			return thumbnail;
+		}
+
+		if (thumbnailUrl is null or "")
+		{
+			return null;
+		}
+
+		return ImageService.GetImage(thumbnailUrl, true).Result;
 	}
 
 	public static Bitmap? GetUserAvatar(this IPackageIdentity? package)

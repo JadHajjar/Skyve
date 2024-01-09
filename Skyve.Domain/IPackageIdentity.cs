@@ -1,6 +1,6 @@
 ﻿namespace Skyve.Domain;
 
-public interface IPackageIdentity : IThumbnailObject
+public interface IPackageIdentity
 {
 	ulong Id { get; }
 	string Name { get; }

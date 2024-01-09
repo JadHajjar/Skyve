@@ -36,20 +36,6 @@ public class PseudoPackage : IPackageIdentity
 		return Package?.GetWorkshopInfo();
 	}
 
-	public bool GetThumbnail(IImageService imageService, out Bitmap? thumbnail, out string? thumbnailUrl)
-	{
-		var info = GetWorkshopInfo();
-
-		if (info is not null)
-		{
-			return info.GetThumbnail(imageService, out thumbnail, out thumbnailUrl);
-		}
-
-		thumbnail = null;
-		thumbnailUrl = null;
-		return false;
-	}
-
 	public static implicit operator ulong(PseudoPackage pkg)
 	{
 		return pkg.Id;

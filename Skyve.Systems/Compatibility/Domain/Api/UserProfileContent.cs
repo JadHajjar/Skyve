@@ -49,19 +49,5 @@ public class UserProfileContent : IDynamicSql
 
 	long ILocalPackageIdentity.FileSize { get; }
 	DateTime ILocalPackageIdentity.LocalTime { get; }
-
-	public bool GetThumbnail(IImageService imageService, out Bitmap? thumbnail, out string? thumbnailUrl)
-	{
-		var info = this.GetWorkshopInfo();
-
-		if (info is not null)
-		{
-			return info.GetThumbnail(imageService, out thumbnail, out thumbnailUrl);
-		}
-
-		thumbnail = null;
-		thumbnailUrl = null;
-		return false;
-	}
 #endif
 }

@@ -7,8 +7,6 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_PackagePage : PanelContent
 {
@@ -33,13 +31,16 @@ public partial class PC_PackagePage : PanelContent
 
 		PB_Icon.Package = package;
 
-		if (package.GetThumbnail(imageService, out var thumbnail, out var thumbnailUrl))
+		if (package.GetWorkshopInfo() is IWorkshopInfo workshopInfo)
 		{
-			PB_Icon.Image = new Bitmap(thumbnail);
-		}
-		else
-		{
-			PB_Icon.LoadImage(thumbnailUrl, imageService.GetImage);
+			if (workshopInfo.GetThumbnail(imageService, out var thumbnail, out var thumbnailUrl))
+			{
+				PB_Icon.Image = new Bitmap(thumbnail);
+			}
+			else
+			{
+				PB_Icon.LoadImage(thumbnailUrl, imageService.GetImage);
+			}
 		}
 
 		P_Info.SetPackage(package, this);
@@ -58,9 +59,13 @@ public partial class PC_PackagePage : PanelContent
 		if (Package is ILocalPackageData p && p.Assets is not null && p.Assets.Length > 0)
 		{
 			if (_settings.UserSettings.ExtendedListInfo)
+			{
 				LC_Items = new ItemListControl.Complex(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
+			}
 			else
+			{
 				LC_Items = new ItemListControl.Simple(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
+			}
 
 			LC_Items.AddRange(p.Assets);
 
@@ -83,7 +88,7 @@ public partial class PC_PackagePage : PanelContent
 
 		if (crAvailable)
 		{
-			foreach (var item in crdata?.Links ?? new())
+			foreach (var item in crdata?.Links ?? [])
 			{
 				FLP_Links.Controls.Add(new LinkControl(item, true));
 			}
@@ -111,7 +116,7 @@ public partial class PC_PackagePage : PanelContent
 			tabs.Remove(T_References);
 		}
 
-		var requirements = package.GetWorkshopInfo()?.Requirements.ToList() ?? new();
+		var requirements = package.GetWorkshopInfo()?.Requirements.ToList() ?? [];
 		if (requirements.Count > 0)
 		{
 			foreach (var requirement in requirements)
