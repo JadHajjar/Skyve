@@ -77,7 +77,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		get => _compactList; set
 		{
 			_compactList = value;
-			baseHeight = _compactList ? 24 : 54;
+			baseHeight = _compactList ? 24 : 48;
 
 			if (Live)
 			{
@@ -227,18 +227,20 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		if (rects.IncludedRect.Contains(e.Location))
 		{
 			var isIncluded = item.Item.IsIncluded(out var partialIncluded) || partialIncluded;
-			var isEnabled = item.Item.IsEnabled();
 
 			Loading = item.Loading = true;
+
 			if (!isIncluded)
 			{
 				await _packageUtil.SetIncluded(item.Item, !isIncluded);
 			}
 			else
 			{
-				await _packageUtil.SetEnabled(item.Item, !isEnabled);
+				await _packageUtil.SetEnabled(item.Item, !item.Item.IsEnabled());
 			}
-			Loading = item.Loading = false;
+
+			item.Loading = false;
+			Loading = SafeGetItems().Any(x => x.Loading);
 		}
 #else
 

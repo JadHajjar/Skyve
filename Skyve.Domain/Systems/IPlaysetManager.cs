@@ -20,9 +20,11 @@ public interface IPlaysetManager
 	Task<bool> MergeIntoCurrentPlayset(IPlayset playset);
 	Task<bool> RenamePlayset(IPlayset playset, string text);
 	void SetCurrentPlayset(ICustomPlayset playset);
-	Task SetIncludedForAll(IPackageIdentity package, bool value);
 	Task Initialize();
+	Task SetIncludedForAll(IPackageIdentity package, bool value);
 	Task SetIncludedForAll(IEnumerable<IPackageIdentity> packages, bool value);
+	Task SetEnabledForAll(IPackageIdentity package, bool value);
+	Task SetEnabledForAll(IEnumerable<IPackageIdentity> packages, bool value);
 
 #if CS1
 	ICustomPlayset TemporaryPlayset { get; }

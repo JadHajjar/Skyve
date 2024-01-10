@@ -50,12 +50,17 @@ public partial class ItemListControl
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
 		}
 
+		if (!GridView)
+		{
+			return;
+		}
+
 		var date = e.Item.GetLocalPackageIdentity()?.LocalTime ?? default;
 		var isRecent = date > DateTime.UtcNow.AddDays(-7);
 
 		if (isRecent && !IsPackagePage)
 		{
-			using var font = UI.Font(GridView ? 9F : 8.25F, FontStyle.Bold);
+			using var font = UI.Font(9F, FontStyle.Bold);
 			using var pen = new Pen(FormDesign.Modern.ActiveColor, (float)(UI.FontScale));
 			using var gradientBrush = new LinearGradientBrush(e.Rects.IconRect.Pad(0, e.Rects.IconRect.Height * 2 / 3, 0, 0), Color.Empty, FormDesign.Modern.ActiveColor, 90);
 			using var dateBrush = new SolidBrush(FormDesign.Modern.ActiveForeColor);
@@ -82,7 +87,7 @@ public partial class ItemListControl
 
 		var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
 
-		if (!required && e.Rects.IncludedRect.Contains(CursorLocation))
+		if (!required && isIncluded && e.Rects.IncludedRect.Contains(CursorLocation))
 		{
 			isPartialIncluded = false;
 			isEnabled = !isEnabled;
@@ -102,8 +107,8 @@ public partial class ItemListControl
 		}
 		else if (activeColor == default && e.Rects.IncludedRect.Contains(CursorLocation))
 		{
-			activeColor = Color.FromArgb(40, isIncluded ? FormDesign.Design.GreenColor : FormDesign.Design.ActiveColor);
-			iconColor = FormDesign.Design.ActiveColor;
+			iconColor = isIncluded ? isEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor : FormDesign.Design.ActiveColor;
+			activeColor = Color.FromArgb(40, iconColor);
 		}
 		else
 		{

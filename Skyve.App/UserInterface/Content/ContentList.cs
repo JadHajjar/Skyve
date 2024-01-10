@@ -682,6 +682,7 @@ public partial class ContentList : SlickControl
 	private void I_Actions_Click(object sender, EventArgs e)
 	{
 		var items = ListControl.SelectedOrFilteredItems.ToList();
+		var isSelected = ListControl.SelectedItemsCount > 0;
 		var anyIncluded = items.Any(x => _packageUtil.IsIncluded(x));
 		var anyExcluded = items.Any(x => !_packageUtil.IsIncluded(x));
 		var anyEnabled = items.Any(x => _packageUtil.IsIncluded(x) && _packageUtil.IsEnabled(x));
@@ -691,25 +692,23 @@ public partial class ContentList : SlickControl
 
 		var stripItems = new SlickStripItem[]
 		{
-			  new (Locale.IncludeAll, "I_Check", , action: async() => await IncludeAll())
-			, new (Locale.ExcludeAll, "I_X", action: async() => await ExcludeAll())
+			  new (Locale.EnableAll, "I_Ok", anyDisabled, action:async () => await EnableAll())
+			, new (Locale.DisableAll, "I_Enabled", anyEnabled, action: async () => await DisableAll())
 			, new (string.Empty)
-			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:async () => await EnableAll())
-			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: async () => await DisableAll())
+			, new (Locale.IncludeAll, "I_Add", anyExcluded, action: async() => await IncludeAll())
+			, new (Locale.ExcludeAll, "I_X", anyIncluded, action: async() => await ExcludeAll())
 			, new (string.Empty)
 			, new (Locale.SelectAll, "I_DragDrop", ListControl.SelectedItemsCount < ListControl.FilteredItems.Count(), action: ListControl.SelectAll)
 			, new (Locale.DeselectAll, "I_Select", ListControl.SelectedItemsCount > 0, action: ListControl.DeselectAll)
 			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
-#if CS2
-			, new (Locale.SubscribeAll, "I_Paradox", this is PC_GenericPackageList, action: async () => await SubscribeAll())
-#else
+#if CS1
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))
 			, new (Locale.ReDownloadAll, "I_ReDownload", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
-#endif
 			, new (string.Empty)
-			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: async () =>await UnsubscribeAll())
+			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: async () => await UnsubscribeAll())
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
+#endif
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), stripItems));
