@@ -363,6 +363,9 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation NoActivePlayset => _instance.GetText(nameof(NoActivePlayset));
 	public static Translation RecentlyUpdated => _instance.GetText(nameof(RecentlyUpdated));
 	public static Translation Manage => _instance.GetText(nameof(Manage));
+	public static Translation ThisModIsRequiredYouCantDisableIt => _instance.GetText(nameof(ThisModIsRequiredYouCantDisableIt));
+	public static Translation AddThisModToYourPlayset => _instance.GetText(nameof(AddThisModToYourPlayset));
+	public static Translation VotesCount => _instance.GetText(nameof(VotesCount));
 
 	public static void Load() { _ = _instance; }
 

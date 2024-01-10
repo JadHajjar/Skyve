@@ -37,7 +37,10 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private readonly ITagsService _tagsService;
 	private readonly SkyvePage _page;
 
-	public IEnumerable<IPackageIdentity> GetSelectedItems() => SelectedItems.Select(x => x.Item);
+	public IEnumerable<IPackageIdentity> GetSelectedItems()
+	{
+		return SelectedItems.Select(x => x.Item);
+	}
 
 	protected ItemListControl(SkyvePage page)
 	{
@@ -74,10 +77,12 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	public bool IsSelection { get => !EnableSelection; set => EnableSelection = !value; }
 	public bool CompactList
 	{
-		get => _compactList; set
+		get => _compactList;
+		set
 		{
 			_compactList = value;
-			baseHeight = _compactList ? 24 : 48;
+
+			baseHeight = _settings.UserSettings.ExtendedListInfo ? _compactList ? 24 : 54 : _compactList ? 20 : 48;
 
 			if (Live)
 			{
@@ -135,7 +140,15 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		else
 		{
 			HighlightOnHover = false;
-			Padding = new Padding((int)Math.Floor((CompactList ? 1.5 : 2.5) * UI.FontScale));
+
+			if (CompactList)
+			{
+				Padding = new Padding((int)Math.Round(2.5 * UI.FontScale), (int)Math.Round(1.5 * UI.FontScale), (int)Math.Round(2.5 * UI.FontScale), (int)Math.Round(1.5 * UI.FontScale));
+			}
+			else
+			{
+				Padding = new Padding((int)Math.Round(3 * UI.FontScale), (int)Math.Round(2 * UI.FontScale), (int)Math.Round(3 * UI.FontScale), (int)Math.Round(2 * UI.FontScale));
+			}
 		}
 	}
 
@@ -224,9 +237,9 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 
 #if CS2
-		if (rects.IncludedRect.Contains(e.Location))
+		if (rects.IncludedRect.Contains(e.Location) && !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil))
 		{
-			var isIncluded = item.Item.IsIncluded(out var partialIncluded) || partialIncluded;
+			var isIncluded = item.Item.IsIncluded(out var partialIncluded) && !partialIncluded;
 
 			Loading = item.Loading = true;
 
@@ -624,30 +637,26 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			if (IncludedRect.Contains(location))
 			{
-				if (Item.GetLocalPackage() is null)
-				{
-					if (!Item.GetPackage()!.IsLocal)
-					{
-						text = Locale.SubscribeToItem;
-						point = IncludedRect.Location;
-						return true;
-					}
-					else
-					{
-						text = string.Empty;
-						point = default;
-						return false;
-					}
-				}
+				var required = ServiceCenter.Get<IModLogicManager>().IsRequired(Item.GetLocalPackageIdentity(), ServiceCenter.Get<IModUtil>());
+				var isIncluded = Item.IsIncluded(out var partialIncluded) && !partialIncluded;
 
-				text = Item.IsIncluded()
-					? $"{Locale.ExcludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}"
-					: $"{Locale.IncludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
+				if (required)
+				{
+					text = Locale.ThisModIsRequiredYouCantDisableIt;
+				}
+				else
+				{
+					text = !isIncluded
+						? (string)Locale.AddThisModToYourPlayset
+						: Item.IsEnabled()
+											? $"{Locale.DisablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}"
+											: $"{Locale.EnablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
+				}
 
 				point = IncludedRect.Location;
 				return true;
 			}
-
+#if CS1
 			if (EnabledRect.Contains(location) && Item.GetPackage()?.IsCodeMod == true)
 			{
 				text = Item.IsEnabled()
@@ -657,7 +666,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				point = EnabledRect.Location;
 				return true;
 			}
-
+#endif
 			if (SteamRect.Contains(location))
 			{
 				text = Locale.ViewOnSteam;
@@ -749,14 +758,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			{
 				text = (instance as ItemListControl)!.IsSelection ? (string)Locale.SelectThisPackage : (string)Locale.OpenPackagePage;
 
-				if ((instance as ItemListControl)!.GridView)
-				{
-					point = IconRect.Location;
-				}
-				else
-				{
-					point = CenterRect.Location;
-				}
+				point = (instance as ItemListControl)!.GridView ? IconRect.Location : CenterRect.Location;
 
 				return true;
 			}

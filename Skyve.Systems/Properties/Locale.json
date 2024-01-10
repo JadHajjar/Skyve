@@ -400,7 +400,14 @@
   "Sorting_Subscribers": "Total Subscribers",
   "Sorting_Votes": "Votes",
   "RatingCount": "{0} votes {1}",
-  "SubscribersCount": "{0} subscribers",
+  "VotesCount": {
+    "One": "{0} vote",
+    "Plural": "{0} votes"
+  },
+  "SubscribersCount": {
+    "One": "{0} subscriber",
+    "Plural": "{0} subscribers"
+  },
   "SearchWorkshop": "Search the workshop instead..",
   "SearchWorkshopBrowser": "Search the workshop in your browser..",
   "VotingTitle": "How the voting system works",

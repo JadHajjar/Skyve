@@ -31,7 +31,7 @@ public partial class ItemListControl
 
 			base.OnPaintItemGrid(e);
 
-			DrawThumbnail(e);
+			DrawThumbnail(e, e.Item.GetLocalPackageIdentity(), workshopInfo);
 			DrawTitleAndTagsAndVersion(e, package, e.Item.GetLocalPackageIdentity(), workshopInfo, isPressed);
 			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, package?.LocalData, out var activeColor);
 

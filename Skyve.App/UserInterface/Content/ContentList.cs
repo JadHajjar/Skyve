@@ -103,12 +103,12 @@ public partial class ContentList : SlickControl
 		_delayedSearch = new(350, DelayedSearch);
 		_delayedAuthorTagsRefresh = new(350, RefreshAuthorAndTags);
 
-		if (!_settings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
-		{
-			OT_Enabled.Hide();
-			P_Filters.SetRow(OT_Workshop, 2);
-			P_Filters.SetRow(OT_ModAsset, 3);
-		}
+		//if (!_settings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
+		//{
+		//	OT_Enabled.Hide();
+		//	P_Filters.SetRow(OT_Workshop, 2);
+		//	P_Filters.SetRow(OT_ModAsset, 3);
+		//}
 
 		clearingFilters = false;
 
@@ -152,12 +152,16 @@ public partial class ContentList : SlickControl
 
 	private void LC_Items_OpenWorkshopSearch()
 	{
-		Program.MainForm.PushPanel(null, new PC_SelectPackage(TB_Search.Text, this is PC_Mods ? ThreeOptionToggle.Value.Option1 : this is PC_Assets ? ThreeOptionToggle.Value.Option2 : ThreeOptionToggle.Value.None));
+		Program.MainForm.PushPanel(null, new PC_SelectPackage(TB_Search.Text, Page is SkyvePage.Mods ? ThreeOptionToggle.Value.Option1 : Page is SkyvePage.Assets ? ThreeOptionToggle.Value.Option2 : ThreeOptionToggle.Value.None));
 	}
 
 	private void LC_Items_OpenWorkshopSearchInBrowser()
 	{
-		PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/browse/?appid=255710&searchtext={WebUtility.UrlEncode(TB_Search.Text)}&browsesort=trend&section=readytouseitems&actualsort=trend&p=1&days=365" + (this is PC_Mods ? "&requiredtags%5B0%5D=Mod" : ""));
+#if CS2
+		throw new NotImplementedException();
+#else
+		PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/browse/?appid=255710&searchtext={WebUtility.UrlEncode(TB_Search.Text)}&browsesort=trend&section=readytouseitems&actualsort=trend&p=1&days=365" + (Page is SkyvePage.Mods ? "&requiredtags%5B0%5D=Mod" : ""));
+#endif
 	}
 
 	private void LC_Items_AddToSearch(string obj)

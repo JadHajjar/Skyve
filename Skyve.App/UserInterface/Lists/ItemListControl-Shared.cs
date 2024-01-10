@@ -21,7 +21,7 @@ public partial class ItemListControl
 		return 0;
 	}
 
-	private void DrawThumbnail(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
+	private void DrawThumbnail(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
 	{
 		var thumbnail = e.Item.GetThumbnail();
 
@@ -50,21 +50,32 @@ public partial class ItemListControl
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
 		}
 
-		if (!GridView)
-		{
-			return;
-		}
-
-		var date = e.Item.GetLocalPackageIdentity()?.LocalTime ?? default;
+		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
 		var isRecent = date > DateTime.UtcNow.AddDays(-7);
 
 		if (isRecent && !IsPackagePage)
 		{
+			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(2 * UI.FontScale));
+
+			if (!GridView)
+			{
+				e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, (int)(5 * UI.FontScale));
+
+				return;
+			}
+
 			using var font = UI.Font(9F, FontStyle.Bold);
-			using var pen = new Pen(FormDesign.Modern.ActiveColor, (float)(UI.FontScale));
-			using var gradientBrush = new LinearGradientBrush(e.Rects.IconRect.Pad(0, e.Rects.IconRect.Height * 2 / 3, 0, 0), Color.Empty, FormDesign.Modern.ActiveColor, 90);
-			using var dateBrush = new SolidBrush(FormDesign.Modern.ActiveForeColor);
+			using var gradientBrush = new LinearGradientBrush(e.Rects.IconRect.Pad(0, e.Rects.IconRect.Height * 2 / 3, 0, 0), Color.Empty, FormDesign.Design.ActiveColor, 90);
+			using var dateBrush = new SolidBrush(FormDesign.Design.ActiveForeColor);
 			using var stringFormat = new StringFormat { LineAlignment = StringAlignment.Far, Alignment = StringAlignment.Center };
+
+			var cblend = new ColorBlend(4)
+			{
+				Colors = [default, Color.FromArgb(100, FormDesign.Design.ActiveColor), Color.FromArgb(200, FormDesign.Design.ActiveColor), FormDesign.Design.ActiveColor],
+				Positions = [0f, 0.5f, 0.7f, 1f]
+			};
+
+			gradientBrush.InterpolationColors = cblend;
 
 			e.Graphics.FillRoundedRectangle(gradientBrush, e.Rects.IconRect.Pad(0, e.Rects.IconRect.Height * 2 / 3, 0, 0), (int)(5 * UI.FontScale));
 			e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, (int)(5 * UI.FontScale));
@@ -76,16 +87,16 @@ public partial class ItemListControl
 	}
 
 #if CS2
-	private void DrawIncludedButton(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, bool isIncluded, bool isPartialIncluded, bool isEnabled, ILocalPackageData? package, out Color activeColor)
+	private void DrawIncludedButton(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, bool isIncluded, bool isPartialIncluded, bool isEnabled, ILocalPackageIdentity? localIdentity, out Color activeColor)
 	{
 		activeColor = default;
 
-		if (package is null && e.Item.IsLocal())
+		if (localIdentity is null && e.Item.IsLocal())
 		{
 			return; // missing local item
 		}
 
-		var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
+		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
 
 		if (!required && isIncluded && e.Rects.IncludedRect.Contains(CursorLocation))
 		{
@@ -129,12 +140,12 @@ public partial class ItemListControl
 
 		if (e.DrawableItem.Loading)
 		{
-			DrawLoader(e.Graphics, e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Width / 2, e.Rects.IncludedRect.Width / 2), iconColor);
+			DrawLoader(e.Graphics, e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Height / 2, e.Rects.IncludedRect.Height / 2), iconColor);
 			return;
 		}
 
 		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
-		using var includedIcon = icon.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
+		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
 	}

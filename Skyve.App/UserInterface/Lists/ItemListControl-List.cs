@@ -132,7 +132,7 @@ public partial class ItemListControl
 
 			base.OnPaintItemList(e);
 
-			DrawThumbnail(e);
+			DrawThumbnail(e, e.Item.GetLocalPackageIdentity(), workshopInfo);
 			DrawTitleAndTagsAndVersionForList(e, package?.LocalData, workshopInfo, isPressed);
 			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, package?.LocalData, out var activeColor);
 
