@@ -240,12 +240,13 @@ public partial class ItemListControl
 			{
 				var isHovered = rect.Contains(CursorLocation);
 
-				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline);
-				using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor);
+				using var fontBold = UI.Font(8.25F, FontStyle.Bold);
+				using var fontUnderline = UI.Font(8.25F, workshopInfo.HasVoted ? FontStyle.Bold | FontStyle.Underline : FontStyle.Underline);
+				using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor.MergeColor(brush.Color, 75));
 				using var voteIcon = IconManager.GetIcon(workshopInfo.HasVoted ? "I_VoteFilled" : "I_Vote", itemHeight + Padding.Top).Color(isHovered || workshopInfo.HasVoted ? greenBrush.Color : brush.Color);
 
 				e.Graphics.DrawImage(voteIcon, rect.Align(voteIcon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(Locale.VotesCount.FormatPlural(workshopInfo.VoteCount.ToString("N0")), isHovered ? fontUnderline : font, isHovered || workshopInfo.HasVoted ? greenBrush : brush, rect.Pad(voteIcon.Width + Padding.Left, 0, 0, 0));
+				e.Graphics.DrawString(Locale.VotesCount.FormatPlural(workshopInfo.VoteCount.ToString("N0")), isHovered ? fontUnderline : workshopInfo.HasVoted ? fontBold : font, isHovered || workshopInfo.HasVoted ? greenBrush : brush, rect.Pad(voteIcon.Width + Padding.Left, 0, 0, 0));
 
 				e.Rects.ScoreRect = rect;
 
