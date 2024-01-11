@@ -694,17 +694,17 @@ public partial class ContentList : SlickControl
 		var allLocal = items.Any(x => !x.IsLocal());
 		var allWorkshop = items.Any(x => x.IsLocal());
 
-		var stripItems = new SlickStripItem[]
+		var stripItems = new SlickStripItem?[]
 		{
-			  new (Locale.EnableAll, "I_Ok", anyDisabled, action:async () => await EnableAll())
-			, new (Locale.DisableAll, "I_Enabled", anyEnabled, action: async () => await DisableAll())
-			, new (string.Empty)
-			, new (Locale.IncludeAll, "I_Add", anyExcluded, action: async() => await IncludeAll())
-			, new (Locale.ExcludeAll, "I_X", anyIncluded, action: async() => await ExcludeAll())
-			, new (string.Empty)
-			, new (Locale.SelectAll, "I_DragDrop", ListControl.SelectedItemsCount < ListControl.FilteredItems.Count(), action: ListControl.SelectAll)
-			, new (Locale.DeselectAll, "I_Select", ListControl.SelectedItemsCount > 0, action: ListControl.DeselectAll)
-			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
+			  anyDisabled ? new (Locale.EnableAll, "I_Ok", async () => await EnableAll()) : null
+			, anyEnabled ? new (Locale.DisableAll, "I_Enabled",  async () => await DisableAll()) : null
+			, new ()
+			, anyExcluded ? new (Locale.IncludeAll, "I_Add",  async() => await IncludeAll()) : null
+			, anyIncluded ? new (Locale.ExcludeAll, "I_X",  async() => await ExcludeAll()) : null
+			, new ()
+			, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count() ? new (Locale.SelectAll, "I_DragDrop",  ListControl.SelectAll) : null
+			, ListControl.SelectedItemsCount > 0? new (Locale.DeselectAll, "I_Select", ListControl.DeselectAll) : null
+			, new (Locale.CopyAllIds, "I_Copy", () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
 #if CS1
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))

@@ -431,22 +431,22 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void I_Actions_Click(object sender, EventArgs e)
 	{
-		var items = new SlickStripItem[]
-		{
-			  new (Locale.IncludeAll, "I_Check", action: async () => await IncludeAll())
-			, new (Locale.ExcludeAll, "I_X", action: async () => await ExcludeAll())
-			, new (string.Empty)
-			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action: async () => await EnableAll())
-			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: async () => await DisableAll())
-			, new (string.Empty)
-			, new (LocaleCR.ApplyAllActions, "I_CompatibilityReport", ListControl.FilteredItems.Any(x => GetAction(x) is not null), action: ApplyAll)
-			, new (LocaleCR.SnoozeAll, "I_Snooze", action: SnoozeAll)
-			, new (string.Empty)
-			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: async () => await UnsubscribeAll())
-			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
-		};
+		//var items = new SlickStripItem[]
+		//{
+		//	  new (Locale.IncludeAll, "I_Check", async () => await IncludeAll())
+		//	, new (Locale.ExcludeAll, "I_X", async () => await ExcludeAll())
+		//	, new (string.Empty)
+		//	, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, async () => await EnableAll())
+		//	, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, async () => await DisableAll())
+		//	, new (string.Empty)
+		//	, new (LocaleCR.ApplyAllActions, "I_CompatibilityReport", ListControl.FilteredItems.Any(x => GetAction(x) is not null), action: ApplyAll)
+		//	, new (LocaleCR.SnoozeAll, "I_Snooze", action: SnoozeAll)
+		//	, new (string.Empty)
+		//	, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: async () => await UnsubscribeAll())
+		//	, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
+		//};
 
-		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
+		//this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
 	}
 
 	private async Task DisableAll()

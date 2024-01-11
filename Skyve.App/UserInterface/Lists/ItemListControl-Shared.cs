@@ -97,8 +97,9 @@ public partial class ItemListControl
 		}
 
 		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
+		var isHovered = e.DrawableItem.Loading || e.Rects.IncludedRect.Contains(CursorLocation);
 
-		if (!required && isIncluded && e.Rects.IncludedRect.Contains(CursorLocation))
+		if (!required && isIncluded && isHovered)
 		{
 			isPartialIncluded = false;
 			isEnabled = !isEnabled;
@@ -116,7 +117,7 @@ public partial class ItemListControl
 			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
 			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
 		}
-		else if (activeColor == default && e.Rects.IncludedRect.Contains(CursorLocation))
+		else if (activeColor == default && isHovered)
 		{
 			iconColor = isIncluded ? isEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor : FormDesign.Design.ActiveColor;
 			activeColor = Color.FromArgb(40, iconColor);
@@ -127,7 +128,7 @@ public partial class ItemListControl
 			{
 				activeColor = Color.FromArgb(20, ForeColor);
 			}
-			else if (e.Rects.IncludedRect.Contains(CursorLocation))
+			else if (isHovered)
 			{
 				activeColor = activeColor.MergeColor(ForeColor, 75);
 			}
