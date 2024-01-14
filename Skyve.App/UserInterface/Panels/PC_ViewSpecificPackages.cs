@@ -1,4 +1,6 @@
-﻿namespace Skyve.App.UserInterface.Panels;
+﻿using System.Threading.Tasks;
+
+namespace Skyve.App.UserInterface.Panels;
 public class PC_ViewSpecificPackages : PC_ContentList
 {
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
@@ -12,13 +14,11 @@ public class PC_ViewSpecificPackages : PC_ContentList
 	{
 		_packages = packages;
 		_title = title;
-
-		LC_Items.RefreshItems();
 	}
 
-	protected override IEnumerable<IPackageIdentity> GetItems()
+	protected override async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
-		return _packages ?? new();
+		return await Task.FromResult(_packages ?? []);
 	}
 
 	protected override void LocaleChanged()

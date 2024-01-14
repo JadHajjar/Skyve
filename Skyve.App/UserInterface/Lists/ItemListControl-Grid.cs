@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.Systems.Compatibility.Domain.Api;
+
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
@@ -12,8 +14,8 @@ public partial class ItemListControl
 		protected override void OnPaintItemGrid(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 		{
 			var package = e.Item.GetPackage();
+			var localIdentity = e.Item.GetLocalPackageIdentity();
 			var workshopInfo = e.Item.GetWorkshopInfo();
-			var isPressed = false;
 			var isIncluded = e.Item.IsIncluded(out var partialIncluded) || partialIncluded;
 			var isEnabled = e.Item.IsEnabled();
 
@@ -25,33 +27,28 @@ public partial class ItemListControl
 			if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
 			{
 				e.BackColor = (e.IsSelected ? e.BackColor : FormDesign.Design.AccentBackColor).MergeColor(FormDesign.Design.ActiveColor, e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
-
-				isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 			}
 
 			base.OnPaintItemGrid(e);
 
-			DrawThumbnail(e, e.Item.GetLocalPackageIdentity(), workshopInfo);
-			DrawTitleAndTagsAndVersion(e, package, e.Item.GetLocalPackageIdentity(), workshopInfo, isPressed);
-			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, package?.LocalData, out var activeColor);
+			DrawThumbnail(e, localIdentity, workshopInfo);
+			DrawTitleAndTags(e);
+			DrawVersionAndDate(e, package, localIdentity, workshopInfo);
+			DrawVoteAndSubscribers(e, workshopInfo);
+			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, localIdentity, out var activeColor);
 
 			if (workshopInfo?.Author is not null)
 			{
-				var xdiff = DrawAuthor(e, workshopInfo.Author);
-
-				DrawScore(e, workshopInfo, xdiff);
+				  DrawAuthor(e, workshopInfo.Author);
 			}
 			else if (e.Item.IsLocal())
 			{
-				var xdiff = DrawFolderName(e, package?.LocalData);
-				DrawScore(e, workshopInfo, xdiff);
+				  DrawFolderName(e, localIdentity);
 			}
-			else
-				DrawScore(e, workshopInfo, 0);
 
 			DrawDividerLine(e);
 
-			var maxTagX = DrawButtons(e, isPressed, package?.LocalData, workshopInfo);
+			var maxTagX = DrawButtons(e, false, package?.LocalData, workshopInfo);
 
 			DrawTags(e, maxTagX);
 
@@ -59,7 +56,7 @@ public partial class ItemListControl
 
 			DrawCompatibilityAndStatus(e, out var outerColor);
 
-			if (isIncluded)
+			if (isEnabled)
 			{
 				if (outerColor == default)
 				{
@@ -70,7 +67,7 @@ public partial class ItemListControl
 
 				e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
 			}
-			else if (!IsPackagePage && package?.LocalData is not null && !e.HoverState.HasFlag(HoverState.Hovered))
+			else if (isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
@@ -83,13 +80,13 @@ public partial class ItemListControl
 			var notificationType = compatibilityReport?.GetNotification();
 			outerColor = default;
 
-			var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - GridPadding.Bottom;
+			var height = GridView ? e.Rects.IncludedRect.Height : (e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - GridPadding.Bottom);
 
 			if (notificationType > NotificationType.Info)
 			{
 				outerColor = notificationType.Value.GetColor();
 
-				e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(new(e.ClipRectangle.Right, e.Rects.IconRect.Bottom), LocaleCR.Get($"{notificationType}"), "I_CompatibilityReport", outerColor, ContentAlignment.BottomRight, padding: GridPadding, height: height, cursorLocation: CursorLocation);
+				e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(new(e.ClipRectangle.Right - GridPadding.Right, e.Rects.IconRect.Bottom), LocaleCR.Get($"{notificationType}"), "I_CompatibilityReport", outerColor, ContentAlignment.BottomRight, padding: GridPadding, height: height, cursorLocation: CursorLocation);
 			}
 
 			if (GetStatusDescriptors(e.Item, out var text, out var icon, out var color))
@@ -99,7 +96,7 @@ public partial class ItemListControl
 					outerColor = color;
 				}
 
-				e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : e.ClipRectangle.Right, e.Rects.IconRect.Bottom), notificationType > NotificationType.Info ? "" : text, icon!, color, ContentAlignment.BottomRight, padding: GridPadding, height: height, cursorLocation: CursorLocation);
+				e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : (e.ClipRectangle.Right - GridPadding.Right), e.Rects.IconRect.Bottom), notificationType > NotificationType.Info ? "" : text, icon!, color, ContentAlignment.BottomRight, padding: GridPadding, height: height, cursorLocation: CursorLocation);
 			}
 
 			if (e.IsSelected && outerColor == default)
@@ -111,7 +108,7 @@ public partial class ItemListControl
 		private void DrawTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, int maxTagX)
 		{
 			var startLocation = GridView
-				? new Point(e.ClipRectangle.X, e.Rects.IconRect.Bottom + (GridPadding.Vertical * 2))
+				? new Point(e.ClipRectangle.X, e.Rects.IconRect.Bottom + (GridPadding.Top * 3))
 				: IsPackagePage ? new Point(e.Rects.TextRect.X - Padding.Left, e.ClipRectangle.Bottom)
 				: new Point(CompactList ? _columnSizes[Columns.Tags].X : (e.ClipRectangle.X + (int)(375 * UI.UIScale)), e.ClipRectangle.Bottom - (CompactList ? 0 : Padding.Bottom));
 			var tagsRect = new Rectangle(startLocation, default);
@@ -127,7 +124,7 @@ public partial class ItemListControl
 
 			if (!IsPackagePage && e.Item.Id > 0)
 			{
-				e.Rects.SteamIdRect = DrawTag(e, maxTagX, startLocation, ref tagsRect, _tagsService.CreateWorkshopTag(e.Item.Id.ToString()), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor));
+				e.Rects.SteamIdRect = DrawTag(e, maxTagX, startLocation, ref tagsRect, _tagsService.CreateIdTag(e.Item.Id.ToString()), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor));
 
 				tagsRect.X += Padding.Left;
 			}
@@ -177,8 +174,8 @@ public partial class ItemListControl
 			using var tagIcon = IconManager.GetSmallIcon(item.Icon);
 
 			var padding = GridView ? GridPadding : Padding;
-			var tagSize = e.Graphics.MeasureLabel(item.Value, tagIcon, large: GridView);
-			var tagRect = e.Graphics.DrawLabel(item.Value, tagIcon, color ?? Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, GridView ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, smaller: CompactList, large: GridView, mousePosition: CursorLocation);
+			var tagSize = e.Graphics.MeasureLabel(item.Value, tagIcon, large: false);
+			var tagRect = e.Graphics.DrawLabel(item.Value, tagIcon, color ?? Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, GridView ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, smaller: CompactList, large: false, mousePosition: CursorLocation);
 
 			e.Rects.TagRects[item] = tagRect;
 
@@ -202,7 +199,7 @@ public partial class ItemListControl
 		{
 			var padding = GridView ? GridPadding : Padding;
 			var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
-			var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : Padding.Right), CompactList ? (e.ClipRectangle.Y + ((e.ClipRectangle.Height - size.Height) / 2)) : (e.ClipRectangle.Bottom - size.Height), size.Width, size.Height);
+			var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? GridPadding.Right : Padding.Right), CompactList ? (e.ClipRectangle.Y + ((e.ClipRectangle.Height - size.Height) / 2)) : (e.ClipRectangle.Bottom - size.Height - (GridView ? GridPadding.Bottom : 0)), size.Width, size.Height);
 			var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 
 			if (parentPackage is not null)
@@ -245,16 +242,27 @@ public partial class ItemListControl
 			return rect.X + rect.Width;
 		}
 
-		private int DrawFolderName(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageData? package)
+		private int DrawFolderName(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity)
 		{
-			if (package is null)
+			if (localIdentity is null)
 			{
 				return 0;
 			}
 
 			if (CompactList)
 			{
-				e.Rects.FolderNameRect = DrawCell(e, Columns.Author, Path.GetFileName(package.Folder), "I_Folder", font: UI.Font(8.25F, FontStyle.Bold));
+				e.Rects.FolderNameRect = DrawCell(e, Columns.Author, Path.GetFileName(localIdentity.Folder), "I_Folder", font: UI.Font(8.25F, FontStyle.Bold));
+				return 0;
+			}
+
+			if (GridView)
+			{
+				var rect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + (int)(40 * UI.FontScale) + GridPadding.Bottom / 2,0,0);
+
+				using var authorIcon = IconManager.GetSmallIcon("I_Folder");
+
+				e.Graphics.DrawLabel(Path.GetFileNameWithoutExtension(localIdentity.FilePath), authorIcon, default, rect, ContentAlignment.TopLeft);
+				
 				return 0;
 			}
 
@@ -262,7 +270,7 @@ public partial class ItemListControl
 			var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
 			var folderPoint = CompactList ? new Point(_columnSizes[Columns.Author].X, e.ClipRectangle.Y) : new Point(e.Rects.TextRect.X, e.Rects.IconRect.Bottom);
 
-			e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "I_Folder", alignment: ContentAlignment.BottomLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
+			e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(localIdentity.Folder), "I_Folder", alignment: ContentAlignment.BottomLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
 
 			return e.Rects.FolderNameRect.Width;
 		}
@@ -273,7 +281,15 @@ public partial class ItemListControl
 			var authorRect = new Rectangle(e.Rects.TextRect.X, e.Rects.IconRect.Bottom, 0, 0);
 			var authorImg = author.GetUserAvatar();
 
-			var height = CompactList ? authorRect.Height : e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
+			if (GridView)
+			{
+				authorRect.Y = e.Rects.TextRect.Bottom + (int)(40 * UI.FontScale) + GridPadding.Bottom / 2;
+			}
+
+			var height = 
+				GridView ? (int)(20 * UI.FontScale) : (
+				CompactList ? authorRect.Height :
+				e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom);
 
 			if (CompactList)
 			{
@@ -290,9 +306,9 @@ public partial class ItemListControl
 			}
 			else if (authorImg is null)
 			{
-				using var authorIcon = IconManager.GetIcon("I_Author", height);
+				using var authorIcon = IconManager.GetSmallIcon("I_Author");
 
-				authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorIcon, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
+				authorRect = e.Graphics.DrawLabel(author.Name, authorIcon, default, authorRect, ContentAlignment.TopLeft, mousePosition: CursorLocation);
 			}
 			else
 			{
@@ -448,60 +464,63 @@ public partial class ItemListControl
 			e.Graphics.FillRectangle(seamBrush, seamRectangle);
 		}
 
-		private void DrawTitleAndTagsAndVersion(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+		private void DrawVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
 		{
-			using var font = UI.Font(GridView ? 10.5F : CompactList ? 8.25F : 9F, FontStyle.Bold);
-			var mod = e.Item is not IAsset;
-			var tags = new List<(Color Color, string Text)>();
-			var text = mod ? e.Item.CleanName(out tags) : e.Item.ToString();
-			using var brush = new SolidBrush(isPressed ? FormDesign.Design.ActiveForeColor : (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) && !IsPackagePage ? FormDesign.Design.ActiveColor : ForeColor);
-			e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near });
-
 #if CS1
-		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
-		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+			var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
+			var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-			var isVersion = package?.IsCodeMod ?? false;
-			var versionText = isVersion ? "v" + package!.Version : localParentPackage?.FileSize.SizeString() ?? workshopInfo?.ServerSize.SizeString();
+			var isVersion = package?.IsCodeMod ?? (false && !string.IsNullOrEmpty(package!.Version));
+			var versionText = isVersion ? "v" + package!.Version : localIdentity?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
 #endif
-			var date = workshopInfo?.ServerTime ?? localParentPackage?.LocalTime;
+			var tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + GridPadding.Bottom / 2, 0, 0);
 
-			if (!string.IsNullOrEmpty(versionText))
+			var rect = e.Graphics.DrawLabel(versionText, null, isVersion ? Color.FromArgb(125, FormDesign.Design.YellowColor) : default, tagRect, ContentAlignment.TopLeft, smaller: false);
+			tagRect.X += GridPadding.Left + rect.Width;
+
+			var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
+
+			if (date != default)
 			{
-				tags.Insert(0, (isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), versionText!));
+				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+				var isRecent = date > DateTime.UtcNow.AddDays(-7);
+
+				e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), isRecent ? Color.FromArgb(125, FormDesign.Design.ActiveColor) : default, tagRect, ContentAlignment.TopLeft, smaller: false);
 			}
+		}
 
-			var padding = GridView ? GridPadding : Padding;
-			var tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + padding.Bottom, 0, 0);
+		private void DrawVoteAndSubscribers(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo)
+		{
+			if (workshopInfo is null)
+				return;
 
-			for (var i = 0; i < tags.Count; i++)
-			{
-				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: i == 0 && isVersion ? CursorLocation : null);
+			var rect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom +(int) (20*UI.FontScale) + GridPadding.Bottom / 2, 0, 0);
 
-				if (i == 0 && !string.IsNullOrEmpty(versionText))
-				{
-					e.Rects.VersionRect = rect;
-				}
+			e.Rects.ScoreRect = e.Graphics.DrawLabel(Locale.VotesCount.FormatPlural(workshopInfo.VoteCount, workshopInfo.VoteCount.ToString("N0"))
+					, IconManager.GetSmallIcon(workshopInfo.HasVoted ? "I_VoteFilled" : "I_Vote")
+					, workshopInfo!.HasVoted ? FormDesign.Design.GreenColor : default
+					, rect
+					, ContentAlignment.TopLeft
+					, mousePosition: CursorLocation);
 
-				tagRect.X += padding.Left + rect.Width;
-			}
+			rect.X += GridPadding.Left + e.Rects.ScoreRect.Width;
 
-			if (date.HasValue && !IsPackagePage)
-			{
-				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
-
-				e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: CursorLocation);
-			}
+			e.Graphics.DrawLabel(Locale.SubscribersCount.FormatPlural(workshopInfo.Subscribers, workshopInfo.Subscribers.ToString("N0"))
+					, IconManager.GetSmallIcon("I_People")
+					, default
+					, rect
+					, ContentAlignment.TopLeft);
 		}
 
 		private Rectangles GenerateGridRectangles(IPackageIdentity item, Rectangle rectangle)
 		{
 			var rects = new Rectangles(item)
 			{
-				IconRect = rectangle.Align(UI.Scale(new Size(64, 64), UI.UIScale), ContentAlignment.TopLeft)
+				IconRect = rectangle.Pad(GridPadding).Align(UI.Scale(new Size(80, 80), UI.FontScale), ContentAlignment.TopLeft)
 			};
 
-			rects.TextRect = rectangle.Pad(rects.IconRect.Width + GridPadding.Left, 0, 0, rectangle.Height).AlignToFontSize(UI.Font(10.5F, FontStyle.Bold), ContentAlignment.TopLeft);
+			using var font = UI.Font(11.25F, FontStyle.Bold);
+			rects.TextRect = rectangle.Pad(rects.IconRect.Width + GridPadding.Left * 2, GridPadding.Top, GridPadding.Right, rectangle.Height).AlignToFontSize(font, ContentAlignment.TopLeft);
 
 			rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.TopRight);
 

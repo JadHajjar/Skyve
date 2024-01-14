@@ -401,12 +401,12 @@
   "Sorting_Votes": "Votes",
   "RatingCount": "{0} votes {1}",
   "VotesCount": {
-    "One": "{0} vote",
-    "Plural": "{0} votes"
+    "One": "{1} vote",
+    "Plural": "{1} votes"
   },
   "SubscribersCount": {
-    "One": "{0} subscriber",
-    "Plural": "{0} subscribers"
+    "One": "{1} subscriber",
+    "Plural": "{1} subscribers"
   },
   "SearchWorkshop": "Search the workshop instead..",
   "SearchWorkshopBrowser": "Search the workshop in your browser..",

@@ -489,48 +489,30 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			}
 			else if (!Items.Any())
 			{
-				e.Graphics.DrawString(Locale.NoLocalPackagesFound + "\r\n" + Locale.CheckFolderInOptions, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(FormDesign.Design.LabelColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+				e.Graphics.SetUp(BackColor);
+
+				using var font = UI.Font(9.75F, FontStyle.Italic);
+				using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+				using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+				e.Graphics.DrawString(Locale.NoLocalPackagesFound + "\r\n" + Locale.CheckFolderInOptions, font, brush, ClientRectangle, stringFormat);
 			}
 			else if (!SafeGetItems().Any())
 			{
+				e.Graphics.SetUp(BackColor);
+
 				if (!IsTextSearchNotEmpty)
 				{
-					e.Graphics.DrawString(Locale.NoPackagesMatchFilters, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(FormDesign.Design.LabelColor), ClientRectangle.Pad(0, 0, 0, Height / 3), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+					using var font = UI.Font(9.75F, FontStyle.Italic);
+					using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+					using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+					e.Graphics.DrawString(Locale.NoPackagesMatchFilters, font, brush, ClientRectangle.Pad(0, 0, 0, Height / 3), stringFormat);
+
 					return;
 				}
 
-				CursorLocation = PointToClient(Cursor.Position);
-
-				e.Graphics.DrawString(Locale.NoPackagesMatchFilters, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(FormDesign.Design.LabelColor), ClientRectangle.Pad(0, 0, 0, Height / 3), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-
-				using var icon1 = IconManager.GetIcon("I_Steam");
-				using var icon2 = IconManager.GetIcon("I_Link");
-
-				var buttonSize1 = SlickButton.GetSize(e.Graphics, icon1, Locale.SearchWorkshop, UI.Font(9.75F));
-				var buttonSize2 = SlickButton.GetSize(e.Graphics, icon2, Locale.SearchWorkshopBrowser, UI.Font(9.75F));
-				PopupSearchRect1 = ClientRectangle.Pad(0, Height / 3, 0, 0).CenterR(buttonSize1);
-
-				SlickButton.GetColors(out var fore, out var back, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal);
-
-				if (!PopupSearchRect1.Contains(CursorLocation))
-				{
-					back = Color.Empty;
-				}
-
-				SlickButton.DrawButton(e, PopupSearchRect1.Location, PopupSearchRect1.Size, Locale.SearchWorkshop, UI.Font(9.75F), back, fore, icon1, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
-
-				PopupSearchRect2 = new Rectangle(PopupSearchRect1.X, PopupSearchRect1.Bottom + (Padding.Vertical * 2), buttonSize2.Width, buttonSize2.Height);
-
-				SlickButton.GetColors(out fore, out back, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal);
-
-				if (!PopupSearchRect2.Contains(CursorLocation))
-				{
-					back = Color.Empty;
-				}
-
-				SlickButton.DrawButton(e, PopupSearchRect2.Location, PopupSearchRect2.Size, Locale.SearchWorkshopBrowser, UI.Font(9.75F), back, fore, icon2, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
-
-				Cursor = PopupSearchRect1.Contains(CursorLocation) || PopupSearchRect2.Contains(CursorLocation) ? Cursors.Hand : Cursors.Default;
+				DrawWorkshopSearchButtons(e);
 			}
 			else
 			{
@@ -544,6 +526,43 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				MessagePrompt.Show(ex);
 			}
 		}
+	}
+
+	private void DrawWorkshopSearchButtons(PaintEventArgs e)
+	{
+		CursorLocation = PointToClient(Cursor.Position);
+
+		using var font = UI.Font(9.75F);
+		using var fontI = UI.Font(9.75F, FontStyle.Italic);
+		using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+		using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+		e.Graphics.DrawString(Locale.NoPackagesMatchFilters, fontI, brush, ClientRectangle.Pad(0, 0, 0, Height / 3), stringFormat);
+
+		PopupSearchRect1 = SlickButton.AlignAndDraw(e.Graphics, new Rectangle(0, Height * 2 / 3, Width, 0), ContentAlignment.TopCenter, new ButtonDrawArgs
+		{
+			Text = Locale.SearchWorkshop,
+#if CS2
+			Icon = "I_Paradox",
+#else
+			Icon = "I_Steam",
+#endif
+			Font = font,
+			Padding = UI.Scale(new Padding(7), UI.UIScale),
+			Cursor = CursorLocation,
+			HoverState = HoverState,
+		}).Rectangle;
+
+		PopupSearchRect2 = SlickButton.AlignAndDraw(e.Graphics, new Rectangle(0, PopupSearchRect1.Bottom + (Padding.Vertical * 2), Width, 0), ContentAlignment.TopCenter, new ButtonDrawArgs
+		{
+			Text = Locale.SearchWorkshopBrowser,
+			Icon = "I_Link",
+			Font = font,
+			Padding = UI.Scale(new Padding(7), UI.UIScale),
+			Cursor = CursorLocation,
+			HoverState = HoverState,
+		}).Rectangle;
+
+		Cursor = PopupSearchRect1.Contains(CursorLocation) || PopupSearchRect2.Contains(CursorLocation) ? Cursors.Hand : Cursors.Default;
 	}
 
 	public void ShowRightClickMenu(IPackageIdentity item)
@@ -741,7 +760,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				var workshopInfo = Item.GetWorkshopInfo();
 				if (workshopInfo is not null)
 				{
-					text = string.Format(Locale.RatingCount, workshopInfo.VoteCount.ToString("N0"), $"({workshopInfo.VoteCount}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0"));
+					text = "";//					string.Format(Locale.RatingCount, workshopInfo.VoteCount.ToString("N0"), $"({workshopInfo.VoteCount}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0"));
 					point = ScoreRect.Location;
 					return true;
 				}

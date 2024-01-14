@@ -31,7 +31,7 @@ public partial class ItemListControl
 			e.DrawableItem.CachedHeight = e.Rects.IncludedRect.Bottom - e.ClipRectangle.Y + GridPadding.Vertical + Padding.Vertical;
 
 			DrawThumbnail(e, localIdentity, workshopInfo);
-			DrawTitleAndTags(e, package, localIdentity, workshopInfo);
+			DrawTitleAndTags(e);
 			DrawAuthor(e, workshopInfo);
 			DrawVersionAndTags(e, package, localIdentity, workshopInfo);
 			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, package?.LocalData, out var activeColor);
@@ -45,7 +45,7 @@ public partial class ItemListControl
 				e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
 			}
 
-			if (!isEnabled && isIncluded && !IsPackagePage && !e.HoverState.HasFlag(HoverState.Hovered))
+			if (!isEnabled && isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
@@ -231,27 +231,6 @@ public partial class ItemListControl
 			using var seamBrush = new LinearGradientBrush(seamRectangle, Color.Empty, e.BackColor, 0F);
 
 			e.Graphics.FillRectangle(seamBrush, seamRectangle);
-		}
-
-		private void DrawTitleAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localParentPackage, IWorkshopInfo? workshopInfo)
-		{
-			using var font = UI.Font(GridView ? 9F : CompactList ? 8.25F : 10.5F, FontStyle.Bold);
-			using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState == HoverState.Hovered && !IsPackagePage ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
-			using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near };
-			var text = e.Item.CleanName(out var tags);
-
-			e.Graphics.DrawString(text, font, brushTitle, e.Rects.TextRect, stringFormat);
-
-			var padding = GridView ? GridPadding : Padding;
-			var textSize = e.Graphics.Measure(text, font);
-			var tagRect = new Rectangle(e.Rects.TextRect.X + (int)textSize.Width, e.Rects.TextRect.Y, 0, e.Rects.TextRect.Height);
-
-			for (var i = 0; i < tags.Count; i++)
-			{
-				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true);
-
-				tagRect.X += padding.Left + rect.Width;
-			}
 		}
 
 		private void DrawAuthor(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo)

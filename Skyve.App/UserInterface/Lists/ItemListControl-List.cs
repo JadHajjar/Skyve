@@ -9,7 +9,7 @@ public partial class ItemListControl
 	{
 		public Complex(SkyvePage page) : base(page)
 		{
-			GridItemSize = new Size(390, 140);
+			GridItemSize = new Size(390, 150);
 		}
 
 		private void OnPaintItemCompactList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
@@ -327,7 +327,8 @@ public partial class ItemListControl
 			{
 				rects.IconRect.X += rects.IncludedRect.Right + Padding.Horizontal;
 
-				rects.TextRect = rectangle.Pad(rects.IconRect.Right + Padding.Left, 0, IsPackagePage ? 0 : (int)(200 * UI.FontScale), rectangle.Height).AlignToFontSize(UI.Font(CompactList ? 8.25F : 9F, FontStyle.Bold), ContentAlignment.TopLeft);
+				using var font = UI.Font(9F, FontStyle.Bold);
+				rects.TextRect = rectangle.Pad(rects.IconRect.Right + Padding.Left, 0, IsPackagePage ? 0 : (int)(200 * UI.FontScale), rectangle.Height).AlignToFontSize(font, ContentAlignment.TopLeft);
 			}
 
 			rects.CenterRect = rects.TextRect.Pad(-Padding.Horizontal, 0, 0, 0);

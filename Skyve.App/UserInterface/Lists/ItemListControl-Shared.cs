@@ -57,7 +57,7 @@ public partial class ItemListControl
 		{
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(2 * UI.FontScale));
 
-			if (!GridView)
+			if (!GridView || _settings.UserSettings.ExtendedListInfo)
 			{
 				e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, (int)(5 * UI.FontScale));
 
@@ -97,7 +97,7 @@ public partial class ItemListControl
 		}
 
 		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
-		var isHovered = e.DrawableItem.Loading || e.Rects.IncludedRect.Contains(CursorLocation);
+		var isHovered = e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation));
 
 		if (!required && isIncluded && isHovered)
 		{
@@ -220,4 +220,24 @@ public partial class ItemListControl
 			}
 		}
 #endif
+	private void DrawTitleAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
+	{
+		using var font = UI.Font(GridView ? (_settings.UserSettings.ExtendedListInfo ? 11.25F : 9F) : CompactList ? 8.25F : 10.5F, FontStyle.Bold);
+		using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState == HoverState.Hovered && !IsPackagePage ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
+		using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near };
+		var text = e.Item.CleanName(out var tags);
+
+		e.Graphics.DrawString(text, font, brushTitle, e.Rects.TextRect, stringFormat);
+
+		var padding = GridView ? GridPadding : Padding;
+		var textSize = e.Graphics.Measure(text, font);
+		var tagRect = new Rectangle(e.Rects.TextRect.X + (int)textSize.Width, e.Rects.TextRect.Y, 0, e.Rects.TextRect.Height);
+
+		for (var i = 0; i < tags.Count; i++)
+		{
+			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ExtendedListInfo);
+
+			tagRect.X += padding.Left + rect.Width;
+		}
+	}
 }

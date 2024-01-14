@@ -98,20 +98,20 @@ public partial class PC_PackagePage : PanelContent
 			AddTags();
 		}
 
-		if (GetItems().Any())
-		{
-			LC_References = new ContentList(SkyvePage.SinglePackage, true, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
-			{
-				Dock = DockStyle.Fill
-			};
+		//if (GetItems().Any())
+		//{
+		//	LC_References = new ContentList(SkyvePage.SinglePackage, true, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+		//	{
+		//		Dock = DockStyle.Fill
+		//	};
 
-			LC_References.TB_Search.Placeholder = "SearchGenericPackages";
+		//	LC_References.TB_Search.Placeholder = "SearchGenericPackages";
 
-			LC_References.RefreshItems();
+		//	LC_References.RefreshItems();
 
-			T_References.LinkedControl = LC_References;
-		}
-		else
+		//	T_References.LinkedControl = LC_References;
+		//}
+		//else
 		{
 			tabs.Remove(T_References);
 		}
@@ -144,9 +144,9 @@ public partial class PC_PackagePage : PanelContent
 		_notifier.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
 	}
 
-	protected IEnumerable<IPackage> GetItems()
+	protected async Task<IEnumerable<IPackage>> GetItems()
 	{
-		return _packageUtil.GetPackagesThatReference(Package, _settings.UserSettings.ShowAllReferencedPackages);
+		return await Task.FromResult(_packageUtil.GetPackagesThatReference(Package, _settings.UserSettings.ShowAllReferencedPackages));
 	}
 
 	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)

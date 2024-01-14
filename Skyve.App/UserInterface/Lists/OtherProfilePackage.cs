@@ -159,7 +159,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 			DrawLabel(e, Locale.CurrentPlayset, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, rects.TextRect.Pad(0, 0, rects.TextRect.Right - rect.X + Padding.Left, 0), ContentAlignment.MiddleRight);
 		}
 
-		SlickButton.DrawButton(e, rects.LoadRect, string.Empty, Font, IconManager.GetIcon("I_Import"), null, rects.LoadRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		SlickButton.DrawButton(e, rects.LoadRect, string.Empty, Font, IconManager.GetIcon("I_Install"), null, rects.LoadRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
 		if (!isIncluded)
 		{

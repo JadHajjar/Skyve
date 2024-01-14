@@ -89,11 +89,13 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		var imageRect = e.ClipRectangle.Pad(Padding).Align(new Size(ItemHeight / 2, ItemHeight / 2), ContentAlignment.TopLeft);
 		var image = user?.GetUserAvatar();
 
-		e.Rects.ViewRectangle = SlickButton.AlignAndDraw(e, new ButtonDrawArgs
+		e.Rects.ViewRectangle = SlickButton.AlignAndDraw(e.Graphics, e.ClipRectangle.Pad(Padding), ContentAlignment.TopRight, new ButtonDrawArgs
 		{
+			HoverState = e.HoverState,
+			Cursor = CursorLocation,
 			Text = LocaleCR.ViewRequest,
 			Icon = "I_Link"
-		}, e.ClipRectangle.Pad(Padding), ContentAlignment.TopRight, (e.HoverState, CursorLocation)).Rectangle;
+		}).Rectangle;
 
 		if (image is not null)
 		{
@@ -125,10 +127,12 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		var r = e.Graphics.DrawLabel(e.Item.Timestamp.ToLocalTime().ToString("g"), dateIcon, FormDesign.Design.AccentColor, e.ClipRectangle, ContentAlignment.BottomLeft, true);
 		e.Graphics.DrawLabel(LocaleHelper.GetGlobalText(e.Item.IsInteraction ? "Interaction" : e.Item.IsStatus ? "Status" : "Other"), typeIcon, FormDesign.Design.AccentColor, e.ClipRectangle.Pad(0, 0, 0, r.Height + Padding.Top), ContentAlignment.BottomLeft, true);
 
-		e.Rects.TextRectangle = SlickButton.AlignAndDraw(e, new ButtonDrawArgs
+		e.Rects.TextRectangle = SlickButton.AlignAndDraw(e.Graphics, e.ClipRectangle.Pad(0, e.Rects.ViewRectangle.Height + Padding.Vertical, Padding.Right, 0), ContentAlignment.MiddleRight, new ButtonDrawArgs
 		{
+			HoverState = e.HoverState,
+			Cursor = CursorLocation,
 			Icon = "I_Copy"
-		}, e.ClipRectangle.Pad(0, e.Rects.ViewRectangle.Height + Padding.Vertical, Padding.Right, 0), ContentAlignment.MiddleRight, (e.HoverState, CursorLocation)).Rectangle;
+		}).Rectangle;
 
 		using var smallfont = UI.Font(8.25F);
 		var noteRect = e.ClipRectangle.Pad((int)(125 * UI.FontScale), e.Rects.ViewRectangle.Height + Padding.Vertical, e.Rects.TextRectangle.Width + Padding.Horizontal, 0);

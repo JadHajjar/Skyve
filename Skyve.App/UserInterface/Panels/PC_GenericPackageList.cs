@@ -1,4 +1,6 @@
-﻿namespace Skyve.App.UserInterface.Panels;
+﻿using System.Threading.Tasks;
+
+namespace Skyve.App.UserInterface.Panels;
 public class PC_GenericPackageList : PC_ContentList
 {
 	private readonly List<IPackageIdentity> _items = new();
@@ -6,7 +8,7 @@ public class PC_GenericPackageList : PC_ContentList
 
 	public override SkyvePage Page => SkyvePage.Generic;
 
-	public PC_GenericPackageList(IEnumerable<IPackageIdentity> items, bool groupItems) : base(true)
+	public PC_GenericPackageList(IEnumerable<IPackageIdentity> items, bool groupItems) : base(true, true)
 	{
 		LC_Items.IsGenericPage = true;
 
@@ -49,8 +51,6 @@ public class PC_GenericPackageList : PC_ContentList
 		}
 
 		_notifier.WorkshopInfoUpdated += _notifier_WorkshopPackagesInfoLoaded;
-
-		LC_Items.RefreshItems();
 	}
 
 	protected override void Dispose(bool disposing)
@@ -68,9 +68,9 @@ public class PC_GenericPackageList : PC_ContentList
 		LC_Items.ListControl.Invalidate();
 	}
 
-	protected override IEnumerable<IPackageIdentity> GetItems()
+	protected override async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
-		return _items;
+		return await Task.FromResult(_items);
 	}
 
 	protected override string GetCountText()

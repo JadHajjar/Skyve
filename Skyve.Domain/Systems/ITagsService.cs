@@ -11,4 +11,5 @@ public interface ITagsService
 	ITag CreateWorkshopTag(string text);
 	ITag CreateGlobalTag(string text);
 	ITag CreateCustomTag(string text);
+	ITag CreateIdTag(string text);
 }

@@ -52,7 +52,7 @@ public partial class ItemListControl
 
 			e.Graphics.SetClip(new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y - Padding.Top + 1, e.ClipRectangle.Width, e.ClipRectangle.Height + Padding.Vertical - 2));
 
-			DrawTitleAndTags(e, package, localIdentity, workshopInfo);
+			DrawTitleAndTags(e);
 			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, package?.LocalData, out var activeColor);
 			DrawVersionAndDate(e, package, localIdentity, workshopInfo);
 			DrawButtons(e, localIdentity, workshopInfo);
@@ -74,7 +74,7 @@ public partial class ItemListControl
 
 			e.Graphics.ResetClip();
 
-			if (!isIncluded && package?.LocalData is not null && !e.HoverState.HasFlag(HoverState.Hovered))
+			if (!isEnabled && isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(Padding));
@@ -162,7 +162,7 @@ public partial class ItemListControl
 			base.OnPaintItemList(e);
 
 			DrawThumbnail(e, localIdentity, workshopInfo);
-			DrawTitleAndTags(e, package, localIdentity, workshopInfo);
+			DrawTitleAndTags(e);
 			DrawVersionAndTags(e, package, localIdentity, workshopInfo);
 			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, localIdentity, out _);
 			DrawCenterInfo(e, localIdentity, workshopInfo);
@@ -175,7 +175,7 @@ public partial class ItemListControl
 
 			e.Graphics.ResetClip();
 
-			if (!isEnabled && isIncluded && !IsPackagePage && !e.HoverState.HasFlag(HoverState.Hovered))
+			if (!isEnabled && isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(Padding));
@@ -246,7 +246,7 @@ public partial class ItemListControl
 				using var voteIcon = IconManager.GetIcon(workshopInfo.HasVoted ? "I_VoteFilled" : "I_Vote", itemHeight + Padding.Top).Color(isHovered || workshopInfo.HasVoted ? greenBrush.Color : brush.Color);
 
 				e.Graphics.DrawImage(voteIcon, rect.Align(voteIcon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(Locale.VotesCount.FormatPlural(workshopInfo.VoteCount.ToString("N0")), isHovered ? fontUnderline : workshopInfo.HasVoted ? fontBold : font, isHovered || workshopInfo.HasVoted ? greenBrush : brush, rect.Pad(voteIcon.Width + Padding.Left, 0, 0, 0));
+				e.Graphics.DrawString(Locale.VotesCount.FormatPlural(workshopInfo.VoteCount, workshopInfo.VoteCount.ToString("N0")), isHovered ? fontUnderline : workshopInfo.HasVoted ? fontBold : font, isHovered || workshopInfo.HasVoted ? greenBrush : brush, rect.Pad(voteIcon.Width + Padding.Left, 0, 0, 0));
 
 				e.Rects.ScoreRect = rect;
 
@@ -254,7 +254,7 @@ public partial class ItemListControl
 
 				using var subsIcon = IconManager.GetIcon("I_People", itemHeight + Padding.Top).Color(brush.Color);
 				e.Graphics.DrawImage(subsIcon, rect.Align(subsIcon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(Locale.SubscribersCount.FormatPlural(workshopInfo.Subscribers.ToString("N0")), font, brush, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0));
+				e.Graphics.DrawString(Locale.SubscribersCount.FormatPlural(workshopInfo.Subscribers, workshopInfo.Subscribers.ToString("N0")), font, brush, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0));
 			}
 
 			void tick()
@@ -420,7 +420,8 @@ public partial class ItemListControl
 			{
 				rects.IconRect.X += rects.IncludedRect.Right + Padding.Horizontal;
 
-				rects.TextRect = new Rectangle(rects.IconRect.Right + (Padding.Left * 2), rectangle.Y + Padding.Top, (rectangle.Width / UI.FontScale > 500 ? (rectangle.Width * 5 / 10) : (rectangle.Width * 7 / 10)) - rects.IconRect.Right - Padding.Left, 0).AlignToFontSize(UI.Font(CompactList ? 8.25F : 9.75F, FontStyle.Bold), ContentAlignment.TopLeft);
+				using var font = UI.Font(9.75F, FontStyle.Bold);
+				rects.TextRect = new Rectangle(rects.IconRect.Right + (Padding.Left * 2), rectangle.Y + Padding.Top, (rectangle.Width / UI.FontScale > 500 ? (rectangle.Width * 5 / 10) : (rectangle.Width * 7 / 10)) - rects.IconRect.Right - Padding.Left, 0).AlignToFontSize(font, ContentAlignment.TopLeft);
 			}
 
 			rects.CenterRect = rects.TextRect.Pad(-Padding.Horizontal, 0, 0, 0);

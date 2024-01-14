@@ -5,7 +5,6 @@ using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +13,7 @@ namespace Skyve.App.UserInterface.Panels;
 public partial class ContentList : SlickControl
 {
 	public delegate Task ApplyAll(IEnumerable<IPackageIdentity> filteredItems, bool included);
+	public delegate Task<IEnumerable<IPackageIdentity>> GetAllItems();
 
 	private bool clearingFilters = true;
 	private bool firstFilterPassed;
@@ -35,7 +35,7 @@ public partial class ContentList : SlickControl
 	private readonly IPackageUtil _packageUtil;
 	private readonly IDownloadService _downloadService;
 
-	private readonly Func<IEnumerable<IPackageIdentity>> GetItems;
+	private readonly GetAllItems GetItems;
 	private readonly ApplyAll SetIncluded;
 	private readonly ApplyAll SetEnabled;
 	private readonly Func<LocaleHelper.Translation> GetItemText;
@@ -52,7 +52,7 @@ public partial class ContentList : SlickControl
 		ListControl.Remove(item);
 	}
 
-	public ContentList(SkyvePage page, bool loaded, Func<IEnumerable<IPackageIdentity>> getItems, ApplyAll setIncluded, ApplyAll setEnabled, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
+	public ContentList(SkyvePage page, bool loaded, GetAllItems getItems, ApplyAll setIncluded, ApplyAll setEnabled, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
 	{
 		Page = page;
 		GetItems = getItems;
@@ -295,7 +295,7 @@ public partial class ContentList : SlickControl
 		base.UIChanged();
 
 		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
-			= L_Counts.Margin = L_FilterCount.Margin = I_SortOrder.Padding 
+			= L_Counts.Margin = L_FilterCount.Margin = I_SortOrder.Padding
 			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
 
 		B_Filters.Size = B_Filters.GetAutoSize(true);
@@ -332,19 +332,20 @@ public partial class ContentList : SlickControl
 		}
 	}
 
-	private void CentralManager_ContentLoaded()
+	private async void CentralManager_ContentLoaded()
 	{
-		RefreshItems();
+		await RefreshItems();
 	}
 
-	public void RefreshItems()
+	public async Task RefreshItems()
 	{
-		if (ListControl.Loading)
-		{
-			ListControl.Loading = false;
-		}
+		ListControl.Loading = true;
 
-		ListControl.SetItems(GetItems());
+		var items = await GetItems();
+
+		ListControl.Loading = false;
+
+		ListControl.SetItems(items);
 
 		this.TryInvoke(RefreshCounts);
 
@@ -378,17 +379,17 @@ public partial class ContentList : SlickControl
 		I_Refresh.Loading = false;
 	}
 
-	private void FilterChanged(object sender, EventArgs e)
+	private async void FilterChanged(object sender, EventArgs e)
 	{
 		if (!clearingFilters)
 		{
 			I_Refresh.Loading = true;
-			_delayedSearch.Run();
 
 			if (sender == I_Refresh)
 			{
-				ListControl.SortingChanged();
+				await RefreshItems();
 			}
+			else _delayedSearch.Run();
 		}
 	}
 
@@ -620,14 +621,27 @@ public partial class ContentList : SlickControl
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
+#if CS2
+		if (Regex.IsMatch(TB_Search.Text, @"/mods/(\d+)"))
+		{
+			TB_Search.Text = Regex.Match(TB_Search.Text, @"/mods/(\d+)").Groups[1].Value;
+			return;
+		}
+#else
 		if (Regex.IsMatch(TB_Search.Text, @"filedetails/\?id=(\d+)"))
 		{
 			TB_Search.Text = Regex.Match(TB_Search.Text, @"filedetails/\?id=(\d+)").Groups[1].Value;
 			return;
 		}
+#endif
 
 		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
 
+		OnSearch();
+	}
+
+	protected virtual void OnSearch()
+	{
 		var searchText = TB_Search.Text.Trim();
 
 		searchTermsAnd.Clear();
@@ -664,7 +678,7 @@ public partial class ContentList : SlickControl
 			}
 		}
 
-		FilterChanged(sender, e);
+		FilterChanged(this, EventArgs.Empty);
 	}
 
 	private void Icon_SizeChanged(object sender, EventArgs e)
@@ -690,7 +704,7 @@ public partial class ContentList : SlickControl
 		var anyIncluded = items.Any(x => _packageUtil.IsIncluded(x));
 		var anyExcluded = items.Any(x => !_packageUtil.IsIncluded(x));
 		var anyEnabled = items.Any(x => _packageUtil.IsIncluded(x) && _packageUtil.IsEnabled(x));
-		var anyDisabled = items.Any(x => _packageUtil.IsIncluded(x) &&!_packageUtil.IsEnabled(x));
+		var anyDisabled = items.Any(x => _packageUtil.IsIncluded(x) && !_packageUtil.IsEnabled(x));
 		var allLocal = items.Any(x => !x.IsLocal());
 		var allWorkshop = items.Any(x => x.IsLocal());
 
@@ -806,7 +820,7 @@ public partial class ContentList : SlickControl
 			return;
 		}
 
-		await ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select<DrawableItem<Domain.IPackageIdentity, ItemListControl.Rectangles>, Domain.IPackageIdentity>(x => (Domain.IPackageIdentity)x.Item));
+		await ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select<DrawableItem<Domain.IPackageIdentity, ItemListControl.Rectangles>, Domain.IPackageIdentity>(x => x.Item));
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}

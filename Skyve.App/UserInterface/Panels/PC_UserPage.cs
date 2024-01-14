@@ -42,9 +42,9 @@ public partial class PC_UserPage : PanelContent
 		LC_Items.ListControl.Loading = true;
 	}
 
-	protected IEnumerable<IPackage> GetItems()
+	protected async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
-		return userItems;
+		return await Task.FromResult(userItems);
 	}
 
 	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
@@ -128,7 +128,7 @@ public partial class PC_UserPage : PanelContent
 
 			userItems = results.ToList(_workshopService.GetPackage);
 
-			LC_Items.RefreshItems();
+			await LC_Items.RefreshItems();
 		}
 		catch (Exception ex)
 		{
