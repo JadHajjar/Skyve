@@ -15,8 +15,8 @@ public partial class ItemListControl
 		private void OnPaintItemCompactList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 		{
 			var package = e.Item.GetPackage();
+			var localIdentity = e.Item.GetLocalPackageIdentity();
 			var workshopInfo = e.Item.GetWorkshopInfo();
-			var isPressed = false;
 			var isIncluded = e.Item.IsIncluded(out var partialIncluded) || partialIncluded;
 			var isEnabled = e.Item.IsEnabled();
 
@@ -32,51 +32,47 @@ public partial class ItemListControl
 			{
 				e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
 			}
-			else if (hasStatus)
+			else if (!IsPackagePage && hasStatus)
 			{
 				e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
 			}
-			else if (e.HoverState.HasFlag(HoverState.Hovered))
-			{
-				e.BackColor = FormDesign.Design.AccentBackColor;
-			}
 			else
 			{
-				e.BackColor = BackColor;
+				e.BackColor = e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.AccentBackColor : BackColor;
 			}
 
 			if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
 			{
 				e.BackColor = e.BackColor.MergeColor(FormDesign.Design.ActiveColor, e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
-
-				isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 			}
 
 			base.OnPaintItemList(e);
 
 			e.Graphics.SetClip(new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y - Padding.Top + 1, e.ClipRectangle.Width, e.ClipRectangle.Height + Padding.Vertical - 2));
 
-			DrawTitleAndTagsAndVersionForList(e, package?.LocalData, workshopInfo, isPressed);
+			DrawTitleAndTags(e);
 			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, package?.LocalData, out var activeColor);
+			DrawCompactVersionAndDate(e, package, localIdentity, workshopInfo);
+			DrawButtons(e, localIdentity, workshopInfo);
 
-			if (workshopInfo?.Author is not null)
+			if (Width / UI.FontScale >= 600)
 			{
-				DrawAuthor(e, workshopInfo.Author);
-			}
-			else if (e.Item.IsLocal())
-			{
-				DrawFolderName(e, package?.LocalData);
+				DrawCompactAuthorOrFolder(e, localIdentity, workshopInfo);
 			}
 
-			DrawButtons(e, isPressed, package?.LocalData, workshopInfo);
+			if (Width / UI.FontScale >= 500)
+			{
+				DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
+			}
 
-			DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
-
-			DrawTags(e, _columnSizes[Columns.Tags].X + _columnSizes[Columns.Tags].Width);
+			if (Width / UI.FontScale >= 965)
+			{
+				DrawTags(e, _columnSizes[Columns.Tags].X + _columnSizes[Columns.Tags].Width);
+			}
 
 			e.Graphics.ResetClip();
 
-			if (!isIncluded && package?.LocalData is not null && !e.HoverState.HasFlag(HoverState.Hovered))
+			if (!isEnabled && isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(Padding));
@@ -149,10 +145,12 @@ public partial class ItemListControl
 					DrawScore(e, workshopInfo, xdiff);
 				}
 				else
+				{
 					DrawScore(e, workshopInfo, 0);
+				}
 			}
 
-			var maxTagX = DrawButtons(e, isPressed, package?.LocalData, workshopInfo);
+			var maxTagX = DrawButtons(e, package?.LocalData, workshopInfo);
 
 			if (!IsPackagePage)
 			{
@@ -222,58 +220,6 @@ public partial class ItemListControl
 			if (CompactList && Math.Max(e.Rects.CompatibilityRect.Right, e.Rects.DownloadStatusRect.Right) > (_columnSizes[Columns.Status].X + _columnSizes[Columns.Status].Width))
 			{
 				DrawSeam(e, _columnSizes[Columns.Status].X + _columnSizes[Columns.Status].Width);
-			}
-		}
-
-		private enum Columns
-		{
-			PackageName,
-			Version,
-			UpdateTime,
-			Author,
-			Tags,
-			Status,
-			Buttons
-		}
-
-		private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = new();
-
-		protected override void DrawHeader(PaintEventArgs e)
-		{
-			var headers = new (string text, int width)[]
-			{
-			(Locale.Package, 0),
-			(Locale.Version, 65),
-			(Locale.UpdateTime, 120),
-			(Locale.Author, 120),
-			(Locale.IDAndTags, 0),
-			(Locale.Status, 160),
-			("", 80)
-			};
-
-			var remainingWidth = Width - (int)(headers.Sum(x => x.width) * UI.FontScale);
-			var autoColumns = headers.Count(x => x.width == 0);
-			var xPos = 0;
-
-			using var font = UI.Font(7.5F, FontStyle.Bold);
-			using var brush = new SolidBrush(FormDesign.Design.LabelColor);
-			using var lineBrush = new SolidBrush(FormDesign.Design.AccentColor);
-
-			e.Graphics.Clear(FormDesign.Design.AccentBackColor);
-
-			e.Graphics.FillRectangle(lineBrush, new Rectangle(0, StartHeight - 2, Width, 2));
-
-			for (var i = 0; i < headers.Length; i++)
-			{
-				var header = headers[i];
-
-				var width = header.width == 0 ? (remainingWidth / autoColumns) : (int)(header.width * UI.FontScale);
-
-				e.Graphics.DrawString(header.text.ToUpper(), font, brush, new Rectangle(xPos, 1, width, StartHeight).Pad(Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
-
-				_columnSizes[(Columns)i] = (xPos, width);
-
-				xPos += width;
 			}
 		}
 

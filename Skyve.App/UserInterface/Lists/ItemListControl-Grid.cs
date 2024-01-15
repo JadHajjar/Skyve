@@ -48,7 +48,7 @@ public partial class ItemListControl
 
 			DrawDividerLine(e);
 
-			var maxTagX = DrawButtons(e, false, package?.LocalData, workshopInfo);
+			var maxTagX = DrawButtons(e, package?.LocalData, workshopInfo);
 
 			DrawTags(e, maxTagX);
 
@@ -193,53 +193,6 @@ public partial class ItemListControl
 			}
 
 			return tagRect;
-		}
-
-		private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, bool isPressed, ILocalPackageData? parentPackage, IWorkshopInfo? workshopInfo)
-		{
-			var padding = GridView ? GridPadding : Padding;
-			var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
-			var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? GridPadding.Right : Padding.Right), CompactList ? (e.ClipRectangle.Y + ((e.ClipRectangle.Height - size.Height) / 2)) : (e.ClipRectangle.Bottom - size.Height - (GridView ? GridPadding.Bottom : 0)), size.Width, size.Height);
-			var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
-
-			if (parentPackage is not null)
-			{
-				using var icon = IconManager.GetIcon("I_Folder", size.Height * 3 / 4);
-
-				SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
-
-				e.Rects.FolderRect = rect;
-
-				rect.X -= rect.Width + padding.Left;
-			}
-
-			if (!IsPackagePage && workshopInfo?.Url is not null)
-			{
-#if CS2
-				using var icon = IconManager.GetIcon("I_Paradox", rect.Height * 3 / 4);
-#else
-				using var icon = IconManager.GetIcon("I_Steam", rect.Height * 3 / 4);
-#endif
-
-				SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
-
-				e.Rects.SteamRect = rect;
-
-				rect.X -= rect.Width + padding.Left;
-			}
-
-			if (!IsPackagePage && _compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
-			{
-				using var icon = IconManager.GetIcon("I_Github", rect.Height * 3 / 4);
-
-				SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
-
-				e.Rects.GithubRect = rect;
-
-				rect.X -= rect.Width + padding.Left;
-			}
-
-			return rect.X + rect.Width;
 		}
 
 		private int DrawFolderName(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity)
@@ -410,58 +363,6 @@ public partial class ItemListControl
 
 				e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: CursorLocation);
 			}
-		}
-
-		private Rectangle DrawCell(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, Columns column, string text, DynamicIcon? dIcon, Color? backColor = null, Font? font = null, bool active = true, Padding padding = default)
-		{
-			var cell = _columnSizes[column];
-			var rect = new Rectangle(cell.X, e.ClipRectangle.Y, cell.Width, e.ClipRectangle.Height).Pad(0, -Padding.Top, 0, -Padding.Bottom);
-
-			if (active && rect.Contains(CursorLocation))
-			{
-				using var brush = new SolidBrush(Color.FromArgb(200, backColor ??= FormDesign.Design.ActiveColor));
-				e.Graphics.FillRectangle(brush, rect);
-			}
-
-			var textColor = backColor?.GetTextColor() ?? e.BackColor.GetTextColor();
-
-			if (dIcon != null)
-			{
-				using var icon = dIcon.Small.Color(textColor);
-
-				e.Graphics.DrawImage(icon, rect.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
-
-				rect = rect.Pad(icon.Width + Padding.Left, 0, 0, 0);
-			}
-
-			using (var brush = new SolidBrush(textColor))
-			using (font ??= UI.Font(7.5F))
-			{
-				var textRect = rect.Pad(padding + Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft, e.Graphics);
-
-				e.Graphics.DrawString(text, font, brush, textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
-
-				if (e.Graphics.Measure(text, font).Width <= rect.Right - textRect.X)
-				{
-					return rect;
-				}
-			}
-
-			using var backBrush = new SolidBrush(e.BackColor);
-			e.Graphics.FillRectangle(backBrush, e.ClipRectangle.Pad(rect.Right, 0, 0, 0));
-
-			DrawSeam(e, rect.Right);
-
-			return rect;
-		}
-
-		private static void DrawSeam(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, int x)
-		{
-			var seamRectangle = new Rectangle(x - (int)(40 * UI.UIScale), e.ClipRectangle.Y, (int)(40 * UI.UIScale), e.ClipRectangle.Height);
-
-			using var seamBrush = new LinearGradientBrush(seamRectangle, Color.Empty, e.BackColor, 0F);
-
-			e.Graphics.FillRectangle(seamBrush, seamRectangle);
 		}
 
 		private void DrawVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)

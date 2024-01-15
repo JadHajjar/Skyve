@@ -54,12 +54,12 @@ public partial class ItemListControl
 
 			DrawTitleAndTags(e);
 			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, package?.LocalData, out var activeColor);
-			DrawVersionAndDate(e, package, localIdentity, workshopInfo);
+			DrawCompactVersionAndDate(e, package, localIdentity, workshopInfo);
 			DrawButtons(e, localIdentity, workshopInfo);
-			
+
 			if (Width / UI.FontScale >= 600)
 			{
-				DrawAuthorOrFolder(e, localIdentity, workshopInfo);
+				DrawCompactAuthorOrFolder(e, localIdentity, workshopInfo);
 			}
 
 			if (Width / UI.FontScale >= 500)
@@ -78,43 +78,6 @@ public partial class ItemListControl
 			{
 				using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(Padding));
-			}
-		}
-
-		private void DrawVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
-		{
-#if CS1
-		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
-		var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
-#else
-			var isVersion = package?.IsCodeMod ?? (false && !string.IsNullOrEmpty(package!.Version));
-			var text = isVersion ? "v" + package!.Version : localIdentity?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
-#endif
-			var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
-
-			if (text is not null and not "")
-			{
-				DrawCell(e, Columns.Version, text, null, active: false);
-			}
-
-			if (Width / UI.FontScale >= 800 && date != default)
-			{
-				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
-				DrawCell(e, Columns.UpdateTime, dateText, "I_UpdateTime", active: false);
-			}
-		}
-
-		private void DrawAuthorOrFolder(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
-		{
-			var author = workshopInfo?.Author;
-
-			if (author?.Name is not null and not "")
-			{
-				e.Rects.AuthorRect = DrawCell(e, Columns.Author, author.Name, "I_Author", font: UI.Font(8.25F));
-			}
-			else if (localIdentity is not null)
-			{
-				DrawCell(e, Columns.Author, Path.GetFileName(localIdentity.Folder), "I_Folder", active: false, font: UI.Font(8.25F));
 			}
 		}
 
@@ -314,83 +277,6 @@ public partial class ItemListControl
 			if (CompactList && Math.Max(e.Rects.CompatibilityRect.Right, e.Rects.DownloadStatusRect.Right) > (_columnSizes[Columns.Status].X + _columnSizes[Columns.Status].Width))
 			{
 				DrawSeam(e, _columnSizes[Columns.Status].X + _columnSizes[Columns.Status].Width);
-			}
-		}
-
-		private enum Columns
-		{
-			PackageName,
-			Version,
-			UpdateTime,
-			Author,
-			Tags,
-			Status,
-			Buttons
-		}
-
-		private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = [];
-
-		protected override void DrawHeader(PaintEventArgs e)
-		{
-			var headers = new List<(string text, int width)?>
-			{
-				(Locale.Package, 0),
-				(Locale.Version, 65),
-				(Locale.UpdateTime, 140),
-				(Locale.Author, 150),
-				(Locale.Tags, 0),
-				(Locale.Status, 160),
-				("", 80)
-			};
-
-			if (Width / UI.FontScale < 500)
-			{
-				headers[5] = null;
-			}
-
-			if (Width / UI.FontScale < 965)
-			{
-				headers[4] = null;
-			}
-
-			if (Width / UI.FontScale < 600)
-			{
-				headers[3] = null;
-			}
-
-			if (Width / UI.FontScale < 800)
-			{
-				headers[2] = null;
-			}
-
-			var remainingWidth = Width - (int)(headers.Sum(x => x?.width ?? 0) * UI.FontScale);
-			var autoColumns = headers.Count(x => x?.width == 0);
-			var xPos = 0;
-
-			using var font = UI.Font(7.5F, FontStyle.Bold);
-			using var brush = new SolidBrush(FormDesign.Design.LabelColor);
-			using var lineBrush = new SolidBrush(FormDesign.Design.AccentColor);
-
-			e.Graphics.Clear(FormDesign.Design.AccentBackColor);
-
-			e.Graphics.FillRectangle(lineBrush, new Rectangle(0, StartHeight - 2, Width, 2));
-
-			for (var i = 0; i < headers.Count; i++)
-			{
-				var header = headers[i];
-
-				if (header == null)
-				{
-					continue;
-				}
-
-				var width = header.Value.width == 0 ? (remainingWidth / autoColumns) : (int)(header.Value.width * UI.FontScale);
-
-				e.Graphics.DrawString(header.Value.text.ToUpper(), font, brush, new Rectangle(xPos, 1, width, StartHeight).Pad(Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
-
-				_columnSizes[(Columns)i] = (xPos, width);
-
-				xPos += width;
 			}
 		}
 

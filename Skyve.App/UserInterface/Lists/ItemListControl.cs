@@ -13,6 +13,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private Rectangle PopupSearchRect1;
 	private Rectangle PopupSearchRect2;
 	private bool _compactList;
+	private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = [];
 
 	public event Action<NotificationType>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
@@ -36,6 +37,17 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private readonly IModUtil _modUtil;
 	private readonly ITagsService _tagsService;
 	private readonly SkyvePage _page;
+
+	private enum Columns
+	{
+		PackageName,
+		Version,
+		UpdateTime,
+		Author,
+		Tags,
+		Status,
+		Buttons
+	}
 
 	public IEnumerable<IPackageIdentity> GetSelectedItems()
 	{
@@ -82,7 +94,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			_compactList = value;
 
-			baseHeight = _settings.UserSettings.ExtendedListInfo ? _compactList ? 24 : 54 : _compactList ? 20 : 48;
+			baseHeight = _settings.UserSettings.ExtendedListInfo ? _compactList ? 24 : 65 : _compactList ? 20 : 48;
 
 			if (Live)
 			{

@@ -1,9 +1,5 @@
 ﻿using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.IO;
 using System.Windows.Forms;
-
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Skyve.App.UserInterface.Lists;
 
@@ -128,109 +124,13 @@ public partial class ItemListControl
 			var packageTags = e.Item.GetTags(IsPackagePage).ToList();
 
 			if (packageTags.Count == 0)
+			{
 				return;
+			}
 
-		var text = packageTags.ListStrings(", ");
+			var text = packageTags.ListStrings(", ");
 
 			DrawCell(e, Columns.Tags, packageTags.ListStrings(", "), "I_Tag", active: false);
-		}
-
-		private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
-		{
-			var padding = GridView ? GridPadding : Padding;
-			var size = UI.Scale(CompactList ? new Size(20, 20) : new Size(24, 24), UI.FontScale);
-			var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : Padding.Right * 2), CompactList ? (e.ClipRectangle.Y + ((e.ClipRectangle.Height - size.Height) / 2)) : (e.ClipRectangle.Bottom - size.Height), size.Width, size.Height);
-			var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
-
-			if (localIdentity is not null)
-			{
-				using var icon = IconManager.GetIcon("I_Folder", size.Height * 3 / 4);
-
-				SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null,  rect.Contains(CursorLocation) ? e.HoverState : HoverState.Normal, backColor: backColor);
-
-				e.Rects.FolderRect = rect;
-
-				rect.X -= rect.Width + padding.Left;
-			}
-
-			if (!IsPackagePage && workshopInfo?.Url is not null)
-			{
-#if CS2
-				using var icon = IconManager.GetIcon("I_Paradox", rect.Height * 3 / 4);
-#else
-				using var icon = IconManager.GetIcon("I_Steam", rect.Height * 3 / 4);
-#endif
-
-				SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState : HoverState.Normal, backColor: backColor);
-
-				e.Rects.SteamRect = rect;
-
-				rect.X -= rect.Width + padding.Left;
-			}
-
-			if (!IsPackagePage && _settings.UserSettings.ExtendedListInfo && _compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
-			{
-				using var icon = IconManager.GetIcon("I_Github", rect.Height * 3 / 4);
-
-				SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState : HoverState.Normal, backColor: backColor);
-
-				e.Rects.GithubRect = rect;
-
-				rect.X -= rect.Width + padding.Left;
-			}
-
-			return rect.X + rect.Width;
-		}
-
-		private Rectangle DrawCell(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, Columns column, string text, DynamicIcon? dIcon, Color? backColor = null, Font? font = null, bool active = true, Padding padding = default)
-		{
-			var cell = _columnSizes[column];
-			var rect = new Rectangle(cell.X, e.ClipRectangle.Y, cell.Width, e.ClipRectangle.Height).Pad(0, -Padding.Top, 0, -Padding.Bottom);
-
-			var textColor = backColor?.GetTextColor() ?? e.BackColor.GetTextColor();
-
-			if (active && rect.Contains(CursorLocation))
-			{
-				textColor= FormDesign.Design.ActiveColor;
-			}
-
-			if (dIcon != null)
-			{
-				using var icon = dIcon.Small.Color(textColor);
-
-				e.Graphics.DrawImage(icon, rect.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
-
-				rect = rect.Pad(icon.Width + Padding.Left, 0, 0, 0);
-			}
-
-			using (var brush = new SolidBrush(textColor))
-			using (font ??= UI.Font(7.5F))
-			{
-				var textRect = rect.Pad(padding + Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft, e.Graphics);
-
-				e.Graphics.DrawString(text, font, brush, textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
-
-				if (e.Graphics.Measure(text, font).Width <= rect.Right - textRect.X)
-				{
-					return rect;
-				}
-			}
-
-			using var backBrush = new SolidBrush(e.BackColor);
-			e.Graphics.FillRectangle(backBrush, e.ClipRectangle.Pad(rect.Right, 0, 0, 0));
-
-			DrawSeam(e, rect.Right);
-
-			return rect;
-		}
-
-		private static void DrawSeam(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, int x)
-		{
-			var seamRectangle = new Rectangle(x - (int)(40 * UI.UIScale), e.ClipRectangle.Y, (int)(40 * UI.UIScale), e.ClipRectangle.Height);
-
-			using var seamBrush = new LinearGradientBrush(seamRectangle, Color.Empty, e.BackColor, 0F);
-
-			e.Graphics.FillRectangle(seamBrush, seamRectangle);
 		}
 
 		private void DrawAuthor(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo)
@@ -239,8 +139,8 @@ public partial class ItemListControl
 
 			if (author?.Name is not null and not "")
 			{
-				using var authorFont = UI.Font(7.5F,FontStyle.Regular);
-				using var authorFontUnderline = UI.Font(7.5F,  FontStyle.Underline );
+				using var authorFont = UI.Font(7.5F, FontStyle.Regular);
+				using var authorFontUnderline = UI.Font(7.5F, FontStyle.Underline);
 				using var stringFormat = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center };
 
 				var rect = new Rectangle(e.Rects.TextRect.X, e.Rects.IncludedRect.Y, e.Rects.TextRect.Width, e.Rects.IncludedRect.Height);
@@ -289,7 +189,7 @@ public partial class ItemListControl
 				using var versionFont = UI.Font(GridView ? 7.5F : 8.25F);
 				using var fadedBrush = new SolidBrush(Color.FromArgb(GridView ? 150 : 200, e.BackColor.GetTextColor()));
 
-				var rect = GridView? new Rectangle(e.Rects.TextRect.X, e.Rects.IncludedRect.Y, e.Rects.TextRect.Width, e.Rects.IncludedRect.Height): new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, e.Rects.TextRect.Width, e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - Padding.Bottom);
+				var rect = GridView ? new Rectangle(e.Rects.TextRect.X, e.Rects.IncludedRect.Y, e.Rects.TextRect.Width, e.Rects.IncludedRect.Height) : new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, e.Rects.TextRect.Width, e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - Padding.Bottom);
 				var size = e.Graphics.Measure(text, versionFont).ToSize();
 
 				if (GridView && e.Rects.AuthorRect.Height > 0)

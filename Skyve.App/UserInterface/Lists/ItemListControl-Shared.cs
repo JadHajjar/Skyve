@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
 
@@ -240,4 +242,215 @@ public partial class ItemListControl
 			tagRect.X += padding.Left + rect.Width;
 		}
 	}
+
+	private void DrawCompactVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
+	{
+#if CS1
+		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
+		var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+#else
+		var isVersion = package?.IsCodeMod ?? (false && !string.IsNullOrEmpty(package!.Version));
+		var text = isVersion ? "v" + package!.Version : localIdentity?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
+#endif
+		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
+
+		if (text is not null and not "")
+		{
+			DrawCell(e, Columns.Version, text, null, active: false);
+		}
+
+		if (Width / UI.FontScale >= 800 && date != default)
+		{
+			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+			DrawCell(e, Columns.UpdateTime, dateText, "I_UpdateTime", active: false);
+		}
+	}
+
+	private Rectangle DrawCell(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, Columns column, string text, DynamicIcon? dIcon, Color? backColor = null, Font? font = null, bool active = true, Padding padding = default)
+	{
+		var cell = _columnSizes[column];
+		var rect = new Rectangle(cell.X, e.ClipRectangle.Y, cell.Width, e.ClipRectangle.Height).Pad(0, -Padding.Top, 0, -Padding.Bottom);
+
+		var textColor = backColor?.GetTextColor() ?? e.BackColor.GetTextColor();
+
+		if (active && rect.Contains(CursorLocation))
+		{
+			textColor = FormDesign.Design.ActiveColor;
+		}
+
+		if (dIcon != null)
+		{
+			using var icon = dIcon.Small.Color(textColor);
+
+			e.Graphics.DrawImage(icon, rect.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+
+			rect = rect.Pad(icon.Width + Padding.Left, 0, 0, 0);
+		}
+
+		using (var brush = new SolidBrush(textColor))
+		using (font ??= UI.Font(7.5F))
+		{
+			var textRect = rect.Pad(padding + Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft, e.Graphics);
+
+			e.Graphics.DrawString(text, font, brush, textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+
+			if (e.Graphics.Measure(text, font).Width <= rect.Right - textRect.X)
+			{
+				return rect;
+			}
+		}
+
+		using var backBrush = new SolidBrush(e.BackColor);
+		e.Graphics.FillRectangle(backBrush, e.ClipRectangle.Pad(rect.Right, 0, 0, 0));
+
+		DrawSeam(e, rect.Right);
+
+		return rect;
+	}
+
+	private static void DrawSeam(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, int x)
+	{
+		var seamRectangle = new Rectangle(x - (int)(40 * UI.UIScale), e.ClipRectangle.Y, (int)(40 * UI.UIScale), e.ClipRectangle.Height);
+
+		using var seamBrush = new LinearGradientBrush(seamRectangle, Color.Empty, e.BackColor, 0F);
+
+		e.Graphics.FillRectangle(seamBrush, seamRectangle);
+	}
+
+	protected override void DrawHeader(PaintEventArgs e)
+	{
+		var headers = new List<(string text, int width)?>
+			{
+				(Locale.Package, 0),
+				(Locale.Version, 65),
+				(Locale.UpdateTime, 140),
+				(Locale.Author, 150),
+				(Locale.Tags, 0),
+				(Locale.Status, 160),
+				("", 80)
+			};
+
+		if (Width / UI.FontScale < 500)
+		{
+			headers[5] = null;
+		}
+
+		if (Width / UI.FontScale < 965)
+		{
+			headers[4] = null;
+		}
+
+		if (Width / UI.FontScale < 600)
+		{
+			headers[3] = null;
+		}
+
+		if (Width / UI.FontScale < 800)
+		{
+			headers[2] = null;
+		}
+
+		var remainingWidth = Width - (int)(headers.Sum(x => x?.width ?? 0) * UI.FontScale);
+		var autoColumns = headers.Count(x => x?.width == 0);
+		var xPos = 0;
+
+		using var font = UI.Font(7.5F, FontStyle.Bold);
+		using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+		using var lineBrush = new SolidBrush(FormDesign.Design.AccentColor);
+
+		e.Graphics.Clear(FormDesign.Design.AccentBackColor);
+
+		e.Graphics.FillRectangle(lineBrush, new Rectangle(0, StartHeight - 2, Width, 2));
+
+		for (var i = 0; i < headers.Count; i++)
+		{
+			var header = headers[i];
+
+			if (header == null)
+			{
+				continue;
+			}
+
+			var width = header.Value.width == 0 ? (remainingWidth / autoColumns) : (int)(header.Value.width * UI.FontScale);
+
+			e.Graphics.DrawString(header.Value.text.ToUpper(), font, brush, new Rectangle(xPos, 1, width, StartHeight).Pad(Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+
+			_columnSizes[(Columns)i] = (xPos, width);
+
+			xPos += width;
+		}
+	}
+
+	private void DrawCompactAuthorOrFolder(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
+	{
+		var author = workshopInfo?.Author;
+
+		if (author?.Name is not null and not "")
+		{
+			e.Rects.AuthorRect = DrawCell(e, Columns.Author, author.Name, "I_Author", font: UI.Font(8.25F));
+		}
+		else if (localIdentity is not null)
+		{
+			DrawCell(e, Columns.Author, Path.GetFileName(localIdentity.Folder), "I_Folder", active: false, font: UI.Font(8.25F));
+		}
+	}
+
+	private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? parentPackage, IWorkshopInfo? workshopInfo)
+	{
+		var padding = GridView ? GridPadding : Padding;
+		var size = _settings.UserSettings.ExtendedListInfo ?
+			UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale) :
+			UI.Scale(CompactList ? new Size(20, 20) : new Size(24, 24), UI.FontScale);
+		var rect = new Rectangle(e.ClipRectangle.Right, e.ClipRectangle.Y, 0, e.ClipRectangle.Height).Pad(padding);
+		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
+
+		if (parentPackage is not null)
+		{
+			e.Rects.FolderRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
+			{
+				Size = size,
+				Icon = "I_Folder",
+				Font = Font,
+				HoverState = e.HoverState,
+				Cursor = CursorLocation
+			}).Rectangle;
+
+			rect.X -= e.Rects.FolderRect.Width + padding.Left;
+		}
+
+		if (!IsPackagePage && workshopInfo?.Url is not null)
+		{
+			e.Rects.SteamRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
+			{
+				Size = size,
+#if CS2
+				Icon = "I_Paradox",
+#else
+				Icon = "I_Steam",
+#endif
+				Font = Font,
+				HoverState = e.HoverState,
+				Cursor = CursorLocation
+			}).Rectangle;
+
+			rect.X -= e.Rects.SteamRect.Width + padding.Left;
+		}
+
+		if (!IsPackagePage && _settings.UserSettings.ExtendedListInfo && _compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		{
+			e.Rects.GithubRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
+			{
+				Size = size,
+				Icon = "I_Github",
+				Font = Font,
+				HoverState = e.HoverState,
+				Cursor = CursorLocation
+			}).Rectangle;
+
+			rect.X -= e.Rects.GithubRect.Width + padding.Left;
+		}
+
+		return rect.X + rect.Width;
+	}
+
 }
