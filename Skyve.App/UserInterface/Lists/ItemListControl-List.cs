@@ -89,8 +89,8 @@ public partial class ItemListControl
 			}
 
 			var package = e.Item.GetPackage();
+			var localIdentity = e.Item.GetLocalPackageIdentity();
 			var workshopInfo = e.Item.GetWorkshopInfo();
-			var isPressed = false;
 			var isIncluded = e.Item.IsIncluded(out var partialIncluded) || partialIncluded;
 			var isEnabled = e.Item.IsEnabled();
 
@@ -122,32 +122,22 @@ public partial class ItemListControl
 			if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
 			{
 				e.BackColor = e.BackColor.MergeColor(FormDesign.Design.ActiveColor, e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
-
-				isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 			}
 
 			base.OnPaintItemList(e);
 
 			DrawThumbnail(e, e.Item.GetLocalPackageIdentity(), workshopInfo);
-			DrawTitleAndTagsAndVersionForList(e, package?.LocalData, workshopInfo, isPressed);
-			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, package?.LocalData, out var activeColor);
+			DrawTitleAndTags(e);
+			DrawVersionAndDate(e, package, localIdentity, workshopInfo);
+			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, localIdentity, out var activeColor);
 
-			if (!IsPackagePage)
+			if (workshopInfo?.Author is not null)
 			{
-				if (workshopInfo?.Author is not null)
-				{
-					var xdiff = DrawAuthor(e, workshopInfo.Author);
-					DrawScore(e, workshopInfo, xdiff);
-				}
-				else if (e.Item.IsLocal())
-				{
-					var xdiff = DrawFolderName(e, package?.LocalData);
-					DrawScore(e, workshopInfo, xdiff);
-				}
-				else
-				{
-					DrawScore(e, workshopInfo, 0);
-				}
+				DrawAuthor(e, workshopInfo.Author);
+			}
+			else if (e.Item.IsLocal())
+			{
+				DrawFolderName(e, localIdentity);
 			}
 
 			var maxTagX = DrawButtons(e, package?.LocalData, workshopInfo);
@@ -166,7 +156,11 @@ public partial class ItemListControl
 				maxTagX = Math.Min(maxTagX, e.Rects.CompatibilityRect.X);
 			}
 
-			DrawTags(e, maxTagX);
+			if (e.ClipRectangle.Width > 575 * UI.FontScale)
+			{
+				DrawVoteAndSubscribers(e, workshopInfo);
+				DrawTags(e, maxTagX);
+			}
 
 			e.Graphics.ResetClip();
 
@@ -179,7 +173,7 @@ public partial class ItemListControl
 
 		private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor)
 		{
-			var height = CompactList ? ((int)(24 * UI.FontScale) - 4) : (Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
+			var height = (int)((CompactList ? 22 : 24) * UI.FontScale);
 
 			if (notificationType > NotificationType.Info)
 			{

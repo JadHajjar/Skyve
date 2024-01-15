@@ -12,7 +12,7 @@ public partial class PC_UserPage : PanelContent
 	private readonly ISettings _settings;
 	private readonly IWorkshopService _workshopService;
 
-	private List<IPackage> userItems = new();
+	private List<IPackageIdentity> userItems = new();
 
 	public IUser User { get; }
 
@@ -126,7 +126,7 @@ public partial class PC_UserPage : PanelContent
 
 			var results = await _workshopService.GetWorkshopItemsByUserAsync(User.Id!);
 
-			userItems = results.ToList(_workshopService.GetPackage);
+			userItems = results.ToList(x => (IPackageIdentity)x);
 
 			await LC_Items.RefreshItems();
 		}
