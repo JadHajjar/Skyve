@@ -67,12 +67,12 @@ internal class D_CompatibilityInfo : IDashboardItem
 		}
 		else
 		{
-			Notifier_CompatibilityReportProcessed();
+			Notifier_InformationUpdated();
 		}
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
-		_notifier.PackageInformationUpdated += Notifier_CompatibilityReportProcessed;
-		_notifier.PlaysetChanged += Notifier_CompatibilityReportProcessed;
+		_notifier.PackageInformationUpdated += Notifier_InformationUpdated;
+		_notifier.PlaysetChanged += Notifier_InformationUpdated;
 		_notifier.CompatibilityReportProcessed += Notifier_CompatibilityReportProcessed;
 	}
 
@@ -82,12 +82,22 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 		_notifier.ContentLoaded -= Invalidate;
 		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
-		_notifier.PackageInformationUpdated -= Notifier_CompatibilityReportProcessed;
-		_notifier.PlaysetChanged -= Notifier_CompatibilityReportProcessed;
+		_notifier.PackageInformationUpdated -= Notifier_InformationUpdated;
+		_notifier.PlaysetChanged -= Notifier_InformationUpdated;
 		_notifier.CompatibilityReportProcessed -= Notifier_CompatibilityReportProcessed;
 	}
 
 	private void Notifier_CompatibilityReportProcessed()
+	{
+		if (Loading)
+		{
+			Loading = false;
+		}
+
+		Notifier_InformationUpdated();
+	}
+
+	private void Notifier_InformationUpdated()
 	{
 		lock (this)
 		{
@@ -134,11 +144,6 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 			this.compatibilityModCounts = compatibilityModCounts;
 			this.compatibilityAssetCounts = compatibilityAssetCounts;
-
-			if (Loading)
-			{
-				Loading = false;
-			}
 
 			OnResizeRequested();
 		}
