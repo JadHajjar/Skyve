@@ -273,14 +273,14 @@
   "Sorting_Votes": "Abstimmungen",
   "VotesCount": {
     "One": "{1} Bewertung",
-    "Plural": "{1} votes"
+    "Plural": "{1} Bewertungen"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "{1} Abonnent",
+    "Plural": "{1} Abonnenten"
   },
-  "SearchWorkshop": "Search the workshop instead...",
-  "DiscoverWorkshop": "Look for mods on the workshop...",
+  "SearchWorkshop": "Durchsuche stattdessen den Workshop...",
+  "DiscoverWorkshop": "Suche nach Mods im Workshop...",
   "SearchWorkshopBrowser": "Durchsuche den Workshop in deinem Browser...",
   "UnknownPackage": "Unbekanntes Paket",
   "Info": "Info",
@@ -289,17 +289,17 @@
   "ControlToSelectMultiplePackages": "Strg+Klick, um mehrere Pakete auf einmal auszuwählen.",
   "Local": "Lokal",
   "Workshop": "Workshop",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "Kompatibilitätsbericht",
   "Enabled": "Aktiviert",
   "Disabled": "Deaktiviert",
   "Included": "Enthalten",
   "Excluded": "Ausgeschlossen",
   "OutOfDate": "Veraltet",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "Paket-Status",
   "Author": "Autor",
   "Include": "Einschließen",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
+  "Unsubscribe": "Abbestellen",
+  "Exclude": "Ausschließen",
   "Snooze": "Schlummern",
   "UnSnooze": "Entschlummern",
   "Mod": {
@@ -320,35 +320,35 @@
   },
   "IncludedCount": {
     "One": "{0} {1} enthalten",
-    "Plural": "{0} {1} included"
+    "Plural": "{0} {1} enthalten"
   },
   "EnabledCount": {
     "One": "{0} {1} aktiviert",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0} {1} aktiviert"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} enthalten & aktiviert",
-    "Plural": "{0} {1} included & enabled"
+    "Plural": "{0} {1} enthalten & aktiviert"
   },
   "LoadedCount": {
     "One": "{0} {1} geladen",
-    "Plural": "{0} {1} loaded"
+    "Plural": "{0} {1} geladen"
   },
   "ShowingCount": {
     "One": "Zeige {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "Plural": "Zeige {0} {1}"
   },
   "ShowingCountWarning": {
     "One": "Zeige {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {3}"
+    "Plural": "Zeige {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
     "One": "Zeige {0} {1}, {2} ausgewählt",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "Plural": "Zeige {0} {1}, {2} ausgewählt"
   },
   "ShowingSelectedCountWarning": {
     "One": "Zeige {0} {1}, {2} ausgewählt, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "Plural": "Zeige {0} {1}, {2} ausgewählt, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} ist wegen der eingestellten Profilnutzung versteckt",
@@ -384,11 +384,11 @@
   },
   "NewUpdatedCount": {
     "One": "{0} neu oder aktualisiert {1}",
-    "Plural": "{0} new or updated {1}"
+    "Plural": "{0} neu oder aktualisiert {1}"
   },
   "TotalCount": {
     "One": "{0} {1} insgesamt",
-    "Plural": "{0} {1} in total"
+    "Plural": "{0} {1} insgesamt"
   },
   "PackageIsNotDownloaded": "'{0}' wurde von deinem Computer entfernt",
   "PackageIsOutOfDate": "'{0}' ist veraltet\n\nDu hängst {1} hinterher",
@@ -406,7 +406,7 @@
     "One": "Du wirst während dieses Prozesses {0} Paket abbestellen.",
     "Plural": "Du wirst während dieses Prozesses {0} Pakete abbestellen."
   },
-  "ViewThisPlaysetsPackages": "View the mods in this playset",
+  "ViewThisPlaysetsPackages": "Mods in diesem Spielset ansehen",
   "YouHavePackagesUser": {
     "One": "Du hast {0} Paket, das von {1} erstellt wurde",
     "Plural": "Du hast {0} Pakete, die von {1} erstellt wurden"
@@ -414,7 +414,7 @@
   "RequestOption1": "Ein Problem melden oder fehlende Informationen hinzufügen",
   "RequestOption2": "Fehlenden Status für das Paket hinzufügen",
   "RequestOption3": "Fehlende Interaktion mit einem anderen Paket hinzufügen",
-  "ActivePlayset": "Active Playset",
+  "ActivePlayset": "Aktives Spielset",
   "References": "Bezüge",
   "OpenLog": "Logdatei öffnen",
   "Sort By": "Sortieren nach",
@@ -446,8 +446,8 @@
   "PastePlaysetId": "Füge die ID des Spielsets ein, das du importieren willst",
   "AssumeInternetConnectivity": "Internetverbindungsüberprüfungen ignorieren",
   "AssumeInternetConnectivity_Tip": "Überspringt die Suche nach dem Internet und geht automatisch davon aus, dass du verbunden bist.",
-  "SelectAll": "Select all items",
-  "DeselectAll": "Un-select all items",
+  "SelectAll": "Alle Elemente auswählen",
+  "DeselectAll": "Alle Elemente abwählen",
   "AddTagBox": "Neues Tag hier hinzufügen",
   "EditingMultipleTags": "Das Bearbeiten von Tags mehrerer Pakete überschreibt jedes ihrer benutzerdefinierten Tags.",
   "EditTagsOfPackage": {
@@ -495,9 +495,9 @@
   "CleanupInfoTitle": "Was ist eine Bereinigung?",
   "TroubleshootCauseResult": "Die folgenden Pakete könnten die Ursache für die Probleme sein",
   "VerifiedAuthor": "Verifizierter Autor",
-  "EnableItem": "Enable this mod",
-  "DisableItem": "Disable this mod",
-  "SwitchToItem": "Switch to this mod",
+  "EnableItem": "Diese Mod aktivieren",
+  "DisableItem": "Diese Mod deaktivieren",
+  "SwitchToItem": "Zu dieser Mod wechseln",
   "FailedToImportPlayset": "Importieren dieses Spielsets fehlgeschlagen.",
   "FilterByEnabled": "Nur aktivierte Elemente anzeigen.",
   "FilterByDisabled": "Nur deaktivierte Elemente anzeigen.",
@@ -541,11 +541,11 @@
     "One": "'{1}' wurde seit deiner letzten Sitzung installiert",
     "Plural": "{0} neue Pakete wurden seit deiner letzten Sitzung installiert"
   },
-  "NoActivePlayset": "No Active Playset",
-  "RecentlyUpdated": "Recently Updated",
-  "Manage": "Manage",
+  "NoActivePlayset": "Kein aktives Spielset",
+  "RecentlyUpdated": "Vor Kurzem aktualisiert",
+  "Manage": "Verwalten",
   "Version": "Version",
-  "UpdateTime": "Update Time",
+  "UpdateTime": "Aktualisierungsdatum",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "ThisModIsRequiredYouCantDisableIt": "Diese Mod ist erforderlich, du kannst sie nicht deaktivieren."
 }
