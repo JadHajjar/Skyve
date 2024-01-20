@@ -1,5 +1,7 @@
-﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_Assets : PC_ContentList<IAsset>
+﻿using System.Threading.Tasks;
+
+namespace Skyve.App.UserInterface.Panels;
+public class PC_Assets : PC_ContentList
 {
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
@@ -14,17 +16,17 @@ public class PC_Assets : PC_ContentList<IAsset>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset.Name}";
+		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override IEnumerable<IAsset> GetItems()
+	protected override async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
 		if (_settings.UserSettings.LinkModAssets)
 		{
-			return _contentManager.Assets.Where(x => !(x.LocalParentPackage?.IsMod ?? false));
+			return _contentManager.Assets.Where(x => !(x.GetLocalPackage()?.IsCodeMod ?? false));
 		}
 
-		return _contentManager.Assets;
+		return await Task.FromResult(_contentManager.Assets);
 	}
 
 	protected override string GetCountText()

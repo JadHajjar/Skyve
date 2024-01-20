@@ -9,27 +9,21 @@ using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Skyve.Systems.Compatibility.Domain;
 public class CompatibilityInfo : ICompatibilityInfo
 {
-	private readonly IPackage? package;
-	private readonly ILocalPackage? localPackage;
-	private DtoLocalPackage? dtoPackage;
-
-	[JsonIgnore] public IPackage? Package => dtoPackage ?? localPackage ?? package;
-	[JsonIgnore] public ILocalPackage? LocalPackage => dtoPackage ?? localPackage;
-	[JsonIgnore] public IndexedPackage? Data { get; }
+	public ulong Id { get; set; }
+	public string Name { get; set; }
+	public string Url { get; set; }
 	public List<ReportItem> ReportItems { get; set; }
-	public DtoLocalPackage? DtoPackage { get => dtoPackage ?? localPackage?.CloneTo<ILocalPackage, DtoLocalPackage>(); set => dtoPackage = value; }
+	[JsonIgnore] public IndexedPackage? Data { get; }
 
-	ILocalPackage? ICompatibilityInfo.Package => LocalPackage;
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data?.Package;
 	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems
-	{ 
+	{
 		get
 		{
 			foreach (var item in ReportItems)
@@ -37,9 +31,9 @@ public class CompatibilityInfo : ICompatibilityInfo
 				yield return item;
 			}
 
-			var id = Data?.Package.SteamId;
-			
-			if (id is not null and not 0 && LocalPackage?.IsIncluded() == false)
+			var id = Data?.Package.Id;
+
+			if (id is not null and not 0 && this.IsIncluded() == false)
 			{
 				var requiredFor = ServiceCenter.Get<ICompatibilityManager, CompatibilityManager>().GetRequiredFor(id.Value);
 
@@ -47,11 +41,11 @@ public class CompatibilityInfo : ICompatibilityInfo
 				{
 					yield return new ReportItem
 					{
-						Package = localPackage,
-						PackageId = Data?.Package.SteamId ?? 0,
+						Package = this.GetPackage(),
+						PackageId = Data?.Package.Id ?? 0,
 						Type = ReportType.RequiredItem,
 						Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
-						PackageName = localPackage?.CleanName(true),
+						PackageName = this.CleanName(true),
 						Packages = requiredFor.ToArray(x => new PseudoPackage(x))
 					};
 				}
@@ -62,23 +56,26 @@ public class CompatibilityInfo : ICompatibilityInfo
 	[Obsolete("Reserved for DTO", true)]
 	public CompatibilityInfo()
 	{
-		ReportItems = new();
+		Name = string.Empty;
+		Url = string.Empty;
+		ReportItems = [];
 	}
 
-	public CompatibilityInfo(IPackage package, IndexedPackage? packageData)
+	public CompatibilityInfo(IPackageIdentity package, IndexedPackage? packageData)
 	{
-		this.package = package;
-		localPackage = package is ILocalPackage lp ? lp : package.LocalPackage;
+		Id = package.Id;
+		Name = package.Name;
+		Url = package.Url ?? string.Empty;
 		Data = packageData;
-		ReportItems = new();
+		ReportItems = [];
 	}
 
 	public void Add(ReportType type, IGenericPackageStatus status, string packageName, ulong[] packages)
 	{
 		ReportItems.Add(new ReportItem
 		{
-			Package = localPackage,
-			PackageId = Data?.Package.SteamId ?? 0,
+			Package = this.GetPackage(),
+			PackageId = Data?.Package.Id ?? 0,
 			Type = type,
 			Status = status,
 			PackageName = packageName,
@@ -90,8 +87,8 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
-			Package = localPackage,
-			PackageId = Data?.Package.SteamId ?? 0,
+			Package = this.GetPackage(),
+			PackageId = Data?.Package.Id ?? 0,
 			Type = type,
 			Status = status,
 			PackageName = packageName,
@@ -103,8 +100,8 @@ public class CompatibilityInfo : ICompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
-			Package = localPackage,
-			PackageId = Data?.Package.SteamId ?? 0,
+			Package = this.GetPackage(),
+			PackageId = Data?.Package.Id ?? 0,
 			Type = type,
 			Status = status,
 			LocaleKey = localeKey,
@@ -112,26 +109,8 @@ public class CompatibilityInfo : ICompatibilityInfo
 		});
 	}
 
-	#region DtoLocalPackage
-#nullable disable
-
-	public class DtoLocalPackage : ILocalPackage
+	public override string ToString()
 	{
-		[JsonIgnore] public ILocalPackageWithContents LocalParentPackage { get; set; }
-		[JsonIgnore] public ILocalPackage LocalPackage => this;
-		[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => this.GetWorkshopInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
-		public long LocalSize { get; set; }
-		public DateTime LocalTime { get; set; }
-		public string Folder { get; set; }
-		public bool IsMod { get; set; }
-		public bool IsLocal { get; set; }
-		public bool IsBuiltIn { get; set; }
-		public string FilePath { get; set; }
-		public ulong Id { get; set; }
-		public string Name { get; set; }
-		public string Url { get; set; }
+		return Name;
 	}
-
-#nullable enable
-	#endregion
 }

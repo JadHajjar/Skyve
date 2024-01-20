@@ -27,7 +27,12 @@ public interface IUserSettings
 	bool ShowFolderSettings { get; set; }
 	bool TreatOptionalAsRequired { get; set; }
 	bool SnapDashToGrid { get; set; }
+	bool ExtendedListInfo { get; set; }
+	bool FadeDisabledItems { get; set; }
 	Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; }
+#if CS2
+	ParadoxLoginInfo ParadoxLogin { get; }
+#endif
 
 	void Save();
 }

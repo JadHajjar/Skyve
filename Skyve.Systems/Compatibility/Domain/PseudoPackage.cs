@@ -3,20 +3,22 @@
 using Skyve.Domain;
 using Skyve.Domain.Systems;
 
+using System.Drawing;
+
 namespace Skyve.Systems.Compatibility.Domain;
 
 public class PseudoPackage : IPackageIdentity
 {
 	private readonly IPackage? _iPackage;
 
-	public PseudoPackage(ulong steamId)
+	public PseudoPackage(ulong id)
 	{
-		Id = steamId;
+		Id = id;
 	}
 
 	public PseudoPackage(IPackage iPackage)
 	{
-		Id = iPackage.Id;
+		Id = Package.Id;
 		_iPackage = iPackage;
 	}
 

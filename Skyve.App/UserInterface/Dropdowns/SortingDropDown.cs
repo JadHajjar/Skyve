@@ -61,7 +61,7 @@ public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 		return item switch
 		{
 			PackageSorting.Name => "I_FileName",
-			PackageSorting.Author => "I_Developer",
+			PackageSorting.Author => "I_Author",
 			PackageSorting.FileSize => "I_MicroSd",
 			PackageSorting.CompatibilityReport => "I_CompatibilityReport",
 			PackageSorting.UpdateTime => "I_UpdateTime",

@@ -6,7 +6,7 @@ namespace Skyve.App.UserInterface.Content;
 public class PackageIcon : SlickImageControl
 {
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-	public IPackage? Package { get; set; }
+	public IPackageIdentity? Package { get; set; }
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 	public bool Collection { get; set; }
 	[Category("Appearance"), DefaultValue(true)]
@@ -35,17 +35,15 @@ public class PackageIcon : SlickImageControl
 
 		if (Image == null)
 		{
-			using var image = (Collection ? Properties.Resources.I_CollectionIcon : Package?.IsMod ?? false ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
-			var iconRect = ClientRectangle.CenterR(image.Size);
+			using var generic = IconManager.GetIcon(Collection ? "I_Package" : Package?.GetPackage()?.IsCodeMod ?? false ? "I_Mods" : "I_Assets", Height).Color(BackColor);
+			var iconRect = ClientRectangle.CenterR(generic.Size);
 
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.IconColor), ClientRectangle, (int)(10 * UI.FontScale));
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), iconRect.Pad(1), (int)(10 * UI.FontScale));
-
-			e.Graphics.DrawRoundedImage(image, iconRect, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			using var brush = new SolidBrush(FormDesign.Design.IconColor);
+			e.Graphics.FillRoundedRectangle(brush, ClientRectangle, (int)(10 * UI.FontScale));
 		}
 		else
 		{
-			if (Package?.IsLocal ?? false)
+			if (Package?.IsLocal() ?? false)
 			{
 				using var unsatImg = new Bitmap(Image, Size).Tint(Sat: 0);
 				e.Graphics.DrawRoundedImage(unsatImg, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);

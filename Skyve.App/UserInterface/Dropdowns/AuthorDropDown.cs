@@ -14,7 +14,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 	}
 
-	public void SetItems<T>(IEnumerable<T?> enumerable) where T : IPackage
+	public void SetItems<T>(IEnumerable<T?> enumerable) where T : IPackageIdentity
 	{
 		foreach (var item in enumerable.SelectWhereNotNull(x => x?.GetWorkshopInfo()?.Author))
 		{

@@ -12,7 +12,7 @@ public class IndexedPackageInteraction
 	public IndexedPackageInteraction(PackageInteraction interaction, Dictionary<ulong, IndexedPackage> packages)
 	{
 		Interaction = interaction;
-		Packages = new();
+		Packages = [];
 
 		if (interaction.Packages is not null)
 		{
@@ -28,6 +28,6 @@ public class IndexedPackageInteraction
 
 	public static implicit operator IndexedPackageInteraction(PackageInteraction status)
 	{
-		return new(status, new());
+		return new(status, []);
 	}
 }

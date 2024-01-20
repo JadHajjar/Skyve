@@ -3,6 +3,8 @@
 namespace Skyve.Domain.Systems;
 public interface ICitiesManager
 {
+	string GameVersion { get; }
+
 	event MonitorTickDelegate MonitorTick;
 	event Action<bool> LaunchingStatusChanged;
 

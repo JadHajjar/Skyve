@@ -39,7 +39,7 @@ public class NewProfileOptionControl : SlickImageControl
 
 		e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(back, 0.8F), ClientRectangle, Padding.Left);
 
-		using var icon = IconManager.GetIcon(FromLink ? "I_LinkChain" : FromScratch ? "I_New" : "I_CopySettings", 48);
+		using var icon = IconManager.GetIcon(FromLink ? "I_LinkChain" : FromScratch ? "I_New" : "I_Copy", 48);
 
 		e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
 

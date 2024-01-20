@@ -41,7 +41,7 @@ internal class CompatibilityService
 		_compatibilityManager = compatibilityManager;
 	}
 
-	internal void CacheReport(Dictionary<IPackage, CompatibilityInfo> cache, CancellationToken token)
+	internal void CacheReport(Dictionary<IPackageIdentity, CompatibilityInfo> cache, CancellationToken token)
 	{
 		foreach (var item in _contentManager.Packages)
 		{
@@ -56,7 +56,7 @@ internal class CompatibilityService
 		}
 	}
 
-	internal CompatibilityInfo GenerateCompatibilityInfo(IPackage package)
+	internal CompatibilityInfo GenerateCompatibilityInfo(IPackageIdentity package)
 	{
 #if DEBUG
 		var sw = Stopwatch.StartNew();
@@ -79,12 +79,12 @@ internal class CompatibilityService
 		sw2.Restart();
 #endif
 
-		if (package.LocalParentPackage?.Mod is IMod mod)
+		if (package.GetPackage()?.IsCodeMod == true && package.GetLocalPackageIdentity() is not null)
 		{
-			var modName = Path.GetFileName(mod.FilePath);
+			var modName = Path.GetFileName(package.GetLocalPackageIdentity()!.FilePath);
 			var duplicate = _contentManager.GetModsByName(modName);
 
-			if (duplicate.Count > 1 && duplicate.Count(_contentUtil.IsIncluded) > 1)
+			if (duplicate.Count > 1 && duplicate.Count(x => x.LocalData is not null && _contentUtil.IsIncluded(x.LocalData)) > 1)
 			{
 				info.Add(ReportType.Compatibility
 					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
@@ -140,7 +140,7 @@ internal class CompatibilityService
 		sw2.Restart();
 #endif
 
-		if (!package.IsLocal && package.IsMod && packageData.Package.Type is PackageType.GenericPackage)
+		if (!package.IsLocal() && package.GetPackage()?.IsCodeMod == true && packageData.Package.Type is PackageType.GenericPackage)
 		{
 			if (!packageData.Statuses.ContainsKey(StatusType.TestVersion) && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true)
 			{
@@ -149,7 +149,7 @@ internal class CompatibilityService
 
 			if (!packageData.Statuses.ContainsKey(StatusType.TestVersion) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 30)
 			{
-				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.UnsubscribeThis });
+				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.NoAction });
 			}
 
 			if (!author.Malicious && workshopInfo?.ServerTime.Date < _compatibilityUtil.MinimumModDate && DateTime.UtcNow - workshopInfo?.ServerTime > TimeSpan.FromDays(365) && !packageData.Statuses.ContainsKey(StatusType.Deprecated))
@@ -205,7 +205,7 @@ internal class CompatibilityService
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, "AuthorMalicious", new object[] { _packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
 		}
-		else if (package.IsMod && author.Retired)
+		else if (package.GetPackage()?.IsCodeMod == true && author.Retired)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), "AuthorRetired", new object[] { _packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
 		}
@@ -214,11 +214,13 @@ internal class CompatibilityService
 		{
 			info.Add(ReportType.Stability, new GenericPackageStatus() { Notification = NotificationType.Info, Note = packageData.Package.Note }, string.Empty, new PseudoPackage[0]);
 		}
-		if (package.IsLocal)
+
+		if (package.IsLocal())
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Package.SteamId)), true), new PseudoPackage[] { new(packageData.Package.SteamId) });
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Package.Id)), true), new PseudoPackage[] { new(packageData.Package.Id) });
 		}
-		if (!package.IsLocal && !author.Malicious && workshopInfo?.IsIncompatible != true)
+
+		if (!package.IsLocal() && !author.Malicious && workshopInfo?.IsIncompatible != true)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), (packageData.Package.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.Package.ReviewDate.ToReadableString(packageData.Package.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"), new object[0]);
 		}

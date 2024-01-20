@@ -61,9 +61,9 @@ public class SteamUserControl : SlickControl
 		}
 		else
 		{
-			using var generic = Properties.Resources.I_GenericUser.Color(FormDesign.Design.IconColor);
+			//using var generic = Properties.Resources.I_GenericUser.Color(FormDesign.Design.IconColor);
 
-			e.Graphics.DrawRoundImage(generic, avatarRect);
+			//e.Graphics.DrawRoundImage(generic, avatarRect);
 		}
 
 		e.Graphics.DrawString(InfoText.IfEmpty(Locale.LoggedInAs), UI.Font(6.75F, FontStyle.Bold), new SolidBrush(FormDesign.Design.InfoColor), textRectangle);

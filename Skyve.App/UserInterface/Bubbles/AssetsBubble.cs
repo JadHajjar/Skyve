@@ -69,7 +69,7 @@ public class AssetsBubble : StatusBubbleBase
 				continue;
 			}
 
-			if (asset.IsMod || Loading)
+			if (asset.Package.IsCodeMod || Loading)
 			{
 				continue;
 			}
@@ -113,7 +113,7 @@ public class AssetsBubble : StatusBubbleBase
 	{
 		if (!_notifier.IsContentLoaded)
 		{
-			DrawText(e, ref targetHeight, Locale.Loading, FormDesign.Design.InfoColor);
+			DrawText(e, ref targetHeight, LocaleSlickUI.Loading, FormDesign.Design.InfoColor);
 			return;
 		}
 
@@ -128,9 +128,9 @@ public class AssetsBubble : StatusBubbleBase
 			}
 
 			assetsIncluded++;
-			assetSize += asset.LocalSize;
+			assetSize += asset.FileSize;
 
-			if (asset.IsMod || Loading)
+			if (asset.Package.IsCodeMod || Loading)
 			{
 				continue;
 			}

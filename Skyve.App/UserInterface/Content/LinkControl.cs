@@ -42,7 +42,7 @@ public class LinkControl : SlickImageControl
 		}
 		else if (Display && e.Button == MouseButtons.Right)
 		{
-			SlickToolStrip.Show(Program.MainForm, PointToScreen(e.Location), new SlickStripItem(Locale.Copy, "I_Copy", action: () => Clipboard.SetText(Link.Url)));
+			SlickToolStrip.Show(Program.MainForm, PointToScreen(e.Location), new SlickStripItem(LocaleSlickUI.Copy, "I_Copy", action: () => Clipboard.SetText(Link.Url)));
 		}
 	}
 

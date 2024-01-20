@@ -11,22 +11,12 @@ public static class ServiceCenter
 
 	public static T Get<T>()
 	{
-		if (Provider == null)
-		{
-			return default;
-		}
-
-		return Provider.GetService<T>();
+		return Provider == null ? default : Provider.GetService<T>();
 	}
 
 	public static T2 Get<T, T2>() where T2 : T
 	{
-		if (Provider == null)
-		{
-			return default;
-		}
-
-		return (T2)Provider.GetService<T>();
+		return Provider == null ? default : (T2)Provider.GetService<T>();
 	}
 
 	public static void Get<T1>(out T1 item1)

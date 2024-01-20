@@ -4,13 +4,14 @@ using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_PackagePage : PanelContent
 {
-	private readonly ItemListControl<IPackage>? LC_Items;
-	private readonly ContentList<IPackage>? LC_References;
+	private readonly ItemListControl? LC_Items;
+	private readonly ContentList? LC_References;
 	private TagControl? addTagControl;
 
 	private readonly INotifier _notifier;
@@ -18,23 +19,29 @@ public partial class PC_PackagePage : PanelContent
 	private readonly IPackageUtil _packageUtil;
 	private readonly ISettings _settings;
 
-	public IPackage Package { get; }
+	public IPackageIdentity Package { get; }
 
-	public PC_PackagePage(IPackage package, bool compatibilityPage = false)
+	public PC_PackagePage(IPackageIdentity package, bool compatibilityPage = false)
 	{
-		if (package is not ILocalPackage && package.LocalPackage is ILocalPackage localPackage)
-		{
-			package = localPackage;
-		}
-
-		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _packageUtil, out _settings);
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _packageUtil, out _settings, out IImageService imageService);
 
 		InitializeComponent();
 
 		Package = package;
 
 		PB_Icon.Package = package;
-		PB_Icon.LoadImage(package.GetWorkshopInfo()?.ThumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
+
+		if (package.GetWorkshopInfo() is IWorkshopInfo workshopInfo)
+		{
+			if (workshopInfo.GetThumbnail(imageService, out var thumbnail, out var thumbnailUrl))
+			{
+				PB_Icon.Image = new Bitmap(thumbnail);
+			}
+			else
+			{
+				PB_Icon.LoadImage(thumbnailUrl, imageService.GetImage);
+			}
+		}
 
 		P_Info.SetPackage(package, this);
 
@@ -49,13 +56,16 @@ public partial class PC_PackagePage : PanelContent
 			TLP_Info.ColumnStyles[1].Width = 0;
 		}
 
-		if (Package is ILocalPackageWithContents p && p.Assets is not null && p.Assets.Length > 0)
+		if (Package is ILocalPackageData p && p.Assets is not null && p.Assets.Length > 0)
 		{
-			LC_Items = new ItemListControl<IPackage>(SkyvePage.SinglePackage)
+			if (_settings.UserSettings.ExtendedListInfo)
 			{
-				IsPackagePage = true,
-				Dock = DockStyle.Fill
-			};
+				LC_Items = new ItemListControl.Complex(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
+			}
+			else
+			{
+				LC_Items = new ItemListControl.Simple(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
+			}
 
 			LC_Items.AddRange(p.Assets);
 
@@ -78,7 +88,7 @@ public partial class PC_PackagePage : PanelContent
 
 		if (crAvailable)
 		{
-			foreach (var item in crdata?.Links ?? new())
+			foreach (var item in crdata?.Links ?? [])
 			{
 				FLP_Links.Controls.Add(new LinkControl(item, true));
 			}
@@ -88,25 +98,25 @@ public partial class PC_PackagePage : PanelContent
 			AddTags();
 		}
 
-		if (GetItems().Any())
-		{
-			LC_References = new ContentList<IPackage>(SkyvePage.SinglePackage, true, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
-			{
-				Dock = DockStyle.Fill
-			};
+		//if (GetItems().Any())
+		//{
+		//	LC_References = new ContentList(SkyvePage.SinglePackage, true, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+		//	{
+		//		Dock = DockStyle.Fill
+		//	};
 
-			LC_References.TB_Search.Placeholder = "SearchGenericPackages";
+		//	LC_References.TB_Search.Placeholder = "SearchGenericPackages";
 
-			LC_References.RefreshItems();
+		//	LC_References.RefreshItems();
 
-			T_References.LinkedControl = LC_References;
-		}
-		else
+		//	T_References.LinkedControl = LC_References;
+		//}
+		//else
 		{
 			tabs.Remove(T_References);
 		}
 
-		var requirements = package.Requirements.ToList();
+		var requirements = package.GetWorkshopInfo()?.Requirements.ToList() ?? [];
 		if (requirements.Count > 0)
 		{
 			foreach (var requirement in requirements)
@@ -121,7 +131,7 @@ public partial class PC_PackagePage : PanelContent
 			L_Requirements.Visible = false;
 		}
 
-		var pc = new OtherProfilePackage(package)
+		var pc = new OtherPlaysetPackage(package)
 		{
 			Dock = DockStyle.Fill
 		};
@@ -134,19 +144,19 @@ public partial class PC_PackagePage : PanelContent
 		_notifier.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
 	}
 
-	protected IEnumerable<IPackage> GetItems()
+	protected async Task<IEnumerable<IPackage>> GetItems()
 	{
-		return _packageUtil.GetPackagesThatReference(Package, _settings.UserSettings.ShowAllReferencedPackages);
+		return await Task.FromResult(_packageUtil.GetPackagesThatReference(Package, _settings.UserSettings.ShowAllReferencedPackages));
 	}
 
-	protected void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
+	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, included);
+		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems, included);
 	}
 
-	protected void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
+	protected async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, enabled);
+		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems, enabled);
 	}
 
 	protected LocaleHelper.Translation GetItemText()
@@ -158,17 +168,17 @@ public partial class PC_PackagePage : PanelContent
 	{
 		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
 
-		foreach (var item in LC_References!.Items.SelectWhereNotNull(x => x.LocalParentPackage))
+		foreach (var item in LC_References!.Items)
 		{
 			if (item?.IsIncluded() == true)
 			{
 				packagesIncluded++;
 
-				if (item.Mod is not null)
+				if (item.GetPackage()?.IsCodeMod == true)
 				{
 					modsIncluded++;
 
-					if (item.Mod.IsEnabled())
+					if (item.IsEnabled())
 					{
 						modsEnabled++;
 					}
@@ -193,12 +203,7 @@ public partial class PC_PackagePage : PanelContent
 
 	private void AddTagControl_MouseClick(object sender, MouseEventArgs e)
 	{
-		if (Package.LocalPackage is null)
-		{
-			return;
-		}
-
-		var frm = EditTags(new[] { Package.LocalPackage });
+		var frm = EditTags(new[] { Package });
 
 		frm.FormClosed += (_, _) =>
 		{
@@ -209,7 +214,7 @@ public partial class PC_PackagePage : PanelContent
 		};
 	}
 
-	private static EditTagsForm EditTags(IEnumerable<ILocalPackage> item)
+	private static EditTagsForm EditTags(IEnumerable<IPackageIdentity> item)
 	{
 		var frm = new EditTagsForm(item);
 
@@ -234,7 +239,7 @@ public partial class PC_PackagePage : PanelContent
 			FLP_Tags.Controls.Add(control);
 		}
 
-		if (Package.LocalPackage is not null)
+		//if (Package.LocalPackage is not null)
 		{
 			addTagControl = new TagControl { ImageName = "I_Add" };
 			addTagControl.MouseClick += AddTagControl_MouseClick;
@@ -273,7 +278,7 @@ public partial class PC_PackagePage : PanelContent
 		label1.Text = LocaleCR.Usage;
 		label2.Text = cr.Usage.GetValues().If(x => x.Count() == Enum.GetValues(typeof(PackageUsage)).Length, x => Locale.AnyUsage.One, x => x.ListStrings(x => LocaleCR.Get(x.ToString()), ", "));
 		label3.Text = LocaleCR.PackageType;
-		label4.Text = cr.Type == PackageType.GenericPackage ? (Package.IsMod ? Locale.Mod : Locale.Asset) : LocaleCR.Get(cr.Type.ToString());
+		label4.Text = cr.Type == PackageType.GenericPackage ? (Package.GetPackage()?.IsCodeMod == true ? Locale.Mod : Locale.Asset) : LocaleCR.Get(cr.Type.ToString());
 		label5.Text = LocaleCR.Links;
 		label6.Text = LocaleSlickUI.Tags;
 		L_Requirements.Text = LocaleHelper.GetGlobalText("CRT_RequiredPackages");

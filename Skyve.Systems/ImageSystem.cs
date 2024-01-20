@@ -17,9 +17,9 @@ namespace Skyve.Systems;
 
 internal class ImageSystem : IImageService
 {
-	private readonly Dictionary<string, object> _lockObjects = new();
+	private readonly Dictionary<string, object> _lockObjects = [];
 	private readonly System.Timers.Timer _cacheClearTimer;
-	private readonly Dictionary<string, (Bitmap image, DateTime lastAccessed)> _cache = new();
+	private readonly Dictionary<string, (Bitmap image, DateTime lastAccessed)> _cache = [];
 	private readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(1);
 	private readonly HttpClient _httpClient = new();
 	private readonly ImageProcessor _imageProcessor;
@@ -32,6 +32,8 @@ internal class ImageSystem : IImageService
 		_cacheClearTimer.Elapsed += CacheClearTimer_Elapsed;
 		_cacheClearTimer.Start();
 		_notifier = notifier;
+
+		new BackgroundAction(ClearOldImages).Run();
 	}
 
 	private object LockObj(string path)
@@ -49,7 +51,7 @@ internal class ImageSystem : IImageService
 
 	public FileInfo File(string url, string? fileName = null)
 	{
-		var filePath = CrossIO.Combine(ISave.DocsFolder, "Thumbs", fileName ?? Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
+		var filePath = CrossIO.Combine(ISave.SaveFolder, "Thumbs", fileName ?? Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
 
 		return new FileInfo(filePath);
 	}
@@ -67,9 +69,9 @@ internal class ImageSystem : IImageService
 		return image is not null ? new(image) : null;
 	}
 
-	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true)
+	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true, bool isFilePath = false)
 	{
-		if (url is null || !await Ensure(url, localOnly, fileName, square))
+		if (url is null || !await Ensure(url, localOnly, fileName, square, isFilePath))
 		{
 			return null;
 		}
@@ -98,7 +100,7 @@ internal class ImageSystem : IImageService
 		return null;
 	}
 
-	public async Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true)
+	public async Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true, bool isFilePath = false)
 	{
 		if (url is null or "")
 		{
@@ -109,7 +111,22 @@ internal class ImageSystem : IImageService
 
 		lock (LockObj(url))
 		{
-			if (filePath.Exists)
+			if (isFilePath)
+			{
+				if (CrossIO.FileExists(url))
+				{
+					if (!filePath.Exists || new FileInfo(url).Length != filePath.Length)
+					{
+						Directory.CreateDirectory(CrossIO.Combine(ISave.SaveFolder, "Thumbs"));
+
+						System.IO.File.Copy(url, filePath.FullName, true);
+					}
+
+					return true;
+				}
+			}
+
+			else if (filePath.Exists)
 			{
 				return true;
 			}
@@ -263,7 +280,7 @@ internal class ImageSystem : IImageService
 
 			_cache.Clear();
 
-			foreach (var item in Directory.EnumerateFiles(CrossIO.Combine(ISave.DocsFolder, "Thumbs")))
+			foreach (var item in Directory.EnumerateFiles(CrossIO.Combine(ISave.SaveFolder, "Thumbs")))
 			{
 				try
 				{
@@ -271,6 +288,21 @@ internal class ImageSystem : IImageService
 				}
 				catch { }
 			}
+		}
+	}
+
+	private void ClearOldImages()
+	{
+		foreach (var item in new DirectoryInfo(CrossIO.Combine(ISave.SaveFolder, "Thumbs")).EnumerateFiles())
+		{
+			try
+			{
+				if (item.LastAccessTimeUtc < DateTime.Now.AddDays(-30))
+				{
+					CrossIO.DeleteFile(item.FullName);
+				}
+			}
+			catch { }
 		}
 	}
 }

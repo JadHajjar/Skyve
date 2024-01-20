@@ -3,5 +3,5 @@
 namespace Skyve.Domain.Systems;
 public interface IVersionUpdateService
 {
-	void Run(List<ILocalPackageWithContents> content);
+	void Run(List<IPackage> content);
 }

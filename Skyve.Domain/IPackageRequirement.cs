@@ -2,5 +2,6 @@
 
 public interface IPackageRequirement : IPackageIdentity
 {
-	bool Optional { get; }
+	bool IsDlc { get; }
+	bool IsOptional { get; }
 }

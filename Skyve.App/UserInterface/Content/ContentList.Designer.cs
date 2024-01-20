@@ -4,7 +4,7 @@ using Skyve.Domain.Enums;
 
 namespace Skyve.App.UserInterface.Panels;
 
-partial class ContentList<T>
+partial class ContentList
 {
 	/// <summary> 
 	/// Required designer variable.
@@ -41,9 +41,6 @@ partial class ContentList<T>
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
 			this.FLP_Search = new System.Windows.Forms.FlowLayoutPanel();
 			this.TB_Search = new SlickControls.SlickTextBox();
@@ -53,11 +50,9 @@ partial class ContentList<T>
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.DD_Sorting = new Skyve.App.UserInterface.Dropdowns.SortingDropDown();
 			this.TLP_MiddleBar = new System.Windows.Forms.TableLayoutPanel();
-			this.B_CompactList = new SlickControls.SlickIcon();
 			this.L_Counts = new System.Windows.Forms.Label();
 			this.L_FilterCount = new System.Windows.Forms.Label();
-			this.B_ListView = new SlickControls.SlickIcon();
-			this.B_GridView = new SlickControls.SlickIcon();
+			this.C_ViewTypeControl = new Skyve.App.UserInterface.Generic.ViewTypeControl();
 			this.P_FiltersContainer = new System.Windows.Forms.Panel();
 			this.P_Filters = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.OT_ModAsset = new Skyve.App.UserInterface.Generic.ThreeOptionToggle();
@@ -123,7 +118,7 @@ partial class ContentList<T>
 			this.FLP_Search.Margin = new System.Windows.Forms.Padding(0);
 			this.FLP_Search.Name = "FLP_Search";
 			this.TLP_Main.SetRowSpan(this.FLP_Search, 2);
-			this.FLP_Search.Size = new System.Drawing.Size(819, 31);
+			this.FLP_Search.Size = new System.Drawing.Size(819, 36);
 			this.FLP_Search.TabIndex = 0;
 			// 
 			// TB_Search
@@ -169,7 +164,7 @@ partial class ContentList<T>
 			this.B_Filters.Location = new System.Drawing.Point(43, 3);
 			this.B_Filters.Name = "B_Filters";
 			this.B_Filters.Selected = false;
-			this.B_Filters.Size = new System.Drawing.Size(83, 25);
+			this.B_Filters.Size = new System.Drawing.Size(118, 30);
 			this.B_Filters.SpaceTriggersClick = true;
 			this.B_Filters.TabIndex = 1;
 			this.B_Filters.Text = "ShowFilters";
@@ -179,7 +174,7 @@ partial class ContentList<T>
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer2, 4);
 			this.slickSpacer2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer2.Location = new System.Drawing.Point(0, 169);
+			this.slickSpacer2.Location = new System.Drawing.Point(0, 174);
 			this.slickSpacer2.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer2.Name = "slickSpacer2";
 			this.slickSpacer2.Size = new System.Drawing.Size(895, 2);
@@ -191,7 +186,7 @@ partial class ContentList<T>
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer1, 4);
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 203);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 211);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(895, 2);
@@ -207,7 +202,7 @@ partial class ContentList<T>
 			this.DD_Sorting.HideLabel = true;
 			this.DD_Sorting.Location = new System.Drawing.Point(842, 3);
 			this.DD_Sorting.Name = "DD_Sorting";
-			this.DD_Sorting.Size = new System.Drawing.Size(50, 22);
+			this.DD_Sorting.Size = new System.Drawing.Size(50, 0);
 			this.DD_Sorting.SkyvePage = Skyve.Domain.Enums.SkyvePage.None;
 			this.DD_Sorting.TabIndex = 2;
 			this.DD_Sorting.Text = "Sort By";
@@ -217,49 +212,30 @@ partial class ContentList<T>
 			// 
 			this.TLP_MiddleBar.AutoSize = true;
 			this.TLP_MiddleBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TLP_MiddleBar.ColumnCount = 7;
+			this.TLP_MiddleBar.ColumnCount = 5;
 			this.TLP_Main.SetColumnSpan(this.TLP_MiddleBar, 4);
 			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_MiddleBar.Controls.Add(this.B_CompactList, 4, 0);
 			this.TLP_MiddleBar.Controls.Add(this.L_Counts, 3, 0);
 			this.TLP_MiddleBar.Controls.Add(this.L_FilterCount, 1, 0);
-			this.TLP_MiddleBar.Controls.Add(this.B_ListView, 5, 0);
-			this.TLP_MiddleBar.Controls.Add(this.B_GridView, 6, 0);
+			this.TLP_MiddleBar.Controls.Add(this.C_ViewTypeControl, 4, 0);
 			this.TLP_MiddleBar.Dock = System.Windows.Forms.DockStyle.Top;
-			this.TLP_MiddleBar.Location = new System.Drawing.Point(0, 171);
+			this.TLP_MiddleBar.Location = new System.Drawing.Point(0, 176);
 			this.TLP_MiddleBar.Margin = new System.Windows.Forms.Padding(0);
 			this.TLP_MiddleBar.Name = "TLP_MiddleBar";
 			this.TLP_MiddleBar.RowCount = 1;
 			this.TLP_MiddleBar.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_MiddleBar.Size = new System.Drawing.Size(895, 32);
+			this.TLP_MiddleBar.Size = new System.Drawing.Size(895, 35);
 			this.TLP_MiddleBar.TabIndex = 6;
-			// 
-			// B_CompactList
-			// 
-			this.B_CompactList.ActiveColor = null;
-			this.B_CompactList.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.B_CompactList.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "I_CompactList";
-			this.B_CompactList.ImageName = dynamicIcon4;
-			this.B_CompactList.Location = new System.Drawing.Point(790, 1);
-			this.B_CompactList.Margin = new System.Windows.Forms.Padding(1);
-			this.B_CompactList.Name = "B_CompactList";
-			this.B_CompactList.Size = new System.Drawing.Size(33, 30);
-			this.B_CompactList.SpaceTriggersClick = true;
-			this.B_CompactList.TabIndex = 10;
-			this.B_CompactList.Click += new System.EventHandler(this.B_CompactList_Click);
 			// 
 			// L_Counts
 			// 
 			this.L_Counts.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(742, 8);
+			this.L_Counts.Location = new System.Drawing.Point(692, 9);
 			this.L_Counts.Name = "L_Counts";
 			this.L_Counts.Size = new System.Drawing.Size(44, 16);
 			this.L_Counts.TabIndex = 1;
@@ -270,50 +246,30 @@ partial class ContentList<T>
 			// 
 			this.L_FilterCount.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_FilterCount.AutoSize = true;
-			this.L_FilterCount.Location = new System.Drawing.Point(3, 8);
+			this.L_FilterCount.Location = new System.Drawing.Point(3, 9);
 			this.L_FilterCount.Name = "L_FilterCount";
 			this.L_FilterCount.Size = new System.Drawing.Size(44, 16);
 			this.L_FilterCount.TabIndex = 2;
 			this.L_FilterCount.Text = "label1";
 			this.L_FilterCount.UseMnemonic = false;
 			// 
-			// B_ListView
+			// C_ViewTypeControl
 			// 
-			this.B_ListView.ActiveColor = null;
-			this.B_ListView.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.B_ListView.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon5.Name = "I_List";
-			this.B_ListView.ImageName = dynamicIcon5;
-			this.B_ListView.Location = new System.Drawing.Point(825, 1);
-			this.B_ListView.Margin = new System.Windows.Forms.Padding(1);
-			this.B_ListView.Name = "B_ListView";
-			this.B_ListView.Selected = true;
-			this.B_ListView.Size = new System.Drawing.Size(34, 30);
-			this.B_ListView.SpaceTriggersClick = true;
-			this.B_ListView.TabIndex = 9;
-			this.B_ListView.Click += new System.EventHandler(this.B_ListView_Click);
-			// 
-			// B_GridView
-			// 
-			this.B_GridView.ActiveColor = null;
-			this.B_GridView.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.B_GridView.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon6.Name = "I_Grid";
-			this.B_GridView.ImageName = dynamicIcon6;
-			this.B_GridView.Location = new System.Drawing.Point(861, 1);
-			this.B_GridView.Margin = new System.Windows.Forms.Padding(1);
-			this.B_GridView.Name = "B_GridView";
-			this.B_GridView.Size = new System.Drawing.Size(33, 30);
-			this.B_GridView.SpaceTriggersClick = true;
-			this.B_GridView.TabIndex = 8;
-			this.B_GridView.Click += new System.EventHandler(this.B_GridView_Click);
+			this.C_ViewTypeControl.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.C_ViewTypeControl.Location = new System.Drawing.Point(742, 3);
+			this.C_ViewTypeControl.Name = "C_ViewTypeControl";
+			this.C_ViewTypeControl.Size = new System.Drawing.Size(150, 29);
+			this.C_ViewTypeControl.TabIndex = 3;
+			this.C_ViewTypeControl.CompactClicked += new System.EventHandler(this.B_CompactList_Click);
+			this.C_ViewTypeControl.ListClicked += new System.EventHandler(this.B_ListView_Click);
+			this.C_ViewTypeControl.GridClicked += new System.EventHandler(this.B_GridView_Click);
 			// 
 			// P_FiltersContainer
 			// 
 			this.TLP_Main.SetColumnSpan(this.P_FiltersContainer, 3);
 			this.P_FiltersContainer.Controls.Add(this.P_Filters);
 			this.P_FiltersContainer.Dock = System.Windows.Forms.DockStyle.Top;
-			this.P_FiltersContainer.Location = new System.Drawing.Point(0, 31);
+			this.P_FiltersContainer.Location = new System.Drawing.Point(0, 36);
 			this.P_FiltersContainer.Margin = new System.Windows.Forms.Padding(0);
 			this.P_FiltersContainer.Name = "P_FiltersContainer";
 			this.P_FiltersContainer.Size = new System.Drawing.Size(895, 138);
@@ -396,8 +352,8 @@ partial class ContentList<T>
 			this.OT_Enabled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.OT_Enabled.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Enabled.Image1 = "I_Checked";
-			this.OT_Enabled.Image2 = "I_Checked_OFF";
+			this.OT_Enabled.Image1 = "I_Ok";
+			this.OT_Enabled.Image2 = "I_Enabled";
 			this.OT_Enabled.Location = new System.Drawing.Point(12, 65);
 			this.OT_Enabled.Name = "OT_Enabled";
 			this.OT_Enabled.Option1 = "Enabled";
@@ -411,8 +367,8 @@ partial class ContentList<T>
 			this.OT_Included.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.OT_Included.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Included.Image1 = "I_Ok";
-			this.OT_Included.Image2 = "I_Enabled";
+			this.OT_Included.Image1 = "I_Add";
+			this.OT_Included.Image2 = "I_X";
 			this.OT_Included.Location = new System.Drawing.Point(12, 39);
 			this.OT_Included.Name = "OT_Included";
 			this.OT_Included.Option1 = "Included";
@@ -427,8 +383,8 @@ partial class ContentList<T>
 			this.I_ClearFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.I_ClearFilters.ColorStyle = Extensions.ColorStyle.Red;
 			this.I_ClearFilters.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon7.Name = "I_ClearFilter";
-			this.I_ClearFilters.ImageName = dynamicIcon7;
+			dynamicIcon4.Name = "I_ClearFilter";
+			this.I_ClearFilters.ImageName = dynamicIcon4;
 			this.I_ClearFilters.Location = new System.Drawing.Point(853, 12);
 			this.I_ClearFilters.Name = "I_ClearFilters";
 			this.I_ClearFilters.Size = new System.Drawing.Size(30, 21);
@@ -578,7 +534,5 @@ partial class ContentList<T>
 	public System.Windows.Forms.FlowLayoutPanel FLP_Search;
 	internal ThreeOptionToggle OT_ModAsset;
 	public System.Windows.Forms.TableLayoutPanel TLP_Main;
-	protected SlickIcon B_ListView;
-	protected SlickIcon B_GridView;
-	protected SlickIcon B_CompactList;
+	private ViewTypeControl C_ViewTypeControl;
 }

@@ -139,7 +139,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		PB_Loading.Loading = true;
 
 		var mods = _userService.User.Manager ?
-			await _workshopService.QueryFilesAsync(PackageSorting.UpdateTime, requiredTags: new[] { "Mod" }, all: true) :
+			await _workshopService.QueryFilesAsync(WorkshopQuerySorting.DateUpdated, requiredTags: new[] { "Mod" }, all: true) :
 			await _workshopService.GetWorkshopItemsByUserAsync(_userService.User.Id ?? 0);
 
 		foreach (var mod in mods)
@@ -248,7 +248,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 				}
 			}
 
-			postPackage.BlackListId = catalogue?.BlackListedIds?.Contains(postPackage.SteamId) ?? false;
+			postPackage.BlackListId = catalogue?.BlackListedIds?.Contains(postPackage.Id) ?? false;
 			postPackage.BlackListName = catalogue?.BlackListedNames?.Contains(postPackage.Name ?? string.Empty) ?? false;
 
 			SetData(postPackage);
@@ -471,14 +471,14 @@ public partial class PC_CompatibilityManagement : PanelContent
 			return false;
 		}
 
-		postPackage!.SteamId = CurrentPackage!.Id;
-		postPackage.FileName = Path.GetFileName(CurrentPackage.LocalParentPackage?.Mod?.FilePath ?? string.Empty).IfEmpty(postPackage.FileName);
+		postPackage!.Id = CurrentPackage!.Id;
+		postPackage.FileName = Path.GetFileName(CurrentPackage.GetLocalPackageIdentity()?.FilePath ?? string.Empty).IfEmpty(postPackage.FileName);
 		postPackage.Name = CurrentPackage.Name;
 		postPackage.ReviewDate = DateTime.UtcNow;
 		postPackage.AuthorId = (ulong)(CurrentPackage.GetWorkshopInfo()?.Author?.Id ?? 0UL);
 		postPackage.Author = new Author
 		{
-			SteamId = postPackage.AuthorId,
+			Id = postPackage.AuthorId,
 			Name = CurrentPackage.GetWorkshopInfo()?.Author?.Name,
 		};
 

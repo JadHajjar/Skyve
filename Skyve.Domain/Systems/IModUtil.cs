@@ -1,11 +1,19 @@
-﻿namespace Skyve.Domain.Systems;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Skyve.Domain.Systems;
 public interface IModUtil
 {
-	bool IsIncluded(IMod mod);
-	bool IsEnabled(IMod mod);
-	void SetIncluded(IMod mod, bool value);
-	void SetEnabled(IMod mod, bool value);
+	bool IsIncluded(IPackageIdentity mod, int? playsetId = null);
+	bool IsEnabled(IPackageIdentity mod, int? playsetId = null);
+	Task SetIncluded(IPackageIdentity mod, bool value, int? playsetId = null);
+	Task SetEnabled(IPackageIdentity mod, bool value, int? playsetId = null);
+	Task SetIncluded(IEnumerable<IPackageIdentity> mods, bool value, int? playsetId = null);
+	Task SetEnabled(IEnumerable<IPackageIdentity> mods, bool value, int? playsetId = null);
 	void SaveChanges();
-	IMod? GetMod(ILocalPackageWithContents package);
+	bool GetModInfo(string folder, out string? modDll, out Version? version);
 	int GetLoadOrder(IPackage package);
+	Task Initialize();
+	bool IsEnabling(IPackageIdentity package);
 }

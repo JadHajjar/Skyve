@@ -12,13 +12,12 @@ public partial class PC_HelpAndLogs : PanelContent
 {
 	private readonly ILogUtil _logUtil;
 	private readonly ILogger _logger;
-	private readonly ILocationManager _locationManager;
+	private readonly ISettings _settings;
+	private readonly ILocationService _locationManager;
 
 	public PC_HelpAndLogs() : base(true)
 	{
-		_logUtil = ServiceCenter.Get<ILogUtil>();
-		_logger = ServiceCenter.Get<ILogger>();
-		_locationManager = ServiceCenter.Get<ILocationManager>();
+		ServiceCenter.Get(out _logger, out _logUtil, out _settings, out _locationManager);
 
 		InitializeComponent();
 
@@ -38,7 +37,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		if (CrossIO.CurrentPlatform is not Platform.Windows)
 		{
 			B_SaveZip.ButtonType = ButtonType.Active;
-			B_CopyLogFile.Visible = B_CopyZip.Visible = B_LotLogCopy.Visible = false;
+			B_CopyZip.Visible = false;
 		}
 	}
 
@@ -72,9 +71,9 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 		}
 
-		B_CopyLogFile.Margin = B_LotLogCopy.Margin = B_SaveZip.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.UIScale);
-		slickSpacer1.Height = slickSpacer2.Height = slickSpacer3.Height = slickSpacer4.Height = (int)(1.5 * UI.FontScale);
-		slickSpacer1.Margin = slickSpacer2.Margin = slickSpacer3.Margin = slickSpacer4.Margin = UI.Scale(new Padding(5), UI.UIScale);
+		B_SaveZip.Margin = UI.Scale(new Padding(10, 7, 10, 10), UI.UIScale);
+		slickSpacer1.Height =  (int)(1.5 * UI.FontScale);
+		slickSpacer1.Margin =  UI.Scale(new Padding(5), UI.UIScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -129,7 +128,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		{
 			try
 			{
-				var folder = CrossIO.Combine(_locationManager.SkyveAppDataPath, "Support Logs");
+				var folder = CrossIO.Combine(_locationManager.SkyveSettingsPath, "Support Logs");
 
 				Directory.CreateDirectory(folder);
 
@@ -220,19 +219,9 @@ public partial class PC_HelpAndLogs : PanelContent
 		PlatformUtil.OpenFolder(Path.GetDirectoryName(_logUtil.GameLogFile));
 	}
 
-	private void B_CopyLogFile_Click(object sender, EventArgs e)
-	{
-		PlatformUtil.SetFileInClipboard(_logUtil.GameLogFile);
-	}
-
 	private void B_LotLog_Click(object sender, EventArgs e)
 	{
 		PlatformUtil.OpenFolder(Path.GetDirectoryName(_logger.LogFilePath));
-	}
-
-	private void B_LotLogCopy_Click(object sender, EventArgs e)
-	{
-		PlatformUtil.SetFileInClipboard(_logger.LogFilePath);
 	}
 
 	private void B_Discord_Click(object sender, EventArgs e)
@@ -267,7 +256,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_OpenAppData_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenFolder(_locationManager.AppDataPath);
+		PlatformUtil.OpenFolder(_settings.FolderSettings.AppDataPath);
 	}
 
 	private async void B_Troubleshoot_Click(object sender, EventArgs e)

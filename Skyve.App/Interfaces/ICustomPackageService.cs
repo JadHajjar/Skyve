@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace Skyve.App.Interfaces;
 public interface ICustomPackageService
 {
-	SlickStripItem[] GetRightClickMenuItems(IEnumerable<IPackage> packages);
-	SlickStripItem[] GetRightClickMenuItems(IPackage package);
+	SlickStripItem[] GetRightClickMenuItems(IEnumerable<IPackageIdentity> packages);
+	SlickStripItem[] GetRightClickMenuItems(IPackageIdentity package);
 }

@@ -1,19 +1,21 @@
 ﻿using Skyve.App.UserInterface.Dropdowns;
 
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
-public partial class PC_ContentList<T> : PanelContent where T : IPackage
+public partial class PC_ContentList : PanelContent
 {
-	protected readonly ContentList<T> LC_Items;
+	protected readonly ContentList LC_Items;
+	private readonly bool _itemsReady;
 
 	public virtual SkyvePage Page { get; }
 
 	public PC_ContentList() : this(false) { }
 
-	public PC_ContentList(bool load) : base(load)
+	public PC_ContentList(bool load, bool itemsReady = false) : base(load)
 	{
-		InitializeComponent();
+		Padding = new Padding(0, 30, 0, 0);
 
 		LC_Items = new(Page, !load, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
 		{
@@ -31,16 +33,23 @@ public partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		Controls.Add(LC_Items);
 
-		if (!load)
+		if (!load && ServiceCenter.Get<INotifier>().IsContentLoaded)
 		{
-			if (!ServiceCenter.Get<INotifier>().IsContentLoaded)
-			{
-				LC_Items.ListControl.Loading = true;
-			}
-			else
-			{
-				LC_Items.RefreshItems();
-			}
+			_itemsReady = true;
+		}
+		else
+		{
+			_itemsReady = itemsReady;
+		}
+	}
+
+	protected override async void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		if (_itemsReady)
+		{
+			await LC_Items.RefreshItems();
 		}
 	}
 
@@ -57,19 +66,19 @@ public partial class PC_ContentList<T> : PanelContent where T : IPackage
 		return false;
 	}
 
-	protected virtual IEnumerable<T> GetItems()
+	protected virtual Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
 		throw new NotImplementedException();
 	}
 
-	protected virtual void SetIncluded(IEnumerable<T> filteredItems, bool included)
+	protected virtual async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, included);
+		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems, included);
 	}
 
-	protected virtual void SetEnabled(IEnumerable<T> filteredItems, bool enabled)
+	protected virtual async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, enabled);
+		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems, enabled);
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()

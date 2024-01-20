@@ -21,8 +21,8 @@ public class CompatibilityManager : ICompatibilityManager
 	private const string SNOOZE_FILE = "CompatibilitySnoozed.json";
 
 	private readonly DelayedAction _delayedReportCache;
-	private readonly Dictionary<IPackage, CompatibilityInfo> _cache = new(new IPackageEqualityComparer());
-	private readonly List<SnoozedItem> _snoozedItems = new();
+	private readonly Dictionary<IPackageIdentity, CompatibilityInfo> _cache = new(new IPackageEqualityComparer());
+	private readonly List<SnoozedItem> _snoozedItems = [];
 	private readonly Regex _bracketsRegex = new(@"[\[\(](.+?)[\]\)]", RegexOptions.Compiled);
 	private readonly Regex _urlRegex = new(@"(https?|ftp)://(?:www\.)?([\w-]+(?:\.[\w-]+)*)(?:/[^?\s]*)?(?:\?[^#\s]*)?(?:#.*)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
@@ -175,7 +175,7 @@ public class CompatibilityManager : ICompatibilityManager
 		catch { }
 	}
 
-	public void Start(List<ILocalPackageWithContents> packages)
+	public void Start(List<IPackage> packages)
 	{
 		try
 		{
@@ -282,7 +282,7 @@ public class CompatibilityManager : ICompatibilityManager
 			|| (package.GetWorkshopInfo()?.IsIncompatible ?? false);
 	}
 
-	public ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false, bool cacheOnly = false)
+	public ICompatibilityInfo GetCompatibilityInfo(IPackageIdentity package, bool noCache = false, bool cacheOnly = false)
 	{
 		if (!FirstLoadComplete)
 		{
@@ -302,24 +302,24 @@ public class CompatibilityManager : ICompatibilityManager
 		return new CompatibilityInfo(package, GetPackageData(package));
 	}
 
-	public CompatibilityPackageData GetAutomatedReport(IPackage package)
+	public CompatibilityPackageData GetAutomatedReport(IPackageIdentity package)
 	{
 		var info = new CompatibilityPackageData
 		{
-			Stability = package.IsMod ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
-			SteamId = package.Id,
+			Stability = package.GetPackage()?.IsCodeMod == true ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
+			Id = package.Id,
 			Name = package.Name,
-			FileName = package.LocalParentPackage?.Mod?.FilePath,
-			Links = new(),
-			Interactions = new(),
-			Statuses = new(),
+			FileName = package.GetLocalPackageIdentity()?.FilePath,
+			Links = [],
+			Interactions = [],
+			Statuses = [],
 		};
 
 		var workshopInfo = package.GetWorkshopInfo();
 
 		if (workshopInfo?.Requirements.Any() ?? false)
 		{
-			info.Interactions.AddRange(workshopInfo.Requirements.GroupBy(x => x.Optional).Select(o =>
+			info.Interactions.AddRange(workshopInfo.Requirements.GroupBy(x => x.IsOptional).Select(o =>
 				new PackageInteraction
 				{
 					Type = o.Key ? InteractionType.OptionalPackages : InteractionType.RequiredPackages,
@@ -413,20 +413,22 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public bool IsUserVerified(IUser author)
 	{
+#if CS2
+		return false;
+#else
 		return CompatibilityData.Authors.TryGet(ulong.Parse(author.Id?.ToString()))?.Verified ?? false;
+#endif
 	}
 
 	public IndexedPackage? GetPackageData(IPackageIdentity identity)
 	{
-		var steamId = identity.Id;
-
-		if (steamId > 0)
+		if (identity.Id > 0)
 		{
-			var packageData = CompatibilityData.Packages.TryGet(steamId);
+			var packageData = CompatibilityData.Packages.TryGet(identity.Id);
 
-			if (packageData is null && identity is IPackage package)
+			if (packageData is null)
 			{
-				packageData = new IndexedPackage(GetAutomatedReport(package));
+				packageData = new IndexedPackage(GetAutomatedReport(identity));
 
 				packageData.Load(CompatibilityData.Packages);
 			}
@@ -439,6 +441,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)
 	{
+		throw new NotImplementedException();
 		if (!CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
 		{
 			return package;
@@ -463,16 +466,16 @@ public class CompatibilityManager : ICompatibilityManager
 		return package;
 	}
 
-	internal IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withAlternativesAndSuccessors)
+	internal IEnumerable<IPackage> FindPackage(IndexedPackage package, bool withAlternativesAndSuccessors)
 	{
-		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
+		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Package.Id));
 
 		if (localPackage is not null)
 		{
 			yield return localPackage;
 		}
 
-		localPackage = _packageManager.GetModsByName(Path.GetFileName(package.Package.FileName)).FirstOrDefault(x => x.IsLocal)?.LocalParentPackage;
+		localPackage = _packageManager.GetModsByName(Path.GetFileName(package.Package.FileName)).FirstOrDefault(x => x.IsLocal);
 
 		if (localPackage is not null)
 		{

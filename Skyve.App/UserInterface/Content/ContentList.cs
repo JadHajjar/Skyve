@@ -5,37 +5,39 @@ using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
-public partial class ContentList<T> : SlickControl where T : IPackage
+public partial class ContentList : SlickControl
 {
+	public delegate Task ApplyAll(IEnumerable<IPackageIdentity> filteredItems, bool included);
+	public delegate Task<IEnumerable<IPackageIdentity>> GetAllItems();
+
 	private bool clearingFilters = true;
 	private bool firstFilterPassed;
 	private readonly DelayedAction _delayedSearch;
 	private readonly DelayedAction _delayedAuthorTagsRefresh;
-	public readonly ItemListControl<T> ListControl;
-	private readonly IncludeAllButton<T> I_Actions;
+	public readonly ItemListControl ListControl;
+	private readonly IncludeAllButton I_Actions;
 	protected int UsageFilteredOut;
 	private bool searchEmpty = true;
-	private readonly List<string> searchTermsOr = new();
-	private readonly List<string> searchTermsAnd = new();
-	private readonly List<string> searchTermsExclude = new();
+	private readonly List<string> searchTermsOr = [];
+	private readonly List<string> searchTermsAnd = [];
+	private readonly List<string> searchTermsExclude = [];
 
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
 	private readonly ICompatibilityManager _compatibilityManager;
-	private readonly IPlaysetManager _profileManager;
+	private readonly IPlaysetManager _playsetManager;
 	private readonly ITagsService _tagUtil;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IDownloadService _downloadService;
 
-	private readonly Func<IEnumerable<T>> GetItems;
-	private readonly Action<IEnumerable<T>, bool> SetIncluded;
-	private readonly Action<IEnumerable<T>, bool> SetEnabled;
+	private readonly GetAllItems GetItems;
+	private readonly ApplyAll SetIncluded;
+	private readonly ApplyAll SetEnabled;
 	private readonly Func<LocaleHelper.Translation> GetItemText;
 	private readonly Func<string> GetCountText;
 
@@ -43,14 +45,14 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 	public int ItemCount => ListControl.ItemCount;
 
 	public bool IsGenericPage { get => ListControl.IsGenericPage; set => ListControl.IsGenericPage = value; }
-	public IEnumerable<T> Items => ListControl.Items;
+	public IEnumerable<IPackageIdentity> Items => ListControl.Items;
 
-	public void Remove(T item)
+	public void Remove(IPackageIdentity item)
 	{
 		ListControl.Remove(item);
 	}
 
-	public ContentList(SkyvePage page, bool loaded, Func<IEnumerable<T>> getItems, Action<IEnumerable<T>, bool> setIncluded, Action<IEnumerable<T>, bool> setEnabled, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
+	public ContentList(SkyvePage page, bool loaded, GetAllItems getItems, ApplyAll setIncluded, ApplyAll setEnabled, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
 	{
 		Page = page;
 		GetItems = getItems;
@@ -59,28 +61,34 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		GetItemText = getItemText;
 		GetCountText = getCountText;
 
-		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _profileManager, out _tagUtil, out _packageUtil, out _downloadService);
+		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _playsetManager, out _tagUtil, out _packageUtil, out _downloadService);
 
-		ListControl = new(Page) { Dock = DockStyle.Fill, Margin = new() };
+		ListControl = _settings.UserSettings.ExtendedListInfo
+			? new ItemListControl.Complex(Page) { Dock = DockStyle.Fill, Margin = new() }
+			: new ItemListControl.Simple(Page) { Dock = DockStyle.Fill, Margin = new() };
 
 		InitializeComponent();
 
 		DD_Sorting.SkyvePage = Page;
 
-		I_Actions = new IncludeAllButton<T>(() => ListControl.FilteredItems.ToList());
+		I_Actions = new IncludeAllButton(() => ListControl.FilteredItems.ToList());
 		I_Actions.ActionClicked += I_Actions_Click;
-		I_Actions.IncludeAllClicked += IncludeAll;
-		I_Actions.ExcludeAllClicked += ExcludeAll;
-		I_Actions.EnableAllClicked += EnableAll;
-		I_Actions.DisableAllClicked += DisableAll;
-		I_Actions.SubscribeAllClicked += SubscribeAll;
+		I_Actions.IncludeAllClicked = IncludeAll;
+		I_Actions.ExcludeAllClicked = ExcludeAll;
+		I_Actions.EnableAllClicked = EnableAll;
+		I_Actions.DisableAllClicked = DisableAll;
+#if CS2
+		I_Actions.SubscribeAllClicked = IncludeAll;
+#else
+		I_Actions.SubscribeAllClicked = SubscribeAll;
+#endif
 
 		TLP_Main.Controls.Add(ListControl, 0, TLP_Main.RowCount - 1);
 		TLP_Main.SetColumnSpan(ListControl, TLP_Main.ColumnCount);
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
-		OT_Workshop.Visible = !_profileManager.CurrentPlayset.DisableWorkshop;
-		OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
+		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !_playsetManager.CurrentPlayset.DisableWorkshop;
+		//OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
 
 		ListControl.FilterRequested += FilterChanged;
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
@@ -94,24 +102,29 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		ListControl.AddToSearch += LC_Items_AddToSearch;
 		ListControl.OpenWorkshopSearch += LC_Items_OpenWorkshopSearch;
 		ListControl.OpenWorkshopSearchInBrowser += LC_Items_OpenWorkshopSearchInBrowser;
-		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
+		ListControl.SelectedItemsChanged += ListControl_SelectedItemsChanged;
 
 		_delayedSearch = new(350, DelayedSearch);
 		_delayedAuthorTagsRefresh = new(350, RefreshAuthorAndTags);
 
-		if (!_settings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
-		{
-			OT_Enabled.Hide();
-			P_Filters.SetRow(OT_Workshop, 2);
-			P_Filters.SetRow(OT_ModAsset, 3);
-		}
+		//if (!_settings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
+		//{
+		//	OT_Enabled.Hide();
+		//	P_Filters.SetRow(OT_Workshop, 2);
+		//	P_Filters.SetRow(OT_ModAsset, 3);
+		//}
 
 		clearingFilters = false;
 
 		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
-		B_GridView.Selected = ListControl.GridView;
-		B_ListView.Selected = !ListControl.GridView && !ListControl.CompactList;
-		B_CompactList.Selected = !ListControl.GridView && ListControl.CompactList;
+		C_ViewTypeControl.GridView = ListControl.GridView;
+		C_ViewTypeControl.CompactList = ListControl.CompactList;
+
+#if CS2
+		OT_Workshop.Image2 = "I_Paradox";
+#else
+		OT_Workshop.Image2 = "I_Steam";
+#endif
 
 		if (loaded)
 		{
@@ -130,15 +143,18 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		{
 			new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
 		}
+	}
 
-		SlickTip.SetTo(B_GridView, "Switch to Grid-View");
-		SlickTip.SetTo(B_CompactList, "Switch to Compact-View");
-		SlickTip.SetTo(B_ListView, "Switch to List-View");
+	private void ListControl_SelectedItemsChanged(object sender, EventArgs e)
+	{
+		RefreshCounts();
+
+		I_Actions.IsSelected = ListControl.SelectedItemsCount > 0;
 	}
 
 	protected void RefreshAuthorAndTags()
 	{
-		var items = new List<T>(ListControl.Items);
+		var items = new List<IPackageIdentity>(ListControl.Items);
 
 		DD_Author.SetItems(items);
 		DD_Tags.Items = _tagUtil.GetDistinctTags().ToArray();
@@ -146,12 +162,16 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 	private void LC_Items_OpenWorkshopSearch()
 	{
-		Program.MainForm.PushPanel(null, new PC_SelectPackage(TB_Search.Text, this is PC_Mods ? ThreeOptionToggle.Value.Option1 : this is PC_Assets ? ThreeOptionToggle.Value.Option2 : ThreeOptionToggle.Value.None));
+		Program.MainForm.PushPanel(null, new PC_SelectPackage(TB_Search.Text, Page is SkyvePage.Mods ? ThreeOptionToggle.Value.Option1 : Page is SkyvePage.Assets ? ThreeOptionToggle.Value.Option2 : ThreeOptionToggle.Value.None));
 	}
 
 	private void LC_Items_OpenWorkshopSearchInBrowser()
 	{
-		PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/browse/?appid=255710&searchtext={WebUtility.UrlEncode(TB_Search.Text)}&browsesort=trend&section=readytouseitems&actualsort=trend&p=1&days=365" + (this is PC_Mods ? "&requiredtags%5B0%5D=Mod" : ""));
+#if CS2
+		throw new NotImplementedException();
+#else
+		PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/browse/?appid=255710&searchtext={WebUtility.UrlEncode(TB_Search.Text)}&browsesort=trend&section=readytouseitems&actualsort=trend&p=1&days=365" + (Page is SkyvePage.Mods ? "&requiredtags%5B0%5D=Mod" : ""));
+#endif
 	}
 
 	private void LC_Items_AddToSearch(string obj)
@@ -218,14 +238,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 	private void LC_Items_CompatibilityReportSelected(NotificationType obj)
 	{
-		if ((int)DD_ReportSeverity.SelectedItem == (int)obj)
-		{
-			DD_ReportSeverity.SelectedItem = CompatibilityNotificationFilter.Any;
-		}
-		else
-		{
-			DD_ReportSeverity.SelectedItem = (CompatibilityNotificationFilter)obj;
-		}
+		DD_ReportSeverity.SelectedItem = (int)DD_ReportSeverity.SelectedItem == (int)obj ? CompatibilityNotificationFilter.Any : (CompatibilityNotificationFilter)obj;
 
 		if (P_FiltersContainer.Height == 0)
 		{
@@ -235,14 +248,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 	private void LC_Items_DownloadStatusSelected(DownloadStatus obj)
 	{
-		if (DD_PackageStatus.SelectedItem == (DownloadStatusFilter)(obj + 1))
-		{
-			DD_PackageStatus.SelectedItem = DownloadStatusFilter.Any;
-		}
-		else
-		{
-			DD_PackageStatus.SelectedItem = (DownloadStatusFilter)(obj + 1);
-		}
+		DD_PackageStatus.SelectedItem = DD_PackageStatus.SelectedItem == (DownloadStatusFilter)(obj + 1) ? DownloadStatusFilter.Any : (DownloadStatusFilter)(obj + 1);
 
 		if (P_FiltersContainer.Height == 0)
 		{
@@ -264,7 +270,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 	{
 		DD_PackageStatus.Text = Locale.PackageStatus;
 		DD_ReportSeverity.Text = Locale.CompatibilityStatus;
-		DD_Tags.Text = Locale.Tags;
+		DD_Tags.Text = LocaleSlickUI.Tags;
 		DD_Profile.Text = Locale.PlaysetFilter;
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
 		DR_ServerTime.Text = Locale.DateUpdated;
@@ -308,12 +314,12 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
 
+		TLP_MiddleBar.Padding = UI.Scale(new Padding(3, 0, 3, 0), UI.FontScale);
+
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
 		L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
 		TB_Search.Width = (int)(250 * UI.FontScale);
-
-		B_ListView.Size = B_GridView.Size = B_CompactList.Size = UI.Scale(new Size(22, 22), UI.FontScale);
 
 		var size = (int)(30 * UI.FontScale) - 6;
 
@@ -326,7 +332,8 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		if (e is null || e.Button is MouseButtons.Left or MouseButtons.None)
 		{
 			B_Filters.Text = P_FiltersContainer.Height == 0 ? "HideFilters" : "ShowFilters";
-			AnimationHandler.Animate(P_FiltersContainer, P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty, 3, AnimationOption.IgnoreWidth);
+			P_FiltersContainer.Size = P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty;
+			//AnimationHandler.Animate(P_FiltersContainer, P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty, 3, AnimationOption.IgnoreWidth);
 			P_FiltersContainer.AutoSize = false;
 		}
 		else if (e?.Button == MouseButtons.Middle)
@@ -335,19 +342,20 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		}
 	}
 
-	private void CentralManager_ContentLoaded()
+	private async void CentralManager_ContentLoaded()
 	{
-		RefreshItems();
+		await RefreshItems();
 	}
 
-	public void RefreshItems()
+	public async Task RefreshItems()
 	{
-		if (ListControl.Loading)
-		{
-			ListControl.Loading = false;
-		}
+		ListControl.Loading = true;
 
-		ListControl.SetItems(GetItems());
+		var items = await GetItems();
+
+		ListControl.Loading = false;
+
+		ListControl.SetItems(items);
 
 		this.TryInvoke(RefreshCounts);
 
@@ -368,7 +376,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 	{
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.Sorting = (int)DD_Sorting.SelectedItem;
-		_settings.SessionSettings.Save();
+		_settings.UserSettings.Save();
 
 		ListControl.SetSorting(DD_Sorting.SelectedItem, ListControl.SortDescending);
 	}
@@ -381,16 +389,19 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		I_Refresh.Loading = false;
 	}
 
-	private void FilterChanged(object sender, EventArgs e)
+	private async void FilterChanged(object sender, EventArgs e)
 	{
 		if (!clearingFilters)
 		{
 			I_Refresh.Loading = true;
-			_delayedSearch.Run();
 
 			if (sender == I_Refresh)
 			{
-				ListControl.SortingChanged();
+				await RefreshItems();
+			}
+			else
+			{
+				_delayedSearch.Run();
 			}
 		}
 	}
@@ -403,11 +414,11 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		FilterChanged(sender, e);
 	}
 
-	private bool IsFilteredOut(T item)
+	private bool IsFilteredOut(IPackageIdentity item)
 	{
-		if (!ListControl.IsGenericPage && _profileManager.CurrentPlayset.DisableWorkshop)
+		if (!ListControl.IsGenericPage && (_playsetManager.CurrentPlayset?.DisableWorkshop ?? false))
 		{
-			if (item is ILocalPackage && !item.IsLocal)
+			if (item.GetPackage()?.IsLocal == true)
 			{
 				return true;
 			}
@@ -418,9 +429,9 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 			return true;
 		}
 
-		if (_profileManager.CurrentPlayset.Usage > 0)
+		if (_playsetManager.CurrentPlayset?.Usage > 0)
 		{
-			if (!(_compatibilityManager.GetPackageInfo(item)?.Usage.HasFlag(_profileManager.CurrentPlayset.Usage) ?? true))
+			if (!(_compatibilityManager.GetPackageInfo(item)?.Usage.HasFlag(_playsetManager.CurrentPlayset.Usage) ?? true))
 			{
 				UsageFilteredOut++;
 				return true;
@@ -434,7 +445,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		if (OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.IsLocal)
+			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.GetPackage()?.IsLocal)
 			{
 				return true;
 			}
@@ -442,7 +453,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.LocalPackage is not null && (item.LocalPackage.IsIncluded(out var partiallyIncluded) || partiallyIncluded)))
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.IsIncluded(out var partiallyIncluded) || partiallyIncluded))
 			{
 				return true;
 			}
@@ -450,7 +461,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (!item.IsMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.LocalPackage?.IsEnabled()))
+			if (item.GetPackage()?.IsCodeMod == false || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.GetLocalPackage()?.IsEnabled()))
 			{
 				return true;
 			}
@@ -458,7 +469,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsMod)
+			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.GetPackage()?.IsCodeMod)
 			{
 				return true;
 			}
@@ -476,7 +487,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 			//else
 			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
 			{
-				if (item.IsLocal || _packageUtil.GetStatus(item, out _) <= DownloadStatus.OK)
+				if (item.GetPackage()?.IsLocal == true || _packageUtil.GetStatus(item, out _) <= DownloadStatus.OK)
 				{
 					return true;
 				}
@@ -509,7 +520,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 			}
 		}
 
-		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.LocalPackage?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
+		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.GetLocalPackage()?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
 		{
 			return true;
 		}
@@ -537,7 +548,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
 		{
-			return !_profileManager.IsPackageIncludedInPlayset(item, DD_Profile.SelectedItem);
+			return !_packageUtil.IsIncluded(item, DD_Profile.SelectedItem.Id);
 		}
 
 		if (!searchEmpty)
@@ -580,14 +591,14 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		return false;
 	}
 
-	private bool Search(string searchTerm, T item)
+	private bool Search(string searchTerm, IPackageIdentity item)
 	{
-		return searchTerm.SearchCheck(item.ToString())
+		return searchTerm.SearchCheck(item.Name)
 			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)
-			|| (!item.IsLocal ? item.Id.ToString() : Path.GetFileName(item.LocalParentPackage?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+			|| (!item.IsLocal() ? item.Id.ToString() : Path.GetFileName(item.GetLocalPackage()?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
-	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<T> e)
+	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<IPackageIdentity> e)
 	{
 		e.DoNotDraw = IsFilteredOut(e.Item);
 	}
@@ -623,14 +634,27 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
+#if CS2
+		if (Regex.IsMatch(TB_Search.Text, @"/mods/(\d+)"))
+		{
+			TB_Search.Text = Regex.Match(TB_Search.Text, @"/mods/(\d+)").Groups[1].Value;
+			return;
+		}
+#else
 		if (Regex.IsMatch(TB_Search.Text, @"filedetails/\?id=(\d+)"))
 		{
 			TB_Search.Text = Regex.Match(TB_Search.Text, @"filedetails/\?id=(\d+)").Groups[1].Value;
 			return;
 		}
+#endif
 
 		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
 
+		OnSearch();
+	}
+
+	protected virtual void OnSearch()
+	{
 		var searchText = TB_Search.Text.Trim();
 
 		searchTermsAnd.Clear();
@@ -667,7 +691,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 			}
 		}
 
-		FilterChanged(sender, e);
+		FilterChanged(this, EventArgs.Empty);
 	}
 
 	private void Icon_SizeChanged(object sender, EventArgs e)
@@ -681,95 +705,127 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.DescendingSort = ListControl.SortDescending;
-		_settings.SessionSettings.Save();
+		_settings.UserSettings.Save();
 
 		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
 	}
 
 	private void I_Actions_Click(object sender, EventArgs e)
 	{
-		var items = new SlickStripItem[]
+		var items = ListControl.SelectedOrFilteredItems.ToList();
+		var isFiltered = items.Count != ItemCount;
+		var isSelected = ListControl.SelectedItemsCount > 0;
+		var anyIncluded = items.Any(x => _packageUtil.IsIncluded(x));
+		var anyExcluded = items.Any(x => !_packageUtil.IsIncluded(x));
+		var anyEnabled = items.Any(x => _packageUtil.IsIncluded(x) && _packageUtil.IsEnabled(x));
+		var anyDisabled = items.Any(x => _packageUtil.IsIncluded(x) && !_packageUtil.IsEnabled(x));
+		var allLocal = items.Any(x => !x.IsLocal());
+		var allWorkshop = items.Any(x => x.IsLocal());
+
+		var stripItems = new SlickStripItem?[]
 		{
-			  new (Locale.IncludeAll, "I_Check", action: () => IncludeAll(this, EventArgs.Empty))
-			, new (Locale.ExcludeAll, "I_X", action: () =>ExcludeAll(this, EventArgs.Empty))
-			, new (string.Empty)
-			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
-			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: () => DisableAll(this, EventArgs.Empty))
-			, new (string.Empty)
-			, new (Locale.SelectAll, "I_DragDrop", ListControl.SelectedItemsCount < ListControl.FilteredItems.Count(), action: ListControl.SelectAll)
-			, new (Locale.DeselectAll, "I_Select", ListControl.SelectedItemsCount > 0, action: ListControl.DeselectAll)
-			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
+			  anyDisabled ? new (isSelected ? Locale.EnableAllSelected : isFiltered ? Locale.EnableAllFiltered : Locale.EnableAll, "I_Ok", async () => await EnableAll()) : null
+			, anyEnabled ? new (isSelected ? Locale.DisableAllSelected : isFiltered ? Locale.DisableAllFiltered : Locale.DisableAll, "I_Enabled",  async () => await DisableAll()) : null
+			, new ()
+			, anyExcluded ? new (isSelected ? Locale.IncludeAllSelected : isFiltered ? Locale.IncludeAllFiltered : Locale.IncludeAll, "I_Add",  async() => await IncludeAll()) : null
+			, anyIncluded ? new (isSelected ? Locale.ExcludeAllSelected : isFiltered ? Locale.ExcludeAllFiltered : Locale.ExcludeAll, "I_X",  async() => await ExcludeAll()) : null
+			, anyDisabled ? new (isSelected ? Locale.ExcludeAllDisabledSelected : isFiltered ? Locale.ExcludeAllDisabledFiltered : Locale.ExcludeAllDisabled, "I_Cancel",  async() => await ExcludeAllDisabled()) : null
+			, new ()
+			, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count() ? new (Locale.SelectAll, "I_DragDrop",  ListControl.SelectAll) : null
+			, ListControl.SelectedItemsCount > 0 ? new (Locale.DeselectAll, "I_Select", ListControl.DeselectAll) : null
+			, new (isSelected ? Locale.CopyAllIdsSelected : isFiltered ? Locale.CopyAllIdsFiltered : Locale.CopyAllIds, "I_Copy", () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
+#if CS1
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
-			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.LocalPackage is null), action: () => DownloadAll(this, EventArgs.Empty))
-			, new (Locale.ReDownloadAll, "I_ReDownload", ListControl.FilteredItems.Any(x => x.LocalPackage is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
+			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))
+			, new (Locale.ReDownloadAll, "I_ReDownload", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
 			, new (string.Empty)
-			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
+			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: async () => await UnsubscribeAll())
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
+#endif
 		};
 
-		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), stripItems));
 	}
 
-	private void DisableAll(object sender, EventArgs e)
+	private async Task DisableAll()
 	{
-		SetEnabled(ListControl.FilteredItems, false);
+		I_Actions.Loading = true;
+		await SetEnabled(ListControl.SelectedOrFilteredItems.ToList(), false);
 		ListControl.Invalidate();
-		I_Actions.Invalidate();
+		I_Actions.Loading = false;
 	}
 
-	private void EnableAll(object sender, EventArgs e)
+	private async Task EnableAll()
 	{
-		SetEnabled(ListControl.FilteredItems, true);
+		I_Actions.Loading = true;
+		await SetEnabled(ListControl.SelectedOrFilteredItems.ToList(), true);
 		ListControl.Invalidate();
-		I_Actions.Invalidate();
+		I_Actions.Loading = false;
 	}
 
-	private void ExcludeAll(object sender, EventArgs e)
+	private async Task ExcludeAll()
 	{
-		SetIncluded(ListControl.FilteredItems, false);
+		var items = ListControl.SelectedOrFilteredItems.ToList();
+
+		if (items.Count > 10 && MessagePrompt.Show(Locale.AreYouSure, PromptButtons.YesNo, PromptIcons.Question, Program.MainForm) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		I_Actions.Loading = true;
+		await SetIncluded(items, false);
 		ListControl.Invalidate();
-		I_Actions.Invalidate();
+		I_Actions.Loading = false;
 	}
 
-	private void IncludeAll(object sender, EventArgs e)
+	private async Task ExcludeAllDisabled()
 	{
-		SetIncluded(ListControl.FilteredItems, true);
+		await SetIncluded(ListControl.SelectedOrFilteredItems.AllWhere(x => !_packageUtil.IsEnabled(x)), false);
 		ListControl.Invalidate();
-		I_Actions.Invalidate();
+		I_Actions.Loading = false;
 	}
 
+	private async Task IncludeAll()
+	{
+		I_Actions.Loading = true;
+		await SetIncluded(ListControl.SelectedOrFilteredItems.ToList(), true);
+		ListControl.Invalidate();
+		I_Actions.Loading = false;
+	}
+
+#if CS1
 	private void DownloadAll(object sender, EventArgs e)
 	{
-		_downloadService.Download(ListControl.FilteredItems.Where(x => x.LocalPackage is null).Select(x => (IPackageIdentity)x));
+		_downloadService.Download(ListControl.SelectedOrFilteredItems.Where(x => x.GetLocalPackage() is null).Select(x => (IPackageIdentity)x));
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
 	private void ReDownloadAll(object sender, EventArgs e)
 	{
-		_downloadService.Download(ListControl.FilteredItems.Where(x => x.LocalPackage is not null).Cast<IPackageIdentity>());
+		_downloadService.Download(ListControl.SelectedOrFilteredItems.Where(x => x.GetLocalPackage() is not null).Cast<IPackageIdentity>());
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
-	private void UnsubscribeAll(object sender, EventArgs e)
+	private async Task UnsubscribeAll()
 	{
-		if (MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisUnsubscribesFrom.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
+		if (MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisUnsubscribesFrom.FormatPlural(ListControl.SelectedOrFilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
 		{
 			return;
 		}
 
 		I_Actions.Loading = true;
-		ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.FilteredItems.Cast<IPackageIdentity>());
+		await ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.SelectedOrFilteredItems.ToList());
 		I_Actions.Loading = false;
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
 
-	private void SubscribeAll(object sender, EventArgs e)
+	private async Task SubscribeAll()
 	{
 		var removeBadPackages = false;
-		var steamIds = ListControl.SafeGetItems().AllWhere(x => x.Item.LocalPackage == null && x.Item.Id != 0);
+		var steamIds = ListControl.SafeGetItems().AllWhere(x => x.Item.GetLocalPackage() == null && x.Item.Id != 0);
 
 		foreach (var item in steamIds.ToList())
 		{
@@ -791,15 +847,16 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 			}
 		}
 
-		if (steamIds.Count == 0 || MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisSubscribesTo.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
+		if (steamIds.Count == 0 || MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisSubscribesTo.FormatPlural(ListControl.SelectedOrFilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
 		{
 			return;
 		}
 
-		ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x => (IPackageIdentity)x.Item));
+		await ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select<DrawableItem<Domain.IPackageIdentity, ItemListControl.Rectangles>, Domain.IPackageIdentity>(x => x.Item));
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
+#endif
 
 	private async void DeleteAll(object sender, EventArgs e)
 	{
@@ -811,14 +868,14 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		I_Actions.Loading = true;
 		await Task.Run(() =>
 		{
-			var items = ListControl.FilteredItems.ToList();
+			var items = ListControl.SelectedOrFilteredItems.ToList();
 			foreach (var item in items)
 			{
-				if (item.IsLocal && item is IAsset asset)
+				if (item.IsLocal() && item is IAsset asset)
 				{
 					CrossIO.DeleteFile(asset.FilePath);
 				}
-				else if (item is ILocalPackage package)
+				else if (item is ILocalPackageData package)
 				{
 					ServiceCenter.Get<IPackageManager>().DeleteAll(package.Folder);
 				}
@@ -829,43 +886,34 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 	private void B_ListView_Click(object sender, EventArgs e)
 	{
-		B_GridView.Selected = false;
-		B_CompactList.Selected = false;
-		B_ListView.Selected = true;
-		ListControl.GridView = false;
-		ListControl.CompactList = false;
+		C_ViewTypeControl.GridView = ListControl.GridView = false;
+		C_ViewTypeControl.CompactList = ListControl.CompactList = false;
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = ListControl.GridView;
 		settings.Compact = ListControl.CompactList;
-		_settings.SessionSettings.Save();
+		_settings.UserSettings.Save();
 	}
 
 	private void B_GridView_Click(object sender, EventArgs e)
 	{
-		B_GridView.Selected = true;
-		B_CompactList.Selected = false;
-		B_ListView.Selected = false;
-		ListControl.GridView = true;
-		ListControl.CompactList = false;
+		C_ViewTypeControl.GridView = ListControl.GridView = true;
+		C_ViewTypeControl.CompactList = ListControl.CompactList = false;
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = ListControl.GridView;
 		settings.Compact = ListControl.CompactList;
-		_settings.SessionSettings.Save();
+		_settings.UserSettings.Save();
 	}
 
 	private void B_CompactList_Click(object sender, EventArgs e)
 	{
-		B_GridView.Selected = false;
-		B_ListView.Selected = false;
-		B_CompactList.Selected = true;
-		ListControl.GridView = false;
-		ListControl.CompactList = true;
+		C_ViewTypeControl.GridView = ListControl.GridView = false;
+		C_ViewTypeControl.CompactList = ListControl.CompactList = true;
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = ListControl.GridView;
 		settings.Compact = ListControl.CompactList;
-		_settings.SessionSettings.Save();
+		_settings.UserSettings.Save();
 	}
 }

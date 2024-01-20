@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_SelectPackage : PanelContent
 {
-	private readonly ItemListControl<GenericWorkshopPackage> LC_Items;
+	private readonly ItemListControl LC_Items;
 	private readonly DelayedAction<TicketBooth.Ticket> _delayedSearch;
 	private readonly TicketBooth _ticketBooth = new();
 	private bool searchEmpty = true;
@@ -33,13 +33,26 @@ public partial class PC_SelectPackage : PanelContent
 
 		L_Selected.Text = Locale.ControlToSelectMultiplePackages;
 
-		LC_Items = new(SkyvePage.None)
+		if (ServiceCenter.Get<ISettings>().UserSettings.ExtendedListInfo)
 		{
-			Loading = true,
-			IsSelection = true,
-			IsGenericPage = true,
-			Dock = DockStyle.Fill
-		};
+			LC_Items = new ItemListControl.Complex(SkyvePage.None)
+			{
+				Loading = true,
+				IsSelection = true,
+				IsGenericPage = true,
+				Dock = DockStyle.Fill
+			};
+		}
+		else
+		{
+			LC_Items = new ItemListControl.Simple(SkyvePage.None)
+			{
+				Loading = true,
+				IsSelection = true,
+				IsGenericPage = true,
+				Dock = DockStyle.Fill
+			};
+		}
 
 		LC_Items.PackageSelected += LC_Items_PackageSelected;
 
@@ -62,7 +75,7 @@ public partial class PC_SelectPackage : PanelContent
 		L_Selected.Visible = false;
 	}
 
-	private void LC_Items_PackageSelected(GenericWorkshopPackage obj)
+	private void LC_Items_PackageSelected(IPackageIdentity obj)
 	{
 		if (ModifierKeys.HasFlag(Keys.Control))
 		{
@@ -135,7 +148,7 @@ public partial class PC_SelectPackage : PanelContent
 
 	private bool Search(string searchTerm, IWorkshopInfo item)
 	{
-		return searchTerm.SearchCheck(item.ToString())
+		return searchTerm.SearchCheck(item.Name)
 			|| searchTerm.SearchCheck(item.Author?.Name)
 			|| item.Id.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
@@ -227,10 +240,9 @@ public partial class PC_SelectPackage : PanelContent
 		}
 		else
 		{
-			items = (await _workshopService.QueryFilesAsync(PackageSorting.Default,
+			items = (await _workshopService.QueryFilesAsync(WorkshopQuerySorting.Popularity,
 				TB_Search.Text,
-				OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option1 ? new[] { "Mod" } : null,
-			 	OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 ? new[] { "Mod" } : null)).ToDictionary(x => x.Id);
+				OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option1 ? ["Mod"] : null)).ToDictionary(x => x.Id);
 		}
 
 		if (!_ticketBooth.IsLast(ticket))
@@ -238,7 +250,7 @@ public partial class PC_SelectPackage : PanelContent
 			return;
 		}
 
-		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)).Select(x => new GenericWorkshopPackage(x)));
+		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)).Select(x => (x)));
 		LC_Items.Loading = false;
 
 		this.TryInvoke(() => L_Totals.Text = Locale.ShowingCount.FormatPlural(LC_Items.ItemCount, Locale.Package.FormatPlural(LC_Items.ItemCount)));

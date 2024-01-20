@@ -19,7 +19,7 @@ public class CompatibilityHelper
 	private readonly IWorkshopService _workshopService;
 	private readonly PackageAvailabilityService _packageAvailabilityService;
 
-	private readonly Dictionary<ulong, List<ulong>> _missingItems = new();
+	private readonly Dictionary<ulong, List<ulong>> _missingItems = [];
 
 	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILogger logger)
 	{
@@ -40,7 +40,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is StatusType.DependencyMod && info.Package is not null && _contentUtil.GetPackagesThatReference(info.Package, true).Any())
+		if (type is StatusType.DependencyMod && _contentUtil.GetPackagesThatReference(info, true).Any())
 		{
 			return;
 		}
@@ -53,7 +53,7 @@ public class CompatibilityHelper
 			}
 		}
 
-		var packages = status.Status.Packages?.ToList() ?? new();
+		var packages = status.Status.Packages?.ToList() ?? [];
 
 		if (status.Status.Action is StatusAction.Switch && status.Status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
 		{
@@ -82,10 +82,10 @@ public class CompatibilityHelper
 
 		if (status.Status.Action is StatusAction.SelectOne)
 		{
-			packages.Insert(0, info.Package?.Id ?? 0);
+			packages.Insert(0, info.Id);
 		}
 
-		info.Add(reportType, status.Status, _packageUtil.CleanName(info.Package, true), packages.ToArray());
+		info.Add(reportType, status.Status, info.CleanName(true), packages.ToArray());
 	}
 
 	public void HandleInteraction(CompatibilityInfo info, IndexedPackageInteraction interaction)
@@ -102,12 +102,12 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.LocalPackage?.IsIncluded() != true)
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.IsIncluded() != true)
 		{
 			return;
 		}
 
-		var packages = interaction.Interaction.Packages?.ToList() ?? new();
+		var packages = interaction.Interaction.Packages?.ToList() ?? [];
 
 		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Interaction.Action is StatusAction.Switch)
 		{
@@ -116,7 +116,7 @@ public class CompatibilityHelper
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
 		{
-			if (info.LocalPackage?.IsIncluded() != true)
+			if (info.IsIncluded() != true)
 			{
 				return;
 			}
@@ -133,7 +133,7 @@ public class CompatibilityHelper
 			packages.RemoveAll(ShouldNotBeUsed);
 		}
 
-		packages.Remove(info.Package?.Id ?? 0);
+		packages.Remove(info.Id);
 
 		if (packages.Count == 0)
 		{
@@ -155,7 +155,7 @@ public class CompatibilityHelper
 			_ => ReportType.Compatibility
 		};
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && _packageAvailabilityService.IsPackageEnabled(info.Data.Package.SteamId, false))
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && _packageAvailabilityService.IsPackageEnabled(info.Data.Package.Id, false))
 		{
 			lock (_missingItems)
 			{
@@ -163,11 +163,11 @@ public class CompatibilityHelper
 				{
 					if (_missingItems.ContainsKey(item))
 					{
-						_missingItems[item].AddIfNotExist(info.Data.Package.SteamId);
+						_missingItems[item].AddIfNotExist(info.Data.Package.Id);
 					}
 					else
 					{
-						_missingItems[item] = new() { info.Data.Package.SteamId };
+						_missingItems[item] = [info.Data.Package.Id];
 					}
 				}
 			}
@@ -175,10 +175,10 @@ public class CompatibilityHelper
 
 		if (interaction.Interaction.Action is StatusAction.SelectOne)
 		{
-			packages.Add(info.Package?.Id ?? 0);
+			packages.Add(info.Id);
 		}
 
-		info.Add(reportType, interaction.Interaction, _packageUtil.CleanName(info.Package, true), packages.ToArray());
+		info.Add(reportType, interaction.Interaction, info.CleanName(true), packages.ToArray());
 	}
 
 	private bool HandleSucceededBy(CompatibilityInfo info, IEnumerable<ulong> packages)
@@ -196,12 +196,12 @@ public class CompatibilityHelper
 		return false;
 	}
 
-	private bool ShouldNotBeUsed(ulong steamId)
+	private bool ShouldNotBeUsed(ulong id)
 	{
-		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(steamId));
+		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(id));
 
 		return (workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved))
-			|| (_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
+			|| (_compatibilityManager.CompatibilityData.Packages.TryGetValue(id, out var package)
 			&& (package.Package.Stability is PackageStability.Broken
 			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false)));
 	}

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_UserPage : PanelContent
 {
-	private readonly ContentList<IPackage> LC_Items;
+	private readonly ContentList LC_Items;
 	private readonly PlaysetListControl L_Profiles;
 
 	private readonly ISettings _settings;
 	private readonly IWorkshopService _workshopService;
 
-	private List<IPackage> userItems = new();
+	private List<IPackageIdentity> userItems = new();
 
 	public IUser User { get; }
 
@@ -32,7 +32,7 @@ public partial class PC_UserPage : PanelContent
 			GridView = true,
 		};
 
-		LC_Items = new ContentList<IPackage>(SkyvePage.User, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+		LC_Items = new ContentList(SkyvePage.User, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
 		{
 			IsGenericPage = true
 		};
@@ -42,19 +42,19 @@ public partial class PC_UserPage : PanelContent
 		LC_Items.ListControl.Loading = true;
 	}
 
-	protected IEnumerable<IPackage> GetItems()
+	protected async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
-		return userItems;
+		return await Task.FromResult(userItems);
 	}
 
-	protected void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
+	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, included);
+		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems, included);
 	}
 
-	protected void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
+	protected async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
 	{
-		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, enabled);
+		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems, enabled);
 	}
 
 	protected LocaleHelper.Translation GetItemText()
@@ -66,17 +66,17 @@ public partial class PC_UserPage : PanelContent
 	{
 		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
 
-		foreach (var item in userItems.SelectWhereNotNull(x => x.LocalParentPackage))
+		foreach (var item in userItems.SelectWhereNotNull(x => x.GetLocalPackage()))
 		{
 			if (item?.IsIncluded() == true)
 			{
 				packagesIncluded++;
 
-				if (item.Mod is not null)
+				if (item.Package.IsCodeMod)
 				{
 					modsIncluded++;
 
-					if (item.Mod.IsEnabled())
+					if (item.IsEnabled())
 					{
 						modsEnabled++;
 					}
@@ -126,9 +126,9 @@ public partial class PC_UserPage : PanelContent
 
 			var results = await _workshopService.GetWorkshopItemsByUserAsync(User.Id!);
 
-			userItems = results.ToList(_workshopService.GetPackage);
+			userItems = results.ToList(x => (IPackageIdentity)x);
 
-			LC_Items.RefreshItems();
+			await LC_Items.RefreshItems();
 		}
 		catch (Exception ex)
 		{

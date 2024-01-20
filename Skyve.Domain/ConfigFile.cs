@@ -12,23 +12,68 @@ using System.Xml.Serialization;
 namespace Skyve.Domain;
 public abstract class ConfigFile
 {
-	protected bool AutoRefresh { get; set; }
-	protected string FilePath { get; }
+	private FileWatcher? watcher;
+	private bool autoRefresh;
 
-	protected ConfigFile(string filePath)
+	protected string FilePath { get; set; }
+	protected bool AutoRefresh
 	{
-		FilePath = filePath;
+		get => autoRefresh;
+		set
+		{
+			autoRefresh = value;
+
+			if (watcher is not null)
+			{
+				watcher.EnableRaisingEvents = value;
+			}
+		}
 	}
 
-	protected void OnLoad() { }
+	protected ConfigFile(string filePath, bool autoRefresh = false)
+	{
+		FilePath = filePath;
+		this.autoRefresh = autoRefresh;
+	}
+
+	protected virtual void OnLoad()
+	{
+		if (!autoRefresh)
+		{
+			return;
+		}
+
+		watcher = new FileWatcher
+		{
+			Path = Path.GetDirectoryName(FilePath),
+			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
+			Filter = Path.GetFileName(FilePath),
+			EnableRaisingEvents = true
+		};
+
+		watcher.Changed += ReLoad;
+		watcher.Created += ReLoad;
+		watcher.Deleted += Clear;
+	}
+
+	public void Reset()
+	{
+		Clear(this, new(WatcherChangeTypes.Deleted, FilePath));
+		Save();
+	}
 
 	public virtual void Save()
 	{
 		try
 		{
-			var xml = Path.GetExtension(FilePath).Equals(".xml", StringComparison.InvariantCultureIgnoreCase);
+			var isXml = Path.GetExtension(FilePath).Equals(".xml", StringComparison.InvariantCultureIgnoreCase);
 
-			if (xml)
+			if (watcher is not null && autoRefresh)
+			{
+				watcher.EnableRaisingEvents = false;
+			}
+
+			if (isXml)
 			{
 				SerializeXml();
 			}
@@ -36,36 +81,46 @@ public abstract class ConfigFile
 			{
 				SerializeJson();
 			}
+
+			if (watcher is not null && autoRefresh)
+			{
+				watcher.EnableRaisingEvents = autoRefresh;
+			}
 		}
 		catch (Exception ex)
 		{
-			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to save the config file: " + Path.GetFileName(FilePath));
+			ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to save the {GetType().Name.FormatWords()} config file: {Path.GetFileName(FilePath)}");
 		}
 	}
 
-	protected static T? Load<T>(string filePath) where T : ConfigFile
+	protected static T Load<T>(string filePath) where T : ConfigFile
 	{
-		if (!CrossIO.FileExists(filePath))
-		{
-			return null;
-		}
-
 		try
 		{
-			var xml = Path.GetExtension(filePath).Equals(".xml", StringComparison.InvariantCultureIgnoreCase);
+			T obj;
 
-			var obj = xml ? DeserializeXml<T>(filePath) : DeserializeJson<T>(filePath);
+			if (!CrossIO.FileExists(filePath))
+			{
+				obj = (T)Activator.CreateInstance(typeof(T));
+			}
+			else
+			{
+				var isXml = Path.GetExtension(filePath).Equals(".xml", StringComparison.InvariantCultureIgnoreCase);
 
-			obj?.OnLoad();
+				obj = (isXml ? DeserializeXml<T>(filePath) : DeserializeJson<T>(filePath))
+					?? (T)Activator.CreateInstance(typeof(T));
+			}
+
+			obj.OnLoad();
 
 			return obj;
 		}
 		catch (Exception ex)
 		{
-			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load the config file: " + Path.GetFileName(filePath));
+			ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to load the {typeof(T).Name.FormatWords()} config file: {Path.GetFileName(filePath)}");
 		}
 
-		return null;
+		return (T)Activator.CreateInstance(typeof(T));
 	}
 
 	private void SerializeJson()
@@ -77,12 +132,9 @@ public abstract class ConfigFile
 	{
 		var fileContents = ISave.Read(filePath);
 
-		if (string.IsNullOrEmpty(fileContents))
-		{
-			throw new Exception("File contents empty");
-		}
-
-		return JsonConvert.DeserializeObject<T>(fileContents);
+		return string.IsNullOrEmpty(fileContents)
+			? throw new Exception("File contents empty")
+			: JsonConvert.DeserializeObject<T>(fileContents);
 	}
 
 	private void SerializeXml()
@@ -104,4 +156,76 @@ public abstract class ConfigFile
 
 		return ser.Deserialize(fs) as T;
 	}
+
+	#region FileWatcherMethods
+
+	private void Clear(object sender, FileWatcherEventArgs e)
+	{
+		var type = GetType();
+		var obj = (ConfigFile)Activator.CreateInstance(type);
+
+		obj.AutoRefresh = false;
+		obj.OnLoad();
+
+		foreach (var item in type.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
+		{
+			if (item.CanWrite && item.CanRead)
+			{
+				item.SetValue(this, item.GetValue(obj));
+			}
+		}
+	}
+
+	private void ReLoad(object sender, FileWatcherEventArgs e)
+	{
+		if (!CrossIO.FileExists(FilePath))
+		{
+			return;
+		}
+
+		try
+		{
+			var type = GetType();
+			var isXml = Path.GetExtension(FilePath).Equals(".xml", StringComparison.InvariantCultureIgnoreCase);
+
+			var obj = (ConfigFile?)(isXml ? DeserializeXml(FilePath, type) : DeserializeJson(FilePath, type));
+
+			if (obj is not null)
+			{
+				obj.AutoRefresh = false;
+				obj.OnLoad();
+
+				foreach (var item in type.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
+				{
+					if (item.CanWrite && item.CanRead)
+					{
+						item.SetValue(this, item.GetValue(obj));
+					}
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load the config file: " + Path.GetFileName(FilePath));
+		}
+	}
+
+	private static object DeserializeJson(string filePath, Type type)
+	{
+		var fileContents = ISave.Read(filePath);
+
+		return string.IsNullOrEmpty(fileContents)
+			? throw new Exception("File contents empty")
+			: JsonConvert.DeserializeObject(fileContents, type);
+	}
+
+	private static object DeserializeXml(string filePath, Type type)
+	{
+		var ser = new XmlSerializer(type);
+		using var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
+		return ser.Deserialize(fs);
+	}
+
+	#endregion
 }

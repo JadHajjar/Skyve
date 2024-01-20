@@ -26,7 +26,7 @@ public class ReportItem : ICompatibilityItem
 
 #nullable disable
 	[JsonIgnore] public IGenericPackageStatus Status { get; set; }
-	[JsonIgnore] internal ILocalPackage Package { get; set; }
+	[JsonIgnore] internal IPackage Package { get; set; }
 	public GenericPackageStatus StatusDTO { get => Status is null ? null : new GenericPackageStatus(Status); set => Status = value?.ToGenericPackage(); }
 #nullable enable
 
@@ -35,7 +35,9 @@ public class ReportItem : ICompatibilityItem
 	private string GetMessage()
 	{
 		if (LocaleKey is not null && LocaleParams is not null)
+		{
 			return LocaleHelper.GetGlobalText(LocaleKey).Format(LocaleParams);
+		}
 
 		var workshopService = ServiceCenter.Get<IWorkshopService>();
 		var packageUtil = ServiceCenter.Get<IPackageNameUtil>();
@@ -44,6 +46,6 @@ public class ReportItem : ICompatibilityItem
 		var text = Packages?.Length switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
 		var actionText = Packages?.Length switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
 
-		return string.Format($"{text}\r\n\r\n{actionText}", PackageName, Packages is null ? string.Empty : packageUtil.CleanName(workshopService.GetInfo(Packages.FirstOrDefault())), true).Trim();
+		return string.Format($"{text}\r\n\r\n{actionText}", PackageName, Packages?.Length is null or 0 ? string.Empty : packageUtil.CleanName(workshopService.GetInfo(Packages.FirstOrDefault())), true).Trim();
 	}
 }

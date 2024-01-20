@@ -37,7 +37,7 @@ public partial class PC_PlaysetList : PanelContent
 
 			if (!LC_Items.Loading)
 			{
-				LC_Items.SetItems(_profileManager.Playsets.Skip(1));
+				LC_Items.SetItems(_profileManager.Playsets);
 			}
 
 			_notifier.PlaysetChanged += LoadProfile;
@@ -202,27 +202,30 @@ public partial class PC_PlaysetList : PanelContent
 	private void LoadProfile()
 	{
 		this.TryInvoke(() =>
-	{
-		var profile = _profileManager.CurrentPlayset;
-		TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
-		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
-		I_ProfileIcon.ImageName = profile.GetIcon();
-		I_Favorite.ImageName = profile.IsFavorite ? "I_StarFilled" : "I_Star";
-		B_TempProfile.Visible = !profile.Temporary;
-		I_ProfileIcon.Enabled = !profile.Temporary;
+		{
+			var profile = _profileManager.CurrentPlayset;
 
-		tableLayoutPanel1.SetColumn(B_TempProfile, profile.Temporary ? 2 : 1);
-		tableLayoutPanel1.SetColumn(B_AddProfile, profile.Temporary ? 1 : 2);
+			if (profile is null)
+				return;
+			TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
+			TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
+			I_ProfileIcon.ImageName = profile.GetIcon();
+			I_Favorite.ImageName = profile.IsFavorite ? "I_StarFilled" : "I_Star";
+			B_TempProfile.Visible = !profile.Temporary;
+			I_ProfileIcon.Enabled = !profile.Temporary;
 
-		SlickTip.SetTo(I_Favorite, profile.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
+			tableLayoutPanel1.SetColumn(B_TempProfile, profile.Temporary ? 2 : 1);
+			tableLayoutPanel1.SetColumn(B_AddProfile, profile.Temporary ? 1 : 2);
 
-		I_Favorite.Visible = B_Save.Visible = !profile.Temporary;
+			SlickTip.SetTo(I_Favorite, profile.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
 
-		I_ProfileIcon.Loading = false;
-		L_CurrentProfile.Text = profile.Name;
+			I_Favorite.Visible = B_Save.Visible = !profile.Temporary;
 
-		LC_Items.Invalidate();
-	});
+			I_ProfileIcon.Loading = false;
+			L_CurrentProfile.Text = profile.Name;
+
+			LC_Items.Invalidate();
+		});
 	}
 
 	private void FilterChanged(object sender, EventArgs e)
@@ -267,7 +270,7 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
 	{
-		_profileManager.SetCurrentPlayset(_profileManager.TemporaryPlayset);
+		//_profileManager.SetCurrentPlayset(_profileManager.TemporaryPlayset);
 	}
 
 	private async void B_Save_Click(object sender, EventArgs e)
@@ -308,7 +311,7 @@ public partial class PC_PlaysetList : PanelContent
 		TLP_ProfileName.BackColor = colorDialog.Color;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
 		_profileManager.CurrentPlayset.Color = colorDialog.Color;
-		_profileManager.Save(_profileManager.CurrentPlayset);
+		//_profileManager.Save(_profileManager.CurrentPlayset);
 	}
 
 	private void I_Favorite_Click(object sender, EventArgs e)
@@ -319,7 +322,7 @@ public partial class PC_PlaysetList : PanelContent
 		}
 
 		_profileManager.CurrentPlayset.IsFavorite = !_profileManager.CurrentPlayset.IsFavorite;
-		_profileManager.Save(_profileManager.CurrentPlayset);
+		//_profileManager.Save(_profileManager.CurrentPlayset);
 
 		I_Favorite.ImageName = _profileManager.CurrentPlayset.IsFavorite ? "I_StarFilled" : "I_Star";
 		SlickTip.SetTo(I_Favorite, _profileManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
@@ -370,6 +373,7 @@ public partial class PC_PlaysetList : PanelContent
 				entry.ExtractToFile(file);
 			}
 
+#if CS1
 			if (file.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
 			{
 				if (profile is not null)
@@ -378,7 +382,7 @@ public partial class PC_PlaysetList : PanelContent
 					return;
 				}
 
-				profile = _profileManager.ConvertLegacyPlayset(file, false);
+				//profile = _profileManager.ConvertLegacyPlayset(file, false);
 
 				if (profile is null)
 				{
@@ -387,18 +391,20 @@ public partial class PC_PlaysetList : PanelContent
 				}
 			}
 			else
+#endif
 			{
 				profile ??= _profileManager.ImportPlayset(file);
 			}
 
 			if (profile is not null)
 			{
-				var panel = new PC_GenericPackageList(profile.Packages, true)
-				{
-					Text = profile.Name
-				};
+				throw new NotImplementedException();
+				//var panel = new PC_GenericPackageList(profile.Packages, true)
+				//{
+				//	Text = profile.Name
+				//};
 
-				Form.PushPanel(panel);
+				//Form.PushPanel(panel);
 			}
 		}
 		catch (Exception ex) { ShowPrompt(ex, Locale.FailedToImportPlayset); }

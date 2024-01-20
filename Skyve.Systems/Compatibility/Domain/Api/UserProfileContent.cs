@@ -2,7 +2,10 @@
 using Extensions.Sql;
 
 using Skyve.Domain;
+using Skyve.Domain.Systems;
 
+using System;
+using System.Drawing;
 using System.IO;
 
 namespace Skyve.Systems.Compatibility.Domain.Api;
@@ -20,7 +23,7 @@ public class UserProfileContent : IDynamicSql
 	[DynamicSqlProperty]
 	public ulong SteamId { get; set; }
 	[DynamicSqlProperty]
-	public bool IsMod { get; set; }
+	public bool IsCodeMod { get; set; }
 	[DynamicSqlProperty]
 	public bool Enabled { get; set; }
 
@@ -41,5 +44,10 @@ public class UserProfileContent : IDynamicSql
 				: (string)LocaleHelper.GetGlobalText("UnknownPackage");
 		}
 	}
+
+	string ILocalPackageIdentity.Folder => Path.GetDirectoryName(RelativePath);
+
+	long ILocalPackageIdentity.FileSize { get; }
+	DateTime ILocalPackageIdentity.LocalTime { get; }
 #endif
 }

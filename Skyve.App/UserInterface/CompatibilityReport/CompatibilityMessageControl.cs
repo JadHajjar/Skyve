@@ -17,15 +17,13 @@ public class CompatibilityMessageControl : SlickControl
 
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly ISubscriptionsManager _subscriptionsManager;
-	private readonly IPackageManager _packageManager;
-	private readonly IBulkUtil _bulkUtil;
 	private readonly IPackageUtil _packageUtil;
 	private readonly INotifier _notifier;
 	private readonly IDlcManager _dlcManager;
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
-		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _subscriptionsManager, out _packageManager, out _bulkUtil, out _packageUtil, out _dlcManager);
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _subscriptionsManager, out _packageUtil, out _dlcManager);
 
 		Dock = DockStyle.Top;
 		Type = type;
@@ -160,7 +158,12 @@ public class CompatibilityMessageControl : SlickControl
 					}
 					else
 					{
-						e.Graphics.DrawRoundedImage(packageThumbnail ?? (dlc is null ? Properties.Resources.I_ModIcon : Properties.Resources.I_DlcIcon).Color(fore), rect.Align(UI.Scale(new Size(isDlc ? 40 * 460 / 215 : 40, 40), UI.FontScale), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
+						using var img = IconManager.GetIcon(dlc is null ? "I_Mods" : "I_Dlc", (int)(40 * UI.FontScale)).Color(BackColor);
+						using var brush2 = new SolidBrush(fore);
+						var imgRect = rect.Align(UI.Scale(new Size(isDlc ? 40 * 460 / 215 : 40, 40), UI.FontScale), ContentAlignment.TopLeft);
+
+						e.Graphics.FillRoundedRectangle(brush2, imgRect, pad);
+						e.Graphics.DrawImage(img, imgRect.CenterR(img.Size));
 					}
 
 					List<(Color Color, string Text)>? tags = null;
@@ -185,21 +188,21 @@ public class CompatibilityMessageControl : SlickControl
 					switch (Message.Status.Action)
 					{
 						case StatusAction.SubscribeToPackages:
-							var p = package?.LocalParentPackage;
+							var p = package?.GetLocalPackage();
 
 							if (p is null)
 							{
-								buttonText = Locale.Subscribe;
+								buttonText = Locale.SubscribeToItem;
 								iconName = "I_Add";
 							}
 							else if (!p.IsIncluded())
 							{
-								buttonText = Locale.Include;
+								buttonText = Locale.IncludeItem;
 								iconName = "I_Check";
 							}
-							else if (!(p.Mod?.IsEnabled() ?? true))
+							else if (!(p.IsEnabled()))
 							{
-								buttonText = Locale.Enable;
+								buttonText = Locale.EnableItem;
 								iconName = "I_Enabled";
 							}
 							break;
@@ -208,7 +211,7 @@ public class CompatibilityMessageControl : SlickControl
 							iconName = "I_Ok";
 							break;
 						case StatusAction.Switch:
-							buttonText = Locale.Switch;
+							buttonText = Locale.SwitchToItem;
 							iconName = "I_Switch";
 							break;
 					}
@@ -269,7 +272,7 @@ public class CompatibilityMessageControl : SlickControl
 						{
 							return 2;
 						}
-						else if (!(p.LocalParentPackage.Mod?.IsEnabled() ?? true))
+						else if (!(p.IsEnabled()))
 						{
 							return 1;
 						}
@@ -278,7 +281,7 @@ public class CompatibilityMessageControl : SlickControl
 					});
 
 					colorStyle = ColorStyle.Green;
-					allText = max switch { 3 => Locale.SubscribeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
+					allText = max switch { 3 => Locale.IncludeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
 					allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
 				}
 				break;
@@ -292,7 +295,7 @@ public class CompatibilityMessageControl : SlickControl
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.UnsubscribeOther:
-				allText = Message.Packages.Length switch { 0 => null, 1 => Locale.Unsubscribe, _ => Locale.UnsubscribeAll };
+				allText = Message.Packages.Length switch { 0 => null, 1 => Locale.Unsubscribe, _ => Locale.ExcludeAll };
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.ExcludeThis:
@@ -358,8 +361,8 @@ public class CompatibilityMessageControl : SlickControl
 			{
 				case StatusAction.SubscribeToPackages:
 					_subscriptionsManager.Subscribe(Message.Packages.Where(x => x.GetLocalPackage() is null));
-					_bulkUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
-					_bulkUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+					_packageUtil.SetIncluded(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+					_packageUtil.SetEnabled(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
 					break;
 				case StatusAction.RequiresConfiguration:
 					_compatibilityManager.ToggleSnoozed(Message);
@@ -409,7 +412,7 @@ public class CompatibilityMessageControl : SlickControl
 			}
 			else if (package is not null)
 			{
-				Program.MainForm.PushPanel(null, package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) : new PC_PackagePage(package));
+				Program.MainForm.PushPanel(null, /*package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) :*/ new PC_PackagePage(item));
 			}
 			else
 			{

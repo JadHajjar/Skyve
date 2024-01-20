@@ -9,6 +9,9 @@ using System.Drawing;
 namespace Skyve.Domain;
 public interface IPlayset
 {
+#if CS2
+	int Id { get; }
+#endif
 	string? Name { get; set; }
 	[CloneIgnore] IUser? Author { get; }
 	string? BannerUrl { get; }
@@ -20,7 +23,7 @@ public interface IPlayset
 	int AssetCount { get; }
 	int ModCount { get; }
 	IEnumerable<IPlaysetEntry> Entries { get; }
-	IEnumerable<IPackage> Packages { get; }
+	//IEnumerable<IPackage> Packages { get; }
 	bool Temporary { get; }
 }
 

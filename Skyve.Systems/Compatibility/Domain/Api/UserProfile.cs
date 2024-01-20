@@ -47,6 +47,7 @@ public class UserProfile : IDynamicSql
 	public int? ProfileUsage { get; set; }
 
 	public UserProfileContent[]? Contents { get; set; }
+	public int Id { get; set; }
 
 #if !API
 	private Bitmap? _banner;
@@ -75,24 +76,14 @@ public class UserProfile : IDynamicSql
 
 			return _banner = new Bitmap(ms);
 		}
-		set
-		{
-			if (value is null)
-			{
-				Banner = null;
-			}
-			else
-			{
-				Banner = (byte[])new ImageConverter().ConvertTo(value, typeof(byte[]));
-			}
-		}
+		set => Banner = value is null ? null : (byte[])new ImageConverter().ConvertTo(value, typeof(byte[]));
 	}
 
 	IUser? IPlayset.Author => ServiceCenter.Get<Skyve.Domain.Systems.IWorkshopService>().GetUser(Author);
 	string? IPlayset.BannerUrl { get; }
 	DateTime IPlayset.DateUsed { get; }
 	[JsonIgnore] public IEnumerable<IPlaysetEntry> Entries => Contents ?? Enumerable.Empty<IPlaysetEntry>();
-	[JsonIgnore] public IEnumerable<IPackage> Packages => Contents?.Select(x => (IPackage)new PlaysetEntryPackage(x)) ?? Enumerable.Empty<IPackage>();
+	//[JsonIgnore] public IEnumerable<IPackage> Packages => Contents?.Select(x => (IPackage)new PlaysetEntryPackage(x)) ?? Enumerable.Empty<IPackage>();
 	bool ICustomPlayset.AutoSave { get; }
 	bool ICustomPlayset.UnsavedChanges { get; }
 	bool ICustomPlayset.DisableWorkshop { get; }

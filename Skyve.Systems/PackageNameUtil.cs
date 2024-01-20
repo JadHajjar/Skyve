@@ -32,11 +32,12 @@ public class PackageNameUtil : IPackageNameUtil
 
 		var text = _tagRegex.Replace(package.Name, string.Empty);
 
+#if CS1
 		if (package is IPackage lp && lp.IsBuiltIn)
 		{
 			text = text.FormatWords();
 		}
-
+#endif
 		return keepTags
 			? text.RemoveDoubleSpaces().RegexRemove(" +(?=[\\]\\)])").RegexRemove("(?<=[\\[\\(]) +")
 			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
@@ -44,16 +45,17 @@ public class PackageNameUtil : IPackageNameUtil
 
 	public string CleanName(IPackageIdentity? package, out List<(Color Color, string Text)> tags, bool keepTags = false)
 	{
-		tags = new();
+		tags = [];
 
 		if (package?.Name is null or "")
 		{
 			return _locale.Get("UnknownPackage");
 		}
 
-		var lp = package as IPackage;
-		var isLocal = lp?.IsLocal ?? false;
-		var isBuiltIn = lp?.IsBuiltIn ?? false;
+		if (package is IAsset)
+			return package.Name;
+
+		var isLocal = package.IsLocal();
 		var text = _tagRegex.Replace(package.Name, string.Empty);
 		var tagMatches = _bracketsRegex.Matches(text);
 
@@ -61,11 +63,14 @@ public class PackageNameUtil : IPackageNameUtil
 			? text.RemoveDoubleSpaces().RegexRemove(" +(?=[\\]\\)])").RegexRemove("(?<=[\\[\\(]) +")
 			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
 
-		if (isBuiltIn)
+#if CS1
+		if (lp?.IsBuiltIn ?? false)
 		{
 			text = text.FormatWords();
 		}
-		else if (isLocal)
+		else
+#endif
+		if (isLocal)
 		{
 			tags.Add((FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), _locale.Get("Local").One.ToUpper()));
 		}

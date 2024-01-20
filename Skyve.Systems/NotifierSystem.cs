@@ -3,7 +3,6 @@
 using Skyve.Domain.Systems;
 
 using System;
-using System.Diagnostics;
 
 namespace Skyve.Systems;
 internal class NotifierSystem : INotifier
@@ -53,7 +52,8 @@ internal class NotifierSystem : INotifier
 	{
 		IsContentLoaded = true;
 
-		_delayedContentLoaded.Run();
+		RunAndLog(ContentLoaded, nameof(ContentLoaded));
+		//_delayedContentLoaded.Run();
 	}
 
 	public void OnWorkshopInfoUpdated()

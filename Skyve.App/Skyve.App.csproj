@@ -1,8 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
 	<Import Project="../../Skyve/Config.props" />
   <PropertyGroup>
 	  <Description>Helps to manage your mods and assets</Description>
-	  <Configurations>Debug;Release;Stable</Configurations>
 	  <DebugType>embedded</DebugType>
 	  <DebugSymbols>true</DebugSymbols>
 	  <Nullable>enable</Nullable>
@@ -14,7 +13,6 @@
 	  <TargetFramework>net4.7.2</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
     <SignAssembly>true</SignAssembly>
     <NeutralLanguage>en</NeutralLanguage>
     <Title>Skyve</Title>
@@ -51,17 +49,14 @@
     <Compile Update="UserInterface\Bubbles\PlaysetBubble.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Content\ContentList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+	  <Compile Update="UserInterface\Content\ContentList.cs">
+		  <SubType>UserControl</SubType>
+	  </Compile>
     <Compile Update="UserInterface\Content\TroubleshootInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Content\DownloadsInfoControl.cs" />
     <Compile Update="UserInterface\Content\UserDescriptionControl.cs" />
-    <Compile Update="UserInterface\Dashboard\D_AssetInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Dashboard\D_AssetInfo.cs" />
     <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\AuthorDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageTypeDropDown.cs" />
@@ -69,7 +64,8 @@
     <Compile Update="UserInterface\Forms\EditTagsForm.cs" />
     <Compile Update="UserInterface\Generic\BigSelectionOptionControl.cs" />
     <Compile Update="UserInterface\Generic\SteamUserControl.cs" />
-    <Compile Update="UserInterface\Lists\OtherProfilePackage.cs" />
+    <Compile Update="UserInterface\Lists\ItemListControl-Shared.cs" />
+    <Compile Update="UserInterface\Lists\OtherPlaysetPackage.cs" />
     <Compile Update="UserInterface\Content\PackageDescriptionControl.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageStatusDropDown.cs" />
     <Compile Update="UserInterface\Lists\CompatibilityReportList.cs" />
@@ -101,9 +97,4 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
-	<ItemGroup>
-	  <None Include="UserInterface\Lists\ItemListControl-Grid.cs" />
-	  <None Include="UserInterface\Lists\ItemListControl-List.cs" />
-	</ItemGroup>
 </Project>

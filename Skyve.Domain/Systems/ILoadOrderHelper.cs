@@ -3,5 +3,5 @@
 namespace Skyve.Domain.Systems;
 public interface ILoadOrderHelper
 {
-	IEnumerable<IMod> GetOrderedMods();
+	IEnumerable<IPackage> GetOrderedMods();
 }

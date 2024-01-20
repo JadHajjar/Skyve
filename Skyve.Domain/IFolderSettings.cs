@@ -1,13 +1,20 @@
 ﻿using Extensions;
 
-namespace Skyve.Domain;
+using Skyve.Domain.Enums;
 
-public interface IFolderSettings
+namespace Skyve.Domain
 {
-	string AppDataPath { get; set; }
-	string GamePath { get; set; }
-	Platform Platform { get; set; }
-	string SteamPath { get; set; }
+	public interface IFolderSettings
+	{
+		string AppDataPath { get; set; }
+		string GamePath { get; set; }
+		string SteamPath { get; set; }
+		Platform Platform { get; set; }
+#if CS2
+		GamingPlatform GamingPlatform { get; set; }
+		string UserIdentifier { get; set; }
+#endif
 
-	void Save();
+		void Save();
+	}
 }

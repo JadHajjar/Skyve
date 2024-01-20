@@ -4,16 +4,17 @@ namespace Skyve.Domain.Systems;
 public interface IPackageManager
 {
 	IEnumerable<IAsset> Assets { get; }
-	IEnumerable<IMod> Mods { get; }
-	IEnumerable<ILocalPackageWithContents> Packages { get; }
+	IEnumerable<IPackage> Packages { get; }
 
-	ILocalPackageWithContents? GetPackageById(IPackageIdentity identity);
-	ILocalPackageWithContents? GetPackageByFolder(string folder);
-	List<IMod> GetModsByName(string modName);
-	void AddPackage(ILocalPackageWithContents package);
-	void RemovePackage(ILocalPackageWithContents package);
-	void SetPackages(List<ILocalPackageWithContents> content);
-	void DeleteAll(IEnumerable<ulong> ids);
+	IPackage? GetPackageById(IPackageIdentity identity);
+	IPackage? GetPackageByFolder(string folder);
+	List<IPackage> GetModsByName(string modName);
+	void AddPackage(IPackage package);
+	void RemovePackage(IPackage package);
+	void SetPackages(List<IPackage> content);
 	void DeleteAll(string folder);
-	void MoveToLocalFolder(ILocalPackage package);
+	void MoveToLocalFolder(IPackage package);
+#if CS1
+	void DeleteAll(IEnumerable<ulong> ids);
+#endif
 }

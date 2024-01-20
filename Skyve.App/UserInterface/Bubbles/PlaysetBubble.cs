@@ -23,7 +23,7 @@ public class PlaysetBubble : StatusBubbleBase
 			return;
 		}
 
-		Text = Locale.PlaysetBubble;
+		Text = Locale.ActivePlayset;
 		ImageName = _playsetManager.CurrentPlayset.GetIcon();
 
 		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
@@ -45,14 +45,16 @@ public class PlaysetBubble : StatusBubbleBase
 	{
 		DrawText(e, ref targetHeight, _playsetManager.CurrentPlayset.Name ?? "");
 
+#if CS1
 		if (_playsetManager.CurrentPlayset.Temporary)
 		{
 			DrawText(e, ref targetHeight, Locale.CreatePlaysetHere, FormDesign.Design.YellowColor);
 		}
 		else
 		{
-			DrawText(e, ref targetHeight, _playsetManager.CurrentPlayset.AutoSave ? Locale.AutoPlaysetSaveOn : Locale.AutoPlaysetSaveOff, _playsetManager.CurrentPlayset.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
+			DrawText(e, ref targetHeight, _playsetManager.CurrentPlayset.AutoSave ? Locale.GetGlobalText("AutoPlaysetSaveOn") : Locale.GetGlobalText("AutoPlaysetSaveOff"), _playsetManager.CurrentPlayset.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
 		}
+#endif
 
 		if (ServiceCenter.Get<INotifier>().PlaysetsLoaded)
 		{

@@ -34,41 +34,80 @@ public static class SystemExtensions
 		return PackageNameUtil.CleanName(package, out tags, keepTags);
 	}
 
-	public static bool IsIncluded(this ILocalPackage package)
+	public static bool IsLocal(this IPackageIdentity identity)
+	{
+		return identity.Id <= 0;
+	}
+
+	public static bool IsIncluded(this IPackageIdentity package)
 	{
 		return PackageUtil.IsIncluded(package);
 	}
 
-	public static bool IsIncluded(this ILocalPackage package, out bool partiallyIncluded)
+	public static bool IsIncluded(this IPackageIdentity package, out bool partiallyIncluded)
 	{
 		return PackageUtil.IsIncluded(package, out partiallyIncluded);
 	}
 
-	public static bool IsEnabled(this ILocalPackage package)
+	public static bool IsEnabled(this IPackageIdentity package)
 	{
 		return PackageUtil.IsEnabled(package);
 	}
 
-	public static ILocalPackage? GetLocalPackage(this IPackageIdentity package)
+	public static IPackage? GetPackage(this IPackageIdentity identity)
 	{
-		if (package is ILocalPackage local)
+		return identity is ILocalPackageData packageData
+			? packageData.Package
+			: identity is IPackage package ? package : PackageManager.GetPackageById(identity);
+	}
+
+	public static bool IsInstalled(this IPackageIdentity identity)
+	{
+		return PackageManager.GetPackageById(identity) != null;
+	}
+
+	public static ILocalPackageData? GetLocalPackage(this IPackageIdentity identity)
+	{
+		return identity is ILocalPackageData packageData
+			? packageData
+			: identity is IPackage package ? package.LocalData : (PackageManager.GetPackageById(identity)?.LocalData);
+	}
+
+	public static ILocalPackageIdentity? GetLocalPackageIdentity(this IPackageIdentity identity)
+	{
+		return identity is ILocalPackageIdentity packageData
+			? packageData
+			: identity is IPackage package ? package.LocalData : (ILocalPackageIdentity?)(PackageManager.GetPackageById(identity)?.LocalData);
+	}
+
+	public static Bitmap? GetThumbnail<T>(this T? identity) where T : IPackageIdentity
+	{
+		if (identity is IThumbnailObject thumbnailObject)
 		{
-			return local;
+			return GetThumbnail(thumbnailObject);
 		}
 
-		return PackageManager.GetPackageById(package);
+		return GetThumbnail((IThumbnailObject?)identity?.GetWorkshopInfo());
 	}
 
-	public static Bitmap? GetThumbnail(this IPackageIdentity? package)
+	public static Bitmap? GetThumbnail(this IThumbnailObject? thumbnailObject)
 	{
-		return (package?.GetWorkshopInfo()).GetThumbnail();
-	}
+		if (thumbnailObject is null)
+		{
+			return null;
+		}
 
-	public static Bitmap? GetThumbnail(this IWorkshopInfo? workshopInfo)
-	{
-		var url = workshopInfo?.ThumbnailUrl;
+		if (thumbnailObject.GetThumbnail(ImageService, out var thumbnail, out var thumbnailUrl))
+		{
+			return thumbnail;
+		}
 
-		return url is null or "" ? null : ImageService.GetImage(url, true).Result;
+		if (thumbnailUrl is null or "")
+		{
+			return null;
+		}
+
+		return ImageService.GetImage(thumbnailUrl, true).Result;
 	}
 
 	public static Bitmap? GetUserAvatar(this IPackageIdentity? package)
@@ -93,27 +132,27 @@ public static class SystemExtensions
 		return dlc?.ThumbnailUrl is null or "" ? null : ImageService.GetImage(dlc.ThumbnailUrl, true, $"{dlc.Id}.png", false).Result;
 	}
 
-	public static IEnumerable<ITag> GetTags(this IPackage package, bool ignoreParent = false)
+	public static IEnumerable<ITag> GetTags(this IPackageIdentity package, bool ignoreParent = false)
 	{
 		return TagsService.GetTags(package, ignoreParent);
 	}
 
 	public static IWorkshopInfo? GetWorkshopInfo(this IPackageIdentity identity)
 	{
-		return WorkshopService.GetInfo(identity);
+		return identity is IWorkshopInfo workshopInfo ? WorkshopService.GetInfo(identity) ?? workshopInfo : WorkshopService.GetInfo(identity);
 	}
 
 	public static IPackage? GetWorkshopPackage(this IPackageIdentity identity)
 	{
-		return WorkshopService.GetPackage(identity);
+		return identity is IWorkshopInfo and IPackage package ? package : WorkshopService.GetPackage(identity);
 	}
 
-	public static ICompatibilityInfo GetCompatibilityInfo(this IPackage package)
+	public static ICompatibilityInfo GetCompatibilityInfo(this IPackageIdentity package, bool noCache = false, bool cacheOnly = false)
 	{
-		return CompatibilityManager.GetCompatibilityInfo(package);
+		return CompatibilityManager.GetCompatibilityInfo(package, noCache, cacheOnly);
 	}
 
-	public static IPackageCompatibilityInfo? GetPackageInfo(this IPackage package)
+	public static IPackageCompatibilityInfo? GetPackageInfo(this IPackageIdentity package)
 	{
 		return CompatibilityManager.GetPackageInfo(package);
 	}

@@ -8,7 +8,7 @@ public class PackageCompatibilityReportControl : TableLayoutPanel
 	private int controlCount;
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly INotifier _notifier;
-	public PackageCompatibilityReportControl(IPackage package)
+	public PackageCompatibilityReportControl(IPackageIdentity package)
 	{
 		ServiceCenter.Get(out _notifier, out _compatibilityManager);
 
@@ -46,7 +46,7 @@ public class PackageCompatibilityReportControl : TableLayoutPanel
 		this.TryInvoke(Reset);
 	}
 
-	public IPackage Package { get; }
+	public IPackageIdentity Package { get; }
 	public ICompatibilityInfo? Report { get; private set; }
 
 	protected override void Dispose(bool disposing)

@@ -1,5 +1,7 @@
-﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_Mods : PC_ContentList<IMod>
+﻿using System.Threading.Tasks;
+
+namespace Skyve.App.UserInterface.Panels;
+public class PC_Mods : PC_ContentList
 {
 	public PC_Mods()
 	{
@@ -12,12 +14,12 @@ public class PC_Mods : PC_ContentList<IMod>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Mod.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
+		Text = $"{Locale.Mod.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override IEnumerable<IMod> GetItems()
+	protected override async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
-		return ServiceCenter.Get<IPackageManager>().Mods;
+		return await Task.FromResult(ServiceCenter.Get<IPackageManager>().Packages);
 	}
 
 	protected override string GetCountText()

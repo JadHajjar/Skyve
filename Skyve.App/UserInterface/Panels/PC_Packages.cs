@@ -1,5 +1,7 @@
-﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_Packages : PC_ContentList<ILocalPackageWithContents>
+﻿using System.Threading.Tasks;
+
+namespace Skyve.App.UserInterface.Panels;
+public class PC_Packages : PC_ContentList
 {
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 	private readonly IPackageManager _contentManager = ServiceCenter.Get<IPackageManager>();
@@ -14,21 +16,21 @@ public class PC_Packages : PC_ContentList<ILocalPackageWithContents>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Package.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
+		Text = $"{Locale.Package.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override IEnumerable<ILocalPackageWithContents> GetItems()
+	protected override async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
 		if (_settings.UserSettings.FilterOutPackagesWithOneAsset || _settings.UserSettings.FilterOutPackagesWithMods)
 		{
 			return _contentManager.Packages.Where(x =>
 			{
-				if (_settings.UserSettings.FilterOutPackagesWithOneAsset && (x.Assets?.Count() ?? 0) == 1)
+				if (_settings.UserSettings.FilterOutPackagesWithOneAsset && (x.LocalData?.Assets.Length == 1))
 				{
 					return false;
 				}
 
-				if (_settings.UserSettings.FilterOutPackagesWithMods && x.Mod is not null)
+				if (_settings.UserSettings.FilterOutPackagesWithMods && x.IsCodeMod)
 				{
 					return false;
 				}
@@ -37,7 +39,7 @@ public class PC_Packages : PC_ContentList<ILocalPackageWithContents>
 			});
 		}
 
-		return _contentManager.Packages;
+		return await Task.FromResult(_contentManager.Packages);
 	}
 
 	protected override string GetCountText()
@@ -50,11 +52,11 @@ public class PC_Packages : PC_ContentList<ILocalPackageWithContents>
 			{
 				packagesIncluded++;
 
-				if (item.Mod is not null)
+				if (item.IsCodeMod)
 				{
 					modsIncluded++;
 
-					if (item.Mod.IsEnabled())
+					if (item.IsEnabled())
 					{
 						modsEnabled++;
 					}

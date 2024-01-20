@@ -23,7 +23,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 	{
 		var entities = new List<ModInfo>();
 
-		foreach (var mod in _packageManager.Mods)
+		foreach (var mod in _packageManager.Packages)
 		{
 			var info = (_compatibilityManager as ICompatibilityManager).GetPackageInfo(mod);
 
@@ -38,7 +38,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		return entities;
 	}
 
-	public IEnumerable<IMod> GetOrderedMods()
+	public IEnumerable<IPackage> GetOrderedMods()
 	{
 		var entities = GetEntities();
 
@@ -99,11 +99,11 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		}
 	}
 
-	private IEnumerable<ModInfo> GetEntity(ulong steamId, List<ModInfo> modEntityMap, IPackageIdentity original)
+	private IEnumerable<ModInfo> GetEntity(ulong id, List<ModInfo> modEntityMap, IPackageIdentity original)
 	{
-		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
+		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(id);
 
-		foreach (var item in modEntityMap.Where(x => x.Mod.Id == steamId))
+		foreach (var item in modEntityMap.Where(x => x.Mod.Id == id))
 		{
 			yield return item;
 		}
@@ -115,7 +115,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 
 		foreach (var item in indexedPackage.Group)
 		{
-			if (item.Key != steamId)
+			if (item.Key != id)
 			{
 				foreach (var package in _compatibilityManager.FindPackage(item.Value, true))
 				{
@@ -144,17 +144,16 @@ internal class LoadOrderHelper : ILoadOrderHelper
 
 	private class ModInfo
 	{
-		public int Order;
-		public IMod Mod;
+		public int Order = 1000;
+		public IPackage Mod;
 		public IPackageIdentity[] RequiredMods;
 		public IPackageIdentity[] LoadAfterMods;
 
-		public ModInfo(IMod mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
+		public ModInfo(IPackage mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
 		{
 			Mod = mod;
 			RequiredMods = requiredMods;
 			LoadAfterMods = afterLoadMods;
-			Order = 1000;
 		}
 	}
 }

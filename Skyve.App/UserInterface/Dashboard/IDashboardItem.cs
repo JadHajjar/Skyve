@@ -141,8 +141,6 @@ public abstract class IDashboardItem : SlickImageControl
 		}
 		catch { }
 
-		base.OnPaint(e);
-
 		var dragRect = ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight);
 
 		using var dotBrush = new SolidBrush(HoverState.HasFlag(HoverState.Hovered) ? Color.FromArgb(150, FormDesign.Design.ActiveColor) : Color.FromArgb(50, FormDesign.Design.AccentColor));
@@ -171,6 +169,8 @@ public abstract class IDashboardItem : SlickImageControl
 				}
 			}
 		}
+
+		base.OnPaint(e);
 	}
 
 	protected void DrawSection(PaintEventArgs e, bool applyDrawing, Rectangle rectangle, string text, DynamicIcon dynamicIcon, out Color fore, ref int preferredHeight, Color? tintColor = null, string? subText = null, bool drawBackground = true)

@@ -57,7 +57,7 @@ public static class PlatformUtil
 
 	public static bool ExecuteSteam(string args)
 	{
-		var file = ServiceCenter.Get<ILocationManager>().SteamPathWithExe;
+		var file = ServiceCenter.Get<ILocationService>().SteamPathWithExe;
 
 		ServiceCenter.Get<IIOUtil>().Execute(file, args);
 
@@ -125,7 +125,7 @@ public static class PlatformUtil
 			{
 				if (path[0] is 'c' or 'C')
 				{
-					var file = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().SkyveAppDataPath, "Support Logs", Path.GetFileName(path));
+					var file = CrossIO.Combine(ServiceCenter.Get<ILocationService>().SkyveSettingsPath, "Support Logs", Path.GetFileName(path));
 
 					CrossIO.CopyFile(path, file, true);
 

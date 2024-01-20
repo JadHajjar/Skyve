@@ -12,7 +12,7 @@ public class IndexedPackageStatus
 	public IndexedPackageStatus(PackageStatus status, Dictionary<ulong, IndexedPackage> packages)
 	{
 		Status = status;
-		Packages = new();
+		Packages = [];
 
 		if (status.Packages is not null)
 		{
@@ -28,6 +28,6 @@ public class IndexedPackageStatus
 
 	public static implicit operator IndexedPackageStatus(PackageStatus status)
 	{
-		return new(status, new());
+		return new(status, []);
 	}
 }

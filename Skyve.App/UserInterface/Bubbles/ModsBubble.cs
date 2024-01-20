@@ -61,9 +61,9 @@ public class ModsBubble : StatusBubbleBase
 	{
 		_compatibilityCounts.Clear();
 
-		foreach (var mod in _contentManager.Mods)
+		foreach (var mod in _contentManager.Packages)
 		{
-			if (!_packageUtil.IsIncluded(mod))
+			if (!mod.IsIncluded())
 			{
 				continue;
 			}
@@ -107,22 +107,22 @@ public class ModsBubble : StatusBubbleBase
 	{
 		if (!_notifier.IsContentLoaded)
 		{
-			DrawText(e, ref targetHeight, Locale.Loading, FormDesign.Design.InfoColor);
+			DrawText(e, ref targetHeight, LocaleSlickUI.Loading, FormDesign.Design.InfoColor);
 			return;
 		}
 
 		int modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
 
-		foreach (var mod in _contentManager.Mods)
+		foreach (var mod in _contentManager.Packages)
 		{
-			if (!_packageUtil.IsIncluded(mod))
+			if (!mod.IsIncluded())
 			{
 				continue;
 			}
 
 			modsIncluded++;
 
-			if (_packageUtil.IsEnabled(mod))
+			if (mod.IsEnabled())
 			{
 				modsEnabled++;
 			}
