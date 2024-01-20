@@ -43,16 +43,16 @@
   "AffectedPackagesAre": "Les paquets affectés sont :",
   "ConfirmDeletePlayset": "Voulez-vous vraiment supprimer le profil '{0}' ?",
   "ActivatePlayset": "Activer ce profil",
-  "PlaysetMerge": "Add all of this playset's mods to your active playset",
-  "PlaysetExclude": "Remove all of this playset's mods from your active playset",
+  "PlaysetMerge": "Ajouter tous les mods de ce profil dans le profil actif",
+  "PlaysetExclude": "Retirer tous les mods de ce profil du profil actif",
   "PlaysetDelete": "Supprimer ce profil",
   "MissingPackages": "Paquets manquants",
   "OpenPackagePage": "Ouvrir la page de ce paquet",
   "OpenPackageFolder": {
     "One": "Ouvrir l'emplacement du fichier",
-    "Plural": "Open all selected packages' file locations"
+    "Plural": "Ouvrir l'emplacement des fichiers des paquets sélectionnés"
   },
-  "OpenLocalFolder": "Open the folder containing this package",
+  "OpenLocalFolder": "Ouvrir le dossier contenant ce paquet",
   "ReDownloadPackage": {
     "One": "Re-télécharger ce paquet",
     "Plural": "Re-télécharger tous les paquets sélectionnés"
@@ -73,7 +73,7 @@
   "FolderSettings": "Paramètres du dossier",
   "ShowDatesRelatively": "Afficher les dates par rapport à l'heure actuelle",
   "CouldNotCreatePlayset": "Impossible de créer un nouveau profil.",
-  "CreatePlaysetHere": "Create a new playset or activate a previous one by clicking here",
+  "CreatePlaysetHere": "Créez un nouveau profil ou activez un profil précédant en cliquant ici",
   "Maintenance": "Maintenance",
   "DisableNewModsByDefault": "Désactiver les nouveaux mods ajoutés par défaut",
   "DisableNewAssetsByDefault": "Désactiver les nouveaux assets ajoutés par défaut",
@@ -81,7 +81,7 @@
   "HideFilters": "Masquer les filtres",
   "DateSubscribed": "Date d'abonnement",
   "DateUpdated": "Date de mise à jour",
-  "FilterOutPackagesWithMods": "Hide code mods in the packages page",
+  "FilterOutPackagesWithMods": "Masquer les mods de code sur la page des paquets",
   "FilterOutPackagesWithOneAsset": "Masquer les paquets à assemblage unique de la page Paquet",
   "CopyAuthorLink": "Copier le lien du profil de l'auteur",
   "YourPlaysets": "Vos profils",
@@ -116,7 +116,7 @@
   "LinkModAssets": "Lier les assets des mods au statut \"inclus\" du mod",
   "LinkModAssets_Tip": "Certains mods incluent des assets qui sont nécessaires pour qu'ils fonctionnent correctement. Activer cette option relie ces assets au mod lui-même et les masque de la page Assets pour ne pas les exclure par erreur.",
   "ShowDatesRelatively_Tip": "Modifie le format des dates qui sont affichées dans les listes de contenu par heure relative. Par exemple ; Hier à 14h10",
-  "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
+  "DisableNewModsByDefault_Tip": "Lorsque vous vous abonnez ou ajouter un mod, l'outil va automatiquement l'exclure ou l'inclure en fonction de ce paramètre lorsque l'outil est lancé.",
   "DisableNewAssetsByDefault_Tip": "Lorsque vous vous abonnez ou ajoutez un asset, l'outil l'exclura automatiquement ou l'inclura en fonction de ce paramètre lorsque l'outil sera lancé.",
   "FilterOutPackagesWithOneAsset_Tip": "Les paquets qui n'ont qu'un seul asset ne s'afficheront pas sur la page des paquets. Ils seront toujours affichés sur la page des assets.",
   "FilterOutPackagesWithMods_Tip": "Les paquets qui contiennent un mod ne seront pas affichés sur la page des paquets. Ils seront toujours affichés sur la page des mods.",
@@ -155,7 +155,7 @@
   "LogZipFile": "Enregistrer les logs dans un fichier",
   "LogFolders": "Dossiers de logs",
   "LogFileDrop": "Déposer ou sélectionner un fichier log à simplifier et afficher la liste des erreurs dans le log",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Les erreurs de votre dernière session seront automatiquement affichées ci-dessous à l'ouverture de cette page",
   "ErrorsInLog": "Erreurs dans le log",
   "OpenLogFolder": "Ouvrir le dossier de log du jeu",
   "CopyLogFile": "Copier le fichier log du jeu dans le presse-papiers",
@@ -183,7 +183,7 @@
   "ABANDONED": "ABANDONNÉ",
   "ActionUnreversible": {
     "One": "Cette action ne peut pas être annulée.",
-    "Plural": "This action can not be reversed. And will affect {0} packages."
+    "Plural": "Cette action ne peut pas être annulée. Et affectera {0} paquets."
   },
   "AlwaysOpenFiltersAndActions": "Afficher la section Filtres par défaut",
   "AlwaysOpenFiltersAndActions_Tip": "Toujours ouvrir la section Filtres lorsque vous entrez dans un onglet de contenu",
@@ -205,22 +205,22 @@
   },
   "EnableThisItemInAllPlaysets": {
     "One": "Activer dans tous vos profils",
-    "Plural": "Enable the selected items in all your playsets"
+    "Plural": "Activer les éléments sélectionnés dans tous vos profils"
   },
   "DisableThisItemInAllPlaysets": {
     "One": "Désactiver dans tous vos profils",
-    "Plural": "Disable the selected items in all your playsets"
+    "Plural": "Désactiver les éléments sélectionnés dans tous vos profils"
   },
   "CopyPackageName": {
-    "One": "Copy the package's name",
+    "One": "Copier le nom du paquet",
     "Plural": "Copier les noms des paquets sélectionnés"
   },
   "CopyAuthorId": {
-    "One": "Copy the author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "Copier l'ID de l'auteur",
+    "Plural": "Copier les IDs des auteurs des paquets sélectionnés"
   },
   "CopyAuthorName": {
-    "One": "Copy the author's name",
+    "One": "Copier le nom de l'auteur",
     "Plural": "Copier les noms des auteurs des paquets sélectionnés"
   },
   "Sorting_LastUsed": "Dernière utilisation",
@@ -235,7 +235,7 @@
   "Sorting_Color": "Couleur du profil",
   "CreateShortcutPlayset": "Créez un raccourci sur votre bureau",
   "AskToLaunchGameForShortcut": "Voulez-vous que le raccourci lance également le jeu avec votre profil ?",
-  "TextImportMissingInfo": "Load a text file containing Workshop IDs to easily subscribe to or manage them",
+  "TextImportMissingInfo": "Chargez un fichier texte contenant les IDs du Workshop pour facilement s'y abonner ou les gérer",
   "ImportFromText": "Importer à partir d'un texte",
   "ImportFromClipboard": "Charger du texte depuis votre presse-papiers",
   "ImportFromTextInfo": "Tout format de texte est pris en charge",
@@ -258,11 +258,11 @@
     "One": "{0} auteur sélectionné",
     "Plural": "{0} auteurs sélectionnés"
   },
-  "Donate": "Donate",
+  "Donate": "Faire un don",
   "FlipItemCopyFilterAction": "Échanger le comportement Ctrl+Clic pour le filtrage dans les listes de contenu",
   "FlipItemCopyFilterAction_Tip": "Échange le comportement par défaut du clic sur les étiquettes, de sort que le clic normal filtre et Alt+Clic effectue l'action par défaut.",
   "AltClickTo": "Alt+Clic vers {0}",
-  "FilterByThisAuthor": "Add '{0}' to your author filters",
+  "FilterByThisAuthor": "Ajouter \"{0}\" à votre filtre d'auteur",
   "AddToSearch": "Ajouter '{0}' à votre recherche",
   "CopyToClipboard": "Copier '{0}' dans votre presse-papiers",
   "ViewPackageCR": "Afficher les informations de compatibilité de ce paquet",
@@ -289,17 +289,17 @@
   "ControlToSelectMultiplePackages": "Ctrl + Cliquer pour sélectionner plusieurs paquets à la fois.",
   "Local": "Local",
   "Workshop": "Workshop",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "Rapport de compatibilité",
   "Enabled": "Activé",
   "Disabled": "Désactivé",
   "Included": "Inclus",
   "Excluded": "Exclu",
   "OutOfDate": "Obsolète",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "Statut du paquet",
   "Author": "Auteur",
   "Include": "Inclure",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
+  "Unsubscribe": "Se désabonner",
+  "Exclude": "Exclure",
   "Snooze": "Répétition",
   "UnSnooze": "Annuler le rappel",
   "Mod": {
@@ -320,35 +320,35 @@
   },
   "IncludedCount": {
     "One": "{0} {1} inclus",
-    "Plural": "{0} {1} included"
+    "Plural": "{0} {1} inclus"
   },
   "EnabledCount": {
     "One": "{0} {1} activé",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0} {1} activés"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} inclus et activé",
-    "Plural": "{0} {1} included & enabled"
+    "Plural": "{0} {1} inclus et activés"
   },
   "LoadedCount": {
     "One": "{0} {1} chargé",
-    "Plural": "{0} {1} loaded"
+    "Plural": "{0} {1} chargés"
   },
   "ShowingCount": {
     "One": "Affichage de {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "Plural": "Affichage de {0} {1}"
   },
   "ShowingCountWarning": {
     "One": "Affichage de {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {3}"
+    "Plural": "Affichage de {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
     "One": "Affichage de {0} {1}, {2} sélectionné",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "Plural": "Affichage de {0} {1}, {2} sélectionnés"
   },
   "ShowingSelectedCountWarning": {
     "One": "Affichage de {0} {1}, {2} sélectionné, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "Plural": "Affichage de {0} {1}, {2} sélectionnés, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} est masqué à cause de l'utilisation de votre profil",
@@ -384,11 +384,11 @@
   },
   "NewUpdatedCount": {
     "One": "{0} {1} nouveaux ou mis à jour",
-    "Plural": "{0} new or updated {1}"
+    "Plural": "{0} {1} nouveaux ou mis à jour"
   },
   "TotalCount": {
     "One": "{0} {1} au total",
-    "Plural": "{0} {1} in total"
+    "Plural": "{0} {1} au total"
   },
   "PackageIsNotDownloaded": "'{0}' a été retiré de votre ordinateur",
   "PackageIsOutOfDate": "'{0}' est obsolète\r\n\r\nVous êtes {1} en retard",
@@ -446,8 +446,8 @@
   "PastePlaysetId": "Coller l'ID du playset que vous souhaitez importer",
   "AssumeInternetConnectivity": "Ignorer la vérification de la connexion à Internet",
   "AssumeInternetConnectivity_Tip": "Ne pas vérifier la connexion et supposer automatiquement que vous êtes connecté à Internet.",
-  "SelectAll": "Select all items",
-  "DeselectAll": "Un-select all items",
+  "SelectAll": "Sélectionner tous les éléments",
+  "DeselectAll": "Désélectionner tous les éléments",
   "AddTagBox": "Ajouter un nouveau tag ici",
   "EditingMultipleTags": "Modifier les tags de plusieurs paquets écrasera chacun de leurs tags personnalisés.",
   "EditTagsOfPackage": {
@@ -495,9 +495,9 @@
   "CleanupInfoTitle": "Qu'est-ce qu'un nettoyage ?",
   "TroubleshootCauseResult": "Les paquets suivants pourraient être la cause de vos problèmes",
   "VerifiedAuthor": "Auteur vérifié",
-  "EnableItem": "Enable this mod",
-  "DisableItem": "Disable this mod",
-  "SwitchToItem": "Switch to this mod",
+  "EnableItem": "Activer ce mod",
+  "DisableItem": "Désactiver ce mod",
+  "SwitchToItem": "Passer à ce mod",
   "FailedToImportPlayset": "Impossible d'importer ce profil.",
   "FilterByEnabled": "Afficher uniquement les éléments activés.",
   "FilterByDisabled": "Afficher uniquement les éléments désactivés.",
@@ -541,11 +541,11 @@
     "One": "\"{1}\" a été installé depuis votre dernière session",
     "Plural": "{0} paquets ont été installés depuis votre dernière session"
   },
-  "NoActivePlayset": "No Active Playset",
-  "RecentlyUpdated": "Recently Updated",
-  "Manage": "Manage",
+  "NoActivePlayset": "Pas de profil actif",
+  "RecentlyUpdated": "Mis à jour récemment",
+  "Manage": "Gérer",
   "Version": "Version",
-  "UpdateTime": "Update Time",
-  "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "UpdateTime": "Date de mise à jour",
+  "Status": "Statut",
+  "ThisModIsRequiredYouCantDisableIt": "Ce mod est requis, vous ne pouvez pas le désactiver."
 }
