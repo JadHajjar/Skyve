@@ -17,9 +17,9 @@
   "AddInteraction": "Añadir interacción",
   "NotReviewed": "Sin reseñas",
   "Stable": "Estable",
-  "StableNoNewFeatures": "Stable, only bug-fix updates",
-  "StableNoFutureUpdates": "Stable, no more updates",
-  "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "StableNoNewFeatures": "Estable, sólo correcciones de errores",
+  "StableNoFutureUpdates": "Estable, no más actualizaciones",
+  "HasIssuesNoFutureUpdates": "Tiene problemas, no hay más actualizaciones",
   "NotEnoughInformation": "No hay suficiente información",
   "HasIssues": "Tiene problemas",
   "Broken": "Dañado",
@@ -106,8 +106,8 @@
     "Plural": "'{0}' se cargará directamente después de los siguientes paquetes."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' es requerido para '{1}'.",
+    "Plural": "'{0}' es requerido para los siguientes paquetes."
   },
   "Interaction_Identical": "Estas son varias versiones del mismo paquete.\n\nDebería elegir sólo uno de ellos.",
   "Status_Succeeded": "'{0}' ha sido reemplazado por '{1}'.\n\nYa estás utilizando '{1}', no necesitas '{0}'.",
@@ -141,10 +141,10 @@
   "OutputText": "Salida esperada",
   "Stability_AssetNotReviewed": "Este asset no ha sido revisado aún.\n\nLa información de compatibilidad puede no ser exacta; aunque los assets generalmente son estables",
   "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
-  "Stability_Stable": "This package is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_Stable": "Este paquete es estable. Su autor sigue trabajando activamente en él y actualizándolo.",
+  "Stability_StableNoNewFeatures": "Este paquete es estable, aunque el autor ya no publicará funciones nuevas.\nSin embargo, lo actualizará en caso de nuevos errores.",
+  "Stability_StableNoFutureUpdates": "Este paquete es estable, aunque el autor ya no lo soporta, las futuras actualizaciones o correcciones de errores no son probables.",
+  "Stability_HasIssuesNoFutureUpdates": "Este paquete puede causar problemas, y el autor ya no lo soporta, actualizaciones o correcciones de errores no son probables.",
   "Stability_NotEnoughInformation": "No hay suficiente información para revisar adecuadamente este paquete.",
   "Stability_HasIssues": "Este paquete puede causar problemas.\nTenga cuidado al usarlo.",
   "Stability_Broken": "Este paquete está obsoleto.\nSe sabe que no deja cargar el juego o simplemente no funciona.",
@@ -178,10 +178,10 @@
     "One": "Deberías cambiar a '{1}'.",
     "Plural": "You should switch to one of the following packages."
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "Debes incluir '{0}'",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "Debes incluir el siguiente paquete:",
+    "Plural": "Debes incluir los siguientes paquetes:"
   },
   "NoRequiredDlcs": "No requiere DLCs",
   "DlcsSelected": {
@@ -244,12 +244,12 @@
     "Plural": "Este paquete tiene {0} advertencias de compatibilidad"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "Eliminar esta solicitud",
+    "Plural": "Eliminar estas solicitudes"
   },
-  "ViewRequest": "View Request",
-  "CRT_RequiredItem": "Required Item",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "ViewRequest": "Ver solicitud",
+  "CRT_RequiredItem": "Artículo requerido",
+  "RequiredItem": "Artículo requerido",
+  "ApplyAllActions": "Aplicar todas las acciones disponibles",
+  "SnoozeAll": "Posponer todos los problemas mostrados"
 }
