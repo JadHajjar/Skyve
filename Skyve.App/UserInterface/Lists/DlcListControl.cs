@@ -227,11 +227,11 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 			{
 				if (ServiceCenter.Get<IDlcManager>().IsIncluded(Item))
 				{
-					text = Locale.ExcludePackage.Format(Item.Name);
+					text = Locale.ExcludeItem.Format(Item.Name);
 				}
 				else
 				{
-					text = Locale.IncludePackage.Format(Item.Name);
+					text = Locale.IncludeItem.Format(Item.Name);
 				}
 
 				point = IncludedRect.Location;

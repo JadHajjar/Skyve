@@ -24,29 +24,15 @@ public partial class ItemListControl
 			var notificationType = compatibilityReport?.GetNotification();
 			var hasStatus = GetStatusDescriptors(e.Item, out var statusText, out var statusIcon, out var statusColor);
 
-			if (e.IsSelected)
-			{
-				e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
-			}
-			else if (!IsPackagePage && notificationType > NotificationType.Info)
-			{
-				e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
-			}
-			else if (!IsPackagePage && hasStatus)
-			{
-				e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
-			}
-			else
-			{
-				e.BackColor = e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.AccentBackColor : BackColor;
-			}
-
-			if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
-			{
-				e.BackColor = e.BackColor.MergeColor(FormDesign.Design.ActiveColor, e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
-			}
+			SetBackColorForList(e, notificationType, hasStatus, statusColor);
 
 			base.OnPaintItemList(e);
+
+			if (e.InvalidRects.All(x => x == e.Rects.IncludedRect))
+			{
+				DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, localIdentity, out _);
+				return;
+			}
 
 			e.Graphics.SetClip(new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y - Padding.Top + 1, e.ClipRectangle.Width, e.ClipRectangle.Height + Padding.Vertical - 2));
 
@@ -98,35 +84,17 @@ public partial class ItemListControl
 			var notificationType = compatibilityReport?.GetNotification();
 			var hasStatus = GetStatusDescriptors(e.Item, out var statusText, out var statusIcon, out var statusColor);
 
-			if (e.IsSelected)
-			{
-				e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
-			}
-			else if (!IsPackagePage && notificationType > NotificationType.Info)
-			{
-				e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
-			}
-			else if (!IsPackagePage && hasStatus)
-			{
-				e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
-			}
-			else if (e.HoverState.HasFlag(HoverState.Hovered))
-			{
-				e.BackColor = FormDesign.Design.AccentBackColor;
-			}
-			else
-			{
-				e.BackColor = BackColor;
-			}
-
-			if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
-			{
-				e.BackColor = e.BackColor.MergeColor(FormDesign.Design.ActiveColor, e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
-			}
+			SetBackColorForList(e, notificationType, hasStatus, statusColor);
 
 			base.OnPaintItemList(e);
 
-			DrawThumbnail(e, e.Item.GetLocalPackageIdentity(), workshopInfo);
+			if (e.InvalidRects.All(x => x == e.Rects.IncludedRect))
+			{
+				DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, localIdentity, out _);
+				return;
+			}
+
+			DrawThumbnail(e, localIdentity, workshopInfo);
 			DrawTitleAndTags(e);
 			DrawVersionAndDate(e, package, localIdentity, workshopInfo);
 			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, localIdentity, out var activeColor);

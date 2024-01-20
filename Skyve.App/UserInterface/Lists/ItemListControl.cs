@@ -427,7 +427,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				return;
 			}
 
-			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) : new PC_PackagePage(item.Item));
+			(FindForm() as BasePanelForm)?.PushPanel(null, /*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) :*/ new PC_PackagePage(item.Item));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{
@@ -489,8 +489,44 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
-	protected override void OnPaint(PaintEventArgs e)
+	protected override void InvalidateForLoading()
 	{
+		var items = SafeGetItems();
+
+		items.RemoveAll(x => !x.Loading || x.Rectangles is null);
+
+		if (items.Count == 0)
+		{
+			Invalidate();
+			return;
+		}
+
+		foreach (var item in items)
+		{
+			Invalidate(item.Rectangles.IncludedRect);
+		}
+	}
+
+	protected override void OnPaintBackground(PaintEventArgs e)
+	{
+		var loading = false;
+
+		foreach (var item in SafeGetItems())
+		{
+			loading |= (item.Loading = _subscriptionsManager.IsSubscribing(item.Item) || _modUtil.IsEnabling(item.Item));
+		}
+
+		if (Loading != loading)
+		{
+			Loading = loading;
+			Invalidate();
+		}
+
+		base.OnPaintBackground(e);
+	}
+
+	protected override void OnPaint(PaintEventArgs e)
+	{	
 		try
 		{
 			PopupSearchRect1 = PopupSearchRect2 = Rectangle.Empty;
@@ -507,7 +543,13 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				using var brush = new SolidBrush(FormDesign.Design.LabelColor);
 				using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
+#if CS1
 				e.Graphics.DrawString(Locale.NoLocalPackagesFound + "\r\n" + Locale.CheckFolderInOptions, font, brush, ClientRectangle, stringFormat);
+#else
+				e.Graphics.DrawString(Locale.NoLocalPackagesFound, font, brush, ClientRectangle, stringFormat);
+
+				DrawWorkshopSearchButtons(e, true);
+#endif
 			}
 			else if (!SafeGetItems().Any())
 			{
@@ -524,7 +566,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 					return;
 				}
 
-				DrawWorkshopSearchButtons(e);
+				DrawWorkshopSearchButtons(e, false);
 			}
 			else
 			{
@@ -540,7 +582,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
-	private void DrawWorkshopSearchButtons(PaintEventArgs e)
+	private void DrawWorkshopSearchButtons(PaintEventArgs e, bool emptySearch)
 	{
 		CursorLocation = PointToClient(Cursor.Position);
 
@@ -552,7 +594,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 		PopupSearchRect1 = SlickButton.AlignAndDraw(e.Graphics, new Rectangle(0, Height * 2 / 3, Width, 0), ContentAlignment.TopCenter, new ButtonDrawArgs
 		{
-			Text = Locale.SearchWorkshop,
+			Text = emptySearch ? Locale.DiscoverWorkshop : Locale.SearchWorkshop,
 #if CS2
 			Icon = "I_Paradox",
 #else
@@ -562,9 +604,10 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			Padding = UI.Scale(new Padding(7), UI.UIScale),
 			Cursor = CursorLocation,
 			HoverState = HoverState,
+			ButtonType = ButtonType.Hidden
 		}).Rectangle;
 
-		PopupSearchRect2 = SlickButton.AlignAndDraw(e.Graphics, new Rectangle(0, PopupSearchRect1.Bottom + (Padding.Vertical * 2), Width, 0), ContentAlignment.TopCenter, new ButtonDrawArgs
+		PopupSearchRect2 = emptySearch ? default : SlickButton.AlignAndDraw(e.Graphics, new Rectangle(0, PopupSearchRect1.Bottom + (Padding.Vertical * 2), Width, 0), ContentAlignment.TopCenter, new ButtonDrawArgs
 		{
 			Text = Locale.SearchWorkshopBrowser,
 			Icon = "I_Link",
@@ -572,6 +615,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			Padding = UI.Scale(new Padding(7), UI.UIScale),
 			Cursor = CursorLocation,
 			HoverState = HoverState,
+			ButtonType = ButtonType.Hidden
 		}).Rectangle;
 
 		Cursor = PopupSearchRect1.Contains(CursorLocation) || PopupSearchRect2.Contains(CursorLocation) ? Cursors.Hand : Cursors.Default;
@@ -678,10 +722,10 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				else
 				{
 					text = !isIncluded
-						? (string)Locale.AddThisModToYourPlayset
+						? (string)Locale.SubscribeToItem
 						: Item.IsEnabled()
-											? $"{Locale.DisablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}"
-											: $"{Locale.EnablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
+											? $"{Locale.DisableItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}"
+											: $"{Locale.EnableItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
 				}
 
 				point = IncludedRect.Location;
@@ -700,7 +744,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 #endif
 			if (SteamRect.Contains(location))
 			{
-				text = Locale.ViewOnSteam;
+				text = Locale.ViewOnWorkshop;
 				point = SteamRect.Location;
 				return true;
 			}

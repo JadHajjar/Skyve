@@ -131,7 +131,7 @@ public partial class PC_PackagePage : PanelContent
 			L_Requirements.Visible = false;
 		}
 
-		var pc = new OtherProfilePackage(package)
+		var pc = new OtherPlaysetPackage(package)
 		{
 			Dock = DockStyle.Fill
 		};

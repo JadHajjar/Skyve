@@ -24,6 +24,12 @@ public partial class ItemListControl
 
 			base.OnPaintItemGrid(e);
 
+			if (e.InvalidRects.All(x => x == e.Rects.IncludedRect))
+			{
+				DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, localIdentity, out _);
+				return;
+			}
+
 			e.DrawableItem.CachedHeight = e.Rects.IncludedRect.Bottom - e.ClipRectangle.Y + GridPadding.Vertical + Padding.Vertical;
 
 			DrawThumbnail(e, localIdentity, workshopInfo);
@@ -73,7 +79,7 @@ public partial class ItemListControl
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
 				using var font = UI.Font(9F, FontStyle.Bold);
-				using var image = icon!.Get(height * 3 / 4).Color(textBrush.Color);
+				using var image = icon!.Get(font.Height * 4 / 3).Color(textBrush.Color);
 
 				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false, notificationType <= NotificationType.Info, notificationType <= NotificationType.Info);
 
@@ -100,7 +106,7 @@ public partial class ItemListControl
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
 				using var font = UI.Font(9F, FontStyle.Bold);
-				using var image = notificationType.Value.GetIcon(false).Get(height * 3 / 4).Color(textBrush.Color);
+				using var image = notificationType.Value.GetIcon(false).Get(font.Height * 4 / 3).Color(textBrush.Color);
 
 				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false);
 

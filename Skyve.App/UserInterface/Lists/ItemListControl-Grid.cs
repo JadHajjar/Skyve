@@ -193,20 +193,19 @@ public partial class ItemListControl
 				if (GridView)
 				{
 					location.Y += tagSize.Height + GridPadding.Top;
+					location.X = e.ClipRectangle.X;
 				}
 				else
 					return true;
 			}
 
-			tagsRect.Location = location;
-
-			var tagRect = e.Graphics.DrawLabel(item.Value, tagIcon, color ?? Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopLeft, mousePosition: CursorLocation);
+			var tagRect = e.Graphics.DrawLabel(item.Value, tagIcon, color ?? Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), new Rectangle(location.X, tagsRect.Y, tagsRect.Width, tagsRect.Height), CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopLeft, mousePosition: CursorLocation);
 
 			location.X += (GridView ? GridPadding : Padding).Left + tagRect.Width;
 
 			e.Rects.TagRects[item] = tagRect;
 
-			return false;
+			return tagsRect.Right > location.X;
 		}
 
 		private int DrawFolderName(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity)

@@ -29,7 +29,7 @@ public partial class PC_PlaysetAdd : PanelContent
 
 		//if (!_profileManager.Save(newProfile))
 		//{
-		//	ShowPrompt(Locale.PlaysetCreationFailed, icon: PromptIcons.Error);
+		//	ShowPrompt(Locale.CouldNotCreatePlayset, icon: PromptIcons.Error);
 		//	return;
 		//}
 

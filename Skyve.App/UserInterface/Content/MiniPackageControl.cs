@@ -59,7 +59,7 @@ public class MiniPackageControl : SlickControl
 				}
 				else
 				{
-					Program.MainForm.PushPanel(null, Package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(Package) : new PC_PackagePage(Package));
+					Program.MainForm.PushPanel(null, /*Package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(Package) :*/ new PC_PackagePage(Package));
 				}
 
 				break;

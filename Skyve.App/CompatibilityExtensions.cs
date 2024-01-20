@@ -16,8 +16,10 @@ public static class CompatibilityExtensions
 			PackageUsage.CityBuilding => "I_City",
 			PackageUsage.AssetCreation => "I_Tools",
 			PackageUsage.MapCreation => "I_Map",
+#if CS1
 			PackageUsage.ScenarioMaking => "I_ScenarioMaking",
 			PackageUsage.ThemeMaking => "I_Paint",
+#endif
 			_ => "I_ProfileSettings"
 		};
 	}

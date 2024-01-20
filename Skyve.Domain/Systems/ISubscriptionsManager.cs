@@ -6,8 +6,8 @@ namespace Skyve.Domain.Systems;
 public interface ISubscriptionsManager
 {
 	bool IsSubscribing(IPackageIdentity package);
-	Task<bool> Subscribe(IEnumerable<IPackageIdentity> ids);
-	Task<bool> UnSubscribe(IEnumerable<IPackageIdentity> ids);
+	Task<bool> Subscribe(IEnumerable<IPackageIdentity> ids, int? playsetId = null);
+	Task<bool> UnSubscribe(IEnumerable<IPackageIdentity> ids, int? playsetId = null);
 
 #if CS1
 	List<ulong> PendingSubscribingTo { get; }

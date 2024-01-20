@@ -265,7 +265,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 		//	, new (Locale.DownloadPlayset, "I_Refresh", local && item.ProfileId != 0 && item.Author != _userService.User.Id, action: () => DownloadProfile(item))
 		//	, new (Locale.CopyPlaysetLink, "I_LinkChain", local && item.ProfileId != 0, action: () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)))
 		//	, new (string.Empty, show: local)
-		//	, new (Locale.PlaysetReplace, "I_Install", local, action: () => LoadProfile?.Invoke(item!))
+		//	, new (Locale.ActivatePlayset, "I_Install", local, action: () => LoadProfile?.Invoke(item!))
 		//	, new (Locale.PlaysetMerge, "I_Merge", local, action: () => MergeProfile?.Invoke(item!))
 		//	, new (Locale.PlaysetExclude, "I_Exclude", local, action: () => ExcludeProfile?.Invoke(item!))
 		//	, new (string.Empty)
@@ -418,7 +418,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 		if (e.Item == _profileManager.CurrentPlayset)
 		{
 			using var okIcon = IconManager.GetSmallIcon("I_Ok");
-			e.Graphics.DrawLabel(Locale.CurrentPlayset, okIcon, FormDesign.Design.ActiveColor, e.Rects.Content, ContentAlignment.TopRight);
+			e.Graphics.DrawLabel(Locale.ActivePlayset, okIcon, FormDesign.Design.ActiveColor, e.Rects.Content, ContentAlignment.TopRight);
 
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale));
 
@@ -430,7 +430,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 			e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, icon, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.TopRight);
 		}
 
-		var loadText = ReadOnly ? _profileManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlayset : Locale.DownloadPlayset : Locale.LoadPlayset;
+		var loadText = ReadOnly ? _profileManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlayset : Locale.DownloadPlayset : Locale.ActivatePlayset;
 		var loadIcon = new DynamicIcon(downloading == e.Item && ReadOnly ? "I_Wait" : ReadOnly && _profileManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? "I_Refresh" : "I_Install");
 		using var importIcon = ReadOnly ? loadIcon.Default : loadIcon.Get(e.Rects.Folder.Height * 3 / 4);
 		var loadSize = SlickButton.GetSize(e.Graphics, importIcon, loadText, Font, null);
@@ -546,7 +546,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 		if (e.Item == _profileManager.CurrentPlayset)
 		{
-			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.CurrentPlayset, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
+			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.ActivePlayset, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
 
 		if (e.Item.IsMissingItems)
@@ -564,10 +564,10 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 		SlickButton.DrawButton(e, e.Rects.Folder, string.Empty, Font, IconManager.GetIcon("I_Folder"), null, e.Rects.Folder.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
-		var loadSize = SlickButton.GetSize(e.Graphics, IconManager.GetIcon("I_Folder"), Locale.LoadPlayset, Font, null);
+		var loadSize = SlickButton.GetSize(e.Graphics, IconManager.GetIcon("I_Folder"), Locale.ActivatePlayset, Font, null);
 		e.Rects.Load = new Rectangle(e.Rects.Folder.X - Padding.Left - loadSize.Width, e.Rects.Folder.Y, loadSize.Width, e.Rects.Folder.Height);
 
-		SlickButton.DrawButton(e, e.Rects.Load, Locale.LoadPlayset, Font, IconManager.GetIcon("I_Install"), null, e.Rects.Load.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		SlickButton.DrawButton(e, e.Rects.Load, Locale.ActivatePlayset, Font, IconManager.GetIcon("I_Install"), null, e.Rects.Load.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
 		if (large)
 		{
@@ -684,7 +684,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 			if (Load.Contains(location))
 			{
-				text = (instance as PlaysetListControl)!.ReadOnly ? ServiceCenter.Get<IPlaysetManager>().Playsets.Any(x => x.Name!.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlaysetTip : Locale.DownloadPlaysetTip : Locale.PlaysetReplace;
+				text = (instance as PlaysetListControl)!.ReadOnly ? ServiceCenter.Get<IPlaysetManager>().Playsets.Any(x => x.Name!.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlaysetTip : Locale.DownloadPlaysetTip : Locale.ActivatePlayset;
 				point = Load.Location;
 				return true;
 			}

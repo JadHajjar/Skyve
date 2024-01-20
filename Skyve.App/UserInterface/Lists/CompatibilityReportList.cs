@@ -466,17 +466,17 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 							if (p is null)
 							{
-								buttonText = Locale.Subscribe;
+								buttonText = Locale.SubscribeToItem;
 								iconName = "I_Add";
 							}
 							else if (!p.IsIncluded())
 							{
-								buttonText = Locale.Include;
+								buttonText = Locale.IncludeItem;
 								iconName = "I_Check";
 							}
 							else if (!(p.IsEnabled() ))
 							{
-								buttonText = Locale.Enable;
+								buttonText = Locale.EnableItem;
 								iconName = "I_Enabled";
 							}
 							break;
@@ -485,7 +485,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 							iconName = "I_Ok";
 							break;
 						case StatusAction.Switch:
-							buttonText = Locale.Switch;
+							buttonText = Locale.SwitchToItem;
 							iconName = "I_Switch";
 							break;
 					}
@@ -600,7 +600,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				});
 
 				colorStyle = ColorStyle.Green;
-				allText = max switch { 3 => Locale.SubscribeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
+				allText = max switch { 3 => Locale.IncludeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
 				allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
 			}
 			break;
@@ -614,7 +614,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.UnsubscribeOther:
-				allText = Message.Packages?.Length switch { 0 => null, _ => Locale.UnsubscribeAll };
+				allText = Message.Packages?.Length switch { 0 => null, _ => Locale.ExcludeAll };
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.ExcludeThis:
@@ -965,7 +965,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
-			Program.MainForm.PushPanel(null, item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetPackage()) : new PC_PackagePage(item.Item));
+			Program.MainForm.PushPanel(null, /*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetPackage()) :*/ new PC_PackagePage(item.Item));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{
@@ -1095,7 +1095,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			}
 			else if (package is not null)
 			{
-				Program.MainForm.PushPanel(null, package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) : new PC_PackagePage(package));
+				Program.MainForm.PushPanel(null, /*package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) :*/ new PC_PackagePage(package));
 			}
 			else
 			{
@@ -1313,11 +1313,11 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 				if (Item.IsIncluded())
 				{
-					text = $"{Locale.ExcludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
+					text = $"{Locale.ExcludeItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
 				}
 				else
 				{
-					text = $"{Locale.IncludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
+					text = $"{Locale.IncludeItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
 				}
 
 				point = IncludedRect.Location;
@@ -1328,11 +1328,11 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			{
 				if (Item.IsEnabled())
 				{
-					text = $"{Locale.DisablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
+					text = $"{Locale.DisableItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
 				}
 				else
 				{
-					text = $"{Locale.EnablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
+					text = $"{Locale.EnableItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
 				}
 
 				point = EnabledRect.Location;
@@ -1341,7 +1341,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (SteamRect.Contains(location))
 			{
-				text = Locale.ViewOnSteam;
+				text = Locale.ViewOnWorkshop;
 				point = SteamRect.Location;
 				return true;
 			}

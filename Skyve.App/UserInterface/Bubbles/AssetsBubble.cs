@@ -113,7 +113,7 @@ public class AssetsBubble : StatusBubbleBase
 	{
 		if (!_notifier.IsContentLoaded)
 		{
-			DrawText(e, ref targetHeight, Locale.Loading, FormDesign.Design.InfoColor);
+			DrawText(e, ref targetHeight, LocaleSlickUI.Loading, FormDesign.Design.InfoColor);
 			return;
 		}
 

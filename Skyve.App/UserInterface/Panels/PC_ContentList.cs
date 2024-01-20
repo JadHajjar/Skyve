@@ -73,12 +73,12 @@ public partial class PC_ContentList : PanelContent
 
 	protected virtual async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
 	{
-		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems.Cast<Domain.IPackageIdentity>(), included);
+		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems, included);
 	}
 
 	protected virtual async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
 	{
-		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems.Cast<Domain.IPackageIdentity>(), enabled);
+		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems, enabled);
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()

@@ -25,6 +25,9 @@ public partial class ItemListControl
 
 	private void DrawThumbnail(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
 	{
+		if (!e.InvalidRects.Any(x => x.IntersectsWith(e.Rects.IconRect)))
+			return;
+
 		var thumbnail = e.Item.GetThumbnail();
 
 		if (thumbnail is null)
@@ -326,7 +329,7 @@ public partial class ItemListControl
 				(Locale.Version, 65),
 				(Locale.UpdateTime, 140),
 				(Locale.Author, 150),
-				(Locale.Tags, 0),
+				(LocaleSlickUI.Tags, 0),
 				(Locale.Status, 160),
 				("", 80)
 			};
@@ -454,4 +457,28 @@ public partial class ItemListControl
 		return rect.X + rect.Width;
 	}
 
+	private void SetBackColorForList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, NotificationType? notificationType, bool hasStatus, Color statusColor)
+	{
+		if (e.IsSelected)
+		{
+			e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
+		}
+		else if (!IsPackagePage && notificationType > NotificationType.Info)
+		{
+			e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
+		}
+		else if (!IsPackagePage && hasStatus)
+		{
+			e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
+		}
+		else
+		{
+			e.BackColor = e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.AccentBackColor : BackColor;
+		}
+
+		if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
+		{
+			e.BackColor = e.BackColor.MergeColor(FormDesign.Design.ActiveColor, e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
+		}
+	}
 }

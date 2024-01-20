@@ -103,7 +103,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		Text = Locale.CompatibilityReport;
 
 		DD_PackageStatus.Text = Locale.PackageStatus;
-		DD_Tags.Text = Locale.Tags;
+		DD_Tags.Text = LocaleSlickUI.Tags;
 		DD_Profile.Text = Locale.PlaysetFilter;
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
 		DR_ServerTime.Text = Locale.DateUpdated;

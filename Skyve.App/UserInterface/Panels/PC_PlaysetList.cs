@@ -373,6 +373,7 @@ public partial class PC_PlaysetList : PanelContent
 				entry.ExtractToFile(file);
 			}
 
+#if CS1
 			if (file.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
 			{
 				if (profile is not null)
@@ -390,6 +391,7 @@ public partial class PC_PlaysetList : PanelContent
 				}
 			}
 			else
+#endif
 			{
 				profile ??= _profileManager.ImportPlayset(file);
 			}

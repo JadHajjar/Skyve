@@ -77,7 +77,11 @@ public partial class ContentList : SlickControl
 		I_Actions.ExcludeAllClicked = ExcludeAll;
 		I_Actions.EnableAllClicked = EnableAll;
 		I_Actions.DisableAllClicked = DisableAll;
+#if CS2
+		I_Actions.SubscribeAllClicked = IncludeAll;
+#else
 		I_Actions.SubscribeAllClicked = SubscribeAll;
+#endif
 
 		TLP_Main.Controls.Add(ListControl, 0, TLP_Main.RowCount - 1);
 		TLP_Main.SetColumnSpan(ListControl, TLP_Main.ColumnCount);
@@ -115,6 +119,12 @@ public partial class ContentList : SlickControl
 		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
 		C_ViewTypeControl.GridView = ListControl.GridView;
 		C_ViewTypeControl.CompactList = ListControl.CompactList;
+
+#if CS2
+		OT_Workshop.Image2 = "I_Paradox";
+#else
+		OT_Workshop.Image2 = "I_Steam";
+#endif
 
 		if (loaded)
 		{
@@ -260,7 +270,7 @@ public partial class ContentList : SlickControl
 	{
 		DD_PackageStatus.Text = Locale.PackageStatus;
 		DD_ReportSeverity.Text = Locale.CompatibilityStatus;
-		DD_Tags.Text = Locale.Tags;
+		DD_Tags.Text = LocaleSlickUI.Tags;
 		DD_Profile.Text = Locale.PlaysetFilter;
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
 		DR_ServerTime.Text = Locale.DateUpdated;
@@ -389,7 +399,10 @@ public partial class ContentList : SlickControl
 			{
 				await RefreshItems();
 			}
-			else _delayedSearch.Run();
+			else
+			{
+				_delayedSearch.Run();
+			}
 		}
 	}
 
@@ -700,6 +713,7 @@ public partial class ContentList : SlickControl
 	private void I_Actions_Click(object sender, EventArgs e)
 	{
 		var items = ListControl.SelectedOrFilteredItems.ToList();
+		var isFiltered = items.Count != ItemCount;
 		var isSelected = ListControl.SelectedItemsCount > 0;
 		var anyIncluded = items.Any(x => _packageUtil.IsIncluded(x));
 		var anyExcluded = items.Any(x => !_packageUtil.IsIncluded(x));
@@ -710,15 +724,16 @@ public partial class ContentList : SlickControl
 
 		var stripItems = new SlickStripItem?[]
 		{
-			  anyDisabled ? new (Locale.EnableAll, "I_Ok", async () => await EnableAll()) : null
-			, anyEnabled ? new (Locale.DisableAll, "I_Enabled",  async () => await DisableAll()) : null
+			  anyDisabled ? new (isSelected ? Locale.EnableAllSelected : isFiltered ? Locale.EnableAllFiltered : Locale.EnableAll, "I_Ok", async () => await EnableAll()) : null
+			, anyEnabled ? new (isSelected ? Locale.DisableAllSelected : isFiltered ? Locale.DisableAllFiltered : Locale.DisableAll, "I_Enabled",  async () => await DisableAll()) : null
 			, new ()
-			, anyExcluded ? new (Locale.IncludeAll, "I_Add",  async() => await IncludeAll()) : null
-			, anyIncluded ? new (Locale.ExcludeAll, "I_X",  async() => await ExcludeAll()) : null
+			, anyExcluded ? new (isSelected ? Locale.IncludeAllSelected : isFiltered ? Locale.IncludeAllFiltered : Locale.IncludeAll, "I_Add",  async() => await IncludeAll()) : null
+			, anyIncluded ? new (isSelected ? Locale.ExcludeAllSelected : isFiltered ? Locale.ExcludeAllFiltered : Locale.ExcludeAll, "I_X",  async() => await ExcludeAll()) : null
+			, anyDisabled ? new (isSelected ? Locale.ExcludeAllDisabledSelected : isFiltered ? Locale.ExcludeAllDisabledFiltered : Locale.ExcludeAllDisabled, "I_Cancel",  async() => await ExcludeAllDisabled()) : null
 			, new ()
 			, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count() ? new (Locale.SelectAll, "I_DragDrop",  ListControl.SelectAll) : null
-			, ListControl.SelectedItemsCount > 0? new (Locale.DeselectAll, "I_Select", ListControl.DeselectAll) : null
-			, new (Locale.CopyAllIds, "I_Copy", () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
+			, ListControl.SelectedItemsCount > 0 ? new (Locale.DeselectAll, "I_Select", ListControl.DeselectAll) : null
+			, new (isSelected ? Locale.CopyAllIdsSelected : isFiltered ? Locale.CopyAllIdsFiltered : Locale.CopyAllIds, "I_Copy", () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
 #if CS1
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))
@@ -734,30 +749,48 @@ public partial class ContentList : SlickControl
 
 	private async Task DisableAll()
 	{
-		await SetEnabled(ListControl.SelectedOrFilteredItems, false);
+		I_Actions.Loading = true;
+		await SetEnabled(ListControl.SelectedOrFilteredItems.ToList(), false);
 		ListControl.Invalidate();
-		I_Actions.Invalidate();
+		I_Actions.Loading = false;
 	}
 
 	private async Task EnableAll()
 	{
-		await SetEnabled(ListControl.SelectedOrFilteredItems, true);
+		I_Actions.Loading = true;
+		await SetEnabled(ListControl.SelectedOrFilteredItems.ToList(), true);
 		ListControl.Invalidate();
-		I_Actions.Invalidate();
+		I_Actions.Loading = false;
 	}
 
 	private async Task ExcludeAll()
 	{
-		await SetIncluded(ListControl.SelectedOrFilteredItems, false);
+		var items = ListControl.SelectedOrFilteredItems.ToList();
+
+		if (items.Count > 10 && MessagePrompt.Show(Locale.AreYouSure, PromptButtons.YesNo, PromptIcons.Question, Program.MainForm) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		I_Actions.Loading = true;
+		await SetIncluded(items, false);
 		ListControl.Invalidate();
-		I_Actions.Invalidate();
+		I_Actions.Loading = false;
+	}
+
+	private async Task ExcludeAllDisabled()
+	{
+		await SetIncluded(ListControl.SelectedOrFilteredItems.AllWhere(x => !_packageUtil.IsEnabled(x)), false);
+		ListControl.Invalidate();
+		I_Actions.Loading = false;
 	}
 
 	private async Task IncludeAll()
 	{
-		await SetIncluded(ListControl.SelectedOrFilteredItems, true);
+		I_Actions.Loading = true;
+		await SetIncluded(ListControl.SelectedOrFilteredItems.ToList(), true);
 		ListControl.Invalidate();
-		I_Actions.Invalidate();
+		I_Actions.Loading = false;
 	}
 
 #if CS1
@@ -774,7 +807,6 @@ public partial class ContentList : SlickControl
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
-#endif
 
 	private async Task UnsubscribeAll()
 	{
@@ -784,7 +816,7 @@ public partial class ContentList : SlickControl
 		}
 
 		I_Actions.Loading = true;
-		await ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.SelectedOrFilteredItems.Cast<Domain.IPackageIdentity>());
+		await ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.SelectedOrFilteredItems.ToList());
 		I_Actions.Loading = false;
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
@@ -824,6 +856,7 @@ public partial class ContentList : SlickControl
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 	}
+#endif
 
 	private async void DeleteAll(object sender, EventArgs e)
 	{

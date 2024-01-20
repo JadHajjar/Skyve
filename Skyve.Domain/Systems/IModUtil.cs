@@ -15,4 +15,5 @@ public interface IModUtil
 	bool GetModInfo(string folder, out string? modDll, out Version? version);
 	int GetLoadOrder(IPackage package);
 	Task Initialize();
+	bool IsEnabling(IPackageIdentity package);
 }

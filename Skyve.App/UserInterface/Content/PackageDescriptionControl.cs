@@ -173,7 +173,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (rects.ScoreRect.Contains(e.Location))
 		{
-			new RatingInfoForm { Icon = Program.MainForm?.Icon }.ShowDialog(Program.MainForm);
+			throw new NotImplementedException();
 			return;
 		}
 
@@ -236,7 +236,7 @@ public class PackageDescriptionControl : SlickImageControl
 		{
 			_drawablePackage.Rectangles = GenerateListRectangles(_drawablePackage.Item, ClientRectangle);
 
-			OnPaintItemList(new ItemPaintEventArgs<IPackageIdentity, Rectangles>(_drawablePackage, e.Graphics, ClientRectangle, HoverState, false));
+			OnPaintItemList(new ItemPaintEventArgs<IPackageIdentity, Rectangles>(_drawablePackage, e.Graphics, [ClientRectangle], ClientRectangle, HoverState, false));
 		}
 	}
 
@@ -717,11 +717,11 @@ public class PackageDescriptionControl : SlickImageControl
 
 				if (Item.IsIncluded())
 				{
-					text = $"{Locale.ExcludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
+					text = $"{Locale.ExcludeItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
 				}
 				else
 				{
-					text = $"{Locale.IncludePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
+					text = $"{Locale.IncludeItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
 				}
 
 				point = IncludedRect.Location;
@@ -732,11 +732,11 @@ public class PackageDescriptionControl : SlickImageControl
 			{
 				if (localPackageData.IsEnabled())
 				{
-					text = $"{Locale.DisablePackage.Format(localPackageData.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
+					text = $"{Locale.DisableItem.Format(localPackageData.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
 				}
 				else
 				{
-					text = $"{Locale.EnablePackage.Format(localPackageData.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
+					text = $"{Locale.EnableItem.Format(localPackageData.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
 				}
 
 				point = EnabledRect.Location;
@@ -745,7 +745,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 			if (SteamRect.Contains(location))
 			{
-				text = Locale.ViewOnSteam;
+				text = Locale.ViewOnWorkshop;
 				point = SteamRect.Location;
 				return true;
 			}
@@ -817,7 +817,7 @@ public class PackageDescriptionControl : SlickImageControl
 				var workshopInfo = Item.GetWorkshopInfo();
 				if (workshopInfo is not null)
 				{
-					text = string.Format(Locale.RatingCount, workshopInfo.VoteCount.ToString("N0"), $"({workshopInfo.VoteCount}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0"));
+					text = "";// string.Format(Locale.RatingCount, workshopInfo.VoteCount.ToString("N0"), $"({workshopInfo.VoteCount}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0"));
 					point = ScoreRect.Location;
 					return true;
 				}

@@ -192,17 +192,17 @@ public class CompatibilityMessageControl : SlickControl
 
 							if (p is null)
 							{
-								buttonText = Locale.Subscribe;
+								buttonText = Locale.SubscribeToItem;
 								iconName = "I_Add";
 							}
 							else if (!p.IsIncluded())
 							{
-								buttonText = Locale.Include;
+								buttonText = Locale.IncludeItem;
 								iconName = "I_Check";
 							}
 							else if (!(p.IsEnabled()))
 							{
-								buttonText = Locale.Enable;
+								buttonText = Locale.EnableItem;
 								iconName = "I_Enabled";
 							}
 							break;
@@ -211,7 +211,7 @@ public class CompatibilityMessageControl : SlickControl
 							iconName = "I_Ok";
 							break;
 						case StatusAction.Switch:
-							buttonText = Locale.Switch;
+							buttonText = Locale.SwitchToItem;
 							iconName = "I_Switch";
 							break;
 					}
@@ -281,7 +281,7 @@ public class CompatibilityMessageControl : SlickControl
 					});
 
 					colorStyle = ColorStyle.Green;
-					allText = max switch { 3 => Locale.SubscribeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
+					allText = max switch { 3 => Locale.IncludeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
 					allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
 				}
 				break;
@@ -295,7 +295,7 @@ public class CompatibilityMessageControl : SlickControl
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.UnsubscribeOther:
-				allText = Message.Packages.Length switch { 0 => null, 1 => Locale.Unsubscribe, _ => Locale.UnsubscribeAll };
+				allText = Message.Packages.Length switch { 0 => null, 1 => Locale.Unsubscribe, _ => Locale.ExcludeAll };
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.ExcludeThis:
@@ -412,7 +412,7 @@ public class CompatibilityMessageControl : SlickControl
 			}
 			else if (package is not null)
 			{
-				Program.MainForm.PushPanel(null, package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) : new PC_PackagePage(item));
+				Program.MainForm.PushPanel(null, /*package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) :*/ new PC_PackagePage(item));
 			}
 			else
 			{
