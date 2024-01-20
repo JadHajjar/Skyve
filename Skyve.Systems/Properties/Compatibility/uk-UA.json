@@ -189,7 +189,7 @@
     "Plural": "{0} DLC вибрано"
   },
   "RequiredDLCs": "Необхідні DLC / CCP (Зміст, створений користувачами)",
-  "CRT_Stability": "Стабільність",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "Наступники",
   "CRT_RequiredPackages": "Необхідні пакунки",
   "CRT_OptionalPackages": "Необов'язкові пакети",
@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} слід виключити",
-    "Plural": "{0} {1} слід виключити"
+    "Plural": "{0} {1} should be excluded"
   },
   "UnsubscribeCount": "{0} {1}, від яких ви повинні відписатися",
   "SwitchCount": {
@@ -249,7 +249,8 @@
   },
   "ViewRequest": "Переглянути запит",
   "CRT_RequiredItem": "Необхідний предмет",
-  "RequiredItem": "Необхідний предмет",
+  "RequiredItem": "Required Item",
   "ApplyAllActions": "Застосувати всі доступні дії",
-  "SnoozeAll": "Відкласти всі знайдені проблеми"
+  "SnoozeAll": "Відкласти всі знайдені проблеми",
+  "LinkedPackages": "Linked Packages"
 }
