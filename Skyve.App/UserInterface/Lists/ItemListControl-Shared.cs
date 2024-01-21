@@ -26,7 +26,9 @@ public partial class ItemListControl
 	private void DrawThumbnail(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
 	{
 		if (!e.InvalidRects.Any(x => x.IntersectsWith(e.Rects.IconRect)))
+		{
 			return;
+		}
 
 		var thumbnail = e.Item.GetThumbnail();
 
@@ -227,23 +229,70 @@ public partial class ItemListControl
 #endif
 	private void DrawTitleAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 	{
-		using var font = UI.Font(GridView ? (_settings.UserSettings.ExtendedListInfo ? 11.25F : 9F) : CompactList ? 8.25F : 10.5F, FontStyle.Bold);
-		using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState == HoverState.Hovered && !IsPackagePage ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
-		using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near };
-		var text = e.Item.CleanName(out var tags);
-		var textRect = e.Rects.TextRect.AlignToFontSize(font, CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopLeft, e.Graphics);
-
-		e.Graphics.DrawString(text, font, brushTitle, textRect, stringFormat);
-
 		var padding = GridView ? GridPadding : Padding;
-		var textSize = e.Graphics.Measure(text, font);
-		var tagRect = new Rectangle(e.Rects.TextRect.X + (int)textSize.Width, textRect.Y, 0, textRect.Height);
+		var text = e.Item.CleanName(out var tags);
+		using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near };
 
-		for (var i = 0; i < tags.Count; i++)
+		if (GridView && !_settings.UserSettings.ExtendedListInfo)
 		{
-			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ExtendedListInfo);
+			using var font = UI.Font(9F, FontStyle.Bold);
+			var textRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Y, e.Rects.TextRect.Width, Height);
 
-			tagRect.X += padding.Left + rect.Width;
+			var textSize = e.Graphics.Measure(text, font, textRect.Width);
+			var oneLineSize = e.Graphics.Measure(text, font);
+			var oneLine = textSize.Height == oneLineSize.Height;
+			var tagRect = new Rectangle(e.Rects.TextRect.X + (oneLine ? (int)textSize.Width : 0), textRect.Y + (oneLine ? 0 : (int)textSize.Height), 0, (int)oneLineSize.Height);
+
+			e.Rects.TextRect.Height = (int)textSize.Height + (GridPadding.Top / 3);
+			e.Rects.CenterRect = e.Rects.TextRect.Pad(0, -GridPadding.Top, 0, 0);
+			e.DrawableItem.CachedHeight = e.Rects.TextRect.Bottom;
+
+			using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState == HoverState.Hovered && !IsPackagePage ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
+
+			e.Graphics.DrawString(text, font, brushTitle, textRect, stringFormat);
+
+			for (var i = 0; i < tags.Count; i++)
+			{
+				var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ExtendedListInfo);
+
+				if (tagRect.X + tagSize.Width > e.Rects.TextRect.Right)
+				{
+					tagRect.Y += tagRect.Height;
+					tagRect.X = e.Rects.TextRect.X;
+					e.DrawableItem.CachedHeight += tagRect.Height;
+				}
+
+				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ExtendedListInfo);
+
+				tagRect.X += padding.Left + rect.Width;
+			}
+		}
+		else
+		{
+			var tagSizes = 0;
+
+			for (var i = 0; i < tags.Count; i++)
+			{
+				var size = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ExtendedListInfo);
+
+				tagSizes += padding.Left + size.Width;
+			}
+
+			using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState == HoverState.Hovered && !IsPackagePage ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
+			using var font = UI.Font(GridView ? 11.25F : CompactList ? 8.25F : 10.5F, FontStyle.Bold).FitToWidth(text, e.Rects.TextRect.Pad(0, 0, tagSizes + Padding.Right, 0), e.Graphics);
+			var textRect = e.Rects.TextRect.Pad(0, 0, tagSizes, 0).AlignToFontSize(font, CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopLeft, e.Graphics);
+
+			e.Graphics.DrawString(text, font, brushTitle, textRect, stringFormat);
+
+			var textSize = e.Graphics.Measure(text, font);
+			var tagRect = new Rectangle(e.Rects.TextRect.X + (int)textSize.Width, textRect.Y, 0, textRect.Height);
+
+			for (var i = 0; i < tags.Count; i++)
+			{
+				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ExtendedListInfo);
+
+				tagRect.X += padding.Left + rect.Width;
+			}
 		}
 	}
 

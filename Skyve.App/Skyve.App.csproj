@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
-	<Import Project="../../Skyve/Config.props" />
+    <Import Project="../../Skyve/Config.props" />
   <PropertyGroup>
-	  <Description>Helps to manage your mods and assets</Description>
-	  <DebugType>embedded</DebugType>
-	  <DebugSymbols>true</DebugSymbols>
-	  <Nullable>enable</Nullable>
-	  <DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
+      <Description>Helps to manage your mods and assets</Description>
+      <DebugType>embedded</DebugType>
+      <DebugSymbols>true</DebugSymbols>
+      <Nullable>enable</Nullable>
+      <DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
-	  <Deterministic>false</Deterministic>
-	  <LangVersion>latest</LangVersion>
-	  <TargetFramework>net4.7.2</TargetFramework>
+      <Deterministic>true</Deterministic>
+      <LangVersion>latest</LangVersion>
+      <TargetFramework>net4.7.2</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <SignAssembly>true</SignAssembly>
@@ -18,7 +18,7 @@
     <Title>Skyve</Title>
   </PropertyGroup>
 
-    <ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
@@ -26,8 +26,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
     <ProjectReference Include="..\..\SlickControls\SlickControls.csproj" />
-	<ProjectReference Include="..\..\Skyve\Skyve.Domain\Skyve.Domain.csproj" />
-	<ProjectReference Include="..\..\Skyve\Skyve.Systems\Skyve.Systems.csproj" />
+    <ProjectReference Include="..\..\Skyve\Skyve.Domain\Skyve.Domain.csproj" />
+    <ProjectReference Include="..\..\Skyve\Skyve.Systems\Skyve.Systems.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,9 +49,9 @@
     <Compile Update="UserInterface\Bubbles\PlaysetBubble.cs">
       <SubType>UserControl</SubType>
     </Compile>
-	  <Compile Update="UserInterface\Content\ContentList.cs">
-		  <SubType>UserControl</SubType>
-	  </Compile>
+      <Compile Update="UserInterface\Content\ContentList.cs">
+          <SubType>UserControl</SubType>
+      </Compile>
     <Compile Update="UserInterface\Content\TroubleshootInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

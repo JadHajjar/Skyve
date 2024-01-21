@@ -443,7 +443,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DEPRECATED => _instance.GetText("DEPRECATED");
 
 	/// <summary>
-	/// Un-select all displayed items
+	/// Un-select all items
 	/// </summary>
 	public static Translation DeselectAll => _instance.GetText("DeselectAll");
 
@@ -1245,7 +1245,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OpenGuideTip => _instance.GetText("OpenGuide_Tip");
 
 	/// <summary>
-	/// Open the local folder containing this package
+	/// Open the folder containing this package
 	/// </summary>
 	public static Translation OpenLocalFolder => _instance.GetText("OpenLocalFolder");
 
@@ -1265,8 +1265,8 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OpenLOTLogFolder => _instance.GetText("OpenLOTLogFolder");
 
 	/// <summary>
-	/// <para>Open local folder</para>
-	/// <para>Plural: Open all selected packages' local folders</para>
+	/// <para>Open file location</para>
+	/// <para>Plural: Open all selected packages' file locations</para>
 	/// </summary>
 	public static Translation OpenPackageFolder => _instance.GetText("OpenPackageFolder");
 
@@ -1561,7 +1561,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SearchWorkshopBrowser => _instance.GetText("SearchWorkshopBrowser");
 
 	/// <summary>
-	/// Select all displayed items
+	/// Select all items
 	/// </summary>
 	public static Translation SelectAll => _instance.GetText("SelectAll");
 

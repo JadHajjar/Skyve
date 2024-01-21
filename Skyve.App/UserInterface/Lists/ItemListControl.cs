@@ -509,17 +509,20 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 	protected override void OnPaintBackground(PaintEventArgs e)
 	{
-		var loading = false;
-
-		foreach (var item in SafeGetItems())
+		if (ItemCount > 0)
 		{
-			loading |= (item.Loading = _subscriptionsManager.IsSubscribing(item.Item) || _modUtil.IsEnabling(item.Item));
-		}
+			var loading = false;
 
-		if (Loading != loading)
-		{
-			Loading = loading;
-			Invalidate();
+			foreach (var item in SafeGetItems())
+			{
+				loading |= (item.Loading = _subscriptionsManager.IsSubscribing(item.Item) || _modUtil.IsEnabling(item.Item));
+			}
+
+			if (Loading != loading)
+			{
+				Loading = loading;
+				Invalidate();
+			}
 		}
 
 		base.OnPaintBackground(e);

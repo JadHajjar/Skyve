@@ -30,7 +30,7 @@ public partial class ItemListControl
 				return;
 			}
 
-			e.DrawableItem.CachedHeight = e.Rects.IncludedRect.Bottom - e.ClipRectangle.Y + GridPadding.Vertical + Padding.Vertical;
+			e.DrawableItem.CachedHeight = int.MinValue;
 
 			DrawThumbnail(e, localIdentity, workshopInfo);
 			DrawTitleAndTags(e);
@@ -38,6 +38,9 @@ public partial class ItemListControl
 			DrawVersionAndTags(e, package, localIdentity, workshopInfo);
 			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, package?.LocalData, out var activeColor);
 			DrawDots(e);
+
+			e.DrawableItem.CachedHeight = Math.Max(e.Rects.IncludedRect.Bottom, e.DrawableItem.CachedHeight) - e.ClipRectangle.Y + GridPadding.Vertical + Padding.Vertical;
+
 			DrawCompatibilityAndStatus(e, out var outerColor);
 
 			if (outerColor != default)
@@ -149,12 +152,13 @@ public partial class ItemListControl
 				using var authorFontUnderline = UI.Font(7.5F, FontStyle.Underline);
 				using var stringFormat = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center };
 
-				var rect = new Rectangle(e.Rects.TextRect.X, e.Rects.IncludedRect.Y, e.Rects.TextRect.Width, e.Rects.IncludedRect.Height);
+				var rect = new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, 0);
 				var size = e.Graphics.Measure(author.Name, authorFont).ToSize();
 
 				using var authorIcon = IconManager.GetIcon("I_Author", size.Height);
 
-				e.Rects.AuthorRect = rect.Align(size + new Size(authorIcon.Width, 0), ContentAlignment.BottomLeft);
+				e.Rects.AuthorRect = rect.Align(size + new Size(authorIcon.Width, 0), ContentAlignment.TopLeft);
+				e.DrawableItem.CachedHeight = e.Rects.AuthorRect.Bottom + GridPadding.Top / 3;
 
 				var isHovered = e.Rects.AuthorRect.Contains(CursorLocation);
 				using var brush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : Color.FromArgb(200, ForeColor));
@@ -192,20 +196,21 @@ public partial class ItemListControl
 
 			if (!string.IsNullOrEmpty(text))
 			{
-				using var versionFont = UI.Font(GridView ? 7.5F : 8.25F);
 				using var fadedBrush = new SolidBrush(Color.FromArgb(GridView ? 150 : 200, e.BackColor.GetTextColor()));
 
-				var rect = GridView ? new Rectangle(e.Rects.TextRect.X, e.Rects.IncludedRect.Y, e.Rects.TextRect.Width, e.Rects.IncludedRect.Height) : new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, e.Rects.TextRect.Width, e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - Padding.Bottom);
-				var size = e.Graphics.Measure(text, versionFont).ToSize();
+				var rect = GridView 
+					? new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, Height) 
+					: new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, e.Rects.TextRect.Width, e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - Padding.Bottom);
 
-				if (GridView && e.Rects.AuthorRect.Height > 0)
+				using var versionFont = GridView ? UI.Font(7.5F) : UI.Font(8.25F).FitToHeight(text, rect, e.Graphics);
+				using var format = GridView ? new() : new StringFormat { LineAlignment = StringAlignment.Far };
+				
+				e.Graphics.DrawString(text, versionFont, fadedBrush, rect, format);
+
+				if (GridView)
 				{
-					rect.Y += e.Rects.AuthorRect.Height;
-
-					e.DrawableItem.CachedHeight += e.Rects.AuthorRect.Height;
+					e.DrawableItem.CachedHeight += (int)e.Graphics.Measure(text, versionFont, rect.Width).Height; 
 				}
-
-				e.Graphics.DrawString(text, versionFont, fadedBrush, rect, new StringFormat { LineAlignment = StringAlignment.Far });
 			}
 		}
 
