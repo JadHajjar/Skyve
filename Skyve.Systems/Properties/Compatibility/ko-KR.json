@@ -189,7 +189,7 @@
     "Plural": "DLC {0}개 선택됨"
   },
   "RequiredDLCs": "필요한 DLC/CCP",
-  "CRT_Stability": "안정성",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "계승자",
   "CRT_RequiredPackages": "필요한 패키지",
   "CRT_OptionalPackages": "선택적 패키지",
@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "제외되어야 하는 {1} {0}개가 있습니다",
-    "Plural": "제외되어야 하는 {1} {0}개가 있습니다"
+    "Plural": "{0} {1} should be excluded"
   },
   "UnsubscribeCount": "구독을 취소해야 하는 {1} {0}개가 있습니다",
   "SwitchCount": {
@@ -249,7 +249,8 @@
   },
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "필요한 항목",
-  "RequiredItem": "필요한 항목",
+  "RequiredItem": "Required Item",
   "ApplyAllActions": "가능한 모든 작업 적용하기",
-  "SnoozeAll": "표시된 모든 이슈 나중에 다시 알림"
+  "SnoozeAll": "표시된 모든 이슈 나중에 다시 알림",
+  "LinkedPackages": "Linked Packages"
 }

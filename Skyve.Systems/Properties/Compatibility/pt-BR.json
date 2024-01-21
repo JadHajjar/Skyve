@@ -189,7 +189,7 @@
     "Plural": "{0} DLCs selecionados"
   },
   "RequiredDLCs": "DLCs / CCPs Necessárias",
-  "CRT_Stability": "Estabilidade",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "Sucessores",
   "CRT_RequiredPackages": "Pacotes Necessários",
   "CRT_OptionalPackages": "Pacotes Opcionais",
@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} Deve ser excluído",
-    "Plural": "{0} {1} Deve ser excluído"
+    "Plural": "{0} {1} should be excluded"
   },
   "UnsubscribeCount": "{0} {1} que você deve cancelar a inscrição",
   "SwitchCount": {
@@ -249,7 +249,8 @@
   },
   "ViewRequest": "Ver pedido",
   "CRT_RequiredItem": "Item Necessário",
-  "RequiredItem": "Item Necessário",
+  "RequiredItem": "Required Item",
   "ApplyAllActions": "Aplicar todas as ações disponíveis",
-  "SnoozeAll": "Adiar todos os problemas exibidos"
+  "SnoozeAll": "Adiar todos os problemas exibidos",
+  "LinkedPackages": "Linked Packages"
 }

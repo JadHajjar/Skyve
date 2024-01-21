@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} debe ser excluido",
-    "Plural": "{0} {1} debe ser excluido"
+    "Plural": "{0} {1} que deben ser excluidos"
   },
   "UnsubscribeCount": "{0} {1} que debes anular suscripción",
   "SwitchCount": {
@@ -251,5 +251,6 @@
   "CRT_RequiredItem": "Artículo requerido",
   "RequiredItem": "Artículo requerido",
   "ApplyAllActions": "Aplicar todas las acciones disponibles",
-  "SnoozeAll": "Posponer todos los problemas mostrados"
+  "SnoozeAll": "Posponer todos los problemas mostrados",
+  "LinkedPackages": "Paquetes vinculados"
 }

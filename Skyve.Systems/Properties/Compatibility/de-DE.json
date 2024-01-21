@@ -215,7 +215,7 @@
     "One": "{0} {1} sollte ausgeschlossen werden",
     "Plural": "{0} {1} sollte ausgeschlossen werden"
   },
-  "UnsubscribeCount": "{0} {1}, die Sie abbestellen sollten",
+  "UnsubscribeCount": "{0} {1}, die du abbestellen solltest",
   "SwitchCount": {
     "One": "{0} {1} muss zu einem anderen wechseln",
     "Plural": "{0} {1} müssen zu einem anderen wechseln"
@@ -251,5 +251,6 @@
   "CRT_RequiredItem": "Erforderlicher Gegenstand",
   "RequiredItem": "Erforderlicher Gegenstand",
   "ApplyAllActions": "Alle verfügbaren Aktionen anwenden",
-  "SnoozeAll": "Alle angezeigten Probleme ausblenden"
+  "SnoozeAll": "Alle angezeigten Probleme ausblenden",
+  "LinkedPackages": "Verknüpfte Pakete"
 }
