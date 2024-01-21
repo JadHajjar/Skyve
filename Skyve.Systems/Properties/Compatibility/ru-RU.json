@@ -189,7 +189,7 @@
     "Plural": "Выбрано {0} DLC"
   },
   "RequiredDLCs": "Required DLCs/CCPs",
-  "CRT_Stability": "Стабильность",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "Наблюдатели",
   "CRT_RequiredPackages": "Требуемые пакеты",
   "CRT_OptionalPackages": "Необязательные пакеты",
@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} должно быть исключено",
-    "Plural": "{0} {1} должно быть исключено"
+    "Plural": "{0} {1} should be excluded"
   },
   "UnsubscribeCount": "{0} {1} , который вы должны отказаться от подписки",
   "SwitchCount": {
@@ -251,5 +251,6 @@
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "SnoozeAll": "Snooze all displayed issues",
+  "LinkedPackages": "Linked Packages"
 }

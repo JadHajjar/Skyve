@@ -189,7 +189,7 @@
     "Plural": "DLCを選択中: {0} 個"
   },
   "RequiredDLCs": "DLC/CCPが必要",
-  "CRT_Stability": "安定性",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "移行先",
   "CRT_RequiredPackages": "必須パッケージ",
   "CRT_OptionalPackages": "オプションパッケージ",
@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} は除外が必要",
-    "Plural": "{0} {1} は除外が必要"
+    "Plural": "{0} {1} should be excluded"
   },
   "UnsubscribeCount": "{0} {1} はサブスク解除が必要",
   "SwitchCount": {
@@ -249,7 +249,8 @@
   },
   "ViewRequest": "リクエストを表示",
   "CRT_RequiredItem": "必要アイテム",
-  "RequiredItem": "必要アイテム",
+  "RequiredItem": "Required Item",
   "ApplyAllActions": "使用できるアクションを全て適用",
-  "SnoozeAll": "表示中の問題点を全てスヌーズ"
+  "SnoozeAll": "表示中の問題点を全てスヌーズ",
+  "LinkedPackages": "Linked Packages"
 }

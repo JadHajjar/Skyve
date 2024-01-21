@@ -189,7 +189,7 @@
     "Plural": "{0} DLC-uri selectate"
   },
   "RequiredDLCs": "Required DLCs/CCPs",
-  "CRT_Stability": "Stabilitate",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "Succesori",
   "CRT_RequiredPackages": "Pachete necesare",
   "CRT_OptionalPackages": "Pachete opționale",
@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} trebuie exclus",
-    "Plural": "{0} {1} trebuie exclus"
+    "Plural": "{0} {1} should be excluded"
   },
   "UnsubscribeCount": "{0} {1} de care ar trebui să vă dezabonați de la",
   "SwitchCount": {
@@ -251,5 +251,6 @@
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "SnoozeAll": "Snooze all displayed issues",
+  "LinkedPackages": "Linked Packages"
 }

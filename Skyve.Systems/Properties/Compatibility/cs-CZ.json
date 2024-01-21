@@ -189,7 +189,7 @@
     "Plural": "{0} DLC vybráno"
   },
   "RequiredDLCs": "Required DLCs/CCPs",
-  "CRT_Stability": "Stabilita",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "Úspěšníci",
   "CRT_RequiredPackages": "Požadované balíčky",
   "CRT_OptionalPackages": "Volitelné balíčky",
@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} by mělo být vyloučeno",
-    "Plural": "{0} {1} by mělo být vyloučeno"
+    "Plural": "{0} {1} should be excluded"
   },
   "UnsubscribeCount": "{0} {1} , ze kterého byste se měli odhlásit",
   "SwitchCount": {
@@ -251,5 +251,6 @@
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "SnoozeAll": "Snooze all displayed issues",
+  "LinkedPackages": "Linked Packages"
 }

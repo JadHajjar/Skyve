@@ -189,7 +189,7 @@
     "Plural": "{0} DLCs valda"
   },
   "RequiredDLCs": "Required DLCs/CCPs",
-  "CRT_Stability": "Stabilitet",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "Framgångsrika",
   "CRT_RequiredPackages": "Obligatoriska paket",
   "CRT_OptionalPackages": "Valfria paket",
@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} bör exkluderas",
-    "Plural": "{0} {1} bör exkluderas"
+    "Plural": "{0} {1} should be excluded"
   },
   "UnsubscribeCount": "{0} {1} som du bör avregistrera dig från",
   "SwitchCount": {
@@ -251,5 +251,6 @@
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "SnoozeAll": "Snooze all displayed issues",
+  "LinkedPackages": "Linked Packages"
 }

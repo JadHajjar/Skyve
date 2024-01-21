@@ -189,7 +189,7 @@
     "Plural": "เลือก DLC แล้ว {0} รายการ"
   },
   "RequiredDLCs": "Required DLCs/CCPs",
-  "CRT_Stability": "ความเสถียร",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "รับช่วงต่อ",
   "CRT_RequiredPackages": "แพ็กเกจที่จำเป็น",
   "CRT_OptionalPackages": "แพ็กเกจทางเลือก",
@@ -251,5 +251,6 @@
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues"
+  "SnoozeAll": "Snooze all displayed issues",
+  "LinkedPackages": "Linked Packages"
 }
