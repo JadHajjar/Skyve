@@ -116,7 +116,7 @@
   "LinkModAssets": "Vincule os recursos dos mods ao estado \"Incluído\" do mod",
   "LinkModAssets_Tip": "Alguns mods incluem recursos necessários para que funcionem corretamente. Habilitar essa opção vincula esses recursos ao próprio mod e os oculta na página de Recursos para que você não os exclua por engano.",
   "ShowDatesRelatively_Tip": "Altera o formato das datas que são exibidas nas listas de conteúdo para o tempo relativo. Por exemplo; Ontem às 2:10",
-  "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
+  "DisableNewModsByDefault_Tip": "Quando você assinar ou adicionar um mod, a ferramenta automaticamente irá excluí-lo ou incluí-lo com base nessa configuração quando a ferramenta for iniciada.",
   "DisableNewAssetsByDefault_Tip": "Quando você assina ou adiciona um recurso, a ferramenta irá automaticamente excluí-lo ou incluí-lo com base nesta configuração quando a ferramenta for iniciada.",
   "FilterOutPackagesWithOneAsset_Tip": "Pacotes que contêm apenas um recurso não serão exibidos na página de Pacotes. No entanto, eles ainda serão exibidos na página de Recursos.",
   "FilterOutPackagesWithMods_Tip": "Pacotes que incluem um mod não serão exibidos na página de Pacotes. No entanto, eles ainda serão exibidos na página de Mods.",
@@ -139,7 +139,7 @@
   "ResetFolderButton_Tip": "Essa ação exigirá que você inicie o jogo antes de poder usar a ferramenta novamente.",
   "AreYouSure": "Tem certeza que deseja continuar?",
   "MapFileInfo": "Selecione um arquivo de mapa para iniciar um novo jogo",
-  "BulkActions": "Bulk Actions",
+  "BulkActions": "Ações em Massa",
   "CopyVersionNumber": "Copiar número da versão",
   "FixAllTip": "Tente baixar novamente todos os pacotes que apresentam problemas. Isso abrirá a Steam por um instante",
   "FilterByThisReportStatus": "Filtrar por este estado de relatório",
@@ -155,7 +155,7 @@
   "LogZipFile": "Salvar relatórios para arquivo",
   "LogFolders": "Pastas de Registros",
   "LogFileDrop": "Arraste ou selecione um arquivo de registro para simplificar e exibir a lista de erros contidos no registro",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Os erros do seu último arquivo de registro serão exibidos automaticamente abaixo ao abrir esta página",
   "ErrorsInLog": "Erros no Relatório",
   "OpenLogFolder": "Abrir a pasta de registros do jogo",
   "CopyLogFile": "Copiar o arquivo de relatório do jogo para área de transferência",
@@ -169,7 +169,7 @@
   "PackageIncludedAndEnabledTotal": "Pacotes incluídos e habilitados: {0}, Total: {1}",
   "AssetIncludedTotal": "Recursos incluídos: {0}, Total: {1}",
   "NewPlayset_Tip": "Criar ou importar uma nova Coleção de Mods",
-  "ViewPlaysets_Tip": "View & manage your playsets",
+  "ViewPlaysets_Tip": "Ver e gerenciar seus Perfis",
   "NewGame_Tip": "Inicia um novo jogo ao abrir o Cities: Skylines. Você pode especificar o mapa com o qual deseja começar",
   "LoadSaveGame_Tip": "Carrega um salvamento ao abrir o Cities: Skylines. Se não selecionar um arquivo de salvamento, ele continuará com o último jogo salvo",
   "BETA": "BETA",
@@ -183,7 +183,7 @@
   "ABANDONED": "ABANDONADO",
   "ActionUnreversible": {
     "One": "Esta ação não pode ser revertida.",
-    "Plural": "This action can not be reversed. And will affect {0} packages."
+    "Plural": "Esta ação não pode ser revertida. E afetará {0} pacotes."
   },
   "AlwaysOpenFiltersAndActions": "Mostrar a seção de Filtros por padrão",
   "AlwaysOpenFiltersAndActions_Tip": "Manter a seção de filtros sempre aberta ao entrar em uma guia de conteúdo",
@@ -204,23 +204,23 @@
     "Plural": "Excluir os pacotes selecionados"
   },
   "EnableThisItemInAllPlaysets": {
-    "One": "Enable in all your playsets",
-    "Plural": "Enable the selected items in all your playsets"
+    "One": "Habilitar em todos os seus Perfis",
+    "Plural": "Ativar os itens selecionados em todos seus Perfis"
   },
   "DisableThisItemInAllPlaysets": {
-    "One": "Disable in all your playsets",
-    "Plural": "Disable the selected items in all your playsets"
+    "One": "Desabilitar em todos seus Perfis",
+    "Plural": "Desabilitar os itens selecionados em todos seus perfis"
   },
   "CopyPackageName": {
-    "One": "Copy the package's name",
+    "One": "Copiar o nome deste pacote",
     "Plural": "Copiar os nomes dos pacotes selecionados"
   },
   "CopyAuthorId": {
-    "One": "Copy the author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "Copiar o ID deste Autor",
+    "Plural": "Copiar os IDs dos autores dos pacotes selecionados"
   },
   "CopyAuthorName": {
-    "One": "Copy the author's name",
+    "One": "Copiar o nome deste autor",
     "Plural": "Copiar os nomes dos autores dos pacotes selecionados"
   },
   "Sorting_LastUsed": "Usado pela última vez",
@@ -235,7 +235,7 @@
   "Sorting_Color": "Cor do Perfil",
   "CreateShortcutPlayset": "Criar um atalho na sua área de trabalho",
   "AskToLaunchGameForShortcut": "Gostaria que o atalho também iniciasse o jogo com o seu perfil?",
-  "TextImportMissingInfo": "Load a text file containing Workshop IDs to easily subscribe to or manage them",
+  "TextImportMissingInfo": "Carregar um arquivo de texto contendo IDs da Oficina para assinar facilmente ou gerenciá-los",
   "ImportFromText": "Importar do texto",
   "ImportFromClipboard": "Carregar texto da sua área de transferência",
   "ImportFromTextInfo": "Qualquer formato de texto é suportado",
@@ -262,7 +262,7 @@
   "FlipItemCopyFilterAction": "Trocar o comportamento do Ctrl+Clique para filtrar nas listas de conteúdo",
   "FlipItemCopyFilterAction_Tip": "Inverte o comportamento padrão de clicar em rótulos para que o clique normal filtre e o Ctrl+Clique execute a ação padrão.",
   "AltClickTo": "Alt+Clique para {0}",
-  "FilterByThisAuthor": "Add '{0}' to your author filters",
+  "FilterByThisAuthor": "Adicione '{0}' para seus filtros de autor",
   "AddToSearch": "Adicione '{0}' à sua pesquisa",
   "CopyToClipboard": "Copiar '{0}' para a área de transferência",
   "ViewPackageCR": "Ver as informações de compatibilidade deste pacote",
@@ -272,15 +272,15 @@
   "Sorting_Subscribers": "Total de Assinantes",
   "Sorting_Votes": "Votos",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} voto",
+    "Plural": "{1} votos"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "{1} assinante",
+    "Plural": "{1} Assinantes"
   },
-  "SearchWorkshop": "Search the workshop instead...",
-  "DiscoverWorkshop": "Look for mods on the workshop...",
+  "SearchWorkshop": "Em vez disso, procure na oficina...",
+  "DiscoverWorkshop": "Procurar por mods na oficina...",
   "SearchWorkshopBrowser": "Pesquisar na oficina no seu navegador..",
   "UnknownPackage": "Pacote Desconhecido",
   "Info": "Informações",
@@ -406,7 +406,7 @@
     "One": "Você cancelará a assinatura do pacote {0} neste processo.",
     "Plural": "Você cancelará a assinatura dos pacotes {0} neste processo."
   },
-  "ViewThisPlaysetsPackages": "View the mods in this playset",
+  "ViewThisPlaysetsPackages": "Ver os mods desse Perfil",
   "YouHavePackagesUser": {
     "One": "Você tem {0} pacote criado por {1}",
     "Plural": "Você tem {0} pacotes criados por {1}"
@@ -414,7 +414,7 @@
   "RequestOption1": "Relatar um problema ou adicionar informações ausentes",
   "RequestOption2": "Adicionar um estado faltando para o pacote",
   "RequestOption3": "Adicionar uma interação ausente com outro pacote",
-  "ActivePlayset": "Active Playset",
+  "ActivePlayset": "Perfil Atual",
   "References": "Referências",
   "OpenLog": "Abrir arquivo de registro",
   "Sort By": "Ordenar por",
@@ -446,8 +446,8 @@
   "PastePlaysetId": "Cole aqui o ID da coleção de mods que você deseja importar",
   "AssumeInternetConnectivity": "Ignorar verificações de conexão da Internet",
   "AssumeInternetConnectivity_Tip": "Ignora a verificação de internet e assume automaticamente que você está conectado.",
-  "SelectAll": "Select all items",
-  "DeselectAll": "Un-select all items",
+  "SelectAll": "Marcar todos os itens",
+  "DeselectAll": "Desmarcar todos os itens",
   "AddTagBox": "Adicionar uma nova etiqueta aqui",
   "EditingMultipleTags": "Editar etiquetas de vários pacotes irá substituir cada uma das suas etiquetas personalizadas.",
   "EditTagsOfPackage": {
@@ -495,9 +495,9 @@
   "CleanupInfoTitle": "O que é uma limpeza?",
   "TroubleshootCauseResult": "Os seguintes pacotes podem ser a causa de seus problemas",
   "VerifiedAuthor": "Autor Verificado",
-  "EnableItem": "Enable this mod",
-  "DisableItem": "Disable this mod",
-  "SwitchToItem": "Switch to this mod",
+  "EnableItem": "Habilitar esse mod",
+  "DisableItem": "Desabilitar esse mod",
+  "SwitchToItem": "Trocar para este mod",
   "FailedToImportPlayset": "Falha ao importar este Perfil.",
   "FilterByEnabled": "Mostrar apenas itens habilitados.",
   "FilterByDisabled": "Mostra apenas itens desabilitados.",
@@ -541,11 +541,11 @@
     "One": "'{1}' foi instalado desde a sua última sessão",
     "Plural": "{0} Novos pacotes foram instalados desde a sua última sessão"
   },
-  "NoActivePlayset": "No Active Playset",
-  "RecentlyUpdated": "Recently Updated",
-  "Manage": "Manage",
-  "Version": "Version",
-  "UpdateTime": "Update Time",
+  "NoActivePlayset": "Nenhum Perfil Ativo",
+  "RecentlyUpdated": "Atualizados Recentemente",
+  "Manage": "Configurar",
+  "Version": "Versão",
+  "UpdateTime": "Tempo de Atualização",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "ThisModIsRequiredYouCantDisableIt": "Este mod é necessário, você não pode desabilitá-lo."
 }
