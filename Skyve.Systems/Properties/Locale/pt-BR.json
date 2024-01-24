@@ -60,9 +60,9 @@
   "OpenAuthorPage": "Abrir página do autor",
   "Sorting_Default": "Classificação padrão",
   "Sorting_LastEdit": "Última hora de edição",
-  "Sorting_DateCreated": "Date Created",
-  "Sorting_Usage": "Playset Usage",
-  "Sorting_Name": "Name",
+  "Sorting_DateCreated": "Data de Criação",
+  "Sorting_Usage": "Uso do Perfil",
+  "Sorting_Name": "Nome",
   "Sorting_FileSize": "Tamanho total do arquivo",
   "Sorting_UpdateTime": "Tempo de Atualização",
   "Sorting_SubscribeTime": "Tempo de Assinatura",
@@ -258,7 +258,7 @@
     "One": "{0} Autor Selecionado",
     "Plural": "{0} Autores selecionados"
   },
-  "Donate": "Donate",
+  "Donate": "Doar",
   "FlipItemCopyFilterAction": "Trocar o comportamento do Ctrl+Clique para filtrar nas listas de conteúdo",
   "FlipItemCopyFilterAction_Tip": "Inverte o comportamento padrão de clicar em rótulos para que o clique normal filtre e o Ctrl+Clique execute a ação padrão.",
   "AltClickTo": "Alt+Clique para {0}",
@@ -289,17 +289,17 @@
   "ControlToSelectMultiplePackages": "Ctrl + Clique para selecionar múltiplos pacotes.",
   "Local": "Local",
   "Workshop": "Workshop",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "Relatório de Compatibilidade",
   "Enabled": "Habilitado",
   "Disabled": "Desativado",
   "Included": "Incluído",
   "Excluded": "Excluído",
   "OutOfDate": "Desatualizado",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "Status do Pacote",
   "Author": "Autor",
   "Include": "Incluir",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
+  "Unsubscribe": "Cancelar Assinatura",
+  "Exclude": "Excluir",
   "Snooze": "Suspender",
   "UnSnooze": "Suspender",
   "Mod": {
@@ -320,35 +320,35 @@
   },
   "IncludedCount": {
     "One": "{0} {1} incluído",
-    "Plural": "{0} {1} included"
+    "Plural": "{0} {1} incluídos"
   },
   "EnabledCount": {
     "One": "{0} {1} habilitado",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0} {1} habilitados"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} incluído e habilitado",
-    "Plural": "{0} {1} included & enabled"
+    "Plural": "{0} {1} incluídos e habilitados"
   },
   "LoadedCount": {
     "One": "{0} {1} carregado",
-    "Plural": "{0} {1} loaded"
+    "Plural": "{0} {1} carregados"
   },
   "ShowingCount": {
     "One": "Exibindo {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "Plural": "Exibindo {0} {1}"
   },
   "ShowingCountWarning": {
     "One": "Exibindo {0} {1}, {3}",
-    "Plural": "Showing {0} {1}, {3}"
+    "Plural": "Exibindo {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
     "One": "Exibindo {0} {1}, {2} selecionado",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "Plural": "Exibindo {0} {1}, {2} selecionados"
   },
   "ShowingSelectedCountWarning": {
     "One": "Exibindo {0} {1}, {2} selecionado, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "Plural": "Exibindo {0} {1}, {2} selecionados, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} Está oculto devido à configuração do seu perfil",
@@ -384,11 +384,11 @@
   },
   "NewUpdatedCount": {
     "One": "{0} novo ou atualizado {1}",
-    "Plural": "{0} new or updated {1}"
+    "Plural": "{0} novo ou atualizado {1}"
   },
   "TotalCount": {
     "One": "{0} {1} no total",
-    "Plural": "{0} {1} in total"
+    "Plural": "{0} {1} no total"
   },
   "PackageIsNotDownloaded": "'{0}' foi removido do seu computador",
   "PackageIsOutOfDate": "'{0}' está desatualizado\r\n\r\nVocê está {1} atrás",
