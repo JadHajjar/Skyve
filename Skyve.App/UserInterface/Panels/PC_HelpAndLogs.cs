@@ -81,7 +81,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		base.DesignChanged(design);
 
 		BackColor = design.AccentBackColor;
-		TLP_Errors.BackColor = TLP_LogFolders.BackColor = TLP_HelpLogs.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
+		TLP_Errors.BackColor = TLP_LogFolders.BackColor = TLP_HelpLogs.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme ? 1 : -1);
 	}
 
 	protected override bool LoadData()

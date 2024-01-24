@@ -197,7 +197,6 @@ partial class PC_CompatibilityReport
 			// 
 			// B_Filters
 			// 
-			this.B_Filters.AutoHideText = false;
 			this.B_Filters.AutoSize = true;
 			this.B_Filters.AutoSizeIcon = true;
 			this.B_Filters.ColorShade = null;

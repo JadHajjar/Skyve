@@ -250,8 +250,8 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 
 		if (required && activeColor != default)
 		{
-			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
-			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
+			iconColor = !FormDesign.Design.IsDarkTheme ? activeColor.MergeColor(ForeColor, 75) : activeColor;
+			activeColor = activeColor.MergeColor(BackColor, !FormDesign.Design.IsDarkTheme ? 35 : 20);
 		}
 		else if (activeColor == default && isHovered)
 		{

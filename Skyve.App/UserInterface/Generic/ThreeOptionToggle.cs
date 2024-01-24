@@ -120,7 +120,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		var textColor2 = SelectedValue == Value.Option2 || option2Hovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
 		var textColorNone = SelectedValue == Value.None || noneHovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
 
-		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 4, -4))), ClientRectangle, Padding.Left);
+		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 4 : -4)), ClientRectangle, Padding.Left);
 
 		// Option 1
 		if (option1Hovered || SelectedValue == Value.Option1)

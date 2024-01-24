@@ -300,7 +300,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 		else
 		{
-			e.BackColor = BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 5, -5));
+			e.BackColor = BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 5 : -5);
 		}
 
 		if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
@@ -783,8 +783,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (required && activeColor != default)
 		{
-			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
-			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
+			iconColor = !FormDesign.Design.IsDarkTheme ? activeColor.MergeColor(ForeColor, 75) : activeColor;
+			activeColor = activeColor.MergeColor(BackColor, !FormDesign.Design.IsDarkTheme ? 35 : 20);
 		}
 		else if (activeColor == default && inclEnableRect.Contains(CursorLocation))
 		{

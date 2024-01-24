@@ -72,6 +72,7 @@ public partial class ItemListControl
 			outerColor = default;
 
 			var height = (int)(20 * UI.FontScale);
+			using var baseFont = UI.Font(9F, FontStyle.Bold);
 
 			if (GetStatusDescriptors(e.Item, out var text, out var icon, out var color))
 			{
@@ -81,12 +82,13 @@ public partial class ItemListControl
 
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
-				using var font = UI.Font(9F, FontStyle.Bold);
-				using var image = icon!.Get(font.Height * 4 / 3).Color(textBrush.Color);
+				using var image = icon!.Get(baseFont.Height * 4 / 3).Color(textBrush.Color);
+				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), e.Graphics);
+				using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false, notificationType <= NotificationType.Info, notificationType <= NotificationType.Info);
 
-				e.Graphics.DrawString(text, font, textBrush, rect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+				e.Graphics.DrawString(text, font, textBrush, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), format);
 
 				e.Graphics.DrawImage(image, rect.Pad(GridPadding).Align(image.Size, ContentAlignment.MiddleLeft));
 
@@ -103,17 +105,19 @@ public partial class ItemListControl
 			if (notificationType > NotificationType.Info)
 			{
 				var rect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y + e.DrawableItem.CachedHeight - Padding.Vertical, e.ClipRectangle.Width, height);
+				var text2 = LocaleCR.Get(notificationType.ToString());
 
 				outerColor = Color.FromArgb(rect.Contains(CursorLocation) ? 200 : 255, notificationType.Value.GetColor());
 
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
-				using var font = UI.Font(9F, FontStyle.Bold);
-				using var image = notificationType.Value.GetIcon(false).Get(font.Height * 4 / 3).Color(textBrush.Color);
+				using var image = notificationType.Value.GetIcon(false).Get(baseFont.Height * 4 / 3).Color(textBrush.Color);
+				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text2, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), e.Graphics);
+				using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false);
 
-				e.Graphics.DrawString(LocaleCR.Get($"{notificationType}"), font, textBrush, rect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+				e.Graphics.DrawString(text2, font, textBrush, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), format);
 
 				e.Graphics.DrawImage(image, rect.Pad(GridPadding).Align(image.Size, ContentAlignment.MiddleLeft));
 

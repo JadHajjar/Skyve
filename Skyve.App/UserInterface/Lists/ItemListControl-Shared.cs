@@ -121,8 +121,8 @@ public partial class ItemListControl
 
 		if (required && activeColor != default)
 		{
-			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
-			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
+			iconColor = !FormDesign.Design.IsDarkTheme ? activeColor.MergeColor(ForeColor, 75) : activeColor;
+			activeColor = activeColor.MergeColor(BackColor, !FormDesign.Design.IsDarkTheme ? 35 : 20);
 		}
 		else if (activeColor == default && isHovered)
 		{
@@ -279,12 +279,12 @@ public partial class ItemListControl
 			}
 
 			using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState == HoverState.Hovered && !IsPackagePage ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
-			using var font = UI.Font(GridView ? 11.25F : CompactList ? 8.25F : 10.5F, FontStyle.Bold).FitToWidth(text, e.Rects.TextRect.Pad(0, 0, tagSizes + Padding.Right, 0), e.Graphics);
+			using var font = UI.Font(GridView ? 11.25F : CompactList ? 8.25F : 10.5F, FontStyle.Bold).FitTo(text, e.Rects.TextRect.Pad(0, 0, tagSizes + Padding.Right, 0), e.Graphics);
 			var textRect = e.Rects.TextRect.Pad(0, 0, tagSizes, 0).AlignToFontSize(font, CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopLeft, e.Graphics);
 
 			e.Graphics.DrawString(text, font, brushTitle, textRect, stringFormat);
 
-			var textSize = e.Graphics.Measure(text, font);
+			var textSize = e.Graphics.Measure(text, font, e.Rects.TextRect.Width - tagSizes - Padding.Right);
 			var tagRect = new Rectangle(e.Rects.TextRect.X + (int)textSize.Width, textRect.Y, 0, textRect.Height);
 
 			for (var i = 0; i < tags.Count; i++)

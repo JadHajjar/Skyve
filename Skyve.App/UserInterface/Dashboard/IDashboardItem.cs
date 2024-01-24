@@ -120,7 +120,7 @@ public abstract class IDashboardItem : SlickImageControl
 			var border = (int)(10 * UI.FontScale);
 			var rect = ClientRectangle.Pad((int)(1.5 * UI.FontScale)).Pad(Padding);
 
-			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 8, -8)));
+			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme? 8: -8));
 			e.Graphics.FillRoundedRectangle(brush, rect, border);
 
 			using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale));

@@ -93,7 +93,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		base.DesignChanged(design);
 
 		TLP_MiddleBar.BackColor = design.AccentBackColor;
-		P_Filters.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
+		P_Filters.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme? -1: 1);
 		ListControl.BackColor = design.BackColor;
 		L_FilterCount.ForeColor = design.InfoColor;
 	}

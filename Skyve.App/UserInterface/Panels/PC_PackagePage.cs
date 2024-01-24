@@ -302,6 +302,6 @@ public partial class PC_PackagePage : PanelContent
 
 		BackColor = design.BackColor;
 		label1.ForeColor = label3.ForeColor = label5.ForeColor = label6.ForeColor = L_Requirements.ForeColor = design.InfoColor.MergeColor(design.ActiveColor);
-		panel1.BackColor = LC_Items is null ? design.AccentBackColor : design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 5, -5));
+		panel1.BackColor = LC_Items is null ? design.AccentBackColor : design.BackColor.Tint(Lum: design.IsDarkTheme? 5: -5);
 	}
 }
