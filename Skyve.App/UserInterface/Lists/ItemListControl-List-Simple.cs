@@ -139,9 +139,9 @@ public partial class ItemListControl
 
 				using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
 				using var icon = IconManager.GetIcon("I_Author", itemHeight + Padding.Top).Color(isHovered ? activeBrush.Color : brush.Color);
-				using var font = UI.Font(8.25F).FitToHeight(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
-				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline);
-				
+				using var font = UI.Font(8.25F).FitToWidth(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline).FitToWidth(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+
 				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
 				e.Graphics.DrawString(author.Name, isHovered ? fontUnderline : font, isHovered ? activeBrush : brush, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), stringFormat);
 
@@ -150,7 +150,7 @@ public partial class ItemListControl
 			else if (localIdentity is not null)
 			{
 				using var icon = IconManager.GetIcon("I_Folder", itemHeight + Padding.Top).Color(brush.Color);
-				using var font = UI.Font(8.25F).FitToHeight(Path.GetFileName(localIdentity.Folder), rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+				using var font = UI.Font(8.25F).FitTo(Path.GetFileName(localIdentity.Folder), rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
 				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
 				e.Graphics.DrawString(Path.GetFileName(localIdentity.Folder), font, brush, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), stringFormat);
