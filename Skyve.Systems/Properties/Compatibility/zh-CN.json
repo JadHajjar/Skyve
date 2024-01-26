@@ -189,7 +189,7 @@
     "Plural": "已选择 {0} 个DLC"
   },
   "RequiredDLCs": "前置 DLC/CCP",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "稳定性",
   "CRT_Successors": "继任模组",
   "CRT_RequiredPackages": "前置插件",
   "CRT_OptionalPackages": "可选插件",
