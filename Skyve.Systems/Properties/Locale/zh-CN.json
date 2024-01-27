@@ -220,7 +220,7 @@
     "Plural": "Copy the selected packages' author IDs"
   },
   "CopyAuthorName": {
-    "One": "Copy the author's name",
+    "One": "复制作者的名字",
     "Plural": "复制所有已选的插件的作者名字"
   },
   "Sorting_LastUsed": "上次使用时间",
@@ -258,7 +258,7 @@
     "One": "已选择 {0} 个作者",
     "Plural": "已选择 {0} 个作者"
   },
-  "Donate": "Donate",
+  "Donate": "赞助",
   "FlipItemCopyFilterAction": "无需按住 Alt 键，左键点击标签可直接将其添加到筛选标签",
   "FlipItemCopyFilterAction_Tip": "启用此选项后，如果按住 Alt 键 + 鼠标左键点击一个标签，则可以查看该标签相关信息；如果不按住 Alt 键，鼠标左键点击一个标签，则可以将该标签添加到筛选选项的标签中。",
   "AltClickTo": "按住 Alt + 左键点击，{0}",
@@ -276,11 +276,11 @@
     "Plural": "{1} votes"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "订阅量：{1}",
+    "Plural": "订阅量：{1}"
   },
   "SearchWorkshop": "Search the workshop instead...",
-  "DiscoverWorkshop": "Look for mods on the workshop...",
+  "DiscoverWorkshop": "在工坊查找模组...",
   "SearchWorkshopBrowser": "在浏览器中搜索创意工坊…",
   "UnknownPackage": "未知插件",
   "Info": "提示",
@@ -289,16 +289,16 @@
   "ControlToSelectMultiplePackages": "按住 Ctrl 并左键点击，可选择多个插件。",
   "Local": "本地",
   "Workshop": "创意工坊",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "兼容性报告",
   "Enabled": "已启用",
   "Disabled": "已禁用",
   "Included": "已装载（模组需要启用！）",
   "Excluded": "已卸下",
   "OutOfDate": "已过期",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "插件状态",
   "Author": "作者",
   "Include": "装载",
-  "Unsubscribe": "Unsubscribe",
+  "Unsubscribe": "取消订阅",
   "Exclude": "Exclude",
   "Snooze": "关闭提醒",
   "UnSnooze": "打开提醒",
@@ -388,7 +388,7 @@
   },
   "TotalCount": {
     "One": "共 {0} 个{1}",
-    "Plural": "{0} {1} in total"
+    "Plural": "共 {0} 个{1}"
   },
   "PackageIsNotDownloaded": "插件 '{0}' 已从您的电脑中删除",
   "PackageIsOutOfDate": "插件 '{0}' 已经过期\n\n您的版本已落后 {1}",
@@ -406,7 +406,7 @@
     "One": "在此进程中，您将取消订阅 {0} 个插件。",
     "Plural": "在此进程中，您将取消订阅 {0} 个插件。"
   },
-  "ViewThisPlaysetsPackages": "View the mods in this playset",
+  "ViewThisPlaysetsPackages": "查看此配置文件中的模组",
   "YouHavePackagesUser": {
     "One": "您有 {0} 个由 {1} 制作的插件",
     "Plural": "您有 {0} 个由 {1} 制作的插件"
