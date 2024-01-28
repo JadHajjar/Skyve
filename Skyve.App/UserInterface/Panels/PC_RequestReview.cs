@@ -1,5 +1,5 @@
 ﻿using Skyve.App.UserInterface.CompatibilityReport;
-using Skyve.Systems.Compatibility.Domain.Api;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.IO;
@@ -155,7 +155,7 @@ public partial class PC_RequestReview : PanelContent
 			return stream.ToArray();
 		});
 
-		var response = await ServiceCenter.Get<SkyveApiUtil>().SendReviewRequest(postPackage);
+		var response = await ServiceCenter.Get<ISkyveApiUtil>().SendReviewRequest(postPackage);
 
 		if (response.Success)
 		{

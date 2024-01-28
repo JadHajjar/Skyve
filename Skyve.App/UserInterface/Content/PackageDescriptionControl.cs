@@ -1,6 +1,7 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;

@@ -4,7 +4,8 @@ using Newtonsoft.Json;
 
 using Skyve.Domain;
 using Skyve.Domain.Systems;
-using Skyve.Systems.Compatibility.Domain.Api;
+
+using SkyveApi.Domain.Generic;
 
 using System;
 using System.IO;

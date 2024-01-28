@@ -1,4 +1,6 @@
-﻿using Skyve.Domain;
+﻿using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
+using Skyve.Domain;
 using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
@@ -9,6 +11,7 @@ namespace Skyve.Systems;
 public static class SystemExtensions
 {
 	private static IWorkshopService? _workshopService;
+	private static ISkyveDataManager? _skyveDataManager;
 	private static ICompatibilityManager? _compatibilityManager;
 	private static IImageService? _imageService;
 	private static IPackageNameUtil? _packageNameUtil;
@@ -18,6 +21,7 @@ public static class SystemExtensions
 
 	private static IWorkshopService WorkshopService => _workshopService ??= ServiceCenter.Get<IWorkshopService>();
 	private static ICompatibilityManager CompatibilityManager => _compatibilityManager ??= ServiceCenter.Get<ICompatibilityManager>();
+	private static ISkyveDataManager SkyveDataManager => _skyveDataManager ??= ServiceCenter.Get<ISkyveDataManager>();
 	private static IImageService ImageService => _imageService ??= ServiceCenter.Get<IImageService>();
 	private static IPackageNameUtil PackageNameUtil => _packageNameUtil ??= ServiceCenter.Get<IPackageNameUtil>();
 	private static IPackageManager PackageManager => _packageManager ??= ServiceCenter.Get<IPackageManager>();
@@ -56,9 +60,17 @@ public static class SystemExtensions
 
 	public static IPackage? GetPackage(this IPackageIdentity identity)
 	{
-		return identity is ILocalPackageData packageData
-			? packageData.Package
-			: identity is IPackage package ? package : PackageManager.GetPackageById(identity);
+		if (identity is IPackage package)
+		{
+			return package;
+		}
+
+		if (identity is ILocalPackageData packageData && packageData.Package is not null)
+		{
+			return packageData.Package;
+		}
+
+		return PackageManager.GetPackageById(identity);
 	}
 
 	public static bool IsInstalled(this IPackageIdentity identity)
@@ -68,16 +80,32 @@ public static class SystemExtensions
 
 	public static ILocalPackageData? GetLocalPackage(this IPackageIdentity identity)
 	{
-		return identity is ILocalPackageData packageData
-			? packageData
-			: identity is IPackage package ? package.LocalData : (PackageManager.GetPackageById(identity)?.LocalData);
+		if (identity is ILocalPackageData packageData)
+		{
+			return packageData;
+		}
+
+		if (identity is IPackage package && package.LocalData is not null)
+		{
+			return package.LocalData;
+		}
+
+		return PackageManager.GetPackageById(identity)?.LocalData;
 	}
 
 	public static ILocalPackageIdentity? GetLocalPackageIdentity(this IPackageIdentity identity)
 	{
-		return identity is ILocalPackageIdentity packageData
-			? packageData
-			: identity is IPackage package ? package.LocalData : (ILocalPackageIdentity?)(PackageManager.GetPackageById(identity)?.LocalData);
+		if (identity is ILocalPackageIdentity packageData)
+		{
+			return packageData;
+		}
+
+		if (identity is IPackage package && package.LocalData is not null)
+		{
+			return package.LocalData;
+		}
+
+		return PackageManager.GetPackageById(identity)?.LocalData;
 	}
 
 	public static Bitmap? GetThumbnail<T>(this T? identity) where T : IPackageIdentity
@@ -154,7 +182,7 @@ public static class SystemExtensions
 
 	public static IPackageCompatibilityInfo? GetPackageInfo(this IPackageIdentity package)
 	{
-		return CompatibilityManager.GetPackageInfo(package);
+		return SkyveDataManager.GetPackageCompatibilityInfo(package);
 	}
 
 	public static NotificationType GetNotification(this ICompatibilityInfo compatibilityInfo)

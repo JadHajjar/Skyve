@@ -2,6 +2,7 @@
 using Skyve.App.UserInterface.Generic;
 
 using Skyve.App.UserInterface.Lists;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.IO;

@@ -2,8 +2,12 @@
 using Skyve.App.UserInterface.CompatibilityReport;
 using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Forms;
+using Skyve.Compatibility.Domain;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Systems.Compatibility;
-using Skyve.Systems.Compatibility.Domain.Api;
+
+using SkyveApi.Domain.CS2;
 
 using System.Drawing;
 using System.IO;
@@ -222,7 +226,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 				return;
 			}
 
-			var catalogue = await ServiceCenter.Get<SkyveApiUtil>().Catalogue(CurrentPackage!.Id);
+			var catalogue = await ServiceCenter.Get<ISkyveApiUtil>().Catalogue(CurrentPackage!.Id);
 
 			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<CompatibilityPackageData, PostPackage>();
 
@@ -514,7 +518,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		B_Apply.Loading = true;
 
-		var response = await ServiceCenter.Get<SkyveApiUtil>().SaveEntry(postPackage);
+		var response = await ServiceCenter.Get<ISkyveApiUtil>().SaveEntry(postPackage);
 
 		B_Apply.Loading = false;
 

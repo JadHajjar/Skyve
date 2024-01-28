@@ -1,6 +1,7 @@
 ﻿using Skyve.App;
 using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.IO;
@@ -507,6 +508,26 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		base.OnMouseMove(e);
+
+		if (!AnyVisibleItems())
+		{
+			Invalidate();
+		}
+	}
+
+	protected override void OnSizeChanged(EventArgs e)
+	{
+		base.OnSizeChanged(e);
+
+		if (!AnyVisibleItems())
+		{
+			Invalidate();
+		}
+	}
+
 	protected override void OnPaintBackground(PaintEventArgs e)
 	{
 		if (ItemCount > 0)
@@ -515,7 +536,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			foreach (var item in SafeGetItems())
 			{
-				loading |= (item.Loading = _subscriptionsManager.IsSubscribing(item.Item) || _modUtil.IsEnabling(item.Item));
+				loading |= item.Loading = _subscriptionsManager.IsSubscribing(item.Item) || _modUtil.IsEnabling(item.Item);
 			}
 
 			if (Loading != loading)
@@ -529,51 +550,39 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
-	{	
+	{
 		try
 		{
+			base.OnPaint(e);
+
 			PopupSearchRect1 = PopupSearchRect2 = Rectangle.Empty;
 
-			if (Loading)
+			if (Loading || AnyVisibleItems())
 			{
-				base.OnPaint(e);
+				return;
 			}
-			else if (!Items.Any())
+
+			e.Graphics.ResetClip();
+
+			using var font = UI.Font(9.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+			if (ItemCount == 0 && _page != SkyvePage.Workshop)
 			{
-				e.Graphics.SetUp(BackColor);
-
-				using var font = UI.Font(9.75F, FontStyle.Italic);
-				using var brush = new SolidBrush(FormDesign.Design.LabelColor);
-				using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-
 #if CS1
 				e.Graphics.DrawString(Locale.NoLocalPackagesFound + "\r\n" + Locale.CheckFolderInOptions, font, brush, ClientRectangle, stringFormat);
 #else
 				e.Graphics.DrawString(Locale.NoLocalPackagesFound, font, brush, ClientRectangle, stringFormat);
+#endif
 
 				DrawWorkshopSearchButtons(e, true);
-#endif
-			}
-			else if (!SafeGetItems().Any())
-			{
-				e.Graphics.SetUp(BackColor);
-
-				if (!IsTextSearchNotEmpty)
-				{
-					using var font = UI.Font(9.75F, FontStyle.Italic);
-					using var brush = new SolidBrush(FormDesign.Design.LabelColor);
-					using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-
-					e.Graphics.DrawString(Locale.NoPackagesMatchFilters, font, brush, ClientRectangle.Pad(0, 0, 0, Height / 3), stringFormat);
-
-					return;
-				}
-
-				DrawWorkshopSearchButtons(e, false);
 			}
 			else
 			{
-				base.OnPaint(e);
+				e.Graphics.DrawString(Locale.NoPackagesMatchFilters, font, brush, ClientRectangle.Pad(0, 0, 0, Height / 3), stringFormat);
+
+				DrawWorkshopSearchButtons(e, false);
 			}
 		}
 		catch (Exception ex)
@@ -587,13 +596,14 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 	private void DrawWorkshopSearchButtons(PaintEventArgs e, bool emptySearch)
 	{
+		if (_page == SkyvePage.Workshop)
+		{ 
+			return;
+		}
+
 		CursorLocation = PointToClient(Cursor.Position);
 
 		using var font = UI.Font(9.75F);
-		using var fontI = UI.Font(9.75F, FontStyle.Italic);
-		using var brush = new SolidBrush(FormDesign.Design.LabelColor);
-		using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-		e.Graphics.DrawString(Locale.NoPackagesMatchFilters, fontI, brush, ClientRectangle.Pad(0, 0, 0, Height / 3), stringFormat);
 
 		PopupSearchRect1 = SlickButton.AlignAndDraw(e.Graphics, new Rectangle(0, Height * 2 / 3, Width, 0), ContentAlignment.TopCenter, new ButtonDrawArgs
 		{

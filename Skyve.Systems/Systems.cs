@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility;
 
@@ -18,8 +19,8 @@ public static class SystemsProgram
 		services.AddSingleton<INotifier, NotifierSystem>();
 		services.AddSingleton<IPackageNameUtil, PackageNameUtil>();
 		services.AddSingleton<IPackageUtil, PackageUtil>();
-		services.AddSingleton<SkyveApiUtil>();
 		services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
+
 		services.AddTransient<ILoadOrderHelper, LoadOrderHelper>();
 
 		return services;

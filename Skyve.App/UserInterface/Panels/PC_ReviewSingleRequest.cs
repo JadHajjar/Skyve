@@ -1,7 +1,7 @@
 ﻿using Skyve.App.UserInterface.CompatibilityReport;
 using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Generic;
-using Skyve.Systems.Compatibility.Domain.Api;
+
 
 using System.Drawing;
 using System.IO;
@@ -16,7 +16,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 
 	private readonly IWorkshopService _workshopService;
 	private readonly IDlcManager _dlcManager;
-	private readonly SkyveApiUtil _skyveApiUtil;
+	private readonly ISkyveApiUtil _skyveApiUtil;
 
 	public PC_ReviewSingleRequest(ReviewRequest request) : base(true)
 	{

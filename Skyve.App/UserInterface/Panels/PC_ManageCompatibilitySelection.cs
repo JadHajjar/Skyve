@@ -1,4 +1,4 @@
-﻿using Skyve.Systems.Compatibility.Domain.Api;
+﻿
 
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -8,7 +8,7 @@ public partial class PC_ManageCompatibilitySelection : PanelContent
 {
 	private readonly IUserService _userService;
 	private readonly IPackageManager _contentManager;
-	private readonly SkyveApiUtil _skyveApiUtil;
+	private readonly ISkyveApiUtil _skyveApiUtil;
 
 	private ReviewRequest[]? reviewRequests;
 

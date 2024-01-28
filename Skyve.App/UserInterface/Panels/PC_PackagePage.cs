@@ -2,6 +2,7 @@
 using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Lists;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.Threading.Tasks;

@@ -23,6 +23,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+		<ProjectReference Include="..\..\Skyve-Api\Domain\Skyve-Api Domain.csproj" />
 		<ProjectReference Include="..\Skyve.Domain\Skyve.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>

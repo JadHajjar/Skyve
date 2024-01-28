@@ -11,20 +11,22 @@ public class PackageAvailabilityService
 {
 	private readonly IPackageManager _packageManager;
 	private readonly IPackageUtil _contentUtil;
+	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly CompatibilityManager _compatibilityManager;
 	private readonly Dictionary<ulong, (bool enabled, bool enabledWithAlternatives)> _cache;
 
-	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil contentUtil, ILogger logger, CompatibilityManager compatibilityManager)
+	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil contentUtil, ILogger logger, ISkyveDataManager skyveDataManager, CompatibilityManager compatibilityManager)
 	{
 		_packageManager = packageManager;
 		_contentUtil = contentUtil;
+		_skyveDataManager = skyveDataManager;
 		_compatibilityManager = compatibilityManager;
 		_cache = [];
 
 		var ids = new List<ulong>();
 
 		ids.AddRange(_packageManager.Packages.Select(x => x.Id));
-		ids.AddRange(_compatibilityManager.CompatibilityData.Packages.Keys);
+		ids.AddRange(_skyveDataManager.GetPackagesKeys());
 
 		logger.Info($"[Compatibility] Caching package availability for {ids.Distinct().Count(x => x > 0)} items");
 
@@ -38,8 +40,7 @@ public class PackageAvailabilityService
 
 	public bool IsPackageEnabled(ulong id, bool withAlternativesAndSuccessors)
 	{
-		return _cache.TryGetValue(id, out var status)
-&& (withAlternativesAndSuccessors ? status.enabledWithAlternatives : status.enabled);
+		return _cache.TryGetValue(id, out var status) && (withAlternativesAndSuccessors ? status.enabledWithAlternatives : status.enabled);
 	}
 
 	internal void UpdateInclusionStatus(ulong id)
@@ -49,7 +50,7 @@ public class PackageAvailabilityService
 
 	private bool GetPackageEnabled(ulong id, bool withAlternativesAndSuccessors)
 	{
-		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(id);
+		var indexedPackage = _skyveDataManager.TryGetPackageInfo(id);
 
 		if (isEnabled(_packageManager.GetPackageById(new GenericPackageIdentity(id))?.LocalData))
 		{

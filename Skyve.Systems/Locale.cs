@@ -1556,7 +1556,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SearchWorkshop => _instance.GetText("SearchWorkshop");
 
 	/// <summary>
-	/// Search the workshop in your browser..
+	/// Search the workshop in your browser...
 	/// </summary>
 	public static Translation SearchWorkshopBrowser => _instance.GetText("SearchWorkshopBrowser");
 

@@ -103,7 +103,7 @@ public partial class PC_UserPage : PanelContent
 	{
 		try
 		{
-			var profiles = await ServiceCenter.Get<SkyveApiUtil>().GetUserProfiles(User.Id!);
+			var profiles = await ServiceCenter.Get<ISkyveApiUtil>().GetUserProfiles(User.Id!);
 
 			if (profiles?.Any() ?? false)
 			{

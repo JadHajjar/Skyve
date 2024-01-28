@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 using Skyve.App.UserInterface.Generic;
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Systems.Compatibility.Domain;
 
 using System.Drawing;

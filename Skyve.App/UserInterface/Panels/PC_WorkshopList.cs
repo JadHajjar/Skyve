@@ -22,7 +22,7 @@ public class PC_WorkshopList : PanelContent
 
 		Padding = new Padding(0, 30, 0, 0);
 
-		LC_Items = new(SkyvePage.Generic, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+		LC_Items = new(SkyvePage.Workshop, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
 		{
 			TabIndex = 0,
 			Dock = DockStyle.Fill
@@ -36,6 +36,12 @@ public class PC_WorkshopList : PanelContent
 		}
 
 		Controls.Add(LC_Items);
+
+#if CS2
+		Text = "PDX Mods";
+#else
+		Text="Steam Workshop";
+#endif
 	}
 
 	protected override async void OnCreateControl()

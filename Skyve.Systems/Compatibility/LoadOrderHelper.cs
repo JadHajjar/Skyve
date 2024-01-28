@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
 using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
@@ -12,10 +14,12 @@ internal class LoadOrderHelper : ILoadOrderHelper
 {
 	private readonly CompatibilityManager _compatibilityManager;
 	private readonly IPackageManager _packageManager;
+	private readonly ISkyveDataManager _skyveDataManager;
 
-	public LoadOrderHelper(IPackageManager packageManager, ICompatibilityManager compatibilityManager)
+	public LoadOrderHelper(IPackageManager packageManager, ICompatibilityManager compatibilityManager, ISkyveDataManager skyveDataManager)
 	{
 		_packageManager = packageManager;
+		_skyveDataManager = skyveDataManager;
 		_compatibilityManager = (CompatibilityManager)compatibilityManager;
 	}
 
@@ -25,8 +29,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 
 		foreach (var mod in _packageManager.Packages)
 		{
-			var info = (_compatibilityManager as ICompatibilityManager).GetPackageInfo(mod);
-
+			var info = _skyveDataManager.GetPackageCompatibilityInfo(mod);
 			var interaction = info?.Interactions?.FirstOrDefault(x => x.Type is InteractionType.RequiredPackages);
 			var loadOrder = info?.Interactions?.FirstOrDefault(x => x.Type is InteractionType.LoadAfter);
 
@@ -101,7 +104,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 
 	private IEnumerable<ModInfo> GetEntity(ulong id, List<ModInfo> modEntityMap, IPackageIdentity original)
 	{
-		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(id);
+		var indexedPackage = _skyveDataManager.TryGetPackageInfo(id);
 
 		foreach (var item in modEntityMap.Where(x => x.Mod.Id == id))
 		{

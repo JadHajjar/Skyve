@@ -334,7 +334,7 @@ public partial class PC_PlaysetList : PanelContent
 		{
 			B_Discover.Loading = true;
 
-			var profiles = await ServiceCenter.Get<SkyveApiUtil>().GetPublicProfiles();
+			var profiles = await ServiceCenter.Get<ISkyveApiUtil>().GetPublicProfiles();
 
 			Invoke(() => Form.PushPanel(new PC_PlaysetList(profiles)));
 		}
