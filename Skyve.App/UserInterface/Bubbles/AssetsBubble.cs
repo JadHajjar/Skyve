@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Bubbles;
 

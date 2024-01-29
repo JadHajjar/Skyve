@@ -1,6 +1,7 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
@@ -31,10 +32,11 @@ public class PackageDescriptionControl : SlickImageControl
 	private readonly ISettings _settings;
 	private readonly IModLogicManager _modLogicManager;
 	private readonly IModUtil _modUtil;
+	private readonly IUserService _userService;
 
 	public PackageDescriptionControl()
 	{
-		ServiceCenter.Get(out _settings, out _packageUtil, out _compatibilityManager, out _subscriptionsManager, out _modUtil, out _modLogicManager);
+		ServiceCenter.Get(out _settings, out _packageUtil, out _compatibilityManager, out _subscriptionsManager, out _modUtil, out _modLogicManager, out _userService);
 	}
 
 	public void SetPackage(IPackageIdentity package, PC_PackagePage? page)
@@ -111,7 +113,7 @@ public class PackageDescriptionControl : SlickImageControl
 			return;
 		}
 
-		if (rects.GithubRect.Contains(e.Location) && _compatibilityManager.GetPackageInfo(item.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		if (rects.GithubRect.Contains(e.Location) && item.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
 			PlatformUtil.OpenUrl(gitLink.Url);
 			return;
@@ -504,7 +506,7 @@ public class PackageDescriptionControl : SlickImageControl
 			authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorImg, alignment: ContentAlignment.TopLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 		}
 
-		if (_compatibilityManager.IsUserVerified(author))
+		if (_userService.IsUserVerified(author))
 		{
 			var avatarRect = authorRect.Pad(padding).Align(CompactList ? UI.Scale(new Size(18, 18), UI.FontScale) : new(authorRect.Height * 3 / 4, authorRect.Height * 3 / 4), ContentAlignment.MiddleLeft);
 			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
@@ -558,7 +560,7 @@ public class PackageDescriptionControl : SlickImageControl
 			rect.X -= rect.Width + padding.Left;
 		}
 
-		if (_compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		if (e.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
 			using var icon = IconManager.GetIcon("I_Github", rect.Height * 3 / 4);
 

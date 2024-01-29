@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 

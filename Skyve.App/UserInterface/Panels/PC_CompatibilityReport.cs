@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 using Skyve.App.UserInterface.Generic;
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Systems.Compatibility.Domain;
 
@@ -160,11 +161,6 @@ public partial class PC_CompatibilityReport : PanelContent
 		}
 	}
 
-	private void B_Manage_Click(object sender, EventArgs e)
-	{
-		Form.PushPanel<PC_ManageCompatibilitySelection>();
-	}
-
 	private void LoadReport(List<ICompatibilityInfo> reports)
 	{
 		try
@@ -256,10 +252,10 @@ public partial class PC_CompatibilityReport : PanelContent
 					Program.MainForm.PushPanel(null, new PC_RequestReview(report));
 				}
 				,
-				StatusAction.Switch => message.Packages.Length == 1 ? () =>
+				StatusAction.Switch => message.Packages.Count() == 1 ? () =>
 				{
 					var pp1 = report.GetLocalPackage();
-					var pp2 = message.Packages[0]?.GetLocalPackage();
+					var pp2 = message.Packages.FirstOrDefault()?.GetLocalPackage();
 
 					if (pp1 is not null && pp2 is not null)
 					{

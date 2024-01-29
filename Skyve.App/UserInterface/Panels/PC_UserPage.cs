@@ -103,7 +103,7 @@ public partial class PC_UserPage : PanelContent
 	{
 		try
 		{
-			var profiles = await ServiceCenter.Get<ISkyveApiUtil>().GetUserProfiles(User.Id!);
+			var profiles = await ServiceCenter.Get<ISkyveApiUtil>().GetUserPlaysets(User);
 
 			if (profiles?.Any() ?? false)
 			{

@@ -1,5 +1,6 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System;
@@ -382,7 +383,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			e.Graphics.DrawString(note, smallFont, smallTextBrush, reportRect.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0));
 		}
 
-		if (allText is not null || Message.Packages.Length > 0)
+		if (allText is not null || Message.Packages.Any())
 		{
 			y = DrawDividerLine(e, y);
 		}
@@ -398,7 +399,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			y += e.Rects.AllButtonRect.Height + GridPadding.Vertical;
 		}
 
-		if (Message.Packages.Length > 0)
+		if (Message.Packages.Any())
 		{
 			var isDlc = Message.Type == ReportType.DlcMissing;
 			var rect = new Rectangle(reportRect.X, y, reportRect.Width, (int)(32 * UI.FontScale) + GridPadding.Vertical).Pad(GridPadding);
@@ -615,7 +616,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.UnsubscribeOther:
-				allText = Message.Packages?.Length switch { 0 => null, _ => Locale.ExcludeAll };
+				allText = Message.Packages?.Count() switch { 0 => null, _ => Locale.ExcludeAll };
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.ExcludeThis:
@@ -623,7 +624,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				allIcon = "I_X";
 				break;
 			case StatusAction.ExcludeOther:
-				allText = Message.Packages?.Length switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
+				allText = Message.Packages?.Count() switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
 				allIcon = "I_X";
 				break;
 			case StatusAction.RequestReview:

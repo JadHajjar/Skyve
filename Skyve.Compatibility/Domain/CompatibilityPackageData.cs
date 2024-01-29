@@ -28,6 +28,6 @@ public class _CompatibilityPackageData : IPackageCompatibilityInfo
 	public List<PackageInteraction>? Interactions { get; set; }
 
 	List<ILink>? IPackageCompatibilityInfo.Links => Links?.ToList(x => (ILink)x);
-	List<IPackageStatus<StatusType>> IPackageCompatibilityInfo.Statuses { get => Statuses?.ToList(x => (IPackageStatus<StatusType>)x) ?? []; set => Statuses = value?.ToList(x => (PackageStatus)x); }
-	List<IPackageStatus<InteractionType>> IPackageCompatibilityInfo.Interactions { get => Interactions?.ToList(x => (IPackageStatus<InteractionType>)x) ?? []; set => Interactions = value?.ToList(x => (PackageInteraction)x); }
+	List<IPackageStatus<StatusType>> IPackageCompatibilityInfo.Statuses { get => Statuses?.ToList(x => (IPackageStatus<StatusType>)x) ?? []; }
+	List<IPackageStatus<InteractionType>> IPackageCompatibilityInfo.Interactions { get => Interactions?.ToList(x => (IPackageStatus<InteractionType>)x) ?? []; }
 }

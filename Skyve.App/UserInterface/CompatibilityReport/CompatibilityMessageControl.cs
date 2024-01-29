@@ -1,5 +1,6 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
@@ -11,8 +12,8 @@ namespace Skyve.App.UserInterface.CompatibilityReport;
 public class CompatibilityMessageControl : SlickControl
 {
 	private readonly List<ulong> _subscribingTo = new();
-	private readonly Dictionary<IPackage, Rectangle> _buttonRects = new();
-	private readonly Dictionary<IPackage, Rectangle> _modRects = new();
+	private readonly Dictionary<IPackageIdentity, Rectangle> _buttonRects = new();
+	private readonly Dictionary<IPackageIdentity, Rectangle> _modRects = new();
 	private Rectangle allButtonRect;
 	private Rectangle snoozeRect;
 
@@ -31,7 +32,7 @@ public class CompatibilityMessageControl : SlickControl
 		Message = message;
 		PackageCompatibilityReportControl = packageCompatibilityReportControl;
 
-		if (message.Packages?.Length != 0 && !message.Packages.All(x => x.GetWorkshopInfo() is not null))
+		if (message.Packages?.Count() != 0 && !message.Packages.All(x => x.GetWorkshopInfo() is not null))
 		{
 			_notifier.WorkshopInfoUpdated += Invalidate;
 		}
@@ -112,7 +113,7 @@ public class CompatibilityMessageControl : SlickControl
 				var buttonIcon = IconManager.GetIcon(allIcon);
 				var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, allText, smallFont, UI.Scale(new Padding(4), UI.FontScale));
 
-				allButtonRect = new Rectangle(0, y, Width, 0).Pad(iconRect.Width + pad, pad, 0, 0).Align(buttonSize, Message.Packages.Length > 0 ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
+				allButtonRect = new Rectangle(0, y, Width, 0).Pad(iconRect.Width + pad, pad, 0, 0).Align(buttonSize, Message.Packages.Any() ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
 
 				SlickButton.DrawButton(e, allButtonRect, allText, smallFont, buttonIcon, UI.Scale(new Padding(4), UI.FontScale), allButtonRect.Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, colorStyle);
 
@@ -121,7 +122,7 @@ public class CompatibilityMessageControl : SlickControl
 				y += allButtonRect.Height + (pad * 2);
 			}
 
-			if (Message.Packages.Length > 0)
+			if (Message.Packages.Any())
 			{
 				var isDlc = Message.Type == ReportType.DlcMissing;
 				var rect = ClientRectangle.Pad(iconRect.Width + pad, y + pad, 0, 0);
@@ -152,7 +153,7 @@ public class CompatibilityMessageControl : SlickControl
 					var package = dlc is null ? packageID : null;
 					var packageThumbnail = dlc?.GetThumbnail() ?? package.GetThumbnail();
 
-					if ((package?.IsLocal ?? false) && packageThumbnail is not null)
+					if ((package?.IsLocal() ?? false) && packageThumbnail is not null)
 					{
 						using var unsatImg = new Bitmap(packageThumbnail, UI.Scale(new Size(40, 40), UI.FontScale)).Tint(Sat: 0);
 						e.Graphics.DrawRoundedImage(unsatImg, rect.Align(UI.Scale(new Size(40, 40), UI.FontScale), ContentAlignment.TopLeft), (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
@@ -259,7 +260,7 @@ public class CompatibilityMessageControl : SlickControl
 		switch (Message.Status.Action)
 		{
 			case StatusAction.SubscribeToPackages:
-				if (Message.Packages.Length > 1)
+				if (Message.Packages.Count() > 1)
 				{
 					var max = Message.Packages.Max(x =>
 					{
@@ -296,7 +297,7 @@ public class CompatibilityMessageControl : SlickControl
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.UnsubscribeOther:
-				allText = Message.Packages.Length switch { 0 => null, 1 => Locale.Unsubscribe, _ => Locale.ExcludeAll };
+				allText = Message.Packages.Count() switch { 0 => null, 1 => Locale.Unsubscribe, _ => Locale.ExcludeAll };
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.ExcludeThis:
@@ -304,7 +305,7 @@ public class CompatibilityMessageControl : SlickControl
 				allIcon = "I_X";
 				break;
 			case StatusAction.ExcludeOther:
-				allText = Message.Packages.Length switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
+				allText = Message.Packages.Count() switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
 				allIcon = "I_X";
 				break;
 			case StatusAction.RequestReview:

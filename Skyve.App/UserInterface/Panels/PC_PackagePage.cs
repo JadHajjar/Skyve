@@ -2,6 +2,7 @@
 using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Lists;
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
@@ -49,7 +50,7 @@ public partial class PC_PackagePage : PanelContent
 		T_CR.LinkedControl = new PackageCompatibilityReportControl(package);
 
 		var tabs = slickTabControl1.Tabs.ToList();
-		var crdata = _compatibilityManager.GetPackageInfo(Package);
+		var crdata = Package.GetPackageInfo();
 		var crAvailable = crdata is not null;
 
 		if (!crAvailable)
@@ -269,7 +270,7 @@ public partial class PC_PackagePage : PanelContent
 
 	protected override void LocaleChanged()
 	{
-		var cr = _compatibilityManager.GetPackageInfo(Package);
+		var cr = Package.GetPackageInfo();
 
 		if (cr is null)
 		{

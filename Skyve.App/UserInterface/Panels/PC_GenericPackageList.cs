@@ -16,7 +16,7 @@ public class PC_GenericPackageList : PC_ContentList
 
 		LC_Items.TB_Search.Placeholder = "SearchGenericPackages";
 
-		var compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+		var skyveDataManager = ServiceCenter.Get<ISkyveDataManager>();
 
 		if (!groupItems)
 		{
@@ -28,7 +28,7 @@ public class PC_GenericPackageList : PC_ContentList
 			{
 				if (packages.Key != 0)
 				{
-					if (compatibilityManager.IsBlacklisted(packages.First()))
+					if (skyveDataManager.IsBlacklisted(packages.First()))
 					{
 						continue;
 					}

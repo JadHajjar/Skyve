@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
@@ -489,7 +491,7 @@ public partial class ItemListControl
 			rect.X -= e.Rects.SteamRect.Width + padding.Left;
 		}
 
-		if (!IsPackagePage && _settings.UserSettings.ExtendedListInfo && _compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		if (!IsPackagePage && _settings.UserSettings.ExtendedListInfo && e.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
 			e.Rects.GithubRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{

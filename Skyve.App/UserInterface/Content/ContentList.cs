@@ -2,6 +2,7 @@
 using Skyve.App.UserInterface.Generic;
 
 using Skyve.App.UserInterface.Lists;
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
@@ -432,7 +433,7 @@ public partial class ContentList : SlickControl
 
 		if (_playsetManager.CurrentPlayset?.Usage > 0)
 		{
-			if (!(_compatibilityManager.GetPackageInfo(item)?.Usage.HasFlag(_playsetManager.CurrentPlayset.Usage) ?? true))
+			if (!(item.GetPackageInfo()?.Usage.HasFlag(_playsetManager.CurrentPlayset.Usage) ?? true))
 			{
 				UsageFilteredOut++;
 				return true;

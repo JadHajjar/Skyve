@@ -2,6 +2,7 @@
 using Skyve.App.UserInterface.Dropdowns;
 
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;

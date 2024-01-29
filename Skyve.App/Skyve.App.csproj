@@ -66,7 +66,6 @@
     <Compile Update="UserInterface\Lists\ReviewRequestList.cs" />
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs" />
-    <Compile Update="UserInterface\Panels\PC_ManageCompatibilitySelection.cs" />
     <Compile Update="UserInterface\Panels\PC_Troubleshoot.cs" />
     <Compile Update="UserInterface\Panels\PC_PlaysetAdd.cs" />
     <Compile Update="UserInterface\Panels\PC_UserPage.cs" />

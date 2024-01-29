@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;

@@ -1,5 +1,7 @@
 ﻿
 
+using Skyve.Compatibility.Domain.Enums;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -259,7 +261,7 @@ public partial class ItemListControl
 			//	authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorImg, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 			//}
 
-			if (_compatibilityManager.IsUserVerified(author))
+			if (_userService.IsUserVerified(author))
 			{
 				var avatarRect = authorRect.Pad(padding).Align(CompactList ? UI.Scale(new Size(18, 18), UI.FontScale) : new(authorRect.Height * 3 / 4, authorRect.Height * 3 / 4), ContentAlignment.MiddleLeft);
 				var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);

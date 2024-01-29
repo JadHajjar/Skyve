@@ -1,4 +1,5 @@
-﻿using Skyve.Compatibility.Domain.Interfaces;
+﻿using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 

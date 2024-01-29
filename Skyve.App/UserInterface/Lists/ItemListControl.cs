@@ -1,6 +1,7 @@
 ﻿using Skyve.App;
 using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
@@ -33,6 +34,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private readonly INotifier _notifier;
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IModLogicManager _modLogicManager;
+	private readonly IUserService _userService;
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
@@ -58,7 +60,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	protected ItemListControl(SkyvePage page)
 	{
 		_page = page;
-		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
+		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _userService, out _subscriptionsManager, out _packageUtil, out _modUtil);
 
 		SeparateWithLines = true;
 		EnableSelection = true;
@@ -321,7 +323,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			return;
 		}
 
-		if (rects.GithubRect.Contains(e.Location) && _compatibilityManager.GetPackageInfo(item.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		if (rects.GithubRect.Contains(e.Location) && item.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
 			PlatformUtil.OpenUrl(gitLink.Url);
 			return;

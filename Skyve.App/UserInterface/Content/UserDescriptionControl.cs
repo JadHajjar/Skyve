@@ -12,12 +12,12 @@ public class UserDescriptionControl : SlickImageControl
 	public PC_UserPage? UserPage { get; private set; }
 
 	private readonly IPackageManager _contentManager;
-	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IUserService _userService;
 
 	public UserDescriptionControl()
 	{
 		_contentManager = ServiceCenter.Get<IPackageManager>();
-		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+		_userService = ServiceCenter.Get<IUserService>();
 	}
 
 	public void SetUser(IUser user, PC_UserPage? page)
@@ -45,7 +45,7 @@ public class UserDescriptionControl : SlickImageControl
 		}
 		else
 		{
-			if (rects?.TextRect.Pad(0, 0, (int)(-24 * UI.FontScale), 0).Contains(e.Location) == true && User is not null && _compatibilityManager.IsUserVerified(User))
+			if (rects?.TextRect.Pad(0, 0, (int)(-24 * UI.FontScale), 0).Contains(e.Location) == true && User is not null && _userService.IsUserVerified(User))
 			{
 				SlickTip.SetTo(this, "VerifiedAuthor");
 			}
@@ -129,7 +129,7 @@ public class UserDescriptionControl : SlickImageControl
 		using var brush = new SolidBrush(FormDesign.Design.ForeColor);
 		e.Graphics.DrawString(text, font, brush, rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
-		if (_compatibilityManager.IsUserVerified(User))
+		if (_userService.IsUserVerified(User))
 		{
 			var checkRect = rects.TextRect.Align(UI.Scale(new Size(16, 16), UI.FontScale), ContentAlignment.MiddleLeft);
 			checkRect.X += rects.TextRect.Width;

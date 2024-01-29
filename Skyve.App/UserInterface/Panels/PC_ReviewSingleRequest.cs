@@ -1,8 +1,9 @@
 ﻿using Skyve.App.UserInterface.CompatibilityReport;
 using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Generic;
-
-
+using Skyve.Compatibility.Domain;
+using Skyve.Compatibility.Domain.Enums;
+using SkyveApi.Domain.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -173,12 +174,14 @@ public partial class PC_ReviewSingleRequest : PanelContent
 
 	private void B_ManagePackage_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel(new PC_CompatibilityManagement(new[] { _request.PackageId }));
+		throw new NotImplementedException();
+		//Form.PushPanel(new PC_CompatibilityManagement(new[] { _request.PackageId }));
 	}
 
 	private void B_ApplyChanges_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel(new PC_CompatibilityManagement(_request));
+		throw new NotImplementedException();
+		//Form.PushPanel(new PC_CompatibilityManagement(_request));
 	}
 
 	private async void B_DeleteRequest_Click(object sender, EventArgs e)

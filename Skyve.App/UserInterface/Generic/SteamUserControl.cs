@@ -79,7 +79,7 @@ public class SteamUserControl : SlickControl
 			Size = new(width, height);
 		}
 
-		if (ServiceCenter.Get<ICompatibilityManager>().IsUserVerified(User))
+		if (ServiceCenter.Get<IUserService>().IsUserVerified(User))
 		{
 			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
