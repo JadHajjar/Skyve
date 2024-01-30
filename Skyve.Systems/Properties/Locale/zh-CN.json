@@ -21,8 +21,8 @@
   "AnyStatus": "任意状态",
   "NoLocalPackagesFound": "在您的电脑上找不到插件。",
   "NoPackagesMatchFilters": "没有符合要求的插件。",
-  "EnableAll": "Enable all items",
-  "DisableAll": "Disable all items",
+  "EnableAll": "全部启用",
+  "DisableAll": "全部禁用",
   "EnableAllFiltered": "Enable filtered items",
   "DisableAllFiltered": "Disable filtered items",
   "EnableAllSelected": "Enable selected items",
@@ -42,7 +42,7 @@
   "SomePackagesWillBeDisabled": "更改此配置文件的用途将会移除某些插件。",
   "AffectedPackagesAre": "受影响的插件为：",
   "ConfirmDeletePlayset": "您确定要删除配置文件“{0}”吗？",
-  "ActivatePlayset": "Activate this playset",
+  "ActivatePlayset": "启用配置文件",
   "PlaysetMerge": "Add all of this playset's mods to your active playset",
   "PlaysetExclude": "Remove all of this playset's mods from your active playset",
   "PlaysetDelete": "删除此配置文件",
@@ -52,7 +52,7 @@
     "One": "打开文件位置",
     "Plural": "Open all selected packages' file locations"
   },
-  "OpenLocalFolder": "Open the folder containing this package",
+  "OpenLocalFolder": "打开此插件的文件夹",
   "ReDownloadPackage": {
     "One": "重新下载此插件",
     "Plural": "重新下载所有已选的插件"
@@ -73,7 +73,7 @@
   "FolderSettings": "文件夹设置",
   "ShowDatesRelatively": "显示当前时间的相对日期",
   "CouldNotCreatePlayset": "无法新建配置文件。",
-  "CreatePlaysetHere": "Create a new playset or activate a previous one by clicking here",
+  "CreatePlaysetHere": "点击此处以新建配置文件，或启用一个配置文件",
   "Maintenance": "维护",
   "DisableNewModsByDefault": "Disable newly added mods by default",
   "DisableNewAssetsByDefault": "Disable newly added assets by default",
@@ -81,9 +81,9 @@
   "HideFilters": "隐藏筛选选项",
   "DateSubscribed": "订阅日期",
   "DateUpdated": "更新日期",
-  "FilterOutPackagesWithMods": "Hide code mods in the packages page",
+  "FilterOutPackagesWithMods": "在插件页面内隐藏代码模组",
   "FilterOutPackagesWithOneAsset": "在插件页面中，隐藏仅包含单个资产的插件",
-  "CopyAuthorLink": "Copy the author's profile link",
+  "CopyAuthorLink": "复制作者的主页链接",
   "YourPlaysets": "您的配置文件",
   "UnFavoriteThisPlayset": "取消收藏此配置文件",
   "FavoriteThisPlayset": "收藏此配置文件",
@@ -111,12 +111,12 @@
   "HelpTranslate": "帮助改进翻译",
   "HelpReset": "帮助与重置",
   "JoinDiscord": "在 Discord 上获取帮助",
-  "OpenGuide": "Open the Wiki",
+  "OpenGuide": "打开 Wiki 指南",
   "ResetFolderButton": "重置所有文件夹设置",
   "LinkModAssets": "将模组自带的前置资产，与模组本身的装载状态关联",
   "LinkModAssets_Tip": "有些模组自带其正常运行所需的前置资产（取订这些资产可能导致模组出错）。启用此选项，可以将模组与其所需的前置资产绑定，并在资产页面中隐藏这些前置资产，以避免意外地将这些资产移除。",
   "ShowDatesRelatively_Tip": "将内容列表中的日期显示格式更改为相对时间，例如：昨天下午 2:10",
-  "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
+  "DisableNewModsByDefault_Tip": "在您订阅或添加模组时，Skyve 将会根据此选项的设置，自动装载或卸下该模组。",
   "DisableNewAssetsByDefault_Tip": "在您订阅或添加资产时，Skyve 将会根据此选项的设置，自动装载或卸下该资产。",
   "FilterOutPackagesWithOneAsset_Tip": "插件页面不显示只含一个资产的插件。在资产页面，这些资产仍然会显示。",
   "FilterOutPackagesWithMods_Tip": "插件页面不显示模组。在模组页面，这些模组仍然会显示。",
@@ -169,7 +169,7 @@
   "PackageIncludedAndEnabledTotal": "共 {1} 个插件，已装载且已启用 {0} 个",
   "AssetIncludedTotal": "您总共有 {1} 个资产，已装载 {0} 个",
   "NewPlayset_Tip": "新建或导入配置文件",
-  "ViewPlaysets_Tip": "View & manage your playsets",
+  "ViewPlaysets_Tip": "查看和管理配置文件",
   "NewGame_Tip": "启动 Cities: Skylines 并新建一个存档。您可以选择新建存档使用的地图。",
   "LoadSaveGame_Tip": "启动 Cities: Skylines 时，自动开始加载所选存档。 如果您没有选择存档文件，会自动加载最近一次保存的存档。",
   "BETA": "BETA 测试版",
@@ -183,7 +183,7 @@
   "ABANDONED": "作者已弃坑",
   "ActionUnreversible": {
     "One": "此操作无法撤销！",
-    "Plural": "This action can not be reversed. And will affect {0} packages."
+    "Plural": "此操作无法撤销，并且会影响 {0} 个插件！"
   },
   "AlwaysOpenFiltersAndActions": "默认显示筛选选项",
   "AlwaysOpenFiltersAndActions_Tip": "进入“内容”选项卡时，始终显示筛选选项。",
@@ -279,7 +279,7 @@
     "One": "订阅量：{1}",
     "Plural": "订阅量：{1}"
   },
-  "SearchWorkshop": "Search the workshop instead...",
+  "SearchWorkshop": "搜索创意工坊…",
   "DiscoverWorkshop": "在工坊查找模组...",
   "SearchWorkshopBrowser": "在浏览器中搜索创意工坊…",
   "UnknownPackage": "未知插件",
@@ -299,7 +299,7 @@
   "Author": "作者",
   "Include": "装载",
   "Unsubscribe": "取消订阅",
-  "Exclude": "Exclude",
+  "Exclude": "卸下",
   "Snooze": "关闭提醒",
   "UnSnooze": "打开提醒",
   "Mod": {
@@ -547,5 +547,5 @@
   "Version": "版本",
   "UpdateTime": "更新时间",
   "Status": "状态",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "ThisModIsRequiredYouCantDisableIt": "此模组是必需的，不能禁用。"
 }
