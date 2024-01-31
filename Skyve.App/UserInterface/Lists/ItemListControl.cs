@@ -15,6 +15,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private Rectangle PopupSearchRect1;
 	private Rectangle PopupSearchRect2;
 	private bool _compactList;
+	private bool settingItems;
 	private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = [];
 
 	public event Action<NotificationType>? CompatibilityReportSelected;
@@ -106,11 +107,16 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
+	public override void SetItems(IEnumerable<IPackageIdentity> items)
+	{
+		settingItems = true;
+		base.SetItems(items);
+		settingItems = false;
+	}
+
 	public void DoFilterChanged()
 	{
 		base.FilterChanged();
-
-		AutoInvalidate = !Loading && Items.Any() && !SafeGetItems().Any();
 	}
 
 	public void SetSorting(PackageSorting packageSorting, bool desc)
@@ -135,7 +141,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 	public override void FilterChanged()
 	{
-		if (!IsHandleCreated)
+		if (!IsHandleCreated || settingItems)
 		{
 			base.FilterChanged();
 		}

@@ -393,7 +393,7 @@ public partial class ContentList : SlickControl
 
 	private async void FilterChanged(object sender, EventArgs e)
 	{
-		if (!clearingFilters)
+		if (!clearingFilters && Live)
 		{
 			I_Refresh.Loading = true;
 
