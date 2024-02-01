@@ -1,10 +1,12 @@
 ﻿using Extensions;
 
+using Skyve.Compatibility.Domain;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
-using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility.Domain;
-using Skyve.Systems.Compatibility.Domain.Api;
+
 
 using System.Collections.Generic;
 using System.Linq;
@@ -17,23 +19,25 @@ public class CompatibilityHelper
 	private readonly IPackageUtil _contentUtil;
 	private readonly IPackageNameUtil _packageUtil;
 	private readonly IWorkshopService _workshopService;
+	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly PackageAvailabilityService _packageAvailabilityService;
 
 	private readonly Dictionary<ulong, List<ulong>> _missingItems = [];
 
-	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILogger logger)
+	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILogger logger, ISkyveDataManager skyveDataManager)
 	{
 		_compatibilityManager = compatibilityManager;
 		_contentManager = contentManager;
 		_contentUtil = contentUtil;
 		_packageUtil = packageUtil;
 		_workshopService = workshopService;
-		_packageAvailabilityService = new(_contentManager, _contentUtil, logger, _compatibilityManager);
+		_skyveDataManager = skyveDataManager;
+		_packageAvailabilityService = new PackageAvailabilityService(_contentManager, _contentUtil, logger, _skyveDataManager, _compatibilityManager);
 	}
 
-	public void HandleStatus(CompatibilityInfo info, IndexedPackageStatus status)
+	public void HandleStatus(CompatibilityInfo info, IPackageStatus<StatusType> status)
 	{
-		var type = status.Status.Type;
+		var type = status.Type;
 
 		if (type is StatusType.SourceAvailable or StatusType.StandardMod)
 		{
@@ -45,22 +49,22 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is StatusType.Deprecated && status.Status.Action is StatusAction.Switch && (status.Status.Packages?.Any() ?? false))
+		if (type is StatusType.Deprecated && status.Action is StatusAction.Switch && (status.Packages?.Any() ?? false))
 		{
-			if (info.Data?.SucceededBy is not null || HandleSucceededBy(info, status.Status.Packages))
+			if (info.Data?.SucceededBy is not null || HandleSucceededBy(info, status.Packages))
 			{
 				return;
 			}
 		}
 
-		var packages = status.Status.Packages?.ToList() ?? [];
+		var packages = status.Packages?.ToList() ?? [];
 
-		if (status.Status.Action is StatusAction.Switch && status.Status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
+		if (status.Action is StatusAction.Switch && status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
 		{
 			packages = packages.Select(x => _compatibilityManager.GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
 		}
 
-		if (status.Status.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
+		if (status.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
 		{
 			packages.RemoveAll(ShouldNotBeUsed);
 
@@ -80,24 +84,24 @@ public class CompatibilityHelper
 			_ => ReportType.Status,
 		};
 
-		if (status.Status.Action is StatusAction.SelectOne)
+		if (status.Action is StatusAction.SelectOne)
 		{
 			packages.Insert(0, info.Id);
 		}
 
-		info.Add(reportType, status.Status, info.CleanName(true), packages.ToArray());
+		info.Add(reportType, status, info.CleanName(true), packages.Select(x => new GenericPackageIdentity(x)).ToArray());
 	}
 
-	public void HandleInteraction(CompatibilityInfo info, IndexedPackageInteraction interaction)
+	public void HandleInteraction(CompatibilityInfo info, IPackageStatus<InteractionType> interaction)
 	{
-		var type = interaction.Interaction.Type;
+		var type = interaction.Type;
 
 		if (type is InteractionType.Successor or InteractionType.RequirementAlternative or InteractionType.LoadAfter)
 		{
 			return;
 		}
 
-		if (type is InteractionType.SucceededBy && interaction.Interaction.Action is StatusAction.NoAction)
+		if (type is InteractionType.SucceededBy && interaction.Action is StatusAction.NoAction)
 		{
 			return;
 		}
@@ -107,9 +111,9 @@ public class CompatibilityHelper
 			return;
 		}
 
-		var packages = interaction.Interaction.Packages?.ToList() ?? [];
+		var packages = interaction.Packages?.ToList() ?? [];
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Interaction.Action is StatusAction.Switch)
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Action is StatusAction.Switch)
 		{
 			packages = packages.Select(x => _compatibilityManager.GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
 		}
@@ -128,7 +132,7 @@ public class CompatibilityHelper
 			packages.RemoveAll(x => _packageAvailabilityService.IsPackageEnabled(x, true));
 		}
 
-		if (interaction.Interaction.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
+		if (interaction.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
 		{
 			packages.RemoveAll(ShouldNotBeUsed);
 		}
@@ -155,7 +159,7 @@ public class CompatibilityHelper
 			_ => ReportType.Compatibility
 		};
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && _packageAvailabilityService.IsPackageEnabled(info.Data.Package.Id, false))
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && _packageAvailabilityService.IsPackageEnabled(info.Data.Id, false))
 		{
 			lock (_missingItems)
 			{
@@ -163,22 +167,22 @@ public class CompatibilityHelper
 				{
 					if (_missingItems.ContainsKey(item))
 					{
-						_missingItems[item].AddIfNotExist(info.Data.Package.Id);
+						_missingItems[item].AddIfNotExist(info.Data.Id);
 					}
 					else
 					{
-						_missingItems[item] = [info.Data.Package.Id];
+						_missingItems[item] = [info.Data.Id];
 					}
 				}
 			}
 		}
 
-		if (interaction.Interaction.Action is StatusAction.SelectOne)
+		if (interaction.Action is StatusAction.SelectOne)
 		{
 			packages.Add(info.Id);
 		}
 
-		info.Add(reportType, interaction.Interaction, info.CleanName(true), packages.ToArray());
+		info.Add(reportType, interaction, info.CleanName(true), packages.Select(x => new GenericPackageIdentity(x)).ToArray());
 	}
 
 	private bool HandleSucceededBy(CompatibilityInfo info, IEnumerable<ulong> packages)
@@ -200,13 +204,17 @@ public class CompatibilityHelper
 	{
 		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(id));
 
-		return (workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved))
-			|| (_compatibilityManager.CompatibilityData.Packages.TryGetValue(id, out var package)
-			&& (package.Package.Stability is PackageStability.Broken
-			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false)));
+		if (workshopItem is not null && (_skyveDataManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved))
+		{
+			return true;
+		}
+
+		var package = _skyveDataManager.TryGetPackageInfo(id);
+
+		return package is not null && (package.Stability is PackageStability.Broken || (package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false));
 	}
 
-	internal void UpdateInclusionStatus(IPackage package)
+	internal void UpdateInclusionStatus(IPackageIdentity package)
 	{
 		_packageAvailabilityService.UpdateInclusionStatus(package.Id);
 	}

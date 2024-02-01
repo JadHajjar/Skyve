@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
 using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
@@ -119,7 +121,7 @@ public class PackageNameUtil : IPackageNameUtil
 		}
 		else
 		{
-			var info = ServiceCenter.Get<ICompatibilityManager>().GetPackageInfo(package);
+			var info = package.GetPackageInfo();
 
 			if (info?.Stability is PackageStability.Broken)
 			{

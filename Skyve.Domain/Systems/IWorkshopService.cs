@@ -20,7 +20,9 @@ public interface IWorkshopService
 #if CS2
 	Task Initialize();
 	Task Login();
+	Task<bool> Login(string email, string password, bool rememberMe);
 	Task WaitUntilReady();
+	Task RunSync();
 	Task<int> GetActivePlaysetId();
 	Task<List<ICustomPlayset>> GetPlaysets(bool localOnly);
 	Task<bool> ToggleVote(IPackageIdentity packageIdentity);

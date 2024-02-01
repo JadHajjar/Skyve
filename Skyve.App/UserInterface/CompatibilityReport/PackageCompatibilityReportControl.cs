@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.CompatibilityReport;
@@ -81,7 +84,7 @@ public class PackageCompatibilityReportControl : TableLayoutPanel
 
 				controlCount = 0;
 
-				foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key is not ReportType.Stability).ThenByDescending(x => x.Max(y => y.Status?.Notification)).ThenByDescending(x => x.Sum(y => y.Packages.Length)))
+				foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key is not ReportType.Stability).ThenByDescending(x => x.Max(y => y.Status?.Notification)).ThenByDescending(x => x.Sum(y => y.Packages.Count())))
 				{
 					var controls = item.ToList(x => new CompatibilityMessageControl(this, item.Key, x));
 

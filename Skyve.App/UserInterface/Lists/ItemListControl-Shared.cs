@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
@@ -26,7 +28,9 @@ public partial class ItemListControl
 	private void DrawThumbnail(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
 	{
 		if (!e.InvalidRects.Any(x => x.IntersectsWith(e.Rects.IconRect)))
+		{
 			return;
+		}
 
 		var thumbnail = e.Item.GetThumbnail();
 
@@ -62,7 +66,7 @@ public partial class ItemListControl
 		{
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(2 * UI.FontScale));
 
-			if (!GridView || _settings.UserSettings.ExtendedListInfo)
+			if (!GridView || _settings.UserSettings.ComplexListUI)
 			{
 				e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, (int)(5 * UI.FontScale));
 
@@ -119,8 +123,8 @@ public partial class ItemListControl
 
 		if (required && activeColor != default)
 		{
-			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
-			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
+			iconColor = !FormDesign.Design.IsDarkTheme ? activeColor.MergeColor(ForeColor, 75) : activeColor;
+			activeColor = activeColor.MergeColor(BackColor, !FormDesign.Design.IsDarkTheme ? 35 : 20);
 		}
 		else if (activeColor == default && isHovered)
 		{
@@ -227,23 +231,70 @@ public partial class ItemListControl
 #endif
 	private void DrawTitleAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 	{
-		using var font = UI.Font(GridView ? (_settings.UserSettings.ExtendedListInfo ? 11.25F : 9F) : CompactList ? 8.25F : 10.5F, FontStyle.Bold);
-		using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState == HoverState.Hovered && !IsPackagePage ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
-		using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near };
-		var text = e.Item.CleanName(out var tags);
-		var textRect = e.Rects.TextRect.AlignToFontSize(font, CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopLeft, e.Graphics);
-
-		e.Graphics.DrawString(text, font, brushTitle, textRect, stringFormat);
-
 		var padding = GridView ? GridPadding : Padding;
-		var textSize = e.Graphics.Measure(text, font);
-		var tagRect = new Rectangle(e.Rects.TextRect.X + (int)textSize.Width, textRect.Y, 0, textRect.Height);
+		var text = e.Item.CleanName(out var tags);
+		using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near };
 
-		for (var i = 0; i < tags.Count; i++)
+		if (GridView && !_settings.UserSettings.ComplexListUI)
 		{
-			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ExtendedListInfo);
+			using var font = UI.Font(9F, FontStyle.Bold);
+			var textRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Y, e.Rects.TextRect.Width, Height);
 
-			tagRect.X += padding.Left + rect.Width;
+			var textSize = e.Graphics.Measure(text, font, textRect.Width);
+			var oneLineSize = e.Graphics.Measure(text, font);
+			var oneLine = textSize.Height == oneLineSize.Height;
+			var tagRect = new Rectangle(e.Rects.TextRect.X + (oneLine ? (int)textSize.Width : 0), textRect.Y + (oneLine ? 0 : (int)textSize.Height), 0, (int)oneLineSize.Height);
+
+			e.Rects.TextRect.Height = (int)textSize.Height + (GridPadding.Top / 3);
+			e.Rects.CenterRect = e.Rects.TextRect.Pad(0, -GridPadding.Top, 0, 0);
+			e.DrawableItem.CachedHeight = e.Rects.TextRect.Bottom;
+
+			using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState == HoverState.Hovered && !IsPackagePage ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
+
+			e.Graphics.DrawString(text, font, brushTitle, textRect, stringFormat);
+
+			for (var i = 0; i < tags.Count; i++)
+			{
+				var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ComplexListUI);
+
+				if (tagRect.X + tagSize.Width > e.Rects.TextRect.Right)
+				{
+					tagRect.Y += tagRect.Height;
+					tagRect.X = e.Rects.TextRect.X;
+					e.DrawableItem.CachedHeight += tagRect.Height;
+				}
+
+				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ComplexListUI);
+
+				tagRect.X += padding.Left + rect.Width;
+			}
+		}
+		else
+		{
+			var tagSizes = 0;
+
+			for (var i = 0; i < tags.Count; i++)
+			{
+				var size = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ComplexListUI);
+
+				tagSizes += padding.Left + size.Width;
+			}
+
+			using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState == HoverState.Hovered && !IsPackagePage ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
+			using var font = UI.Font(GridView ? 11.25F : CompactList ? 8.25F : 10.5F, FontStyle.Bold).FitTo(text, e.Rects.TextRect.Pad(0, 0, tagSizes + Padding.Right, 0), e.Graphics);
+			var textRect = e.Rects.TextRect.Pad(0, 0, tagSizes, 0).AlignToFontSize(font, CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopLeft, e.Graphics);
+
+			e.Graphics.DrawString(text, font, brushTitle, textRect, stringFormat);
+
+			var textSize = e.Graphics.Measure(text, font, e.Rects.TextRect.Width - tagSizes - Padding.Right);
+			var tagRect = new Rectangle(e.Rects.TextRect.X + (int)textSize.Width, textRect.Y, 0, textRect.Height);
+
+			for (var i = 0; i < tags.Count; i++)
+			{
+				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ComplexListUI);
+
+				tagRect.X += padding.Left + rect.Width;
+			}
 		}
 	}
 
@@ -253,7 +304,7 @@ public partial class ItemListControl
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-		var isVersion = package?.IsCodeMod ?? (false && !string.IsNullOrEmpty(package!.Version));
+		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
 		var text = isVersion ? "v" + package!.Version : localIdentity?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
 #endif
 		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
@@ -402,7 +453,7 @@ public partial class ItemListControl
 	private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? parentPackage, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : Padding;
-		var size = _settings.UserSettings.ExtendedListInfo ?
+		var size = _settings.UserSettings.ComplexListUI ?
 			UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale) :
 			UI.Scale(CompactList ? new Size(20, 20) : new Size(24, 24), UI.FontScale);
 		var rect = new Rectangle(e.ClipRectangle.Right, e.ClipRectangle.Y, 0, e.ClipRectangle.Height).Pad(padding);
@@ -440,7 +491,7 @@ public partial class ItemListControl
 			rect.X -= e.Rects.SteamRect.Width + padding.Left;
 		}
 
-		if (!IsPackagePage && _settings.UserSettings.ExtendedListInfo && _compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		if (!IsPackagePage && _settings.UserSettings.ComplexListUI && e.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
 			e.Rects.GithubRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{

@@ -1,6 +1,8 @@
 ﻿using Skyve.App;
 using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.IO;
@@ -13,6 +15,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private Rectangle PopupSearchRect1;
 	private Rectangle PopupSearchRect2;
 	private bool _compactList;
+	private bool settingItems;
 	private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = [];
 
 	public event Action<NotificationType>? CompatibilityReportSelected;
@@ -32,6 +35,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private readonly INotifier _notifier;
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IModLogicManager _modLogicManager;
+	private readonly IUserService _userService;
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
@@ -57,7 +61,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	protected ItemListControl(SkyvePage page)
 	{
 		_page = page;
-		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
+		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _userService, out _subscriptionsManager, out _packageUtil, out _modUtil);
 
 		SeparateWithLines = true;
 		EnableSelection = true;
@@ -94,7 +98,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			_compactList = value;
 
-			baseHeight = _settings.UserSettings.ExtendedListInfo ? _compactList ? 24 : 60 : _compactList ? 20 : 48;
+			baseHeight = _settings.UserSettings.ComplexListUI ? _compactList ? 24 : 60 : _compactList ? 20 : 48;
 
 			if (Live)
 			{
@@ -103,11 +107,16 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
+	public override void SetItems(IEnumerable<IPackageIdentity> items)
+	{
+		settingItems = true;
+		base.SetItems(items);
+		settingItems = false;
+	}
+
 	public void DoFilterChanged()
 	{
 		base.FilterChanged();
-
-		AutoInvalidate = !Loading && Items.Any() && !SafeGetItems().Any();
 	}
 
 	public void SetSorting(PackageSorting packageSorting, bool desc)
@@ -132,7 +141,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 	public override void FilterChanged()
 	{
-		if (!IsHandleCreated)
+		if (!IsHandleCreated || settingItems)
 		{
 			base.FilterChanged();
 		}
@@ -320,7 +329,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			return;
 		}
 
-		if (rects.GithubRect.Contains(e.Location) && _compatibilityManager.GetPackageInfo(item.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		if (rects.GithubRect.Contains(e.Location) && item.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
 			PlatformUtil.OpenUrl(gitLink.Url);
 			return;
@@ -507,70 +516,81 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		base.OnMouseMove(e);
+
+		if (!AnyVisibleItems())
+		{
+			Invalidate();
+		}
+	}
+
+	protected override void OnSizeChanged(EventArgs e)
+	{
+		base.OnSizeChanged(e);
+
+		if (!AnyVisibleItems())
+		{
+			Invalidate();
+		}
+	}
+
 	protected override void OnPaintBackground(PaintEventArgs e)
 	{
-		var loading = false;
-
-		foreach (var item in SafeGetItems())
+		if (ItemCount > 0)
 		{
-			loading |= (item.Loading = _subscriptionsManager.IsSubscribing(item.Item) || _modUtil.IsEnabling(item.Item));
-		}
+			var loading = false;
 
-		if (Loading != loading)
-		{
-			Loading = loading;
-			Invalidate();
+			foreach (var item in SafeGetItems())
+			{
+				loading |= item.Loading = _subscriptionsManager.IsSubscribing(item.Item) || _modUtil.IsEnabling(item.Item);
+			}
+
+			if (Loading != loading)
+			{
+				Loading = loading;
+				Invalidate();
+			}
 		}
 
 		base.OnPaintBackground(e);
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
-	{	
+	{
 		try
 		{
+			base.OnPaint(e);
+
 			PopupSearchRect1 = PopupSearchRect2 = Rectangle.Empty;
 
-			if (Loading)
+			if (Loading || AnyVisibleItems())
 			{
-				base.OnPaint(e);
+				return;
 			}
-			else if (!Items.Any())
+
+			e.Graphics.ResetClip();
+
+			using var font = UI.Font(9.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+			if (ItemCount == 0 && _page != SkyvePage.Workshop)
 			{
-				e.Graphics.SetUp(BackColor);
-
-				using var font = UI.Font(9.75F, FontStyle.Italic);
-				using var brush = new SolidBrush(FormDesign.Design.LabelColor);
-				using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-
 #if CS1
 				e.Graphics.DrawString(Locale.NoLocalPackagesFound + "\r\n" + Locale.CheckFolderInOptions, font, brush, ClientRectangle, stringFormat);
 #else
 				e.Graphics.DrawString(Locale.NoLocalPackagesFound, font, brush, ClientRectangle, stringFormat);
+#endif
 
 				DrawWorkshopSearchButtons(e, true);
-#endif
-			}
-			else if (!SafeGetItems().Any())
-			{
-				e.Graphics.SetUp(BackColor);
-
-				if (!IsTextSearchNotEmpty)
-				{
-					using var font = UI.Font(9.75F, FontStyle.Italic);
-					using var brush = new SolidBrush(FormDesign.Design.LabelColor);
-					using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-
-					e.Graphics.DrawString(Locale.NoPackagesMatchFilters, font, brush, ClientRectangle.Pad(0, 0, 0, Height / 3), stringFormat);
-
-					return;
-				}
-
-				DrawWorkshopSearchButtons(e, false);
 			}
 			else
 			{
-				base.OnPaint(e);
+				e.Graphics.DrawString(Locale.NoPackagesMatchFilters, font, brush, ClientRectangle.Pad(0, 0, 0, Height / 3), stringFormat);
+
+				DrawWorkshopSearchButtons(e, false);
 			}
 		}
 		catch (Exception ex)
@@ -584,13 +604,14 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 	private void DrawWorkshopSearchButtons(PaintEventArgs e, bool emptySearch)
 	{
+		if (_page == SkyvePage.Workshop)
+		{ 
+			return;
+		}
+
 		CursorLocation = PointToClient(Cursor.Position);
 
 		using var font = UI.Font(9.75F);
-		using var fontI = UI.Font(9.75F, FontStyle.Italic);
-		using var brush = new SolidBrush(FormDesign.Design.LabelColor);
-		using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-		e.Graphics.DrawString(Locale.NoPackagesMatchFilters, fontI, brush, ClientRectangle.Pad(0, 0, 0, Height / 3), stringFormat);
 
 		PopupSearchRect1 = SlickButton.AlignAndDraw(e.Graphics, new Rectangle(0, Height * 2 / 3, Width, 0), ContentAlignment.TopCenter, new ButtonDrawArgs
 		{

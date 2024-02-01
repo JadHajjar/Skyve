@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
@@ -30,7 +32,7 @@ public partial class ItemListControl
 				return;
 			}
 
-			e.DrawableItem.CachedHeight = e.Rects.IncludedRect.Bottom - e.ClipRectangle.Y + GridPadding.Vertical + Padding.Vertical;
+			e.DrawableItem.CachedHeight = int.MinValue;
 
 			DrawThumbnail(e, localIdentity, workshopInfo);
 			DrawTitleAndTags(e);
@@ -38,6 +40,9 @@ public partial class ItemListControl
 			DrawVersionAndTags(e, package, localIdentity, workshopInfo);
 			DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, package?.LocalData, out var activeColor);
 			DrawDots(e);
+
+			e.DrawableItem.CachedHeight = Math.Max(e.Rects.IncludedRect.Bottom, e.DrawableItem.CachedHeight) - e.ClipRectangle.Y + GridPadding.Vertical + Padding.Vertical;
+
 			DrawCompatibilityAndStatus(e, out var outerColor);
 
 			if (outerColor != default)
@@ -69,6 +74,7 @@ public partial class ItemListControl
 			outerColor = default;
 
 			var height = (int)(20 * UI.FontScale);
+			using var baseFont = UI.Font(9F, FontStyle.Bold);
 
 			if (GetStatusDescriptors(e.Item, out var text, out var icon, out var color))
 			{
@@ -78,12 +84,13 @@ public partial class ItemListControl
 
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
-				using var font = UI.Font(9F, FontStyle.Bold);
-				using var image = icon!.Get(font.Height * 4 / 3).Color(textBrush.Color);
+				using var image = icon!.Get(baseFont.Height * 4 / 3).Color(textBrush.Color);
+				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), e.Graphics);
+				using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false, notificationType <= NotificationType.Info, notificationType <= NotificationType.Info);
 
-				e.Graphics.DrawString(text, font, textBrush, rect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+				e.Graphics.DrawString(text, font, textBrush, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), format);
 
 				e.Graphics.DrawImage(image, rect.Pad(GridPadding).Align(image.Size, ContentAlignment.MiddleLeft));
 
@@ -100,17 +107,19 @@ public partial class ItemListControl
 			if (notificationType > NotificationType.Info)
 			{
 				var rect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y + e.DrawableItem.CachedHeight - Padding.Vertical, e.ClipRectangle.Width, height);
+				var text2 = LocaleCR.Get(notificationType.ToString());
 
 				outerColor = Color.FromArgb(rect.Contains(CursorLocation) ? 200 : 255, notificationType.Value.GetColor());
 
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
-				using var font = UI.Font(9F, FontStyle.Bold);
-				using var image = notificationType.Value.GetIcon(false).Get(font.Height * 4 / 3).Color(textBrush.Color);
+				using var image = notificationType.Value.GetIcon(false).Get(baseFont.Height * 4 / 3).Color(textBrush.Color);
+				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text2, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), e.Graphics);
+				using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false);
 
-				e.Graphics.DrawString(LocaleCR.Get($"{notificationType}"), font, textBrush, rect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+				e.Graphics.DrawString(text2, font, textBrush, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), format);
 
 				e.Graphics.DrawImage(image, rect.Pad(GridPadding).Align(image.Size, ContentAlignment.MiddleLeft));
 
@@ -149,12 +158,13 @@ public partial class ItemListControl
 				using var authorFontUnderline = UI.Font(7.5F, FontStyle.Underline);
 				using var stringFormat = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center };
 
-				var rect = new Rectangle(e.Rects.TextRect.X, e.Rects.IncludedRect.Y, e.Rects.TextRect.Width, e.Rects.IncludedRect.Height);
+				var rect = new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, 0);
 				var size = e.Graphics.Measure(author.Name, authorFont).ToSize();
 
 				using var authorIcon = IconManager.GetIcon("I_Author", size.Height);
 
-				e.Rects.AuthorRect = rect.Align(size + new Size(authorIcon.Width, 0), ContentAlignment.BottomLeft);
+				e.Rects.AuthorRect = rect.Align(size + new Size(authorIcon.Width, 0), ContentAlignment.TopLeft);
+				e.DrawableItem.CachedHeight = e.Rects.AuthorRect.Bottom + GridPadding.Top / 3;
 
 				var isHovered = e.Rects.AuthorRect.Contains(CursorLocation);
 				using var brush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : Color.FromArgb(200, ForeColor));
@@ -170,7 +180,7 @@ public partial class ItemListControl
 			var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 			var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-			var isVersion = package?.IsCodeMod ?? (false && !string.IsNullOrEmpty(package!.Version));
+			var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
 			var text = isVersion ? "v" + package!.Version : localParentPackage?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
 #endif
 
@@ -192,20 +202,21 @@ public partial class ItemListControl
 
 			if (!string.IsNullOrEmpty(text))
 			{
-				using var versionFont = UI.Font(GridView ? 7.5F : 8.25F);
 				using var fadedBrush = new SolidBrush(Color.FromArgb(GridView ? 150 : 200, e.BackColor.GetTextColor()));
 
-				var rect = GridView ? new Rectangle(e.Rects.TextRect.X, e.Rects.IncludedRect.Y, e.Rects.TextRect.Width, e.Rects.IncludedRect.Height) : new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, e.Rects.TextRect.Width, e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - Padding.Bottom);
-				var size = e.Graphics.Measure(text, versionFont).ToSize();
+				var rect = GridView 
+					? new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, Height) 
+					: new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, e.Rects.TextRect.Width, e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - Padding.Bottom);
 
-				if (GridView && e.Rects.AuthorRect.Height > 0)
+				using var versionFont = GridView ? UI.Font(7.5F) : UI.Font(8.25F).FitToHeight(text, rect, e.Graphics);
+				using var format = GridView ? new() : new StringFormat { LineAlignment = StringAlignment.Far };
+				
+				e.Graphics.DrawString(text, versionFont, fadedBrush, rect, format);
+
+				if (GridView)
 				{
-					rect.Y += e.Rects.AuthorRect.Height;
-
-					e.DrawableItem.CachedHeight += e.Rects.AuthorRect.Height;
+					e.DrawableItem.CachedHeight += (int)e.Graphics.Measure(text, versionFont, rect.Width).Height; 
 				}
-
-				e.Graphics.DrawString(text, versionFont, fadedBrush, rect, new StringFormat { LineAlignment = StringAlignment.Far });
 			}
 		}
 

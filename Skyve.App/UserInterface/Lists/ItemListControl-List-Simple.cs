@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -10,7 +12,7 @@ public partial class ItemListControl
 	{
 		public Simple(SkyvePage page) : base(page)
 		{
-			GridItemSize = new Size(200, 236);
+			GridItemSize = new Size(190, 260);
 			DynamicSizing = true;
 		}
 
@@ -124,11 +126,12 @@ public partial class ItemListControl
 				return;
 			}
 
-			using var font = UI.Font(8.25F);
+			using var fontBase = UI.Font(8.25F);
 			using var brush = new SolidBrush(e.BackColor.GetTextColor());
+			using var stringFormat = new StringFormat { LineAlignment = StringAlignment.Center };
 
 			var index = 0;
-			var itemHeight = (int)e.Graphics.Measure(" ", font).Height;
+			var itemHeight = (int)e.Graphics.Measure(" ", fontBase).Height;
 			var rect = new Rectangle(e.Rects.TextRect.Right, e.Rects.TextRect.Y + Padding.Top, e.ClipRectangle.Width * 2 / 10, itemHeight);
 			var author = workshopInfo?.Author;
 
@@ -137,20 +140,22 @@ public partial class ItemListControl
 				var isHovered = rect.Contains(CursorLocation);
 
 				using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
-				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline);
-				using var subsIcon = IconManager.GetIcon("I_Author", itemHeight + Padding.Top).Color(isHovered ? activeBrush.Color : brush.Color);
+				using var icon = IconManager.GetIcon("I_Author", itemHeight + Padding.Top).Color(isHovered ? activeBrush.Color : brush.Color);
+				using var font = UI.Font(8.25F).FitToWidth(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline).FitToWidth(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
-				e.Graphics.DrawImage(subsIcon, rect.Align(subsIcon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(author.Name, isHovered ? fontUnderline : font, isHovered ? activeBrush : brush, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0));
+				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
+				e.Graphics.DrawString(author.Name, isHovered ? fontUnderline : font, isHovered ? activeBrush : brush, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), stringFormat);
 
 				e.Rects.AuthorRect = rect;
 			}
 			else if (localIdentity is not null)
 			{
-				using var subsIcon = IconManager.GetIcon("I_Folder", itemHeight + Padding.Top).Color(brush.Color);
+				using var icon = IconManager.GetIcon("I_Folder", itemHeight + Padding.Top).Color(brush.Color);
+				using var font = UI.Font(8.25F).FitTo(Path.GetFileName(localIdentity.Folder), rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
-				e.Graphics.DrawImage(subsIcon, rect.Align(subsIcon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(Path.GetFileName(localIdentity.Folder), font, brush, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0));
+				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
+				e.Graphics.DrawString(Path.GetFileName(localIdentity.Folder), font, brush, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), stringFormat);
 			}
 
 			tick();
@@ -160,13 +165,14 @@ public partial class ItemListControl
 			if (date != default)
 			{
 				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
-				var isRecent = date > DateTime.UtcNow.AddDays(-7) && !e.HoverState.HasFlag(HoverState.Pressed);
+				var isRecent = date > DateTime.UtcNow.AddDays(-7) && e.BackColor != FormDesign.Design.ActiveColor;
 
 				using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
-				using var subsIcon = IconManager.GetIcon("I_UpdateTime", itemHeight + Padding.Top).Color(isRecent ? activeBrush.Color : brush.Color);
+				using var icon = IconManager.GetIcon("I_UpdateTime", itemHeight + Padding.Top).Color(isRecent ? activeBrush.Color : brush.Color);
+				using var font = UI.Font(8.25F).FitToWidth(dateText, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
-				e.Graphics.DrawImage(subsIcon, rect.Align(subsIcon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(dateText, font, isRecent ? activeBrush : brush, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0));
+				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
+				e.Graphics.DrawString(dateText, font, isRecent ? activeBrush : brush, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), stringFormat);
 			}
 
 			tick();
@@ -174,22 +180,26 @@ public partial class ItemListControl
 			if (workshopInfo is not null)
 			{
 				var isHovered = rect.Contains(CursorLocation);
+				var text = Locale.VotesCount.FormatPlural(workshopInfo.VoteCount, workshopInfo.VoteCount.ToString("N0"));
+				var text2 = Locale.SubscribersCount.FormatPlural(workshopInfo.Subscribers, workshopInfo.Subscribers.ToString("N0"));
 
 				using var fontBold = UI.Font(8.25F, FontStyle.Bold);
 				using var fontUnderline = UI.Font(8.25F, workshopInfo.HasVoted ? FontStyle.Bold | FontStyle.Underline : FontStyle.Underline);
 				using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor.MergeColor(brush.Color, 75));
-				using var voteIcon = IconManager.GetIcon(workshopInfo.HasVoted ? "I_VoteFilled" : "I_Vote", itemHeight + Padding.Top).Color(isHovered || workshopInfo.HasVoted ? greenBrush.Color : brush.Color);
+				using var icon = IconManager.GetIcon(workshopInfo.HasVoted ? "I_VoteFilled" : "I_Vote", itemHeight + Padding.Top).Color(isHovered || workshopInfo.HasVoted ? greenBrush.Color : brush.Color);
+				using var font = UI.Font(8.25F).FitToWidth(text, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
-				e.Graphics.DrawImage(voteIcon, rect.Align(voteIcon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(Locale.VotesCount.FormatPlural(workshopInfo.VoteCount, workshopInfo.VoteCount.ToString("N0")), isHovered ? fontUnderline : workshopInfo.HasVoted ? fontBold : font, isHovered || workshopInfo.HasVoted ? greenBrush : brush, rect.Pad(voteIcon.Width + Padding.Left, 0, 0, 0));
+				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
+				e.Graphics.DrawString(text, isHovered ? fontUnderline : workshopInfo.HasVoted ? fontBold : font, isHovered || workshopInfo.HasVoted ? greenBrush : brush, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), stringFormat);
 
 				e.Rects.ScoreRect = rect;
 
 				tick();
 
 				using var subsIcon = IconManager.GetIcon("I_People", itemHeight + Padding.Top).Color(brush.Color);
+				using var font2 = UI.Font(8.25F).FitToWidth(text2, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 				e.Graphics.DrawImage(subsIcon, rect.Align(subsIcon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(Locale.SubscribersCount.FormatPlural(workshopInfo.Subscribers, workshopInfo.Subscribers.ToString("N0")), font, brush, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0));
+				e.Graphics.DrawString(text2, font2, brush, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0), stringFormat);
 			}
 
 			void tick()

@@ -81,11 +81,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation AddToSearch => _instance.GetText("AddToSearch");
 
 	/// <summary>
-	/// Enabling this option will let you change both included &amp; enabled states of mods, similar to the original Load Order Tool.
-	/// </summary>
-	public static Translation AdvancedIncludeEnableTip => _instance.GetText("AdvancedIncludeEnable_Tip");
-
-	/// <summary>
 	/// Show extra launch options
 	/// </summary>
 	public static Translation AdvancedLaunchOptions => _instance.GetText("AdvancedLaunchOptions");
@@ -278,6 +273,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CompatibilityStatus => _instance.GetText("CompatibilityStatus");
 
 	/// <summary>
+	/// Advanced-user UI mode
+	/// </summary>
+	public static Translation ComplexListUI => _instance.GetText("ComplexListUI");
+
+	/// <summary>
+	/// Adds more advanced information to the UI and adds extra actions.
+	/// </summary>
+	public static Translation ComplexListUITip => _instance.GetText("ComplexListUI_Tip");
+
+	/// <summary>
 	/// Are you sure you want to delete the playset '{0}'?
 	/// </summary>
 	public static Translation ConfirmDeletePlayset => _instance.GetText("ConfirmDeletePlayset");
@@ -443,7 +448,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DEPRECATED => _instance.GetText("DEPRECATED");
 
 	/// <summary>
-	/// Un-select all displayed items
+	/// Un-select all items
 	/// </summary>
 	public static Translation DeselectAll => _instance.GetText("DeselectAll");
 
@@ -849,11 +854,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation HideFilters => _instance.GetText("HideFilters");
 
 	/// <summary>
-	/// Theme mixes generate a mod file in order to be shared on the workshop. Enabling this option will hide those from your mods list and have them always included.
-	/// </summary>
-	public static Translation HidePseudoModsTip => _instance.GetText("HidePseudoMods_Tip");
-
-	/// <summary>
 	/// ID &amp; Tags
 	/// </summary>
 	public static Translation IDAndTags => _instance.GetText("IDAndTags");
@@ -1245,7 +1245,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OpenGuideTip => _instance.GetText("OpenGuide_Tip");
 
 	/// <summary>
-	/// Open the local folder containing this package
+	/// Open the folder containing this package
 	/// </summary>
 	public static Translation OpenLocalFolder => _instance.GetText("OpenLocalFolder");
 
@@ -1265,8 +1265,8 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OpenLOTLogFolder => _instance.GetText("OpenLOTLogFolder");
 
 	/// <summary>
-	/// <para>Open local folder</para>
-	/// <para>Plural: Open all selected packages' local folders</para>
+	/// <para>Open file location</para>
+	/// <para>Plural: Open all selected packages' file locations</para>
 	/// </summary>
 	public static Translation OpenPackageFolder => _instance.GetText("OpenPackageFolder");
 
@@ -1300,11 +1300,6 @@ public class Locale : LocaleHelper, ILocale
 	/// <para>Plural: {0} {1} are out of date</para>
 	/// </summary>
 	public static Translation OutOfDateCount => _instance.GetText("OutOfDateCount");
-
-	/// <summary>
-	/// Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the app is open.
-	/// </summary>
-	public static Translation OverrideGameChangesTip => _instance.GetText("OverrideGameChanges_Tip");
 
 	/// <summary>
 	/// <para>Package</para>
@@ -1556,12 +1551,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SearchWorkshop => _instance.GetText("SearchWorkshop");
 
 	/// <summary>
-	/// Search the workshop in your browser..
+	/// Search the workshop in your browser...
 	/// </summary>
 	public static Translation SearchWorkshopBrowser => _instance.GetText("SearchWorkshopBrowser");
 
 	/// <summary>
-	/// Select all displayed items
+	/// Select all items
 	/// </summary>
 	public static Translation SelectAll => _instance.GetText("SelectAll");
 

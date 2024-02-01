@@ -33,7 +33,7 @@ public partial class PC_SelectPackage : PanelContent
 
 		L_Selected.Text = Locale.ControlToSelectMultiplePackages;
 
-		if (ServiceCenter.Get<ISettings>().UserSettings.ExtendedListInfo)
+		if (ServiceCenter.Get<ISettings>().UserSettings.ComplexListUI)
 		{
 			LC_Items = new ItemListControl.Complex(SkyvePage.None)
 			{

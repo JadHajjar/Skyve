@@ -2,6 +2,8 @@
 using Skyve.App.UserInterface.Generic;
 
 using Skyve.App.UserInterface.Lists;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.IO;
@@ -63,7 +65,7 @@ public partial class ContentList : SlickControl
 
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _playsetManager, out _tagUtil, out _packageUtil, out _downloadService);
 
-		ListControl = _settings.UserSettings.ExtendedListInfo
+		ListControl = _settings.UserSettings.ComplexListUI
 			? new ItemListControl.Complex(Page) { Dock = DockStyle.Fill, Margin = new() }
 			: new ItemListControl.Simple(Page) { Dock = DockStyle.Fill, Margin = new() };
 
@@ -261,7 +263,7 @@ public partial class ContentList : SlickControl
 		base.DesignChanged(design);
 
 		TLP_MiddleBar.BackColor = design.AccentBackColor;
-		P_Filters.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
+		P_Filters.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme?-1: 1);
 		ListControl.BackColor = design.BackColor;
 		L_Counts.ForeColor = L_FilterCount.ForeColor = design.InfoColor;
 	}
@@ -349,10 +351,12 @@ public partial class ContentList : SlickControl
 
 	public async Task RefreshItems()
 	{
+		if (ListControl.ItemCount == 0)
 		ListControl.Loading = true;
 
 		var items = await GetItems();
 
+		if (ListControl.ItemCount == 0)
 		ListControl.Loading = false;
 
 		ListControl.SetItems(items);
@@ -386,17 +390,18 @@ public partial class ContentList : SlickControl
 		UsageFilteredOut = 0;
 		ListControl.DoFilterChanged();
 		this.TryInvoke(RefreshCounts);
-		I_Refresh.Loading = false;
 	}
 
 	private async void FilterChanged(object sender, EventArgs e)
 	{
-		if (!clearingFilters)
+		if (!clearingFilters && Live)
 		{
 			I_Refresh.Loading = true;
 
 			if (sender == I_Refresh)
 			{
+				await Task.Delay(150);
+
 				await RefreshItems();
 			}
 			else
@@ -431,7 +436,7 @@ public partial class ContentList : SlickControl
 
 		if (_playsetManager.CurrentPlayset?.Usage > 0)
 		{
-			if (!(_compatibilityManager.GetPackageInfo(item)?.Usage.HasFlag(_playsetManager.CurrentPlayset.Usage) ?? true))
+			if (!(item.GetPackageInfo()?.Usage.HasFlag(_playsetManager.CurrentPlayset.Usage) ?? true))
 			{
 				UsageFilteredOut++;
 				return true;
@@ -625,6 +630,7 @@ public partial class ContentList : SlickControl
 		}
 
 		I_Actions.Invalidate();
+		I_Refresh.Loading = false;
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)

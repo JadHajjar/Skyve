@@ -1,5 +1,7 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System;
 using System.Drawing;
@@ -211,13 +213,13 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (CurrentGroup == item.Key)
 			{
-				using var backBrush = Gradient(baseColor, 0.3F);
-				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(Padding.Top * 3 / 4), Padding.Left);
+				using var backBrush = new SolidBrush(Color.FromArgb(200, baseColor));
+				e.Graphics.FillRectangle(backBrush, rectangle);
 			}
 			else if (rectangle.Contains(CursorLocation) && HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var backBrush = new SolidBrush(Color.FromArgb(50, baseColor));
-				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(Padding.Top * 3 / 4), Padding.Left);
+				e.Graphics.FillRectangle(backBrush, rectangle);
 			}
 
 			if (!smaller || CurrentGroup == item.Key)
@@ -238,11 +240,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			xpos += rectangle.Width;
 
-			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos + 1, Padding.Top, 1, StartHeight - Padding.Vertical));
+			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos - 1, Padding.Top, 2, StartHeight - Padding.Vertical));
 		}
 
-		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, 0, Width, (int)UI.FontScale));
-		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, StartHeight - (int)UI.FontScale, Width, (int)UI.FontScale));
+		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, StartHeight - (int)(UI.FontScale), Width, (int)(UI.FontScale)));
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)
@@ -300,7 +301,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 		else
 		{
-			e.BackColor = BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 5, -5));
+			e.BackColor = BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 5 : -5);
 		}
 
 		if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
@@ -313,7 +314,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		base.OnPaintItemGrid(e);
 
 		DrawThumbnail(e);
-		DrawTitleAndTagsAndVersionForList(e, package?.LocalData, workshopInfo, isPressed);
+		DrawTitleAndTagsAndVersionForList(e, package, package?.LocalData, workshopInfo, isPressed);
 		DrawIncludedButton(e, isIncluded, partialIncluded, package?.LocalData, out _);
 		DrawButtons(e, isPressed, package?.LocalData, workshopInfo);
 
@@ -381,7 +382,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			e.Graphics.DrawString(note, smallFont, smallTextBrush, reportRect.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0));
 		}
 
-		if (allText is not null || Message.Packages.Length > 0)
+		if (allText is not null || Message.Packages.Any())
 		{
 			y = DrawDividerLine(e, y);
 		}
@@ -397,7 +398,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			y += e.Rects.AllButtonRect.Height + GridPadding.Vertical;
 		}
 
-		if (Message.Packages.Length > 0)
+		if (Message.Packages.Any())
 		{
 			var isDlc = Message.Type == ReportType.DlcMissing;
 			var rect = new Rectangle(reportRect.X, y, reportRect.Width, (int)(32 * UI.FontScale) + GridPadding.Vertical).Pad(GridPadding);
@@ -614,7 +615,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.UnsubscribeOther:
-				allText = Message.Packages?.Length switch { 0 => null, _ => Locale.ExcludeAll };
+				allText = Message.Packages?.Count() switch { 0 => null, _ => Locale.ExcludeAll };
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.ExcludeThis:
@@ -622,7 +623,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				allIcon = "I_X";
 				break;
 			case StatusAction.ExcludeOther:
-				allText = Message.Packages?.Length switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
+				allText = Message.Packages?.Count() switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
 				allIcon = "I_X";
 				break;
 			case StatusAction.RequestReview:
@@ -675,7 +676,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		return y + (GridPadding.Vertical * 4);
 	}
 
-	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackage? package, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
 	{
 		using var font = UI.Font(9F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
@@ -688,7 +689,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-		var isVersion = !string.IsNullOrWhiteSpace(localParentPackage?.Version);
+		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
 		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.FileSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #endif
 		var date = workshopInfo?.ServerTime ?? localParentPackage?.LocalTime;
@@ -783,8 +784,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (required && activeColor != default)
 		{
-			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
-			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
+			iconColor = !FormDesign.Design.IsDarkTheme ? activeColor.MergeColor(ForeColor, 75) : activeColor;
+			activeColor = activeColor.MergeColor(BackColor, !FormDesign.Design.IsDarkTheme ? 35 : 20);
 		}
 		else if (activeColor == default && inclEnableRect.Contains(CursorLocation))
 		{

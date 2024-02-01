@@ -6,7 +6,7 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<Configurations>CS1 Debug;CS1 Release;CS1 Stable;CS2 Debug;CS2 Release;CS2 Stable</Configurations>
+		<Configurations>CS1 Debug;CS1 Release;CS1 Stable;CS2 Debug;CS2 Release;CS2 Stable;API Debug;API Stable</Configurations>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<GameVersion>$([System.String]::Copy($(Configuration)).Substring(0, 3))</GameVersion>
 		<BuildType>$([System.String]::Copy($(Configuration)).Substring(4))</BuildType>

@@ -1,4 +1,6 @@
 ﻿using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -44,12 +46,12 @@ public class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectan
 		var image = Package?.GetThumbnail();
 		var panel = PanelContent.GetParentPanel(this);
 
-		if (panel is PC_CompatibilityManagement cm && cm.CurrentPackage?.Id == e.Item || panel is PC_ReviewRequests rr && rr.CurrentPackage == e.Item)
-		{
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.ActiveColor), imageRect.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleLeft), Padding.Left);
+		//if (panel is PC_CompatibilityManagement cm && cm.CurrentPackage?.Id == e.Item || panel is PC_ReviewRequests rr && rr.CurrentPackage == e.Item)
+		//{
+		//	e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.ActiveColor), imageRect.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleLeft), Padding.Left);
 
-			imageRect.X += 3 * Padding.Left;
-		}
+		//	imageRect.X += 3 * Padding.Left;
+		//}
 
 		if (image is not null)
 		{
@@ -85,7 +87,7 @@ public class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectan
 			return;
 		}
 
-		var cr = _compatibilityManager.GetPackageInfo(Package);
+		var cr = Package.GetPackageInfo();
 
 		if (cr is null)
 		{

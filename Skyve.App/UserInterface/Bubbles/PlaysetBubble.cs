@@ -56,7 +56,7 @@ public class PlaysetBubble : StatusBubbleBase
 		}
 #endif
 
-		if (ServiceCenter.Get<INotifier>().PlaysetsLoaded)
+		if (ServiceCenter.Get<INotifier>().IsPlaysetsLoaded)
 		{
 			DrawText(e, ref targetHeight, Locale.LoadedCount.FormatPlural(_playsetManager.Playsets.Count() - 1, Locale.Playset.FormatPlural(_playsetManager.Playsets.Count() - 1).ToLower()));
 		}

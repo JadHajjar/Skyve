@@ -1,16 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
 	<Import Project="../../Skyve/Config.props" />
-	<Import Project="../../Extensions/Extensions.Sql/Extensions.Sql.projitems" Label="Shared" />
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
-		<Description>Helps to manage your mods and assets</Description>
-		<DebugType>embedded</DebugType>
-		<DebugSymbols>true</DebugSymbols>
 		<Nullable>enable</Nullable>
 		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup>
-		<Deterministic>false</Deterministic>
+		<Deterministic>true</Deterministic>
 		<TargetFramework>net4.7.2</TargetFramework>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<SignAssembly>True</SignAssembly>

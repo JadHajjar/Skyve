@@ -40,7 +40,7 @@ public class BigSelectionOptionControl : SlickImageControl
 
 		SlickButton.GetColors(out var fore, out var back, HoverState, FromScratch ? ColorStyle.Green : ColorStyle.Active);
 
-		if (!HoverState.HasFlag(HoverState.Pressed) && FormDesign.Design.Type == FormDesignType.Light)
+		if (!HoverState.HasFlag(HoverState.Pressed) && !FormDesign.Design.IsDarkTheme)
 		{
 			back = back.Tint(Lum: 1.5F);
 		}

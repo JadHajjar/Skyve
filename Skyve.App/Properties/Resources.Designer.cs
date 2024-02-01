@@ -2533,6 +2533,16 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Paradox_128 {
+            get {
+                object obj = ResourceManager.GetObject("I_Paradox_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Paradox_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Paradox_16", resourceCulture);
@@ -2553,6 +2563,16 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Paradox_256 {
+            get {
+                object obj = ResourceManager.GetObject("I_Paradox_256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Paradox_32 {
             get {
                 object obj = ResourceManager.GetObject("I_Paradox_32", resourceCulture);
@@ -2566,6 +2586,26 @@ namespace Skyve.App.Properties {
         internal static System.Drawing.Bitmap I_Paradox_48 {
             get {
                 object obj = ResourceManager.GetObject("I_Paradox_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Paradox_64 {
+            get {
+                object obj = ResourceManager.GetObject("I_Paradox_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Paradox_96 {
+            get {
+                object obj = ResourceManager.GetObject("I_Paradox_96", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

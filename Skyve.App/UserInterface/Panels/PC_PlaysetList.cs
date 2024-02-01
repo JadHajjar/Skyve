@@ -33,7 +33,7 @@ public partial class PC_PlaysetList : PanelContent
 			LC_Items.MergeProfile += Ctrl_MergeProfile;
 			LC_Items.ExcludeProfile += Ctrl_ExcludeProfile;
 			LC_Items.DisposeProfile += Ctrl_DisposeProfile;
-			LC_Items.Loading = !_notifier.PlaysetsLoaded;
+			LC_Items.Loading = !_notifier.IsPlaysetsLoaded;
 
 			if (!LC_Items.Loading)
 			{
@@ -334,7 +334,7 @@ public partial class PC_PlaysetList : PanelContent
 		{
 			B_Discover.Loading = true;
 
-			var profiles = await ServiceCenter.Get<SkyveApiUtil>().GetPublicProfiles();
+			var profiles = await ServiceCenter.Get<ISkyveApiUtil>().GetPublicPlaysets();
 
 			Invoke(() => Form.PushPanel(new PC_PlaysetList(profiles)));
 		}

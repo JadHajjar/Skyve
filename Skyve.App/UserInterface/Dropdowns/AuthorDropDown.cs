@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.Compatibility.Domain.Interfaces;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
@@ -6,12 +8,12 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 {
 	private readonly Dictionary<IUser, int> _counts = new();
 	private readonly IImageService _imageManager;
-	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IUserService _userService;
 
 	public AuthorDropDown()
 	{
 		_imageManager = ServiceCenter.Get<IImageService>();
-		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+		_userService = ServiceCenter.Get<IUserService>();
 	}
 
 	public void SetItems<T>(IEnumerable<T?> enumerable) where T : IPackageIdentity
@@ -55,7 +57,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 			e.Graphics.DrawRoundedImage(icon, avatarRect, (int)(4 * UI.FontScale));
 		}
 
-		if (_compatibilityManager.IsUserVerified(item))
+		if (_userService.IsUserVerified(item))
 		{
 			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 

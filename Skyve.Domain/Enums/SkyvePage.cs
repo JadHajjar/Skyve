@@ -10,5 +10,6 @@ public enum SkyvePage
 	SinglePackage,
 	User,
 	Generic,
-	CompatibilityReport
+	CompatibilityReport,
+	Workshop
 }

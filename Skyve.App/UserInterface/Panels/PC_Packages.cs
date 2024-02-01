@@ -8,6 +8,7 @@ public class PC_Packages : PC_ContentList
 
 	public PC_Packages()
 	{
+		LC_Items.OT_Included.SelectedValue = Generic.ThreeOptionToggle.Value.Option1;
 	}
 
 	public override SkyvePage Page => SkyvePage.Packages;

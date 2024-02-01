@@ -3,10 +3,11 @@
 namespace Skyve.Domain.Systems;
 public interface INotifier
 {
-	bool BulkUpdating { get; set; }
+	bool IsBulkUpdating { get; set; }
 	bool IsContentLoaded { get; }
-	bool ApplyingPlayset { get; set; }
-	bool PlaysetsLoaded { get; set; }
+	bool IsApplyingPlayset { get; set; }
+	bool IsPlaysetsLoaded { get; set; }
+	bool IsWorkshopSyncInProgress { get; set; }
 
 	event Action? ContentLoaded;
 	event Action? PackageInformationUpdated;
@@ -19,8 +20,12 @@ public interface INotifier
 	event Action? WorkshopUsersInfoLoaded;
 	event Action? CompatibilityReportProcessed;
 	event Action? CompatibilityDataLoaded;
+	event Action? WorkshopSyncStarted;
+	event Action? WorkshopSyncEnded;
 	event Action<Exception>? LoggerFailed;
 
+	void OnLoggerFailed(Exception ex);
+	void OnRefreshUI(bool now = false);
 	void TriggerAutoSave();
 	void OnContentLoaded();
 	void OnInclusionUpdated();
@@ -28,9 +33,9 @@ public interface INotifier
 	void OnWorkshopInfoUpdated();
 	void OnPlaysetUpdated();
 	void OnPlaysetChanged();
-	void OnRefreshUI(bool now = false);
 	void OnCompatibilityReportProcessed();
-	void OnLoggerFailed(Exception ex);
 	void OnWorkshopUsersInfoLoaded();
 	void OnCompatibilityDataLoaded();
+	void OnWorkshopSyncStarted();
+	void OnWorkshopSyncEnded();
 }

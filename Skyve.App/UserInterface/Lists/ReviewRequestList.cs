@@ -1,5 +1,4 @@
-﻿using Skyve.Systems.Compatibility.Domain.Api;
-
+﻿using SkyveApi.Domain.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 

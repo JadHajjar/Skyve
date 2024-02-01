@@ -6,8 +6,10 @@ public class PC_Assets : PC_ContentList
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 	private readonly IPackageManager _contentManager = ServiceCenter.Get<IPackageManager>();
+
 	public PC_Assets()
 	{
+		LC_Items.OT_Included.SelectedValue = Generic.ThreeOptionToggle.Value.Option1;
 	}
 
 	public override SkyvePage Page => SkyvePage.Assets;

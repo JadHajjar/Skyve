@@ -1,4 +1,6 @@
-﻿using Skyve.Systems.Compatibility.Domain.Api;
+﻿
+
+using Skyve.Compatibility.Domain.Enums;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -60,7 +62,7 @@ public partial class ItemListControl
 			{
 				if (outerColor == default)
 				{
-					outerColor = Color.FromArgb(FormDesign.Design.Type == FormDesignType.Dark ? 65 : 100, activeColor);
+					outerColor = Color.FromArgb(FormDesign.Design.IsDarkTheme ? 65 : 100, activeColor);
 				}
 
 				using var pen = new Pen(outerColor, (float)(1.5 * UI.FontScale));
@@ -259,7 +261,7 @@ public partial class ItemListControl
 			//	authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorImg, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 			//}
 
-			if (_compatibilityManager.IsUserVerified(author))
+			if (_userService.IsUserVerified(author))
 			{
 				var avatarRect = authorRect.Pad(padding).Align(CompactList ? UI.Scale(new Size(18, 18), UI.FontScale) : new(authorRect.Height * 3 / 4, authorRect.Height * 3 / 4), ContentAlignment.MiddleLeft);
 				var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
@@ -282,7 +284,7 @@ public partial class ItemListControl
 			var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 			var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-			var isVersion = package?.IsCodeMod ?? (false && !string.IsNullOrEmpty(package!.Version));
+			var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
 			var versionText = isVersion ? "v" + package!.Version : localIdentity?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
 #endif
 			var tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + (GridView ? GridPadding.Bottom / 2 : (Padding.Bottom * 2)), 0, 0);

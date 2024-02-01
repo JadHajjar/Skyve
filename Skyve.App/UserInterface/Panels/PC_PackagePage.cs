@@ -2,6 +2,8 @@
 using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Lists;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.Threading.Tasks;
@@ -48,7 +50,7 @@ public partial class PC_PackagePage : PanelContent
 		T_CR.LinkedControl = new PackageCompatibilityReportControl(package);
 
 		var tabs = slickTabControl1.Tabs.ToList();
-		var crdata = _compatibilityManager.GetPackageInfo(Package);
+		var crdata = Package.GetPackageInfo();
 		var crAvailable = crdata is not null;
 
 		if (!crAvailable)
@@ -58,7 +60,7 @@ public partial class PC_PackagePage : PanelContent
 
 		if (Package is ILocalPackageData p && p.Assets is not null && p.Assets.Length > 0)
 		{
-			if (_settings.UserSettings.ExtendedListInfo)
+			if (_settings.UserSettings.ComplexListUI)
 			{
 				LC_Items = new ItemListControl.Complex(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
 			}
@@ -268,7 +270,7 @@ public partial class PC_PackagePage : PanelContent
 
 	protected override void LocaleChanged()
 	{
-		var cr = _compatibilityManager.GetPackageInfo(Package);
+		var cr = Package.GetPackageInfo();
 
 		if (cr is null)
 		{
@@ -302,6 +304,6 @@ public partial class PC_PackagePage : PanelContent
 
 		BackColor = design.BackColor;
 		label1.ForeColor = label3.ForeColor = label5.ForeColor = label6.ForeColor = L_Requirements.ForeColor = design.InfoColor.MergeColor(design.ActiveColor);
-		panel1.BackColor = LC_Items is null ? design.AccentBackColor : design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 5, -5));
+		panel1.BackColor = LC_Items is null ? design.AccentBackColor : design.BackColor.Tint(Lum: design.IsDarkTheme? 5: -5);
 	}
 }

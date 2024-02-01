@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 
 using Skyve.App.UserInterface.Generic;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Systems.Compatibility.Domain;
 
 using System.Drawing;
@@ -93,7 +95,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		base.DesignChanged(design);
 
 		TLP_MiddleBar.BackColor = design.AccentBackColor;
-		P_Filters.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
+		P_Filters.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme? -1: 1);
 		ListControl.BackColor = design.BackColor;
 		L_FilterCount.ForeColor = design.InfoColor;
 	}
@@ -157,11 +159,6 @@ public partial class PC_CompatibilityReport : PanelContent
 				PB_Loader.Hide();
 			});
 		}
-	}
-
-	private void B_Manage_Click(object sender, EventArgs e)
-	{
-		Form.PushPanel<PC_ManageCompatibilitySelection>();
 	}
 
 	private void LoadReport(List<ICompatibilityInfo> reports)
@@ -255,10 +252,10 @@ public partial class PC_CompatibilityReport : PanelContent
 					Program.MainForm.PushPanel(null, new PC_RequestReview(report));
 				}
 				,
-				StatusAction.Switch => message.Packages.Length == 1 ? () =>
+				StatusAction.Switch => message.Packages.Count() == 1 ? () =>
 				{
 					var pp1 = report.GetLocalPackage();
-					var pp2 = message.Packages[0]?.GetLocalPackage();
+					var pp2 = message.Packages.FirstOrDefault()?.GetLocalPackage();
 
 					if (pp1 is not null && pp2 is not null)
 					{
