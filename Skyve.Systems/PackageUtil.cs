@@ -133,7 +133,7 @@ public class PackageUtil : IPackageUtil
 			return;
 		}
 
-		_notifier.BulkUpdating = true;
+		_notifier.IsBulkUpdating = true;
 
 		var assets = packageList.SelectMany(x => x.GetLocalPackage()?.Assets ?? []);
 
@@ -144,7 +144,7 @@ public class PackageUtil : IPackageUtil
 
 		await _modUtil.SetIncluded(packages, value, playsetId);
 
-		_notifier.BulkUpdating = false;
+		_notifier.IsBulkUpdating = false;
 
 		if (_notifier.IsContentLoaded)
 		{

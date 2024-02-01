@@ -518,7 +518,6 @@ partial class PC_CompatibilityReport
 			this.Controls.Add(this.PB_Loader);
 			this.Controls.Add(this.TLP_Buttons);
 			this.Controls.Add(this.TLP_Main);
-			this.LabelBounds = new System.Drawing.Point(-2, 3);
 			this.Name = "PC_CompatibilityReport";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(1312, 817);

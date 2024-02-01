@@ -1465,4 +1465,16 @@
   <data name="I_X_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_X_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="I_Paradox_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Paradox_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Paradox_256" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Paradox_256.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Paradox_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Paradox_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Paradox_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Paradox_96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

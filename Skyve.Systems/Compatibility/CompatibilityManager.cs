@@ -467,7 +467,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (!package.IsLocal() && !author.Malicious && workshopInfo?.IsIncompatible != true)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), (packageData.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"), []);
+			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), (packageData.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"), []);
 		}
 
 #if DEBUG

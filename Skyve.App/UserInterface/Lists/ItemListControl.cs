@@ -98,7 +98,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			_compactList = value;
 
-			baseHeight = _settings.UserSettings.ExtendedListInfo ? _compactList ? 24 : 60 : _compactList ? 20 : 48;
+			baseHeight = _settings.UserSettings.ComplexListUI ? _compactList ? 24 : 60 : _compactList ? 20 : 48;
 
 			if (Live)
 			{

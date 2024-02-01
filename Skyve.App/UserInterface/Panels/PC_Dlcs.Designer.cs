@@ -246,7 +246,6 @@ partial class PC_DLCs
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.Controls.Add(this.TLP_Main);
-			this.LabelBounds = new System.Drawing.Point(-2, 3);
 			this.Name = "PC_DLCs";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(932, 713);

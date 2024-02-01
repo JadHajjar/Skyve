@@ -66,7 +66,7 @@ public partial class ItemListControl
 		{
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(2 * UI.FontScale));
 
-			if (!GridView || _settings.UserSettings.ExtendedListInfo)
+			if (!GridView || _settings.UserSettings.ComplexListUI)
 			{
 				e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, (int)(5 * UI.FontScale));
 
@@ -235,7 +235,7 @@ public partial class ItemListControl
 		var text = e.Item.CleanName(out var tags);
 		using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near };
 
-		if (GridView && !_settings.UserSettings.ExtendedListInfo)
+		if (GridView && !_settings.UserSettings.ComplexListUI)
 		{
 			using var font = UI.Font(9F, FontStyle.Bold);
 			var textRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Y, e.Rects.TextRect.Width, Height);
@@ -255,7 +255,7 @@ public partial class ItemListControl
 
 			for (var i = 0; i < tags.Count; i++)
 			{
-				var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ExtendedListInfo);
+				var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ComplexListUI);
 
 				if (tagRect.X + tagSize.Width > e.Rects.TextRect.Right)
 				{
@@ -264,7 +264,7 @@ public partial class ItemListControl
 					e.DrawableItem.CachedHeight += tagRect.Height;
 				}
 
-				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ExtendedListInfo);
+				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ComplexListUI);
 
 				tagRect.X += padding.Left + rect.Width;
 			}
@@ -275,7 +275,7 @@ public partial class ItemListControl
 
 			for (var i = 0; i < tags.Count; i++)
 			{
-				var size = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ExtendedListInfo);
+				var size = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ComplexListUI);
 
 				tagSizes += padding.Left + size.Width;
 			}
@@ -291,7 +291,7 @@ public partial class ItemListControl
 
 			for (var i = 0; i < tags.Count; i++)
 			{
-				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ExtendedListInfo);
+				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ComplexListUI);
 
 				tagRect.X += padding.Left + rect.Width;
 			}
@@ -304,7 +304,7 @@ public partial class ItemListControl
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-		var isVersion = package?.IsCodeMod ?? (false && !string.IsNullOrEmpty(package!.Version));
+		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
 		var text = isVersion ? "v" + package!.Version : localIdentity?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
 #endif
 		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
@@ -453,7 +453,7 @@ public partial class ItemListControl
 	private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? parentPackage, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : Padding;
-		var size = _settings.UserSettings.ExtendedListInfo ?
+		var size = _settings.UserSettings.ComplexListUI ?
 			UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale) :
 			UI.Scale(CompactList ? new Size(20, 20) : new Size(24, 24), UI.FontScale);
 		var rect = new Rectangle(e.ClipRectangle.Right, e.ClipRectangle.Y, 0, e.ClipRectangle.Height).Pad(padding);
@@ -491,7 +491,7 @@ public partial class ItemListControl
 			rect.X -= e.Rects.SteamRect.Width + padding.Left;
 		}
 
-		if (!IsPackagePage && _settings.UserSettings.ExtendedListInfo && e.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		if (!IsPackagePage && _settings.UserSettings.ComplexListUI && e.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
 			e.Rects.GithubRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{

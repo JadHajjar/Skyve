@@ -21,6 +21,8 @@ internal class NotifierSystem : INotifier
 	public event Action? WorkshopInfoUpdated;
 	public event Action? WorkshopUsersInfoLoaded;
 	public event Action? CompatibilityDataLoaded;
+	public event Action? WorkshopSyncStarted;
+	public event Action? WorkshopSyncEnded;
 
 	private readonly DelayedAction _delayedPackageInformationUpdated;
 	private readonly DelayedAction _delayedPackageInclusionUpdated;
@@ -44,9 +46,10 @@ internal class NotifierSystem : INotifier
 	}
 
 	public bool IsContentLoaded { get; private set; }
-	public bool BulkUpdating { get; set; }
-	public bool ApplyingPlayset { get; set; }
-	public bool PlaysetsLoaded { get; set; }
+	public bool IsBulkUpdating { get; set; }
+	public bool IsApplyingPlayset { get; set; }
+	public bool IsPlaysetsLoaded { get; set; }
+	public bool IsWorkshopSyncInProgress { get; set; }
 
 	public void OnContentLoaded()
 	{
@@ -136,5 +139,15 @@ internal class NotifierSystem : INotifier
 		_logger.Info("[Auto - Started  ] " + name);
 		action?.Invoke();
 		_logger.Info("[Auto - Completed] " + name);
+	}
+
+	public void OnWorkshopSyncStarted()
+	{
+		WorkshopSyncStarted?.Invoke();
+	}
+
+	public void OnWorkshopSyncEnded()
+	{
+		WorkshopSyncEnded?.Invoke();
 	}
 }

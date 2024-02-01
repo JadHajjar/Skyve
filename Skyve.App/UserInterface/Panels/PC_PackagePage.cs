@@ -60,7 +60,7 @@ public partial class PC_PackagePage : PanelContent
 
 		if (Package is ILocalPackageData p && p.Assets is not null && p.Assets.Length > 0)
 		{
-			if (_settings.UserSettings.ExtendedListInfo)
+			if (_settings.UserSettings.ComplexListUI)
 			{
 				LC_Items = new ItemListControl.Complex(SkyvePage.SinglePackage) { Dock = DockStyle.Fill, IsPackagePage = true };
 			}

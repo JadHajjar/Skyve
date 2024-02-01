@@ -65,7 +65,7 @@ public partial class ContentList : SlickControl
 
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _playsetManager, out _tagUtil, out _packageUtil, out _downloadService);
 
-		ListControl = _settings.UserSettings.ExtendedListInfo
+		ListControl = _settings.UserSettings.ComplexListUI
 			? new ItemListControl.Complex(Page) { Dock = DockStyle.Fill, Margin = new() }
 			: new ItemListControl.Simple(Page) { Dock = DockStyle.Fill, Margin = new() };
 
@@ -351,10 +351,12 @@ public partial class ContentList : SlickControl
 
 	public async Task RefreshItems()
 	{
+		if (ListControl.ItemCount == 0)
 		ListControl.Loading = true;
 
 		var items = await GetItems();
 
+		if (ListControl.ItemCount == 0)
 		ListControl.Loading = false;
 
 		ListControl.SetItems(items);
@@ -388,7 +390,6 @@ public partial class ContentList : SlickControl
 		UsageFilteredOut = 0;
 		ListControl.DoFilterChanged();
 		this.TryInvoke(RefreshCounts);
-		I_Refresh.Loading = false;
 	}
 
 	private async void FilterChanged(object sender, EventArgs e)
@@ -399,6 +400,8 @@ public partial class ContentList : SlickControl
 
 			if (sender == I_Refresh)
 			{
+				await Task.Delay(150);
+
 				await RefreshItems();
 			}
 			else
@@ -627,6 +630,7 @@ public partial class ContentList : SlickControl
 		}
 
 		I_Actions.Invalidate();
+		I_Refresh.Loading = false;
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)

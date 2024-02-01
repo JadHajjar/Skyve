@@ -261,7 +261,7 @@ public class PackageDescriptionControl : SlickImageControl
 		using var backBrush = new SolidBrush(BackColor == FormDesign.Design.BackColor ? FormDesign.Design.AccentBackColor : FormDesign.Design.BackColor);
 		e.Graphics.FillRoundedRectangle(backBrush, e.Rects.BotRect.Pad(0, 0, 0, -Padding.Bottom), Padding.Left);
 
-		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo);
+		DrawTitleAndTagsAndVersionForList(e, localPackage, localParentPackage, workshopInfo);
 		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
 
 		var scoreX = DrawScore(e, workshopInfo);
@@ -316,7 +316,7 @@ public class PackageDescriptionControl : SlickImageControl
 		return false;
 	}
 
-	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo)
+	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo)
 	{
 		using var font = UI.Font(14.5F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
@@ -329,7 +329,7 @@ public class PackageDescriptionControl : SlickImageControl
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-		var isVersion = !string.IsNullOrWhiteSpace(localParentPackage?.Version);
+		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
 		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.FileSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #endif
 		var date = workshopInfo?.ServerTime ?? e.Item.GetLocalPackage()?.LocalTime;

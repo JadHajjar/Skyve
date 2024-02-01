@@ -213,13 +213,13 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (CurrentGroup == item.Key)
 			{
-				using var backBrush = Gradient(baseColor, 0.3F);
-				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(Padding.Top * 3 / 4), Padding.Left);
+				using var backBrush = new SolidBrush(Color.FromArgb(200, baseColor));
+				e.Graphics.FillRectangle(backBrush, rectangle);
 			}
 			else if (rectangle.Contains(CursorLocation) && HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var backBrush = new SolidBrush(Color.FromArgb(50, baseColor));
-				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(Padding.Top * 3 / 4), Padding.Left);
+				e.Graphics.FillRectangle(backBrush, rectangle);
 			}
 
 			if (!smaller || CurrentGroup == item.Key)
@@ -240,11 +240,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			xpos += rectangle.Width;
 
-			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos + 1, Padding.Top, 1, StartHeight - Padding.Vertical));
+			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos - 1, Padding.Top, 2, StartHeight - Padding.Vertical));
 		}
 
-		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, 0, Width, (int)UI.FontScale));
-		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, StartHeight - (int)UI.FontScale, Width, (int)UI.FontScale));
+		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, StartHeight - (int)(UI.FontScale), Width, (int)(UI.FontScale)));
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)
@@ -315,7 +314,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		base.OnPaintItemGrid(e);
 
 		DrawThumbnail(e);
-		DrawTitleAndTagsAndVersionForList(e, package?.LocalData, workshopInfo, isPressed);
+		DrawTitleAndTagsAndVersionForList(e, package, package?.LocalData, workshopInfo, isPressed);
 		DrawIncludedButton(e, isIncluded, partialIncluded, package?.LocalData, out _);
 		DrawButtons(e, isPressed, package?.LocalData, workshopInfo);
 
@@ -677,7 +676,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		return y + (GridPadding.Vertical * 4);
 	}
 
-	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackage? package, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
 	{
 		using var font = UI.Font(9F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
@@ -690,7 +689,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-		var isVersion = !string.IsNullOrWhiteSpace(localParentPackage?.Version);
+		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
 		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.FileSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #endif
 		var date = workshopInfo?.ServerTime ?? localParentPackage?.LocalTime;

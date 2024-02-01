@@ -34,7 +34,7 @@ public class ReportItem : ICompatibilityItem
 	public GenericPackageStatus StatusDTO { get => Status is null ? null : new GenericPackageStatus(Status); set => Status = value?.ToGenericPackage(); }
 #nullable enable
 
-	IEnumerable<IPackageIdentity> ICompatibilityItem.Packages => Packages.Cast<IPackageIdentity>();
+	IEnumerable<IPackageIdentity> ICompatibilityItem.Packages => Packages?.Cast<IPackageIdentity>() ?? [];
 
 	private string GetMessage()
 	{
