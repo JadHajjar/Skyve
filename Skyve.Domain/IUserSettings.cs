@@ -31,7 +31,7 @@ public interface IUserSettings
 	bool FadeDisabledItems { get; set; }
 	Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; }
 #if CS2
-	ParadoxLoginInfo ParadoxLogin { get; }
+	ParadoxLoginInfo ParadoxLogin { get; set; }
 #endif
 
 	void Save();

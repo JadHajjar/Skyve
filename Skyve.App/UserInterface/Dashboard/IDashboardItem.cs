@@ -6,6 +6,7 @@ public abstract class IDashboardItem : SlickImageControl
 {
 	protected readonly List<(Rectangle rectangle, int height)> _sections = new();
 	protected readonly Dictionary<Rectangle, ExtensionClass.action> _buttonActions = new();
+	protected readonly Dictionary<Rectangle, ExtensionClass.action> _buttonRightClickActions = new();
 
 	public event EventHandler? ResizeRequested;
 
@@ -99,6 +100,18 @@ public abstract class IDashboardItem : SlickImageControl
 		if (e.Button == MouseButtons.Left)
 		{
 			foreach (var item in _buttonActions)
+			{
+				if (item.Key.Contains(e.Location))
+				{
+					item.Value();
+					return;
+				}
+			}
+		}
+
+		if (e.Button == MouseButtons.Right)
+		{
+			foreach (var item in _buttonRightClickActions)
 			{
 				if (item.Key.Contains(e.Location))
 				{

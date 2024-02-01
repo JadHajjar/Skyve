@@ -75,6 +75,7 @@ internal class D_NotificationCenter : IDashboardItem
 				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(0, -Margin.Top / 2, 0, -Margin.Top / 2), Margin.Left);
 
 				_buttonActions[rectangle.Pad(0, -Margin.Top / 2, 0, -Margin.Top / 2)] = notification.OnClick;
+				_buttonRightClickActions[rectangle.Pad(0, -Margin.Top / 2, 0, -Margin.Top / 2)] = notification.OnRightClick;
 			}
 
 			e.Graphics.DrawImage(icon.Color(notification.Color ?? FormDesign.Design.ForeColor), new Rectangle(e.ClipRectangle.X + Margin.Left, preferredHeight, e.ClipRectangle.Width, Math.Max(icon.Height, (int)titleBounds.Height + (int)descBounds.Height)).Align(icon.Size, ContentAlignment.MiddleLeft));
