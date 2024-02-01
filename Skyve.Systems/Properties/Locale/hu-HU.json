@@ -20,39 +20,39 @@
   "CompatibilityStatus": "Kompabilitási Infó",
   "AnyStatus": "Bármilyen állapot",
   "NoLocalPackagesFound": "Nem találhatók csomagok a számítógépen.",
-  "NoPackagesMatchFilters": "No packages match what you're looking for.",
-  "EnableAll": "Enable all items",
-  "DisableAll": "Disable all items",
-  "EnableAllFiltered": "Enable filtered items",
-  "DisableAllFiltered": "Disable filtered items",
-  "EnableAllSelected": "Enable selected items",
-  "DisableAllSelected": "Disable selected items",
-  "CopyAllIds": "Copy all items' names & IDs",
-  "CopyAllIdsFiltered": "Copy all filtered items' names & IDs",
-  "CopyAllIdsSelected": "Copy all selected items' names & IDs",
+  "NoPackagesMatchFilters": "Egyetlen csomag sem felel meg annak, amit keres.",
+  "EnableAll": "Minden elem engedélyezése",
+  "DisableAll": "Minden elem letiltása",
+  "EnableAllFiltered": "A szűrt elemek engedélyezése",
+  "DisableAllFiltered": "A szűrt elemek letiltása",
+  "EnableAllSelected": "A szűrt elemek engedélyezése",
+  "DisableAllSelected": "Összegyűjtött tételek kikapcsolása",
+  "CopyAllIds": "Másolja ki az összes megjelenített elem műhelyazonosítóját",
+  "CopyAllIdsFiltered": "Másolja ki az összes megjelenített elem nevét és műhelyazonosítóját",
+  "CopyAllIdsSelected": "Másolja ki az összes megjelenített elem nevét és műhelyazonosítóját",
   "HelpLogs": "Súgó és naplók",
   "Preferences": "Tulajdonságok",
   "PlaysetName": "Playset név",
-  "RenamePlayset": "Rename this playset",
+  "RenamePlayset": "Nevezze át ezt a játékkészletet",
   "StartScratch": "Új profil nulláról",
-  "ContinueFromCurrent": "Clone your active playset",
+  "ContinueFromCurrent": "Klónozd az aktív játékkészletedet",
   "GamePlay": "Építs városokat",
   "EditorPlay": "Készítsen asseteket",
   "PlaysetUsage": "Playset Használat",
   "SomePackagesWillBeDisabled": "A profil használatának megváltoztatásával egyes csomagok eltávolításra kerülnek.",
   "AffectedPackagesAre": "Az érintett csomagok:",
   "ConfirmDeletePlayset": "Biztosan törlöd a(z) „{0}” játékkészletet?",
-  "ActivatePlayset": "Activate this playset",
-  "PlaysetMerge": "Add all of this playset's mods to your active playset",
-  "PlaysetExclude": "Remove all of this playset's mods from your active playset",
+  "ActivatePlayset": "Aktiválja ezt a játékkészletet",
+  "PlaysetMerge": "Adja hozzá a játékkészlet összes modját az aktív játékkészlethez",
+  "PlaysetExclude": "Távolítsa el a játékkészlet összes modját az aktív játékkészletből",
   "PlaysetDelete": "Töröltesd ki ezt a játékkészletet",
   "MissingPackages": "Hiányzó csomagok",
   "OpenPackagePage": "Nyissa meg a csomag oldalát",
   "OpenPackageFolder": {
-    "One": "Open file location",
-    "Plural": "Open all selected packages' file locations"
+    "One": "Mutasd a lemezen",
+    "Plural": "Nyissa meg az összes kiválasztott csomag fájlhelyét"
   },
-  "OpenLocalFolder": "Open the folder containing this package",
+  "OpenLocalFolder": "Nyissa meg a csomagot tartalmazó helyi mappát",
   "ReDownloadPackage": {
     "One": "Töltsed le újra ezt a csomagot",
     "Plural": "Töltse le újra az összes kiválasztott csomagot"
@@ -60,9 +60,9 @@
   "OpenAuthorPage": "Nyissa meg a szerző oldalát",
   "Sorting_Default": "Alapértelmezett rendezés",
   "Sorting_LastEdit": "Utolsó szerkesztés ideje",
-  "Sorting_DateCreated": "Date Created",
-  "Sorting_Usage": "Playset Usage",
-  "Sorting_Name": "Name",
+  "Sorting_DateCreated": "Létrehozás dátuma",
+  "Sorting_Usage": "Használt profil",
+  "Sorting_Name": "Név",
   "Sorting_FileSize": "Teljes fájlméret",
   "Sorting_UpdateTime": "Frissítés ideje",
   "Sorting_SubscribeTime": "Feliratkozás időpontja",
@@ -72,18 +72,18 @@
   "Sorting_LoadOrder": "Load Order",
   "FolderSettings": "Mappa beállításai",
   "ShowDatesRelatively": "Dátumok megjelenítése az aktuális időhöz képest",
-  "CouldNotCreatePlayset": "Could not create a new playset.",
-  "CreatePlaysetHere": "Create a new playset or activate a previous one by clicking here",
+  "CouldNotCreatePlayset": "Játékkészlet létrehozása sikertelen.",
+  "CreatePlaysetHere": "Hozz létre egy új játékkészletet, vagy tölts be egy korábbit ide kattintva",
   "Maintenance": "Karbantartás",
-  "DisableNewModsByDefault": "Disable newly added mods by default",
-  "DisableNewAssetsByDefault": "Disable newly added assets by default",
+  "DisableNewModsByDefault": "Alapértelmezés szerint tiltsa le az újonnan előfizetett modokat",
+  "DisableNewAssetsByDefault": "Alapértelmezés szerint tiltsa le az újonnan előfizetett asseteket",
   "ShowFilters": "Mutassa a szűrőket",
   "HideFilters": "Szűrők elrejtése",
   "DateSubscribed": "Utolsó feliratkozás dátuma",
   "DateUpdated": "Frissítés Dátuma",
-  "FilterOutPackagesWithMods": "Hide code mods in the packages page",
+  "FilterOutPackagesWithMods": "A modok elrejtése a csomagok oldalon",
   "FilterOutPackagesWithOneAsset": "Az egyelemes csomagok elrejtése a csomagok oldalon",
-  "CopyAuthorLink": "Copy the author's profile link",
+  "CopyAuthorLink": "Másold ki a készítő profiljának linkjét",
   "YourPlaysets": "Tekintsd meg játékkészleteidet",
   "UnFavoriteThisPlayset": "Távolítsa el a profilt a kedvencek közül",
   "FavoriteThisPlayset": "Távolítsa el a profilt a kedvencek közül",
@@ -111,12 +111,12 @@
   "HelpTranslate": "Fordítás javítása",
   "HelpReset": "Súgó és visszaállítás",
   "JoinDiscord": "Kérjen segítséget a Discordon",
-  "OpenGuide": "Open the Wiki",
+  "OpenGuide": "Nyissa meg az útmutatót",
   "ResetFolderButton": "Állítsa vissza az összes mappabeállítást",
   "LinkModAssets": "Kapcsold össze a modok elemeit a mod „Included” állapotával",
   "LinkModAssets_Tip": "Egyes modok olyan asseteket tartalmaznak, amelyek szükségesek a megfelelő működésükhöz. Ennek az opciónak az engedélyezése összekapcsolja ezeket az elemeket magával a moddal, és elrejti az asset oldalon, hogy véletlenül se zárja ki őket.",
   "ShowDatesRelatively_Tip": "A tartalomlistákban megjelenő dátumok formátumát relatív időre módosítja. Például; Tegnap 14:10-kor",
-  "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
+  "DisableNewModsByDefault_Tip": "Amikor előfizet vagy hozzáad egy modot, az eszköz automatikusan kizárja vagy felveszi azt a beállítás alapján a szoftver elindításakor.",
   "DisableNewAssetsByDefault_Tip": "Amikor előfizet vagy hozzáad egy assetet, a Skyve automatikusan kizárja vagy felveszi azt e beállítás alapján az eszköz elindításakor.",
   "FilterOutPackagesWithOneAsset_Tip": "Azok a csomagok, amelyekben csak egyetlen asset van, nem jelennek meg a Csomagok oldalon. Továbbra is megjelennek az Asset oldalon.",
   "FilterOutPackagesWithMods_Tip": "A modot tartalmazó csomagok nem jelennek meg a Csomagok oldalon. Továbbra is megjelennek a Mods oldalon.",
@@ -139,7 +139,7 @@
   "ResetFolderButton_Tip": "Ehhez a művelethez el kell indítania a játékot, mielőtt újra használhatná az eszközt.",
   "AreYouSure": "Biztosan folytatja?",
   "MapFileInfo": "Válasszon ki egy térképfájlt, amellyel új játékot szeretne indítani",
-  "BulkActions": "Bulk Actions",
+  "BulkActions": "Tömeges műveletek",
   "CopyVersionNumber": "Másolja ki a verziószámot",
   "FixAllTip": "Próbálja meg újra letölteni az összes problémás csomagot, ehhez meg kell nyitni a Steam alkalmazást",
   "FilterByThisReportStatus": "Szűrés a jelentés állapota szerint",
@@ -155,7 +155,7 @@
   "LogZipFile": "Naplófájlok mentése fáljba",
   "LogFolders": "Napló mappa",
   "LogFileDrop": "Dobjon el vagy válasszon egy naplófájlt az egyszerűsítéshez, és jelenítse meg a hibalistát a naplóban",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Az oldal megnyitásakor az utolsó naplófájl hibái automatikusan megjelennek alább",
   "ErrorsInLog": "Hibák a naplóban",
   "OpenLogFolder": "Nyissa meg a játék naplómappáját",
   "CopyLogFile": "Másolja a játék naplófájlját a vágólapra",
@@ -169,7 +169,7 @@
   "PackageIncludedAndEnabledTotal": "Tartalmazott és engedélyezett csomagok: {0}, összesen: {1}",
   "AssetIncludedTotal": "Assetek: {0}, összesen: {1}",
   "NewPlayset_Tip": "Hozzon létre vagy importáljon új profilt",
-  "ViewPlaysets_Tip": "View & manage your playsets",
+  "ViewPlaysets_Tip": "Megtekintheti és kezelheti mentett játékkészleteit",
   "NewGame_Tip": "Új játékot indít a Cities: Skylines elindításakor. Megadhatja, hogy melyik térképen szeretne kezdeni",
   "LoadSaveGame_Tip": "Tölts be egy mentési játékot a Cities: Skylines indításakor. Ha nem választ ki egy mentési fájlt, akkor a legutóbbi mentés folytatódik",
   "BETA": "BÉTA",
@@ -183,7 +183,7 @@
   "ABANDONED": "ELHAGYATOTT",
   "ActionUnreversible": {
     "One": "Ez a művelet nem vonható vissza.",
-    "Plural": "This action can not be reversed. And will affect {0} packages."
+    "Plural": "Ez a művelet nem vonható vissza és ez {0} csomagot érint."
   },
   "AlwaysOpenFiltersAndActions": "Alapértelmezés szerint az alap szakasz megjelenítése",
   "AlwaysOpenFiltersAndActions_Tip": "Mindig legyen nyitva a szűrő szakasz, amikor belép a tartalom lapra",
@@ -204,23 +204,23 @@
     "Plural": "Kiválasztott csomagok törlése"
   },
   "EnableThisItemInAllPlaysets": {
-    "One": "Enable in all your playsets",
-    "Plural": "Enable the selected items in all your playsets"
+    "One": "Engedélyezze az összes játékkészletben",
+    "Plural": "Tedd bele a kiválasztott elemeket az összes játékkészletedbe"
   },
   "DisableThisItemInAllPlaysets": {
-    "One": "Disable in all your playsets",
-    "Plural": "Disable the selected items in all your playsets"
+    "One": "Tiltsa le az összes játékkészletben",
+    "Plural": "Zárja ki a kiválasztott elemeket az összes profilból"
   },
   "CopyPackageName": {
-    "One": "Copy the package's name",
+    "One": "Másolja ki a csomag nevét",
     "Plural": "Másolja ki a kiválasztott csomagok nevét"
   },
   "CopyAuthorId": {
-    "One": "Copy the author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "Másolja ki a készítő azonosítóját",
+    "Plural": "Másolja ki a kiválasztott csomagok szerzői azonosítóit"
   },
   "CopyAuthorName": {
-    "One": "Copy the author's name",
+    "One": "Másolja ki a készítő nevét",
     "Plural": "Másolja ki a kiválasztott csomagok szerzői nevét"
   },
   "Sorting_LastUsed": "Utolsó használat ideje",
@@ -235,7 +235,7 @@
   "Sorting_Color": "A profil színe",
   "CreateShortcutPlayset": "Hozzon létre hozzá egy parancsikont az asztalon",
   "AskToLaunchGameForShortcut": "Szeretnéd, ha a parancsikon a profiloddal indítaná el a játékot?",
-  "TextImportMissingInfo": "Load a text file containing Workshop IDs to easily subscribe to or manage them",
+  "TextImportMissingInfo": "Tölts be egy szöveges fájlt, amely Steam azonosítókat tartalmaz, hogy egyszerűen előfizessen vagy kezelje azokat",
   "ImportFromText": "Importálás szövegből",
   "ImportFromClipboard": "Szöveg betöltése a vágólapról",
   "ImportFromTextInfo": "Bármilyen szövegformátum támogatott",
@@ -258,11 +258,11 @@
     "One": "{0} készítő kiválasztva",
     "Plural": "{0} készítő kiválasztva"
   },
-  "Donate": "Donate",
+  "Donate": "Adományozz!",
   "FlipItemCopyFilterAction": "Cserélje le a Ctrl+kattintáz a tartalomlisták szűréséhez",
   "FlipItemCopyFilterAction_Tip": "Felcseréli a címkékre való kattintást, így a normál kattintás szűri, a Ctrl+kattintás pedig az alapértelmezett műveletet hajtja végre.",
   "AltClickTo": "Alt+kattintás a következőhöz: {0}",
-  "FilterByThisAuthor": "Add '{0}' to your author filters",
+  "FilterByThisAuthor": "Adja hozzá a(z) „{0}” elemet a szerző-szűrődhöz",
   "AddToSearch": "Adja hozzá a \"{0}\" kifejezést a kereséshez",
   "CopyToClipboard": "Másolja a(z) „{0}” a vágólapra",
   "ViewPackageCR": "Tekintse meg a csomag kompatibilitási adatait",
@@ -272,15 +272,15 @@
   "Sorting_Subscribers": "Feliratkozások összesen",
   "Sorting_Votes": "Szavazatok",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} szavazat",
+    "Plural": "{1} szavazat"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "{1} feliratkozó",
+    "Plural": "{1} feliratkozó"
   },
-  "SearchWorkshop": "Search the workshop instead...",
-  "DiscoverWorkshop": "Look for mods on the workshop...",
+  "SearchWorkshop": "Inkább keress a műhelyben...",
+  "DiscoverWorkshop": "Keress modokat a műhelyben...",
   "SearchWorkshopBrowser": "Keressen a műhelyben a böngésződdel..",
   "UnknownPackage": "Ismeretlen csomag",
   "Info": "Infó",
@@ -289,17 +289,17 @@
   "ControlToSelectMultiplePackages": "Ctrl + kattintás egyszerre több csomag kiválasztásához.",
   "Local": "Helyi",
   "Workshop": "Műhely",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "Kompabilitási Infó Compatibility Report",
   "Enabled": "Engedélyezve",
   "Disabled": "Kikapcsolva",
   "Included": "Tartalmazza",
   "Excluded": "Kihagyott",
   "OutOfDate": "Elavult",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "Csomag státusza",
   "Author": "Készítő",
   "Include": "Tartalma",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
+  "Unsubscribe": "Leiratkozás",
+  "Exclude": "Mellőz",
   "Snooze": "Szundi",
   "UnSnooze": "Visszaállítás szundiból",
   "Mod": {
@@ -320,35 +320,35 @@
   },
   "IncludedCount": {
     "One": "{0} {1} alkalmazott",
-    "Plural": "{0} {1} included"
+    "Plural": "{0} {1} alkalmazott"
   },
   "EnabledCount": {
     "One": "{0} {1} engedélyezett",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0} {1} engedélyezett"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} alkalmazott és engedélyezett",
-    "Plural": "{0} {1} included & enabled"
+    "Plural": "{0} {1} alkalmazott & engedélyezett"
   },
   "LoadedCount": {
     "One": "{0} {1} betöltött",
-    "Plural": "{0} {1} loaded"
+    "Plural": "{0} {1} betöltött"
   },
   "ShowingCount": {
     "One": "{0} - {1} mutatása",
-    "Plural": "Showing {0} {1}"
+    "Plural": "{0} - {1} mutatása"
   },
   "ShowingCountWarning": {
     "One": "{0} {1}, {2} mutatása",
-    "Plural": "Showing {0} {1}, {3}"
+    "Plural": "{0} {1}, {3} mutatása"
   },
   "ShowingSelectedCount": {
     "One": "{0} {1} megjelenítése, {2} kiválasztva",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "Plural": "{0} {1} megjelenítése, {2} kiválasztva"
   },
   "ShowingSelectedCountWarning": {
     "One": "{0} {1}, {2} kiválasztott, {3} megjelenítése",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "Plural": "{0} {1}, {2} kiválasztott, {3} megjelenítése"
   },
   "ItemsHidden": {
     "One": "A(z) {0} {1} el van rejtve a profilod használata miatt",
@@ -384,11 +384,11 @@
   },
   "NewUpdatedCount": {
     "One": "{0} új vagy frissített {1}",
-    "Plural": "{0} new or updated {1}"
+    "Plural": "{0} új vagy frissített {1}"
   },
   "TotalCount": {
     "One": "Összesen {0} {1}",
-    "Plural": "{0} {1} in total"
+    "Plural": "Összesen {0} {1}"
   },
   "PackageIsNotDownloaded": "A(z) „{0}” eltávolítva a számítógépről",
   "PackageIsOutOfDate": "\"{0}\" elavult\n\nÖn {1} lemaradt",
@@ -406,7 +406,7 @@
     "One": "Ezzel a folyamattal leiratkozik a(z) {0} csomagról.",
     "Plural": "Ebben a folyamatban leiratkozik {0} csomagról."
   },
-  "ViewThisPlaysetsPackages": "View the mods in this playset",
+  "ViewThisPlaysetsPackages": "Tekintse meg a játékkészlet modjait",
   "YouHavePackagesUser": {
     "One": "{0} csomagja van a {1} által",
     "Plural": "{0} csomagjai vannak a {1} által"
@@ -414,7 +414,7 @@
   "RequestOption1": "Jelentse be a problémát, vagy adja meg a hiányzó információkat",
   "RequestOption2": "Adjon hozzá egy hiányzó állapotot a csomaghoz",
   "RequestOption3": "Adjon hozzá egy hiányzó interakciót egy másik csomaghoz",
-  "ActivePlayset": "Active Playset",
+  "ActivePlayset": "Aktív játékkészlet",
   "References": "Referenciák",
   "OpenLog": "Naplófájl megnyitása",
   "Sort By": "Sorbarendezés",
@@ -446,8 +446,8 @@
   "PastePlaysetId": "Illessze be az importálni kívánt profil azonosítóját",
   "AssumeInternetConnectivity": "Az internetkapcsolat ellenőrzésének figyelmen kívül hagyása",
   "AssumeInternetConnectivity_Tip": "Kihagyja az internetkeresést, és automatikusan feltételezi, hogy csatlakozik.",
-  "SelectAll": "Select all items",
-  "DeselectAll": "Un-select all items",
+  "SelectAll": "Válassza ki az összes elemet",
+  "DeselectAll": "Törölje az összes elem kijelölését",
   "AddTagBox": "Új címke hozzáadása",
   "EditingMultipleTags": "Több csomag címkéinek szerkesztése felülírja mindegyik egyéni címkéjét.",
   "EditTagsOfPackage": {
@@ -495,9 +495,9 @@
   "CleanupInfoTitle": "Mi az a takarítás?",
   "TroubleshootCauseResult": "A következő csomagok okozhatják a problémákat",
   "VerifiedAuthor": "Ellenőrzött szerző",
-  "EnableItem": "Enable this mod",
-  "DisableItem": "Disable this mod",
-  "SwitchToItem": "Switch to this mod",
+  "EnableItem": "Engedélyezze ezt a modot",
+  "DisableItem": "Mod tiltása",
+  "SwitchToItem": "Váltson erre a módra",
   "FailedToImportPlayset": "Nem sikerült importálni ezt a játékkészletet.",
   "FilterByEnabled": "Csak az engedélyezett elemek megjelenítése.",
   "FilterByDisabled": "Csak a letiltott elemek megjelenítése.",
@@ -541,11 +541,11 @@
     "One": "A(z) „{1}” a legutóbbi munkamenete óta telepítve lett",
     "Plural": "{0} új csomag lett telepítve az utolsó munkamenet óta"
   },
-  "NoActivePlayset": "No Active Playset",
-  "RecentlyUpdated": "Recently Updated",
-  "Manage": "Manage",
-  "Version": "Version",
-  "UpdateTime": "Update Time",
-  "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "NoActivePlayset": "Nincs aktív játékkészlet",
+  "RecentlyUpdated": "Legutóbb frissített",
+  "Manage": "Kezelés",
+  "Version": "Verzió",
+  "UpdateTime": "Frissítés ideje",
+  "Status": "Státusz",
+  "ThisModIsRequiredYouCantDisableIt": "Ez a mod szükséges, nem lehet letiltani."
 }

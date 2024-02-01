@@ -189,7 +189,7 @@
     "Plural": "{0} DLC kiválasztva"
   },
   "RequiredDLCs": "Szükséges DLC-k / CCP-k",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "Stabilitás",
   "CRT_Successors": "Utódok",
   "CRT_RequiredPackages": "Szükséges csomagok",
   "CRT_OptionalPackages": "Választható csomagok",
@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} - ezeket ki kell zárni",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} {1} - ezeket ki kell zárni"
   },
   "UnsubscribeCount": "{0} {1}, amelyről le kell iratkoznia",
   "SwitchCount": {
@@ -249,8 +249,8 @@
   },
   "ViewRequest": "Kérelem megtekintése",
   "CRT_RequiredItem": "Szükséges elem",
-  "RequiredItem": "Required Item",
+  "RequiredItem": "Szükséges elem",
   "ApplyAllActions": "Alkalmazza az összes elérhető műveletet",
   "SnoozeAll": "Az összes megjelenített probléma elhalasztása",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Kapcsolt csomagok"
 }
