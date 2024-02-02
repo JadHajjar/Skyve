@@ -12,7 +12,7 @@ public class PlaysetBubble : StatusBubbleBase
 		ServiceCenter.Get(out _notifier, out _playsetManager);
 	}
 
-	public override Color? TintColor { get => _playsetManager.CurrentPlayset.Color; set { } }
+	public override Color? TintColor { get => _playsetManager.CurrentPlayset?.Color ?? FormDesign.Design.MenuColor; set { } }
 
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -24,7 +24,7 @@ public class PlaysetBubble : StatusBubbleBase
 		}
 
 		Text = Locale.ActivePlayset;
-		ImageName = _playsetManager.CurrentPlayset.GetIcon();
+		ImageName = _playsetManager.CurrentPlayset?.GetIcon() ?? "I_Playsets";
 
 		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
@@ -38,12 +38,12 @@ public class PlaysetBubble : StatusBubbleBase
 
 	private void ProfileManager_ProfileChanged()
 	{
-		ImageName = _playsetManager.CurrentPlayset.GetIcon();
+		ImageName = _playsetManager.CurrentPlayset?.GetIcon() ?? "I_Playsets";
 	}
 
 	protected override void CustomDraw(PaintEventArgs e, ref int targetHeight)
 	{
-		DrawText(e, ref targetHeight, _playsetManager.CurrentPlayset.Name ?? "");
+		DrawText(e, ref targetHeight, _playsetManager.CurrentPlayset?.Name ?? "");
 
 #if CS1
 		if (_playsetManager.CurrentPlayset.Temporary)

@@ -31,19 +31,19 @@ partial class PC_PlaysetList
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon8 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon9 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon10 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon11 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon12 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon13 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon14 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon15 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon16 = new SlickControls.DynamicIcon();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.TB_Search = new SlickControls.SlickTextBox();
-			this.DD_Sorting = new Skyve.App.UserInterface.Dropdowns.ProfileSortingDropDown();
+			this.DD_Sorting = new Skyve.App.UserInterface.Dropdowns.PlaysetSortingDropDown();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_ListView = new SlickControls.SlickIcon();
 			this.B_GridView = new SlickControls.SlickIcon();
@@ -78,6 +78,7 @@ partial class PC_PlaysetList
 			// 
 			// base_Text
 			// 
+			this.base_Text.Size = new System.Drawing.Size(150, 31);
 			this.base_Text.Text = "Mods";
 			// 
 			// TLP_Main
@@ -103,7 +104,7 @@ partial class PC_PlaysetList
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Main.Size = new System.Drawing.Size(1190, 617);
+			this.TLP_Main.Size = new System.Drawing.Size(1190, 631);
 			this.TLP_Main.TabIndex = 0;
 			// 
 			// slickSpacer2
@@ -132,13 +133,12 @@ partial class PC_PlaysetList
 			// 
 			// TB_Search
 			// 
-			this.TB_Search.EnterTriggersClick = false;
-			dynamicIcon1.Name = "I_Search";
-			this.TB_Search.ImageName = dynamicIcon1;
+			dynamicIcon9.Name = "I_Search";
+			this.TB_Search.ImageName = dynamicIcon9;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
-			this.TB_Search.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+			this.TB_Search.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
 			this.TB_Search.Placeholder = "SearchPlaysets";
 			this.TB_Search.SelectedText = "";
 			this.TB_Search.SelectionLength = 0;
@@ -155,11 +155,11 @@ partial class PC_PlaysetList
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DD_Sorting.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_Sorting.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Sorting.Location = new System.Drawing.Point(906, 0);
+			this.DD_Sorting.Location = new System.Drawing.Point(973, 0);
 			this.DD_Sorting.Margin = new System.Windows.Forms.Padding(0);
 			this.DD_Sorting.Name = "DD_Sorting";
 			this.DD_Sorting.Padding = new System.Windows.Forms.Padding(7);
-			this.DD_Sorting.Size = new System.Drawing.Size(284, 27);
+			this.DD_Sorting.Size = new System.Drawing.Size(217, 27);
 			this.DD_Sorting.TabIndex = 4;
 			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
 			// 
@@ -191,8 +191,8 @@ partial class PC_PlaysetList
 			this.B_ListView.ActiveColor = null;
 			this.B_ListView.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.B_ListView.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_List";
-			this.B_ListView.ImageName = dynamicIcon2;
+			dynamicIcon10.Name = "I_List";
+			this.B_ListView.ImageName = dynamicIcon10;
 			this.B_ListView.Location = new System.Drawing.Point(1120, 1);
 			this.B_ListView.Margin = new System.Windows.Forms.Padding(1);
 			this.B_ListView.Name = "B_ListView";
@@ -206,8 +206,8 @@ partial class PC_PlaysetList
 			this.B_GridView.ActiveColor = null;
 			this.B_GridView.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.B_GridView.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon3.Name = "I_Grid";
-			this.B_GridView.ImageName = dynamicIcon3;
+			dynamicIcon11.Name = "I_Grid";
+			this.B_GridView.ImageName = dynamicIcon11;
 			this.B_GridView.Location = new System.Drawing.Point(1156, 1);
 			this.B_GridView.Margin = new System.Windows.Forms.Padding(1);
 			this.B_GridView.Name = "B_GridView";
@@ -221,9 +221,9 @@ partial class PC_PlaysetList
 			// 
 			this.L_Counts.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(1045, 1);
+			this.L_Counts.Location = new System.Drawing.Point(1078, 9);
 			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(71, 30);
+			this.L_Counts.Size = new System.Drawing.Size(38, 13);
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
 			// 
@@ -231,9 +231,9 @@ partial class PC_PlaysetList
 			// 
 			this.L_FilterCount.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_FilterCount.AutoSize = true;
-			this.L_FilterCount.Location = new System.Drawing.Point(3, 1);
+			this.L_FilterCount.Location = new System.Drawing.Point(3, 9);
 			this.L_FilterCount.Name = "L_FilterCount";
-			this.L_FilterCount.Size = new System.Drawing.Size(71, 30);
+			this.L_FilterCount.Size = new System.Drawing.Size(38, 13);
 			this.L_FilterCount.TabIndex = 2;
 			this.L_FilterCount.Text = "label1";
 			// 
@@ -246,16 +246,16 @@ partial class PC_PlaysetList
 			this.panel1.Location = new System.Drawing.Point(0, 63);
 			this.panel1.Margin = new System.Windows.Forms.Padding(0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(1190, 554);
+			this.panel1.Size = new System.Drawing.Size(1190, 568);
 			this.panel1.TabIndex = 14;
 			// 
 			// slickScroll1
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll1.LinkedControl = this.FLP_Profiles;
-			this.slickScroll1.Location = new System.Drawing.Point(1180, 0);
+			this.slickScroll1.Location = new System.Drawing.Point(1182, 0);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(10, 554);
+			this.slickScroll1.Size = new System.Drawing.Size(8, 568);
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 0;
 			this.slickScroll1.TabStop = false;
@@ -276,10 +276,10 @@ partial class PC_PlaysetList
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DD_Usage.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_Usage.HideLabel = true;
-			this.DD_Usage.Location = new System.Drawing.Point(531, 0);
+			this.DD_Usage.Location = new System.Drawing.Point(777, 0);
 			this.DD_Usage.Margin = new System.Windows.Forms.Padding(0);
 			this.DD_Usage.Name = "DD_Usage";
-			this.DD_Usage.Size = new System.Drawing.Size(375, 27);
+			this.DD_Usage.Size = new System.Drawing.Size(196, 27);
 			this.DD_Usage.TabIndex = 15;
 			this.DD_Usage.Text = "Usage";
 			this.DD_Usage.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
@@ -290,9 +290,9 @@ partial class PC_PlaysetList
 			this.tableLayoutPanel1.SetColumnSpan(this.roundedPanel, 4);
 			this.roundedPanel.Controls.Add(this.TLP_Main);
 			this.roundedPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.roundedPanel.Location = new System.Drawing.Point(3, 69);
+			this.roundedPanel.Location = new System.Drawing.Point(3, 55);
 			this.roundedPanel.Name = "roundedPanel";
-			this.roundedPanel.Size = new System.Drawing.Size(1190, 617);
+			this.roundedPanel.Size = new System.Drawing.Size(1190, 631);
 			this.roundedPanel.TabIndex = 0;
 			// 
 			// tableLayoutPanel1
@@ -322,7 +322,7 @@ partial class PC_PlaysetList
 			this.B_AddProfile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.B_AddProfile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.B_AddProfile.Controls.Add(this.slickIcon2, 0, 0);
-			this.B_AddProfile.Location = new System.Drawing.Point(299, 10);
+			this.B_AddProfile.Location = new System.Drawing.Point(266, 10);
 			this.B_AddProfile.Margin = new System.Windows.Forms.Padding(10);
 			this.B_AddProfile.Name = "B_AddProfile";
 			this.B_AddProfile.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -333,8 +333,8 @@ partial class PC_PlaysetList
 			// 
 			this.slickIcon2.ActiveColor = null;
 			this.slickIcon2.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "I_Add";
-			this.slickIcon2.ImageName = dynamicIcon4;
+			dynamicIcon12.Name = "I_Add";
+			this.slickIcon2.ImageName = dynamicIcon12;
 			this.slickIcon2.Location = new System.Drawing.Point(0, 0);
 			this.slickIcon2.Margin = new System.Windows.Forms.Padding(0);
 			this.slickIcon2.Name = "slickIcon2";
@@ -350,7 +350,7 @@ partial class PC_PlaysetList
 			this.B_TempProfile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.B_TempProfile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.B_TempProfile.Controls.Add(this.slickIcon1, 0, 0);
-			this.B_TempProfile.Location = new System.Drawing.Point(235, 10);
+			this.B_TempProfile.Location = new System.Drawing.Point(202, 10);
 			this.B_TempProfile.Margin = new System.Windows.Forms.Padding(10);
 			this.B_TempProfile.Name = "B_TempProfile";
 			this.B_TempProfile.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -361,8 +361,8 @@ partial class PC_PlaysetList
 			// 
 			this.slickIcon1.ActiveColor = null;
 			this.slickIcon1.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon5.Name = "I_TempProfile";
-			this.slickIcon1.ImageName = dynamicIcon5;
+			dynamicIcon13.Name = "I_TempProfile";
+			this.slickIcon1.ImageName = dynamicIcon13;
 			this.slickIcon1.Location = new System.Drawing.Point(0, 0);
 			this.slickIcon1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickIcon1.Name = "slickIcon1";
@@ -374,22 +374,21 @@ partial class PC_PlaysetList
 			// 
 			// B_Discover
 			// 
+			this.B_Discover.AutoSize = true;
 			this.B_Discover.ButtonType = SlickControls.ButtonType.Active;
 			this.B_Discover.ColorShade = null;
 			this.B_Discover.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Discover.Dock = System.Windows.Forms.DockStyle.Right;
-			dynamicIcon6.Name = "I_Discover";
-			this.B_Discover.ImageName = dynamicIcon6;
+			dynamicIcon14.Name = "I_Discover";
+			this.B_Discover.ImageName = dynamicIcon14;
 			this.B_Discover.LargeImage = true;
-			this.B_Discover.Location = new System.Drawing.Point(1086, 10);
-			this.B_Discover.Margin = new System.Windows.Forms.Padding(10);
+			this.B_Discover.Location = new System.Drawing.Point(1068, 3);
 			this.B_Discover.Name = "B_Discover";
-			this.B_Discover.Size = new System.Drawing.Size(100, 46);
+			this.B_Discover.Size = new System.Drawing.Size(125, 46);
 			this.B_Discover.SpaceTriggersClick = true;
 			this.B_Discover.TabIndex = 3;
 			this.B_Discover.Text = "DiscoverPlaysets";
-		this.B_Discover.AutoSize = true;
-		this.B_Discover.Click += new System.EventHandler(this.B_Discover_Click);
+			this.B_Discover.Click += new System.EventHandler(this.B_Discover_Click);
 			// 
 			// TLP_ProfileName
 			// 
@@ -412,7 +411,7 @@ partial class PC_PlaysetList
 			this.TLP_ProfileName.Name = "TLP_ProfileName";
 			this.TLP_ProfileName.RowCount = 1;
 			this.TLP_ProfileName.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_ProfileName.Size = new System.Drawing.Size(205, 32);
+			this.TLP_ProfileName.Size = new System.Drawing.Size(172, 32);
 			this.TLP_ProfileName.TabIndex = 5;
 			// 
 			// I_ProfileIcon
@@ -434,9 +433,9 @@ partial class PC_PlaysetList
 			this.B_Save.ActiveColor = null;
 			this.B_Save.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_Save.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon7.Name = "I_Save";
-			this.B_Save.ImageName = dynamicIcon7;
-			this.B_Save.Location = new System.Drawing.Point(173, 0);
+			dynamicIcon15.Name = "I_Save";
+			this.B_Save.ImageName = dynamicIcon15;
+			this.B_Save.Location = new System.Drawing.Point(140, 0);
 			this.B_Save.Margin = new System.Windows.Forms.Padding(0);
 			this.B_Save.Name = "B_Save";
 			this.B_Save.Padding = new System.Windows.Forms.Padding(5);
@@ -463,9 +462,9 @@ partial class PC_PlaysetList
 			// 
 			this.L_CurrentProfile.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_CurrentProfile.AutoSize = true;
-			this.L_CurrentProfile.Location = new System.Drawing.Point(99, 1);
+			this.L_CurrentProfile.Location = new System.Drawing.Point(99, 9);
 			this.L_CurrentProfile.Name = "L_CurrentProfile";
-			this.L_CurrentProfile.Size = new System.Drawing.Size(71, 30);
+			this.L_CurrentProfile.Size = new System.Drawing.Size(38, 13);
 			this.L_CurrentProfile.TabIndex = 1;
 			this.L_CurrentProfile.Text = "label1";
 			// 
@@ -474,8 +473,8 @@ partial class PC_PlaysetList
 			this.B_EditName.ActiveColor = null;
 			this.B_EditName.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_EditName.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon8.Name = "I_Cog";
-			this.B_EditName.ImageName = dynamicIcon8;
+			dynamicIcon16.Name = "I_Cog";
+			this.B_EditName.ImageName = dynamicIcon16;
 			this.B_EditName.Location = new System.Drawing.Point(64, 0);
 			this.B_EditName.Margin = new System.Windows.Forms.Padding(0);
 			this.B_EditName.Name = "B_EditName";
@@ -485,12 +484,12 @@ partial class PC_PlaysetList
 			this.B_EditName.TabStop = false;
 			this.B_EditName.Click += new System.EventHandler(this.B_EditName_Click);
 			// 
-			// PC_ProfileList
+			// PC_PlaysetList
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
-			this.Name = "PC_ProfileList";
+			this.Name = "PC_PlaysetList";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(1196, 719);
 			this.Text = "Mods";
@@ -518,7 +517,7 @@ partial class PC_PlaysetList
 
 	private System.Windows.Forms.TableLayoutPanel TLP_Main;
 	private SlickControls.SlickTextBox TB_Search;
-	private ProfileSortingDropDown DD_Sorting;
+	private PlaysetSortingDropDown DD_Sorting;
 	private SlickControls.SlickSpacer slickSpacer1;
 	private SlickControls.SlickSpacer slickSpacer2;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;

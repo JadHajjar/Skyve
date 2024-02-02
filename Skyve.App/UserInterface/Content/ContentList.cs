@@ -263,13 +263,14 @@ public partial class ContentList : SlickControl
 		base.DesignChanged(design);
 
 		TLP_MiddleBar.BackColor = design.AccentBackColor;
-		P_Filters.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme?-1: 1);
+		P_Filters.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme ? -1 : 1);
 		ListControl.BackColor = design.BackColor;
 		L_Counts.ForeColor = L_FilterCount.ForeColor = design.InfoColor;
 	}
 
 	protected override void LocaleChanged()
 	{
+		DD_PackageUsage.Text = Locale.PackageUsage;
 		DD_PackageStatus.Text = Locale.PackageStatus;
 		DD_ReportSeverity.Text = Locale.CompatibilityStatus;
 		DD_Tags.Text = LocaleSlickUI.Tags;
@@ -314,7 +315,7 @@ public partial class ContentList : SlickControl
 
 		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin = OT_ModAsset.Margin
 			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
-			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
+			= DD_Author.Margin = DD_PackageStatus.Margin = DD_PackageUsage.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
 
 		TLP_MiddleBar.Padding = UI.Scale(new Padding(3, 0, 3, 0), UI.FontScale);
 
@@ -352,12 +353,16 @@ public partial class ContentList : SlickControl
 	public async Task RefreshItems()
 	{
 		if (ListControl.ItemCount == 0)
-		ListControl.Loading = true;
+		{
+			ListControl.Loading = true;
+		}
 
 		var items = await GetItems();
 
 		if (ListControl.ItemCount == 0)
-		ListControl.Loading = false;
+		{
+			ListControl.Loading = false;
+		}
 
 		ListControl.SetItems(items);
 
@@ -503,6 +508,16 @@ public partial class ContentList : SlickControl
 				{
 					return true;
 				}
+			}
+		}
+
+		if (DD_PackageUsage.SelectedItems.Count() != DD_PackageUsage.Items.Length)
+		{
+			var usage = item.GetPackageInfo()?.Usage ?? (PackageUsage)(-1);
+
+			if (!DD_PackageUsage.SelectedItems.Any(x => usage.HasFlag(x)))
+			{
+				return true;
 			}
 		}
 

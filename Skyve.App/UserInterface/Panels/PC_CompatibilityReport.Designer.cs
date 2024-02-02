@@ -63,7 +63,7 @@ partial class PC_CompatibilityReport
 			this.DD_PackageStatus = new Skyve.App.UserInterface.Dropdowns.PackageStatusDropDown();
 			this.DD_Tags = new Skyve.App.UserInterface.Dropdowns.TagsDropDown();
 			this.DD_Author = new Skyve.App.UserInterface.Dropdowns.AuthorDropDown();
-			this.DD_Profile = new Skyve.App.UserInterface.Dropdowns.ProfilesDropDown();
+			this.DD_Profile = new Skyve.App.UserInterface.Dropdowns.PlaysetsDropDown();
 			this.I_SortOrder = new SlickControls.SlickIcon();
 			((System.ComponentModel.ISupportInitialize)(this.PB_Loader)).BeginInit();
 			this.TLP_Main.SuspendLayout();
@@ -564,7 +564,7 @@ partial class PC_CompatibilityReport
 	internal Dropdowns.PackageStatusDropDown DD_PackageStatus;
 	internal Dropdowns.TagsDropDown DD_Tags;
 	internal Dropdowns.AuthorDropDown DD_Author;
-	internal Dropdowns.ProfilesDropDown DD_Profile;
+	internal Dropdowns.PlaysetsDropDown DD_Profile;
 	internal SlickIcon I_SortOrder;
 	internal System.Windows.Forms.TableLayoutPanel TLP_MiddleBar;
 	internal System.Windows.Forms.Label L_FilterCount;

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
-public class ProfileSortingDropDown : SlickSelectionDropDown<ProfileSorting>
+public class PlaysetSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{

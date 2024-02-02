@@ -128,7 +128,7 @@
   "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Reset your settings to the default ones. This does not affect folder settings.",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "EnableDevUi": "Enable Dev UI",
   "RefreshWorkshop": "Refresh Workshop Content",
   "NewGame": "Start a new game",
@@ -546,5 +546,10 @@
   "Version": "Version",
   "UpdateTime": "Update Time",
   "Status": "Status",
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
   "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
 }

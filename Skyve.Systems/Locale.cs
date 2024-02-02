@@ -258,6 +258,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CleanupInfoTitle => _instance.GetText("CleanupInfoTitle");
 
 	/// <summary>
+	/// <para>Code Mod</para>
+	/// <para>Plural: Code Mods</para>
+	/// </summary>
+	public static Translation CodeMod => _instance.GetText("CodeMod");
+
+	/// <summary>
 	/// Compatibility Info
 	/// </summary>
 	public static Translation CompatibilityInfo => _instance.GetText("CompatibilityInfo");
@@ -278,7 +284,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ComplexListUI => _instance.GetText("ComplexListUI");
 
 	/// <summary>
-	/// Adds more advanced information to the UI and adds extra actions.
+	/// Adds more advanced information and adds extra actions to the user interface.
 	/// </summary>
 	public static Translation ComplexListUITip => _instance.GetText("ComplexListUI_Tip");
 
@@ -1352,6 +1358,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Package Updates
 	/// </summary>
 	public static Translation PackageUpdates => _instance.GetText("PackageUpdates");
+
+	/// <summary>
+	/// Package Usage
+	/// </summary>
+	public static Translation PackageUsage => _instance.GetText("PackageUsage");
 
 	/// <summary>
 	/// Partially downloaded

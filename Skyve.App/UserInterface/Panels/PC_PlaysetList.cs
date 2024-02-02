@@ -167,6 +167,8 @@ public partial class PC_PlaysetList : PanelContent
 		B_ListView.Size = B_GridView.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 		L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		B_Discover.Font = UI.Font(9.75F, FontStyle.Bold);
+		B_Discover.Padding = UI.Scale(new Padding(10), UI.FontScale);
+		B_Discover.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		DD_Usage.Width = DD_Sorting.Width = (int)(180 * UI.FontScale);
 		TB_Search.Width = (int)(250 * UI.FontScale);
 		roundedPanel.Padding = new Padding((int)(2.5 * UI.FontScale) + 1, (int)(5 * UI.FontScale), (int)(2.5 * UI.FontScale), (int)(5 * UI.FontScale));

@@ -20,11 +20,13 @@ public interface IPlayset
 	DateTime DateUsed { get; }
 	DateTime DateCreated { get; }
 	bool IsFavorite { get; set; }
-	int AssetCount { get; }
 	int ModCount { get; }
 	IEnumerable<IPlaysetEntry> Entries { get; }
 	//IEnumerable<IPackage> Packages { get; }
 	bool Temporary { get; }
+#if CS1
+	int AssetCount { get; }
+#endif
 }
 
 public interface ICustomPlayset : IPlayset
