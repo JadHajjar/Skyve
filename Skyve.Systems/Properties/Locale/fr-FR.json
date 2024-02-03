@@ -13,7 +13,7 @@
   "IncludesItemsYouDoNotHave": "Inclure les éléments que vous n'avez pas",
   "ContentAndInfo": "Contenu et informations",
   "OtherPlaysets": "Autres Playsets",
-  "ViewPlaysets": "Voir vos profils",
+  "ViewPlaysets": "Voir vos playsets",
   "AddPlayset": "Ajouter un playset",
   "LHT": "Circulation à gauche",
   "TotalAssetSize": "{0} d'assets inclus",
@@ -43,7 +43,7 @@
   "AffectedPackagesAre": "Les paquets affectés sont :",
   "ConfirmDeletePlayset": "Voulez-vous vraiment supprimer le playset '{0}' ?",
   "ActivatePlayset": "Activer ce playset",
-  "PlaysetMerge": "Ajouter tous les mods de ce playset dans le profil actif",
+  "PlaysetMerge": "Ajouter tous les mods de ce playset dans votre playset actif",
   "PlaysetExclude": "Retirer tous les mods de ce playset de votre playset actif",
   "PlaysetDelete": "Supprimer ce playset",
   "MissingPackages": "Paquets manquants",
@@ -85,8 +85,8 @@
   "FilterOutPackagesWithOneAsset": "Masquer les paquets à assemblage unique de la page Paquet",
   "CopyAuthorLink": "Copier le lien du profil de l'auteur",
   "YourPlaysets": "Vos Playsets",
-  "UnFavoriteThisPlayset": "Supprimer ce profil des favoris",
-  "FavoriteThisPlayset": "Mettre ce profil en favori",
+  "UnFavoriteThisPlayset": "Supprimer ce playset des favoris",
+  "FavoriteThisPlayset": "Mettre ce playset en favori",
   "NoDlcsNoInternet": "Impossible de charger les DLCs, veuillez vous connecter à Internet",
   "NoDlcsOpenGame": "Aucun DLC ne correspond à votre recherche",
   "DlcUpdateNotice": "Si vos DLC ne sont pas affichés ici, assurez-vous d'ouvrir le jeu au moins une fois",
@@ -188,7 +188,7 @@
   "AlwaysOpenFiltersAndActions_Tip": "Toujours ouvrir la section Filtres lorsque vous entrez dans un onglet de contenu",
   "FavoritePlaysetTotal": "Playsets favoris : {0}, Total : {1}",
   "FavoriteTotal": "Nombre total de playsets: {0}",
-  "PlaysetFilter": "Filtrer les profils",
+  "PlaysetFilter": "Filtrer par Playset",
   "CheckDocumentsFolder": "Assurez-vous que Skyve a accès à votre dossier de documents, il l'utilise pour stocker vos paramètres d'interface et de langue.",
   "FailedToSaveLanguage": "Échec d'enregistrer la langue sélectionnée",
   "FailedToOpenTC": "Échec de l'ouverture du changeur de thème",
@@ -203,12 +203,12 @@
     "Plural": "Supprimer les paquets sélectionnés"
   },
   "EnableThisItemInAllPlaysets": {
-    "One": "Activer dans tous vos profils",
-    "Plural": "Activer les éléments sélectionnés dans tous vos profils"
+    "One": "Activer dans tous vos playsets",
+    "Plural": "Activer les éléments sélectionnés dans tous vos playsets"
   },
   "DisableThisItemInAllPlaysets": {
-    "One": "Désactiver dans tous vos profils",
-    "Plural": "Désactiver les éléments sélectionnés dans tous vos profils"
+    "One": "Désactiver dans tous vos playsets",
+    "Plural": "Désactiver les éléments sélectionnés dans tous vos playsets"
   },
   "CopyPackageName": {
     "One": "Copier le nom du paquet",
@@ -223,7 +223,7 @@
     "Plural": "Copier les noms des auteurs des paquets sélectionnés"
   },
   "Sorting_LastUsed": "Dernière utilisation",
-  "PlaysetStillLoading": "Votre profil est toujours en cours de chargement, veuillez patienter avant de quitter cette page.",
+  "PlaysetStillLoading": "Votre playset est toujours en cours de chargement, veuillez patienter avant de quitter cette page.",
   "ApplyPlaysetNameBeforeExit": "Terminez la modification du nom du playset avant de quitter cette page.",
   "SteamNotOpenTo": "Steam n'est pas en cours d’exécution",
   "OpenSteamToContinue": "Veuillez ouvrir Steam afin de continuer votre tâche précédente.",
@@ -231,9 +231,9 @@
   "OpenPlaysetFolder": "Voir le fichier de ce Playset sur votre ordinateur",
   "ChangePlaysetColor": "Changer la couleur de ce playset",
   "EditPlaysetName": "Modifier le nom de ce Playset",
-  "Sorting_Color": "Couleur du profil",
+  "Sorting_Color": "Couleur du Playset",
   "CreateShortcutPlayset": "Créez un raccourci sur votre bureau",
-  "AskToLaunchGameForShortcut": "Voulez-vous que le raccourci lance également le jeu avec votre profil ?",
+  "AskToLaunchGameForShortcut": "Voulez-vous que le raccourci lance également le jeu avec votre playset?",
   "TextImportMissingInfo": "Chargez un fichier texte contenant les IDs du Workshop pour facilement s'y abonner ou les gérer",
   "ImportFromText": "Importer à partir d'un texte",
   "ImportFromClipboard": "Charger du texte depuis votre presse-papiers",
@@ -314,8 +314,8 @@
     "Plural": "Paquets"
   },
   "Playset": {
-    "One": "Profil",
-    "Plural": "Profils"
+    "One": "Playset",
+    "Plural": "Playsets"
   },
   "IncludedCount": {
     "One": "{0} {1} inclus",
@@ -350,8 +350,8 @@
     "Plural": "Affichage de {0} {1}, {2} sélectionnés, {3}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} est masqué à cause de l'utilisation de votre profil",
-    "Plural": "{0} {1} sont masqués à cause de l'utilisation de votre profil"
+    "One": "{0} {1} est masqué à cause de l'utilisation de votre playset",
+    "Plural": "{0} {1} sont masqués à cause de l'utilisation de votre playset"
   },
   "EditCompatibility": {
     "One": "Modifier la compatibilité de ce paquet",
@@ -405,7 +405,7 @@
     "One": "Vous vous désabonnerez de {0} paquet au cours de ce processus.",
     "Plural": "Vous vous désabonnerez de {0} paquets au cours de ce processus."
   },
-  "ViewThisPlaysetsPackages": "Voir les mods de ce profil",
+  "ViewThisPlaysetsPackages": "Voir les mods de ce playset",
   "YouHavePackagesUser": {
     "One": "Vous avez {0} paquet créé par {1}",
     "Plural": "Vous avez {0} paquets créés par {1}"
@@ -413,7 +413,7 @@
   "RequestOption1": "Signaler un problème ou une information manquante",
   "RequestOption2": "Ajouter un statut manquant pour le paquet",
   "RequestOption3": "Ajouter une interaction manquante avec un autre paquet",
-  "ActivePlayset": "Profil actif",
+  "ActivePlayset": "Playset Actif",
   "References": "Références",
   "OpenLog": "Ouvrir le fichier Log",
   "Sort By": "Trier par",
@@ -435,13 +435,13 @@
   "UpdatePlaysetTip": "Mettez à jour votre version locale de ce playset",
   "DownloadPlaysetTip": "Télécharger ce Playset sur votre ordinateur",
   "EditPlaysetThumbnail": "Modifier la miniature de ce Playset",
-  "MakePublic": "Rendre ce profil Public",
-  "MakePrivate": "Rendre ce profil Privé",
+  "MakePublic": "Rendre ce playset Public",
+  "MakePrivate": "Rendre ce playset Privé",
   "CopyPlaysetLink": "Copier l'ID de ce playset",
   "FailedToUploadPlayset": "Impossible de télécharger votre Playset",
   "FailedToDeletePlayset": "Impossible de supprimer votre playset",
   "FailedToUpdatePlayset": "Impossible de mettre à jour votre playset",
-  "ImportFromLink": "Importer un profil en utilisant son ID",
+  "ImportFromLink": "Importer un playset en utilisant son ID",
   "PastePlaysetId": "Coller l'ID du playset que vous souhaitez importer",
   "AssumeInternetConnectivity": "Ignorer la vérification de la connexion à Internet",
   "AssumeInternetConnectivity_Tip": "Ne pas vérifier la connexion et supposer automatiquement que vous êtes connecté à Internet.",
@@ -497,7 +497,7 @@
   "EnableItem": "Activer ce mod",
   "DisableItem": "Désactiver ce mod",
   "SwitchToItem": "Passer à ce mod",
-  "FailedToImportPlayset": "Impossible d'importer ce profil.",
+  "FailedToImportPlayset": "Impossible d'importer ce playset.",
   "FilterByEnabled": "Afficher uniquement les éléments activés.",
   "FilterByDisabled": "Afficher uniquement les éléments désactivés.",
   "FilterByIncluded": "Afficher uniquement les éléments inclus.",
@@ -513,8 +513,8 @@
   },
   "SnapDashToGrid": "Afficher, et accrocher les sections du tableau de bord à, un guide en grille",
   "SnapDashToGrid_Tip": "Lors de l'édition des sections du tableau de bord, affiche une grille à 12 colonnes auxquelles les sections s'accrochent.",
-  "UnsavedChangesPlayset": "Il y a des modifications non enregistrées aux paquets de ce profil",
-  "ChangePlaysetSettings": "Modifier les paramètres de ce profil",
+  "UnsavedChangesPlayset": "Il y a des modifications non enregistrées aux paquets de ce playset",
+  "ChangePlaysetSettings": "Modifier les paramètres de ce playset",
   "ViewCompatibilityReport": "Voir le rapport de compatibilité complet",
   "DashboardCustomizationInfo": "Vous pouvez personnaliser le tableau de bord en faisant glisser chaque section depuis son en-tête.\nVous pouvez aussi redimensionner une section à l'aide du triangle pointillé dans le coin en bas à droite.",
   "ViewAssetsWithIssues": "Voir les assets avec des problèmes",
@@ -540,7 +540,7 @@
     "One": "\"{1}\" a été installé depuis votre dernière session",
     "Plural": "{0} paquets ont été installés depuis votre dernière session"
   },
-  "NoActivePlayset": "Pas de profil actif",
+  "NoActivePlayset": "Pas de playset actif",
   "RecentlyUpdated": "Mis à jour récemment",
   "Manage": "Gérer",
   "Version": "Version",
