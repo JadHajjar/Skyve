@@ -103,23 +103,23 @@ public partial class PC_UserPage : PanelContent
 	{
 		try
 		{
-			var profiles = await ServiceCenter.Get<ISkyveApiUtil>().GetUserPlaysets(User);
+			//var profiles = await ServiceCenter.Get<ISkyveApiUtil>().GetUserPlaysets(User);
 
-			if (profiles?.Any() ?? false)
-			{
-				L_Profiles.SetItems(profiles);
+			//if (profiles?.Any() ?? false)
+			//{
+			//	L_Profiles.SetItems(profiles);
 
-				this.TryInvoke(() =>
-				{
-					T_Profiles.LinkedControl = L_Profiles;
+			//	this.TryInvoke(() =>
+			//	{
+			//		T_Profiles.LinkedControl = L_Profiles;
 
-					if (T_Profiles.Selected)
-					{
-						T_Profiles.Selected = true;
-					}
-				});
-			}
-			else
+			//		if (T_Profiles.Selected)
+			//		{
+			//			T_Profiles.Selected = true;
+			//		}
+			//	});
+			//}
+			//else
 			{
 				this.TryInvoke(() => tabControl.Tabs = tabControl.Tabs.Where(x => x != T_Profiles).ToArray());
 			}

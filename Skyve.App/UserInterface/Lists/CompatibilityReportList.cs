@@ -2,6 +2,7 @@
 using Skyve.App.UserInterface.Panels;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
+using Skyve.Domain;
 
 using System;
 using System.Drawing;
@@ -676,7 +677,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		return y + (GridPadding.Vertical * 4);
 	}
 
-	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackage? package, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackage? package, ILocalPackageIdentity? localPackageIdentity, IWorkshopInfo? workshopInfo, bool isPressed)
 	{
 		using var font = UI.Font(9F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
@@ -689,10 +690,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
-		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.FileSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package?.Version);
+		var versionText = isVersion ? "v" + package!.Version : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
-		var date = workshopInfo?.ServerTime ?? localParentPackage?.LocalTime;
+		var date = workshopInfo?.ServerTime ?? localPackageIdentity?.LocalTime;
 
 		var padding = GridView ? GridPadding : GridPadding;
 		var textSize = e.Graphics.Measure(text, font);
@@ -735,7 +736,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (!string.IsNullOrEmpty(versionText))
 		{
-			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: localParentPackage is not null ? CursorLocation : null);
+			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: localPackageIdentity is not null ? CursorLocation : null);
 
 			tagRect.X += padding.Left + e.Rects.VersionRect.Width;
 		}

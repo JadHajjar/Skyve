@@ -174,33 +174,33 @@ public partial class ItemListControl
 			}
 		}
 
-		private void DrawVersionAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localParentPackage, IWorkshopInfo? workshopInfo)
+		private void DrawVersionAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localPackageIdentity, IWorkshopInfo? workshopInfo)
 		{
 #if CS1
 			var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 			var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-			var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
-			var text = isVersion ? "v" + package!.Version : localParentPackage?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
+			var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package?.Version);
+			var versionText = isVersion ? "v" + package!.Version : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
 
 			var packageTags = e.Item.GetTags(IsPackagePage).ToList();
 
 			if (packageTags.Count > 0)
 			{
-				if (!string.IsNullOrEmpty(text))
+				if (!string.IsNullOrEmpty(versionText))
 				{
-					text += " • ";
+					versionText += " • ";
 				}
 				else
 				{
-					text = string.Empty;
+					versionText = string.Empty;
 				}
 
-				text += packageTags.ListStrings(", ");
+				versionText += packageTags.ListStrings(", ");
 			}
 
-			if (!string.IsNullOrEmpty(text))
+			if (!string.IsNullOrEmpty(versionText))
 			{
 				using var fadedBrush = new SolidBrush(Color.FromArgb(GridView ? 150 : 200, e.BackColor.GetTextColor()));
 
@@ -208,14 +208,14 @@ public partial class ItemListControl
 					? new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, Height) 
 					: new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, e.Rects.TextRect.Width, e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - Padding.Bottom);
 
-				using var versionFont = GridView ? UI.Font(7.5F) : UI.Font(8.25F).FitToHeight(text, rect, e.Graphics);
+				using var versionFont = GridView ? UI.Font(7.5F) : UI.Font(8.25F).FitToHeight(versionText, rect, e.Graphics);
 				using var format = GridView ? new() : new StringFormat { LineAlignment = StringAlignment.Far };
 				
-				e.Graphics.DrawString(text, versionFont, fadedBrush, rect, format);
+				e.Graphics.DrawString(versionText, versionFont, fadedBrush, rect, format);
 
 				if (GridView)
 				{
-					e.DrawableItem.CachedHeight += (int)e.Graphics.Measure(text, versionFont, rect.Width).Height; 
+					e.DrawableItem.CachedHeight += (int)e.Graphics.Measure(versionText, versionFont, rect.Width).Height; 
 				}
 			}
 		}

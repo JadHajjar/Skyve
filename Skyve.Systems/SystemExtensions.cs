@@ -18,6 +18,7 @@ public static class SystemExtensions
 	private static IPackageManager? _packageManager;
 	private static IPackageUtil? _packageUtil;
 	private static ITagsService? _tagService;
+	private static IPlaysetManager? _playsetManager;
 
 	private static IWorkshopService WorkshopService => _workshopService ??= ServiceCenter.Get<IWorkshopService>();
 	private static ICompatibilityManager CompatibilityManager => _compatibilityManager ??= ServiceCenter.Get<ICompatibilityManager>();
@@ -27,6 +28,7 @@ public static class SystemExtensions
 	private static IPackageManager PackageManager => _packageManager ??= ServiceCenter.Get<IPackageManager>();
 	private static IPackageUtil PackageUtil => _packageUtil ??= ServiceCenter.Get<IPackageUtil>();
 	private static ITagsService TagsService => _tagService ??= ServiceCenter.Get<ITagsService>();
+	private static IPlaysetManager PlaysetManager => _playsetManager ??= ServiceCenter.Get<IPlaysetManager>();
 
 	public static string CleanName(this IPackageIdentity? package, bool keepTags = false)
 	{
@@ -188,5 +190,10 @@ public static class SystemExtensions
 	public static NotificationType GetNotification(this ICompatibilityInfo compatibilityInfo)
 	{
 		return CompatibilityManager.GetNotification(compatibilityInfo);
+	}
+
+	public static ICustomPlayset GetCustomPlayset(this IPlayset playset)
+	{
+		return PlaysetManager.GetCustomPlayset(playset);
 	}
 }

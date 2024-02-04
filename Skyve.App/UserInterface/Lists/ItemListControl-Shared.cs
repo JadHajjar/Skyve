@@ -1,4 +1,5 @@
 ﻿using Skyve.Compatibility.Domain.Enums;
+using Skyve.Domain;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -298,20 +299,20 @@ public partial class ItemListControl
 		}
 	}
 
-	private void DrawCompactVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
+	private void DrawCompactVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localPackageIdentity, IWorkshopInfo? workshopInfo)
 	{
 #if CS1
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
-		var text = isVersion ? "v" + package!.Version : localIdentity?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
+		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package?.Version);
+		var versionText = isVersion ? "v" + package!.Version : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
-		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
+		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localPackageIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
 
-		if (text is not null and not "")
+		if (versionText is not null and not "")
 		{
-			DrawCell(e, Columns.Version, text, null, active: false);
+			DrawCell(e, Columns.Version, versionText, null, active: false);
 		}
 
 		if (Width / UI.FontScale >= 800 && date != default)
@@ -455,7 +456,7 @@ public partial class ItemListControl
 		var padding = GridView ? GridPadding : Padding;
 		var size = _settings.UserSettings.ComplexListUI ?
 			UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale) :
-			UI.Scale(CompactList ? new Size(20, 20) : new Size(24, 24), UI.FontScale);
+			UI.Scale(CompactList ? new Size(18, 18) : new Size(22, 22), UI.FontScale);
 		var rect = new Rectangle(e.ClipRectangle.Right, e.ClipRectangle.Y, 0, e.ClipRectangle.Height).Pad(padding);
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 
@@ -467,7 +468,8 @@ public partial class ItemListControl
 				Icon = "I_Folder",
 				Font = Font,
 				HoverState = e.HoverState,
-				Cursor = CursorLocation
+				Cursor = CursorLocation,
+				BackgroundColor = e.BackColor
 			}).Rectangle;
 
 			rect.X -= e.Rects.FolderRect.Width + padding.Left;
@@ -485,7 +487,8 @@ public partial class ItemListControl
 #endif
 				Font = Font,
 				HoverState = e.HoverState,
-				Cursor = CursorLocation
+				Cursor = CursorLocation,
+				BackgroundColor = e.BackColor
 			}).Rectangle;
 
 			rect.X -= e.Rects.SteamRect.Width + padding.Left;
@@ -499,7 +502,8 @@ public partial class ItemListControl
 				Icon = "I_Github",
 				Font = Font,
 				HoverState = e.HoverState,
-				Cursor = CursorLocation
+				Cursor = CursorLocation,
+				BackgroundColor = e.BackColor
 			}).Rectangle;
 
 			rect.X -= e.Rects.GithubRect.Width + padding.Left;

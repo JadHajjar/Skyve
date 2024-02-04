@@ -264,6 +264,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CodeMod => _instance.GetText("CodeMod");
 
 	/// <summary>
+	/// Compatibility Center
+	/// </summary>
+	public static Translation CompatibilityCenter => _instance.GetText("CompatibilityCenter");
+
+	/// <summary>
 	/// Compatibility Info
 	/// </summary>
 	public static Translation CompatibilityInfo => _instance.GetText("CompatibilityInfo");
@@ -292,6 +297,12 @@ public class Locale : LocaleHelper, ILocale
 	/// Are you sure you want to delete the playset '{0}'?
 	/// </summary>
 	public static Translation ConfirmDeletePlayset => _instance.GetText("ConfirmDeletePlayset");
+
+	/// <summary>
+	/// <para>Contains {0} {1}</para>
+	/// <para>Plural: Contains {0} {1}</para>
+	/// </summary>
+	public static Translation ContainCount => _instance.GetText("ContainCount");
 
 	/// <summary>
 	/// Content &amp; Info
@@ -665,6 +676,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ExplainIssueInfo => _instance.GetText("ExplainIssueInfo");
 
 	/// <summary>
+	/// Fade out disabled mods &amp; assets
+	/// </summary>
+	public static Translation FadeDisabledItems => _instance.GetText("FadeDisabledItems");
+
+	/// <summary>
+	/// Disabled mods &amp; assets in your local content lists will be faded out.
+	/// </summary>
+	public static Translation FadeDisabledItemsTip => _instance.GetText("FadeDisabledItems_Tip");
+
+	/// <summary>
 	/// Failed to delete item
 	/// </summary>
 	public static Translation FailedToDeleteItem => _instance.GetText("FailedToDeleteItem");
@@ -828,6 +849,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Build Cities
 	/// </summary>
 	public static Translation GamePlay => _instance.GetText("GamePlay");
+
+	/// <summary>
+	/// Generic Playset
+	/// </summary>
+	public static Translation GenericPlayset => _instance.GetText("GenericPlayset");
 
 	/// <summary>
 	/// Help &amp; Logs
@@ -2030,6 +2056,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Up to date
 	/// </summary>
 	public static Translation UpToDate => _instance.GetText("UpToDate");
+
+	/// <summary>
+	/// {0} Playset
+	/// </summary>
+	public static Translation UsagePlayset => _instance.GetText("UsagePlayset");
 
 	/// <summary>
 	/// * Please try to use English in your description.

@@ -224,10 +224,11 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.ThenBy(x => x.Item.ToString()),
 
 			_ => items
-				.OrderBy(x => !(x.Item.GetLocalPackage() is ILocalPackageData lp && (lp.IsIncluded(out var partial) || partial)))
-				.ThenBy(x => x.Item.GetPackage()?.IsLocal)
+				.OrderBy(x => !(x.Item.IsIncluded(out var partial) || partial))
+				.ThenBy(x => !x.Item.IsEnabled())
+				.ThenBy(x => x.Item.IsLocal())
 				.ThenBy(x => !x.Item.GetPackage()?.IsCodeMod)
-				.ThenBy(x => x.Item.GetLocalPackage()?.CleanName() ?? x.Item.CleanName())
+				.ThenBy(x => x.Item.CleanName())
 		};
 
 		return SortDescending ? items.Reverse() : items;

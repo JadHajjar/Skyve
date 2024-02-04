@@ -218,13 +218,13 @@ public partial class ItemListControl
 
 		private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor)
 		{
-			var height = CompactList ? ((int)(24 * UI.FontScale) - 4) : (Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
+			var height = CompactList ? ((int)(18 * UI.FontScale)) : (Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
 
 			if (notificationType > NotificationType.Info)
 			{
 				var point = CompactList
 					? new Point(_columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2))
-					: new Point(e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top);
+					: new Point(e.ClipRectangle.Right - Padding.Right, e.ClipRectangle.Top + Padding.Top);
 
 				e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
 					point,
@@ -242,7 +242,7 @@ public partial class ItemListControl
 			{
 				var point = CompactList
 					? new Point(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.Right + Padding.Left) : _columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2))
-					: new Point(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - Padding.Left) : e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top);
+					: new Point(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - Padding.Left) : e.ClipRectangle.Right - Padding.Right, e.ClipRectangle.Top + Padding.Top);
 
 				e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(
 					point,

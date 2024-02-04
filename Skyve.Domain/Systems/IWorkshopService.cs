@@ -24,7 +24,7 @@ public interface IWorkshopService
 	Task WaitUntilReady();
 	Task RunSync();
 	Task<int> GetActivePlaysetId();
-	Task<List<ICustomPlayset>> GetPlaysets(bool localOnly);
+	Task<List<IPlayset>> GetPlaysets(bool localOnly);
 	Task<bool> ToggleVote(IPackageIdentity packageIdentity);
 #endif
 }

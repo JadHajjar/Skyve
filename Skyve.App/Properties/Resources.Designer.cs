@@ -883,36 +883,6 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap I_CS_16 {
-            get {
-                object obj = ResourceManager.GetObject("I_CS_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_CS_24 {
-            get {
-                object obj = ResourceManager.GetObject("I_CS_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_CS_48 {
-            get {
-                object obj = ResourceManager.GetObject("I_CS_48", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap I_Dashboard_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Dashboard_16", resourceCulture);
@@ -2323,26 +2293,6 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap I_NoInternet_16 {
-            get {
-                object obj = ResourceManager.GetObject("I_NoInternet_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap I_NoInternet_24 {
-            get {
-                object obj = ResourceManager.GetObject("I_NoInternet_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap I_Note_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Note_16", resourceCulture);
@@ -3333,6 +3283,16 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Star_32 {
+            get {
+                object obj = ResourceManager.GetObject("I_Star_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Star_48 {
             get {
                 object obj = ResourceManager.GetObject("I_Star_48", resourceCulture);
@@ -3356,6 +3316,16 @@ namespace Skyve.App.Properties {
         internal static System.Drawing.Bitmap I_StarFilled_24 {
             get {
                 object obj = ResourceManager.GetObject("I_StarFilled_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_StarFilled_32 {
+            get {
+                object obj = ResourceManager.GetObject("I_StarFilled_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

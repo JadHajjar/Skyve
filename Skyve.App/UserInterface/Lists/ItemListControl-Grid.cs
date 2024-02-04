@@ -1,6 +1,7 @@
 ﻿
 
 using Skyve.Compatibility.Domain.Enums;
+using Skyve.Domain;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -278,21 +279,21 @@ public partial class ItemListControl
 			return authorRect.Width;
 		}
 
-		private void DrawVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
+		private void DrawVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localPackageIdentity, IWorkshopInfo? workshopInfo)
 		{
 #if CS1
 			var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 			var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-			var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
-			var versionText = isVersion ? "v" + package!.Version : localIdentity?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
+			var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package?.Version);
+			var versionText = isVersion ? "v" + package!.Version : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
 			var tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + (GridView ? GridPadding.Bottom / 2 : (Padding.Bottom * 2)), 0, 0);
 
 			var rect = e.Graphics.DrawLabel(versionText, null, isVersion ? Color.FromArgb(125, FormDesign.Design.YellowColor) : default, tagRect, ContentAlignment.TopLeft, smaller: false);
 			tagRect.X += (GridView ? GridPadding.Left : Padding.Left) + rect.Width;
 
-			var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
+			var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localPackageIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
 
 			if (date != default)
 			{

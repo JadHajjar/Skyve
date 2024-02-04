@@ -89,8 +89,12 @@ public partial class ContentList : SlickControl
 		TLP_Main.SetColumnSpan(ListControl, TLP_Main.ColumnCount);
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
-		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !_playsetManager.CurrentPlayset.DisableWorkshop;
-		//OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
+#if CS2
+		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null;
+#else
+		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !(_playsetManager.GetCustomPlayset(_playsetManager.CurrentPlayset)?.DisableWorkshop ?? false);
+#endif
+		OT_ModAsset.Visible = Page is not SkyvePage.Assets and not SkyvePage.Mods;
 
 		ListControl.FilterRequested += FilterChanged;
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
@@ -301,6 +305,8 @@ public partial class ContentList : SlickControl
 			P_FiltersContainer.Height = 0;
 			P_FiltersContainer.Visible = true;
 		}
+
+		Program.MainForm.HandleKeyPress += MainForm_HandleKeyPress;
 	}
 
 	protected override void UIChanged()
@@ -426,7 +432,11 @@ public partial class ContentList : SlickControl
 
 	private bool IsFilteredOut(IPackageIdentity item)
 	{
-		if (!ListControl.IsGenericPage && (_playsetManager.CurrentPlayset?.DisableWorkshop ?? false))
+#if CS2
+		if (!ListControl.IsGenericPage && _playsetManager.CurrentPlayset is null)
+#else
+		if (!ListControl.IsGenericPage && (_playsetManager.CurrentCustomPlayset?.DisableWorkshop ?? false))
+#endif
 		{
 			if (item.GetPackage()?.IsLocal == true)
 			{
@@ -439,9 +449,9 @@ public partial class ContentList : SlickControl
 			return true;
 		}
 
-		if (_playsetManager.CurrentPlayset?.Usage > 0)
+		if (_playsetManager.CurrentCustomPlayset?.Usage > 0)
 		{
-			if (!(item.GetPackageInfo()?.Usage.HasFlag(_playsetManager.CurrentPlayset.Usage) ?? true))
+			if (!(item.GetPackageInfo()?.Usage.HasFlag(_playsetManager.CurrentCustomPlayset.Usage) ?? true))
 			{
 				UsageFilteredOut++;
 				return true;
@@ -936,5 +946,22 @@ public partial class ContentList : SlickControl
 		settings.GridView = ListControl.GridView;
 		settings.Compact = ListControl.CompactList;
 		_settings.UserSettings.Save();
+	}
+
+	private bool MainForm_HandleKeyPress(Message arg1, Keys arg2)
+	{
+		if (arg2 == (Keys.Control | Keys.Z))
+		{
+			ServiceCenter.Get<IModUtil>().UndoChanges();
+			return true;
+		}
+
+		if (arg2 == (Keys.Control | Keys.Y))
+		{
+			ServiceCenter.Get<IModUtil>().RedoChanges();
+			return true;
+		}
+
+		return false;
 	}
 }

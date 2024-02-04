@@ -1,6 +1,4 @@
-﻿using Skyve.App.UserInterface.Bubbles;
-
-namespace Skyve.App.UserInterface.Panels;
+﻿namespace Skyve.App.UserInterface.Panels;
 
 partial class PC_MainPage
 {

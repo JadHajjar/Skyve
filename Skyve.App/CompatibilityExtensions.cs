@@ -7,9 +7,13 @@ namespace Skyve.App;
 
 public static class CompatibilityExtensions
 {
-	public static DynamicIcon GetIcon(this IPlayset profile)
+	public static DynamicIcon GetIcon(this ICustomPlayset profile)
 	{
+#if CS2
+		return profile.Usage.GetIcon();
+#else
 		return profile.Temporary ? (DynamicIcon)"I_TempProfile" : profile.Usage.GetIcon();
+#endif
 	}
 
 	public static DynamicIcon GetIcon(this PackageUsage usage)
@@ -23,7 +27,7 @@ public static class CompatibilityExtensions
 			PackageUsage.ScenarioMaking => "I_ScenarioMaking",
 			PackageUsage.ThemeMaking => "I_Paint",
 #endif
-			_ => "I_ProfileSettings"
+			_ => "I_Playsets"
 		};
 	}
 

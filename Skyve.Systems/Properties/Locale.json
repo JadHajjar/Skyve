@@ -317,6 +317,10 @@
     "One": "Playset",
     "Plural": "Playsets"
   },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
+  },
   "IncludedCount": {
     "One": "{0} {1} included",
     "Plural": "{0} {1} included"
@@ -551,5 +555,10 @@
     "One": "Code Mod",
     "Plural": "Code Mods"
   },
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center"
 }

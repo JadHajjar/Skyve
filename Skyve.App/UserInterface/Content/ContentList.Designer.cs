@@ -1,6 +1,5 @@
 ﻿using Skyve.App.UserInterface.Dropdowns;
 using Skyve.App.UserInterface.Generic;
-using Skyve.Domain.Enums;
 
 namespace Skyve.App.UserInterface.Panels;
 
@@ -24,6 +23,7 @@ partial class ContentList
 			_notifier.ContentLoaded -= CentralManager_WorkshopInfoUpdated;
 			_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
 			_notifier.PackageInformationUpdated -= CentralManager_WorkshopInfoUpdated;
+			Program.MainForm.HandleKeyPress -= MainForm_HandleKeyPress;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

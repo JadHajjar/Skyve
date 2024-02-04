@@ -3,5 +3,5 @@
 public class PlaysetSettingsPanel : PanelContent
 {
 	public virtual void EditName() { }
-	public virtual void LoadProfile(ICustomPlayset customPlayset) { }
+	public virtual void LoadPlayset(IPlayset customPlayset) { }
 }

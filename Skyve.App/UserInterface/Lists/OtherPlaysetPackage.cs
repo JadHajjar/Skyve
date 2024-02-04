@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, OtherPlaysetPackage.Rectangles>
+public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlaysetPackage.Rectangles>
 {
 	public IPackageIdentity Package { get; }
 
@@ -49,12 +49,12 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 		Padding = UI.Scale(new Padding(3, 1, 3, 1), UI.FontScale);
 	}
 
-	protected override IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> OrderItems(IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> items)
+	protected override IEnumerable<DrawableItem<IPlayset, Rectangles>> OrderItems(IEnumerable<DrawableItem<IPlayset, Rectangles>> items)
 	{
 		return items.OrderByDescending(x => x.Item.DateUpdated);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<ICustomPlayset, Rectangles> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<IPlayset, Rectangles> item, Point location)
 	{
 		var rects = item.Rectangles;
 
@@ -74,7 +74,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 		return false;
 	}
 
-	protected override async void OnItemMouseClick(DrawableItem<ICustomPlayset, Rectangles> item, MouseEventArgs e)
+	protected override async void OnItemMouseClick(DrawableItem<IPlayset, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -131,7 +131,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 		//}
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<IPlayset, Rectangles> e)
 	{
 		if (e.Item == _playsetManager.CurrentPlayset)
 		{
@@ -190,24 +190,24 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 		}
 	}
 
-	private void DrawIcon(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
+	private void DrawIcon(ItemPaintEventArgs<IPlayset, Rectangles> e)
 	{
 		var iconColor = FormDesign.Design.IconColor;
 
-		if (e.Item.Color != null)
+		if (e.Item.GetCustomPlayset().Color != null)
 		{
-			iconColor = e.Item.Color.Value.GetTextColor();
+			iconColor = e.Item.GetCustomPlayset().Color!.Value.GetTextColor();
 
-			using var gradientBrush = e.Rects.IconRect.Gradient(e.Item.Color.Value, 1.5F);
+			using var gradientBrush = e.Rects.IconRect.Gradient(e.Item.GetCustomPlayset().Color!.Value, 1.5F);
 			e.Graphics.FillRoundedRectangle(gradientBrush, e.Rects.IconRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		using var playsetIcon = e.Item.GetIcon().Get(e.Rects.IncludedRect.Height * 3 / 4);
+		using var playsetIcon = e.Item.GetCustomPlayset().GetIcon().Get(e.Rects.IncludedRect.Height * 3 / 4);
 
 		e.Graphics.DrawImage(playsetIcon.Color(iconColor), e.Rects.IconRect.CenterR(playsetIcon.Size));
 	}
 
-	protected override Rectangles GenerateRectangles(ICustomPlayset item, Rectangle rectangle)
+	protected override Rectangles GenerateRectangles(IPlayset item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item)
 		{
@@ -223,7 +223,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 	}
 
 #if CS2
-	private void DrawIncludedButton(ItemPaintEventArgs<ICustomPlayset, Rectangles> e, bool isIncluded, bool isPartialIncluded, bool isEnabled, ILocalPackageIdentity? localIdentity, out Color activeColor)
+	private void DrawIncludedButton(ItemPaintEventArgs<IPlayset, Rectangles> e, bool isIncluded, bool isPartialIncluded, bool isEnabled, ILocalPackageIdentity? localIdentity, out Color activeColor)
 	{
 		activeColor = default;
 
@@ -281,7 +281,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 			return;
 		}
 
-		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(Package) ? "I_Wait" : isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
+		var icon = new DynamicIcon(isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
 		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
@@ -357,16 +357,16 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 		}
 #endif
 
-	public class Rectangles : IDrawableItemRectangles<ICustomPlayset>
+	public class Rectangles : IDrawableItemRectangles<IPlayset>
 	{
 		public Rectangle IncludedRect;
 		public Rectangle IconRect;
 		public Rectangle LoadRect;
 		public Rectangle TextRect;
 
-		public ICustomPlayset Item { get; set; }
+		public IPlayset Item { get; set; }
 
-		public Rectangles(ICustomPlayset item)
+		public Rectangles(IPlayset item)
 		{
 			Item = item;
 		}

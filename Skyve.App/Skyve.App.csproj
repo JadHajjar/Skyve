@@ -45,8 +45,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="UserInterface\Bubbles\FavoriteProfileBubble.cs" />
-    <Compile Update="UserInterface\Bubbles\PlaysetBubble.cs" />
       <Compile Update="UserInterface\Content\ContentList.cs" />
     <Compile Update="UserInterface\Content\TroubleshootInfoControl.cs" />
     <Compile Update="UserInterface\Content\UserDescriptionControl.cs" />
@@ -67,7 +65,6 @@
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs" />
     <Compile Update="UserInterface\Panels\PC_Troubleshoot.cs" />
-    <Compile Update="UserInterface\Panels\PC_PlaysetAdd.cs" />
     <Compile Update="UserInterface\Panels\PC_UserPage.cs" />
     <Compile Update="UserInterface\Panels\PC_PlaysetList.cs" />
     <Compile Update="UserInterface\Panels\PC_Packages.cs" />

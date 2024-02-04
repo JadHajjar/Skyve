@@ -58,7 +58,11 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
-		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !_playsetManager.CurrentPlayset.DisableWorkshop;
+#if CS2
+		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null;
+#else
+		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !(_playsetManager.GetCustomPlayset(_playsetManager.CurrentPlayset)?.DisableWorkshop ?? false);
+#endif
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
