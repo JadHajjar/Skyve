@@ -158,7 +158,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		{
 			var customPlayset = item.Item.GetCustomPlayset();
 			customPlayset.IsFavorite = !customPlayset.IsFavorite;
-			//_playsetManager.Save(customPlayset);
+			_playsetManager.Save(customPlayset);
 		}
 		else if (item.Rectangles.ActivateButton.Contains(e.Location))
 		{
@@ -317,10 +317,10 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		}
 	}
 
-	protected override bool IsFlowBreak(int index, DrawableItem<IPlayset, Rectangles> currentItem, DrawableItem<IPlayset, Rectangles> nextItem)
-	{
-		return currentItem.Item.GetCustomPlayset().IsFavorite && (!nextItem?.Item.GetCustomPlayset().IsFavorite ?? false);
-	}
+	//protected override bool IsFlowBreak(int index, DrawableItem<IPlayset, Rectangles> currentItem, DrawableItem<IPlayset, Rectangles> nextItem)
+	//{
+	//	return currentItem.Item.GetCustomPlayset().IsFavorite && (!nextItem?.Item.GetCustomPlayset().IsFavorite ?? false);
+	//}
 
 	protected override void OnPaint(PaintEventArgs e)
 	{

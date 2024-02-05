@@ -275,7 +275,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			}
 
 			item.Loading = false;
-			Loading = SafeGetItems().Any(x => x.Loading);
+			Invalidate(item.Item);
 		}
 #else
 

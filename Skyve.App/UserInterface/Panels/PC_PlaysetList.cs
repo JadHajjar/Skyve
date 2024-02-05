@@ -54,8 +54,8 @@ public partial class PC_PlaysetList : PanelContent
 			LC_Items.SetSorting(ProfileSorting.Downloads);
 		}
 
-		SlickTip.SetTo(B_GridView, "Switch to Grid-View");
-		SlickTip.SetTo(B_ListView, "Switch to List-View");
+		C_ViewTypeControl.GridView = true;
+
 		SlickTip.SetTo(B_Add, "NewPlayset_Tip");
 		SlickTip.SetTo(B_Deactivate, "TempPlayset_Tip");
 		SlickTip.SetTo(B_Edit, "TempPlayset_Tip");
@@ -137,8 +137,7 @@ public partial class PC_PlaysetList : PanelContent
 		B_Deactivate.Size = B_Add.Size = B_Edit.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 		L_CurrentPlayset.Font = UI.Font(11F, FontStyle.Bold);
 		roundedPanel.Margin = TB_Search.Margin = L_Counts.Margin = L_FilterCount.Margin = DD_Sorting.Margin = DD_Usage.Margin = UI.Scale(new Padding(6), UI.FontScale);
-		B_DeactivatePlayset.Padding = B_AddPlayset.Padding = TLP_PlaysetName.Padding = B_ListView.Padding = B_GridView.Padding = UI.Scale(new Padding(3), UI.FontScale);
-		B_ListView.Size = B_GridView.Size = UI.Scale(new Size(24, 24), UI.FontScale);
+		B_DeactivatePlayset.Padding = B_AddPlayset.Padding = TLP_PlaysetName.Padding = UI.Scale(new Padding(3), UI.FontScale);
 		L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		B_Discover.Font = UI.Font(9F, FontStyle.Bold);
 		B_Discover.Margin = TLP_PlaysetName.Margin = B_DeactivatePlayset.Margin = B_AddPlayset.Margin = UI.Scale(new Padding(5), UI.FontScale);
@@ -187,7 +186,7 @@ public partial class PC_PlaysetList : PanelContent
 			TLP_PlaysetName.ForeColor = TLP_PlaysetName.BackColor.GetTextColor();
 			L_CurrentPlayset.Text = playset?.Name ?? Locale.NoActivePlayset;
 
-			B_Edit.Visible = B_Deactivate.Parent.Visible = playset is not null;
+			B_Edit.Visible = B_DeactivatePlayset.Visible = playset is not null;
 			TLP_Top.ColumnStyles[1] = playset is not null ? new() : new ColumnStyle(SizeType.Absolute, 0);
 
 			LC_Items.Invalidate();
@@ -219,15 +218,13 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void B_ListView_Click(object sender, EventArgs e)
 	{
-		B_GridView.Selected = false;
-		B_ListView.Selected = true;
+		C_ViewTypeControl.GridView = false;
 		LC_Items.GridView = false;
 	}
 
 	private void B_GridView_Click(object sender, EventArgs e)
 	{
-		B_GridView.Selected = true;
-		B_ListView.Selected = false;
+		C_ViewTypeControl.GridView = true;
 		LC_Items.GridView = true;
 	}
 

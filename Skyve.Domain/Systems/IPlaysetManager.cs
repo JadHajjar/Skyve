@@ -30,6 +30,7 @@ public interface IPlaysetManager
 	IPlayset? GetPlayset(int id);
 	ICustomPlayset GetCustomPlayset(IPlayset playset);
 	Task DeactivateActivePlayset();
+	void Save(ICustomPlayset customPlayset);
 
 #if CS1
 	IPlayset TemporaryPlayset { get; }
