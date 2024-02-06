@@ -343,7 +343,7 @@ public class CompatibilityMessageControl : SlickControl
 				}
 				else if (e.Button == MouseButtons.Right && item.Key.GetWorkshopPackage() is not null)
 				{
-					var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item.Key.GetWorkshopPackage()!);
+					var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item.Key.GetWorkshopPackage()!);
 
 					this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 				}

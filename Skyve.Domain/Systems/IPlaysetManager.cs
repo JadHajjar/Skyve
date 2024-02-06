@@ -10,17 +10,17 @@ public interface IPlaysetManager
 	ICustomPlayset? CurrentCustomPlayset { get; }
 	IEnumerable<IPlayset> Playsets { get; }
 
-	void AddPlayset(IPlayset newPlayset);
+	Task AddPlayset(IPlayset newPlayset);
 	void CreateShortcut(IPlayset item);
 	Task<bool> DeletePlayset(IPlayset playset);
 	Task<bool> ExcludeFromCurrentPlayset(IPlayset playset);
 	string GetFileName(IPlayset playset);
 	List<IPackage> GetInvalidPackages(PackageUsage usage);
 	Task<IPlayset?> CreateNewPlayset(string playsetName);
-	IPlayset? ImportPlayset(string obj);
+	Task<IPlayset?> ImportPlayset(string obj);
 	Task<bool> MergeIntoCurrentPlayset(IPlayset playset);
 	Task<bool> RenamePlayset(IPlayset playset, string text);
-	void SetCurrentPlayset(IPlayset playset);
+	Task ActivatePlayset(IPlayset playset);
 	Task Initialize();
 	Task SetIncludedForAll(IPackageIdentity package, bool value);
 	Task SetIncludedForAll(IEnumerable<IPackageIdentity> packages, bool value);

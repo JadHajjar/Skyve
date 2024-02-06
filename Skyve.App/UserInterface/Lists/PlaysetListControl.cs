@@ -1,5 +1,7 @@
-﻿using Skyve.App.UserInterface.Panels;
+﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Panels;
 using Skyve.Compatibility.Domain.Interfaces;
+using Skyve.Domain;
 using Skyve.Domain.Systems;
 
 using System.Drawing;
@@ -124,7 +126,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		};
 	}
 
-	protected override void OnItemMouseClick(DrawableItem<IPlayset, Rectangles> item, MouseEventArgs e)
+	protected override async void OnItemMouseClick(DrawableItem<IPlayset, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -170,7 +172,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			{
 				LoadPlaysetStarted?.Invoke();
 
-				_playsetManager.SetCurrentPlayset(item.Item);
+				await _playsetManager.ActivatePlayset(item.Item);
 			}
 		}
 		else if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
@@ -235,46 +237,22 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 	private void ChangeColor(IPlayset item)
 	{
-		throw new NotImplementedException();
-		//var colorDialog = new SlickColorPicker(item.Color ?? Color.Red);
+		var customPlayset = item.GetCustomPlayset();
+		var colorDialog = new SlickColorPicker(customPlayset.Color ?? FormDesign.Design.ActiveColor);
 
-		//if (colorDialog.ShowDialog() != DialogResult.OK)
-		//{
-		//	return;
-		//}
+		if (colorDialog.ShowDialog() != DialogResult.OK)
+		{
+			return;
+		}
 
-		//item.Color = colorDialog.Color;
-		//_profileManager.Save(item!);
+		customPlayset.Color = colorDialog.Color;
+
+		_playsetManager.Save(customPlayset);
 	}
 
-	private void ShowRightClickMenu(IPlayset item)
+	private void ShowRightClickMenu(IPlayset playset)
 	{
-		throw new NotImplementedException();
-		//var local = item is not IOnlinePlayset;
-
-		//var items = new SlickStripItem[]
-		//{
-		//	  new (Locale.DownloadPlayset, "I_Install", !local, action: () => DownloadProfile(item))
-		//	, new (Locale.ViewThisPlaysetsPackages, "I_ViewFile", action: () => ShowProfileContents(item))
-		////	, new (item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item); })
-		//	, new (Locale.ChangePlaysetColor, "I_Paint", local, action: () => this.TryBeginInvoke(() => ChangeColor(item)))
-		//	, new (Locale.CreateShortcutPlayset, "I_Link", local && CrossIO.CurrentPlatform is Platform.Windows, action: () => _profileManager.CreateShortcut(item!))
-		//	, new (Locale.OpenPlaysetFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(_profileManager.GetFileName(item!)))
-		//	, new (string.Empty, show: local)
-		//	, new (Locale.SharePlayset, "I_Share", local && item.ProfileId == 0 && _userService.User.Id is not null && downloading != item, action: async () => await ShareProfile(item))
-		//	, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && _userService.User.Equals(item.Author), action: async () => await ServiceCenter.Get<IOnlinePlaysetUtil>().SetVisibility((item as IPlayset)!, !item.Public))
-		//	, new (Locale.UpdatePlayset, "I_Share", local && item.ProfileId != 0 && _userService.User.Equals(item.Author), action: async () => await ShareProfile(item))
-		//	, new (Locale.DownloadPlayset, "I_Refresh", local && item.ProfileId != 0 && item.Author != _userService.User.Id, action: () => DownloadProfile(item))
-		//	, new (Locale.CopyPlaysetLink, "I_LinkChain", local && item.ProfileId != 0, action: () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)))
-		//	, new (string.Empty, show: local)
-		//	, new (Locale.ActivatePlayset, "I_Install", local, action: () => LoadProfile?.Invoke(item!))
-		//	, new (Locale.PlaysetMerge, "I_Merge", local, action: () => MergeProfile?.Invoke(item!))
-		//	, new (Locale.PlaysetExclude, "I_Exclude", local, action: () => ExcludeProfile?.Invoke(item!))
-		//	, new (string.Empty)
-		//	, new (Locale.PlaysetDelete, "I_Disposable", local || _userService.User.Equals(item.Author), action: async () => { if(local) { DisposeProfile?.Invoke(item!); } else if(await ServiceCenter.Get<IOnlinePlaysetUtil>().DeleteOnlinePlayset((item as IOnlinePlayset)!)) { base.Remove(item); } })
-		//};
-
-		//this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(playset, !ReadOnly)));
 	}
 
 	private async Task ShareProfile(IPlayset item)
@@ -571,8 +549,6 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<IPlayset, Rectangles> e)
 	{
-		var large = false;
-		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 		var customPlayset = e.Item.GetCustomPlayset();
 		var banner = customPlayset.GetThumbnail();
 		var onBannerColor = (customPlayset.Color ?? Color.Black).GetTextColor();

@@ -122,7 +122,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (rects.MoreRect.Contains(e.Location))
 		{
-			var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item.Item);
+			var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item.Item);
 
 			this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 

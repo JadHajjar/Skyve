@@ -32,6 +32,7 @@ public interface IUserSettings
 	Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; }
 #if CS2
 	ParadoxLoginInfo ParadoxLogin { get; set; }
+	bool FilterIncludedByDefault { get; set; }
 #endif
 
 	void Save();

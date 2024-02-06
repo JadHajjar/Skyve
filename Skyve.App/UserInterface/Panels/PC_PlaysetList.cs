@@ -269,7 +269,7 @@ public partial class PC_PlaysetList : PanelContent
 		//B_Discover.Loading = false;
 	}
 
-	public void Import(string file)
+	public async void Import(string file)
 	{
 		try
 		{
@@ -318,7 +318,7 @@ public partial class PC_PlaysetList : PanelContent
 			else
 #endif
 			{
-				profile ??= _playsetManager.ImportPlayset(file);
+				profile ??= await _playsetManager.ImportPlayset(file);
 			}
 
 			if (profile is not null)

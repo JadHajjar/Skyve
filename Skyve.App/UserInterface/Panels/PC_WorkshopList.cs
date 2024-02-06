@@ -13,7 +13,7 @@ namespace Skyve.App.UserInterface.Panels;
 public class PC_WorkshopList : PanelContent
 {
 	private IWorkshopService _workshopService;
-	protected readonly WorkshopContentList LC_Items;
+	internal protected readonly WorkshopContentList LC_Items;
 	private readonly bool _itemsReady;
 
 	public PC_WorkshopList() : base(false)
@@ -40,7 +40,7 @@ public class PC_WorkshopList : PanelContent
 #if CS2
 		Text = "PDX Mods";
 #else
-		Text="Steam Workshop";
+		Text = "Steam Workshop";
 #endif
 	}
 

@@ -223,7 +223,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.ThenByDescending(x => x.Item.GetPackage() is IPackage package ? _modUtil.GetLoadOrder(package) : 0)
 				.ThenBy(x => x.Item.ToString()),
 
-			_ => items
+			_ => _page is SkyvePage.Workshop ? items : items
 				.OrderBy(x => !(x.Item.IsIncluded(out var partial) || partial))
 				.ThenBy(x => !x.Item.IsEnabled())
 				.ThenBy(x => x.Item.IsLocal())
@@ -645,9 +645,9 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 	public void ShowRightClickMenu(IPackageIdentity item)
 	{
-		var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems((SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new IPackageIdentity[] { item }).Cast<IPackage>());
+		var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems((SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new IPackageIdentity[] { item }).Cast<IPackage>());
 
-		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 	}
 
 	private bool GetStatusDescriptors(IPackageIdentity mod, out string text, out DynamicIcon? icon, out Color color)

@@ -3,9 +3,14 @@
 namespace Skyve.App.UserInterface.Panels;
 public class PC_Mods : PC_ContentList
 {
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
+
 	public PC_Mods()
 	{
-		LC_Items.OT_Included.SelectedValue = Generic.ThreeOptionToggle.Value.Option1;
+		if (_settings.UserSettings.FilterIncludedByDefault)
+		{
+			LC_Items.OT_Included.SelectedValue = Generic.ThreeOptionToggle.Value.Option1;
+		}
 	}
 
 	public override SkyvePage Page => SkyvePage.Mods;

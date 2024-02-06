@@ -1016,7 +1016,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				}
 				else if (e.Button == MouseButtons.Right && rect.Key.GetLocalPackage() is not null)
 				{
-					var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(rect.Key.GetLocalPackage()!);
+					var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(rect.Key.GetLocalPackage()!);
 
 					this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 				}
@@ -1080,7 +1080,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	public void ShowRightClickMenu(IPackageIdentity item)
 	{
-		var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item);
+		var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item);
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
 	}

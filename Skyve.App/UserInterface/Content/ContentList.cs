@@ -168,13 +168,16 @@ public partial class ContentList : SlickControl
 
 	private void LC_Items_OpenWorkshopSearch()
 	{
-		Program.MainForm.PushPanel(null, new PC_SelectPackage(TB_Search.Text, Page is SkyvePage.Mods ? ThreeOptionToggle.Value.Option1 : Page is SkyvePage.Assets ? ThreeOptionToggle.Value.Option2 : ThreeOptionToggle.Value.None));
+		var panel = new PC_WorkshopList();
+
+		panel.LC_Items.TB_Search.Text = TB_Search.Text;
+		panel.LC_Items.OT_ModAsset.SelectedValue = Page is SkyvePage.Mods ? ThreeOptionToggle.Value.Option1 : Page is SkyvePage.Assets ? ThreeOptionToggle.Value.Option2 : ThreeOptionToggle.Value.None;
 	}
 
 	private void LC_Items_OpenWorkshopSearchInBrowser()
 	{
 #if CS2
-		throw new NotImplementedException();
+		PlatformUtil.OpenUrl("https://mods.paradoxplaza.com/games/cities_skylines_2");
 #else
 		PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/browse/?appid=255710&searchtext={WebUtility.UrlEncode(TB_Search.Text)}&browsesort=trend&section=readytouseitems&actualsort=trend&p=1&days=365" + (Page is SkyvePage.Mods ? "&requiredtags%5B0%5D=Mod" : ""));
 #endif

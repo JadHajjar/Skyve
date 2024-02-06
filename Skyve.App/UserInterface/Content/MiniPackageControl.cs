@@ -64,7 +64,7 @@ public class MiniPackageControl : SlickControl
 
 				break;
 			case MouseButtons.Right:
-				var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(Package);
+				var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(Package);
 
 				this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 				break;
