@@ -21,12 +21,12 @@ public class LoggerSystem : ILogger
 	public string LogFilePath { get; }
 	public string PreviousLogFilePath { get; }
 
-	public LoggerSystem(ISettings _)
+	public LoggerSystem(string name)
 	{
 		var folder = CrossIO.Combine(ISave.SaveFolder, "Logs");
 
-		PreviousLogFilePath = CrossIO.Combine(folder, $"SkyveApp_Previous.log");
-		LogFilePath = CrossIO.Combine(folder, $"SkyveApp.log");
+		PreviousLogFilePath = CrossIO.Combine(folder, $"{name}_Previous.log");
+		LogFilePath = CrossIO.Combine(folder, $"{name}.log");
 
 		_stopwatch = Stopwatch.StartNew();
 
@@ -46,15 +46,17 @@ public class LoggerSystem : ILogger
 
 			File.WriteAllBytes(LogFilePath, new byte[0]);
 
-			_stopwatch = Stopwatch.StartNew();
-
 			var assembly = Assembly.GetEntryAssembly();
 			var details = assembly.GetName();
 
+			_stopwatch = Stopwatch.StartNew();
+
 #if STABLE
 			Info($"Skyve Stable v{details.Version}");
-#else
+#elif Release
 			Info($"Skyve Beta v{details.Version}");
+#else
+			Info($"Skyve Debug v{details.Version}");
 #endif
 
 			Info($"Now  = {DateTime.Now:yyyy-MM-dd hh:mm:ss tt}");
@@ -89,6 +91,11 @@ public class LoggerSystem : ILogger
 	public void Exception(Exception exception, object message)
 	{
 		ProcessLog("FATAL", $"{message}\r\n{exception}\r\n");
+	}
+
+	public void Exception(object message)
+	{
+		ProcessLog("FATAL", message);
 	}
 
 	protected void ProcessLog(string type, object content)

@@ -5,6 +5,7 @@ public interface IPackageManager
 {
 	IEnumerable<IAsset> Assets { get; }
 	IEnumerable<IPackage> Packages { get; }
+	IEnumerable<IAsset> SaveGames { get; }
 
 	IPackage? GetPackageById(IPackageIdentity identity);
 	IPackage? GetPackageByFolder(string folder);

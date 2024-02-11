@@ -178,7 +178,7 @@ public class PackageDescriptionControl : SlickImageControl
 		if (rects.ScoreRect.Contains(e.Location))
 		{
 			throw new NotImplementedException();
-			return;
+			//return;
 		}
 
 		if (rects.DateRect.Contains(e.Location))

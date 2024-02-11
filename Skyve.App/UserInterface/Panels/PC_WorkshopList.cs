@@ -12,9 +12,8 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Panels;
 public class PC_WorkshopList : PanelContent
 {
-	private IWorkshopService _workshopService;
+	private readonly IWorkshopService _workshopService;
 	internal protected readonly WorkshopContentList LC_Items;
-	private readonly bool _itemsReady;
 
 	public PC_WorkshopList() : base(false)
 	{

@@ -24,7 +24,7 @@ public class PC_Mods : PC_ContentList
 
 	protected override async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
-		return await Task.FromResult(ServiceCenter.Get<IPackageManager>().Packages);
+		return await Task.FromResult(ServiceCenter.Get<IPackageManager>().Packages.Where(x => x.IsCodeMod));
 	}
 
 	protected override string GetCountText()

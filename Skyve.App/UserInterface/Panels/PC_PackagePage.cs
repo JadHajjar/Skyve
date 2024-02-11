@@ -58,7 +58,7 @@ public partial class PC_PackagePage : PanelContent
 			TLP_Info.ColumnStyles[1].Width = 0;
 		}
 
-		if (Package is ILocalPackageData p && p.Assets is not null && p.Assets.Length > 0)
+		if (Package.GetLocalPackage() is ILocalPackageData p && p.Assets is not null && p.Assets.Length > 0)
 		{
 			if (_settings.UserSettings.ComplexListUI)
 			{
@@ -100,20 +100,20 @@ public partial class PC_PackagePage : PanelContent
 			AddTags();
 		}
 
-		//if (GetItems().Any())
-		//{
-		//	LC_References = new ContentList(SkyvePage.SinglePackage, true, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
-		//	{
-		//		Dock = DockStyle.Fill
-		//	};
+		if (GetItems().Result.Any())
+		{
+			LC_References = new ContentList(SkyvePage.SinglePackage, true, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+			{
+				Dock = DockStyle.Fill
+			};
 
-		//	LC_References.TB_Search.Placeholder = "SearchGenericPackages";
+			LC_References.TB_Search.Placeholder = "SearchGenericPackages";
 
-		//	LC_References.RefreshItems();
+			LC_References.RefreshItems().RunSynchronously();
 
-		//	T_References.LinkedControl = LC_References;
-		//}
-		//else
+			T_References.LinkedControl = LC_References;
+		}
+		else
 		{
 			tabs.Remove(T_References);
 		}
@@ -146,7 +146,7 @@ public partial class PC_PackagePage : PanelContent
 		_notifier.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
 	}
 
-	protected async Task<IEnumerable<IPackage>> GetItems()
+	protected async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
 		return await Task.FromResult(_packageUtil.GetPackagesThatReference(Package, _settings.UserSettings.ShowAllReferencedPackages));
 	}

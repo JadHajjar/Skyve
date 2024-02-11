@@ -33,43 +33,29 @@ public class PackageUtil : IPackageUtil
 
 	public bool IsIncluded(IPackageIdentity identity, int? playsetId = null)
 	{
-		if (identity is ILocalPackageData localPackage)
-		{
-			foreach (var item in localPackage.Assets)
-			{
-				if (_assetUtil.IsIncluded(item, playsetId))
-				{
-					return true;
-				}
-			}
-
-			return _modUtil.IsIncluded(identity, playsetId);
-		}
-
 		if (identity is IAsset asset)
 		{
 			return _assetUtil.IsIncluded(asset, playsetId);
 		}
 
-		var package = identity.GetLocalPackage();
-
-		return package is not null ? IsIncluded(package, playsetId) : _modUtil.IsIncluded(identity, playsetId);
+		return _modUtil.IsIncluded(identity, playsetId);
 	}
 
 	public bool IsIncluded(IPackageIdentity identity, out bool partiallyIncluded, int? playsetId = null)
 	{
-		var included = false;
-		var excluded = false;
-
 		if (identity is ILocalPackageData localPackage)
 		{
+			bool included, excluded = false;
+
 			if (_modUtil.IsIncluded(localPackage, playsetId))
 			{
 				included = true;
 			}
 			else
 			{
-				excluded = true;
+				partiallyIncluded = false;
+
+				return false;
 			}
 
 			foreach (var item in localPackage.Assets)
@@ -200,7 +186,7 @@ public class PackageUtil : IPackageUtil
 #if CS2
 		reason = string.Empty;
 		return DownloadStatus.OK;
-#endif
+#else
 
 		if (workshopInfo.ServerTime == default)
 		{
@@ -236,6 +222,7 @@ public class PackageUtil : IPackageUtil
 
 		reason = string.Empty;
 		return DownloadStatus.OK;
+#endif
 	}
 
 	public IEnumerable<IPackage> GetPackagesThatReference(IPackageIdentity package, bool withExcluded = false)

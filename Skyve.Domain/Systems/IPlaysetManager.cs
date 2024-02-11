@@ -10,7 +10,7 @@ public interface IPlaysetManager
 	ICustomPlayset? CurrentCustomPlayset { get; }
 	IEnumerable<IPlayset> Playsets { get; }
 
-	Task AddPlayset(IPlayset newPlayset);
+	Task<IPlayset?> AddPlayset(IPlayset newPlayset);
 	void CreateShortcut(IPlayset item);
 	Task<bool> DeletePlayset(IPlayset playset);
 	Task<bool> ExcludeFromCurrentPlayset(IPlayset playset);

@@ -10,8 +10,10 @@ public class IncludeAllButton : SlickControl
 	private readonly bool _doubleButtons;
 	private readonly Func<List<IPackageIdentity>> GetPackages;
 	private Rectangle IncludedRect;
-	private Rectangle EnabledRect;
 	private Rectangle ActionRect;
+#if CS1
+	private Rectangle EnabledRect;
+#endif
 
 	public event EventHandler? ActionClicked;
 	public TaskAction? IncludeAllClicked;

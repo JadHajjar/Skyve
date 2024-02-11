@@ -47,8 +47,13 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		AllowDrop = true;
 
 		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _settings, out _modUtil, out _modLogicManager);
+	}
 
-		if (_settings is not null && _settings.UserSettings.PageSettings.ContainsKey(SkyvePage.CompatibilityReport))
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		if (Live && _settings.UserSettings.PageSettings.ContainsKey(SkyvePage.CompatibilityReport))
 		{
 			sorting = (PackageSorting)_settings.UserSettings.PageSettings[SkyvePage.CompatibilityReport].Sorting;
 			SortDescending = _settings.UserSettings.PageSettings[SkyvePage.CompatibilityReport].DescendingSort;
@@ -1088,6 +1093,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	private void Clicked(ICompatibilityInfo info, ICompatibilityItem Message, IPackageIdentity item, bool button)
 	{
 		var package = item.GetWorkshopPackage();
+		_ = info;
 
 		if (!button)
 		{

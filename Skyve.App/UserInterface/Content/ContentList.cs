@@ -272,7 +272,6 @@ public partial class ContentList : SlickControl
 		TLP_MiddleBar.BackColor = design.AccentBackColor;
 		P_Filters.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme ? -1 : 1);
 		ListControl.BackColor = design.BackColor;
-		L_Counts.ForeColor = L_FilterCount.ForeColor = design.InfoColor;
 	}
 
 	protected override void LocaleChanged()
@@ -317,8 +316,7 @@ public partial class ContentList : SlickControl
 		base.UIChanged();
 
 		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
-			= L_Counts.Margin = L_FilterCount.Margin = I_SortOrder.Padding
-			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
+			= I_SortOrder.Padding = B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
 
 		B_Filters.Size = B_Filters.GetAutoSize(true);
 
@@ -329,7 +327,6 @@ public partial class ContentList : SlickControl
 		TLP_MiddleBar.Padding = UI.Scale(new Padding(3, 0, 3, 0), UI.FontScale);
 
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
-		L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
 		TB_Search.Width = (int)(250 * UI.FontScale);
 
@@ -646,16 +643,8 @@ public partial class ContentList : SlickControl
 			ListControl.SelectedItemsCount,
 			Locale.ItemsHidden.FormatPlural(UsageFilteredOut, GetItemText().FormatPlural(ListControl.FilteredCount).ToLower()));
 
-		if (L_Counts.Text != countText)
-		{
-			L_Counts.Text = countText;
-		}
-
-		if (L_FilterCount.Text != filteredText)
-		{
-			L_FilterCount.Visible = !string.IsNullOrEmpty(filteredText);
-			L_FilterCount.Text = filteredText;
-		}
+		L_Counts.RightText = countText;
+		L_Counts.LeftText = filteredText;
 
 		I_Actions.Invalidate();
 		I_Refresh.Loading = false;
