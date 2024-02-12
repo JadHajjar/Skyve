@@ -37,6 +37,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private readonly IModLogicManager _modLogicManager;
 	private readonly IUserService _userService;
 	private readonly ISubscriptionsManager _subscriptionsManager;
+	private readonly IPlaysetManager _playsetManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
 	private readonly ITagsService _tagsService;
@@ -61,7 +62,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	protected ItemListControl(SkyvePage page)
 	{
 		_page = page;
-		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _userService, out _subscriptionsManager, out _packageUtil, out _modUtil);
+		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _userService, out _playsetManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
 
 		SeparateWithLines = true;
 		EnableSelection = true;
@@ -244,7 +245,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			return;
 		}
 
-		if (e.Button != MouseButtons.Left || item.Loading)
+		if (e.Button != MouseButtons.Left)
 		{
 			return;
 		}

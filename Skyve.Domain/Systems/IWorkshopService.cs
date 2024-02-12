@@ -1,5 +1,6 @@
 ﻿using Skyve.Domain.Enums;
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace Skyve.Domain.Systems;
 public interface IWorkshopService
 {
 	bool IsReady { get; }
+	IDisposable Lock { get; }
 
 	void ClearCache();
 	Task<IEnumerable<ITag>> GetAvailableTags();
@@ -18,6 +20,7 @@ public interface IWorkshopService
 	Task<IEnumerable<IWorkshopInfo>> GetWorkshopItemsByUserAsync(object userId);
 	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, string? query = null, string[]? requiredTags = null, bool all = false);
 #if CS2
+	bool IsLoggedIn { get; }
 	Task Initialize();
 	Task Login();
 	Task<bool> Login(string email, string password, bool rememberMe);
