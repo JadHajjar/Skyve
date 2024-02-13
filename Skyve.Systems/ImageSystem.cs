@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Skyve.Systems;
@@ -24,14 +25,16 @@ internal class ImageSystem : IImageService
 	private readonly HttpClient _httpClient = new();
 	private readonly ImageProcessor _imageProcessor;
 	private readonly INotifier _notifier;
+	private readonly SaveHandler _saveHandler;
 
-	public ImageSystem(INotifier notifier)
+	public ImageSystem(INotifier notifier, SaveHandler saveHandler)
 	{
 		_imageProcessor = new(this);
 		_cacheClearTimer = new System.Timers.Timer(_expirationTime.TotalMilliseconds);
 		_cacheClearTimer.Elapsed += CacheClearTimer_Elapsed;
 		_cacheClearTimer.Start();
 		_notifier = notifier;
+		_saveHandler = saveHandler;
 
 		new BackgroundAction(ClearOldImages).Run();
 	}
@@ -51,7 +54,7 @@ internal class ImageSystem : IImageService
 
 	public FileInfo File(string url, string? fileName = null)
 	{
-		var filePath = CrossIO.Combine(ISave.SaveFolder, "Thumbs", fileName ?? Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
+		var filePath = CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, "Thumbs", fileName ?? Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
 
 		return new FileInfo(filePath);
 	}
@@ -117,7 +120,7 @@ internal class ImageSystem : IImageService
 				{
 					if (!filePath.Exists || new FileInfo(url).Length != filePath.Length)
 					{
-						Directory.CreateDirectory(CrossIO.Combine(ISave.SaveFolder, "Thumbs"));
+						Directory.CreateDirectory(CrossIO.Combine(_saveHandler.SaveDirectory, "Thumbs"));
 
 						System.IO.File.Copy(url, filePath.FullName, true);
 					}
@@ -280,7 +283,7 @@ internal class ImageSystem : IImageService
 
 			_cache.Clear();
 
-			foreach (var item in Directory.EnumerateFiles(CrossIO.Combine(ISave.SaveFolder, "Thumbs")))
+			foreach (var item in Directory.EnumerateFiles(CrossIO.Combine(_saveHandler.SaveDirectory, "Thumbs")))
 			{
 				try
 				{
@@ -293,7 +296,7 @@ internal class ImageSystem : IImageService
 
 	private void ClearOldImages()
 	{
-		foreach (var item in new DirectoryInfo(CrossIO.Combine(ISave.SaveFolder, "Thumbs")).EnumerateFiles())
+		foreach (var item in new DirectoryInfo(CrossIO.Combine(_saveHandler.SaveDirectory, "Thumbs")).EnumerateFiles())
 		{
 			try
 			{

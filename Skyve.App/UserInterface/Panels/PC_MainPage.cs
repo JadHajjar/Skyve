@@ -25,7 +25,7 @@ public partial class PC_MainPage : PanelContent
 
 		TLP_FirstTime.Visible = !_settings.SessionSettings.DashboardFirstTimeShown;
 
-		ISave.Load(out _dashItemSizes, "DashboardLayout.json");
+		ServiceCenter.Get<SaveHandler>().Load(out _dashItemSizes, "DashboardLayout.json");
 		_dashItemSizes ??= GetDefaultLayout();
 
 		P_Board.SuspendLayout();
@@ -496,7 +496,7 @@ public partial class PC_MainPage : PanelContent
 
 	private void SaveLayout()
 	{
-		ISave.Save(_dashItemSizes, "DashboardLayout.json");
+		ServiceCenter.Get<SaveHandler>().Save(_dashItemSizes, "DashboardLayout.json");
 	}
 	private class DashItemRect
 	{

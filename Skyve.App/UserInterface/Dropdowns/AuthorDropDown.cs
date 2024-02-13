@@ -18,6 +18,8 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 
 	public void SetItems<T>(IEnumerable<T?> enumerable) where T : IPackageIdentity
 	{
+		_counts.Clear();
+
 		foreach (var item in enumerable.SelectWhereNotNull(x => x?.GetWorkshopInfo()?.Author))
 		{
 			if (_counts.ContainsKey(item!))
@@ -30,7 +32,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 			}
 		}
 
-		Items = _counts.Keys.ToArray();
+		Items = [.. _counts.Keys];
 	}
 
 	protected override IEnumerable<IUser> OrderItems(IEnumerable<IUser> items)
@@ -49,6 +51,8 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 		{ return; }
 
 		var text = item.Name;
+
+#if CS1
 		var icon = _imageManager.GetImage(item.AvatarUrl, true).Result;
 		var avatarRect = rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
 
@@ -68,6 +72,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 		}
 
 		rectangle = rectangle.Pad(rectangle.Height + Padding.Left, 0, 0, 0);
+#endif
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 

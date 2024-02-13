@@ -125,12 +125,12 @@ public abstract class ConfigFile
 
 	private void SerializeJson()
 	{
-		ISave.Write(FilePath, JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented), false);
+		ServiceCenter.Get<SaveHandler>().Write(FilePath, JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented), false);
 	}
 
 	private static T DeserializeJson<T>(string filePath) where T : ConfigFile
 	{
-		var fileContents = ISave.Read(filePath);
+		var fileContents = ServiceCenter.Get<SaveHandler>().Read(filePath);
 
 		return string.IsNullOrEmpty(fileContents)
 			? throw new Exception("File contents empty")
@@ -212,7 +212,7 @@ public abstract class ConfigFile
 
 	private static object DeserializeJson(string filePath, Type type)
 	{
-		var fileContents = ISave.Read(filePath);
+		var fileContents = ServiceCenter.Get<SaveHandler>().Read(filePath);
 
 		return string.IsNullOrEmpty(fileContents)
 			? throw new Exception("File contents empty")

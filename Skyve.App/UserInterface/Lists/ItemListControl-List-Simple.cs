@@ -179,27 +179,33 @@ public partial class ItemListControl
 
 			if (workshopInfo is not null)
 			{
-				var isHovered = rect.Contains(CursorLocation);
-				var text = Locale.VotesCount.FormatPlural(workshopInfo.VoteCount, workshopInfo.VoteCount.ToString("N0"));
-				var text2 = Locale.SubscribersCount.FormatPlural(workshopInfo.Subscribers, workshopInfo.Subscribers.ToString("N0"));
+				if (workshopInfo.VoteCount >= 0)
+				{
+					var isHovered = rect.Contains(CursorLocation);
+					var text = Locale.VotesCount.FormatPlural(workshopInfo.VoteCount, workshopInfo.VoteCount.ToString("N0"));
+					using var fontBold = UI.Font(8.25F, FontStyle.Bold);
+					using var fontUnderline = UI.Font(8.25F, workshopInfo.HasVoted ? FontStyle.Bold | FontStyle.Underline : FontStyle.Underline);
+					using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor.MergeColor(brush.Color, 75));
+					using var icon = IconManager.GetIcon(workshopInfo.HasVoted ? "I_VoteFilled" : "I_Vote", itemHeight + Padding.Top).Color(isHovered || workshopInfo.HasVoted ? greenBrush.Color : brush.Color);
+					using var font = UI.Font(8.25F).FitToWidth(text, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
-				using var fontBold = UI.Font(8.25F, FontStyle.Bold);
-				using var fontUnderline = UI.Font(8.25F, workshopInfo.HasVoted ? FontStyle.Bold | FontStyle.Underline : FontStyle.Underline);
-				using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor.MergeColor(brush.Color, 75));
-				using var icon = IconManager.GetIcon(workshopInfo.HasVoted ? "I_VoteFilled" : "I_Vote", itemHeight + Padding.Top).Color(isHovered || workshopInfo.HasVoted ? greenBrush.Color : brush.Color);
-				using var font = UI.Font(8.25F).FitToWidth(text, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+					e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
+					e.Graphics.DrawString(text, isHovered ? fontUnderline : workshopInfo.HasVoted ? fontBold : font, isHovered || workshopInfo.HasVoted ? greenBrush : brush, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), stringFormat);
 
-				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(text, isHovered ? fontUnderline : workshopInfo.HasVoted ? fontBold : font, isHovered || workshopInfo.HasVoted ? greenBrush : brush, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), stringFormat);
-
-				e.Rects.ScoreRect = rect;
+					e.Rects.ScoreRect = rect;
+				}
 
 				tick();
 
-				using var subsIcon = IconManager.GetIcon("I_People", itemHeight + Padding.Top).Color(brush.Color);
-				using var font2 = UI.Font(8.25F).FitToWidth(text2, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0), e.Graphics);
-				e.Graphics.DrawImage(subsIcon, rect.Align(subsIcon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(text2, font2, brush, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0), stringFormat);
+				if (workshopInfo.Subscribers >= 0)
+				{
+					var text2 = Locale.SubscribersCount.FormatPlural(workshopInfo.Subscribers, workshopInfo.Subscribers.ToString("N0"));
+					using var subsIcon = IconManager.GetIcon("I_People", itemHeight + Padding.Top).Color(brush.Color);
+					using var font2 = UI.Font(8.25F).FitToWidth(text2, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+
+					e.Graphics.DrawImage(subsIcon, rect.Align(subsIcon.Size, ContentAlignment.MiddleLeft));
+					e.Graphics.DrawString(text2, font2, brush, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0), stringFormat);
+				}
 			}
 
 			void tick()
@@ -252,7 +258,7 @@ public partial class ItemListControl
 					CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
 					Padding,
 					height,
-					CursorLocation,
+					null,
 					CompactList);
 			}
 

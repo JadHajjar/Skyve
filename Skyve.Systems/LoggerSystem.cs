@@ -21,9 +21,9 @@ public class LoggerSystem : ILogger
 	public string LogFilePath { get; }
 	public string PreviousLogFilePath { get; }
 
-	public LoggerSystem(string name)
+	public LoggerSystem(string name, SaveHandler saveHandler)
 	{
-		var folder = CrossIO.Combine(ISave.SaveFolder, "Logs");
+		var folder = CrossIO.Combine(saveHandler.SaveDirectory, SaveHandler.AppName, "Logs");
 
 		PreviousLogFilePath = CrossIO.Combine(folder, $"{name}_Previous.log");
 		LogFilePath = CrossIO.Combine(folder, $"{name}.log");

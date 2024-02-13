@@ -80,12 +80,12 @@ public partial class ItemListControl
 			{
 				var rect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y + e.DrawableItem.CachedHeight - Padding.Vertical, e.ClipRectangle.Width, height);
 
-				outerColor = Color.FromArgb(rect.Contains(CursorLocation) ? 200 : 255, color);
+				outerColor = Color.FromArgb(200, color);
 
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
 				using var image = icon!.Get(baseFont.Height * 4 / 3).Color(textBrush.Color);
-				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), e.Graphics);
+				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text, rect.Pad(image.Width * 2, GridPadding.Top, image.Width * 2, GridPadding.Bottom), e.Graphics);
 				using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false, notificationType <= NotificationType.Info, notificationType <= NotificationType.Info);
@@ -100,7 +100,7 @@ public partial class ItemListControl
 
 				if (notificationType > NotificationType.Info)
 				{
-					e.DrawableItem.CachedHeight -= GridPadding.Top;
+					e.DrawableItem.CachedHeight -= GridPadding.Top / 2;
 				}
 			}
 
@@ -114,7 +114,7 @@ public partial class ItemListControl
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
 				using var image = notificationType.Value.GetIcon(false).Get(baseFont.Height * 4 / 3).Color(textBrush.Color);
-				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text2, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), e.Graphics);
+				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text2, rect.Pad(image.Width * 2, GridPadding.Top, image.Width * 2, GridPadding.Bottom), e.Graphics);
 				using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false);

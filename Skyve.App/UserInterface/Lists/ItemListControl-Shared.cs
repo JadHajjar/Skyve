@@ -151,7 +151,24 @@ public partial class ItemListControl
 
 		if (e.DrawableItem.Loading)
 		{
-			DrawLoader(e.Graphics, e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Height / 2, e.Rects.IncludedRect.Height / 2), iconColor);
+			var rectangle = e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Height * 3 / 5, e.Rects.IncludedRect.Height * 3 / 5);
+#if CS2
+			if (_subscriptionsManager.Status.ModId != e.Item.Id || _subscriptionsManager.Status.Progress == 0 || !_subscriptionsManager.Status.IsActive)
+			{
+				DrawLoader(e.Graphics, rectangle, iconColor);
+				return;
+			}
+
+			var width = Math.Min(Math.Min(rectangle.Width, rectangle.Height), (int)(32 * UI.UIScale));
+			var size = (float)Math.Max(2, width / (8D - (Math.Abs(100 - LoaderPercentage) / 50)));
+			var drawSize = new SizeF(width - size, width - size);
+			var rect = new RectangleF(new PointF(rectangle.X + ((rectangle.Width - drawSize.Width) / 2), rectangle.Y + ((rectangle.Height - drawSize.Height) / 2)), drawSize).Pad(size / 2);
+			using var pen = new Pen(iconColor, size) { StartCap = LineCap.Round, EndCap = LineCap.Round };
+			
+			e.Graphics.DrawArc(pen, rect, -90, 360 * _subscriptionsManager.Status.Progress);
+#else
+			DrawLoader(e.Graphics, rectangle, iconColor);
+#endif
 			return;
 		}
 
@@ -230,7 +247,7 @@ public partial class ItemListControl
 			}
 		}
 #endif
-	private void DrawTitleAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
+			private void DrawTitleAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 	{
 		var padding = GridView ? GridPadding : Padding;
 		var text = e.Item.CleanName(out var tags);

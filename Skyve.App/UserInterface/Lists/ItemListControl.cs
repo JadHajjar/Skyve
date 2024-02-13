@@ -719,7 +719,6 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				AuthorRect.Contains(location) ||
 				FolderNameRect.Contains(location) ||
 				((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl)!.IsPackagePage) ||
-				DownloadStatusRect.Contains(location) ||
 				ScoreRect.Contains(location) ||
 				DotsRect.Contains(location) ||
 				CompatibilityRect.Contains(location) ||
