@@ -23,7 +23,6 @@ public class PackageDescriptionControl : SlickImageControl
 #pragma warning restore IDE1006
 
 	public IPackageIdentity? Package { get; private set; }
-	public PC_PackagePage? PackagePage { get; private set; }
 
 	private DrawableItem<IPackageIdentity, Rectangles>? _drawablePackage;
 
@@ -40,9 +39,8 @@ public class PackageDescriptionControl : SlickImageControl
 		ServiceCenter.Get(out _settings, out _packageUtil, out _compatibilityManager, out _subscriptionsManager, out _modUtil, out _modLogicManager, out _userService);
 	}
 
-	public void SetPackage(IPackageIdentity package, PC_PackagePage? page)
+	public void SetPackage(IPackageIdentity package)
 	{
-		PackagePage = page;
 		Package = package;
 		_drawablePackage = new DrawableItem<IPackageIdentity, Rectangles>(Package);
 
@@ -156,17 +154,6 @@ public class PackageDescriptionControl : SlickImageControl
 				Clipboard.SetText(item.Item.Id.ToString());
 			}
 
-			return;
-		}
-
-		if (rects.CompatibilityRect.Contains(e.Location))
-		{
-			{
-				if (PackagePage is not null)
-				{
-					PackagePage.T_CR.Selected = true;
-				}
-			}
 			return;
 		}
 

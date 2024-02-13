@@ -953,9 +953,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		if (rects.CompatibilityRect.Contains(e.Location))
 		{
 			{
-				var pc = new PC_PackagePage(item.Item, true);
+			ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item, true);
+				//var pc = new PC_PackagePage(item.Item, true);
 
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+				//(FindForm() as BasePanelForm)?.PushPanel(null, pc);
 
 				if (_settings.UserSettings.ResetScrollOnPackageClick)
 				{
@@ -972,7 +973,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
-			Program.MainForm.PushPanel(null, /*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetPackage()) :*/ new PC_PackagePage(item.Item));
+			ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item, false);
+			//Program.MainForm.PushPanel(null, /*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetPackage()) :*/ new PC_PackagePage(item.Item));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{
@@ -1103,7 +1105,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			}
 			else if (package is not null)
 			{
-				Program.MainForm.PushPanel(null, /*package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) :*/ new PC_PackagePage(package));
+			ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item, false);
+			//	Program.MainForm.PushPanel(null, /*package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) :*/ new PC_PackagePage(package));
 			}
 			else
 			{

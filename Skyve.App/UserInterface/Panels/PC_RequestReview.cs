@@ -27,7 +27,7 @@ public partial class PC_RequestReview : PanelContent
 		PB_Icon.Package = CurrentPackage;
 		PB_Icon.Image = null;
 		PB_Icon.LoadImage(CurrentPackage.GetWorkshopInfo()?.ThumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
-		P_Info.SetPackage(CurrentPackage, null);
+		P_Info.SetPackage(CurrentPackage);
 	}
 
 	public IPackageIdentity CurrentPackage { get; }
