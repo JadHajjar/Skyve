@@ -28,12 +28,13 @@ public class CompatibilityManager : ICompatibilityManager
 
 	private readonly ILocale _locale;
 	private readonly ILogger _logger;
+	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
 	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly IPackageManager _packageManager;
 	private readonly ICompatibilityUtil _compatibilityUtil;
-	private readonly IPackageUtil _contentUtil;
-	private readonly IPackageNameUtil _packageUtil;
+	private readonly IPackageUtil _packageUtil;
+	private readonly IPackageNameUtil _packageNameUtil;
 	private readonly IWorkshopService _workshopService;
 	private readonly IDlcManager _dlcManager;
 	private readonly SaveHandler _saveHandler;
@@ -46,21 +47,22 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public bool FirstLoadComplete { get; private set; }
 
-	public CompatibilityManager(ISkyveDataManager skyveDataManager, IPackageManager packageManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, ISkyveApiUtil skyveApiUtil, IDlcManager dlcManager, SaveHandler saveHandler)
+	public CompatibilityManager(ISkyveDataManager skyveDataManager, IPackageManager packageManager, ILogger logger, ISettings settings, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, ISkyveApiUtil skyveApiUtil, IDlcManager dlcManager, SaveHandler saveHandler)
 	{
 		_skyveDataManager = skyveDataManager;
 		_packageManager = packageManager;
 		_logger = logger;
 		_notifier = notifier;
 		_compatibilityUtil = compatibilityUtil;
-		_contentUtil = contentUtil;
+		_packageUtil = contentUtil;
 		_locale = locale;
-		_packageUtil = packageUtil;
+		_settings = settings;
+		_packageNameUtil = packageUtil;
 		_workshopService = workshopService;
 		_skyveApiUtil = skyveApiUtil;
 		_dlcManager = dlcManager;
 		_saveHandler = saveHandler;
-		_compatibilityHelper = new CompatibilityHelper(this, _packageManager, _contentUtil, _packageUtil, _workshopService, _logger, _skyveDataManager);
+		_compatibilityHelper = new CompatibilityHelper(this, _settings, _packageManager, _packageUtil, _packageNameUtil, _workshopService, _logger, _skyveDataManager);
 
 		LoadSnoozedData();
 
@@ -331,7 +333,7 @@ public class CompatibilityManager : ICompatibilityManager
 			var modName = Path.GetFileName(package.GetLocalPackageIdentity()!.FilePath);
 			var duplicate = _packageManager.GetModsByName(modName);
 
-			if (duplicate.Count > 1 && duplicate.Count(x => x.LocalData is not null && _contentUtil.IsIncluded(x.LocalData)) > 1)
+			if (duplicate.Count > 1 && duplicate.Count(x => _packageUtil.IsIncluded(x)) > 1)
 			{
 				info.Add(ReportType.Compatibility
 					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
@@ -353,6 +355,24 @@ public class CompatibilityManager : ICompatibilityManager
 		if (packageData is null)
 		{
 			return info;
+		}
+
+		if (packageData.Id > 0 && !_packageUtil.IsIncludedAndEnabled(package))
+		{
+			var requiredFor = GetRequiredFor(packageData.Id);
+
+			if (requiredFor is not null)
+			{
+				info.ReportItems.Add(new ReportItem
+				{
+					Package = package.GetPackage(),
+					PackageId = packageData.Id,
+					Type = ReportType.RequiredItem,
+					Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
+					PackageName = package.CleanName(true),
+					Packages = requiredFor.ToArray(x => new GenericPackageIdentity(x))
+				});
+			}
 		}
 
 		_compatibilityUtil.PopulatePackageReport(packageData, info, _compatibilityHelper);
@@ -450,11 +470,11 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (author.Malicious)
 		{
-			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, "AuthorMalicious", new object[] { _packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
+			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, "AuthorMalicious", new object[] { _packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
 		}
 		else if (package.GetPackage()?.IsCodeMod == true && author.Retired)
 		{
-			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), "AuthorRetired", new object[] { _packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
+			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), "AuthorRetired", new object[] { _packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
 		}
 
 		if (!string.IsNullOrEmpty(packageData.Note))
@@ -464,7 +484,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (package.IsLocal())
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Id)), true), [new GenericPackageIdentity(packageData.Id)]);
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageNameUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Id)), true), [new GenericPackageIdentity(packageData.Id)]);
 		}
 
 		if (!package.IsLocal() && !author.Malicious && workshopInfo?.IsIncompatible != true)
@@ -489,5 +509,23 @@ public class CompatibilityManager : ICompatibilityManager
 	internal List<ulong>? GetRequiredFor(ulong id)
 	{
 		return _compatibilityHelper.GetRequiredFor(id);
+	}
+
+	public IEnumerable<IPackage> GetPackagesThatReference(IPackageIdentity package, bool withExcluded = false)
+	{
+		var packages = withExcluded || _settings.UserSettings.ShowAllReferencedPackages
+			? _packageManager.Packages.ToList()
+			: _packageManager.Packages.AllWhere(x => x.IsIncluded());
+
+		foreach (var localPackage in packages)
+		{
+			foreach (var requirement in localPackage.GetWorkshopInfo()?.Requirements ?? [])
+			{
+				if (GetFinalSuccessor(requirement)?.Id == package.Id)
+				{
+					yield return localPackage;
+				}
+			}
+		}
 	}
 }

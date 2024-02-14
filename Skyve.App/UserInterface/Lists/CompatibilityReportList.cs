@@ -1,8 +1,11 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
+using Skyve.Domain.Systems;
+using Skyve.Systems;
 
 using System;
 using System.Drawing;
@@ -22,6 +25,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	private readonly ISettings _settings;
 	private readonly IModLogicManager _modLogicManager;
 	private readonly IModUtil _modUtil;
+	private readonly IWorkshopService _workshopService;
+	private readonly IPackageNameUtil _packageNameUtil;
 
 #pragma warning disable IDE1006
 #pragma warning disable CS0649
@@ -46,7 +51,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		DynamicSizing = true;
 		AllowDrop = true;
 
-		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _settings, out _modUtil, out _modLogicManager);
+		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _settings, out _modUtil, out _modLogicManager, out _workshopService, out _packageNameUtil);
 	}
 
 	protected override void OnCreateControl()
@@ -343,7 +348,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		using var font = UI.Font(8.25F);
 		using var smallFont = UI.Font(7.5F);
 		var iconRect = new Rectangle(e.Rects.IncludedRect.X, baseY, e.Rects.IncludedRect.Width, e.Rects.IncludedRect.Height);
-		var messageSize = e.Graphics.Measure(Message.Message, font, reportRect.Width - (iconRect.Width * 2) - pad);
+		var messageSize = e.Graphics.Measure(Message.GetMessage(_workshopService, _packageNameUtil), font, reportRect.Width - (iconRect.Width * 2) - pad);
 		var noteSize = e.Graphics.Measure(note, smallFont, reportRect.Width - (iconRect.Width * 2) - pad);
 		using var brush = new SolidBrush(color);
 		using var icon = Message.Status.Notification.GetIcon(false).Get(e.Rects.IncludedRect.Width * 3 / 4);
@@ -380,12 +385,12 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 
 		using var textBrush = new SolidBrush(FormDesign.Design.ForeColor);
-		e.Graphics.DrawString(Message.Message, font, textBrush, reportRect.Pad(iconRect.Width + pad, 0, iconRect.Width, 0));
+		e.Graphics.DrawString(Message.GetMessage(_workshopService, _packageNameUtil), font, textBrush, reportRect.Pad(iconRect.Width + pad, 0, iconRect.Width, 0));
 
 		if (note is not null)
 		{
 			using var smallTextBrush = new SolidBrush(Color.FromArgb(200, ForeColor));
-			e.Graphics.DrawString(note, smallFont, smallTextBrush, reportRect.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0));
+			e.Graphics.DrawString(note, smallFont, smallTextBrush, reportRect.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.GetMessage(_workshopService, _packageNameUtil)) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0));
 		}
 
 		if (allText is not null || Message.Packages.Any())

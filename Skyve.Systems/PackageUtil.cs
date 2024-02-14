@@ -224,23 +224,4 @@ public class PackageUtil : IPackageUtil
 		return DownloadStatus.OK;
 #endif
 	}
-
-	public IEnumerable<IPackage> GetPackagesThatReference(IPackageIdentity package, bool withExcluded = false)
-	{
-		var compatibilityUtil = ServiceCenter.Get<ICompatibilityManager>();
-		var packages = withExcluded || ServiceCenter.Get<ISettings>().UserSettings.ShowAllReferencedPackages
-			? _packageManager.Packages.ToList()
-			: _packageManager.Packages.AllWhere(x => x.IsIncluded());
-
-		foreach (var localPackage in packages)
-		{
-			foreach (var requirement in localPackage.GetWorkshopInfo()?.Requirements ?? [])
-			{
-				if (compatibilityUtil.GetFinalSuccessor(requirement)?.Id == package.Id)
-				{
-					yield return localPackage;
-				}
-			}
-		}
-	}
 }

@@ -244,8 +244,6 @@ internal class ImageSystem : IImageService
 
 	private void CacheClearTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
-		var sw = Stopwatch.StartNew();
-
 		try
 		{
 			var keys = _cache.Keys.ToList();
@@ -263,13 +261,6 @@ internal class ImageSystem : IImageService
 			}
 		}
 		catch { }
-
-		sw.Stop();
-
-		if (sw.ElapsedMilliseconds > 5000)
-		{
-			ServiceCenter.Get<ILogger>().Info("[Auto] [Timer] Cleared Image Cache");
-		}
 	}
 
 	public void ClearCache()

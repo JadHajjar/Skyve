@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using Skyve.Domain;
 using Skyve.Domain.Systems;
 
@@ -17,17 +19,19 @@ public class LoggerSystem : ILogger
 	private bool failed;
 	private readonly bool _disabled;
 	private readonly Stopwatch? _stopwatch;
+	private readonly IServiceProvider _provider;
 
 	public string LogFilePath { get; }
 	public string PreviousLogFilePath { get; }
 
-	public LoggerSystem(string name, SaveHandler saveHandler)
+	public LoggerSystem(string name, SaveHandler saveHandler, IServiceProvider provider)
 	{
 		var folder = CrossIO.Combine(saveHandler.SaveDirectory, SaveHandler.AppName, "Logs");
 
 		PreviousLogFilePath = CrossIO.Combine(folder, $"{name}_Previous.log");
 		LogFilePath = CrossIO.Combine(folder, $"{name}.log");
 
+		_provider = provider;
 		_stopwatch = Stopwatch.StartNew();
 
 		try
@@ -134,7 +138,7 @@ public class LoggerSystem : ILogger
 				{
 					failed = true;
 
-					ServiceCenter.Get<INotifier>().OnLoggerFailed(ex);
+					_provider.GetService<INotifier>()?.OnLoggerFailed(ex);
 				}
 			}
 		}

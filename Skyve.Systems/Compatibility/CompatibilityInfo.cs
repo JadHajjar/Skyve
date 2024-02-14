@@ -24,36 +24,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	[JsonIgnore] public IIndexedPackageCompatibilityInfo? Data { get; }
 
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data;
-	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems
-	{
-		get
-		{
-			foreach (var item in ReportItems)
-			{
-				yield return item;
-			}
-
-			var id = Data?.Id;
-
-			if (id is not null and not 0 && this.IsIncluded() == false)
-			{
-				var requiredFor = ServiceCenter.Get<ICompatibilityManager, CompatibilityManager>().GetRequiredFor(id.Value);
-
-				if (requiredFor is not null)
-				{
-					yield return new ReportItem
-					{
-						Package = this.GetPackage(),
-						PackageId = Data?.Id ?? 0,
-						Type = ReportType.RequiredItem,
-						Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
-						PackageName = this.CleanName(true),
-						Packages = requiredFor.ToArray(x => new GenericPackageIdentity(x))
-					};
-				}
-			}
-		}
-	}
+	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast<ICompatibilityItem>();
 
 	[Obsolete("Reserved for DTO", true)]
 	public CompatibilityInfo()

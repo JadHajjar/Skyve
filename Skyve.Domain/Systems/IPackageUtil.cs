@@ -7,7 +7,6 @@ namespace Skyve.Domain.Systems;
 
 public interface IPackageUtil
 {
-	IEnumerable<IPackage> GetPackagesThatReference(IPackageIdentity package, bool withExcluded = false);
 	DownloadStatus GetStatus(IPackageIdentity? mod, out string reason);
 
 	bool IsEnabled(IPackageIdentity package, int? playsetId = null);

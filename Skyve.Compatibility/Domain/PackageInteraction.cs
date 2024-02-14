@@ -18,9 +18,7 @@ public class PackageInteraction : IPackageStatus<InteractionType>
 	{
 		get
 		{
-			var type = Type is InteractionType.OptionalPackages && ServiceCenter.Get<Skyve.Domain.Systems.ISettings>().UserSettings.TreatOptionalAsRequired
-				? NotificationType.MissingDependency
-				: CRNAttribute.GetNotification(Type);
+			var type = CRNAttribute.GetNotification(Type);
 			var action = CRNAttribute.GetNotification(Action);
 
 			return type > action ? type : action;

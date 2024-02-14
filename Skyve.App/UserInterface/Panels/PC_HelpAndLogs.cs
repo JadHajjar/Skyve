@@ -1,5 +1,6 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Generic;
+using Skyve.App.Utilities;
 
 using System.Drawing;
 using System.IO;
@@ -109,7 +110,9 @@ public partial class PC_HelpAndLogs : PanelContent
 		{
 			try
 			{
-				_logUtil.CreateZipFileAndSetToClipboard();
+				var file = _logUtil.CreateZipFile();
+
+				PlatformUtil.SetFileInClipboard(file);
 			}
 			catch (Exception ex) { ShowPrompt(ex, Locale.FailedToFetchLogs); }
 		});
@@ -132,7 +135,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 				Directory.CreateDirectory(folder);
 
-				var fileName = _logUtil.CreateZipFileAndSetToClipboard(folder);
+				var fileName = _logUtil.CreateZipFile(folder);
 
 				PlatformUtil.OpenFolder(fileName);
 			}

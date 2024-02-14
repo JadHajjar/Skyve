@@ -2,6 +2,7 @@
 using Skyve.Domain;
 
 using System;
+using System.Collections.Generic;
 
 namespace Skyve.Compatibility.Domain.Interfaces;
 public interface ICompatibilityManager
@@ -10,6 +11,7 @@ public interface ICompatibilityManager
 
 	event Action? SnoozeChanged;
 
+	IEnumerable<IPackage> GetPackagesThatReference(IPackageIdentity package, bool withExcluded = false);
 	ICompatibilityInfo GetCompatibilityInfo(IPackageIdentity package, bool noCache = false, bool cacheOnly = false);
 	IPackageIdentity GetFinalSuccessor(IPackageIdentity item);
 	NotificationType GetNotification(ICompatibilityInfo info);

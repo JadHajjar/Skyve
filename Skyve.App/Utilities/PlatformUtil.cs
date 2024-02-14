@@ -1,16 +1,9 @@
-﻿using Extensions;
-
-using Skyve.Domain;
-using Skyve.Domain.Systems;
-
-using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Skyve.Systems;
+namespace Skyve.App.Utilities;
 public static class PlatformUtil
 {
 	public static void OpenUrl(string? url)

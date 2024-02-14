@@ -1,5 +1,6 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
@@ -22,10 +23,12 @@ public class CompatibilityMessageControl : SlickControl
 	private readonly IPackageUtil _packageUtil;
 	private readonly INotifier _notifier;
 	private readonly IDlcManager _dlcManager;
+	private readonly IWorkshopService _workshopService;
+	private readonly IPackageNameUtil _packageNameUtil;
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
-		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _subscriptionsManager, out _packageUtil, out _dlcManager);
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _subscriptionsManager, out _packageUtil, out _dlcManager, out _workshopService, out _packageNameUtil);
 
 		Dock = DockStyle.Top;
 		Type = type;
@@ -67,7 +70,7 @@ public class CompatibilityMessageControl : SlickControl
 			var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
 			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
-			var messageSize = e.Graphics.Measure(Message.Message, font, Width - (iconRect.Width * 2) - pad);
+			var messageSize = e.Graphics.Measure(Message.GetMessage(_workshopService, _packageNameUtil), font, Width - (iconRect.Width * 2) - pad);
 			var noteSize = e.Graphics.Measure(note, smallFont, Width - (iconRect.Width * 2) - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 			using var brush = new SolidBrush(color);
@@ -101,11 +104,11 @@ public class CompatibilityMessageControl : SlickControl
 				e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor) ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
 			}
 
-			e.Graphics.DrawString(Message.Message, font, new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
+			e.Graphics.DrawString(Message.GetMessage(_workshopService, _packageNameUtil), font, new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 
 			if (note is not null)
 			{
-				e.Graphics.DrawString(note, smallFont, new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0), new StringFormat { LineAlignment = y <= Height && string.IsNullOrWhiteSpace(Message.Message) && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
+				e.Graphics.DrawString(note, smallFont, new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.GetMessage(_workshopService, _packageNameUtil)) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0), new StringFormat { LineAlignment = y <= Height && string.IsNullOrWhiteSpace(Message.GetMessage(_workshopService, _packageNameUtil)) && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 			}
 
 			if (allText is not null)

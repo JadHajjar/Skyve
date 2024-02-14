@@ -7,7 +7,7 @@ public interface ILogUtil
 	string GameDataPath { get; }
 	string GameLogFile { get; }
 
-	string CreateZipFileAndSetToClipboard(string? folder = null);
+	string CreateZipFile(string? folder = null);
 	void CreateZipToStream(Stream fileStream);
 	List<ILogTrace> SimplifyLog(string log, out string simpleLog);
 }
