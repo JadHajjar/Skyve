@@ -25,15 +25,17 @@ internal class ImageSystem : IImageService
 	private readonly HttpClient _httpClient = new();
 	private readonly ImageProcessor _imageProcessor;
 	private readonly INotifier _notifier;
+	private readonly ILogger _logger;
 	private readonly SaveHandler _saveHandler;
 
-	public ImageSystem(INotifier notifier, SaveHandler saveHandler)
+	public ImageSystem(INotifier notifier, ILogger logger, SaveHandler saveHandler)
 	{
 		_imageProcessor = new(this);
 		_cacheClearTimer = new System.Timers.Timer(_expirationTime.TotalMilliseconds);
 		_cacheClearTimer.Elapsed += CacheClearTimer_Elapsed;
 		_cacheClearTimer.Start();
 		_notifier = notifier;
+		_logger = logger;
 		_saveHandler = saveHandler;
 
 		new BackgroundAction(ClearOldImages).Run();
@@ -74,30 +76,37 @@ internal class ImageSystem : IImageService
 
 	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true, bool isFilePath = false)
 	{
-		if (url is null || !await Ensure(url, localOnly, fileName, square, isFilePath))
+		try
 		{
-			return null;
-		}
-
-		var cache = GetCache(url);
-
-		if (cache != null)
-		{
-			return cache;
-		}
-
-		var filePath = File(url, fileName);
-
-		if (filePath.Exists)
-		{
-			lock (LockObj(url))
+			if (url is null || !await Ensure(url, localOnly, fileName, square, isFilePath))
 			{
-				try
-				{
-					return AddCache(url, (Bitmap)Image.FromFile(filePath.FullName));
-				}
-				catch { }
+				return null;
 			}
+
+			var cache = GetCache(url);
+
+			if (cache != null)
+			{
+				return cache;
+			}
+
+			var filePath = File(url, fileName);
+
+			if (filePath.Exists)
+			{
+				lock (LockObj(url))
+				{
+					try
+					{
+						return AddCache(url, (Bitmap)Image.FromFile(filePath.FullName));
+					}
+					catch { }
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, "Unexpected error in ImageService");
 		}
 
 		return null;
@@ -120,7 +129,7 @@ internal class ImageSystem : IImageService
 				{
 					if (!filePath.Exists || new FileInfo(url).Length != filePath.Length)
 					{
-						Directory.CreateDirectory(CrossIO.Combine(_saveHandler.SaveDirectory, "Thumbs"));
+						filePath.Directory.Create();
 
 						System.IO.File.Copy(url, filePath.FullName, true);
 					}
