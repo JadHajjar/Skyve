@@ -6,8 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FC9A01B9-57E2-40F4-B503-2441379627BA}"
 	ProjectSection(SolutionItems) = preProject
 		Config.props = Config.props
-		CS1-Version.props = CS1-Version.props
-		CS2-Version.props = CS2-Version.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skyve.App", "Skyve.App\Skyve.App.csproj", "{ABB03609-79E2-41BA-AD76-39A64906DCDD}"

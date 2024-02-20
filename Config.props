@@ -14,6 +14,17 @@
 		<OutputPath>bin\$(BuildType)</OutputPath>
 		<PublishDir>bin\Publish_$(BuildType)</PublishDir>
 	</PropertyGroup>
+
+	<PropertyGroup Label="Versions">
+		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' == 'Stable'">0.1.5</Version>
+		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">0.1.5</Version>
+		
+		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' == 'Stable'">3.3.2.1</Version>
+		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' != 'Stable'">3.3.2.1</Version>
+
+		<FileVersion>$(Version)</FileVersion>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(BuildType)' == 'Debug'">
 		<DefineConstants>$(DefineConstants);DEBUG</DefineConstants>

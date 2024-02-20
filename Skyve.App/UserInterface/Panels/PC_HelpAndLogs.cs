@@ -73,8 +73,8 @@ public partial class PC_HelpAndLogs : PanelContent
 		}
 
 		B_SaveZip.Margin = UI.Scale(new Padding(10, 7, 10, 10), UI.UIScale);
-		slickSpacer1.Height =  (int)(1.5 * UI.FontScale);
-		slickSpacer1.Margin =  UI.Scale(new Padding(5), UI.UIScale);
+		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
+		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -87,16 +87,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	protected override bool LoadData()
 	{
-		if (!File.Exists(_logUtil.GameLogFile))
-		{
-			return false;
-		}
-
-		var tempName = Path.GetTempFileName();
-
-		File.Copy(_logUtil.GameLogFile, tempName, true);
-
-		var logs = _logUtil.SimplifyLog(tempName, out _);
+		var logs = _logUtil.GetCurrentLogsTrace();
 
 		this.TryInvoke(() => SetTrace(logs));
 
@@ -114,7 +105,10 @@ public partial class PC_HelpAndLogs : PanelContent
 
 				PlatformUtil.SetFileInClipboard(file);
 			}
-			catch (Exception ex) { ShowPrompt(ex, Locale.FailedToFetchLogs); }
+			catch (Exception ex)
+			{
+				ShowPrompt(ex, Locale.FailedToFetchLogs);
+			}
 		});
 		B_CopyZip.Loading = false;
 
@@ -139,7 +133,10 @@ public partial class PC_HelpAndLogs : PanelContent
 
 				PlatformUtil.OpenFolder(fileName);
 			}
-			catch (Exception ex) { ShowPrompt(ex, Locale.FailedToFetchLogs); }
+			catch (Exception ex)
+			{
+				ShowPrompt(ex, Locale.FailedToFetchLogs);
+			}
 		});
 
 		B_SaveZip.Loading = false;
@@ -219,7 +216,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_OpenLogFolder_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenFolder(Path.GetDirectoryName(_logUtil.GameLogFile));
+		PlatformUtil.OpenFolder(_logUtil.GameLogFolder);
 	}
 
 	private void B_LotLog_Click(object sender, EventArgs e)
