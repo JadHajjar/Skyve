@@ -560,5 +560,9 @@
   "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
   "UsagePlayset": "{0} Playset",
   "GenericPlayset": "Generic Playset",
-  "CompatibilityCenter": "Compatibility Center"
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  }
 }

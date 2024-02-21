@@ -460,6 +460,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DeletePackage => _instance.GetText("DeletePackage");
 
 	/// <summary>
+	/// <para>Dependency</para>
+	/// <para>Plural: Dependencies</para>
+	/// </summary>
+	public static Translation Dependency => _instance.GetText("Dependency");
+
+	/// <summary>
 	/// DEPRECATED
 	/// </summary>
 	public static Translation DEPRECATED => _instance.GetText("DEPRECATED");
