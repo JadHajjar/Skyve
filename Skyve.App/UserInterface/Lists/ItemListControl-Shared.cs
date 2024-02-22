@@ -247,7 +247,7 @@ public partial class ItemListControl
 			}
 		}
 #endif
-			private void DrawTitleAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
+	private void DrawTitleAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 	{
 		var padding = GridView ? GridPadding : Padding;
 		var text = e.Item.CleanName(out var tags);

@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Date Created",
   "Sorting_Usage": "Playset Usage",
   "Sorting_Name": "Name",
-  "Sorting_FileSize": "Total File Size",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "Update Time",
   "Sorting_SubscribeTime": "Subscribe Time",
   "Sorting_Author": "Author Name",
@@ -269,10 +269,10 @@
   "LaunchArgsInfo": "Add extra arguments when launching the game",
   "SearchGenericPackages": "Search through these packages..",
   "Sorting_Subscribers": "Total Subscribers",
-  "Sorting_Votes": "Votes",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} subscriber",
@@ -564,5 +564,9 @@
   "Dependency": {
     "One": "Dependency",
     "Plural": "Dependencies"
-  }
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included"
 }

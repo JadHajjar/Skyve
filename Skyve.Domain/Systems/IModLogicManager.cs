@@ -6,6 +6,7 @@ public interface IModLogicManager
 	void Analyze(IPackage mod, IModUtil modUtil);
 	void ApplyRequiredStates(IModUtil modUtil);
 	bool AreMultipleSkyvesPresent(out List<IPackageIdentity> skyveInstances);
+	void Clear();
 	IEnumerable<IPackage> GetCollection(string key);
 	bool IsForbidden(ILocalPackageIdentity? mod);
 	bool IsPseudoMod(IPackage package);

@@ -1134,6 +1134,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Mod => _instance.GetText("Mod");
 
 	/// <summary>
+	/// Mod ID
+	/// </summary>
+	public static Translation ModID => _instance.GetText("ModID");
+
+	/// <summary>
 	/// Mods included &amp; enabled: {0}, Total: {1}
 	/// </summary>
 	public static Translation ModIncludedAndEnabledTotal => _instance.GetText("ModIncludedAndEnabledTotal");
@@ -1400,6 +1405,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Partially downloaded
 	/// </summary>
 	public static Translation PartiallyDownloaded => _instance.GetText("PartiallyDownloaded");
+
+	/// <summary>
+	/// Partially Included
+	/// </summary>
+	public static Translation PartiallyIncluded => _instance.GetText("PartiallyIncluded");
 
 	/// <summary>
 	/// Paste the ID of the playset you'd like to import
@@ -1743,7 +1753,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SortingDefault => _instance.GetText("Sorting_Default");
 
 	/// <summary>
-	/// Total File Size
+	/// File Size
 	/// </summary>
 	public static Translation SortingFileSize => _instance.GetText("Sorting_FileSize");
 
@@ -1793,7 +1803,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SortingUsage => _instance.GetText("Sorting_Usage");
 
 	/// <summary>
-	/// Votes
+	/// Total Likes
 	/// </summary>
 	public static Translation SortingVotes => _instance.GetText("Sorting_Votes");
 
@@ -1846,6 +1856,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Stop Troubleshooting?
 	/// </summary>
 	public static Translation StopTroubleshootTitle => _instance.GetText("StopTroubleshootTitle");
+
+	/// <summary>
+	/// Subscribers
+	/// </summary>
+	public static Translation Subscribers => _instance.GetText("Subscribers");
 
 	/// <summary>
 	/// <para>{1} subscriber</para>
@@ -2154,8 +2169,13 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ViewXOnSteam => _instance.GetText("ViewXOnSteam");
 
 	/// <summary>
-	/// <para>{1} vote</para>
-	/// <para>Plural: {1} votes</para>
+	/// Likes
+	/// </summary>
+	public static Translation Votes => _instance.GetText("Votes");
+
+	/// <summary>
+	/// <para>{1} like</para>
+	/// <para>Plural: {1} likes</para>
 	/// </summary>
 	public static Translation VotesCount => _instance.GetText("VotesCount");
 

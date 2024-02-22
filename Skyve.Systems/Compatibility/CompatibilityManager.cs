@@ -235,7 +235,6 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)
 	{
-		throw new NotImplementedException();
 		//if (!CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
 		//{
 		//	return package;
@@ -257,7 +256,7 @@ public class CompatibilityManager : ICompatibilityManager
 		//	}
 		//}
 
-		//return package;
+		return package;
 	}
 
 	internal IEnumerable<IPackage> FindPackage(IIndexedPackageCompatibilityInfo package, bool withAlternativesAndSuccessors)

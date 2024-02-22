@@ -261,7 +261,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 
 #if CS2
-		if (rects.IncludedRect.Contains(e.Location) && !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil))
+		if (rects.IncludedRect.Contains(e.Location))
 		{
 			var isIncluded = item.Item.IsIncluded(out var partialIncluded) && !partialIncluded;
 
@@ -273,7 +273,10 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			}
 			else
 			{
-				await _packageUtil.SetEnabled(item.Item, !item.Item.IsEnabled());
+				var enable = !item.Item.IsEnabled();
+
+				if (enable || !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil))
+					await _modUtil.SetEnabled(item.Item, enable);
 			}
 
 			item.Loading = false;
