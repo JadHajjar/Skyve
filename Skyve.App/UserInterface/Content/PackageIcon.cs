@@ -35,22 +35,22 @@ public class PackageIcon : SlickImageControl
 
 		if (Image == null)
 		{
-			using var generic = IconManager.GetIcon(Collection ? "I_Package" : Package?.GetPackage()?.IsCodeMod ?? false ? "I_Mods" : "I_Assets", Height).Color(BackColor);
-			var iconRect = ClientRectangle.CenterR(generic.Size);
-
+			using var generic = IconManager.GetIcon(Package is IAsset ? "I_Assets" : Package?.IsLocal() == true ? "I_Package" : "I_Paradox", Height).Color(BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
-			e.Graphics.FillRoundedRectangle(brush, ClientRectangle, (int)(10 * UI.FontScale));
+
+			e.Graphics.FillRoundedRectangle(brush, ClientRectangle, (int)(5 * UI.FontScale));
+			e.Graphics.DrawImage(generic, ClientRectangle.CenterR(generic.Size));
 		}
 		else
 		{
 			if (Package?.IsLocal() ?? false)
 			{
 				using var unsatImg = new Bitmap(Image, Size).Tint(Sat: 0);
-				e.Graphics.DrawRoundedImage(unsatImg, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
+				e.Graphics.DrawRoundedImage(unsatImg, ClientRectangle, (int)(5 * UI.FontScale), FormDesign.Design.AccentBackColor);
 			}
 			else
 			{
-				e.Graphics.DrawRoundedImage(Image, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
+				e.Graphics.DrawRoundedImage(Image, ClientRectangle, (int)(5 * UI.FontScale), FormDesign.Design.AccentBackColor);
 			}
 		}
 	}

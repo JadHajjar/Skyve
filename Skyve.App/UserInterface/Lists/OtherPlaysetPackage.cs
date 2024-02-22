@@ -126,41 +126,26 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		}
 	}
 
-	protected override void OnPaint(PaintEventArgs e)
-	{
-		base.OnPaint(e);
-		//if (Loading)
-		//{
-		//	base.OnPaint(e);
-		//}
-		//else if (!Items.Any())
-		//{
-		//	e.Graphics.DrawString(Locale.NoDlcsNoInternet, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-		//}
-		//else if (!SafeGetItems().Any())
-		//{
-		//	e.Graphics.DrawString(Locale.NoDlcsOpenGame, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-		//}
-		//else
-		//{
-		//	base.OnPaint(e);
-		//}
-	}
-
 	protected override void OnPaintItemList(ItemPaintEventArgs<IPlayset, Rectangles> e)
 	{
 		var customPlayset = e.Item.GetCustomPlayset();
 
+		base.OnPaintItemList(e);
+
 		if (e.Item == _playsetManager.CurrentPlayset)
 		{
 			e.BackColor = FormDesign.Design.AccentBackColor.MergeColor(FormDesign.Design.GreenColor, e.HoverState.HasFlag(HoverState.Hovered) ? 50 : 80);
-		}
-		else
-		{
-			e.BackColor = e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.AccentBackColor.MergeColor(customPlayset.Color ?? FormDesign.Design.ActiveColor, 85) : FormDesign.Design.AccentBackColor;
-		}
 
-		base.OnPaintItemList(e);
+			using var brush = new SolidBrush(e.BackColor);
+			e.Graphics.FillRectangle(brush, e.ClipRectangle.Pad(Padding.Left, 0, Padding.Right, 0));
+		}
+		else if (e.HoverState.HasFlag(HoverState.Hovered))
+		{
+			e.BackColor = FormDesign.Design.AccentBackColor.MergeColor(customPlayset.Color ?? FormDesign.Design.ActiveColor, 85);
+
+			using var brush = new SolidBrush(e.BackColor);
+			e.Graphics.FillRectangle(brush, e.ClipRectangle.Pad(Padding.Left, 0, Padding.Right, 0));
+		}
 
 		var localIdentity = Package.GetLocalPackageIdentity();
 		var isIncluded = _packageUtil.IsIncluded(Package, out var partialIncluded, e.Item.Id) || partialIncluded;

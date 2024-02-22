@@ -16,6 +16,7 @@ public class MiniPackageControl : SlickControl
 
 	public bool ReadOnly { get; set; }
 	public bool Large { get; set; }
+	public bool ShowIncluded { get; set; }
 
 	public MiniPackageControl(ulong steamId)
 	{
@@ -32,9 +33,9 @@ public class MiniPackageControl : SlickControl
 
 	protected override void UIChanged()
 	{
-		Height = (int)((Large ? 42 : 32) * UI.FontScale);
+		Height = (int)((Large ? 32 : 24) * UI.FontScale);
 
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
+		Padding = UI.Scale(new Padding(4), UI.FontScale);
 	}
 
 	protected override void OnMouseClick(MouseEventArgs e)
@@ -80,13 +81,11 @@ public class MiniPackageControl : SlickControl
 	{
 		e.Graphics.SetUp(BackColor);
 
-		using var backBrush = new SolidBrush(Color.FromArgb(10, !FormDesign.Design.IsDarkTheme ? Color.Black : Color.White));
-		e.Graphics.FillRoundedRectangle(backBrush, ClientRectangle.Pad(Padding), Padding.Left);
-
 		if (HoverState.HasFlag(HoverState.Hovered))
 		{
-			using var brush = new LinearGradientBrush(ClientRectangle.Pad(Height / 2, 0, 0, 0), Color.FromArgb(150, FormDesign.Design.ActiveColor), Color.Empty, LinearGradientMode.Horizontal);
-			e.Graphics.FillRectangle(brush, ClientRectangle.Pad(Height / 2, 0, 0, 0).Pad(Padding));
+			using var backBrush = new SolidBrush(Color.FromArgb(25, FormDesign.Design.ForeColor));
+
+			e.Graphics.FillRoundedRectangle(backBrush, ClientRectangle.Pad(1), Padding.Left);
 		}
 
 		var imageRect = ClientRectangle.Pad(Padding);
@@ -98,11 +97,11 @@ public class MiniPackageControl : SlickControl
 			if (Package!.IsLocal)
 			{
 				using var unsatImg = new Bitmap(image, imageRect.Size).Tint(Sat: 0);
-				e.Graphics.DrawRoundedImage(unsatImg, imageRect, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+				e.Graphics.DrawRoundedImage(unsatImg, imageRect, Padding.Left);
 			}
 			else
 			{
-				e.Graphics.DrawRoundedImage(image, imageRect, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+				e.Graphics.DrawRoundedImage(image, imageRect, Padding.Left);
 			}
 		}
 		else
@@ -119,7 +118,18 @@ public class MiniPackageControl : SlickControl
 		var textRect = ClientRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top, !ReadOnly && HoverState.HasFlag(HoverState.Hovered) ? imageRect.Right + Padding.Left : 0, Padding.Bottom).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
 		var text = Package?.CleanName(out tags) ?? Locale.UnknownPackage;
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
+		if (ShowIncluded && Package?.IsIncluded() ==true&& Package?.IsEnabled()==true)
+		{
+			using var checkIcon = IconManager.GetIcon("I_Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor);
+
+			e.Graphics.DrawImage(checkIcon, textRect.Pad(Padding).Align(checkIcon.Size, ContentAlignment.MiddleRight));
+
+			textRect = textRect.Pad(0, 0, checkIcon.Width+ Padding.Horizontal, 0);
+		}
+
+		using var textBrush = new SolidBrush(ForeColor);
+		using var font = UI.Font(Large ? 9.75F : 8.25F).FitToWidth(text, textRect, e.Graphics);
+		e.Graphics.DrawString(text, base.Font, textBrush, textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
 
 		var tagRect = new Rectangle(textRect.X + (int)e.Graphics.Measure(text, Font).Width, textRect.Y, 0, textRect.Height);
 
