@@ -106,10 +106,16 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 			}
 			else
 			{
-				await _packageUtil.SetEnabled(Package, !_packageUtil.IsEnabled(Package, item.Item.Id), item.Item.Id);
+				var enable = !_packageUtil.IsEnabled(Package, item.Item.Id);
+
+				if (enable || !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil))
+				{
+					await _packageUtil.SetEnabled(Package, enable, item.Item.Id);
+				}
 			}
 
 			item.Loading = false;
+			Invalidate(item.Item);
 
 			Loading = SafeGetItems().Any(x => x.Loading);
 		}
@@ -190,6 +196,10 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 				ColorStyle = ColorStyle.Red,
 				ButtonType = ButtonType.Hidden
 			}).Rectangle;
+		}
+		else
+		{
+			e.Rects.LoadRect = default;
 		}
 	}
 

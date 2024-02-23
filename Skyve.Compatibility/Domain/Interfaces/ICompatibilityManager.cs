@@ -9,8 +9,6 @@ public interface ICompatibilityManager
 {
 	bool FirstLoadComplete { get; }
 
-	event Action? SnoozeChanged;
-
 	IEnumerable<IPackage> GetPackagesThatReference(IPackageIdentity package, bool withExcluded = false);
 	ICompatibilityInfo GetCompatibilityInfo(IPackageIdentity package, bool noCache = false, bool cacheOnly = false);
 	IPackageIdentity GetFinalSuccessor(IPackageIdentity item);

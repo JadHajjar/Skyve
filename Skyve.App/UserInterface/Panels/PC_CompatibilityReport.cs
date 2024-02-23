@@ -85,7 +85,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		_notifier.ContentLoaded += CompatibilityManager_ReportProcessed;
 		_notifier.CompatibilityReportProcessed += CompatibilityManager_ReportProcessed;
-		_compatibilityManager.SnoozeChanged += CompatibilityManager_ReportProcessed;
+		_notifier.SnoozeChanged += CompatibilityManager_ReportProcessed;
 		new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
 	}
 

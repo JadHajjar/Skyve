@@ -19,7 +19,7 @@ partial class PC_CompatibilityReport
 		{
 			_notifier.ContentLoaded -= CompatibilityManager_ReportProcessed;
 			_notifier.CompatibilityReportProcessed -= CompatibilityManager_ReportProcessed;
-			_compatibilityManager.SnoozeChanged -= CompatibilityManager_ReportProcessed;
+			_notifier.SnoozeChanged -= CompatibilityManager_ReportProcessed;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

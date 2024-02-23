@@ -23,4 +23,6 @@ public interface IWorkshopInfo : IPackageIdentity, IThumbnailObject
 	Dictionary<string, string> Tags { get; }
 	IEnumerable<IPackageRequirement> Requirements { get; }
 	IEnumerable<IModChangelog> Changelog { get; }
+	IEnumerable<IThumbnailObject> Images { get; }
+	IEnumerable<ILink> Links { get; }
 }

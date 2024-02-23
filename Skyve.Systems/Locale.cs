@@ -1022,6 +1022,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation LinkModAssetsTip => _instance.GetText("LinkModAssets_Tip");
 
 	/// <summary>
+	/// Links
+	/// </summary>
+	public static Translation Links => _instance.GetText("Links");
+
+	/// <summary>
 	/// <para>{0} {1} loaded</para>
 	/// <para>Plural: {0} {1} loaded</para>
 	/// </summary>

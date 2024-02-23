@@ -43,8 +43,6 @@ public class CompatibilityManager : ICompatibilityManager
 
 	private CancellationTokenSource? cancellationTokenSource;
 
-	public event Action? SnoozeChanged;
-
 	public bool FirstLoadComplete { get; private set; }
 
 	public CompatibilityManager(ISkyveDataManager skyveDataManager, IPackageManager packageManager, ILogger logger, ISettings settings, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, ISkyveApiUtil skyveApiUtil, IDlcManager dlcManager, SaveHandler saveHandler)
@@ -204,7 +202,7 @@ public class CompatibilityManager : ICompatibilityManager
 			_cache[reportItem.Package] = GenerateCompatibilityInfo(reportItem.Package);
 		}
 
-		SnoozeChanged?.Invoke();
+		_notifier.OnSnoozeChanged();
 		_notifier.OnRefreshUI();
 	}
 

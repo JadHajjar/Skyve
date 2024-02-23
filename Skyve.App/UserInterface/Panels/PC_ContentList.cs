@@ -23,13 +23,13 @@ public partial class PC_ContentList : PanelContent
 			Dock = DockStyle.Fill
 		};
 
-		if (this is not PC_GenericPackageList)
-		{
-			LC_Items.TLP_Main.SetColumn(LC_Items.FLP_Search, 0);
-			LC_Items.TLP_Main.SetColumnSpan(LC_Items.FLP_Search, 2);
-			LC_Items.TLP_Main.SetColumn(LC_Items.P_FiltersContainer, 0);
-			LC_Items.TLP_Main.SetColumnSpan(LC_Items.P_FiltersContainer, 4);
-		}
+		//if (this is not PC_GenericPackageList)
+		//{
+		//	LC_Items.TLP_Main.SetColumn(LC_Items.FLP_Search, 0);
+		//	LC_Items.TLP_Main.SetColumnSpan(LC_Items.FLP_Search, 2);
+		//	LC_Items.TLP_Main.SetColumn(LC_Items.P_FiltersContainer, 0);
+		//	LC_Items.TLP_Main.SetColumnSpan(LC_Items.P_FiltersContainer, 4);
+		//}
 
 		Controls.Add(LC_Items);
 

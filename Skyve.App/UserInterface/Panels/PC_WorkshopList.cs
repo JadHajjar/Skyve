@@ -27,12 +27,12 @@ public class PC_WorkshopList : PanelContent
 			Dock = DockStyle.Fill
 		};
 
-		{
-			LC_Items.TLP_Main.SetColumn(LC_Items.FLP_Search, 0);
-			LC_Items.TLP_Main.SetColumnSpan(LC_Items.FLP_Search, 2);
-			LC_Items.TLP_Main.SetColumn(LC_Items.P_FiltersContainer, 0);
-			LC_Items.TLP_Main.SetColumnSpan(LC_Items.P_FiltersContainer, 4);
-		}
+		//{
+		//	LC_Items.TLP_Main.SetColumn(LC_Items.FLP_Search, 0);
+		//	LC_Items.TLP_Main.SetColumnSpan(LC_Items.FLP_Search, 2);
+		//	LC_Items.TLP_Main.SetColumn(LC_Items.P_FiltersContainer, 0);
+		//	LC_Items.TLP_Main.SetColumnSpan(LC_Items.P_FiltersContainer, 4);
+		//}
 
 		Controls.Add(LC_Items);
 
