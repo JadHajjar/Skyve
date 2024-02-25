@@ -9,7 +9,7 @@ public interface IAppInterfaceService : IInterfaceService
 {
 	INotificationInfo GetLastVersionNotification();
 	PC_Changelog ChangelogPanel();
-	PlaysetSettingsPanel PlaysetSettingsPanel();
+	PlaysetSettingsPanel PlaysetSettingsPanel(IPlayset playset);
 	PanelContent NewPlaysetPanel();
 	PanelContent UtilitiesPanel();
 }

@@ -71,7 +71,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation AddPlayset => _instance.GetText("AddPlayset");
 
 	/// <summary>
-	/// Add a new tag here
+	/// Add a new tag or search here
 	/// </summary>
 	public static Translation AddTagBox => _instance.GetText("AddTagBox");
 
@@ -236,6 +236,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Cancel &amp; Reset Troubleshooting?
 	/// </summary>
 	public static Translation CancelTroubleshootTitle => _instance.GetText("CancelTroubleshootTitle");
+
+	/// <summary>
+	/// Change-log
+	/// </summary>
+	public static Translation Changelog => _instance.GetText("Changelog");
 
 	/// <summary>
 	/// Change this playset's color
@@ -441,6 +446,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Date Updated
 	/// </summary>
 	public static Translation DateUpdated => _instance.GetText("DateUpdated");
+
+	/// <summary>
+	/// Deactivate your current playset
+	/// </summary>
+	public static Translation DeactivatePlaysetTip => _instance.GetText("DeactivatePlayset_Tip");
 
 	/// <summary>
 	/// Your last session's errors will be automatically shown below when opening this page
@@ -727,7 +737,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FailedToRetrievePlaysets => _instance.GetText("FailedToRetrievePlaysets");
 
 	/// <summary>
-	/// Failed to save the selected language
+	/// Failed to save the selected 1language
 	/// </summary>
 	public static Translation FailedToSaveLanguage => _instance.GetText("FailedToSaveLanguage");
 
@@ -1222,6 +1232,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation NoActivePlayset => _instance.GetText("NoActivePlayset");
 
 	/// <summary>
+	/// Disable All Assets
+	/// </summary>
+	public static Translation NoAssets => _instance.GetText("NoAssets");
+
+	/// <summary>
 	/// <para>No Compatibility issues detected.</para>
 	/// <para>Plural: No compatibility issues with your {0} were detected.</para>
 	/// </summary>
@@ -1241,6 +1256,11 @@ public class Locale : LocaleHelper, ILocale
 	/// No packages found on your computer.
 	/// </summary>
 	public static Translation NoLocalPackagesFound => _instance.GetText("NoLocalPackagesFound");
+
+	/// <summary>
+	/// Disable All Code-Mods
+	/// </summary>
+	public static Translation NoMods => _instance.GetText("NoMods");
 
 	/// <summary>
 	/// No notifications
@@ -1482,11 +1502,6 @@ public class Locale : LocaleHelper, ILocale
 	/// References
 	/// </summary>
 	public static Translation References => _instance.GetText("References");
-
-	/// <summary>
-	/// Refresh Workshop Content
-	/// </summary>
-	public static Translation RefreshWorkshop => _instance.GetText("RefreshWorkshop");
 
 	/// <summary>
 	/// Reload all data

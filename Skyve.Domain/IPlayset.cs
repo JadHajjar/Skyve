@@ -31,6 +31,8 @@ public interface ICustomPlayset : IThumbnailObject
 
 	IOnlinePlayset? OnlineInfo { get; }
 
+	void SetThumbnail(Image? image);
+
 #if CS1
 	bool DisableWorkshop { get; }
 	bool IsMissingItems { get; }

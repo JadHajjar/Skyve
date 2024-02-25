@@ -8,5 +8,9 @@ public enum LinkType
 	Crowdin,
 	Donation,
 	YouTube,
+	Twitch,
+	X,
+	Paypal,
+	Patreon,
 	Other = 99,
 }

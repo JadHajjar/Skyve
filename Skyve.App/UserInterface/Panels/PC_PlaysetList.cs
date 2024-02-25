@@ -57,8 +57,8 @@ public partial class PC_PlaysetList : PanelContent
 		C_ViewTypeControl.GridView = true;
 
 		SlickTip.SetTo(B_Add, "NewPlayset_Tip");
-		SlickTip.SetTo(B_Deactivate, "TempPlayset_Tip");
-		SlickTip.SetTo(B_Edit, "TempPlayset_Tip");
+		SlickTip.SetTo(B_Deactivate, "DeactivatePlayset_Tip");
+		SlickTip.SetTo(B_Edit, "ChangePlaysetSettings");
 
 		RefreshCounts();
 	}
@@ -247,7 +247,7 @@ public partial class PC_PlaysetList : PanelContent
 	{
 		if (!B_Edit.Loading)
 		{
-			Form.PushPanel(ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel());
+			Form.PushPanel(ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel(_playsetManager.CurrentPlayset));
 		}
 	}
 

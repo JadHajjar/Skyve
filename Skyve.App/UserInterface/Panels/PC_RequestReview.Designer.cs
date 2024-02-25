@@ -301,7 +301,6 @@ partial class PC_RequestReview
 			// PB_Icon
 			// 
 			this.PB_Icon.Dock = System.Windows.Forms.DockStyle.Left;
-			this.PB_Icon.HalfColor = false;
 			this.PB_Icon.Location = new System.Drawing.Point(0, 0);
 			this.PB_Icon.Margin = new System.Windows.Forms.Padding(0);
 			this.PB_Icon.Name = "PB_Icon";
