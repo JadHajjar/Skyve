@@ -16,7 +16,7 @@ public class PackageIcon : SlickImageControl
 
 		var thumbnail = Package?.GetWorkshopInfo()?.GetThumbnail();
 
-		Loading = thumbnail is null && ConnectionHandler.IsConnected;
+		Loading = thumbnail is null && !(Package?.IsLocal() ?? false) && ConnectionHandler.IsConnected;
 
 		if (Loading)
 		{

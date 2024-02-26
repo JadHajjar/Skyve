@@ -114,7 +114,7 @@ partial class PC_UserPage
 			this.T_Profiles.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Profiles.FillTab = true;
 			this.T_Profiles.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon1.Name = "I_ProfileSettings";
+			dynamicIcon1.Name = "I_PlaysetSettings";
 			this.T_Profiles.IconName = dynamicIcon1;
 			this.T_Profiles.LinkedControl = null;
 			this.T_Profiles.Location = new System.Drawing.Point(0, 5);

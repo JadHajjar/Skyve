@@ -3,65 +3,33 @@
 using System.Threading.Tasks;
 
 namespace Skyve.App.UserInterface.Panels;
-public class PC_GenericPackageList : PC_ContentList
+public class PC_PlaysetContents : PC_ContentList
 {
-	private readonly List<IPackageIdentity> _items = new();
-	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
+	private readonly IPlaysetManager _playsetManager = ServiceCenter.Get<IPlaysetManager>();
 
 	public override SkyvePage Page => SkyvePage.Generic;
 
-	public PC_GenericPackageList(IEnumerable<IPackageIdentity> items, bool groupItems) : base(true, true)
+	public IPlayset Playset { get; }
+
+	public PC_PlaysetContents(IPlayset playset) : base(true, true)
 	{
+		Playset = playset;
+
+		Text = Playset.Name;
 		LC_Items.IsGenericPage = true;
 		LC_Items.TB_Search.Placeholder = "SearchGenericPackages";
-
-		var skyveDataManager = ServiceCenter.Get<ISkyveDataManager>();
-
-		if (!groupItems)
-		{
-			_items.AddRange(items);
-		}
-		else
-		{
-			foreach (var packages in items.GroupBy(x => x.Id))
-			{
-				if (packages.Key != 0)
-				{
-					if (skyveDataManager.IsBlacklisted(packages.First()))
-					{
-						continue;
-					}
-
-					var package = packages.Last();
-
-					if (package.GetWorkshopInfo()?.IsRemoved == true)
-					{
-						continue;
-					}
-
-					_items.Add(package);
-				}
-				else
-				{
-					foreach (var item in packages)
-					{
-						_items.Add(item);
-					}
-				}
-			}
-		}
 	}
 
 	protected override async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
-		return await Task.FromResult(_items);
+		return await _playsetManager.GetPlaysetContents(Playset);
 	}
 
 	protected override string GetCountText()
 	{
 		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
 
-		foreach (var item in _items)
+		foreach (var item in LC_Items.Items)
 		{
 			var package = item.GetLocalPackage();
 

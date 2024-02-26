@@ -187,9 +187,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		
 		if (item.Rectangles.ViewContents.Contains(e.Location))
 		{
-			Loading = item.Loading = true;
-			await ShowPlaysetContents(item.Item);
-			Loading = item.Loading = false;
+			ShowPlaysetContents(item.Item);
 
 			return;
 		}
@@ -229,21 +227,6 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		}
 	}
 
-	private void ChangeColor(IPlayset item)
-	{
-		var customPlayset = item.GetCustomPlayset();
-		var colorDialog = new SlickColorPicker(customPlayset.Color ?? FormDesign.Design.ActiveColor);
-
-		if (colorDialog.ShowDialog() != DialogResult.OK)
-		{
-			return;
-		}
-
-		customPlayset.Color = colorDialog.Color;
-
-		_playsetManager.Save(customPlayset);
-	}
-
 	private void ShowRightClickMenu(IPlayset playset)
 	{
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(playset, !ReadOnly)));
@@ -258,16 +241,11 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		Loading = false;
 	}
 
-	private async Task ShowPlaysetContents(IPlayset item)
+	private void ShowPlaysetContents(IPlayset item)
 	{
 		try
 		{
-			var packages = await _playsetManager.GetPlaysetContents(item);
-
-			Program.MainForm.PushPanel(new PC_GenericPackageList(packages, true)
-			{
-				Text = item.Name
-			});
+			Program.MainForm.PushPanel(new PC_PlaysetContents(item));
 		}
 		catch (Exception ex)
 		{
@@ -496,8 +474,6 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 	{
 		var customPlayset = e.Item.GetCustomPlayset();
 		var banner = customPlayset.GetThumbnail();
-		var onBannerColor = (customPlayset.Color ?? Color.Black).GetTextColor();
-		using var onBannerBrush = new SolidBrush(Color.FromArgb(banner is null ? 125 : 50, onBannerColor));
 
 		if (e.Item == _playsetManager.CurrentPlayset)
 		{
@@ -507,6 +483,9 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		{
 			e.BackColor = e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.AccentBackColor.MergeColor(customPlayset.Color ?? FormDesign.Design.ActiveColor, 85) : FormDesign.Design.AccentBackColor;
 		}
+
+		var onBannerColor = e.BackColor.GetTextColor();
+		using var onBannerBrush = new SolidBrush(Color.FromArgb(banner is null ? 125 : 50, onBannerColor));
 
 		base.OnPaintItemList(e);
 

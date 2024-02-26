@@ -603,7 +603,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation EditPlaysetName => _instance.GetText("EditPlaysetName");
 
 	/// <summary>
-	/// Edit this playset's thumbnail picture
+	/// Edit this playset's thumbnail
 	/// </summary>
 	public static Translation EditPlaysetThumbnail => _instance.GetText("EditPlaysetThumbnail");
 
@@ -1572,6 +1572,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Reset mods' cache
 	/// </summary>
 	public static Translation ResetModsCache => _instance.GetText("ResetModsCache");
+
+	/// <summary>
+	/// Reset this playset's thumbnail
+	/// </summary>
+	public static Translation ResetPlaysetImage => _instance.GetText("ResetPlaysetImage");
 
 	/// <summary>
 	/// Reset scrolling when opening a package's page
