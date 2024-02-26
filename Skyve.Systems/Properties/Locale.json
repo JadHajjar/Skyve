@@ -233,6 +233,7 @@
   "ChangePlaysetColor": "Change this playset's color",
   "EditPlaysetName": "Edit this playset's name",
   "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "Playset Color",
   "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your playset?",
