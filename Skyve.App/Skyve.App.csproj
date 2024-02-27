@@ -46,6 +46,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
       <Compile Update="UserInterface\Content\ContentList.cs" />
+      <Compile Update="UserInterface\Content\IconTopButton.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
       <Compile Update="UserInterface\Content\PlaysetIcon.cs">
         <SubType>UserControl</SubType>
       </Compile>

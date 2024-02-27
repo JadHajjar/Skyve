@@ -1,43 +1,35 @@
 ﻿using Skyve.App.Utilities;
 
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
-public class LinkControl : SlickImageControl
+public class IconTopButton : SlickImageControl
 {
-	public LinkControl(ILink link, bool display)
+	[Browsable(true)]
+	[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+	[EditorBrowsable(EditorBrowsableState.Always)]
+	[Bindable(true)]
+	public override string Text
 	{
-		Link = link;
-		Display = display;
-		Cursor = Cursors.Hand;
-		SlickTip.SetTo(this, Link.Url);
+		get => base.Text; set
+		{
+			base.Text = value;
+			UIChanged();
+		}
 	}
 
-	public ILink Link { get; set; }
-	public bool Display { get; set; }
+	public IconTopButton()
+	{
+		Cursor = Cursors.Hand;
+	}
 
 	protected override void UIChanged()
 	{
 		base.UIChanged();
 
 		Padding = UI.Scale(new Padding(5), UI.FontScale);
-		Margin = UI.Scale(new Padding(3, 3, 6, 6), UI.FontScale);
-		Size = UI.Scale(new Size(55, 55), UI.FontScale);
-	}
-
-	protected override void OnMouseClick(MouseEventArgs e)
-	{
-		base.OnMouseClick(e);
-
-		if (Display && e.Button == MouseButtons.Left)
-		{
-			PlatformUtil.OpenUrl(Link.Url);
-		}
-		else if (Display && e.Button == MouseButtons.Right)
-		{
-			SlickToolStrip.Show(Program.MainForm, PointToScreen(e.Location), new SlickStripItem(LocaleSlickUI.Copy, "I_Copy", action: () => Clipboard.SetText(Link.Url)));
-		}
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -45,10 +37,10 @@ public class LinkControl : SlickImageControl
 		e.Graphics.SetUp(BackColor);
 
 		var client = ClientRectangle.Pad(1);
-		var active = !Display && ImageName is null ? FormDesign.Design.RedColor : FormDesign.Design.ActiveColor;
+		var active = FormDesign.Design.ActiveColor;
 		var backColor = HoverState.HasFlag(HoverState.Pressed) ? active
-				: HoverState.HasFlag(HoverState.Hovered) ? BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 10 : -8)
-				: BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? -6 : 6);
+				: HoverState.HasFlag(HoverState.Hovered) ? BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 12 : -10)
+				: BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 6 : -5);
 		var activeColor = backColor.GetTextColor();
 
 		using var activeBrush = new SolidBrush(activeColor);
@@ -58,10 +50,10 @@ public class LinkControl : SlickImageControl
 
 		DrawFocus(e.Graphics, client, Padding.Left, active);
 
-		var text = Link.Title.IfEmpty(LocaleCR.Get(Link.Type.ToString())).ToUpper();
+		var text = LocaleHelper.GetGlobalText(Text).One.ToUpper();
 		using var font = UI.Font(7F, FontStyle.Bold).FitToWidth(text, client.Pad(Padding), e.Graphics);
 		var textHeight = (int)e.Graphics.Measure(text, font).Height;
-		using var img = (HoverState.HasFlag(HoverState.Hovered) ? Display ? "I_Link" : "I_Edit" : Link.Type.GetIcon()).Get(Height / 2)?.Color(activeColor);
+		using var img = ImageName.Get(Height / 2)?.Color(activeColor);
 
 		if (img == null)
 		{

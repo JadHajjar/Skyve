@@ -1574,6 +1574,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ResetModsCache => _instance.GetText("ResetModsCache");
 
 	/// <summary>
+	/// Reset this playset's color
+	/// </summary>
+	public static Translation ResetPlaysetColor => _instance.GetText("ResetPlaysetColor");
+
+	/// <summary>
 	/// Reset this playset's thumbnail
 	/// </summary>
 	public static Translation ResetPlaysetImage => _instance.GetText("ResetPlaysetImage");
