@@ -111,7 +111,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 
 	protected override void DesignChanged(FormDesign design)
 	{
-		P_Main.BackColor = design.BackColor;
+		P_Main.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme ? 6 : -6);
 		L_OutputTitle.ForeColor = design.LabelColor;
 		L_Output.ForeColor = design.InfoColor;
 	}
@@ -119,11 +119,10 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 	protected override void UIChanged()
 	{
 		MinimumSize = UI.Scale(new Size(250, 0), UI.UIScale);
-		P_Main.Padding = slickSpacer1.Margin = L_OutputTitle.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		CloseIcon.Size = UI.Scale(new Size(16, 16), UI.FontScale);
+		Margin = P_Main.Padding = slickSpacer1.Margin = L_OutputTitle.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		TB_Note.MinimumSize = new Size(0, (int)(64 * UI.FontScale));
-		I_Paste.Size = I_Copy.Size = I_AddPackage.Size = I_Note.Size = UI.Scale(new Size(24, 24), UI.FontScale);
-		I_Paste.Padding = I_Copy.Padding = I_AddPackage.Padding = I_Note.Padding = UI.Scale(new Padding(5), UI.FontScale);
+		I_Paste.Size = I_Copy.Size = I_AddPackage.Size = I_Note.Size = I_Close.Size = UI.Scale(new Size(28, 28), UI.FontScale);
+		I_Paste.Padding = I_Copy.Padding = I_AddPackage.Padding = I_Note.Padding = I_Close.Padding = UI.Scale(new Padding(3), UI.FontScale);
 		L_OutputTitle.Font = UI.Font(7.5F, FontStyle.Bold);
 	}
 

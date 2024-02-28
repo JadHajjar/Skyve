@@ -398,7 +398,7 @@ public class CompatibilityMessageControl : SlickControl
 					}
 					break;
 				case StatusAction.RequestReview:
-					Program.MainForm.PushPanel(null, new PC_RequestReview(PackageCompatibilityReportControl.Package));
+					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().RequestReviewPanel(PackageCompatibilityReportControl.Package));
 					break;
 			}
 			_compatibilityManager.QuickUpdate(Message);

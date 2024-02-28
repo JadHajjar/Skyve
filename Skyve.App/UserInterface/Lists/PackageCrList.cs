@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-public class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectangles>
+public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCrList.Rectangles>
 {
 	private readonly IWorkshopService _workshopService;
 	private readonly ICompatibilityManager _compatibilityManager;
@@ -26,21 +26,21 @@ public class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectan
 		Font = UI.Font(7F, FontStyle.Bold);
 	}
 
-	protected override IEnumerable<DrawableItem<ulong, Rectangles>> OrderItems(IEnumerable<DrawableItem<ulong, Rectangles>> items)
+	protected override IEnumerable<DrawableItem<IPackageIdentity, Rectangles>> OrderItems(IEnumerable<DrawableItem<IPackageIdentity, Rectangles>> items)
 	{
-		return items.OrderByDescending(x => _workshopService.GetInfo(new GenericPackageIdentity(x.Item))?.ServerTime);
+		return items.OrderByDescending(x => _workshopService.GetInfo(x.Item)?.ServerTime);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<ulong, Rectangles> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<IPackageIdentity, Rectangles> item, Point location)
 	{
 		return true;
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<ulong, Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 	{
 		base.OnPaintItemList(e);
 
-		var Package = _workshopService.GetInfo(new GenericPackageIdentity(e.Item));
+		var Package = _workshopService.GetInfo(e.Item);
 		var imageRect = e.ClipRectangle.Pad(Padding);
 		imageRect.Width = imageRect.Height;
 		var image = Package?.GetThumbnail();
@@ -102,9 +102,9 @@ public class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectan
 		}
 	}
 
-	public class Rectangles : IDrawableItemRectangles<ulong>
+	public class Rectangles : IDrawableItemRectangles<IPackageIdentity>
 	{
-		public ulong Item { get; set; }
+		public IPackageIdentity Item { get; set; }
 
 		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
 		{

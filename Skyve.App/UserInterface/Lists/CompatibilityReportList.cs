@@ -1082,7 +1082,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					}
 					break;
 				case StatusAction.RequestReview:
-					Program.MainForm.PushPanel(null, new PC_RequestReview(item.Item));
+					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().RequestReviewPanel(item.Item));
 					break;
 			}
 

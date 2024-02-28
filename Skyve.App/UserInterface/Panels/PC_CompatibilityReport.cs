@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 
+using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Generic;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
@@ -253,7 +254,7 @@ public partial class PC_CompatibilityReport : PanelContent
 				,
 				StatusAction.RequestReview => () =>
 				{
-					Program.MainForm.PushPanel(null, new PC_RequestReview(report));
+					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().RequestReviewPanel(report));
 				}
 				,
 				StatusAction.Switch => message.Packages.Count() == 1 ? () =>
