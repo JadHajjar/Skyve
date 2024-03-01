@@ -60,7 +60,10 @@ public class ReportSeverityDropDown : SlickSelectionDropDown<CompatibilityNotifi
 		using var icon = (item switch { CompatibilityNotificationFilter.Any => new DynamicIcon("I_Slash"), CompatibilityNotificationFilter.AnyIssue => new DynamicIcon("I_Warning"), _ => ((NotificationType)(int)item).GetIcon(true) }).Get(rectangle.Height - 2).Color(color);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
-
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		
+		using var brush = new SolidBrush(foreColor);
+		using var font = UI.Font(8.25F).FitTo(text, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center };
+		e.Graphics.DrawString(text, font, brush, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), format);
 	}
 }

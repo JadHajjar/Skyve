@@ -62,7 +62,9 @@ public class ApiUtil(ILogger logger)
 				request.Headers.Add(item.Item1, item.Item2);
 			}
 
+#if !STABLE
 			_logger.Info($"[API] [GET] {baseUrl}");
+#endif
 
 			using var response = request.GetResponse();
 			using var dataStream = response.GetResponseStream();
@@ -70,9 +72,9 @@ public class ApiUtil(ILogger logger)
 
 			if (typeof(T) == typeof(byte[]))
 			{
-				using var memstream = new MemoryStream();
-				reader.BaseStream.CopyTo(memstream);
-				return (T)(object)memstream.ToArray();
+				using var memoryStream = new MemoryStream();
+				reader.BaseStream.CopyTo(memoryStream);
+				return (T)(object)memoryStream.ToArray();
 			}
 
 			var responseContent = reader.ReadToEnd();
@@ -87,7 +89,9 @@ public class ApiUtil(ILogger logger)
 			httpClient.DefaultRequestHeaders.Add(item.Item1, item.Item2);
 		}
 
+#if !STABLE
 		_logger.Info($"[API] [GET] {baseUrl}");
+#endif
 
 		var httpResponse = await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(method), new Uri(url)));
 
@@ -146,7 +150,9 @@ public class ApiUtil(ILogger logger)
 			request.ContentType = "application/json";
 			request.ContentLength = postDataBytes.Length;
 
+#if !STABLE
 			_logger.Info($"[API] [POST] {baseUrl}");
+#endif
 
 			using (var requestStream = request.GetRequestStream())
 			{
@@ -159,9 +165,9 @@ public class ApiUtil(ILogger logger)
 
 			if (typeof(T) == typeof(byte[]))
 			{
-				using var memstream = new MemoryStream();
-				reader.BaseStream.CopyTo(memstream);
-				return (T)(object)memstream.ToArray();
+				using var memoryStream = new MemoryStream();
+				reader.BaseStream.CopyTo(memoryStream);
+				return (T)(object)memoryStream.ToArray();
 			}
 
 			var responseContent = reader.ReadToEnd();
@@ -179,7 +185,9 @@ public class ApiUtil(ILogger logger)
 		var content = new StringContent(json, Encoding.UTF8, "application/json");
 		var httpResponse = await httpClient.PostAsync(url, content);
 
+#if !STABLE
 		_logger.Info($"[API] [POST] {baseUrl}");
+#endif
 
 		if (httpResponse.IsSuccessStatusCode)
 		{

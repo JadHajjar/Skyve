@@ -228,16 +228,21 @@ public class LanguageDropDown : SlickSelectionDropDown<string>
 
 			var text = _langNames[item][hoverState.HasFlag(HoverState.Hovered)];
 			var textSize1 = Size.Ceiling(e.Graphics.Measure(text.Name, Font));
-			var textSize2 = Size.Ceiling(e.Graphics.Measure(" / " + text.Dialect, UI.Font(7F)));
+			using var font = UI.Font(7F);
+			var textSize2 = Size.Ceiling(e.Graphics.Measure(" / " + text.Dialect, font));
 			var textRect = rectangle.Pad(iconSize + Padding.Horizontal, (int)(ItemHeight * UI.FontScale) + 1 != rectangle.Height ? -1 : -Padding.Top + 1, Padding.Right * 3 / 2, (int)(ItemHeight * UI.FontScale) + 1 != rectangle.Height ? -3 : -Padding.Bottom + 1);
 			var textRect1 = textRect.Align(new Size(textRect.Width, textSize1.Height), textSize1.Width + textSize2.Width > textRect.Width ? ContentAlignment.TopCenter : ContentAlignment.MiddleCenter);
 			var textRect2 = textRect.Align(new Size(textRect.Width, textSize2.Height), textSize1.Width + textSize2.Width > textRect.Width ? ContentAlignment.BottomCenter : ContentAlignment.MiddleCenter);
 
 			textRect.Width = rectangle.Width - textRect.X;
 
-			e.Graphics.DrawString(text.Name, Font, new SolidBrush(foreColor), textRect1, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+			using var brush = new SolidBrush(foreColor);
+			using var format = new StringFormat { Trimming = StringTrimming.EllipsisCharacter };
+			e.Graphics.DrawString(text.Name, base.Font, brush, textRect1, format);
 
-			e.Graphics.DrawString(" / " + text.Dialect, UI.Font(7F), new SolidBrush(Color.FromArgb(175, foreColor)), textRect2, new StringFormat { Alignment = StringAlignment.Far, Trimming = StringTrimming.EllipsisCharacter });
+			using var brush1 = new SolidBrush(Color.FromArgb(175, foreColor));
+			using var format1 = new StringFormat { Alignment = StringAlignment.Far, Trimming = StringTrimming.EllipsisCharacter };
+			e.Graphics.DrawString(" / " + text.Dialect, font, brush1, textRect2, format1);
 		}
 	}
 }

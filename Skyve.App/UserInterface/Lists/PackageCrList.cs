@@ -1,5 +1,4 @@
-﻿using Skyve.App.UserInterface.Panels;
-using Skyve.Compatibility.Domain.Enums;
+﻿using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
@@ -10,6 +9,9 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 {
 	private readonly IWorkshopService _workshopService;
 	private readonly ICompatibilityManager _compatibilityManager;
+
+	public IPackageIdentity? CurrentPackage { get; set; }
+
 	public PackageCrList()
 	{
 		ServiceCenter.Get(out _workshopService, out _compatibilityManager);
@@ -40,66 +42,82 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 	{
 		base.OnPaintItemList(e);
 
-		var Package = _workshopService.GetInfo(e.Item);
-		var imageRect = e.ClipRectangle.Pad(Padding);
+		var cr = e.Item.GetPackageInfo();
+		var stability = (cr?.Stability ?? PackageStability.NotReviewed);
+		var clipRectangle = e.ClipRectangle;
+		var imageRect = clipRectangle.Pad(Padding);
+		var thumbnail = e.Item.GetThumbnail();
+		var isUpToDate = cr?.ReviewDate > e.Item.GetWorkshopInfo()?.ServerTime;
+
 		imageRect.Width = imageRect.Height;
-		var image = Package?.GetThumbnail();
-		var panel = PanelContent.GetParentPanel(this);
 
-		//if (panel is PC_CompatibilityManagement cm && cm.CurrentPackage?.Id == e.Item || panel is PC_ReviewRequests rr && rr.CurrentPackage == e.Item)
-		//{
-		//	e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.ActiveColor), imageRect.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleLeft), Padding.Left);
-
-		//	imageRect.X += 3 * Padding.Left;
-		//}
-
-		if (image is not null)
+		if (CurrentPackage == e.Item)
 		{
-			e.Graphics.DrawRoundedImage(image, imageRect, (int)(3 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
+			e.Graphics.FillRoundedRectangle(activeBrush, clipRectangle.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleRight), Padding.Left);
+
+			clipRectangle.Width -= 3 * Padding.Left;
+		}
+
+		if (thumbnail is null)
+		{
+			using var generic = IconManager.GetIcon(isUpToDate ? "I_OK" : "I_Paradox", isUpToDate ? (imageRect.Height * 3 / 4) : imageRect.Height).Color(e.BackColor);
+			using var backBrush = new SolidBrush(isUpToDate ? FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.IconColor, 35) : FormDesign.Design.IconColor);
+
+			e.Graphics.FillRoundedRectangle(backBrush, imageRect, (int)(5 * UI.FontScale));
+			e.Graphics.DrawImage(generic, imageRect.CenterR(generic.Size));
 		}
 		else
 		{
-			using var generic = IconManager.GetIcon("I_Package", imageRect.Height).Color(BackColor);
-			using var brush = new SolidBrush(FormDesign.Design.IconColor);
+			e.Graphics.DrawRoundedImage(thumbnail, imageRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
 
-			e.Graphics.FillRoundedRectangle(brush, imageRect, (int)(3 * UI.FontScale));
-			e.Graphics.DrawImage(generic, imageRect.CenterR(generic.Size));
-		}
+			using var pen = new Pen(e.BackColor, 2.5F);
+			e.Graphics.DrawRoundedRectangle(pen, imageRect, (int)(5 * UI.FontScale));
 
-		List<(Color Color, string Text)>? tags = null;
-
-		var textRect = e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.TopLeft);
-
-		e.Graphics.DrawString(Package?.CleanName(out tags) ?? Locale.UnknownPackage, Font, new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
-
-		var tagRect = new Rectangle(textRect.Right, textRect.Y, 0, textRect.Height);
-
-		if (tags is not null)
-		{
-			foreach (var item in tags)
+			if (isUpToDate && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
-				tagRect.X -= Padding.Left + e.Graphics.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.TopRight, smaller: true).Width;
+				using var greenBrush = new SolidBrush(Color.FromArgb(150, FormDesign.Design.GreenColor));
+				using var icon = IconManager.GetIcon("I_Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor.GetTextColor());
+
+				e.Graphics.FillRoundedRectangle(greenBrush, imageRect, (int)(5 * UI.FontScale));
+				e.Graphics.DrawImage(icon, imageRect.CenterR(icon.Size));
 			}
 		}
 
-		if (Package is null)
+		var text = e.Item.CleanName(out var tags);
+		var tagSizes = 0;
+
+		for (var i = 0; i < tags.Count; i++)
 		{
-			return;
+			var size = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: true);
+
+			tagSizes += Padding.Left + size.Width;
 		}
 
-		var cr = Package.GetPackageInfo();
+		var textRect = clipRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top / 2, tagSizes, 0);
+		using var brushTitle = new SolidBrush(e.BackColor.GetTextColor());
+		using var font = UI.Font(8.25F, FontStyle.Bold).FitTo(text, textRect.Pad(Padding.Left), e.Graphics);
 
-		if (cr is null)
+		e.Graphics.DrawString(text, font, brushTitle, textRect);
+
+		textRect = clipRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top / 2, 0, 0);
+		var textSize = e.Graphics.Measure(text, font, textRect.Width - tagSizes - Padding.Right);
+		var tagRect = new Rectangle(textRect.X + (int)textSize.Width, textRect.Y, 0, (int)textSize.Height);
+
+		for (var i = 0; i < tags.Count; i++)
 		{
-			return;
+			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true);
+
+			tagRect.X += Padding.Left + rect.Width;
 		}
 
-		e.Graphics.DrawLabel(LocaleCR.Get(cr.Stability.ToString()), null, CRNAttribute.GetNotification(cr.Stability).GetColor().MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomLeft, smaller: true);
+		text = LocaleCR.Get(stability.ToString());
+		textRect = new Rectangle(textRect.X, textRect.Bottom - textRect.Height / 2, textRect.Width, textRect.Height / 2);
+		using var font2 = UI.Font(7F, FontStyle.Bold).FitToWidth(text, textRect.Pad(Padding.Left), e.Graphics);
+		using var brush = new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? brushTitle.Color : CRNAttribute.GetNotification(stability).GetColor());
+		using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
-		if (cr.ReviewDate > Package.ServerTime)
-		{
-			e.Graphics.DrawLabel(Locale.UpToDate, null, FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomRight, smaller: true);
-		}
+		e.Graphics.DrawString(text, font2, brush, textRect, format);
 	}
 
 	public class Rectangles : IDrawableItemRectangles<IPackageIdentity>
