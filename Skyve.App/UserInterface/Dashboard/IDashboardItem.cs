@@ -4,9 +4,9 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Dashboard;
 public abstract class IDashboardItem : SlickImageControl
 {
-	protected readonly List<(Rectangle rectangle, int height)> _sections = new();
-	protected readonly Dictionary<Rectangle, ExtensionClass.action> _buttonActions = new();
-	protected readonly Dictionary<Rectangle, ExtensionClass.action> _buttonRightClickActions = new();
+	protected readonly List<(Rectangle rectangle, int height)> _sections = [];
+	protected readonly Dictionary<Rectangle, ExtensionClass.action> _buttonActions = [];
+	protected readonly Dictionary<Rectangle, ExtensionClass.action> _buttonRightClickActions = [];
 
 	public event EventHandler? ResizeRequested;
 
@@ -133,7 +133,7 @@ public abstract class IDashboardItem : SlickImageControl
 			var border = (int)(10 * UI.FontScale);
 			var rect = ClientRectangle.Pad((int)(1.5 * UI.FontScale)).Pad(Padding);
 
-			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme? 8: -8));
+			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 8 : -8));
 			e.Graphics.FillRoundedRectangle(brush, rect, border);
 
 			using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale));
@@ -208,7 +208,7 @@ public abstract class IDashboardItem : SlickImageControl
 			back = FormDesign.Design.MenuColor;
 		}
 
-		if (applyDrawing&& drawBackground)
+		if (applyDrawing && drawBackground)
 		{
 			if (tintColor != null)
 			{

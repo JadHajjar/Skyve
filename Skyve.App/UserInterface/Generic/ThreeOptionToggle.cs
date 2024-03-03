@@ -17,7 +17,15 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 	public event EventHandler? SelectedValueChanged;
 
 	[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-	public Value SelectedValue { get => _selectedValue; set { _selectedValue = value; Invalidate(); SelectedValueChanged?.Invoke(this, EventArgs.Empty); } }
+	public Value SelectedValue
+	{
+		get => _selectedValue; set
+		{
+			_selectedValue = value;
+			Invalidate();
+			SelectedValueChanged?.Invoke(this, EventArgs.Empty);
+		}
+	}
 	[Category("Appearance"), DefaultValue("")]
 	public string Option1 { get; set; } = string.Empty;
 	[Category("Appearance"), DefaultValue("")]

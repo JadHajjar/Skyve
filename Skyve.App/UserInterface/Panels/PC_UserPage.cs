@@ -12,7 +12,7 @@ public partial class PC_UserPage : PanelContent
 	private readonly ISettings _settings;
 	private readonly IWorkshopService _workshopService;
 
-	private List<IPackageIdentity> userItems = new();
+	private List<IPackageIdentity> userItems = [];
 
 	public IUser User { get; }
 

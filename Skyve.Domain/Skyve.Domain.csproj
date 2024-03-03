@@ -5,7 +5,6 @@
 		<Nullable>enable</Nullable>
 		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
 		<Deterministic>true</Deterministic>
-		<TargetFramework>net4.7.2</TargetFramework>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<SignAssembly>True</SignAssembly>
 		<NeutralLanguage>en</NeutralLanguage>

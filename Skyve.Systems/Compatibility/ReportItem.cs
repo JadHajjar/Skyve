@@ -6,7 +6,6 @@ using Skyve.Compatibility.Domain;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
-using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace Skyve.Systems.Compatibility.Domain;
 
 public class ReportItem : ICompatibilityItem
 {
-	private string? message;
+	private readonly string? message;
 
 	public ulong PackageId { get; set; }
 	public string? PackageName { get; set; }

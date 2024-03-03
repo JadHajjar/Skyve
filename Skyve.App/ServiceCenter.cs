@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using System;
-
 namespace Skyve.App;
 
 #nullable disable

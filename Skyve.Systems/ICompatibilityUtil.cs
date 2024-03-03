@@ -1,6 +1,4 @@
-﻿using Skyve.Compatibility.Domain;
-using Skyve.Compatibility.Domain.Interfaces;
-using Skyve.Domain;
+﻿using Skyve.Compatibility.Domain.Interfaces;
 
 
 using System;

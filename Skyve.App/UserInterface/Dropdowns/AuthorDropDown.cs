@@ -1,12 +1,10 @@
-﻿using Skyve.Compatibility.Domain.Interfaces;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
 public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 {
-	private readonly Dictionary<IUser, int> _counts = new();
+	private readonly Dictionary<IUser, int> _counts = [];
 	private readonly IImageService _imageManager;
 	private readonly IUserService _userService;
 
@@ -48,7 +46,9 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IUser item, bool selected)
 	{
 		if (item is null)
-		{ return; }
+		{
+			return;
+		}
 
 		var text = item.Name;
 
@@ -74,12 +74,18 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 		rectangle = rectangle.Pad(rectangle.Height + Padding.Left, 0, 0, 0);
 #endif
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
-
 		if (_counts.ContainsKey(item!))
 		{
-			e.Graphics.DrawString(Locale.ItemsCount.FormatPlural(_counts[item!]), Font, new SolidBrush(Color.FromArgb(200, foreColor)), rectangle.Pad(0, 0, (int)(5 * UI.FontScale), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+			using var brush2 = new SolidBrush(Color.FromArgb(200, foreColor));
+			e.Graphics.DrawString(Locale.ItemsCount.FormatPlural(_counts[item!]), Font, brush2, rectangle.Pad(0, 0, (int)(5 * UI.FontScale), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center });
+
+			rectangle.Width -= (int)e.Graphics.Measure(Locale.ItemsCount.FormatPlural(_counts[item!]), Font).Width;
 		}
+
+		using var brush = new SolidBrush(foreColor);
+		using var font = UI.Font(8.25F).FitTo(text, rectangle, e.Graphics);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center };
+		e.Graphics.DrawString(text, font, brush, rectangle, format);
 	}
 
 	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<IUser> items)
@@ -102,7 +108,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 			return;
 		}
 
-		var iconRect = rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
+		var iconRect = Rectangle.Empty;/* rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
 		foreach (var item in items)
 		{
 			var icon = _imageManager.GetImage(item?.AvatarUrl, true).Result;
@@ -112,7 +118,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 			}
 
 			iconRect.X += iconRect.Width * 9 / 10;
-		}
+		}*/
 
 		e.Graphics.DrawString(Locale.AuthorsSelected.FormatPlural(items.Count()), Font, new SolidBrush(foreColor), rectangle.Pad(iconRect.Right - iconRect.Width, 0, 0, 0).AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 	}

@@ -1,17 +1,12 @@
-﻿using Extensions;
+﻿using Newtonsoft.Json;
 
-using Newtonsoft.Json;
-
-using Skyve.Compatibility.Domain;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
-using Skyve.Domain.Enums;
 
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
 namespace Skyve.Systems.Compatibility.Domain;
@@ -34,7 +29,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 		ReportItems = [];
 	}
 
-	public CompatibilityInfo(IPackageIdentity package, IIndexedPackageCompatibilityInfo	? packageData)
+	public CompatibilityInfo(IPackageIdentity package, IIndexedPackageCompatibilityInfo? packageData)
 	{
 		Id = package.Id;
 		Name = package.Name;

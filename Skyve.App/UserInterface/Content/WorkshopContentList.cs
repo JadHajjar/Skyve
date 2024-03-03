@@ -1,16 +1,6 @@
-﻿using Extensions;
+﻿using Skyve.App.UserInterface.Panels;
 
-using Skyve.App.UserInterface.Generic;
-using Skyve.App.UserInterface.Panels;
-using Skyve.Domain.Systems;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
-using static Extensions.TicketBooth;
 
 namespace Skyve.App.UserInterface.Content;
 public class WorkshopContentList : ContentList
@@ -28,9 +18,13 @@ public class WorkshopContentList : ContentList
 		ListControl.Loading = true;
 
 		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
-		await Task.Delay(250);
+		{
+			await Task.Delay(250);
+		}
 
 		if (id == _id)
-		await RefreshItems();
+		{
+			await RefreshItems();
+		}
 	}
 }

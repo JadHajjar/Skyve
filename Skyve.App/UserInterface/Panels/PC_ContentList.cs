@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_ContentList : PanelContent
 {
-	internal protected readonly ContentList LC_Items;
+	protected internal readonly ContentList LC_Items;
 	private readonly bool _itemsReady;
 
 	public virtual SkyvePage Page { get; }

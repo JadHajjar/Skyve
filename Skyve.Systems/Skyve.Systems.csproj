@@ -10,7 +10,6 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<Deterministic>true</Deterministic>
-		<TargetFramework>net4.7.2</TargetFramework>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<SignAssembly>True</SignAssembly>
 		<NeutralLanguage>en</NeutralLanguage>
@@ -23,7 +22,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
-		<ProjectReference Include="..\..\Skyve-Api\Domain\Skyve-Api Domain.csproj" />
+		<ProjectReference Include="..\Skyve.Compatibility\Skyve.Compatibility.csproj" />
 		<ProjectReference Include="..\Skyve.Domain\Skyve.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>

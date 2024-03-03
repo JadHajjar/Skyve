@@ -10,7 +10,6 @@
   <PropertyGroup>
       <Deterministic>true</Deterministic>
       <LangVersion>latest</LangVersion>
-      <TargetFramework>net4.7.2</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <SignAssembly>true</SignAssembly>

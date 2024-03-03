@@ -276,7 +276,9 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				var enable = !item.Item.IsEnabled();
 
 				if (enable || !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil))
+				{
 					await _modUtil.SetEnabled(item.Item, enable);
+				}
 			}
 
 			item.Loading = false;
@@ -610,7 +612,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private void DrawWorkshopSearchButtons(PaintEventArgs e, bool emptySearch)
 	{
 		if (_page == SkyvePage.Workshop)
-		{ 
+		{
 			return;
 		}
 

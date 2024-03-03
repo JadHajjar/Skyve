@@ -17,7 +17,9 @@ public partial class AddLinkForm : BaseForm
 		Text = LocaleHelper.GetGlobalText("Links");
 
 		foreach (var link in links)
-		{ AddLink(link); }
+		{
+			AddLink(link);
+		}
 	}
 
 	protected override void UIChanged()

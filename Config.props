@@ -7,17 +7,19 @@
 	
 	<PropertyGroup>
 		<Configurations>CS1 Debug;CS1 Release;CS1 Stable;CS2 Debug;CS2 Release;CS2 Stable;API Debug;API Stable</Configurations>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<GameVersion>$([System.String]::Copy($(Configuration)).Substring(0, 3))</GameVersion>
 		<BuildType>$([System.String]::Copy($(Configuration)).Substring(4))</BuildType>
 		<DefineConstants>$(DefineConstants);$(GameVersion)</DefineConstants>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<TargetFramework>net4.7.2</TargetFramework>
 		<OutputPath>bin\$(BuildType)</OutputPath>
+		<OutDir>bin\$(BuildType)</OutDir>
 		<PublishDir>bin\Publish_$(BuildType)</PublishDir>
 	</PropertyGroup>
-
+	
 	<PropertyGroup Label="Versions">
-		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' == 'Stable'">0.1.6</Version> <!--CS2 STABLE-->
-		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">0.1.6</Version> <!--CS2 BETA-->
+		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' == 'Stable'">0.1.7</Version> <!--CS2 STABLE-->
+		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">0.1.7</Version> <!--CS2 BETA-->
 		
 		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' == 'Stable'">3.3.2.1</Version> <!--CS1 STABLE-->
 		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' != 'Stable'">3.3.2.1</Version> <!--CS1 BETA-->

@@ -1,6 +1,5 @@
 ﻿using Skyve.App.UserInterface.Panels;
 using Skyve.App.Utilities;
-using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -80,7 +79,7 @@ public class UserDescriptionControl : SlickImageControl
 		else
 		{
 			e.Graphics.SetUp(FormDesign.Design.AccentBackColor);
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1, Height / 2 + 1, 1, 1), (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1, (Height / 2) + 1, 1, 1), (int)(5 * UI.FontScale));
 		}
 
 		if (User == null)

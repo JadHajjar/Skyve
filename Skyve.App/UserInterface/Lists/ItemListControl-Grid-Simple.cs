@@ -164,7 +164,7 @@ public partial class ItemListControl
 				using var authorIcon = IconManager.GetIcon("I_Author", size.Height);
 
 				e.Rects.AuthorRect = rect.Align(size + new Size(authorIcon.Width, 0), ContentAlignment.TopLeft);
-				e.DrawableItem.CachedHeight = e.Rects.AuthorRect.Bottom + GridPadding.Top / 3;
+				e.DrawableItem.CachedHeight = e.Rects.AuthorRect.Bottom + (GridPadding.Top / 3);
 
 				var isHovered = e.Rects.AuthorRect.Contains(CursorLocation);
 				using var brush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : Color.FromArgb(200, ForeColor));
@@ -204,18 +204,18 @@ public partial class ItemListControl
 			{
 				using var fadedBrush = new SolidBrush(Color.FromArgb(GridView ? 150 : 200, e.BackColor.GetTextColor()));
 
-				var rect = GridView 
-					? new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, Height) 
+				var rect = GridView
+					? new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, Height)
 					: new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, e.Rects.TextRect.Width, e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - Padding.Bottom);
 
 				using var versionFont = GridView ? UI.Font(7.5F) : UI.Font(8.25F).FitToHeight(versionText, rect, e.Graphics);
 				using var format = GridView ? new() : new StringFormat { LineAlignment = StringAlignment.Far };
-				
+
 				e.Graphics.DrawString(versionText, versionFont, fadedBrush, rect, format);
 
 				if (GridView)
 				{
-					e.DrawableItem.CachedHeight += (int)e.Graphics.Measure(versionText, versionFont, rect.Width).Height; 
+					e.DrawableItem.CachedHeight += (int)e.Graphics.Measure(versionText, versionFont, rect.Width).Height;
 				}
 			}
 		}

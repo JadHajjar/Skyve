@@ -43,7 +43,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 		base.OnPaintItemList(e);
 
 		var cr = e.Item.GetPackageInfo();
-		var stability = (cr?.Stability ?? PackageStability.NotReviewed);
+		var stability = cr?.Stability ?? PackageStability.NotReviewed;
 		var clipRectangle = e.ClipRectangle;
 		var imageRect = clipRectangle.Pad(Padding);
 		var thumbnail = e.Item.GetThumbnail();
@@ -112,7 +112,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 		}
 
 		text = LocaleCR.Get(stability.ToString());
-		textRect = new Rectangle(textRect.X, textRect.Bottom - textRect.Height / 2, textRect.Width, textRect.Height / 2);
+		textRect = new Rectangle(textRect.X, textRect.Bottom - (textRect.Height / 2), textRect.Width, textRect.Height / 2);
 		using var font2 = UI.Font(7F, FontStyle.Bold).FitToWidth(text, textRect.Pad(Padding.Left), e.Graphics);
 		using var brush = new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? brushTitle.Color : CRNAttribute.GetNotification(stability).GetColor());
 		using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };

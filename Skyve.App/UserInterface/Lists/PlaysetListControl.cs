@@ -1,9 +1,6 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
-using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Interfaces;
-using Skyve.Domain;
-using Skyve.Domain.Systems;
 
 using System.Drawing;
 using System.IO;
@@ -15,7 +12,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 {
 	private ProfileSorting sorting;
 	private static IPlayset? downloading;
-	private static IPlayset? opening;
+	private static readonly IPlayset? opening;
 	private readonly IOSelectionDialog imagePrompt;
 
 	public bool ReadOnly { get; set; }
@@ -177,21 +174,21 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 			return;
 		}
-		
+
 		if (item.Rectangles.Author.Contains(e.Location) && item.Item.GetCustomPlayset().OnlineInfo?.Author is IUser author)
 		{
 			Program.MainForm.PushPanel(new PC_UserPage(author));
 
 			return;
 		}
-		
+
 		if (item.Rectangles.ViewContents.Contains(e.Location))
 		{
 			ShowPlaysetContents(item.Item);
 
 			return;
 		}
-		
+
 		if (item.Rectangles.EditThumbnail.Contains(e.Location))
 		{
 			if (imagePrompt.PromptFile(Program.MainForm) == DialogResult.OK)
@@ -344,7 +341,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			using var userIcon = IconManager.GetSmallIcon("I_User");
 
 			e.Rects.Author = e.Graphics.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), default, ContentAlignment.TopLeft);
-			
+
 			throw new NotImplementedException();
 		}
 
@@ -358,7 +355,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 		//var loadText = ReadOnly ? _playsetManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlayset : Locale.DownloadPlayset : Locale.ActivatePlayset;
 		//var loadIcon = new DynamicIcon(downloading == e.Item && ReadOnly ? "I_Wait" : ReadOnly && _playsetManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? "I_Refresh" : "I_Install");
-		
+
 		if (ReadOnly)
 		{
 			return;
@@ -460,7 +457,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		var fav = new DynamicIcon(ReadOnly ? "I_ViewFile" : customPlayset.IsFavorite != favViewRect.Contains(CursorLocation) ? "I_StarFilled" : "I_Star");
 		using var favIcon = fav.Get(favViewRect.Height * 3 / 4);
 
-		if( e.DrawableItem.Loading)
+		if (e.DrawableItem.Loading)
 		{
 			DrawLoader(e.Graphics, favViewRect.CenterR(favIcon.Size));
 		}
@@ -528,7 +525,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			ActiveColor = e.Item == _playsetManager.CurrentPlayset ? FormDesign.Design.GreenColor : customPlayset.Color ?? FormDesign.Design.ActiveColor
 		});
 
-		using var pen = new Pen(FormDesign.Design.AccentColor, (int)(UI.FontScale));
+		using var pen = new Pen(FormDesign.Design.AccentColor, (int)UI.FontScale);
 
 		e.Graphics.DrawLine(pen, e.Rects.Content.Right + Padding.Horizontal, e.Rects.Content.Y, e.Rects.Content.Right + Padding.Horizontal, e.Rects.Content.Bottom);
 
@@ -621,7 +618,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			rects.DotsRect = rects.EditSettings = rectangle.Align(size, ContentAlignment.TopRight);
 			rects.EditSettings.X -= rects.EditSettings.Width + Padding.Left;
 
-			rects.Content = Rectangle.FromLTRB(rects.Text.Right, rectangle.Y, rects.EditSettings.X - Padding.Horizontal * 2 - (int)UI.FontScale, rectangle.Bottom);
+			rects.Content = Rectangle.FromLTRB(rects.Text.Right, rectangle.Y, rects.EditSettings.X - (Padding.Horizontal * 2) - (int)UI.FontScale, rectangle.Bottom);
 		}
 
 		if (ReadOnly)

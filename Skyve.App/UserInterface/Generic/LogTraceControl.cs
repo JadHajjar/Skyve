@@ -33,13 +33,13 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 
 		using var titleFont = UI.Font(8.25F, FontStyle.Bold);
 
-		y += Padding.Top + (int)e.Graphics.Measure(e.Item.Title, e.Item.Trace.Count == 0 ? smallFont : titleFont, rect.Width - (int)timeStampSize.Width * 2 - Padding.Right).Height;
+		y += Padding.Top + (int)e.Graphics.Measure(e.Item.Title, e.Item.Trace.Count == 0 ? smallFont : titleFont, rect.Width - ((int)timeStampSize.Width * 2) - Padding.Right).Height;
 
 		foreach (var item in e.Item.Trace)
 		{
 			var trace = item.StartsWith("at");
 
-			y += (int)e.Graphics.Measure(item, smallFont, Width - (trace ? 2 : 1) * Padding.Horizontal).Height;
+			y += (int)e.Graphics.Measure(item, smallFont, Width - ((trace ? 2 : 1) * Padding.Horizontal)).Height;
 		}
 
 		y += Padding.Bottom;
@@ -92,18 +92,18 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 
 		using var titleFont = UI.Font(8.25F, FontStyle.Bold);
 		using var titleBrush = new SolidBrush(ForeColor);
-		e.Graphics.DrawString(e.Item.Title, titleFont, titleBrush, rect.Pad(0, 0, (int)timeStampSize.Width * 2 + Padding.Right, 0));
+		e.Graphics.DrawString(e.Item.Title, titleFont, titleBrush, rect.Pad(0, 0, ((int)timeStampSize.Width * 2) + Padding.Right, 0));
 
-		y += Padding.Top + (int)e.Graphics.Measure(e.Item.Title, e.Item.Trace.Count == 0 ? smallFont : titleFont, rect.Width - (int)timeStampSize.Width * 2 - Padding.Right).Height;
+		y += Padding.Top + (int)e.Graphics.Measure(e.Item.Title, e.Item.Trace.Count == 0 ? smallFont : titleFont, rect.Width - ((int)timeStampSize.Width * 2) - Padding.Right).Height;
 
 		using var textBrush = new SolidBrush(Color.FromArgb(215, ForeColor));
 		foreach (var item in e.Item.Trace)
 		{
 			var trace = item.StartsWith("at");
 
-			e.Graphics.DrawString(item, smallFont, trace ? textBrush : titleBrush, new Rectangle(Padding.Left + (trace ? Padding.Horizontal : 0), y, Width - (trace ? 2 : 1) * Padding.Horizontal, Height));
+			e.Graphics.DrawString(item, smallFont, trace ? textBrush : titleBrush, new Rectangle(Padding.Left + (trace ? Padding.Horizontal : 0), y, Width - ((trace ? 2 : 1) * Padding.Horizontal), Height));
 
-			y += (int)e.Graphics.Measure(item, smallFont, Width - (trace ? 2 : 1) * Padding.Horizontal).Height;
+			y += (int)e.Graphics.Measure(item, smallFont, Width - ((trace ? 2 : 1) * Padding.Horizontal)).Height;
 		}
 
 		y += Padding.Bottom;

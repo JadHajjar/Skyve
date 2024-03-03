@@ -1,9 +1,7 @@
 ﻿using Extensions;
 
 using Skyve.Compatibility.Domain.Enums;
-using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
-using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
 using System;
@@ -55,7 +53,9 @@ public class PackageNameUtil : IPackageNameUtil
 		}
 
 		if (package is IAsset)
+		{
 			return package.Name;
+		}
 
 		var isLocal = package.IsLocal();
 		var text = _tagRegex.Replace(package.Name, string.Empty);

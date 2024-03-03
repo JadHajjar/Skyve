@@ -43,7 +43,7 @@ internal class ViewTypeControl : SlickControl
 		Size = new Size((WithCompactList ? itemHeight : 0) + (WithList ? itemHeight : 0) + (WithGrid ? itemHeight : 0), itemHeight - (int)(4 * UI.FontScale));
 
 		var rect = ClientRectangle.Align(new Size(itemHeight, Height), ContentAlignment.MiddleLeft);
-	
+
 		if (WithCompactList)
 		{
 			CompactRect = rect;

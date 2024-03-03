@@ -2,10 +2,8 @@
 
 using Newtonsoft.Json;
 
-using Skyve.Domain;
+using Skyve.Compatibility.Domain;
 using Skyve.Domain.Systems;
-
-using SkyveApi.Domain.Generic;
 
 using System;
 using System.IO;

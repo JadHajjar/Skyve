@@ -30,6 +30,7 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly ILogger _logger;
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
+	private readonly IUserService _userService;
 	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly IPackageManager _packageManager;
 	private readonly ICompatibilityUtil _compatibilityUtil;
@@ -39,13 +40,12 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly IDlcManager _dlcManager;
 	private readonly SaveHandler _saveHandler;
 	private readonly CompatibilityHelper _compatibilityHelper;
-	private readonly ISkyveApiUtil _skyveApiUtil;
 
 	private CancellationTokenSource? cancellationTokenSource;
 
 	public bool FirstLoadComplete { get; private set; }
 
-	public CompatibilityManager(ISkyveDataManager skyveDataManager, IPackageManager packageManager, ILogger logger, ISettings settings, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, ISkyveApiUtil skyveApiUtil, IDlcManager dlcManager, SaveHandler saveHandler)
+	public CompatibilityManager(ISkyveDataManager skyveDataManager, IPackageManager packageManager, ILogger logger, ISettings settings, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, IDlcManager dlcManager, SaveHandler saveHandler, IUserService userService)
 	{
 		_skyveDataManager = skyveDataManager;
 		_packageManager = packageManager;
@@ -57,8 +57,8 @@ public class CompatibilityManager : ICompatibilityManager
 		_settings = settings;
 		_packageNameUtil = packageUtil;
 		_workshopService = workshopService;
-		_skyveApiUtil = skyveApiUtil;
 		_dlcManager = dlcManager;
+		_userService = userService;
 		_saveHandler = saveHandler;
 		_compatibilityHelper = new CompatibilityHelper(this, _settings, _packageManager, _packageUtil, _packageNameUtil, _workshopService, _logger, _skyveDataManager);
 
@@ -379,7 +379,7 @@ public class CompatibilityManager : ICompatibilityManager
 		sw2.Restart();
 #endif
 
-		var author = _skyveDataManager.TryGetAuthor(packageData.AuthorId);
+		var author = _userService.TryGetAuthor(packageData.AuthorId);
 
 		if (packageData.Stability is not PackageStability.Stable && workshopInfo?.IsIncompatible != true && !author.Malicious)
 		{

@@ -1,5 +1,4 @@
 ﻿using Skyve.Compatibility.Domain.Enums;
-using Skyve.Domain;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -164,7 +163,7 @@ public partial class ItemListControl
 			var drawSize = new SizeF(width - size, width - size);
 			var rect = new RectangleF(new PointF(rectangle.X + ((rectangle.Width - drawSize.Width) / 2), rectangle.Y + ((rectangle.Height - drawSize.Height) / 2)), drawSize).Pad(size / 2);
 			using var pen = new Pen(iconColor, size) { StartCap = LineCap.Round, EndCap = LineCap.Round };
-			
+
 			e.Graphics.DrawArc(pen, rect, -90, 360 * _subscriptionsManager.Status.Progress);
 #else
 			DrawLoader(e.Graphics, rectangle, iconColor);

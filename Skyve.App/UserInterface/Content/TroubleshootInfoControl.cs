@@ -115,7 +115,7 @@ public class TroubleshootInfoControl : SlickControl
 
 		y += Padding.Top;
 
-		if (_troubleshootSystem.WaitingForGameLaunch || _troubleshootSystem.WaitingForGameClose && CrossIO.CurrentPlatform is Platform.Windows)
+		if (_troubleshootSystem.WaitingForGameLaunch || (_troubleshootSystem.WaitingForGameClose && CrossIO.CurrentPlatform is Platform.Windows))
 		{
 			using var launchButtonIcon = IconManager.GetSmallIcon("I_CS");
 			launchRect = new Rectangle(Padding.Left, y + buttonSize.Height + Padding.Bottom, Width - Padding.Horizontal, buttonSize.Height);
@@ -183,7 +183,7 @@ public class TroubleshootInfoControl : SlickControl
 	{
 		base.OnMouseClick(e);
 
-		if (e.Button == MouseButtons.None || e.Button == MouseButtons.Left && buttonRect.Contains(e.Location))
+		if (e.Button == MouseButtons.None || (e.Button == MouseButtons.Left && buttonRect.Contains(e.Location)))
 		{
 			if (_troubleshootSystem.WaitingForPrompt)
 			{

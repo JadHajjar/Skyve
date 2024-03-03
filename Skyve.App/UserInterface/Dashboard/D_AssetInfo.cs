@@ -34,7 +34,7 @@ internal class D_AssetsInfo : IDashboardItem
 	{
 		if (Program.MainForm.PushPanel<PC_Assets>())
 		{
-			(Program.MainForm.CurrentPanel as PC_Assets)?.SetSorting(PackageSorting.UpdateTime, true); 
+			(Program.MainForm.CurrentPanel as PC_Assets)?.SetSorting(PackageSorting.UpdateTime, true);
 		}
 	}
 

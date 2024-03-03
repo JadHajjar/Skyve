@@ -1,11 +1,6 @@
 ﻿using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Dropdowns;
-using Skyve.Domain.Systems;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,7 +8,7 @@ namespace Skyve.App.UserInterface.Panels;
 public class PC_WorkshopList : PanelContent
 {
 	private readonly IWorkshopService _workshopService;
-	internal protected readonly WorkshopContentList LC_Items;
+	protected internal readonly WorkshopContentList LC_Items;
 
 	public PC_WorkshopList() : base(false)
 	{

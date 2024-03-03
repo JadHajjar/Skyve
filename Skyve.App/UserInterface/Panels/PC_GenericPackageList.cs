@@ -1,11 +1,9 @@
-﻿using Skyve.Compatibility.Domain.Interfaces;
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Skyve.App.UserInterface.Panels;
 public class PC_GenericPackageList : PC_ContentList
 {
-	private readonly List<IPackageIdentity> _items = new();
+	private readonly List<IPackageIdentity> _items = [];
 	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
 	public override SkyvePage Page => SkyvePage.Generic;

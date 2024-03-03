@@ -22,8 +22,8 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 	public D_CompatibilityInfo()
 	{
-		compatibilityModCounts = new();
-		compatibilityAssetCounts = new();
+		compatibilityModCounts = [];
+		compatibilityAssetCounts = [];
 		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _compatibilityManager);
 	}
 
@@ -246,7 +246,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 				e.Graphics.DrawStringItem(LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Mod.FormatPlural(group.Value).ToLower())
 					, Font
 					, group.Key.GetColor()
-					, rect.Pad(Margin	)
+					, rect.Pad(Margin)
 					, ref preferredHeight
 					, applyDrawing
 					, group.Key.GetIcon(true));
@@ -309,7 +309,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 		{
 			Text = Locale.ViewModsWithIssues,
 			Icon = "I_Mods",
-			Rectangle = buttonRect.Pad(0,0,Margin.Right,0)
+			Rectangle = buttonRect.Pad(0, 0, Margin.Right, 0)
 		});
 
 		var maxHeight = preferredHeight;
@@ -342,7 +342,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
 		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out var fore, ref preferredHeight);
-		
+
 		var rect = new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, modsSectionHeight - preferredHeight);
 
 		if (compatibilityModCounts.Count == 0)

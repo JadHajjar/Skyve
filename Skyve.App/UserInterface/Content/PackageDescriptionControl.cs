@@ -1,10 +1,8 @@
 ﻿using Skyve.App.Interfaces;
-using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Panels;
 using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
-using Skyve.Domain;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -440,7 +438,7 @@ public class PackageDescriptionControl : SlickImageControl
 			var padding = GridView ? GridPadding : Padding;
 			var height = (int)(24 * UI.FontScale);
 			var labelH = height - padding.Bottom;
-			var scoreRect = new Rectangle(e.Rects.BotRect.X + padding.Horizontal, e.Rects.BotRect.Top + padding.Vertical + height / 2 - labelH / 2 + 1, labelH, labelH);
+			var scoreRect = new Rectangle(e.Rects.BotRect.X + padding.Horizontal, e.Rects.BotRect.Top + padding.Vertical + (height / 2) - (labelH / 2) + 1, labelH, labelH);
 			var small = UI.FontScale < 1.25;
 			var backColor = score > 90 && workshopInfo!.Subscribers >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
 			e.Rects.ScoreRect = scoreRect;
@@ -471,7 +469,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		var padding = GridView ? GridPadding : Padding;
 		var height = (int)(24 * UI.FontScale);
-		var folderPoint = new Point(scoreX == 0 ? e.Rects.BotRect.X + padding.Horizontal : scoreX + padding.Left * 3, e.Rects.BotRect.Y + padding.Vertical);
+		var folderPoint = new Point(scoreX == 0 ? e.Rects.BotRect.X + padding.Horizontal : scoreX + (padding.Left * 3), e.Rects.BotRect.Y + padding.Vertical);
 
 		e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "I_Folder", alignment: ContentAlignment.TopLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
 	}
@@ -479,7 +477,7 @@ public class PackageDescriptionControl : SlickImageControl
 	private void DrawAuthor(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IUser author, int scoreX)
 	{
 		var padding = GridView ? GridPadding : Padding;
-		var authorRect = new Rectangle(scoreX + padding.Left * 3, e.Rects.BotRect.Y + padding.Vertical, 0, 0);
+		var authorRect = new Rectangle(scoreX + (padding.Left * 3), e.Rects.BotRect.Y + padding.Vertical, 0, 0);
 		var authorImg = author.GetUserAvatar();
 
 		var height = (int)(24 * UI.FontScale);
@@ -569,7 +567,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (notificationType > NotificationType.Info)
 		{
-			var point = new Point(e.ClipRectangle.Right - Padding.Horizontal * 2, e.Rects.BotRect.Y + Padding.Vertical);
+			var point = new Point(e.ClipRectangle.Right - (Padding.Horizontal * 2), e.Rects.BotRect.Y + Padding.Vertical);
 
 			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
 				point,
@@ -585,7 +583,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (statusText is not null && statusIcon is not null)
 		{
-			var point = new Point(e.ClipRectangle.Right - Padding.Horizontal * 2, e.Rects.BotRect.Bottom - Padding.Bottom);
+			var point = new Point(e.ClipRectangle.Right - (Padding.Horizontal * 2), e.Rects.BotRect.Bottom - Padding.Bottom);
 
 			e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(
 				point,
@@ -616,7 +614,7 @@ public class PackageDescriptionControl : SlickImageControl
 		var rects = new Rectangles(item)
 		{
 			TopRect = rectangle.Pad(0, 0, 0, rectangle.Height * 6 / 10),
-			BotRect = rectangle.Pad(Padding.Left, rectangle.Height * 4 / 10 + Padding.Top, Padding.Right, Padding.Bottom),
+			BotRect = rectangle.Pad(Padding.Left, (rectangle.Height * 4 / 10) + Padding.Top, Padding.Right, Padding.Bottom),
 			IconRect = rectangle.Pad(0, 0, rectangle.Width, rectangle.Height * 6 / 10),
 		};
 
@@ -640,7 +638,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 	public class Rectangles : IDrawableItemRectangles<IPackageIdentity>
 	{
-		public Dictionary<ITag, Rectangle> TagRects = new();
+		public Dictionary<ITag, Rectangle> TagRects = [];
 		public Rectangle IncludedRect;
 		public Rectangle EnabledRect;
 		public Rectangle FolderRect;
@@ -660,7 +658,7 @@ public class PackageDescriptionControl : SlickImageControl
 		public Rectangle BotRect;
 		public Rectangle MoreRect;
 
-		public IPackageIdentity	 Item { get; set; }
+		public IPackageIdentity Item { get; set; }
 
 		public Rectangles(IPackageIdentity item)
 		{
@@ -682,7 +680,7 @@ public class PackageDescriptionControl : SlickImageControl
 				DateRect.Contains(location) ||
 				MoreRect.Contains(location) ||
 				GithubRect.Contains(location) ||
-				VersionRect.Contains(location) && Item?.GetLocalPackage() is not null ||
+				(VersionRect.Contains(location) && Item?.GetLocalPackage() is not null) ||
 				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);
 		}

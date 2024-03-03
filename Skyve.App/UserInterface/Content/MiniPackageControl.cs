@@ -1,8 +1,6 @@
 ﻿using Skyve.App.Interfaces;
-using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
@@ -118,13 +116,13 @@ public class MiniPackageControl : SlickControl
 		var textRect = ClientRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top, !ReadOnly && HoverState.HasFlag(HoverState.Hovered) ? imageRect.Right + Padding.Left : 0, Padding.Bottom).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
 		var text = Package?.CleanName(out tags) ?? Locale.UnknownPackage;
 
-		if (ShowIncluded && Package?.IsIncluded() ==true&& Package?.IsEnabled()==true)
+		if (ShowIncluded && Package?.IsIncluded() == true && Package?.IsEnabled() == true)
 		{
 			using var checkIcon = IconManager.GetIcon("I_Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor);
 
 			e.Graphics.DrawImage(checkIcon, textRect.Pad(Padding).Align(checkIcon.Size, ContentAlignment.MiddleRight));
 
-			textRect = textRect.Pad(0, 0, checkIcon.Width+ Padding.Horizontal, 0);
+			textRect = textRect.Pad(0, 0, checkIcon.Width + Padding.Horizontal, 0);
 		}
 
 		using var textBrush = new SolidBrush(ForeColor);
