@@ -47,9 +47,18 @@ public class PackageNameUtil : IPackageNameUtil
 	{
 		tags = [];
 
+		IWorkshopInfo? workshopInfo;
+
 		if (package?.Name is null or "")
 		{
-			return _locale.Get("UnknownPackage");
+			workshopInfo = package?.GetWorkshopInfo();
+
+			if (workshopInfo?.Name is null or "")
+			{
+				return _locale.Get("UnknownPackage");
+			}
+
+			return CleanName(workshopInfo, out tags, keepTags);
 		}
 
 		if (package is IAsset)
@@ -104,7 +113,7 @@ public class PackageNameUtil : IPackageNameUtil
 			}
 		}
 
-		var workshopInfo = package.GetWorkshopInfo();
+		workshopInfo = package.GetWorkshopInfo();
 
 		if (workshopInfo is null)
 		{

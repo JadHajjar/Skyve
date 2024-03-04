@@ -2,7 +2,7 @@
 
 namespace Skyve.Domain;
 
-public class ReviewRequest
+public class ReviewRequest : IPackageIdentity
 {
 	public byte[]? LogFile { get; set; }
 	public ulong PackageId { get; set; }
@@ -19,4 +19,8 @@ public class ReviewRequest
 	public bool IsInteraction { get; set; }
 	public bool IsStatus { get; set; }
 	public DateTime Timestamp { get; set; }
+
+	ulong IPackageIdentity.Id => PackageId;
+	string IPackageIdentity.Name => string.Empty;
+	string? IPackageIdentity.Url => string.Empty;
 }
