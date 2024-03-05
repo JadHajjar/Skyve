@@ -402,6 +402,7 @@
   "RemovedByAuthor": "Removed by author",
   "Missing": "Missing",
   "LoggedInAs": "Logged in as",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "Unknown User",
   "AddMeaningfulDescription": "Please add a meaningful description to your request.",
   "ThisSubscribesTo": {

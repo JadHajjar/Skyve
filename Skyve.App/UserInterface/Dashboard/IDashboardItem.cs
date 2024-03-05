@@ -130,7 +130,7 @@ public abstract class IDashboardItem : SlickImageControl
 
 		if (MoveInProgress || ResizeInProgress)
 		{
-			var border = (int)(10 * UI.FontScale);
+			var border = (int)(8 * UI.FontScale);
 			var rect = ClientRectangle.Pad((int)(1.5 * UI.FontScale)).Pad(Padding);
 
 			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 8 : -8));
@@ -178,7 +178,7 @@ public abstract class IDashboardItem : SlickImageControl
 			{
 				if (rectangle.rectangle.Contains(CursorLocation))
 				{
-					e.Graphics.FillRoundedRectangle(grabberBrush, rectangle.rectangle.ClipTo(rectangle.height).Pad(2), Padding.Left/*, botLeft: false, botRight: false*/);
+					e.Graphics.FillRoundedRectangle(grabberBrush, rectangle.rectangle.ClipTo(rectangle.height).Pad(2), (int)(8 * UI.FontScale));
 				}
 			}
 		}
@@ -230,20 +230,21 @@ public abstract class IDashboardItem : SlickImageControl
 			//}
 
 			using var gradient = rectangle.Gradient(back, /*hoverState.HasFlag(HoverState.Pressed) ? 1F :*/ 0.5F);
-			e.Graphics.FillRoundedRectangle(gradient, rectangle.Pad(2), Padding.Left);
+			e.Graphics.FillRoundedRectangle(gradient, rectangle.Pad(2), (int)(8 * UI.FontScale));
 		}
 
 		if (!string.IsNullOrEmpty(text))
 		{
-			using var font = UI.Font(9.75F, FontStyle.Bold);
-			using var icon = dynamicIcon?.Get(font.Height + Margin.Top);
+			using var icon = dynamicIcon?.Get((int)(25 * UI.FontScale));
 			var iconRectangle = new Rectangle(Margin.Left + rectangle.X, rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
+			var textRect = new Rectangle(iconRectangle.Right + Margin.Left / 2, Margin.Top + rectangle.Y, rectangle.Right - Margin.Horizontal - iconRectangle.Right, 0);
+			using var font = UI.Font(9.75F, FontStyle.Bold).FitToWidth(text, textRect, e.Graphics);
 			var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, font, rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height);
-			var textRect = new Rectangle(iconRectangle.Right + Margin.Left, Margin.Top + rectangle.Y, rectangle.Right - Margin.Horizontal - iconRectangle.Right, titleHeight);
+			textRect.Height = titleHeight;
 
 			if (subText is not null)
 			{
-				using var smallFont = UI.Font(7F);
+				using var smallFont = UI.Font(7F).FitToWidth(subText, textRect, e.Graphics);
 				var textHeight = (int)e.Graphics.Measure(subText, smallFont, rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height;
 
 				if (applyDrawing)
@@ -292,9 +293,6 @@ public abstract class IDashboardItem : SlickImageControl
 
 	protected void DrawSquareButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ExtensionClass.action? clickAction, ButtonDrawArgs buttonArgs)
 	{
-		using var icon = buttonArgs.Icon.Get(Math.Min(buttonArgs.Rectangle.Width, buttonArgs.Rectangle.Height) * 3 / 5);
-
-		buttonArgs.Image = icon;
 		buttonArgs.BorderRadius = Padding.Left;
 
 		DrawButtonInternal(e, applyDrawing, ref preferredHeight, true, buttonArgs, clickAction);
@@ -302,18 +300,14 @@ public abstract class IDashboardItem : SlickImageControl
 
 	protected void DrawButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ExtensionClass.action? clickAction, ButtonDrawArgs buttonArgs)
 	{
-		using var icon = buttonArgs.Icon.Default;
-
-		buttonArgs.Image = icon;
-
 		DrawButtonInternal(e, applyDrawing, ref preferredHeight, false, buttonArgs, clickAction);
 	}
 
 	private void DrawButtonInternal(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, bool square, ButtonDrawArgs buttonArgs, ExtensionClass.action? clickAction)
 	{
-		buttonArgs.Font ??= Font;
 		buttonArgs.Padding = Margin;
-		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, square ? buttonArgs.Rectangle.Height : SlickButton.GetSize(e.Graphics, buttonArgs.Image, buttonArgs.Text, buttonArgs.Font, buttonArgs.Padding, buttonArgs.Rectangle.Width).Height);
+		buttonArgs.BorderRadius = (int)(4 * UI.FontScale);
+		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, square ? buttonArgs.Rectangle.Height : SlickButton.GetSize(e.Graphics, buttonArgs.Image, buttonArgs.Text, buttonArgs.Font, buttonArgs.Padding).Height);
 		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
 
 		if (buttonArgs.BackColor.A != 0 && buttonArgs.HoverState.HasFlag(HoverState.Hovered))

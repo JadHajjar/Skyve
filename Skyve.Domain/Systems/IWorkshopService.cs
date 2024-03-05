@@ -21,6 +21,8 @@ public interface IWorkshopService
 	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, string? query = null, string[]? requiredTags = null, bool all = false);
 #if CS2
 	bool IsLoggedIn { get; }
+	bool IsLoginPending { get; }
+
 	Task Initialize();
 	Task Login();
 	Task<bool> Login(string email, string password, bool rememberMe);

@@ -1088,6 +1088,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation LoggedInAs => _instance.GetText("LoggedInAs");
 
 	/// <summary>
+	/// Logged in as {0}
+	/// </summary>
+	public static Translation LoggedInUser => _instance.GetText("LoggedInUser");
+
+	/// <summary>
 	/// Copy logs to clipboard
 	/// </summary>
 	public static Translation LogZipCopy => _instance.GetText("LogZipCopy");
