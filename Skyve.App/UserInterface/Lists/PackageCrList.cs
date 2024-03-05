@@ -17,7 +17,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 		ServiceCenter.Get(out _workshopService, out _compatibilityManager);
 		HighlightOnHover = true;
 		SeparateWithLines = true;
-		ItemHeight = 32;
+		ItemHeight = 35;
 	}
 
 	protected override void UIChanged()
@@ -94,11 +94,11 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 			tagSizes += Padding.Left + size.Width;
 		}
 
-		var textRect = clipRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top / 2, tagSizes, 0);
+		var textRect = clipRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top / 2, tagSizes, clipRectangle.Height / 2 - Padding.Top);
 		using var brushTitle = new SolidBrush(e.BackColor.GetTextColor());
-		using var font = UI.Font(8.25F, FontStyle.Bold).FitTo(text, textRect.Pad(Padding.Left), e.Graphics);
+		using var font = UI.Font(8F, FontStyle.Bold).FitTo(text, textRect.Pad(Padding.Left), e.Graphics);
 
-		e.Graphics.DrawString(text, font, brushTitle, textRect);
+		e.Graphics.DrawString(text, font, brushTitle, textRect.Location);
 
 		textRect = clipRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top / 2, 0, 0);
 		var textSize = e.Graphics.Measure(text, font, textRect.Width - tagSizes - Padding.Right);
@@ -112,9 +112,9 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 		}
 
 		text = LocaleCR.Get(stability.ToString());
-		textRect = new Rectangle(textRect.X, textRect.Bottom - (textRect.Height / 2), textRect.Width, textRect.Height / 2);
+		textRect = new Rectangle(textRect.X, textRect.Bottom - (textRect.Height / 2), textRect.Width, textRect.Height / 2 + Padding.Bottom);
 		using var font2 = UI.Font(7F, FontStyle.Bold).FitToWidth(text, textRect.Pad(Padding.Left), e.Graphics);
-		using var brush = new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? brushTitle.Color : CRNAttribute.GetNotification(stability).GetColor());
+		using var brush = new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? brushTitle.Color : Color.FromArgb(200, CRNAttribute.GetNotification(stability).GetColor()));
 		using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 		e.Graphics.DrawString(text, font2, brush, textRect, format);
