@@ -53,6 +53,14 @@ public static class SystemExtensions
 		return identity.Id <= 0;
 	}
 
+	public static bool IsCodeMod(this IPackageIdentity identity)
+	{
+		if (identity.Id > 0 && identity.GetWorkshopInfo() is IWorkshopInfo workshopInfo)
+			return workshopInfo.IsCodeMod;
+
+		return identity.GetLocalPackage()?.IsCodeMod ?? false;
+	}
+
 	public static bool IsIncluded(this IPackageIdentity package)
 	{
 		return PackageUtil.IsIncluded(package);

@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading;
 
 namespace Skyve.Systems.Compatibility;
@@ -38,6 +39,7 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly IPackageNameUtil _packageNameUtil;
 	private readonly IWorkshopService _workshopService;
 	private readonly IDlcManager _dlcManager;
+	private readonly ICitiesManager _citiesManager;
 	private readonly SaveHandler _saveHandler;
 	private readonly CompatibilityHelper _compatibilityHelper;
 
@@ -45,7 +47,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public bool FirstLoadComplete { get; private set; }
 
-	public CompatibilityManager(ISkyveDataManager skyveDataManager, IPackageManager packageManager, ILogger logger, ISettings settings, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, IDlcManager dlcManager, SaveHandler saveHandler, IUserService userService)
+	public CompatibilityManager(ISkyveDataManager skyveDataManager, IPackageManager packageManager, ILogger logger, ISettings settings, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, IDlcManager dlcManager, SaveHandler saveHandler, IUserService userService, ICitiesManager citiesManager)
 	{
 		_skyveDataManager = skyveDataManager;
 		_packageManager = packageManager;
@@ -60,6 +62,7 @@ public class CompatibilityManager : ICompatibilityManager
 		_dlcManager = dlcManager;
 		_userService = userService;
 		_saveHandler = saveHandler;
+		_citiesManager = citiesManager;
 		_compatibilityHelper = new CompatibilityHelper(this, _settings, _packageManager, _packageUtil, _packageNameUtil, _workshopService, _logger, _skyveDataManager);
 
 		LoadSnoozedData();
@@ -304,30 +307,15 @@ public class CompatibilityManager : ICompatibilityManager
 
 	internal CompatibilityInfo GenerateCompatibilityInfo(IPackageIdentity package)
 	{
-#if DEBUG
-		var sw = Stopwatch.StartNew();
-		var sw2 = Stopwatch.StartNew();
-		_logger.Debug("[Compatibility] Starting " + package);
-#endif
-
 		var packageData = _skyveDataManager.GetPackageCompatibilityInfo(package);
-
-#if DEBUG
-		_logger.Debug($"[Compatibility] GetPackageData took {sw2.ElapsedMilliseconds * 1000:0.000} secs");
-		sw2.Restart();
-#endif
-
 		var info = new CompatibilityInfo(package, packageData);
 		var workshopInfo = package.GetWorkshopInfo();
+		var localPackage = package.GetLocalPackage();
+		var isCodeMod = workshopInfo?.IsCodeMod ?? localPackage?.IsCodeMod ?? false;
 
-#if DEBUG
-		_logger.Debug($"[Compatibility] GetWorkshopInfo took {sw2.ElapsedMilliseconds * 1000:0.000} secs");
-		sw2.Restart();
-#endif
-
-		if (package.GetPackage()?.IsCodeMod == true && package.GetLocalPackageIdentity() is not null)
+		if (isCodeMod && localPackage?.FilePath is string filePath)
 		{
-			var modName = Path.GetFileName(package.GetLocalPackageIdentity()!.FilePath);
+			var modName = Path.GetFileName(filePath);
 			var duplicate = _packageManager.GetModsByName(modName);
 
 			if (duplicate.Count > 1 && duplicate.Count(x => _packageUtil.IsIncluded(x)) > 1)
@@ -339,12 +327,8 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
-#if DEBUG
-		_logger.Debug($"[Compatibility] GetDuplicates took {sw2.ElapsedMilliseconds * 1000:0.000} secs");
-		sw2.Restart();
-#endif
-
-		if (workshopInfo?.IsIncompatible == true)
+		var isCompatible = IsCompatible(localPackage?.SuggestedGameVersion ?? workshopInfo?.SuggestedGameVersion);
+		if (!isCompatible)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), string.Empty, []);
 		}
@@ -374,14 +358,9 @@ public class CompatibilityManager : ICompatibilityManager
 
 		_compatibilityUtil.PopulatePackageReport(packageData, info, _compatibilityHelper);
 
-#if DEBUG
-		_logger.Debug($"[Compatibility] PopulatePackageReport took {sw2.ElapsedMilliseconds * 1000:0.000} secs");
-		sw2.Restart();
-#endif
-
 		var author = _userService.TryGetAuthor(packageData.AuthorId);
 
-		if (packageData.Stability is not PackageStability.Stable && workshopInfo?.IsIncompatible != true && !author.Malicious)
+		if (packageData.Stability is not PackageStability.Stable && isCompatible && !author.Malicious)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(packageData.Stability, null, false), string.Empty, []);
 		}
@@ -399,12 +378,7 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
-#if DEBUG
-		_logger.Debug($"[Compatibility] HandleStatuses took {sw2.ElapsedMilliseconds * 1000:0.000} secs");
-		sw2.Restart();
-#endif
-
-		if (!package.IsLocal() && package.GetPackage()?.IsCodeMod == true && packageData.Type is PackageType.GenericPackage)
+		if (!package.IsLocal() && isCodeMod && packageData.Type is PackageType.GenericPackage)
 		{
 			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !packageData.IndexedStatuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true)
 			{
@@ -422,11 +396,6 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
-#if DEBUG
-		_logger.Debug($"[Compatibility] HandleStatusesSecond took {sw2.ElapsedMilliseconds * 1000:0.000} secs");
-		sw2.Restart();
-#endif
-
 		if (packageData.SucceededBy is not null)
 		{
 			_compatibilityHelper.HandleInteraction(info, packageData.SucceededBy.Status);
@@ -439,11 +408,6 @@ public class CompatibilityManager : ICompatibilityManager
 				_compatibilityHelper.HandleInteraction(info, item.Status);
 			}
 		}
-
-#if DEBUG
-		_logger.Debug($"[Compatibility] HandleInteraction took {sw2.ElapsedMilliseconds * 1000:0.000} secs");
-		sw2.Restart();
-#endif
 
 		if (packageData.RequiredDLCs?.Any() ?? false)
 		{
@@ -460,18 +424,13 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
-#if DEBUG
-		_logger.Debug($"[Compatibility] RequiredDLCs took {sw2.ElapsedMilliseconds * 1000:0.000} secs");
-		sw2.Restart();
-#endif
-
 		if (author.Malicious)
 		{
-			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, "AuthorMalicious", new object[] { _packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
+			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, "AuthorMalicious", [_packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name)]);
 		}
 		else if (package.GetPackage()?.IsCodeMod == true && author.Retired)
 		{
-			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), "AuthorRetired", new object[] { _packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
+			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), "AuthorRetired", [_packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name)]);
 		}
 
 		if (!string.IsNullOrEmpty(packageData.Note))
@@ -484,23 +443,20 @@ public class CompatibilityManager : ICompatibilityManager
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageNameUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Id)), true), [new GenericPackageIdentity(packageData.Id)]);
 		}
 
-		if (!package.IsLocal() && !author.Malicious && workshopInfo?.IsIncompatible != true)
+		if (!package.IsLocal() && !author.Malicious && isCompatible)
 		{
 			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), (packageData.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"), []);
 		}
 
-#if DEBUG
-		_logger.Debug($"[Compatibility] Stability took {sw2.ElapsedMilliseconds * 1000:0.000} secs");
-		sw2.Restart();
-
-		sw.Stop();
-		if (sw.ElapsedMilliseconds > 100)
-		{
-			_logger.Debug($"[Compatibility] {package.Name} took {sw.ElapsedMilliseconds * 1000:0.000} secs");
-		}
-#endif
-
 		return info;
+	}
+
+	private bool IsCompatible(string? version)
+	{
+		if (version is null or "")
+			return true;
+
+		return ExtensionClass.IsPatternMatch(_citiesManager.GameVersion, version);
 	}
 
 	internal List<ulong>? GetRequiredFor(ulong id)

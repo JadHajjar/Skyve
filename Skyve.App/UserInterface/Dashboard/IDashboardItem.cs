@@ -305,9 +305,9 @@ public abstract class IDashboardItem : SlickImageControl
 
 	private void DrawButtonInternal(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, bool square, ButtonDrawArgs buttonArgs, ExtensionClass.action? clickAction)
 	{
-		buttonArgs.Padding = Margin;
+		buttonArgs.Padding = UI.Scale(new Padding(8, 4, 8, 4), UI.FontScale);
 		buttonArgs.BorderRadius = (int)(4 * UI.FontScale);
-		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, square ? buttonArgs.Rectangle.Height : SlickButton.GetSize(e.Graphics, buttonArgs.Image, buttonArgs.Text, buttonArgs.Font, buttonArgs.Padding).Height);
+		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, square ? buttonArgs.Rectangle.Height : (int)(32*UI.FontScale));
 		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
 
 		if (buttonArgs.BackColor.A != 0 && buttonArgs.HoverState.HasFlag(HoverState.Hovered))

@@ -124,10 +124,6 @@ public class PackageNameUtil : IPackageNameUtil
 		{
 			tags.Add((FormDesign.Design.RedColor, _locale.Get("Banned").One.ToUpper()));
 		}
-		else if (workshopInfo.IsIncompatible)
-		{
-			tags.Add((FormDesign.Design.RedColor, _locale.Get("Incompatible").One.ToUpper()));
-		}
 		else
 		{
 			var info = package.GetPackageInfo();
