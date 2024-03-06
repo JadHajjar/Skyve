@@ -51,7 +51,7 @@ public class IconTopButton : SlickImageControl
 		var text = LocaleHelper.GetGlobalText(Text).One.ToUpper();
 		using var font = UI.Font(7F, FontStyle.Bold).FitToWidth(text, client.Pad(Padding), e.Graphics);
 		var textHeight = (int)e.Graphics.Measure(text, font).Height;
-		using var img = ImageName.Get(Height / 2)?.Color(activeColor);
+		using var img = ImageName?.Get(Height / 2)?.Color(activeColor);
 
 		if (img == null)
 		{
