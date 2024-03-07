@@ -25,6 +25,8 @@ internal class ImageSystem : IImageService
 	private readonly ILogger _logger;
 	private readonly SaveHandler _saveHandler;
 
+	internal string ThumbnailFolder { get; }
+
 	public ImageSystem(INotifier notifier, ILogger logger, SaveHandler saveHandler)
 	{
 		_imageProcessor = new(this);
@@ -34,6 +36,8 @@ internal class ImageSystem : IImageService
 		_notifier = notifier;
 		_logger = logger;
 		_saveHandler = saveHandler;
+
+		ThumbnailFolder = CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, "Thumbs");
 
 		new BackgroundAction(ClearOldImages).Run();
 	}
@@ -53,7 +57,7 @@ internal class ImageSystem : IImageService
 
 	public FileInfo File(string url, string? fileName = null)
 	{
-		var filePath = CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, "Thumbs", fileName ?? Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
+		var filePath = CrossIO.Combine(ThumbnailFolder, fileName ?? Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
 
 		return new FileInfo(filePath);
 	}
@@ -280,7 +284,7 @@ internal class ImageSystem : IImageService
 
 			_cache.Clear();
 
-			foreach (var item in Directory.EnumerateFiles(CrossIO.Combine(_saveHandler.SaveDirectory, "Thumbs")))
+			foreach (var item in Directory.EnumerateFiles(ThumbnailFolder))
 			{
 				try
 				{
@@ -293,7 +297,7 @@ internal class ImageSystem : IImageService
 
 	private void ClearOldImages()
 	{
-		foreach (var item in new DirectoryInfo(CrossIO.Combine(_saveHandler.SaveDirectory, "Thumbs")).EnumerateFiles())
+		foreach (var item in new DirectoryInfo(ThumbnailFolder).EnumerateFiles())
 		{
 			try
 			{
@@ -304,5 +308,17 @@ internal class ImageSystem : IImageService
 			}
 			catch { }
 		}
+	}
+
+	public string? FindImage(string pattern)
+	{
+		var file = Directory.EnumerateFiles(ThumbnailFolder, pattern).OrderByDescending(System.IO.File.GetCreationTime).FirstOrDefault();
+
+		if (!string.IsNullOrEmpty(file))
+		{
+			return Path.GetFileName(file);
+		}
+
+		return null;
 	}
 }
