@@ -108,6 +108,11 @@ public partial class PC_MainPage : PanelContent
 		TLP_FirstTime.Padding = UI.Scale(new Padding(12, 12, 12, 0), UI.FontScale);
 	}
 
+	public override Color GetTopBarColor()
+	{
+		return FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 5 : -5);
+	}
+
 	private void B_Dismiss_Click(object sender, EventArgs e)
 	{
 		TLP_FirstTime.Hide();

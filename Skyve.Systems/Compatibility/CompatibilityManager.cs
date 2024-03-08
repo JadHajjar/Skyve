@@ -327,7 +327,7 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
-		var isCompatible = IsCompatible(localPackage?.SuggestedGameVersion ?? workshopInfo?.SuggestedGameVersion);
+		var isCompatible = IsCompatible((localPackage?.SuggestedGameVersion).IfEmpty(workshopInfo?.SuggestedGameVersion));
 		if (!isCompatible)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), string.Empty, []);
@@ -453,7 +453,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	private bool IsCompatible(string? version)
 	{
-		if (version is null or "")
+		if (version is null or "" || _citiesManager.GameVersion is "")
 			return true;
 
 		return ExtensionClass.IsPatternMatch(_citiesManager.GameVersion, version);
