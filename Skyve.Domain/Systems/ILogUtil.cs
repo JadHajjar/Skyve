@@ -11,5 +11,9 @@ public interface ILogUtil
 	string CreateZipFile(string? folder = null);
 	void CreateZipToStream(Stream fileStream);
 	List<ILogTrace> GetCurrentLogsTrace();
-	List<ILogTrace> SimplifyLog(string log, out string simpleLog);
+#if CS2
+	List<ILogTrace> ExtractTrace(string originalFile, string log);
+#else
+	List<ILogTrace> SimplifyLog(string originalFile, string log, out string simpleLog);
+#endif
 }

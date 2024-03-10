@@ -453,7 +453,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DeactivatePlaysetTip => _instance.GetText("DeactivatePlayset_Tip");
 
 	/// <summary>
-	/// Your last session's errors will be automatically shown below when opening this page
+	/// Your last session's errors will be automatically shown here, results are updated live.
 	/// </summary>
 	public static Translation DefaultLogViewInfo => _instance.GetText("DefaultLogViewInfo");
 
@@ -646,11 +646,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation EnabledCount => _instance.GetText("EnabledCount");
 
 	/// <summary>
-	/// Enable Dev UI
-	/// </summary>
-	public static Translation EnableDevUi => _instance.GetText("EnableDevUi");
-
-	/// <summary>
 	/// Enable this mod
 	/// </summary>
 	public static Translation EnableItem => _instance.GetText("EnableItem");
@@ -755,6 +750,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Faulty Packages Detected
 	/// </summary>
 	public static Translation FaultyPackagesTitle => _instance.GetText("FaultyPackagesTitle");
+
+	/// <summary>
+	/// Favorite Playsets
+	/// </summary>
+	public static Translation FavoritePlaysets => _instance.GetText("FavoritePlaysets");
 
 	/// <summary>
 	/// Playsets favorited: {0}, Total: {1}
@@ -1298,6 +1298,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OBSOLETE => _instance.GetText("OBSOLETE");
 
 	/// <summary>
+	/// Only show warnings and errors
+	/// </summary>
+	public static Translation OnlyShowErrors => _instance.GetText("OnlyShowErrors");
+
+	/// <summary>
 	/// Open the author's page
 	/// </summary>
 	public static Translation OpenAuthorPage => _instance.GetText("OpenAuthorPage");
@@ -1323,7 +1328,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OpenLocalFolder => _instance.GetText("OpenLocalFolder");
 
 	/// <summary>
-	/// Open Log File
+	/// Open Game Log
 	/// </summary>
 	public static Translation OpenLog => _instance.GetText("OpenLog");
 
@@ -1352,6 +1357,11 @@ public class Locale : LocaleHelper, ILocale
 	/// View this playset's file on your computer
 	/// </summary>
 	public static Translation OpenPlaysetFolder => _instance.GetText("OpenPlaysetFolder");
+
+	/// <summary>
+	/// Open Skyve Log
+	/// </summary>
+	public static Translation OpenSkyveLog => _instance.GetText("OpenSkyveLog");
 
 	/// <summary>
 	/// Please open Steam in order to continue your previous task.

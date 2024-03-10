@@ -187,7 +187,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawLoadingSection(e, applyDrawing, Locale.CompatibilityReport, "I_CompatibilityReport", ref preferredHeight);
+		DrawLoadingSection(e, applyDrawing, e.ClipRectangle, Locale.CompatibilityReport, out _, ref preferredHeight);
 	}
 
 	private void DrawNoIssues(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
@@ -213,8 +213,6 @@ internal class D_CompatibilityInfo : IDashboardItem
 			Icon = "I_ViewFile",
 			Rectangle = e.ClipRectangle
 		});
-
-		preferredHeight -= Margin.Bottom;
 	}
 
 	private void DrawSplit(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
@@ -432,7 +430,5 @@ internal class D_CompatibilityInfo : IDashboardItem
 			Icon = "I_ViewFile",
 			Rectangle = e.ClipRectangle
 		});
-
-		preferredHeight -= Margin.Bottom;
 	}
 }

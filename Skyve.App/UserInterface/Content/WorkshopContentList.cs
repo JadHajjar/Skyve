@@ -6,7 +6,7 @@ namespace Skyve.App.UserInterface.Content;
 public class WorkshopContentList : ContentList
 {
 	private ulong _id;
-	public WorkshopContentList(SkyvePage page, bool loaded, GetAllItems getItems, ApplyAll setIncluded, ApplyAll setEnabled, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText) : base(page, loaded, getItems, setIncluded, setEnabled, getItemText, getCountText)
+	public WorkshopContentList(SkyvePage page, bool loaded, GetAllItems getItems, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText) : base(page, loaded, getItems, getItemText, getCountText)
 	{
 	}
 

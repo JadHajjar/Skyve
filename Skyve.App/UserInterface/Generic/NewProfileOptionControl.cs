@@ -41,7 +41,14 @@ public class NewProfileOptionControl : SlickImageControl
 
 		using var icon = IconManager.GetIcon(FromLink ? "I_LinkChain" : FromScratch ? "I_New" : "I_Copy", 48);
 
-		e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+		if (Loading)
+		{
+			DrawLoader(e.Graphics, ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+		}
+		else
+		{
+			e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+		}
 
 		e.Graphics.DrawString(FromLink ? Locale.ImportFromLink : FromScratch ? Locale.StartScratch : Locale.ContinueFromCurrent, Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + icon.Width, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 	}

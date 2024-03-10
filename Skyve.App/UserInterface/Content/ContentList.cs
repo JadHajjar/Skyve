@@ -15,7 +15,6 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Panels;
 public partial class ContentList : SlickControl
 {
-	public delegate Task ApplyAll(IEnumerable<IPackageIdentity> filteredItems, bool included);
 	public delegate Task<IEnumerable<IPackageIdentity>> GetAllItems();
 
 	private bool clearingFilters = true;
@@ -39,8 +38,6 @@ public partial class ContentList : SlickControl
 	private readonly IDownloadService _downloadService;
 
 	private readonly GetAllItems GetItems;
-	private readonly ApplyAll SetIncluded;
-	private readonly ApplyAll SetEnabled;
 	private readonly Func<LocaleHelper.Translation> GetItemText;
 	private readonly Func<string> GetCountText;
 
@@ -55,12 +52,10 @@ public partial class ContentList : SlickControl
 		ListControl.Remove(item);
 	}
 
-	public ContentList(SkyvePage page, bool loaded, GetAllItems getItems, ApplyAll setIncluded, ApplyAll setEnabled, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
+	public ContentList(SkyvePage page, bool loaded, GetAllItems getItems, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
 	{
 		Page = page;
 		GetItems = getItems;
-		SetIncluded = setIncluded;
-		SetEnabled = setEnabled;
 		GetItemText = getItemText;
 		GetCountText = getCountText;
 
@@ -815,6 +810,16 @@ public partial class ContentList : SlickControl
 		await SetIncluded(ListControl.SelectedOrFilteredItems.ToList(), true);
 		ListControl.Invalidate();
 		I_Actions.Loading = false;
+	}
+
+	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
+	{
+		await _packageUtil.SetIncluded(filteredItems, included);
+	}
+
+	protected async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
+	{
+		await _packageUtil.SetEnabled(filteredItems, enabled);
 	}
 
 #if CS1

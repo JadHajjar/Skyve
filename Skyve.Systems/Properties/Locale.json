@@ -129,7 +129,6 @@
   "ResetButton_Tip": "Reset your settings to the default ones. This does not affect folder settings.",
   "ComplexListUI": "Advanced-user UI mode",
   "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
-  "EnableDevUi": "Enable Dev UI",
   "NewGame": "Start a new game",
   "LoadSaveGame": "Continue a previous save-game",
   "DevOptions": "Developer Launch Options",
@@ -153,7 +152,7 @@
   "LogZipFile": "Save logs to file",
   "LogFolders": "Log Folders",
   "LogFileDrop": "Drop or select a log file to be simplified and display the list of errors inside the log",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "Errors in the Log",
   "OpenLogFolder": "Open the game's log folder",
   "CopyLogFile": "Copy the game's log file to clipboard",
@@ -423,7 +422,8 @@
   "RequestOption3": "Add a missing interaction with another package",
   "ActivePlayset": "Active Playset",
   "References": "References",
-  "OpenLog": "Open Log File",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "Sort By",
   "FailedToFetchLogs": "Failed to fetch your logs",
   "DiscoverPlaysets": "Discover Playsets",
@@ -575,5 +575,7 @@
   "PartiallyIncluded": "Partially Included",
   "Links": "Links",
   "NoAssets": "Disable All Assets",
-  "NoMods": "Disable All Code-Mods"
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors"
 }

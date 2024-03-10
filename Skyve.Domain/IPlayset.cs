@@ -30,6 +30,7 @@ public interface ICustomPlayset : IThumbnailObject
 
 	IOnlinePlayset? OnlineInfo { get; }
 	bool IsCustomThumbnailSet { get; }
+	bool NoBanner { get; set; }
 
 	void SetThumbnail(Image? image);
 

@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.Domain.Systems;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dashboard;
@@ -165,7 +167,7 @@ public abstract class IDashboardItem : SlickImageControl
 
 		var dragRect = ClientRectangle.Pad(Padding).Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight);
 
-		using var dotBrush = new SolidBrush(HoverState.HasFlag(HoverState.Hovered) ? Color.FromArgb(150, FormDesign.Design.ActiveColor) : Color.FromArgb(50, FormDesign.Design.AccentColor));
+		using var dotBrush = new SolidBrush(HoverState.HasFlag(HoverState.Hovered) && ClientRectangle.Pad(Padding.Left, Padding.Top, 0, 0).Contains(CursorLocation) ? Color.FromArgb(150, FormDesign.Design.ActiveColor) : Color.FromArgb(50, FormDesign.Design.AccentColor));
 
 		for (var i = 3; i > 0; i--)
 		{
@@ -197,7 +199,7 @@ public abstract class IDashboardItem : SlickImageControl
 
 	private void DrawBackground(PaintEventArgs e, Rectangle clipRectangle)
 	{
-		using var brush = new SolidBrush(Color.FromArgb(FormDesign.Design.IsDarkTheme ? 3 : 10, FormDesign.Design.AccentColor));
+		using var brush = new SolidBrush(FormDesign.Design.IsDarkTheme ? Color.FromArgb(1, 255, 255, 255) : Color.FromArgb(10, FormDesign.Design.AccentColor));
 		for (var i = Padding.Right; i > 0; i--)
 		{
 			e.Graphics.FillRoundedRectangle(brush, clipRectangle.Pad(-i), Margin.Left + i);
@@ -222,7 +224,7 @@ public abstract class IDashboardItem : SlickImageControl
 		e.Graphics.DrawRoundedRectangle(penActive, clipRectangle, Margin.Left);
 	}
 
-	protected void DrawSection(PaintEventArgs e, bool applyDrawing, Rectangle rectangle, string text, DynamicIcon dynamicIcon, out Color fore, ref int preferredHeight, Color? tintColor = null, string? subText = null, bool drawBackground = true)
+	protected void DrawSection(PaintEventArgs e, bool applyDrawing, Rectangle rectangle, string text, DynamicIcon? dynamicIcon, out Color fore, ref int preferredHeight, Color? tintColor = null, string? subText = null, bool drawBackground = true)
 	{
 		fore = FormDesign.Design.ForeColor;
 
@@ -233,13 +235,15 @@ public abstract class IDashboardItem : SlickImageControl
 
 		using var icon = dynamicIcon?.Get((int)(20 * UI.FontScale));
 		var iconRectangle = new Rectangle(rectangle.Right - Margin.Right - icon?.Width ?? 0, rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
-		var textRect = new Rectangle(rectangle.X + Margin.Left, Margin.Top / 2 + rectangle.Y, rectangle.Right - Margin.Horizontal - Margin.Left - iconRectangle.Width, (int)(26 * UI.FontScale));
+		var textRect = new Rectangle(rectangle.X + Margin.Left, rectangle.Y, rectangle.Right - Margin.Horizontal - Margin.Left - iconRectangle.Width, (int)(26 * UI.FontScale));
 		using var font = UI.Font(8.5F, FontStyle.Bold).FitTo(text, textRect, e.Graphics);
 		var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, font, rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height);
 		textRect.Height = titleHeight + Margin.Top;
 
 		if (subText is not null)
 		{
+			textRect.Y += (Margin.Top / 2);
+
 			using var smallFont = UI.Font(6.75F).FitToWidth(subText, textRect, e.Graphics);
 			var textHeight = (int)e.Graphics.Measure(subText, smallFont, rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height;
 
@@ -251,6 +255,10 @@ public abstract class IDashboardItem : SlickImageControl
 
 			titleHeight += textHeight - (Margin.Top / 2);
 			textRect.Y += textHeight - (Margin.Top / 2);
+		}
+		else
+		{
+			textRect.Y += Margin.Top + ((titleHeight - textRect.Height) / 2);
 		}
 
 		iconRectangle.Y += Margin.Top + ((titleHeight - icon?.Height ?? 0) / 2);
@@ -278,13 +286,16 @@ public abstract class IDashboardItem : SlickImageControl
 		preferredHeight += titleHeight + (Margin.Top * 2);
 	}
 
-	protected void DrawLoadingSection(PaintEventArgs e, bool applyDrawing, string text, DynamicIcon icon, ref int preferredHeight)
+	protected void DrawLoadingSection(PaintEventArgs e, bool applyDrawing, Rectangle rectangle, string text, out Color fore, ref int preferredHeight, Color? tintColor = null, string? subText = null, bool drawBackground = true)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle, text, icon, out _, ref preferredHeight);
+		var iconSize = (int)(18 * UI.FontScale);
+		var iconRectangle = new Rectangle(rectangle.Right - Margin.Right - iconSize, preferredHeight, iconSize, 0);
 
-		DrawLoader(e.Graphics, e.ClipRectangle.Pad(Margin).Align(UI.Scale(new Size(32, 32), UI.FontScale), ContentAlignment.BottomCenter));
+		DrawSection(e, applyDrawing, rectangle, text, null, out fore, ref preferredHeight, tintColor, subText, drawBackground);
 
-		preferredHeight += (int)(32 * UI.FontScale) + Margin.Vertical;
+		iconRectangle.Height = preferredHeight- iconRectangle.Y;
+
+		DrawLoader(e.Graphics, iconRectangle.CenterR(iconSize,iconSize));
 	}
 
 	protected void DrawSquareButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ExtensionClass.action? clickAction, ButtonDrawArgs buttonArgs)
@@ -303,7 +314,7 @@ public abstract class IDashboardItem : SlickImageControl
 	{
 		buttonArgs.Padding = UI.Scale(new Padding(8, 4, 8, 4), UI.FontScale);
 		buttonArgs.BorderRadius = (int)(4 * UI.FontScale);
-		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X + Margin.Left / 2, preferredHeight, buttonArgs.Rectangle.Width - Margin.Left, square ? buttonArgs.Rectangle.Height : (int)(32 * UI.FontScale));
+		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X + (Margin.Left / 2), preferredHeight, buttonArgs.Rectangle.Width - Margin.Left, square ? buttonArgs.Rectangle.Height : buttonArgs.Size.Height.If(0, (int)(28 * UI.FontScale)));
 		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
 
 		if (buttonArgs.BackColor.A != 0 && buttonArgs.HoverState.HasFlag(HoverState.Hovered))

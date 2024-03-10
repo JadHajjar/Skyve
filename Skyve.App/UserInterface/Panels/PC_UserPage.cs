@@ -32,11 +32,11 @@ public partial class PC_UserPage : PanelContent
 			GridView = true,
 		};
 
-		LC_Items = new ContentList(SkyvePage.User, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+		LC_Items = new ContentList(SkyvePage.User, false, GetItems, GetItemText, GetCountText)
 		{
 			IsGenericPage = true
 		};
-
+		
 		LC_Items.TB_Search.Placeholder = "SearchGenericPackages";
 
 		LC_Items.ListControl.Loading = true;

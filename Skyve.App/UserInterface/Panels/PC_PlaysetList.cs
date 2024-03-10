@@ -245,9 +245,9 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void B_Edit_Click(object sender, EventArgs e)
 	{
-		if (!B_Edit.Loading)
+		if (!B_Edit.Loading && _playsetManager.CurrentPlayset is not null)
 		{
-			Form.PushPanel(ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel(_playsetManager.CurrentPlayset));
+			ServiceCenter.Get<IAppInterfaceService>().OpenPlaysetPage(_playsetManager.CurrentPlayset);
 		}
 	}
 

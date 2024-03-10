@@ -17,7 +17,7 @@ public partial class PC_ContentList : PanelContent
 	{
 		Padding = new Padding(0, 30, 0, 0);
 
-		LC_Items = new(Page, !load, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+		LC_Items = new(Page, !load, GetItems, GetItemText, GetCountText)
 		{
 			TabIndex = 0,
 			Dock = DockStyle.Fill

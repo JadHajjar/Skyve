@@ -16,7 +16,7 @@ public class PC_WorkshopList : PanelContent
 
 		Padding = new Padding(0, 30, 0, 0);
 
-		LC_Items = new(SkyvePage.Workshop, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+		LC_Items = new(SkyvePage.Workshop, false, GetItems, GetItemText, GetCountText)
 		{
 			TabIndex = 0,
 			Dock = DockStyle.Fill
@@ -71,16 +71,6 @@ public class PC_WorkshopList : PanelContent
 		}
 
 		return await _workshopService.QueryFilesAsync(WorkshopQuerySorting.Popularity, LC_Items.TB_Search.Text, LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray());
-	}
-
-	protected virtual async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
-	{
-		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems.Cast<Domain.IPackageIdentity>(), included);
-	}
-
-	protected virtual async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
-	{
-		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems.Cast<Domain.IPackageIdentity>(), enabled);
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()

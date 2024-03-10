@@ -110,7 +110,7 @@ public partial class PC_MainPage : PanelContent
 
 	public override Color GetTopBarColor()
 	{
-		return FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 5 : -5);
+		return FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 2 : -5);
 	}
 
 	private void B_Dismiss_Click(object sender, EventArgs e)
