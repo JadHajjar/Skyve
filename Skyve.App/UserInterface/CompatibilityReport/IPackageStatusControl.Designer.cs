@@ -39,13 +39,13 @@ partial class IPackageStatusControl<T, TBase>
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.TB_Note = new SlickControls.SlickTextBox();
 			this.I_Note = new SlickControls.SlickIcon();
-			this.L_LinkedPackages = new System.Windows.Forms.Label();
+			this.L_LinkedPackages = new AutoSizeLabel();
 			this.I_AddPackage = new SlickControls.SlickIcon();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.P_Packages = new System.Windows.Forms.Panel();
 			this.I_Paste = new SlickControls.SlickIcon();
 			this.I_Copy = new SlickControls.SlickIcon();
-			this.L_OutputTitle = new System.Windows.Forms.Label();
+			this.L_OutputTitle = new AutoSizeLabel();
 			this.L_Output = new SlickControls.SlickControl();
 			this.I_Close = new SlickControls.SlickIcon();
 			this.DD_Action = new Skyve.App.UserInterface.Dropdowns.PackageActionDropDown();
@@ -128,7 +128,8 @@ partial class IPackageStatusControl<T, TBase>
 			this.I_Note.Name = "I_Note";
 			this.I_Note.Size = new System.Drawing.Size(74, 44);
 			this.I_Note.TabIndex = 20;
-			this.I_Note.Click += new System.EventHandler(this.I_Note_Click);
+			this.I_Note.HasAction = true;
+		this.I_Note.Click += new System.EventHandler(this.I_Note_Click);
 			// 
 			// L_LinkedPackages
 			// 
@@ -150,6 +151,7 @@ partial class IPackageStatusControl<T, TBase>
 			this.I_AddPackage.Location = new System.Drawing.Point(309, 267);
 			this.I_AddPackage.Name = "I_AddPackage";
 			this.I_AddPackage.Size = new System.Drawing.Size(74, 44);
+			this.I_AddPackage.HasAction = true;
 			this.I_AddPackage.TabIndex = 20;
 			this.I_AddPackage.Click += new System.EventHandler(this.I_AddPackage_Click);
 			// 
@@ -189,6 +191,7 @@ partial class IPackageStatusControl<T, TBase>
 			this.I_Paste.Name = "I_Paste";
 			this.I_Paste.Size = new System.Drawing.Size(74, 44);
 			this.I_Paste.TabIndex = 20;
+			this.I_Paste.HasAction = true;
 			this.I_Paste.Click += new System.EventHandler(this.I_Paste_Click);
 			// 
 			// I_Copy
@@ -202,6 +205,7 @@ partial class IPackageStatusControl<T, TBase>
 			this.I_Copy.Name = "I_Copy";
 			this.I_Copy.Size = new System.Drawing.Size(74, 44);
 			this.I_Copy.TabIndex = 20;
+			this.I_Copy.HasAction = true;
 			this.I_Copy.Click += new System.EventHandler(this.I_Copy_Click);
 			// 
 			// L_OutputTitle
@@ -235,6 +239,7 @@ partial class IPackageStatusControl<T, TBase>
 			this.I_Close.ImageName = dynamicIcon1;
 			this.I_Close.Location = new System.Drawing.Point(309, 3);
 			this.I_Close.Name = "I_Close";
+			this.I_Close.HasAction = true;
 			this.I_Close.Size = new System.Drawing.Size(74, 44);
 			this.I_Close.TabIndex = 25;
 			this.I_Close.Click += new System.EventHandler(this.CloseIcon_Click);
@@ -272,13 +277,13 @@ partial class IPackageStatusControl<T, TBase>
 	public SlickControls.SlickTextBox TB_Note;
 	public SlickControls.SlickIcon I_Note;
 	public SlickControls.SlickIcon I_AddPackage;
-	public System.Windows.Forms.Label L_LinkedPackages;
+	public AutoSizeLabel L_LinkedPackages;
 	public SlickControls.SlickSpacer slickSpacer1;
 	public System.Windows.Forms.Panel P_Packages;
 	public SlickControls.SlickIcon I_Paste;
 	public SlickControls.SlickIcon I_Copy;
 	public SlickControls.SlickSpacer slickSpacer2;
-	public System.Windows.Forms.Label L_OutputTitle;
+	public AutoSizeLabel L_OutputTitle;
 	public SlickControls.SlickControl L_Output;
 	public SlickIcon I_Close;
 }

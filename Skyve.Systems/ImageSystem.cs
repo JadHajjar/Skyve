@@ -18,7 +18,7 @@ internal class ImageSystem : IImageService
 	private readonly Dictionary<string, object> _lockObjects = [];
 	private readonly System.Timers.Timer _cacheClearTimer;
 	private readonly Dictionary<string, (Bitmap image, DateTime lastAccessed)> _cache = [];
-	private readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(1);
+	private readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(15);
 	private readonly HttpClient _httpClient = new();
 	private readonly ImageProcessor _imageProcessor;
 	private readonly INotifier _notifier;
@@ -75,7 +75,7 @@ internal class ImageSystem : IImageService
 		return image is not null ? new(image) : null;
 	}
 
-	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true, bool isFilePath = false)
+	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true, bool isFilePath = false, Size? downscaleTo = null)
 	{
 		try
 		{
@@ -99,7 +99,7 @@ internal class ImageSystem : IImageService
 				{
 					try
 					{
-						return AddCache(url, (Bitmap)Image.FromFile(filePath.FullName));
+						return AddCache(url, (Bitmap)Image.FromFile(filePath.FullName), downscaleTo);
 					}
 					catch { }
 				}
@@ -215,11 +215,18 @@ internal class ImageSystem : IImageService
 		}
 	}
 
-	private Bitmap AddCache(string key, Bitmap image)
+	private Bitmap AddCache(string key, Bitmap image, Size? downscaleTo)
 	{
 		if (key is null or "")
 		{
 			return image;
+		}
+
+		if (downscaleTo.HasValue)
+		{
+			using var img = image;
+
+			image = new Bitmap(image, WinExtensionClass.CalculateNewSize(image.Size, downscaleTo.Value));
 		}
 
 		if (_cache.ContainsKey(key))
@@ -273,7 +280,7 @@ internal class ImageSystem : IImageService
 		catch { }
 	}
 
-	public void ClearCache()
+	public void ClearCache(bool deleteFiles)
 	{
 		lock (_lockObjects)
 		{
@@ -284,13 +291,16 @@ internal class ImageSystem : IImageService
 
 			_cache.Clear();
 
-			foreach (var item in Directory.EnumerateFiles(ThumbnailFolder))
+			if (deleteFiles)
 			{
-				try
+				foreach (var item in Directory.EnumerateFiles(ThumbnailFolder))
 				{
-					CrossIO.DeleteFile(item);
+					try
+					{
+						CrossIO.DeleteFile(item);
+					}
+					catch { }
 				}
-				catch { }
 			}
 		}
 	}
