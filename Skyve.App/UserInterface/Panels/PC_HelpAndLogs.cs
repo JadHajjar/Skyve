@@ -94,6 +94,7 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 		}
 
+		TLP_Main.RowStyles[0].Height = (int)(100 * UI.FontScale);
 		TB_Search.Width = (int)(150 * UI.FontScale);
 		B_SaveZip.Margin = UI.Scale(new Padding(10, 7, 10, 10), UI.UIScale);
 		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
