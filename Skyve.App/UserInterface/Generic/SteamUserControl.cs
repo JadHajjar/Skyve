@@ -35,7 +35,7 @@ public class SteamUserControl : SlickControl
 		}
 	}
 
-	public IUser? User => _steamId == 0 ? _userService.User : _workshopService.GetUser(_steamId);
+	public IUser? User => _steamId == 0 ? _userService.User : _userService.TryGetUser(_steamId.ToString());
 	public string? InfoText { get; set; }
 
 	protected override void OnPaint(PaintEventArgs e)

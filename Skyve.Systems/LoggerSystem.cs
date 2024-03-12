@@ -47,7 +47,7 @@ public class LoggerSystem : ILogger
 				File.Move(LogFilePath, PreviousLogFilePath);
 			}
 
-			File.WriteAllBytes(LogFilePath, new byte[0]);
+			File.WriteAllBytes(LogFilePath, []);
 
 			var assembly = Assembly.GetEntryAssembly();
 			var details = assembly.GetName();
@@ -64,6 +64,7 @@ public class LoggerSystem : ILogger
 
 			Info($"Now  = {DateTime.Now:yyyy-MM-dd hh:mm:ss tt}");
 			Info($"Here = {Application.StartupPath}");
+			Info($"SaveLocation = {saveHandler.SaveDirectory}");
 		}
 		catch
 		{

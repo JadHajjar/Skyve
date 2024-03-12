@@ -12,7 +12,9 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 
 	public IPackageIdentity? CurrentPackage { get; set; }
 
-	public PackageCrList()
+	public bool ShowCompleted { get; set; } = true;
+
+    public PackageCrList()
 	{
 		ServiceCenter.Get(out _workshopService, out _compatibilityManager);
 		HighlightOnHover = true;
@@ -47,7 +49,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 		var clipRectangle = e.ClipRectangle;
 		var imageRect = clipRectangle.Pad(Padding);
 		var thumbnail = e.Item.GetThumbnail();
-		var isUpToDate = cr?.ReviewDate > e.Item.GetWorkshopInfo()?.ServerTime;
+		var isUpToDate = ShowCompleted && cr?.ReviewDate > e.Item.GetWorkshopInfo()?.ServerTime;
 
 		imageRect.Width = imageRect.Height;
 

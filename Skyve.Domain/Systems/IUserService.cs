@@ -7,6 +7,6 @@ public interface IUserService
 
 	event Action UserInfoUpdated;
 
-	IKnownUser TryGetAuthor(string? id);
+	IKnownUser TryGetUser(string? id);
 	bool IsUserVerified(IUser author);
 }

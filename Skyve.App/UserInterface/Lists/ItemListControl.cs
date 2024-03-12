@@ -201,7 +201,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.OrderBy(x => _packageUtil.GetStatus(x.Item.GetLocalPackage(), out _)),
 
 			PackageSorting.UpdateTime => items
-				.OrderBy(x => x.Item.GetWorkshopInfo()?.ServerTime ?? x.Item.GetLocalPackage()?.LocalTime),
+				.OrderBy(x => (x.Item.GetWorkshopInfo()?.ServerTime).If(y => y is null || y.Value == DateTime.MinValue, _ => x.Item.GetLocalPackage()?.LocalTime ?? DateTime.Now, y => y.Value)),
 
 			PackageSorting.SubscribeTime => items
 				.OrderBy(x => x.Item.GetLocalPackage()?.LocalTime),

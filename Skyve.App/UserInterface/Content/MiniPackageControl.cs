@@ -18,13 +18,11 @@ public class MiniPackageControl : SlickControl
 
 	public MiniPackageControl(ulong steamId)
 	{
-		Cursor = Cursors.Hand;
 		Id = steamId;
 	}
 
 	public MiniPackageControl(IPackage package)
 	{
-		Cursor = Cursors.Hand;
 		_package = package;
 		Id = package.Id;
 	}
@@ -34,6 +32,15 @@ public class MiniPackageControl : SlickControl
 		Height = (int)((Large ? 32 : 24) * UI.FontScale);
 
 		Padding = UI.Scale(new Padding(4), UI.FontScale);
+	}
+
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		base.OnMouseMove(e);
+
+		var imageRect = ClientRectangle.Pad(Padding);
+
+		Cursor = ClientRectangle.Pad(1, 1, ReadOnly && !ShowIncluded ? 1 :( imageRect.Width + Padding.Horizontal), 1).Contains(e.Location) ? Cursors.Hand : Cursors.Default;
 	}
 
 	protected override void OnMouseClick(MouseEventArgs e)
@@ -56,11 +63,9 @@ public class MiniPackageControl : SlickControl
 				{
 					Dispose();
 				}
-				else
+				else if (ClientRectangle.Pad(1, 1, imageRect.Width + Padding.Horizontal, 1).Contains(e.Location))
 				{
 					ServiceCenter.Get<IInterfaceService>().OpenPackagePage(Package, false);
-
-					//Program.MainForm.PushPanel(null, /*Package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(Package) :*/ new PC_PackagePage(Package));
 				}
 
 				break;
@@ -68,9 +73,14 @@ public class MiniPackageControl : SlickControl
 				var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(Package);
 
 				this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
+
 				break;
 			case MouseButtons.Middle:
-				Dispose();
+				if (!ReadOnly)
+				{
+					Dispose();
+				}
+
 				break;
 		}
 	}
@@ -82,12 +92,13 @@ public class MiniPackageControl : SlickControl
 		var imageRect = ClientRectangle.Pad(Padding);
 		imageRect.Width = imageRect.Height;
 		var image = Package?.GetThumbnail();
+		var textRect = ClientRectangle.Pad(1, 1, ReadOnly && !ShowIncluded ? 1 : (imageRect.Width + Padding.Horizontal), 1);
 
 		if (HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var backBrush = new SolidBrush(Color.FromArgb(25, FormDesign.Design.ForeColor));
 
-			e.Graphics.FillRoundedRectangle(backBrush, ClientRectangle.Pad(1, 1, imageRect.Width + Padding.Horizontal, 1), Padding.Left);
+			e.Graphics.FillRoundedRectangle(backBrush, textRect, Padding.Left);
 		}
 
 		if (image is not null)
@@ -113,7 +124,7 @@ public class MiniPackageControl : SlickControl
 
 		List<(Color Color, string Text)>? tags = null;
 
-		var textRect = ClientRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top, !ReadOnly && HoverState.HasFlag(HoverState.Hovered) ? imageRect.Right + Padding.Left : 0, Padding.Bottom).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
+		textRect = textRect.Pad(imageRect.Right + Padding.Left, 0, 0, 0);
 		var text = Package?.CleanName(out tags) ?? Locale.UnknownPackage;
 
 		if (ShowIncluded && Package?.IsIncluded() == true && Package?.IsEnabled() == true)
@@ -127,7 +138,7 @@ public class MiniPackageControl : SlickControl
 
 		using var textBrush = new SolidBrush(ForeColor);
 		using var font = UI.Font(Large ? 9.75F : 8.25F).FitToWidth(text, textRect, e.Graphics);
-		e.Graphics.DrawString(text, base.Font, textBrush, textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(text, base.Font, textBrush, textRect, new StringFormat { LineAlignment = StringAlignment.Center });
 
 		var tagRect = new Rectangle(textRect.X + (int)e.Graphics.Measure(text, Font).Width, textRect.Y, 0, textRect.Height);
 

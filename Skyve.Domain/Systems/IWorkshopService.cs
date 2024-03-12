@@ -16,7 +16,6 @@ public interface IWorkshopService
 	Task<IWorkshopInfo?> GetInfoAsync(IPackageIdentity identity);
 	IPackage GetPackage(IPackageIdentity identity);
 	Task<IPackage> GetPackageAsync(IPackageIdentity identity);
-	IUser? GetUser(object authorId);
 	Task<IEnumerable<IWorkshopInfo>> GetWorkshopItemsByUserAsync(object userId);
 	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, string? query = null, string[]? requiredTags = null, bool all = false);
 #if CS2

@@ -358,7 +358,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		_compatibilityUtil.PopulatePackageReport(packageData, info, _compatibilityHelper);
 
-		var author = _userService.TryGetAuthor(packageData.AuthorId);
+		var author = _userService.TryGetUser(packageData.AuthorId);
 
 		if (packageData.Stability is not PackageStability.Stable && isCompatible && !author.Malicious)
 		{

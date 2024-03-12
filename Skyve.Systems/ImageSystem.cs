@@ -322,6 +322,11 @@ internal class ImageSystem : IImageService
 
 	public string? FindImage(string pattern)
 	{
+		if (!Directory.Exists(ThumbnailFolder))
+		{
+			return null;
+		}
+
 		var file = Directory.EnumerateFiles(ThumbnailFolder, pattern).OrderByDescending(System.IO.File.GetCreationTime).FirstOrDefault();
 
 		if (!string.IsNullOrEmpty(file))
