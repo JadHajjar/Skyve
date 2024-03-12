@@ -374,6 +374,10 @@
     "One": "Edit this package's Tags",
     "Plural": "Edit selected items' Tags"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
   "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
   "TreatOptionalAsRequired": "Treat optional packages as required",

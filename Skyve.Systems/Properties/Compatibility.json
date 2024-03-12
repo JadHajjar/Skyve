@@ -8,7 +8,6 @@
   "NoteInfo": "Extra informational text displayed for the package",
   "BlackListName": "Black-list by name",
   "BlackListId": "Black-list by Steam ID",
-  "GlobalTags": "Global Tags",
   "GlobalTagsInfo": "Tags all players will see in the app",
   "Links": "Links",
   "StatusesCount": "Statuses ({0})",
@@ -253,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

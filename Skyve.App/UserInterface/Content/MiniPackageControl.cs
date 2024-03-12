@@ -79,16 +79,16 @@ public class MiniPackageControl : SlickControl
 	{
 		e.Graphics.SetUp(BackColor);
 
+		var imageRect = ClientRectangle.Pad(Padding);
+		imageRect.Width = imageRect.Height;
+		var image = Package?.GetThumbnail();
+
 		if (HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var backBrush = new SolidBrush(Color.FromArgb(25, FormDesign.Design.ForeColor));
 
-			e.Graphics.FillRoundedRectangle(backBrush, ClientRectangle.Pad(1), Padding.Left);
+			e.Graphics.FillRoundedRectangle(backBrush, ClientRectangle.Pad(1, 1, imageRect.Width + Padding.Horizontal, 1), Padding.Left);
 		}
-
-		var imageRect = ClientRectangle.Pad(Padding);
-		imageRect.Width = imageRect.Height;
-		var image = Package?.GetThumbnail();
 
 		if (image is not null)
 		{
@@ -143,14 +143,9 @@ public class MiniPackageControl : SlickControl
 		{
 			imageRect = ClientRectangle.Pad(Padding).Align(imageRect.Size, ContentAlignment.MiddleRight);
 
-			if (imageRect.Contains(PointToClient(Cursor.Position)))
-			{
-				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) ? 50 : 20, FormDesign.Design.RedColor.MergeColor(ForeColor, 65))), imageRect.Pad(1), (int)(4 * UI.FontScale));
-			}
+			using var img = IconManager.GetIcon("I_Trash", imageRect.Height * 3 / 4);
 
-			using var img = IconManager.GetIcon("I_Disposable");
-
-			e.Graphics.DrawImage(img.Color(FormDesign.Design.RedColor, (byte)(HoverState.HasFlag(HoverState.Pressed) ? 255 : 175)), imageRect.CenterR(img.Size));
+			e.Graphics.DrawImage(img.Color(imageRect.Contains(PointToClient(Cursor.Position)) ? FormDesign.Design.RedColor : FormDesign.Design.ForeColor, (byte)(HoverState.HasFlag(HoverState.Pressed) ? 255 : 175)), imageRect.CenterR(img.Size));
 		}
 
 		if (Dock == DockStyle.None)

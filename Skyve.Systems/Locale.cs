@@ -593,6 +593,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation EditingMultipleTags => _instance.GetText("EditingMultipleTags");
 
 	/// <summary>
+	/// <para>Edit this package's Links</para>
+	/// <para>Plural: Edit selected items' Links</para>
+	/// </summary>
+	public static Translation EditLinks => _instance.GetText("EditLinks");
+
+	/// <summary>
 	/// Make Assets
 	/// </summary>
 	public static Translation EditorPlay => _instance.GetText("EditorPlay");

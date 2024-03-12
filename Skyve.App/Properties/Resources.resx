@@ -1495,4 +1495,64 @@
   <data name="I_PlaysetSettings_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_PlaysetSettings_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="I_Patreon_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Patreon_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Patreon_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Patreon_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Patreon_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Patreon_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Patreon_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Patreon_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Paypal_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Paypal_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Paypal_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Paypal_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Paypal_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Paypal_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Paypal_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Paypal_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Twitch_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Twitch_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Twitch_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Twitch_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Twitch_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Twitch_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Twitch_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Twitch_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_TwitterX_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_TwitterX_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_TwitterX_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_TwitterX_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_TwitterX_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_TwitterX_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_TwitterX_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_TwitterX_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Youtube_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Youtube_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Youtube_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Youtube_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Youtube_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Youtube_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Youtube_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Youtube_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

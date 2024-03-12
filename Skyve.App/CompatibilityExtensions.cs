@@ -47,6 +47,11 @@ public static class CompatibilityExtensions
 			LinkType.Crowdin => "I_Translate",
 			LinkType.Donation => "I_Donate",
 			LinkType.Discord => "I_Discord",
+			LinkType.YouTube => "I_Youtube",
+			LinkType.Paypal => "I_Paypal",
+			LinkType.Twitch => "I_Twitch",
+			LinkType.Patreon => "I_Patreon",
+			LinkType.X => "I_TwitterX",
 			_ => "I_Share",
 		};
 	}
