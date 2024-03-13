@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Date Created",
   "Sorting_Usage": "Playset Usage",
   "Sorting_Name": "Name",
-  "Sorting_FileSize": "ファイルサイズの合計",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "更新日時",
   "Sorting_SubscribeTime": "サブスク開始日",
   "Sorting_Author": "作者名",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "初めてSkyveを使うユーザーは、オンラインガイドを参照してみて下さい。",
   "ResetButton_Tip": "オプション内の設定をデフォルトに全てリセットします。このリセットは、フォルダ設定には影響しません。",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "開発者向けUIを有効化",
-  "RefreshWorkshop": "ワークショップをリフレッシュ",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "新規でゲームを開始",
   "LoadSaveGame": "前回のセーブゲームで再開",
   "DevOptions": "開発者向けの起動オプション",
@@ -154,7 +152,7 @@
   "LogZipFile": "ログをファイルに保存",
   "LogFolders": "ログのフォルダ",
   "LogFileDrop": "確認したいログをD&D・ファイルを選択すると、エラーを検出して下記のエリアに表示",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "ログで検出したエラー",
   "OpenLogFolder": "ゲームのログフォルダを開く",
   "CopyLogFile": "ゲームのログをクリップボードにコピー",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "アセットを含める: {0} 個 / 合計: {1} 個",
   "NewPlayset_Tip": "新しいプレイセットを作成するか、もしくはインポートします。",
   "ViewPlaysets_Tip": "View & manage your playsets",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "Cities Skylinesを起動すると、新規でゲームを開始します。起動時に開始するマップを指定できます。",
   "LoadSaveGame_Tip": "Cities: Skylinesを起動すると、セーブゲームをロードします。セーブファイルが未選択の場合は、最新のセーブで再開します。",
   "BETA": "β版",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "プレイセットの合計: {0} 個",
   "PlaysetFilter": "プレイセットのフィルタ",
   "CheckDocumentsFolder": "Skyveがドキュメントフォルダにアクセス可能か確認して下さい。ドキュメントフォルダは、UIと言語の設定を保存するために使用します。",
-  "FailedToSaveLanguage": "選択した言語の保存に失敗！",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "テーマチェンジャーが開けません！",
   "FailedToDeleteItem": "アイテムの削除に失敗！",
   "OpenChangelog": "更新履歴を開く",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "アセットを削除",
     "Plural": "選択したアセットを削除"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "プレイセットのファイルをPC上で表示",
   "ChangePlaysetColor": "プレイセットの色を変更",
   "EditPlaysetName": "このプレイセット名を編集",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "プレイセットの色",
   "CreateShortcutPlayset": "デスクトップにショートカットを作成",
   "AskToLaunchGameForShortcut": "プレイセット経由でゲームを起動するショートカットを作成しますか?",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "起動時に追加パラメータの引数を追加",
   "SearchGenericPackages": "これらのパッケージを検索...",
   "Sorting_Subscribers": "総サブスク数",
-  "Sorting_Votes": "評価",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} subscriber",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "プレイセット",
     "Plural": "プレイセット"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} を含める",
@@ -368,6 +374,10 @@
     "One": "パッケージのタグを編集",
     "Plural": "選択したアイテムのタグを編集"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "「参照」タブに除外したパッケージを表示",
   "ShowAllReferencedPackages_Tip": "表示中のパッケージを参照して、除外したパッケージと含めるパッケージの両方が表示されます。",
   "TreatOptionalAsRequired": "オプションパッケージは必要に応じて処理",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "作者によって削除済み",
   "Missing": "不明",
   "LoggedInAs": "次でログイン中",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "不明なユーザー",
   "AddMeaningfulDescription": "リクエストに具体的な問題点などの説明を追加して下さい。",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "別のパッケージで不足している依存関係を追加",
   "ActivePlayset": "Active Playset",
   "References": "参照",
-  "OpenLog": "ログファイルを開く",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "ソート順",
   "FailedToFetchLogs": "ログの取得に失敗",
   "DiscoverPlaysets": "プレイセットを探す",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "プレイセットのDLに失敗しました。\n\n後でもう一度やり直して下さい。",
   "UpdatePlaysetTip": "プレイセットのローカルバージョンを更新",
   "DownloadPlaysetTip": "プレイセットをローカルPCにDL",
-  "EditPlaysetThumbnail": "プレイセットのサムネイル画像を編集",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "プレイセットを公開",
   "MakePrivate": "プレイセットを非公開",
   "CopyPlaysetLink": "プレイセットIDをコピー",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "インターネットの接続確認をスキップして、自動的に接続済みと判断します。",
   "SelectAll": "Select all items",
   "DeselectAll": "Un-select all items",
-  "AddTagBox": "ここに新規タグを追加",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "複数のパッケージでタグを編集すると、それぞれのカスタムタグは上書きされます。",
   "EditTagsOfPackage": {
     "One": "パッケージ内のアセットタグを全て編集",
@@ -546,5 +558,29 @@
   "Version": "Version",
   "UpdateTime": "Update Time",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }
