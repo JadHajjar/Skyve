@@ -8,7 +8,6 @@
   "NoteInfo": "Text informativ suplimentar afișat pentru pachet",
   "BlackListName": "Lista neagră după nume",
   "BlackListId": "Lista neagră după ID-ul Steam",
-  "GlobalTags": "Etichete globale",
   "GlobalTagsInfo": "Etichete pe care toți jucătorii le vor vedea în aplicație",
   "Links": "Link-uri",
   "StatusesCount": "Statuses ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Nu sunt suficiente informații",
   "HasIssues": "Are probleme",
   "Broken": "Distrugere",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Atenție necesară",
   "Website": "Website",
   "Donation": "Donează",
-  "ManageSinglePackage": "Gestionează pachete specifice",
-  "ManageCompatibilityData": "Gestionează datele de compatibilitate",
-  "YourPackages": "Gestionează pachetele",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Adaugă Pachete",
   "ConfirmEndSession": "Ești sigur că vrei să închizi sesiunea?",
   "CrDataLoadFailed": "Imposibil de încărcat datele, încercați din nou mai târziu",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Nu există suficiente informații pentru a revizui în mod corespunzător acest pachet.",
   "Stability_HasIssues": "Acest pachet poate cauza probleme.\r\nFiţi atent în timp ce îl folosiţi.",
   "Stability_Broken": "Acest pachet este stricat.\r\nEste cunoscut fie că întrerup jocul, fie că nu funcționează.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Gestionare pachet",
   "Banned": "Interzis",
   "NoIssues": "Nicio problemă",
-  "RequestReviewDisclaimer": "*ID-ul tău de Steam și jurnalele sunt trimise cu solicitarea ta",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Producere de scenariu",
   "ThemeMaking": "Crearea de teme",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }
