@@ -80,12 +80,12 @@ public partial class ItemListControl
 			{
 				var rect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y + e.DrawableItem.CachedHeight - Padding.Vertical, e.ClipRectangle.Width, height);
 
-				outerColor = Color.FromArgb(rect.Contains(CursorLocation) ? 200 : 255, color);
+				outerColor = Color.FromArgb(200, color);
 
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
 				using var image = icon!.Get(baseFont.Height * 4 / 3).Color(textBrush.Color);
-				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), e.Graphics);
+				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text, rect.Pad(image.Width * 2, GridPadding.Top, image.Width * 2, GridPadding.Bottom), e.Graphics);
 				using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false, notificationType <= NotificationType.Info, notificationType <= NotificationType.Info);
@@ -100,7 +100,7 @@ public partial class ItemListControl
 
 				if (notificationType > NotificationType.Info)
 				{
-					e.DrawableItem.CachedHeight -= GridPadding.Top;
+					e.DrawableItem.CachedHeight -= GridPadding.Top / 2;
 				}
 			}
 
@@ -114,7 +114,7 @@ public partial class ItemListControl
 				using var brush = new SolidBrush(outerColor);
 				using var textBrush = new SolidBrush(outerColor.GetTextColor());
 				using var image = notificationType.Value.GetIcon(false).Get(baseFont.Height * 4 / 3).Color(textBrush.Color);
-				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text2, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), e.Graphics);
+				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text2, rect.Pad(image.Width * 2, GridPadding.Top, image.Width * 2, GridPadding.Bottom), e.Graphics);
 				using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false);
@@ -164,7 +164,7 @@ public partial class ItemListControl
 				using var authorIcon = IconManager.GetIcon("I_Author", size.Height);
 
 				e.Rects.AuthorRect = rect.Align(size + new Size(authorIcon.Width, 0), ContentAlignment.TopLeft);
-				e.DrawableItem.CachedHeight = e.Rects.AuthorRect.Bottom + GridPadding.Top / 3;
+				e.DrawableItem.CachedHeight = e.Rects.AuthorRect.Bottom + (GridPadding.Top / 3);
 
 				var isHovered = e.Rects.AuthorRect.Contains(CursorLocation);
 				using var brush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : Color.FromArgb(200, ForeColor));
@@ -174,48 +174,48 @@ public partial class ItemListControl
 			}
 		}
 
-		private void DrawVersionAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localParentPackage, IWorkshopInfo? workshopInfo)
+		private void DrawVersionAndTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localPackageIdentity, IWorkshopInfo? workshopInfo)
 		{
 #if CS1
 			var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 			var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-			var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
-			var text = isVersion ? "v" + package!.Version : localParentPackage?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
+			var isVersion = (package?.IsCodeMod ?? workshopInfo?.IsCodeMod ??  false) && !string.IsNullOrEmpty(package?.Version);
+			var versionText = isVersion ? "v" + package!.Version : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
 
 			var packageTags = e.Item.GetTags(IsPackagePage).ToList();
 
 			if (packageTags.Count > 0)
 			{
-				if (!string.IsNullOrEmpty(text))
+				if (!string.IsNullOrEmpty(versionText))
 				{
-					text += " • ";
+					versionText += " • ";
 				}
 				else
 				{
-					text = string.Empty;
+					versionText = string.Empty;
 				}
 
-				text += packageTags.ListStrings(", ");
+				versionText += packageTags.ListStrings(", ");
 			}
 
-			if (!string.IsNullOrEmpty(text))
+			if (!string.IsNullOrEmpty(versionText))
 			{
 				using var fadedBrush = new SolidBrush(Color.FromArgb(GridView ? 150 : 200, e.BackColor.GetTextColor()));
 
-				var rect = GridView 
-					? new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, Height) 
+				var rect = GridView
+					? new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, Height)
 					: new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, e.Rects.TextRect.Width, e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - Padding.Bottom);
 
-				using var versionFont = GridView ? UI.Font(7.5F) : UI.Font(8.25F).FitToHeight(text, rect, e.Graphics);
+				using var versionFont = GridView ? UI.Font(7.5F) : UI.Font(8.25F).FitToHeight(versionText, rect, e.Graphics);
 				using var format = GridView ? new() : new StringFormat { LineAlignment = StringAlignment.Far };
-				
-				e.Graphics.DrawString(text, versionFont, fadedBrush, rect, format);
+
+				e.Graphics.DrawString(versionText, versionFont, fadedBrush, rect, format);
 
 				if (GridView)
 				{
-					e.DrawableItem.CachedHeight += (int)e.Graphics.Measure(text, versionFont, rect.Width).Height; 
+					e.DrawableItem.CachedHeight += (int)e.Graphics.Measure(versionText, versionFont, rect.Width).Height;
 				}
 			}
 		}

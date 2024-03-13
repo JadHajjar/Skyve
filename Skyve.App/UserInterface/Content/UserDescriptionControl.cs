@@ -1,5 +1,5 @@
 ﻿using Skyve.App.UserInterface.Panels;
-using Skyve.Compatibility.Domain.Interfaces;
+using Skyve.App.Utilities;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -79,7 +79,7 @@ public class UserDescriptionControl : SlickImageControl
 		else
 		{
 			e.Graphics.SetUp(FormDesign.Design.AccentBackColor);
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1, Height / 2 + 1, 1, 1), (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1, (Height / 2) + 1, 1, 1), (int)(5 * UI.FontScale));
 		}
 
 		if (User == null)
@@ -113,7 +113,11 @@ public class UserDescriptionControl : SlickImageControl
 	{
 		rects!.SteamRect = ClientRectangle.Pad(0, 0, 0, Height / 2).Pad(Padding).Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.BottomRight);
 
+#if CS2
+		using var icon = IconManager.GetIcon("I_Paradox", rects.SteamRect.Height * 3 / 4);
+#else
 		using var icon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height * 3 / 4);
+#endif
 
 		SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, icon, null, rects.SteamRect.Contains(CursorLocation) ? HoverState & ~HoverState.Focused : HoverState.Normal);
 	}

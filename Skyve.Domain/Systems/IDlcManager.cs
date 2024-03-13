@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 public interface IDlcManager
@@ -13,4 +14,5 @@ public interface IDlcManager
 	bool IsIncluded(IDlcInfo dlc);
 	void SetIncluded(IDlcInfo dlc, bool value);
 	List<uint> GetExcludedDlcs();
+	Task UpdateDLCs();
 }

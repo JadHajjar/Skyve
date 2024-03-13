@@ -17,7 +17,9 @@ public partial class AddLinkForm : BaseForm
 		Text = LocaleHelper.GetGlobalText("Links");
 
 		foreach (var link in links)
-		{ AddLink(link); }
+		{
+			AddLink(link);
+		}
 	}
 
 	protected override void UIChanged()
@@ -49,7 +51,13 @@ public partial class AddLinkForm : BaseForm
 		return TLP.Controls.OfType<LinkControl>().Select(x => x.Link);
 	}
 
-	private class LinkControl : TableLayoutPanel
+	private void B_Apply_Click(object sender, EventArgs e)
+	{
+		LinksReturned?.Invoke(GetLinks());
+		Close();
+	}
+
+	private class LinkControl : SmartTablePanel
 	{
 		private readonly SlickIcon icon;
 		private readonly SlickTextBox tbLink;
@@ -78,19 +86,17 @@ public partial class AddLinkForm : BaseForm
 			tbLink.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 			tbLink.ShowLabel = false;
 			tbLink.Placeholder = "Link URL";
-			tbLink.MinimumSize = new(0, (int)(24 * UI.FontScale));
 			tbLink.Text = packageLink.Url;
 			tbLink.TextChanged += TbLink_TextChanged;
 
 			tbName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 			tbName.ShowLabel = false;
 			tbName.Placeholder = "Link Name";
-			tbName.MinimumSize = new(0, (int)(24 * UI.FontScale));
 			tbName.Text = packageLink.Title;
 
 			deleteButton.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 			deleteButton.Padding = UI.Scale(new Padding(5), UI.FontScale);
-			deleteButton.ImageName = "I_Disposable";
+			deleteButton.ImageName = "I_Trash";
 			deleteButton.ColorStyle = ColorStyle.Red;
 			deleteButton.Margin = UI.Scale(new Padding(3, 3, 10, 3), UI.FontScale);
 			deleteButton.Click += (s, e) => Dispose();
@@ -152,11 +158,5 @@ public partial class AddLinkForm : BaseForm
 
 			SlickToolStrip.Show(FindForm() as AddLinkForm, icon.PointToScreen(new Point(icon.Width + 5, 0)), items);
 		}
-	}
-
-	private void B_Apply_Click(object sender, EventArgs e)
-	{
-		LinksReturned?.Invoke(GetLinks());
-		Close();
 	}
 }

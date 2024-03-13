@@ -1,5 +1,5 @@
 ﻿using Skyve.App.Interfaces;
-using Skyve.App.UserInterface.Panels;
+using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
@@ -11,9 +11,9 @@ namespace Skyve.App.UserInterface.CompatibilityReport;
 
 public class CompatibilityMessageControl : SlickControl
 {
-	private readonly List<ulong> _subscribingTo = new();
-	private readonly Dictionary<IPackageIdentity, Rectangle> _buttonRects = new();
-	private readonly Dictionary<IPackageIdentity, Rectangle> _modRects = new();
+	private readonly List<ulong> _subscribingTo = [];
+	private readonly Dictionary<IPackageIdentity, Rectangle> _buttonRects = [];
+	private readonly Dictionary<IPackageIdentity, Rectangle> _modRects = [];
 	private Rectangle allButtonRect;
 	private Rectangle snoozeRect;
 
@@ -22,10 +22,12 @@ public class CompatibilityMessageControl : SlickControl
 	private readonly IPackageUtil _packageUtil;
 	private readonly INotifier _notifier;
 	private readonly IDlcManager _dlcManager;
+	private readonly IWorkshopService _workshopService;
+	private readonly IPackageNameUtil _packageNameUtil;
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
-		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _subscriptionsManager, out _packageUtil, out _dlcManager);
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _subscriptionsManager, out _packageUtil, out _dlcManager, out _workshopService, out _packageNameUtil);
 
 		Dock = DockStyle.Top;
 		Type = type;
@@ -67,7 +69,7 @@ public class CompatibilityMessageControl : SlickControl
 			var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
 			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
-			var messageSize = e.Graphics.Measure(Message.Message, font, Width - (iconRect.Width * 2) - pad);
+			var messageSize = e.Graphics.Measure(Message.GetMessage(_workshopService, _packageNameUtil), font, Width - (iconRect.Width * 2) - pad);
 			var noteSize = e.Graphics.Measure(note, smallFont, Width - (iconRect.Width * 2) - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 			using var brush = new SolidBrush(color);
@@ -92,20 +94,20 @@ public class CompatibilityMessageControl : SlickControl
 				{
 					e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(125, purple)), snoozeRect, pad);
 				}
-				else if (isSnoozed || HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor))
+				else if (isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor)))
 				{
 					e.Graphics.FillRoundedRectangle(new SolidBrush(purple), snoozeRect, pad);
 				}
 
 				using var snoozeIcon = IconManager.GetLargeIcon("I_Snooze");
-				e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor) ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
+				e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor)) ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
 			}
 
-			e.Graphics.DrawString(Message.Message, font, new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
+			e.Graphics.DrawString(Message.GetMessage(_workshopService, _packageNameUtil), font, new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 
 			if (note is not null)
 			{
-				e.Graphics.DrawString(note, smallFont, new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0), new StringFormat { LineAlignment = y <= Height && string.IsNullOrWhiteSpace(Message.Message) && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
+				e.Graphics.DrawString(note, smallFont, new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.GetMessage(_workshopService, _packageNameUtil)) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0), new StringFormat { LineAlignment = y <= Height && string.IsNullOrWhiteSpace(Message.GetMessage(_workshopService, _packageNameUtil)) && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 			}
 
 			if (allText is not null)
@@ -202,11 +204,12 @@ public class CompatibilityMessageControl : SlickControl
 								buttonText = Locale.IncludeItem;
 								iconName = "I_Check";
 							}
-							else if (!(p.IsEnabled()))
+							else if (!p.IsEnabled())
 							{
 								buttonText = Locale.EnableItem;
 								iconName = "I_Enabled";
 							}
+
 							break;
 						case StatusAction.SelectOne:
 							buttonText = Locale.SelectThisPackage;
@@ -274,7 +277,7 @@ public class CompatibilityMessageControl : SlickControl
 						{
 							return 2;
 						}
-						else if (!(p.IsEnabled()))
+						else if (!p.IsEnabled())
 						{
 							return 1;
 						}
@@ -286,6 +289,7 @@ public class CompatibilityMessageControl : SlickControl
 					allText = max switch { 3 => Locale.IncludeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
 					allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
 				}
+
 				break;
 			case StatusAction.RequiresConfiguration:
 				allText = _compatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
@@ -343,7 +347,7 @@ public class CompatibilityMessageControl : SlickControl
 				}
 				else if (e.Button == MouseButtons.Right && item.Key.GetWorkshopPackage() is not null)
 				{
-					var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item.Key.GetWorkshopPackage()!);
+					var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item.Key.GetWorkshopPackage()!);
 
 					this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 				}
@@ -383,6 +387,7 @@ public class CompatibilityMessageControl : SlickControl
 						_packageUtil.SetIncluded(package, false);
 					}
 				}
+
 				break;
 				case StatusAction.ExcludeOther:
 					foreach (var item in Message.Packages)
@@ -393,11 +398,13 @@ public class CompatibilityMessageControl : SlickControl
 							_packageUtil.SetIncluded(package, false);
 						}
 					}
+
 					break;
 				case StatusAction.RequestReview:
-					Program.MainForm.PushPanel(null, new PC_RequestReview(PackageCompatibilityReportControl.Package));
+					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().RequestReviewPanel(PackageCompatibilityReportControl.Package));
 					break;
 			}
+
 			_compatibilityManager.QuickUpdate(Message);
 		}
 	}
@@ -414,7 +421,8 @@ public class CompatibilityMessageControl : SlickControl
 			}
 			else if (package is not null)
 			{
-				Program.MainForm.PushPanel(null, /*package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) :*/ new PC_PackagePage(item));
+				ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item, false);
+				//Program.MainForm.PushPanel(null, /*package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) :*/ new PC_PackagePage(item));
 			}
 			else
 			{
@@ -455,6 +463,7 @@ public class CompatibilityMessageControl : SlickControl
 						}
 					}
 				}
+
 				break;
 			case StatusAction.Switch:
 			{
@@ -465,6 +474,7 @@ public class CompatibilityMessageControl : SlickControl
 					_packageUtil.SetEnabled(pp, false);
 				}
 			}
+
 			break;
 		}
 

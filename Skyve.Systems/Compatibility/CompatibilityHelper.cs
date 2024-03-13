@@ -15,24 +15,26 @@ namespace Skyve.Systems.Compatibility;
 public class CompatibilityHelper
 {
 	private readonly CompatibilityManager _compatibilityManager;
+	private readonly ISettings _settings;
 	private readonly IPackageManager _contentManager;
-	private readonly IPackageUtil _contentUtil;
-	private readonly IPackageNameUtil _packageUtil;
+	private readonly IPackageUtil _packageUtil;
+	private readonly IPackageNameUtil _packageNameUtil;
 	private readonly IWorkshopService _workshopService;
 	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly PackageAvailabilityService _packageAvailabilityService;
 
 	private readonly Dictionary<ulong, List<ulong>> _missingItems = [];
 
-	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILogger logger, ISkyveDataManager skyveDataManager)
+	public CompatibilityHelper(CompatibilityManager compatibilityManager, ISettings settings, IPackageManager contentManager, IPackageUtil packageUtil, IPackageNameUtil packageNameUtil, IWorkshopService workshopService, ILogger logger, ISkyveDataManager skyveDataManager)
 	{
 		_compatibilityManager = compatibilityManager;
+		_settings = settings;
 		_contentManager = contentManager;
-		_contentUtil = contentUtil;
 		_packageUtil = packageUtil;
+		_packageNameUtil = packageNameUtil;
 		_workshopService = workshopService;
 		_skyveDataManager = skyveDataManager;
-		_packageAvailabilityService = new PackageAvailabilityService(_contentManager, _contentUtil, logger, _skyveDataManager, _compatibilityManager);
+		_packageAvailabilityService = new PackageAvailabilityService(_contentManager, _packageUtil, logger, _skyveDataManager, _compatibilityManager);
 	}
 
 	public void HandleStatus(CompatibilityInfo info, IPackageStatus<StatusType> status)
@@ -44,7 +46,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is StatusType.DependencyMod && _contentUtil.GetPackagesThatReference(info, true).Any())
+		if (type is StatusType.DependencyMod && _compatibilityManager.GetPackagesThatReference(info, true).Any())
 		{
 			return;
 		}
@@ -147,6 +149,11 @@ public class CompatibilityHelper
 		if (type is InteractionType.SucceededBy && HandleSucceededBy(info, packages))
 		{
 			return;
+		}
+
+		if (type is InteractionType.OptionalPackages && _settings.UserSettings.TreatOptionalAsRequired)
+		{
+			type = InteractionType.RequiredPackages;
 		}
 
 		var reportType = type switch

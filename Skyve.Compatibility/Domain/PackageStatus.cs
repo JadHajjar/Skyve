@@ -1,4 +1,6 @@
-﻿using Skyve.Compatibility.Domain.Enums;
+﻿using Newtonsoft.Json;
+
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 namespace Skyve.Compatibility.Domain;
@@ -21,9 +23,8 @@ public class PackageStatus : IPackageStatus<StatusType>
 		}
 	}
 
-	public int IntType { get => (int)Type; set => Type = (StatusType)value; }
-
-	public string LocaleKey => $"Status_{Type}";
+	[JsonIgnore] public int IntType { get => (int)Type; set => Type = (StatusType)value; }
+	[JsonIgnore] public string LocaleKey => $"Status_{Type}";
 
 	public PackageStatus()
 	{

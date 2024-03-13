@@ -1,4 +1,6 @@
-﻿using Skyve.Compatibility.Domain.Enums;
+﻿using Newtonsoft.Json;
+
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 namespace Skyve.Compatibility.Domain;
@@ -21,6 +23,6 @@ public class StabilityStatus : IPackageStatus<PackageStability>
 	public ulong[]? Packages { get; set; }
 	public string? Note { get; set; }
 	public NotificationType Notification => CRNAttribute.GetNotification(Type);
-	public int IntType { get => (int)Type; set => Type = (PackageStability)value; }
-	public string LocaleKey => $"Stability_{Type}";
+	[JsonIgnore] public int IntType { get => (int)Type; set => Type = (PackageStability)value; }
+	[JsonIgnore] public string LocaleKey => $"Stability_{Type}";
 }

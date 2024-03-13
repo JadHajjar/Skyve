@@ -24,9 +24,16 @@ public class TagsDropDown : SlickMultiSelectionDropDown<ITag>
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		var text2 = Locale.ItemsCount.FormatPlural(_tagsService.GetTagUsage(item));
+		using var brush2 = new SolidBrush(Color.FromArgb(200, foreColor));
+		e.Graphics.DrawString(text2, Font, brush2, rectangle.Pad(0, 0, (int)(5 * UI.FontScale), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center });
 
-		e.Graphics.DrawString(Locale.ItemsCount.FormatPlural(_tagsService.GetTagUsage(item)), Font, new SolidBrush(Color.FromArgb(200, foreColor)), rectangle.Pad(0, 0, (int)(5 * UI.FontScale), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+		rectangle.Width -= (int)e.Graphics.Measure(text2, Font).Width;
+
+		using var brush = new SolidBrush(foreColor);
+		using var font = UI.Font(8.25F).FitTo(text, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center };
+		e.Graphics.DrawString(text, font, brush, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), format);
 	}
 
 	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<ITag> items)
@@ -37,6 +44,9 @@ public class TagsDropDown : SlickMultiSelectionDropDown<ITag>
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		using var brush = new SolidBrush(foreColor);
+		using var font = UI.Font(8.25F).FitTo(text, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center };
+		e.Graphics.DrawString(text, font, brush, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), format);
 	}
 }

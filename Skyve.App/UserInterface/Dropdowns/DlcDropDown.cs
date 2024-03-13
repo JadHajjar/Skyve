@@ -34,7 +34,9 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IDlcInfo item, bool selected)
 	{
 		if (item is null)
-		{ return; }
+		{
+			return;
+		}
 
 		var text = item.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP");
 		var icon = item.GetThumbnail();
@@ -44,7 +46,7 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height * 460 / 215, rectangle.Height), ContentAlignment.MiddleLeft), (int)(4 * UI.FontScale));
 		}
 
-		rectangle = rectangle.Pad(rectangle.Height * 460 / 215 + Padding.Left, 0, 0, 0);
+		rectangle = rectangle.Pad((rectangle.Height * 460 / 215) + Padding.Left, 0, 0, 0);
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 	}

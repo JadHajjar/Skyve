@@ -6,9 +6,11 @@ public partial class EditTagsForm : BaseForm
 	private readonly ITagsService _tagsService = ServiceCenter.Get<ITagsService>();
 	private readonly List<ITag> _tags;
 
+	public event Action<IEnumerable<string>>? ApplyTags;
+
 	public List<IPackageIdentity> Packages { get; }
 
-	public EditTagsForm(IEnumerable<IPackageIdentity> packages)
+	public EditTagsForm(IEnumerable<IPackageIdentity> packages, IEnumerable<ITag>? tags = null)
 	{
 		InitializeComponent();
 
@@ -22,10 +24,10 @@ public partial class EditTagsForm : BaseForm
 		}
 		else
 		{
-			Text = Locale.TagsTitle.Format(Packages[0].ToString());
+			Text = Locale.TagsTitle.Format(Packages[0].CleanName(true));
 		}
 
-		_tags = new(Packages.SelectMany(x => x.GetTags().Where(x => x.IsCustom)).Distinct(x => x.Value));
+		_tags = tags?.ToList() ?? new(Packages.SelectMany(x => x.GetTags().Where(x => x.IsCustom)).Distinct(x => x.Value));
 
 		TLC.Tags.AddRange(_tags);
 		TLC.AllTags.AddRange(_tagsService.GetDistinctTags().OrderByDescending(x => _tags.Any(t => t.Value == x.Value)).ThenByDescending(x => x.IsCustom).ThenByDescending(_tagsService.GetTagUsage));
@@ -53,9 +55,16 @@ public partial class EditTagsForm : BaseForm
 	{
 		DialogResult = DialogResult.OK;
 
-		foreach (var package in Packages)
+		if (ApplyTags is not null)
 		{
-			ServiceCenter.Get<ITagsService>().SetTags(package, TLC.Tags.Select(x => x.Value).Distinct());
+			ApplyTags(TLC.Tags.Select(x => x.Value).Distinct());
+		}
+		else
+		{
+			foreach (var package in Packages)
+			{
+				_tagsService.SetTags(package, TLC.Tags.Select(x => x.Value).Distinct());
+			}
 		}
 
 		Close();

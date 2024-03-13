@@ -142,7 +142,7 @@ public partial class PC_Troubleshoot : PanelContent
 			{
 				new BackgroundAction(() =>
 				{
-					ServiceCenter.Get<ITroubleshootSystem>().CleanDownload(faultyPackages.ToList(x=>x.LocalData!));
+					ServiceCenter.Get<ITroubleshootSystem>().CleanDownload(faultyPackages.ToList(x => x.LocalData!));
 				}).Run();
 
 				PushBack();

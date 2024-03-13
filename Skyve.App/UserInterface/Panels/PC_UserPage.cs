@@ -12,7 +12,7 @@ public partial class PC_UserPage : PanelContent
 	private readonly ISettings _settings;
 	private readonly IWorkshopService _workshopService;
 
-	private List<IPackageIdentity> userItems = new();
+	private List<IPackageIdentity> userItems = [];
 
 	public IUser User { get; }
 
@@ -32,11 +32,11 @@ public partial class PC_UserPage : PanelContent
 			GridView = true,
 		};
 
-		LC_Items = new ContentList(SkyvePage.User, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+		LC_Items = new ContentList(SkyvePage.User, false, GetItems, GetItemText, GetCountText)
 		{
 			IsGenericPage = true
 		};
-
+		
 		LC_Items.TB_Search.Placeholder = "SearchGenericPackages";
 
 		LC_Items.ListControl.Loading = true;
@@ -103,23 +103,23 @@ public partial class PC_UserPage : PanelContent
 	{
 		try
 		{
-			var profiles = await ServiceCenter.Get<ISkyveApiUtil>().GetUserPlaysets(User);
+			//var profiles = await ServiceCenter.Get<ISkyveApiUtil>().GetUserPlaysets(User);
 
-			if (profiles?.Any() ?? false)
-			{
-				L_Profiles.SetItems(profiles);
+			//if (profiles?.Any() ?? false)
+			//{
+			//	L_Profiles.SetItems(profiles);
 
-				this.TryInvoke(() =>
-				{
-					T_Profiles.LinkedControl = L_Profiles;
+			//	this.TryInvoke(() =>
+			//	{
+			//		T_Profiles.LinkedControl = L_Profiles;
 
-					if (T_Profiles.Selected)
-					{
-						T_Profiles.Selected = true;
-					}
-				});
-			}
-			else
+			//		if (T_Profiles.Selected)
+			//		{
+			//			T_Profiles.Selected = true;
+			//		}
+			//	});
+			//}
+			//else
 			{
 				this.TryInvoke(() => tabControl.Tabs = tabControl.Tabs.Where(x => x != T_Profiles).ToArray());
 			}

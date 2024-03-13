@@ -17,7 +17,7 @@ public class NewProfileOptionControl : SlickImageControl
 		if (Live)
 		{
 			Font = UI.Font(11.25F, FontStyle.Bold);
-			Margin = UI.Scale(new Padding(100 - Parent.Controls.IndexOf(this) % 2 * 100, 15, Parent.Controls.IndexOf(this) % 2 * 100, 15), UI.FontScale);
+			Margin = UI.Scale(new Padding(100 - (Parent.Controls.IndexOf(this) % 2 * 100), 15, Parent.Controls.IndexOf(this) % 2 * 100, 15), UI.FontScale);
 			Padding = UI.Scale(new Padding(15), UI.FontScale);
 			Size = UI.Scale(new Size(250, 75), UI.FontScale);
 		}
@@ -41,7 +41,14 @@ public class NewProfileOptionControl : SlickImageControl
 
 		using var icon = IconManager.GetIcon(FromLink ? "I_LinkChain" : FromScratch ? "I_New" : "I_Copy", 48);
 
-		e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+		if (Loading)
+		{
+			DrawLoader(e.Graphics, ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+		}
+		else
+		{
+			e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+		}
 
 		e.Graphics.DrawString(FromLink ? Locale.ImportFromLink : FromScratch ? Locale.StartScratch : Locale.ContinueFromCurrent, Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + icon.Width, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 	}

@@ -112,11 +112,17 @@ public partial class ItemListControl
 			Rectangle tagsRect;
 
 			if (GridView)
+			{
 				tagsRect = new(e.ClipRectangle.X, e.Rects.IconRect.Bottom + (GridPadding.Top * 3), maxTagX - e.ClipRectangle.X, e.ClipRectangle.Bottom - e.Rects.IconRect.Bottom - (GridPadding.Top * 3));
+			}
 			else if (CompactList)
+			{
 				tagsRect = new(_columnSizes[Columns.Tags].X, e.ClipRectangle.Y, _columnSizes[Columns.Tags].Width, e.ClipRectangle.Height);
+			}
 			else
-				tagsRect = new(e.ClipRectangle.Width * 5 / 10, e.Rects.TextRect.Bottom + (int)(20 * UI.FontScale) + Padding.Bottom * 2, maxTagX - e.ClipRectangle.Width * 4 / 10, (int)(20 * UI.FontScale));
+			{
+				tagsRect = new(e.ClipRectangle.Width * 5 / 10, e.Rects.TextRect.Bottom + (int)(20 * UI.FontScale) + (Padding.Bottom * 2), maxTagX - (e.ClipRectangle.Width * 4 / 10), (int)(20 * UI.FontScale));
+			}
 
 			var location = tagsRect.Location;
 
@@ -135,7 +141,7 @@ public partial class ItemListControl
 
 				e.Rects.SteamIdRect = e.Rects.TagRects.First().Value;
 
-				location.X += (GridView?GridPadding:Padding).Left;
+				location.X += (GridView ? GridPadding : Padding).Left;
 			}
 
 			var endReached = false;
@@ -143,11 +149,15 @@ public partial class ItemListControl
 			foreach (var item in e.Item.GetTags(IsPackagePage))
 			{
 				if (endReached = DrawTag(e, ref location, tagsRect, item))
+				{
 					break;
+				}
 			}
 
 			if (!endReached)
+			{
 				return;
+			}
 
 			if (CompactList)
 			{
@@ -198,7 +208,9 @@ public partial class ItemListControl
 					location.X = e.ClipRectangle.X;
 				}
 				else
+				{
 					return true;
+				}
 			}
 
 			var tagRect = e.Graphics.DrawLabel(item.Value, tagIcon, color ?? Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), new Rectangle(location.X, tagsRect.Y, tagsRect.Width, tagsRect.Height), CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopLeft, mousePosition: CursorLocation);
@@ -221,11 +233,11 @@ public partial class ItemListControl
 
 			if (GridView)
 			{
-				rect.Y += (int)(40 * UI.FontScale) + GridPadding.Bottom / 2;
+				rect.Y += (int)(40 * UI.FontScale) + (GridPadding.Bottom / 2);
 			}
 			else
 			{
-				rect.Y += (int)(20 * UI.FontScale) + Padding.Bottom * 2;
+				rect.Y += (int)(20 * UI.FontScale) + (Padding.Bottom * 2);
 			}
 
 			using var authorIcon = IconManager.GetSmallIcon("I_Folder");
@@ -243,11 +255,11 @@ public partial class ItemListControl
 
 			if (GridView)
 			{
-				authorRect.Y += (int)(40 * UI.FontScale) + GridPadding.Bottom / 2;
+				authorRect.Y += (int)(40 * UI.FontScale) + (GridPadding.Bottom / 2);
 			}
 			else
 			{
-				authorRect.Y += (int)(20 * UI.FontScale) + Padding.Bottom * 2;
+				authorRect.Y += (int)(20 * UI.FontScale) + (Padding.Bottom * 2);
 			}
 
 			if (authorImg is null)
@@ -278,21 +290,21 @@ public partial class ItemListControl
 			return authorRect.Width;
 		}
 
-		private void DrawVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
+		private void DrawVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localPackageIdentity, IWorkshopInfo? workshopInfo)
 		{
 #if CS1
 			var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 			var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-			var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
-			var versionText = isVersion ? "v" + package!.Version : localIdentity?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
+			var isVersion = (package?.IsCodeMod ?? workshopInfo?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package?.Version);
+			var versionText = isVersion ? "v" + package!.Version : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
 			var tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + (GridView ? GridPadding.Bottom / 2 : (Padding.Bottom * 2)), 0, 0);
 
 			var rect = e.Graphics.DrawLabel(versionText, null, isVersion ? Color.FromArgb(125, FormDesign.Design.YellowColor) : default, tagRect, ContentAlignment.TopLeft, smaller: false);
 			tagRect.X += (GridView ? GridPadding.Left : Padding.Left) + rect.Width;
 
-			var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
+			var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localPackageIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
 
 			if (date != default)
 			{
@@ -306,11 +318,13 @@ public partial class ItemListControl
 		private void DrawVoteAndSubscribers(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo)
 		{
 			if (workshopInfo is null)
+			{
 				return;
+			}
 
 			var rect = GridView
-				? new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + (int)(20 * UI.FontScale) + GridPadding.Bottom / 2, 0, 0)
-				: new Rectangle(e.ClipRectangle.Width * 5 / 10, e.Rects.TextRect.Bottom + Padding.Bottom * 2, 0, 0);
+				? new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + (int)(20 * UI.FontScale) + (GridPadding.Bottom / 2), 0, 0)
+				: new Rectangle(e.ClipRectangle.Width * 5 / 10, e.Rects.TextRect.Bottom + (Padding.Bottom * 2), 0, 0);
 
 			e.Rects.ScoreRect = e.Graphics.DrawLabel(Locale.VotesCount.FormatPlural(workshopInfo.VoteCount, workshopInfo.VoteCount.ToString("N0"))
 					, IconManager.GetSmallIcon(workshopInfo.HasVoted ? "I_VoteFilled" : "I_Vote")
@@ -336,7 +350,7 @@ public partial class ItemListControl
 			};
 
 			using var font = UI.Font(11.25F, FontStyle.Bold);
-			rects.TextRect = rectangle.Pad(rects.IconRect.Width + GridPadding.Left * 2, GridPadding.Top, GridPadding.Right, rectangle.Height).AlignToFontSize(font, ContentAlignment.TopLeft);
+			rects.TextRect = rectangle.Pad(rects.IconRect.Width + (GridPadding.Left * 2), GridPadding.Top, GridPadding.Right, rectangle.Height).AlignToFontSize(font, ContentAlignment.TopLeft);
 
 			rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.TopRight);
 

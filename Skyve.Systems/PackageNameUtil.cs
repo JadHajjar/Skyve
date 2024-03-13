@@ -1,9 +1,7 @@
 ﻿using Extensions;
 
 using Skyve.Compatibility.Domain.Enums;
-using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
-using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
 using System;
@@ -49,13 +47,24 @@ public class PackageNameUtil : IPackageNameUtil
 	{
 		tags = [];
 
+		IWorkshopInfo? workshopInfo;
+
 		if (package?.Name is null or "")
 		{
-			return _locale.Get("UnknownPackage");
+			workshopInfo = package?.GetWorkshopInfo();
+
+			if (workshopInfo?.Name is null or "")
+			{
+				return _locale.Get("UnknownPackage");
+			}
+
+			return CleanName(workshopInfo, out tags, keepTags);
 		}
 
 		if (package is IAsset)
+		{
 			return package.Name;
+		}
 
 		var isLocal = package.IsLocal();
 		var text = _tagRegex.Replace(package.Name, string.Empty);
@@ -104,7 +113,7 @@ public class PackageNameUtil : IPackageNameUtil
 			}
 		}
 
-		var workshopInfo = package.GetWorkshopInfo();
+		workshopInfo = package.GetWorkshopInfo();
 
 		if (workshopInfo is null)
 		{
@@ -114,10 +123,6 @@ public class PackageNameUtil : IPackageNameUtil
 		if (workshopInfo.IsBanned)
 		{
 			tags.Add((FormDesign.Design.RedColor, _locale.Get("Banned").One.ToUpper()));
-		}
-		else if (workshopInfo.IsIncompatible)
-		{
-			tags.Add((FormDesign.Design.RedColor, _locale.Get("Incompatible").One.ToUpper()));
 		}
 		else
 		{

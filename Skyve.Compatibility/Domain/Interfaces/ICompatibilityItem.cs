@@ -1,5 +1,6 @@
 ﻿using Skyve.Compatibility.Domain.Enums;
 using Skyve.Domain;
+using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
 
@@ -9,6 +10,7 @@ public interface ICompatibilityItem
 	ulong PackageId { get; }
 	IGenericPackageStatus Status { get; }
 	ReportType Type { get; }
-	string? Message { get; }
 	IEnumerable<IPackageIdentity> Packages { get; }
+
+	string GetMessage(IWorkshopService workshopService, IPackageNameUtil packageNameUtil);
 }

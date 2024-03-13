@@ -9,7 +9,10 @@ public class PC_Assets : PC_ContentList
 
 	public PC_Assets()
 	{
-		LC_Items.OT_Included.SelectedValue = Generic.ThreeOptionToggle.Value.Option1;
+		if (_settings.UserSettings.FilterIncludedByDefault)
+		{
+			LC_Items.OT_Included.SelectedValue = Generic.ThreeOptionToggle.Value.Option1;
+		}
 	}
 
 	public override SkyvePage Page => SkyvePage.Assets;

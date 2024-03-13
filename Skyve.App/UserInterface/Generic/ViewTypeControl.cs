@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,8 +12,17 @@ internal class ViewTypeControl : SlickControl
 	private Rectangle ListRect;
 	private Rectangle GridRect;
 
+	[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 	public bool GridView { get; internal set; }
+	[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 	public bool CompactList { get; internal set; }
+
+	[DefaultValue(true)]
+	public bool WithCompactList { get; set; } = true;
+	[DefaultValue(true)]
+	public bool WithList { get; set; } = true;
+	[DefaultValue(true)]
+	public bool WithGrid { get; set; } = true;
 
 	public event EventHandler? CompactClicked;
 	public event EventHandler? ListClicked;
@@ -28,16 +38,28 @@ internal class ViewTypeControl : SlickControl
 		Margin = UI.Scale(new Padding(4, 4, 4, 5), UI.FontScale);
 		Padding = UI.Scale(new Padding(3), UI.FontScale);
 
-		var ItemHeight = (int)(28 * UI.FontScale);
+		var itemHeight = (int)(28 * UI.FontScale);
 
-		Size = new Size(ItemHeight * 3, ItemHeight - (int)(4 * UI.FontScale));
+		Size = new Size((WithCompactList ? itemHeight : 0) + (WithList ? itemHeight : 0) + (WithGrid ? itemHeight : 0), itemHeight - (int)(4 * UI.FontScale));
 
-		var rect = ClientRectangle.Align(new Size(ItemHeight, Height), ContentAlignment.MiddleLeft);
-		CompactRect = rect;
-		rect.X += rect.Width;
-		ListRect = rect;
-		rect.X += rect.Width;
-		GridRect = rect;
+		var rect = ClientRectangle.Align(new Size(itemHeight, Height), ContentAlignment.MiddleLeft);
+
+		if (WithCompactList)
+		{
+			CompactRect = rect;
+			rect.X += rect.Width;
+		}
+
+		if (WithList)
+		{
+			ListRect = rect;
+			rect.X += rect.Width;
+		}
+
+		if (WithGrid)
+		{
+			GridRect = rect;
+		}
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)
@@ -91,6 +113,7 @@ internal class ViewTypeControl : SlickControl
 
 		e.Graphics.FillRoundedRectangle(brush, ClientRectangle, Padding.Left);
 
+		if (WithCompactList)
 		{
 			var rect = CompactRect;
 			using var icon = IconManager.GetIcon("I_CompactList", rect.Width * 3 / 4);
@@ -108,6 +131,7 @@ internal class ViewTypeControl : SlickControl
 			}
 		}
 
+		if (WithList)
 		{
 			var rect = ListRect;
 			using var icon = IconManager.GetIcon("I_List", rect.Width * 3 / 4);
@@ -125,6 +149,7 @@ internal class ViewTypeControl : SlickControl
 			}
 		}
 
+		if (WithGrid)
 		{
 			var rect = GridRect;
 			using var icon = IconManager.GetIcon("I_Grid", rect.Width * 3 / 4);

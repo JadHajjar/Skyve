@@ -1,4 +1,4 @@
-﻿using Skyve.Compatibility.Domain.Interfaces;
+﻿using Skyve.App.Utilities;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -35,7 +35,7 @@ public class SteamUserControl : SlickControl
 		}
 	}
 
-	public IUser? User => _steamId == 0 ? _userService.User : _workshopService.GetUser(_steamId);
+	public IUser? User => _steamId == 0 ? _userService.User : _userService.TryGetUser(_steamId.ToString());
 	public string? InfoText { get; set; }
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -50,9 +50,9 @@ public class SteamUserControl : SlickControl
 
 		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), ClientRectangle, Padding.Horizontal);
 
-		var size = Height - Padding.Vertical * 2;
+		var size = Height - (Padding.Vertical * 2);
 		var image = ServiceCenter.Get<IImageService>().GetImage(User.AvatarUrl, true).Result;
-		var textRectangle = ClientRectangle.Pad(size + Padding.Left * 2, 0, 0, 0);
+		var textRectangle = ClientRectangle.Pad(size + (Padding.Left * 2), 0, 0, 0);
 		var avatarRect = ClientRectangle.Pad(Padding).Align(new Size(size, size), ContentAlignment.MiddleLeft);
 		var infoSize = e.Graphics.Measure(InfoText.IfEmpty(Locale.LoggedInAs), UI.Font(6.75F, FontStyle.Bold));
 		var nameSize = e.Graphics.Measure(User.Name, UI.Font(9F, FontStyle.Bold));
@@ -74,7 +74,7 @@ public class SteamUserControl : SlickControl
 		var width = (int)Math.Max(infoSize.Width, nameSize.Width) + Padding.Left + Padding.Horizontal + size;
 		var height = (int)(infoSize.Height + nameSize.Height);
 
-		if (width != Width && Dock == DockStyle.None || height != Height)
+		if ((width != Width && Dock == DockStyle.None) || height != Height)
 		{
 			Size = new(width, height);
 		}

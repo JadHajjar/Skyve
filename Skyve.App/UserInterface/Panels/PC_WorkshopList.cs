@@ -1,20 +1,14 @@
 ﻿using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Dropdowns;
-using Skyve.Domain.Systems;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
 public class PC_WorkshopList : PanelContent
 {
-	private IWorkshopService _workshopService;
-	protected readonly WorkshopContentList LC_Items;
-	private readonly bool _itemsReady;
+	private readonly IWorkshopService _workshopService;
+	protected internal readonly WorkshopContentList LC_Items;
 
 	public PC_WorkshopList() : base(false)
 	{
@@ -22,25 +16,18 @@ public class PC_WorkshopList : PanelContent
 
 		Padding = new Padding(0, 30, 0, 0);
 
-		LC_Items = new(SkyvePage.Workshop, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
+		LC_Items = new(SkyvePage.Workshop, false, GetItems, GetItemText, GetCountText)
 		{
 			TabIndex = 0,
 			Dock = DockStyle.Fill
 		};
-
-		{
-			LC_Items.TLP_Main.SetColumn(LC_Items.FLP_Search, 0);
-			LC_Items.TLP_Main.SetColumnSpan(LC_Items.FLP_Search, 2);
-			LC_Items.TLP_Main.SetColumn(LC_Items.P_FiltersContainer, 0);
-			LC_Items.TLP_Main.SetColumnSpan(LC_Items.P_FiltersContainer, 4);
-		}
 
 		Controls.Add(LC_Items);
 
 #if CS2
 		Text = "PDX Mods";
 #else
-		Text="Steam Workshop";
+		Text = "Steam Workshop";
 #endif
 	}
 
@@ -77,16 +64,6 @@ public class PC_WorkshopList : PanelContent
 		}
 
 		return await _workshopService.QueryFilesAsync(WorkshopQuerySorting.Popularity, LC_Items.TB_Search.Text, LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray());
-	}
-
-	protected virtual async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
-	{
-		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems.Cast<Domain.IPackageIdentity>(), included);
-	}
-
-	protected virtual async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
-	{
-		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems.Cast<Domain.IPackageIdentity>(), enabled);
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()

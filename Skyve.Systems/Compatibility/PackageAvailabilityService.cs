@@ -10,15 +10,15 @@ namespace Skyve.Systems.Compatibility;
 public class PackageAvailabilityService
 {
 	private readonly IPackageManager _packageManager;
-	private readonly IPackageUtil _contentUtil;
+	private readonly IPackageUtil _packageUtil;
 	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly CompatibilityManager _compatibilityManager;
 	private readonly Dictionary<ulong, (bool enabled, bool enabledWithAlternatives)> _cache;
 
-	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil contentUtil, ILogger logger, ISkyveDataManager skyveDataManager, CompatibilityManager compatibilityManager)
+	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil packageUtil, ILogger logger, ISkyveDataManager skyveDataManager, CompatibilityManager compatibilityManager)
 	{
 		_packageManager = packageManager;
-		_contentUtil = contentUtil;
+		_packageUtil = packageUtil;
 		_skyveDataManager = skyveDataManager;
 		_compatibilityManager = compatibilityManager;
 		_cache = [];
@@ -103,6 +103,6 @@ public class PackageAvailabilityService
 
 		return false;
 
-		bool isEnabled(ILocalPackageIdentity? package) => package is not null && _contentUtil.IsIncludedAndEnabled(package);
+		bool isEnabled(ILocalPackageIdentity? package) => package is not null && _packageUtil.IsIncludedAndEnabled(package);
 	}
 }

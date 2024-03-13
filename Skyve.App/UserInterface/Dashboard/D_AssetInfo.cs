@@ -34,7 +34,7 @@ internal class D_AssetsInfo : IDashboardItem
 	{
 		if (Program.MainForm.PushPanel<PC_Assets>())
 		{
-			(Program.MainForm.CurrentPanel as PC_Assets)?.SetSorting(PackageSorting.UpdateTime, true); 
+			(Program.MainForm.CurrentPanel as PC_Assets)?.SetSorting(PackageSorting.UpdateTime, true);
 		}
 	}
 
@@ -170,7 +170,7 @@ internal class D_AssetsInfo : IDashboardItem
 
 	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawLoadingSection(e, applyDrawing, Locale.AssetsBubble, "I_Assets", ref preferredHeight);
+		DrawLoadingSection(e, applyDrawing, e.ClipRectangle, Locale.AssetsBubble, out _, ref preferredHeight);
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
@@ -248,7 +248,7 @@ internal class D_AssetsInfo : IDashboardItem
 			Icon = "I_UpdateTime",
 			Rectangle = e.ClipRectangle
 		});
-		preferredHeight -= Margin.Top;
+
 	}
 
 	private void DrawLandscape(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)

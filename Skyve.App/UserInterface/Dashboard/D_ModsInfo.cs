@@ -167,7 +167,7 @@ internal class D_ModsInfo : IDashboardItem
 
 	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawLoadingSection(e, applyDrawing, Locale.ModsBubble, "I_Mods", ref preferredHeight);
+		DrawLoadingSection(e, applyDrawing, e.ClipRectangle, Locale.ModsBubble, out _, ref preferredHeight);
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
@@ -265,7 +265,6 @@ internal class D_ModsInfo : IDashboardItem
 			Icon = "I_UpdateTime",
 			Rectangle = e.ClipRectangle
 		});
-		preferredHeight -= Margin.Top;
 	}
 
 	private void DrawLandscape(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)

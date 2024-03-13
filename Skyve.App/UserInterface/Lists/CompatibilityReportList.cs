@@ -1,15 +1,13 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
-using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
-
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Skyve.App.UserInterface.Lists;
 public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInfo, CompatibilityReportList.Rectangles>
@@ -21,6 +19,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	private readonly ISettings _settings;
 	private readonly IModLogicManager _modLogicManager;
 	private readonly IModUtil _modUtil;
+	private readonly IWorkshopService _workshopService;
+	private readonly IPackageNameUtil _packageNameUtil;
 
 #pragma warning disable IDE1006
 #pragma warning disable CS0649
@@ -31,7 +31,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	private PackageSorting sorting;
 	private bool headerHovered;
-	private readonly Dictionary<NotificationType, Rectangle> _headerRects = new();
+	private readonly Dictionary<NotificationType, Rectangle> _headerRects = [];
 
 	public bool SortDescending { get; private set; }
 	public NotificationType CurrentGroup { get; private set; }
@@ -45,9 +45,14 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		DynamicSizing = true;
 		AllowDrop = true;
 
-		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _settings, out _modUtil, out _modLogicManager);
+		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _settings, out _modUtil, out _modLogicManager, out _workshopService, out _packageNameUtil);
+	}
 
-		if (_settings is not null && _settings.UserSettings.PageSettings.ContainsKey(SkyvePage.CompatibilityReport))
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		if (Live && _settings.UserSettings.PageSettings.ContainsKey(SkyvePage.CompatibilityReport))
 		{
 			sorting = (PackageSorting)_settings.UserSettings.PageSettings[SkyvePage.CompatibilityReport].Sorting;
 			SortDescending = _settings.UserSettings.PageSettings[SkyvePage.CompatibilityReport].DescendingSort;
@@ -67,7 +72,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo> args)
 	{
-		args.DoNotDraw = (CurrentGroup != NotificationType.None && args.Item.GetNotification() != CurrentGroup);
+		args.DoNotDraw = CurrentGroup != NotificationType.None && args.Item.GetNotification() != CurrentGroup;
 
 		base.CanDrawItemInternal(args);
 	}
@@ -82,7 +87,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		base.SetItems(items);
 
 		DoFilterChanged();
-	
+
 		GroupChanged?.Invoke(this, EventArgs.Empty);
 	}
 
@@ -185,7 +190,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			int width;
 
 			using var font = UI.Font(9.75F);
-			using var icon = (item.Key == NotificationType.None ? "I_CompatibilityReport": item.Key.GetIcon(true)).Get(font.Height + Padding.Top);
+			using var icon = (item.Key == NotificationType.None ? "I_CompatibilityReport" : item.Key.GetIcon(true)).Get(font.Height + Padding.Top);
 			var text = (item.Key == NotificationType.None ? LocaleHelper.GetGlobalText("All") : LocaleCR.Get(item.Key.ToString())) + $" ({item.Count()})";
 
 			if (!smaller)
@@ -243,7 +248,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos - 1, Padding.Top, 2, StartHeight - Padding.Vertical));
 		}
 
-		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, StartHeight - (int)(UI.FontScale), Width, (int)(UI.FontScale)));
+		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, StartHeight - (int)UI.FontScale, Width, (int)UI.FontScale));
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)
@@ -326,7 +331,9 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		var Message = e.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == e.Item.GetNotification() && !_compatibilityManager.IsSnoozed(x));
 
 		if (Message is null)
+		{
 			return;
+		}
 
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 		var reportRect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, 9999).Pad(0, baseY - e.ClipRectangle.Y, 0, 0);
@@ -337,7 +344,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		using var font = UI.Font(8.25F);
 		using var smallFont = UI.Font(7.5F);
 		var iconRect = new Rectangle(e.Rects.IncludedRect.X, baseY, e.Rects.IncludedRect.Width, e.Rects.IncludedRect.Height);
-		var messageSize = e.Graphics.Measure(Message.Message, font, reportRect.Width - (iconRect.Width * 2) - pad);
+		var messageSize = e.Graphics.Measure(Message.GetMessage(_workshopService, _packageNameUtil), font, reportRect.Width - (iconRect.Width * 2) - pad);
 		var noteSize = e.Graphics.Measure(note, smallFont, reportRect.Width - (iconRect.Width * 2) - pad);
 		using var brush = new SolidBrush(color);
 		using var icon = Message.Status.Notification.GetIcon(false).Get(e.Rects.IncludedRect.Width * 3 / 4);
@@ -374,12 +381,12 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 
 		using var textBrush = new SolidBrush(FormDesign.Design.ForeColor);
-		e.Graphics.DrawString(Message.Message, font, textBrush, reportRect.Pad(iconRect.Width + pad, 0, iconRect.Width, 0));
+		e.Graphics.DrawString(Message.GetMessage(_workshopService, _packageNameUtil), font, textBrush, reportRect.Pad(iconRect.Width + pad, 0, iconRect.Width, 0));
 
 		if (note is not null)
 		{
 			using var smallTextBrush = new SolidBrush(Color.FromArgb(200, ForeColor));
-			e.Graphics.DrawString(note, smallFont, smallTextBrush, reportRect.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0));
+			e.Graphics.DrawString(note, smallFont, smallTextBrush, reportRect.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.GetMessage(_workshopService, _packageNameUtil)) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0));
 		}
 
 		if (allText is not null || Message.Packages.Any())
@@ -475,11 +482,12 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 								buttonText = Locale.IncludeItem;
 								iconName = "I_Check";
 							}
-							else if (!(p.IsEnabled() ))
+							else if (!p.IsEnabled())
 							{
 								buttonText = Locale.EnableItem;
 								iconName = "I_Enabled";
 							}
+
 							break;
 						case StatusAction.SelectOne:
 							buttonText = Locale.SelectThisPackage;
@@ -491,7 +499,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 							break;
 					}
 
-					if (buttonText is null ||e.Item. GetWorkshopInfo()?.IsCollection == true)
+					if (buttonText is null || e.Item.GetWorkshopInfo()?.IsCollection == true)
 					{
 						rect.Y += e.Rects.modRects[packageID].Height + GridPadding.Vertical;
 						continue;
@@ -604,6 +612,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				allText = max switch { 3 => Locale.IncludeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
 				allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
 			}
+
 			break;
 			case StatusAction.RequiresConfiguration:
 				allText = _compatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
@@ -676,7 +685,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		return y + (GridPadding.Vertical * 4);
 	}
 
-	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackage? package, ILocalPackageData? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackage? package, ILocalPackageIdentity? localPackageIdentity, IWorkshopInfo? workshopInfo, bool isPressed)
 	{
 		using var font = UI.Font(9F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
@@ -689,10 +698,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
-		var versionText = isVersion ? "v" + localParentPackage!.Version : e.Item is ILocalPackageData lp ? lp.FileSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package?.Version);
+		var versionText = isVersion ? "v" + package!.Version : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
-		var date = workshopInfo?.ServerTime ?? localParentPackage?.LocalTime;
+		var date = workshopInfo?.ServerTime ?? localPackageIdentity?.LocalTime;
 
 		var padding = GridView ? GridPadding : GridPadding;
 		var textSize = e.Graphics.Measure(text, font);
@@ -735,7 +744,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (!string.IsNullOrEmpty(versionText))
 		{
-			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: localParentPackage is not null ? CursorLocation : null);
+			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: localPackageIdentity is not null ? CursorLocation : null);
 
 			tagRect.X += padding.Left + e.Rects.VersionRect.Width;
 		}
@@ -759,7 +768,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
 		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
-		var required  = package is not null &&_modLogicManager.IsRequired(package, _modUtil);
+		var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
 
 		DynamicIcon? enabl = null;
 		if (_settings.UserSettings.AdvancedIncludeEnable && package is not null)
@@ -947,15 +956,17 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		if (rects.CompatibilityRect.Contains(e.Location))
 		{
 			{
-				var pc = new PC_PackagePage(item.Item, true);
+				ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item, true);
+				//var pc = new PC_PackagePage(item.Item, true);
 
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+				//(FindForm() as BasePanelForm)?.PushPanel(null, pc);
 
 				if (_settings.UserSettings.ResetScrollOnPackageClick)
 				{
 					ScrollTo(item.Item);
 				}
 			}
+
 			return;
 		}
 
@@ -966,7 +977,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
-			Program.MainForm.PushPanel(null, /*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetPackage()) :*/ new PC_PackagePage(item.Item));
+			ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item, false);
+			//Program.MainForm.PushPanel(null, /*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetPackage()) :*/ new PC_PackagePage(item.Item));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{
@@ -1015,7 +1027,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				}
 				else if (e.Button == MouseButtons.Right && rect.Key.GetLocalPackage() is not null)
 				{
-					var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(rect.Key.GetLocalPackage()!);
+					var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(rect.Key.GetLocalPackage()!);
 
 					this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 				}
@@ -1057,6 +1069,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 						_packageUtil.SetIncluded(pp, false);
 					}
 				}
+
 				break;
 				case StatusAction.ExcludeOther:
 					foreach (var p in Message.Packages!)
@@ -1067,9 +1080,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 							_packageUtil.SetIncluded(pp, false);
 						}
 					}
+
 					break;
 				case StatusAction.RequestReview:
-					Program.MainForm.PushPanel(null, new PC_RequestReview(item.Item));
+					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().RequestReviewPanel(item.Item));
 					break;
 			}
 
@@ -1079,7 +1093,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	public void ShowRightClickMenu(IPackageIdentity item)
 	{
-		var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item);
+		var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item);
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
 	}
@@ -1087,6 +1101,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	private void Clicked(ICompatibilityInfo info, ICompatibilityItem Message, IPackageIdentity item, bool button)
 	{
 		var package = item.GetWorkshopPackage();
+		_ = info;
 
 		if (!button)
 		{
@@ -1096,7 +1111,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			}
 			else if (package is not null)
 			{
-				Program.MainForm.PushPanel(null, /*package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) :*/ new PC_PackagePage(package));
+				ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item, false);
+				//	Program.MainForm.PushPanel(null, /*package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) :*/ new PC_PackagePage(package));
 			}
 			else
 			{
@@ -1137,10 +1153,14 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 						}
 					}
 				}
+
 				break;
 			case StatusAction.Switch:
 				if (p is not null)
-				_packageUtil.SetIncluded(p, false);
+				{
+					_packageUtil.SetIncluded(p, false);
+				}
+
 				break;
 		}
 
@@ -1194,6 +1214,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				drgevent.Effect = DragDropEffects.Copy;
 				Invalidate();
 			}
+
 			return;
 		}
 
@@ -1277,8 +1298,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		public Rectangle AuthorRect;
 		public Rectangle VersionRect;
 		public Rectangle DateRect;
-		public Dictionary<IPackageIdentity, Rectangle> buttonRects = new();
-		public Dictionary<IPackageIdentity, Rectangle> modRects = new();
+		public Dictionary<IPackageIdentity, Rectangle> buttonRects = [];
+		public Dictionary<IPackageIdentity, Rectangle> modRects = [];
 		public Rectangle SteamIdRect;
 		public Rectangle SnoozeRect;
 		public Rectangle AllButtonRect;

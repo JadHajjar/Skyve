@@ -16,6 +16,9 @@ public struct ParadoxLoginInfo
 
 			return !string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(password);
 		}
-		catch { return false; }
+		catch
+		{
+			return false;
+		}
 	}
 }

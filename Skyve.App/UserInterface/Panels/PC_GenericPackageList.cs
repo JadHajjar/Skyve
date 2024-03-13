@@ -1,11 +1,9 @@
-﻿using Skyve.Compatibility.Domain.Interfaces;
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Skyve.App.UserInterface.Panels;
 public class PC_GenericPackageList : PC_ContentList
 {
-	private readonly List<IPackageIdentity> _items = new();
+	private readonly List<IPackageIdentity> _items = [];
 	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
 	public override SkyvePage Page => SkyvePage.Generic;
@@ -13,7 +11,6 @@ public class PC_GenericPackageList : PC_ContentList
 	public PC_GenericPackageList(IEnumerable<IPackageIdentity> items, bool groupItems) : base(true, true)
 	{
 		LC_Items.IsGenericPage = true;
-
 		LC_Items.TB_Search.Placeholder = "SearchGenericPackages";
 
 		var skyveDataManager = ServiceCenter.Get<ISkyveDataManager>();
@@ -51,23 +48,6 @@ public class PC_GenericPackageList : PC_ContentList
 				}
 			}
 		}
-
-		_notifier.WorkshopInfoUpdated += _notifier_WorkshopPackagesInfoLoaded;
-	}
-
-	protected override void Dispose(bool disposing)
-	{
-		if (disposing)
-		{
-			_notifier.WorkshopInfoUpdated -= _notifier_WorkshopPackagesInfoLoaded;
-		}
-
-		base.Dispose(disposing);
-	}
-
-	private void _notifier_WorkshopPackagesInfoLoaded()
-	{
-		LC_Items.ListControl.Invalidate();
 	}
 
 	protected override async Task<IEnumerable<IPackageIdentity>> GetItems()

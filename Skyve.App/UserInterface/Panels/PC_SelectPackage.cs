@@ -14,9 +14,9 @@ public partial class PC_SelectPackage : PanelContent
 	private readonly DelayedAction<TicketBooth.Ticket> _delayedSearch;
 	private readonly TicketBooth _ticketBooth = new();
 	private bool searchEmpty = true;
-	private readonly List<string> searchTermsOr = new();
-	private readonly List<string> searchTermsAnd = new();
-	private readonly List<string> searchTermsExclude = new();
+	private readonly List<string> searchTermsOr = [];
+	private readonly List<string> searchTermsAnd = [];
+	private readonly List<string> searchTermsExclude = [];
 	public event Action<IEnumerable<ulong>>? PackageSelected;
 
 	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
@@ -235,7 +235,7 @@ public partial class PC_SelectPackage : PanelContent
 			}
 			else
 			{
-				items = new();
+				items = [];
 			}
 		}
 		else
@@ -250,7 +250,7 @@ public partial class PC_SelectPackage : PanelContent
 			return;
 		}
 
-		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)).Select(x => (x)));
+		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)).Select(x => x));
 		LC_Items.Loading = false;
 
 		this.TryInvoke(() => L_Totals.Text = Locale.ShowingCount.FormatPlural(LC_Items.ItemCount, Locale.Package.FormatPlural(LC_Items.ItemCount)));

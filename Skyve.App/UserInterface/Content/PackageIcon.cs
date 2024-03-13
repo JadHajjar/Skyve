@@ -9,49 +9,45 @@ public class PackageIcon : SlickImageControl
 	public IPackageIdentity? Package { get; set; }
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 	public bool Collection { get; set; }
-	[Category("Appearance"), DefaultValue(true)]
-	public bool HalfColor { get; set; } = true;
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
-		if (HalfColor)
-		{
-			e.Graphics.Clear(FormDesign.Design.BackColor);
+		e.Graphics.SetUp(BackColor);
 
-			e.Graphics.FillRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), new Rectangle(0, 0, Width, Height / 2));
-		}
-		else
-		{
-			e.Graphics.Clear(BackColor);
-		}
+		var thumbnail = Package?.GetWorkshopInfo()?.GetThumbnail();
+
+		Loading = thumbnail is null && !(Package?.IsLocal() ?? false) && ConnectionHandler.IsConnected;
 
 		if (Loading)
 		{
+			using var brush = new SolidBrush(FormDesign.Design.AccentBackColor);
+			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));
+
 			DrawLoader(e.Graphics, ClientRectangle.CenterR(UI.Scale(new Size(32, 32), UI.UIScale)));
 			return;
 		}
 
 		e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
-		if (Image == null)
+		if (thumbnail == null)
 		{
-			using var generic = IconManager.GetIcon(Collection ? "I_Package" : Package?.GetPackage()?.IsCodeMod ?? false ? "I_Mods" : "I_Assets", Height).Color(BackColor);
-			var iconRect = ClientRectangle.CenterR(generic.Size);
-
+			using var generic = IconManager.GetIcon(Package is IAsset ? "I_Assets" : Package?.IsLocal() == true ? "I_Package" : "I_Paradox", Height).Color(BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
-			e.Graphics.FillRoundedRectangle(brush, ClientRectangle, (int)(10 * UI.FontScale));
+
+			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));
+			e.Graphics.DrawImage(generic, ClientRectangle.CenterR(generic.Size));
+
+			return;
+		}
+
+		if (Package?.IsLocal() ?? false)
+		{
+			using var unsatImg = new Bitmap(thumbnail, Size).Tint(Sat: 0);
+			e.Graphics.DrawRoundedImage(unsatImg, ClientRectangle.Pad(1), (int)(5 * UI.FontScale), FormDesign.Design.AccentBackColor);
 		}
 		else
 		{
-			if (Package?.IsLocal() ?? false)
-			{
-				using var unsatImg = new Bitmap(Image, Size).Tint(Sat: 0);
-				e.Graphics.DrawRoundedImage(unsatImg, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
-			}
-			else
-			{
-				e.Graphics.DrawRoundedImage(Image, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
-			}
+			e.Graphics.DrawRoundedImage(thumbnail, ClientRectangle.Pad(1), (int)(5 * UI.FontScale), FormDesign.Design.AccentBackColor);
 		}
 	}
 }

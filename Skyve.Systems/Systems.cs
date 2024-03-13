@@ -22,6 +22,7 @@ public static class SystemsProgram
 		services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
 
 		services.AddTransient<ILoadOrderHelper, LoadOrderHelper>();
+		services.AddTransient<ApiUtil>();
 
 		return services;
 	}

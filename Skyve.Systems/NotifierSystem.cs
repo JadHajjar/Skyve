@@ -23,6 +23,8 @@ internal class NotifierSystem : INotifier
 	public event Action? CompatibilityDataLoaded;
 	public event Action? WorkshopSyncStarted;
 	public event Action? WorkshopSyncEnded;
+	public event Action? SkyveUpdateAvailable;
+	public event Action? SnoozeChanged;
 
 	private readonly DelayedAction _delayedPackageInformationUpdated;
 	private readonly DelayedAction _delayedPackageInclusionUpdated;
@@ -149,5 +151,15 @@ internal class NotifierSystem : INotifier
 	public void OnWorkshopSyncEnded()
 	{
 		WorkshopSyncEnded?.Invoke();
+	}
+
+	public void OnSkyveUpdateAvailable()
+	{
+		SkyveUpdateAvailable?.Invoke();
+	}
+
+	public void OnSnoozeChanged()
+	{
+		SnoozeChanged?.Invoke();
 	}
 }

@@ -6,6 +6,7 @@ public interface ILocationService
 	string SkyveDataPath { get; }
 	string SkyveSettingsPath { get; }
 	string SteamPathWithExe { get; }
+	string CitiesPathWithExe { get; }
 
 #if CS1
 	string AddonsPath { get; }

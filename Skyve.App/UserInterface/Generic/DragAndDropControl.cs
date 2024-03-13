@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Skyve.App.Utilities;
+
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -30,7 +32,14 @@ public class DragAndDropControl : SlickControl
 	public string? StartingFolder { get => _selectionDialog.StartingFolder; set => _selectionDialog.StartingFolder = value; }
 
 	[Category("Behavior"), DefaultValue(null)]
-	public string? SelectedFile { get => _selectedFile; set { _selectedFile = value; Invalidate(); } }
+	public string? SelectedFile
+	{
+		get => _selectedFile; set
+		{
+			_selectedFile = value;
+			Invalidate();
+		}
+	}
 
 	[Category("Behavior"), DefaultValue(null)]
 	public Dictionary<string, string>? PinnedFolders { get => _selectionDialog.PinnedFolders; set => _selectionDialog.PinnedFolders = value; }
@@ -221,7 +230,7 @@ public class DragAndDropControl : SlickControl
 		e.Graphics.DrawRoundedRectangle(pen, ClientRectangle.Pad((int)(1.5 * UI.FontScale)), border);
 
 		var text = LocaleHelper.GetGlobalText(Text);
-		var size = e.Graphics.Measure(text, Font, availableWidth - 2 * Padding.Horizontal - (UI.FontScale >= 2 ? 48 : 24));
+		var size = e.Graphics.Measure(text, Font, availableWidth - (2 * Padding.Horizontal) - (UI.FontScale >= 2 ? 48 : 24));
 		var width = (int)size.Width + 3 + Padding.Left + (UI.FontScale >= 2 ? 48 : 24);
 		var rect = new Rectangle(Width - availableWidth, 0, availableWidth, Height).CenterR(width, Math.Max(UI.FontScale >= 2 ? 48 : 24, (int)size.Height + 3));
 

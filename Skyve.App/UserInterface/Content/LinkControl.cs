@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.App.Utilities;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
@@ -8,28 +10,20 @@ public class LinkControl : SlickImageControl
 	{
 		Link = link;
 		Display = display;
+		Cursor = Cursors.Hand;
+		SlickTip.SetTo(this, Link.Url);
 	}
 
 	public ILink Link { get; set; }
 	public bool Display { get; set; }
 
-	protected override void OnHandleCreated(EventArgs e)
-	{
-		base.OnHandleCreated(e);
-
-		if (Live)
-		{
-			AutoSize = true;
-			Cursor = Cursors.Hand;
-			SlickTip.SetTo(this, Link.Url);
-		}
-	}
-
 	protected override void UIChanged()
 	{
 		base.UIChanged();
 
-		Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
+		Padding = UI.Scale(new Padding(5), UI.FontScale);
+		Margin = UI.Scale(new Padding(3, 3, 6, 6), UI.FontScale);
+		Size = UI.Scale(new Size(55, 55), UI.FontScale);
 	}
 
 	protected override void OnMouseClick(MouseEventArgs e)
@@ -46,30 +40,42 @@ public class LinkControl : SlickImageControl
 		}
 	}
 
-	public override Size GetPreferredSize(Size proposedSize)
-	{
-		using var img = Link.Type.GetIcon().Default;
-		return Size.Ceiling(FontMeasuring.Measure(Link.Title.IfEmpty(LocaleCR.Get(Link.Type.ToString())), Font)) + new Size(Padding.Horizontal + img.Width, Padding.Vertical);
-	}
-
 	protected override void OnPaint(PaintEventArgs e)
 	{
 		e.Graphics.SetUp(BackColor);
 
-		SlickButton.GetColors(out var fore, out var back, HoverState, !Display && ImageName is null ? ColorStyle.Red : ColorStyle.Active);
+		var client = ClientRectangle.Pad(1);
+		var active = !Display && ImageName is null ? FormDesign.Design.RedColor : FormDesign.Design.ActiveColor;
+		var backColor = HoverState.HasFlag(HoverState.Pressed) ? active
+				: HoverState.HasFlag(HoverState.Hovered) ? BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 10 : -8)
+				: BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? -6 : 6);
+		var activeColor = backColor.GetTextColor();
 
-		using var brush = new SolidBrush(back);
-		using var foreBrush = new SolidBrush(fore);
+		using var activeBrush = new SolidBrush(activeColor);
 
-		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), Padding.Left);
+		using var backBrush = new SolidBrush(backColor);
+		e.Graphics.FillRoundedRectangle(backBrush, client, Padding.Left);
 
-		using (var img = (HoverState.HasFlag(HoverState.Hovered) ? Display ? "I_Link" : "I_Edit" : Link.Type.GetIcon()).Default)
+		DrawFocus(e.Graphics, client, Padding.Left, active);
+
+		var text = Link.Title.IfEmpty(LocaleCR.Get(Link.Type.ToString())).ToUpper();
+		using var font = UI.Font(7F, FontStyle.Bold).FitToWidth(text, client.Pad(Padding), e.Graphics);
+		var textHeight = (int)e.Graphics.Measure(text, font).Height;
+		using var img = (HoverState.HasFlag(HoverState.Hovered) ? Display ? "I_Link" : "I_Edit" : Link.Type.GetIcon()).Get(Height / 2)?.Color(activeColor);
+
+		if (img == null)
 		{
-			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.Pad(Padding).Align(img.Size, ContentAlignment.MiddleLeft));
-
-			e.Graphics.DrawString(Link.Title.IfEmpty(LocaleCR.Get(Link.Type.ToString())), Font, foreBrush, ClientRectangle.Pad(Padding.Horizontal + img.Width, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+			using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+			e.Graphics.DrawString(text, font, activeBrush, client, format);
 		}
+		else
+		{
+			var rect = client.CenterR(client.Width, textHeight + img.Height + (int)(2.5 * UI.FontScale));
 
-		DrawFocus(e.Graphics, ClientRectangle.Pad(1), Padding.Left, !Display && ImageName is null ? FormDesign.Design.RedColor : null);
+			e.Graphics.DrawImage(img, rect.Align(img.Size, ContentAlignment.TopCenter));
+
+			using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Far };
+			e.Graphics.DrawString(text, font, activeBrush, rect, format);
+		}
 	}
 }

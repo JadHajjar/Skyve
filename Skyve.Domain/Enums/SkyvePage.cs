@@ -11,5 +11,6 @@ public enum SkyvePage
 	User,
 	Generic,
 	CompatibilityReport,
-	Workshop
+	Workshop,
+	Playset
 }

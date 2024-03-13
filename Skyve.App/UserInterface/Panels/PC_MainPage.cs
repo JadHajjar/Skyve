@@ -25,7 +25,7 @@ public partial class PC_MainPage : PanelContent
 
 		TLP_FirstTime.Visible = !_settings.SessionSettings.DashboardFirstTimeShown;
 
-		ISave.Load(out _dashItemSizes, "DashboardLayout.json");
+		ServiceCenter.Get<SaveHandler>().Load(out _dashItemSizes, "DashboardLayout.json");
 		_dashItemSizes ??= GetDefaultLayout();
 
 		P_Board.SuspendLayout();
@@ -106,6 +106,11 @@ public partial class PC_MainPage : PanelContent
 		P_Scroll.Width = (int)(15 * UI.FontScale);
 
 		TLP_FirstTime.Padding = UI.Scale(new Padding(12, 12, 12, 0), UI.FontScale);
+	}
+
+	public override Color GetTopBarColor()
+	{
+		return FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 2 : -5);
 	}
 
 	private void B_Dismiss_Click(object sender, EventArgs e)
@@ -496,7 +501,7 @@ public partial class PC_MainPage : PanelContent
 
 	private void SaveLayout()
 	{
-		ISave.Save(_dashItemSizes, "DashboardLayout.json");
+		ServiceCenter.Get<SaveHandler>().Save(_dashItemSizes, "DashboardLayout.json");
 	}
 	private class DashItemRect
 	{

@@ -92,7 +92,7 @@ public partial class ItemListControl
 			e.Graphics.DrawString(Locale.RecentlyUpdated, font, dateBrush, e.Rects.IconRect.Pad(GridPadding), stringFormat);
 		}
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor/*, blur: e.Rects.IconRect.Contains(CursorLocation)*/);
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
 	}
 
 #if CS2
@@ -150,7 +150,24 @@ public partial class ItemListControl
 
 		if (e.DrawableItem.Loading)
 		{
-			DrawLoader(e.Graphics, e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Height / 2, e.Rects.IncludedRect.Height / 2), iconColor);
+			var rectangle = e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Height * 3 / 5, e.Rects.IncludedRect.Height * 3 / 5);
+#if CS2
+			if (_subscriptionsManager.Status.ModId != e.Item.Id || _subscriptionsManager.Status.Progress == 0 || !_subscriptionsManager.Status.IsActive)
+			{
+				DrawLoader(e.Graphics, rectangle, iconColor);
+				return;
+			}
+
+			var width = Math.Min(Math.Min(rectangle.Width, rectangle.Height), (int)(32 * UI.UIScale));
+			var size = (float)Math.Max(2, width / (8D - (Math.Abs(100 - LoaderPercentage) / 50)));
+			var drawSize = new SizeF(width - size, width - size);
+			var rect = new RectangleF(new PointF(rectangle.X + ((rectangle.Width - drawSize.Width) / 2), rectangle.Y + ((rectangle.Height - drawSize.Height) / 2)), drawSize).Pad(size / 2);
+			using var pen = new Pen(iconColor, size) { StartCap = LineCap.Round, EndCap = LineCap.Round };
+
+			e.Graphics.DrawArc(pen, rect, -90, 360 * _subscriptionsManager.Status.Progress);
+#else
+			DrawLoader(e.Graphics, rectangle, iconColor);
+#endif
 			return;
 		}
 
@@ -268,6 +285,9 @@ public partial class ItemListControl
 
 				tagRect.X += padding.Left + rect.Width;
 			}
+
+			if (!oneLine && tags.Count > 0)
+				e.DrawableItem.CachedHeight += tagRect.Height;
 		}
 		else
 		{
@@ -295,23 +315,24 @@ public partial class ItemListControl
 
 				tagRect.X += padding.Left + rect.Width;
 			}
+
 		}
 	}
 
-	private void DrawCompactVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
+	private void DrawCompactVersionAndDate(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IPackage? package, ILocalPackageIdentity? localPackageIdentity, IWorkshopInfo? workshopInfo)
 	{
 #if CS1
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-		var isVersion = (package?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package!.Version);
-		var text = isVersion ? "v" + package!.Version : localIdentity?.FileSize.SizeString(0) ?? workshopInfo?.ServerSize.SizeString(0);
+		var isVersion = (package?.IsCodeMod ?? workshopInfo?.IsCodeMod ?? false) && !string.IsNullOrEmpty(package?.Version);
+		var versionText = isVersion ? "v" + package!.Version : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
-		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
+		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localPackageIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
 
-		if (text is not null and not "")
+		if (versionText is not null and not "")
 		{
-			DrawCell(e, Columns.Version, text, null, active: false);
+			DrawCell(e, Columns.Version, versionText, null, active: false);
 		}
 
 		if (Width / UI.FontScale >= 800 && date != default)
@@ -455,7 +476,7 @@ public partial class ItemListControl
 		var padding = GridView ? GridPadding : Padding;
 		var size = _settings.UserSettings.ComplexListUI ?
 			UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale) :
-			UI.Scale(CompactList ? new Size(20, 20) : new Size(24, 24), UI.FontScale);
+			UI.Scale(CompactList ? new Size(18, 18) : new Size(22, 22), UI.FontScale);
 		var rect = new Rectangle(e.ClipRectangle.Right, e.ClipRectangle.Y, 0, e.ClipRectangle.Height).Pad(padding);
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 
@@ -467,7 +488,8 @@ public partial class ItemListControl
 				Icon = "I_Folder",
 				Font = Font,
 				HoverState = e.HoverState,
-				Cursor = CursorLocation
+				Cursor = CursorLocation,
+				BackgroundColor = e.BackColor
 			}).Rectangle;
 
 			rect.X -= e.Rects.FolderRect.Width + padding.Left;
@@ -485,7 +507,8 @@ public partial class ItemListControl
 #endif
 				Font = Font,
 				HoverState = e.HoverState,
-				Cursor = CursorLocation
+				Cursor = CursorLocation,
+				BackgroundColor = e.BackColor
 			}).Rectangle;
 
 			rect.X -= e.Rects.SteamRect.Width + padding.Left;
@@ -499,7 +522,8 @@ public partial class ItemListControl
 				Icon = "I_Github",
 				Font = Font,
 				HoverState = e.HoverState,
-				Cursor = CursorLocation
+				Cursor = CursorLocation,
+				BackgroundColor = e.BackColor
 			}).Rectangle;
 
 			rect.X -= e.Rects.GithubRect.Width + padding.Left;

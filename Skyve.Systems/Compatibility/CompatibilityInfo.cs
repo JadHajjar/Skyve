@@ -1,17 +1,12 @@
-﻿using Extensions;
+﻿using Newtonsoft.Json;
 
-using Newtonsoft.Json;
-
-using Skyve.Compatibility.Domain;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
-using Skyve.Domain.Enums;
 
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
 namespace Skyve.Systems.Compatibility.Domain;
@@ -24,36 +19,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	[JsonIgnore] public IIndexedPackageCompatibilityInfo? Data { get; }
 
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data;
-	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems
-	{
-		get
-		{
-			foreach (var item in ReportItems)
-			{
-				yield return item;
-			}
-
-			var id = Data?.Id;
-
-			if (id is not null and not 0 && this.IsIncluded() == false)
-			{
-				var requiredFor = ServiceCenter.Get<ICompatibilityManager, CompatibilityManager>().GetRequiredFor(id.Value);
-
-				if (requiredFor is not null)
-				{
-					yield return new ReportItem
-					{
-						Package = this.GetPackage(),
-						PackageId = Data?.Id ?? 0,
-						Type = ReportType.RequiredItem,
-						Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
-						PackageName = this.CleanName(true),
-						Packages = requiredFor.ToArray(x => new GenericPackageIdentity(x))
-					};
-				}
-			}
-		}
-	}
+	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast<ICompatibilityItem>();
 
 	[Obsolete("Reserved for DTO", true)]
 	public CompatibilityInfo()
@@ -63,7 +29,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 		ReportItems = [];
 	}
 
-	public CompatibilityInfo(IPackageIdentity package, IIndexedPackageCompatibilityInfo	? packageData)
+	public CompatibilityInfo(IPackageIdentity package, IIndexedPackageCompatibilityInfo? packageData)
 	{
 		Id = package.Id;
 		Name = package.Name;

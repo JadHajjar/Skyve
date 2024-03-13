@@ -21,7 +21,7 @@ public class _CompatibilityPackageData : IPackageCompatibilityInfo
 	public PackageUsage Usage { get; set; } = (PackageUsage)(-1);
 	public PackageType Type { get; set; }
 
-	public uint[]? RequiredDLCs { get; set; }
+	public List<uint>? RequiredDLCs { get; set; }
 	public List<string>? Tags { get; set; }
 	public List<PackageLink>? Links { get; set; }
 	public List<PackageStatus>? Statuses { get; set; }

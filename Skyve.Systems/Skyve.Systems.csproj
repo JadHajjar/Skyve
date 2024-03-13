@@ -10,7 +10,6 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<Deterministic>true</Deterministic>
-		<TargetFramework>net4.7.2</TargetFramework>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<SignAssembly>True</SignAssembly>
 		<NeutralLanguage>en</NeutralLanguage>
@@ -23,7 +22,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
-		<ProjectReference Include="..\..\Skyve-Api\Domain\Skyve-Api Domain.csproj" />
+		<ProjectReference Include="..\Skyve.Compatibility\Skyve.Compatibility.csproj" />
 		<ProjectReference Include="..\Skyve.Domain\Skyve.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
@@ -36,8 +35,8 @@
 		<LocaleJsonToClassExe>$([System.IO.Path]::GetFullPath('..\Extensions\LocaleJsonToClass\LocaleJsonToClass.exe'))</LocaleJsonToClassExe>
 		<LocaleJsonFile>"$([System.IO.Path]::GetFullPath('..\Skyve\Skyve.Systems\Properties\Locale.json'))"</LocaleJsonFile>
 		<LocaleCsFile>"$([System.IO.Path]::GetFullPath('..\Skyve\Skyve.Systems\Locale.cs'))"</LocaleCsFile>
-		<CRJsonFile>"$([System.IO.Path]::GetFullPath('..\Skyve\Skyve.Systems\Properties\Locale.json'))"</CRJsonFile>
-		<CRCsFile>"$([System.IO.Path]::GetFullPath('..\Skyve\Skyve.Systems\Locale.cs'))"</CRCsFile>
+		<CRJsonFile>"$([System.IO.Path]::GetFullPath('..\Skyve\Skyve.Systems\Properties\Compatibility.json'))"</CRJsonFile>
+		<CRCsFile>"$([System.IO.Path]::GetFullPath('..\Skyve\Skyve.Systems\LocaleCR.cs'))"</CRCsFile>
 	</PropertyGroup>
 
 	<Target Name="BuildLocale" BeforeTargets="PreBuildEvent">

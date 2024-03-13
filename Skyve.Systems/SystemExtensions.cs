@@ -1,15 +1,18 @@
-﻿using Skyve.Compatibility.Domain.Enums;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
-using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
 namespace Skyve.Systems;
 public static class SystemExtensions
 {
+	private static IServiceProvider? serviceProvider;
 	private static IWorkshopService? _workshopService;
 	private static ISkyveDataManager? _skyveDataManager;
 	private static ICompatibilityManager? _compatibilityManager;
@@ -18,15 +21,22 @@ public static class SystemExtensions
 	private static IPackageManager? _packageManager;
 	private static IPackageUtil? _packageUtil;
 	private static ITagsService? _tagService;
+	private static IPlaysetManager? _playsetManager;
 
-	private static IWorkshopService WorkshopService => _workshopService ??= ServiceCenter.Get<IWorkshopService>();
-	private static ICompatibilityManager CompatibilityManager => _compatibilityManager ??= ServiceCenter.Get<ICompatibilityManager>();
-	private static ISkyveDataManager SkyveDataManager => _skyveDataManager ??= ServiceCenter.Get<ISkyveDataManager>();
-	private static IImageService ImageService => _imageService ??= ServiceCenter.Get<IImageService>();
-	private static IPackageNameUtil PackageNameUtil => _packageNameUtil ??= ServiceCenter.Get<IPackageNameUtil>();
-	private static IPackageManager PackageManager => _packageManager ??= ServiceCenter.Get<IPackageManager>();
-	private static IPackageUtil PackageUtil => _packageUtil ??= ServiceCenter.Get<IPackageUtil>();
-	private static ITagsService TagsService => _tagService ??= ServiceCenter.Get<ITagsService>();
+	private static IWorkshopService WorkshopService => _workshopService ??= serviceProvider!.GetService<IWorkshopService>()!;
+	private static ICompatibilityManager CompatibilityManager => _compatibilityManager ??= serviceProvider!.GetService<ICompatibilityManager>()!;
+	private static ISkyveDataManager SkyveDataManager => _skyveDataManager ??= serviceProvider!.GetService<ISkyveDataManager>()!;
+	private static IImageService ImageService => _imageService ??= serviceProvider!.GetService<IImageService>()!;
+	private static IPackageNameUtil PackageNameUtil => _packageNameUtil ??= serviceProvider!.GetService<IPackageNameUtil>()!;
+	private static IPackageManager PackageManager => _packageManager ??= serviceProvider!.GetService<IPackageManager>()!;
+	private static IPackageUtil PackageUtil => _packageUtil ??= serviceProvider!.GetService<IPackageUtil>()!;
+	private static ITagsService TagsService => _tagService ??= serviceProvider!.GetService<ITagsService>()!;
+	private static IPlaysetManager PlaysetManager => _playsetManager ??= serviceProvider!.GetService<IPlaysetManager>()!;
+
+	public static void Initialize(IServiceProvider provider)
+	{
+		serviceProvider = provider;
+	}
 
 	public static string CleanName(this IPackageIdentity? package, bool keepTags = false)
 	{
@@ -41,6 +51,14 @@ public static class SystemExtensions
 	public static bool IsLocal(this IPackageIdentity identity)
 	{
 		return identity.Id <= 0;
+	}
+
+	public static bool IsCodeMod(this IPackageIdentity identity)
+	{
+		if (identity.Id > 0 && identity.GetWorkshopInfo() is IWorkshopInfo workshopInfo)
+			return workshopInfo.IsCodeMod;
+
+		return identity.GetLocalPackage()?.IsCodeMod ?? false;
 	}
 
 	public static bool IsIncluded(this IPackageIdentity package)
@@ -188,5 +206,10 @@ public static class SystemExtensions
 	public static NotificationType GetNotification(this ICompatibilityInfo compatibilityInfo)
 	{
 		return CompatibilityManager.GetNotification(compatibilityInfo);
+	}
+
+	public static ICustomPlayset GetCustomPlayset(this IPlayset playset)
+	{
+		return PlaysetManager.GetCustomPlayset(playset);
 	}
 }

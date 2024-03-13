@@ -9,6 +9,7 @@ public interface ILogger
 	void Info(object message);
 	void Warning(object message);
 	void Error(object message);
+	void Exception(object message);
 	void Exception(Exception exception, object message);
 
 #if DEBUG

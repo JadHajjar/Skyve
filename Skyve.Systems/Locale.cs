@@ -71,7 +71,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation AddPlayset => _instance.GetText("AddPlayset");
 
 	/// <summary>
-	/// Add a new tag here
+	/// Add a new tag or search here
 	/// </summary>
 	public static Translation AddTagBox => _instance.GetText("AddTagBox");
 
@@ -238,6 +238,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CancelTroubleshootTitle => _instance.GetText("CancelTroubleshootTitle");
 
 	/// <summary>
+	/// Change-log
+	/// </summary>
+	public static Translation Changelog => _instance.GetText("Changelog");
+
+	/// <summary>
 	/// Change this playset's color
 	/// </summary>
 	public static Translation ChangePlaysetColor => _instance.GetText("ChangePlaysetColor");
@@ -256,6 +261,17 @@ public class Locale : LocaleHelper, ILocale
 	/// What is a cleanup?
 	/// </summary>
 	public static Translation CleanupInfoTitle => _instance.GetText("CleanupInfoTitle");
+
+	/// <summary>
+	/// <para>Code Mod</para>
+	/// <para>Plural: Code Mods</para>
+	/// </summary>
+	public static Translation CodeMod => _instance.GetText("CodeMod");
+
+	/// <summary>
+	/// Compatibility Center
+	/// </summary>
+	public static Translation CompatibilityCenter => _instance.GetText("CompatibilityCenter");
 
 	/// <summary>
 	/// Compatibility Info
@@ -278,7 +294,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ComplexListUI => _instance.GetText("ComplexListUI");
 
 	/// <summary>
-	/// Adds more advanced information to the UI and adds extra actions.
+	/// Adds more advanced information and adds extra actions to the user interface.
 	/// </summary>
 	public static Translation ComplexListUITip => _instance.GetText("ComplexListUI_Tip");
 
@@ -286,6 +302,12 @@ public class Locale : LocaleHelper, ILocale
 	/// Are you sure you want to delete the playset '{0}'?
 	/// </summary>
 	public static Translation ConfirmDeletePlayset => _instance.GetText("ConfirmDeletePlayset");
+
+	/// <summary>
+	/// <para>Contains {0} {1}</para>
+	/// <para>Plural: Contains {0} {1}</para>
+	/// </summary>
+	public static Translation ContainCount => _instance.GetText("ContainCount");
 
 	/// <summary>
 	/// Content &amp; Info
@@ -426,7 +448,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DateUpdated => _instance.GetText("DateUpdated");
 
 	/// <summary>
-	/// Your last session's errors will be automatically shown below when opening this page
+	/// Deactivate your current playset
+	/// </summary>
+	public static Translation DeactivatePlaysetTip => _instance.GetText("DeactivatePlayset_Tip");
+
+	/// <summary>
+	/// Your last session's errors will be automatically shown here, results are updated live.
 	/// </summary>
 	public static Translation DefaultLogViewInfo => _instance.GetText("DefaultLogViewInfo");
 
@@ -441,6 +468,12 @@ public class Locale : LocaleHelper, ILocale
 	/// <para>Plural: Delete the selected packages</para>
 	/// </summary>
 	public static Translation DeletePackage => _instance.GetText("DeletePackage");
+
+	/// <summary>
+	/// <para>Dependency</para>
+	/// <para>Plural: Dependencies</para>
+	/// </summary>
+	public static Translation Dependency => _instance.GetText("Dependency");
 
 	/// <summary>
 	/// DEPRECATED
@@ -560,6 +593,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation EditingMultipleTags => _instance.GetText("EditingMultipleTags");
 
 	/// <summary>
+	/// <para>Edit this package's Links</para>
+	/// <para>Plural: Edit selected items' Links</para>
+	/// </summary>
+	public static Translation EditLinks => _instance.GetText("EditLinks");
+
+	/// <summary>
 	/// Make Assets
 	/// </summary>
 	public static Translation EditorPlay => _instance.GetText("EditorPlay");
@@ -570,7 +609,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation EditPlaysetName => _instance.GetText("EditPlaysetName");
 
 	/// <summary>
-	/// Edit this playset's thumbnail picture
+	/// Edit this playset's thumbnail
 	/// </summary>
 	public static Translation EditPlaysetThumbnail => _instance.GetText("EditPlaysetThumbnail");
 
@@ -611,11 +650,6 @@ public class Locale : LocaleHelper, ILocale
 	/// <para>Plural: {0} {1} enabled</para>
 	/// </summary>
 	public static Translation EnabledCount => _instance.GetText("EnabledCount");
-
-	/// <summary>
-	/// Enable Dev UI
-	/// </summary>
-	public static Translation EnableDevUi => _instance.GetText("EnableDevUi");
 
 	/// <summary>
 	/// Enable this mod
@@ -659,6 +693,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ExplainIssueInfo => _instance.GetText("ExplainIssueInfo");
 
 	/// <summary>
+	/// Fade out disabled mods &amp; assets
+	/// </summary>
+	public static Translation FadeDisabledItems => _instance.GetText("FadeDisabledItems");
+
+	/// <summary>
+	/// Disabled mods &amp; assets in your local content lists will be faded out.
+	/// </summary>
+	public static Translation FadeDisabledItemsTip => _instance.GetText("FadeDisabledItems_Tip");
+
+	/// <summary>
 	/// Failed to delete item
 	/// </summary>
 	public static Translation FailedToDeleteItem => _instance.GetText("FailedToDeleteItem");
@@ -694,7 +738,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FailedToRetrievePlaysets => _instance.GetText("FailedToRetrievePlaysets");
 
 	/// <summary>
-	/// Failed to save the selected language
+	/// Failed to save the selected 1language
 	/// </summary>
 	public static Translation FailedToSaveLanguage => _instance.GetText("FailedToSaveLanguage");
 
@@ -712,6 +756,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Faulty Packages Detected
 	/// </summary>
 	public static Translation FaultyPackagesTitle => _instance.GetText("FaultyPackagesTitle");
+
+	/// <summary>
+	/// Favorite Playsets
+	/// </summary>
+	public static Translation FavoritePlaysets => _instance.GetText("FavoritePlaysets");
 
 	/// <summary>
 	/// Playsets favorited: {0}, Total: {1}
@@ -822,6 +871,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Build Cities
 	/// </summary>
 	public static Translation GamePlay => _instance.GetText("GamePlay");
+
+	/// <summary>
+	/// Generic Playset
+	/// </summary>
+	public static Translation GenericPlayset => _instance.GetText("GenericPlayset");
 
 	/// <summary>
 	/// Help &amp; Logs
@@ -984,6 +1038,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation LinkModAssetsTip => _instance.GetText("LinkModAssets_Tip");
 
 	/// <summary>
+	/// Links
+	/// </summary>
+	public static Translation Links => _instance.GetText("Links");
+
+	/// <summary>
 	/// <para>{0} {1} loaded</para>
 	/// <para>Plural: {0} {1} loaded</para>
 	/// </summary>
@@ -1033,6 +1092,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Logged in as
 	/// </summary>
 	public static Translation LoggedInAs => _instance.GetText("LoggedInAs");
+
+	/// <summary>
+	/// Logged in as {0}
+	/// </summary>
+	public static Translation LoggedInUser => _instance.GetText("LoggedInUser");
 
 	/// <summary>
 	/// Copy logs to clipboard
@@ -1094,6 +1158,11 @@ public class Locale : LocaleHelper, ILocale
 	/// <para>Plural: Mods</para>
 	/// </summary>
 	public static Translation Mod => _instance.GetText("Mod");
+
+	/// <summary>
+	/// Mod ID
+	/// </summary>
+	public static Translation ModID => _instance.GetText("ModID");
 
 	/// <summary>
 	/// Mods included &amp; enabled: {0}, Total: {1}
@@ -1174,6 +1243,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation NoActivePlayset => _instance.GetText("NoActivePlayset");
 
 	/// <summary>
+	/// Disable All Assets
+	/// </summary>
+	public static Translation NoAssets => _instance.GetText("NoAssets");
+
+	/// <summary>
 	/// <para>No Compatibility issues detected.</para>
 	/// <para>Plural: No compatibility issues with your {0} were detected.</para>
 	/// </summary>
@@ -1193,6 +1267,11 @@ public class Locale : LocaleHelper, ILocale
 	/// No packages found on your computer.
 	/// </summary>
 	public static Translation NoLocalPackagesFound => _instance.GetText("NoLocalPackagesFound");
+
+	/// <summary>
+	/// Disable All Code-Mods
+	/// </summary>
+	public static Translation NoMods => _instance.GetText("NoMods");
 
 	/// <summary>
 	/// No notifications
@@ -1225,6 +1304,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OBSOLETE => _instance.GetText("OBSOLETE");
 
 	/// <summary>
+	/// Only show warnings and errors
+	/// </summary>
+	public static Translation OnlyShowErrors => _instance.GetText("OnlyShowErrors");
+
+	/// <summary>
 	/// Open the author's page
 	/// </summary>
 	public static Translation OpenAuthorPage => _instance.GetText("OpenAuthorPage");
@@ -1250,7 +1334,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OpenLocalFolder => _instance.GetText("OpenLocalFolder");
 
 	/// <summary>
-	/// Open Log File
+	/// Open Game Log
 	/// </summary>
 	public static Translation OpenLog => _instance.GetText("OpenLog");
 
@@ -1279,6 +1363,11 @@ public class Locale : LocaleHelper, ILocale
 	/// View this playset's file on your computer
 	/// </summary>
 	public static Translation OpenPlaysetFolder => _instance.GetText("OpenPlaysetFolder");
+
+	/// <summary>
+	/// Open Skyve Log
+	/// </summary>
+	public static Translation OpenSkyveLog => _instance.GetText("OpenSkyveLog");
 
 	/// <summary>
 	/// Please open Steam in order to continue your previous task.
@@ -1354,9 +1443,19 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PackageUpdates => _instance.GetText("PackageUpdates");
 
 	/// <summary>
+	/// Package Usage
+	/// </summary>
+	public static Translation PackageUsage => _instance.GetText("PackageUsage");
+
+	/// <summary>
 	/// Partially downloaded
 	/// </summary>
 	public static Translation PartiallyDownloaded => _instance.GetText("PartiallyDownloaded");
+
+	/// <summary>
+	/// Partially Included
+	/// </summary>
+	public static Translation PartiallyIncluded => _instance.GetText("PartiallyIncluded");
 
 	/// <summary>
 	/// Paste the ID of the playset you'd like to import
@@ -1424,11 +1523,6 @@ public class Locale : LocaleHelper, ILocale
 	/// References
 	/// </summary>
 	public static Translation References => _instance.GetText("References");
-
-	/// <summary>
-	/// Refresh Workshop Content
-	/// </summary>
-	public static Translation RefreshWorkshop => _instance.GetText("RefreshWorkshop");
 
 	/// <summary>
 	/// Reload all data
@@ -1501,6 +1595,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ResetModsCache => _instance.GetText("ResetModsCache");
 
 	/// <summary>
+	/// Reset this playset's color
+	/// </summary>
+	public static Translation ResetPlaysetColor => _instance.GetText("ResetPlaysetColor");
+
+	/// <summary>
+	/// Reset this playset's thumbnail
+	/// </summary>
+	public static Translation ResetPlaysetImage => _instance.GetText("ResetPlaysetImage");
+
+	/// <summary>
 	/// Reset scrolling when opening a package's page
 	/// </summary>
 	public static Translation ResetScrollOnPackageClick => _instance.GetText("ResetScrollOnPackageClick");
@@ -1514,6 +1618,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Reset all snoozes
 	/// </summary>
 	public static Translation ResetSnoozes => _instance.GetText("ResetSnoozes");
+
+	/// <summary>
+	/// Restart Required
+	/// </summary>
+	public static Translation RestartRequired => _instance.GetText("RestartRequired");
 
 	/// <summary>
 	/// Failed to send your review request for '{0}'.  {1}
@@ -1700,7 +1809,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SortingDefault => _instance.GetText("Sorting_Default");
 
 	/// <summary>
-	/// Total File Size
+	/// File Size
 	/// </summary>
 	public static Translation SortingFileSize => _instance.GetText("Sorting_FileSize");
 
@@ -1750,7 +1859,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SortingUsage => _instance.GetText("Sorting_Usage");
 
 	/// <summary>
-	/// Votes
+	/// Total Likes
 	/// </summary>
 	public static Translation SortingVotes => _instance.GetText("Sorting_Votes");
 
@@ -1803,6 +1912,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Stop Troubleshooting?
 	/// </summary>
 	public static Translation StopTroubleshootTitle => _instance.GetText("StopTroubleshootTitle");
+
+	/// <summary>
+	/// Subscribers
+	/// </summary>
+	public static Translation Subscribers => _instance.GetText("Subscribers");
 
 	/// <summary>
 	/// <para>{1} subscriber</para>
@@ -2021,6 +2135,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation UpToDate => _instance.GetText("UpToDate");
 
 	/// <summary>
+	/// {0} Playset
+	/// </summary>
+	public static Translation UsagePlayset => _instance.GetText("UsagePlayset");
+
+	/// <summary>
 	/// * Please try to use English in your description.
 	/// </summary>
 	public static Translation UseEnglishPlease => _instance.GetText("UseEnglishPlease");
@@ -2106,8 +2225,13 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ViewXOnSteam => _instance.GetText("ViewXOnSteam");
 
 	/// <summary>
-	/// <para>{1} vote</para>
-	/// <para>Plural: {1} votes</para>
+	/// Likes
+	/// </summary>
+	public static Translation Votes => _instance.GetText("Votes");
+
+	/// <summary>
+	/// <para>{1} like</para>
+	/// <para>Plural: {1} likes</para>
 	/// </summary>
 	public static Translation VotesCount => _instance.GetText("VotesCount");
 

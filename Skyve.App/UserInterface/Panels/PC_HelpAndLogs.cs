@@ -1,5 +1,5 @@
 ﻿using Skyve.App.Interfaces;
-using Skyve.App.UserInterface.Generic;
+using Skyve.App.Utilities;
 
 using System.Drawing;
 using System.IO;
@@ -14,6 +14,10 @@ public partial class PC_HelpAndLogs : PanelContent
 	private readonly ILogger _logger;
 	private readonly ISettings _settings;
 	private readonly ILocationService _locationManager;
+	private readonly System.Timers.Timer timer;
+	private bool orderAsc;
+	private List<ILogTrace>? selectedFileLogs;
+	private List<ILogTrace>? defaultLogs;
 
 	public PC_HelpAndLogs() : base(true)
 	{
@@ -39,6 +43,20 @@ public partial class PC_HelpAndLogs : PanelContent
 			B_SaveZip.ButtonType = ButtonType.Active;
 			B_CopyZip.Visible = false;
 		}
+
+		timer = new System.Timers.Timer(5000);
+		timer.Elapsed += Timer_Elapsed;
+		timer.Start();
+	}
+
+	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+	{
+		if (CrossIO.FileExists(DD_LogFile.SelectedFile))
+		{
+			return;
+		}
+
+		LoadData();
 	}
 
 	protected override void LocaleChanged()
@@ -46,6 +64,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		Text = Locale.HelpLogs;
 		L_Info.Text = Locale.DefaultLogViewInfo;
 		L_Troubleshoot.Text = Locale.TroubleshootInfo;
+		TB_Search.Placeholder = LocaleSlickUI.Search + "..";
 	}
 
 	public override Color GetTopBarColor()
@@ -57,11 +76,15 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		base.UIChanged();
 
-		I_Info.Size = UI.Scale(new Size(24, 24), UI.FontScale);
+		I_Sort.Size = UI.Scale(new Size(24, 24), UI.FontScale);
+		I_Sort.Padding = UI.Scale(new Padding(3), UI.FontScale);
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
-		P_Troubleshoot.Margin = DD_LogFile.Margin = TLP_Errors.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10), UI.UIScale);
+		TLP_LogFiles.Margin = TLP_Errors.Margin = P_Troubleshoot.Margin = DD_LogFile.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10), UI.UIScale);
 		L_Troubleshoot.Font = UI.Font(9F);
-		L_Troubleshoot.Margin = UI.Scale(new Padding(3), UI.FontScale);
+		CB_OnlyShowErrors.Font = UI.Font(7.5F);
+		CB_OnlyShowErrors.Padding = TB_Search .Margin= B_OpenSkyveLog.Margin = B_OpenLog.Margin = L_Troubleshoot.Margin = UI.Scale(new Padding(3), UI.FontScale);
+		tableLayoutPanel1.Width = (int)(250 * UI.FontScale);
+		B_OpenSkyveLog.Height = B_OpenLog.Height = (int)(48 * UI.FontScale);
 
 		foreach (var button in this.GetControls<SlickButton>())
 		{
@@ -71,9 +94,11 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 		}
 
+		TLP_Main.RowStyles[0].Height = (int)(100 * UI.FontScale);
+		TB_Search.Width = (int)(150 * UI.FontScale);
 		B_SaveZip.Margin = UI.Scale(new Padding(10, 7, 10, 10), UI.UIScale);
-		slickSpacer1.Height =  (int)(1.5 * UI.FontScale);
-		slickSpacer1.Margin =  UI.Scale(new Padding(5), UI.UIScale);
+		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
+		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -81,25 +106,24 @@ public partial class PC_HelpAndLogs : PanelContent
 		base.DesignChanged(design);
 
 		BackColor = design.AccentBackColor;
-		TLP_Errors.BackColor = TLP_LogFolders.BackColor = TLP_HelpLogs.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme ? 1 : -1);
+		TLP_LogFiles .BackColor=TLP_Errors.BackColor = TLP_LogFolders.BackColor = TLP_HelpLogs.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme ? 1 : -1);
 	}
 
 	protected override bool LoadData()
 	{
-		if (!File.Exists(_logUtil.GameLogFile))
+		try
 		{
+			defaultLogs = _logUtil.GetCurrentLogsTrace();
+
+			this.TryInvoke(() => SetTrace(defaultLogs));
+
+			return true;
+		}
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, "Failed to get current logs trace");
 			return false;
 		}
-
-		var tempName = Path.GetTempFileName();
-
-		File.Copy(_logUtil.GameLogFile, tempName, true);
-
-		var logs = _logUtil.SimplifyLog(tempName, out _);
-
-		this.TryInvoke(() => SetTrace(logs));
-
-		return true;
 	}
 
 	private async void B_CopyZip_Click(object sender, EventArgs e)
@@ -109,9 +133,14 @@ public partial class PC_HelpAndLogs : PanelContent
 		{
 			try
 			{
-				_logUtil.CreateZipFileAndSetToClipboard();
+				var file = _logUtil.CreateZipFile();
+
+				PlatformUtil.SetFileInClipboard(file);
 			}
-			catch (Exception ex) { ShowPrompt(ex, Locale.FailedToFetchLogs); }
+			catch (Exception ex)
+			{
+				ShowPrompt(ex, Locale.FailedToFetchLogs);
+			}
 		});
 		B_CopyZip.Loading = false;
 
@@ -132,11 +161,14 @@ public partial class PC_HelpAndLogs : PanelContent
 
 				Directory.CreateDirectory(folder);
 
-				var fileName = _logUtil.CreateZipFileAndSetToClipboard(folder);
+				var fileName = _logUtil.CreateZipFile(folder);
 
 				PlatformUtil.OpenFolder(fileName);
 			}
-			catch (Exception ex) { ShowPrompt(ex, Locale.FailedToFetchLogs); }
+			catch (Exception ex)
+			{
+				ShowPrompt(ex, Locale.FailedToFetchLogs);
+			}
 		});
 
 		B_SaveZip.Loading = false;
@@ -146,7 +178,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		B_SaveZip.ImageName = "I_Log";
 	}
 
-	private void DD_LogFile_FileSelected(string file)
+	private async void DD_LogFile_FileSelected(string file)
 	{
 		if (!CrossIO.FileExists(file))
 		{
@@ -156,7 +188,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		DD_LogFile.Loading = true;
 
-		new BackgroundAction("Simplifying Log", () =>
+		selectedFileLogs = await Task.Run(() =>
 		{
 			var zip = file.ToLower().EndsWith(".zip");
 
@@ -171,8 +203,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 					if (entry is null)
 					{
-						DD_LogFile.Loading = false;
-						return;
+						return null;
 					}
 
 					file = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.txt");
@@ -181,14 +212,16 @@ public partial class PC_HelpAndLogs : PanelContent
 				}
 				catch
 				{
-					DD_LogFile.Loading = false;
-					return;
+					return null;
 				}
 			}
 
-			var logs = _logUtil.SimplifyLog(file, out var simpleLog);
+#if CS2
+			var logs = _logUtil.ExtractTrace(file, file);
 
-			this.TryInvoke(() => SetTrace(logs));
+			DD_LogFile.SelectedFile = file;
+#else
+			var logs = _logUtil.SimplifyLog(file, file, out var simpleLog);
 
 			if (!zip)
 			{
@@ -197,16 +230,83 @@ public partial class PC_HelpAndLogs : PanelContent
 
 				DD_LogFile.SelectedFile = simpleLogFile;
 			}
+#endif
 
-			DD_LogFile.Loading = false;
-		}).Run();
+			return logs;
+		});
+
+		this.TryInvoke(() => SetTrace(selectedFileLogs ?? defaultLogs ?? []));
+
+		DD_LogFile.Loading = false;
+	}
+
+	private void CB_OnlyShowErrors_CheckChanged(object sender, EventArgs e)
+	{
+		if (CrossIO.FileExists(DD_LogFile.SelectedFile))
+		{
+			SetTrace(selectedFileLogs ?? []);
+		}
+		else
+		{
+			SetTrace(defaultLogs ?? []);
+		}
+	}
+
+	private void I_Sort_Click(object sender, EventArgs e)
+	{
+		orderAsc = !orderAsc;
+
+		I_Sort.ImageName = orderAsc ? "I_SortAsc" : "I_SortDesc";
+
+		CB_OnlyShowErrors_CheckChanged(sender, e);
 	}
 
 	private void SetTrace(List<ILogTrace> logs)
 	{
-		TLP_Errors.Controls.Clear(true);
-		TLP_Errors.Controls.Add(new LogTraceControl(logs));
-		TLP_Errors.Visible = logs.Count > 0;
+		IEnumerable<ILogTrace> logEnumerable = logs;
+
+		if (CB_OnlyShowErrors.Checked)
+		{
+			logEnumerable = logEnumerable.Where(x => x.Type is not "INFO" and not "DEBUG");
+		}
+
+		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
+		{
+			logEnumerable = logEnumerable.Where(SearchLog);
+		}
+
+		if (orderAsc)
+		{
+			logEnumerable = logEnumerable.OrderBy(x => x.Timestamp);
+		}
+		else
+		{
+			logEnumerable = logEnumerable.OrderByDescending(x => x.Timestamp);
+		}
+
+		logTraceControl.SetItems(logEnumerable);
+		logTraceControl.Invalidate();
+		L_Info.Visible = logs.Count == 0;
+	}
+
+	private bool SearchLog(ILogTrace trace)
+	{
+		if (trace.Type.Contains(TB_Search.Text, StringComparison.InvariantCultureIgnoreCase)
+			|| Path.GetFileName(trace.SourceFile).Contains(TB_Search.Text, StringComparison.InvariantCultureIgnoreCase)
+			|| TB_Search.Text.SearchCheck(trace.Title))
+		{
+			return true;
+		}
+
+		for (var i = 0; i < trace.Trace.Count; i++)
+		{
+			if (TB_Search.Text.SearchCheck(trace.Trace[i]))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private bool DD_LogFile_ValidFile(object sender, string arg)
@@ -216,7 +316,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_OpenLogFolder_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenFolder(Path.GetDirectoryName(_logUtil.GameLogFile));
+		PlatformUtil.OpenFolder(_logUtil.GameLogFolder);
 	}
 
 	private void B_LotLog_Click(object sender, EventArgs e)
@@ -242,11 +342,6 @@ public partial class PC_HelpAndLogs : PanelContent
 	private void B_Donate_Click(object sender, EventArgs e)
 	{
 		PlatformUtil.OpenUrl("https://www.buymeacoffee.com/tdwsvillage");
-	}
-
-	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
-	{
-		slickSpacer3.Visible = slickScroll1.Percentage != 0;
 	}
 
 	private void B_OpenLog_Click(object sender, EventArgs e)
@@ -281,5 +376,27 @@ public partial class PC_HelpAndLogs : PanelContent
 		{
 			Form.PushPanel<PC_Troubleshoot>();
 		}
+	}
+
+	private void B_OpenSkyveLog_Click(object sender, EventArgs e)
+	{
+		ServiceCenter.Get<IIOUtil>().Execute(_logger.LogFilePath, string.Empty);
+	}
+
+	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
+	{
+		slickSpacer3.Visible = slickScroll1.Percentage != 0;
+	}
+
+	private void TB_Search_IconClicked(object sender, EventArgs e)
+	{
+		TB_Search.Text = string.Empty;
+	}
+
+	private void TB_Search_TextChanged(object sender, EventArgs e)
+	{
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
+
+		CB_OnlyShowErrors_CheckChanged(sender, e);
 	}
 }

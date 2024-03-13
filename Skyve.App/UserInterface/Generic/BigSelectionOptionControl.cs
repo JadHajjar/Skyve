@@ -16,7 +16,14 @@ public class BigSelectionOptionControl : SlickImageControl
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 	[EditorBrowsable(EditorBrowsableState.Always)]
 	[Bindable(true)]
-	public override string Text { get => base.Text; set { base.Text = value; UIChanged(); } }
+	public override string Text
+	{
+		get => base.Text; set
+		{
+			base.Text = value;
+			UIChanged();
+		}
+	}
 
 	public bool FromScratch { get; set; }
 

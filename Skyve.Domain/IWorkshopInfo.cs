@@ -9,6 +9,7 @@ public interface IWorkshopInfo : IPackageIdentity, IThumbnailObject
 	string? ShortDescription { get; }
 	string? Description { get; }
 	string? Version { get; }
+	string? SuggestedGameVersion { get; }
 	DateTime ServerTime { get; }
 	long ServerSize { get; }
 	int Subscribers { get; }
@@ -16,11 +17,12 @@ public interface IWorkshopInfo : IPackageIdentity, IThumbnailObject
 	int VoteCount { get; set; }
 	bool IsCodeMod { get; }
 	bool IsRemoved { get; }
-	bool IsIncompatible { get; }
 	bool IsBanned { get; }
 	bool IsCollection { get; }
 	bool IsInvalid { get; }
 	Dictionary<string, string> Tags { get; }
 	IEnumerable<IPackageRequirement> Requirements { get; }
 	IEnumerable<IModChangelog> Changelog { get; }
+	IEnumerable<IThumbnailObject> Images { get; }
+	IEnumerable<ILink> Links { get; }
 }

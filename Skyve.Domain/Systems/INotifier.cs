@@ -22,6 +22,8 @@ public interface INotifier
 	event Action? CompatibilityDataLoaded;
 	event Action? WorkshopSyncStarted;
 	event Action? WorkshopSyncEnded;
+	event Action? SkyveUpdateAvailable;
+	event Action? SnoozeChanged;
 	event Action<Exception>? LoggerFailed;
 
 	void OnLoggerFailed(Exception ex);
@@ -38,4 +40,6 @@ public interface INotifier
 	void OnCompatibilityDataLoaded();
 	void OnWorkshopSyncStarted();
 	void OnWorkshopSyncEnded();
+	void OnSkyveUpdateAvailable();
+	void OnSnoozeChanged();
 }

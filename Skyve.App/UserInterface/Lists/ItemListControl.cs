@@ -1,6 +1,7 @@
 ﻿using Skyve.App;
 using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
@@ -37,6 +38,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private readonly IModLogicManager _modLogicManager;
 	private readonly IUserService _userService;
 	private readonly ISubscriptionsManager _subscriptionsManager;
+	private readonly IPlaysetManager _playsetManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
 	private readonly ITagsService _tagsService;
@@ -61,7 +63,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	protected ItemListControl(SkyvePage page)
 	{
 		_page = page;
-		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _userService, out _subscriptionsManager, out _packageUtil, out _modUtil);
+		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _userService, out _playsetManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
 
 		SeparateWithLines = true;
 		EnableSelection = true;
@@ -199,7 +201,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.OrderBy(x => _packageUtil.GetStatus(x.Item.GetLocalPackage(), out _)),
 
 			PackageSorting.UpdateTime => items
-				.OrderBy(x => x.Item.GetWorkshopInfo()?.ServerTime ?? x.Item.GetLocalPackage()?.LocalTime),
+				.OrderBy(x => (x.Item.GetWorkshopInfo()?.ServerTime).If(y => y is null || y.Value == DateTime.MinValue, _ => x.Item.GetLocalPackage()?.LocalTime ?? DateTime.Now, y => y.Value)),
 
 			PackageSorting.SubscribeTime => items
 				.OrderBy(x => x.Item.GetLocalPackage()?.LocalTime),
@@ -223,11 +225,12 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.ThenByDescending(x => x.Item.GetPackage() is IPackage package ? _modUtil.GetLoadOrder(package) : 0)
 				.ThenBy(x => x.Item.ToString()),
 
-			_ => items
-				.OrderBy(x => !(x.Item.GetLocalPackage() is ILocalPackageData lp && (lp.IsIncluded(out var partial) || partial)))
-				.ThenBy(x => x.Item.GetPackage()?.IsLocal)
+			_ => _page is SkyvePage.Workshop ? items : items
+				.OrderBy(x => !(x.Item.IsIncluded(out var partial) || partial))
+				.ThenBy(x => !x.Item.IsEnabled())
+				.ThenBy(x => x.Item.IsLocal())
 				.ThenBy(x => !x.Item.GetPackage()?.IsCodeMod)
-				.ThenBy(x => x.Item.GetLocalPackage()?.CleanName() ?? x.Item.CleanName())
+				.ThenBy(x => x.Item.CleanName())
 		};
 
 		return SortDescending ? items.Reverse() : items;
@@ -243,7 +246,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			return;
 		}
 
-		if (e.Button != MouseButtons.Left || item.Loading)
+		if (e.Button != MouseButtons.Left)
 		{
 			return;
 		}
@@ -258,7 +261,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 
 #if CS2
-		if (rects.IncludedRect.Contains(e.Location) && !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil))
+		if (rects.IncludedRect.Contains(e.Location))
 		{
 			var isIncluded = item.Item.IsIncluded(out var partialIncluded) && !partialIncluded;
 
@@ -270,11 +273,16 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			}
 			else
 			{
-				await _packageUtil.SetEnabled(item.Item, !item.Item.IsEnabled());
+				var enable = !item.Item.IsEnabled();
+
+				if (enable || !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil))
+				{
+					await _modUtil.SetEnabled(item.Item, enable);
+				}
 			}
 
 			item.Loading = false;
-			Loading = SafeGetItems().Any(x => x.Loading);
+			Invalidate(item.Item);
 		}
 #else
 
@@ -388,9 +396,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			}
 			else
 			{
-				var pc = new PC_PackagePage(item.Item, true);
-
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+				ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item.GetPackage() ?? item.Item, true);
 
 				if (_settings.UserSettings.ResetScrollOnPackageClick)
 				{
@@ -436,7 +442,8 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				return;
 			}
 
-			(FindForm() as BasePanelForm)?.PushPanel(null, /*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) :*/ new PC_PackagePage(item.Item));
+			ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item.GetPackage() ?? item.Item, false);
+			//(FindForm() as BasePanelForm)?.PushPanel(null, /*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) :*/ new PC_PackagePage(item.Item.GetPackage() ?? item.Item));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{
@@ -544,7 +551,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			foreach (var item in SafeGetItems())
 			{
-				loading |= item.Loading = _subscriptionsManager.IsSubscribing(item.Item) || _modUtil.IsEnabling(item.Item);
+				loading |= !item.Hidden & (item.Loading = _subscriptionsManager.IsSubscribing(item.Item) || _modUtil.IsEnabling(item.Item));
 			}
 
 			if (Loading != loading)
@@ -605,7 +612,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private void DrawWorkshopSearchButtons(PaintEventArgs e, bool emptySearch)
 	{
 		if (_page == SkyvePage.Workshop)
-		{ 
+		{
 			return;
 		}
 
@@ -644,9 +651,9 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 	public void ShowRightClickMenu(IPackageIdentity item)
 	{
-		var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems((SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new IPackageIdentity[] { item }).Cast<IPackage>());
+		var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems((SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new IPackageIdentity[] { item }).Cast<IPackage>());
 
-		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 	}
 
 	private bool GetStatusDescriptors(IPackageIdentity mod, out string text, out DynamicIcon? icon, out Color color)
@@ -718,7 +725,6 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				AuthorRect.Contains(location) ||
 				FolderNameRect.Contains(location) ||
 				((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl)!.IsPackagePage) ||
-				DownloadStatusRect.Contains(location) ||
 				ScoreRect.Contains(location) ||
 				DotsRect.Contains(location) ||
 				CompatibilityRect.Contains(location) ||

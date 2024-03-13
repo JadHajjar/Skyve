@@ -162,6 +162,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation BlackListName => _instance.GetText("BlackListName");
 
 	/// <summary>
+	/// Stable, potentially breaks on patch
+	/// </summary>
+	public static Translation BreaksOnPatch => _instance.GetText("BreaksOnPatch");
+
+	/// <summary>
 	/// Broken
 	/// </summary>
 	public static Translation Broken => _instance.GetText("Broken");
@@ -305,11 +310,6 @@ public class LocaleCR : LocaleHelper
 	public static Translation GenericPackage => _instance.GetText("GenericPackage");
 
 	/// <summary>
-	/// Global Tags
-	/// </summary>
-	public static Translation GlobalTags => _instance.GetText("GlobalTags");
-
-	/// <summary>
 	/// Tags all players will see in the app
 	/// </summary>
 	public static Translation GlobalTagsInfo => _instance.GetText("GlobalTagsInfo");
@@ -434,7 +434,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation LoadAfter => _instance.GetText("LoadAfter");
 
 	/// <summary>
-	/// Manage Compatibility Data
+	/// Compatibility Management
 	/// </summary>
 	public static Translation ManageCompatibilityData => _instance.GetText("ManageCompatibilityData");
 
@@ -442,11 +442,6 @@ public class LocaleCR : LocaleHelper
 	/// Manage Package
 	/// </summary>
 	public static Translation ManagePackage => _instance.GetText("ManagePackage");
-
-	/// <summary>
-	/// Manage specific packages
-	/// </summary>
-	public static Translation ManageSinglePackage => _instance.GetText("ManageSinglePackage");
 
 	/// <summary>
 	/// Map Creation
@@ -490,9 +485,19 @@ public class LocaleCR : LocaleHelper
 	public static Translation NoIssues => _instance.GetText("NoIssues");
 
 	/// <summary>
+	/// No Links
+	/// </summary>
+	public static Translation NoLinks => _instance.GetText("NoLinks");
+
+	/// <summary>
 	/// No Required DLCs
 	/// </summary>
 	public static Translation NoRequiredDlcs => _instance.GetText("NoRequiredDlcs");
+
+	/// <summary>
+	/// No Tags
+	/// </summary>
+	public static Translation NoTags => _instance.GetText("NoTags");
 
 	/// <summary>
 	/// Note
@@ -571,7 +576,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation RequestReview => _instance.GetText("RequestReview");
 
 	/// <summary>
-	/// *Your Steam ID and logs are sent with your request
+	/// *Your account's ID and logs are sent with your request
 	/// </summary>
 	public static Translation RequestReviewDisclaimer => _instance.GetText("RequestReviewDisclaimer");
 
@@ -674,6 +679,11 @@ public class LocaleCR : LocaleHelper
 	/// This asset has not been reviewed yet.  The compatibility info may not be accurate; though assets are generally stable
 	/// </summary>
 	public static Translation StabilityAssetNotReviewed => _instance.GetText("Stability_AssetNotReviewed");
+
+	/// <summary>
+	/// This package is very likely to break when the new patch is released.
+	/// </summary>
+	public static Translation StabilityBreaksOnPatch => _instance.GetText("Stability_BreaksOnPatch");
 
 	/// <summary>
 	/// This package is broken. It is known to either break the game or just does not work.
@@ -916,7 +926,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation Website => _instance.GetText("Website");
 
 	/// <summary>
-	/// Manage your packages
+	/// Manage your mods
 	/// </summary>
 	public static Translation YourPackages => _instance.GetText("YourPackages");
 }

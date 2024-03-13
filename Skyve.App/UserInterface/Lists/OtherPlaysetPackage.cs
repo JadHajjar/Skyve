@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, OtherPlaysetPackage.Rectangles>
+public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlaysetPackage.Rectangles>
 {
 	public IPackageIdentity Package { get; }
 
@@ -49,12 +49,28 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 		Padding = UI.Scale(new Padding(3, 1, 3, 1), UI.FontScale);
 	}
 
-	protected override IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> OrderItems(IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> items)
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<IPlayset> args)
+	{
+		base.CanDrawItemInternal(args);
+
+		if (!args.DoNotDraw)
+		{
+			var cr = Package.GetPackageInfo();
+			var playsetUsage = args.Item.GetCustomPlayset().Usage;
+
+			if (cr is not null && playsetUsage > 0 && cr.Usage.HasFlag(playsetUsage))
+			{
+				args.DoNotDraw = true;
+			}
+		}
+	}
+
+	protected override IEnumerable<DrawableItem<IPlayset, Rectangles>> OrderItems(IEnumerable<DrawableItem<IPlayset, Rectangles>> items)
 	{
 		return items.OrderByDescending(x => x.Item.DateUpdated);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<ICustomPlayset, Rectangles> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<IPlayset, Rectangles> item, Point location)
 	{
 		var rects = item.Rectangles;
 
@@ -74,7 +90,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 		return false;
 	}
 
-	protected override async void OnItemMouseClick(DrawableItem<ICustomPlayset, Rectangles> item, MouseEventArgs e)
+	protected override async void OnItemMouseClick(DrawableItem<IPlayset, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -90,10 +106,16 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 			}
 			else
 			{
-				await _packageUtil.SetEnabled(Package, !_packageUtil.IsEnabled(Package, item.Item.Id), item.Item.Id);
+				var enable = !_packageUtil.IsEnabled(Package, item.Item.Id);
+
+				if (enable || !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil))
+				{
+					await _packageUtil.SetEnabled(Package, enable, item.Item.Id);
+				}
 			}
 
 			item.Loading = false;
+			Invalidate(item.Item);
 
 			Loading = SafeGetItems().Any(x => x.Loading);
 		}
@@ -110,39 +132,26 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 		}
 	}
 
-	protected override void OnPaint(PaintEventArgs e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<IPlayset, Rectangles> e)
 	{
-		base.OnPaint(e);
-		//if (Loading)
-		//{
-		//	base.OnPaint(e);
-		//}
-		//else if (!Items.Any())
-		//{
-		//	e.Graphics.DrawString(Locale.NoDlcsNoInternet, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-		//}
-		//else if (!SafeGetItems().Any())
-		//{
-		//	e.Graphics.DrawString(Locale.NoDlcsOpenGame, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-		//}
-		//else
-		//{
-		//	base.OnPaint(e);
-		//}
-	}
-
-	protected override void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
-	{
-		if (e.Item == _playsetManager.CurrentPlayset)
-		{
-			e.BackColor = BackColor.MergeColor(FormDesign.Design.GreenColor, e.HoverState.HasFlag(HoverState.Hovered) ? 50 : 75);
-		}
-		else
-		{
-			e.BackColor = e.HoverState.HasFlag(HoverState.Hovered) ? BackColor.MergeColor(FormDesign.Design.ActiveColor, 95) : BackColor;
-		}
+		var customPlayset = e.Item.GetCustomPlayset();
 
 		base.OnPaintItemList(e);
+
+		if (e.Item == _playsetManager.CurrentPlayset)
+		{
+			e.BackColor = FormDesign.Design.AccentBackColor.MergeColor(FormDesign.Design.GreenColor, e.HoverState.HasFlag(HoverState.Hovered) ? 50 : 80);
+
+			using var brush = new SolidBrush(e.BackColor);
+			e.Graphics.FillRectangle(brush, e.ClipRectangle.Pad(Padding.Left, 0, Padding.Right, 0));
+		}
+		else if (e.HoverState.HasFlag(HoverState.Hovered))
+		{
+			e.BackColor = FormDesign.Design.AccentBackColor.MergeColor(customPlayset.Color ?? FormDesign.Design.ActiveColor, 85);
+
+			using var brush = new SolidBrush(e.BackColor);
+			e.Graphics.FillRectangle(brush, e.ClipRectangle.Pad(Padding.Left, 0, Padding.Right, 0));
+		}
 
 		var localIdentity = Package.GetLocalPackageIdentity();
 		var isIncluded = _packageUtil.IsIncluded(Package, out var partialIncluded, e.Item.Id) || partialIncluded;
@@ -150,7 +159,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 
 		DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, localIdentity, out var activeColor);
 
-		DrawIcon(e);
+		DrawIcon(e, customPlayset);
 
 		using var font = UI.Font(9F, FontStyle.Bold);
 		using var textBrush = new SolidBrush(e.BackColor.GetTextColor());
@@ -188,26 +197,34 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 				ButtonType = ButtonType.Hidden
 			}).Rectangle;
 		}
-	}
-
-	private void DrawIcon(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
-	{
-		var iconColor = FormDesign.Design.IconColor;
-
-		if (e.Item.Color != null)
+		else
 		{
-			iconColor = e.Item.Color.Value.GetTextColor();
-
-			using var gradientBrush = e.Rects.IconRect.Gradient(e.Item.Color.Value, 1.5F);
-			e.Graphics.FillRoundedRectangle(gradientBrush, e.Rects.IconRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
+			e.Rects.LoadRect = default;
 		}
-
-		using var playsetIcon = e.Item.GetIcon().Get(e.Rects.IncludedRect.Height * 3 / 4);
-
-		e.Graphics.DrawImage(playsetIcon.Color(iconColor), e.Rects.IconRect.CenterR(playsetIcon.Size));
 	}
 
-	protected override Rectangles GenerateRectangles(ICustomPlayset item, Rectangle rectangle)
+	private void DrawIcon(ItemPaintEventArgs<IPlayset, Rectangles> e, ICustomPlayset customPlayset)
+	{
+		var banner = customPlayset.GetThumbnail();
+		var onBannerColor = (customPlayset.Color ?? Color.Black).GetTextColor();
+
+		if (banner is null)
+		{
+			using var brush = new SolidBrush(customPlayset.Color ?? FormDesign.Design.AccentColor);
+
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail, (int)(5 * UI.FontScale));
+
+			using var icon = customPlayset.Usage.GetIcon().Get(e.Rects.Thumbnail.Width * 3 / 4).Color(onBannerColor);
+
+			e.Graphics.DrawImage(icon, e.Rects.Thumbnail.CenterR(icon.Size));
+		}
+		else
+		{
+			e.Graphics.DrawRoundedImage(banner, e.Rects.Thumbnail, (int)(5 * UI.FontScale));
+		}
+	}
+
+	protected override Rectangles GenerateRectangles(IPlayset item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item)
 		{
@@ -215,15 +232,15 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 			LoadRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
 		};
 
-		rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + (2 * Padding.Left)).Align(rects.IncludedRect.Size, ContentAlignment.MiddleLeft);
+		rects.Thumbnail = rectangle.Pad(rects.IncludedRect.Right + (2 * Padding.Left)).Align(rects.IncludedRect.Size, ContentAlignment.MiddleLeft);
 
-		rects.TextRect = new Rectangle(rects.IconRect.Right + Padding.Left, rectangle.Y, rects.LoadRect.X - rects.IconRect.Right - (2 * Padding.Left), rectangle.Height);
+		rects.TextRect = new Rectangle(rects.Thumbnail.Right + Padding.Left, rectangle.Y, rects.LoadRect.X - rects.Thumbnail.Right - (2 * Padding.Left), rectangle.Height);
 
 		return rects;
 	}
 
 #if CS2
-	private void DrawIncludedButton(ItemPaintEventArgs<ICustomPlayset, Rectangles> e, bool isIncluded, bool isPartialIncluded, bool isEnabled, ILocalPackageIdentity? localIdentity, out Color activeColor)
+	private void DrawIncludedButton(ItemPaintEventArgs<IPlayset, Rectangles> e, bool isIncluded, bool isPartialIncluded, bool isEnabled, ILocalPackageIdentity? localIdentity, out Color activeColor)
 	{
 		activeColor = default;
 
@@ -281,7 +298,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 			return;
 		}
 
-		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(Package) ? "I_Wait" : isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
+		var icon = new DynamicIcon(isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
 		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
@@ -357,16 +374,16 @@ public class OtherPlaysetPackage : SlickStackedListControl<ICustomPlayset, Other
 		}
 #endif
 
-	public class Rectangles : IDrawableItemRectangles<ICustomPlayset>
+	public class Rectangles : IDrawableItemRectangles<IPlayset>
 	{
 		public Rectangle IncludedRect;
-		public Rectangle IconRect;
+		public Rectangle Thumbnail;
 		public Rectangle LoadRect;
 		public Rectangle TextRect;
 
-		public ICustomPlayset Item { get; set; }
+		public IPlayset Item { get; set; }
 
-		public Rectangles(ICustomPlayset item)
+		public Rectangles(IPlayset item)
 		{
 			Item = item;
 		}

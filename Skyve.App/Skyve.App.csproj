@@ -10,7 +10,6 @@
   <PropertyGroup>
       <Deterministic>true</Deterministic>
       <LangVersion>latest</LangVersion>
-      <TargetFramework>net4.7.2</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <SignAssembly>true</SignAssembly>
@@ -45,9 +44,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="UserInterface\Bubbles\FavoriteProfileBubble.cs" />
-    <Compile Update="UserInterface\Bubbles\PlaysetBubble.cs" />
       <Compile Update="UserInterface\Content\ContentList.cs" />
+      <Compile Update="UserInterface\Content\IconTopButton.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="UserInterface\Content\PlaysetIcon.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
     <Compile Update="UserInterface\Content\TroubleshootInfoControl.cs" />
     <Compile Update="UserInterface\Content\UserDescriptionControl.cs" />
     <Compile Update="UserInterface\Dashboard\D_AssetInfo.cs" />
@@ -66,15 +69,17 @@
     <Compile Update="UserInterface\Lists\ReviewRequestList.cs" />
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs" />
+    <Compile Update="UserInterface\Panels\PC_PlaysetContents.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Panels\PC_Troubleshoot.cs" />
-    <Compile Update="UserInterface\Panels\PC_PlaysetAdd.cs" />
     <Compile Update="UserInterface\Panels\PC_UserPage.cs" />
     <Compile Update="UserInterface\Panels\PC_PlaysetList.cs" />
     <Compile Update="UserInterface\Panels\PC_Packages.cs" />
     <Compile Update="UserInterface\Generic\NewProfileOptionControl.cs" />
     <Compile Update="UserInterface\Dropdowns\LanguageDropDown.cs" />
-    <Compile Update="UserInterface\Dropdowns\ProfileSortingDropDown.cs" />
-    <Compile Update="UserInterface\Dropdowns\ProfilesDropDown.cs" />
+    <Compile Update="UserInterface\Dropdowns\PlaysetSortingDropDown.cs" />
+    <Compile Update="UserInterface\Dropdowns\PlaysetsDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\TagsDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\SortingDropDown.cs" />
     <Compile Update="UserInterface\Generic\DoubleButton.cs" />
