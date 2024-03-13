@@ -23,11 +23,11 @@
   "NoPackagesMatchFilters": "没有符合要求的插件。",
   "EnableAll": "全部启用",
   "DisableAll": "全部禁用",
-  "EnableAllFiltered": "Enable filtered items",
-  "DisableAllFiltered": "Disable filtered items",
+  "EnableAllFiltered": "启用筛选的项目",
+  "DisableAllFiltered": "禁用筛选的项目",
   "EnableAllSelected": "启用已选项目",
   "DisableAllSelected": "禁用已选项目",
-  "CopyAllIds": "Copy all items' names & IDs",
+  "CopyAllIds": "复制所有项目的名称和 ID",
   "CopyAllIdsFiltered": "Copy all filtered items' names & IDs",
   "CopyAllIdsSelected": "Copy all selected items' names & IDs",
   "HelpLogs": "获取帮助和日志",
@@ -120,9 +120,6 @@
   "DisableNewAssetsByDefault_Tip": "在您订阅或添加资产时，Skyve 将会根据此选项的设置，自动装载或卸下该资产。",
   "FilterOutPackagesWithOneAsset_Tip": "插件页面不显示只含一个资产的插件。在资产页面，这些资产仍然会显示。",
   "FilterOutPackagesWithMods_Tip": "插件页面不显示模组。在模组页面，这些模组仍然会显示。",
-  "OverrideGameChanges_Tip": "在 Skyve 程序运行时，游戏中对模组的启用状态所作的任何改动，在下次启动游戏时将自动被配置文件的设定覆盖。",
-  "HidePseudoMods_Tip": "Theme Mixer 模组会生成一个 DLL 文件，以便在创意工坊分享混合主题。启用此选项将会隐藏模组列表中的混合主题，并且始终保持这些混合主题为载入状态。",
-  "AdvancedIncludeEnable_Tip": "启用此选项时，您将可以分别更改模组的装载和启用状态，类似于 Load Order Tool 1。",
   "AdvancedLaunchOptions_Tip": "在配置文件的设置页面中，显示供开发者使用的高级启动选项。",
   "ShowFolderSettings_Tip": "在选项页面显示 Skyve 的文件夹设置。",
   "HelpTranslate_Tip": "在 Crowdin 上为 Skyve 的本地化翻译提供帮助。",
@@ -130,6 +127,8 @@
   "JoinDiscord_Tip": "加入 Discord 服务器，可以寻求帮助，并接收 Skyve 相关的更新信息。",
   "OpenGuide_Tip": "在线查阅 Skyve 使用指南，并开始使用 Skyve。",
   "ResetButton_Tip": "将您的设置重置为默认值。此操作不影响文件夹设置。",
+  "ComplexListUI": "高级用户界面模式",
+  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
   "EnableDevUi": "启用开发界面",
   "RefreshWorkshop": "刷新创意工坊内容",
   "NewGame": "新建一个存档",
@@ -235,7 +234,7 @@
   "Sorting_Color": "配置文件图标颜色",
   "CreateShortcutPlayset": "创建桌面快捷方式",
   "AskToLaunchGameForShortcut": "是否要在打开 Skyve 的快捷方式时，同时使用您的配置文件启动游戏？",
-  "TextImportMissingInfo": "Load a text file containing Workshop IDs to easily subscribe to or manage them",
+  "TextImportMissingInfo": "导入含有工坊 ID 的文本文件，以方便订阅或管理插件",
   "ImportFromText": "导入文本文件",
   "ImportFromClipboard": "从剪贴板粘贴文本",
   "ImportFromTextInfo": "支持任何文本文件格式",
@@ -281,7 +280,7 @@
   },
   "SearchWorkshop": "搜索创意工坊…",
   "DiscoverWorkshop": "在工坊查找模组...",
-  "SearchWorkshopBrowser": "在浏览器中搜索创意工坊…",
+  "SearchWorkshopBrowser": "Search the workshop in your browser...",
   "UnknownPackage": "未知插件",
   "Info": "提示",
   "SelectThisPackage": "选择此插件",
@@ -320,35 +319,35 @@
   },
   "IncludedCount": {
     "One": "已装载 {0} 个{1}",
-    "Plural": "{0} {1} included"
+    "Plural": "已装载 {0} 个{1}"
   },
   "EnabledCount": {
     "One": "已启用 {0} 个{1}",
-    "Plural": "{0} {1} enabled"
+    "Plural": "已启用 {0} 个{1}"
   },
   "IncludedEnabledCount": {
     "One": "已装载并启用 {0} 个{1}",
-    "Plural": "{0} {1} included & enabled"
+    "Plural": "已装载并启用 {0} 个{1}"
   },
   "LoadedCount": {
     "One": "已加载 {0} 个{1}",
-    "Plural": "{0} {1} loaded"
+    "Plural": "已加载 {0} 个{1}"
   },
   "ShowingCount": {
     "One": "当前显示 {0} 个{1}",
-    "Plural": "Showing {0} {1}"
+    "Plural": "当前显示 {0} 个{1}"
   },
   "ShowingCountWarning": {
     "One": "当前显示 {0} 个{1}，{3}",
-    "Plural": "Showing {0} {1}, {3}"
+    "Plural": "当前显示 {0} 个{1}，{3}"
   },
   "ShowingSelectedCount": {
     "One": "当前显示 {0} 个{1}，已选择 {2} 个{1}",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "Plural": "当前显示 {0} 个{1}，已选中其中 {2} 个"
   },
   "ShowingSelectedCountWarning": {
     "One": "当前显示 {0} 个{1}，已选择 {2} 个{1}，{3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "Plural": "当前显示 {0} 个{1}，已选中其中 {2} 个，{3}"
   },
   "ItemsHidden": {
     "One": "{0} 个{1} 由于当前配置文件的用途已被隐藏",
@@ -384,7 +383,7 @@
   },
   "NewUpdatedCount": {
     "One": "新增或更新了 {0} 个{1}",
-    "Plural": "{0} new or updated {1}"
+    "Plural": "新增或更新了 {0} 个{1}"
   },
   "TotalCount": {
     "One": "共 {0} 个{1}",
@@ -497,7 +496,7 @@
   "VerifiedAuthor": "已认证的作者",
   "EnableItem": "启用此模组",
   "DisableItem": "禁用此模组",
-  "SwitchToItem": "Switch to this mod",
+  "SwitchToItem": "切换到这个模组",
   "FailedToImportPlayset": "无法导入此配置文件。",
   "FilterByEnabled": "只显示已启用的项目。",
   "FilterByDisabled": "只显示已禁用的项目。",

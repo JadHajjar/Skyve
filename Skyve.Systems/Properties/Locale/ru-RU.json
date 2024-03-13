@@ -12,47 +12,47 @@
   "LaunchSettings": "Настройки запуска",
   "IncludesItemsYouDoNotHave": "Содержит элементы которых у вас нет",
   "ContentAndInfo": "Контент и информация",
-  "OtherPlaysets": "Другие игровые наборы",
-  "ViewPlaysets": "Просмотр ваших игровых наборов",
-  "AddPlayset": "Добавить игровой набор",
+  "OtherPlaysets": "Другие Игровые Наборы",
+  "ViewPlaysets": "Просмотр Ваших Игровых Наборов",
+  "AddPlayset": "Добавить Игровой Набор",
   "LHT": "Левосторонний трафик",
   "TotalAssetSize": "{0} включенных объектов",
   "CompatibilityStatus": "Статус совместимости",
   "AnyStatus": "Любое состояние",
   "NoLocalPackagesFound": "На вашем компьютере не найдено пакетов.",
-  "NoPackagesMatchFilters": "No packages match what you're looking for.",
-  "EnableAll": "Enable all items",
-  "DisableAll": "Disable all items",
-  "EnableAllFiltered": "Enable filtered items",
-  "DisableAllFiltered": "Disable filtered items",
-  "EnableAllSelected": "Enable selected items",
-  "DisableAllSelected": "Disable selected items",
-  "CopyAllIds": "Copy all items' names & IDs",
-  "CopyAllIdsFiltered": "Copy all filtered items' names & IDs",
-  "CopyAllIdsSelected": "Copy all selected items' names & IDs",
+  "NoPackagesMatchFilters": "Нет пакетов, соответствующих тому, что Вы ищете.",
+  "EnableAll": "Включить все элементы",
+  "DisableAll": "Отключить все элементы",
+  "EnableAllFiltered": "Включить отфильтрованные элементы",
+  "DisableAllFiltered": "Отключить отфильтрованные элементы",
+  "EnableAllSelected": "Включить выбранные элементы",
+  "DisableAllSelected": "Отключить выбранные элементы",
+  "CopyAllIds": "Скопировать имена и ID всех элементов",
+  "CopyAllIdsFiltered": "Скопировать имена и ID всех отфильтрованных элементов",
+  "CopyAllIdsSelected": "Скопировать имена и ID всех выбранных элементов",
   "HelpLogs": "Помощь и логи",
   "Preferences": "Предпочтения",
   "PlaysetName": "Название игрового набора",
-  "RenamePlayset": "Rename this playset",
+  "RenamePlayset": "Переименовать этот игровой набор",
   "StartScratch": "Создать игровой набор с нуля",
-  "ContinueFromCurrent": "Clone your active playset",
+  "ContinueFromCurrent": "Клонируйте ваш активный игровой набор",
   "GamePlay": "Строить города",
   "EditorPlay": "Создавать ассеты",
   "PlaysetUsage": "Использование Плейсета",
   "SomePackagesWillBeDisabled": "Некоторые пакеты будут удалены после изменения типа использования этого профиля.",
   "AffectedPackagesAre": "Затронутые пакеты:",
   "ConfirmDeletePlayset": "Вы уверены, что хотите удалить плейсет '{0}'?",
-  "ActivatePlayset": "Activate this playset",
-  "PlaysetMerge": "Add all of this playset's mods to your active playset",
-  "PlaysetExclude": "Remove all of this playset's mods from your active playset",
+  "ActivatePlayset": "Активировать этот игровой набор",
+  "PlaysetMerge": "Добавить все моды этого игрового набора в ваш активный игровой набор",
+  "PlaysetExclude": "Удалить все моды этого игрового набора из вашего активного игрового набора",
   "PlaysetDelete": "Удалить этот плейсет",
   "MissingPackages": "Отсутствующие пакеты",
   "OpenPackagePage": "Открыть страницу этого пакета",
   "OpenPackageFolder": {
-    "One": "Open file location",
-    "Plural": "Open all selected packages' file locations"
+    "One": "Открыть расположение файла",
+    "Plural": "Открыть расположения файлов всех выбранных пакетов"
   },
-  "OpenLocalFolder": "Open the folder containing this package",
+  "OpenLocalFolder": "Открыть папку содержащую этот пакет",
   "ReDownloadPackage": {
     "One": "Скачать повторно этот пакет",
     "Plural": "Перезагрузить все выбранные пакеты"
@@ -60,9 +60,9 @@
   "OpenAuthorPage": "Открыть страницу автора",
   "Sorting_Default": "Сортировка по умолчанию",
   "Sorting_LastEdit": "Время последнего редактирования",
-  "Sorting_DateCreated": "Date Created",
-  "Sorting_Usage": "Playset Usage",
-  "Sorting_Name": "Name",
+  "Sorting_DateCreated": "Дата создания",
+  "Sorting_Usage": "Применение игрового набора",
+  "Sorting_Name": "Имя",
   "Sorting_FileSize": "Общий размер файла",
   "Sorting_UpdateTime": "Время обновления",
   "Sorting_SubscribeTime": "Время подписки",
@@ -72,18 +72,18 @@
   "Sorting_LoadOrder": "Загрузить заказ",
   "FolderSettings": "Настройки папки",
   "ShowDatesRelatively": "Показывать даты относительно текущего времени",
-  "CouldNotCreatePlayset": "Could not create a new playset.",
-  "CreatePlaysetHere": "Create a new playset or activate a previous one by clicking here",
+  "CouldNotCreatePlayset": "Не удалось создать новый игровой набор.",
+  "CreatePlaysetHere": "Создайте новый или активируйте предыдущий игровой набор, нажав здесь",
   "Maintenance": "Обслуживание",
-  "DisableNewModsByDefault": "Disable newly added mods by default",
-  "DisableNewAssetsByDefault": "Disable newly added assets by default",
+  "DisableNewModsByDefault": "Отключить новые моды по умолчанию",
+  "DisableNewAssetsByDefault": "Отключить новые объекты по умолчанию",
   "ShowFilters": "Показать фильтры",
   "HideFilters": "Скрыть фильтры",
   "DateSubscribed": "Дата подписки",
   "DateUpdated": "Дата обновления",
-  "FilterOutPackagesWithMods": "Hide code mods in the packages page",
+  "FilterOutPackagesWithMods": "Скрыть моды кода на странице пакетов",
   "FilterOutPackagesWithOneAsset": "Скрыть пакеты с одним активом со страницы пакетов",
-  "CopyAuthorLink": "Copy the author's profile link",
+  "CopyAuthorLink": "Копировать ссылку на профиль автора",
   "YourPlaysets": "Ваши игровые наборы",
   "UnFavoriteThisPlayset": "Удалить этот игровой набор из избранного",
   "FavoriteThisPlayset": "Добавить в избранное этот игровой набор",
@@ -111,18 +111,15 @@
   "HelpTranslate": "Помогите улучшить перевод",
   "HelpReset": "Помощь и Сброс",
   "JoinDiscord": "Поддержка в Discord",
-  "OpenGuide": "Open the Wiki",
+  "OpenGuide": "Открыть Wiki",
   "ResetFolderButton": "Сбросить настройки всех папок",
   "LinkModAssets": "Связать ассет с состоянием мода \"Добавлен в игру\"",
   "LinkModAssets_Tip": "Некоторые моды включают ассеты, которые необходимы им для правильного функционирования. Включение этой опции связывает эти ассеты с мод и скрывает эти активы со страницы ассетов, чтобы вы не исключили их по ошибке.",
   "ShowDatesRelatively_Tip": "Изменяет формат дат, которые отображаются в списках контента на относительное время. Например вчера в 14:10 вечера",
-  "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
+  "DisableNewModsByDefault_Tip": "При подписке или добавлении модов, инструмент будет автоматически добавлять или исключать его при запуске инструмента на основе этого параметра.",
   "DisableNewAssetsByDefault_Tip": "Когда вы подписываетесь или добавляете ассеты, инструмент будет автоматически добавлять или исключать его при запуске инструмента на основе этого параметра.",
   "FilterOutPackagesWithOneAsset_Tip": "Пакеты, которые имеют только один ассет, не будут отображаться на странице пакетов. Они по-прежнему будут отображаться на странице ассетов.",
   "FilterOutPackagesWithMods_Tip": "Пакеты, которые включают моды, не будут отображаться на странице пакетов. Они все равно будут отображаться на странице модов.",
-  "OverrideGameChanges_Tip": "Изменения, внесённые в игре в статус включённых модов, будут автоматически отменены вашими настройками внутри Skyve, изменения будут применены при следующем запуске. Это работает только тогда, когда приложение открыто.",
-  "HidePseudoMods_Tip": "Theme mixer генерируют файлы модов, чтобы можно было поделиться им в мастерской. Включение этой опции скроет их из вашего списка модов и всегда будет добавлять их.",
-  "AdvancedIncludeEnable_Tip": "Включение этой опции позволит вам изменить изменять состояния «Добавлен в игру» и «Активирован» по отдельности, аналогично с оригинальным Load Order Tool.",
   "AdvancedLaunchOptions_Tip": "Отображает дополнительные опции запуска, используемые разработчиками в настройках профиля.",
   "ShowFolderSettings_Tip": "Показывает настройки папок, используемые инструментом на странице параметров.",
   "HelpTranslate_Tip": "Помогите перевести этот инструмент на ваш язык в Crowdin.",
@@ -130,6 +127,8 @@
   "JoinDiscord_Tip": "Запросите помощь и получите информацию об обновлениях этого инструмента на сервере discord.",
   "OpenGuide_Tip": "Просмотрите онлайн-руководство по работе с Skyve.",
   "ResetButton_Tip": "Сбросить настройки до по умолчанию. Это не повлияет на настройки папок.",
+  "ComplexListUI": "Режим расширенного пользовательского интерфейса",
+  "ComplexListUI_Tip": "Добавляет более подробную информацию в пользовательский интерфейс и дополнительные действия.",
   "EnableDevUi": "Включить интерфейс отладки",
   "RefreshWorkshop": "Обновить контент мастерской",
   "NewGame": "Начать новую игру",
@@ -139,7 +138,7 @@
   "ResetFolderButton_Tip": "Это действие потребует запустить игру прежде чем вы сможете использовать этот инструмент снова.",
   "AreYouSure": "Вы уверены, что хотите продолжить?",
   "MapFileInfo": "Выберите файл карты, чтобы начать новую игру",
-  "BulkActions": "Bulk Actions",
+  "BulkActions": "Массовые Операции",
   "CopyVersionNumber": "Копировать номер версии",
   "FixAllTip": "Попытка перезагрузить все пакеты, которые имеют проблемы, это займет некоторое время",
   "FilterByThisReportStatus": "Фильтровать по состоянию в отчете",
@@ -155,7 +154,7 @@
   "LogZipFile": "Сохранить логи в файл",
   "LogFolders": "Папка с логами",
   "LogFileDrop": "Перетащите или выберите лог файл для отображения списка ошибок в нем",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "При открытии этой страницы будут отображаться ошибки последней сессии",
   "ErrorsInLog": "Ошибки в логе",
   "OpenLogFolder": "Открыть папку с лог файлами игры",
   "CopyLogFile": "Копировать лог файл игры в буфер обмена",
@@ -169,7 +168,7 @@
   "PackageIncludedAndEnabledTotal": "Пакетов добавлено в игру и активировано: {0}, Всего: {1}",
   "AssetIncludedTotal": "Ассетов добавлено в игру: {0}, Всего: {1}",
   "NewPlayset_Tip": "Создать или импортировать новый игровой набор",
-  "ViewPlaysets_Tip": "View & manage your playsets",
+  "ViewPlaysets_Tip": "Просмотр и управление вашими игровыми наборами",
   "NewGame_Tip": "Начинает новую игру при запуске Cities: Skylines. Вы можете указать карту, на которой хотите начать игру",
   "LoadSaveGame_Tip": "Загрузка сохраненной игры при запуске Cities: Skylines. Если не выбирать файл сохранения, то будет загружено ваше последнее сохранение",
   "BETA": "BETA",
@@ -183,7 +182,7 @@
   "ABANDONED": "ЗАБРОШЕНО",
   "ActionUnreversible": {
     "One": "Это действие нельзя отменить.",
-    "Plural": "This action can not be reversed. And will affect {0} packages."
+    "Plural": "Это действие не может быть отменено и повлияет на  {0} пакет(-а, -ов)."
   },
   "AlwaysOpenFiltersAndActions": "Показывать секцию фильтров по умолчанию",
   "AlwaysOpenFiltersAndActions_Tip": "Всегда открывать раздел фильтров при входе в вкладку содержимого",
@@ -204,23 +203,23 @@
     "Plural": "Удалить выбранные пакеты"
   },
   "EnableThisItemInAllPlaysets": {
-    "One": "Enable in all your playsets",
-    "Plural": "Enable the selected items in all your playsets"
+    "One": "Включить во всех ваших игровых наборах",
+    "Plural": "Включить выбранные элементы во всех ваших игровых наборах"
   },
   "DisableThisItemInAllPlaysets": {
-    "One": "Disable in all your playsets",
-    "Plural": "Disable the selected items in all your playsets"
+    "One": "Отключить во всех ваших игровых наборах",
+    "Plural": "Отключить выбранные элементы во всех ваших игровых наборах"
   },
   "CopyPackageName": {
-    "One": "Copy the package's name",
+    "One": "Скопировать имя пакета",
     "Plural": "Скопировать имена выбранных пакетов"
   },
   "CopyAuthorId": {
-    "One": "Copy the author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "Копировать ID автора",
+    "Plural": "Скопировать ID авторов выбранных пакетов"
   },
   "CopyAuthorName": {
-    "One": "Copy the author's name",
+    "One": "Скопировать имя автора",
     "Plural": "Скопировать имена авторов выбранных пакетов"
   },
   "Sorting_LastUsed": "Последнее использование",
@@ -235,7 +234,7 @@
   "Sorting_Color": "Цвет профиля",
   "CreateShortcutPlayset": "Создать ярлык для него на рабочем столе",
   "AskToLaunchGameForShortcut": "Хотите ли вы сделать ярлык для запуска игры с вашим профилем?",
-  "TextImportMissingInfo": "Load a text file containing Workshop IDs to easily subscribe to or manage them",
+  "TextImportMissingInfo": "Загрузите текстовый файл, содержащий идентификаторы мастерской, чтобы легко подписаться на них или управлять ими",
   "ImportFromText": "Импортировать из текста",
   "ImportFromClipboard": "Загрузить текст из буфера обмена",
   "ImportFromTextInfo": "Поддерживается любой формат текста",
@@ -258,11 +257,11 @@
     "One": "{0} автор выбран",
     "Plural": "Выбрано {0} авторов"
   },
-  "Donate": "Donate",
+  "Donate": "Пожертвовать",
   "FlipItemCopyFilterAction": "Поведение Ctrl + клик для фильтрации в списках контента",
   "FlipItemCopyFilterAction_Tip": "Меняет поведение по умолчанию при нажатии на метки, чтобы обычное нажатие на фильтры и Ctrl+щелчок выполняло действие по умолчанию.",
   "AltClickTo": "Alt+Нажмите, чтобы {0}",
-  "FilterByThisAuthor": "Add '{0}' to your author filters",
+  "FilterByThisAuthor": "Добавить '{0}' в ваши фильтры авторов",
   "AddToSearch": "Добавить '{0}' в ваш поиск",
   "CopyToClipboard": "Копировать {0} в буфер обмена",
   "ViewPackageCR": "Просмотреть отчёт о совместимости этого пакета",
@@ -272,16 +271,16 @@
   "Sorting_Subscribers": "Всего подписчиков",
   "Sorting_Votes": "Голоса",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} голос",
+    "Plural": "{1} голос(-а,-ов)"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "{1} подписчик",
+    "Plural": "{1} подписчик(-а, -ов)"
   },
-  "SearchWorkshop": "Search the workshop instead...",
-  "DiscoverWorkshop": "Look for mods on the workshop...",
-  "SearchWorkshopBrowser": "Поиск по мастерской в вашем браузере..",
+  "SearchWorkshop": "Искать в мастерской вместо этого...",
+  "DiscoverWorkshop": "Ищите моды в мастерской...",
+  "SearchWorkshopBrowser": "Поиск мастерской в вашем браузере...",
   "UnknownPackage": "Неизвестный пакет",
   "Info": "Инфо",
   "SelectThisPackage": "Выберите этот пакет",
@@ -289,17 +288,17 @@
   "ControlToSelectMultiplePackages": "Ctrl + Щелкните, чтобы выбрать несколько пакетов одновременно.",
   "Local": "Локальный",
   "Workshop": "Мастерская",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "Отчет о совместимости",
   "Enabled": "Активирован",
   "Disabled": "Выключено",
   "Included": "Добавлен в игру",
   "Excluded": "Исключён из игры",
   "OutOfDate": "Устарел",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "Состояние пакета",
   "Author": "Автор",
   "Include": "Включить",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
+  "Unsubscribe": "Отписаться",
+  "Exclude": "Исключить",
   "Snooze": "Повтор",
   "UnSnooze": "Отложить",
   "Mod": {
@@ -320,35 +319,35 @@
   },
   "IncludedCount": {
     "One": "{0} {1} включено",
-    "Plural": "{0} {1} included"
+    "Plural": "{0} {1} включён"
   },
   "EnabledCount": {
     "One": "{0} {1} включено",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0} {1} включен"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} включено и включено",
-    "Plural": "{0} {1} included & enabled"
+    "Plural": "{0} {1} включён и включен"
   },
   "LoadedCount": {
     "One": "{0} {1} загружено",
-    "Plural": "{0} {1} loaded"
+    "Plural": "{0} {1} загружен"
   },
   "ShowingCount": {
     "One": "Показано {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "Plural": "Показан {0} {1}"
   },
   "ShowingCountWarning": {
     "One": "Показаны {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {3}"
+    "Plural": "Показаны {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
     "One": "Показаны {0} {1}, {2} выбраны",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "Plural": "Показаны {0} {1}, {2} выбраны"
   },
   "ShowingSelectedCountWarning": {
     "One": "Показаны {0} {1}, {2} выбрано, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "Plural": "Показаны {0} {1}, {2} выбраны, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} скрыт из-за использования вашего профиля",
@@ -384,11 +383,11 @@
   },
   "NewUpdatedCount": {
     "One": "{0} новый или обновлено {1}",
-    "Plural": "{0} new or updated {1}"
+    "Plural": "{0} новых или обновлено {1}"
   },
   "TotalCount": {
     "One": "{0} {1} всего",
-    "Plural": "{0} {1} in total"
+    "Plural": "{0} {1} всего"
   },
   "PackageIsNotDownloaded": "'{0}' был удален с вашего компьютера",
   "PackageIsOutOfDate": "'{0}' устарел\r\n\r\nВы {1} позади",
@@ -406,7 +405,7 @@
     "One": "В результате этого действия вы будете отписаны от {0} пакета.",
     "Plural": "В результате этого действия вы будете отписаны от {0} пакетов."
   },
-  "ViewThisPlaysetsPackages": "View the mods in this playset",
+  "ViewThisPlaysetsPackages": "Посмотреть моды в этом игровом наборе",
   "YouHavePackagesUser": {
     "One": "У вас есть {0} пакет, созданный {1}",
     "Plural": "У вас есть {0} пакета(-ов), созданный {1}"
@@ -414,7 +413,7 @@
   "RequestOption1": "Сообщить о проблеме или добавить недостающую информацию",
   "RequestOption2": "Добавить отсутствующий статус для пакета",
   "RequestOption3": "Добавить недостающее взаимодействие с другим пакетом",
-  "ActivePlayset": "Active Playset",
+  "ActivePlayset": "Активный Игровой Набор",
   "References": "Ссылки",
   "OpenLog": "Открыть файл журнала",
   "Sort By": "Сортировать по",
@@ -446,8 +445,8 @@
   "PastePlaysetId": "Вставьте ID плейлиста, который вы хотите импортировать",
   "AssumeInternetConnectivity": "Игнорировать проверку Интернет-соединения",
   "AssumeInternetConnectivity_Tip": "Пропускает проверку Интернета и автоматически предполагает, что вы подключились.",
-  "SelectAll": "Select all items",
-  "DeselectAll": "Un-select all items",
+  "SelectAll": "Выбрать все элементы",
+  "DeselectAll": "Отменить выбор всех элементов",
   "AddTagBox": "Добавить новый тег здесь",
   "EditingMultipleTags": "Редактирование тегов нескольких пакетов перезапишет каждый из их пользовательских тегов.",
   "EditTagsOfPackage": {
@@ -495,9 +494,9 @@
   "CleanupInfoTitle": "Что такое очистка?",
   "TroubleshootCauseResult": "Причиной проблем могут быть следующие пакеты",
   "VerifiedAuthor": "Проверенный автор",
-  "EnableItem": "Enable this mod",
-  "DisableItem": "Disable this mod",
-  "SwitchToItem": "Switch to this mod",
+  "EnableItem": "Включить этот мод",
+  "DisableItem": "Отключить этот мод",
+  "SwitchToItem": "Переключиться на этот мод",
   "FailedToImportPlayset": "Не удалось импортировать этот плейсет.",
   "FilterByEnabled": "Показывать только включенные элементы.",
   "FilterByDisabled": "Показывать только отключённые элементы.",
@@ -541,11 +540,11 @@
     "One": "'{1}' установлен со времени вашего последнего сеанса",
     "Plural": "{0} новых пакетов установлено со времени вашего последнего сеанса"
   },
-  "NoActivePlayset": "No Active Playset",
-  "RecentlyUpdated": "Recently Updated",
-  "Manage": "Manage",
-  "Version": "Version",
-  "UpdateTime": "Update Time",
-  "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "NoActivePlayset": "Нет Активного Игрового Набора",
+  "RecentlyUpdated": "Недавно обновлённые",
+  "Manage": "Управлять",
+  "Version": "Версия",
+  "UpdateTime": "Время обновления",
+  "Status": "Состояние",
+  "ThisModIsRequiredYouCantDisableIt": "Этот мод необходим, вы не можете отключить его."
 }
