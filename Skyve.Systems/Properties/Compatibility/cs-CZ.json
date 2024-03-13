@@ -8,7 +8,6 @@
   "NoteInfo": "Extra informační text zobrazený pro balíček",
   "BlackListName": "Černý seznam podle názvu",
   "BlackListId": "Black-list by name",
-  "GlobalTags": "Globální štítky",
   "GlobalTagsInfo": "Značky všech hráčů budou vidět v aplikaci",
   "Links": "Odkazy",
   "StatusesCount": "Statuses ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Nedostatek informací",
   "HasIssues": "Má problémy",
   "Broken": "Rozbitý",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Vyžadována pozornost",
   "Website": "Webová stránka",
   "Donation": "Přispět",
-  "ManageSinglePackage": "Spravovat konkrétní balíčky",
-  "ManageCompatibilityData": "Spravovat data kompatibility",
-  "YourPackages": "Spravovat balíčky",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Přidat balíčky",
   "ConfirmEndSession": "Jste si jisti, že chcete ukončit vaši relaci?",
   "CrDataLoadFailed": "Nepodařilo se načíst data, zkuste to znovu později",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Pro správnou kontrolu tohoto balíčku není dostatek informací.",
   "Stability_HasIssues": "Tento balíček může způsobit problémy.\r\nBuďte opatrní při jeho používání.",
   "Stability_Broken": "Tento balíček je nefunkční.\r\nJe známo, že buď rozbije hru, nebo prostě nefunguje.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Spravovat balíček",
   "Banned": "Zakázáno",
   "NoIssues": "Žádné problémy",
-  "RequestReviewDisclaimer": "*Vaše Steam ID a logy jsou odeslány s Vaším požadavkem",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Vytváření scénářů",
   "ThemeMaking": "Tvorba motivů",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }
