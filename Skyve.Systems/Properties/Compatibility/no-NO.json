@@ -8,7 +8,6 @@
   "NoteInfo": "Ekstra informasjonstekst som vises for pakken",
   "BlackListName": "Svarteliste etter navn",
   "BlackListId": "Black-list by name",
-  "GlobalTags": "Globale merker",
   "GlobalTagsInfo": "Tagger alle spillere vil se i appen",
   "Links": "Lenker",
   "StatusesCount": "Statuses ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Ikke nok informasjon",
   "HasIssues": "Har problemer",
   "Broken": "Ødelagt",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Merknad kreves",
   "Website": "Nettside",
   "Donation": "Doner",
-  "ManageSinglePackage": "Behandle bestemte pakker",
-  "ManageCompatibilityData": "Administrer kompatibilitetsdata",
-  "YourPackages": "Administrer dine pakker",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Legg til pakker",
   "ConfirmEndSession": "Er du sikker på at du vil avslutte økten?",
   "CrDataLoadFailed": "Kunne ikke laste inn data, prøv igjen senere",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Det er ikke nok informasjon til å gjennomgå denne pakken på riktig måte.",
   "Stability_HasIssues": "Denne pakken kan forårsake problemer.\r\nVær forsiktig mens du bruker den.",
   "Stability_Broken": "Denne pakken er ødelagt.\r\nDet er kjent for å enten ødelegge spillet eller bare ikke fungere.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Administrer tilleggsfunksjon",
   "Banned": "Utestengt",
   "NoIssues": "Ingen saker",
-  "RequestReviewDisclaimer": "*Din Steam ID og logger sendes ut med din forespørsel",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Scenarioopptak",
   "ThemeMaking": "Utforming",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }
