@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Date de création",
   "Sorting_Usage": "Utilisation du Playset",
   "Sorting_Name": "Nom",
-  "Sorting_FileSize": "Taille totale du fichier",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "Temps de mise à jour",
   "Sorting_SubscribeTime": "Heure d'abonnement",
   "Sorting_Author": "Nom de l'auteur",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "Consultez le guide en ligne pour commencer avec Skyve.",
   "ResetButton_Tip": "Réinitialisez vos paramètres aux paramètres par défaut. Cela n'affecte pas les paramètres du dossier.",
   "ComplexListUI": "Mode d’interface utilisateur avancé",
-  "ComplexListUI_Tip": "Ajoute des informations plus avancées et des options supplémentaires à l'interface.",
-  "EnableDevUi": "Activer l'interface développeur",
-  "RefreshWorkshop": "Rafraîchir le contenu du Workshop",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "Commencer une nouvelle partie",
   "LoadSaveGame": "Continuer une sauvegarde précédente",
   "DevOptions": "Options de lancement développeur",
@@ -154,7 +152,7 @@
   "LogZipFile": "Enregistrer les logs dans un fichier",
   "LogFolders": "Dossiers de logs",
   "LogFileDrop": "Déposer ou sélectionner un fichier log à simplifier et afficher la liste des erreurs dans le log",
-  "DefaultLogViewInfo": "Les erreurs de votre dernière session seront automatiquement affichées ci-dessous à l'ouverture de cette page",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "Erreurs dans le log",
   "OpenLogFolder": "Ouvrir le dossier de log du jeu",
   "CopyLogFile": "Copier le fichier log du jeu dans le presse-papiers",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "Assets inclus : {0}, Total : {1}",
   "NewPlayset_Tip": "Créer ou importer un nouveau playset",
   "ViewPlaysets_Tip": "Voir et gérer vos playsets",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "Démarre une nouvelle partie lors du lancement de Cities: Skylines. Vous pouvez spécifier la carte dans laquelle vous souhaitez commencer",
   "LoadSaveGame_Tip": "Charger une sauvegarde lors du lancement de Cities: Skylines. Ne pas sélectionner un fichier de sauvegarde continuera votre dernière sauvegarde",
   "BETA": "BÊTA",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "Nombre total de playsets: {0}",
   "PlaysetFilter": "Filtrer par Playset",
   "CheckDocumentsFolder": "Assurez-vous que Skyve a accès à votre dossier de documents, il l'utilise pour stocker vos paramètres d'interface et de langue.",
-  "FailedToSaveLanguage": "Échec d'enregistrer la langue sélectionnée",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "Échec de l'ouverture du changeur de thème",
   "FailedToDeleteItem": "Échec de la suppression de l'élément",
   "OpenChangelog": "Ouvrir le journal de modifications",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "Supprimer cet asset",
     "Plural": "Supprimer la sélection d'assets"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "Voir le fichier de ce Playset sur votre ordinateur",
   "ChangePlaysetColor": "Changer la couleur de ce playset",
   "EditPlaysetName": "Modifier le nom de ce Playset",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "Couleur du Playset",
   "CreateShortcutPlayset": "Créez un raccourci sur votre bureau",
   "AskToLaunchGameForShortcut": "Voulez-vous que le raccourci lance également le jeu avec votre playset?",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "Ajouter des arguments supplémentaires lors du lancement du jeu",
   "SearchGenericPackages": "Recherchez dans ces paquets..",
   "Sorting_Subscribers": "Nombre total d'abonnés",
-  "Sorting_Votes": "Votes",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} abonné",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "Playset",
     "Plural": "Playsets"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} inclus",
@@ -368,6 +374,10 @@
     "One": "Modifier les tags de ce paquet",
     "Plural": "Modifier les tags des éléments sélectionnés"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "Afficher les paquets exclus dans l'onglet 'Références'",
   "ShowAllReferencedPackages_Tip": "Affiche à la fois les paquets exclus et inclus qui font référence à celui que vous visualisez.",
   "TreatOptionalAsRequired": "Traiter les paquets facultatifs comme requis",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "Supprimé par l'auteur",
   "Missing": "Manquant",
   "LoggedInAs": "Connecté en tant que",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "Utilisateur inconnu",
   "AddMeaningfulDescription": "Veuillez ajouter une description précise à votre demande.",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "Ajouter une interaction manquante avec un autre paquet",
   "ActivePlayset": "Playset Actif",
   "References": "Références",
-  "OpenLog": "Ouvrir le fichier Log",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "Trier par",
   "FailedToFetchLogs": "Échec de la récupération des logs",
   "DiscoverPlaysets": "Découvrez les Playsets",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "Impossible de télécharger ce playset.\r\n\r\nVeuillez réessayer plus tard.",
   "UpdatePlaysetTip": "Mettez à jour votre version locale de ce playset",
   "DownloadPlaysetTip": "Télécharger ce Playset sur votre ordinateur",
-  "EditPlaysetThumbnail": "Modifier la miniature de ce Playset",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "Rendre ce playset Public",
   "MakePrivate": "Rendre ce playset Privé",
   "CopyPlaysetLink": "Copier l'ID de ce playset",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "Ne pas vérifier la connexion et supposer automatiquement que vous êtes connecté à Internet.",
   "SelectAll": "Sélectionner tous les éléments",
   "DeselectAll": "Désélectionner tous les éléments",
-  "AddTagBox": "Ajouter un nouveau tag ici",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "Modifier les tags de plusieurs paquets écrasera chacun de leurs tags personnalisés.",
   "EditTagsOfPackage": {
     "One": "Modifier tous les tags des assets de ce paquet",
@@ -546,5 +558,29 @@
   "Version": "Version",
   "UpdateTime": "Date de mise à jour",
   "Status": "Statut",
-  "ThisModIsRequiredYouCantDisableIt": "Ce mod est requis, vous ne pouvez pas le désactiver."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "Ce mod est requis, vous ne pouvez pas le désactiver.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }
