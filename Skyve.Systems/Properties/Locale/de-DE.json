@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Erstelldatum",
   "Sorting_Usage": "Spielset-Nutzung",
   "Sorting_Name": "Name",
-  "Sorting_FileSize": "Gesamte Datei-Größe",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "Aktualisierungsdatum",
   "Sorting_SubscribeTime": "Abonnementsdatum",
   "Sorting_Author": "Name des Autors",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "Sehe dir die Online-Anleitung an, um mit Skyve loszulegen.",
   "ResetButton_Tip": "Setze die Einstellungen auf den Standard zurück. Dies wirkt sich nicht auf die Ordnereinstellungen aus.",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "Dev-UI aktivieren",
-  "RefreshWorkshop": "Workshop-Inhalt aktualisieren",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "Starte ein neues Spiel",
   "LoadSaveGame": "Einen vorherigen Spielstand fortsetzen",
   "DevOptions": "Entwickler-Start-Optionen",
@@ -154,7 +152,7 @@
   "LogZipFile": "Protokolle in Datei speichern",
   "LogFolders": "Protokoll-Ordner",
   "LogFileDrop": "Ziehe eine Protokoll-Datei hierhin oder wählen eine aus, um vereinfacht zu werden und die Fehlerliste im Log anzuzeigen",
-  "DefaultLogViewInfo": "Die Fehler der letzten Spielsitzung werden beim Öffnen dieser Seite automatisch angezeigt",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "Fehler in der Protokoll-Datei",
   "OpenLogFolder": "Öffne den Protokoll-Ordner des Spiels",
   "CopyLogFile": "Die Protokoll-Datei des Spiels in die Zwischenablage kopieren",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "Gegenstände enthalten: {0}, Gesamt: {1}",
   "NewPlayset_Tip": "Neues Spielset erstellen oder importieren",
   "ViewPlaysets_Tip": "Deine Spielsets anzeigen und verwalten",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "Startet einen neuen Spielstand beim Start von Cities: Skylines. Du kannst die Karte angeben, auf der du starten möchtest",
   "LoadSaveGame_Tip": "Lade einen Spielstand beim Starten von Cities: Skylines. Wenn du keine Speicherdatei auswählst, wird automatisch der aktuellste Spielstand geladen",
   "BETA": "BETA",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "Anzahl der Spielsets: {0}",
   "PlaysetFilter": "Spielset-Filter",
   "CheckDocumentsFolder": "Vergewissere dich, dass Skyve Zugriff auf den Dokumentenordner hat. Es verwendet diesen, um die UI- & Sprach-Einstellungen zu speichern.",
-  "FailedToSaveLanguage": "Fehler beim Speichern der ausgewählten Sprache",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "Fehler beim Öffnen des Themen-Wechslers",
   "FailedToDeleteItem": "Element konnte nicht gelöscht werden",
   "OpenChangelog": "Änderungsprotokoll öffnen",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "Dieses Asset löschen",
     "Plural": "Die ausgewählten Assets löschen"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "Zeige die Datei dieses Spielsets auf deinem Computer",
   "ChangePlaysetColor": "Farbe dieses Spielsets ändern",
   "EditPlaysetName": "Name dieses Spielsets bearbeiten",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "Profil-Farbe",
   "CreateShortcutPlayset": "Erstelle eine Verknüpfung für dieses Spielset auf deinem Desktop",
   "AskToLaunchGameForShortcut": "Soll die Verknüpfung das Spiel mit dem ausgewählten Profil starten?",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "Zusätzliche Argumente beim Starten des Spiels hinzufügen",
   "SearchGenericPackages": "Durchsuche diese Pakete...",
   "Sorting_Subscribers": "Abonnenten insgesamt",
-  "Sorting_Votes": "Abstimmungen",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} Bewertung",
-    "Plural": "{1} Bewertungen"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} Abonnent",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "Profil",
     "Plural": "Spielsets"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} enthalten",
@@ -368,6 +374,10 @@
     "One": "Tags dieses Pakets bearbeiten",
     "Plural": "Tags der ausgewählten Elemente bearbeiten"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "Ausgeschlossene Pakete im Reiter 'Referenzen' anzeigen",
   "ShowAllReferencedPackages_Tip": "Zeigt sowohl ausgeschlossene als auch enthaltene Pakete, die auf das angezeigte verweisen.",
   "TreatOptionalAsRequired": "Optionale Pakete als erforderlich behandeln",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "Vom Autor entfernt",
   "Missing": "Fehlend",
   "LoggedInAs": "Angemeldet als",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "Unbekannter Benutzer",
   "AddMeaningfulDescription": "Bitte füge deiner Anfrage eine sinnvolle Beschreibung hinzu.",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "Fehlende Interaktion mit einem anderen Paket hinzufügen",
   "ActivePlayset": "Aktives Spielset",
   "References": "Bezüge",
-  "OpenLog": "Logdatei öffnen",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "Sortieren nach",
   "FailedToFetchLogs": "Fehler beim Abrufen der Protokolldateien",
   "DiscoverPlaysets": "Spielsets entdecken",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "Herunterladen dieses Spielsets fehlgeschlagen.\n\nBitte versuche es später erneut.",
   "UpdatePlaysetTip": "Lokale Version dieses Spielsets aktualisieren",
   "DownloadPlaysetTip": "Dieses Spielset auf den lokalen Computer herunterladen",
-  "EditPlaysetThumbnail": "Vorschaubild dieses Spielsets bearbeiten",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "Dieses Profil öffentlich machen",
   "MakePrivate": "Dieses Profil auf privat setzen",
   "CopyPlaysetLink": "ID dieses Spielsets kopieren",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "Überspringt die Suche nach dem Internet und geht automatisch davon aus, dass du verbunden bist.",
   "SelectAll": "Alle Elemente auswählen",
   "DeselectAll": "Alle Elemente abwählen",
-  "AddTagBox": "Neues Tag hier hinzufügen",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "Das Bearbeiten von Tags mehrerer Pakete überschreibt jedes ihrer benutzerdefinierten Tags.",
   "EditTagsOfPackage": {
     "One": "Bearbeite alle Tags der Assets dieses Pakets",
@@ -546,5 +558,29 @@
   "Version": "Version",
   "UpdateTime": "Aktualisierungsdatum",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "Diese Mod ist erforderlich, du kannst sie nicht deaktivieren."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "Diese Mod ist erforderlich, du kannst sie nicht deaktivieren.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }
