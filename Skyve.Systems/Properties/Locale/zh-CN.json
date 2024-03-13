@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "创建日期",
   "Sorting_Usage": "配置文件用途",
   "Sorting_Name": "名称",
-  "Sorting_FileSize": "文件总大小",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "更新时间",
   "Sorting_SubscribeTime": "订阅时间",
   "Sorting_Author": "作者名称",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "在线查阅 Skyve 使用指南，并开始使用 Skyve。",
   "ResetButton_Tip": "将您的设置重置为默认值。此操作不影响文件夹设置。",
   "ComplexListUI": "高级用户界面模式",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "启用开发界面",
-  "RefreshWorkshop": "刷新创意工坊内容",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "新建一个存档",
   "LoadSaveGame": "继续游玩上次保存的存档",
   "DevOptions": "开发者启动选项",
@@ -154,7 +152,7 @@
   "LogZipFile": "将日志文件打包保存进压缩包",
   "LogFolders": "日志文件夹",
   "LogFileDrop": "将日志文件拖到此处；或单击此处，选择一个日志文件，以查看简化后的报错信息。",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "日志中的报错信息",
   "OpenLogFolder": "打开游戏的日志文件夹",
   "CopyLogFile": "将游戏日志文件复制到剪贴板",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "您总共有 {1} 个资产，已装载 {0} 个",
   "NewPlayset_Tip": "新建或导入配置文件",
   "ViewPlaysets_Tip": "查看和管理配置文件",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "启动 Cities: Skylines 并新建一个存档。您可以选择新建存档使用的地图。",
   "LoadSaveGame_Tip": "启动 Cities: Skylines 时，自动开始加载所选存档。 如果您没有选择存档文件，会自动加载最近一次保存的存档。",
   "BETA": "BETA 测试版",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "共 {0} 个配置文件",
   "PlaysetFilter": "筛选配置文件",
   "CheckDocumentsFolder": "请检查 Skyve 是否可以访问您的“文档”文件夹，Skyve 的界面和语言设置信息存储在该文件夹内。",
-  "FailedToSaveLanguage": "保存所选语言失败",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "打开主题编辑器失败",
   "FailedToDeleteItem": "删除项目失败",
   "OpenChangelog": "打开更新日志",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "删除此资产",
     "Plural": "删除已选的资产"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "打开该配置文件存储位置文件夹",
   "ChangePlaysetColor": "更改该配置文件图标的颜色",
   "EditPlaysetName": "编辑此配置文件的名称",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "配置文件图标颜色",
   "CreateShortcutPlayset": "创建桌面快捷方式",
   "AskToLaunchGameForShortcut": "是否要在打开 Skyve 的快捷方式时，同时使用您的配置文件启动游戏？",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "为游戏添加额外的启动参数",
   "SearchGenericPackages": "搜索插件…",
   "Sorting_Subscribers": "总订阅量",
-  "Sorting_Votes": "评分",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "订阅量：{1}",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "配置文件",
     "Plural": "配置文件"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "已装载 {0} 个{1}",
@@ -368,6 +374,10 @@
     "One": "编辑此插件的标签",
     "Plural": "编辑所有已选的插件的标签"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "在“引用”选项卡显示被卸下的插件",
   "ShowAllReferencedPackages_Tip": "无论被引用的插件已装载或已卸下，都在插件详情页面的“引用”选项卡显示它们。",
   "TreatOptionalAsRequired": "将可选插件视为必需的前置插件",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "已被作者删除",
   "Missing": "丢失",
   "LoggedInAs": "登录为",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "未知用户",
   "AddMeaningfulDescription": "发送申请前，请提供有效的描述信息。",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "补充此插件与另一个插件的交互方式",
   "ActivePlayset": "Active Playset",
   "References": "引用",
-  "OpenLog": "打开游戏的日志文件",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "排序方式",
   "FailedToFetchLogs": "获取日志失败",
   "DiscoverPlaysets": "查找在线配置文件",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "无法下载此配置文件。\n\n请稍后重试。",
   "UpdatePlaysetTip": "使用本地版本更新此配置文件",
   "DownloadPlaysetTip": "将配置文件下载到本地",
-  "EditPlaysetThumbnail": "编辑配置文件的缩略图",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "将此配置文件设为公开",
   "MakePrivate": "将此配置文件设为私密",
   "CopyPlaysetLink": "复制配置文件的 ID",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "跳过网络连接检查，程序将默认您有可用的网络连接（请务必打开加速器 / VPN）。",
   "SelectAll": "全选",
   "DeselectAll": "取消全选",
-  "AddTagBox": "在此处新增标签",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "同时编辑多个插件的标签，将会覆盖每个插件所有原有标签。",
   "EditTagsOfPackage": {
     "One": "编辑此插件所含资产的标签",
@@ -546,5 +558,29 @@
   "Version": "版本",
   "UpdateTime": "更新时间",
   "Status": "状态",
-  "ThisModIsRequiredYouCantDisableIt": "此模组是必需的，不能禁用。"
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "此模组是必需的，不能禁用。",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }
