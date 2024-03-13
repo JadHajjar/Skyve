@@ -8,7 +8,6 @@
   "NoteInfo": "Paketin lisätiedot",
   "BlackListName": "Lisää mustalle listalle nimen mukaan",
   "BlackListId": "Lisää mustalle listalle Steam ID:n mukaan",
-  "GlobalTags": "Globaalit Tagit",
   "GlobalTagsInfo": "Tagit, jotka kaikki pelaajat näkevät sovelluksessa",
   "Links": "Linkit",
   "StatusesCount": "Tilat ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Vakaa, vain viankorjauspäivitykset",
   "StableNoFutureUpdates": "Vakaa, ei enää päivityksiä",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Ei tarpeeksi tietoja",
   "HasIssues": "Ongelmia",
   "Broken": "Epäkunnossa",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Vaaditaan Huomiota",
   "Website": "Verkkosivusto",
   "Donation": "Lahjoita",
-  "ManageSinglePackage": "Hallinnoi tiettyjä paketteja",
-  "ManageCompatibilityData": "Hallitse Yhteensopivuustietoja",
-  "YourPackages": "Hallinnoi pakettejasi",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Lisää Paketteja",
   "ConfirmEndSession": "Haluatko varmasti päättää istuntosi?",
   "CrDataLoadFailed": "Tietojen lataaminen epäonnistui, yritä myöhemmin uudelleen",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Paketin asianmukaiseen tarkistukseen ei ole riittävästi tietoa.",
   "Stability_HasIssues": "Tämä paketti voi aiheuttaa ongelmia.\r\nOle varovainen käyttäessäsi sitä.",
   "Stability_Broken": "Tämä paketti on rikki.\nSen tiedetään joko rikkovan pelin tai se ei vain toimi.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Hallinnoi pakettia",
   "Banned": "Estetty",
   "NoIssues": "Ei ongelmia",
-  "RequestReviewDisclaimer": "*Sinun Steam-tunnuksesi ja lokisi lähetetään pyyntösi yhteydessä",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Skenaarion teko",
   "ThemeMaking": "Teeman teko",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }
