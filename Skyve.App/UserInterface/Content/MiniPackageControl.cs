@@ -39,8 +39,10 @@ public class MiniPackageControl : SlickControl
 		base.OnMouseMove(e);
 
 		var imageRect = ClientRectangle.Pad(Padding);
+				imageRect = imageRect.Align(new Size(imageRect.Height, imageRect.Height), ContentAlignment.MiddleRight);
 
-		Cursor = ClientRectangle.Pad(1, 1, ReadOnly && !ShowIncluded ? 1 :( imageRect.Width + Padding.Horizontal), 1).Contains(e.Location) ? Cursors.Hand : Cursors.Default;
+		Cursor = ClientRectangle.Pad(1, 1, ReadOnly && !ShowIncluded ? 1 :( imageRect.Width + Padding.Horizontal), 1).Contains(e.Location)
+			|| (!ReadOnly && !ShowIncluded && imageRect.Contains(e.Location)) ? Cursors.Hand : Cursors.Default;
 	}
 
 	protected override void OnMouseClick(MouseEventArgs e)
@@ -94,7 +96,7 @@ public class MiniPackageControl : SlickControl
 		var image = Package?.GetThumbnail();
 		var textRect = ClientRectangle.Pad(1, 1, ReadOnly && !ShowIncluded ? 1 : (imageRect.Width + Padding.Horizontal), 1);
 
-		if (HoverState.HasFlag(HoverState.Hovered))
+		if (HoverState.HasFlag(HoverState.Hovered)&& textRect.Contains(PointToClient(Cursor.Position)))
 		{
 			using var backBrush = new SolidBrush(Color.FromArgb(25, FormDesign.Design.ForeColor));
 
@@ -129,11 +131,11 @@ public class MiniPackageControl : SlickControl
 
 		if (ShowIncluded && Package?.IsIncluded() == true && Package?.IsEnabled() == true)
 		{
+			imageRect = ClientRectangle.Pad(Padding).Align(imageRect.Size, ContentAlignment.MiddleRight);
+
 			using var checkIcon = IconManager.GetIcon("I_Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor);
 
-			e.Graphics.DrawImage(checkIcon, textRect.Pad(Padding).Align(checkIcon.Size, ContentAlignment.MiddleRight));
-
-			textRect = textRect.Pad(0, 0, checkIcon.Width + Padding.Horizontal, 0);
+			e.Graphics.DrawImage(checkIcon, imageRect.CenterR(checkIcon.Size));
 		}
 
 		using var textBrush = new SolidBrush(ForeColor);

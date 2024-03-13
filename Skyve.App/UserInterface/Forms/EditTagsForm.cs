@@ -24,7 +24,7 @@ public partial class EditTagsForm : BaseForm
 		}
 		else
 		{
-			Text = Locale.TagsTitle.Format(Packages[0].ToString());
+			Text = Locale.TagsTitle.Format(Packages[0].CleanName(true));
 		}
 
 		_tags = tags?.ToList() ?? new(Packages.SelectMany(x => x.GetTags().Where(x => x.IsCustom)).Distinct(x => x.Value));
