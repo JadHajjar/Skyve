@@ -8,7 +8,6 @@
   "NoteInfo": "패키지에 대해 표시되는 추가 정보 텍스트",
   "BlackListName": "이름별 블랙리스트",
   "BlackListId": "Steam 아이디별 블랙리스트",
-  "GlobalTags": "전역 태그",
   "GlobalTagsInfo": "모든 플레이어가 앱에서 볼 수 있는 태그",
   "Links": "링크",
   "StatusesCount": "상태({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "안정적임, 버그 픽스 업데이트 있을 수 있음",
   "StableNoFutureUpdates": "안정적임, 더 이상 업데이트 없음",
   "HasIssuesNoFutureUpdates": "문제 있음, 더 이상 업데이트 없음",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "충분한 정보 없음",
   "HasIssues": "문제 있음",
   "Broken": "망가짐",
@@ -60,9 +60,8 @@
   "AttentionRequired": "주목 필요",
   "Website": "웹사이트",
   "Donation": "후원",
-  "ManageSinglePackage": "특정 패키지 관리",
-  "ManageCompatibilityData": "호환성 데이터 관리",
-  "YourPackages": "패키지 관리",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "패키지 추가",
   "ConfirmEndSession": "정말 이 세션을 종료하시겠습니까?",
   "CrDataLoadFailed": "데이터를 불러오는 데 실패했습니다. 나중에 다시 시도해 주세요",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "이 패키지는 안정적입니다. 하지만 제작자는 더 이상 기능 업데이트를 출시하지 않습니다.\n그렇지만 새로운 버그가 생긴 경우에는 업데이트가 있을 것입니다.",
   "Stability_StableNoFutureUpdates": "이 패키지는 안정적입니다. 하지만 제작자는 이를 지원하고 있지 않습니다. 향후 업데이트나 버그 수정이 있을 가능성은 거의 없습니다.",
   "Stability_HasIssuesNoFutureUpdates": "이 패키지는 문제를 일으킬 수 있습니다. 제작자는 이를 지원하고 있지 않습니다. 향후 업데이트나 버그 수정이 있을 가능성은 거의 없습니다.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "이 패키지를 제대로 검토할 만한 정보가 충분하지 않습니다.",
   "Stability_HasIssues": "이 패키지는 문제를 일으킬 수 있습니다.\n주의해서 사용하세요.",
   "Stability_Broken": "이 패키지는 망가졌습니다.\n작동하지 않거나 게임을 망가트리는 것으로 알려져 있습니다.",
@@ -236,7 +236,7 @@
   "ManagePackage": "패키지 관리",
   "Banned": "차단됨",
   "NoIssues": "문제 없음",
-  "RequestReviewDisclaimer": "*당신의 Steam ID와 로그가 요청과 함께 전송됩니다",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "시나리오 제작용",
   "ThemeMaking": "테마 제작용",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "가능한 모든 작업 적용하기",
   "SnoozeAll": "표시된 모든 이슈 나중에 다시 알림",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }
