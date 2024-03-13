@@ -8,7 +8,6 @@
   "NoteInfo": "Zusätzlicher Informationstext, der für das Paket angezeigt wird",
   "BlackListName": "Namen auf die Sperrliste setzen",
   "BlackListId": "ID auf die Sperrliste setzen",
-  "GlobalTags": "Globale Tags",
   "GlobalTagsInfo": "Schlagwörter, die alle Spieler in der App sehen werden",
   "Links": "Links",
   "StatusesCount": "Stati ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stabil, nur Bugfix-Updates",
   "StableNoFutureUpdates": "Stabil, keine weiteren Updates",
   "HasIssuesNoFutureUpdates": "Hat Probleme, keine weiteren Updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Nicht genügend Informationen",
   "HasIssues": "Hat Probleme",
   "Broken": "Defekt",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Aufmerksamkeit erforderlich",
   "Website": "Webseite",
   "Donation": "Spenden",
-  "ManageSinglePackage": "Bestimmte Pakete verwalten",
-  "ManageCompatibilityData": "Kompatibilitätsdaten verwalten",
-  "YourPackages": "Pakete verwalten",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Pakete hinzufügen",
   "ConfirmEndSession": "Sind Sie sicher, dass Sie Ihre Sitzung abschließen möchten?",
   "CrDataLoadFailed": "Fehler beim Laden der Daten, versuche es später erneut",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "Dieses Paket ist stabil, aber der Autor wird keine weiteren Funktionen hinzufügen.\nSollten neue Fehler auftauchen, werden diese jedoch behoben werden.",
   "Stability_StableNoFutureUpdates": "Dieses Paket ist stabil, aber der Autor unterstützt diese Mod nicht mehr und daher sind zukünftige Aktualisierungen oder Bugfixes unwahrscheinlich.",
   "Stability_HasIssuesNoFutureUpdates": "Dieses Paket ist kann Probleme verursachen, aber der Autor unterstützt diese Mod nicht mehr und daher sind zukünftige Aktualisierungen oder Bugfixes unwahrscheinlich.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Es gibt nicht genügend Informationen, um dieses Paket ordnungsgemäß zu überprüfen.",
   "Stability_HasIssues": "Dieses Paket kann Probleme verursachen.\nSei vorsichtig, wenn du es verwendest.",
   "Stability_Broken": "Dieses Paket ist defekt.\nEs ist bekannt, dass es entweder Spielfunktionen zerstört oder einfach nicht funktioniert.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Paket verwalten",
   "Banned": "Gesperrt",
   "NoIssues": "Keine Probleme",
-  "RequestReviewDisclaimer": "*Deine Steam ID und Protokolle werden mit deiner Anfrage gesendet",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Szenario-Erstellung",
   "ThemeMaking": "Themen-Erstellung",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Erforderlicher Gegenstand",
   "ApplyAllActions": "Alle verfügbaren Aktionen anwenden",
   "SnoozeAll": "Alle angezeigten Probleme ausblenden",
-  "LinkedPackages": "Verknüpfte Pakete"
+  "LinkedPackages": "Verknüpfte Pakete",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }
