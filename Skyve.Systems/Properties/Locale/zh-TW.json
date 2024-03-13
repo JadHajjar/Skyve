@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Date Created",
   "Sorting_Usage": "Playset Usage",
   "Sorting_Name": "Name",
-  "Sorting_FileSize": "文件總大小",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "更新時間",
   "Sorting_SubscribeTime": "訂閱時間",
   "Sorting_Author": "作者名稱",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "以網路查閱指南並開始使用 Skyve。",
   "ResetButton_Tip": "將您的設置重置為預設值。此操作不影響資料夾設置。",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "啟用開發介面",
-  "RefreshWorkshop": "重新整理工作坊內容",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "新建一個存檔",
   "LoadSaveGame": "繼續遊玩上次保存的存檔",
   "DevOptions": "開發者啟動選項",
@@ -154,7 +152,7 @@
   "LogZipFile": "將日誌檔打包保存進壓縮包",
   "LogFolders": "日誌資料夾",
   "LogFileDrop": "將日誌檔拖到此處；或按一下此處，選擇一個日誌檔，以查看簡化後的報錯資訊。",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "日誌中的報錯資訊",
   "OpenLogFolder": "打開遊戲的日誌資料夾",
   "CopyLogFile": "將遊戲日誌檔複製到剪貼板",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "您總共有 {1} 個資產，已裝載 {0} 個",
   "NewPlayset_Tip": "Create or import a new playset",
   "ViewPlaysets_Tip": "View & manage your playsets",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "啟動 Cities: Skylines 並新建一個存檔。您可以選擇新建存檔使用的地圖。",
   "LoadSaveGame_Tip": "啟動 Cities: Skylines 時，自動開始載入所選存檔。 如果您沒有選擇存檔檔，會自動載入最近一次保存的存檔。",
   "BETA": "BETA 測試版",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "請檢查 Skyve 是否可以訪問您的「文件」資料夾，Skyve 的介面和語言設定資訊儲存在該資料夾內。",
-  "FailedToSaveLanguage": "保存所選語言失敗",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "打開主題編輯器失敗",
   "FailedToDeleteItem": "刪除專案失敗",
   "OpenChangelog": "打開更新日誌",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "Delete this asset",
     "Plural": "Delete the selected assets"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "View this playset's file on your computer",
   "ChangePlaysetColor": "Change this playset's color",
   "EditPlaysetName": "Edit this playset's name",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "設定檔圖示顏色",
   "CreateShortcutPlayset": "在電腦桌面上為其創建快捷方式",
   "AskToLaunchGameForShortcut": "是否要在點開 LOT 2 的快捷方式時，同時使用您的設定檔啟動遊戲？",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "為遊戲添加額外的啟動參數",
   "SearchGenericPackages": "搜索這些外掛程式…",
   "Sorting_Subscribers": "總訂閱量",
-  "Sorting_Votes": "評分",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} subscriber",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "設定檔",
     "Plural": "設定檔"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "已裝載 {0} {1}",
@@ -368,6 +374,10 @@
     "One": "Edit this package's Tags",
     "Plural": "Edit selected items' Tags"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "在「引用」選項卡顯示被卸下的外掛",
   "ShowAllReferencedPackages_Tip": "參考您正在查看的頁面，可以同時顯示已裝載與已卸下的外掛。",
   "TreatOptionalAsRequired": "將可選外掛視為必需外掛",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "Removed by author",
   "Missing": "丟失",
   "LoggedInAs": "登錄為",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "未知使用者",
   "AddMeaningfulDescription": "傳送申請前，請先新增一個有意義的描述。",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "為包裹補齊與其他包裹的互動",
   "ActivePlayset": "Active Playset",
   "References": "資料依屬",
-  "OpenLog": "打開記錄檔",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "排序方式",
   "FailedToFetchLogs": "獲取記錄檔失敗",
   "DiscoverPlaysets": "Discover Playsets",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "Failed to download this playset.\r\n\r\nPlease try again later.",
   "UpdatePlaysetTip": "Update your local version of this playset",
   "DownloadPlaysetTip": "Download this playset to your local computer",
-  "EditPlaysetThumbnail": "Edit this playset's thumbnail picture",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "Make this profile Public",
   "MakePrivate": "Make this profile Private",
   "CopyPlaysetLink": "Copy this playset's ID",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "跳過網路連線檢查，程序將預設您有可用的網路連線（請務必打開加速器 / VPN）。",
   "SelectAll": "Select all items",
   "DeselectAll": "Un-select all items",
-  "AddTagBox": "Add a new tag here",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
   "EditTagsOfPackage": {
     "One": "Edit all of this package's assets' Tags",
@@ -546,5 +558,29 @@
   "Version": "Version",
   "UpdateTime": "Update Time",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }
