@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Date Created",
   "Sorting_Usage": "Playset Usage",
   "Sorting_Name": "Name",
-  "Sorting_FileSize": "Ukuran file total",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "Perbarui waktu",
   "Sorting_SubscribeTime": "Berlangganan waktu",
   "Sorting_Author": "Nama Penulis",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "Lihat panduan online untuk memulai Skyve.",
   "ResetButton_Tip": "Atur ulang pengaturan anda ke pengaturan default. Ini tidak mempengaruhi pengaturan folder.",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "Aktifkan UI Dev",
-  "RefreshWorkshop": "Refresh Konten Workshop",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "Mulai game baru",
   "LoadSaveGame": "Lanjutkan save-game sebelumnya",
   "DevOptions": "Opsi Peluncuran Developer",
@@ -154,7 +152,7 @@
   "LogZipFile": "Simpan log ke file",
   "LogFolders": "Folder Log",
   "LogFileDrop": "Letakkan atau pilih file log untuk disederhanakan dan tampilkan daftar error di dalam log",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "Error dalam Log",
   "OpenLogFolder": "Buka folder log game",
   "CopyLogFile": "Salin file log game ke clipboard",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "Aset disertakan: {0}, Total: {1}",
   "NewPlayset_Tip": "Buat atau impor playset baru",
   "ViewPlaysets_Tip": "View & manage your playsets",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "Memulai game baru saat meluncurkan Cities: Skylines. Anda dapat menentukan map tempat anda ingin memulai",
   "LoadSaveGame_Tip": "Load save-game saat meluncurkan Cities: Skylines. Tidak memilih save-file akan melanjutkan save terakhir anda",
   "BETA": "BETA",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "Total playset: {0}",
   "PlaysetFilter": "Filter Playset",
   "CheckDocumentsFolder": "Pastikan Skyve memiliki akses ke folder dokumen anda, menggunakannya untuk menyimpan pengaturan UI & Bahasa anda.",
-  "FailedToSaveLanguage": "Gagal menyimpan bahasa yang dipilih",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "Gagal untuk membuka Theme Changer",
   "FailedToDeleteItem": "Gagal menghapus item",
   "OpenChangelog": "Buka Change-log",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "Hapus aset ini",
     "Plural": "Hapus aset yang dipilih"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "Lihat file playset ini di komputer Anda",
   "ChangePlaysetColor": "Ubah warna playset ini",
   "EditPlaysetName": "Edit nama playset ini",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "Warna Playset",
   "CreateShortcutPlayset": "Buat shortcut untuk aplikasi di desktop anda",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "Tambahkan argumen ekstra saat meluncurkan game",
   "SearchGenericPackages": "Cari melalui paket ini..",
   "Sorting_Subscribers": "Total Subscriber",
-  "Sorting_Votes": "Vote",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} subscriber",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "Playset",
     "Plural": "Profiles"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} included",
@@ -368,6 +374,10 @@
     "One": "Edit this package's Tags",
     "Plural": "Edit selected items' Tags"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
   "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
   "TreatOptionalAsRequired": "Treat optional packages as required",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "Removed by author",
   "Missing": "Missing",
   "LoggedInAs": "Logged in as",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "Unknown User",
   "AddMeaningfulDescription": "Please add a meaningful description to your request.",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "Tambahkan interaksi yang hilang dengan paket lain",
   "ActivePlayset": "Active Playset",
   "References": "Referensi",
-  "OpenLog": "Buka File Log",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "Sortir dengan",
   "FailedToFetchLogs": "Gagal mengambil log Anda",
   "DiscoverPlaysets": "Temukan Playset",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "Gagal download playset ini.",
   "UpdatePlaysetTip": "Update versi lokal playset ini",
   "DownloadPlaysetTip": "Download playset ini ke komputer lokal anda",
-  "EditPlaysetThumbnail": "Edit gambar thumbnail playset ini",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "Make this profile Public",
   "MakePrivate": "Make this profile Private",
   "CopyPlaysetLink": "Salin ID playset ini",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "Skip pemeriksaan internet dan secara otomatis menganggap anda terhubung.",
   "SelectAll": "Select all items",
   "DeselectAll": "Un-select all items",
-  "AddTagBox": "Add a new tag here",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
   "EditTagsOfPackage": {
     "One": "Edit all of this package's assets' Tags",
@@ -546,5 +558,29 @@
   "Version": "Version",
   "UpdateTime": "Update Time",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }
