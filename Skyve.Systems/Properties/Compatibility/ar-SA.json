@@ -8,7 +8,6 @@
   "NoteInfo": "عرض نص معلومات إضافية للحزمة",
   "BlackListName": "القائمة السوداء بالاسم",
   "BlackListId": "Black-list by name",
-  "GlobalTags": "العلامات العالمية",
   "GlobalTagsInfo": "علامات جميع اللاعبين سوف يشاهدون في التطبيق",
   "Links": "الروابط",
   "StatusesCount": "Statuses ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "لا توجد معلومات كافية",
   "HasIssues": "لديه مشاكل",
   "Broken": "مكسورة",
@@ -60,9 +60,8 @@
   "AttentionRequired": "مطلوب الانتباه",
   "Website": "الموقع",
   "Donation": "تبرع",
-  "ManageSinglePackage": "إدارة حزم محددة",
-  "ManageCompatibilityData": "إدارة بيانات التوافق",
-  "YourPackages": "إدارة الحزم الخاصة بك",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "إضافة حزم",
   "ConfirmEndSession": "هل أنت متأكد من أنك تريد إنهاء جلستك؟",
   "CrDataLoadFailed": "فشل تحميل البيانات، حاول مرة أخرى لاحقاً",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "لا توجد معلومات كافية لاستعراض هذه الحزمة بشكل صحيح.",
   "Stability_HasIssues": "هذه الحزمة يمكن أن تسبب مشكلات.\r\nكن حذرا عند استخدامها.",
   "Stability_Broken": "تم كسر هذه الحزمة.\r\nمن المعروف أنها إما كسر اللعبة أو أنها لا تعمل فقط.",
@@ -236,7 +236,7 @@
   "ManagePackage": "إدارة الحزمة",
   "Banned": "محظور",
   "NoIssues": "لا توجد مشاكل",
-  "RequestReviewDisclaimer": "*معرف Steam وسجلاتك يتم إرسالها مع طلبك",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "وضع السيناريوهات",
   "ThemeMaking": "تصميم الموضوع",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }
