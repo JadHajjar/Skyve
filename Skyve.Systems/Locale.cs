@@ -1620,6 +1620,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ResetSnoozes => _instance.GetText("ResetSnoozes");
 
 	/// <summary>
+	/// Restart Required
+	/// </summary>
+	public static Translation RestartRequired => _instance.GetText("RestartRequired");
+
+	/// <summary>
 	/// Failed to send your review request for '{0}'.  {1}
 	/// </summary>
 	public static Translation ReviewRequestFailed => _instance.GetText("ReviewRequestFailed");

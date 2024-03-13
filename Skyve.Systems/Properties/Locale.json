@@ -581,5 +581,6 @@
   "NoAssets": "Disable All Assets",
   "NoMods": "Disable All Code-Mods",
   "FavoritePlaysets": "Favorite Playsets",
-  "OnlyShowErrors": "Only show warnings and errors"
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }
