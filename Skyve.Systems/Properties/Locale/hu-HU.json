@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Létrehozás dátuma",
   "Sorting_Usage": "Használt profil",
   "Sorting_Name": "Név",
-  "Sorting_FileSize": "Teljes fájlméret",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "Frissítés ideje",
   "Sorting_SubscribeTime": "Feliratkozás időpontja",
   "Sorting_Author": "Készítő neve",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "Tekintse meg az online útmutatót a Skyve használatának megkezdéséhez.",
   "ResetButton_Tip": "Állítsa vissza a beállításokat az alapértelmezett értékekre. Ez nem befolyásolja a mappa beállításait.",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "Fejlesztői felhasználói felület engedélyezése",
-  "RefreshWorkshop": "Frissítse a műhely tartalmát",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "Új játék indítása",
   "LoadSaveGame": "Folytassa az előző mentett játékot",
   "DevOptions": "Fejlesztői funkciókkal való indítás",
@@ -154,7 +152,7 @@
   "LogZipFile": "Naplófájlok mentése fáljba",
   "LogFolders": "Napló mappa",
   "LogFileDrop": "Dobjon el vagy válasszon egy naplófájlt az egyszerűsítéshez, és jelenítse meg a hibalistát a naplóban",
-  "DefaultLogViewInfo": "Az oldal megnyitásakor az utolsó naplófájl hibái automatikusan megjelennek alább",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "Hibák a naplóban",
   "OpenLogFolder": "Nyissa meg a játék naplómappáját",
   "CopyLogFile": "Másolja a játék naplófájlját a vágólapra",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "Assetek: {0}, összesen: {1}",
   "NewPlayset_Tip": "Hozzon létre vagy importáljon új profilt",
   "ViewPlaysets_Tip": "Megtekintheti és kezelheti mentett játékkészleteit",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "Új játékot indít a Cities: Skylines elindításakor. Megadhatja, hogy melyik térképen szeretne kezdeni",
   "LoadSaveGame_Tip": "Tölts be egy mentési játékot a Cities: Skylines indításakor. Ha nem választ ki egy mentési fájlt, akkor a legutóbbi mentés folytatódik",
   "BETA": "BÉTA",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "Összes játékkészlet: {0}",
   "PlaysetFilter": "A profil filter",
   "CheckDocumentsFolder": "Győződjön meg arról, hogy a Skyve hozzáfér a dokumentumok mappájához, és azt használja a felhasználói felület és a nyelvi beállítások tárolására.",
-  "FailedToSaveLanguage": "Nem sikerült menteni a kiválasztott nyelvet",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "Nem sikerült megnyitni a Témaváltót",
   "FailedToDeleteItem": "Nem sikerült törölni az elemet",
   "OpenChangelog": "Nyissa meg a Változásnaplót",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "Törölje ezt az elemet",
     "Plural": "Kiválasztott csomagok törlése"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "A profil fájljának megtekintése a számítógépén",
   "ChangePlaysetColor": "Módosítsa a profil színét",
   "EditPlaysetName": "Szerkessze a profil nevét",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "A profil színe",
   "CreateShortcutPlayset": "Hozzon létre hozzá egy parancsikont az asztalon",
   "AskToLaunchGameForShortcut": "Szeretnéd, ha a parancsikon a profiloddal indítaná el a játékot?",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "Adjon hozzá további parancsokat a játék indításakor",
   "SearchGenericPackages": "Keresés a fájlcsomagok között..",
   "Sorting_Subscribers": "Feliratkozások összesen",
-  "Sorting_Votes": "Szavazatok",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} szavazat",
-    "Plural": "{1} szavazat"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} feliratkozó",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "Profil",
     "Plural": "Profilok"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} alkalmazott",
@@ -368,6 +374,10 @@
     "One": "Nyissa meg a csomag oldalát",
     "Plural": "Szerkeszd a kiválasztott elemek címkéit"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "A kizárt csomagok megjelenítése a „Referenciák” lapon",
   "ShowAllReferencedPackages_Tip": "Megjeleníti mind a kizárt, mind a benne foglalt csomagokat, amelyek az éppen megtekintett csomagra hivatkoznak.",
   "TreatOptionalAsRequired": "Az opcionális csomagokat igény szerint kezelje",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "A szerző eltávolította",
   "Missing": "Hiányzó",
   "LoggedInAs": "Bejelentkezve mint",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "Ismeretlen felhasználó",
   "AddMeaningfulDescription": "Kérjük, adj hozzá értelmes leírást kérésedhez.",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "Adjon hozzá egy hiányzó interakciót egy másik csomaghoz",
   "ActivePlayset": "Aktív játékkészlet",
   "References": "Referenciák",
-  "OpenLog": "Naplófájl megnyitása",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "Sorbarendezés",
   "FailedToFetchLogs": "Nem sikerült lekérni a naplókat",
   "DiscoverPlaysets": "Fedezze fel a profilt",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "Nem sikerült letölteni ezt a profilt.\n\nKérlek, próbáld újra később.",
   "UpdatePlaysetTip": "Frissítse a profil helyi verzióját",
   "DownloadPlaysetTip": "Töltse le ezt a profilt a helyi számítógépére",
-  "EditPlaysetThumbnail": "Szerkessze a profil indexképét",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "Tedd nyilvánossá ezt a profilt",
   "MakePrivate": "Legyen ez a profil privát",
   "CopyPlaysetLink": "Másolja ki a profil azonosítóját",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "Kihagyja az internetkeresést, és automatikusan feltételezi, hogy csatlakozik.",
   "SelectAll": "Válassza ki az összes elemet",
   "DeselectAll": "Törölje az összes elem kijelölését",
-  "AddTagBox": "Új címke hozzáadása",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "Több csomag címkéinek szerkesztése felülírja mindegyik egyéni címkéjét.",
   "EditTagsOfPackage": {
     "One": "Szerkeszd a csomag összes elemének címkéit",
@@ -546,5 +558,29 @@
   "Version": "Verzió",
   "UpdateTime": "Frissítés ideje",
   "Status": "Státusz",
-  "ThisModIsRequiredYouCantDisableIt": "Ez a mod szükséges, nem lehet letiltani."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "Ez a mod szükséges, nem lehet letiltani.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }
