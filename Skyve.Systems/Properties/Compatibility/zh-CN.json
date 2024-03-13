@@ -213,7 +213,7 @@
   },
   "ExcludeCount": {
     "One": "{0} 个{1} 应当被卸下",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} 个{1} 应当被卸下"
   },
   "UnsubscribeCount": "{0} 个{1} 应当取消订阅",
   "SwitchCount": {
@@ -252,5 +252,5 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "应用所有可用的操作",
   "SnoozeAll": "关闭当前显示的所有问题的提醒",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "关联的插件"
 }
