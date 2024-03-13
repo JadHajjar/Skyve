@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Дата створення",
   "Sorting_Usage": "Використання ігрового набору",
   "Sorting_Name": "Назва",
-  "Sorting_FileSize": "Загальний розмір файлу",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "Час оновлення",
   "Sorting_SubscribeTime": "Час підписки",
   "Sorting_Author": "Ім'я автора",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "Перегляньте онлайн-посібник, щоб почати роботу з Skyve.",
   "ResetButton_Tip": "Скидання налаштувань до стандартних. Це не впливає на налаштування теки.",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "Увімкнути інтерфейс розробника",
-  "RefreshWorkshop": "Оновити вміст Майстерні",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "Почати нову гру",
   "LoadSaveGame": "Продовжити попередню збережену гру",
   "DevOptions": "Параметри запуску розробника",
@@ -154,7 +152,7 @@
   "LogZipFile": "Зберегти логи у файл",
   "LogFolders": "Тека логів",
   "LogFileDrop": "Перетягніть або виберіть лог, який буде спрощений і відображатиме список помилок всередині",
-  "DefaultLogViewInfo": "Помилки з вашої останньої сесії будуть автоматично відображатись під час відкриття цієї сторінки",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "Помилки у лог-файлі",
   "OpenLogFolder": "Відкрити теку з логом гри",
   "CopyLogFile": "Скопіювати лог-файл гри в буфер обміну",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "Ассетів включено: {0}, Загалом: {1}",
   "NewPlayset_Tip": "Створити або імпортувати новий ігровий набір",
   "ViewPlaysets_Tip": "Перегляд та керування вашими ігровими наборами",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "Починає нову гру під час запуску Cities: Skylines. Ви можете вказати карту, яку хочете використати",
   "LoadSaveGame_Tip": "Завантажте збереження при запуску Cities: Skylines. Якщо не вибрано файл збереження, продовжиться ваше останнє збереження",
   "BETA": "БЕТА",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "Всього ігрових наборів: {0}",
   "PlaysetFilter": "Фільтр ігрового набору",
   "CheckDocumentsFolder": "Переконайтеся, що Skyve має доступ до вашої теки з документами, вона використовує її для зберігання налаштувань інтерфейсу і мови.",
-  "FailedToSaveLanguage": "Не вдалося зберегти вибрану мову",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "Не вдалося відкрити перемикач тем",
   "FailedToDeleteItem": "Не вдалося видалити елемент",
   "OpenChangelog": "Відкрити журнал змін",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "Видалити цей ассет",
     "Plural": "Видалити вибрані ассети"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "Перегляньте файл цього ігрового набору на вашому комп'ютері",
   "ChangePlaysetColor": "Змінити колір ігрового набору",
   "EditPlaysetName": "Редагувати ім'я ігрового набору",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "Колір ігрового набору",
   "CreateShortcutPlayset": "Створити ярлик для нього на робочому столі",
   "AskToLaunchGameForShortcut": "Ви хотіли б щоб комбінацією клавіш також запускалась гра з вашим ігровим набором?",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "Додає додаткові параметри під час запуску гри",
   "SearchGenericPackages": "Шукати у цих пакунках..",
   "Sorting_Subscribers": "Всього підписників",
-  "Sorting_Votes": "Голоси",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} subscriber",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "Ігровий набір",
     "Plural": "Ігрові набори"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} включений",
@@ -368,6 +374,10 @@
     "One": "Редагувати Мітки даного пакунку",
     "Plural": "Редагувати Мітки вибраних елементів"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "Показати виключені пакети в закладці \"References\"",
   "ShowAllReferencedPackages_Tip": "Відображає як виключені, так і включені пакети, які посилаються на той, який ви переглядаєте.",
   "TreatOptionalAsRequired": "Трактувати необов'язкові пакети як обов'язкові",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "Видалено автором",
   "Missing": "Відсутний",
   "LoggedInAs": "Ви увійшли як",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "Невідомий користувач",
   "AddMeaningfulDescription": "Будь ласка, додайте змістовний опис до вашого запиту.",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "Додайте відсутню взаємодію з іншим пакунком",
   "ActivePlayset": "Active Playset",
   "References": "Посилання",
-  "OpenLog": "Відкрити лог файл",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "Сортувати за",
   "FailedToFetchLogs": "Не вдалося отримати ваші журнали",
   "DiscoverPlaysets": "Відкрийте для себе ігрові набори",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "Не вдалося завантажити цей ігровий набір.\r\n\r\nБудь ласка, спробуйте ще раз пізніше.",
   "UpdatePlaysetTip": "Оновіть вашу локальну версію цього ігрового набору",
   "DownloadPlaysetTip": "Завантажити цей ігровий набір на ваш локальний комп'ютер",
-  "EditPlaysetThumbnail": "Змінити іконку цього ігрового набору",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "Зробити цей ігровий набір Публічним",
   "MakePrivate": "Зробити цей ігровий набір Приватним",
   "CopyPlaysetLink": "Скопіюйте ID цього ігрового набору",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "Пропускає перевірку підключення до інтернету та автоматично припускає, що ви є підключеним.",
   "SelectAll": "Select all items",
   "DeselectAll": "Un-select all items",
-  "AddTagBox": "Додати новий тег тут",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "Редагування тегів декількох пакунків перезапише кожен з їх власних тегів.",
   "EditTagsOfPackage": {
     "One": "Редагувати всі Теги ассетів цього пакунка",
@@ -546,5 +558,29 @@
   "Version": "Version",
   "UpdateTime": "Update Time",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }
