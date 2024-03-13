@@ -55,6 +55,11 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 
 		if (CurrentPackage == e.Item)
 		{
+			var filledRect = e.ClipRectangle.Pad(0, -Padding.Top / 2, Padding.Right / 2, -Padding.Bottom / 2);
+
+			using var backBrush = new SolidBrush(e.BackColor.MergeColor(FormDesign.Design.ActiveColor, 75));
+			e.Graphics.FillRoundedRectangle(backBrush, filledRect, Padding.Left);
+
 			var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
 			e.Graphics.FillRoundedRectangle(activeBrush, clipRectangle.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleRight), Padding.Left);
 

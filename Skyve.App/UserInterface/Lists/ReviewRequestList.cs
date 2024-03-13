@@ -114,6 +114,7 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 
 		e.Rects.TextRectangle = SlickButton.AlignAndDraw(e.Graphics, e.ClipRectangle.Pad(0, e.Rects.UserRectangle.Height + Padding.Top, 0, 0), ContentAlignment.TopRight, new ButtonDrawArgs
 		{
+			BackgroundColor = e.BackColor,
 			HoverState = e.HoverState,
 			Cursor = CursorLocation,
 			Icon = "I_Copy"
@@ -133,6 +134,7 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		using var buttonFont = UI.Font(9.5F);
 		SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 		{
+			BackgroundColor = e.BackColor,
 			Font = buttonFont,
 			HoverState = e.HoverState,
 			Rectangle = e.Rects.ViewRectangle,

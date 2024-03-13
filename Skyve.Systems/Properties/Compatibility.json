@@ -7,7 +7,7 @@
   "Note": "Note",
   "NoteInfo": "Extra informational text displayed for the package",
   "BlackListName": "Black-list by name",
-  "BlackListId": "Black-list by Steam ID",
+  "BlackListId": "Black-list by ID",
   "GlobalTagsInfo": "Tags all players will see in the app",
   "Links": "Links",
   "StatusesCount": "Statuses ({0})",
@@ -149,7 +149,7 @@
   "Stability_HasIssues": "This package can cause issues.\r\nBe careful while using it.",
   "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
   "Stability_Incompatible": "This package is not compatible with, or breaks, the game.\r\n\r\nYou should remove it immediately.",
-  "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
+  "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.\r\n\r\nCheck the package's links to look for updates to the mod.",
   "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
@@ -231,7 +231,7 @@
   "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\n\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages.",
-  "ReviewRequests": "Review Requests {0}",
+  "ReviewRequests": "Review Requests",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
   "Banned": "Banned",
@@ -254,5 +254,6 @@
   "SnoozeAll": "Snooze all displayed issues",
   "LinkedPackages": "Linked Packages",
   "NoTags": "No Tags",
-  "NoLinks": "No Links"
+  "NoLinks": "No Links",
+  "HideReviewedPackages": "Hide reviewed mods"
 }

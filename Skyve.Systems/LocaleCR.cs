@@ -152,7 +152,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation Banned => _instance.GetText("Banned");
 
 	/// <summary>
-	/// Black-list by Steam ID
+	/// Black-list by ID
 	/// </summary>
 	public static Translation BlackListId => _instance.GetText("BlackListId");
 
@@ -323,6 +323,11 @@ public class LocaleCR : LocaleHelper
 	/// Has issues, no more updates
 	/// </summary>
 	public static Translation HasIssuesNoFutureUpdates => _instance.GetText("HasIssuesNoFutureUpdates");
+
+	/// <summary>
+	/// Hide reviewed mods
+	/// </summary>
+	public static Translation HideReviewedPackages => _instance.GetText("HideReviewedPackages");
 
 	/// <summary>
 	/// IMT Markings
@@ -626,7 +631,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation ReuseDataTip => _instance.GetText("ReuseData_Tip");
 
 	/// <summary>
-	/// Review Requests {0}
+	/// Review Requests
 	/// </summary>
 	public static Translation ReviewRequests => _instance.GetText("ReviewRequests");
 
@@ -711,7 +716,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityIncompatible => _instance.GetText("Stability_Incompatible");
 
 	/// <summary>
-	/// This package is a local version of its original mod '{0}'.  Local versions are usually used for testing purposes or in case you do not have Steam.  Check the package's links to look for updates to the mod.
+	/// This package is a local version of its original mod '{0}'.  Local versions are usually used for testing purposes.  Check the package's links to look for updates to the mod.
 	/// </summary>
 	public static Translation StabilityLocal => _instance.GetText("Stability_Local");
 

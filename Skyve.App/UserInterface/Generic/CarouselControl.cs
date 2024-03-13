@@ -180,30 +180,20 @@ public partial class CarouselControl : SlickControl
 			return;
 		}
 
-		var gap = (int)(64 * UI.FontScale) * 3 / 2;
+		var gap = (int)(64 * UI.FontScale);
 
-		var rect1 = new Rectangle(0, imageRect.Y, gap, imageRect.Height);
-		var rect2 = new Rectangle(MainThumb.Width - gap, imageRect.Y, gap, imageRect.Height);
-		using var brush1 = new LinearGradientBrush(rect1, BackColor, default, 0f);
-		using var brush2 = new LinearGradientBrush(rect2, BackColor, default, 180f);
+		var rect1 = new Rectangle(0, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
+		var rect2 = new Rectangle(MainThumb.Width - gap * 2, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
+		using var brush = new SolidBrush(Color.FromArgb(125, BackColor));
 
-		var blend = new ColorBlend(3)
-		{
-			Colors = [BackColor, Color.FromArgb(175, BackColor), default],
-			Positions = [0, 0.5f, 1f]
-		};
-
-		brush1.InterpolationColors = blend;
-		brush2.InterpolationColors = blend;
-
-		e.Graphics.FillRectangle(brush1, rect1);
-		e.Graphics.FillRectangle(brush2, rect2);
+		e.Graphics.FillEllipse(brush, rect1);
+		e.Graphics.FillEllipse(brush, rect2);
 
 		var icon1 = IconManager.GetIcon("I_ArrowLeft", gap * 3 / 4).Color(rect1.Contains(cursor) ? FormDesign.Design.ActiveColor : ForeColor);
 		var icon2 = IconManager.GetIcon("I_ArrowRight", gap * 3 / 4).Color(rect2.Contains(cursor) ? FormDesign.Design.ActiveColor : ForeColor);
 
-		e.Graphics.DrawImage(icon1, rect1.Pad(0, 0, gap / 2, 0).CenterR(icon1.Size));
-		e.Graphics.DrawImage(icon2, rect2.Pad(gap / 2, 0, 0, 0).CenterR(icon2.Size));
+		e.Graphics.DrawImage(icon1, rect1.Pad(0,0, gap / 10, 0).CenterR(icon1.Size));
+		e.Graphics.DrawImage(icon2, rect2.Pad(gap / 10, 0, 0, 0).CenterR(icon2.Size));
 
 		MainThumb.Cursor = rect1.Contains(cursor) || rect2.Contains(cursor) ? Cursors.Hand : Cursors.Default;
 	}
@@ -225,10 +215,10 @@ public partial class CarouselControl : SlickControl
 		}
 		else if (e.Button == MouseButtons.Left)
 		{
-			var gap = (int)(64 * UI.FontScale) * 3 / 2;
+			var gap = (int)(64 * UI.FontScale);
 
-			var rect1 = new Rectangle(0, 0, gap, MainThumb.Height);
-			var rect2 = new Rectangle(MainThumb.Width - gap, 0, gap, MainThumb.Height);
+			var rect1 = new Rectangle(0, 0, gap * 2, MainThumb.Height).CenterR(gap, gap);
+			var rect2 = new Rectangle(MainThumb.Width - gap * 2, 0, gap * 2, MainThumb.Height).CenterR(gap, gap);
 
 			if (rect1.Contains(e.Location))
 			{
