@@ -170,13 +170,14 @@ internal class D_AssetsInfo : IDashboardItem
 
 	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawLoadingSection(e, applyDrawing, e.ClipRectangle, Locale.AssetsBubble, out _, ref preferredHeight);
+		DrawLoadingSection(e, applyDrawing, ref preferredHeight, Locale.AssetsBubble);
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.AssetsBubble, "I_Assets", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.AssetsBubble, "I_Assets");
 
+		var fore = FormDesign.Design.ForeColor;
 		var textRect = e.ClipRectangle.Pad(Margin);
 
 		e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower())
@@ -255,8 +256,9 @@ internal class D_AssetsInfo : IDashboardItem
 	{
 		var mainRect = e.ClipRectangle.Pad(0, 0, e.ClipRectangle.Width / 2, 0);
 
-		DrawSection(e, applyDrawing, mainRect.ClipTo(mainSectionHeight), Locale.AssetsBubble, "I_Assets", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.AssetsBubble, "I_Assets");
 
+		var fore = FormDesign.Design.ForeColor;
 		var textRect = mainRect.Pad(Margin);
 
 		e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower())

@@ -68,7 +68,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 
 		if (thumbnail is null)
 		{
-			using var generic = IconManager.GetIcon(isUpToDate ? "I_OK" : "I_Paradox", isUpToDate ? (imageRect.Height * 3 / 4) : imageRect.Height).Color(e.BackColor);
+			using var generic = IconManager.GetIcon(isUpToDate ? "I_Ok" : "I_Paradox", isUpToDate ? (imageRect.Height * 3 / 4) : imageRect.Height).Color(e.BackColor);
 			using var backBrush = new SolidBrush(isUpToDate ? FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.IconColor, 35) : FormDesign.Design.IconColor);
 
 			e.Graphics.FillRoundedRectangle(backBrush, imageRect, (int)(5 * UI.FontScale));

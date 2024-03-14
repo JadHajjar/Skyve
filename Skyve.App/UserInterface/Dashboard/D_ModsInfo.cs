@@ -167,13 +167,14 @@ internal class D_ModsInfo : IDashboardItem
 
 	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawLoadingSection(e, applyDrawing, e.ClipRectangle, Locale.ModsBubble, out _, ref preferredHeight);
+		DrawLoadingSection(e, applyDrawing, ref preferredHeight, Locale.ModsBubble);
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.ModsBubble, "I_Mods", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.ModsBubble, "I_Mods");
 
+		var fore = FormDesign.Design.ForeColor;
 		var textRect = e.ClipRectangle.Pad(Margin);
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
@@ -271,8 +272,9 @@ internal class D_ModsInfo : IDashboardItem
 	{
 		var mainRect = e.ClipRectangle.Pad(0, 0, e.ClipRectangle.Width / 2, 0);
 
-		DrawSection(e, applyDrawing, mainRect.ClipTo(mainSectionHeight), Locale.ModsBubble, "I_Mods", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.ModsBubble, "I_Mods");
 
+		var fore = FormDesign.Design.ForeColor;
 		var textRect = mainRect.Pad(Margin);
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)

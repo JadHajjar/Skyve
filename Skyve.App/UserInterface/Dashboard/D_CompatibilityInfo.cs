@@ -187,16 +187,16 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawLoadingSection(e, applyDrawing, e.ClipRectangle, Locale.CompatibilityReport, out _, ref preferredHeight);
+		DrawLoadingSection(e, applyDrawing, ref preferredHeight, Locale.CompatibilityReport);
 	}
 
 	private void DrawNoIssues(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.CompatibilityReport, "I_CompatibilityReport");
 
 		e.Graphics.DrawStringItem(Locale.NoCompatibilityIssues
 			, Font
-			, fore
+			, FormDesign.Design.ForeColor
 			, e.ClipRectangle.Pad(Margin)
 			, ref preferredHeight
 			, applyDrawing);
@@ -217,7 +217,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 	private void DrawSplit(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.CompatibilityReport, "I_CompatibilityReport");
 
 		var rect = new Rectangle(e.ClipRectangle.X, preferredHeight, (e.ClipRectangle.Width / 2) - (Padding.Left / 2), mainSectionHeight - preferredHeight + e.ClipRectangle.Y);
 
@@ -231,7 +231,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 		{
 			e.Graphics.DrawStringItem(string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Mod.Plural.ToLower())
 			, Font
-			, fore
+			, FormDesign.Design.ForeColor
 			, rect.Pad(Margin)
 			, ref preferredHeight
 			, applyDrawing
@@ -275,7 +275,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 		{
 			e.Graphics.DrawStringItem(string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Asset.Plural.ToLower())
 				, Font
-				, fore
+				, FormDesign.Design.ForeColor
 				, rect.Pad(Margin)
 				, ref preferredHeight
 				, applyDrawing
@@ -339,7 +339,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.CompatibilityReport, "I_CompatibilityReport");
 
 		var rect = new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, modsSectionHeight - preferredHeight);
 
@@ -347,7 +347,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 		{
 			e.Graphics.DrawStringItem(string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Mod.Plural.ToLower())
 			, Font
-			, fore
+			, FormDesign.Design.ForeColor
 			, e.ClipRectangle.Pad(Margin)
 			, ref preferredHeight
 			, applyDrawing
@@ -392,7 +392,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 		{
 			e.Graphics.DrawStringItem(string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Asset.Plural.ToLower())
 				, Font
-				, fore
+				, FormDesign.Design.ForeColor
 				, e.ClipRectangle.Pad(Margin)
 				, ref preferredHeight
 				, applyDrawing

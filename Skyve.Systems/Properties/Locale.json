@@ -189,7 +189,7 @@
   "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
-  "FailedToSaveLanguage": "Failed to save the selected 1language",
+  "FailedToSaveLanguage": "Failed to save the selected language",
   "FailedToOpenTC": "Failed to open Theme Changer",
   "FailedToDeleteItem": "Failed to delete item",
   "OpenChangelog": "Open Change-log",

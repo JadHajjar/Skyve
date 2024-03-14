@@ -184,7 +184,7 @@ public partial class CarouselControl : SlickControl
 
 		var rect1 = new Rectangle(0, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
 		var rect2 = new Rectangle(MainThumb.Width - gap * 2, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
-		using var brush = new SolidBrush(Color.FromArgb(125, BackColor));
+		using var brush = new SolidBrush(Color.FromArgb(125, BackColor.Tint(Lum: BackColor.IsDark() ? 6:-6)));
 
 		e.Graphics.FillEllipse(brush, rect1);
 		e.Graphics.FillEllipse(brush, rect2);

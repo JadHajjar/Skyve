@@ -738,7 +738,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FailedToRetrievePlaysets => _instance.GetText("FailedToRetrievePlaysets");
 
 	/// <summary>
-	/// Failed to save the selected 1language
+	/// Failed to save the selected language
 	/// </summary>
 	public static Translation FailedToSaveLanguage => _instance.GetText("FailedToSaveLanguage");
 

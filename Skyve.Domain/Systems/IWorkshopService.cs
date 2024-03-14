@@ -17,10 +17,14 @@ public interface IWorkshopService
 	IPackage GetPackage(IPackageIdentity identity);
 	Task<IPackage> GetPackageAsync(IPackageIdentity identity);
 	Task<IEnumerable<IWorkshopInfo>> GetWorkshopItemsByUserAsync(object userId);
-	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, string? query = null, string[]? requiredTags = null, bool all = false);
+	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null);
+
 #if CS2
+	event Action? ContextAvailable;
+
 	bool IsLoggedIn { get; }
 	bool IsLoginPending { get; }
+	bool IsAvailable { get; }
 
 	Task Initialize();
 	Task Login();
