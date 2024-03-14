@@ -351,9 +351,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			}
 			else
 			{
-				var pc = new PC_UserPage(user);
-
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+				Program.MainForm.PushPanel(null, new PC_UserPage(user));
 			}
 
 			return;

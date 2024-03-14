@@ -1233,6 +1233,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation NewUpdatedCount => _instance.GetText("NewUpdatedCount");
 
 	/// <summary>
+	/// New Uploads
+	/// </summary>
+	public static Translation NewUploads => _instance.GetText("NewUploads");
+
+	/// <summary>
 	/// Next Stage
 	/// </summary>
 	public static Translation NextStage => _instance.GetText("NextStage");

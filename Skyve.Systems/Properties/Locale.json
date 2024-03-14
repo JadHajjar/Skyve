@@ -582,5 +582,6 @@
   "NoMods": "Disable All Code-Mods",
   "FavoritePlaysets": "Favorite Playsets",
   "OnlyShowErrors": "Only show warnings and errors",
-  "RestartRequired": "Restart Required"
+  "RestartRequired": "Restart Required",
+  "NewUploads": "New Uploads"
 }
