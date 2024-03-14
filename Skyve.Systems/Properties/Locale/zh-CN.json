@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "创建日期",
   "Sorting_Usage": "配置文件用途",
   "Sorting_Name": "名称",
-  "Sorting_FileSize": "File Size",
+  "Sorting_FileSize": "文件大小",
   "Sorting_UpdateTime": "更新时间",
   "Sorting_SubscribeTime": "订阅时间",
   "Sorting_Author": "作者名称",
@@ -193,7 +193,7 @@
   "FailedToOpenTC": "打开主题编辑器失败",
   "FailedToDeleteItem": "删除项目失败",
   "OpenChangelog": "打开更新日志",
-  "Changelog": "Change-log",
+  "Changelog": "更新日志",
   "DeleteAsset": {
     "One": "删除此资产",
     "Plural": "删除已选的资产"
@@ -271,7 +271,7 @@
   "LaunchArgsInfo": "为游戏添加额外的启动参数",
   "SearchGenericPackages": "搜索插件…",
   "Sorting_Subscribers": "总订阅量",
-  "Sorting_Votes": "Total Likes",
+  "Sorting_Votes": "累计点赞",
   "VotesCount": {
     "One": "{1} like",
     "Plural": "{1} likes"
