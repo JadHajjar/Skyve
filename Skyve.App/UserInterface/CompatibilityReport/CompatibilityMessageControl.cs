@@ -99,7 +99,7 @@ public class CompatibilityMessageControl : SlickControl
 					e.Graphics.FillRoundedRectangle(new SolidBrush(purple), snoozeRect, pad);
 				}
 
-				using var snoozeIcon = IconManager.GetLargeIcon("I_Snooze");
+				using var snoozeIcon = IconManager.GetLargeIcon("Snooze");
 				e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor)) ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
 			}
 
@@ -162,7 +162,7 @@ public class CompatibilityMessageControl : SlickControl
 					}
 					else
 					{
-						using var img = IconManager.GetIcon(dlc is null ? "I_Mods" : "I_Dlc", (int)(40 * UI.FontScale)).Color(BackColor);
+						using var img = IconManager.GetIcon(dlc is null ? "Mods" : "Dlc", (int)(40 * UI.FontScale)).Color(BackColor);
 						using var brush2 = new SolidBrush(fore);
 						var imgRect = rect.Align(UI.Scale(new Size(isDlc ? 40 * 460 / 215 : 40, 40), UI.FontScale), ContentAlignment.TopLeft);
 
@@ -197,27 +197,27 @@ public class CompatibilityMessageControl : SlickControl
 							if (p is null)
 							{
 								buttonText = Locale.SubscribeToItem;
-								iconName = "I_Add";
+								iconName = "Add";
 							}
 							else if (!p.IsIncluded())
 							{
 								buttonText = Locale.IncludeItem;
-								iconName = "I_Check";
+								iconName = "Check";
 							}
 							else if (!p.IsEnabled())
 							{
 								buttonText = Locale.EnableItem;
-								iconName = "I_Enabled";
+								iconName = "Enabled";
 							}
 
 							break;
 						case StatusAction.SelectOne:
 							buttonText = Locale.SelectThisPackage;
-							iconName = "I_Ok";
+							iconName = "Ok";
 							break;
 						case StatusAction.Switch:
 							buttonText = Locale.SwitchToItem;
-							iconName = "I_Switch";
+							iconName = "Switch";
 							break;
 					}
 
@@ -287,34 +287,34 @@ public class CompatibilityMessageControl : SlickControl
 
 					colorStyle = ColorStyle.Green;
 					allText = max switch { 3 => Locale.IncludeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
-					allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
+					allIcon = max switch { 3 => "Add", 2 => "Check", 1 => "Enabled", _ => null };
 				}
 
 				break;
 			case StatusAction.RequiresConfiguration:
 				allText = _compatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
-				allIcon = "I_Snooze";
+				allIcon = "Snooze";
 				colorStyle = ColorStyle.Active;
 				break;
 			case StatusAction.UnsubscribeThis:
 				allText = Locale.Unsubscribe;
-				allIcon = "I_RemoveSteam";
+				allIcon = "RemoveSteam";
 				break;
 			case StatusAction.UnsubscribeOther:
 				allText = Message.Packages.Count() switch { 0 => null, 1 => Locale.Unsubscribe, _ => Locale.ExcludeAll };
-				allIcon = "I_RemoveSteam";
+				allIcon = "RemoveSteam";
 				break;
 			case StatusAction.ExcludeThis:
 				allText = Locale.Exclude;
-				allIcon = "I_X";
+				allIcon = "X";
 				break;
 			case StatusAction.ExcludeOther:
 				allText = Message.Packages.Count() switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
-				allIcon = "I_X";
+				allIcon = "X";
 				break;
 			case StatusAction.RequestReview:
 				allText = LocaleCR.RequestReview;
-				allIcon = "I_RequestReview";
+				allIcon = "RequestReview";
 				colorStyle = ColorStyle.Active;
 				break;
 		}

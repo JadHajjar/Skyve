@@ -202,7 +202,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 			e.Graphics.FillRectangle(brush, rectangleNone);
 		}
 
-		using var slash = IconManager.GetIcon("I_Slash", Height - Padding.Vertical).Color(textColorNone);
+		using var slash = IconManager.GetIcon("Slash", Height - Padding.Vertical).Color(textColorNone);
 		e.Graphics.DrawImage(slash, ClientRectangle.CenterR(slash.Size));
 
 		if (!Enabled)

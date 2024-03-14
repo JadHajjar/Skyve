@@ -94,7 +94,7 @@ partial class EditTagsForm
 			this.B_Apply.ButtonType = SlickControls.ButtonType.Active;
 			this.B_Apply.ColorShade = null;
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_Ok";
+			dynamicIcon1.Name = "Ok";
 			this.B_Apply.ImageName = dynamicIcon1;
 			this.B_Apply.Location = new System.Drawing.Point(300, 400);
 			this.B_Apply.Name = "B_Apply";
@@ -141,7 +141,7 @@ partial class EditTagsForm
 			this.tableLayoutPanel1.SetColumnSpan(this.TB_NewTag, 2);
 			this.TB_NewTag.Dock = System.Windows.Forms.DockStyle.Top;
 			this.TB_NewTag.EnterTriggersClick = true;
-			dynamicIcon2.Name = "I_Add";
+			dynamicIcon2.Name = "Add";
 			this.TB_NewTag.ImageName = dynamicIcon2;
 			this.TB_NewTag.Location = new System.Drawing.Point(3, 3);
 			this.TB_NewTag.Name = "TB_NewTag";

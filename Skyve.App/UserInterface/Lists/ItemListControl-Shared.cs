@@ -20,7 +20,7 @@ public partial class ItemListControl
 		var padding = GridView ? GridPadding : Padding;
 		var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
 
-		e.Rects.ScoreRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X + xdiff + (xdiff == 0 ? 0 : padding.Left), e.Rects.IconRect.Bottom), score.ToMagnitudeString(), "I_VoteFilled", workshopInfo!.HasVoted ? FormDesign.Design.GreenColor : null, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
+		e.Rects.ScoreRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X + xdiff + (xdiff == 0 ? 0 : padding.Left), e.Rects.IconRect.Bottom), score.ToMagnitudeString(), "VoteFilled", workshopInfo!.HasVoted ? FormDesign.Design.GreenColor : null, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 
 		return 0;
 	}
@@ -36,7 +36,7 @@ public partial class ItemListControl
 
 		if (thumbnail is null)
 		{
-			using var generic = IconManager.GetIcon(e.Item is IAsset ? "I_Assets" : _page is SkyvePage.Mods ? "I_Mods" : _page is SkyvePage.Packages ? "I_Package" : "I_Paradox", e.Rects.IconRect.Height).Color(e.BackColor);
+			using var generic = IconManager.GetIcon(e.Item is IAsset ? "Assets" : _page is SkyvePage.Mods ? "Mods" : _page is SkyvePage.Packages ? "Package" : "Paradox", e.Rects.IconRect.Height).Color(e.BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
@@ -171,7 +171,7 @@ public partial class ItemListControl
 			return;
 		}
 
-		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
+		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : "Enabled");
 		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
@@ -187,14 +187,14 @@ public partial class ItemListControl
 			}
 
 			var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
-			var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
+			var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : partialIncluded ? "Slash" : isIncluded ? "Ok" : package is null ? "Add" : "Enabled");
 			var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
 
 			DynamicIcon? enabl = null;
 
 			if (_settings.UserSettings.AdvancedIncludeEnable && package is not null)
 			{
-				enabl = new DynamicIcon(package.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
+				enabl = new DynamicIcon(package.IsEnabled() ? "Checked" : "Checked_OFF");
 
 				if (isIncluded)
 				{
@@ -338,7 +338,7 @@ public partial class ItemListControl
 		if (Width / UI.FontScale >= 800 && date != default)
 		{
 			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
-			DrawCell(e, Columns.UpdateTime, dateText, "I_UpdateTime", active: false);
+			DrawCell(e, Columns.UpdateTime, dateText, "UpdateTime", active: false);
 		}
 	}
 
@@ -463,11 +463,11 @@ public partial class ItemListControl
 
 		if (author?.Name is not null and not "")
 		{
-			e.Rects.AuthorRect = DrawCell(e, Columns.Author, author.Name, "I_Author", font: UI.Font(8.25F));
+			e.Rects.AuthorRect = DrawCell(e, Columns.Author, author.Name, "Author", font: UI.Font(8.25F));
 		}
 		else if (localIdentity is not null)
 		{
-			DrawCell(e, Columns.Author, Path.GetFileName(localIdentity.Folder), "I_Folder", active: false, font: UI.Font(8.25F));
+			DrawCell(e, Columns.Author, Path.GetFileName(localIdentity.Folder), "Folder", active: false, font: UI.Font(8.25F));
 		}
 	}
 
@@ -485,7 +485,7 @@ public partial class ItemListControl
 			e.Rects.FolderRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{
 				Size = size,
-				Icon = "I_Folder",
+				Icon = "Folder",
 				Font = Font,
 				HoverState = e.HoverState,
 				Cursor = CursorLocation,
@@ -501,9 +501,9 @@ public partial class ItemListControl
 			{
 				Size = size,
 #if CS2
-				Icon = "I_Paradox",
+				Icon = "Paradox",
 #else
-				Icon = "I_Steam",
+				Icon = "Steam",
 #endif
 				Font = Font,
 				HoverState = e.HoverState,
@@ -519,7 +519,7 @@ public partial class ItemListControl
 			e.Rects.GithubRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{
 				Size = size,
-				Icon = "I_Github",
+				Icon = "Github",
 				Font = Font,
 				HoverState = e.HoverState,
 				Cursor = CursorLocation,

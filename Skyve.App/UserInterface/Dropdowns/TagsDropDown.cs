@@ -20,7 +20,7 @@ public class TagsDropDown : SlickMultiSelectionDropDown<ITag>
 	{
 		var text = item.Value;
 
-		using var icon = IconManager.GetIcon(text == Locale.AnyTags ? "I_Slash" : item.Icon, rectangle.Height - 2).Color(foreColor);
+		using var icon = IconManager.GetIcon(text == Locale.AnyTags ? "Slash" : item.Icon, rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
@@ -40,7 +40,7 @@ public class TagsDropDown : SlickMultiSelectionDropDown<ITag>
 	{
 		var text = items.Count() switch { 0 => Locale.AnyTags.ToString(), <= 2 => items.ListStrings(", "), _ => $"{items.Take(2).ListStrings(", ")} +{items.Count() - 2}" };
 
-		using var icon = IconManager.GetIcon(!items.Any() ? "I_Slash" : "I_Tag", rectangle.Height - 2).Color(foreColor);
+		using var icon = IconManager.GetIcon(!items.Any() ? "Slash" : "Tag", rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

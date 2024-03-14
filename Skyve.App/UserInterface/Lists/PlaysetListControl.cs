@@ -355,19 +355,19 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		});
 
 		var isHovered = e.Rects.DotsRect.Contains(CursorLocation);
-		using var img = IconManager.GetIcon("I_VertialMore", e.Rects.DotsRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : onBannerColor);
+		using var img = IconManager.GetIcon("VertialMore", e.Rects.DotsRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : onBannerColor);
 
 		e.Graphics.DrawImage(img, e.Rects.DotsRect.CenterR(img.Size));
 
 #if CS1
-		labelRects.Y += e.Graphics.DrawLabel(Locale.ContainCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
+		labelRects.Y += e.Graphics.DrawLabel(Locale.ContainCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
 #endif
 
 		if (customPlayset.OnlineInfo?.Author?.Name is not null and not "")
 		{
 			var name = customPlayset.OnlineInfo.Author.Name;
 
-			using var userIcon = IconManager.GetSmallIcon("I_User");
+			using var userIcon = IconManager.GetSmallIcon("User");
 
 			e.Rects.Author = e.Graphics.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), default, ContentAlignment.TopLeft);
 
@@ -377,7 +377,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 #if CS1
 		else if (e.Item.IsMissingItems)
 		{
-			using var icon = IconManager.GetSmallIcon("I_MinorIssues");
+			using var icon = IconManager.GetSmallIcon("MinorIssues");
 			e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, icon, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.TopRight);
 		}
 #endif
@@ -401,7 +401,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 			{
 				Text = Locale.ActivatePlayset.ToString().ToUpper(),
-				Icon = "I_Check",
+				Icon = "Check",
 				Rectangle = e.Rects.ActivateButton,
 				Padding = UI.Scale(new Padding(8, 4, 8, 4), UI.FontScale),
 				HoverState = e.HoverState,
@@ -427,7 +427,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			e.Graphics.FillRoundedRectangle(favBrush, favViewRect, borderRadius);
 		}
 
-		var fav = new DynamicIcon(ReadOnly ? "I_ViewFile" : customPlayset.IsFavorite != favViewRect.Contains(CursorLocation) ? "I_StarFilled" : "I_Star");
+		var fav = new DynamicIcon(ReadOnly ? "ViewFile" : customPlayset.IsFavorite != favViewRect.Contains(CursorLocation) ? "StarFilled" : "Star");
 		using var favIcon = fav.Get(favViewRect.Height * 3 / 4);
 
 		if (e.DrawableItem.Loading)
@@ -479,7 +479,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 		SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 		{
-			Icon = "I_VertialMore",
+			Icon = "VertialMore",
 			BorderRadius = borderRadius,
 			Rectangle = e.Rects.DotsRect,
 			Cursor = CursorLocation,
@@ -490,7 +490,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 		SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 		{
-			Icon = "I_Cog",
+			Icon = "Cog",
 			BorderRadius = borderRadius,
 			Rectangle = e.Rects.EditSettings,
 			Cursor = CursorLocation,
@@ -523,7 +523,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			e.Rects.ActivateButton = SlickButton.AlignAndDraw(e.Graphics, e.Rects.Content, ContentAlignment.MiddleRight, new ButtonDrawArgs
 			{
 				Text = Locale.ActivatePlayset.ToString().ToUpper(),
-				Icon = "I_Check",
+				Icon = "Check",
 				Padding = UI.Scale(new Padding(4), UI.FontScale),
 				Cursor = CursorLocation,
 				HoverState = e.HoverState,
@@ -549,7 +549,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 #if CS1
 		if (e.Item.IsMissingItems)
 		{
-			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, IconManager.GetSmallIcon("I_MinorIssues"), FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
+			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, IconManager.GetSmallIcon("MinorIssues"), FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
 #endif
 	}

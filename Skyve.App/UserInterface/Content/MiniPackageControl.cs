@@ -117,7 +117,7 @@ public class MiniPackageControl : SlickControl
 		}
 		else
 		{
-			using var generic = IconManager.GetIcon("I_Package", imageRect.Height).Color(BackColor);
+			using var generic = IconManager.GetIcon("Package", imageRect.Height).Color(BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
 			e.Graphics.FillRoundedRectangle(brush, imageRect, (int)(4 * UI.FontScale));
@@ -133,7 +133,7 @@ public class MiniPackageControl : SlickControl
 		{
 			imageRect = ClientRectangle.Pad(Padding).Align(imageRect.Size, ContentAlignment.MiddleRight);
 
-			using var checkIcon = IconManager.GetIcon("I_Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor);
+			using var checkIcon = IconManager.GetIcon("Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor);
 
 			e.Graphics.DrawImage(checkIcon, imageRect.CenterR(checkIcon.Size));
 		}
@@ -156,7 +156,7 @@ public class MiniPackageControl : SlickControl
 		{
 			imageRect = ClientRectangle.Pad(Padding).Align(imageRect.Size, ContentAlignment.MiddleRight);
 
-			using var img = IconManager.GetIcon("I_Trash", imageRect.Height * 3 / 4);
+			using var img = IconManager.GetIcon("Trash", imageRect.Height * 3 / 4);
 
 			e.Graphics.DrawImage(img.Color(imageRect.Contains(PointToClient(Cursor.Position)) ? FormDesign.Design.RedColor : FormDesign.Design.ForeColor, (byte)(HoverState.HasFlag(HoverState.Pressed) ? 255 : 175)), imageRect.CenterR(img.Size));
 		}

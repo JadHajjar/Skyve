@@ -109,16 +109,16 @@ public class PackageCompatibilityReportControl : TableLayoutPanel
 	{
 		return type switch
 		{
-			ReportType.Stability => "I_Stability",
-			ReportType.DlcMissing or ReportType.RequiredPackages => "I_MissingMod",
-			ReportType.Ambiguous => "I_Malicious",
-			ReportType.Successors => "I_Upgrade",
-			ReportType.Alternatives => "I_Alternatives",
-			ReportType.Status => "I_Statuses",
-			ReportType.OptionalPackages => "I_Recommendations",
-			ReportType.Compatibility => "I_Compatibilities",
-			ReportType.RequiredItem => "I_Important",
-			_ => "I_CompatibilityReport",
+			ReportType.Stability => "Stability",
+			ReportType.DlcMissing or ReportType.RequiredPackages => "MissingMod",
+			ReportType.Ambiguous => "Malicious",
+			ReportType.Successors => "Upgrade",
+			ReportType.Alternatives => "Alternatives",
+			ReportType.Status => "Statuses",
+			ReportType.OptionalPackages => "Recommendations",
+			ReportType.Compatibility => "Compatibilities",
+			ReportType.RequiredItem => "Important",
+			_ => "CompatibilityReport",
 		};
 	}
 

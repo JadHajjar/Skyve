@@ -86,8 +86,8 @@ partial class PC_SelectPackage
 			this.OT_ModAsset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.OT_ModAsset.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_ModAsset.Image1 = "I_Mods";
-			this.OT_ModAsset.Image2 = "I_Assets";
+			this.OT_ModAsset.Image1 = "Mods";
+			this.OT_ModAsset.Image2 = "Assets";
 			this.OT_ModAsset.Location = new System.Drawing.Point(544, 3);
 			this.OT_ModAsset.Name = "OT_ModAsset";
 			this.OT_ModAsset.Option1 = "Mods";
@@ -100,7 +100,7 @@ partial class PC_SelectPackage
 			// 
 			// TB_Search
 			// 
-			dynamicIcon1.Name = "I_Search";
+			dynamicIcon1.Name = "Search";
 			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
@@ -164,7 +164,7 @@ partial class PC_SelectPackage
 			this.B_Continue.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.B_Continue.ColorShade = null;
 			this.B_Continue.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_Ok";
+			dynamicIcon2.Name = "Ok";
 			this.B_Continue.ImageName = dynamicIcon2;
 			this.B_Continue.Location = new System.Drawing.Point(817, 33);
 			this.B_Continue.Name = "B_Continue";

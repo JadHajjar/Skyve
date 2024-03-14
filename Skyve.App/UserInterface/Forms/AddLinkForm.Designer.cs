@@ -85,7 +85,7 @@ partial class AddLinkForm
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.B_AddLink.AutoSize = true;
 			this.B_AddLink.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_Add";
+			dynamicIcon2.Name = "Add";
 			this.B_AddLink.ImageName = dynamicIcon2;
 			this.B_AddLink.Location = new System.Drawing.Point(3, 3);
 			this.B_AddLink.Name = "B_AddLink";
@@ -116,7 +116,7 @@ partial class AddLinkForm
 			this.B_Apply.AutoSize = true;
 			this.B_Apply.ButtonType = SlickControls.ButtonType.Active;
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_Ok";
+			dynamicIcon1.Name = "Ok";
 			this.B_Apply.ImageName = dynamicIcon1;
 			this.B_Apply.Location = new System.Drawing.Point(280, 306);
 			this.B_Apply.Name = "B_Apply";

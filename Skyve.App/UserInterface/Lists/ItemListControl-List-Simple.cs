@@ -140,7 +140,7 @@ public partial class ItemListControl
 				var isHovered = rect.Contains(CursorLocation);
 
 				using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
-				using var icon = IconManager.GetIcon("I_Author", itemHeight + Padding.Top).Color(isHovered ? activeBrush.Color : brush.Color);
+				using var icon = IconManager.GetIcon("Author", itemHeight + Padding.Top).Color(isHovered ? activeBrush.Color : brush.Color);
 				using var font = UI.Font(8.25F).FitToWidth(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline).FitToWidth(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
@@ -151,7 +151,7 @@ public partial class ItemListControl
 			}
 			else if (localIdentity is not null)
 			{
-				using var icon = IconManager.GetIcon("I_Folder", itemHeight + Padding.Top).Color(brush.Color);
+				using var icon = IconManager.GetIcon("Folder", itemHeight + Padding.Top).Color(brush.Color);
 				using var font = UI.Font(8.25F).FitTo(Path.GetFileName(localIdentity.Folder), rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
 				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
@@ -168,7 +168,7 @@ public partial class ItemListControl
 				var isRecent = date > DateTime.UtcNow.AddDays(-7) && e.BackColor != FormDesign.Design.ActiveColor;
 
 				using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
-				using var icon = IconManager.GetIcon("I_UpdateTime", itemHeight + Padding.Top).Color(isRecent ? activeBrush.Color : brush.Color);
+				using var icon = IconManager.GetIcon("UpdateTime", itemHeight + Padding.Top).Color(isRecent ? activeBrush.Color : brush.Color);
 				using var font = UI.Font(8.25F).FitToWidth(dateText, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
 				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
@@ -186,7 +186,7 @@ public partial class ItemListControl
 					using var fontBold = UI.Font(8.25F, FontStyle.Bold);
 					using var fontUnderline = UI.Font(8.25F, workshopInfo.HasVoted ? FontStyle.Bold | FontStyle.Underline : FontStyle.Underline);
 					using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor.MergeColor(brush.Color, 75));
-					using var icon = IconManager.GetIcon(workshopInfo.HasVoted ? "I_VoteFilled" : "I_Vote", itemHeight + Padding.Top).Color(isHovered || workshopInfo.HasVoted ? greenBrush.Color : brush.Color);
+					using var icon = IconManager.GetIcon(workshopInfo.HasVoted ? "VoteFilled" : "Vote", itemHeight + Padding.Top).Color(isHovered || workshopInfo.HasVoted ? greenBrush.Color : brush.Color);
 					using var font = UI.Font(8.25F).FitToWidth(text, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
 					e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
@@ -200,7 +200,7 @@ public partial class ItemListControl
 				if (workshopInfo.Subscribers >= 0)
 				{
 					var text2 = Locale.SubscribersCount.FormatPlural(workshopInfo.Subscribers, workshopInfo.Subscribers.ToString("N0"));
-					using var subsIcon = IconManager.GetIcon("I_People", itemHeight + Padding.Top).Color(brush.Color);
+					using var subsIcon = IconManager.GetIcon("People", itemHeight + Padding.Top).Color(brush.Color);
 					using var font2 = UI.Font(8.25F).FitToWidth(text2, rect.Pad(subsIcon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
 					e.Graphics.DrawImage(subsIcon, rect.Align(subsIcon.Size, ContentAlignment.MiddleLeft));
@@ -235,7 +235,7 @@ public partial class ItemListControl
 				e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
 					point,
 					LocaleCR.Get($"{notificationType}"),
-					"I_CompatibilityReport",
+					"CompatibilityReport",
 					notificationType.Value.GetColor(),
 					CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
 					Padding,

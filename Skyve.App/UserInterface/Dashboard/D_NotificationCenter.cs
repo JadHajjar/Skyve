@@ -36,7 +36,7 @@ internal class D_NotificationCenter : IDashboardItem
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, ref preferredHeight, Locale.Notifications, "I_Notification");
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.Notifications, "Notification");
 
 		sectionHeight = preferredHeight - e.ClipRectangle.Y;
 

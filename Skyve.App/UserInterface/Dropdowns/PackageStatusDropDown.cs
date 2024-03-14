@@ -41,45 +41,45 @@ public class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilter
 		{
 			case DownloadStatusFilter.Any:
 				text = Locale.AnyStatus;
-				icon = new DynamicIcon("I_Slash");
+				icon = new DynamicIcon("Slash");
 				color = FormDesign.Design.ForeColor;
 				return;
 
 			case DownloadStatusFilter.AnyIssue:
 				text = Locale.AnyIssue;
-				icon = new DynamicIcon("I_Warning");
+				icon = new DynamicIcon("Warning");
 				color = FormDesign.Design.RedColor;
 				return;
 
 			case DownloadStatusFilter.OK:
 				text = Locale.UpToDate;
-				icon = new DynamicIcon("I_Ok");
+				icon = new DynamicIcon("Ok");
 				color = FormDesign.Design.GreenColor;
 				return;
 			case DownloadStatusFilter.Unknown:
 				text = Locale.StatusUnknown;
-				icon = new DynamicIcon("I_Question");
+				icon = new DynamicIcon("Question");
 				color = FormDesign.Design.YellowColor;
 				return;
 			case DownloadStatusFilter.OutOfDate:
 				text = Locale.OutOfDate;
-				icon = new DynamicIcon("I_OutOfDate");
+				icon = new DynamicIcon("OutOfDate");
 				color = FormDesign.Design.YellowColor;
 				return;
 			case DownloadStatusFilter.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
-				icon = new DynamicIcon("I_Broken");
+				icon = new DynamicIcon("Broken");
 				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatusFilter.Removed:
 				text = Locale.RemovedByAuthor;
-				icon = new DynamicIcon("I_ContentRemoved");
+				icon = new DynamicIcon("ContentRemoved");
 				color = FormDesign.Design.RedColor;
 				return;
 		}
 
 		text = Locale.Local;
-		icon = new DynamicIcon("I_PC");
+		icon = new DynamicIcon("PC");
 		color = FormDesign.Design.ForeColor;
 	}
 }

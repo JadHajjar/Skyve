@@ -88,7 +88,7 @@ public partial class ItemListControl
 			{
 				outerColor = notificationType.Value.GetColor();
 
-				e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(new(e.ClipRectangle.Right - GridPadding.Right, e.Rects.IconRect.Bottom), LocaleCR.Get($"{notificationType}"), "I_CompatibilityReport", outerColor, ContentAlignment.BottomRight, padding: GridPadding, height: height, cursorLocation: CursorLocation);
+				e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(new(e.ClipRectangle.Right - GridPadding.Right, e.Rects.IconRect.Bottom), LocaleCR.Get($"{notificationType}"), "CompatibilityReport", outerColor, ContentAlignment.BottomRight, padding: GridPadding, height: height, cursorLocation: CursorLocation);
 			}
 
 			if (GetStatusDescriptors(e.Item, out var text, out var icon, out var color))
@@ -240,7 +240,7 @@ public partial class ItemListControl
 				rect.Y += (int)(20 * UI.FontScale) + (Padding.Bottom * 2);
 			}
 
-			using var authorIcon = IconManager.GetSmallIcon("I_Folder");
+			using var authorIcon = IconManager.GetSmallIcon("Folder");
 
 			e.Graphics.DrawLabel(Path.GetFileNameWithoutExtension(localIdentity.FilePath), authorIcon, default, rect, ContentAlignment.TopLeft);
 
@@ -264,7 +264,7 @@ public partial class ItemListControl
 
 			if (authorImg is null)
 			{
-				using var authorIcon = IconManager.GetSmallIcon("I_Author");
+				using var authorIcon = IconManager.GetSmallIcon("Author");
 
 				authorRect = e.Graphics.DrawLabel(author.Name, authorIcon, default, authorRect, ContentAlignment.TopLeft, mousePosition: CursorLocation);
 			}
@@ -280,7 +280,7 @@ public partial class ItemListControl
 
 				e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
 
-				using var img = IconManager.GetIcon("I_Check", checkRect.Height);
+				using var img = IconManager.GetIcon("Check", checkRect.Height);
 
 				e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 			}
@@ -311,7 +311,7 @@ public partial class ItemListControl
 				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
 				var isRecent = date > DateTime.UtcNow.AddDays(-7);
 
-				e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), isRecent ? Color.FromArgb(125, FormDesign.Design.ActiveColor) : default, tagRect, ContentAlignment.TopLeft, smaller: false);
+				e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("UpdateTime"), isRecent ? Color.FromArgb(125, FormDesign.Design.ActiveColor) : default, tagRect, ContentAlignment.TopLeft, smaller: false);
 			}
 		}
 
@@ -327,7 +327,7 @@ public partial class ItemListControl
 				: new Rectangle(e.ClipRectangle.Width * 5 / 10, e.Rects.TextRect.Bottom + (Padding.Bottom * 2), 0, 0);
 
 			e.Rects.ScoreRect = e.Graphics.DrawLabel(Locale.VotesCount.FormatPlural(workshopInfo.VoteCount, workshopInfo.VoteCount.ToString("N0"))
-					, IconManager.GetSmallIcon(workshopInfo.HasVoted ? "I_VoteFilled" : "I_Vote")
+					, IconManager.GetSmallIcon(workshopInfo.HasVoted ? "VoteFilled" : "Vote")
 					, workshopInfo!.HasVoted ? FormDesign.Design.GreenColor : default
 					, rect
 					, ContentAlignment.TopLeft
@@ -336,7 +336,7 @@ public partial class ItemListControl
 			rect.X += GridPadding.Left + e.Rects.ScoreRect.Width;
 
 			e.Graphics.DrawLabel(Locale.SubscribersCount.FormatPlural(workshopInfo.Subscribers, workshopInfo.Subscribers.ToString("N0"))
-					, IconManager.GetSmallIcon("I_People")
+					, IconManager.GetSmallIcon("People")
 					, default
 					, rect
 					, ContentAlignment.TopLeft);

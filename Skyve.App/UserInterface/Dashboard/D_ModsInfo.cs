@@ -172,7 +172,7 @@ internal class D_ModsInfo : IDashboardItem
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, ref preferredHeight, Locale.ModsBubble, "I_Mods");
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.ModsBubble, "Mods");
 
 		var fore = FormDesign.Design.ForeColor;
 		var textRect = e.ClipRectangle.Pad(Margin);
@@ -256,14 +256,14 @@ internal class D_ModsInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, OpenModsPanel, new()
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Mod.Plural.ToLower()),
-			Icon = "I_ViewFile",
+			Icon = "ViewFile",
 			Rectangle = e.ClipRectangle
 		});
 
 		DrawButton(e, applyDrawing, ref preferredHeight, OpenRecentModsPanel, new()
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Mod.Plural.ToLower()),
-			Icon = "I_UpdateTime",
+			Icon = "UpdateTime",
 			Rectangle = e.ClipRectangle
 		});
 	}
@@ -272,7 +272,7 @@ internal class D_ModsInfo : IDashboardItem
 	{
 		var mainRect = e.ClipRectangle.Pad(0, 0, e.ClipRectangle.Width / 2, 0);
 
-		DrawSection(e, applyDrawing, ref preferredHeight, Locale.ModsBubble, "I_Mods");
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.ModsBubble, "Mods");
 
 		var fore = FormDesign.Design.ForeColor;
 		var textRect = mainRect.Pad(Margin);
@@ -359,14 +359,14 @@ internal class D_ModsInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, OpenModsPanel, new()
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Mod.Plural.ToLower()),
-			Icon = "I_ViewFile",
+			Icon = "ViewFile",
 			Rectangle = mainRect
 		});
 
 		DrawButton(e, applyDrawing, ref preferredHeight, OpenRecentModsPanel, new()
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Mod.Plural.ToLower()),
-			Icon = "I_UpdateTime",
+			Icon = "UpdateTime",
 			Rectangle = mainRect
 		});
 

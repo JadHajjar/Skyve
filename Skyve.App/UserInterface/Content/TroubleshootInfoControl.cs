@@ -96,11 +96,11 @@ public class TroubleshootInfoControl : SlickControl
 
 		var y = Padding.Top;
 
-		using var buttonIcon = IconManager.GetSmallIcon("I_Skip");
+		using var buttonIcon = IconManager.GetSmallIcon("Skip");
 		var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, Locale.NextStage, UI.Font(6.75F), new(4, 3, 2, 2));
 		buttonRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomRight);
 
-		using var cancelButtonIcon = IconManager.GetSmallIcon("I_Cancel");
+		using var cancelButtonIcon = IconManager.GetSmallIcon("Cancel");
 		buttonSize = SlickButton.GetSize(e.Graphics, cancelButtonIcon, LocaleSlickUI.Cancel, UI.Font(6.75F), new(4, 3, 2, 2));
 		cancelRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomLeft);
 
@@ -117,7 +117,7 @@ public class TroubleshootInfoControl : SlickControl
 
 		if (_troubleshootSystem.WaitingForGameLaunch || (_troubleshootSystem.WaitingForGameClose && CrossIO.CurrentPlatform is Platform.Windows))
 		{
-			using var launchButtonIcon = IconManager.GetSmallIcon("I_CS");
+			using var launchButtonIcon = IconManager.GetSmallIcon("CS");
 			launchRect = new Rectangle(Padding.Left, y + buttonSize.Height + Padding.Bottom, Width - Padding.Horizontal, buttonSize.Height);
 
 			SlickButton.DrawButton(e, launchRect, LocaleHelper.GetGlobalText(_citiesManager.IsRunning() ? "StopCities" : "StartCities"), UI.Font(6.75F), launchButtonIcon, null, launchRect.Contains(PointToClient(Cursor.Position)) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Active);

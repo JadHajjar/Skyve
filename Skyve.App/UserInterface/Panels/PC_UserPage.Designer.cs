@@ -89,7 +89,7 @@ partial class PC_UserPage
 			this.roundedGroupPanel1.AddPaddingForIcon = true;
 			this.roundedGroupPanel1.Controls.Add(this.label1);
 			this.roundedGroupPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon3.Name = "I_Package";
+			dynamicIcon3.Name = "Package";
 			this.roundedGroupPanel1.ImageName = dynamicIcon3;
 			this.roundedGroupPanel1.Location = new System.Drawing.Point(3, 3);
 			this.roundedGroupPanel1.Name = "roundedGroupPanel1";
@@ -114,7 +114,7 @@ partial class PC_UserPage
 			this.T_Profiles.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Profiles.FillTab = true;
 			this.T_Profiles.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon1.Name = "I_PlaysetSettings";
+			dynamicIcon1.Name = "PlaysetSettings";
 			this.T_Profiles.IconName = dynamicIcon1;
 			this.T_Profiles.LinkedControl = null;
 			this.T_Profiles.Location = new System.Drawing.Point(0, 5);
@@ -131,7 +131,7 @@ partial class PC_UserPage
 			this.T_Packages.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Packages.FillTab = true;
 			this.T_Packages.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon2.Name = "I_Package";
+			dynamicIcon2.Name = "Package";
 			this.T_Packages.IconName = dynamicIcon2;
 			this.T_Packages.LinkedControl = null;
 			this.T_Packages.Location = new System.Drawing.Point(375, 5);

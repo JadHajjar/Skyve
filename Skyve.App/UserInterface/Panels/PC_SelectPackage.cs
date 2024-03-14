@@ -173,7 +173,7 @@ public partial class PC_SelectPackage : PanelContent
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
-		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "Search" : "ClearSearch";
 		TB_Search.Loading = true;
 
 		if (Regex.IsMatch(TB_Search.Text, @"filedetails/\?id=(\d+)"))

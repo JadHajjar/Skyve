@@ -54,7 +54,7 @@ public class TagControl : SlickButton
 		{
 			Control = this,
 			Font = Font,
-			Icon = TagInfo is null ? ImageName : HoverState.HasFlag(HoverState.Hovered) ? Display && !TagInfo.IsCustom ? "I_Copy" : "I_Disposable" : TagInfo.Icon,
+			Icon = TagInfo is null ? ImageName : HoverState.HasFlag(HoverState.Hovered) ? Display && !TagInfo.IsCustom ? "Copy" : "Disposable" : TagInfo.Icon,
 			Image = image,
 			Text = TagInfo?.Value ?? "X",
 			Padding = Padding,
@@ -74,7 +74,7 @@ public class TagControl : SlickButton
 		{
 			Control = this,
 			Font = Font,
-			Icon = TagInfo is null ? null : HoverState.HasFlag(HoverState.Hovered) ? Display ? "I_Link" : "I_Trash" : TagInfo.Icon,
+			Icon = TagInfo is null ? null : HoverState.HasFlag(HoverState.Hovered) ? Display ? "Link" : "Trash" : TagInfo.Icon,
 			Image = image,
 			Text = TagInfo?.Value,
 			Padding = Padding,
@@ -95,9 +95,9 @@ public class TagControl : SlickButton
 			return;
 		}
 
-		using var icon1 = IconManager.GetIcon("I_Edit", Font.Height * 5 / 4);
-		using var icon2 = IconManager.GetIcon("I_Slash", Font.Height * 5 / 4);
-		using var icon3 = IconManager.GetIcon("I_Add", Font.Height * 5 / 4);
+		using var icon1 = IconManager.GetIcon("Edit", Font.Height * 5 / 4);
+		using var icon2 = IconManager.GetIcon("Slash", Font.Height * 5 / 4);
+		using var icon3 = IconManager.GetIcon("Add", Font.Height * 5 / 4);
 
 		var rect2 = ClientRectangle.CenterR(icon2.Size);
 		var rect1 = rect2;

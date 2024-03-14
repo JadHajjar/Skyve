@@ -190,7 +190,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			int width;
 
 			using var font = UI.Font(9.75F);
-			using var icon = (item.Key == NotificationType.None ? "I_CompatibilityReport" : item.Key.GetIcon(true)).Get(font.Height + Padding.Top);
+			using var icon = (item.Key == NotificationType.None ? "CompatibilityReport" : item.Key.GetIcon(true)).Get(font.Height + Padding.Top);
 			var text = (item.Key == NotificationType.None ? LocaleHelper.GetGlobalText("All") : LocaleCR.Get(item.Key.ToString())) + $" ({item.Count()})";
 
 			if (!smaller)
@@ -376,7 +376,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				e.Graphics.FillRoundedRectangle(new SolidBrush(purple), e.Rects.SnoozeRect, pad);
 			}
 
-			using var snoozeIcon = IconManager.GetLargeIcon("I_Snooze");
+			using var snoozeIcon = IconManager.GetLargeIcon("Snooze");
 			e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor)) ? purple.GetTextColor() : FormDesign.Design.IconColor), e.Rects.SnoozeRect.CenterR(icon.Size));
 		}
 
@@ -440,7 +440,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 					}
 					else
 					{
-						using var img = IconManager.GetIcon(dlc is null ? "I_Mods" : "I_Dlc", (int)(40 * UI.FontScale)).Color(BackColor);
+						using var img = IconManager.GetIcon(dlc is null ? "Mods" : "Dlc", (int)(40 * UI.FontScale)).Color(BackColor);
 						using var brush2 = new SolidBrush(fore);
 						var imgRect = rect.Align(UI.Scale(new Size(isDlc ? 40 * 460 / 215 : 40, 40), UI.FontScale), ContentAlignment.TopLeft);
 
@@ -475,27 +475,27 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 							if (p is null)
 							{
 								buttonText = Locale.SubscribeToItem;
-								iconName = "I_Add";
+								iconName = "Add";
 							}
 							else if (!p.IsIncluded())
 							{
 								buttonText = Locale.IncludeItem;
-								iconName = "I_Check";
+								iconName = "Check";
 							}
 							else if (!p.IsEnabled())
 							{
 								buttonText = Locale.EnableItem;
-								iconName = "I_Enabled";
+								iconName = "Enabled";
 							}
 
 							break;
 						case StatusAction.SelectOne:
 							buttonText = Locale.SelectThisPackage;
-							iconName = "I_Ok";
+							iconName = "Ok";
 							break;
 						case StatusAction.Switch:
 							buttonText = Locale.SwitchToItem;
-							iconName = "I_Switch";
+							iconName = "Switch";
 							break;
 					}
 
@@ -564,12 +564,12 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			e.Graphics.FillRoundedRectangle(brush, iconRect2, pad);
 
-			using var icon2 = IconManager.GetIcon("I_Info", e.Rects.IncludedRect.Width * 3 / 4);
+			using var icon2 = IconManager.GetIcon("Info", e.Rects.IncludedRect.Width * 3 / 4);
 			e.Graphics.DrawImage(icon2.Color(color.GetTextColor()), iconRect2.CenterR(icon2.Size));
 		}
 
 		var rect3 = bottomRect.Align(iconRect.Size, ContentAlignment.MiddleRight);
-		using var cricon = IconManager.GetIcon("I_CompatibilityReport", iconRect.Height * 3 / 4);
+		using var cricon = IconManager.GetIcon("CompatibilityReport", iconRect.Height * 3 / 4);
 
 		SlickButton.DrawButton(e, rect3, string.Empty, Font, cricon, null, rect3.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
@@ -610,34 +610,34 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 				colorStyle = ColorStyle.Green;
 				allText = max switch { 3 => Locale.IncludeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
-				allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
+				allIcon = max switch { 3 => "Add", 2 => "Check", 1 => "Enabled", _ => null };
 			}
 
 			break;
 			case StatusAction.RequiresConfiguration:
 				allText = _compatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
-				allIcon = "I_Snooze";
+				allIcon = "Snooze";
 				colorStyle = ColorStyle.Active;
 				break;
 			case StatusAction.UnsubscribeThis:
 				allText = Locale.Unsubscribe;
-				allIcon = "I_RemoveSteam";
+				allIcon = "RemoveSteam";
 				break;
 			case StatusAction.UnsubscribeOther:
 				allText = Message.Packages?.Count() switch { 0 => null, _ => Locale.ExcludeAll };
-				allIcon = "I_RemoveSteam";
+				allIcon = "RemoveSteam";
 				break;
 			case StatusAction.ExcludeThis:
 				allText = Locale.Exclude;
-				allIcon = "I_X";
+				allIcon = "X";
 				break;
 			case StatusAction.ExcludeOther:
 				allText = Message.Packages?.Count() switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
-				allIcon = "I_X";
+				allIcon = "X";
 				break;
 			case StatusAction.RequestReview:
 				allText = LocaleCR.RequestReview;
-				allIcon = "I_RequestReview";
+				allIcon = "RequestReview";
 				colorStyle = ColorStyle.Active;
 				break;
 		}
@@ -649,7 +649,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (thumbnail is null)
 		{
-			using var generic = IconManager.GetIcon(e.Item is IAsset ? "I_Assets" : e.Item is ILocalPackageData ? "I_Mods" : "I_Package", e.Rects.IconRect.Height).Color(e.BackColor);
+			using var generic = IconManager.GetIcon(e.Item is IAsset ? "Assets" : e.Item is ILocalPackageData ? "Mods" : "Package", e.Rects.IconRect.Height).Color(e.BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
@@ -723,7 +723,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (e.Item.Id > 0)
 		{
-			using var icon = IconManager.GetSmallIcon("I_Steam");
+			using var icon = IconManager.GetSmallIcon("Steam");
 
 			e.Rects.SteamIdRect = e.Graphics.DrawLabel(e.Item.Id.ToString(), icon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: CursorLocation);
 
@@ -732,7 +732,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (workshopInfo?.Author is not null)
 		{
-			using var icon = IconManager.GetSmallIcon("I_Author");
+			using var icon = IconManager.GetSmallIcon("Author");
 
 			e.Rects.AuthorRect = e.Graphics.DrawLabel(workshopInfo?.Author.Name, icon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: CursorLocation);
 
@@ -753,7 +753,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		{
 			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
 
-			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: CursorLocation);
+			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: CursorLocation);
 		}
 	}
 
@@ -767,13 +767,13 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 
 		var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
-		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
+		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : partialIncluded ? "Slash" : isIncluded ? "Ok" : package is null ? "Add" : "Enabled");
 		var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
 
 		DynamicIcon? enabl = null;
 		if (_settings.UserSettings.AdvancedIncludeEnable && package is not null)
 		{
-			enabl = new DynamicIcon(package.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
+			enabl = new DynamicIcon(package.IsEnabled() ? "Checked" : "Checked_OFF");
 
 			if (isIncluded)
 			{
@@ -844,7 +844,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (parentPackage is not null)
 		{
-			using var icon = IconManager.GetIcon("I_Folder", size.Height * 3 / 4);
+			using var icon = IconManager.GetIcon("Folder", size.Height * 3 / 4);
 
 			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
@@ -855,7 +855,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (!IsPackagePage && workshopInfo?.Url is not null)
 		{
-			using var icon = IconManager.GetIcon("I_Steam", rect.Height * 3 / 4);
+			using var icon = IconManager.GetIcon("Steam", rect.Height * 3 / 4);
 
 			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 

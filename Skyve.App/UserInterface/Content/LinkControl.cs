@@ -36,7 +36,7 @@ public class LinkControl : SlickImageControl
 		}
 		else if (Display && e.Button == MouseButtons.Right)
 		{
-			SlickToolStrip.Show(Program.MainForm, PointToScreen(e.Location), new SlickStripItem(LocaleSlickUI.Copy, "I_Copy", action: () => Clipboard.SetText(Link.Url)));
+			SlickToolStrip.Show(Program.MainForm, PointToScreen(e.Location), new SlickStripItem(LocaleSlickUI.Copy, "Copy", action: () => Clipboard.SetText(Link.Url)));
 		}
 	}
 
@@ -61,7 +61,7 @@ public class LinkControl : SlickImageControl
 		var text = Link.Title.IfEmpty(LocaleCR.Get(Link.Type.ToString())).ToUpper();
 		using var font = UI.Font(7F, FontStyle.Bold).FitToWidth(text, client.Pad(Padding), e.Graphics);
 		var textHeight = (int)e.Graphics.Measure(text, font).Height;
-		using var img = (HoverState.HasFlag(HoverState.Hovered) ? Display ? "I_Link" : "I_Edit" : Link.Type.GetIcon()).Get(Height / 2)?.Color(activeColor);
+		using var img = (HoverState.HasFlag(HoverState.Hovered) ? Display ? "Link" : "Edit" : Link.Type.GetIcon()).Get(Height / 2)?.Color(activeColor);
 
 		if (img == null)
 		{

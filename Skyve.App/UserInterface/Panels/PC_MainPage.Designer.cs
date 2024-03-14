@@ -129,11 +129,11 @@ partial class PC_MainPage
 			this.I_Info.ColorStyle = Extensions.ColorStyle.Icon;
 			this.I_Info.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_Info.Enabled = false;
-			dynamicIcon1.Name = "I_Info";
+			dynamicIcon1.Name = "Info";
 			this.I_Info.ImageName = dynamicIcon1;
 			this.I_Info.Location = new System.Drawing.Point(10, 9);
 			this.I_Info.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
-			this.I_Info.Name = "I_Info";
+			this.I_Info.Name = "Info";
 			this.I_Info.Selected = true;
 			this.I_Info.Size = new System.Drawing.Size(32, 32);
 			this.I_Info.TabIndex = 20;
@@ -145,7 +145,7 @@ partial class PC_MainPage
 			this.B_Dismiss.AutoSize = true;
 			this.B_Dismiss.ColorShade = null;
 			this.B_Dismiss.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_Ok";
+			dynamicIcon2.Name = "Ok";
 			this.B_Dismiss.ImageName = dynamicIcon2;
 			this.B_Dismiss.Location = new System.Drawing.Point(741, 9);
 			this.B_Dismiss.Name = "B_Dismiss";

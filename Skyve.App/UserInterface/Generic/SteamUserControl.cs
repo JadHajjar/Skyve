@@ -85,7 +85,7 @@ public class SteamUserControl : SlickControl
 
 			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
 
-			using var img = IconManager.GetIcon("I_Check", checkRect.Height);
+			using var img = IconManager.GetIcon("Check", checkRect.Height);
 			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 		}
 	}

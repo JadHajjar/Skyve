@@ -114,9 +114,9 @@ public class UserDescriptionControl : SlickImageControl
 		rects!.SteamRect = ClientRectangle.Pad(0, 0, 0, Height / 2).Pad(Padding).Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.BottomRight);
 
 #if CS2
-		using var icon = IconManager.GetIcon("I_Paradox", rects.SteamRect.Height * 3 / 4);
+		using var icon = IconManager.GetIcon("Paradox", rects.SteamRect.Height * 3 / 4);
 #else
-		using var icon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height * 3 / 4);
+		using var icon = IconManager.GetIcon("Steam", rects.SteamRect.Height * 3 / 4);
 #endif
 
 		SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, icon, null, rects.SteamRect.Contains(CursorLocation) ? HoverState & ~HoverState.Focused : HoverState.Normal);
@@ -142,7 +142,7 @@ public class UserDescriptionControl : SlickImageControl
 
 			checkRect = checkRect.Pad((int)(3 * UI.FontScale));
 
-			using var img = IconManager.GetIcon("I_Check", checkRect.Height);
+			using var img = IconManager.GetIcon("Check", checkRect.Height);
 			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 		}
 	}

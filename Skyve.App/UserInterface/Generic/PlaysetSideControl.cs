@@ -239,19 +239,19 @@ public class PlaysetSideControl : SlickControl
 		});
 
 		var isHovered = DotsRect.Contains(CursorLocation);
-		using var img = IconManager.GetIcon("I_VertialMore", DotsRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : onBannerColor);
+		using var img = IconManager.GetIcon("VertialMore", DotsRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : onBannerColor);
 
 		e.Graphics.DrawImage(img, DotsRect.CenterR(img.Size));
 
 #if CS1
-		labelRects.Y += e.Graphics.DrawLabel(Locale.ContainCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
+		labelRects.Y += e.Graphics.DrawLabel(Locale.ContainCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
 #endif
 
 		if (customPlayset.OnlineInfo?.Author?.Name is not null and not "")
 		{
 			var name = customPlayset.OnlineInfo.Author.Name;
 
-			using var userIcon = IconManager.GetSmallIcon("I_User");
+			using var userIcon = IconManager.GetSmallIcon("User");
 
 			var Author = e.Graphics.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), default, ContentAlignment.TopLeft);
 
@@ -261,7 +261,7 @@ public class PlaysetSideControl : SlickControl
 #if CS1
 		else if (e.Item.IsMissingItems)
 		{
-			using var icon = IconManager.GetSmallIcon("I_MinorIssues");
+			using var icon = IconManager.GetSmallIcon("MinorIssues");
 			e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, icon, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), Content, ContentAlignment.TopRight);
 		}
 #endif
@@ -271,7 +271,7 @@ public class PlaysetSideControl : SlickControl
 			SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 			{
 				Text = Locale.ActivatePlayset.ToString().ToUpper(),
-				Icon = "I_Check",
+				Icon = "Check",
 				Font = smallTextFont,
 				Rectangle = ActivateButton.Pad(0, Padding.Top, 0, 0),
 				Padding = UI.Scale(new Padding(8, 4, 8, 4), UI.FontScale),
@@ -295,7 +295,7 @@ public class PlaysetSideControl : SlickControl
 			e.Graphics.FillRoundedRectangle(favBrush, Favorite, Padding.Left / 2);
 		}
 
-		var fav = new DynamicIcon(customPlayset.IsFavorite != Favorite.Contains(CursorLocation) ? "I_StarFilled" : "I_Star");
+		var fav = new DynamicIcon(customPlayset.IsFavorite != Favorite.Contains(CursorLocation) ? "StarFilled" : "Star");
 		using var favIcon = fav.Get(Favorite.Height * 3 / 4);
 
 		if (customPlayset.IsFavorite || (HoverState.HasFlag(HoverState.Hovered) && Thumbnail.Contains(CursorLocation)))

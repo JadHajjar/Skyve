@@ -624,9 +624,9 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			Text = emptySearch ? Locale.DiscoverWorkshop : Locale.SearchWorkshop,
 #if CS2
-			Icon = "I_Paradox",
+			Icon = "Paradox",
 #else
-			Icon = "I_Steam",
+			Icon = "Steam",
 #endif
 			Font = font,
 			Padding = UI.Scale(new Padding(7), UI.UIScale),
@@ -638,7 +638,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		PopupSearchRect2 = emptySearch ? default : SlickButton.AlignAndDraw(e.Graphics, new Rectangle(0, PopupSearchRect1.Bottom + (Padding.Vertical * 2), Width, 0), ContentAlignment.TopCenter, new ButtonDrawArgs
 		{
 			Text = Locale.SearchWorkshopBrowser,
-			Icon = "I_Link",
+			Icon = "Link",
 			Font = font,
 			Padding = UI.Scale(new Padding(7), UI.UIScale),
 			Cursor = CursorLocation,
@@ -662,22 +662,22 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
-				icon = "I_Question";
+				icon = "Question";
 				color = FormDesign.Design.YellowColor;
 				return true;
 			case DownloadStatus.OutOfDate:
 				text = Locale.OutOfDate;
-				icon = "I_OutOfDate";
+				icon = "OutOfDate";
 				color = FormDesign.Design.YellowColor;
 				return true;
 			case DownloadStatus.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
-				icon = "I_Broken";
+				icon = "Broken";
 				color = FormDesign.Design.RedColor;
 				return true;
 			case DownloadStatus.Removed:
 				text = Locale.RemovedByAuthor;
-				icon = "I_ContentRemoved";
+				icon = "ContentRemoved";
 				color = FormDesign.Design.RedColor;
 				return true;
 		}

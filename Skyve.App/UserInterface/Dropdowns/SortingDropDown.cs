@@ -63,17 +63,17 @@ public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 	{
 		return item switch
 		{
-			PackageSorting.Name => "I_FileName",
-			PackageSorting.Author => "I_Author",
-			PackageSorting.FileSize => "I_MicroSd",
-			PackageSorting.CompatibilityReport => "I_CompatibilityReport",
-			PackageSorting.UpdateTime => "I_UpdateTime",
-			PackageSorting.SubscribeTime => "I_Add",
-			PackageSorting.Status => "I_Broken",
-			PackageSorting.Subscribers => "I_People",
-			PackageSorting.Votes => "I_Vote",
-			PackageSorting.LoadOrder => "I_Wrench",
-			_ => "I_Check",
+			PackageSorting.Name => "FileName",
+			PackageSorting.Author => "Author",
+			PackageSorting.FileSize => "MicroSd",
+			PackageSorting.CompatibilityReport => "CompatibilityReport",
+			PackageSorting.UpdateTime => "UpdateTime",
+			PackageSorting.SubscribeTime => "Add",
+			PackageSorting.Status => "Broken",
+			PackageSorting.Subscribers => "People",
+			PackageSorting.Votes => "Vote",
+			PackageSorting.LoadOrder => "Wrench",
+			_ => "Check",
 		};
 	}
 }

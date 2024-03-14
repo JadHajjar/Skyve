@@ -362,7 +362,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			return;
 		}
 
-		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "Search" : "ClearSearch";
 
 		var searchText = TB_Search.Text.Trim();
 
@@ -435,17 +435,17 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		//var items = new SlickStripItem[]
 		//{
-		//	  new (Locale.IncludeAll, "I_Check", async () => await IncludeAll())
-		//	, new (Locale.ExcludeAll, "I_X", async () => await ExcludeAll())
+		//	  new (Locale.IncludeAll, "Check", async () => await IncludeAll())
+		//	, new (Locale.ExcludeAll, "X", async () => await ExcludeAll())
 		//	, new (string.Empty)
-		//	, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, async () => await EnableAll())
-		//	, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, async () => await DisableAll())
+		//	, new (Locale.EnableAll, "Enabled", _settings.UserSettings.AdvancedIncludeEnable, async () => await EnableAll())
+		//	, new (Locale.DisableAll, "Disabled", _settings.UserSettings.AdvancedIncludeEnable, async () => await DisableAll())
 		//	, new (string.Empty)
-		//	, new (LocaleCR.ApplyAllActions, "I_CompatibilityReport", ListControl.FilteredItems.Any(x => GetAction(x) is not null), action: ApplyAll)
-		//	, new (LocaleCR.SnoozeAll, "I_Snooze", action: SnoozeAll)
+		//	, new (LocaleCR.ApplyAllActions, "CompatibilityReport", ListControl.FilteredItems.Any(x => GetAction(x) is not null), action: ApplyAll)
+		//	, new (LocaleCR.SnoozeAll, "Snooze", action: SnoozeAll)
 		//	, new (string.Empty)
-		//	, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: async () => await UnsubscribeAll())
-		//	, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
+		//	, new (Locale.UnsubscribeAll, "RemoveSteam", action: async () => await UnsubscribeAll())
+		//	, new (Locale.DeleteAll, "Disposable", action: () => DeleteAll(this, EventArgs.Empty))
 		//};
 
 		//this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
@@ -824,6 +824,6 @@ public partial class PC_CompatibilityReport : PanelContent
 		settings.DescendingSort = ListControl.SortDescending;
 		_settings.SessionSettings.Save();
 
-		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
+		I_SortOrder.ImageName = ListControl.SortDescending ? "SortDesc" : "SortAsc";
 	}
 }

@@ -154,7 +154,7 @@ public partial class ItemListControl
 				e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
 					point,
 					LocaleCR.Get($"{notificationType}"),
-					"I_CompatibilityReport",
+					"CompatibilityReport",
 					notificationType.Value.GetColor(),
 					CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
 					Padding,

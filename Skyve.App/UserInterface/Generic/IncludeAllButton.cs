@@ -83,7 +83,7 @@ public class IncludeAllButton : SlickControl
 
 	private void SetExpandedSize()
 	{
-		var action = new DynamicIcon("I_Actions");
+		var action = new DynamicIcon("Actions");
 		using var graphics = CreateGraphics();
 		using var font = UI.Font(8.25F);
 		using var actionIcon = action.Get(IncludedRect.Width * 3 / 4);
@@ -199,7 +199,7 @@ public class IncludeAllButton : SlickControl
 		{
 			SlickButton.GetColors(out var fore, out var back, IncludedRect.Contains(cursorLocation) ? HoverState : default, subscribe ? ColorStyle.Active : enable ? ColorStyle.Red : ColorStyle.Green);
 
-			var incl = new DynamicIcon(subscribe ? "I_Add" : enable ? "I_Enabled" : "I_Ok");
+			var incl = new DynamicIcon(subscribe ? "Add" : enable ? "Enabled" : "Ok");
 			using var inclIcon = incl.Get(IncludedRect.Width * 3 / 4);
 			using var brush1 = IncludedRect.Gradient(back, 1.5F);
 
@@ -218,7 +218,7 @@ public class IncludeAllButton : SlickControl
 		{
 			SlickButton.GetColors(out var fore, out var back, ActionRect.Contains(cursorLocation) ? HoverState : default, buttonType: IsSelected ? ButtonType.Active : ButtonType.Normal);
 
-			var action = new DynamicIcon("I_Actions");
+			var action = new DynamicIcon("Actions");
 			using var actionIcon = action.Get(IncludedRect.Width * 3 / 4);
 			using var brush2 = ActionRect.Gradient(back, 1.5F);
 
@@ -386,7 +386,7 @@ public class IncludeAllButton : SlickControl
 		}
 
 		{
-			var incl = new DynamicIcon(subscribe ? "I_Add" : include ? "I_Ok" : "I_Enabled");
+			var incl = new DynamicIcon(subscribe ? "Add" : include ? "Ok" : "Enabled");
 			using var inclIcon = incl.Get(width * 3 / 4);
 
 			SlickButton.GetColors(out var fore, out var back, IncludedRect.Contains(CursorLocation) ? HoverState : default, subscribe ? ColorStyle.Active : include ? ColorStyle.Red : ColorStyle.Green);
@@ -399,7 +399,7 @@ public class IncludeAllButton : SlickControl
 
 		if (_doubleButtons && EnabledRect != default)
 		{
-			var enl = new DynamicIcon(enable ? "I_Checked" : "I_Checked_OFF");
+			var enl = new DynamicIcon(enable ? "Checked" : "Checked_OFF");
 			using var enlIcon = enl.Get(width * 3 / 4);
 
 			{
@@ -412,7 +412,7 @@ public class IncludeAllButton : SlickControl
 			}
 		}
 
-		var action = new DynamicIcon("I_Actions");
+		var action = new DynamicIcon("Actions");
 		using var actionIcon = action.Get(width * 3 / 4);
 
 		{
