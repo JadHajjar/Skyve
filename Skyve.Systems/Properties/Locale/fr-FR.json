@@ -189,7 +189,7 @@
   "FavoriteTotal": "Nombre total de playsets: {0}",
   "PlaysetFilter": "Filtrer par Playset",
   "CheckDocumentsFolder": "Assurez-vous que Skyve a accès à votre dossier de documents, il l'utilise pour stocker vos paramètres d'interface et de langue.",
-  "FailedToSaveLanguage": "Failed to save the selected 1language",
+  "FailedToSaveLanguage": "Impossible d'enregistrer la langue sélectionnée",
   "FailedToOpenTC": "Échec de l'ouverture du changeur de thème",
   "FailedToDeleteItem": "Échec de la suppression de l'élément",
   "OpenChangelog": "Ouvrir le journal de modifications",
