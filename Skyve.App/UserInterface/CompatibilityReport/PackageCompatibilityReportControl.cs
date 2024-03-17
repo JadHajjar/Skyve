@@ -1,56 +1,40 @@
-﻿using Skyve.Compatibility.Domain.Enums;
+﻿using Skyve.App.UserInterface.Generic;
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.CompatibilityReport;
-public class PackageCompatibilityReportControl : TableLayoutPanel
+public class PackageCompatibilityReportControl : SmartPanel
 {
-	private readonly TableLayoutPanel[] _panels;
-	private int controlCount;
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly INotifier _notifier;
+	private readonly Dictionary<ReportType, CompatibilitySectionPanel> _panels = [];
+
+	public IPackageIdentity Package { get; }
+	public ICompatibilityInfo? Report { get; private set; }
+
 	public PackageCompatibilityReportControl(IPackageIdentity package)
 	{
 		ServiceCenter.Get(out _notifier, out _compatibilityManager);
 
 		Package = package;
-		AutoSize = true;
-		AutoSizeMode = AutoSizeMode.GrowAndShrink;
-		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
-		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
-		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
-		ColumnCount = 3;
+	}
 
-		_panels = new TableLayoutPanel[ColumnCount];
-		for (var i = 0; i < ColumnCount; i++)
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		foreach (ReportType item in Enum.GetValues(typeof(ReportType)))
 		{
-			_panels[i] = new()
-			{
-				Dock = DockStyle.Top,
-				AutoSize = true,
-				AutoSizeMode = AutoSizeMode.GrowAndShrink
-			};
-
-			_panels[i].ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-			_panels[i].ColumnCount = 1;
-
-			Controls.Add(_panels[i], i, 0);
+			Controls.Add(_panels[item] = new CompatibilitySectionPanel(item));
 		}
 
 		_notifier.CompatibilityReportProcessed += CentralManager_PackageInformationUpdated;
 
 		Reset();
 	}
-
-	private void CentralManager_PackageInformationUpdated()
-	{
-		this.TryInvoke(Reset);
-	}
-
-	public IPackageIdentity Package { get; }
-	public ICompatibilityInfo? Report { get; private set; }
 
 	protected override void Dispose(bool disposing)
 	{
@@ -59,11 +43,9 @@ public class PackageCompatibilityReportControl : TableLayoutPanel
 		base.Dispose(disposing);
 	}
 
-	protected override void OnCreateControl()
+	private void CentralManager_PackageInformationUpdated()
 	{
-		base.OnCreateControl();
-
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
+		this.TryInvoke(Reset);
 	}
 
 	public void Reset()
@@ -76,22 +58,21 @@ public class PackageCompatibilityReportControl : TableLayoutPanel
 			{
 				Report = _compatibilityManager.GetCompatibilityInfo(Package, true);
 
-				for (var i = 0; i < _panels.Length; i++)
+				foreach (var panel in _panels)
 				{
-					_panels[i].Controls.Clear(true);
-					_panels[i].RowStyles.Clear();
+					var reportItems = Report.ReportItems.AllWhere(x => x.Type == panel.Key);
+
+					if (reportItems.SequenceEqual(panel.Value.ReportItems))
+						continue;
+
+					panel.Value.ReportItems = reportItems;
+					panel.Value.Controls.Clear(true);
+
+					if (panel.Value.ReportItems.Count != 0)
+					{
+						panel.Value.Controls.AddRange(panel.Value.ReportItems.Reverse<ICompatibilityItem>().ToArray(x => new CompatibilityMessageControl(this, panel.Key, x)));
+					}
 				}
-
-				controlCount = 0;
-
-				foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key is not ReportType.Stability).ThenByDescending(x => x.Max(y => y.Status?.Notification)).ThenByDescending(x => x.Sum(y => y.Packages.Count())))
-				{
-					var controls = item.ToList(x => new CompatibilityMessageControl(this, item.Key, x));
-
-					GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), controls);
-				}
-
-				ColumnStyles[2].Width = controlCount > 2 ? 100 / 3F : 0;
 			}
 		}
 		finally
@@ -100,84 +81,41 @@ public class PackageCompatibilityReportControl : TableLayoutPanel
 		}
 	}
 
-	private Color GetTypeColor(IGrouping<ReportType, ICompatibilityItem> item)
+	protected override void OnLayout(LayoutEventArgs levent)
 	{
-		return item.Max(x => x.Status.Notification).GetColor().MergeColor(FormDesign.Design.AccentBackColor, 15);
-	}
+		const int preferredSize = 450;
+		var columns = (int)Math.Max(1, Math.Floor((Width - Padding.Horizontal) / (preferredSize * UI.FontScale)));
+		var columnWidth = (Width - Padding.Horizontal) / columns;
+		var currentY = new int[columns];
+		var index = 0;
 
-	private DynamicIcon GetTypeIcon(ReportType type)
-	{
-		return type switch
+		foreach (var panel in _panels
+			.OrderBy(x => x.Key is not ReportType.Stability)
+			.ThenByDescending(x => x.Value.ReportItems.Max(y => y.Status?.Notification))
+			.ThenByDescending(x => x.Value.ReportItems.Sum(y => y.Packages.Count())))
 		{
-			ReportType.Stability => "Stability",
-			ReportType.DlcMissing or ReportType.RequiredPackages => "MissingMod",
-			ReportType.Ambiguous => "Malicious",
-			ReportType.Successors => "Upgrade",
-			ReportType.Alternatives => "Alternatives",
-			ReportType.Status => "Statuses",
-			ReportType.OptionalPackages => "Recommendations",
-			ReportType.Compatibility => "Compatibilities",
-			ReportType.RequiredItem => "Important",
-			_ => "CompatibilityReport",
-		};
-	}
+			if (panel.Value.ReportItems.Count == 0)
+			{
+				panel.Value.Visible = false;
+				panel.Value.Location = default;
 
-	private void GenerateSection(string title, Bitmap image, Color backColor, List<CompatibilityMessageControl> controls)
-	{
-		if (controls.Count == 0)
-		{
-			return;
+				continue;
+			}
+
+			var bounds = new Rectangle(Padding.Left + (index * columnWidth), currentY[index] + Padding.Top, columnWidth, panel.Value.Height + panel.Value.Margin.Vertical).Pad(panel.Value.Margin);
+
+			if (panel.Value.Bounds != bounds)
+			{
+				panel.Value.Bounds = bounds;
+			}
+
+			panel.Value.Visible = true;
+
+			currentY[index] += Padding.Top + panel.Value.Height + panel.Value.Margin.Vertical;
+
+			index = (index + 1) % columns;
 		}
 
-		var tlp = new RoundedTableLayoutPanel
-		{
-			Dock = DockStyle.Top,
-			Padding = UI.Scale(new Padding(5), UI.FontScale),
-			Margin = UI.Scale(new Padding(5), UI.FontScale),
-			AutoSize = true,
-			AutoSizeMode = AutoSizeMode.GrowAndShrink,
-			BackColor = backColor,
-			ForeColor = backColor.GetTextColor(),
-		};
-
-		var icon = new PictureBox
-		{
-			Image = image.Color(tlp.ForeColor),
-			Enabled = false,
-			Anchor = AnchorStyles.Left,
-			Size = new Size(32, 32),
-			SizeMode = PictureBoxSizeMode.CenterImage,
-			Margin = UI.Scale(new Padding(4, 4, 0, 10), UI.FontScale),
-		};
-
-		var label = new Label
-		{
-			Text = title,
-			AutoSize = true,
-			Anchor = AnchorStyles.Left,
-			Font = UI.Font(10.25F, FontStyle.Bold),
-			Margin = UI.Scale(new Padding(0, 3, 4, 10), UI.FontScale),
-		};
-
-		tlp.ColumnStyles.Add(new ColumnStyle());
-		tlp.ColumnStyles.Add(new ColumnStyle());
-		tlp.RowStyles.Add(new RowStyle());
-		tlp.Controls.Add(icon, 0, 0);
-		tlp.Controls.Add(label, 1, 0);
-
-		var i = 1;
-		foreach (var item in controls)
-		{
-			tlp.RowStyles.Add(new RowStyle());
-			tlp.Controls.Add(item, 0, i++);
-			tlp.SetColumnSpan(item, 2);
-		}
-
-		tlp.RowCount = tlp.RowStyles.Count;
-		tlp.ColumnCount = tlp.ColumnStyles.Count;
-
-		_panels[controlCount % 3].Controls.Add(tlp);
-
-		controlCount++;
+		base.OnLayout(levent);
 	}
 }

@@ -133,7 +133,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 
 	private void I_AddPackage_Click(object sender, EventArgs e)
 	{
-		var form = new PC_SelectPackage();
+		var form = new PC_WorkshopPackageSelection(P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Id));
 
 		form.PackageSelected += Form_PackageSelected;
 
@@ -171,7 +171,11 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 			return;
 		}
 
+#if CS2
+		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{5,6})");
+#else
 		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{8,20})");
+#endif
 
 		foreach (Match item in matches)
 		{

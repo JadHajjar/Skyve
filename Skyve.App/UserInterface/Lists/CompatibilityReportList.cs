@@ -22,15 +22,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	private readonly IWorkshopService _workshopService;
 	private readonly IPackageNameUtil _packageNameUtil;
 
-#pragma warning disable IDE1006
-#pragma warning disable CS0649
-	private readonly bool CompactList;
-	private readonly bool IsPackagePage;
-#pragma warning restore CS0649
-#pragma warning restore IDE1006
-
 	private PackageSorting sorting;
 	private bool headerHovered;
+	private bool IsPackagePage;
+	private bool CompactList;
 	private readonly Dictionary<NotificationType, Rectangle> _headerRects = [];
 
 	public bool SortDescending { get; private set; }
@@ -61,7 +56,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	protected override void UIChanged()
 	{
-		GridItemSize = new Size(380, 380);
+		GridItemSize = new Size(400, 380);
 
 		base.UIChanged();
 

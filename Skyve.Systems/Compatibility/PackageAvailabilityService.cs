@@ -3,6 +3,7 @@
 using Skyve.Domain;
 using Skyve.Domain.Systems;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,32 +16,32 @@ public class PackageAvailabilityService
 	private readonly CompatibilityManager _compatibilityManager;
 	private readonly Dictionary<ulong, (bool enabled, bool enabledWithAlternatives)> _cache;
 
-	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil packageUtil, ILogger logger, ISkyveDataManager skyveDataManager, CompatibilityManager compatibilityManager)
+	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil packageUtil, ISkyveDataManager skyveDataManager, CompatibilityManager compatibilityManager)
 	{
 		_packageManager = packageManager;
 		_packageUtil = packageUtil;
 		_skyveDataManager = skyveDataManager;
 		_compatibilityManager = compatibilityManager;
 		_cache = [];
-
-		var ids = new List<ulong>();
-
-		ids.AddRange(_packageManager.Packages.Select(x => x.Id));
-		ids.AddRange(_skyveDataManager.GetPackagesKeys());
-
-		logger.Info($"[Compatibility] Caching package availability for {ids.Distinct().Count(x => x > 0)} items");
-
-		foreach (var package in ids.Distinct().Where(x => x > 0))
-		{
-			_cache[package] = (GetPackageEnabled(package, false), GetPackageEnabled(package, true));
-		}
-
-		logger.Info("[Compatibility] Package Availability Cached");
 	}
 
 	public bool IsPackageEnabled(ulong id, bool withAlternativesAndSuccessors)
 	{
 		return _cache.TryGetValue(id, out var status) && (withAlternativesAndSuccessors ? status.enabledWithAlternatives : status.enabled);
+	}
+
+	internal void RefreshCache()
+	{
+		var ids = new List<ulong>();
+
+		ids.AddRange(_packageManager.Packages.Select(x => x.Id));
+		ids.AddRange(_skyveDataManager.GetPackagesKeys());
+
+		_cache.Clear();
+		foreach (var package in ids.Distinct().Where(x => x > 0))
+		{
+			_cache[package] = (GetPackageEnabled(package, false), GetPackageEnabled(package, true));
+		}
 	}
 
 	internal void UpdateInclusionStatus(ulong id)

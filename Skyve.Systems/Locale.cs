@@ -304,6 +304,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ConfirmDeletePlayset => _instance.GetText("ConfirmDeletePlayset");
 
 	/// <summary>
+	/// Confirm Selection
+	/// </summary>
+	public static Translation ConfirmSelection => _instance.GetText("ConfirmSelection");
+
+	/// <summary>
 	/// <para>Contains {0} {1}</para>
 	/// <para>Plural: Contains {0} {1}</para>
 	/// </summary>
@@ -418,6 +423,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CustomMaps => _instance.GetText("Custom Maps");
 
 	/// <summary>
+	/// Custom Color
+	/// </summary>
+	public static Translation CustomColor => _instance.GetText("CustomColor");
+
+	/// <summary>
 	/// Custom Launch Arguments
 	/// </summary>
 	public static Translation CustomLaunchArguments => _instance.GetText("CustomLaunchArguments");
@@ -426,6 +436,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Custom Tags
 	/// </summary>
 	public static Translation CustomTags => _instance.GetText("CustomTags");
+
+	/// <summary>
+	/// Custom Thumbnail
+	/// </summary>
+	public static Translation CustomThumbnail => _instance.GetText("CustomThumbnail");
 
 	/// <summary>
 	/// Dashboard
@@ -701,6 +716,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Disabled mods &amp; assets in your local content lists will be faded out.
 	/// </summary>
 	public static Translation FadeDisabledItemsTip => _instance.GetText("FadeDisabledItems_Tip");
+
+	/// <summary>
+	/// Failed to apply the requested changes.
+	/// </summary>
+	public static Translation FailedToApplyChanges => _instance.GetText("FailedToApplyChanges");
 
 	/// <summary>
 	/// Failed to delete item
@@ -1299,6 +1319,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation NoPlaysetsMatchFilters => _instance.GetText("NoPlaysetsMatchFilters");
 
 	/// <summary>
+	/// Disable Thumbnail
+	/// </summary>
+	public static Translation NoThumbnail => _instance.GetText("NoThumbnail");
+
+	/// <summary>
 	/// Notifications
 	/// </summary>
 	public static Translation Notifications => _instance.GetText("Notifications");
@@ -1370,6 +1395,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OpenPlaysetFolder => _instance.GetText("OpenPlaysetFolder");
 
 	/// <summary>
+	/// Open this playset's page
+	/// </summary>
+	public static Translation OpenPlaysetPage => _instance.GetText("OpenPlaysetPage");
+
+	/// <summary>
 	/// Open Skyve Log
 	/// </summary>
 	public static Translation OpenSkyveLog => _instance.GetText("OpenSkyveLog");
@@ -1432,6 +1462,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PackageIsOutOfDate => _instance.GetText("PackageIsOutOfDate");
 
 	/// <summary>
+	/// Packages Selected ({0})
+	/// </summary>
+	public static Translation PackagesSelected => _instance.GetText("PackagesSelected");
+
+	/// <summary>
+	/// Click on a package to select it, click on 'Confirm Selection' once you're finished.
+	/// </summary>
+	public static Translation PackagesSelectionInfo => _instance.GetText("PackagesSelectionInfo");
+
+	/// <summary>
 	/// Package Status
 	/// </summary>
 	public static Translation PackageStatus => _instance.GetText("PackageStatus");
@@ -1474,6 +1514,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Playset => _instance.GetText("Playset");
 
 	/// <summary>
+	/// No custom color selected
+	/// </summary>
+	public static Translation PlaysetColorNotSet => _instance.GetText("PlaysetColorNotSet");
+
+	/// <summary>
+	/// Custom color enabled
+	/// </summary>
+	public static Translation PlaysetColorSet => _instance.GetText("PlaysetColorSet");
+
+	/// <summary>
 	/// Delete this playset
 	/// </summary>
 	public static Translation PlaysetDelete => _instance.GetText("PlaysetDelete");
@@ -1504,9 +1554,24 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PlaysetStillLoading => _instance.GetText("PlaysetStillLoading");
 
 	/// <summary>
+	/// No custom thumbnail selected
+	/// </summary>
+	public static Translation PlaysetThumbnailNotSet => _instance.GetText("PlaysetThumbnailNotSet");
+
+	/// <summary>
+	/// Custom thumbnail enabled
+	/// </summary>
+	public static Translation PlaysetThumbnailSet => _instance.GetText("PlaysetThumbnailSet");
+
+	/// <summary>
 	/// Playset Usage
 	/// </summary>
 	public static Translation PlaysetUsage => _instance.GetText("PlaysetUsage");
+
+	/// <summary>
+	/// Selecting a dedicated usage for your playset allows Skyve to automatically hide mods that either do not match, or are not compatible with, your selected usage.
+	/// </summary>
+	public static Translation PlaysetUsageInfo => _instance.GetText("PlaysetUsageInfo");
 
 	/// <summary>
 	/// Preferences

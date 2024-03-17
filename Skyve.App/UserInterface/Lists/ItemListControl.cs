@@ -18,6 +18,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private bool _compactList;
 	private bool settingItems;
 	private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = [];
+	public readonly List<ulong> _selectionList = [];
 
 	public event Action<NotificationType>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
@@ -28,6 +29,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	public event Action<bool>? FilterByEnabled;
 	public event Action<string>? AddToSearch;
 	public event Action<IPackageIdentity>? PackageSelected;
+	public event Action<IPackageIdentity>? PackageUnSelected;
 	public event Action? OpenWorkshopSearch;
 	public event Action? OpenWorkshopSearchInBrowser;
 	public event EventHandler? FilterRequested;
@@ -192,7 +194,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.OrderBy(x => x.Item.GetLocalPackage()?.FileSize),
 
 			PackageSorting.Name => items
-				.OrderBy(x => x.Item.ToString()),
+				.OrderBy(x => x.Item.CleanName()),
 
 			PackageSorting.Author => items
 				.OrderBy(x => x.Item.GetWorkshopInfo()?.Author?.Name ?? string.Empty),
@@ -223,7 +225,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			PackageSorting.LoadOrder => items
 				.OrderBy(x => !x.Item.GetLocalPackage()?.IsIncluded())
 				.ThenByDescending(x => x.Item.GetPackage() is IPackage package ? _modUtil.GetLoadOrder(package) : 0)
-				.ThenBy(x => x.Item.ToString()),
+				.ThenBy(x => x.Item.CleanName()),
 
 			_ => _page is SkyvePage.Workshop ? items : items
 				.OrderBy(x => !(x.Item.IsIncluded(out var partial) || partial))
@@ -436,7 +438,17 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			if (IsSelection)
 			{
-				PackageSelected?.Invoke(item.Item);
+				if (_selectionList.Contains(item.Item.Id))
+				{
+					_selectionList.Remove(item.Item.Id);
+					PackageUnSelected?.Invoke(item.Item);
+				}
+				else
+				{
+					_selectionList.Add(item.Item.Id);
+					PackageSelected?.Invoke(item.Item);
+				}
+
 				return;
 			}
 
@@ -560,6 +572,16 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 
 		base.OnPaintBackground(e);
+	}
+
+	protected override void OnPaintItem(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
+	{
+		if (IsSelection)
+		{
+			e.IsSelected = _selectionList.Contains(e.Item.Id);
+		}
+
+		base.OnPaintItem(e);
 	}
 
 	protected override void OnPaint(PaintEventArgs e)

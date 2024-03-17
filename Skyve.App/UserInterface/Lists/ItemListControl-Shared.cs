@@ -250,7 +250,7 @@ public partial class ItemListControl
 	{
 		var padding = GridView ? GridPadding : Padding;
 		var text = e.Item.CleanName(out var tags);
-		using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near };
+		using var stringFormat = CompactList ? new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center } : new();
 
 		if (GridView && !_settings.UserSettings.ComplexListUI)
 		{

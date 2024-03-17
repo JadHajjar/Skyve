@@ -3,6 +3,9 @@
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Skyve.Compatibility.Domain;
 
 public class PackageStatus : IPackageStatus<StatusType>
@@ -35,5 +38,20 @@ public class PackageStatus : IPackageStatus<StatusType>
 	{
 		Type = type;
 		Action = action;
+	}
+
+	public override bool Equals(object? obj)
+	{
+		return obj is PackageStatus status &&
+			   Type == status.Type &&
+			   (Packages?.SequenceEqual(status.Packages) ?? status.Packages is null);
+	}
+
+	public override int GetHashCode()
+	{
+		var hashCode = 498602157;
+		hashCode = hashCode * -1521134295 + Type.GetHashCode();
+		hashCode = hashCode * -1521134295 + EqualityComparer<ulong[]?>.Default.GetHashCode(Packages);
+		return hashCode;
 	}
 }

@@ -16,21 +16,24 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 
 	public void SetItems<T>(IEnumerable<T?> enumerable) where T : IPackageIdentity
 	{
-		_counts.Clear();
-
-		foreach (var item in enumerable.SelectWhereNotNull(x => x?.GetWorkshopInfo()?.Author))
+		lock (this)
 		{
-			if (_counts.ContainsKey(item!))
-			{
-				_counts[item!]++;
-			}
-			else
-			{
-				_counts[item!] = 1;
-			}
-		}
+			_counts.Clear();
 
-		Items = [.. _counts.Keys];
+			foreach (var item in enumerable.SelectWhereNotNull(x => x?.GetWorkshopInfo()?.Author))
+			{
+				if (_counts.ContainsKey(item!))
+				{
+					_counts[item!]++;
+				}
+				else
+				{
+					_counts[item!] = 1;
+				}
+			}
+
+			Items = [.. _counts.Keys];
+		}
 	}
 
 	protected override IEnumerable<IUser> OrderItems(IEnumerable<IUser> items)

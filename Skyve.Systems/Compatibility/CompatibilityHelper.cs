@@ -7,7 +7,6 @@ using Skyve.Domain;
 using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility.Domain;
 
-
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,23 +17,21 @@ public class CompatibilityHelper
 	private readonly ISettings _settings;
 	private readonly IPackageManager _contentManager;
 	private readonly IPackageUtil _packageUtil;
-	private readonly IPackageNameUtil _packageNameUtil;
 	private readonly IWorkshopService _workshopService;
 	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly PackageAvailabilityService _packageAvailabilityService;
 
 	private readonly Dictionary<ulong, List<ulong>> _missingItems = [];
 
-	public CompatibilityHelper(CompatibilityManager compatibilityManager, ISettings settings, IPackageManager contentManager, IPackageUtil packageUtil, IPackageNameUtil packageNameUtil, IWorkshopService workshopService, ILogger logger, ISkyveDataManager skyveDataManager)
+	public CompatibilityHelper(CompatibilityManager compatibilityManager, ISettings settings, IPackageManager contentManager, IPackageUtil packageUtil, IWorkshopService workshopService, ISkyveDataManager skyveDataManager)
 	{
 		_compatibilityManager = compatibilityManager;
 		_settings = settings;
 		_contentManager = contentManager;
 		_packageUtil = packageUtil;
-		_packageNameUtil = packageNameUtil;
 		_workshopService = workshopService;
 		_skyveDataManager = skyveDataManager;
-		_packageAvailabilityService = new PackageAvailabilityService(_contentManager, _packageUtil, logger, _skyveDataManager, _compatibilityManager);
+		_packageAvailabilityService = new PackageAvailabilityService(_contentManager, _packageUtil, _skyveDataManager, _compatibilityManager);
 	}
 
 	public void HandleStatus(CompatibilityInfo info, IPackageStatus<StatusType> status)
@@ -91,7 +88,7 @@ public class CompatibilityHelper
 			packages.Insert(0, info.Id);
 		}
 
-		info.Add(reportType, status, info.CleanName(true), packages.Select(x => new GenericPackageIdentity(x)).ToArray());
+		info.Add(reportType, status, info.CleanName(true), packages.Select(x => new GenericLocalPackageIdentity(x)).ToArray());
 	}
 
 	public void HandleInteraction(CompatibilityInfo info, IPackageStatus<InteractionType> interaction)
@@ -189,15 +186,16 @@ public class CompatibilityHelper
 			packages.Add(info.Id);
 		}
 
-		info.Add(reportType, interaction, info.CleanName(true), packages.Select(x => new GenericPackageIdentity(x)).ToArray());
+		info.Add(reportType, interaction, info.CleanName(true), packages.Select(x => new GenericLocalPackageIdentity(x)).ToArray());
 	}
 
 	private bool HandleSucceededBy(CompatibilityInfo info, IEnumerable<ulong> packages)
 	{
 		foreach (var item in packages)
 		{
-			if (_packageAvailabilityService.IsPackageEnabled(item, true))
+			if (_packageAvailabilityService.IsPackageEnabled(item, true)  )
 			{
+				if(_packageAvailabilityService.IsPackageEnabled(info.Id, false))
 				HandleStatus(info, new PackageStatus(StatusType.Succeeded, StatusAction.UnsubscribeThis) { Packages = new[] { item } });
 
 				return true;
@@ -226,11 +224,22 @@ public class CompatibilityHelper
 		_packageAvailabilityService.UpdateInclusionStatus(package.Id);
 	}
 
+	internal bool IsPackageEnabled(ulong id, bool withAlternativesAndSuccessors)
+	{
+		return _packageAvailabilityService.IsPackageEnabled(id, withAlternativesAndSuccessors);
+	}
+
 	internal List<ulong>? GetRequiredFor(ulong id)
 	{
 		lock (_missingItems)
 		{
 			return _missingItems.TryGet(id);
 		}
+	}
+
+	internal void RefreshCache()
+	{
+		_missingItems.Clear();
+		_packageAvailabilityService.RefreshCache();
 	}
 }

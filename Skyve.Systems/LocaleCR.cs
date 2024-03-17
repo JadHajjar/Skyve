@@ -116,6 +116,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation ApplyContinue => _instance.GetText("ApplyContinue");
 
 	/// <summary>
+	/// Apply recommended action
+	/// </summary>
+	public static Translation ApplyRecommendedAction => _instance.GetText("ApplyRecommendedAction");
+
+	/// <summary>
 	/// Apply Requested Changes
 	/// </summary>
 	public static Translation ApplyRequestedChanges => _instance.GetText("ApplyRequestedChanges");
@@ -601,6 +606,12 @@ public class LocaleCR : LocaleHelper
 	public static Translation RequiredItem => _instance.GetText("RequiredItem");
 
 	/// <summary>
+	/// <para>{0} {1} is required but is not enabled</para>
+	/// <para>Plural: {0} {1} are required but are not enabled</para>
+	/// </summary>
+	public static Translation RequiredItemCount => _instance.GetText("RequiredItemCount");
+
+	/// <summary>
 	/// Requires ..
 	/// </summary>
 	public static Translation RequiredPackages => _instance.GetText("RequiredPackages");
@@ -696,9 +707,14 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityBroken => _instance.GetText("Stability_Broken");
 
 	/// <summary>
-	/// This package broke after a recent patch. Please wait until it is updated before using it.
+	/// This package broke after patch {0} of the game. Please wait until it is updated before using it. In the meantime, you should disable it.
 	/// </summary>
 	public static Translation StabilityBrokenFromPatch => _instance.GetText("Stability_BrokenFromPatch");
+
+	/// <summary>
+	/// This package broke after patch {0} of the game. Please wait until it is updated before using it.
+	/// </summary>
+	public static Translation StabilityBrokenFromPatchSafe => _instance.GetText("Stability_BrokenFromPatchSafe");
 
 	/// <summary>
 	/// This package can cause issues. Be careful while using it.
@@ -809,7 +825,7 @@ public class LocaleCR : LocaleHelper
 
 	/// <summary>
 	/// <para>When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.  Use '{1}' to recover your save if needed. Read its Workshop description for more info.</para>
-	/// <para>Zero: When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.</para>
+	/// <para>Zero: After you save your city with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.</para>
 	/// </summary>
 	public static Translation StatusSavesCantLoadWithoutIt => _instance.GetText("Status_SavesCantLoadWithoutIt");
 

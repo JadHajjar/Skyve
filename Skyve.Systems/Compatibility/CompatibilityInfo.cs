@@ -38,7 +38,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 		ReportItems = [];
 	}
 
-	public void Add(ReportType type, IGenericPackageStatus status, string packageName, GenericPackageIdentity[] packages)
+	public void Add(ReportType type, IGenericPackageStatus status, string? packageName, GenericLocalPackageIdentity[] packages)
 	{
 		ReportItems.Add(new ReportItem
 		{
@@ -51,7 +51,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 		});
 	}
 
-	public void AddWithLocale(ReportType type, IGenericPackageStatus status, string localeKey, object[] localeParams)
+	public void AddWithLocale(ReportType type, IGenericPackageStatus status, string? packageName, string localeKey, object[] localeParams)
 	{
 		ReportItems.Add(new ReportItem
 		{

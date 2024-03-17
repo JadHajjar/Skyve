@@ -583,5 +583,18 @@
   "FavoritePlaysets": "Favorite Playsets",
   "OnlyShowErrors": "Only show warnings and errors",
   "RestartRequired": "Restart Required",
-  "NewUploads": "New Uploads"
+  "NewUploads": "New Uploads",
+  "FailedToApplyChanges": "Failed to apply the requested changes.",
+  "ConfirmSelection": "Confirm Selection",
+  "PackagesSelected": "Packages Selected ({0})",
+  "PackagesSelectionInfo": "Click on a package to select it, click on 'Confirm Selection' once you're finished.",
+  "CustomColor": "Custom Color",
+  "CustomThumbnail": "Custom Thumbnail",
+  "NoThumbnail": "Disable Thumbnail",
+  "PlaysetUsageInfo": "Selecting a dedicated usage for your playset allows Skyve to automatically hide mods that either do not match, or are not compatible with, your selected usage.",
+  "PlaysetColorSet": "Custom color enabled",
+  "PlaysetColorNotSet": "No custom color selected",
+  "PlaysetThumbnailSet": "Custom thumbnail enabled",
+  "PlaysetThumbnailNotSet": "No custom thumbnail selected",
+  "OpenPlaysetPage": "Open this playset's page"
 }

@@ -399,4 +399,16 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		CB_OnlyShowErrors_CheckChanged(sender, e);
 	}
+
+	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+	{
+		if (keyData == (Keys.Control | Keys.F))
+		{
+			TB_Search.Focus();
+			TB_Search.SelectAll();
+			return true;
+		}
+
+		return base.ProcessCmdKey(ref msg, keyData);
+	}
 }

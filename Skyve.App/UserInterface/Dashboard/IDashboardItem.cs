@@ -197,26 +197,12 @@ public abstract class IDashboardItem : SlickImageControl
 
 	private void DrawBackground(PaintEventArgs e, Rectangle clipRectangle)
 	{
-		using var brush = new SolidBrush(FormDesign.Design.IsDarkTheme ? Color.FromArgb(1, 255, 255, 255) : Color.FromArgb(10, FormDesign.Design.AccentColor));
-		for (var i = Padding.Right; i > 0; i--)
-		{
-			e.Graphics.FillRoundedRectangle(brush, clipRectangle.Pad(-i), Margin.Left + i);
-		}
-
-		using var brushBack = new SolidBrush(FormDesign.Design.BackColor);
-		e.Graphics.FillRoundedRectangle(brushBack, clipRectangle, Margin.Left);
+		e.Graphics.FillRoundedRectangleWithShadow(clipRectangle, Margin.Left, Padding.Right);
 	}
 
 	private void DrawSectionHoverAndBackground(PaintEventArgs e, Rectangle clipRectangle)
 	{
-		using var brush = new SolidBrush(Color.FromArgb(12, FormDesign.Design.ActiveColor));
-		for (var i = Padding.Right; i > 0; i--)
-		{
-			e.Graphics.FillRoundedRectangle(brush, clipRectangle.Pad(-i), Margin.Left + i);
-		}
-
-		using var brushBack = new SolidBrush(FormDesign.Design.BackColor);
-		e.Graphics.FillRoundedRectangle(brushBack, clipRectangle, Margin.Left);
+		e.Graphics.FillRoundedRectangleWithShadow(clipRectangle, Margin.Left, Padding.Right, shadow: Color.FromArgb(12, FormDesign.Design.ActiveColor));
 
 		using var penActive = new Pen(FormDesign.Design.ActiveColor, 1.5F);
 		e.Graphics.DrawRoundedRectangle(penActive, clipRectangle, Margin.Left);
