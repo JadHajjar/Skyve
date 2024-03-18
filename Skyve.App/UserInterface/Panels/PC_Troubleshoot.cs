@@ -157,6 +157,9 @@ public partial class PC_Troubleshoot : PanelContent
 
 	private bool CheckStrict(IPackage localPackage)
 	{
+#if CS2
+		return false;
+#endif
 		var workshopInfo = localPackage.GetWorkshopInfo();
 
 		if (localPackage.IsLocal)

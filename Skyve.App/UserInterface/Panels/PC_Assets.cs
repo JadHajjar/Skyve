@@ -34,15 +34,6 @@ public class PC_Assets : PC_ContentList
 		return await Task.FromResult(_contentManager.Assets);
 	}
 
-	protected override string GetCountText()
-	{
-		var assetsIncluded = _contentManager.Assets.Count(x => x.IsIncluded());
-		var total = LC_Items.ItemCount;
-		var text = string.Empty;
-
-		return string.Format(Locale.AssetIncludedTotal, assetsIncluded, total);
-	}
-
 	protected override LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Asset;

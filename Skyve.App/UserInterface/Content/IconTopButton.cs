@@ -1,10 +1,15 @@
-﻿using System.ComponentModel;
+﻿using SlickControls;
+
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
 public class IconTopButton : SlickImageControl
 {
+	[Category("Appearance"), DisplayName("Match Background Color"), DefaultValue(true)]
+	public bool MatchBackgroundColor { get; set; } = true;
+
 	[Browsable(true)]
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 	[EditorBrowsable(EditorBrowsableState.Always)]
@@ -37,8 +42,8 @@ public class IconTopButton : SlickImageControl
 		var client = ClientRectangle.Pad(1);
 		var active = FormDesign.Design.ActiveColor;
 		var backColor = HoverState.HasFlag(HoverState.Pressed) ? active
-				: HoverState.HasFlag(HoverState.Hovered) ? BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 12 : -10)
-				: BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 6 : -5);
+			: HoverState.HasFlag(HoverState.Hovered) ? (MatchBackgroundColor ? BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 12 : -10) : FormDesign.Design.ButtonColor.Tint(Lum: !FormDesign.Design.IsDarkTheme ? -7 : 7))
+			: (MatchBackgroundColor ? BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 6 : -5) : FormDesign.Design.ButtonColor);
 		var activeColor = backColor.GetTextColor();
 
 		using var activeBrush = new SolidBrush(activeColor);

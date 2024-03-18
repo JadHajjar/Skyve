@@ -62,14 +62,13 @@ public partial class PC_HelpAndLogs : PanelContent
 	protected override void LocaleChanged()
 	{
 		Text = Locale.HelpLogs;
-		L_Info.Text = Locale.DefaultLogViewInfo;
 		L_Troubleshoot.Text = Locale.TroubleshootInfo;
 		TB_Search.Placeholder = LocaleSlickUI.Search + "..";
 	}
 
 	public override Color GetTopBarColor()
 	{
-		return FormDesign.Design.AccentBackColor;
+		return FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 2 : -5);
 	}
 
 	protected override void UIChanged()
@@ -79,22 +78,26 @@ public partial class PC_HelpAndLogs : PanelContent
 		I_Sort.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 		I_Sort.Padding = UI.Scale(new Padding(3), UI.FontScale);
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
-		TLP_LogFiles.Margin = TLP_Errors.Margin = P_Troubleshoot.Margin = DD_LogFile.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10), UI.UIScale);
+		TLP_LogFiles.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10, 10, 10, 0), UI.UIScale);
+		TLP_LogFiles.Padding = TLP_Errors.Padding =  UI.Scale(new Padding(12), UI.UIScale);
+		DD_LogFile.Margin = UI.Scale(new Padding(12,14,12,6), UI.UIScale);
+		P_Troubleshoot.Margin = UI.Scale(new Padding(10, 10, 5, 0), UI.UIScale);
+		TLP_Errors.Margin = UI.Scale(new Padding(10, 10, 5, 10), UI.UIScale);
 		L_Troubleshoot.Font = UI.Font(9F);
 		CB_OnlyShowErrors.Font = UI.Font(7.5F);
-		CB_OnlyShowErrors.Padding = TB_Search .Margin= B_OpenSkyveLog.Margin = B_OpenLog.Margin = L_Troubleshoot.Margin = UI.Scale(new Padding(3), UI.FontScale);
+		CB_OnlyShowErrors.Padding = TB_Search.Margin = B_OpenSkyveLog.Margin = B_OpenLog.Margin = UI.Scale(new Padding(3), UI.FontScale);
 		tableLayoutPanel1.Width = (int)(250 * UI.FontScale);
 		B_OpenSkyveLog.Height = B_OpenLog.Height = (int)(48 * UI.FontScale);
 
 		foreach (var button in this.GetControls<SlickButton>())
 		{
-			if (button is not SlickLabel)
+			if (button is not SlickLabel && button != B_Troubleshoot)
 			{
 				button.Margin = UI.Scale(new Padding(10, 7, 10, 7), UI.UIScale);
 			}
 		}
 
-		TLP_Main.RowStyles[0].Height = (int)(100 * UI.FontScale);
+		TLP_Main.RowStyles[0].Height = (int)(125 * UI.FontScale);
 		TB_Search.Width = (int)(150 * UI.FontScale);
 		B_SaveZip.Margin = UI.Scale(new Padding(10, 7, 10, 10), UI.UIScale);
 		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
@@ -105,8 +108,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		base.DesignChanged(design);
 
-		BackColor = design.AccentBackColor;
-		TLP_LogFiles .BackColor=TLP_Errors.BackColor = TLP_LogFolders.BackColor = TLP_HelpLogs.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme ? 1 : -1);
+		P_Troubleshoot.BackColor = TLP_LogFiles.BackColor = TLP_Errors.BackColor = TLP_LogFolders.BackColor = TLP_HelpLogs.BackColor = design.BackColor;
 	}
 
 	protected override bool LoadData()
@@ -286,7 +288,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		logTraceControl.SetItems(logEnumerable);
 		logTraceControl.Invalidate();
-		L_Info.Visible = logs.Count == 0;
+		P_ErrorsContainer.Invalidate();
 	}
 
 	private bool SearchLog(ILogTrace trace)
@@ -356,6 +358,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private async void B_Troubleshoot_Click(object sender, EventArgs e)
 	{
+		ShowPrompt("Coming soon...", icon: PromptIcons.Info);return;
 		var sys = ServiceCenter.Get<ITroubleshootSystem>();
 
 		if (sys.IsInProgress)
@@ -410,5 +413,17 @@ public partial class PC_HelpAndLogs : PanelContent
 		}
 
 		return base.ProcessCmdKey(ref msg, keyData);
+	}
+
+	private void P_ErrorsContainer_Paint(object sender, PaintEventArgs e)
+	{
+		if (logTraceControl.Items.Any())
+			return;
+
+		using var font = UI.Font(9.75F, FontStyle.Italic);
+		using var brush = new SolidBrush(FormDesign.Design.InfoColor);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+
+		e.Graphics.DrawString(Locale.DefaultLogViewInfo, font, brush, P_ErrorsContainer.ClientRectangle.Pad(Math.Min(P_ErrorsContainer.Height, P_ErrorsContainer. Width) / 3), format);
 	}
 }

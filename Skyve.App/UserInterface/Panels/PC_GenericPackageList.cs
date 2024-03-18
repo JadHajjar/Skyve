@@ -55,47 +55,6 @@ public class PC_GenericPackageList : PC_ContentList
 		return await Task.FromResult(_items);
 	}
 
-	protected override string GetCountText()
-	{
-		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
-
-		foreach (var item in _items)
-		{
-			var package = item.GetLocalPackage();
-
-			if (package is null)
-			{
-				continue;
-			}
-
-			if (package.IsIncluded())
-			{
-				packagesIncluded++;
-
-				if (package.Package.IsCodeMod)
-				{
-					modsIncluded++;
-
-					if (package.IsEnabled())
-					{
-						modsEnabled++;
-					}
-				}
-			}
-		}
-
-		var total = LC_Items.ItemCount;
-
-		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
-		{
-			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
-		}
-
-		return modsIncluded == modsEnabled
-			? string.Format(Locale.PackageIncludedAndEnabledTotal, packagesIncluded, total)
-			: string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
-	}
-
 	protected override LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Package;

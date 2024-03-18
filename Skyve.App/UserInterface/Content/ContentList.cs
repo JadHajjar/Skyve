@@ -39,11 +39,11 @@ public partial class ContentList : SlickControl
 
 	private readonly GetAllItems GetItems;
 	private readonly Func<LocaleHelper.Translation> GetItemText;
-	private readonly Func<string> GetCountText;
 
 	public SkyvePage Page { get; }
 	public int ItemCount => ListControl.ItemCount;
 
+	public int? SelectedPlayset { get => ListControl.SelectedPlayset; set => ListControl.SelectedPlayset = value; }
 	public bool IsGenericPage { get => ListControl.IsGenericPage; set => ListControl.IsGenericPage = value; }
 	public IEnumerable<IPackageIdentity> Items => ListControl.Items;
 
@@ -52,12 +52,11 @@ public partial class ContentList : SlickControl
 		ListControl.Remove(item);
 	}
 
-	public ContentList(SkyvePage page, bool loaded, GetAllItems getItems, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
+	public ContentList(SkyvePage page, bool loaded, GetAllItems getItems, Func<LocaleHelper.Translation> getItemText)
 	{
 		Page = page;
 		GetItems = getItems;
 		GetItemText = getItemText;
-		GetCountText = getCountText;
 
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _playsetManager, out _tagUtil, out _packageUtil, out _downloadService);
 
@@ -631,19 +630,51 @@ public partial class ContentList : SlickControl
 
 	protected void RefreshCounts()
 	{
-		var countText = GetCountText();
-		var format = ListControl.SelectedItemsCount == 0 ? (UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning) : (UsageFilteredOut == 0 ? Locale.ShowingSelectedCount : Locale.ShowingSelectedCountWarning);
-		var filteredText = format.FormatPlural(
-			ListControl.FilteredCount,
-			GetItemText().FormatPlural(ListControl.FilteredCount).ToLower(),
-			ListControl.SelectedItemsCount,
-			Locale.ItemsHidden.FormatPlural(UsageFilteredOut, GetItemText().FormatPlural(ListControl.FilteredCount).ToLower()));
+		if (ListControl.ItemCount > 0)
+		{
+			var countText = GetCountText();
+			var format = ListControl.SelectedItemsCount == 0 ? (UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning) : (UsageFilteredOut == 0 ? Locale.ShowingSelectedCount : Locale.ShowingSelectedCountWarning);
+			var filteredText = format.FormatPlural(
+				ListControl.FilteredCount,
+				GetItemText().FormatPlural(ListControl.FilteredCount).ToLower(),
+				ListControl.SelectedItemsCount,
+				Locale.ItemsHidden.FormatPlural(UsageFilteredOut, GetItemText().FormatPlural(ListControl.FilteredCount).ToLower()));
 
-		L_Counts.RightText = countText;
-		L_Counts.LeftText = filteredText;
+			L_Counts.RightText = countText;
+			L_Counts.LeftText = filteredText;
+			I_Actions.Visible = true;
+		}
+		else
+		{
+			L_Counts.LeftText = L_Counts.RightText = string.Empty;
+			I_Actions.Visible = false;
+		}
 
+		L_Counts.Invalidate();
 		I_Actions.Invalidate();
 		I_Refresh.Loading = false;
+	}
+
+	protected string GetCountText()
+	{
+		var mods = ListControl.Items.ToList();
+		var modsIncluded = mods.Count(x => _packageUtil.IsIncluded(x, SelectedPlayset));
+		var modsEnabled = mods.Count(x => _packageUtil.IsIncludedAndEnabled(x, SelectedPlayset));
+		var count = ListControl.ItemCount;
+
+#if CS1
+		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
+		{
+			return string.Format(Locale.GenericIncludedTotal, GetItemText().Plural, modsIncluded, count);
+		}
+#endif
+
+		if (modsIncluded == modsEnabled)
+		{
+			return string.Format(Locale.GenericIncludedAndEnabledTotal, GetItemText().Plural, modsIncluded, count);
+		}
+
+		return string.Format(Locale.GenericIncludedEnabledTotal, GetItemText().Plural, modsIncluded, modsEnabled, count);
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)

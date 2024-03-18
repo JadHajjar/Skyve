@@ -187,11 +187,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Asset => _instance.GetText("Asset");
 
 	/// <summary>
-	/// Assets included: {0}, Total: {1}
-	/// </summary>
-	public static Translation AssetIncludedTotal => _instance.GetText("AssetIncludedTotal");
-
-	/// <summary>
 	/// Your Assets
 	/// </summary>
 	public static Translation AssetsBubble => _instance.GetText("AssetsBubble");
@@ -893,6 +888,21 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation GamePlay => _instance.GetText("GamePlay");
 
 	/// <summary>
+	/// {0} included &amp; enabled: {1}, Total: {2}
+	/// </summary>
+	public static Translation GenericIncludedAndEnabledTotal => _instance.GetText("GenericIncludedAndEnabledTotal");
+
+	/// <summary>
+	/// {0} included: {1}, of which are enabled: {2}, Total: {3}
+	/// </summary>
+	public static Translation GenericIncludedEnabledTotal => _instance.GetText("GenericIncludedEnabledTotal");
+
+	/// <summary>
+	/// {0} included: {1}, Total: {2}
+	/// </summary>
+	public static Translation GenericIncludedTotal => _instance.GetText("GenericIncludedTotal");
+
+	/// <summary>
 	/// Generic Playset
 	/// </summary>
 	public static Translation GenericPlayset => _instance.GetText("GenericPlayset");
@@ -1185,21 +1195,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ModID => _instance.GetText("ModID");
 
 	/// <summary>
-	/// Mods included &amp; enabled: {0}, Total: {1}
-	/// </summary>
-	public static Translation ModIncludedAndEnabledTotal => _instance.GetText("ModIncludedAndEnabledTotal");
-
-	/// <summary>
-	/// Mods included: {0}, of which are enabled: {1}, Total: {2}
-	/// </summary>
-	public static Translation ModIncludedEnabledTotal => _instance.GetText("ModIncludedEnabledTotal");
-
-	/// <summary>
-	/// Mods included: {0}, Total: {1}
-	/// </summary>
-	public static Translation ModIncludedTotal => _instance.GetText("ModIncludedTotal");
-
-	/// <summary>
 	/// Item is private
 	/// </summary>
 	public static Translation ModIsPrivate => _instance.GetText("ModIsPrivate");
@@ -1430,21 +1425,6 @@ public class Locale : LocaleHelper, ILocale
 	/// <para>Plural: Packages</para>
 	/// </summary>
 	public static Translation Package => _instance.GetText("Package");
-
-	/// <summary>
-	/// Packages included &amp; enabled: {0}, Total: {1}
-	/// </summary>
-	public static Translation PackageIncludedAndEnabledTotal => _instance.GetText("PackageIncludedAndEnabledTotal");
-
-	/// <summary>
-	/// Packages included: {0}, of which {1} are mods and {2} are enabled, Total: {3}
-	/// </summary>
-	public static Translation PackageIncludedEnabledTotal => _instance.GetText("PackageIncludedEnabledTotal");
-
-	/// <summary>
-	/// Packages included: {0}, Total: {1}
-	/// </summary>
-	public static Translation PackageIncludedTotal => _instance.GetText("PackageIncludedTotal");
 
 	/// <summary>
 	/// '{0}' may be out of date, it was updated {1}

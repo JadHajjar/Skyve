@@ -32,7 +32,7 @@ public partial class PC_UserPage : PanelContent
 			GridView = true,
 		};
 
-		LC_Items = new ContentList(SkyvePage.User, false, GetItems, GetItemText, GetCountText)
+		LC_Items = new ContentList(SkyvePage.User, false, GetItems, GetItemText)
 		{
 			IsGenericPage = true
 		};
@@ -60,43 +60,6 @@ public partial class PC_UserPage : PanelContent
 	protected LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Package;
-	}
-
-	protected string GetCountText()
-	{
-		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
-
-		foreach (var item in userItems.SelectWhereNotNull(x => x.GetLocalPackage()))
-		{
-			if (item?.IsIncluded() == true)
-			{
-				packagesIncluded++;
-
-				if (item.Package.IsCodeMod)
-				{
-					modsIncluded++;
-
-					if (item.IsEnabled())
-					{
-						modsEnabled++;
-					}
-				}
-			}
-		}
-
-		var total = LC_Items.ItemCount;
-
-		if (!_settings.UserSettings.AdvancedIncludeEnable)
-		{
-			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
-		}
-
-		if (modsIncluded == modsEnabled)
-		{
-			return string.Format(Locale.PackageIncludedAndEnabledTotal, packagesIncluded, total);
-		}
-
-		return string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
 	}
 
 	protected override async Task<bool> LoadDataAsync()

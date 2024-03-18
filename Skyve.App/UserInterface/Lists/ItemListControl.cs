@@ -90,6 +90,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
+	public int? SelectedPlayset { get; set; }
 	public bool SortDescending { get; private set; }
 	public bool IsPackagePage { get; set; }
 	public bool IsTextSearchNotEmpty { get; set; }
@@ -203,7 +204,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.OrderBy(x => _packageUtil.GetStatus(x.Item.GetLocalPackage(), out _)),
 
 			PackageSorting.UpdateTime => items
-				.OrderBy(x => (x.Item.GetWorkshopInfo()?.ServerTime).If(y => y is null || y.Value == DateTime.MinValue, _ => x.Item.GetLocalPackage()?.LocalTime ?? DateTime.Now, y => y.Value)),
+				.OrderBy(x => (x.Item.GetWorkshopInfo()?.ServerTime).If(y => y is null || y.Value == DateTime.MinValue, _ => x.Item.GetLocalPackage()?.LocalTime ?? DateTime.Now, y => y ?? DateTime.Now)),
 
 			PackageSorting.SubscribeTime => items
 				.OrderBy(x => x.Item.GetLocalPackage()?.LocalTime),
@@ -265,21 +266,21 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 #if CS2
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			var isIncluded = item.Item.IsIncluded(out var partialIncluded) && !partialIncluded;
+			var isIncluded = _packageUtil.IsIncluded(item.Item, out var partialIncluded, SelectedPlayset) && !partialIncluded;
 
 			Loading = item.Loading = true;
 
 			if (!isIncluded)
 			{
-				await _packageUtil.SetIncluded(item.Item, !isIncluded);
+				await _packageUtil.SetIncluded(item.Item, !isIncluded, SelectedPlayset);
 			}
 			else
 			{
-				var enable = !item.Item.IsEnabled();
+				var enable = !_packageUtil.IsEnabled(item.Item, SelectedPlayset);
 
 				if (enable || !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil))
 				{
-					await _modUtil.SetEnabled(item.Item, enable);
+					await _modUtil.SetEnabled(item.Item, enable, SelectedPlayset);
 				}
 			}
 

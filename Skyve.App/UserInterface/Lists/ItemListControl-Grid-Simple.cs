@@ -14,8 +14,8 @@ public partial class ItemListControl
 			var package = e.Item.GetPackage();
 			var localIdentity = e.Item.GetLocalPackageIdentity();
 			var workshopInfo = e.Item.GetWorkshopInfo();
-			var isIncluded = e.Item.IsIncluded(out var partialIncluded) || partialIncluded;
-			var isEnabled = e.Item.IsEnabled();
+			var isIncluded = _packageUtil.IsIncluded(e.Item, out var partialIncluded, SelectedPlayset) || partialIncluded;
+			var isEnabled = _packageUtil.IsEnabled(e.Item, SelectedPlayset);
 
 			e.BackColor = BackColor;
 

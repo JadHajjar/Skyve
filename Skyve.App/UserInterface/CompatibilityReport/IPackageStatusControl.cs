@@ -111,15 +111,16 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 
 	protected override void DesignChanged(FormDesign design)
 	{
-		P_Main.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme ? 6 : -6);
+		P_Main.BackColor = design.AccentBackColor;
 		L_OutputTitle.ForeColor = design.LabelColor;
 		L_Output.ForeColor = design.InfoColor;
 	}
 
 	protected override void UIChanged()
 	{
-		MinimumSize = UI.Scale(new Size(250, 0), UI.UIScale);
-		Margin = P_Main.Padding = slickSpacer1.Margin = L_OutputTitle.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		MinimumSize = UI.Scale(new Size(260, 0), UI.UIScale);
+		P_Main.Padding = UI.Scale(new Padding(12), UI.FontScale);
+		Margin = slickSpacer1.Margin = L_OutputTitle.Margin = UI.Scale(new Padding(3), UI.FontScale);
 		TB_Note.MinimumSize = new Size(0, (int)(64 * UI.FontScale));
 		I_Paste.Size = I_Copy.Size = I_AddPackage.Size = I_Note.Size = I_Close.Size = UI.Scale(new Size(28, 28), UI.FontScale);
 		I_Paste.Padding = I_Copy.Padding = I_AddPackage.Padding = I_Note.Padding = I_Close.Padding = UI.Scale(new Padding(3), UI.FontScale);
