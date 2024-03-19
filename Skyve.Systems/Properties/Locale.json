@@ -592,5 +592,6 @@
   "PlaysetColorNotSet": "No custom color selected",
   "PlaysetThumbnailSet": "Custom thumbnail enabled",
   "PlaysetThumbnailNotSet": "No custom thumbnail selected",
-  "OpenPlaysetPage": "Open this playset's page"
+  "OpenPlaysetPage": "Open this playset's page",
+  "Ready": "Ready"
 }

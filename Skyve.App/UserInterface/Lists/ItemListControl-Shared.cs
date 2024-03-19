@@ -171,7 +171,7 @@ public partial class ItemListControl
 			return;
 		}
 
-		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : "Enabled");
+		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : (isHovered && ModifierKeys.HasFlag(Keys.Alt)) ? "X" : "Enabled");
 		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
@@ -471,16 +471,15 @@ public partial class ItemListControl
 		}
 	}
 
-	private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? parentPackage, IWorkshopInfo? workshopInfo)
+	private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : Padding;
 		var size = _settings.UserSettings.ComplexListUI ?
 			UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale) :
 			UI.Scale(CompactList ? new Size(18, 18) : new Size(22, 22), UI.FontScale);
 		var rect = new Rectangle(e.ClipRectangle.Right, e.ClipRectangle.Y, 0, e.ClipRectangle.Height).Pad(padding);
-		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 
-		if (parentPackage is not null)
+		if (localIdentity is not null)
 		{
 			e.Rects.FolderRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{
@@ -497,7 +496,7 @@ public partial class ItemListControl
 
 		if (!IsPackagePage && workshopInfo?.Url is not null)
 		{
-			e.Rects.SteamRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
+			e.Rects.WorkshopRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{
 				Size = size,
 #if CS2
@@ -511,7 +510,7 @@ public partial class ItemListControl
 				BackgroundColor = e.BackColor
 			}).Rectangle;
 
-			rect.X -= e.Rects.SteamRect.Width + padding.Left;
+			rect.X -= e.Rects.WorkshopRect.Width + padding.Left;
 		}
 
 		if (!IsPackagePage && _settings.UserSettings.ComplexListUI && e.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)

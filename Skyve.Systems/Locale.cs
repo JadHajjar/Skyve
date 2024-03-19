@@ -1559,6 +1559,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Preferences => _instance.GetText("Preferences");
 
 	/// <summary>
+	/// Ready
+	/// </summary>
+	public static Translation Ready => _instance.GetText("Ready");
+
+	/// <summary>
 	/// Recently Updated
 	/// </summary>
 	public static Translation RecentlyUpdated => _instance.GetText("RecentlyUpdated");

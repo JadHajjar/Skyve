@@ -195,7 +195,6 @@ public class CompatibilityMessageControl : SlickControl
 		{
 			e.Graphics.SetUp(BackColor);
 
-
 			var color = Message.Status.Notification.GetColor().Tint(Lum: FormDesign.Design.IsDarkTheme ? 6 : -6);
 			var isSnoozed = _compatibilityManager.IsSnoozed(Message);
 			var text = Message.GetMessage(_workshopService, _packageNameUtil);

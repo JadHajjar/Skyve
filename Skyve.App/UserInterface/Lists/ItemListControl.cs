@@ -270,7 +270,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			Loading = item.Loading = true;
 
-			if (!isIncluded)
+			if (!isIncluded || ModifierKeys.HasFlag(Keys.Alt))
 			{
 				await _packageUtil.SetIncluded(item.Item, !isIncluded, SelectedPlayset);
 			}
@@ -334,7 +334,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			return;
 		}
 
-		if (rects.SteamRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Url is string url)
+		if (rects.WorkshopRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Url is string url)
 		{
 			PlatformUtil.OpenUrl(url);
 			return;
@@ -554,6 +554,16 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
+	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+	{
+		if (keyData == Keys.Alt)
+		{
+			Invalidate();
+		}
+
+		return base.ProcessCmdKey(ref msg, keyData);
+	}
+
 	protected override void OnPaintBackground(PaintEventArgs e)
 	{
 		if (ItemCount > 0)
@@ -716,7 +726,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		public Rectangle FolderRect;
 		public Rectangle IconRect;
 		public Rectangle TextRect;
-		public Rectangle SteamRect;
+		public Rectangle WorkshopRect;
 		public Rectangle SteamIdRect;
 		public Rectangle CenterRect;
 		public Rectangle AuthorRect;
@@ -742,7 +752,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				IncludedRect.Contains(location) ||
 				EnabledRect.Contains(location) ||
 				FolderRect.Contains(location) ||
-				SteamRect.Contains(location) ||
+				WorkshopRect.Contains(location) ||
 				AuthorRect.Contains(location) ||
 				FolderNameRect.Contains(location) ||
 				((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl)!.IsPackagePage) ||
@@ -790,10 +800,10 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				return true;
 			}
 #endif
-			if (SteamRect.Contains(location))
+			if (WorkshopRect.Contains(location))
 			{
 				text = Locale.ViewOnWorkshop;
-				point = SteamRect.Location;
+				point = WorkshopRect.Location;
 				return true;
 			}
 

@@ -224,7 +224,7 @@ public partial class ItemListControl
 
 		private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor)
 		{
-			var height = CompactList ? ((int)(18 * UI.FontScale)) : (Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
+			var height = CompactList ? ((int)(18 * UI.FontScale)) : (Math.Max(e.Rects.WorkshopRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
 
 			if (notificationType > NotificationType.Info)
 			{
