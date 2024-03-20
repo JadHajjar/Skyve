@@ -354,7 +354,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			}
 			else
 			{
-				Program.MainForm.PushPanel(null, new PC_UserPage(user));
+				Program.MainForm.PushPanel(new PC_UserPage(user));
 			}
 
 			return;
@@ -454,7 +454,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			}
 
 			ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item.GetPackage() ?? item.Item, false);
-			//(FindForm() as BasePanelForm)?.PushPanel(null, /*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) :*/ new PC_PackagePage(item.Item.GetPackage() ?? item.Item));
+			//(FindForm() as BasePanelForm)?.PushPanel(/*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) :*/ new PC_PackagePage(item.Item.GetPackage() ?? item.Item));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{

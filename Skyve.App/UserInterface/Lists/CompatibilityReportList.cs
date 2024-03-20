@@ -62,7 +62,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		Padding = UI.Scale(new Padding(8), UI.FontScale);
 		GridPadding = UI.Scale(new Padding(5), UI.FontScale);
-		StartHeight = (int)(32 * UI.FontScale);
+		StartHeight = (int)(44 * UI.FontScale);
 	}
 
 	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo> args)
@@ -167,13 +167,15 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	protected override void DrawHeader(PaintEventArgs e)
 	{
 		if (ItemCount == 0)
+		{
 			return;
+		}
 
 		var items = Items.GroupBy(x => x.GetNotification()).OrderByDescending(x => x.Key).ToList();
 
 		items.Insert(0, Items.GroupBy(x => NotificationType.None).FirstOrDefault());
 
-		var smaller = Width < items.Count * 175 * UI.FontScale;
+		var smaller = Width < items.Count * 100 * UI.FontScale;
 		var xpos = 0;
 
 		using var brush = new SolidBrush(FormDesign.Design.AccentBackColor);
@@ -187,26 +189,22 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		{
 			int width;
 
-			using var font = UI.Font(9.75F);
-			using var icon = (item.Key == NotificationType.None ? "CompatibilityReport" : item.Key.GetIcon(true)).Get(font.Height + Padding.Top);
-			var text = (item.Key == NotificationType.None ? LocaleHelper.GetGlobalText("All") : LocaleCR.Get(item.Key.ToString())) + $" ({item.Count()})";
-
 			if (!smaller)
 			{
-				width = Math.Min(Width / items.Count, (int)(300 * UI.FontScale));
-			}
-			else if (CurrentGroup == item.Key)
-			{
-				width = SlickButton.GetSize(e.Graphics, icon, text, font, Padding).Width;
+				width = Math.Min(Width / items.Count, (int)(250 * UI.FontScale));
 			}
 			else
 			{
 				width = StartHeight;
 			}
 
-			var rectangle = new Rectangle(xpos, 0, width, StartHeight);
+			var rectangle = new Rectangle(xpos, 0, width, StartHeight).Pad(Padding);
 
 			_headerRects[item.Key] = rectangle;
+
+			var text = (item.Key == NotificationType.None ? LocaleHelper.GetGlobalText("All") : LocaleCR.Get(item.Key.ToString())) + $" ({item.Count()})";
+			using var icon = (item.Key == NotificationType.None ? "CompatibilityReport" : item.Key.GetIcon(true)).Get((StartHeight - Padding.Vertical) * 3 / 4);
+			using var font = UI.Font(9.75F, CurrentGroup == item.Key ? FontStyle.Bold : FontStyle.Regular).FitToWidth(text, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
 			var baseColor = item.Key == NotificationType.None ? FormDesign.Design.ActiveColor : item.Key.GetColor();
 			using var foreBrush = new SolidBrush(CurrentGroup == item.Key ? baseColor.GetTextColor() : baseColor.MergeColor(ForeColor, 80));
@@ -216,13 +214,12 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (CurrentGroup == item.Key)
 			{
-				using var backBrush = new SolidBrush(Color.FromArgb(200, baseColor));
-				e.Graphics.FillRectangle(backBrush, rectangle);
+				e.Graphics.FillRoundedRectangleWithShadow(rectangle, GridPadding.Left, Padding.Left, Color.FromArgb(200, baseColor), Color.FromArgb(6, baseColor));
 			}
 			else if (rectangle.Contains(CursorLocation) && HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var backBrush = new SolidBrush(Color.FromArgb(50, baseColor));
-				e.Graphics.FillRectangle(backBrush, rectangle);
+				e.Graphics.FillRoundedRectangle(backBrush, rectangle, GridPadding.Left);
 			}
 
 			if (!smaller || CurrentGroup == item.Key)
@@ -241,7 +238,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			e.Graphics.DrawImage(icon.Color(foreBrush.Color), iconBounds);
 
-			xpos += rectangle.Width;
+			xpos += rectangle.Width+Padding.Horizontal;
 
 			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos - 1, Padding.Top, 2, StartHeight - Padding.Vertical));
 		}
@@ -370,7 +367,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		e.Rects.CenterRect = e.Rects.TextRect.Pad(0, -GridPadding.Top, 0, 0);
 		e.DrawableItem.CachedHeight = e.Rects.TextRect.Bottom;
 
-		using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState == HoverState.Hovered ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
+		using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
 
 		e.Graphics.DrawString(text, font, brushTitle, textRect);
 
@@ -749,6 +746,13 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			return;
 		}
 
+		if (rects.AuthorRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Author is IUser user)
+		{
+			Program.MainForm.PushPanel(new PC_UserPage(user));
+
+			return;
+		}
+
 		var Message = item.Item.ReportItems?.Any() == true ? item.Item.ReportItems.OrderBy(x => _compatibilityManager.IsSnoozed(x) ? 0 : x.Status.Notification).LastOrDefault() : null;
 
 		if (Message is null)
@@ -858,7 +862,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		{
 			await action.Invoke(Message, package);
 
-			_compatibilityManager.QuickUpdate(Message);
+			//_compatibilityManager.QuickUpdate(Message);
 		}
 		catch (Exception ex)
 		{
@@ -878,79 +882,9 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
 	}
 
-	private void Clicked(ICompatibilityInfo info, ICompatibilityItem Message, IPackageIdentity item, bool button)
-	{
-		var package = item.GetWorkshopPackage();
-		_ = info;
-
-		if (!button)
-		{
-			if (Message.Type is ReportType.DlcMissing)
-			{
-				PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.Id}");
-			}
-			else if (package is not null)
-			{
-				ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item, false);
-				//	Program.MainForm.PushPanel(null, /*package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) :*/ new PC_PackagePage(package));
-			}
-			else
-			{
-				PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={item.Id}");
-			}
-
-			return;
-		}
-
-		var p = item.GetLocalPackage();
-
-		if (p is null)
-		{
-			//_subscribingTo.Add(item);
-
-			Loading = true;
-
-			_subscriptionsManager.Subscribe(new[] { item });
-		}
-		else
-		{
-			_packageUtil.SetIncluded(p, true);
-			_packageUtil.SetEnabled(p, true);
-		}
-
-		switch (Message.Status.Action)
-		{
-			case StatusAction.SelectOne:
-				foreach (var id in Message.Packages!)
-				{
-					if (id != item)
-					{
-						var pp = id.GetLocalPackage();
-
-						if (pp is not null)
-						{
-							_packageUtil.SetIncluded(pp, false);
-						}
-					}
-				}
-
-				break;
-			case StatusAction.Switch:
-				if (p is not null)
-				{
-					_packageUtil.SetIncluded(p, false);
-				}
-
-				break;
-		}
-
-		_compatibilityManager.QuickUpdate(Message);
-	}
-
 	protected override void OnDragEnter(DragEventArgs drgevent)
 	{
 		base.OnDragEnter(drgevent);
-
 
 		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop))
 		{

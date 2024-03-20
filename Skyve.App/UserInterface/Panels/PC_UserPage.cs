@@ -27,24 +27,37 @@ public partial class PC_UserPage : PanelContent
 		PB_Icon.LoadImage(User.AvatarUrl, ServiceCenter.Get<IImageService>().GetImage);
 		P_Info.SetUser(User, this);
 
-		L_Profiles = new(true)
+		T_Profiles.LinkedControl = L_Profiles = new(true)
 		{
 			GridView = true,
 		};
 
-		LC_Items = new ContentList(SkyvePage.User, false, GetItems, GetItemText)
+		T_Packages.LinkedControl = LC_Items = new ContentList(SkyvePage.User, false, GetItems, GetItemText)
 		{
 			IsGenericPage = true
 		};
-		
+
 		LC_Items.TB_Search.Placeholder = "SearchGenericPackages";
 
 		LC_Items.ListControl.Loading = true;
 	}
 
+	protected override async void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		await LC_Items.RefreshItems();
+	}
+
+	protected override void LocaleChanged()
+	{
+		T_Profiles.Text = Locale.Playset.Plural;
+		T_Packages.Text = Locale.Package.Plural;
+	}
+
 	protected async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
-		return await Task.FromResult(userItems);
+		return await _workshopService.GetWorkshopItemsByUserAsync(User.Id!);
 	}
 
 	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
@@ -74,24 +87,14 @@ public partial class PC_UserPage : PanelContent
 
 			//	this.TryInvoke(() =>
 			//	{
-			//		T_Profiles.LinkedControl = L_Profiles;
 
 			//		if (T_Profiles.Selected)
 			//		{
 			//			T_Profiles.Selected = true;
 			//		}
 			//	});
+			// T_Profiles.Visible = true;
 			//}
-			//else
-			{
-				this.TryInvoke(() => tabControl.Tabs = tabControl.Tabs.Where(x => x != T_Profiles).ToArray());
-			}
-
-			var results = await _workshopService.GetWorkshopItemsByUserAsync(User.Id!);
-
-			userItems = results.ToList(x => (IPackageIdentity)x);
-
-			await LC_Items.RefreshItems();
 		}
 		catch (Exception ex)
 		{
@@ -104,23 +107,10 @@ public partial class PC_UserPage : PanelContent
 
 	protected override void OnDataLoad()
 	{
-		if (LC_Items.ItemCount == 0)
+		if (L_Profiles.ItemCount > 0)
 		{
-			OnLoadFail();
-			return;
+			T_Profiles.Visible = true;
 		}
-
-		T_Packages.LinkedControl = LC_Items;
-
-		if (T_Packages.Selected)
-		{
-			T_Packages.Selected = true;
-		}
-	}
-
-	protected override void OnLoadFail()
-	{
-		tabControl.Tabs = tabControl.Tabs.Where(x => x != T_Packages).ToArray();
 	}
 
 	protected override void UIChanged()

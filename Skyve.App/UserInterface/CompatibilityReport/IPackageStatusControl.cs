@@ -138,7 +138,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 
 		form.PackageSelected += Form_PackageSelected;
 
-		Program.MainForm.PushPanel(null, form);
+		Program.MainForm.PushPanel(form);
 	}
 
 	private void Form_PackageSelected(IEnumerable<ulong> packages)

@@ -131,7 +131,7 @@ public class PackageDescriptionControl : SlickImageControl
 			{
 				var pc = new PC_UserPage(user);
 
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+				(FindForm() as BasePanelForm)?.PushPanel(pc);
 			}
 
 			return;

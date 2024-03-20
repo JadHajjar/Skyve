@@ -92,7 +92,7 @@ internal class D_NotificationCenter : IDashboardItem
 
 			e.Graphics.FillRoundedRectangle(activeBrush, rectangle.Align(new Size(Margin.Left / 2, rectangle.Height - (Margin.Left / 2)), ContentAlignment.MiddleLeft), Margin.Left / 4);
 
-			e.Graphics.DrawImage(icon.Color(FormDesign.Design.ForeColor), new Rectangle(e.ClipRectangle.X + Margin.Left + (Margin.Left / 2), preferredHeight, e.ClipRectangle.Width, Math.Max(icon.Height, (int)titleBounds.Height + (int)descBounds.Height)).Align(icon.Size, ContentAlignment.MiddleLeft));
+			e.Graphics.DrawImage(icon.Color(FormDesign.Design.ForeColor), rectangle.Pad(Margin.Left, -Margin.Top / 2, 0, -Margin.Top / 2).Align(icon.Size, ContentAlignment.MiddleLeft));
 
 			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
 
