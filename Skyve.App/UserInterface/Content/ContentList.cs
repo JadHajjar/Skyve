@@ -85,8 +85,10 @@ public partial class ContentList : SlickControl
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
 #if CS2
+		OT_Workshop.Image2 = "Paradox";
 		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null;
 #else
+		OT_Workshop.Image2 = "Steam";
 		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !(_playsetManager.GetCustomPlayset(_playsetManager.CurrentPlayset)?.DisableWorkshop ?? false);
 #endif
 		OT_ModAsset.Visible = Page is not SkyvePage.Assets and not SkyvePage.Mods;
@@ -108,24 +110,11 @@ public partial class ContentList : SlickControl
 		_delayedSearch = new(350, DelayedSearch);
 		_delayedAuthorTagsRefresh = new(350, RefreshAuthorAndTags);
 
-		//if (!_settings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
-		//{
-		//	OT_Enabled.Hide();
-		//	P_Filters.SetRow(OT_Workshop, 2);
-		//	P_Filters.SetRow(OT_ModAsset, 3);
-		//}
-
 		clearingFilters = false;
 
 		I_SortOrder.ImageName = ListControl.SortDescending ? "SortDesc" : "SortAsc";
 		C_ViewTypeControl.GridView = ListControl.GridView;
 		C_ViewTypeControl.CompactList = ListControl.CompactList;
-
-#if CS2
-		OT_Workshop.Image2 = "Paradox";
-#else
-		OT_Workshop.Image2 = "Steam";
-#endif
 
 		if (loaded)
 		{

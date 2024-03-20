@@ -166,6 +166,9 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	protected override void DrawHeader(PaintEventArgs e)
 	{
+		if (ItemCount == 0)
+			return;
+
 		var items = Items.GroupBy(x => x.GetNotification()).OrderByDescending(x => x.Key).ToList();
 
 		items.Insert(0, Items.GroupBy(x => NotificationType.None).FirstOrDefault());
@@ -503,10 +506,20 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			e.Rects.snoozeRect = new Rectangle(rectangle.Location, e.Graphics.Measure(isSnoozed ? Locale.UnSnooze : Locale.Snooze, tinyFont).ToSize());
 
+			rectangle.X += e.Rects.snoozeRect.Width + GridPadding.Horizontal;
 			bottomText = Math.Max(bottomText, e.Rects.snoozeRect.Height);
 
 			using var purpleBrush = new SolidBrush(Color.FromArgb(isSnoozed ? 255 : 200, 100, 60, 220));
 			e.Graphics.DrawString(isSnoozed ? Locale.UnSnooze : Locale.Snooze, e.Rects.snoozeRect.Contains(cursor) ? tinyUnderlineFont : tinyFont, purpleBrush, e.Rects.snoozeRect.X, e.Rects.snoozeRect.Y - (GridPadding.Top / 2));
+		}
+
+		{
+			e.Rects.compatibilityReport = new Rectangle(rectangle.Location, e.Graphics.Measure(Locale.ViewCompatibilityReport, tinyFont).ToSize());
+
+			bottomText = Math.Max(bottomText, e.Rects.compatibilityReport.Height);
+
+			using var labelBrush = new SolidBrush(FormDesign.Design.LabelColor);
+			e.Graphics.DrawString(Locale.ViewCompatibilityReport, e.Rects.compatibilityReport.Contains(cursor) ? tinyUnderlineFont : tinyFont, labelBrush, e.Rects.compatibilityReport.X, e.Rects.compatibilityReport.Y - (GridPadding.Top / 2));
 		}
 
 		if (e.DrawableItem.Loading)
@@ -715,7 +728,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		var rects = item.Rectangles;
 
-		if (rects.CenterRect.Contains(e.Location))
+		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
 			if (e.Button == MouseButtons.Right)
 			{
@@ -779,6 +792,13 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 				return;
 			}
+		}
+
+		if (e.Button == MouseButtons.Left && rects.compatibilityReport.Contains(e.Location))
+		{
+			ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item, true);
+
+			return;
 		}
 
 		if (e.Button == MouseButtons.Left && rects.snoozeRect.Contains(e.Location))
@@ -1042,6 +1062,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		public Rectangle bulkActionRect;
 		public Rectangle recommendedActionRect;
 		public Rectangle snoozeRect;
+		public Rectangle compatibilityReport;
 
 		public bool Enabled;
 
@@ -1069,6 +1090,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				snoozeRect.Contains(location) ||
 				bulkActionRect.Contains(location) ||
 				recommendedActionRect.Contains(location) ||
+				compatibilityReport.Contains(location) ||
 				_actionRects.Any(x => x.Value.Rectangle.Contains(location)) ||
 				_modRects.Any(x => x.Value.Contains(location)) ||
 				_modDotsRects.Any(x => x.Value.Contains(location));

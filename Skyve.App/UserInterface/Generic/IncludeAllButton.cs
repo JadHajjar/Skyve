@@ -33,12 +33,12 @@ public class IncludeAllButton : SlickControl
 		{
 			_isSelected = value;
 
-			if (!value)
-			{
-				Size = size;
-				ActionRect = ClientRectangle.Align(IncludedRect.Size, ContentAlignment.MiddleRight);
-			}
-			else
+			//if (!value)
+			//{
+			//	Size = size;
+			//	ActionRect = ClientRectangle.Align(IncludedRect.Size, ContentAlignment.MiddleRight);
+			//}
+			//else
 			{
 				SetExpandedSize();
 			}
@@ -75,7 +75,7 @@ public class IncludeAllButton : SlickControl
 		Size = new Size(ItemHeight * (_doubleButtons ? 3 : 2), ItemHeight - (int)(4 * UI.FontScale));
 #endif
 
-		if (IsSelected)
+		//if (IsSelected)
 		{
 			SetExpandedSize();
 		}
@@ -224,19 +224,19 @@ public class IncludeAllButton : SlickControl
 
 			e.Graphics.FillRoundedRectangle(brush2, ActionRect, Margin.Left);
 
-			if (IsSelected)
-			{
+			//if (IsSelected)
+			//{
 				using var brush3 = ActionRect.Gradient(fore, 1.5F);
 				using var font = UI.Font(8.25F);
 				using var stringFormat = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center };
 
 				e.Graphics.DrawString(LocaleHelper.GetGlobalText("BulkActions"), font, brush3, ActionRect.Pad(Padding), stringFormat);
 				e.Graphics.DrawImage(actionIcon.Color(fore), ActionRect.Pad(Padding).Align(actionIcon.Size, ContentAlignment.MiddleLeft));
-			}
-			else
-			{
-				e.Graphics.DrawImage(actionIcon.Color(fore), ActionRect.CenterR(actionIcon.Size));
-			}
+			//}
+			//else
+			//{
+			//	e.Graphics.DrawImage(actionIcon.Color(fore), ActionRect.CenterR(actionIcon.Size));
+			//}
 		}
 	}
 #else

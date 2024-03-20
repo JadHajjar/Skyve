@@ -101,7 +101,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation Alternative => _instance.GetText("Alternative");
 
 	/// <summary>
-	/// Apply all available actions
+	/// Apply all recommended actions
 	/// </summary>
 	public static Translation ApplyAllActions => _instance.GetText("ApplyAllActions");
 
@@ -672,9 +672,14 @@ public class LocaleCR : LocaleHelper
 	public static Translation Skip => _instance.GetText("Skip");
 
 	/// <summary>
-	/// Snooze all displayed issues
+	/// Snooze all issues
 	/// </summary>
 	public static Translation SnoozeAll => _instance.GetText("SnoozeAll");
+
+	/// <summary>
+	/// Snooze all filtered issues
+	/// </summary>
+	public static Translation SnoozeAllFiltered => _instance.GetText("SnoozeAllFiltered");
 
 	/// <summary>
 	/// Source code is available

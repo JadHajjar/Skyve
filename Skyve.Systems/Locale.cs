@@ -2230,7 +2230,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ViewAssetsWithIssues => _instance.GetText("ViewAssetsWithIssues");
 
 	/// <summary>
-	/// View the full compatibility report
+	/// View the full report
 	/// </summary>
 	public static Translation ViewCompatibilityReport => _instance.GetText("ViewCompatibilityReport");
 
