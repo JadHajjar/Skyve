@@ -1,7 +1,6 @@
 ﻿using Skyve.App.Utilities;
 
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
@@ -184,15 +183,16 @@ public partial class CarouselControl : SlickControl
 
 		var rect1 = new Rectangle(0, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
 		var rect2 = new Rectangle(MainThumb.Width - gap * 2, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
-		using var brush = new SolidBrush(Color.FromArgb(125, BackColor.Tint(Lum: BackColor.IsDark() ? 6:-6)));
+		using var brush1 = new SolidBrush(Color.FromArgb(rect1.Contains(cursor) ? 255 : 125, BackColor.Tint(Lum: BackColor.IsDark() ? 6 : -6)));
+		using var brush2 = new SolidBrush(Color.FromArgb(rect2.Contains(cursor) ? 255 : 125, BackColor.Tint(Lum: BackColor.IsDark() ? 6 : -6)));
 
-		e.Graphics.FillEllipse(brush, rect1);
-		e.Graphics.FillEllipse(brush, rect2);
+		e.Graphics.FillEllipse(brush1, rect1);
+		e.Graphics.FillEllipse(brush2, rect2);
 
 		var icon1 = IconManager.GetIcon("ArrowLeft", gap * 3 / 4).Color(rect1.Contains(cursor) ? FormDesign.Design.ActiveColor : ForeColor);
 		var icon2 = IconManager.GetIcon("ArrowRight", gap * 3 / 4).Color(rect2.Contains(cursor) ? FormDesign.Design.ActiveColor : ForeColor);
 
-		e.Graphics.DrawImage(icon1, rect1.Pad(0,0, gap / 10, 0).CenterR(icon1.Size));
+		e.Graphics.DrawImage(icon1, rect1.Pad(0, 0, gap / 10, 0).CenterR(icon1.Size));
 		e.Graphics.DrawImage(icon2, rect2.Pad(gap / 10, 0, 0, 0).CenterR(icon2.Size));
 
 		MainThumb.Cursor = rect1.Contains(cursor) || rect2.Contains(cursor) ? Cursors.Hand : Cursors.Default;
