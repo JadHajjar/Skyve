@@ -189,11 +189,11 @@
   "FavoriteTotal": "Total de playsets: {0}",
   "PlaysetFilter": "Filtro de playset",
   "CheckDocumentsFolder": "Asegúrese de que Skyve tiene acceso a su carpeta de documentos, esta se utiliza para almacenar sus ajustes de interfaz de usuario e idioma.",
-  "FailedToSaveLanguage": "Failed to save the selected 1language",
+  "FailedToSaveLanguage": "Error al guardar el idioma seleccionado",
   "FailedToOpenTC": "Error al abrir el \"Theme Changer\"",
   "FailedToDeleteItem": "Error al eliminar el artículo",
   "OpenChangelog": "Abrir registro de cambios",
-  "Changelog": "Change-log",
+  "Changelog": "Registro de cambios",
   "DeleteAsset": {
     "One": "Eliminar este asset",
     "Plural": "Eliminar assets seleccionados"
@@ -231,8 +231,8 @@
   "OpenPlaysetFolder": "Ver el archivo de este playset",
   "ChangePlaysetColor": "Cambiar el color de este playset",
   "EditPlaysetName": "Editar el nombre de este playset",
-  "ResetPlaysetImage": "Reset this playset's thumbnail",
-  "ResetPlaysetColor": "Reset this playset's color",
+  "ResetPlaysetImage": "Restablecer la miniatura de este playset",
+  "ResetPlaysetColor": "Restablecer el color de este playset",
   "Sorting_Color": "Color de perfil",
   "CreateShortcutPlayset": "Crear acceso directo en el escritorio",
   "AskToLaunchGameForShortcut": "¿Quieres que el acceso directo también inicie el juego con tu perfil?",
@@ -271,7 +271,7 @@
   "LaunchArgsInfo": "Añadir argumentos adicionales al iniciar el juego",
   "SearchGenericPackages": "Buscar en la lista de paquetes...",
   "Sorting_Subscribers": "Número de suscriptores",
-  "Sorting_Votes": "Total Likes",
+  "Sorting_Votes": "Total de \"me gusta\"",
   "VotesCount": {
     "One": "{1} like",
     "Plural": "{1} likes"
@@ -320,8 +320,8 @@
     "Plural": "Playsets"
   },
   "ContainCount": {
-    "One": "Contains {0} {1}",
-    "Plural": "Contains {0} {1}"
+    "One": "Contiene {0} {1}",
+    "Plural": "Contiene {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} incluido",
@@ -375,8 +375,8 @@
     "Plural": "Editar etiquetas de elementos seleccionados"
   },
   "EditLinks": {
-    "One": "Edit this package's Links",
-    "Plural": "Edit selected items' Links"
+    "One": "Editar los enlaces de este paquete",
+    "Plural": "Editar enlaces de elementos seleccionados"
   },
   "ShowAllReferencedPackages": "Mostrar paquetes excluidos en la pestaña 'Referencias'",
   "ShowAllReferencedPackages_Tip": "Muestra tanto los paquetes excluidos como los incluidos que hacen referencia al que estás viendo.",
@@ -405,7 +405,7 @@
   "RemovedByAuthor": "Eliminado por el autor",
   "Missing": "Faltan",
   "LoggedInAs": "Sesión iniciada como",
-  "LoggedInUser": "Logged in as {0}",
+  "LoggedInUser": "Conectado como {0}",
   "UnknownUser": "Usuario desconocido",
   "AddMeaningfulDescription": "Por favor, añada una descripción detallada a su solicitud.",
   "ThisSubscribesTo": {
@@ -426,8 +426,8 @@
   "RequestOption3": "Añadir una interacción faltante con otro paquete",
   "ActivePlayset": "Playset activo",
   "References": "Referencias",
-  "OpenLog": "Open Game Log",
-  "OpenSkyveLog": "Open Skyve Log",
+  "OpenLog": "Abrir registro de juego",
+  "OpenSkyveLog": "Abrir registro de Skyve",
   "Sort By": "Ordenar por",
   "FailedToFetchLogs": "No se pudo obtener los registros",
   "DiscoverPlaysets": "Descubre Playsets",
@@ -446,7 +446,7 @@
   "FailedToDownloadPlayset": "Error al descargar este playset.\n\nInténtalo de nuevo más tarde.",
   "UpdatePlaysetTip": "Actualiza la versión local de este playset",
   "DownloadPlaysetTip": "Descargar este playset a tu ordenador",
-  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
+  "EditPlaysetThumbnail": "Cambiar imagen miniatura de este playset",
   "MakePublic": "Hacer este playset público",
   "MakePrivate": "Hacer este playset privado",
   "CopyPlaysetLink": "Copiar el ID de este playset",
@@ -459,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "Omite la comprobación de conexión a Internet y asume que está conectado.",
   "SelectAll": "Seleccionar todos los artículos",
   "DeselectAll": "Deseleccionar todos los artículos",
-  "AddTagBox": "Add a new tag or search here",
+  "AddTagBox": "Añadir una nueva etiqueta o buscar aquí",
   "EditingMultipleTags": "Editar las etiquetas de varios paquetes sobrescribirá cada una de sus etiquetas personalizadas.",
   "EditTagsOfPackage": {
     "One": "Editar todas las etiquetas de los activos de este paquete",
@@ -558,29 +558,29 @@
   "Version": "Versión",
   "UpdateTime": "Fecha de actualización",
   "Status": "Estado",
-  "PackageUsage": "Package Usage",
+  "PackageUsage": "Uso del paquete",
   "CodeMod": {
     "One": "Code Mod",
     "Plural": "Code Mods"
   },
   "ThisModIsRequiredYouCantDisableIt": "Este mod es requerido, no puede desactivarlo.",
-  "FadeDisabledItems": "Fade out disabled mods & assets",
-  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "FadeDisabledItems": "Desvanecer mods y assets desactivados",
+  "FadeDisabledItems_Tip": "Los mods y assets desactivados en sus listas de contenido local se desvanecerán.",
   "UsagePlayset": "{0} Playset",
-  "GenericPlayset": "Generic Playset",
-  "CompatibilityCenter": "Compatibility Center",
+  "GenericPlayset": "Playset genérico",
+  "CompatibilityCenter": "Centro de compatibilidad",
   "Dependency": {
-    "One": "Dependency",
-    "Plural": "Dependencies"
+    "One": "Dependencia",
+    "Plural": "Dependencias"
   },
-  "ModID": "Mod ID",
-  "Subscribers": "Subscribers",
+  "ModID": "ID del mod",
+  "Subscribers": "Suscriptores",
   "Votes": "Likes",
-  "PartiallyIncluded": "Partially Included",
-  "Links": "Links",
-  "NoAssets": "Disable All Assets",
-  "NoMods": "Disable All Code-Mods",
-  "FavoritePlaysets": "Favorite Playsets",
-  "OnlyShowErrors": "Only show warnings and errors",
-  "RestartRequired": "Restart Required"
+  "PartiallyIncluded": "Parcialmente descargado",
+  "Links": "Enlaces",
+  "NoAssets": "Desactivar todos los assets",
+  "NoMods": "Desactivar todos los mods",
+  "FavoritePlaysets": "Playsets favoritos",
+  "OnlyShowErrors": "Mostrar sólo advertencias y errores",
+  "RestartRequired": "Se requiere reiniciar"
 }
