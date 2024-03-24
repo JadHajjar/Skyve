@@ -270,7 +270,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<IPlayset, Rectangles> e)
 	{
-		var isActive = e.Item == _playsetManager.CurrentPlayset;
+		var isActive = e.Item.Equals(_playsetManager.CurrentPlayset);
 		var borderRadius = (int)(5 * UI.FontScale);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 		var customPlayset = e.Item.GetCustomPlayset();
@@ -446,7 +446,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		var customPlayset = e.Item.GetCustomPlayset();
 		var banner = customPlayset.GetThumbnail();
 
-		if (e.Item == _playsetManager.CurrentPlayset)
+		if (e.Item.Equals(_playsetManager.CurrentPlayset))
 		{
 			e.BackColor = FormDesign.Design.AccentBackColor.MergeColor(FormDesign.Design.GreenColor, e.HoverState.HasFlag(HoverState.Hovered) ? 50 : 80);
 		}
@@ -485,7 +485,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			Cursor = CursorLocation,
 			HoverState = e.HoverState,
 			BackgroundColor = e.BackColor,
-			ActiveColor = e.Item == _playsetManager.CurrentPlayset ? FormDesign.Design.GreenColor : customPlayset.Color ?? FormDesign.Design.ActiveColor
+			ActiveColor = e.Item.Equals(_playsetManager.CurrentPlayset) ? FormDesign.Design.GreenColor : customPlayset.Color ?? FormDesign.Design.ActiveColor
 		});
 
 		SlickButton.Draw(e.Graphics, new ButtonDrawArgs
@@ -496,14 +496,14 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			Cursor = CursorLocation,
 			HoverState = e.HoverState,
 			BackgroundColor = e.BackColor,
-			ActiveColor = e.Item == _playsetManager.CurrentPlayset ? FormDesign.Design.GreenColor : customPlayset.Color ?? FormDesign.Design.ActiveColor
+			ActiveColor = e.Item.Equals(_playsetManager.CurrentPlayset) ? FormDesign.Design.GreenColor : customPlayset.Color ?? FormDesign.Design.ActiveColor
 		});
 
 		using var pen = new Pen(FormDesign.Design.AccentColor, (int)UI.FontScale);
 
 		e.Graphics.DrawLine(pen, e.Rects.Content.Right + Padding.Horizontal, e.Rects.Content.Y, e.Rects.Content.Right + Padding.Horizontal, e.Rects.Content.Bottom);
 
-		if (e.Item == _playsetManager.CurrentPlayset)
+		if (e.Item.Equals(_playsetManager.CurrentPlayset))
 		{
 			using var font = UI.Font(8.25F, FontStyle.Bold);
 			var rect = SlickButton.AlignAndDraw(e.Graphics, e.Rects.Content, ContentAlignment.MiddleRight, new ButtonDrawArgs

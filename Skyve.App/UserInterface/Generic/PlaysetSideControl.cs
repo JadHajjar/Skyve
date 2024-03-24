@@ -145,7 +145,7 @@ public class PlaysetSideControl : SlickControl
 		DotsRect = TextRect.Align(UI.Scale(new Size(32, 32), UI.FontScale), ContentAlignment.TopRight);
 		TextRect.Width -= DotsRect.Width;
 
-		var isActive = Playset == _playsetManager.CurrentPlayset;
+		var isActive = Playset.Equals(_playsetManager.CurrentPlayset);
 		var borderRadius = Padding.Left;
 		var CursorLocation = PointToClient(Cursor.Position);
 		var customPlayset = Playset.GetCustomPlayset();

@@ -15,19 +15,19 @@ public class LocaleCR : LocaleHelper
 	protected LocaleCR() : base($"Skyve.Systems.Properties.Compatibility.json") { }
 
 	/// <summary>
-	/// <para>You should exclude '{1}'.</para>
-	/// <para>Plural: You should exclude the following packages:</para>
+	/// <para>You should disable '{1}'.</para>
+	/// <para>Plural: You should disable the following packages.</para>
 	/// </summary>
 	public static Translation ActionExcludeOther => _instance.GetText("Action_ExcludeOther");
 
 	/// <summary>
-	/// You should exclude '{0}'.
+	/// You should disable '{0}'.
 	/// </summary>
 	public static Translation ActionExcludeThis => _instance.GetText("Action_ExcludeThis");
 
 	/// <summary>
-	/// <para>You should include the following package:</para>
-	/// <para>Plural: You should include these packages:</para>
+	/// <para>You should add the following package to your playset.</para>
+	/// <para>Plural: You should add the following packages to your playset.</para>
 	/// </summary>
 	public static Translation ActionIncludeOther => _instance.GetText("Action_IncludeOther");
 
@@ -42,7 +42,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation ActionNoAction => _instance.GetText("Action_NoAction");
 
 	/// <summary>
-	/// You should follow the following instructions:
+	/// Please follow the following instructions:
 	/// </summary>
 	public static Translation ActionRequiresConfiguration => _instance.GetText("Action_RequiresConfiguration");
 
@@ -53,25 +53,25 @@ public class LocaleCR : LocaleHelper
 	public static Translation ActionSelectOne => _instance.GetText("Action_SelectOne");
 
 	/// <summary>
-	/// <para>You should subscribe to the following package:</para>
-	/// <para>Plural: You should subscribe to these packages:</para>
+	/// <para>You should add the following package to your playset.</para>
+	/// <para>Plural: You should add the following packages to your playset.</para>
 	/// </summary>
 	public static Translation ActionSubscribeToPackages => _instance.GetText("Action_SubscribeToPackages");
 
 	/// <summary>
 	/// <para>You should switch to '{1}'.</para>
-	/// <para>Plural: You should switch to one of the following packages:</para>
+	/// <para>Plural: You should switch to one of the following packages.</para>
 	/// </summary>
 	public static Translation ActionSwitch => _instance.GetText("Action_Switch");
 
 	/// <summary>
-	/// <para>You should unsubscribe from '{1}'.</para>
-	/// <para>Plural: You should unsubscribe from the following packages:</para>
+	/// <para>You should remove '{1}' from your playset.</para>
+	/// <para>Plural: You should remove the following packages from your playset.</para>
 	/// </summary>
 	public static Translation ActionUnsubscribeOther => _instance.GetText("Action_UnsubscribeOther");
 
 	/// <summary>
-	/// You should unsubscribe from '{0}'.
+	/// You should remove '{0}' from your playset.
 	/// </summary>
 	public static Translation ActionUnsubscribeThis => _instance.GetText("Action_UnsubscribeThis");
 
@@ -289,7 +289,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation Donation => _instance.GetText("Donation");
 
 	/// <summary>
-	/// Exclude
+	/// Disable
 	/// </summary>
 	public static Translation Exclude => _instance.GetText("Exclude");
 
@@ -300,7 +300,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation ExcludeCount => _instance.GetText("ExcludeCount");
 
 	/// <summary>
-	/// Exclude this package
+	/// Disable this package
 	/// </summary>
 	public static Translation ExcludeThis => _instance.GetText("ExcludeThis");
 
@@ -315,7 +315,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation GenericPackage => _instance.GetText("GenericPackage");
 
 	/// <summary>
-	/// Tags all players will see in the app
+	/// Tags all players will see in Skyve
 	/// </summary>
 	public static Translation GlobalTagsInfo => _instance.GetText("GlobalTagsInfo");
 
@@ -356,7 +356,7 @@ public class LocaleCR : LocaleHelper
 
 	/// <summary>
 	/// <para>'{1}' can be used as an alternative to '{0}'.</para>
-	/// <para>Plural: One of the following packages can be used as an alternative to '{0}'.</para>
+	/// <para>Plural: Any one of the following packages can be used as an alternative to '{0}'.</para>
 	/// </summary>
 	public static Translation InteractionAlternative => _instance.GetText("Interaction_Alternative");
 
@@ -367,7 +367,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation InteractionCausesIssuesWith => _instance.GetText("Interaction_CausesIssuesWith");
 
 	/// <summary>
-	/// These are multiple versions of the same package.  You should choose only one of them.
+	/// The following are multiple versions of the same mod. Using them at the same time will cause conflicts.
 	/// </summary>
 	public static Translation InteractionIdentical => _instance.GetText("Interaction_Identical");
 
@@ -515,7 +515,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation Note => _instance.GetText("Note");
 
 	/// <summary>
-	/// Extra informational text displayed for the package
+	/// Additional information to be displayed for the mod
 	/// </summary>
 	public static Translation NoteInfo => _instance.GetText("NoteInfo");
 
@@ -606,8 +606,8 @@ public class LocaleCR : LocaleHelper
 	public static Translation RequiredItem => _instance.GetText("RequiredItem");
 
 	/// <summary>
-	/// <para>{0} {1} is required but is not enabled</para>
-	/// <para>Plural: {0} {1} are required but are not enabled</para>
+	/// <para>{0} {1} that is required but is not enabled</para>
+	/// <para>Plural: {0} {1} that are required but are not enabled</para>
 	/// </summary>
 	public static Translation RequiredItemCount => _instance.GetText("RequiredItemCount");
 
@@ -697,72 +697,72 @@ public class LocaleCR : LocaleHelper
 	public static Translation Stability => _instance.GetText("Stability");
 
 	/// <summary>
-	/// This asset has not been reviewed yet.  The compatibility info may not be accurate; though assets are generally stable
+	/// '{0}' has not been reviewed yet. The compatibility info may not be accurate; though assets are generally stable.
 	/// </summary>
 	public static Translation StabilityAssetNotReviewed => _instance.GetText("Stability_AssetNotReviewed");
 
 	/// <summary>
-	/// This package is very likely to break when the new patch is released.
+	/// '{0}' is very likely to break when the new patch is released.
 	/// </summary>
 	public static Translation StabilityBreaksOnPatch => _instance.GetText("Stability_BreaksOnPatch");
 
 	/// <summary>
-	/// This package is broken. It is known to either break the game or just does not work.
+	/// '{0}' is broken. It is known to either break the game or just does not work.
 	/// </summary>
 	public static Translation StabilityBroken => _instance.GetText("Stability_Broken");
 
 	/// <summary>
-	/// This package broke after patch {0} of the game. Please wait until it is updated before using it. In the meantime, you should disable it.
+	/// '{1}' broke after patch {0} of the game. Please wait until it is updated before using it. In the meantime, you should disable it.
 	/// </summary>
 	public static Translation StabilityBrokenFromPatch => _instance.GetText("Stability_BrokenFromPatch");
 
 	/// <summary>
-	/// This package broke after patch {0} of the game. Please wait until it is updated before using it.
+	/// '{1}' broke after patch {0} of the game. Please wait until it is updated before using it.
 	/// </summary>
 	public static Translation StabilityBrokenFromPatchSafe => _instance.GetText("Stability_BrokenFromPatchSafe");
 
 	/// <summary>
-	/// This package can cause issues. Be careful while using it.
+	/// '{0}' can cause issues. Be careful while using it.
 	/// </summary>
 	public static Translation StabilityHasIssues => _instance.GetText("Stability_HasIssues");
 
 	/// <summary>
-	/// This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.
+	/// '{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.
 	/// </summary>
 	public static Translation StabilityHasIssuesNoFutureUpdates => _instance.GetText("Stability_HasIssuesNoFutureUpdates");
 
 	/// <summary>
-	/// This package is not compatible with, or breaks, the game.  You should remove it immediately.
+	/// '{0}' is marked as not compatible with your current game version. Use it cautiously, or disable it while waiting for it to be updated.
 	/// </summary>
 	public static Translation StabilityIncompatible => _instance.GetText("Stability_Incompatible");
 
 	/// <summary>
-	/// This package is a local version of its original mod '{0}'.  Local versions are usually used for testing purposes.  Check the package's links to look for updates to the mod.
+	/// This is a local version of its original mod '{0}'.  Local versions are usually used for testing purposes.
 	/// </summary>
 	public static Translation StabilityLocal => _instance.GetText("Stability_Local");
 
 	/// <summary>
-	/// There is not enough information to properly review this package.
+	/// There is not enough information to properly review '{0}'.
 	/// </summary>
 	public static Translation StabilityNotEnoughInformation => _instance.GetText("Stability_NotEnoughInformation");
 
 	/// <summary>
-	/// This package has not been reviewed yet.  The compatibility info may not be accurate.
+	/// '{0}' has not been reviewed yet.  The compatibility info may not be accurate.
 	/// </summary>
 	public static Translation StabilityNotReviewed => _instance.GetText("Stability_NotReviewed");
 
 	/// <summary>
-	/// This package is stable. It's author is still actively working on it and updating it.
+	/// '{0}' is stable. It's author is still actively working on it and updating it.
 	/// </summary>
 	public static Translation StabilityStable => _instance.GetText("Stability_Stable");
 
 	/// <summary>
-	/// This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.
+	/// '{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.
 	/// </summary>
 	public static Translation StabilityStableNoFutureUpdates => _instance.GetText("Stability_StableNoFutureUpdates");
 
 	/// <summary>
-	/// This package is stable, though the author will no longer release feature updates. They will however still update it in case of new bugs.
+	/// '{0}' is stable, though the author will no longer release feature updates. They will however still update it in case of new bugs.
 	/// </summary>
 	public static Translation StabilityStableNoNewFeatures => _instance.GetText("Stability_StableNoNewFeatures");
 
@@ -792,12 +792,12 @@ public class LocaleCR : LocaleHelper
 	public static Translation StatusAutoDeprecated => _instance.GetText("Status_AutoDeprecated");
 
 	/// <summary>
-	/// '{0}' causes issues with your game.
+	/// '{0}' is known to cause issues with the game.
 	/// </summary>
 	public static Translation StatusCausesIssues => _instance.GetText("Status_CausesIssues");
 
 	/// <summary>
-	/// This is a dependency mod, but it does not seem like you are using any package that requires it.
+	/// This is a dependency mod, but it does not look like you are using any package that requires it.
 	/// </summary>
 	public static Translation StatusDependencyMod => _instance.GetText("Status_DependencyMod");
 
@@ -823,14 +823,14 @@ public class LocaleCR : LocaleHelper
 	public static Translation StatusMusicCanBeCopyrighted => _instance.GetText("Status_MusicCanBeCopyrighted");
 
 	/// <summary>
-	/// <para>This is a re-upload of '{1}'.</para>
+	/// <para>'{0}' is a re-upload of '{1}'.</para>
 	/// <para>Zero: '{0}' is a re-upload of an original package.</para>
 	/// </summary>
 	public static Translation StatusReupload => _instance.GetText("Status_Reupload");
 
 	/// <summary>
-	/// <para>When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.  Use '{1}' to recover your save if needed. Read its Workshop description for more info.</para>
-	/// <para>Zero: After you save your city with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.</para>
+	/// <para>After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.  Use '{1}' to recover your save if needed. Read its Workshop description for more info.</para>
+	/// <para>Zero: After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.</para>
 	/// </summary>
 	public static Translation StatusSavesCantLoadWithoutIt => _instance.GetText("Status_SavesCantLoadWithoutIt");
 
@@ -850,12 +850,12 @@ public class LocaleCR : LocaleHelper
 	public static Translation StatusStandardMod => _instance.GetText("Status_StandardMod");
 
 	/// <summary>
-	/// '{0}' is succeeded by '{1}'.  You are already using '{1}' so there is no need for '{0}' anymore.
+	/// '{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.
 	/// </summary>
 	public static Translation StatusSucceeded => _instance.GetText("Status_Succeeded");
 
 	/// <summary>
-	/// <para>This is a 'Test' version of '{1}'.  Be aware that updates to it might cause unexpected issues.</para>
+	/// <para>This is a 'Test' version of '{1}'. Be aware that updates to it might cause unexpected issues.</para>
 	/// <para>Zero: This is a 'Test' version, be aware that test versions of mods can cause issues and that updates to it might cause unexpected errors.</para>
 	/// </summary>
 	public static Translation StatusTestVersion => _instance.GetText("Status_TestVersion");

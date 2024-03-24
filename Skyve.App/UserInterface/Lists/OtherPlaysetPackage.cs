@@ -58,7 +58,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 			var cr = Package.GetPackageInfo();
 			var playsetUsage = args.Item.GetCustomPlayset().Usage;
 
-			if (cr is not null && playsetUsage > 0 && cr.Usage.HasFlag(playsetUsage))
+			if (cr is not null && playsetUsage > 0 && !cr.Usage.HasFlag(playsetUsage))
 			{
 				args.DoNotDraw = true;
 			}
@@ -166,7 +166,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center };
 		e.Graphics.DrawString(e.Item.Name, font, textBrush, e.Rects.TextRect, stringFormat);
 
-		if (e.Item == _playsetManager.CurrentPlayset)
+		if (e.Item.Equals(_playsetManager.CurrentPlayset))
 		{
 			var rect = e.Rects.TextRect;
 			var textSize = e.Graphics.Measure(e.Item.Name, font);

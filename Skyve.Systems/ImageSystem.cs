@@ -84,22 +84,21 @@ internal class ImageSystem : IImageService
 				return null;
 			}
 
-			var cache = GetCache(url);
+			var filePath = File(url, fileName);
+			var cache = GetCache(filePath.Name);
 
 			if (cache != null)
 			{
 				return cache;
 			}
 
-			var filePath = File(url, fileName);
-
 			if (filePath.Exists)
 			{
-				lock (LockObj(url))
+				lock (LockObj(filePath.Name))
 				{
 					try
 					{
-						return AddCache(url, (Bitmap)Image.FromFile(filePath.FullName), downscaleTo);
+						return AddCache(filePath.Name, (Bitmap)Image.FromFile(filePath.FullName), downscaleTo);
 					}
 					catch { }
 				}
@@ -122,7 +121,7 @@ internal class ImageSystem : IImageService
 
 		var filePath = File(url, fileName);
 
-		lock (LockObj(url))
+		lock (LockObj(filePath.Name))
 		{
 			if (isFilePath)
 			{
@@ -231,6 +230,7 @@ internal class ImageSystem : IImageService
 
 		if (_cache.ContainsKey(key))
 		{
+			_cache[key].image.Dispose();
 			_cache[key] = (image, DateTime.Now);
 		}
 		else
@@ -248,7 +248,7 @@ internal class ImageSystem : IImageService
 			if (DateTime.Now - value.lastAccessed > _expirationTime)
 			{
 				value.image.Dispose();
-				_ = _cache.Remove(key);
+				_cache.Remove(key);
 				return null;
 			}
 

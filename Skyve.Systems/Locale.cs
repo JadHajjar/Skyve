@@ -187,9 +187,9 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Asset => _instance.GetText("Asset");
 
 	/// <summary>
-	/// Your Assets
+	/// Assets Enabled
 	/// </summary>
-	public static Translation AssetsBubble => _instance.GetText("AssetsBubble");
+	public static Translation AssetsEnabled => _instance.GetText("AssetsEnabled");
 
 	/// <summary>
 	/// Ignore Internet connection checks
@@ -211,6 +211,11 @@ public class Locale : LocaleHelper, ILocale
 	/// <para>Plural: {0} authors selected</para>
 	/// </summary>
 	public static Translation AuthorsSelected => _instance.GetText("AuthorsSelected");
+
+	/// <summary>
+	/// Available Widgets
+	/// </summary>
+	public static Translation AvailableWidgets => _instance.GetText("AvailableWidgets");
 
 	/// <summary>
 	/// BETA
@@ -310,9 +315,9 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ContainCount => _instance.GetText("ContainCount");
 
 	/// <summary>
-	/// Content &amp; Info
+	/// Content Summary
 	/// </summary>
-	public static Translation ContentAndInfo => _instance.GetText("ContentAndInfo");
+	public static Translation ContentSummary => _instance.GetText("ContentSummary");
 
 	/// <summary>
 	/// Clone your active playset
@@ -443,7 +448,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Dashboard => _instance.GetText("Dashboard");
 
 	/// <summary>
-	/// You can customize your dashboard by dragging each section from its header. You can also resize a section using the dotted triangle on its bottom-right.
+	/// Customize your dashboard by dragging each section from its title. You can also resize a section using the dotted triangle on its bottom-right corner.
 	/// </summary>
 	public static Translation DashboardCustomizationInfo => _instance.GetText("DashboardCustomizationInfo");
 
@@ -596,6 +601,11 @@ public class Locale : LocaleHelper, ILocale
 	/// <para>Plural: Edit selected packages' compatibility</para>
 	/// </summary>
 	public static Translation EditCompatibility => _instance.GetText("EditCompatibility");
+
+	/// <summary>
+	/// Edit Dashboard
+	/// </summary>
+	public static Translation EditDashboard => _instance.GetText("EditDashboard");
 
 	/// <summary>
 	/// Editing multiple packages' tags will overwrite each of their custom tags.
@@ -933,6 +943,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation HelpTranslateTip => _instance.GetText("HelpTranslate_Tip");
 
 	/// <summary>
+	/// Hide Extra Widgets
+	/// </summary>
+	public static Translation HideExtraWidgets => _instance.GetText("HideExtraWidgets");
+
+	/// <summary>
 	/// Hide Filters
 	/// </summary>
 	public static Translation HideFilters => _instance.GetText("HideFilters");
@@ -993,12 +1008,6 @@ public class Locale : LocaleHelper, ILocale
 	/// Includes items you do not have
 	/// </summary>
 	public static Translation IncludesItemsYouDoNotHave => _instance.GetText("IncludesItemsYouDoNotHave");
-
-	/// <summary>
-	/// <para>{0} {1} does not match its size from the Workshop</para>
-	/// <para>Plural: {0} {1} do not match their respective sizes from the Workshop</para>
-	/// </summary>
-	public static Translation IncompleteCount => _instance.GetText("IncompleteCount");
 
 	/// <summary>
 	/// Info
@@ -1200,9 +1209,9 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ModIsPrivate => _instance.GetText("ModIsPrivate");
 
 	/// <summary>
-	/// Your Mods
+	/// Mods Enabled
 	/// </summary>
-	public static Translation ModsBubble => _instance.GetText("ModsBubble");
+	public static Translation ModsEnabled => _instance.GetText("ModsEnabled");
 
 	/// <summary>
 	/// <para>Copy package to a local folder</para>
@@ -1240,17 +1249,6 @@ public class Locale : LocaleHelper, ILocale
 	/// Create or import a new playset
 	/// </summary>
 	public static Translation NewPlaysetTip => _instance.GetText("NewPlayset_Tip");
-
-	/// <summary>
-	/// <para>{0} new or updated {1}</para>
-	/// <para>Plural: {0} new or updated {1}</para>
-	/// </summary>
-	public static Translation NewUpdatedCount => _instance.GetText("NewUpdatedCount");
-
-	/// <summary>
-	/// New Uploads
-	/// </summary>
-	public static Translation NewUploads => _instance.GetText("NewUploads");
 
 	/// <summary>
 	/// Next Stage
@@ -1410,15 +1408,14 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OtherPlaysets => _instance.GetText("OtherPlaysets");
 
 	/// <summary>
+	/// {0} out of {1}
+	/// </summary>
+	public static Translation OutOf => _instance.GetText("OutOf");
+
+	/// <summary>
 	/// Out of date
 	/// </summary>
 	public static Translation OutOfDate => _instance.GetText("OutOfDate");
-
-	/// <summary>
-	/// <para>{0} {1} is out of date</para>
-	/// <para>Plural: {0} {1} are out of date</para>
-	/// </summary>
-	public static Translation OutOfDateCount => _instance.GetText("OutOfDateCount");
 
 	/// <summary>
 	/// <para>Package</para>
@@ -1440,6 +1437,16 @@ public class Locale : LocaleHelper, ILocale
 	/// '{0}' is out of date  You are {1} behind
 	/// </summary>
 	public static Translation PackageIsOutOfDate => _instance.GetText("PackageIsOutOfDate");
+
+	/// <summary>
+	/// Packages Enabled
+	/// </summary>
+	public static Translation PackagesEnabled => _instance.GetText("PackagesEnabled");
+
+	/// <summary>
+	/// Packages Included &amp; Disabled
+	/// </summary>
+	public static Translation PackagesIncludedDisabled => _instance.GetText("PackagesIncludedDisabled");
 
 	/// <summary>
 	/// Packages Selected ({0})
@@ -1569,6 +1576,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation RecentlyUpdated => _instance.GetText("RecentlyUpdated");
 
 	/// <summary>
+	/// Recently Updated {0}
+	/// </summary>
+	public static Translation RecentlyUpdatedItem => _instance.GetText("RecentlyUpdatedItem");
+
+	/// <summary>
 	/// <para>Re-download this package</para>
 	/// <para>Plural: Re-download all selected Packages</para>
 	/// </summary>
@@ -1643,6 +1655,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Caution! Resetting anything can not be undone.
 	/// </summary>
 	public static Translation ResetInfo => _instance.GetText("ResetInfo");
+
+	/// <summary>
+	/// Reset Layout
+	/// </summary>
+	public static Translation ResetLayout => _instance.GetText("ResetLayout");
 
 	/// <summary>
 	/// Reset mods' cache
@@ -2036,12 +2053,6 @@ public class Locale : LocaleHelper, ILocale
 	/// {0} of included assets
 	/// </summary>
 	public static Translation TotalAssetSize => _instance.GetText("TotalAssetSize");
-
-	/// <summary>
-	/// <para>{0} {1} in total</para>
-	/// <para>Plural: {0} {1} in total</para>
-	/// </summary>
-	public static Translation TotalCount => _instance.GetText("TotalCount");
 
 	/// <summary>
 	/// Treat optional packages as required

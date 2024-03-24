@@ -34,6 +34,11 @@ internal class D_NotificationCenter : IDashboardItem
 		return Draw;
 	}
 
+	protected override void DrawHeader(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
+	{
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.Notifications, "Notification");
+	}
+
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
 		DrawSection(e, applyDrawing, ref preferredHeight, Locale.Notifications, "Notification");

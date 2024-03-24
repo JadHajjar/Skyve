@@ -834,12 +834,12 @@ public partial class ContentList : SlickControl
 
 	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
 	{
-		await _packageUtil.SetIncluded(filteredItems, included);
+		await _packageUtil.SetIncluded(filteredItems, included, SelectedPlayset);
 	}
 
 	protected async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
 	{
-		await _packageUtil.SetEnabled(filteredItems, enabled);
+		await _packageUtil.SetEnabled(filteredItems, enabled, SelectedPlayset);
 	}
 
 #if CS1

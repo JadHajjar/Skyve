@@ -1,7 +1,5 @@
 {
   "CompatibilityInfo": "Compatibility Info",
-  "AssetsBubble": "Your Assets",
-  "ModsBubble": "Your Mods",
   "Dashboard": "Dashboard",
   "SearchDlcs": "Search through your DLCs..",
   "SearchPackages": "Search through your packages..",
@@ -11,7 +9,6 @@
   "PartiallyDownloaded": "Partially downloaded",
   "LaunchSettings": "Launch Settings",
   "IncludesItemsYouDoNotHave": "Includes items you do not have",
-  "ContentAndInfo": "Content & Info",
   "OtherPlaysets": "Other Playsets",
   "ViewPlaysets": "View Your Playsets",
   "AddPlayset": "Add Playset",
@@ -379,22 +376,6 @@
   "TreatOptionalAsRequired": "Treat optional packages as required",
   "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages.",
   "AddCustomTag": "Add a custom tag",
-  "OutOfDateCount": {
-    "One": "{0} {1} is out of date",
-    "Plural": "{0} {1} are out of date"
-  },
-  "IncompleteCount": {
-    "One": "{0} {1} does not match its size from the Workshop",
-    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
-  },
-  "NewUpdatedCount": {
-    "One": "{0} new or updated {1}",
-    "Plural": "{0} new or updated {1}"
-  },
-  "TotalCount": {
-    "One": "{0} {1} in total",
-    "Plural": "{0} {1} in total"
-  },
   "PackageIsNotDownloaded": "'{0}' was removed from your computer",
   "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
   "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
@@ -524,7 +505,7 @@
   "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
   "ChangePlaysetSettings": "Change this playset's settings",
   "ViewCompatibilityReport": "View the full report",
-  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "DashboardCustomizationInfo": "Customize your dashboard by dragging each section from its title.\r\nYou can also resize a section using the dotted triangle on its bottom-right corner.",
   "ViewAssetsWithIssues": "View Assets with issues",
   "ViewModsWithIssues": "View Mods with issues",
   "CreateShortcut": "Create shortcut",
@@ -579,7 +560,6 @@
   "FavoritePlaysets": "Favorite Playsets",
   "OnlyShowErrors": "Only show warnings and errors",
   "RestartRequired": "Restart Required",
-  "NewUploads": "New Uploads",
   "FailedToApplyChanges": "Failed to apply the requested changes.",
   "ConfirmSelection": "Confirm Selection",
   "PackagesSelected": "Packages Selected ({0})",
@@ -593,5 +573,16 @@
   "PlaysetThumbnailSet": "Custom thumbnail enabled",
   "PlaysetThumbnailNotSet": "No custom thumbnail selected",
   "OpenPlaysetPage": "Open this playset's page",
-  "Ready": "Ready"
+  "Ready": "Ready",
+  "EditDashboard": "Edit Dashboard",
+  "AvailableWidgets": "Available Widgets",
+  "HideExtraWidgets": "Hide Extra Widgets",
+  "ResetLayout": "Reset Layout",
+  "ContentSummary": "Content Summary",
+  "PackagesEnabled": "Packages Enabled",
+  "ModsEnabled": "Mods Enabled",
+  "AssetsEnabled": "Assets Enabled",
+  "PackagesIncludedDisabled": "Packages Included & Disabled",
+  "OutOf": "{0} out of {1}",
+  "RecentlyUpdatedItem": "Recently Updated {0}"
 }
