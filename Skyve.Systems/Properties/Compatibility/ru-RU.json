@@ -5,10 +5,10 @@
   "Previous": "Предыдущий",
   "Skip": "Пропустить",
   "Note": "Примечание",
-  "NoteInfo": "Дополнительный информационный текст, отображаемый для пакета",
+  "NoteInfo": "Additional information to be displayed for the mod",
   "BlackListName": "Чёрный список по имени",
-  "BlackListId": "Black-list by name",
-  "GlobalTagsInfo": "Теги всех игроков будут видеть в приложении",
+  "BlackListId": "Black-list by ID",
+  "GlobalTagsInfo": "Tags all players will see in Skyve",
   "Links": "Ссылки",
   "StatusesCount": "Statuses ({0})",
   "InteractionCount": "Взаимодействия ({0})",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "Пожалуйста, выберите правильное использование для этого пакета.",
   "Interaction_Alternative": {
     "One": "'{1}' можно использовать в качестве альтернативы '{0}'.",
-    "Plural": "Один из следующих пакетов может быть использован в качестве альтернативы '{0}'."
+    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' и '{1}' ' имеют одинаковые функции.",
@@ -108,18 +108,18 @@
     "One": "'{0}' is required for '{1}'.",
     "Plural": "'{0}' is required for the following packages."
   },
-  "Interaction_Identical": "Это несколько версий одного и того же пакета.\r\n\r\nВы должны выбрать только один из них.",
-  "Status_Succeeded": "'{0}' успешно '{1}'.\r\n\r\nВы уже используете '{1}', поэтому больше нет необходимости '{0}'.",
+  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' является устаревшим, он больше не поддерживается его автором.",
   "Status_AutoDeprecated": "'{0}' давно не обновлялся, вероятно, больше не поддерживается автором.",
   "Status_Reupload": {
     "Zero": "'{0}' является повторной загрузкой оригинального пакета.",
-    "One": "Это повторная загрузка '{1}'."
+    "One": "'{0}' is a re-upload of '{1}'."
   },
-  "Status_CausesIssues": "'{0}' вызывает проблемы с вашей игрой.",
+  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "При создании нового сохранения с '{0}' включено, вы больше не сможете загрузить сохранение, если '{0}' отключен.",
-    "One": "При создании нового сохранения с '{0}' включено, вы больше не сможете загрузить сохранение, если '{0}' отключен.\r\n\r\nИспользуйте '{1}' для восстановления сохранения, если необходимо. Прочитайте его описание для дополнительной информации."
+    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
+    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
   },
   "Status_TestVersion": {
     "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
@@ -129,7 +129,7 @@
     "One": "You're missing the '{0}' DLC to use this package.",
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
-  "Status_DependencyMod": "Это мод зависимостей, но он не похож на то, что вы используете любой пакет, который требует его.",
+  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "Исходный код этого мода недоступен. Вы не должны использовать его, если вы не доверяете его автору.",
   "SourceAvailable": "Исходный код доступен",
   "StandardMod": "Standard Mod",
@@ -138,41 +138,42 @@
   "Status_SourceAvailable": "Этот пакет не будет предупреждать об отсутствии исходного кода.",
   "Status_StandardMod": "Этот пакет будет проигнорирован при обработке выявленных модов.",
   "OutputText": "Ожидаемый вывод",
-  "Stability_AssetNotReviewed": "Этот актив еще не проверен.\r\n\r\nИнформация о совместимости может быть неточной; хотя ресурсы в целом стабильны",
-  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
-  "Stability_Stable": "This package is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "Недостаточно информации для правильного просмотра этого пакета.",
-  "Stability_HasIssues": "Пакет может вызвать проблемы.\r\nБудьте осторожны при его использовании.",
-  "Stability_Broken": "Этот пакет сломан.\r\nИзвестно, что он либо прервал игру, либо просто не работает.",
-  "Stability_Incompatible": "Этот пакет не совместим или ломает игру.\r\n\r\nВы должны удалить его немедленно.",
-  "Stability_Local": "Этот пакет является локальной версией его оригинального мода '{0}'.\r\n\r\nЛокальные версии обычно используются для тестирования или если у вас нет Steam.\r\n\r\nПроверьте ссылки на пакет, чтобы найти обновления к моду.",
-  "Stability_BrokenFromPatch": "Этот пакет сломался после последнего патча. Пожалуйста, дождитесь его обновления перед его использованием.",
+  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
+  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
+  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
+  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
+  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
+  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
+  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
+  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
+  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
+  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should subscribe to the following package.",
-    "Plural": "You should subscribe to these packages."
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
-  "Action_RequiresConfiguration": "Вы должны следовать следующим инструкциям:",
+  "Action_RequiresConfiguration": "Please follow the following instructions:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "Вы должны отписаться от '{0}'.",
+  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
   "Action_UnsubscribeOther": {
-    "One": "Вы должны отписаться от '{1}'.",
-    "Plural": "You should unsubscribe from the following packages."
+    "One": "You should remove '{1}' from your playset.",
+    "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "Вы должны исключить '{0}'.",
-  "ExcludeThis": "Исключить этот пакет",
-  "Exclude": "Исключить",
+  "Action_ExcludeThis": "You should disable '{0}'.",
+  "ExcludeThis": "Disable this package",
+  "Exclude": "Disable",
   "Unsubscribe": "Отписаться",
   "Action_ExcludeOther": {
-    "One": "Вы должны исключить '{1}'.",
-    "Plural": "You should exclude the following packages."
+    "One": "You should disable '{1}'.",
+    "Plural": "You should disable the following packages."
   },
   "Action_Switch": {
     "One": "Вы должны переключиться на '{1}'.",
@@ -180,8 +181,8 @@
   },
   "Action_IncludeThis": "You should include '{0}'",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
   "NoRequiredDlcs": "Нет необходимых DLC",
   "DlcsSelected": {
@@ -220,6 +221,10 @@
     "One": "{0} {1} требует переключения на другой",
     "Plural": "{0} {1} требует переключения на другой"
   },
+  "RequiredItemCount": {
+    "One": "{0} {1} that is required but is not enabled",
+    "Plural": "{0} {1} that are required but are not enabled"
+  },
   "PackageType": "Тип пакета",
   "GenericPackage": "Универсальный пакет",
   "MusicPack": "Набор Музыки",
@@ -231,7 +236,7 @@
   "ApplyChangedBeforeExit": "У вас есть несохраненные изменения.\r\n\r\nВы хотите применить эти изменения перед продолжением?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Известно, что автор {0}, {1}— вредоносный и/или содержит вредоносный контент, например вирусы.",
-  "ReviewRequests": "Запросы на проверку {0}",
+  "ReviewRequests": "Review Requests",
   "ApplyRequestedChanges": "Применить запрошенные изменения",
   "ManagePackage": "Управление Пакетами",
   "Banned": "Заблокирован",
@@ -250,9 +255,12 @@
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues",
+  "ApplyAllActions": "Apply all recommended actions",
+  "SnoozeAll": "Snooze all issues",
+  "SnoozeAllFiltered": "Snooze all filtered issues",
   "LinkedPackages": "Linked Packages",
   "NoTags": "No Tags",
-  "NoLinks": "No Links"
+  "NoLinks": "No Links",
+  "HideReviewedPackages": "Hide reviewed mods",
+  "ApplyRecommendedAction": "Apply recommended action"
 }
