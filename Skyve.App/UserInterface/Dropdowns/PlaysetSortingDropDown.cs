@@ -25,7 +25,7 @@ public class PlaysetSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 	{
 		var text = LocaleHelper.GetGlobalText($"Sorting_{item}");
 
-		using var icon = IconManager.GetIcon("I_Sort", rectangle.Height - 2).Color(foreColor);
+		using var icon = IconManager.GetIcon("Sort", rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

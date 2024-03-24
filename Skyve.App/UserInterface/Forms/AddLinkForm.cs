@@ -96,7 +96,7 @@ public partial class AddLinkForm : BaseForm
 
 			deleteButton.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 			deleteButton.Padding = UI.Scale(new Padding(5), UI.FontScale);
-			deleteButton.ImageName = "I_Trash";
+			deleteButton.ImageName = "Trash";
 			deleteButton.ColorStyle = ColorStyle.Red;
 			deleteButton.Margin = UI.Scale(new Padding(3, 3, 10, 3), UI.FontScale);
 			deleteButton.Click += (s, e) => Dispose();

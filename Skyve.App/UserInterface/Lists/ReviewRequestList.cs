@@ -90,7 +90,7 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		var user = _userService.TryGetUser(e.Item.UserId);
 
 		using var font = UI.Font(10F);
-		using var icon = IconManager.GetIcon("I_User", font.Height * 5 / 4).Color(FormDesign.Design.ForeColor);
+		using var icon = IconManager.GetIcon("User", font.Height * 5 / 4).Color(FormDesign.Design.ForeColor);
 		using var brush = new SolidBrush(FormDesign.Design.ForeColor);
 
 		var nameSize = e.Graphics.Measure(user.Name, font);
@@ -114,9 +114,10 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 
 		e.Rects.TextRectangle = SlickButton.AlignAndDraw(e.Graphics, e.ClipRectangle.Pad(0, e.Rects.UserRectangle.Height + Padding.Top, 0, 0), ContentAlignment.TopRight, new ButtonDrawArgs
 		{
+			BackgroundColor = e.BackColor,
 			HoverState = e.HoverState,
 			Cursor = CursorLocation,
-			Icon = "I_Copy"
+			Icon = "Copy"
 		}).Rectangle;
 
 		using var textFont = UI.Font(8.25F);
@@ -133,12 +134,13 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		using var buttonFont = UI.Font(9.5F);
 		SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 		{
+			BackgroundColor = e.BackColor,
 			Font = buttonFont,
 			HoverState = e.HoverState,
 			Rectangle = e.Rects.ViewRectangle,
 			Cursor = CursorLocation,
 			Text = LocaleCR.ViewRequest,
-			Icon = "I_Link"
+			Icon = "Link"
 		});
 
 		e.DrawableItem.CachedHeight = e.Rects.ViewRectangle.Bottom - e.ClipRectangle.Y + Padding.Vertical + GridPadding.Vertical;

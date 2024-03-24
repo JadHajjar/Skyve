@@ -197,7 +197,7 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void FilterChanged(object sender, EventArgs e)
 	{
-		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "Search" : "ClearSearch";
 
 		LC_Items.FilterChanged();
 		RefreshCounts();

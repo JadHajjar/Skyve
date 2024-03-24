@@ -121,7 +121,7 @@ partial class ContentList
 			// 
 			// TB_Search
 			// 
-			dynamicIcon1.Name = "I_Search";
+			dynamicIcon1.Name = "Search";
 			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
@@ -141,10 +141,10 @@ partial class ContentList
 			// 
 			this.I_Refresh.ActiveColor = null;
 			this.I_Refresh.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_Refresh";
+			dynamicIcon2.Name = "Refresh";
 			this.I_Refresh.ImageName = dynamicIcon2;
 			this.I_Refresh.Location = new System.Drawing.Point(23, 3);
-			this.I_Refresh.Name = "I_Refresh";
+			this.I_Refresh.Name = "Refresh";
 			this.I_Refresh.Size = new System.Drawing.Size(14, 14);
 			this.I_Refresh.SpaceTriggersClick = true;
 			this.I_Refresh.TabIndex = 1;
@@ -156,7 +156,7 @@ partial class ContentList
 			this.B_Filters.AutoSize = true;
 			this.B_Filters.AutoSizeIcon = true;
 			this.B_Filters.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon3.Name = "I_Filter";
+			dynamicIcon3.Name = "Filter";
 			this.B_Filters.ImageName = dynamicIcon3;
 			this.B_Filters.Location = new System.Drawing.Point(43, 3);
 			this.B_Filters.Name = "B_Filters";
@@ -303,8 +303,8 @@ partial class ContentList
 			this.OT_ModAsset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.OT_ModAsset.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_ModAsset.Image1 = "I_Mods";
-			this.OT_ModAsset.Image2 = "I_Assets";
+			this.OT_ModAsset.Image1 = "Mods";
+			this.OT_ModAsset.Image2 = "Assets";
 			this.OT_ModAsset.Location = new System.Drawing.Point(10, 115);
 			this.OT_ModAsset.Name = "OT_ModAsset";
 			this.OT_ModAsset.Option1 = "Mods";
@@ -320,8 +320,8 @@ partial class ContentList
 			this.OT_Workshop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.OT_Workshop.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Workshop.Image1 = "I_PC";
-			this.OT_Workshop.Image2 = "I_Steam";
+			this.OT_Workshop.Image1 = "PC";
+			this.OT_Workshop.Image2 = "Steam";
 			this.OT_Workshop.Location = new System.Drawing.Point(10, 89);
 			this.OT_Workshop.Name = "OT_Workshop";
 			this.OT_Workshop.Option1 = "Local";
@@ -337,8 +337,8 @@ partial class ContentList
 			this.OT_Enabled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.OT_Enabled.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Enabled.Image1 = "I_Ok";
-			this.OT_Enabled.Image2 = "I_Enabled";
+			this.OT_Enabled.Image1 = "Ok";
+			this.OT_Enabled.Image2 = "Enabled";
 			this.OT_Enabled.Location = new System.Drawing.Point(10, 63);
 			this.OT_Enabled.Name = "OT_Enabled";
 			this.OT_Enabled.Option1 = "Enabled";
@@ -352,8 +352,8 @@ partial class ContentList
 			this.OT_Included.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.OT_Included.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Included.Image1 = "I_Add";
-			this.OT_Included.Image2 = "I_X";
+			this.OT_Included.Image1 = "Add";
+			this.OT_Included.Image2 = "X";
 			this.OT_Included.Location = new System.Drawing.Point(10, 37);
 			this.OT_Included.Name = "OT_Included";
 			this.OT_Included.Option1 = "Included";
@@ -368,10 +368,10 @@ partial class ContentList
 			this.I_ClearFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.I_ClearFilters.ColorStyle = Extensions.ColorStyle.Red;
 			this.I_ClearFilters.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "I_ClearFilter";
+			dynamicIcon4.Name = "ClearFilter";
 			this.I_ClearFilters.ImageName = dynamicIcon4;
 			this.I_ClearFilters.Location = new System.Drawing.Point(855, 10);
-			this.I_ClearFilters.Name = "I_ClearFilters";
+			this.I_ClearFilters.Name = "ClearFilters";
 			this.I_ClearFilters.Size = new System.Drawing.Size(30, 21);
 			this.I_ClearFilters.TabIndex = 1;
 			this.I_ClearFilters.Click += new System.EventHandler(this.I_ClearFilters_Click);
@@ -479,7 +479,7 @@ partial class ContentList
 			this.I_SortOrder.ActiveColor = null;
 			this.I_SortOrder.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_SortOrder.Location = new System.Drawing.Point(806, 3);
-			this.I_SortOrder.Name = "I_SortOrder";
+			this.I_SortOrder.Name = "SortOrder";
 			this.I_SortOrder.Size = new System.Drawing.Size(30, 33);
 			this.I_SortOrder.TabIndex = 1;
 			this.I_SortOrder.SizeChanged += new System.EventHandler(this.Icon_SizeChanged);

@@ -14,8 +14,8 @@ public partial class ItemListControl
 			var package = e.Item.GetPackage();
 			var localIdentity = e.Item.GetLocalPackageIdentity();
 			var workshopInfo = e.Item.GetWorkshopInfo();
-			var isIncluded = e.Item.IsIncluded(out var partialIncluded) || partialIncluded;
-			var isEnabled = e.Item.IsEnabled();
+			var isIncluded = _packageUtil.IsIncluded(e.Item, out var partialIncluded, SelectedPlayset) || partialIncluded;
+			var isEnabled = _packageUtil.IsEnabled(e.Item, SelectedPlayset);
 
 			e.BackColor = BackColor;
 
@@ -62,7 +62,7 @@ public partial class ItemListControl
 		private void DrawDots(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 		{
 			var isHovered = e.Rects.DotsRect.Contains(CursorLocation);
-			using var img = IconManager.GetIcon("I_VertialMore", e.Rects.IncludedRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.IconColor);
+			using var img = IconManager.GetIcon("VertialMore", e.Rects.IncludedRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.IconColor);
 
 			e.Graphics.DrawImage(img, e.Rects.DotsRect.CenterR(img.Size));
 		}
@@ -145,7 +145,7 @@ public partial class ItemListControl
 
 			var text = packageTags.ListStrings(", ");
 
-			DrawCell(e, Columns.Tags, packageTags.ListStrings(", "), "I_Tag", active: false);
+			DrawCell(e, Columns.Tags, packageTags.ListStrings(", "), "Tag", active: false);
 		}
 
 		private void DrawAuthor(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo)
@@ -161,7 +161,7 @@ public partial class ItemListControl
 				var rect = new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, 0);
 				var size = e.Graphics.Measure(author.Name, authorFont).ToSize();
 
-				using var authorIcon = IconManager.GetIcon("I_Author", size.Height);
+				using var authorIcon = IconManager.GetIcon("Author", size.Height);
 
 				e.Rects.AuthorRect = rect.Align(size + new Size(authorIcon.Width, 0), ContentAlignment.TopLeft);
 				e.DrawableItem.CachedHeight = e.Rects.AuthorRect.Bottom + (GridPadding.Top / 3);

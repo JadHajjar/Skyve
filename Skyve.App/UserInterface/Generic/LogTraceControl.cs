@@ -104,7 +104,7 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 		SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 		{
 			Rectangle = buttonRect,
-			Icon = "I_Copy",
+			Icon = "Copy",
 			Font = Font,
 			HoverState = HoverState,
 			Cursor = CursorLocation
@@ -148,7 +148,7 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 			SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 			{
 				Rectangle = linkRect,
-				Icon = "I_Link",
+				Icon = "Link",
 				Font = Font,
 				HoverState = HoverState,
 				Cursor = CursorLocation
@@ -157,7 +157,7 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 			SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 			{
 				Rectangle = folderRect,
-				Icon = "I_Folder",
+				Icon = "Folder",
 				Font = Font,
 				HoverState = HoverState,
 				Cursor = CursorLocation

@@ -58,7 +58,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 			var cr = Package.GetPackageInfo();
 			var playsetUsage = args.Item.GetCustomPlayset().Usage;
 
-			if (cr is not null && playsetUsage > 0 && cr.Usage.HasFlag(playsetUsage))
+			if (cr is not null && playsetUsage > 0 && !cr.Usage.HasFlag(playsetUsage))
 			{
 				args.DoNotDraw = true;
 			}
@@ -166,7 +166,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center };
 		e.Graphics.DrawString(e.Item.Name, font, textBrush, e.Rects.TextRect, stringFormat);
 
-		if (e.Item == _playsetManager.CurrentPlayset)
+		if (e.Item.Equals(_playsetManager.CurrentPlayset))
 		{
 			var rect = e.Rects.TextRect;
 			var textSize = e.Graphics.Measure(e.Item.Name, font);
@@ -189,7 +189,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		{
 			e.Rects.LoadRect = SlickButton.AlignAndDraw(e.Graphics, e.ClipRectangle.Pad(0, 0, Padding.Right * 2, 0), ContentAlignment.MiddleRight, new ButtonDrawArgs
 			{
-				Icon = "I_X",
+				Icon = "X",
 				HoverState = e.HoverState,
 				Cursor = CursorLocation,
 				Size = e.Rects.IncludedRect.Size,
@@ -298,7 +298,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 			return;
 		}
 
-		var icon = new DynamicIcon(isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
+		var icon = new DynamicIcon(isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : "Enabled");
 		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
@@ -314,14 +314,14 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 			}
 
 			var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
-			var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
+			var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : partialIncluded ? "Slash" : isIncluded ? "Ok" : package is null ? "Add" : "Enabled");
 			var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
 
 			DynamicIcon? enabl = null;
 
 			if (_settings.UserSettings.AdvancedIncludeEnable && package is not null)
 			{
-				enabl = new DynamicIcon(package.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
+				enabl = new DynamicIcon(package.IsEnabled() ? "Checked" : "Checked_OFF");
 
 				if (isIncluded)
 				{

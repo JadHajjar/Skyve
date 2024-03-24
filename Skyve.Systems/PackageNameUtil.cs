@@ -32,6 +32,11 @@ public class PackageNameUtil : IPackageNameUtil
 
 		var text = _tagRegex.Replace(package.Name, string.Empty);
 
+		if (text.IndexOf(' ') < 0)
+		{
+			text = text.FormatWords();
+		}
+
 #if CS1
 		if (package is IPackage lp && lp.IsBuiltIn)
 		{
@@ -73,6 +78,11 @@ public class PackageNameUtil : IPackageNameUtil
 		text = keepTags
 			? text.RemoveDoubleSpaces().RegexRemove(" +(?=[\\]\\)])").RegexRemove("(?<=[\\[\\(]) +")
 			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
+
+		if (text.IndexOf(' ') < 0)
+		{
+			text = text.FormatWords();
+		}
 
 #if CS1
 		if (lp?.IsBuiltIn ?? false)

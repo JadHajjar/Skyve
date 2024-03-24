@@ -18,6 +18,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private bool _compactList;
 	private bool settingItems;
 	private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = [];
+	public readonly List<ulong> _selectionList = [];
 
 	public event Action<NotificationType>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
@@ -28,6 +29,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	public event Action<bool>? FilterByEnabled;
 	public event Action<string>? AddToSearch;
 	public event Action<IPackageIdentity>? PackageSelected;
+	public event Action<IPackageIdentity>? PackageUnSelected;
 	public event Action? OpenWorkshopSearch;
 	public event Action? OpenWorkshopSearchInBrowser;
 	public event EventHandler? FilterRequested;
@@ -88,6 +90,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
+	public int? SelectedPlayset { get; set; }
 	public bool SortDescending { get; private set; }
 	public bool IsPackagePage { get; set; }
 	public bool IsTextSearchNotEmpty { get; set; }
@@ -192,7 +195,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.OrderBy(x => x.Item.GetLocalPackage()?.FileSize),
 
 			PackageSorting.Name => items
-				.OrderBy(x => x.Item.ToString()),
+				.OrderBy(x => x.Item.CleanName()),
 
 			PackageSorting.Author => items
 				.OrderBy(x => x.Item.GetWorkshopInfo()?.Author?.Name ?? string.Empty),
@@ -201,7 +204,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.OrderBy(x => _packageUtil.GetStatus(x.Item.GetLocalPackage(), out _)),
 
 			PackageSorting.UpdateTime => items
-				.OrderBy(x => (x.Item.GetWorkshopInfo()?.ServerTime).If(y => y is null || y.Value == DateTime.MinValue, _ => x.Item.GetLocalPackage()?.LocalTime ?? DateTime.Now, y => y.Value)),
+				.OrderBy(x => (x.Item.GetWorkshopInfo()?.ServerTime).If(y => y is null || y.Value == DateTime.MinValue, _ => x.Item.GetLocalPackage()?.LocalTime ?? DateTime.Now, y => y ?? DateTime.Now)),
 
 			PackageSorting.SubscribeTime => items
 				.OrderBy(x => x.Item.GetLocalPackage()?.LocalTime),
@@ -223,7 +226,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			PackageSorting.LoadOrder => items
 				.OrderBy(x => !x.Item.GetLocalPackage()?.IsIncluded())
 				.ThenByDescending(x => x.Item.GetPackage() is IPackage package ? _modUtil.GetLoadOrder(package) : 0)
-				.ThenBy(x => x.Item.ToString()),
+				.ThenBy(x => x.Item.CleanName()),
 
 			_ => _page is SkyvePage.Workshop ? items : items
 				.OrderBy(x => !(x.Item.IsIncluded(out var partial) || partial))
@@ -263,21 +266,21 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 #if CS2
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			var isIncluded = item.Item.IsIncluded(out var partialIncluded) && !partialIncluded;
+			var isIncluded = _packageUtil.IsIncluded(item.Item, out var partialIncluded, SelectedPlayset) && !partialIncluded;
 
 			Loading = item.Loading = true;
 
-			if (!isIncluded)
+			if (!isIncluded || ModifierKeys.HasFlag(Keys.Alt))
 			{
-				await _packageUtil.SetIncluded(item.Item, !isIncluded);
+				await _packageUtil.SetIncluded(item.Item, !isIncluded, SelectedPlayset);
 			}
 			else
 			{
-				var enable = !item.Item.IsEnabled();
+				var enable = !_packageUtil.IsEnabled(item.Item, SelectedPlayset);
 
 				if (enable || !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil))
 				{
-					await _modUtil.SetEnabled(item.Item, enable);
+					await _modUtil.SetEnabled(item.Item, enable, SelectedPlayset);
 				}
 			}
 
@@ -331,7 +334,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			return;
 		}
 
-		if (rects.SteamRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Url is string url)
+		if (rects.WorkshopRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Url is string url)
 		{
 			PlatformUtil.OpenUrl(url);
 			return;
@@ -351,9 +354,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			}
 			else
 			{
-				var pc = new PC_UserPage(user);
-
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+				Program.MainForm.PushPanel(new PC_UserPage(user));
 			}
 
 			return;
@@ -438,12 +439,22 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			if (IsSelection)
 			{
-				PackageSelected?.Invoke(item.Item);
+				if (_selectionList.Contains(item.Item.Id))
+				{
+					_selectionList.Remove(item.Item.Id);
+					PackageUnSelected?.Invoke(item.Item);
+				}
+				else
+				{
+					_selectionList.Add(item.Item.Id);
+					PackageSelected?.Invoke(item.Item);
+				}
+
 				return;
 			}
 
 			ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item.GetPackage() ?? item.Item, false);
-			//(FindForm() as BasePanelForm)?.PushPanel(null, /*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) :*/ new PC_PackagePage(item.Item.GetPackage() ?? item.Item));
+			//(FindForm() as BasePanelForm)?.PushPanel(/*item.Item.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.GetWorkshopPackage()!) :*/ new PC_PackagePage(item.Item.GetPackage() ?? item.Item));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{
@@ -543,6 +554,16 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
+	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+	{
+		if (keyData == Keys.Alt)
+		{
+			Invalidate();
+		}
+
+		return base.ProcessCmdKey(ref msg, keyData);
+	}
+
 	protected override void OnPaintBackground(PaintEventArgs e)
 	{
 		if (ItemCount > 0)
@@ -562,6 +583,16 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 
 		base.OnPaintBackground(e);
+	}
+
+	protected override void OnPaintItem(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
+	{
+		if (IsSelection)
+		{
+			e.IsSelected = _selectionList.Contains(e.Item.Id);
+		}
+
+		base.OnPaintItem(e);
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -624,9 +655,9 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			Text = emptySearch ? Locale.DiscoverWorkshop : Locale.SearchWorkshop,
 #if CS2
-			Icon = "I_Paradox",
+			Icon = "Paradox",
 #else
-			Icon = "I_Steam",
+			Icon = "Steam",
 #endif
 			Font = font,
 			Padding = UI.Scale(new Padding(7), UI.UIScale),
@@ -638,7 +669,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		PopupSearchRect2 = emptySearch ? default : SlickButton.AlignAndDraw(e.Graphics, new Rectangle(0, PopupSearchRect1.Bottom + (Padding.Vertical * 2), Width, 0), ContentAlignment.TopCenter, new ButtonDrawArgs
 		{
 			Text = Locale.SearchWorkshopBrowser,
-			Icon = "I_Link",
+			Icon = "Link",
 			Font = font,
 			Padding = UI.Scale(new Padding(7), UI.UIScale),
 			Cursor = CursorLocation,
@@ -662,22 +693,22 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
-				icon = "I_Question";
+				icon = "Question";
 				color = FormDesign.Design.YellowColor;
 				return true;
 			case DownloadStatus.OutOfDate:
 				text = Locale.OutOfDate;
-				icon = "I_OutOfDate";
+				icon = "OutOfDate";
 				color = FormDesign.Design.YellowColor;
 				return true;
 			case DownloadStatus.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
-				icon = "I_Broken";
+				icon = "Broken";
 				color = FormDesign.Design.RedColor;
 				return true;
 			case DownloadStatus.Removed:
 				text = Locale.RemovedByAuthor;
-				icon = "I_ContentRemoved";
+				icon = "ContentRemoved";
 				color = FormDesign.Design.RedColor;
 				return true;
 		}
@@ -695,7 +726,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		public Rectangle FolderRect;
 		public Rectangle IconRect;
 		public Rectangle TextRect;
-		public Rectangle SteamRect;
+		public Rectangle WorkshopRect;
 		public Rectangle SteamIdRect;
 		public Rectangle CenterRect;
 		public Rectangle AuthorRect;
@@ -721,7 +752,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				IncludedRect.Contains(location) ||
 				EnabledRect.Contains(location) ||
 				FolderRect.Contains(location) ||
-				SteamRect.Contains(location) ||
+				WorkshopRect.Contains(location) ||
 				AuthorRect.Contains(location) ||
 				FolderNameRect.Contains(location) ||
 				((CenterRect.Contains(location) || IconRect.Contains(location)) && !(instance as ItemListControl)!.IsPackagePage) ||
@@ -769,10 +800,10 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				return true;
 			}
 #endif
-			if (SteamRect.Contains(location))
+			if (WorkshopRect.Contains(location))
 			{
 				text = Locale.ViewOnWorkshop;
-				point = SteamRect.Location;
+				point = WorkshopRect.Location;
 				return true;
 			}
 

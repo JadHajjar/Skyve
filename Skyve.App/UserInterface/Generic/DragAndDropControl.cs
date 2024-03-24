@@ -150,7 +150,7 @@ public class DragAndDropControl : SlickControl
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
-			using var removeIcon = IconManager.GetIcon("I_X");
+			using var removeIcon = IconManager.GetIcon("X");
 
 			var fileRect = new Rectangle(0, 0, Width - availableWidth, Height).Pad(Padding.Left);
 			var removeRect = fileRect.Align(new Size(removeIcon.Width + Padding.Left, removeIcon.Height + Padding.Top), ContentAlignment.TopRight);
@@ -192,8 +192,8 @@ public class DragAndDropControl : SlickControl
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
-			using var fileIcon = IconManager.GetLargeIcon("I_File").Color(FormDesign.Design.MenuForeColor);
-			using var removeIcon = IconManager.GetIcon("I_X").Color(FormDesign.Design.MenuForeColor);
+			using var fileIcon = IconManager.GetLargeIcon("File").Color(FormDesign.Design.MenuForeColor);
+			using var removeIcon = IconManager.GetIcon("X").Color(FormDesign.Design.MenuForeColor);
 
 			var textSize = e.Graphics.Measure(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), Width - availableWidth - Padding.Horizontal);
 			var fileHeight = (int)textSize.Height + 3 + fileIcon.Height + Padding.Top;
@@ -240,7 +240,7 @@ public class DragAndDropControl : SlickControl
 		}
 		else
 		{
-			using var icon = IconManager.GetLargeIcon("I_DragDrop").Color(color);
+			using var icon = IconManager.GetLargeIcon("DragDrop").Color(color);
 
 			e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
 		}

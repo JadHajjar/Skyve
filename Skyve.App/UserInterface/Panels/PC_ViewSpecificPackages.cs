@@ -32,41 +32,4 @@ public class PC_ViewSpecificPackages : PC_ContentList
 	{
 		return Locale.Package;
 	}
-
-	protected override string GetCountText()
-	{
-		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
-
-		foreach (var item in _contentManager.Packages)
-		{
-			if (item.IsIncluded())
-			{
-				packagesIncluded++;
-
-				if (item.IsCodeMod)
-				{
-					modsIncluded++;
-
-					if (item.IsEnabled())
-					{
-						modsEnabled++;
-					}
-				}
-			}
-		}
-
-		var total = LC_Items.ItemCount;
-
-		if (!_settings.UserSettings.AdvancedIncludeEnable)
-		{
-			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
-		}
-
-		if (modsIncluded == modsEnabled)
-		{
-			return string.Format(Locale.PackageIncludedAndEnabledTotal, packagesIncluded, total);
-		}
-
-		return string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
-	}
 }

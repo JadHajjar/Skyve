@@ -34,9 +34,14 @@ internal class D_NotificationCenter : IDashboardItem
 		return Draw;
 	}
 
+	protected override void DrawHeader(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
+	{
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.Notifications, "Notification");
+	}
+
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(sectionHeight), Locale.Notifications, "I_Notification", out _, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.Notifications, "Notification");
 
 		sectionHeight = preferredHeight - e.ClipRectangle.Y;
 
@@ -92,7 +97,7 @@ internal class D_NotificationCenter : IDashboardItem
 
 			e.Graphics.FillRoundedRectangle(activeBrush, rectangle.Align(new Size(Margin.Left / 2, rectangle.Height - (Margin.Left / 2)), ContentAlignment.MiddleLeft), Margin.Left / 4);
 
-			e.Graphics.DrawImage(icon.Color(FormDesign.Design.ForeColor), new Rectangle(e.ClipRectangle.X + Margin.Left + (Margin.Left / 2), preferredHeight, e.ClipRectangle.Width, Math.Max(icon.Height, (int)titleBounds.Height + (int)descBounds.Height)).Align(icon.Size, ContentAlignment.MiddleLeft));
+			e.Graphics.DrawImage(icon.Color(FormDesign.Design.ForeColor), rectangle.Pad(Margin.Left, -Margin.Top / 2, 0, -Margin.Top / 2).Align(icon.Size, ContentAlignment.MiddleLeft));
 
 			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
 

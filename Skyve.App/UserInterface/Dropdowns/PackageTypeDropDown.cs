@@ -41,7 +41,7 @@ public class PackageTypeDropDown : SlickSelectionDropDown<PackageType>
 	{
 		var text = LocaleCR.Get($"{item}");
 
-		using var icon = IconManager.GetIcon("I_Cog", rectangle.Height - 2).Color(foreColor);
+		using var icon = IconManager.GetIcon("Cog", rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

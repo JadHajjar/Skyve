@@ -123,7 +123,7 @@ partial class PC_PlaysetList
 			// 
 			// TB_Search
 			// 
-			dynamicIcon1.Name = "I_Search";
+			dynamicIcon1.Name = "Search";
 			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
@@ -241,7 +241,7 @@ partial class PC_PlaysetList
 			this.B_Add.ActiveColor = null;
 			this.B_Add.ColorStyle = Extensions.ColorStyle.Green;
 			this.B_Add.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_Add";
+			dynamicIcon2.Name = "Add";
 			this.B_Add.ImageName = dynamicIcon2;
 			this.B_Add.Location = new System.Drawing.Point(0, 0);
 			this.B_Add.Margin = new System.Windows.Forms.Padding(0);
@@ -269,7 +269,7 @@ partial class PC_PlaysetList
 			this.B_Deactivate.ActiveColor = null;
 			this.B_Deactivate.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_Deactivate.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon3.Name = "I_Shutdown";
+			dynamicIcon3.Name = "Shutdown";
 			this.B_Deactivate.ImageName = dynamicIcon3;
 			this.B_Deactivate.Location = new System.Drawing.Point(0, 0);
 			this.B_Deactivate.Margin = new System.Windows.Forms.Padding(0);
@@ -287,7 +287,7 @@ partial class PC_PlaysetList
 			this.B_Discover.ColorShade = null;
 			this.B_Discover.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Discover.Dock = System.Windows.Forms.DockStyle.Right;
-			dynamicIcon4.Name = "I_Discover";
+			dynamicIcon4.Name = "Discover";
 			this.B_Discover.ImageName = dynamicIcon4;
 			this.B_Discover.LargeImage = true;
 			this.B_Discover.Location = new System.Drawing.Point(1064, 3);
@@ -331,7 +331,7 @@ partial class PC_PlaysetList
 			this.B_Edit.ActiveColor = null;
 			this.B_Edit.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_Edit.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon5.Name = "I_Cog";
+			dynamicIcon5.Name = "Cog";
 			this.B_Edit.ImageName = dynamicIcon5;
 			this.B_Edit.Location = new System.Drawing.Point(44, 0);
 			this.B_Edit.Margin = new System.Windows.Forms.Padding(0);

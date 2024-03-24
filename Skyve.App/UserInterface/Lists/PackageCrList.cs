@@ -55,6 +55,11 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 
 		if (CurrentPackage == e.Item)
 		{
+			var filledRect = e.ClipRectangle.Pad(0, -Padding.Top / 2, Padding.Right / 2, -Padding.Bottom / 2);
+
+			using var backBrush = new SolidBrush(e.BackColor.MergeColor(FormDesign.Design.ActiveColor, 75));
+			e.Graphics.FillRoundedRectangle(backBrush, filledRect, Padding.Left);
+
 			var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
 			e.Graphics.FillRoundedRectangle(activeBrush, clipRectangle.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleRight), Padding.Left);
 
@@ -63,7 +68,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 
 		if (thumbnail is null)
 		{
-			using var generic = IconManager.GetIcon(isUpToDate ? "I_OK" : "I_Paradox", isUpToDate ? (imageRect.Height * 3 / 4) : imageRect.Height).Color(e.BackColor);
+			using var generic = IconManager.GetIcon(isUpToDate ? "Ok" : "Paradox", isUpToDate ? (imageRect.Height * 3 / 4) : imageRect.Height).Color(e.BackColor);
 			using var backBrush = new SolidBrush(isUpToDate ? FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.IconColor, 35) : FormDesign.Design.IconColor);
 
 			e.Graphics.FillRoundedRectangle(backBrush, imageRect, (int)(5 * UI.FontScale));
@@ -79,7 +84,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 			if (isUpToDate && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var greenBrush = new SolidBrush(Color.FromArgb(150, FormDesign.Design.GreenColor));
-				using var icon = IconManager.GetIcon("I_Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor.GetTextColor());
+				using var icon = IconManager.GetIcon("Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor.GetTextColor());
 
 				e.Graphics.FillRoundedRectangle(greenBrush, imageRect, (int)(5 * UI.FontScale));
 				e.Graphics.DrawImage(icon, imageRect.CenterR(icon.Size));

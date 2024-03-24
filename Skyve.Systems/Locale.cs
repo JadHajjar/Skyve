@@ -187,14 +187,9 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Asset => _instance.GetText("Asset");
 
 	/// <summary>
-	/// Assets included: {0}, Total: {1}
+	/// Assets Enabled
 	/// </summary>
-	public static Translation AssetIncludedTotal => _instance.GetText("AssetIncludedTotal");
-
-	/// <summary>
-	/// Your Assets
-	/// </summary>
-	public static Translation AssetsBubble => _instance.GetText("AssetsBubble");
+	public static Translation AssetsEnabled => _instance.GetText("AssetsEnabled");
 
 	/// <summary>
 	/// Ignore Internet connection checks
@@ -216,6 +211,11 @@ public class Locale : LocaleHelper, ILocale
 	/// <para>Plural: {0} authors selected</para>
 	/// </summary>
 	public static Translation AuthorsSelected => _instance.GetText("AuthorsSelected");
+
+	/// <summary>
+	/// Available Widgets
+	/// </summary>
+	public static Translation AvailableWidgets => _instance.GetText("AvailableWidgets");
 
 	/// <summary>
 	/// BETA
@@ -304,15 +304,20 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ConfirmDeletePlayset => _instance.GetText("ConfirmDeletePlayset");
 
 	/// <summary>
+	/// Confirm Selection
+	/// </summary>
+	public static Translation ConfirmSelection => _instance.GetText("ConfirmSelection");
+
+	/// <summary>
 	/// <para>Contains {0} {1}</para>
 	/// <para>Plural: Contains {0} {1}</para>
 	/// </summary>
 	public static Translation ContainCount => _instance.GetText("ContainCount");
 
 	/// <summary>
-	/// Content &amp; Info
+	/// Content Summary
 	/// </summary>
-	public static Translation ContentAndInfo => _instance.GetText("ContentAndInfo");
+	public static Translation ContentSummary => _instance.GetText("ContentSummary");
 
 	/// <summary>
 	/// Clone your active playset
@@ -418,6 +423,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CustomMaps => _instance.GetText("Custom Maps");
 
 	/// <summary>
+	/// Custom Color
+	/// </summary>
+	public static Translation CustomColor => _instance.GetText("CustomColor");
+
+	/// <summary>
 	/// Custom Launch Arguments
 	/// </summary>
 	public static Translation CustomLaunchArguments => _instance.GetText("CustomLaunchArguments");
@@ -428,12 +438,17 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CustomTags => _instance.GetText("CustomTags");
 
 	/// <summary>
+	/// Custom Thumbnail
+	/// </summary>
+	public static Translation CustomThumbnail => _instance.GetText("CustomThumbnail");
+
+	/// <summary>
 	/// Dashboard
 	/// </summary>
 	public static Translation Dashboard => _instance.GetText("Dashboard");
 
 	/// <summary>
-	/// You can customize your dashboard by dragging each section from its header. You can also resize a section using the dotted triangle on its bottom-right.
+	/// Customize your dashboard by dragging each section from its title. You can also resize a section using the dotted triangle on its bottom-right corner.
 	/// </summary>
 	public static Translation DashboardCustomizationInfo => _instance.GetText("DashboardCustomizationInfo");
 
@@ -588,6 +603,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation EditCompatibility => _instance.GetText("EditCompatibility");
 
 	/// <summary>
+	/// Edit Dashboard
+	/// </summary>
+	public static Translation EditDashboard => _instance.GetText("EditDashboard");
+
+	/// <summary>
 	/// Editing multiple packages' tags will overwrite each of their custom tags.
 	/// </summary>
 	public static Translation EditingMultipleTags => _instance.GetText("EditingMultipleTags");
@@ -703,6 +723,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FadeDisabledItemsTip => _instance.GetText("FadeDisabledItems_Tip");
 
 	/// <summary>
+	/// Failed to apply the requested changes.
+	/// </summary>
+	public static Translation FailedToApplyChanges => _instance.GetText("FailedToApplyChanges");
+
+	/// <summary>
 	/// Failed to delete item
 	/// </summary>
 	public static Translation FailedToDeleteItem => _instance.GetText("FailedToDeleteItem");
@@ -738,7 +763,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FailedToRetrievePlaysets => _instance.GetText("FailedToRetrievePlaysets");
 
 	/// <summary>
-	/// Failed to save the selected 1language
+	/// Failed to save the selected language
 	/// </summary>
 	public static Translation FailedToSaveLanguage => _instance.GetText("FailedToSaveLanguage");
 
@@ -873,6 +898,21 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation GamePlay => _instance.GetText("GamePlay");
 
 	/// <summary>
+	/// {0} included &amp; enabled: {1}, Total: {2}
+	/// </summary>
+	public static Translation GenericIncludedAndEnabledTotal => _instance.GetText("GenericIncludedAndEnabledTotal");
+
+	/// <summary>
+	/// {0} included: {1}, of which are enabled: {2}, Total: {3}
+	/// </summary>
+	public static Translation GenericIncludedEnabledTotal => _instance.GetText("GenericIncludedEnabledTotal");
+
+	/// <summary>
+	/// {0} included: {1}, Total: {2}
+	/// </summary>
+	public static Translation GenericIncludedTotal => _instance.GetText("GenericIncludedTotal");
+
+	/// <summary>
 	/// Generic Playset
 	/// </summary>
 	public static Translation GenericPlayset => _instance.GetText("GenericPlayset");
@@ -901,6 +941,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Help translate this tool into your native language on Crowdin.
 	/// </summary>
 	public static Translation HelpTranslateTip => _instance.GetText("HelpTranslate_Tip");
+
+	/// <summary>
+	/// Hide Extra Widgets
+	/// </summary>
+	public static Translation HideExtraWidgets => _instance.GetText("HideExtraWidgets");
 
 	/// <summary>
 	/// Hide Filters
@@ -963,12 +1008,6 @@ public class Locale : LocaleHelper, ILocale
 	/// Includes items you do not have
 	/// </summary>
 	public static Translation IncludesItemsYouDoNotHave => _instance.GetText("IncludesItemsYouDoNotHave");
-
-	/// <summary>
-	/// <para>{0} {1} does not match its size from the Workshop</para>
-	/// <para>Plural: {0} {1} do not match their respective sizes from the Workshop</para>
-	/// </summary>
-	public static Translation IncompleteCount => _instance.GetText("IncompleteCount");
 
 	/// <summary>
 	/// Info
@@ -1165,29 +1204,14 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ModID => _instance.GetText("ModID");
 
 	/// <summary>
-	/// Mods included &amp; enabled: {0}, Total: {1}
-	/// </summary>
-	public static Translation ModIncludedAndEnabledTotal => _instance.GetText("ModIncludedAndEnabledTotal");
-
-	/// <summary>
-	/// Mods included: {0}, of which are enabled: {1}, Total: {2}
-	/// </summary>
-	public static Translation ModIncludedEnabledTotal => _instance.GetText("ModIncludedEnabledTotal");
-
-	/// <summary>
-	/// Mods included: {0}, Total: {1}
-	/// </summary>
-	public static Translation ModIncludedTotal => _instance.GetText("ModIncludedTotal");
-
-	/// <summary>
 	/// Item is private
 	/// </summary>
 	public static Translation ModIsPrivate => _instance.GetText("ModIsPrivate");
 
 	/// <summary>
-	/// Your Mods
+	/// Mods Enabled
 	/// </summary>
-	public static Translation ModsBubble => _instance.GetText("ModsBubble");
+	public static Translation ModsEnabled => _instance.GetText("ModsEnabled");
 
 	/// <summary>
 	/// <para>Copy package to a local folder</para>
@@ -1225,12 +1249,6 @@ public class Locale : LocaleHelper, ILocale
 	/// Create or import a new playset
 	/// </summary>
 	public static Translation NewPlaysetTip => _instance.GetText("NewPlayset_Tip");
-
-	/// <summary>
-	/// <para>{0} new or updated {1}</para>
-	/// <para>Plural: {0} new or updated {1}</para>
-	/// </summary>
-	public static Translation NewUpdatedCount => _instance.GetText("NewUpdatedCount");
 
 	/// <summary>
 	/// Next Stage
@@ -1292,6 +1310,11 @@ public class Locale : LocaleHelper, ILocale
 	/// No playsets match your search
 	/// </summary>
 	public static Translation NoPlaysetsMatchFilters => _instance.GetText("NoPlaysetsMatchFilters");
+
+	/// <summary>
+	/// Disable Thumbnail
+	/// </summary>
+	public static Translation NoThumbnail => _instance.GetText("NoThumbnail");
 
 	/// <summary>
 	/// Notifications
@@ -1365,6 +1388,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OpenPlaysetFolder => _instance.GetText("OpenPlaysetFolder");
 
 	/// <summary>
+	/// Open this playset's page
+	/// </summary>
+	public static Translation OpenPlaysetPage => _instance.GetText("OpenPlaysetPage");
+
+	/// <summary>
 	/// Open Skyve Log
 	/// </summary>
 	public static Translation OpenSkyveLog => _instance.GetText("OpenSkyveLog");
@@ -1380,36 +1408,20 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OtherPlaysets => _instance.GetText("OtherPlaysets");
 
 	/// <summary>
+	/// {0} out of {1}
+	/// </summary>
+	public static Translation OutOf => _instance.GetText("OutOf");
+
+	/// <summary>
 	/// Out of date
 	/// </summary>
 	public static Translation OutOfDate => _instance.GetText("OutOfDate");
-
-	/// <summary>
-	/// <para>{0} {1} is out of date</para>
-	/// <para>Plural: {0} {1} are out of date</para>
-	/// </summary>
-	public static Translation OutOfDateCount => _instance.GetText("OutOfDateCount");
 
 	/// <summary>
 	/// <para>Package</para>
 	/// <para>Plural: Packages</para>
 	/// </summary>
 	public static Translation Package => _instance.GetText("Package");
-
-	/// <summary>
-	/// Packages included &amp; enabled: {0}, Total: {1}
-	/// </summary>
-	public static Translation PackageIncludedAndEnabledTotal => _instance.GetText("PackageIncludedAndEnabledTotal");
-
-	/// <summary>
-	/// Packages included: {0}, of which {1} are mods and {2} are enabled, Total: {3}
-	/// </summary>
-	public static Translation PackageIncludedEnabledTotal => _instance.GetText("PackageIncludedEnabledTotal");
-
-	/// <summary>
-	/// Packages included: {0}, Total: {1}
-	/// </summary>
-	public static Translation PackageIncludedTotal => _instance.GetText("PackageIncludedTotal");
 
 	/// <summary>
 	/// '{0}' may be out of date, it was updated {1}
@@ -1425,6 +1437,26 @@ public class Locale : LocaleHelper, ILocale
 	/// '{0}' is out of date  You are {1} behind
 	/// </summary>
 	public static Translation PackageIsOutOfDate => _instance.GetText("PackageIsOutOfDate");
+
+	/// <summary>
+	/// Packages Enabled
+	/// </summary>
+	public static Translation PackagesEnabled => _instance.GetText("PackagesEnabled");
+
+	/// <summary>
+	/// Packages Included &amp; Disabled
+	/// </summary>
+	public static Translation PackagesIncludedDisabled => _instance.GetText("PackagesIncludedDisabled");
+
+	/// <summary>
+	/// Packages Selected ({0})
+	/// </summary>
+	public static Translation PackagesSelected => _instance.GetText("PackagesSelected");
+
+	/// <summary>
+	/// Click on a package to select it, click on 'Confirm Selection' once you're finished.
+	/// </summary>
+	public static Translation PackagesSelectionInfo => _instance.GetText("PackagesSelectionInfo");
 
 	/// <summary>
 	/// Package Status
@@ -1469,6 +1501,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Playset => _instance.GetText("Playset");
 
 	/// <summary>
+	/// No custom color selected
+	/// </summary>
+	public static Translation PlaysetColorNotSet => _instance.GetText("PlaysetColorNotSet");
+
+	/// <summary>
+	/// Custom color enabled
+	/// </summary>
+	public static Translation PlaysetColorSet => _instance.GetText("PlaysetColorSet");
+
+	/// <summary>
 	/// Delete this playset
 	/// </summary>
 	public static Translation PlaysetDelete => _instance.GetText("PlaysetDelete");
@@ -1499,9 +1541,24 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PlaysetStillLoading => _instance.GetText("PlaysetStillLoading");
 
 	/// <summary>
+	/// No custom thumbnail selected
+	/// </summary>
+	public static Translation PlaysetThumbnailNotSet => _instance.GetText("PlaysetThumbnailNotSet");
+
+	/// <summary>
+	/// Custom thumbnail enabled
+	/// </summary>
+	public static Translation PlaysetThumbnailSet => _instance.GetText("PlaysetThumbnailSet");
+
+	/// <summary>
 	/// Playset Usage
 	/// </summary>
 	public static Translation PlaysetUsage => _instance.GetText("PlaysetUsage");
+
+	/// <summary>
+	/// Selecting a dedicated usage for your playset allows Skyve to automatically hide mods that either do not match, or are not compatible with, your selected usage.
+	/// </summary>
+	public static Translation PlaysetUsageInfo => _instance.GetText("PlaysetUsageInfo");
 
 	/// <summary>
 	/// Preferences
@@ -1509,9 +1566,19 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Preferences => _instance.GetText("Preferences");
 
 	/// <summary>
+	/// Ready
+	/// </summary>
+	public static Translation Ready => _instance.GetText("Ready");
+
+	/// <summary>
 	/// Recently Updated
 	/// </summary>
 	public static Translation RecentlyUpdated => _instance.GetText("RecentlyUpdated");
+
+	/// <summary>
+	/// Recently Updated {0}
+	/// </summary>
+	public static Translation RecentlyUpdatedItem => _instance.GetText("RecentlyUpdatedItem");
 
 	/// <summary>
 	/// <para>Re-download this package</para>
@@ -1588,6 +1655,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Caution! Resetting anything can not be undone.
 	/// </summary>
 	public static Translation ResetInfo => _instance.GetText("ResetInfo");
+
+	/// <summary>
+	/// Reset Layout
+	/// </summary>
+	public static Translation ResetLayout => _instance.GetText("ResetLayout");
 
 	/// <summary>
 	/// Reset mods' cache
@@ -1983,12 +2055,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TotalAssetSize => _instance.GetText("TotalAssetSize");
 
 	/// <summary>
-	/// <para>{0} {1} in total</para>
-	/// <para>Plural: {0} {1} in total</para>
-	/// </summary>
-	public static Translation TotalCount => _instance.GetText("TotalCount");
-
-	/// <summary>
 	/// Treat optional packages as required
 	/// </summary>
 	public static Translation TreatOptionalAsRequired => _instance.GetText("TreatOptionalAsRequired");
@@ -2175,7 +2241,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ViewAssetsWithIssues => _instance.GetText("ViewAssetsWithIssues");
 
 	/// <summary>
-	/// View the full compatibility report
+	/// View the full report
 	/// </summary>
 	public static Translation ViewCompatibilityReport => _instance.GetText("ViewCompatibilityReport");
 

@@ -15,13 +15,10 @@ namespace Skyve.Systems.Compatibility.Domain;
 
 public class ReportItem : ICompatibilityItem
 {
-	private readonly string? message;
-
 	public ulong PackageId { get; set; }
 	public string? PackageName { get; set; }
 	public ReportType Type { get; set; }
-	public GenericPackageIdentity[]? Packages { get; set; }
-
+	public GenericLocalPackageIdentity[]? Packages { get; set; }
 	public string? LocaleKey { get; set; }
 	public object[]? LocaleParams { get; set; }
 
@@ -31,6 +28,9 @@ public class ReportItem : ICompatibilityItem
 	public GenericPackageStatus StatusDTO { get => Status is null ? null : new GenericPackageStatus(Status); set => Status = value?.ToGenericPackage(); }
 #nullable enable
 
+	ulong IPackageIdentity.Id => PackageId;
+	string IPackageIdentity.Name => PackageName ?? PackageId.ToString();
+	string? IPackageIdentity.Url { get; }
 	IEnumerable<IPackageIdentity> ICompatibilityItem.Packages => Packages?.Cast<IPackageIdentity>() ?? [];
 
 	public string GetMessage(IWorkshopService workshopService, IPackageNameUtil packageNameUtil)
@@ -46,5 +46,34 @@ public class ReportItem : ICompatibilityItem
 		var actionText = Packages?.Length switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
 
 		return string.Format($"{text}\r\n\r\n{actionText}", PackageName, Packages?.Length is null or 0 ? string.Empty : packageNameUtil.CleanName(workshopService.GetInfo(Packages.FirstOrDefault())), true).Trim();
+	}
+
+	public override bool Equals(object? obj)
+	{
+		return obj is ReportItem item &&
+			   PackageId == item.PackageId &&
+			   Type == item.Type &&
+			   (Packages?.SequenceEqual(item.Packages) ?? item.Packages is null) &&
+			   Status.Equals(item.Status);
+	}
+
+	public override int GetHashCode()
+	{
+		var hashCode = 109806218;
+		hashCode = hashCode * -1521134295 + PackageId.GetHashCode();
+		hashCode = hashCode * -1521134295 + Type.GetHashCode();
+		hashCode = hashCode * -1521134295 + EqualityComparer<GenericLocalPackageIdentity[]?>.Default.GetHashCode(Packages);
+		hashCode = hashCode * -1521134295 + Status.GetHashCode();
+		return hashCode;
+	}
+
+	public static bool operator ==(ReportItem? left, ReportItem? right)
+	{
+		return EqualityComparer<ReportItem>.Default.Equals(left, right);
+	}
+
+	public static bool operator !=(ReportItem? left, ReportItem? right)
+	{
+		return !(left == right);
 	}
 }

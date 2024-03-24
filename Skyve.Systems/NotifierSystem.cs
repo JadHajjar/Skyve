@@ -90,7 +90,7 @@ internal class NotifierSystem : INotifier
 		if (IsContentLoaded)
 		{
 			_delayedPackageInclusionUpdated.Run();
-			_delayedPackageInformationUpdated.Run();
+			//_delayedPackageInformationUpdated.Run();
 		}
 	}
 

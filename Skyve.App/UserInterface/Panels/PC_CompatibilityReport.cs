@@ -21,6 +21,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	private bool clearingFilters;
 	private bool firstFilterPassed;
 	private bool massSnoozeing;
+	private readonly int UsageFilteredOut;
 	private readonly DelayedAction _delayedSearch;
 	private readonly List<string> searchTermsOr = [];
 	private readonly List<string> searchTermsAnd = [];
@@ -29,6 +30,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly ICompatibilityActionsHelper _compatibilityActions;
 	private readonly IPackageManager _contentManager;
 	private readonly INotifier _notifier;
 	private readonly IPackageUtil _packageUtil;
@@ -41,7 +43,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	public PC_CompatibilityReport() : base(ServiceCenter.Get<IUserService>().User.Manager && !ServiceCenter.Get<IUserService>().User.Malicious)
 	{
-		ServiceCenter.Get(out _subscriptionsManager, out _tagUtil, out _playsetManager, out _downloadService, out _settings, out _packageUtil, out _compatibilityManager, out _contentManager, out _notifier, out IUserService userService);
+		ServiceCenter.Get(out _subscriptionsManager, out _tagUtil, out _compatibilityActions, out _playsetManager, out _downloadService, out _settings, out _packageUtil, out _compatibilityManager, out _contentManager, out _notifier, out IUserService userService);
 
 		InitializeComponent();
 
@@ -60,8 +62,10 @@ public partial class PC_CompatibilityReport : PanelContent
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
 #if CS2
+		OT_Workshop.Image2 = "Paradox";
 		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null;
 #else
+		OT_Workshop.Image2 = "Steam";
 		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !(_playsetManager.GetCustomPlayset(_playsetManager.CurrentPlayset)?.DisableWorkshop ?? false);
 #endif
 
@@ -102,7 +106,6 @@ public partial class PC_CompatibilityReport : PanelContent
 		TLP_MiddleBar.BackColor = design.AccentBackColor;
 		P_Filters.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme ? -1 : 1);
 		ListControl.BackColor = design.BackColor;
-		L_FilterCount.ForeColor = design.InfoColor;
 	}
 
 	protected override void LocaleChanged()
@@ -127,7 +130,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		PB_Loader.Location = ClientRectangle.Center(PB_Loader.Size);
 
 		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
-			= L_FilterCount.Margin = I_SortOrder.Padding
+			= I_SortOrder.Padding
 			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
 
 		B_Filters.Size = B_Filters.GetAutoSize(true);
@@ -137,7 +140,6 @@ public partial class PC_CompatibilityReport : PanelContent
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
 
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
-		L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
 		TB_Search.Width = (int)(250 * UI.FontScale);
 
@@ -195,7 +197,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private ExtensionClass.action? GetAction(ICompatibilityInfo report)
 	{
-		var message = report.ReportItems.FirstOrDefault(x => x.Status.Notification == ListControl.CurrentGroup && !_compatibilityManager.IsSnoozed(x));
+		var message = GetMessage(report);
 
 		return message is null || report.GetLocalPackage() is null
 			? null
@@ -276,6 +278,11 @@ public partial class PC_CompatibilityReport : PanelContent
 			,
 				_ => null,
 			};
+	}
+
+	private ICompatibilityItem? GetMessage(ICompatibilityInfo report)
+	{
+		return report.ReportItems?.Any() == true ? report.ReportItems.OrderBy(x => _compatibilityManager.IsSnoozed(x) ? 0 : x.Status.Notification).LastOrDefault() : null;
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<ICompatibilityInfo> e)
@@ -362,7 +369,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			return;
 		}
 
-		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "Search" : "ClearSearch";
 
 		var searchText = TB_Search.Text.Trim();
 
@@ -401,10 +408,33 @@ public partial class PC_CompatibilityReport : PanelContent
 		FilterChanged(sender, e);
 	}
 
-	private async void ApplyAll()
+	private async Task ApplyAll()
 	{
-		await Task.Run(() => Parallelism.ForEach(ListControl.FilteredItems.SelectWhereNotNull(GetAction).ToList(), 4));
-		ListControl.DoFilterChanged();
+		var messages = ListControl.FilteredItems.SelectWhereNotNull(GetMessage).ToList();
+
+		massSnoozeing = true;
+		I_Actions.Loading = true;
+		PB_Loader.Visible = true;
+		ListControl.Enabled = false;
+		_notifier.IsBulkUpdating = true;
+
+		foreach (var message in messages)
+		{
+			var action = _compatibilityActions.GetRecommendedAction(message!);
+
+			if (action is not null)
+			{
+				await action.Invoke(message!);
+			}
+		}
+
+		_notifier.IsBulkUpdating = false;
+		ListControl.Enabled = true;
+		PB_Loader.Visible = false;
+		I_Actions.Loading = false;
+		massSnoozeing = false;
+
+		CompatibilityManager_ReportProcessed();
 	}
 
 	private void SnoozeAll()
@@ -433,22 +463,39 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void I_Actions_Click(object sender, EventArgs e)
 	{
-		//var items = new SlickStripItem[]
-		//{
-		//	  new (Locale.IncludeAll, "I_Check", async () => await IncludeAll())
-		//	, new (Locale.ExcludeAll, "I_X", async () => await ExcludeAll())
-		//	, new (string.Empty)
-		//	, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, async () => await EnableAll())
-		//	, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, async () => await DisableAll())
-		//	, new (string.Empty)
-		//	, new (LocaleCR.ApplyAllActions, "I_CompatibilityReport", ListControl.FilteredItems.Any(x => GetAction(x) is not null), action: ApplyAll)
-		//	, new (LocaleCR.SnoozeAll, "I_Snooze", action: SnoozeAll)
-		//	, new (string.Empty)
-		//	, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: async () => await UnsubscribeAll())
-		//	, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
-		//};
+		var items = ListControl.SelectedOrFilteredItems.ToList();
+		var isFiltered = items.Count != ListControl.ItemCount;
+		var isSelected = ListControl.SelectedItemsCount > 0;
+		var anyIncluded = items.Any(x => _packageUtil.IsIncluded(x));
+		var anyExcluded = items.Any(x => !_packageUtil.IsIncluded(x));
+		var anyEnabled = items.Any(x => _packageUtil.IsIncluded(x) && _packageUtil.IsEnabled(x));
+		var anyDisabled = items.Any(x => _packageUtil.IsIncluded(x) && !_packageUtil.IsEnabled(x));
+		var allLocal = items.Any(x => !x.IsLocal());
+		var allWorkshop = items.Any(x => x.IsLocal());
 
-		//this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
+		var stripItems = new SlickStripItem?[]
+		{
+			  new (LocaleCR.ApplyAllActions, "CompatibilityReport", async () => await ApplyAll(), !ListControl.FilteredItems.Any(x => GetMessage(x) is  ICompatibilityItem message && _compatibilityActions.HasRecommendedAction(message)))
+			, new (isFiltered ? LocaleCR.SnoozeAllFiltered : LocaleCR.SnoozeAll, "Snooze", action: SnoozeAll)
+			, new ()
+			, anyDisabled ? new (isSelected ? Locale.EnableAllSelected : isFiltered ? Locale.EnableAllFiltered : Locale.EnableAll, "Ok", async () => await EnableAll()) : null
+			, anyEnabled ? new (isSelected ? Locale.DisableAllSelected : isFiltered ? Locale.DisableAllFiltered : Locale.DisableAll, "Enabled",  async () => await DisableAll()) : null
+			, new ()
+			, anyExcluded ? new (isSelected ? Locale.IncludeAllSelected : isFiltered ? Locale.IncludeAllFiltered : Locale.IncludeAll, "Add",  async() => await IncludeAll()) : null
+			, anyIncluded ? new (isSelected ? Locale.ExcludeAllSelected : isFiltered ? Locale.ExcludeAllFiltered : Locale.ExcludeAll, "X",  async() => await ExcludeAll()) : null
+			, new ()
+			, new (isSelected ? Locale.CopyAllIdsSelected : isFiltered ? Locale.CopyAllIdsFiltered : Locale.CopyAllIds, "Copy", () => Clipboard.SetText(items.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
+#if CS1
+			, new (Locale.SubscribeAll, "Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
+			, new (Locale.DownloadAll, "Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))
+			, new (Locale.ReDownloadAll, "ReDownload", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
+			, new (string.Empty)
+			, new (Locale.UnsubscribeAll, "RemoveSteam", action: async () => await UnsubscribeAll())
+			, new (Locale.DeleteAll, "Disposable", action: () => DeleteAll(this, EventArgs.Empty))
+#endif
+		};
+
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), stripItems));
 	}
 
 	private async Task DisableAll()
@@ -612,20 +659,51 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void RefreshCounts()
 	{
-		var format = ListControl.SelectedItemsCount == 0 ? Locale.ShowingCount : Locale.ShowingSelectedCount;
-		var filteredText = format.FormatPlural(
-			ListControl.FilteredCount,
-			Locale.Package.FormatPlural(ListControl.FilteredCount).ToLower(),
-			ListControl.SelectedItemsCount,
-			string.Empty);
-
-		if (L_FilterCount.Text != filteredText)
+		if (ListControl.ItemCount > 0)
 		{
-			L_FilterCount.Visible = !string.IsNullOrEmpty(filteredText);
-			L_FilterCount.Text = filteredText;
+			var countText = GetCountText();
+			var format = ListControl.SelectedItemsCount == 0 ? (UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning) : (UsageFilteredOut == 0 ? Locale.ShowingSelectedCount : Locale.ShowingSelectedCountWarning);
+			var filteredText = format.FormatPlural(
+				ListControl.FilteredCount,
+				Locale.Package.FormatPlural(ListControl.FilteredCount).ToLower(),
+				ListControl.SelectedItemsCount,
+				Locale.ItemsHidden.FormatPlural(UsageFilteredOut, Locale.Package.FormatPlural(ListControl.FilteredCount).ToLower()));
+
+			L_Counts.RightText = countText;
+			L_Counts.LeftText = filteredText;
+			I_Actions.Visible = true;
+		}
+		else
+		{
+			L_Counts.LeftText = L_Counts.RightText = string.Empty;
+			I_Actions.Visible = false;
 		}
 
+		L_Counts.Invalidate();
 		I_Actions.Invalidate();
+		I_Refresh.Loading = false;
+	}
+
+	protected string GetCountText()
+	{
+		var mods = ListControl.Items.ToList();
+		var modsIncluded = mods.Count(x => _packageUtil.IsIncluded(x));
+		var modsEnabled = mods.Count(x => _packageUtil.IsIncludedAndEnabled(x));
+		var count = ListControl.ItemCount;
+
+#if CS1
+		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
+		{
+			return string.Format(Locale.GenericIncludedTotal, GetItemText().Plural, modsIncluded, count);
+		}
+#endif
+
+		if (modsIncluded == modsEnabled)
+		{
+			return string.Format(Locale.GenericIncludedAndEnabledTotal, Locale.Package.Plural, modsIncluded, count);
+		}
+
+		return string.Format(Locale.GenericIncludedEnabledTotal, Locale.Package.Plural, modsIncluded, modsEnabled, count);
 	}
 
 	private void DelayedSearch()
@@ -824,6 +902,6 @@ public partial class PC_CompatibilityReport : PanelContent
 		settings.DescendingSort = ListControl.SortDescending;
 		_settings.SessionSettings.Save();
 
-		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
+		I_SortOrder.ImageName = ListControl.SortDescending ? "SortDesc" : "SortAsc";
 	}
 }

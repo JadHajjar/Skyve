@@ -62,7 +62,7 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 
 		if (!items.Any())
 		{
-			using var icon = IconManager.GetIcon("I_Slash", rectangle.Height - 2).Color(foreColor);
+			using var icon = IconManager.GetIcon("Slash", rectangle.Height - 2).Color(foreColor);
 
 			e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

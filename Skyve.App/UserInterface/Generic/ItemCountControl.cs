@@ -26,8 +26,8 @@ internal class ItemCountControl : Control
 		var leftWidth = (int)e.Graphics.Measure(LeftText, font).Width;
 		var rightWidth = (int)e.Graphics.Measure(RightText, font).Width;
 
-		var leftRect = ClientRectangle.Align(new Size(Width * leftWidth / (leftWidth + rightWidth), Height), ContentAlignment.MiddleLeft).Pad(padding);
-		var rightRect = ClientRectangle.Align(new Size(Width * rightWidth / (leftWidth + rightWidth), Height), ContentAlignment.MiddleRight).Pad(padding);
+		var leftRect = ClientRectangle.Align(new Size(Width * leftWidth / (leftWidth + rightWidth).If(0, 1), Height), ContentAlignment.MiddleLeft).Pad(padding);
+		var rightRect = ClientRectangle.Align(new Size(Width * rightWidth / (leftWidth + rightWidth).If(0, 1), Height), ContentAlignment.MiddleRight).Pad(padding);
 
 		using var leftFont = UI.Font(7.5F, FontStyle.Bold).FitTo(LeftText, leftRect, e.Graphics);
 		using var rightFont = UI.Font(7.5F, FontStyle.Bold).FitTo(RightText, rightRect, e.Graphics);

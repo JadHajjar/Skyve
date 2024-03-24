@@ -1,12 +1,14 @@
-﻿using Skyve.Domain.Systems;
-
-using System.Drawing;
+﻿using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dashboard;
 public abstract class IDashboardItem : SlickImageControl
 {
-	protected readonly List<(Rectangle rectangle, int height)> _sections = [];
+	private CancellationTokenSource? tokenSource;
+	protected Rectangle headerRectangle;
 	protected readonly Dictionary<Rectangle, ExtensionClass.action> _buttonActions = [];
 	protected readonly Dictionary<Rectangle, ExtensionClass.action> _buttonRightClickActions = [];
 
@@ -16,6 +18,9 @@ public abstract class IDashboardItem : SlickImageControl
 	public bool MoveInProgress { get; internal set; }
 	public bool ResizeInProgress { get; internal set; }
 	public int MinimumWidth { get; protected set; } = 100;
+	internal bool DrawHeaderOnly { get; set; }
+	internal bool MovementBlocked { get; set; }
+	protected int BorderRadius { get; set; }
 
 	public IDashboardItem()
 	{
@@ -24,12 +29,13 @@ public abstract class IDashboardItem : SlickImageControl
 
 	protected delegate void DrawingDelegate(PaintEventArgs e, bool applyDrawing, ref int preferredHeight);
 	protected abstract DrawingDelegate GetDrawingMethod(int width);
+	protected abstract void DrawHeader(PaintEventArgs e, bool applyDrawing, ref int preferredHeight);
 
 	public virtual bool MoveAreaContains(Point point)
 	{
-		if (_sections.Count > 0)
+		if (headerRectangle != default)
 		{
-			return _sections.Any(x => x.rectangle.ClipTo(x.height).Contains(point));
+			return headerRectangle.Contains(point);
 		}
 
 		return point.Y < Padding.Top * 3 / 2;
@@ -47,11 +53,18 @@ public abstract class IDashboardItem : SlickImageControl
 
 		var height = pe.ClipRectangle.Y;
 
-		_sections.Clear();
+		headerRectangle = default;
 
 		try
 		{
-			GetDrawingMethod(pe.ClipRectangle.Width).Invoke(pe, false, ref height);
+			if (DrawHeaderOnly)
+			{
+				DrawHeader(pe, false, ref height);
+			}
+			else
+			{
+				GetDrawingMethod(pe.ClipRectangle.Width).Invoke(pe, false, ref height);
+			}
 		}
 		catch { }
 
@@ -61,12 +74,12 @@ public abstract class IDashboardItem : SlickImageControl
 	protected override void UIChanged()
 	{
 		Padding = UI.Scale(new Padding(10, 10, 4, 4), UI.FontScale);
-		Margin = UI.Scale(new Padding(8), UI.FontScale);
+		BorderRadius = (int)(8 * UI.FontScale);
 	}
 
 	protected void OnResizeRequested()
 	{
-		this.TryInvoke(() =>
+		this.TryBeginInvoke(() =>
 		{
 			Invalidate();
 			ResizeRequested?.Invoke(this, EventArgs.Empty);
@@ -77,15 +90,15 @@ public abstract class IDashboardItem : SlickImageControl
 	{
 		base.OnMouseMove(e);
 
-		if (ResizeInProgress || ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
+		if (!MovementBlocked && !DrawHeaderOnly && (ResizeInProgress || ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location)))
 		{
 			Cursor = Cursors.SizeWE;
 		}
-		else if (MoveInProgress || MoveAreaContains(e.Location))
+		else if (!MovementBlocked && (MoveInProgress || MoveAreaContains(e.Location)))
 		{
 			Cursor = Cursors.SizeAll;
 		}
-		else if (_buttonActions.Keys.Any(x => x.Contains(e.Location)))
+		else if (MovementBlocked && _buttonActions.Keys.Any(x => x.Contains(e.Location)))
 		{
 			Cursor = Cursors.Hand;
 		}
@@ -98,6 +111,11 @@ public abstract class IDashboardItem : SlickImageControl
 	protected override void OnMouseClick(MouseEventArgs e)
 	{
 		base.OnMouseClick(e);
+
+		if (!MovementBlocked)
+		{
+			return;
+		}
 
 		if (e.Button == MouseButtons.Left)
 		{
@@ -124,6 +142,46 @@ public abstract class IDashboardItem : SlickImageControl
 		}
 	}
 
+	public void LoadData()
+	{
+		tokenSource?.Cancel();
+		tokenSource = new CancellationTokenSource();
+
+		Task.Run(TriggerDataLoad);
+	}
+
+	private async void TriggerDataLoad()
+	{
+		var token = tokenSource!.Token;
+
+		Loading = true;
+
+		try
+		{
+			await ProcessDataLoad(token);
+		}
+		catch (Exception ex)
+		{
+			OnDataLoadError(ex);
+		}
+		finally
+		{
+			if (!token.IsCancellationRequested)
+			{
+				Loading = false;
+			}
+		}
+	}
+
+	protected virtual Task ProcessDataLoad(CancellationToken token)
+	{
+		return Task.CompletedTask;
+	}
+
+	protected virtual void OnDataLoadError(Exception ex)
+	{
+	}
+
 	protected override void OnPaint(PaintEventArgs e)
 	{
 		e.Graphics.SetUp(BackColor);
@@ -132,23 +190,23 @@ public abstract class IDashboardItem : SlickImageControl
 
 		if (MoveInProgress || ResizeInProgress)
 		{
-			var border = Margin.Left;
-			var rect = ClientRectangle.Pad((int)(1.5 * UI.FontScale)).Pad(Padding);
+			using var pe = new PaintEventArgs(e.Graphics, ClientRectangle.Pad(Padding));
+			var height = pe.ClipRectangle.Y;
 
-			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 8 : -8));
-			e.Graphics.FillRoundedRectangle(brush, rect, border);
+			e.Graphics.FillRoundedRectangleWithShadow(pe.ClipRectangle.Pad((int)(2 * UI.FontScale)), BorderRadius, Padding.Right, FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 8 : -8), Color.FromArgb(20, FormDesign.Design.AccentColor), addOutline: true);
 
-			using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale));
-			e.Graphics.DrawRoundedRectangle(pen, rect, border);
+			DrawHeader(pe, true, ref height);
 
 			return;
 		}
+
+		var isHovered = HoverState.HasFlag(HoverState.Hovered);
 
 		try
 		{
 			using var pe = new PaintEventArgs(e.Graphics, ClientRectangle.Pad(Padding));
 
-			if (HoverState.HasFlag(HoverState.Hovered) && _sections.Any(x => x.rectangle.ClipTo(x.height).Contains(CursorLocation)))
+			if (isHovered && !MovementBlocked && headerRectangle.Contains(CursorLocation))
 			{
 				DrawSectionHoverAndBackground(e, pe.ClipRectangle);
 			}
@@ -161,107 +219,108 @@ public abstract class IDashboardItem : SlickImageControl
 
 			var height = pe.ClipRectangle.Y;
 
-			GetDrawingMethod(pe.ClipRectangle.Width).Invoke(pe, true, ref height);
+			if (DrawHeaderOnly)
+			{
+				DrawHeader(pe, true, ref height);
+			}
+			else
+			{
+				var hoverState = HoverState;
+
+				if (!MovementBlocked)
+				{
+					HoverState = default;
+				}
+
+				GetDrawingMethod(pe.ClipRectangle.Width).Invoke(pe, true, ref height);
+
+				if (!MovementBlocked)
+				{
+					HoverState = hoverState;
+				}
+			}
 		}
 		catch { }
 
-		var dragRect = ClientRectangle.Pad(Padding).Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight);
-
-		using var dotBrush = new SolidBrush(HoverState.HasFlag(HoverState.Hovered) && ClientRectangle.Pad(Padding.Left, Padding.Top, 0, 0).Contains(CursorLocation) ? Color.FromArgb(150, FormDesign.Design.ActiveColor) : Color.FromArgb(50, FormDesign.Design.AccentColor));
-
-		for (var i = 3; i > 0; i--)
+		if (!MovementBlocked && !DrawHeaderOnly)
 		{
-			var y = dragRect.Y + ((3 - i) * dragRect.Height / 3.75F);
+			var dragRect = ClientRectangle.Pad(Padding).Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight);
 
-			for (var j = i; j > 0; j--)
+			using var dotBrush = new SolidBrush(isHovered && ClientRectangle.Pad(Padding.Left, Padding.Top, 0, 0).Contains(CursorLocation) ? Color.FromArgb(200, FormDesign.Design.ActiveColor) : Color.FromArgb(150, FormDesign.Design.AccentColor));
+
+			for (var i = 3; i > 0; i--)
 			{
-				var x = dragRect.X + ((j - 1) * dragRect.Width / 3.75F);
+				var y = dragRect.Y + ((3 - i) * dragRect.Height / 3.75F);
 
-				e.Graphics.FillEllipse(dotBrush, x, y, dragRect.Width / 5F, dragRect.Width / 5F);
+				for (var j = i; j > 0; j--)
+				{
+					var x = dragRect.X + ((j - 1) * dragRect.Width / 3.75F);
+
+					e.Graphics.FillEllipse(dotBrush, x, y, dragRect.Width / 5F, dragRect.Width / 5F);
+				}
 			}
 		}
 
 		base.OnPaint(e);
 
-		if (HoverState.HasFlag(HoverState.Hovered))
+		if (isHovered && !DrawHeaderOnly && !MovementBlocked && headerRectangle.Contains(CursorLocation))
 		{
 			using var grabberBrush = new SolidBrush(Color.FromArgb(35, FormDesign.Design.ActiveColor));
-
-			foreach (var rectangle in _sections)
-			{
-				if (rectangle.rectangle.ClipTo(rectangle.height).Contains(CursorLocation))
-				{
-					e.Graphics.FillRoundedRectangle(grabberBrush, rectangle.rectangle.ClipTo(rectangle.height), Margin.Left, botLeft: false, botRight: false);
-				}
-			}
+			e.Graphics.FillRoundedRectangle(grabberBrush, headerRectangle, BorderRadius, botLeft: DrawHeaderOnly, botRight: DrawHeaderOnly);
 		}
 	}
 
 	private void DrawBackground(PaintEventArgs e, Rectangle clipRectangle)
 	{
-		using var brush = new SolidBrush(FormDesign.Design.IsDarkTheme ? Color.FromArgb(1, 255, 255, 255) : Color.FromArgb(10, FormDesign.Design.AccentColor));
-		for (var i = Padding.Right; i > 0; i--)
-		{
-			e.Graphics.FillRoundedRectangle(brush, clipRectangle.Pad(-i), Margin.Left + i);
-		}
-
-		using var brushBack = new SolidBrush(FormDesign.Design.BackColor);
-		e.Graphics.FillRoundedRectangle(brushBack, clipRectangle, Margin.Left);
+		e.Graphics.FillRoundedRectangleWithShadow(clipRectangle, BorderRadius, Padding.Right, addOutline: !MovementBlocked);
 	}
 
 	private void DrawSectionHoverAndBackground(PaintEventArgs e, Rectangle clipRectangle)
 	{
-		using var brush = new SolidBrush(Color.FromArgb(12, FormDesign.Design.ActiveColor));
-		for (var i = Padding.Right; i > 0; i--)
-		{
-			e.Graphics.FillRoundedRectangle(brush, clipRectangle.Pad(-i), Margin.Left + i);
-		}
-
-		using var brushBack = new SolidBrush(FormDesign.Design.BackColor);
-		e.Graphics.FillRoundedRectangle(brushBack, clipRectangle, Margin.Left);
+		e.Graphics.FillRoundedRectangleWithShadow(clipRectangle, BorderRadius, Padding.Right, shadow: Color.FromArgb(12, FormDesign.Design.ActiveColor));
 
 		using var penActive = new Pen(FormDesign.Design.ActiveColor, 1.5F);
-		e.Graphics.DrawRoundedRectangle(penActive, clipRectangle, Margin.Left);
+		e.Graphics.DrawRoundedRectangle(penActive, clipRectangle, BorderRadius);
 	}
 
-	protected void DrawSection(PaintEventArgs e, bool applyDrawing, Rectangle rectangle, string text, DynamicIcon? dynamicIcon, out Color fore, ref int preferredHeight, Color? tintColor = null, string? subText = null, bool drawBackground = true)
+	protected void DrawSection(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, string text, DynamicIcon? dynamicIcon, string? subText = null)
 	{
-		fore = FormDesign.Design.ForeColor;
-
 		if (string.IsNullOrEmpty(text))
 		{
 			return;
 		}
 
+		var rectangle = e.ClipRectangle;
 		using var icon = dynamicIcon?.Get((int)(20 * UI.FontScale));
-		var iconRectangle = new Rectangle(rectangle.Right - Margin.Right - icon?.Width ?? 0, rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
-		var textRect = new Rectangle(rectangle.X + Margin.Left, rectangle.Y, rectangle.Right - Margin.Horizontal - Margin.Left - iconRectangle.Width, (int)(26 * UI.FontScale));
+		var iconRectangle = new Rectangle(rectangle.Right - BorderRadius - icon?.Width ?? 0, rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
+		var textRect = new Rectangle(rectangle.X + BorderRadius, rectangle.Y, rectangle.Right - (2 * BorderRadius) - BorderRadius - iconRectangle.Width, (int)(26 * UI.FontScale));
 		using var font = UI.Font(8.5F, FontStyle.Bold).FitTo(text, textRect, e.Graphics);
-		var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, font, rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height);
-		textRect.Height = titleHeight + Margin.Top;
+		var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, font, rectangle.Right - (2 * BorderRadius) - iconRectangle.Right).Height);
+		textRect.Height = titleHeight + (BorderRadius * 3 / 2);
 
 		if (subText is not null)
 		{
-			textRect.Y += (Margin.Top / 2);
+			textRect.Y += BorderRadius / 2;
 
 			using var smallFont = UI.Font(6.75F).FitToWidth(subText, textRect, e.Graphics);
-			var textHeight = (int)e.Graphics.Measure(subText, smallFont, rectangle.Right - Margin.Horizontal - iconRectangle.Right).Height;
+			var textHeight = (int)e.Graphics.Measure(subText, smallFont, rectangle.Right - (2 * BorderRadius) - iconRectangle.Right).Height;
 
 			if (applyDrawing)
 			{
-				using var brush = new SolidBrush(Color.FromArgb(150, fore));
+				using var brush = new SolidBrush(Color.FromArgb(150, FormDesign.Design.ForeColor));
 				e.Graphics.DrawString(subText, smallFont, brush, textRect.Pad((int)(2 * UI.FontScale), 0, 0, 0));
 			}
 
-			titleHeight += textHeight - (Margin.Top / 2);
-			textRect.Y += textHeight - (Margin.Top / 2);
+			titleHeight += textHeight - (BorderRadius / 2);
+			textRect.Y += textHeight - (BorderRadius / 2);
+			headerRectangle = rectangle.ClipTo(textRect.Bottom - Padding.Top);
 		}
 		else
 		{
-			textRect.Y += Margin.Top + ((titleHeight - textRect.Height) / 2);
+			headerRectangle = rectangle.ClipTo(textRect.Height);
 		}
 
-		iconRectangle.Y += Margin.Top + ((titleHeight - icon?.Height ?? 0) / 2);
+		iconRectangle.Y = headerRectangle.Y + ((headerRectangle.Height - iconRectangle.Height) / 2);
 
 		if (applyDrawing)
 		{
@@ -269,33 +328,96 @@ public abstract class IDashboardItem : SlickImageControl
 			{
 				try
 				{
-					e.Graphics.DrawImage(icon.Color(fore), iconRectangle);
+					e.Graphics.DrawImage(icon.Color(FormDesign.Design.ForeColor), iconRectangle);
 				}
 				catch { }
 			}
 
-			using var brush = new SolidBrush(fore);
+			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
 			using var format = new StringFormat { LineAlignment = StringAlignment.Center };
 			e.Graphics.DrawString(text, font, brush, textRect, format);
 		}
-		else
-		{
-			_sections.Add((rectangle, titleHeight + (Margin.Top * 2)));
-		}
 
-		preferredHeight += titleHeight + (Margin.Top * 2);
+		preferredHeight += titleHeight + (BorderRadius * 2);
 	}
 
-	protected void DrawLoadingSection(PaintEventArgs e, bool applyDrawing, Rectangle rectangle, string text, out Color fore, ref int preferredHeight, Color? tintColor = null, string? subText = null, bool drawBackground = true)
+	protected void DrawLoadingSection(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, string text, string? subText = null)
 	{
 		var iconSize = (int)(18 * UI.FontScale);
-		var iconRectangle = new Rectangle(rectangle.Right - Margin.Right - iconSize, preferredHeight, iconSize, 0);
+		var iconRectangle = new Rectangle(e.ClipRectangle.Right - BorderRadius - iconSize, preferredHeight, iconSize, 0);
 
-		DrawSection(e, applyDrawing, rectangle, text, null, out fore, ref preferredHeight, tintColor, subText, drawBackground);
+		DrawSection(e, applyDrawing, ref preferredHeight, text, null, subText);
 
-		iconRectangle.Height = preferredHeight- iconRectangle.Y;
+		iconRectangle.Height = preferredHeight - iconRectangle.Y;
 
-		DrawLoader(e.Graphics, iconRectangle.CenterR(iconSize,iconSize));
+		DrawLoader(e.Graphics, iconRectangle.CenterR(iconSize, iconSize));
+	}
+
+	protected void DrawDivider(PaintEventArgs e, Rectangle rect, bool applyDrawing, ref int preferredHeight, bool vertical = false)
+	{
+		if (!applyDrawing)
+		{
+			if (!vertical)
+			{
+				preferredHeight += BorderRadius;
+			}
+
+			return;
+		}
+
+		using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale));
+
+		if (vertical)
+		{
+			e.Graphics.DrawLine(pen, rect.X, rect.Y, rect.X, rect.Bottom);
+			return;
+		}
+
+		e.Graphics.DrawLine(pen, rect.X, preferredHeight, rect.Right, preferredHeight);
+
+		preferredHeight += BorderRadius;
+	}
+
+	protected void DrawValue(PaintEventArgs e, Rectangle rect, string label, string value, bool applyDrawing, ref int preferredHeight, DynamicIcon? dynamicIcon = null, Color? color = null, bool boldValue = true)
+	{
+		using var valueFont = UI.Font(8.75F, boldValue ? FontStyle.Bold : FontStyle.Regular);
+		using var labelFont = UI.Font(7.75F);
+		using var icon = dynamicIcon?.Get(valueFont.Height * 5 / 4);
+
+		var valueSize = e.Graphics.Measure(value, valueFont).ToSize();
+		var labelSize = e.Graphics.Measure(label, labelFont, rect.Width - valueSize.Width - BorderRadius - (icon is null ? 0 : ((BorderRadius / 2) + icon.Width))).ToSize();
+
+		if (labelFont.Height * 4 < labelSize.Height)
+		{
+			labelSize = default;
+		}
+
+		rect = new Rectangle(rect.X, preferredHeight, rect.Width, Math.Max(valueSize.Height, labelSize.Height));
+		preferredHeight += rect.Height + (BorderRadius / 2);
+
+		if (!applyDrawing)
+		{
+			return;
+		}
+
+		var brush = new SolidBrush(color ?? FormDesign.Design.ForeColor);
+
+		if (icon is not null)
+		{
+			e.Graphics.DrawImage(icon.Color(brush.Color), rect.Align(icon.Size, ContentAlignment.MiddleLeft));
+		}
+
+		if (labelSize != default)
+		{
+			using var format1 = new StringFormat { LineAlignment = StringAlignment.Center };
+			e.Graphics.DrawString(label, labelFont, brush, rect.Pad(icon is null ? 0 : ((BorderRadius / 2) + icon.Width), 0, valueSize.Width + BorderRadius, 0), format1);
+		}
+
+		using var format2 = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far };
+		e.Graphics.DrawString(value, valueFont, brush, rect, format2);
+
+		using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale)) { DashStyle = DashStyle.Dot, DashCap = DashCap.Round, EndCap = LineCap.Round, StartCap = LineCap.Round };
+		e.Graphics.DrawLine(pen, rect.X + (icon is null ? 0 : ((BorderRadius / 2) + icon.Width)) + labelSize.Width, rect.Y + (rect.Height / 2), rect.Right - valueSize.Width - (BorderRadius / 2), rect.Y + (rect.Height / 2));
 	}
 
 	protected void DrawSquareButton(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, ExtensionClass.action? clickAction, ButtonDrawArgs buttonArgs)
@@ -312,9 +434,9 @@ public abstract class IDashboardItem : SlickImageControl
 
 	private void DrawButtonInternal(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, bool square, ButtonDrawArgs buttonArgs, ExtensionClass.action? clickAction)
 	{
-		buttonArgs.Padding = UI.Scale(new Padding(8, 4, 8, 4), UI.FontScale);
+		buttonArgs.Padding = UI.Scale(new Padding(6, 3, 6, 3), UI.FontScale);
 		buttonArgs.BorderRadius = (int)(4 * UI.FontScale);
-		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X + (Margin.Left / 2), preferredHeight, buttonArgs.Rectangle.Width - Margin.Left, square ? buttonArgs.Rectangle.Height : buttonArgs.Size.Height.If(0, (int)(28 * UI.FontScale)));
+		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, square ? buttonArgs.Rectangle.Height : buttonArgs.Size.Height.If(0, (int)(26 * UI.FontScale)));
 		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
 
 		if (buttonArgs.BackColor.A != 0 && buttonArgs.HoverState.HasFlag(HoverState.Hovered))
@@ -322,7 +444,7 @@ public abstract class IDashboardItem : SlickImageControl
 			buttonArgs.BackColor = buttonArgs.BackColor.MergeColor(FormDesign.Design.ButtonColor, buttonArgs.HoverState.HasFlag(HoverState.Pressed) ? 25 : 65);
 		}
 
-		preferredHeight += buttonArgs.Rectangle.Height + Margin.Bottom;
+		preferredHeight += buttonArgs.Rectangle.Height + BorderRadius;
 
 		if (!applyDrawing)
 		{
@@ -335,30 +457,5 @@ public abstract class IDashboardItem : SlickImageControl
 		}
 
 		SlickButton.Draw(e, buttonArgs);
-	}
-
-	protected void DrawDivider(PaintEventArgs e, Rectangle rect, bool applyDrawing, ref int preferredHeight, bool vertical = false)
-	{
-		if (!applyDrawing)
-		{
-			if (!vertical)
-			{
-				preferredHeight += Margin.Top;
-			}
-
-			return;
-		}
-
-		using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale));
-
-		if (vertical)
-		{
-			e.Graphics.DrawLine(pen, rect.X, rect.Y, rect.X, rect.Bottom);
-			return;
-		}
-
-		e.Graphics.DrawLine(pen, rect.X, preferredHeight, rect.Right, preferredHeight);
-
-		preferredHeight += Margin.Top;
 	}
 }

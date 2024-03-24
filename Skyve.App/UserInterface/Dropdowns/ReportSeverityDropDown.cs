@@ -57,7 +57,7 @@ public class ReportSeverityDropDown : SlickSelectionDropDown<CompatibilityNotifi
 	{
 		var text = item switch { CompatibilityNotificationFilter.Any => Locale.AnyStatus, CompatibilityNotificationFilter.AnyIssue => Locale.AnyIssue, _ => LocaleCR.Get($"{item}") };
 		var color = item switch { CompatibilityNotificationFilter.Any => foreColor, CompatibilityNotificationFilter.AnyIssue => FormDesign.Design.RedColor, _ => ((NotificationType)(int)item).GetColor() };
-		using var icon = (item switch { CompatibilityNotificationFilter.Any => new DynamicIcon("I_Slash"), CompatibilityNotificationFilter.AnyIssue => new DynamicIcon("I_Warning"), _ => ((NotificationType)(int)item).GetIcon(true) }).Get(rectangle.Height - 2).Color(color);
+		using var icon = (item switch { CompatibilityNotificationFilter.Any => new DynamicIcon("Slash"), CompatibilityNotificationFilter.AnyIssue => new DynamicIcon("Warning"), _ => ((NotificationType)(int)item).GetIcon(true) }).Get(rectangle.Height - 2).Color(color);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

@@ -3,6 +3,9 @@
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Skyve.Compatibility.Domain;
 
 public class PackageInteraction : IPackageStatus<InteractionType>
@@ -33,5 +36,20 @@ public class PackageInteraction : IPackageStatus<InteractionType>
 	{
 		Type = type;
 		Action = action;
+	}
+
+	public override bool Equals(object? obj)
+	{
+		return obj is PackageInteraction interaction &&
+			   Type == interaction.Type &&
+			   (Packages?.SequenceEqual(interaction.Packages) ?? interaction.Packages is null);
+	}
+
+	public override int GetHashCode()
+	{
+		var hashCode = 498602157;
+		hashCode = hashCode * -1521134295 + Type.GetHashCode();
+		hashCode = hashCode * -1521134295 + EqualityComparer<ulong[]?>.Default.GetHashCode(Packages);
+		return hashCode;
 	}
 }

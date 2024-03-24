@@ -116,7 +116,7 @@ internal class ViewTypeControl : SlickControl
 		if (WithCompactList)
 		{
 			var rect = CompactRect;
-			using var icon = IconManager.GetIcon("I_CompactList", rect.Width * 3 / 4);
+			using var icon = IconManager.GetIcon("CompactList", rect.Width * 3 / 4);
 
 			if (rect.Contains(CursorLocation))
 			{
@@ -134,7 +134,7 @@ internal class ViewTypeControl : SlickControl
 		if (WithList)
 		{
 			var rect = ListRect;
-			using var icon = IconManager.GetIcon("I_List", rect.Width * 3 / 4);
+			using var icon = IconManager.GetIcon("List", rect.Width * 3 / 4);
 
 			if (rect.Contains(CursorLocation))
 			{
@@ -152,7 +152,7 @@ internal class ViewTypeControl : SlickControl
 		if (WithGrid)
 		{
 			var rect = GridRect;
-			using var icon = IconManager.GetIcon("I_Grid", rect.Width * 3 / 4);
+			using var icon = IconManager.GetIcon("Grid", rect.Width * 3 / 4);
 
 			if (rect.Contains(CursorLocation))
 			{

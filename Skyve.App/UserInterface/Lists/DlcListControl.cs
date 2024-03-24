@@ -105,7 +105,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		DrawIncludedButton(e, isIncluded, out var activeColor);
 
 		var height = (e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - GridPadding.Vertical) / 2;
-		var dateRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + GridPadding.Top), _settings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), "I_UpdateTime", height: height, smaller: true);
+		var dateRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + GridPadding.Top), _settings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), "UpdateTime", height: height, smaller: true);
 
 		e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, dateRect.Bottom + GridPadding.Top), e.Item.Price.IfEmpty(Locale.Free), null, FormDesign.Design.GreenColor, height: height, smaller: true);
 
@@ -136,7 +136,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		if (thumbnail is null)
 		{
-			using var generic = IconManager.GetIcon("I_Dlc", e.Rects.IconRect.Height).Color(BackColor);
+			using var generic = IconManager.GetIcon("Dlc", e.Rects.IconRect.Height).Color(BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
@@ -163,7 +163,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 	{
 		activeColor = default;
 
-		var incl = new DynamicIcon(!_dlcManager.IsAvailable(e.Item.Id) ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled");
+		var incl = new DynamicIcon(!_dlcManager.IsAvailable(e.Item.Id) ? "Slash" : isIncluded ? "Ok" : "Enabled");
 
 		if (isIncluded)
 		{

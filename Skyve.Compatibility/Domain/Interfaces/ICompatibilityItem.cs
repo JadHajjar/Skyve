@@ -5,7 +5,7 @@ using Skyve.Domain.Systems;
 using System.Collections.Generic;
 
 namespace Skyve.Compatibility.Domain.Interfaces;
-public interface ICompatibilityItem
+public interface ICompatibilityItem : IPackageIdentity
 {
 	ulong PackageId { get; }
 	IGenericPackageStatus Status { get; }

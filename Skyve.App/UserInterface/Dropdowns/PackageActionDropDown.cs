@@ -27,7 +27,7 @@ public class PackageActionDropDown : SlickSelectionDropDown<StatusAction>
 		var text = LocaleCR.Get(!IsFlipped || item is StatusAction.NoAction ? item.ToString() : $"Flipped{item}");
 		var color = CRNAttribute.GetNotification(item).GetColor();
 
-		using var icon = IconManager.GetIcon("I_Actions", rectangle.Height - 2).Color(color);
+		using var icon = IconManager.GetIcon("Actions", rectangle.Height - 2).Color(color);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

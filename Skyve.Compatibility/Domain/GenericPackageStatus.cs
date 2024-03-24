@@ -3,6 +3,9 @@
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace Skyve.Compatibility.Domain;
 public class GenericPackageStatus : IGenericPackageStatus
@@ -31,6 +34,21 @@ public class GenericPackageStatus : IGenericPackageStatus
 	public string? Type { get; set; }
 	[JsonIgnore] public string LocaleKey => string.Empty;
 	[JsonIgnore] public NotificationType Notification { get; set; }
+
+	public override bool Equals(object? obj)
+	{
+		return obj is GenericPackageStatus status &&
+			   (Packages?.SequenceEqual(status.Packages) ?? status.Packages is null) &&
+			   Type == status.Type;
+	}
+
+	public override int GetHashCode()
+	{
+		var hashCode = 1386127205;
+		hashCode = hashCode * -1521134295 + EqualityComparer<ulong[]?>.Default.GetHashCode(Packages);
+		hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(Type);
+		return hashCode;
+	}
 
 	public IGenericPackageStatus ToGenericPackage()
 	{

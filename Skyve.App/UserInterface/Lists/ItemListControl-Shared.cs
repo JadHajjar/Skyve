@@ -20,7 +20,7 @@ public partial class ItemListControl
 		var padding = GridView ? GridPadding : Padding;
 		var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
 
-		e.Rects.ScoreRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X + xdiff + (xdiff == 0 ? 0 : padding.Left), e.Rects.IconRect.Bottom), score.ToMagnitudeString(), "I_VoteFilled", workshopInfo!.HasVoted ? FormDesign.Design.GreenColor : null, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
+		e.Rects.ScoreRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X + xdiff + (xdiff == 0 ? 0 : padding.Left), e.Rects.IconRect.Bottom), score.ToMagnitudeString(), "VoteFilled", workshopInfo!.HasVoted ? FormDesign.Design.GreenColor : null, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 
 		return 0;
 	}
@@ -36,7 +36,7 @@ public partial class ItemListControl
 
 		if (thumbnail is null)
 		{
-			using var generic = IconManager.GetIcon(e.Item is IAsset ? "I_Assets" : _page is SkyvePage.Mods ? "I_Mods" : _page is SkyvePage.Packages ? "I_Package" : "I_Paradox", e.Rects.IconRect.Height).Color(e.BackColor);
+			using var generic = IconManager.GetIcon(e.Item is IAsset ? "Assets" : _page is SkyvePage.Mods ? "Mods" : _page is SkyvePage.Packages ? "Package" : "Paradox", e.Rects.IconRect.Height).Color(e.BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
@@ -171,7 +171,7 @@ public partial class ItemListControl
 			return;
 		}
 
-		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : isPartialIncluded ? "I_Slash" : isEnabled ? "I_Ok" : !isIncluded ? "I_Add" : "I_Enabled");
+		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : (isHovered && ModifierKeys.HasFlag(Keys.Alt)) ? "X" : "Enabled");
 		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
@@ -187,14 +187,14 @@ public partial class ItemListControl
 			}
 
 			var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
-			var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
+			var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : partialIncluded ? "Slash" : isIncluded ? "Ok" : package is null ? "Add" : "Enabled");
 			var required = package is not null && _modLogicManager.IsRequired(package, _modUtil);
 
 			DynamicIcon? enabl = null;
 
 			if (_settings.UserSettings.AdvancedIncludeEnable && package is not null)
 			{
-				enabl = new DynamicIcon(package.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
+				enabl = new DynamicIcon(package.IsEnabled() ? "Checked" : "Checked_OFF");
 
 				if (isIncluded)
 				{
@@ -250,7 +250,7 @@ public partial class ItemListControl
 	{
 		var padding = GridView ? GridPadding : Padding;
 		var text = e.Item.CleanName(out var tags);
-		using var stringFormat = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near };
+		using var stringFormat = CompactList ? new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center } : new();
 
 		if (GridView && !_settings.UserSettings.ComplexListUI)
 		{
@@ -338,7 +338,7 @@ public partial class ItemListControl
 		if (Width / UI.FontScale >= 800 && date != default)
 		{
 			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
-			DrawCell(e, Columns.UpdateTime, dateText, "I_UpdateTime", active: false);
+			DrawCell(e, Columns.UpdateTime, dateText, "UpdateTime", active: false);
 		}
 	}
 
@@ -463,29 +463,28 @@ public partial class ItemListControl
 
 		if (author?.Name is not null and not "")
 		{
-			e.Rects.AuthorRect = DrawCell(e, Columns.Author, author.Name, "I_Author", font: UI.Font(8.25F));
+			e.Rects.AuthorRect = DrawCell(e, Columns.Author, author.Name, "Author", font: UI.Font(8.25F));
 		}
 		else if (localIdentity is not null)
 		{
-			DrawCell(e, Columns.Author, Path.GetFileName(localIdentity.Folder), "I_Folder", active: false, font: UI.Font(8.25F));
+			DrawCell(e, Columns.Author, Path.GetFileName(localIdentity.Folder), "Folder", active: false, font: UI.Font(8.25F));
 		}
 	}
 
-	private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? parentPackage, IWorkshopInfo? workshopInfo)
+	private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : Padding;
 		var size = _settings.UserSettings.ComplexListUI ?
 			UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale) :
 			UI.Scale(CompactList ? new Size(18, 18) : new Size(22, 22), UI.FontScale);
 		var rect = new Rectangle(e.ClipRectangle.Right, e.ClipRectangle.Y, 0, e.ClipRectangle.Height).Pad(padding);
-		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 
-		if (parentPackage is not null)
+		if (localIdentity is not null)
 		{
 			e.Rects.FolderRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{
 				Size = size,
-				Icon = "I_Folder",
+				Icon = "Folder",
 				Font = Font,
 				HoverState = e.HoverState,
 				Cursor = CursorLocation,
@@ -497,13 +496,13 @@ public partial class ItemListControl
 
 		if (!IsPackagePage && workshopInfo?.Url is not null)
 		{
-			e.Rects.SteamRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
+			e.Rects.WorkshopRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{
 				Size = size,
 #if CS2
-				Icon = "I_Paradox",
+				Icon = "Paradox",
 #else
-				Icon = "I_Steam",
+				Icon = "Steam",
 #endif
 				Font = Font,
 				HoverState = e.HoverState,
@@ -511,7 +510,7 @@ public partial class ItemListControl
 				BackgroundColor = e.BackColor
 			}).Rectangle;
 
-			rect.X -= e.Rects.SteamRect.Width + padding.Left;
+			rect.X -= e.Rects.WorkshopRect.Width + padding.Left;
 		}
 
 		if (!IsPackagePage && _settings.UserSettings.ComplexListUI && e.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
@@ -519,7 +518,7 @@ public partial class ItemListControl
 			e.Rects.GithubRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{
 				Size = size,
-				Icon = "I_Github",
+				Icon = "Github",
 				Font = Font,
 				HoverState = e.HoverState,
 				Cursor = CursorLocation,

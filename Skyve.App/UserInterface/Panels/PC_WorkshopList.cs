@@ -16,7 +16,7 @@ public class PC_WorkshopList : PanelContent
 
 		Padding = new Padding(0, 30, 0, 0);
 
-		LC_Items = new(SkyvePage.Workshop, false, GetItems, GetItemText, GetCountText)
+		LC_Items = new(SkyvePage.Workshop, false, GetItems, GetItemText)
 		{
 			TabIndex = 0,
 			Dock = DockStyle.Fill
@@ -69,47 +69,6 @@ public class PC_WorkshopList : PanelContent
 	protected virtual LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Package;
-	}
-
-	protected virtual string GetCountText()
-	{
-		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
-
-		foreach (var item in LC_Items.Items)
-		{
-			var package = item.GetLocalPackage();
-
-			if (package is null)
-			{
-				continue;
-			}
-
-			if (package.IsIncluded())
-			{
-				packagesIncluded++;
-
-				if (package.Package.IsCodeMod)
-				{
-					modsIncluded++;
-
-					if (package.IsEnabled())
-					{
-						modsEnabled++;
-					}
-				}
-			}
-		}
-
-		var total = LC_Items.ItemCount;
-
-		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
-		{
-			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
-		}
-
-		return modsIncluded == modsEnabled
-			? string.Format(Locale.PackageIncludedAndEnabledTotal, packagesIncluded, total)
-			: string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
 	}
 
 	public void SetSorting(PackageSorting packageSorting, bool desc)

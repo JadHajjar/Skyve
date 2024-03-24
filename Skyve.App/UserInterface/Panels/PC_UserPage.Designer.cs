@@ -30,16 +30,16 @@ partial class PC_UserPage
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
 			this.P_Content = new System.Windows.Forms.Panel();
 			this.tabControl = new SlickControls.SlickTabControl();
+			this.T_Profiles = new SlickControls.SlickTabControl.Tab();
+			this.T_Packages = new SlickControls.SlickTabControl.Tab();
 			this.smartFlowPanel1 = new SlickControls.SmartFlowPanel();
 			this.roundedGroupPanel1 = new SlickControls.RoundedGroupPanel();
 			this.label1 = new System.Windows.Forms.Label();
-			this.T_Profiles = new SlickControls.SlickTabControl.Tab();
-			this.T_Packages = new SlickControls.SlickTabControl.Tab();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
 			this.PB_Icon = new Skyve.App.UserInterface.Content.UserIcon();
 			this.P_Back = new System.Windows.Forms.Panel();
@@ -52,6 +52,7 @@ partial class PC_UserPage
 			// 
 			// base_Text
 			// 
+			this.base_Text.Size = new System.Drawing.Size(150, 39);
 			this.base_Text.Text = "Back";
 			// 
 			// P_Content
@@ -72,8 +73,41 @@ partial class PC_UserPage
 			this.tabControl.Size = new System.Drawing.Size(916, 387);
 			this.tabControl.TabIndex = 0;
 			this.tabControl.Tabs = new SlickControls.SlickTabControl.Tab[] {
-        this.T_Profiles,
-        this.T_Packages};
+        this.T_Packages,
+        this.T_Profiles};
+			// 
+			// T_Profiles
+			// 
+			this.T_Profiles.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.T_Profiles.Dock = System.Windows.Forms.DockStyle.Left;
+			this.T_Profiles.FillTab = true;
+			this.T_Profiles.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dynamicIcon2.Name = "PlaysetSettings";
+			this.T_Profiles.IconName = dynamicIcon2;
+			this.T_Profiles.LinkedControl = null;
+			this.T_Profiles.Location = new System.Drawing.Point(156, 5);
+			this.T_Profiles.Name = "T_Profiles";
+			this.T_Profiles.Size = new System.Drawing.Size(156, 75);
+			this.T_Profiles.TabIndex = 0;
+			this.T_Profiles.TabStop = false;
+			this.T_Profiles.Text = "Profiles";
+			this.T_Profiles.Visible = false;
+			// 
+			// T_Packages
+			// 
+			this.T_Packages.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.T_Packages.Dock = System.Windows.Forms.DockStyle.Left;
+			this.T_Packages.FillTab = true;
+			this.T_Packages.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dynamicIcon1.Name = "Package";
+			this.T_Packages.IconName = dynamicIcon1;
+			this.T_Packages.LinkedControl = null;
+			this.T_Packages.Location = new System.Drawing.Point(0, 5);
+			this.T_Packages.Name = "T_Packages";
+			this.T_Packages.Size = new System.Drawing.Size(156, 75);
+			this.T_Packages.TabIndex = 0;
+			this.T_Packages.TabStop = false;
+			this.T_Packages.Text = "Packages";
 			// 
 			// smartFlowPanel1
 			// 
@@ -89,11 +123,11 @@ partial class PC_UserPage
 			this.roundedGroupPanel1.AddPaddingForIcon = true;
 			this.roundedGroupPanel1.Controls.Add(this.label1);
 			this.roundedGroupPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon3.Name = "I_Package";
+			dynamicIcon3.Name = "Package";
 			this.roundedGroupPanel1.ImageName = dynamicIcon3;
 			this.roundedGroupPanel1.Location = new System.Drawing.Point(3, 3);
 			this.roundedGroupPanel1.Name = "roundedGroupPanel1";
-			this.roundedGroupPanel1.Padding = new System.Windows.Forms.Padding(42, 54, 9, 9);
+			this.roundedGroupPanel1.Padding = new System.Windows.Forms.Padding(36, 45, 7, 7);
 			this.roundedGroupPanel1.Size = new System.Drawing.Size(501, 206);
 			this.roundedGroupPanel1.TabIndex = 0;
 			this.roundedGroupPanel1.Text = "WorkshopPackageSubmissions";
@@ -102,45 +136,11 @@ partial class PC_UserPage
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.label1.Location = new System.Drawing.Point(42, 54);
+			this.label1.Location = new System.Drawing.Point(36, 45);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(44, 16);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "label1";
-			// 
-			// T_Profiles
-			// 
-			this.T_Profiles.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.T_Profiles.Dock = System.Windows.Forms.DockStyle.Left;
-			this.T_Profiles.FillTab = true;
-			this.T_Profiles.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon1.Name = "I_PlaysetSettings";
-			this.T_Profiles.IconName = dynamicIcon1;
-			this.T_Profiles.LinkedControl = null;
-			this.T_Profiles.Location = new System.Drawing.Point(0, 5);
-			this.T_Profiles.Name = "T_Profiles";
-			this.T_Profiles.Selected = true;
-			this.T_Profiles.Size = new System.Drawing.Size(375, 25);
-			this.T_Profiles.TabIndex = 0;
-			this.T_Profiles.TabStop = false;
-			this.T_Profiles.Text = "Profiles";
-			// 
-			// T_Packages
-			// 
-			this.T_Packages.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.T_Packages.Dock = System.Windows.Forms.DockStyle.Left;
-			this.T_Packages.FillTab = true;
-			this.T_Packages.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon2.Name = "I_Package";
-			this.T_Packages.IconName = dynamicIcon2;
-			this.T_Packages.LinkedControl = null;
-			this.T_Packages.Location = new System.Drawing.Point(375, 5);
-			this.T_Packages.Name = "T_Packages";
-			this.T_Packages.Selected = false;
-			this.T_Packages.Size = new System.Drawing.Size(375, 25);
-			this.T_Packages.TabIndex = 0;
-			this.T_Packages.TabStop = false;
-			this.T_Packages.Text = "Packages";
 			// 
 			// TLP_Top
 			// 

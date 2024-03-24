@@ -1,32 +1,56 @@
 ﻿using Skyve.App.UserInterface.Dashboard;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Reflection;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_MainPage : PanelContent
 {
-	private readonly Control _control = new();
-	private readonly Dictionary<string, Rectangle> _dashItemSizes;
 	private readonly ISettings _settings;
+	private readonly SaveHandler _saveHandler;
+	private readonly Control _control = new();
+	private Dictionary<string, DashboardSetting> _dashItemSizes;
 	private Point CursorStart;
 	private Rectangle initialRect;
 	private bool layoutInProgress;
 	private IDashboardItem? MoveItem;
 	private IDashboardItem? ResizeItem;
 	private Rectangle savedRect;
+	private Rectangle editRect;
+	private Rectangle cancelRect;
+	private Rectangle resetRect;
+
+	public struct DashboardSetting
+	{
+		public Rectangle Rectangle { get; set; }
+		public bool Hidden { get; set; }
+
+		public DashboardSetting()
+		{
+		}
+
+		public DashboardSetting(Rectangle rectangle, bool hidden)
+		{
+			Rectangle = rectangle;
+			Hidden = hidden;
+		}
+	}
 
 	public PC_MainPage()
 	{
-		ServiceCenter.Get(out _settings);
+		ServiceCenter.Get(out _settings, out _saveHandler);
 
 		InitializeComponent();
 
-		TLP_FirstTime.Visible = !_settings.SessionSettings.DashboardFirstTimeShown;
+		_saveHandler.Load(out _dashItemSizes, "DashboardLayout.json");
 
-		ServiceCenter.Get<SaveHandler>().Load(out _dashItemSizes, "DashboardLayout.json");
-		_dashItemSizes ??= GetDefaultLayout();
+		if (_dashItemSizes is null || _dashItemSizes.Count == 0)
+		{
+			_settings.SessionSettings.DashboardFirstTimeShown = false;
+			_dashItemSizes = GetDefaultLayout();
+		}
 
 		P_Board.SuspendLayout();
 
@@ -43,7 +67,24 @@ public partial class PC_MainPage : PanelContent
 		{
 			p.Offset(-CursorStart.X, -CursorStart.Y);
 
-			savedRect.Location = P_Board.PointToClient(p);
+			if (P_AvailableWidgets.ClientRectangle.Pad((int)(-12 * UI.FontScale)).Contains(P_AvailableWidgets.PointToClient(p)))
+			{
+				if (!MoveItem.DrawHeaderOnly)
+				{
+					MoveItem.DrawHeaderOnly = true;
+					MoveItem.Parent = FLP_AvailableWidgets;
+				}
+			}
+			else
+			{
+				if (MoveItem.DrawHeaderOnly)
+				{
+					MoveItem.DrawHeaderOnly = false;
+					MoveItem.Parent = P_Board;
+				}
+			}
+
+			savedRect.Location = MoveItem.Parent.PointToClient(p);
 
 			var rect = GetSnappingRect(MoveItem, false, savedRect);
 
@@ -71,7 +112,6 @@ public partial class PC_MainPage : PanelContent
 	protected override void LocaleChanged()
 	{
 		Text = Locale.Dashboard;
-		L_Info.Text = Locale.DashboardCustomizationInfo;
 	}
 
 	protected override void OnCreateControl()
@@ -79,6 +119,12 @@ public partial class PC_MainPage : PanelContent
 		base.OnCreateControl();
 
 		Form.Deactivate += Form_Deactivate;
+		Form.WindowStateChanged += Form_WindowStateChanged;
+	}
+
+	private void Form_WindowStateChanged(object sender, EventArgs e)
+	{
+		Form.OnNextIdle(P_Container.PerformLayout);
 	}
 
 	protected override void OnShown()
@@ -104,20 +150,20 @@ public partial class PC_MainPage : PanelContent
 		base.UIChanged();
 
 		P_Scroll.Width = (int)(15 * UI.FontScale);
+		P_Board.Padding = new Padding(0, 0, 0, (int)(48 * UI.FontScale));
+		P_AvailableWidgets.Padding = UI.Scale(new Padding(6), UI.FontScale);
+	}
 
-		TLP_FirstTime.Padding = UI.Scale(new Padding(12, 12, 12, 0), UI.FontScale);
+	protected override void DesignChanged(FormDesign design)
+	{
+		base.DesignChanged(design);
+
+		FLP_AvailableWidgets.BackColor = design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 4 : -3);
 	}
 
 	public override Color GetTopBarColor()
 	{
 		return FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 2 : -5);
-	}
-
-	private void B_Dismiss_Click(object sender, EventArgs e)
-	{
-		TLP_FirstTime.Hide();
-		_settings.SessionSettings.DashboardFirstTimeShown = true;
-		_settings.SessionSettings.Save();
 	}
 
 	private void DashMouseDown(object sender, MouseEventArgs e)
@@ -129,13 +175,22 @@ public partial class PC_MainPage : PanelContent
 
 		var control = (IDashboardItem)sender;
 
-		if (control.ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
+		if (control.MovementBlocked)
+		{
+			return;
+		}
+
+		if (!control.DrawHeaderOnly && control.ClientRectangle.Align(UI.Scale(new Size(16, 16), UI.UIScale), ContentAlignment.BottomRight).Contains(e.Location))
 		{
 			ResizeItem = control;
 			CursorStart = new(Cursor.Position.X, control.Width);
 			initialRect = savedRect = control.Bounds;
 			control.ResizeInProgress = true;
-			control.BringToFront();
+			if (!control.DrawHeaderOnly)
+			{
+				control.BringToFront();
+			}
+
 			P_Board.Invalidate();
 			P_Container.Invalidate();
 		}
@@ -145,7 +200,11 @@ public partial class PC_MainPage : PanelContent
 			CursorStart = control.PointToClient(Cursor.Position);
 			initialRect = savedRect = control.Bounds;
 			control.MoveInProgress = true;
-			control.BringToFront();
+			if (!control.DrawHeaderOnly)
+			{
+				control.BringToFront();
+			}
+
 			P_Board.Invalidate();
 			P_Container.Invalidate();
 		}
@@ -189,7 +248,7 @@ public partial class PC_MainPage : PanelContent
 
 	private void DashResizeRequested(object sender, EventArgs e)
 	{
-		this.TryInvoke(() => P_Board_Layout(sender, null));
+		this.TryInvoke(DoDashboardLayout);
 	}
 
 	private void Form_Deactivate(object sender, EventArgs e)
@@ -216,16 +275,17 @@ public partial class PC_MainPage : PanelContent
 		P_Container.PerformLayout();
 	}
 
-	private Dictionary<string, Rectangle> GetDefaultLayout()
+	private Dictionary<string, DashboardSetting> GetDefaultLayout()
 	{
 		return new()
 		{
-		  { "D_AssetsInfo", new Rectangle(2500, 100, 2500, 100) },
-		  { "D_CompatibilityInfo", new Rectangle(0, 0, 5000, 100) },
-		  { "D_ModsInfo", new Rectangle(0, 100, 2500, 100) },
-		  { "D_Playsets", new Rectangle(5250, 0, 2250, 100) },
-		  { "D_LaunchGame", new Rectangle(7750, 0, 2250, 100) },
-		  { "D_NotificationCenter", new Rectangle(7750, 100, 2250, 100) },
+		  { "D_CompatibilityInfo", new(new(0, 0, 4500, 100), false) },
+		  { "D_ContentInfo",  new(new(0, 100, 2250, 100), false) },
+		  { "D_DiskInfo",  new(new(2250, 100, 2250, 100), false) },
+		  { "D_PdxModsNew",  new(new(4500, 0, 3500, 100), false) },
+		  { "D_PdxUser",  new(new(8000, 0, 2000, 100), false) },
+		  { "D_Playsets",  new(new(8000, 100, 2000, 100), false) },
+		  { "D_NotificationCenter",  new(new(8000, 200, 2000, 100), false) },
 		};
 	}
 
@@ -242,9 +302,9 @@ public partial class PC_MainPage : PanelContent
 		}
 	}
 
-	private Rectangle GetNewRect(IDashboardItem dashItem)
+	private DashboardSetting GetNewRect(IDashboardItem dashItem)
 	{
-		return _dashItemSizes[dashItem.Key] = new(dashItem.Parent.Controls.GetChildIndex(dashItem) % 3 * 3_333, 0, 3_333, 1_000);
+		return _dashItemSizes[dashItem.Key] = new(new(dashItem.Parent.Controls.GetChildIndex(dashItem) % 3 * 3_333, 0, 3_333, 1_000), true);
 	}
 
 	private Rectangle GetSnappingRect(IDashboardItem control, bool addPadding = true, Rectangle? savedRect = null)
@@ -253,64 +313,85 @@ public partial class PC_MainPage : PanelContent
 
 		rect.Width = Math.Max(rect.Width, control.MinimumWidth * P_Container.Width / 6 / 100);
 
-		var margin = (int)(32 * UI.FontScale);
-		var closestX = P_Board.Controls
-			.Where(x => x != control && x is IDashboardItem)
-			.Select(x => x.Left)
-				.Concat(GetGridSnapping())
-			.OrderBy(number => Math.Abs(number - rect.Left))
-			.FirstOrDefault();
-
-		if (Math.Abs(closestX - rect.Left) < margin)
+		if (ModifierKeys.HasFlag(Keys.Shift))
 		{
-			rect.X = closestX;
+			rect.X -= rect.X % (P_Container.Width / 100);
+
+			if (ResizeItem is not null)
+				rect.Width -= rect.Width % (P_Container.Width / 100);
+		}
+
+		if (!ModifierKeys.HasFlag(Keys.Alt))
+		{
+			var margin = (int)(32 * UI.FontScale);
+			var closestX = P_Board.Controls
+				.Where(x => x != control && x is IDashboardItem)
+				.Select(x => x.Left)
+					.Concat(GetGridSnapping())
+				.OrderBy(number => Math.Abs(number - rect.Left))
+				.FirstOrDefault();
+
+			if (Math.Abs(closestX - rect.Left) < margin)
+			{
+				rect.X = closestX;
+
+				if (MoveItem is not null && rect.Right > P_Container.Width)
+				{
+					rect.X = Math.Min(rect.X, P_Container.Width - (int)(32 * UI.FontScale));
+					rect.Width = P_Container.Width - rect.X;
+				}
+			}
+			else
+			{
+				var closestRight = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Right).OrderBy(number => Math.Abs(number - rect.Left)).FirstOrDefault();
+
+				if (Math.Abs(closestRight - rect.Left) < margin)
+				{
+					rect.X = closestRight;
+				}
+				else if (rect.Left < margin)
+				{
+					rect.X = 0;
+				}
+				else if (MoveItem is not null && rect.Right + margin > P_Container.Width)
+				{
+					rect.X = P_Container.Width - rect.Width;
+				}
+			}
+
+			if (rect.Y < margin)
+			{
+				rect.Y = -margin;
+			}
+
+			closestX = P_Board.Controls
+				.Where(x => x != control && x is IDashboardItem)
+				.Select(x => x.Left)
+					.Concat(GetGridSnapping())
+				.OrderBy(number => Math.Abs(number - rect.Right - control.Padding.Horizontal))
+				.FirstOrDefault();
+
+			if (Math.Abs(closestX - rect.Right - control.Padding.Horizontal) < margin)
+			{
+				rect.Width = closestX - rect.X + (addPadding ? control.Padding.Horizontal : 0);
+			}
+			else
+			{
+				var closestRight = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Right).OrderBy(number => Math.Abs(number - rect.Right - control.Padding.Horizontal)).FirstOrDefault();
+
+				if (Math.Abs(closestRight - rect.Right - control.Padding.Horizontal) < margin)
+				{
+					rect.Width = closestRight - rect.X + (addPadding ? control.Padding.Horizontal : 0);
+				}
+			}
+		}
+		else
+		{
+			rect.X = Math.Min(rect.X, P_Container.Width - (int)(32 * UI.FontScale));
 
 			if (MoveItem is not null && rect.Right > P_Container.Width)
 			{
 				rect.Width = P_Container.Width - rect.X;
-			}
-		}
-		else
-		{
-			var closestRight = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Right).OrderBy(number => Math.Abs(number - rect.Left)).FirstOrDefault();
-
-			if (Math.Abs(closestRight - rect.Left) < margin)
-			{
-				rect.X = closestRight;
-			}
-			else if (rect.Left < margin)
-			{
-				rect.X = 0;
-			}
-			else if (MoveItem is not null && rect.Right + margin > P_Container.Width)
-			{
-				rect.X = P_Container.Width - rect.Width;
-			}
-		}
-
-		if (rect.Y < margin)
-		{
-			rect.Y = -margin;
-		}
-
-		closestX = P_Board.Controls
-			.Where(x => x != control && x is IDashboardItem)
-			.Select(x => x.Left)
-				.Concat(GetGridSnapping())
-			.OrderBy(number => Math.Abs(number - rect.Right - control.Padding.Horizontal))
-			.FirstOrDefault();
-
-		if (Math.Abs(closestX - rect.Right - control.Padding.Horizontal) < margin)
-		{
-			rect.Width = closestX - rect.X + (addPadding ? control.Padding.Horizontal : 0);
-		}
-		else
-		{
-			var closestRight = P_Board.Controls.Where(x => x != control && x is IDashboardItem).Select(x => x.Right).OrderBy(number => Math.Abs(number - rect.Right - control.Padding.Horizontal)).FirstOrDefault();
-
-			if (Math.Abs(closestRight - rect.Right - control.Padding.Horizontal) < margin)
-			{
-				rect.Width = closestRight - rect.X + (addPadding ? control.Padding.Horizontal : 0);
 			}
 		}
 
@@ -336,12 +417,35 @@ public partial class PC_MainPage : PanelContent
 			control.MouseDown += DashMouseDown;
 			control.MouseUp += DashMouseUp;
 			control.ResizeRequested += DashResizeRequested;
+			control.ParentChanged += DashParentChanged;
 
-			P_Board.Controls.Add(control);
+			if (_dashItemSizes.TryGetValue(control.Key, out var settings) && !settings.Hidden)
+			{
+				control.MovementBlocked = true;
+				P_Board.Controls.Add(control);
+			}
+			else
+			{
+				control.DrawHeaderOnly = true;
+				FLP_AvailableWidgets.Controls.Add(control);
+			}
 		}
 	}
 
-	private void P_Board_Layout(object sender, LayoutEventArgs? e)
+	private void DashParentChanged(object sender, EventArgs e)
+	{
+		if (sender is IDashboardItem dash)
+		{
+			dash.Margin = dash.Parent == FLP_AvailableWidgets ? default : UI.Scale(new Padding(8), UI.FontScale);
+		}
+	}
+
+	private void P_Board_Layout(object sender, LayoutEventArgs e)
+	{
+		DoDashboardLayout();
+	}
+
+	private void DoDashboardLayout()
 	{
 		if (layoutInProgress || !Live)
 		{
@@ -358,7 +462,7 @@ public partial class PC_MainPage : PanelContent
 
 		foreach (var dashItem in controls)
 		{
-			var rect = _dashItemSizes.ContainsKey(dashItem.Item.Key) ? _dashItemSizes[dashItem.Item.Key] : GetNewRect(dashItem.Item);
+			var rect = (_dashItemSizes.ContainsKey(dashItem.Item.Key) ? _dashItemSizes[dashItem.Item.Key] : GetNewRect(dashItem.Item)).Rectangle;
 			var maxWidth = P_Container.Width;
 
 			if (small)
@@ -382,7 +486,7 @@ public partial class PC_MainPage : PanelContent
 		{
 			var y = 0;
 
-			foreach (var dashItem in controls.OrderBy(x => _dashItemSizes[x.Item.Key].X).ThenBy(x => _dashItemSizes[x.Item.Key].Y))
+			foreach (var dashItem in controls.OrderBy(x => _dashItemSizes[x.Item.Key].Rectangle.X).ThenBy(x => _dashItemSizes[x.Item.Key].Rectangle.Y))
 			{
 				dashItem.Item.Bounds = new Rectangle(dashItem.Rectangle.X, y, dashItem.Rectangle.Width, dashItem.Rectangle.Height);
 
@@ -452,8 +556,6 @@ public partial class PC_MainPage : PanelContent
 					SaveDashItemBounds(item.Item);
 				}
 			}
-
-			SaveLayout();
 		}
 
 		P_Board.Size = P_Board.GetPreferredSize(P_Board.Size);
@@ -463,24 +565,87 @@ public partial class PC_MainPage : PanelContent
 
 	private void P_Container_Paint(object sender, PaintEventArgs e)
 	{
-		if (!_settings.UserSettings.SnapDashToGrid || (MoveItem == null && ResizeItem == null))
+		e.Graphics.SetUp();
+
+		if (_settings.UserSettings.SnapDashToGrid && P_AvailableWidgets.Visible)
 		{
-			return;
+			using var pen = new Pen(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor), 5F) { DashStyle = DashStyle.Dash, DashCap = DashCap.Round, EndCap = LineCap.Round, StartCap = LineCap.Round };
+
+			foreach (var x in GetGridSnapping())
+			{
+				if (x > 0)
+				{
+					e.Graphics.DrawLine(pen, x - 1, 0, x - 1, ((SlickControl)sender).Height);
+				}
+			}
 		}
 
-		using var pen = new Pen(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor), 5F) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dash };
-
-		foreach (var x in GetGridSnapping())
+		if (P_Container == sender || P_Container.Height < P_Board.Height + P_Board.Padding.Bottom)
 		{
-			if (x > 0)
+			var control = (SlickControl)sender;
+			var rectangle = (P_Container == sender || P_Container.Height > P_Board.Height ? P_Container : P_Board).ClientRectangle.Pad(0, 0, 0, !P_AvailableWidgets.Visible ? (int)(8 * UI.FontScale) : 0);
+
+			rectangle = rectangle.Pad(0, rectangle.Bottom - P_Board.Padding.Bottom * 3 / 4, 0, 0);
+
+			editRect = SlickButton.AlignAndDraw(e.Graphics, rectangle, _settings.SessionSettings.DashboardFirstTimeShown ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
 			{
-				e.Graphics.DrawLine(pen, x - 1, e.Graphics.VisibleClipBounds.Y, x - 1, e.Graphics.VisibleClipBounds.Height);
+				Text = P_AvailableWidgets.Visible ? "SaveChanges" : "EditDashboard",
+				Icon = P_AvailableWidgets.Visible ? "Ok" : "Edit",
+				ButtonType = P_AvailableWidgets.Visible ? ButtonType.Active : ButtonType.Dimmed,
+				BackgroundColor = P_AvailableWidgets.Visible ? default : BackColor,
+				HoverState = control.HoverState & ~HoverState.Focused,
+				Cursor = control.PointToClient(Cursor.Position)
+			});
+
+			if (P_AvailableWidgets.Visible)
+			{
+				cancelRect = SlickButton.AlignAndDraw(e.Graphics, rectangle.Pad(0, 0, editRect.Width + P_AvailableWidgets.Padding.Horizontal, 0), _settings.SessionSettings.DashboardFirstTimeShown ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
+				{
+					Text = "Cancel",
+					Icon = "Cancel",
+					ButtonType = ButtonType.Dimmed,
+					BackgroundColor = BackColor,
+					HoverState = control.HoverState & ~HoverState.Focused,
+					Cursor = control.PointToClient(Cursor.Position)
+				});
+
+				resetRect = SlickButton.AlignAndDraw(e.Graphics, rectangle.Pad(P_AvailableWidgets.Padding.Horizontal, 0, 0, 0), _settings.SessionSettings.DashboardFirstTimeShown ? ContentAlignment.MiddleLeft : ContentAlignment.BottomLeft, new ButtonDrawArgs
+				{
+					Text = "ResetLayout",
+					Icon = "Undo",
+					ButtonType = ButtonType.Dimmed,
+					ColorStyle = ColorStyle.Red,
+					BackgroundColor = BackColor,
+					HoverState = control.HoverState & ~HoverState.Focused,
+					Cursor = control.PointToClient(Cursor.Position)
+				});
+			}
+			else
+			{
+				resetRect = cancelRect = default;
+			}
+
+			if (!_settings.SessionSettings.DashboardFirstTimeShown)
+			{
+				var textRect = rectangle.Pad(resetRect.Width + (int)(16 * UI.FontScale), 0, rectangle.Right - (cancelRect == default ? editRect.X : cancelRect.X) + (int)(8 * UI.FontScale), 0);
+				using var font = UI.Font(8.5F, FontStyle.Italic).FitTo(Locale.DashboardCustomizationInfo, textRect, e.Graphics);
+				using var brush = new SolidBrush(FormDesign.Design.InfoColor);
+				using var format = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far };
+
+				e.Graphics.DrawString(Locale.DashboardCustomizationInfo, font, brush, textRect, format);
 			}
 		}
 	}
 
 	private void SaveDashItemBounds(IDashboardItem item, Rectangle? rectangle = null)
 	{
+		if (item.DrawHeaderOnly)
+		{
+			item.Size = new Size((int)(200 * UI.FontScale), rectangle?.Height ?? (int)(32 * UI.FontScale));
+			_dashItemSizes[item.Key] = new DashboardSetting(new(default, item.Size), true);
+			return;
+		}
+
 		var size = P_Container.Size;
 		var bounds = rectangle ?? item.Bounds;
 
@@ -492,25 +657,109 @@ public partial class PC_MainPage : PanelContent
 
 		if (rectangle is null && _dashItemSizes.ContainsKey(item.Key))
 		{
-			rect.X = _dashItemSizes[item.Key].X;
-			rect.Width = _dashItemSizes[item.Key].Width;
+			rect.X = _dashItemSizes[item.Key].Rectangle.X;
+			rect.Width = _dashItemSizes[item.Key].Rectangle.Width;
 		}
 
-		_dashItemSizes[item.Key] = rect;
+		_dashItemSizes[item.Key] = new(rect, false);
 	}
 
 	private void SaveLayout()
 	{
-		ServiceCenter.Get<SaveHandler>().Save(_dashItemSizes, "DashboardLayout.json");
+		_saveHandler.Save(_dashItemSizes, "DashboardLayout.json");
+		_settings.SessionSettings.DashboardFirstTimeShown = true;
+		_settings.SessionSettings.Save();
 	}
-	private class DashItemRect
+
+	private void P_Board_MouseClick(object sender, MouseEventArgs e)
 	{
-		public DashItemRect(IDashboardItem item)
+		if (e.Button == MouseButtons.Left && editRect.Contains(e.Location))
 		{
-			Item = item;
+			P_AvailableWidgets.Visible = !P_AvailableWidgets.Visible;
+
+			foreach (IDashboardItem control in P_Board.Controls)
+			{
+				control.MovementBlocked = !P_AvailableWidgets.Visible;
+				control.Invalidate();
+			}
+
+			foreach (IDashboardItem control in FLP_AvailableWidgets.Controls)
+			{
+				SaveDashItemBounds(control, GetSnappingRect(control, false, savedRect));
+				control.Invalidate();
+			}
+
+			SaveLayout();
 		}
 
-		public IDashboardItem Item { get; set; }
+		if (e.Button == MouseButtons.Left && cancelRect.Contains(e.Location))
+		{
+			_saveHandler.Load(out _dashItemSizes, "DashboardLayout.json");
+
+			var controls = P_Board.Controls.Cast<IDashboardItem>().Concat(FLP_AvailableWidgets.Controls.Cast<IDashboardItem>()).ToList();
+
+			foreach (var control in controls)
+			{
+				control.DrawHeaderOnly = !(_dashItemSizes.TryGetValue(control.Key, out var settings) && !settings.Hidden);
+				control.Parent = control.DrawHeaderOnly ? FLP_AvailableWidgets : P_Board;
+
+				if (control.DrawHeaderOnly)
+				{
+					SaveDashItemBounds(control, GetSnappingRect(control, false, savedRect));
+				}
+			}
+
+			DoDashboardLayout();
+
+			P_AvailableWidgets.Visible = !P_AvailableWidgets.Visible;
+
+			foreach (IDashboardItem control in P_Board.Controls)
+			{
+				control.MovementBlocked = !P_AvailableWidgets.Visible;
+				control.Invalidate();
+			}
+
+			foreach (IDashboardItem control in FLP_AvailableWidgets.Controls)
+			{
+				SaveDashItemBounds(control, GetSnappingRect(control, false, savedRect));
+				control.Invalidate();
+			}
+		}
+
+		if (e.Button == MouseButtons.Left && resetRect.Contains(e.Location))
+		{
+			_dashItemSizes = GetDefaultLayout();
+
+			var controls = P_Board.Controls.Cast<IDashboardItem>().Concat(FLP_AvailableWidgets.Controls.Cast<IDashboardItem>()).ToList();
+
+			foreach (var control in controls)
+			{
+				control.DrawHeaderOnly = !(_dashItemSizes.TryGetValue(control.Key, out var settings) && !settings.Hidden);
+				control.Parent = control.DrawHeaderOnly ? FLP_AvailableWidgets : P_Board;
+
+				if (control.DrawHeaderOnly)
+				{
+					SaveDashItemBounds(control, GetSnappingRect(control, false, savedRect));
+				}
+			}
+
+			DoDashboardLayout();
+		}
+	}
+
+	private void P_Board_MouseMove(object sender, MouseEventArgs e)
+	{
+		P_Board.Cursor = P_Container.Cursor = editRect.Contains(e.Location) || cancelRect.Contains(e.Location) || resetRect.Contains(e.Location) ? Cursors.Hand : Cursors.Default;
+	}
+
+	private void P_Container_Resize(object sender, EventArgs e)
+	{
+		P_Board.Invalidate();
+	}
+
+	private class DashItemRect(IDashboardItem item)
+	{
+		public IDashboardItem Item { get; set; } = item;
 		public Rectangle Rectangle { get; set; }
 	}
 }

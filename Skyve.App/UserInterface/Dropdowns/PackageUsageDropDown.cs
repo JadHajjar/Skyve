@@ -58,7 +58,7 @@ public class PackageUsageDropDown : SlickMultiSelectionDropDown<PackageUsage>
 	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<PackageUsage> items)
 	{
 		var text = !items.Any() ? Locale.Invalid : items.Count() == Items.Length ? Locale.AllUsages : items.ListStrings(x => LocaleCR.Get($"{x}"), ", ");
-		var iconName = !items.Any() ? "I_X" : items.Count() == Items.Length ? "I_Slash" : items.First().GetIcon();
+		var iconName = !items.Any() ? "X" : items.Count() == Items.Length ? "Slash" : items.First().GetIcon();
 
 		using var icon = iconName.Get(rectangle.Height - 2).Color(foreColor);
 

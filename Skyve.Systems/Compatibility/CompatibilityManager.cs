@@ -11,10 +11,8 @@ using Skyve.Systems.Compatibility.Domain;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Security.Principal;
 using System.Threading;
 
 namespace Skyve.Systems.Compatibility;
@@ -63,7 +61,7 @@ public class CompatibilityManager : ICompatibilityManager
 		_userService = userService;
 		_saveHandler = saveHandler;
 		_citiesManager = citiesManager;
-		_compatibilityHelper = new CompatibilityHelper(this, _settings, _packageManager, _packageUtil, _packageNameUtil, _workshopService, _logger, _skyveDataManager);
+		_compatibilityHelper = new CompatibilityHelper(this, _settings, _packageManager, _packageUtil, _workshopService, _skyveDataManager);
 
 		LoadSnoozedData();
 
@@ -71,6 +69,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		_notifier.ContentLoaded += _delayedReportCache.Run;
 		_notifier.PackageInclusionUpdated += _delayedReportCache.Run;
+		_notifier.PlaysetChanged += _delayedReportCache.Run;
 	}
 
 	public void CacheReport()
@@ -93,6 +92,8 @@ public class CompatibilityManager : ICompatibilityManager
 			cancellationTokenSource = new();
 
 			_logger.Info("[Compatibility] Compatibility Service Ready");
+
+			_compatibilityHelper.RefreshCache();
 
 			CacheReport(_cache, cancellationTokenSource.Token);
 
@@ -313,24 +314,24 @@ public class CompatibilityManager : ICompatibilityManager
 		var localPackage = package.GetLocalPackage();
 		var isCodeMod = workshopInfo?.IsCodeMod ?? localPackage?.IsCodeMod ?? false;
 
-		if (isCodeMod && localPackage?.FilePath is string filePath)
+		if (isCodeMod && localPackage?.FilePath is string filePath && Path.GetExtension(filePath).Equals(".dll", StringComparison.InvariantCultureIgnoreCase))
 		{
 			var modName = Path.GetFileName(filePath);
 			var duplicate = _packageManager.GetModsByName(modName);
 
-			if (duplicate.Count > 1 && duplicate.Count(x => _packageUtil.IsIncluded(x)) > 1)
+			if (duplicate.Count > 1 && duplicate.Count(x => x.Id > 0 ? _compatibilityHelper.IsPackageEnabled(x.Id, false) : _packageUtil.IsIncludedAndEnabled(x)) > 1)
 			{
 				info.Add(ReportType.Compatibility
 					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
-					, string.Empty
-					, duplicate.Select(x => new GenericPackageIdentity(x.Id, x.Name, x.Url)).ToArray());
+					, workshopInfo?.Name
+					, duplicate.Select(x => new GenericLocalPackageIdentity(x.Id, x.Name, x.Url, x.LocalData?.Folder, x.LocalData?.FilePath, x.LocalData?.FileSize ?? default, x.LocalData?.LocalTime ?? default)).ToArray());
 			}
 		}
 
-		var isCompatible = IsCompatible((localPackage?.SuggestedGameVersion).IfEmpty(workshopInfo?.SuggestedGameVersion));
+		var isCompatible = IsCompatible((localPackage?.SuggestedGameVersion).IfEmpty(workshopInfo?.SuggestedGameVersion), packageData?.ReviewedGameVersion);
 		if (!isCompatible)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), string.Empty, []);
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), workshopInfo?.CleanName(true), []);
 		}
 
 		if (packageData is null)
@@ -338,7 +339,28 @@ public class CompatibilityManager : ICompatibilityManager
 			return info;
 		}
 
-		if (packageData.Id > 0 && !_packageUtil.IsIncludedAndEnabled(package))
+		var stability = packageData.Stability;
+
+		if (stability is PackageStability.BreaksOnPatch)
+		{
+			if (!IsCompatible(packageData.ReviewedGameVersion, null))
+			{
+				stability = PackageStability.BrokenFromPatch;
+			}
+		}
+		else if (stability is PackageStability.BrokenFromPatch)
+		{
+			if (IsCompatible((localPackage?.SuggestedGameVersion).IfEmpty(workshopInfo?.SuggestedGameVersion), null))
+			{
+				stability = PackageStability.NotReviewed;
+			}
+			else if (!_compatibilityHelper.IsPackageEnabled(package.Id, false))
+			{
+				stability = PackageStability.BrokenFromPatchSafe;
+			}
+		}
+
+		if (packageData.Id > 0 && !_compatibilityHelper.IsPackageEnabled(package.Id, false))
 		{
 			var requiredFor = GetRequiredFor(packageData.Id);
 
@@ -351,7 +373,7 @@ public class CompatibilityManager : ICompatibilityManager
 					Type = ReportType.RequiredItem,
 					Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
 					PackageName = package.CleanName(true),
-					Packages = requiredFor.ToArray(x => new GenericPackageIdentity(x))
+					Packages = requiredFor.ToArray(x => new GenericLocalPackageIdentity(x))
 				});
 			}
 		}
@@ -360,9 +382,20 @@ public class CompatibilityManager : ICompatibilityManager
 
 		var author = _userService.TryGetUser(packageData.AuthorId);
 
-		if (packageData.Stability is not PackageStability.Stable && isCompatible && !author.Malicious)
+		if (stability is not PackageStability.Stable && isCompatible && !author.Malicious)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(packageData.Stability, null, false), string.Empty, []);
+			if (stability is PackageStability.BrokenFromPatch or PackageStability.BrokenFromPatchSafe)
+			{
+				info.AddWithLocale(ReportType.Stability,
+					new StabilityStatus(stability, null, false),
+					workshopInfo?.CleanName(true),
+					$"Stability_{stability}",
+					[_citiesManager.GameVersion ?? packageData.ReviewedGameVersion ?? string.Empty]);
+			}
+			else
+			{
+				info.Add(ReportType.Stability, new StabilityStatus(stability, null, false), workshopInfo?.CleanName(true), []);
+			}
 		}
 
 		foreach (var status in packageData.IndexedStatuses)
@@ -390,7 +423,7 @@ public class CompatibilityManager : ICompatibilityManager
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.NoAction });
 			}
 
-			if (!author.Malicious && workshopInfo?.ServerTime.Date < _compatibilityUtil.MinimumModDate && DateTime.UtcNow - workshopInfo?.ServerTime > TimeSpan.FromDays(365) && !packageData.IndexedStatuses.ContainsKey(StatusType.Deprecated))
+			if (!author.Malicious && workshopInfo?.ServerTime.Date < _compatibilityUtil.MinimumModDate && workshopInfo?.ServerTime.Date > DateTime.MinValue && DateTime.UtcNow - workshopInfo?.ServerTime > TimeSpan.FromDays(365) && !packageData.IndexedStatuses.ContainsKey(StatusType.Deprecated))
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus(StatusType.AutoDeprecated));
 			}
@@ -426,35 +459,55 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (author.Malicious)
 		{
-			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, "AuthorMalicious", [_packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name)]);
+			info.AddWithLocale(ReportType.Stability,
+				new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis },
+				workshopInfo?.CleanName(true),
+				"AuthorMalicious",
+				[_packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name)]);
 		}
 		else if (package.GetPackage()?.IsCodeMod == true && author.Retired)
 		{
-			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), "AuthorRetired", [_packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name)]);
+			info.AddWithLocale(ReportType.Stability,
+				new StabilityStatus(PackageStability.AuthorRetired, null, false),
+				workshopInfo?.CleanName(true),
+				"AuthorRetired",
+				[_packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name)]);
 		}
 
 		if (!string.IsNullOrEmpty(packageData.Note))
 		{
-			info.Add(ReportType.Stability, new GenericPackageStatus() { Notification = NotificationType.Info, Note = packageData.Note }, string.Empty, []);
+			info.Add(ReportType.Stability,
+				new GenericPackageStatus() { Notification = NotificationType.Info, Note = packageData.Note },
+				workshopInfo?.CleanName(true),
+				[]);
 		}
 
 		if (package.IsLocal())
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageNameUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Id)), true), [new GenericPackageIdentity(packageData.Id)]);
+			info.Add(ReportType.Stability,
+				new StabilityStatus(PackageStability.Local, null, false),
+				_packageNameUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Id)), true),
+				[new GenericLocalPackageIdentity(packageData.Id)]);
 		}
 
 		if (!package.IsLocal() && !author.Malicious && isCompatible)
 		{
-			info.AddWithLocale(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), (packageData.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"), []);
+			info.AddWithLocale(ReportType.Stability,
+				new StabilityStatus(PackageStability.Stable, string.Empty, true),
+				workshopInfo?.CleanName(true),
+				(stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"),
+				[]);
 		}
 
 		return info;
 	}
 
-	private bool IsCompatible(string? version)
+	private bool IsCompatible(string? version, string? reviewedGameVersion)
 	{
-		if (version is null or "" || _citiesManager.GameVersion is "")
+		if (version is null or "" || _citiesManager.GameVersion is "" || reviewedGameVersion == _citiesManager.GameVersion)
+		{
 			return true;
+		}
 
 		return ExtensionClass.IsPatternMatch(_citiesManager.GameVersion, version);
 	}

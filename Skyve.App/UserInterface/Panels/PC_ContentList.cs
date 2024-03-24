@@ -17,7 +17,7 @@ public partial class PC_ContentList : PanelContent
 	{
 		Padding = new Padding(0, 30, 0, 0);
 
-		LC_Items = new(Page, !load, GetItems, GetItemText, GetCountText)
+		LC_Items = new(Page, !load, GetItems, GetItemText)
 		{
 			TabIndex = 0,
 			Dock = DockStyle.Fill
@@ -74,11 +74,6 @@ public partial class PC_ContentList : PanelContent
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()
-	{
-		throw new NotImplementedException();
-	}
-
-	protected virtual string GetCountText()
 	{
 		throw new NotImplementedException();
 	}

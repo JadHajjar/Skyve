@@ -44,7 +44,7 @@ public class PackageStatusTypeDropDown<T> : SlickSelectionDropDown<T> where T : 
 		var text = LocaleCR.Get($"{item}");
 		var color = CRNAttribute.GetNotification(item).GetColor();
 
-		using var icon = IconManager.GetIcon("I_Stability", rectangle.Height - 2).Color(color);
+		using var icon = IconManager.GetIcon("Stability", rectangle.Height - 2).Color(color);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

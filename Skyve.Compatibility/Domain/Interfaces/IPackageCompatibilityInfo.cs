@@ -14,6 +14,7 @@ public interface IPackageCompatibilityInfo
 	string? AuthorId { get; }
 	string? Note { get; }
 	DateTime ReviewDate { get; }
+	string? ReviewedGameVersion { get; }
 	PackageStability Stability { get; }
 	PackageUsage Usage { get; }
 	PackageType Type { get; }

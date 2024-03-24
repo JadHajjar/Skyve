@@ -12,7 +12,7 @@ public static class CompatibilityExtensions
 #if CS2
 		return profile.Usage.GetIcon();
 #else
-		return profile.Temporary ? (DynamicIcon)"I_TempProfile" : profile.Usage.GetIcon();
+		return profile.Temporary ? (DynamicIcon)"TempProfile" : profile.Usage.GetIcon();
 #endif
 	}
 
@@ -20,14 +20,14 @@ public static class CompatibilityExtensions
 	{
 		return usage switch
 		{
-			PackageUsage.CityBuilding => "I_City",
-			PackageUsage.AssetCreation => "I_Tools",
-			PackageUsage.MapCreation => "I_Map",
+			PackageUsage.CityBuilding => "City",
+			PackageUsage.AssetCreation => "Tools",
+			PackageUsage.MapCreation => "Map",
 #if CS1
-			PackageUsage.ScenarioMaking => "I_ScenarioMaking",
-			PackageUsage.ThemeMaking => "I_Paint",
+			PackageUsage.ScenarioMaking => "ScenarioMaking",
+			PackageUsage.ThemeMaking => "Paint",
 #endif
-			_ => "I_Playsets"
+			_ => "Playsets"
 		};
 	}
 
@@ -42,17 +42,17 @@ public static class CompatibilityExtensions
 	{
 		return link switch
 		{
-			LinkType.Website => "I_Globe",
-			LinkType.Github => "I_Github",
-			LinkType.Crowdin => "I_Translate",
-			LinkType.Donation => "I_Donate",
-			LinkType.Discord => "I_Discord",
-			LinkType.YouTube => "I_Youtube",
-			LinkType.Paypal => "I_Paypal",
-			LinkType.Twitch => "I_Twitch",
-			LinkType.Patreon => "I_Patreon",
-			LinkType.X => "I_TwitterX",
-			_ => "I_Share",
+			LinkType.Website => "Globe",
+			LinkType.Github => "Github",
+			LinkType.Crowdin => "Translate",
+			LinkType.Donation => "Donate",
+			LinkType.Discord => "Discord",
+			LinkType.YouTube => "Youtube",
+			LinkType.Paypal => "Paypal",
+			LinkType.Twitch => "Twitch",
+			LinkType.Patreon => "Patreon",
+			LinkType.X => "TwitterX",
+			_ => "Share",
 		};
 	}
 
@@ -60,16 +60,16 @@ public static class CompatibilityExtensions
 	{
 		return notification switch
 		{
-			NotificationType.Info => "I_Info",
-			NotificationType.MissingDependency => "I_MissingMod",
-			NotificationType.Caution => "I_Remarks",
-			NotificationType.Warning => "I_MinorIssues",
-			NotificationType.AttentionRequired => "I_MajorIssues",
-			NotificationType.Switch => "I_Switch",
-			NotificationType.Unsubscribe => "I_Broken",
-			NotificationType.Exclude => "I_X",
-			NotificationType.RequiredItem => "I_Important",
-			NotificationType.None or _ => status ? "I_Ok" : "I_Info",
+			NotificationType.Info => "Info",
+			NotificationType.MissingDependency => "MissingMod",
+			NotificationType.Caution => "Remarks",
+			NotificationType.Warning => "MinorIssues",
+			NotificationType.AttentionRequired => "MajorIssues",
+			NotificationType.Switch => "Switch",
+			NotificationType.Unsubscribe => "Broken",
+			NotificationType.Exclude => "X",
+			NotificationType.RequiredItem => "Important",
+			NotificationType.None or _ => status ? "Ok" : "Info",
 		};
 	}
 

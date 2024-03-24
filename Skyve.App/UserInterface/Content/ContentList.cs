@@ -39,11 +39,11 @@ public partial class ContentList : SlickControl
 
 	private readonly GetAllItems GetItems;
 	private readonly Func<LocaleHelper.Translation> GetItemText;
-	private readonly Func<string> GetCountText;
 
 	public SkyvePage Page { get; }
 	public int ItemCount => ListControl.ItemCount;
 
+	public int? SelectedPlayset { get => ListControl.SelectedPlayset; set => ListControl.SelectedPlayset = value; }
 	public bool IsGenericPage { get => ListControl.IsGenericPage; set => ListControl.IsGenericPage = value; }
 	public IEnumerable<IPackageIdentity> Items => ListControl.Items;
 
@@ -52,12 +52,11 @@ public partial class ContentList : SlickControl
 		ListControl.Remove(item);
 	}
 
-	public ContentList(SkyvePage page, bool loaded, GetAllItems getItems, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
+	public ContentList(SkyvePage page, bool loaded, GetAllItems getItems, Func<LocaleHelper.Translation> getItemText)
 	{
 		Page = page;
 		GetItems = getItems;
 		GetItemText = getItemText;
-		GetCountText = getCountText;
 
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _playsetManager, out _tagUtil, out _packageUtil, out _downloadService);
 
@@ -86,8 +85,10 @@ public partial class ContentList : SlickControl
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
 #if CS2
+		OT_Workshop.Image2 = "Paradox";
 		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null;
 #else
+		OT_Workshop.Image2 = "Steam";
 		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !(_playsetManager.GetCustomPlayset(_playsetManager.CurrentPlayset)?.DisableWorkshop ?? false);
 #endif
 		OT_ModAsset.Visible = Page is not SkyvePage.Assets and not SkyvePage.Mods;
@@ -109,24 +110,11 @@ public partial class ContentList : SlickControl
 		_delayedSearch = new(350, DelayedSearch);
 		_delayedAuthorTagsRefresh = new(350, RefreshAuthorAndTags);
 
-		//if (!_settings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
-		//{
-		//	OT_Enabled.Hide();
-		//	P_Filters.SetRow(OT_Workshop, 2);
-		//	P_Filters.SetRow(OT_ModAsset, 3);
-		//}
-
 		clearingFilters = false;
 
-		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
+		I_SortOrder.ImageName = ListControl.SortDescending ? "SortDesc" : "SortAsc";
 		C_ViewTypeControl.GridView = ListControl.GridView;
 		C_ViewTypeControl.CompactList = ListControl.CompactList;
-
-#if CS2
-		OT_Workshop.Image2 = "I_Paradox";
-#else
-		OT_Workshop.Image2 = "I_Steam";
-#endif
 
 		if (loaded)
 		{
@@ -631,19 +619,51 @@ public partial class ContentList : SlickControl
 
 	protected void RefreshCounts()
 	{
-		var countText = GetCountText();
-		var format = ListControl.SelectedItemsCount == 0 ? (UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning) : (UsageFilteredOut == 0 ? Locale.ShowingSelectedCount : Locale.ShowingSelectedCountWarning);
-		var filteredText = format.FormatPlural(
-			ListControl.FilteredCount,
-			GetItemText().FormatPlural(ListControl.FilteredCount).ToLower(),
-			ListControl.SelectedItemsCount,
-			Locale.ItemsHidden.FormatPlural(UsageFilteredOut, GetItemText().FormatPlural(ListControl.FilteredCount).ToLower()));
+		if (ListControl.ItemCount > 0)
+		{
+			var countText = GetCountText();
+			var format = ListControl.SelectedItemsCount == 0 ? (UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning) : (UsageFilteredOut == 0 ? Locale.ShowingSelectedCount : Locale.ShowingSelectedCountWarning);
+			var filteredText = format.FormatPlural(
+				ListControl.FilteredCount,
+				GetItemText().FormatPlural(ListControl.FilteredCount).ToLower(),
+				ListControl.SelectedItemsCount,
+				Locale.ItemsHidden.FormatPlural(UsageFilteredOut, GetItemText().FormatPlural(ListControl.FilteredCount).ToLower()));
 
-		L_Counts.RightText = countText;
-		L_Counts.LeftText = filteredText;
+			L_Counts.RightText = countText;
+			L_Counts.LeftText = filteredText;
+			I_Actions.Visible = true;
+		}
+		else
+		{
+			L_Counts.LeftText = L_Counts.RightText = string.Empty;
+			I_Actions.Visible = false;
+		}
 
+		L_Counts.Invalidate();
 		I_Actions.Invalidate();
 		I_Refresh.Loading = false;
+	}
+
+	protected string GetCountText()
+	{
+		var mods = ListControl.Items.ToList();
+		var modsIncluded = mods.Count(x => _packageUtil.IsIncluded(x, SelectedPlayset));
+		var modsEnabled = mods.Count(x => _packageUtil.IsIncludedAndEnabled(x, SelectedPlayset));
+		var count = ListControl.ItemCount;
+
+#if CS1
+		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
+		{
+			return string.Format(Locale.GenericIncludedTotal, GetItemText().Plural, modsIncluded, count);
+		}
+#endif
+
+		if (modsIncluded == modsEnabled)
+		{
+			return string.Format(Locale.GenericIncludedAndEnabledTotal, GetItemText().Plural, modsIncluded, count);
+		}
+
+		return string.Format(Locale.GenericIncludedEnabledTotal, GetItemText().Plural, modsIncluded, modsEnabled, count);
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)
@@ -667,7 +687,7 @@ public partial class ContentList : SlickControl
 		}
 #endif
 
-		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "Search" : "ClearSearch";
 
 		OnSearch();
 	}
@@ -726,7 +746,7 @@ public partial class ContentList : SlickControl
 		settings.DescendingSort = ListControl.SortDescending;
 		_settings.UserSettings.Save();
 
-		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
+		I_SortOrder.ImageName = ListControl.SortDescending ? "SortDesc" : "SortAsc";
 	}
 
 	private void I_Actions_Click(object sender, EventArgs e)
@@ -743,23 +763,23 @@ public partial class ContentList : SlickControl
 
 		var stripItems = new SlickStripItem?[]
 		{
-			  anyDisabled ? new (isSelected ? Locale.EnableAllSelected : isFiltered ? Locale.EnableAllFiltered : Locale.EnableAll, "I_Ok", async () => await EnableAll()) : null
-			, anyEnabled ? new (isSelected ? Locale.DisableAllSelected : isFiltered ? Locale.DisableAllFiltered : Locale.DisableAll, "I_Enabled",  async () => await DisableAll()) : null
+			  anyDisabled ? new (isSelected ? Locale.EnableAllSelected : isFiltered ? Locale.EnableAllFiltered : Locale.EnableAll, "Ok", async () => await EnableAll()) : null
+			, anyEnabled ? new (isSelected ? Locale.DisableAllSelected : isFiltered ? Locale.DisableAllFiltered : Locale.DisableAll, "Enabled",  async () => await DisableAll()) : null
 			, new ()
-			, anyExcluded ? new (isSelected ? Locale.IncludeAllSelected : isFiltered ? Locale.IncludeAllFiltered : Locale.IncludeAll, "I_Add",  async() => await IncludeAll()) : null
-			, anyIncluded ? new (isSelected ? Locale.ExcludeAllSelected : isFiltered ? Locale.ExcludeAllFiltered : Locale.ExcludeAll, "I_X",  async() => await ExcludeAll()) : null
-			, anyDisabled ? new (isSelected ? Locale.ExcludeAllDisabledSelected : isFiltered ? Locale.ExcludeAllDisabledFiltered : Locale.ExcludeAllDisabled, "I_Cancel",  async() => await ExcludeAllDisabled()) : null
+			, anyExcluded ? new (isSelected ? Locale.IncludeAllSelected : isFiltered ? Locale.IncludeAllFiltered : Locale.IncludeAll, "Add",  async() => await IncludeAll()) : null
+			, anyIncluded ? new (isSelected ? Locale.ExcludeAllSelected : isFiltered ? Locale.ExcludeAllFiltered : Locale.ExcludeAll, "X",  async() => await ExcludeAll()) : null
+			, anyDisabled ? new (isSelected ? Locale.ExcludeAllDisabledSelected : isFiltered ? Locale.ExcludeAllDisabledFiltered : Locale.ExcludeAllDisabled, "Cancel",  async() => await ExcludeAllDisabled()) : null
 			, new ()
-			, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count() ? new (Locale.SelectAll, "I_DragDrop",  ListControl.SelectAll) : null
-			, ListControl.SelectedItemsCount > 0 ? new (Locale.DeselectAll, "I_Select", ListControl.DeselectAll) : null
-			, new (isSelected ? Locale.CopyAllIdsSelected : isFiltered ? Locale.CopyAllIdsFiltered : Locale.CopyAllIds, "I_Copy", () => Clipboard.SetText(items.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
+			, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count() ? new (Locale.SelectAll, "DragDrop",  ListControl.SelectAll) : null
+			, ListControl.SelectedItemsCount > 0 ? new (Locale.DeselectAll, "Select", ListControl.DeselectAll) : null
+			, new (isSelected ? Locale.CopyAllIdsSelected : isFiltered ? Locale.CopyAllIdsFiltered : Locale.CopyAllIds, "Copy", () => Clipboard.SetText(items.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
 #if CS1
-			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
-			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))
-			, new (Locale.ReDownloadAll, "I_ReDownload", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
+			, new (Locale.SubscribeAll, "Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
+			, new (Locale.DownloadAll, "Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))
+			, new (Locale.ReDownloadAll, "ReDownload", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
 			, new (string.Empty)
-			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: async () => await UnsubscribeAll())
-			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
+			, new (Locale.UnsubscribeAll, "RemoveSteam", action: async () => await UnsubscribeAll())
+			, new (Locale.DeleteAll, "Disposable", action: () => DeleteAll(this, EventArgs.Empty))
 #endif
 		};
 
@@ -814,12 +834,12 @@ public partial class ContentList : SlickControl
 
 	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
 	{
-		await _packageUtil.SetIncluded(filteredItems, included);
+		await _packageUtil.SetIncluded(filteredItems, included, SelectedPlayset);
 	}
 
 	protected async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
 	{
-		await _packageUtil.SetEnabled(filteredItems, enabled);
+		await _packageUtil.SetEnabled(filteredItems, enabled, SelectedPlayset);
 	}
 
 #if CS1

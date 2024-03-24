@@ -16,21 +16,24 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 
 	public void SetItems<T>(IEnumerable<T?> enumerable) where T : IPackageIdentity
 	{
-		_counts.Clear();
-
-		foreach (var item in enumerable.SelectWhereNotNull(x => x?.GetWorkshopInfo()?.Author))
+		lock (this)
 		{
-			if (_counts.ContainsKey(item!))
-			{
-				_counts[item!]++;
-			}
-			else
-			{
-				_counts[item!] = 1;
-			}
-		}
+			_counts.Clear();
 
-		Items = [.. _counts.Keys];
+			foreach (var item in enumerable.SelectWhereNotNull(x => x?.GetWorkshopInfo()?.Author))
+			{
+				if (_counts.ContainsKey(item!))
+				{
+					_counts[item!]++;
+				}
+				else
+				{
+					_counts[item!] = 1;
+				}
+			}
+
+			Items = [.. _counts.Keys];
+		}
 	}
 
 	protected override IEnumerable<IUser> OrderItems(IEnumerable<IUser> items)
@@ -67,7 +70,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 
 			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
 
-			using var img = IconManager.GetIcon("I_Check", checkRect.Height);
+			using var img = IconManager.GetIcon("Check", checkRect.Height);
 			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 		}
 
@@ -99,7 +102,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 
 		if (!items.Any())
 		{
-			using var icon = IconManager.GetIcon("I_Slash", rectangle.Height - 2).Color(foreColor);
+			using var icon = IconManager.GetIcon("Slash", rectangle.Height - 2).Color(foreColor);
 
 			e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
