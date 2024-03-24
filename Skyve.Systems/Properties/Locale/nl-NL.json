@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Date Created",
   "Sorting_Usage": "Playset Usage",
   "Sorting_Name": "Name",
-  "Sorting_FileSize": "Totale bestandsgrootte",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "Update tijd",
   "Sorting_SubscribeTime": "Abonneer de tijd",
   "Sorting_Author": "Auteur naam",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "Bekijk de online handleiding om te beginnen met Skyve.",
   "ResetButton_Tip": "Reset uw instellingen naar de standaarden. Dit heeft geen invloed op de instellingen van de mappen.",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "Dev UI inschakelen",
-  "RefreshWorkshop": "Vernieuw Werkplaats Inhoud",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "Start een nieuwe save game",
   "LoadSaveGame": "Ga door met een vorige save game",
   "DevOptions": "Opties Developer Launch",
@@ -154,7 +152,7 @@
   "LogZipFile": "Sla logs op in bestand",
   "LogFolders": "Log mappen",
   "LogFileDrop": "Drop of selecteer een logboekbestand om te worden vereenvoudigd en de lijst met fouten in het logboek weergeven",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "Fouten in het logboek",
   "OpenLogFolder": "Open de logmap van het spel",
   "CopyLogFile": "Kopieer het logbestand van het spel naar het klembord",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "Assets omvatten: {0}, Totaal: {1}",
   "NewPlayset_Tip": "Nieuwe afspeelset maken of importeren",
   "ViewPlaysets_Tip": "View & manage your playsets",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "Start een nieuw spel wanneer je Cities: Skylines opent. Je kunt aangeven in welke map je wilt starten",
   "LoadSaveGame_Tip": "Laad een opgeslagen spel wanneer u Cities: Skylines opstart. Het niet selecteren van een opgeslagen bestand zal uw laatste save voortzetten",
   "BETA": "BETA",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "Totale afspeelsets: {0}",
   "PlaysetFilter": "Afspeelset filter",
   "CheckDocumentsFolder": "Zorg ervoor dat Skyve toegang heeft tot je documentenmap, het gebruikt het om je UI & Taal instellingen op te slaan.",
-  "FailedToSaveLanguage": "Fout bij het opslaan van de geselecteerde taal",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "Kon Thema Wijziger niet openen",
   "FailedToDeleteItem": "Kan item niet verwijderen",
   "OpenChangelog": "Wijzigingslogboek openen",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "Verwijder dit bestand",
     "Plural": "De geselecteerde assets verwijderen"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "Bekijk het bestand van deze playset op je computer",
   "ChangePlaysetColor": "Verander de kleur van deze playset",
   "EditPlaysetName": "Bewerk de naam van deze speelset",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "Profielkleur",
   "CreateShortcutPlayset": "Maak een snelkoppeling op je bureaublad",
   "AskToLaunchGameForShortcut": "Moet de snelkoppeling het spel starten met het geselecteerde profiel?",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "Voeg extra argumenten toe bij het starten van het spel",
   "SearchGenericPackages": "Zoek via deze pakketten..",
   "Sorting_Subscribers": "Totaal aantal abonnees",
-  "Sorting_Votes": "Stemmen",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} subscriber",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "Profiel",
     "Plural": "Profielen"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} inbegrepen",
@@ -368,6 +374,10 @@
     "One": "Labels van dit pakket bewerken",
     "Plural": "Labels van geselecteerde items bewerken"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "Toon uitgesloten pakketten in het tabblad 'References'",
   "ShowAllReferencedPackages_Tip": "Toont zowel uitgesloten als inbegrepen pakketten die verwijzen naar degene die je aan het bekijken bent.",
   "TreatOptionalAsRequired": "Behandel optionele pakketten indien nodig",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "Removed by author",
   "Missing": "Ontbrekende",
   "LoggedInAs": "Ingelogd als",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "Onbekende gebruiker",
   "AddMeaningfulDescription": "Voeg een zinvolle beschrijving toe aan je verzoek.",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "Voeg ontbrekende interactie toe met een ander pakket",
   "ActivePlayset": "Active Playset",
   "References": "Referenties",
-  "OpenLog": "Logbestand openen",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "Sorteren op",
   "FailedToFetchLogs": "Fout bij het ophalen van logs",
   "DiscoverPlaysets": "Ontdek Playsets",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "Downloaden van deze afspeelset mislukt.\r\n\r\nProbeer het later opnieuw.",
   "UpdatePlaysetTip": "Update je lokale versie van deze playset",
   "DownloadPlaysetTip": "Download deze playset naar je lokale computer",
-  "EditPlaysetThumbnail": "Bewerk de thumbnail van deze afspeelset",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "Make this profile Public",
   "MakePrivate": "Make this profile Private",
   "CopyPlaysetLink": "Kopieer het ID van deze playset",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "Slaat het checken voor een internetverbinding over en neemt automatisch aan dat je verbonden bent.",
   "SelectAll": "Select all items",
   "DeselectAll": "Un-select all items",
-  "AddTagBox": "Voeg hier een nieuwe tag toe",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "Het bewerken van de tags van meerdere pakketten overschrijft elk van hun aangepaste tags.",
   "EditTagsOfPackage": {
     "One": "Bewerk alle tags van dit pakket",
@@ -546,5 +558,29 @@
   "Version": "Version",
   "UpdateTime": "Update Time",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }

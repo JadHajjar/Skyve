@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Fecha de creación",
   "Sorting_Usage": "Propósito del playset",
   "Sorting_Name": "Nombre",
-  "Sorting_FileSize": "Tamaño total del archivo",
+  "Sorting_FileSize": "Tamaño de archivo",
   "Sorting_UpdateTime": "Fecha de actualización",
   "Sorting_SubscribeTime": "Fecha de suscripción",
   "Sorting_Author": "Nombre del autor",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "Ver la guía en línea para saber como usar Skyve.",
   "ResetButton_Tip": "Restablece tus ajustes a los predeterminados. Esto no afecta a la configuración de carpetas.",
   "ComplexListUI": "Modo de UI avanzado",
-  "ComplexListUI_Tip": "Añade información más avanzada a la interfaz de usuario y añade acciones adicionales.",
-  "EnableDevUi": "Activar Interfaz de Usuario de Desarrollo",
-  "RefreshWorkshop": "Actualizar contenido del workshop",
+  "ComplexListUI_Tip": "Añade más información avanzada y añade acciones adicionales a la interfaz de usuario.",
   "NewGame": "Comenzar una nueva partida",
   "LoadSaveGame": "Continuar partida anterior",
   "DevOptions": "Opciones de Ejecución Avanzadas",
@@ -154,7 +152,7 @@
   "LogZipFile": "Guardar registros en un archivo",
   "LogFolders": "Carpetas de registro",
   "LogFileDrop": "Arrastra o selecciona un archivo de registro para simplificarlo y mostrar la lista de errores existentes",
-  "DefaultLogViewInfo": "Los errores más recientes de tu registro serán mostrados de forma automática al abrir esta página",
+  "DefaultLogViewInfo": "Los errores más recientes de tu registro se mostrarán aquí, los resultados son en tiempo real.",
   "ErrorsInLog": "Errores en el registro",
   "OpenLogFolder": "Abrir la carpeta del registro del juego",
   "CopyLogFile": "Copiar el archivo de registro del juego al portapapeles",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "Assets incluidos: {0}, Total: {1}",
   "NewPlayset_Tip": "Crear o importar un playset nuevo",
   "ViewPlaysets_Tip": "Ver y administrar tus playsets",
+  "DeactivatePlayset_Tip": "Desactiva tu playset actual",
   "NewGame_Tip": "Comienza un juego nuevo al ejecutar Cities: Skylines. Puedes especificar el mapa en el que quieres empezar",
   "LoadSaveGame_Tip": "Cargar un juego al ejecutar Cities: Skylines. Si no seleccionas algún archivo, se cargará el juego guardado más reciente",
   "BETA": "BETA",
@@ -194,6 +193,7 @@
   "FailedToOpenTC": "Error al abrir el \"Theme Changer\"",
   "FailedToDeleteItem": "Error al eliminar el artículo",
   "OpenChangelog": "Abrir registro de cambios",
+  "Changelog": "Registro de cambios",
   "DeleteAsset": {
     "One": "Eliminar este asset",
     "Plural": "Eliminar assets seleccionados"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "Ver el archivo de este playset",
   "ChangePlaysetColor": "Cambiar el color de este playset",
   "EditPlaysetName": "Editar el nombre de este playset",
+  "ResetPlaysetImage": "Restablecer la miniatura de este playset",
+  "ResetPlaysetColor": "Restablecer el color de este playset",
   "Sorting_Color": "Color de perfil",
   "CreateShortcutPlayset": "Crear acceso directo en el escritorio",
   "AskToLaunchGameForShortcut": "¿Quieres que el acceso directo también inicie el juego con tu perfil?",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "Añadir argumentos adicionales al iniciar el juego",
   "SearchGenericPackages": "Buscar en la lista de paquetes...",
   "Sorting_Subscribers": "Número de suscriptores",
-  "Sorting_Votes": "Votos",
+  "Sorting_Votes": "Total de \"me gusta\"",
   "VotesCount": {
-    "One": "{1} voto",
-    "Plural": "{1} votos"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} suscriptor",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "Perfil",
     "Plural": "Playsets"
+  },
+  "ContainCount": {
+    "One": "Contiene {0} {1}",
+    "Plural": "Contiene {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} incluido",
@@ -368,6 +374,10 @@
     "One": "Editar las etiquetas de este paquete",
     "Plural": "Editar etiquetas de elementos seleccionados"
   },
+  "EditLinks": {
+    "One": "Editar los enlaces de este paquete",
+    "Plural": "Editar enlaces de elementos seleccionados"
+  },
   "ShowAllReferencedPackages": "Mostrar paquetes excluidos en la pestaña 'Referencias'",
   "ShowAllReferencedPackages_Tip": "Muestra tanto los paquetes excluidos como los incluidos que hacen referencia al que estás viendo.",
   "TreatOptionalAsRequired": "Tratar paquetes opcionales como requeridos",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "Eliminado por el autor",
   "Missing": "Faltan",
   "LoggedInAs": "Sesión iniciada como",
+  "LoggedInUser": "Conectado como {0}",
   "UnknownUser": "Usuario desconocido",
   "AddMeaningfulDescription": "Por favor, añada una descripción detallada a su solicitud.",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "Añadir una interacción faltante con otro paquete",
   "ActivePlayset": "Playset activo",
   "References": "Referencias",
-  "OpenLog": "Abrir archivo de registro",
+  "OpenLog": "Abrir registro de juego",
+  "OpenSkyveLog": "Abrir registro de Skyve",
   "Sort By": "Ordenar por",
   "FailedToFetchLogs": "No se pudo obtener los registros",
   "DiscoverPlaysets": "Descubre Playsets",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "Omite la comprobación de conexión a Internet y asume que está conectado.",
   "SelectAll": "Seleccionar todos los artículos",
   "DeselectAll": "Deseleccionar todos los artículos",
-  "AddTagBox": "Añadir nueva etiqueta",
+  "AddTagBox": "Añadir una nueva etiqueta o buscar aquí",
   "EditingMultipleTags": "Editar las etiquetas de varios paquetes sobrescribirá cada una de sus etiquetas personalizadas.",
   "EditTagsOfPackage": {
     "One": "Editar todas las etiquetas de los activos de este paquete",
@@ -546,5 +558,29 @@
   "Version": "Versión",
   "UpdateTime": "Fecha de actualización",
   "Status": "Estado",
-  "ThisModIsRequiredYouCantDisableIt": "Este mod es requerido, no puede desactivarlo."
+  "PackageUsage": "Uso del paquete",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "Este mod es requerido, no puede desactivarlo.",
+  "FadeDisabledItems": "Desvanecer mods y assets desactivados",
+  "FadeDisabledItems_Tip": "Los mods y assets desactivados en sus listas de contenido local se desvanecerán.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Playset genérico",
+  "CompatibilityCenter": "Centro de compatibilidad",
+  "Dependency": {
+    "One": "Dependencia",
+    "Plural": "Dependencias"
+  },
+  "ModID": "ID del mod",
+  "Subscribers": "Suscriptores",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Parcialmente descargado",
+  "Links": "Enlaces",
+  "NoAssets": "Desactivar todos los assets",
+  "NoMods": "Desactivar todos los mods",
+  "FavoritePlaysets": "Playsets favoritos",
+  "OnlyShowErrors": "Mostrar sólo advertencias y errores",
+  "RestartRequired": "Se requiere reiniciar"
 }

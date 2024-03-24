@@ -8,7 +8,6 @@
   "NoteInfo": "Дополнительный информационный текст, отображаемый для пакета",
   "BlackListName": "Чёрный список по имени",
   "BlackListId": "Black-list by name",
-  "GlobalTags": "Глобальные теги",
   "GlobalTagsInfo": "Теги всех игроков будут видеть в приложении",
   "Links": "Ссылки",
   "StatusesCount": "Statuses ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Недостаточно информации",
   "HasIssues": "Имеет проблемы",
   "Broken": "Сломано",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Требуется внимание",
   "Website": "Сайт",
   "Donation": "Пожертвовать",
-  "ManageSinglePackage": "Управление определенными пакетами",
-  "ManageCompatibilityData": "Управление данными совместимости",
-  "YourPackages": "Управление пакетами",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Добавить пакеты",
   "ConfirmEndSession": "Вы уверены, что хотите завершить сеанс?",
   "CrDataLoadFailed": "Не удалось загрузить данные, повторите попытку позже",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Недостаточно информации для правильного просмотра этого пакета.",
   "Stability_HasIssues": "Пакет может вызвать проблемы.\r\nБудьте осторожны при его использовании.",
   "Stability_Broken": "Этот пакет сломан.\r\nИзвестно, что он либо прервал игру, либо просто не работает.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Управление Пакетами",
   "Banned": "Заблокирован",
   "NoIssues": "Нет замечаний",
-  "RequestReviewDisclaimer": "*Ваш Steam ID и журналы высылаются по вашему запросу",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Создание сценария",
   "ThemeMaking": "Создание темы",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

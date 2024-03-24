@@ -8,7 +8,6 @@
   "NoteInfo": "在外掛程式頁面顯示的更多的資訊文本",
   "BlackListName": "按名稱列出黑名單",
   "BlackListId": "Steam ID 黑名單",
-  "GlobalTags": "全域標籤",
   "GlobalTagsInfo": "所有玩家都會在應用程式中看到的標籤",
   "Links": "連結",
   "StatusesCount": "狀態 ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "沒有足夠的資訊",
   "HasIssues": "存在問題",
   "Broken": "損壞的",
@@ -60,9 +60,8 @@
   "AttentionRequired": "需要注意",
   "Website": "網站",
   "Donation": "贊助",
-  "ManageSinglePackage": "管理特定外掛",
-  "ManageCompatibilityData": "管理相容性報告的資料",
-  "YourPackages": "管理您的外掛程式",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "添加外掛程式",
   "ConfirmEndSession": "您確定要關閉此會話嗎？",
   "CrDataLoadFailed": "數據載入失敗，請稍後重試",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "沒有足夠的資訊來正確地檢查此外掛程式的穩定性。",
   "Stability_HasIssues": "此外掛可能引發問題。\n請小心使用。",
   "Stability_Broken": "此外掛已經損壞。\n目前已知此外掛無法正常運行，或使遊戲崩潰。",
@@ -236,7 +236,7 @@
   "ManagePackage": "管理外掛",
   "Banned": "封鎖",
   "NoIssues": "沒有問題",
-  "RequestReviewDisclaimer": "* 傳送請求時，您的 Steam ID 和記錄檔也會一併傳送",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "製作情況用",
   "ThemeMaking": "制作主题用",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

@@ -8,7 +8,6 @@
   "NoteInfo": "Extra informational text displayed for the package",
   "BlackListName": "บัญชีดำตามชื่อ",
   "BlackListId": "บัญชีดำตามไอดีสตีม",
-  "GlobalTags": "แท็กทั่วไป",
   "GlobalTagsInfo": "แท็กผู้เล่นทุกคนจะดูได้ในแอป",
   "Links": "ลิงก์",
   "StatusesCount": "สถานะ ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "ข้อมูลไม่เพียงพอ",
   "HasIssues": "มีปัญหา",
   "Broken": "พัง",
@@ -60,9 +60,8 @@
   "AttentionRequired": "ต้องการความสนใจ",
   "Website": "เว็บไซต์",
   "Donation": "บริจาค",
-  "ManageSinglePackage": "จัดการแพ็กเกจเฉพาะ",
-  "ManageCompatibilityData": "จัดการข้อมูลความเข้ากันได้",
-  "YourPackages": "จัดการแพ็กเกจของคุณ",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "เพิ่มแพ็กเกจ",
   "ConfirmEndSession": "คุณต้องการยุติเซสชั่นของคุณใช่ไหม?",
   "CrDataLoadFailed": "โหลดข้อมูลไม่สำเร็จ โปรดลองอีกครั้งในภายหลัง",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "There is not enough information to properly review this package.",
   "Stability_HasIssues": "แพ็กเกจนี้มีปัญหาเล็กน้อย\nโปรดใช้งานอย่างระมัดระวัง",
   "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Manage Package",
   "Banned": "Banned",
   "NoIssues": "No Issues",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Scenario-Making",
   "ThemeMaking": "Theme-Making",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

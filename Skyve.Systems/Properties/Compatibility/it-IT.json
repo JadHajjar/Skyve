@@ -8,7 +8,6 @@
   "NoteInfo": "Testo informativo extra mostrato per il pacchetto",
   "BlackListName": "Escludi per nome",
   "BlackListId": "Escludi per Steam ID",
-  "GlobalTags": "Tag globali",
   "GlobalTagsInfo": "Tag che tutti i giocatori vedranno nell'app",
   "Links": "Collegamenti",
   "StatusesCount": "Status ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stabile, solo aggiornamenti per correzioni di bug",
   "StableNoFutureUpdates": "Stabile, nessun altro aggiornamento",
   "HasIssuesNoFutureUpdates": "Ha problemi, niente più aggiornamenti",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Informazioni insufficienti",
   "HasIssues": "Ha problemi",
   "Broken": "Non funziona",
@@ -60,9 +60,8 @@
   "AttentionRequired": "È richiesta attenzione",
   "Website": "Sito web",
   "Donation": "Dona",
-  "ManageSinglePackage": "Gestisci pacchetti specifici",
-  "ManageCompatibilityData": "Gestisci dati di compatibilità",
-  "YourPackages": "Gestisci i tuoi pacchetti",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Aggiungi pacchetti",
   "ConfirmEndSession": "Sei sicuro di voler concludere la sessione?",
   "CrDataLoadFailed": "Impossibile caricare i dati, riprova più tardi",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "Questo pacchetto è stabile, l'autore però non rilascerà più aggiornamenti delle funzionalità.\nTuttavia, continuerà ad aggiornarlo in caso di nuovi bug.",
   "Stability_StableNoFutureUpdates": "Questo pacchetto è stabile, anche se l'autore non lo supporta più; aggiornamenti o correzioni di bug sono improbabili.",
   "Stability_HasIssuesNoFutureUpdates": "Questo pacchetto può causare problemi e l'autore non lo supporta più; aggiornamenti o correzioni di bug sono improbabili.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Non ci sono abbastanza informazioni per poter recensire adeguatamente questo pacchetto.",
   "Stability_HasIssues": "Questo pacchetto può causare problemi.\nFai attenzione mentre lo usi.",
   "Stability_Broken": "Questo pacchetto non è funzionante.\nÈ noto per bloccare il gioco o semplicemente perché non funziona.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Gestione del Pacchetto",
   "Banned": "Bannato",
   "NoIssues": "Nessun problema",
-  "RequestReviewDisclaimer": "*Il tuo ID Steam e i tuoi log vengono inviati insieme alla richiesta",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Creazione di scenari",
   "ThemeMaking": "Creazione di temi",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Applica tutte le azioni disponibili",
   "SnoozeAll": "Nascondi tutti i problemi visualizzati",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

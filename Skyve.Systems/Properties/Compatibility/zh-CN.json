@@ -8,7 +8,6 @@
   "NoteInfo": "在插件页面显示的更多的信息文本",
   "BlackListName": "按名称列出黑名单",
   "BlackListId": "Steam ID 黑名单",
-  "GlobalTags": "全局标签",
   "GlobalTagsInfo": "所有玩家都会在应用程序中看到的标签",
   "Links": "链接",
   "StatusesCount": "状态 ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "稳定，只有修复 Bug 的更新",
   "StableNoFutureUpdates": "稳定，不再更新",
   "HasIssuesNoFutureUpdates": "存在问题，但不再更新",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "没有足够的信息",
   "HasIssues": "存在问题",
   "Broken": "已损坏",
@@ -60,9 +60,8 @@
   "AttentionRequired": "需要注意",
   "Website": "网站",
   "Donation": "赞助",
-  "ManageSinglePackage": "管理特定插件",
-  "ManageCompatibilityData": "管理兼容性报告的数据",
-  "YourPackages": "管理您的插件",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "添加插件",
   "ConfirmEndSession": "您确定要关闭此会话吗？",
   "CrDataLoadFailed": "数据加载失败，请稍后重试",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "此插件能够稳定运行，不过作者已不再发布功能性更新。\n不过，如果出现新的问题，作者仍会进行更新。",
   "Stability_StableNoFutureUpdates": "此插件可以稳定运行，但作者已不再提供支持，因此，未来不太可能再进行更新或错误修复。",
   "Stability_HasIssuesNoFutureUpdates": "此插件可能存在问题，而且作者已不再提供支持，未来也不太可能提供更新，或修复问题。",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查此插件的稳定性。",
   "Stability_HasIssues": "此插件可能存在问题。\n请小心使用。",
   "Stability_Broken": "此插件已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
@@ -236,7 +236,7 @@
   "ManagePackage": "管理插件",
   "Banned": "已被封禁",
   "NoIssues": "没有问题",
-  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam ID 和日志文件也会一并发送",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "制作剧本",
   "ThemeMaking": "制作地图主题",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "应用所有可用的操作",
   "SnoozeAll": "关闭当前显示的所有问题的提醒",
-  "LinkedPackages": "关联的插件"
+  "LinkedPackages": "关联的插件",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

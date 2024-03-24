@@ -8,7 +8,6 @@
   "NoteInfo": "Extra informational text displayed for the package",
   "BlackListName": "Black-list by name",
   "BlackListId": "Steam ID ile Kara Listeye Al",
-  "GlobalTags": "Global Tags",
   "GlobalTagsInfo": "Tags all players will see in the app",
   "Links": "Links",
   "StatusesCount": "Statuses ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Not enough information",
   "HasIssues": "Has issues",
   "Broken": "Broken",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Attention Required",
   "Website": "Website",
   "Donation": "Donate",
-  "ManageSinglePackage": "Manage specific packages",
-  "ManageCompatibilityData": "Manage Compatibility Data",
-  "YourPackages": "Manage your packages",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Add Packages",
   "ConfirmEndSession": "Are you sure you want to conclude your session?",
   "CrDataLoadFailed": "Failed to load data, try again later",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "There is not enough information to properly review this package.",
   "Stability_HasIssues": "This package can cause issues.\r\nBe careful while using it.",
   "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Manage Package",
   "Banned": "Banned",
   "NoIssues": "No Issues",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Scenario-Making",
   "ThemeMaking": "Theme-Making",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

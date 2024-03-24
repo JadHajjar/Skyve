@@ -8,7 +8,6 @@
   "NoteInfo": "Texto informativo extra exibido para o pacote",
   "BlackListName": "Lista Negra por nome",
   "BlackListId": "Lista negra por ID Steam",
-  "GlobalTags": "Etiquetas Globais",
   "GlobalTagsInfo": "Marca todos os jogadores que verão no aplicativo",
   "Links": "Links",
   "StatusesCount": "Situações ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Estável, somente atualizações de correções",
   "StableNoFutureUpdates": "Estável, sem novas atualizações",
   "HasIssuesNoFutureUpdates": "Tem problemas, sem mais atualizações",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Não há informação suficiente",
   "HasIssues": "Tem problemas",
   "Broken": "Quebrado",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Atenção Requerida",
   "Website": "Página Web",
   "Donation": "Doar",
-  "ManageSinglePackage": "Gerencie pacotes específicos",
-  "ManageCompatibilityData": "Gerenciar Dados de Compatibilidade",
-  "YourPackages": "Gerencie seus pacotes",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Adicionar Pacotes",
   "ConfirmEndSession": "Tem certeza que deseja terminar sua sessão?",
   "CrDataLoadFailed": "Falha ao carregar dados, tente novamente mais tarde",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "Este pacote é estável, embora o autor não lançará mais atualizações de recursos. \nNo entanto, ele ainda irá atualizá-lo em caso de novos problemas.",
   "Stability_StableNoFutureUpdates": "Este pacote é estável, no entanto, o autor não está mais oferecendo suporte. Atualizações futuras ou correções de problemas são improváveis.",
   "Stability_HasIssuesNoFutureUpdates": "Este pacote pode causar problemas, e o autor não está mais oferecendo suporte. Atualizações futuras ou correções de problemas são improváveis.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Não há informações suficientes para revisar adequadamente este pacote.",
   "Stability_HasIssues": "Este pacote pode causar problemas.\nTenha cuidado ao usá-lo.",
   "Stability_Broken": "Este pacote está quebrado.\nÉ conhecido por quebrar o jogo ou simplesmente não funcionar.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Gerenciar Pacote",
   "Banned": "Banido",
   "NoIssues": "Sem problemas",
-  "RequestReviewDisclaimer": "*Seu ID Steam e registros são enviados com o seu pedido",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Cenário/Fabricação",
   "ThemeMaking": "Criação de Temas",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Item Necessário",
   "ApplyAllActions": "Aplicar todas as ações disponíveis",
   "SnoozeAll": "Adiar todos os problemas exibidos",
-  "LinkedPackages": "Pacotes Vinculados"
+  "LinkedPackages": "Pacotes Vinculados",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

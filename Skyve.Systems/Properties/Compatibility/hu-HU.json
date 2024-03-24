@@ -8,7 +8,6 @@
   "NoteInfo": "Extra tájékoztató szöveg jelenik meg a csomaghoz",
   "BlackListName": "Feketelista név szerint",
   "BlackListId": "Feketelista a Steam ID alapján",
-  "GlobalTags": "Globális címkék",
   "GlobalTagsInfo": "Címkék, amelyeket minden játékos látni fog az alkalmazásban",
   "Links": "Linkek",
   "StatusesCount": "Állapotok ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stabil, csak hibajavító frissítések történtek",
   "StableNoFutureUpdates": "Stabil, nincs várható több frissítés",
   "HasIssuesNoFutureUpdates": "Problémák vannak, de nem várható több frissítés",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Nincs elég információ",
   "HasIssues": "Problémás",
   "Broken": "Hibás",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Figyelem szükséges",
   "Website": "Honlap",
   "Donation": "Adományozz!",
-  "ManageSinglePackage": "Egyes csomagok kezelése",
-  "ManageCompatibilityData": "Kompatibilitási adatok kezelése",
-  "YourPackages": "Kezeld a csomagjaidat",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Csomagok hozzáadása",
   "ConfirmEndSession": "Biztosan befejezi a munkamenetet?",
   "CrDataLoadFailed": "Nem sikerült betölteni az adatokat, próbálkozz újra később",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "Ez a csomag stabil, bár a szerző a továbbiakban nem ad ki frissítéseket.\nÚj hibák esetén azonban továbbra is frissítik.",
   "Stability_StableNoFutureUpdates": "Ez a csomag stabil, bár a szerző már nem támogatja, jövőbeli frissítések vagy hibajavítások nem valószínűek.",
   "Stability_HasIssuesNoFutureUpdates": "Ez a csomag problémákat okozhat, és a szerző már nem támogatja, jövőbeli frissítések vagy hibajavítások nem valószínűek.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Nincs elég információ a csomag megfelelő áttekintéséhez.",
   "Stability_HasIssues": "Ez a csomag problémákat okozhat.\nLegyél óvatos használata közben.",
   "Stability_Broken": "Ez a csomag elromlott. Várhatóan vagy megszakítja a játékot, vagy egyszerűen nem működik.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Csomagok kezelése",
   "Banned": "Kitiltott",
   "NoIssues": "Nincsenek problémák",
-  "RequestReviewDisclaimer": "* A Steam azonosítód és naplóid a kéréssel együtt elküldésre kerülnek",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Forgatókönyv-készítés",
   "ThemeMaking": "Témakészítés",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Szükséges elem",
   "ApplyAllActions": "Alkalmazza az összes elérhető műveletet",
   "SnoozeAll": "Az összes megjelenített probléma elhalasztása",
-  "LinkedPackages": "Kapcsolt csomagok"
+  "LinkedPackages": "Kapcsolt csomagok",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

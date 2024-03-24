@@ -8,7 +8,6 @@
   "NoteInfo": "Επιπλέον ενημερωτικό κείμενο που εμφανίζεται για το πακέτο",
   "BlackListName": "Μαύρη λίστα με όνομα",
   "BlackListId": "Μαύρη λίστα από το Steam ID",
-  "GlobalTags": "Καθολικές Ετικέτες",
   "GlobalTagsInfo": "Ετικέτες όλοι οι παίκτες που θα δουν στην εφαρμογή",
   "Links": "Σύνδεσμοι",
   "StatusesCount": "Statuses ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Μη επαρκείς πληροφορίες",
   "HasIssues": "Έχει προβλήματα",
   "Broken": "Σπασμένο",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Απαιτείται Προσοχή",
   "Website": "Ιστοσελίδα",
   "Donation": "Δωρεά",
-  "ManageSinglePackage": "Διαχείριση συγκεκριμένων πακέτων",
-  "ManageCompatibilityData": "Διαχείριση Δεδομένων Συμβατότητας",
-  "YourPackages": "Διαχείριση των πακέτων σας",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Προσθήκη Πακέτων",
   "ConfirmEndSession": "Είστε βέβαιοι ότι θέλετε να ολοκληρώσετε τη συνεδρία σας?",
   "CrDataLoadFailed": "Αποτυχία φόρτωσης δεδομένων, προσπαθήστε ξανά αργότερα",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Δεν υπάρχουν αρκετές πληροφορίες για την κατάλληλη αναθεώρηση αυτού του πακέτου.",
   "Stability_HasIssues": "Αυτό το πακέτο μπορεί να προκαλέσει προβλήματα.\r\nΝα είστε προσεκτικοί κατά τη χρήση του.",
   "Stability_Broken": "\r\nΕίναι γνωστό ότι είτε να σπάσει το παιχνίδι ή απλά δεν λειτουργεί.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Διαχείριση Πακέτου",
   "Banned": "Αποκλεισμένος",
   "NoIssues": "Δεν Υπάρχουν Θέματα",
-  "RequestReviewDisclaimer": "*Το Steam ID και τα αρχεία καταγραφής σας αποστέλλονται με το αίτημά σας",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Δημιουργία Σεναρίου",
   "ThemeMaking": "Δημιουργία Θέματος",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all available actions",
   "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

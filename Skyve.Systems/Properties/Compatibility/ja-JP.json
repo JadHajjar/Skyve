@@ -8,7 +8,6 @@
   "NoteInfo": "パッケージに表示される追加のテキスト情報",
   "BlackListName": "名前でブラックリスト",
   "BlackListId": "Steam IDでブラックリスト",
-  "GlobalTags": "グローバルタグ",
   "GlobalTagsInfo": "全てのユーザーにアプリ上で表示されるタグ",
   "Links": "リンク",
   "StatusesCount": "ステータス ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "安定版 - バグ修正のみの更新",
   "StableNoFutureUpdates": "安定版 - これ以上の更新はありません",
   "HasIssuesNoFutureUpdates": "問題あり - アップデートはありません",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "情報が不足",
   "HasIssues": "問題あり",
   "Broken": "破損",
@@ -60,9 +60,8 @@
   "AttentionRequired": "要注意",
   "Website": "ウェブサイト",
   "Donation": "寄付",
-  "ManageSinglePackage": "特定のパッケージを管理",
-  "ManageCompatibilityData": "互換性データの管理",
-  "YourPackages": "パッケージの管理",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "パッケージの追加",
   "ConfirmEndSession": "セッションを終了してもよろしいのですか？",
   "CrDataLoadFailed": "データのロードに失敗しました、後でやり直して下さい",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "このパッケージは安定しています。作者は機能面での追加のアップデート予定はありません。\nしかし、新たなバグが発生した場合はアップデートします。",
   "Stability_StableNoFutureUpdates": "このパッケージは安定しています。作者は既にサポートをしていません。\n残念ながら、今後のアップデートやバグ修正は期待できません。",
   "Stability_HasIssuesNoFutureUpdates": "このパッケージは問題を引き起こす可能性があり、作者は既にサポートしていません。\n残念ながら、今後のアップデートやバグ修正は期待できません。",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "パッケージを適切に評価・確認するには十分な情報がありません。",
   "Stability_HasIssues": "このパッケージは問題を引き起こす可能性があります。\n使用時は注意して下さい。",
   "Stability_Broken": "このパッケージは破損しています。\nゲームがプレイできない・既に動作しないことが判明しています。",
@@ -236,7 +236,7 @@
   "ManagePackage": "パッケージの管理",
   "Banned": "BAN済み",
   "NoIssues": "問題なし",
-  "RequestReviewDisclaimer": "※あなたのSteam IDとログがリクエストと一緒に送信されます！",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "シナリオの作成",
   "ThemeMaking": "テーマの作成",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "使用できるアクションを全て適用",
   "SnoozeAll": "表示中の問題点を全てスヌーズ",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }

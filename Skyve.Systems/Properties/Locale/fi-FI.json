@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Date Created",
   "Sorting_Usage": "Playset Usage",
   "Sorting_Name": "Name",
-  "Sorting_FileSize": "Tiedoston kokonaiskoko",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "Päivitysaika",
   "Sorting_SubscribeTime": "Tilaamisajankohta",
   "Sorting_Author": "Tekijän nimi",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "Näytä online-opas päästäksesi alkuun Skyven kanssa.",
   "ResetButton_Tip": "Nollaa asetuksesi oletusarvoihin. Tämä ei vaikuta kansion asetuksiin.",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "Ota Käyttöön Kehityskäyttöliittymä",
-  "RefreshWorkshop": "Päivitä Workshop Sisältö",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "Aloita uusi peli",
   "LoadSaveGame": "Jatka edellistä tallennusta",
   "DevOptions": "Kehittäjän Käynnistysasetukset",
@@ -154,7 +152,7 @@
   "LogZipFile": "Tallenna lokit tiedostoon",
   "LogFolders": "Loki Kansiot",
   "LogFileDrop": "Pudota tai valitse lokitiedosto, joka yksinkertaistetaan ja näytetään lokin sisällä olevien virheiden luettelo",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "Lokissa on virheitä",
   "OpenLogFolder": "Avaa pelin lokikansio",
   "CopyLogFile": "Kopioi pelin lokitiedosto leikepöydälle",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "Sisällytetyt esineet: {0}, Yhteensä: {1}",
   "NewPlayset_Tip": "Luo tai tuo uusi soittosarja",
   "ViewPlaysets_Tip": "View & manage your playsets",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "Aloittaa uuden pelin kun Cities: Skylines käynnistetään. Voit määrittää kartan, jonka haluat aloittaa",
   "LoadSaveGame_Tip": "Lataa tallennettu peli kun Cities: Skylines käynnistetään. Jos et valitse tallennustiedostoa, jatketaaan viimeisintä tallennustasi",
   "BETA": "BETA",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "Pelioita yhteensä: {0}",
   "PlaysetFilter": "Soittosarjan Suodatin",
   "CheckDocumentsFolder": "Varmista, että Skyvellä on pääsy Tiedostot-kansioon, se käyttää sitä käyttöliittymä- ja kieliasetusten tallentamiseen.",
-  "FailedToSaveLanguage": "Valitun kielen tallentaminen epäonnistui",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "Teeman vaihtajan avaaminen epäonnistui",
   "FailedToDeleteItem": "Kohteen poistaminen epäonnistui",
   "OpenChangelog": "Avaa Muutosloki",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "Poista tämä assetti",
     "Plural": "Poista valitut assetit"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "Näytä tämän pelaajan tiedosto tietokoneellasi",
   "ChangePlaysetColor": "Muuta tämän pelin väriä",
   "EditPlaysetName": "Muokkaa tämän pelin nimeä",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "Profiilin Väri",
   "CreateShortcutPlayset": "Luo pikakuvake sitä varten työpöydällä",
   "AskToLaunchGameForShortcut": "Haluatko että pikakuvake voi myös käynnistää pelin profiilisi avulla?",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "Lisää ylimääräisiä argumentteja pelin käynnistämisessä",
   "SearchGenericPackages": "Etsi näistä paketeista..",
   "Sorting_Subscribers": "Tilaajia Yhteensä",
-  "Sorting_Votes": "Äänet",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} subscriber",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "Profiili",
     "Plural": "Profiles"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} sisältyy",
@@ -368,6 +374,10 @@
     "One": "Muokkaa tämän paketin tageja",
     "Plural": "Muokkaa valittujen kohteiden tageja"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "Näytä ei käytössä olevat paketit 'Viitteet' -välilehdellä",
   "ShowAllReferencedPackages_Tip": "Näyttää sekä pois jätetyt että mukana olleet paketit, jotka viittaavat katselemaasi pakettiin.",
   "TreatOptionalAsRequired": "Kohtele valinnaisia paketteja tarvittavina",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "Removed by author",
   "Missing": "Puuttuu",
   "LoggedInAs": "Kirjautuneena käyttäjänä",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "Tuntematon käyttäjä",
   "AddMeaningfulDescription": "Ole hyvä ja lisää kuvaava kuvaus pyyntöösi.",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "Lisää puuttuva vuorovaikutus toisen paketin kanssa",
   "ActivePlayset": "Active Playset",
   "References": "Viitteet",
-  "OpenLog": "Avaa Lokitiedosto",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "Lajitteluperuste",
   "FailedToFetchLogs": "Lokitiedostojen noutaminen epäonnistui",
   "DiscoverPlaysets": "Löydä Playsets",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "Tämän toiston lataaminen epäonnistui.\r\n\r\nYritä myöhemmin uudelleen.",
   "UpdatePlaysetTip": "Päivitä paikallinen versio tästä soittimesta",
   "DownloadPlaysetTip": "Lataa tämä soitto paikalliselle tietokoneellesi",
-  "EditPlaysetThumbnail": "Muokkaa tämän pelaajan pikkukuvaa",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "Make this profile Public",
   "MakePrivate": "Make this profile Private",
   "CopyPlaysetLink": "Kopioi tämän soiton tunnus",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "Ohittaa internet-yhteyden tarkastuksen ja olettaa että olet yhteydessä.",
   "SelectAll": "Select all items",
   "DeselectAll": "Un-select all items",
-  "AddTagBox": "Lisää uusi tagi tähän",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "Useiden pakettien tagien muokkaaminen korvaa jokaisen niiden mukautetun tagin.",
   "EditTagsOfPackage": {
     "One": "Muokkaa kaikkia tämän paketin omaisuutta",
@@ -546,5 +558,29 @@
   "Version": "Version",
   "UpdateTime": "Update Time",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }

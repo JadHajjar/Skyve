@@ -63,7 +63,7 @@
   "Sorting_DateCreated": "Date Created",
   "Sorting_Usage": "Playset Usage",
   "Sorting_Name": "Name",
-  "Sorting_FileSize": "총 파일 크기",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "업데이트된 시간",
   "Sorting_SubscribeTime": "구독한 시간",
   "Sorting_Author": "제작자 이름",
@@ -128,9 +128,7 @@
   "OpenGuide_Tip": "Skyve를 시작하려면 온라인 가이드를 보십시오.",
   "ResetButton_Tip": "현재 설정을 기본값으로 되돌립니다. 이 것은 폴더 설정에 영향을 주지 않습니다.",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "Dev UI 활성화",
-  "RefreshWorkshop": "창작마당 콘텐츠 새로고침",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "새 게임을 시작하기",
   "LoadSaveGame": "이전 세이브 게임 이어하기",
   "DevOptions": "개발자 시작 옵션",
@@ -154,7 +152,7 @@
   "LogZipFile": "로그를 파일에 저장하기",
   "LogFolders": "로그 폴더",
   "LogFileDrop": "단순화할 로그 파일을 끌어오거나 선택하여 로그 내부의 오류 목록을 표시하세요",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "로그 내 오류",
   "OpenLogFolder": "게임의 로그 폴더 열기",
   "CopyLogFile": "게임의 로그 파일을 클립보드에 복사하기",
@@ -169,6 +167,7 @@
   "AssetIncludedTotal": "포함된 에셋: {0}개, 총: {1}개",
   "NewPlayset_Tip": "새 프로필을 생성하거나 가져오기",
   "ViewPlaysets_Tip": "View & manage your playsets",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "Cities: Skylines를 실행할 때 새 게임을 시작합니다. 시작하려는 맵을 정할 수 있습니다.",
   "LoadSaveGame_Tip": "Cities: Skylines를 실행할 때 저장된 게임을 불러옵니다. 선택한 게임이 없는 경우 마지막으로 저장된 게임을 불러옵니다.",
   "BETA": "베타",
@@ -190,10 +189,11 @@
   "FavoriteTotal": "총 프로필: {0}개",
   "PlaysetFilter": "프로필 필터",
   "CheckDocumentsFolder": "Skyve가 문서 폴더에 접근할 수 있는지 확인해주세요. UI 및 언어 설정을 저장하기 위해 사용합니다.",
-  "FailedToSaveLanguage": "선택한 언어로 변경하지 못했습니다",
+  "FailedToSaveLanguage": "Failed to save the selected 1language",
   "FailedToOpenTC": "테마 체인저를 열지 못했습니다",
   "FailedToDeleteItem": "항목을 삭제 하지 못했습니다",
   "OpenChangelog": "변경사항 열기",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "이 에셋을 삭제",
     "Plural": "선택된 에셋을 삭제"
@@ -231,6 +231,8 @@
   "OpenPlaysetFolder": "이 프로필 파일을 컴퓨터에서 보기",
   "ChangePlaysetColor": "프로필 색상 변경하기",
   "EditPlaysetName": "프로필 이름 수정하기",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "프로필 색상",
   "CreateShortcutPlayset": "바탕화면에 프로필 바로 가기 생성하기",
   "AskToLaunchGameForShortcut": "바로가기를 사용하여 저장된 프로필의 게임을 실행하시겠습니까?",
@@ -269,10 +271,10 @@
   "LaunchArgsInfo": "게임이 실행될 때의 추가 인수를 추가하세요",
   "SearchGenericPackages": "이 패키지들 중 검색..",
   "Sorting_Subscribers": "총 구독자 수",
-  "Sorting_Votes": "평점",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} subscriber",
@@ -316,6 +318,10 @@
   "Playset": {
     "One": "프로필",
     "Plural": "프로필"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{1} {0}개 포함됨",
@@ -368,6 +374,10 @@
     "One": "이 패키지의 태그 편집하기",
     "Plural": "선택된 항목들의 태그 편집하기"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "'참조' 탭에 제외된 패키지 표시하기",
   "ShowAllReferencedPackages_Tip": "보고 있는 패키지를 참조하는 포함된 패키지와 제외된 패키지를 모두 표시합니다.",
   "TreatOptionalAsRequired": "선택적 패키지를 필요한 것으로 간주하기",
@@ -395,6 +405,7 @@
   "RemovedByAuthor": "제작자가 삭제함",
   "Missing": "누락",
   "LoggedInAs": "로그인됨",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "알 수 없는 사용자",
   "AddMeaningfulDescription": "요청에 의미있는 설명을 추가해주세요.",
   "ThisSubscribesTo": {
@@ -415,7 +426,8 @@
   "RequestOption3": "누락된 다른 패키지와의 상호 작용을 추가하기",
   "ActivePlayset": "Active Playset",
   "References": "참조",
-  "OpenLog": "로그 파일 열기",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "정렬",
   "FailedToFetchLogs": "로그를 가져오는 데 실패했습니다",
   "DiscoverPlaysets": "프로필 탐색",
@@ -434,7 +446,7 @@
   "FailedToDownloadPlayset": "이 프로필을 다운로드 하는 데 실패했습니다.\n\n나중에 다시 시도하세요.",
   "UpdatePlaysetTip": "이 프로필의 내 로컬 버전 업데이트",
   "DownloadPlaysetTip": "이 프로필을 로컬 저장소에 다운로드",
-  "EditPlaysetThumbnail": "이 프로필의 섬네일 수정하기",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "이 프로필을 공개하기",
   "MakePrivate": "이 프로필을 비공개하기",
   "CopyPlaysetLink": "프로필 ID 복사",
@@ -447,7 +459,7 @@
   "AssumeInternetConnectivity_Tip": "인터넷 확인을 건너뛰고 연결되어 있다고 가정합니다.",
   "SelectAll": "Select all items",
   "DeselectAll": "Un-select all items",
-  "AddTagBox": "여기에 새 태그를 추가",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "여러 패키지의 태그를 편집하는 것은 각각의 커스텀 태그를 덮어씌울 것입니다.",
   "EditTagsOfPackage": {
     "One": "이 패키지의 모든 에셋의 태그를 편집",
@@ -546,5 +558,29 @@
   "Version": "Version",
   "UpdateTime": "Update Time",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required"
 }

@@ -8,7 +8,6 @@
   "NoteInfo": "Додаткова інформація, що відображається для пакунка",
   "BlackListName": "Чорний список за іменем",
   "BlackListId": "Чорний список за Steam ID",
-  "GlobalTags": "Глобальні теги",
   "GlobalTagsInfo": "Додає тег, який будуть бачити всі користувачі додатку",
   "Links": "Посилання",
   "StatusesCount": "Статуси ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Стабільно, тільки оновлення з виправленнями помилок",
   "StableNoFutureUpdates": "Стабільно, оновлень більше не буде",
   "HasIssuesNoFutureUpdates": "Має проблеми, оновлень більше не буде",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Недостатньо інформації",
   "HasIssues": "Є проблеми",
   "Broken": "Зламано",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Вимагає уваги",
   "Website": "Вебсайт",
   "Donation": "Підтримати",
-  "ManageSinglePackage": "Керувати конкретними пакунками",
-  "ManageCompatibilityData": "Керування даними сумісності",
-  "YourPackages": "Керуйте вашими пакунками",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Додати пакунки",
   "ConfirmEndSession": "Ви впевнені, що хочете завершити сесію?",
   "CrDataLoadFailed": "Не вдалося завантажити дані, спробуйте пізніше",
@@ -145,6 +144,7 @@
   "Stability_StableNoNewFeatures": "Цей пакунок стабільний, хоча автор більше не планує оновлень.\nАвтор все ж продовжує виправляти нові помилки.",
   "Stability_StableNoFutureUpdates": "Цей пакунок стабільний, хоча автор більше не підтримує його, майбутні оновлення чи виправлення помилок малоймовірні.",
   "Stability_HasIssuesNoFutureUpdates": "Цей пакунок може викликати помилки, хоча автор більше не підтримує його, майбутні оновлення чи виправлення помилок малоймовірні.",
+  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "Недостатньо інформації для належного огляду цього пакету.",
   "Stability_HasIssues": "Цей пакет може створювати проблеми.\nБудьте обережні при його використанні.",
   "Stability_Broken": "Цей пакет несправний.\nВідомо, що він або руйнує гру, або просто не працює.",
@@ -236,7 +236,7 @@
   "ManagePackage": "Керування пакунком",
   "Banned": "Забанений",
   "NoIssues": "Немає проблем",
-  "RequestReviewDisclaimer": "*Ваш Steam ID і логи надсилаються з вашим запитом",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Створення сценарію",
   "ThemeMaking": "Створення теми",
   "OtherCompatibilityWarnings": {
@@ -252,5 +252,7 @@
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Застосувати всі доступні дії",
   "SnoozeAll": "Відкласти всі знайдені проблеми",
-  "LinkedPackages": "Linked Packages"
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links"
 }
