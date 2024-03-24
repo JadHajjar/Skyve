@@ -5,10 +5,10 @@
   "Previous": "Προηγούμενο",
   "Skip": "Παράλειψη",
   "Note": "Σημείωση",
-  "NoteInfo": "Επιπλέον ενημερωτικό κείμενο που εμφανίζεται για το πακέτο",
+  "NoteInfo": "Additional information to be displayed for the mod",
   "BlackListName": "Μαύρη λίστα με όνομα",
-  "BlackListId": "Μαύρη λίστα από το Steam ID",
-  "GlobalTagsInfo": "Ετικέτες όλοι οι παίκτες που θα δουν στην εφαρμογή",
+  "BlackListId": "Black-list by ID",
+  "GlobalTagsInfo": "Tags all players will see in Skyve",
   "Links": "Σύνδεσμοι",
   "StatusesCount": "Statuses ({0})",
   "InteractionCount": "Αλληλεπιδράσεις ({0})",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "Παρακαλώ επιλέξτε μια έγκυρη χρήση για αυτό το πακέτο.",
   "Interaction_Alternative": {
     "One": "'{1}' μπορεί να χρησιμοποιηθεί ως εναλλακτική λύση για το '{0}'.",
-    "Plural": "Ένα από τα ακόλουθα πακέτα μπορεί να χρησιμοποιηθεί ως εναλλακτική λύση για το '{0}'."
+    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' και '{1}' έχουν τις ίδιες λειτουργίες.",
@@ -108,28 +108,28 @@
     "One": "'{0}' is required for '{1}'.",
     "Plural": "'{0}' is required for the following packages."
   },
-  "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
-  "Status_Succeeded": "'{0}' έχει πετύχει το '{1}'.\r\n\r\nΧρησιμοποιείτε ήδη το '{1}' οπότε δεν υπάρχει πλέον ανάγκη για '{0}'.",
+  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' έχει καταργηθεί, δεν υποστηρίζεται πλέον από το συγγραφέα του.",
   "Status_AutoDeprecated": "'{0}' δεν έχει ενημερωθεί εδώ και πολύ καιρό.",
   "Status_Reupload": {
     "Zero": "'{0}' είναι μια εκ νέου αποστολή ενός αρχικού πακέτου.",
-    "One": "Αυτό είναι ένα reupload του '{1}'."
+    "One": "'{0}' is a re-upload of '{1}'."
   },
-  "Status_CausesIssues": "'{0}' προκαλεί προβλήματα με το παιχνίδι σας.",
+  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "Όταν δημιουργείτε μια νέα αποθήκευση με ενεργοποιημένο το '{0}', δεν θα μπορείτε πλέον να φορτώσετε αυτό το αρχείο αν το '{0}' είναι απενεργοποιημένο.",
-    "One": "Όταν δημιουργείτε μια νέα αποθήκευση με ενεργοποιημένο το '{0}', δεν θα μπορείτε πλέον να φορτώσετε αυτό το αρχείο αν το '{0}' είναι απενεργοποιημένο.\r\n\r\nΧρησιμοποίησε '{1}' για να ανακτήσεις το αποθηκευμένο σου αν χρειαστεί. Διάβασε την περιγραφή του Εργαστηρίου του για περισσότερες πληροφορίες."
+    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
+    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
   },
   "Status_TestVersion": {
     "Zero": "Αυτή είναι μια \"Δοκιμή\" έκδοση, γνωρίζετε ότι οι δοκιμαστικές εκδόσεις των mods μπορούν να προκαλέσουν προβλήματα και ότι οι ενημερώσεις σε αυτό μπορεί να προκαλέσουν απροσδόκητα σφάλματα.",
-    "One": "Αυτή είναι μια 'Test' έκδοση του '{1}'.\r\n\r\nΝα γνωρίζετε ότι οι ενημερώσεις σε αυτό μπορεί να προκαλέσουν απροσδόκητα ζητήματα."
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
   "Status_MissingDlc": {
     "One": "Σας λείπει ένα DLC για να χρησιμοποιήσετε αυτό το πακέτο.",
     "Plural": "Δεν έχετε τα ακόλουθα DLC για να χρησιμοποιήσετε αυτό το πακέτο."
   },
-  "Status_DependencyMod": "Αυτό είναι ένα mod εξάρτησης, αλλά δεν φαίνεται σαν να χρησιμοποιείτε οποιοδήποτε πακέτο που το απαιτεί.",
+  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "Ο πηγαίος κώδικας αυτού του mod δεν είναι διαθέσιμος. Δεν πρέπει να τον χρησιμοποιείτε, εκτός αν εμπιστεύεστε το συγγραφέα του.",
   "SourceAvailable": "Ο πηγαίος κώδικας είναι διαθέσιμος",
   "StandardMod": "Standard Mod",
@@ -138,50 +138,51 @@
   "Status_SourceAvailable": "Αυτό το πακέτο δεν θα προειδοποιήσει για τον πηγαίο κώδικα που λείπει.",
   "Status_StandardMod": "Αυτό το πακέτο θα αγνοηθεί κατά την επεξεργασία των mods για αντιμετώπιση προβλημάτων.",
   "OutputText": "Αναμενόμενη Έξοδος",
-  "Stability_AssetNotReviewed": "Αυτό το στοιχείο δεν έχει εξεταστεί ακόμα.\r\n\r\nΟι πληροφορίες συμβατότητας μπορεί να μην είναι ακριβείς. Αν και τα στοιχεία ενεργητικού είναι γενικά σταθερά",
-  "Stability_NotReviewed": "This package has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "This package is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "Δεν υπάρχουν αρκετές πληροφορίες για την κατάλληλη αναθεώρηση αυτού του πακέτου.",
-  "Stability_HasIssues": "Αυτό το πακέτο μπορεί να προκαλέσει προβλήματα.\r\nΝα είστε προσεκτικοί κατά τη χρήση του.",
-  "Stability_Broken": "\r\nΕίναι γνωστό ότι είτε να σπάσει το παιχνίδι ή απλά δεν λειτουργεί.",
-  "Stability_Incompatible": "Αυτό το πακέτο δεν είναι συμβατό με το παιχνίδι ή σπάει.\r\n\r\nΘα πρέπει να το αφαιρέσετε αμέσως.",
-  "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
+  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
+  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
+  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
+  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
+  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
+  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
+  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
+  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
+  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "Θα πρέπει να εγγραφείτε στο ακόλουθο πακέτο:",
-    "Plural": "Θα πρέπει να εγγραφείτε σε αυτά τα πακέτα:"
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
-  "Action_RequiresConfiguration": "Θα πρέπει να ακολουθήσετε τις ακόλουθες οδηγίες:",
+  "Action_RequiresConfiguration": "Please follow the following instructions:",
   "Action_SelectOne": {
     "One": "Μεταξύ '{0}' και '{1}', θα πρέπει να επιλέξετε μόνο ένα από αυτά.",
     "Plural": "Μεταξύ του '{0}' και των παρακάτω πακέτων, θα πρέπει να επιλέξετε μόνο ένα."
   },
-  "Action_UnsubscribeThis": "Θα πρέπει να διαγραφείτε από το '{0}'.",
+  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
   "Action_UnsubscribeOther": {
-    "One": "Θα πρέπει να διαγραφείτε από το '{1}'.",
-    "Plural": "Θα πρέπει να διαγραφείτε από τα ακόλουθα πακέτα:"
+    "One": "You should remove '{1}' from your playset.",
+    "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "Θα πρέπει να αποκλείσετε το '{0}'.",
-  "ExcludeThis": "Εξαίρεση αυτού του πακέτου",
-  "Exclude": "Εξαίρεση",
+  "Action_ExcludeThis": "You should disable '{0}'.",
+  "ExcludeThis": "Disable this package",
+  "Exclude": "Disable",
   "Unsubscribe": "Διαγραφή",
   "Action_ExcludeOther": {
-    "One": "Θα πρέπει να αποκλείσετε το '{1}'.",
-    "Plural": "Θα πρέπει να αποκλείσετε τα ακόλουθα πακέτα:"
+    "One": "You should disable '{1}'.",
+    "Plural": "You should disable the following packages."
   },
   "Action_Switch": {
     "One": "Θα πρέπει να μεταβείτε σε '{1}'.",
-    "Plural": "Θα πρέπει να μεταβείτε σε ένα από τα ακόλουθα πακέτα:"
+    "Plural": "You should switch to one of the following packages."
   },
   "Action_IncludeThis": "You should include '{0}'",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
   "NoRequiredDlcs": "Δεν Απαιτούνται DLCs",
   "DlcsSelected": {
@@ -220,6 +221,10 @@
     "One": "{0} {1} απαιτεί εναλλαγή σε άλλο",
     "Plural": "{0} {1} απαιτεί μετάβαση σε άλλο"
   },
+  "RequiredItemCount": {
+    "One": "{0} {1} that is required but is not enabled",
+    "Plural": "{0} {1} that are required but are not enabled"
+  },
   "PackageType": "Τύπος Πακέτου",
   "GenericPackage": "Γενικό Πακέτο",
   "MusicPack": "Πακέτο Μουσικής",
@@ -231,7 +236,7 @@
   "ApplyChangedBeforeExit": "Έχετε μη αποθηκευμένες αλλαγές.\r\n\r\nΘα θέλατε να εφαρμόσετε αυτές τις αλλαγές πριν συνεχίσετε?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\n\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Ο συγγραφέας του {0}, {1}, είναι γνωστό ότι είναι κακόβουλο και/ή για τη συμπερίληψη επιβλαβούς περιεχομένου όπως οι ιοί στα πακέτα τους.",
-  "ReviewRequests": "Αιτήσεις Κριτικής {0}",
+  "ReviewRequests": "Review Requests",
   "ApplyRequestedChanges": "Εφαρμογή Αιτούμενων Αλλαγών",
   "ManagePackage": "Διαχείριση Πακέτου",
   "Banned": "Αποκλεισμένος",
@@ -250,9 +255,12 @@
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues",
+  "ApplyAllActions": "Apply all recommended actions",
+  "SnoozeAll": "Snooze all issues",
+  "SnoozeAllFiltered": "Snooze all filtered issues",
   "LinkedPackages": "Linked Packages",
   "NoTags": "No Tags",
-  "NoLinks": "No Links"
+  "NoLinks": "No Links",
+  "HideReviewedPackages": "Hide reviewed mods",
+  "ApplyRecommendedAction": "Apply recommended action"
 }
