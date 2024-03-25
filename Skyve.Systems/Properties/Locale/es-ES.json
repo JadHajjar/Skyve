@@ -155,7 +155,7 @@
   "CopyLogFile": "Copiar el archivo de registro del juego al portapapeles",
   "OpenLOTLogFolder": "Abrir la carpeta del registro de Skyve",
   "CopyLOTLogFile": "Copiar el archivo del registro de Skyve al portapapeles",
-  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
+  "GenericIncludedTotal": "{0} incluido: {1}, Total: {2}",
   "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
   "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
   "NewPlayset_Tip": "Crear o importar un playset nuevo",
