@@ -331,8 +331,10 @@ public class CompatibilityManager : ICompatibilityManager
 		var isCompatible = IsCompatible((localPackage?.SuggestedGameVersion).IfEmpty(workshopInfo?.SuggestedGameVersion), packageData?.ReviewedGameVersion);
 		if (!isCompatible)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), workshopInfo?.CleanName(true), []);
+			info.Add(ReportType.Stability, new StabilityStatus(isCodeMod ? PackageStability.Incompatible : PackageStability.AssetIncompatible, null, false), workshopInfo?.CleanName(true), []);
 		}
+
+		isCompatible |= !isCodeMod;
 
 		if (packageData is null)
 		{
@@ -413,7 +415,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (!package.IsLocal() && isCodeMod && packageData.Type is PackageType.GenericPackage)
 		{
-			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !packageData.IndexedStatuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true)
+			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !packageData.IndexedStatuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true && workshopInfo?.Links?.Any(x => x.Type is LinkType.Github) != true)
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.NoAction });
 			}

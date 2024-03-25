@@ -129,7 +129,7 @@ public partial class CarouselControl : SlickControl
 		var maxRatio = Math.Max(widthRatio, heightRatio);
 		var minRatio = Math.Min(widthRatio, heightRatio);
 
-		if (minRatio < 1)
+		if (minRatio < 1 || imageSize.Width <= imageSize.Height)
 		{
 			maxRatio = minRatio;
 		}
@@ -182,7 +182,7 @@ public partial class CarouselControl : SlickControl
 		var gap = (int)(64 * UI.FontScale);
 
 		var rect1 = new Rectangle(0, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
-		var rect2 = new Rectangle(MainThumb.Width - gap * 2, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
+		var rect2 = new Rectangle(MainThumb.Width - (gap * 2), imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
 		using var brush1 = new SolidBrush(Color.FromArgb(rect1.Contains(cursor) ? 255 : 125, BackColor.Tint(Lum: BackColor.IsDark() ? 6 : -6)));
 		using var brush2 = new SolidBrush(Color.FromArgb(rect2.Contains(cursor) ? 255 : 125, BackColor.Tint(Lum: BackColor.IsDark() ? 6 : -6)));
 
@@ -218,7 +218,7 @@ public partial class CarouselControl : SlickControl
 			var gap = (int)(64 * UI.FontScale);
 
 			var rect1 = new Rectangle(0, 0, gap * 2, MainThumb.Height).CenterR(gap, gap);
-			var rect2 = new Rectangle(MainThumb.Width - gap * 2, 0, gap * 2, MainThumb.Height).CenterR(gap, gap);
+			var rect2 = new Rectangle(MainThumb.Width - (gap * 2), 0, gap * 2, MainThumb.Height).CenterR(gap, gap);
 
 			if (rect1.Contains(e.Location))
 			{
@@ -257,6 +257,7 @@ public partial class CarouselControl : SlickControl
 	private class MiniThumb : SlickControl
 	{
 		public Bitmap? cachedImage;
+		private bool _selected;
 
 		public MiniThumb(IThumbnailObject thumbnailObject)
 		{
@@ -267,7 +268,18 @@ public partial class CarouselControl : SlickControl
 		}
 
 		public IThumbnailObject ThumbnailObject { get; }
-		public bool Selected { get; set; }
+		public bool Selected
+		{
+			get => _selected; set
+			{
+				_selected = value;
+
+				if (value)
+				{
+					SlickScroll.GlobalScrollTo(this, 5);
+				}
+			}
+		}
 
 		protected override void OnHoverStateChanged()
 		{
@@ -297,6 +309,11 @@ public partial class CarouselControl : SlickControl
 			if (image != null)
 			{
 				e.Graphics.DrawRoundedImage(image, ClientRectangle.CenterR(image.Size), (int)(5 * UI.FontScale));
+			}
+			else
+			{
+				using var icon = IconManager.GetIcon("Gallery", Height / 2).Color(FormDesign.Design.IconColor);
+				e.Graphics.DrawImage(icon, ClientRectangle.CenterR(icon.Size));
 			}
 		}
 

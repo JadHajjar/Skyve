@@ -697,6 +697,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation Stability => _instance.GetText("Stability");
 
 	/// <summary>
+	/// '{0}' is marked as not compatible with your current game version. Assets rarely break with new updates, so you should be okay using it.
+	/// </summary>
+	public static Translation StabilityAssetIncompatible => _instance.GetText("Stability_AssetIncompatible");
+
+	/// <summary>
 	/// '{0}' has not been reviewed yet. The compatibility info may not be accurate; though assets are generally stable.
 	/// </summary>
 	public static Translation StabilityAssetNotReviewed => _instance.GetText("Stability_AssetNotReviewed");

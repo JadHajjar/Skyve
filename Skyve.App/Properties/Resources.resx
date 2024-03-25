@@ -1585,4 +1585,16 @@
   <data name="I_Sync_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Sync_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="I_Megaphone_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Megaphone_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Megaphone_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Megaphone_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Megaphone_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Megaphone_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Megaphone_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Megaphone_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

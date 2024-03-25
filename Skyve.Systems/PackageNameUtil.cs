@@ -54,7 +54,12 @@ public class PackageNameUtil : IPackageNameUtil
 
 		IWorkshopInfo? workshopInfo;
 
-		if (package?.Name is null or "")
+        if (package is IPackageRequirement requirement && requirement.IsDlc)
+        {
+			return package.Name;
+        }
+
+        if (package?.Name is null or "")
 		{
 			workshopInfo = package?.GetWorkshopInfo();
 

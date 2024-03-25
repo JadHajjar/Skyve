@@ -1,27 +1,32 @@
 ﻿using Skyve.App.Interfaces;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
 public class MiniPackageControl : SlickControl
 {
-	private readonly IPackage? _package;
+	private readonly IPackageIdentity? _package;
 	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
+	private readonly ISubscriptionsManager _subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
+	private readonly IModLogicManager _modLogicManager = ServiceCenter.Get<IModLogicManager>();
+	private readonly IModUtil _modUtil = ServiceCenter.Get<IModUtil>();
 
-	public IPackage? Package => _package ?? _workshopService.GetPackage(new GenericPackageIdentity(Id));
+	public IPackageIdentity? Package => _package ?? _workshopService.GetInfo(new GenericPackageIdentity(Id));
 	public ulong Id { get; }
 
 	public bool ReadOnly { get; set; }
 	public bool Large { get; set; }
 	public bool ShowIncluded { get; set; }
+	public bool IsDlc { get; set; }
 
-	public MiniPackageControl(ulong steamId)
+	public MiniPackageControl(ulong modId)
 	{
-		Id = steamId;
+		Id = modId;
 	}
 
-	public MiniPackageControl(IPackage package)
+	public MiniPackageControl(IPackageIdentity package)
 	{
 		_package = package;
 		Id = package.Id;
@@ -34,18 +39,28 @@ public class MiniPackageControl : SlickControl
 		Padding = UI.Scale(new Padding(4), UI.FontScale);
 	}
 
+	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+	{
+		if (keyData == Keys.Alt)
+		{
+			Invalidate();
+		}
+
+		return base.ProcessCmdKey(ref msg, keyData);
+	}
+
 	protected override void OnMouseMove(MouseEventArgs e)
 	{
 		base.OnMouseMove(e);
 
 		var imageRect = ClientRectangle.Pad(Padding);
-				imageRect = imageRect.Align(new Size(imageRect.Height, imageRect.Height), ContentAlignment.MiddleRight);
+		imageRect = imageRect.Align(new Size(imageRect.Height, imageRect.Height), ContentAlignment.MiddleRight);
 
-		Cursor = ClientRectangle.Pad(1, 1, ReadOnly && !ShowIncluded ? 1 :( imageRect.Width + Padding.Horizontal), 1).Contains(e.Location)
-			|| (!ReadOnly && !ShowIncluded && imageRect.Contains(e.Location)) ? Cursors.Hand : Cursors.Default;
+		Cursor = ClientRectangle.Pad(1, 1, ReadOnly && !ShowIncluded ? 1 : (imageRect.Width + Padding.Horizontal), 1).Contains(e.Location)
+			|| ((!ReadOnly || ShowIncluded) && !IsDlc && imageRect.Contains(e.Location)) ? Cursors.Hand : Cursors.Default;
 	}
 
-	protected override void OnMouseClick(MouseEventArgs e)
+	protected override async void OnMouseClick(MouseEventArgs e)
 	{
 		base.OnMouseClick(e);
 
@@ -64,6 +79,28 @@ public class MiniPackageControl : SlickControl
 				if (!ReadOnly && imageRect.Contains(e.Location))
 				{
 					Dispose();
+				}
+				else if (ShowIncluded &&!IsDlc && imageRect.Contains(e.Location))
+				{
+					var isIncluded = Package.IsIncluded(out var partialIncluded) && !partialIncluded;
+
+					Loading = true;
+
+					if (!isIncluded || ModifierKeys.HasFlag(Keys.Alt))
+					{
+						await _modUtil.SetIncluded(Package, !isIncluded);
+					}
+					else
+					{
+						var enable = !Package.IsEnabled();
+
+						if (enable || !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil))
+						{
+							await _modUtil.SetEnabled(Package, enable);
+						}
+					}
+
+					Loading = false;
 				}
 				else if (ClientRectangle.Pad(1, 1, imageRect.Width + Padding.Horizontal, 1).Contains(e.Location))
 				{
@@ -96,7 +133,7 @@ public class MiniPackageControl : SlickControl
 		var image = Package?.GetThumbnail();
 		var textRect = ClientRectangle.Pad(1, 1, ReadOnly && !ShowIncluded ? 1 : (imageRect.Width + Padding.Horizontal), 1);
 
-		if (HoverState.HasFlag(HoverState.Hovered)&& textRect.Contains(PointToClient(Cursor.Position)))
+		if (HoverState.HasFlag(HoverState.Hovered) && textRect.Contains(PointToClient(Cursor.Position)))
 		{
 			using var backBrush = new SolidBrush(Color.FromArgb(25, FormDesign.Design.ForeColor));
 
@@ -105,7 +142,7 @@ public class MiniPackageControl : SlickControl
 
 		if (image is not null)
 		{
-			if (Package!.IsLocal)
+			if (Package!.IsLocal())
 			{
 				using var unsatImg = new Bitmap(image, imageRect.Size).Tint(Sat: 0);
 				e.Graphics.DrawRoundedImage(unsatImg, imageRect, Padding.Left);
@@ -117,7 +154,7 @@ public class MiniPackageControl : SlickControl
 		}
 		else
 		{
-			using var generic = IconManager.GetIcon("Package", imageRect.Height).Color(BackColor);
+			using var generic = IconManager.GetIcon(IsDlc ? "Dlc" : "Package", imageRect.Height).Color(BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
 			e.Graphics.FillRoundedRectangle(brush, imageRect, (int)(4 * UI.FontScale));
@@ -129,13 +166,10 @@ public class MiniPackageControl : SlickControl
 		textRect = textRect.Pad(imageRect.Right + Padding.Left, 0, 0, 0);
 		var text = Package?.CleanName(out tags) ?? Locale.UnknownPackage;
 
-		if (ShowIncluded && Package?.IsIncluded() == true && Package?.IsEnabled() == true)
+		if (ShowIncluded && Package is not null)
 		{
-			imageRect = ClientRectangle.Pad(Padding).Align(imageRect.Size, ContentAlignment.MiddleRight);
-
-			using var checkIcon = IconManager.GetIcon("Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor);
-
-			e.Graphics.DrawImage(checkIcon, imageRect.CenterR(checkIcon.Size));
+			if (!IsDlc)
+			DrawIncludedButton(e, ClientRectangle.Pad(Padding).Align(imageRect.Size, ContentAlignment.MiddleRight));
 		}
 
 		using var textBrush = new SolidBrush(ForeColor);
@@ -164,6 +198,130 @@ public class MiniPackageControl : SlickControl
 		if (Dock == DockStyle.None)
 		{
 			Width = tagRect.X + Padding.Right;
+		}
+	}
+
+	private void DrawIncludedButton(PaintEventArgs e, Rectangle buttonRect)
+	{
+		var localIdentity = Package!.GetLocalPackageIdentity();
+		var isIncluded = Package!.IsIncluded(out var isPartialIncluded);
+		var isEnabled = Package!.IsEnabled();
+		Color activeColor = default;
+		string text;
+
+		if (localIdentity is null && Package!.IsLocal())
+		{
+			return; // missing local item
+		}
+
+		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
+		var isHovered = Loading || (HoverState.HasFlag(HoverState.Hovered) && buttonRect.Contains(PointToClient(Cursor.Position)));
+
+		if (isHovered)
+		{
+			if (!isIncluded)
+			{
+				text = Locale.IncludeItem;
+			}
+			else if (required)
+			{
+				text = Locale.ThisModIsRequiredYouCantDisableIt;
+			}
+			else if (isEnabled)
+			{
+				text = Locale.DisableItem;
+			}
+			else
+			{
+				text = Locale.EnableItem;
+			}
+		}
+		else
+		{
+			if (isPartialIncluded)
+			{
+				text = Locale.PartiallyIncluded;
+			}
+			else if (!isIncluded)
+			{
+				text = Locale.IncludeItem;
+			}
+			else if (isEnabled)
+			{
+				text = Locale.Enabled;
+			}
+			else
+			{
+				text = Locale.Disabled;
+			}
+		}
+
+		if (!required && isIncluded && isHovered)
+		{
+			isPartialIncluded = false;
+			isEnabled = !isEnabled;
+		}
+
+		if (isEnabled)
+		{
+			activeColor = isPartialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
+		}
+
+		if (required && activeColor != default)
+		{
+			activeColor = activeColor.MergeColor(BackColor, !FormDesign.Design.IsDarkTheme ? 35 : 20);
+		}
+		else if (activeColor == default && isHovered)
+		{
+			activeColor = isIncluded ? isEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor : isHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.ForeColor;
+		}
+		else
+		{
+			if (activeColor == default)
+			{
+				activeColor = Color.FromArgb(isIncluded ? 20 : 200, FormDesign.Design.ForeColor);
+			}
+			else if (isHovered)
+			{
+				activeColor = activeColor.MergeColor(ForeColor, 75);
+			}
+		}
+
+		if (isHovered)
+		{
+			using var brush = new SolidBrush(Color.FromArgb(50, activeColor));
+
+			e.Graphics.FillRoundedRectangle(brush, buttonRect, Padding.Left);
+		}
+
+		Rectangle iconRect;
+
+		if (Loading)
+		{
+			iconRect = buttonRect.CenterR(buttonRect.Height * 3 / 5, buttonRect.Height * 3 / 5);
+
+			if (_subscriptionsManager.Status.ModId != Package!.Id || _subscriptionsManager.Status.Progress == 0 || !_subscriptionsManager.Status.IsActive)
+			{
+				DrawLoader(e.Graphics, iconRect, activeColor);
+			}
+			else
+			{
+				var width = Math.Min(Math.Min(iconRect.Width, iconRect.Height), (int)(32 * UI.UIScale));
+				var size = (float)Math.Max(2, width / (8D - (Math.Abs(100 - LoaderPercentage) / 50)));
+				var drawSize = new SizeF(width - size, width - size);
+				var rect = new RectangleF(new PointF(iconRect.X + ((iconRect.Width - drawSize.Width) / 2), iconRect.Y + ((iconRect.Height - drawSize.Height) / 2)), drawSize).Pad(size / 2);
+				using var pen = new Pen(activeColor, size) { StartCap = LineCap.Round, EndCap = LineCap.Round };
+
+				e.Graphics.DrawArc(pen, rect, -90, 360 * _subscriptionsManager.Status.Progress);
+			}
+		}
+		else
+		{
+			var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(Package!) ? "Wait" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : (isHovered && ModifierKeys.HasFlag(Keys.Alt)) ? "X" : "Enabled");
+			using var includedIcon = icon.Get(buttonRect.Height * 3 / 4).Color(activeColor);
+
+			iconRect = buttonRect.CenterR( includedIcon.Size);
+			e.Graphics.DrawImage(includedIcon, iconRect);
 		}
 	}
 }

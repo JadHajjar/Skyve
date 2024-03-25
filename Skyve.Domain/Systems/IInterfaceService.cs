@@ -8,4 +8,5 @@ public interface IInterfaceService
 	void ViewSpecificPackages(List<IPackageIdentity> packages, string title);
 	void OpenPackagePage(IPackageIdentity package, bool openCompatibilityPage = false);
 	void OpenPlaysetPage(IPlayset playset, bool settingsTab = false);
+	bool AskForDependencyConfirmation(List<IPackageIdentity> packages, List<IPackageIdentity> dependencies);
 }
