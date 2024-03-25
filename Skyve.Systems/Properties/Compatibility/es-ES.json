@@ -5,10 +5,10 @@
   "Previous": "Anterior",
   "Skip": "Omitir",
   "Note": "Nota",
-  "NoteInfo": "Additional information to be displayed for the mod",
+  "NoteInfo": "Información adicional que se mostrará para el mod",
   "BlackListName": "Lista negra por nombre",
-  "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "BlackListId": "Lista negra por ID",
+  "GlobalTagsInfo": "Etiquetas que todos los jugadores verán en Skyve",
   "Links": "Enlaces",
   "StatusesCount": "Estados ({0})",
   "InteractionCount": "Interacciones ({0})",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "Por favor, selecciona un uso válido para el cambio.",
   "Interaction_Alternative": {
     "One": "'{1}' puede ser usado como una alternativa a '{0}'.",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "Cualquiera de los siguientes paquetes puede ser usado como una alternativa a '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' y '{1}' tienen las mismas funcionalidades.",
@@ -108,17 +108,17 @@
     "One": "'{0}' es requerido para '{1}'.",
     "Plural": "'{0}' es requerido para los siguientes paquetes."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Interaction_Identical": "Las siguientes son varias versiones del mismo mod.\nUtilizarlas al mismo tiempo causará conflictos.",
+  "Status_Succeeded": "'{0}' ha sido reemplazado por '{1}', y estás utilizando '{1}', no necesitas '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto, ya no está soportado por su autor.",
   "Status_AutoDeprecated": "'{0}' no ha sido actualizado en mucho tiempo.",
   "Status_Reupload": {
     "Zero": "'{0}' es una nueva versión de un paquete original.",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "'{0}' es una nueva versión de '{1}'."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "Se sabe que '{0}' causa problemas con el juego.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
+    "Zero": "Al crear un nuevo guardado con '{0}' habilitado, ya no podrás cargar el mismo juego si '{0}' está deshabilitado.",
     "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
   },
   "Status_TestVersion": {
@@ -145,8 +145,8 @@
   "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
+  "Stability_NotEnoughInformation": "No hay suficiente información para hacer una evaluación de '{0}'.",
+  "Stability_HasIssues": "'{0}' puede causar problemas.\nTenga cuidado al usarlo.",
   "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
   "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
   "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
@@ -157,32 +157,32 @@
     "One": "You should add the following package to your playset.",
     "Plural": "You should add the following packages to your playset."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "Recomendamos que sigas las siguientes instrucciones:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "Deberías eliminar '{0}' de tu playset.",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "Deberías eliminar '{1}' de tu playset.",
+    "Plural": "Deberías eliminar los siguientes paquetes de tu playset."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "Action_ExcludeThis": "Deberías desactivar '{0}'.",
+  "ExcludeThis": "Desactivar este paquete",
+  "Exclude": "Desactivar",
   "Unsubscribe": "Anular suscripción",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "Deberías desactivar '{1}'.",
+    "Plural": "Deberías desactivar los siguientes paquetes."
   },
   "Action_Switch": {
     "One": "Deberías cambiar a '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "Deberías cambiar a uno de los siguientes paquetes."
   },
   "Action_IncludeThis": "Debes incluir '{0}'",
   "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Deberías añadir el siguiente paquete a tu playset.",
+    "Plural": "Deberías añadir los siguientes paquetes a tu playset."
   },
   "NoRequiredDlcs": "No requiere DLCs",
   "DlcsSelected": {
@@ -222,8 +222,8 @@
     "Plural": "{0} {1} requieren cambiar a otro"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1} que es necesario pero no está activado",
+    "Plural": "{0} {1} que son necesarios pero no están habilitados"
   },
   "PackageType": "Tipo de paquete",
   "GenericPackage": "Paquete genérico",
@@ -236,7 +236,7 @@
   "ApplyChangedBeforeExit": "Tienes cambios sin guardar.\n\n¿Quieres aplicar esos cambios antes de continuar?",
   "AuthorRetired": "El autor de {0}, {1}, se ha retirado o ha estado inactivo durante mucho tiempo.\n\nLas actualizaciones futuras y la estabilidad de sus paquetes no están garantizadas.",
   "AuthorMalicious": "El autor de {0}, {1}, es conocido por ser malicioso y/o por incluir contenido perjudicial como virus en sus paquetes.",
-  "ReviewRequests": "Review Requests",
+  "ReviewRequests": "Solicitudes de evaluación",
   "ApplyRequestedChanges": "Aplicar cambios solicitados",
   "ManagePackage": "Gestionar Paquete",
   "Banned": "Suspendido",
@@ -255,12 +255,12 @@
   "ViewRequest": "Ver solicitud",
   "CRT_RequiredItem": "Artículo requerido",
   "RequiredItem": "Artículo requerido",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
-  "SnoozeAllFiltered": "Snooze all filtered issues",
+  "ApplyAllActions": "Aplicar todas las acciones recomendadas",
+  "SnoozeAll": "Posponer todos los problemas",
+  "SnoozeAllFiltered": "Posponer todos los problemas mostrados",
   "LinkedPackages": "Paquetes vinculados",
   "NoTags": "Sin etiquetas",
   "NoLinks": "Sin enlaces",
-  "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action"
+  "HideReviewedPackages": "Ocultar mods evaluados",
+  "ApplyRecommendedAction": "Aplicar todas las acciones recomendadas"
 }
