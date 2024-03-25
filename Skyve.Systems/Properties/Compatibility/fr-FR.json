@@ -7,7 +7,7 @@
   "Note": "Note",
   "NoteInfo": "Information supplémentaire à afficher pour le mod",
   "BlackListName": "Liste noire par nom",
-  "BlackListId": "Black-list by ID",
+  "BlackListId": "Liste Noire par ID",
   "GlobalTagsInfo": "Tags all players will see in Skyve",
   "Links": "Liens",
   "StatusesCount": "Statuts ({0})",
@@ -168,11 +168,11 @@
     "Plural": "You should remove the following packages from your playset."
   },
   "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "ExcludeThis": "Désactiver ce paquet",
+  "Exclude": "Désactiver",
   "Unsubscribe": "Se désabonner",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
+    "One": "Vous devriez désactiver '{1}'.",
     "Plural": "You should disable the following packages."
   },
   "Action_Switch": {
@@ -255,8 +255,8 @@
   "ViewRequest": "Voir la demande",
   "CRT_RequiredItem": "Élément requis",
   "RequiredItem": "Élément requis",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
+  "ApplyAllActions": "Appliquer toutes les actions recommandées",
+  "SnoozeAll": "Ignorer tout les problèmes",
   "SnoozeAllFiltered": "Snooze all filtered issues",
   "LinkedPackages": "Paquets liés",
   "NoTags": "Aucun tag",
