@@ -403,8 +403,8 @@
   "RequestOption3": "补充此插件与另一个插件的交互方式",
   "ActivePlayset": "Active Playset",
   "References": "引用",
-  "OpenLog": "Open Game Log",
-  "OpenSkyveLog": "Open Skyve Log",
+  "OpenLog": "开启游戏日志",
+  "OpenSkyveLog": "开启 Skyve 日志",
   "Sort By": "排序方式",
   "FailedToFetchLogs": "获取日志失败",
   "DiscoverPlaysets": "查找在线配置文件",
@@ -504,7 +504,7 @@
   "SnapDashToGrid_Tip": "在编辑统计面板页面时，显示分为 12 列的网格状辅助线，便于将统计面板吸附到网格上",
   "UnsavedChangesPlayset": "此配置文件中的改动还没有保存",
   "ChangePlaysetSettings": "更改此配置文件的设置",
-  "ViewCompatibilityReport": "View the full report",
+  "ViewCompatibilityReport": "查看完整报告",
   "DashboardCustomizationInfo": "Customize your dashboard by dragging each section from its title.\r\nYou can also resize a section using the dotted triangle on its bottom-right corner.",
   "ViewAssetsWithIssues": "查看存在问题的资产",
   "ViewModsWithIssues": "查看存在问题的模组",
@@ -537,8 +537,8 @@
   "Status": "状态",
   "PackageUsage": "Package Usage",
   "CodeMod": {
-    "One": "Code Mod",
-    "Plural": "Code Mods"
+    "One": "代码模组",
+    "Plural": "代码模组"
   },
   "ThisModIsRequiredYouCantDisableIt": "此模组是必需的，不能禁用。",
   "FadeDisabledItems": "Fade out disabled mods & assets",
@@ -547,10 +547,10 @@
   "GenericPlayset": "Generic Playset",
   "CompatibilityCenter": "Compatibility Center",
   "Dependency": {
-    "One": "Dependency",
-    "Plural": "Dependencies"
+    "One": "依赖",
+    "Plural": "依赖"
   },
-  "ModID": "Mod ID",
+  "ModID": "模组ID",
   "Subscribers": "Subscribers",
   "Votes": "Likes",
   "PartiallyIncluded": "Partially Included",
@@ -559,7 +559,7 @@
   "NoMods": "Disable All Code-Mods",
   "FavoritePlaysets": "Favorite Playsets",
   "OnlyShowErrors": "Only show warnings and errors",
-  "RestartRequired": "Restart Required",
+  "RestartRequired": "需要重启",
   "FailedToApplyChanges": "Failed to apply the requested changes.",
   "ConfirmSelection": "Confirm Selection",
   "PackagesSelected": "Packages Selected ({0})",
