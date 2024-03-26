@@ -5,11 +5,10 @@
   "Previous": "السابق",
   "Skip": "تخطي",
   "Note": "ملاحظة",
-  "NoteInfo": "عرض نص معلومات إضافية للحزمة",
+  "NoteInfo": "Additional information to be displayed for the mod",
   "BlackListName": "القائمة السوداء بالاسم",
-  "BlackListId": "Black-list by name",
-  "GlobalTags": "العلامات العالمية",
-  "GlobalTagsInfo": "علامات جميع اللاعبين سوف يشاهدون في التطبيق",
+  "BlackListId": "Black-list by ID",
+  "GlobalTagsInfo": "Tags all players will see in Skyve",
   "Links": "الروابط",
   "StatusesCount": "Statuses ({0})",
   "InteractionCount": "التفاعلات ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "لا توجد معلومات كافية",
   "HasIssues": "لديه مشاكل",
   "Broken": "مكسورة",
@@ -60,9 +60,8 @@
   "AttentionRequired": "مطلوب الانتباه",
   "Website": "الموقع",
   "Donation": "تبرع",
-  "ManageSinglePackage": "إدارة حزم محددة",
-  "ManageCompatibilityData": "إدارة بيانات التوافق",
-  "YourPackages": "إدارة الحزم الخاصة بك",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "إضافة حزم",
   "ConfirmEndSession": "هل أنت متأكد من أنك تريد إنهاء جلستك؟",
   "CrDataLoadFailed": "فشل تحميل البيانات، حاول مرة أخرى لاحقاً",
@@ -75,7 +74,7 @@
   "PleaseReviewPackageUsage": "الرجاء تحديد استخدام صالح لهذه الحزمة.",
   "Interaction_Alternative": {
     "One": "'{1}' يمكن استخدامه كبديل لـ '{0}'.",
-    "Plural": "يمكن استخدام إحدى الحزم التالية كبديل لـ '{0}'."
+    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' و '{1}' لديهم نفس الوظائف.",
@@ -109,18 +108,18 @@
     "One": "'{0}' is required for '{1}'.",
     "Plural": "'{0}' is required for the following packages."
   },
-  "Interaction_Identical": "هذه إصدارات متعددة من نفس الحزمة.\r\n\r\nيجب عليك اختيار واحد منها فقط.",
-  "Status_Succeeded": "'{0}' نجح ب '{1}'.\r\n\r\nأنت تستخدم بالفعل '{1}' لذلك لا حاجة إلى '{0}' بعد الآن.",
+  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' مهجور, لم يعد مدعوما من قبل مؤلفه.",
   "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' هو إعادة تحميل الحزمة الأصلية.",
-    "One": "هذا هو إعادة تحميل من '{1}'."
+    "One": "'{0}' is a re-upload of '{1}'."
   },
-  "Status_CausesIssues": "{0}'' يسبب مشاكل مع لعبتك.",
+  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "عند إنشاء حفظ جديد مع '{0}' مفعل، لن تتمكن بعد الآن من تحميل الحفظ إذا كان '{0}' معطل.",
-    "One": "عند إنشاء حفظ جديد مع '{0}' مفعل، لن تتمكن بعد الآن من تحميل الحفظ إذا كان '{0}' معطل.\r\n\r\nاستخدم '{1}' لاسترداد حفظك إذا لزم الأمر. اقرأ وصف ورشة العمل لمزيد من المعلومات."
+    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
+    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
   },
   "Status_TestVersion": {
     "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
@@ -130,7 +129,7 @@
     "One": "You're missing the '{0}' DLC to use this package.",
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
-  "Status_DependencyMod": "هذا هو وضع التبعية، ولكن يبدو أنك تستخدم أي حزمة تتطلب ذلك.",
+  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "الرمز المصدر لهذا التعديل غير متوفر. لا يجب عليك استخدامه إلا إذا كنت تثق بمؤلفه.",
   "SourceAvailable": "رمز المصدر متاح",
   "StandardMod": "Standard Mod",
@@ -139,40 +138,42 @@
   "Status_SourceAvailable": "هذه الحزمة لن تحذر من الكود المصدر المفقود.",
   "Status_StandardMod": "سيتم تجاهل هذه الحزمة أثناء معالجة المودات لتكون مستكشفة عن المشاكل.",
   "OutputText": "المخرجات المتوقعة",
-  "Stability_AssetNotReviewed": "لم يتم مراجعة هذا الأصل بعد.\r\n\r\nقد لا تكون معلومات التوافق دقيقة؛ على الرغم من أن الأصول مستقرة بشكل عام",
-  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
-  "Stability_Stable": "This package is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_NotEnoughInformation": "لا توجد معلومات كافية لاستعراض هذه الحزمة بشكل صحيح.",
-  "Stability_HasIssues": "هذه الحزمة يمكن أن تسبب مشكلات.\r\nكن حذرا عند استخدامها.",
-  "Stability_Broken": "تم كسر هذه الحزمة.\r\nمن المعروف أنها إما كسر اللعبة أو أنها لا تعمل فقط.",
-  "Stability_Incompatible": "هذه الحزمة غير متوافقة مع اللعبة أو كسرها.\r\n\r\nيجب إزالتها فورا.",
-  "Stability_Local": "هذه الحزمة هي نسخة محلية من التعديل الأصلي '{0}'.\r\n\r\nعادة ما تستخدم الإصدارات المحلية لأغراض الاختبار أو في حالة عدم وجود سيفيك.\r\n\r\nتحقق من روابط الحزمة للبحث عن تحديثات للمود.",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
+  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
+  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
+  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
+  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
+  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
+  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
+  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
+  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
+  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should subscribe to the following package.",
-    "Plural": "You should subscribe to these packages."
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
-  "Action_RequiresConfiguration": "ينبغي أن تتبع التعليمات التالية:",
+  "Action_RequiresConfiguration": "Please follow the following instructions:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "يجب عليك إلغاء الاشتراك من '{0}'.",
+  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
   "Action_UnsubscribeOther": {
-    "One": "يجب عليك إلغاء الاشتراك من '{1}'.",
-    "Plural": "You should unsubscribe from the following packages."
+    "One": "You should remove '{1}' from your playset.",
+    "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "يجب أن تستبعد ''{0}'.",
-  "ExcludeThis": "استبعاد هذه الحزمة",
-  "Exclude": "استبعاد",
+  "Action_ExcludeThis": "You should disable '{0}'.",
+  "ExcludeThis": "Disable this package",
+  "Exclude": "Disable",
   "Unsubscribe": "إلغاء الاشتراك",
   "Action_ExcludeOther": {
-    "One": "يجب أن تستبعد ''{1}'.",
-    "Plural": "You should exclude the following packages."
+    "One": "You should disable '{1}'.",
+    "Plural": "You should disable the following packages."
   },
   "Action_Switch": {
     "One": "يجب عليك الانتقال إلى '{1}'.",
@@ -180,8 +181,8 @@
   },
   "Action_IncludeThis": "You should include '{0}'",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
   "NoRequiredDlcs": "لا يوجد DLCs مطلوبة",
   "DlcsSelected": {
@@ -220,6 +221,10 @@
     "One": "{0} {1} يتطلب التبديل إلى آخر",
     "Plural": "{0} {1} يتطلب التبديل إلى آخر"
   },
+  "RequiredItemCount": {
+    "One": "{0} {1} that is required but is not enabled",
+    "Plural": "{0} {1} that are required but are not enabled"
+  },
   "PackageType": "نوع الحزمة",
   "GenericPackage": "حزمة عامة",
   "MusicPack": "باقة الموسيقى",
@@ -231,12 +236,12 @@
   "ApplyChangedBeforeExit": "لديك تغييرات غير محفوظة.\r\n\r\nهل ترغب في تطبيق هذه التغييرات قبل المتابعة؟",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "مؤلف {0}، {1}، معروف بأنه خبيث و/أو أنه يتضمن محتوى ضار مثل الفيروسات في الحزم الخاصة بهم.",
-  "ReviewRequests": "مراجعة طلبات {0}",
+  "ReviewRequests": "Review Requests",
   "ApplyRequestedChanges": "تطبيق التغييرات المطلوبة",
   "ManagePackage": "إدارة الحزمة",
   "Banned": "محظور",
   "NoIssues": "لا توجد مشاكل",
-  "RequestReviewDisclaimer": "*معرف Steam وسجلاتك يتم إرسالها مع طلبك",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "وضع السيناريوهات",
   "ThemeMaking": "تصميم الموضوع",
   "OtherCompatibilityWarnings": {
@@ -250,7 +255,12 @@
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "ApplyAllActions": "Apply all recommended actions",
+  "SnoozeAll": "Snooze all issues",
+  "SnoozeAllFiltered": "Snooze all filtered issues",
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links",
+  "HideReviewedPackages": "Hide reviewed mods",
+  "ApplyRecommendedAction": "Apply recommended action"
 }

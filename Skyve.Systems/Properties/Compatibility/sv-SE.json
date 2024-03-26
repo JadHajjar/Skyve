@@ -5,11 +5,10 @@
   "Previous": "Föregående",
   "Skip": "Hoppa",
   "Note": "Anteckning",
-  "NoteInfo": "Extra informationstext som visas för paketet",
+  "NoteInfo": "Additional information to be displayed for the mod",
   "BlackListName": "Svartlista efter namn",
-  "BlackListId": "Black-list by name",
-  "GlobalTags": "Globala taggar",
-  "GlobalTagsInfo": "Taggar alla spelare kommer att se i appen",
+  "BlackListId": "Black-list by ID",
+  "GlobalTagsInfo": "Tags all players will see in Skyve",
   "Links": "Länkar",
   "StatusesCount": "Statuses ({0})",
   "InteractionCount": "Interaktioner ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "Inte tillräckligt med information",
   "HasIssues": "Har problem",
   "Broken": "Trasig",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Uppmärksamhet krävs",
   "Website": "Webbplats",
   "Donation": "Donera",
-  "ManageSinglePackage": "Hantera specifika paket",
-  "ManageCompatibilityData": "Hantera kompatibilitetsdata",
-  "YourPackages": "Hantera dina paket",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "Lägg till paket",
   "ConfirmEndSession": "Är du säker på att du vill avsluta din session?",
   "CrDataLoadFailed": "Det gick inte att ladda data, försök igen senare",
@@ -75,7 +74,7 @@
   "PleaseReviewPackageUsage": "Välj en giltig användning för det här paketet.",
   "Interaction_Alternative": {
     "One": "'{1}' kan användas som ett alternativ till '{0}'.",
-    "Plural": "Ett av följande paket kan användas som ett alternativ till '{0}'."
+    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' och '{1}' har samma funktioner.",
@@ -109,18 +108,18 @@
     "One": "'{0}' is required for '{1}'.",
     "Plural": "'{0}' is required for the following packages."
   },
-  "Interaction_Identical": "Dessa är flera versioner av samma paket.\r\n\r\nDu bör endast välja en av dem.",
-  "Status_Succeeded": "'{0}' efterträds av '{1}'.\r\n\r\nDu använder redan '{1}' så det finns inget behov av '{0}' längre.",
+  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' är föråldrad, den stöds inte längre av dess författare.",
   "Status_AutoDeprecated": "'{0}' har inte uppdaterats på länge, det stöds förmodligen inte längre av sin författare.",
   "Status_Reupload": {
     "Zero": "'{0}' är en återsändning av ett originalpaket.",
-    "One": "Detta är en ny uppladdning av '{1}'."
+    "One": "'{0}' is a re-upload of '{1}'."
   },
-  "Status_CausesIssues": "'{0}' orsakar problem med ditt spel.",
+  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "När du skapar en ny spara med '{0}' aktiverad, du kommer inte längre att kunna ladda som spara om '{0}' är inaktiverad.",
-    "One": "När du skapar en ny spara med '{0}' aktiverad, du kommer inte längre att kunna ladda som spara om '{0}' är inaktiverad.\r\n\r\nAnvänd '{1}' för att återställa din spara om det behövs. Läs dess Workshop-beskrivning för mer information."
+    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
+    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
   },
   "Status_TestVersion": {
     "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
@@ -130,7 +129,7 @@
     "One": "You're missing the '{0}' DLC to use this package.",
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
-  "Status_DependencyMod": "Detta är en beroende-mod, men det verkar inte som om du använder något paket som kräver den.",
+  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "Källkoden för denna mod är inte tillgänglig. Du bör inte använda den om du inte litar på dess författare.",
   "SourceAvailable": "Källkoden finns tillgänglig",
   "StandardMod": "Standard Mod",
@@ -139,40 +138,42 @@
   "Status_SourceAvailable": "Detta paket kommer inte att varna för saknad källkod.",
   "Status_StandardMod": "Detta paket kommer att ignoreras medan moddarna bearbetas för att felsökas.",
   "OutputText": "Förväntad utdata",
-  "Stability_AssetNotReviewed": "Denna tillgång har inte granskats ännu.\r\n\r\nKompatibilitetsinformationen kanske inte är korrekt, men tillgångar är generellt stabila",
-  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
-  "Stability_Stable": "This package is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_NotEnoughInformation": "Det finns inte tillräckligt med information för att ordentligt granska detta paket.",
-  "Stability_HasIssues": "Detta paket kan orsaka problem.\r\nVar försiktig när du använder det.",
-  "Stability_Broken": "Detta paket är trasigt.\r\nDet är känt att antingen bryta spelet eller bara fungerar inte.",
-  "Stability_Incompatible": "Detta paket är inte kompatibelt med eller går sönder spelet.\r\n\r\nDu bör ta bort det omedelbart.",
-  "Stability_Local": "Detta paket är en lokal version av dess ursprungliga mod '{0}'.\r\n\r\nLokala versioner används vanligtvis för testning eller om du inte har Steam.\r\n\r\nKontrollera paketets länkar för att söka efter uppdateringar till modden.",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
+  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
+  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
+  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
+  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
+  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
+  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
+  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
+  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
+  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should subscribe to the following package.",
-    "Plural": "You should subscribe to these packages."
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
-  "Action_RequiresConfiguration": "Du bör följa följande instruktioner:",
+  "Action_RequiresConfiguration": "Please follow the following instructions:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "Du bör avsluta prenumerationen på '{0}'.",
+  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
   "Action_UnsubscribeOther": {
-    "One": "Du bör avsluta prenumerationen på '{1}'.",
-    "Plural": "You should unsubscribe from the following packages."
+    "One": "You should remove '{1}' from your playset.",
+    "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "Du bör exkludera '{0}'.",
-  "ExcludeThis": "Exkludera detta paket",
-  "Exclude": "Exkludera",
+  "Action_ExcludeThis": "You should disable '{0}'.",
+  "ExcludeThis": "Disable this package",
+  "Exclude": "Disable",
   "Unsubscribe": "Avprenumerera",
   "Action_ExcludeOther": {
-    "One": "Du bör exkludera '{1}'.",
-    "Plural": "You should exclude the following packages."
+    "One": "You should disable '{1}'.",
+    "Plural": "You should disable the following packages."
   },
   "Action_Switch": {
     "One": "Du bör byta till '{1}'.",
@@ -180,8 +181,8 @@
   },
   "Action_IncludeThis": "You should include '{0}'",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
   "NoRequiredDlcs": "Inga nödvändiga DLC:er",
   "DlcsSelected": {
@@ -220,6 +221,10 @@
     "One": "{0} {1} kräver byte till en annan",
     "Plural": "{0} {1} kräver byte till en annan"
   },
+  "RequiredItemCount": {
+    "One": "{0} {1} that is required but is not enabled",
+    "Plural": "{0} {1} that are required but are not enabled"
+  },
   "PackageType": "Paketets typ",
   "GenericPackage": "Generellt paket",
   "MusicPack": "Musik Paket",
@@ -231,12 +236,12 @@
   "ApplyChangedBeforeExit": "Du har osparade ändringar.\r\n\r\nVill du tillämpa dessa ändringar innan du fortsätter?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Författaren till {0}, {1}, är känd för att vara skadlig och/eller för att inkludera skadligt innehåll som virus i sina paket.",
-  "ReviewRequests": "Granska förfrågningar {0}",
+  "ReviewRequests": "Review Requests",
   "ApplyRequestedChanges": "Tillämpa begärda ändringar",
   "ManagePackage": "Hantera paket",
   "Banned": "Bannlyst",
   "NoIssues": "Inga problem",
-  "RequestReviewDisclaimer": "*Ditt Steam-ID och dina loggar skickas med din begäran",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "Scenario-skapande",
   "ThemeMaking": "Tema-skapande",
   "OtherCompatibilityWarnings": {
@@ -250,7 +255,12 @@
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "ApplyAllActions": "Apply all recommended actions",
+  "SnoozeAll": "Snooze all issues",
+  "SnoozeAllFiltered": "Snooze all filtered issues",
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links",
+  "HideReviewedPackages": "Hide reviewed mods",
+  "ApplyRecommendedAction": "Apply recommended action"
 }

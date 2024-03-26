@@ -5,11 +5,10 @@
   "Previous": "이전",
   "Skip": "스킵",
   "Note": "참고",
-  "NoteInfo": "패키지에 대해 표시되는 추가 정보 텍스트",
+  "NoteInfo": "Additional information to be displayed for the mod",
   "BlackListName": "이름별 블랙리스트",
-  "BlackListId": "Steam 아이디별 블랙리스트",
-  "GlobalTags": "전역 태그",
-  "GlobalTagsInfo": "모든 플레이어가 앱에서 볼 수 있는 태그",
+  "BlackListId": "Black-list by ID",
+  "GlobalTagsInfo": "Tags all players will see in Skyve",
   "Links": "링크",
   "StatusesCount": "상태({0})",
   "InteractionCount": "상호작용 ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "안정적임, 버그 픽스 업데이트 있을 수 있음",
   "StableNoFutureUpdates": "안정적임, 더 이상 업데이트 없음",
   "HasIssuesNoFutureUpdates": "문제 있음, 더 이상 업데이트 없음",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "충분한 정보 없음",
   "HasIssues": "문제 있음",
   "Broken": "망가짐",
@@ -60,9 +60,8 @@
   "AttentionRequired": "주목 필요",
   "Website": "웹사이트",
   "Donation": "후원",
-  "ManageSinglePackage": "특정 패키지 관리",
-  "ManageCompatibilityData": "호환성 데이터 관리",
-  "YourPackages": "패키지 관리",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "패키지 추가",
   "ConfirmEndSession": "정말 이 세션을 종료하시겠습니까?",
   "CrDataLoadFailed": "데이터를 불러오는 데 실패했습니다. 나중에 다시 시도해 주세요",
@@ -75,7 +74,7 @@
   "PleaseReviewPackageUsage": "이 패키지에 알맞는 용도를 선택해 주세요.",
   "Interaction_Alternative": {
     "One": "'{1}' 는 '{0}'의 대안으로 사용될 수 있습니다.",
-    "Plural": "다음 패키지들 중 하나는 '{0}'의 대안으로 사용될 수 있습니다."
+    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' 와 '{1}' 는 같은 기능을 가집니다.",
@@ -109,28 +108,28 @@
     "One": "'{0}' 는 '{1}' 에 필요합니다.",
     "Plural": "'{0}' 는 다음 패키지들에 필요합니다."
   },
-  "Interaction_Identical": "이것들은 같은 패키지의 여러 버전들입니다.\n\n이 중 하나만 선택해야 합니다.",
-  "Status_Succeeded": "'{0}' 는 '{1}' 로 계승되었습니다.\n\n이미 '{1}' 를 사용하고 있으므로 '{0}' 는 더 이상 필요하지 않습니다.",
+  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' 는 더 이상 제작자에 의해 지원되지 않으며 사용되지 않습니다.",
   "Status_AutoDeprecated": "'{0}' 는 오랫동안 업데이트되지 않았습니다. 더 이상 제작자에 의해 지원되지 않는 것일 수 있습니다.",
   "Status_Reupload": {
     "Zero": "'{0}' 는 기존 패키지의 재업로드입니다.",
-    "One": "이것은 '{1}'의 재업로드입니다."
+    "One": "'{0}' is a re-upload of '{1}'."
   },
-  "Status_CausesIssues": "'{0}' 는 게임에 문제를 일으킬 수 있습니다.",
+  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "'{0}' 가 활성화된 채로 새 세이브를 생성하고 '{0}' 가 비활성화되면 해당 세이브를 더 이상 불러올 수 없습니다.",
-    "One": "'{0}' 가 활성화된 채로 새 세이브를 생성하고 '{0}' 가 비활성화되면 해당 세이브를 더 이상 불러올 수 없습니다.\n\n세이브 복구가 필요하다면 '{1}' 를 사용하세요. 자세한 정보는 창작마당의 설명을 읽어보세요."
+    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
+    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
   },
   "Status_TestVersion": {
     "Zero": "이것은 '테스트' 버전입니다. 모드의 테스트 버전은 문제를 일으킬 수 있으며 업데이트는 예기치 않은 오류를 발생시킬 수 있습니다.",
-    "One": "이것은 '{1}'의 테스트 버전입니다.\n\n업데이트는 예기치 않은 오류를 발생시킬 수 있습니다."
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
   "Status_MissingDlc": {
     "One": "이 패키지에 필요한 '{0}' DLC가 누락되었습니다.",
     "Plural": "이 패키지에 필요한 다음 DLC들을 누락했습니다."
   },
-  "Status_DependencyMod": "이것은 종속성 모드입니다. 하지만 이를 필요로 하는 어떤 패키지도 사용하고 있지 않은 것 같습니다.",
+  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "이 모드의 소스 코드를 확인할 수 없습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
   "SourceAvailable": "소스 코드 확인 가능",
   "StandardMod": "기본 모드",
@@ -139,49 +138,51 @@
   "Status_SourceAvailable": "이 패키지는 누락된 소스 코드를 경고하지 않습니다.",
   "Status_StandardMod": "이 패키지는 문제 해결할 모드를 프로세스 하는 동안 무시됩니다.",
   "OutputText": "예상 출력",
-  "Stability_AssetNotReviewed": "이 에셋은 아직 리뷰되지 않았습니다.\n\n에셋들은 일반적으로 안정적이지만 호환성 정보는 정확하지 않을 수 있습니다.",
-  "Stability_NotReviewed": "이 패키지는 아직 리뷰되지 않았습니다.\n\n호환성 정보는 정확하지 않을 수 있습니다.",
-  "Stability_Stable": "이 패키지는 안정적입니다. 제작자는 이 패키지에 대해 여전히 활동적으로 작업하며 업데이트하고 있습니다.",
-  "Stability_StableNoNewFeatures": "이 패키지는 안정적입니다. 하지만 제작자는 더 이상 기능 업데이트를 출시하지 않습니다.\n그렇지만 새로운 버그가 생긴 경우에는 업데이트가 있을 것입니다.",
-  "Stability_StableNoFutureUpdates": "이 패키지는 안정적입니다. 하지만 제작자는 이를 지원하고 있지 않습니다. 향후 업데이트나 버그 수정이 있을 가능성은 거의 없습니다.",
-  "Stability_HasIssuesNoFutureUpdates": "이 패키지는 문제를 일으킬 수 있습니다. 제작자는 이를 지원하고 있지 않습니다. 향후 업데이트나 버그 수정이 있을 가능성은 거의 없습니다.",
-  "Stability_NotEnoughInformation": "이 패키지를 제대로 검토할 만한 정보가 충분하지 않습니다.",
-  "Stability_HasIssues": "이 패키지는 문제를 일으킬 수 있습니다.\n주의해서 사용하세요.",
-  "Stability_Broken": "이 패키지는 망가졌습니다.\n작동하지 않거나 게임을 망가트리는 것으로 알려져 있습니다.",
-  "Stability_Incompatible": "이 패키지는 게임과 호환되지 않거나 게임을 망가트립니다.\n\n이것은 바로 제거해야 합니다.",
-  "Stability_Local": "이 패키지는 이 패키지의 원본 모드인 '{0}'의 로컬 버전입니다.\n\n로컬 버전은 일반적으로 테스트 목적이나 Steam이 없는 경우에 사용됩니다.\n\n모드에 대한 업데이트를 찾으려면 패키지의 링크를 확인하세요.",
-  "Stability_BrokenFromPatch": "이 패키지는 최신 패치 이후로 손상되었습니다. 패키지가 업데이트 될 때까지 기다리십시오.",
+  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
+  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
+  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
+  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
+  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
+  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
+  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
+  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
+  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
+  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "다음 패키지를 구독해야 합니다:",
-    "Plural": "이 패키지들을 구독해야 합니다:"
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
-  "Action_RequiresConfiguration": "다음 지침을 따라야 합니다:",
+  "Action_RequiresConfiguration": "Please follow the following instructions:",
   "Action_SelectOne": {
     "One": "'{0}' 와 '{1}' 중 하나만 선택해야 합니다.",
     "Plural": "다음 패키지들과 '{0}' 중 하나만 선택해야 합니다."
   },
-  "Action_UnsubscribeThis": "'{0}' 를 구독 취소해야 합니다.",
+  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
   "Action_UnsubscribeOther": {
-    "One": "'{1}' 를 구독 취소해야 합니다.",
-    "Plural": "다음 패키지들을 구독 취소해야 합니다:"
+    "One": "You should remove '{1}' from your playset.",
+    "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "'{0}' 를 제외해야 합니다.",
-  "ExcludeThis": "이 패키지를 제외하기",
-  "Exclude": "제외 필요",
+  "Action_ExcludeThis": "You should disable '{0}'.",
+  "ExcludeThis": "Disable this package",
+  "Exclude": "Disable",
   "Unsubscribe": "구독 취소 필요",
   "Action_ExcludeOther": {
-    "One": "'{1}' 를 제외해야 합니다.",
-    "Plural": "다음 패키지들을 제외해야 합니다:"
+    "One": "You should disable '{1}'.",
+    "Plural": "You should disable the following packages."
   },
   "Action_Switch": {
     "One": "'{1}' 로 바꾸어야 합니다.",
-    "Plural": "다음 패키지 중 하나로 바꿔야 합니다."
+    "Plural": "You should switch to one of the following packages."
   },
   "Action_IncludeThis": "'{0}' 를 포함해야 합니다",
   "Action_IncludeOther": {
-    "One": "다음 패키지를 포함해야 합니다:",
-    "Plural": "이 패키지들을 포함해야 합니다:"
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
   "NoRequiredDlcs": "필요한 DLC 없음",
   "DlcsSelected": {
@@ -220,6 +221,10 @@
     "One": "다른 {1}로 바꾸어야 하는 {1} {0}개가 있습니다",
     "Plural": "다른 {1}로 바꾸어야 하는 {1} {0}개가 있습니다"
   },
+  "RequiredItemCount": {
+    "One": "{0} {1} that is required but is not enabled",
+    "Plural": "{0} {1} that are required but are not enabled"
+  },
   "PackageType": "패키지 유형",
   "GenericPackage": "일반적인 패키지",
   "MusicPack": "뮤직 팩",
@@ -231,12 +236,12 @@
   "ApplyChangedBeforeExit": "저장되지 않은 변경사항이 있습니다.\n\n계속하기 전에 변경사항을 적용하시겠습니까?",
   "AuthorRetired": "{0}의 제작자인 {1}는 제작을 그만두었거나 오랫동안 활동하지 않았습니다.\n\n그의 패키지에 대한 앞으로의 업데이트와 안정성은 보장되지 않습니다.",
   "AuthorMalicious": "{0}의 제작자인 {1}는 바이러스와 같은 유해하거나 악성인 콘텐츠를 자신의 패키지에 포함시키는 것으로 알려져 있습니다.",
-  "ReviewRequests": "검토 요청 {0}",
+  "ReviewRequests": "Review Requests",
   "ApplyRequestedChanges": "요청된 변경사항 적용",
   "ManagePackage": "패키지 관리",
   "Banned": "차단됨",
   "NoIssues": "문제 없음",
-  "RequestReviewDisclaimer": "*당신의 Steam ID와 로그가 요청과 함께 전송됩니다",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "시나리오 제작용",
   "ThemeMaking": "테마 제작용",
   "OtherCompatibilityWarnings": {
@@ -250,7 +255,12 @@
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "필요한 항목",
   "RequiredItem": "Required Item",
-  "ApplyAllActions": "가능한 모든 작업 적용하기",
-  "SnoozeAll": "표시된 모든 이슈 나중에 다시 알림",
-  "LinkedPackages": "Linked Packages"
+  "ApplyAllActions": "Apply all recommended actions",
+  "SnoozeAll": "Snooze all issues",
+  "SnoozeAllFiltered": "Snooze all filtered issues",
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links",
+  "HideReviewedPackages": "Hide reviewed mods",
+  "ApplyRecommendedAction": "Apply recommended action"
 }

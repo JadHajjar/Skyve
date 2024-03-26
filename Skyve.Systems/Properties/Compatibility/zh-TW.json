@@ -5,11 +5,10 @@
   "Previous": "返回",
   "Skip": "跳過",
   "Note": "備註",
-  "NoteInfo": "在外掛程式頁面顯示的更多的資訊文本",
+  "NoteInfo": "Additional information to be displayed for the mod",
   "BlackListName": "按名稱列出黑名單",
-  "BlackListId": "Steam ID 黑名單",
-  "GlobalTags": "全域標籤",
-  "GlobalTagsInfo": "所有玩家都會在應用程式中看到的標籤",
+  "BlackListId": "Black-list by ID",
+  "GlobalTagsInfo": "Tags all players will see in Skyve",
   "Links": "連結",
   "StatusesCount": "狀態 ({0})",
   "InteractionCount": "對話模式 ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stable, only bug-fix updates",
   "StableNoFutureUpdates": "Stable, no more updates",
   "HasIssuesNoFutureUpdates": "Has issues, no more updates",
+  "BreaksOnPatch": "Stable, potentially breaks on patch",
   "NotEnoughInformation": "沒有足夠的資訊",
   "HasIssues": "存在問題",
   "Broken": "損壞的",
@@ -60,9 +60,8 @@
   "AttentionRequired": "需要注意",
   "Website": "網站",
   "Donation": "贊助",
-  "ManageSinglePackage": "管理特定外掛",
-  "ManageCompatibilityData": "管理相容性報告的資料",
-  "YourPackages": "管理您的外掛程式",
+  "ManageCompatibilityData": "Compatibility Management",
+  "YourPackages": "Manage your mods",
   "AddPackages": "添加外掛程式",
   "ConfirmEndSession": "您確定要關閉此會話嗎？",
   "CrDataLoadFailed": "數據載入失敗，請稍後重試",
@@ -75,7 +74,7 @@
   "PleaseReviewPackageUsage": "請為此外掛程式選擇一個有效的用法。",
   "Interaction_Alternative": {
     "One": "'{1}' 可以作為 '{0}' 的替代方案。",
-    "Plural": "下列任意一個外掛程式可以作為 '{0}' 的替代方案："
+    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' 和 '{1}' 具有相同的功能。",
@@ -109,28 +108,28 @@
     "One": "'{0}' is required for '{1}'.",
     "Plural": "'{0}' is required for the following packages."
   },
-  "Interaction_Identical": "這些是同一個外掛程式的多個不同版本。\n\n您應當只選擇使用其中一個，並取消訂閱其他版本。",
-  "Status_Succeeded": "「{0}」 的功能已被「{1}」繼承。\n\n您已經使用了「{1}」，因此不再需要使用「{0}」。",
+  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' 已經廢棄，不再受到作者的支持。",
   "Status_AutoDeprecated": "「{0}」已經很長時間沒有進行過更新，可能不再受到作者的支援。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某個原始外掛程式的重新上傳版本。",
-    "One": "這是 '{1}' 的重新上傳版本。"
+    "One": "'{0}' is a re-upload of '{1}'."
   },
-  "Status_CausesIssues": "'{0}' 會導致遊戲出現問題。",
+  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "一旦在新建存檔時啟用 '{0}' ，此後，當 '{0}' 被禁用時，這個存檔將無法載入。",
-    "One": "一旦在新建存檔時啟用「{0}」，此後，當「{0}」被禁用時，這個存檔將無法載入。\n\n如果需要，可以使用「{1}」來恢復您的存檔。請閱讀其工作坊頁面描述以獲取更多資訊。"
+    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
+    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
   },
   "Status_TestVersion": {
     "Zero": "這是某個原版模組的測試版。請注意，測試版模組可能會出現意外問題。",
-    "One": "這是 '{1}' 的測試版。\n請注意，測試版模組可能會出現意外問題。"
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
   "Status_MissingDlc": {
     "One": "要使用這個外掛程式，您必須購買 '{0}' DLC。",
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
-  "Status_DependencyMod": "這是一個前置模組，但你似乎沒有使用任何依賴於該模組的外掛程式。",
+  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "此模組的原始程式碼不可用。除非您信任此模組的作者，否則不應使用此模組。",
   "SourceAvailable": "原始程式碼公開",
   "StandardMod": "Standard Mod",
@@ -139,49 +138,51 @@
   "Status_SourceAvailable": "This package will not warn about missing source code.",
   "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
   "OutputText": "預期輸出",
-  "Stability_AssetNotReviewed": "此資產尚未被檢查。\n\n相容性資訊可能不精準；儘管資產一般都是穩定的。",
-  "Stability_NotReviewed": "此外掛程式尚未被檢查。相容性資訊可能不準確。",
-  "Stability_Stable": "This package is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_NotEnoughInformation": "沒有足夠的資訊來正確地檢查此外掛程式的穩定性。",
-  "Stability_HasIssues": "此外掛可能引發問題。\n請小心使用。",
-  "Stability_Broken": "此外掛已經損壞。\n目前已知此外掛無法正常運行，或使遊戲崩潰。",
-  "Stability_Incompatible": "此外掛與遊戲不相容，或者會使遊戲崩潰。\n\n您應該立刻取消訂閱或刪除此外掛。",
-  "Stability_Local": "此外掛是「{0}」模組的本地版本。\n\n本地模組通常用於進行測試，或在非 Steam 版本的遊戲使用。\n\n請查看外掛的連結以尋找模組的更新版本。",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
+  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
+  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
+  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
+  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
+  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
+  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
+  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
+  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
+  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "您應該訂閱下列外掛程式：",
-    "Plural": "您應該訂閱這些外掛程式："
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
-  "Action_RequiresConfiguration": "您應該遵循以下指令：",
+  "Action_RequiresConfiguration": "Please follow the following instructions:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "您應該取消訂閱 '{0}' 。",
+  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
   "Action_UnsubscribeOther": {
-    "One": "您應該取消訂閱 '{1}' 。",
-    "Plural": "您應該取消訂閱下列外掛程式："
+    "One": "You should remove '{1}' from your playset.",
+    "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "您應該卸下 '{0}'。",
-  "ExcludeThis": "卸下此插件",
-  "Exclude": "卸載",
+  "Action_ExcludeThis": "You should disable '{0}'.",
+  "ExcludeThis": "Disable this package",
+  "Exclude": "Disable",
   "Unsubscribe": "取消訂閱",
   "Action_ExcludeOther": {
-    "One": "您應該卸下 '{1}'。",
-    "Plural": "您應該卸下以下外掛程式。"
+    "One": "You should disable '{1}'.",
+    "Plural": "You should disable the following packages."
   },
   "Action_Switch": {
     "One": "您應當改為使用 '{1}'。",
-    "Plural": "您應當改為使用下列任意一個外掛程式："
+    "Plural": "You should switch to one of the following packages."
   },
   "Action_IncludeThis": "You should include '{0}'",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
   "NoRequiredDlcs": "沒有前置 DLC",
   "DlcsSelected": {
@@ -220,6 +221,10 @@
     "One": "{0} {1} 需要切換到另一個",
     "Plural": "{0} {1} 需要切換到另一個"
   },
+  "RequiredItemCount": {
+    "One": "{0} {1} that is required but is not enabled",
+    "Plural": "{0} {1} that are required but are not enabled"
+  },
   "PackageType": "外掛類型",
   "GenericPackage": "普通外掛",
   "MusicPack": "音樂外掛",
@@ -231,12 +236,12 @@
   "ApplyChangedBeforeExit": "當前存在尚未保存的改動。\n\n在繼續操作前，您想保存並應用這些改動嗎？",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "已知 {0} 的作者 {1} 存在惡意，並且其製作的外掛中含有病毒等有害內容。",
-  "ReviewRequests": "檢查請求 {0}",
+  "ReviewRequests": "Review Requests",
   "ApplyRequestedChanges": "應用請求的改動",
   "ManagePackage": "管理外掛",
   "Banned": "封鎖",
   "NoIssues": "沒有問題",
-  "RequestReviewDisclaimer": "* 傳送請求時，您的 Steam ID 和記錄檔也會一併傳送",
+  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
   "ScenarioMaking": "製作情況用",
   "ThemeMaking": "制作主题用",
   "OtherCompatibilityWarnings": {
@@ -250,7 +255,12 @@
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues",
-  "LinkedPackages": "Linked Packages"
+  "ApplyAllActions": "Apply all recommended actions",
+  "SnoozeAll": "Snooze all issues",
+  "SnoozeAllFiltered": "Snooze all filtered issues",
+  "LinkedPackages": "Linked Packages",
+  "NoTags": "No Tags",
+  "NoLinks": "No Links",
+  "HideReviewedPackages": "Hide reviewed mods",
+  "ApplyRecommendedAction": "Apply recommended action"
 }

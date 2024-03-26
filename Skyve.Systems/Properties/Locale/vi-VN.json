@@ -1,7 +1,5 @@
 {
   "CompatibilityInfo": "Báo cáo tương thích",
-  "AssetsBubble": "Tài sản của bạn",
-  "ModsBubble": "Mod của bạn",
   "Dashboard": "bảng điều khiển",
   "SearchDlcs": "Tìm kiếm thông qua các DLC của bạn ..",
   "SearchPackages": "Tìm kiếm thông qua các gói của bạn ..",
@@ -11,7 +9,6 @@
   "PartiallyDownloaded": "Tải xuống một phần",
   "LaunchSettings": "Cài đặt khởi chạy",
   "IncludesItemsYouDoNotHave": "Bao gồm các mặt hàng bạn không có",
-  "ContentAndInfo": "Nội dung & Thông tin",
   "OtherPlaysets": "Các cấu hình chơi khác",
   "ViewPlaysets": "Xem cấu hình chơi",
   "AddPlayset": "Áp dụng cấu hình chơi",
@@ -63,7 +60,7 @@
   "Sorting_DateCreated": "Date Created",
   "Sorting_Usage": "Playset Usage",
   "Sorting_Name": "Name",
-  "Sorting_FileSize": "Tổng kích thước tệp",
+  "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "Cập nhật thời gian",
   "Sorting_SubscribeTime": "Đăng ký thời gian",
   "Sorting_Author": "Tên tác giả",
@@ -128,9 +125,7 @@
   "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Reset your settings to the default ones. This does not affect folder settings.",
   "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information to the UI and adds extra actions.",
-  "EnableDevUi": "Enable Dev UI",
-  "RefreshWorkshop": "Refresh Workshop Content",
+  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "Start a new game",
   "LoadSaveGame": "Continue a previous save-game",
   "DevOptions": "Developer Launch Options",
@@ -154,21 +149,18 @@
   "LogZipFile": "Save logs to file",
   "LogFolders": "Log Folders",
   "LogFileDrop": "Drop or select a log file to be simplified and display the list of errors inside the log",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown below when opening this page",
+  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "Errors in the Log",
   "OpenLogFolder": "Open the game's log folder",
   "CopyLogFile": "Copy the game's log file to clipboard",
   "OpenLOTLogFolder": "Open Skyve's log folder",
   "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
-  "ModIncludedTotal": "Mods included: {0}, Total: {1}",
-  "ModIncludedAndEnabledTotal": "Mods included & enabled: {0}, Total: {1}",
-  "ModIncludedEnabledTotal": "Mods included: {0}, of which are enabled: {1}, Total: {2}",
-  "PackageIncludedTotal": "Packages included: {0}, Total: {1}",
-  "PackageIncludedEnabledTotal": "Packages included: {0}, of which {1} are mods and {2} are enabled, Total: {3}",
-  "PackageIncludedAndEnabledTotal": "Packages included & enabled: {0}, Total: {1}",
-  "AssetIncludedTotal": "Assets included: {0}, Total: {1}",
+  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
   "NewPlayset_Tip": "Create or import a new playset",
   "ViewPlaysets_Tip": "View & manage your playsets",
+  "DeactivatePlayset_Tip": "Deactivate your current playset",
   "NewGame_Tip": "Starts a new game when launching Cities: Skylines. You can specify the map you'd like to start in",
   "LoadSaveGame_Tip": "Load a save-game when launching Cities: Skylines. Not selecting a save-file will continue your latest save",
   "BETA": "BETA",
@@ -194,6 +186,7 @@
   "FailedToOpenTC": "Failed to open Theme Changer",
   "FailedToDeleteItem": "Failed to delete item",
   "OpenChangelog": "Open Change-log",
+  "Changelog": "Change-log",
   "DeleteAsset": {
     "One": "Delete this asset",
     "Plural": "Delete the selected assets"
@@ -231,6 +224,8 @@
   "OpenPlaysetFolder": "View this playset's file on your computer",
   "ChangePlaysetColor": "Change this playset's color",
   "EditPlaysetName": "Edit this playset's name",
+  "ResetPlaysetImage": "Reset this playset's thumbnail",
+  "ResetPlaysetColor": "Reset this playset's color",
   "Sorting_Color": "Profile Color",
   "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
@@ -269,10 +264,10 @@
   "LaunchArgsInfo": "Add extra arguments when launching the game",
   "SearchGenericPackages": "Search through these packages..",
   "Sorting_Subscribers": "Total Subscribers",
-  "Sorting_Votes": "Votes",
+  "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} vote",
-    "Plural": "{1} votes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
     "One": "{1} subscriber",
@@ -316,6 +311,10 @@
   "Playset": {
     "One": "Playset",
     "Plural": "Profiles"
+  },
+  "ContainCount": {
+    "One": "Contains {0} {1}",
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} included",
@@ -368,33 +367,22 @@
     "One": "Edit this package's Tags",
     "Plural": "Edit selected items' Tags"
   },
+  "EditLinks": {
+    "One": "Edit this package's Links",
+    "Plural": "Edit selected items' Links"
+  },
   "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
   "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
   "TreatOptionalAsRequired": "Treat optional packages as required",
   "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages.",
   "AddCustomTag": "Add a custom tag",
-  "OutOfDateCount": {
-    "One": "{0} {1} is out of date",
-    "Plural": "{0} {1} are out of date"
-  },
-  "IncompleteCount": {
-    "One": "{0} {1} does not match its size from the Workshop",
-    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
-  },
-  "NewUpdatedCount": {
-    "One": "{0} new or updated {1}",
-    "Plural": "{0} new or updated {1}"
-  },
-  "TotalCount": {
-    "One": "{0} {1} in total",
-    "Plural": "{0} {1} in total"
-  },
   "PackageIsNotDownloaded": "'{0}' was removed from your computer",
   "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
   "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
   "RemovedByAuthor": "Removed by author",
   "Missing": "Missing",
   "LoggedInAs": "Logged in as",
+  "LoggedInUser": "Logged in as {0}",
   "UnknownUser": "Unknown User",
   "AddMeaningfulDescription": "Please add a meaningful description to your request.",
   "ThisSubscribesTo": {
@@ -415,7 +403,8 @@
   "RequestOption3": "Add a missing interaction with another package",
   "ActivePlayset": "Active Playset",
   "References": "References",
-  "OpenLog": "Open Log File",
+  "OpenLog": "Open Game Log",
+  "OpenSkyveLog": "Open Skyve Log",
   "Sort By": "Sort By",
   "FailedToFetchLogs": "Failed to fetch your logs",
   "DiscoverPlaysets": "Discover Playsets",
@@ -434,7 +423,7 @@
   "FailedToDownloadPlayset": "Failed to download this playset.\r\n\r\nPlease try again later.",
   "UpdatePlaysetTip": "Update your local version of this playset",
   "DownloadPlaysetTip": "Download this playset to your local computer",
-  "EditPlaysetThumbnail": "Edit this playset's thumbnail picture",
+  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
   "MakePublic": "Make this profile Public",
   "MakePrivate": "Make this profile Private",
   "CopyPlaysetLink": "Copy this playset's ID",
@@ -447,7 +436,7 @@
   "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected.",
   "SelectAll": "Select all items",
   "DeselectAll": "Un-select all items",
-  "AddTagBox": "Add a new tag here",
+  "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
   "EditTagsOfPackage": {
     "One": "Edit all of this package's assets' Tags",
@@ -515,8 +504,8 @@
   "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
   "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
   "ChangePlaysetSettings": "Change this playset's settings",
-  "ViewCompatibilityReport": "View the full compatibility report",
-  "DashboardCustomizationInfo": "You can customize your dashboard by dragging each section from its header.\r\nYou can also resize a section using the dotted triangle on its bottom-right.",
+  "ViewCompatibilityReport": "View the full report",
+  "DashboardCustomizationInfo": "Customize your dashboard by dragging each section from its title.\r\nYou can also resize a section using the dotted triangle on its bottom-right corner.",
   "ViewAssetsWithIssues": "View Assets with issues",
   "ViewModsWithIssues": "View Mods with issues",
   "CreateShortcut": "Create shortcut",
@@ -546,5 +535,54 @@
   "Version": "Version",
   "UpdateTime": "Update Time",
   "Status": "Status",
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it."
+  "PackageUsage": "Package Usage",
+  "CodeMod": {
+    "One": "Code Mod",
+    "Plural": "Code Mods"
+  },
+  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
+  "FadeDisabledItems": "Fade out disabled mods & assets",
+  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "UsagePlayset": "{0} Playset",
+  "GenericPlayset": "Generic Playset",
+  "CompatibilityCenter": "Compatibility Center",
+  "Dependency": {
+    "One": "Dependency",
+    "Plural": "Dependencies"
+  },
+  "ModID": "Mod ID",
+  "Subscribers": "Subscribers",
+  "Votes": "Likes",
+  "PartiallyIncluded": "Partially Included",
+  "Links": "Links",
+  "NoAssets": "Disable All Assets",
+  "NoMods": "Disable All Code-Mods",
+  "FavoritePlaysets": "Favorite Playsets",
+  "OnlyShowErrors": "Only show warnings and errors",
+  "RestartRequired": "Restart Required",
+  "FailedToApplyChanges": "Failed to apply the requested changes.",
+  "ConfirmSelection": "Confirm Selection",
+  "PackagesSelected": "Packages Selected ({0})",
+  "PackagesSelectionInfo": "Click on a package to select it, click on 'Confirm Selection' once you're finished.",
+  "CustomColor": "Custom Color",
+  "CustomThumbnail": "Custom Thumbnail",
+  "NoThumbnail": "Disable Thumbnail",
+  "PlaysetUsageInfo": "Selecting a dedicated usage for your playset allows Skyve to automatically hide mods that either do not match, or are not compatible with, your selected usage.",
+  "PlaysetColorSet": "Custom color enabled",
+  "PlaysetColorNotSet": "No custom color selected",
+  "PlaysetThumbnailSet": "Custom thumbnail enabled",
+  "PlaysetThumbnailNotSet": "No custom thumbnail selected",
+  "OpenPlaysetPage": "Open this playset's page",
+  "Ready": "Ready",
+  "EditDashboard": "Edit Dashboard",
+  "AvailableWidgets": "Available Widgets",
+  "HideExtraWidgets": "Hide Extra Widgets",
+  "ResetLayout": "Reset Layout",
+  "ContentSummary": "Content Summary",
+  "PackagesEnabled": "Packages Enabled",
+  "ModsEnabled": "Mods Enabled",
+  "AssetsEnabled": "Assets Enabled",
+  "PackagesIncludedDisabled": "Packages Included & Disabled",
+  "OutOf": "{0} out of {1}",
+  "RecentlyUpdatedItem": "Recently Updated {0}"
 }
