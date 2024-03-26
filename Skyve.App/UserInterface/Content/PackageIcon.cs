@@ -14,7 +14,7 @@ public class PackageIcon : SlickImageControl
 	{
 		e.Graphics.SetUp(BackColor);
 
-		var thumbnail = Package?.GetWorkshopInfo()?.GetThumbnail();
+		var thumbnail = Package?.GetThumbnail();
 
 		Loading = thumbnail is null && !(Package?.IsLocal() ?? false) && ConnectionHandler.IsConnected;
 

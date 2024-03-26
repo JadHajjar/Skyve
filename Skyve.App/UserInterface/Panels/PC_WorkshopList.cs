@@ -9,6 +9,8 @@ public class PC_WorkshopList : PanelContent
 {
 	private readonly IWorkshopService _workshopService;
 	protected internal readonly WorkshopContentList LC_Items;
+	private int currentPage;
+	private bool listLoading;
 
 	public PC_WorkshopList() : base(false)
 	{
@@ -21,6 +23,8 @@ public class PC_WorkshopList : PanelContent
 			TabIndex = 0,
 			Dock = DockStyle.Fill
 		};
+
+		LC_Items.ListControl.ScrollEndReached += ListControl_ScrollEndReached;
 
 		Controls.Add(LC_Items);
 
@@ -53,7 +57,7 @@ public class PC_WorkshopList : PanelContent
 
 	protected virtual async Task<IEnumerable<IPackageIdentity>> GetItems()
 	{
-		if (ulong.TryParse(LC_Items.TB_Search.Text, out var id))
+		if (LC_Items.TB_Search.Text.Length is 5 or 6 && ulong.TryParse(LC_Items.TB_Search.Text, out var id))
 		{
 			var package = await _workshopService.GetInfoAsync(new GenericPackageIdentity(id));
 
@@ -63,7 +67,36 @@ public class PC_WorkshopList : PanelContent
 			}
 		}
 
-		return await _workshopService.QueryFilesAsync(WorkshopQuerySorting.Popularity, LC_Items.TB_Search.Text, LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray());
+		return await GetPackages(0);
+	}
+
+	private void ListControl_ScrollEndReached(object sender, EventArgs e)
+	{
+		if (!listLoading)
+		{
+			Task.Run(async () => LC_Items.ListControl.AddRange(await GetPackages(currentPage + 1)));
+		}
+	}
+
+	private async Task<IEnumerable<IPackageIdentity>> GetPackages(int page)
+	{
+		listLoading = true;
+
+		try
+		{
+			var list = await _workshopService.QueryFilesAsync(
+				WorkshopQuerySorting.Popularity,
+				LC_Items.TB_Search.Text,
+				LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray(),
+				limit: 30,
+				page: currentPage = page);
+
+			return list;
+		}
+		finally
+		{
+			listLoading = false;
+		}
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()

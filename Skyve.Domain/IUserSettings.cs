@@ -34,6 +34,7 @@ public interface IUserSettings
 #if CS2
 	ParadoxLoginInfo ParadoxLogin { get; set; }
 	bool FilterIncludedByDefault { get; set; }
+	bool SyncBeforeLaunching { get; }
 #endif
 
 	void Save();
