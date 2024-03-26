@@ -1,7 +1,5 @@
 {
   "CompatibilityInfo": "兼容性信息",
-  "AssetsBubble": "您的资产",
-  "ModsBubble": "您的模组",
   "Dashboard": "统计面板",
   "SearchDlcs": "搜索您的 DLC…",
   "SearchPackages": "搜索您的插件…",
@@ -11,16 +9,15 @@
   "PartiallyDownloaded": "没有完整下载",
   "LaunchSettings": "启动选项",
   "IncludesItemsYouDoNotHave": "警告：其中的一些插件已丢失",
-  "ContentAndInfo": "内容和信息",
   "OtherPlaysets": "其它配置文件",
-  "ViewPlaysets": "查看配置文件",
+  "ViewPlaysets": "查看配组",
   "AddPlayset": "添加配置文件",
   "LHT": "靠左行驶",
   "TotalAssetSize": "已装载的资产中的 {0}",
   "CompatibilityStatus": "兼容性状态",
   "AnyStatus": "任意状态",
   "NoLocalPackagesFound": "在您的电脑上找不到插件。",
-  "NoPackagesMatchFilters": "没有符合要求的插件。",
+  "NoPackagesMatchFilters": "没有符合要求插件",
   "EnableAll": "全部启用",
   "DisableAll": "全部禁用",
   "EnableAllFiltered": "启用筛选的项目",
@@ -29,7 +26,7 @@
   "DisableAllSelected": "禁用已选项目",
   "CopyAllIds": "复制所有项目的名称和 ID",
   "CopyAllIdsFiltered": "Copy all filtered items' names & IDs",
-  "CopyAllIdsSelected": "Copy all selected items' names & IDs",
+  "CopyAllIdsSelected": "复制当前选择的所有项目的名称与数字 ID",
   "HelpLogs": "获取帮助和日志",
   "Preferences": "选项",
   "PlaysetName": "配置文件名称",
@@ -50,7 +47,7 @@
   "OpenPackagePage": "打开此插件的详情页面",
   "OpenPackageFolder": {
     "One": "打开文件位置",
-    "Plural": "Open all selected packages' file locations"
+    "Plural": "打开所有选中插件的文件位置"
   },
   "OpenLocalFolder": "打开此插件的文件夹",
   "ReDownloadPackage": {
@@ -75,8 +72,8 @@
   "CouldNotCreatePlayset": "无法新建配置文件。",
   "CreatePlaysetHere": "点击此处以新建配置文件，或启用一个配置文件",
   "Maintenance": "维护",
-  "DisableNewModsByDefault": "Disable newly added mods by default",
-  "DisableNewAssetsByDefault": "Disable newly added assets by default",
+  "DisableNewModsByDefault": "默认禁用新添加的模组",
+  "DisableNewAssetsByDefault": "默认禁用新添加的资产",
   "ShowFilters": "显示筛选选项",
   "HideFilters": "隐藏筛选选项",
   "DateSubscribed": "订阅日期",
@@ -158,13 +155,9 @@
   "CopyLogFile": "将游戏日志文件复制到剪贴板",
   "OpenLOTLogFolder": "打开 Skyve 的日志文件夹",
   "CopyLOTLogFile": "将 Skyve 的日志文件复制到剪贴板",
-  "ModIncludedTotal": "您总共有 {1} 个模组，已装载 {0} 个",
-  "ModIncludedAndEnabledTotal": "您总共有 {1} 个模组，已装载且已启用 {0} 个",
-  "ModIncludedEnabledTotal": "您总共有 {2} 个模组，已装载 {0} 个，其中启用了 {1} 个。",
-  "PackageIncludedTotal": "共 {1} 个插件，已装载 {0} 个",
-  "PackageIncludedEnabledTotal": "共 {3} 个插件，已装载 {0} 个，其中有 {1} 个模组，已启用 {2} 个模组",
-  "PackageIncludedAndEnabledTotal": "共 {1} 个插件，已装载且已启用 {0} 个",
-  "AssetIncludedTotal": "您总共有 {1} 个资产，已装载 {0} 个",
+  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
   "NewPlayset_Tip": "新建或导入配置文件",
   "ViewPlaysets_Tip": "查看和管理配置文件",
   "DeactivatePlayset_Tip": "Deactivate your current playset",
@@ -189,7 +182,7 @@
   "FavoriteTotal": "共 {0} 个配置文件",
   "PlaysetFilter": "筛选配置文件",
   "CheckDocumentsFolder": "请检查 Skyve 是否可以访问您的“文档”文件夹，Skyve 的界面和语言设置信息存储在该文件夹内。",
-  "FailedToSaveLanguage": "Failed to save the selected 1language",
+  "FailedToSaveLanguage": "保存当前选择的语言失败",
   "FailedToOpenTC": "打开主题编辑器失败",
   "FailedToDeleteItem": "删除项目失败",
   "OpenChangelog": "打开更新日志",
@@ -203,11 +196,11 @@
     "Plural": "删除已选的插件的文件"
   },
   "EnableThisItemInAllPlaysets": {
-    "One": "Enable in all your playsets",
+    "One": "在所有的配组中开启",
     "Plural": "Enable the selected items in all your playsets"
   },
   "DisableThisItemInAllPlaysets": {
-    "One": "Disable in all your playsets",
+    "One": "在所有的配组中禁用",
     "Plural": "Disable the selected items in all your playsets"
   },
   "CopyPackageName": {
@@ -216,7 +209,7 @@
   },
   "CopyAuthorId": {
     "One": "复制作者 ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "Plural": "复制所有选中插件的作者ID"
   },
   "CopyAuthorName": {
     "One": "复制作者的名字",
@@ -231,8 +224,8 @@
   "OpenPlaysetFolder": "打开该配置文件存储位置文件夹",
   "ChangePlaysetColor": "更改该配置文件图标的颜色",
   "EditPlaysetName": "编辑此配置文件的名称",
-  "ResetPlaysetImage": "Reset this playset's thumbnail",
-  "ResetPlaysetColor": "Reset this playset's color",
+  "ResetPlaysetImage": "重置配组缩略图",
+  "ResetPlaysetColor": "重置配组颜色",
   "Sorting_Color": "配置文件图标颜色",
   "CreateShortcutPlayset": "创建桌面快捷方式",
   "AskToLaunchGameForShortcut": "是否要在打开 Skyve 的快捷方式时，同时使用您的配置文件启动游戏？",
@@ -273,8 +266,8 @@
   "Sorting_Subscribers": "总订阅量",
   "Sorting_Votes": "累计点赞",
   "VotesCount": {
-    "One": "{1} like",
-    "Plural": "{1} likes"
+    "One": "{1} 个点赞",
+    "Plural": "{1} 个点赞"
   },
   "SubscribersCount": {
     "One": "订阅量：{1}",
@@ -282,7 +275,7 @@
   },
   "SearchWorkshop": "搜索创意工坊…",
   "DiscoverWorkshop": "在工坊查找模组...",
-  "SearchWorkshopBrowser": "Search the workshop in your browser...",
+  "SearchWorkshopBrowser": "在浏览器中搜索创意工坊…",
   "UnknownPackage": "未知插件",
   "Info": "提示",
   "SelectThisPackage": "选择此插件",
@@ -375,7 +368,7 @@
     "Plural": "编辑所有已选的插件的标签"
   },
   "EditLinks": {
-    "One": "Edit this package's Links",
+    "One": "编辑插件链接",
     "Plural": "Edit selected items' Links"
   },
   "ShowAllReferencedPackages": "在“引用”选项卡显示被卸下的插件",
@@ -383,29 +376,13 @@
   "TreatOptionalAsRequired": "将可选插件视为必需的前置插件",
   "TreatOptionalAsRequired_Tip": "启用后，如果缺少了可选插件，将会显示“缺少前置”的警告。",
   "AddCustomTag": "添加自定义标签",
-  "OutOfDateCount": {
-    "One": "{0} 个{1} 已过期",
-    "Plural": "{0} 个{1} 已过期"
-  },
-  "IncompleteCount": {
-    "One": "{0} 个{1} 与创意工坊版本的文件大小不匹配",
-    "Plural": "{0} 个{1} 与创意工坊版本的文件大小不匹配"
-  },
-  "NewUpdatedCount": {
-    "One": "新增或更新了 {0} 个{1}",
-    "Plural": "新增或更新了 {0} 个{1}"
-  },
-  "TotalCount": {
-    "One": "共 {0} 个{1}",
-    "Plural": "共 {0} 个{1}"
-  },
   "PackageIsNotDownloaded": "插件 '{0}' 已从您的电脑中删除",
   "PackageIsOutOfDate": "插件 '{0}' 已经过期\n\n您的版本已落后 {1}",
   "PackageIsMaybeOutOfDate": "插件 '{0}' 可能已过期，它已经于 {1} 进行了更新",
   "RemovedByAuthor": "已被作者删除",
   "Missing": "丢失",
   "LoggedInAs": "登录为",
-  "LoggedInUser": "Logged in as {0}",
+  "LoggedInUser": "登录为 {0}",
   "UnknownUser": "未知用户",
   "AddMeaningfulDescription": "发送申请前，请提供有效的描述信息。",
   "ThisSubscribesTo": {
@@ -424,10 +401,10 @@
   "RequestOption1": "报告此插件的问题，或补充缺少的信息",
   "RequestOption2": "为此插件补充状态信息",
   "RequestOption3": "补充此插件与另一个插件的交互方式",
-  "ActivePlayset": "Active Playset",
+  "ActivePlayset": "激活配组",
   "References": "引用",
-  "OpenLog": "Open Game Log",
-  "OpenSkyveLog": "Open Skyve Log",
+  "OpenLog": "开启游戏日志",
+  "OpenSkyveLog": "开启 Skyve 日志",
   "Sort By": "排序方式",
   "FailedToFetchLogs": "获取日志失败",
   "DiscoverPlaysets": "查找在线配置文件",
@@ -446,7 +423,7 @@
   "FailedToDownloadPlayset": "无法下载此配置文件。\n\n请稍后重试。",
   "UpdatePlaysetTip": "使用本地版本更新此配置文件",
   "DownloadPlaysetTip": "将配置文件下载到本地",
-  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
+  "EditPlaysetThumbnail": "编辑配组缩略图",
   "MakePublic": "将此配置文件设为公开",
   "MakePrivate": "将此配置文件设为私密",
   "CopyPlaysetLink": "复制配置文件的 ID",
@@ -459,7 +436,7 @@
   "AssumeInternetConnectivity_Tip": "跳过网络连接检查，程序将默认您有可用的网络连接（请务必打开加速器 / VPN）。",
   "SelectAll": "全选",
   "DeselectAll": "取消全选",
-  "AddTagBox": "Add a new tag or search here",
+  "AddTagBox": "添加或搜索标签",
   "EditingMultipleTags": "同时编辑多个插件的标签，将会覆盖每个插件所有原有标签。",
   "EditTagsOfPackage": {
     "One": "编辑此插件所含资产的标签",
@@ -527,8 +504,8 @@
   "SnapDashToGrid_Tip": "在编辑统计面板页面时，显示分为 12 列的网格状辅助线，便于将统计面板吸附到网格上",
   "UnsavedChangesPlayset": "此配置文件中的改动还没有保存",
   "ChangePlaysetSettings": "更改此配置文件的设置",
-  "ViewCompatibilityReport": "查看完整的兼容性报告",
-  "DashboardCustomizationInfo": "您可以拖动各个统计面板的标题来自定义它们，\n还可以使用右下角的三角虚线调整面板的大小。",
+  "ViewCompatibilityReport": "查看完整报告",
+  "DashboardCustomizationInfo": "Customize your dashboard by dragging each section from its title.\r\nYou can also resize a section using the dotted triangle on its bottom-right corner.",
   "ViewAssetsWithIssues": "查看存在问题的资产",
   "ViewModsWithIssues": "查看存在问题的模组",
   "CreateShortcut": "创建 Skyve 的桌面快捷方式",
@@ -552,7 +529,7 @@
     "One": "在您上次使用 Skyve 后，新增的插件 '{1}' 已安装",
     "Plural": "在您上次使用 Skyve 后，新增的 {0} 个插件已安装"
   },
-  "NoActivePlayset": "No Active Playset",
+  "NoActivePlayset": "没有已激活的配组",
   "RecentlyUpdated": "近期更新",
   "Manage": "管理",
   "Version": "版本",
@@ -560,27 +537,52 @@
   "Status": "状态",
   "PackageUsage": "Package Usage",
   "CodeMod": {
-    "One": "Code Mod",
-    "Plural": "Code Mods"
+    "One": "代码模组",
+    "Plural": "代码模组"
   },
   "ThisModIsRequiredYouCantDisableIt": "此模组是必需的，不能禁用。",
-  "FadeDisabledItems": "Fade out disabled mods & assets",
-  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
+  "FadeDisabledItems": "减淡已禁用的模组和资产",
+  "FadeDisabledItems_Tip": "本地内容列表中已禁用的模组和资产将被减淡",
   "UsagePlayset": "{0} Playset",
-  "GenericPlayset": "Generic Playset",
-  "CompatibilityCenter": "Compatibility Center",
+  "GenericPlayset": "通用配组",
+  "CompatibilityCenter": "兼容性中心",
   "Dependency": {
-    "One": "Dependency",
-    "Plural": "Dependencies"
+    "One": "依赖",
+    "Plural": "依赖"
   },
-  "ModID": "Mod ID",
-  "Subscribers": "Subscribers",
-  "Votes": "Likes",
+  "ModID": "模组ID",
+  "Subscribers": "订阅者",
+  "Votes": "点赞",
   "PartiallyIncluded": "Partially Included",
-  "Links": "Links",
-  "NoAssets": "Disable All Assets",
-  "NoMods": "Disable All Code-Mods",
-  "FavoritePlaysets": "Favorite Playsets",
-  "OnlyShowErrors": "Only show warnings and errors",
-  "RestartRequired": "Restart Required"
+  "Links": "链接",
+  "NoAssets": "禁用所有资产",
+  "NoMods": "禁用所有代码模组",
+  "FavoritePlaysets": "收藏的配组",
+  "OnlyShowErrors": "只显示警告和错误",
+  "RestartRequired": "需要重启",
+  "FailedToApplyChanges": "无法应用请求的更改",
+  "ConfirmSelection": "确认选择",
+  "PackagesSelected": "Packages Selected ({0})",
+  "PackagesSelectionInfo": "单击选择一个包，当你完成后点击“确认选择”",
+  "CustomColor": "自定义颜色",
+  "CustomThumbnail": "自定义缩略图",
+  "NoThumbnail": "禁用缩略图",
+  "PlaysetUsageInfo": "Selecting a dedicated usage for your playset allows Skyve to automatically hide mods that either do not match, or are not compatible with, your selected usage.",
+  "PlaysetColorSet": "开启自定义颜色",
+  "PlaysetColorNotSet": "未选择自定义颜色",
+  "PlaysetThumbnailSet": "开启自定义缩略图",
+  "PlaysetThumbnailNotSet": "未选择自定义缩略图",
+  "OpenPlaysetPage": "Open this playset's page",
+  "Ready": "就绪",
+  "EditDashboard": "编辑仪表板",
+  "AvailableWidgets": "可用组件",
+  "HideExtraWidgets": "隐藏更多组件",
+  "ResetLayout": "重置布局",
+  "ContentSummary": "内容摘要",
+  "PackagesEnabled": "已启用的插件",
+  "ModsEnabled": "已启用模组",
+  "AssetsEnabled": "已启用资产",
+  "PackagesIncludedDisabled": "已包含&禁用的插件",
+  "OutOf": "{0} out of {1}",
+  "RecentlyUpdatedItem": "近期更新 {0}"
 }

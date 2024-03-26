@@ -5,10 +5,10 @@
   "Previous": "Anterior",
   "Skip": "Treci peste",
   "Note": "Notă",
-  "NoteInfo": "Text informativ suplimentar afișat pentru pachet",
+  "NoteInfo": "Additional information to be displayed for the mod",
   "BlackListName": "Lista neagră după nume",
-  "BlackListId": "Lista neagră după ID-ul Steam",
-  "GlobalTagsInfo": "Etichete pe care toți jucătorii le vor vedea în aplicație",
+  "BlackListId": "Black-list by ID",
+  "GlobalTagsInfo": "Tags all players will see in Skyve",
   "Links": "Link-uri",
   "StatusesCount": "Statuses ({0})",
   "InteractionCount": "Interacţiuni ({0})",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "Vă rugăm să selectaţi o utilizare validă pentru acest pachet.",
   "Interaction_Alternative": {
     "One": "'{1}' poate fi folosit ca o alternativă la '{0}'.",
-    "Plural": "Unul dintre următoarele pachete poate fi folosit ca o alternativă la '{0}'."
+    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' și '{1}' au aceleași funcționalități.",
@@ -108,18 +108,18 @@
     "One": "'{0}' is required for '{1}'.",
     "Plural": "'{0}' is required for the following packages."
   },
-  "Interaction_Identical": "Acestea sunt versiuni multiple ale aceluiași pachet.\r\n\r\nAr trebui să alegeți doar una dintre ele.",
-  "Status_Succeeded": "'{0}' este succes de '{1}'.\r\n\r\nDeja folosești '{1}' așa că nu mai este nevoie de '{0}''.",
+  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' este învechit, nu mai este susținut de autorul său.",
   "Status_AutoDeprecated": "'{0}' nu a fost actualizat de mult timp, probabil nu mai este actualizat de autorul său.",
   "Status_Reupload": {
     "Zero": "'{0}' este o reîncărcare a unui pachet original.",
-    "One": "Aceasta este o reîncărcare a '{1}'."
+    "One": "'{0}' is a re-upload of '{1}'."
   },
-  "Status_CausesIssues": "'{0}' cauzează probleme cu jocul tău.",
+  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "Atunci când se creează o nouă salvare cu '{0}' activată, nu veți mai putea încărca această salvare dacă '{0}' este dezactivat.",
-    "One": "Atunci când se creează o nouă salvare cu '{0}' activată, nu veți mai putea încărca această salvare dacă '{0}' este dezactivat.\r\n\r\nFolosiți '{1}pentru a recupera datele de salvare. Citiți descrierea atelierului pentru mai multe informații."
+    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
+    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
   },
   "Status_TestVersion": {
     "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
@@ -129,7 +129,7 @@
     "One": "You're missing the '{0}' DLC to use this package.",
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
-  "Status_DependencyMod": "Aceasta este o modalitate de dependență, dar se pare că nu utilizați niciun pachet care necesită acest lucru.",
+  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "Codul sursă al acestui mod nu este disponibil. Ar trebui să îl folosești doar dacă ai încredere în autorul său.",
   "SourceAvailable": "Codul sursă este disponibil",
   "StandardMod": "Standard Mod",
@@ -138,50 +138,51 @@
   "Status_SourceAvailable": "Acest pachet nu va avertiza despre codul sursă lipsă.",
   "Status_StandardMod": "Acest pachet va fi ignorat în timpul procesării mod-urilor de depanare.",
   "OutputText": "Ieșire așteptată",
-  "Stability_AssetNotReviewed": "Acest activ nu a fost încă revizuit.\n\nInformațiile de compatibilitate ar putea să nu fie exacte; deși activele sunt în general stabile",
-  "Stability_NotReviewed": "Acest pachet nu a fost revizuit încă.\n\nInformațiile de compatibilitate pot să nu fie exacte.",
-  "Stability_Stable": "This package is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "This package is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "This package is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "This package can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "This package is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "Nu există suficiente informații pentru a revizui în mod corespunzător acest pachet.",
-  "Stability_HasIssues": "Acest pachet poate cauza probleme.\r\nFiţi atent în timp ce îl folosiţi.",
-  "Stability_Broken": "Acest pachet este stricat.\r\nEste cunoscut fie că întrerup jocul, fie că nu funcționează.",
-  "Stability_Incompatible": "Acest pachet nu este compatibil cu, sau pare, jocul.\r\n\r\nAr trebui să îl eliminați imediat.",
-  "Stability_Local": "Acest pachet este o versiune locală a modului original '{0}'.\r\n\r\nVersiunile locale sunt de obicei folosite în scopul testării sau în cazul în care nu aveți Steam.\r\n\r\nVerificați link-urile pachetului pentru a căuta actualizări în modul.",
-  "Stability_BrokenFromPatch": "This package broke after a recent patch. Please wait until it is updated before using it.",
+  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
+  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
+  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
+  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
+  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
+  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
+  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
+  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
+  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
+  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "Trebuie să vă abonați la următorul pachet:",
-    "Plural": "Ar trebui să vă abonați la aceste pachete:"
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
-  "Action_RequiresConfiguration": "Trebuie să urmaţi următoarele instrucţiuni:",
+  "Action_RequiresConfiguration": "Please follow the following instructions:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "Ar trebui să vă dezabonați de la '{0}'.",
+  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
   "Action_UnsubscribeOther": {
-    "One": "Ar trebui să vă dezabonați de la '{1}'.",
-    "Plural": "Ar trebui să vă dezabonați de la următoarele pachete:"
+    "One": "You should remove '{1}' from your playset.",
+    "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "Ar trebui să excludeți '{0}'.",
-  "ExcludeThis": "Exclude acest pachet",
-  "Exclude": "Excludeți",
+  "Action_ExcludeThis": "You should disable '{0}'.",
+  "ExcludeThis": "Disable this package",
+  "Exclude": "Disable",
   "Unsubscribe": "Dezabonați-vă",
   "Action_ExcludeOther": {
-    "One": "Ar trebui să excludeți '{1}'.",
-    "Plural": "Ar trebui să excludeți următoarele ambalaje:"
+    "One": "You should disable '{1}'.",
+    "Plural": "You should disable the following packages."
   },
   "Action_Switch": {
     "One": "Ar trebui să comutați la '{1}'.",
-    "Plural": "Ar trebui să treceți la unul dintre următoarele ambalaje:"
+    "Plural": "You should switch to one of the following packages."
   },
   "Action_IncludeThis": "You should include '{0}'",
   "Action_IncludeOther": {
-    "One": "You should include the following package:",
-    "Plural": "You should include these packages:"
+    "One": "You should add the following package to your playset.",
+    "Plural": "You should add the following packages to your playset."
   },
   "NoRequiredDlcs": "Nu sunt necesare DLC-uri",
   "DlcsSelected": {
@@ -220,6 +221,10 @@
     "One": "{0} {1} necesită trecerea la un altul",
     "Plural": "{0} {1} necesită comutarea la altul"
   },
+  "RequiredItemCount": {
+    "One": "{0} {1} that is required but is not enabled",
+    "Plural": "{0} {1} that are required but are not enabled"
+  },
   "PackageType": "Tip de pachet",
   "GenericPackage": "Pachet generic",
   "MusicPack": "Pachet de muzică",
@@ -231,7 +236,7 @@
   "ApplyChangedBeforeExit": "Aveți modificări nesalvate.\r\n\r\nDoriți să aplicați aceste modificări înainte de a continua?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Autorul {0}, {1}, este cunoscut ca fiind răuvoitor și/sau pentru includerea conținutului dăunător precum virușii în pachetele lor.",
-  "ReviewRequests": "Revizuiește solicitările {0}",
+  "ReviewRequests": "Review Requests",
   "ApplyRequestedChanges": "Aplică modificările solicitate",
   "ManagePackage": "Gestionare pachet",
   "Banned": "Interzis",
@@ -250,9 +255,12 @@
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all available actions",
-  "SnoozeAll": "Snooze all displayed issues",
+  "ApplyAllActions": "Apply all recommended actions",
+  "SnoozeAll": "Snooze all issues",
+  "SnoozeAllFiltered": "Snooze all filtered issues",
   "LinkedPackages": "Linked Packages",
   "NoTags": "No Tags",
-  "NoLinks": "No Links"
+  "NoLinks": "No Links",
+  "HideReviewedPackages": "Hide reviewed mods",
+  "ApplyRecommendedAction": "Apply recommended action"
 }
