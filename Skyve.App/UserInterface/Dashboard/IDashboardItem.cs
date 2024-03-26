@@ -295,7 +295,7 @@ public abstract class IDashboardItem : SlickImageControl
 		var iconRectangle = new Rectangle(rectangle.Right - BorderRadius - icon?.Width ?? 0, rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
 		var textRect = new Rectangle(rectangle.X + BorderRadius, rectangle.Y, rectangle.Right - (2 * BorderRadius) - BorderRadius - iconRectangle.Width, (int)(26 * UI.FontScale));
 		using var font = UI.Font(8.5F, FontStyle.Bold).FitTo(text, textRect, e.Graphics);
-		var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, font, rectangle.Right - (2 * BorderRadius) - iconRectangle.Right).Height);
+		var titleHeight = (int)e.Graphics.Measure(text, font, rectangle.Right - (2 * BorderRadius) - iconRectangle.Right).Height + BorderRadius / 2;
 		textRect.Height = titleHeight + (BorderRadius * 3 / 2);
 
 		if (subText is not null)

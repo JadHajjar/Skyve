@@ -156,6 +156,8 @@ public partial class ContentList : SlickControl
 
 		panel.LC_Items.TB_Search.Text = TB_Search.Text;
 		panel.LC_Items.OT_ModAsset.SelectedValue = Page is SkyvePage.Mods ? ThreeOptionToggle.Value.Option1 : Page is SkyvePage.Assets ? ThreeOptionToggle.Value.Option2 : ThreeOptionToggle.Value.None;
+
+		Program.MainForm.PushPanel(panel);
 	}
 
 	private void LC_Items_OpenWorkshopSearchInBrowser()
