@@ -154,18 +154,18 @@
   "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Sinun tulisi lisätä seuraava paketti pelisettiisi.",
+    "Plural": "Sinun tulisi lisätä seuraavat paketit pelisettiisi."
   },
   "Action_RequiresConfiguration": "Please follow the following instructions:",
   "Action_SelectOne": {
     "One": "Sinun tulee valita vain '{0}' tai '{1}'.",
     "Plural": "Sinun tulee valita joko '{0}' tai yksi seuraavista paketeista."
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "Sinun pitäisi poistaa '{0}' pelisetistä.",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "Sinun pitäisi poistaa '{1}' pelisetistä.",
+    "Plural": "Sinun tulisi poistaa seuraavat paketit pelisetistä."
   },
   "Action_ExcludeThis": "You should disable '{0}'.",
   "ExcludeThis": "Disable this package",
@@ -181,8 +181,8 @@
   },
   "Action_IncludeThis": "You should include '{0}'",
   "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Sinun tulisi lisätä seuraava paketti pelisettiisi.",
+    "Plural": "Sinun tulisi lisätä seuraavat paketit pelisettiisi."
   },
   "NoRequiredDlcs": "Ei Vaadittuja DLC:itä",
   "DlcsSelected": {
