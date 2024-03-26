@@ -5,10 +5,10 @@
   "Previous": "Voltar",
   "Skip": "Pular",
   "Note": "Observação",
-  "NoteInfo": "Additional information to be displayed for the mod",
+  "NoteInfo": "Informações adicionais a serem exibidas para o mod",
   "BlackListName": "Lista Negra por nome",
-  "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "BlackListId": "Lista negra por ID",
+  "GlobalTagsInfo": "Marca todos os jogadores que verão no Skyve",
   "Links": "Links",
   "StatusesCount": "Situações ({0})",
   "InteractionCount": "Interações ({0})",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "Por favor, selecione um uso válido para este pacote.",
   "Interaction_Alternative": {
     "One": "'{1}' pode ser usado como uma alternativa a '{0}'.",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "Um dos seguintes pacotes pode ser usado como uma alternativa a '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' e '{1}' têm as mesmas funcionalidades.",
@@ -108,28 +108,28 @@
     "One": "'{0}' é necessário para '{1}'.",
     "Plural": "'{0}' é necessário para os seguintes pacotes."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Interaction_Identical": "Os seguintes pacotes são versões diferentes do mesmo mod.\nUsar múltiplas versões do mesmo mod ao mesmo tempo, pode causar conflitos.",
+  "Status_Succeeded": "'{0}' foi substituído por '{1}', e você já está usando '{1}'. Não há uso para '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto e não é mais suportado pelo seu autor.",
   "Status_AutoDeprecated": "'{0}' não foi atualizado em muito tempo.",
   "Status_Reupload": {
     "Zero": "'{0}' é um re-envio de um pacote original.",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "'{0}' é um re-envio de '{1}'."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "'{0}' é conhecido por causar problemas no jogo.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "Depois de salvar sua cidade com '{0}' habilitado, você não será mais capaz de carregar o save sem '{0}' habilitado.",
+    "One": "Depois de salvar sua cidade com '{0}' habilitado, você não será mais capaz de carregar o save sem '{0}' habilitado.\n\nUse '{1}' para recuperar seu save se necessário. Leia a descrição da Oficina para mais informações."
   },
   "Status_TestVersion": {
     "Zero": "Esta é uma versão de 'Teste', esteja ciente que versões de teste de mods podem causar problemas e que atualizações podem resultar em erros inesperados.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Esta é uma versão 'Teste' de '{1}'.\nEsteja ciente que atualizações nele podem causar problemas inesperados."
   },
   "Status_MissingDlc": {
     "One": "Você está sem um DLC necessário para usar este pacote.",
     "Plural": "Você está sem os seguintes DLCs necessários para usar este pacote."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "Este é um mod de dependência, mas não parece que você esteja usando qualquer pacote que o exija.",
   "Status_SourceCodeNotAvailable": "O código-fonte deste mod não está disponível. Você não deve usá-lo a menos que confie em seu autor.",
   "SourceAvailable": "O código fonte está disponível",
   "StandardMod": "Mod Básico",
@@ -138,18 +138,18 @@
   "Status_SourceAvailable": "Este pacote não vai avisar sobre falta do código-fonte.",
   "Status_StandardMod": "Este pacote será ignorado durante o processamento dos mods a serem resolvidos.",
   "OutputText": "Saída Esperada",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
+  "Stability_AssetNotReviewed": "'{0} Ainda não foi analisado.\n\nEmbora as informações de compatibilidade possam não ser precisas, os recursos geralmente são estáveis.",
+  "Stability_NotReviewed": "'{0}' ainda não foi revisado.\n\nA informação de compatibilidade pode não estar correta.",
+  "Stability_Stable": "'{0}' é estável. O autor ainda está trabalhando ativamente nele e atualizando-o.",
+  "Stability_StableNoNewFeatures": "'{0} Encontra-se estável, embora o autor não lançará mais atualizações de recursos. \nNo entanto, ele ainda irá atualizá-lo em caso de novos problemas.",
+  "Stability_StableNoFutureUpdates": "'{0}' é estável, embora o autor não esteja mais dando suporte, atualizações futuras ou correções de falhas são improváveis.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' pode causar problemas e o autor não está mais dando suporte, atualizações futuras ou correções de bugs são improváveis.",
+  "Stability_BreaksOnPatch": "'{0}' é muito provável que pare de funcionar quando a nova atualização for lançada.",
+  "Stability_NotEnoughInformation": "Não há informação suficiente para revisar corretamente '{0}'.",
+  "Stability_HasIssues": "'{0}' pode causar problemas.\nTenha cuidado ao usá-lo.",
+  "Stability_Broken": "'{0}' está com problemas.\nÉ conhecido por quebrar o jogo ou simplesmente não funciona.",
+  "Stability_Incompatible": "'{0}' está marcado como não compatível com a versão atual do seu jogo.\nUse-o cautelosamente, ou desative-o enquanto espera que seja atualizado.",
+  "Stability_Local": "Esta é uma versão local do seu mod original '{0}'.\n\nversões locais são geralmente usadas para fins de teste.",
   "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
   "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
   "Action_NoAction": "",
