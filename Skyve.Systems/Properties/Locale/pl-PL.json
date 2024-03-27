@@ -252,7 +252,7 @@
     "One": "Wybrano autora {0}",
     "Plural": "{0} wybranych autorów"
   },
-  "Donate": "Donate",
+  "Donate": "Wspomóż",
   "FlipItemCopyFilterAction": "Zamień zachowanie Ctrl+Kliknij do filtrowania na listach treści",
   "FlipItemCopyFilterAction_Tip": "Zamienia domyślne zachowanie klikania na etykiety, tak aby normalne klikanie i Ctrl + klikanie wykonywały domyślną akcję.",
   "AltClickTo": "Alt+Kliknij do {0}",
@@ -264,14 +264,14 @@
   "LaunchArgsInfo": "Dodaj dodatkowe argumenty podczas uruchamiania gry",
   "SearchGenericPackages": "Przeszukaj te pakiety..",
   "Sorting_Subscribers": "Całkowita liczba subskrybentów",
-  "Sorting_Votes": "Total Likes",
+  "Sorting_Votes": "Łącznie polubień",
   "VotesCount": {
-    "One": "{1} like",
-    "Plural": "{1} likes"
+    "One": "{1} lubię to",
+    "Plural": "{1} lubię to"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "{1} subskrybent",
+    "Plural": "{1} subskrybentów"
   },
   "SearchWorkshop": "Search the workshop instead...",
   "DiscoverWorkshop": "Look for mods on the workshop...",
@@ -283,7 +283,7 @@
   "ControlToSelectMultiplePackages": "Ctrl + Kliknij, aby wybrać wiele pakietów jednocześnie.",
   "Local": "Lokalny",
   "Workshop": "Warsztat",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "Raport zgodności",
   "Enabled": "Włączony",
   "Disabled": "Wyłączony",
   "Included": "Dołączony",
@@ -292,7 +292,7 @@
   "PackageStatus": "Package Status",
   "Author": "Autor",
   "Include": "Dołącz",
-  "Unsubscribe": "Unsubscribe",
+  "Unsubscribe": "Anuluj subskrypcje",
   "Exclude": "Exclude",
   "Snooze": "Drzemka",
   "UnSnooze": "Usuń drzemkę",
