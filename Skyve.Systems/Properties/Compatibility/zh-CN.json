@@ -241,7 +241,7 @@
   "ManagePackage": "管理插件",
   "Banned": "已被封禁",
   "NoIssues": "没有问题",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "* 发送申请时，您的账号 ID 和日志文件也会一并发送",
   "ScenarioMaking": "制作剧本",
   "ThemeMaking": "制作地图主题",
   "OtherCompatibilityWarnings": {
