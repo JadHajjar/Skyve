@@ -1,6 +1,7 @@
 ﻿using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Dropdowns;
 
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,6 +12,7 @@ public class PC_WorkshopList : PanelContent
 	protected internal readonly WorkshopContentList LC_Items;
 	private int currentPage;
 	private bool listLoading;
+	private bool endOfPagesReached;
 
 	public PC_WorkshopList() : base(false)
 	{
@@ -55,7 +57,7 @@ public class PC_WorkshopList : PanelContent
 		return false;
 	}
 
-	protected virtual async Task<IEnumerable<IPackageIdentity>> GetItems()
+	protected virtual async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
 		if (LC_Items.TB_Search.Text.Length is 5 or 6 && ulong.TryParse(LC_Items.TB_Search.Text, out var id))
 		{
@@ -72,7 +74,7 @@ public class PC_WorkshopList : PanelContent
 
 	private void ListControl_ScrollEndReached(object sender, EventArgs e)
 	{
-		if (!listLoading)
+		if (!listLoading && !endOfPagesReached)
 		{
 			Task.Run(async () => LC_Items.ListControl.AddRange(await GetPackages(currentPage + 1)));
 		}
@@ -90,6 +92,8 @@ public class PC_WorkshopList : PanelContent
 				LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray(),
 				limit: 30,
 				page: currentPage = page);
+
+			endOfPagesReached = list.Count() < 30;
 
 			return list;
 		}

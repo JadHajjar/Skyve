@@ -9,14 +9,16 @@ using Skyve.Compatibility.Domain.Interfaces;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
 public partial class ContentList : SlickControl
 {
-	public delegate Task<IEnumerable<IPackageIdentity>> GetAllItems();
+	public delegate Task<IEnumerable<IPackageIdentity>> GetAllItems(CancellationToken token);
 
+	private CancellationTokenSource? tokenSource;
 	private bool clearingFilters = true;
 	private bool firstFilterPassed;
 	private readonly DelayedAction _delayedSearch;
@@ -349,7 +351,17 @@ public partial class ContentList : SlickControl
 			ListControl.Loading = true;
 		}
 
-		var items = await GetItems();
+		tokenSource?.Cancel();
+		tokenSource = new();
+
+		var token = tokenSource.Token;
+
+		var items = await GetItems(token);
+
+		if (token.IsCancellationRequested)
+		{
+			return;
+		}
 
 		if (ListControl.ItemCount == 0)
 		{

@@ -274,9 +274,15 @@ public partial class CarouselControl : SlickControl
 			{
 				_selected = value;
 
-				if (value)
+				if (value && Parent?.Parent is not null)
 				{
-					SlickScroll.GlobalScrollTo(this, 5);
+					var screenPosition = new Rectangle(PointToScreen(default), Size);
+					var visibleBounds = new Rectangle(Parent.Parent.PointToScreen(default), Parent.Parent.Size);
+
+					if (!visibleBounds.Contains(screenPosition))
+					{
+						SlickScroll.GlobalScrollTo(this, 5);
+					}
 				}
 			}
 		}

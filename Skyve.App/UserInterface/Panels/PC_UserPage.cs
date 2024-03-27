@@ -1,6 +1,7 @@
 ﻿using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Skyve.App.UserInterface.Panels;
@@ -55,7 +56,7 @@ public partial class PC_UserPage : PanelContent
 		T_Packages.Text = Locale.Package.Plural;
 	}
 
-	protected async Task<IEnumerable<IPackageIdentity>> GetItems()
+	protected async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
 		return await _workshopService.GetWorkshopItemsByUserAsync(User.Id!);
 	}

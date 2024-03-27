@@ -1,5 +1,6 @@
 ﻿using Skyve.App.UserInterface.Dropdowns;
 
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -58,7 +59,7 @@ public partial class PC_ContentList : PanelContent
 		return false;
 	}
 
-	protected virtual Task<IEnumerable<IPackageIdentity>> GetItems()
+	protected virtual Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
 		throw new NotImplementedException();
 	}

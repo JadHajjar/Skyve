@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace Skyve.App.UserInterface.Panels;
 public class PC_Assets : PC_ContentList
@@ -24,7 +25,7 @@ public class PC_Assets : PC_ContentList
 		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override async Task<IEnumerable<IPackageIdentity>> GetItems()
+	protected override async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
 		if (_settings.UserSettings.LinkModAssets)
 		{
