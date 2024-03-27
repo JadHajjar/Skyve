@@ -256,7 +256,7 @@
   "CRT_RequiredItem": "前置项目",
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
+  "SnoozeAll": "关闭所有问题的提醒",
   "SnoozeAllFiltered": "Snooze all filtered issues",
   "LinkedPackages": "关联的插件",
   "NoTags": "No Tags",
