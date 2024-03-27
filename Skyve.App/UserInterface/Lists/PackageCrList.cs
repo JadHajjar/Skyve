@@ -47,7 +47,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 		var cr = e.Item.GetPackageInfo();
 		var stability = cr?.Stability ?? PackageStability.NotReviewed;
 		var clipRectangle = e.ClipRectangle;
-		var imageRect = clipRectangle.Pad(Padding);
+		var imageRect = clipRectangle.Pad(Padding.Left);
 		var thumbnail = e.Item.GetThumbnail();
 		var isUpToDate = ShowCompleted && cr?.ReviewDate > e.Item.GetWorkshopInfo()?.ServerTime;
 
@@ -77,9 +77,6 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 		else
 		{
 			e.Graphics.DrawRoundedImage(thumbnail, imageRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
-
-			using var pen = new Pen(e.BackColor, 2.5F);
-			e.Graphics.DrawRoundedRectangle(pen, imageRect, (int)(5 * UI.FontScale));
 
 			if (isUpToDate && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
