@@ -162,22 +162,22 @@
     "One": "Entre '{0}' et '{1}', vous ne devriez en choisir qu'un seul.",
     "Plural": "Entre '{0}' et les paquets suivants, vous ne devriez en choisir qu'un seul."
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "Vous devriez retirer '{0}' de votre playset.",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
+    "One": "Vous devriez retirer '{1}' de votre playset.",
     "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
+  "Action_ExcludeThis": "Vous devriez désactiver '{0}'.",
   "ExcludeThis": "Désactiver ce paquet",
   "Exclude": "Désactiver",
   "Unsubscribe": "Se désabonner",
   "Action_ExcludeOther": {
     "One": "Vous devriez désactiver '{1}'.",
-    "Plural": "You should disable the following packages."
+    "Plural": "Vous devriez désactiver les paquets suivants."
   },
   "Action_Switch": {
     "One": "Vous devriez basculer vers '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "Vous devriez basculer vers un des paquets suivants."
   },
   "Action_IncludeThis": "Vous devriez inclure \"{0}\"",
   "Action_IncludeOther": {
