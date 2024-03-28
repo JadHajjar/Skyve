@@ -14,4 +14,11 @@ public enum PackageSorting
 	LoadOrder,
 	Mod,
 	None,
+
+	WorkshopSorting = 100,
+	Best,
+	Popularity,
+	DateUpdated,
+	DateCreated,
+	WorkshopName,
 }

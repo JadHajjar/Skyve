@@ -1,10 +1,10 @@
 ﻿namespace Skyve.Domain.Enums;
 public enum WorkshopQuerySorting
 {
+	Best = 1,
 	Popularity,
-	Name,
-	DateCreated,
 	DateUpdated,
+	DateCreated,
+	Name,
 	Rating,
-	Best
 }

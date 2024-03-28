@@ -49,7 +49,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		Padding = UI.Scale(new Padding(3, 1, 3, 1), UI.FontScale);
 	}
 
-	protected override void CanDrawItemInternal(CanDrawItemEventArgs<IPlayset> args)
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<IPlayset, Rectangles> args)
 	{
 		base.CanDrawItemInternal(args);
 
@@ -60,7 +60,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 			if (cr is not null && playsetUsage > 0 && !cr.Usage.HasFlag(playsetUsage))
 			{
-				args.DoNotDraw = true;
+				args.DrawableItem.Hidden = true;
 			}
 		}
 	}

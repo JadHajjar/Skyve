@@ -90,6 +90,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
+	public int UsageFilteredOut { get; set; }
 	public int? SelectedPlayset { get; set; }
 	public bool SortDescending { get; private set; }
 	public bool IsPackagePage { get; set; }
@@ -121,6 +122,8 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 	public void DoFilterChanged()
 	{
+		UsageFilteredOut = 0;
+
 		base.FilterChanged();
 	}
 
@@ -148,6 +151,8 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	{
 		if (!IsHandleCreated || settingItems)
 		{
+			UsageFilteredOut = 0;
+
 			base.FilterChanged();
 		}
 		else
@@ -187,8 +192,47 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		StartHeight = _compactList ? (int)(24 * UI.FontScale) : 0;
 	}
 
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<IPackageIdentity, Rectangles> args)
+	{
+		if (_playsetManager.CurrentCustomPlayset?.Usage > 0)
+		{
+			if (!(args.Item.GetPackageInfo()?.Usage.HasFlag(_playsetManager.CurrentCustomPlayset.Usage) ?? true))
+			{
+				UsageFilteredOut++;
+				args.DrawableItem.Tag = true;
+			}
+			else
+			{
+				args.DrawableItem.Tag = null;
+			}
+
+			if (_page is not SkyvePage.Workshop)
+			{
+				base.CanDrawItemInternal(args);
+			}
+
+			return;
+		}
+
+		if (_page is SkyvePage.Workshop)
+		{
+			OnCanDrawItem(args);
+
+			args.DrawableItem.Tag = args.DoNotDraw ? true : null;
+		}
+		else
+		{
+			base.CanDrawItemInternal(args);
+		}
+	}
+
 	protected override IEnumerable<DrawableItem<IPackageIdentity, Rectangles>> OrderItems(IEnumerable<DrawableItem<IPackageIdentity, Rectangles>> items)
 	{
+		if (sorting > PackageSorting.WorkshopSorting)
+		{
+			return items;
+		}
+
 		items = sorting switch
 		{
 			PackageSorting.FileSize => items
@@ -228,7 +272,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.ThenByDescending(x => x.Item.GetPackage() is IPackage package ? _modUtil.GetLoadOrder(package) : 0)
 				.ThenBy(x => x.Item.CleanName()),
 
-			_ => _page is SkyvePage.Workshop ? items : items
+			_ => items
 				.OrderBy(x => !(x.Item.IsIncluded(out var partial) || partial))
 				.ThenBy(x => !x.Item.IsEnabled())
 				.ThenBy(x => x.Item.IsLocal())

@@ -5,6 +5,7 @@ namespace Skyve.App.UserInterface.Dropdowns;
 public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 {
 	public SkyvePage SkyvePage { get; set; }
+	public bool WorkshopSort { get; set; }
 
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -12,7 +13,7 @@ public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(PackageSorting)).Cast<PackageSorting>().Where(x => x < PackageSorting.Mod).ToArray();
+			Items = Enum.GetValues(typeof(PackageSorting)).Cast<PackageSorting>().Where(x => WorkshopSort ? x > PackageSorting.WorkshopSorting : x < PackageSorting.Mod).ToArray();
 
 			selectedItem = (PackageSorting)ServiceCenter.Get<ISettings>().UserSettings.PageSettings.GetOrAdd(SkyvePage).Sorting;
 		}
@@ -22,7 +23,7 @@ public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 	{
 		if (e.Button == MouseButtons.Middle)
 		{
-			SelectedItem = PackageSorting.Default;
+			SelectedItem = WorkshopSort ? PackageSorting.Best : PackageSorting.Default;
 		}
 
 		base.OnMouseClick(e);
@@ -42,7 +43,6 @@ public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 
 	public override void ResetValue()
 	{
-
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageSorting item)
@@ -63,16 +63,17 @@ public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 	{
 		return item switch
 		{
-			PackageSorting.Name => "FileName",
+			PackageSorting.Name or PackageSorting.WorkshopName => "FileName",
 			PackageSorting.Author => "Author",
 			PackageSorting.FileSize => "MicroSd",
 			PackageSorting.CompatibilityReport => "CompatibilityReport",
-			PackageSorting.UpdateTime => "UpdateTime",
-			PackageSorting.SubscribeTime => "Add",
+			PackageSorting.UpdateTime or PackageSorting.DateUpdated => "UpdateTime",
+			PackageSorting.SubscribeTime or PackageSorting.DateCreated => "Add",
 			PackageSorting.Status => "Broken",
-			PackageSorting.Subscribers => "People",
+			PackageSorting.Subscribers or PackageSorting.Popularity => "People",
 			PackageSorting.Votes => "Vote",
 			PackageSorting.LoadOrder => "Wrench",
+			PackageSorting.Best => "Star",
 			_ => "Check",
 		};
 	}

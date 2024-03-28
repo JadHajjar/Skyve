@@ -52,7 +52,12 @@ public partial class ItemListControl
 				e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
 			}
 
-			if (!isEnabled && isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
+			if (e.DrawableItem.Tag is not null)
+			{
+				using var brush = new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 50 : 175, BackColor));
+				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
+			}
+			else if (!isEnabled && isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));

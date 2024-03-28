@@ -18,7 +18,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 	private readonly ICompatibilityManager _compatibilityManager;
 
 	private Dictionary<NotificationType, int> compatibilityModCounts = [];
-	private Dictionary<NotificationType, int> compatibilityAssetCounts = []; 
+	private Dictionary<NotificationType, int> compatibilityAssetCounts = [];
 	private int mainSectionHeight;
 	private int modsSectionHeight;
 
@@ -83,13 +83,23 @@ internal class D_CompatibilityInfo : IDashboardItem
 		_notifier.PlaysetChanged -= LoadData;
 	}
 
-	protected override Task ProcessDataLoad(CancellationToken token)
+	protected override Task<bool> ProcessDataLoad(CancellationToken token)
 	{
+		if (!_notifier.IsContentLoaded)
+		{
+			return Task.FromResult(false);
+		}
+
 		var compatibilityModCounts = new Dictionary<NotificationType, int>();
 		var compatibilityAssetCounts = new Dictionary<NotificationType, int>();
 
 		foreach (var mod in _contentManager.Packages)
 		{
+			if (token.IsCancellationRequested)
+			{
+				return Task.FromResult(false);
+			}
+
 			if (!mod.IsIncluded())
 			{
 				continue;
@@ -126,15 +136,17 @@ internal class D_CompatibilityInfo : IDashboardItem
 			}
 		}
 
-		if (!token.IsCancellationRequested)
+		if (token.IsCancellationRequested)
 		{
-			this.compatibilityModCounts = compatibilityModCounts;
-			this.compatibilityAssetCounts = compatibilityAssetCounts;
-
-			OnResizeRequested();
+			return Task.FromResult(false);
 		}
 
-		return base.ProcessDataLoad(token);
+		this.compatibilityModCounts = compatibilityModCounts;
+		this.compatibilityAssetCounts = compatibilityAssetCounts;
+
+		OnResizeRequested();
+
+		return Task.FromResult(true);
 	}
 
 	protected override DrawingDelegate GetDrawingMethod(int width)
@@ -262,7 +274,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 			Rectangle = buttonRect.Pad(Margin.Left, 0, 0, 0).Pad(Margin)
 		});
 
-		preferredHeight = Math.Max(maxHeight, preferredHeight)+BorderRadius/2;
+		preferredHeight = Math.Max(maxHeight, preferredHeight) + BorderRadius / 2;
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)

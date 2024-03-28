@@ -584,5 +584,7 @@
   "AssetsEnabled": "Assets Enabled",
   "PackagesIncludedDisabled": "Packages Included & Disabled",
   "OutOf": "{0} out of {1}",
-  "RecentlyUpdatedItem": "Recently Updated {0}"
+  "RecentlyUpdatedItem": "Recently Updated {0}",
+  "MassSubscribeWarningTitle": "Mass subscription warning",
+  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?"
 }

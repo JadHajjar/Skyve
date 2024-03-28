@@ -1183,6 +1183,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation MapFileInfo => _instance.GetText("MapFileInfo");
 
 	/// <summary>
+	/// You're about to subscribe to {0} mods. Are you sure you want to continue?
+	/// </summary>
+	public static Translation MassSubscribeWarningInfo => _instance.GetText("MassSubscribeWarningInfo");
+
+	/// <summary>
+	/// Mass subscription warning
+	/// </summary>
+	public static Translation MassSubscribeWarningTitle => _instance.GetText("MassSubscribeWarningTitle");
+
+	/// <summary>
 	/// Missing
 	/// </summary>
 	public static Translation Missing => _instance.GetText("Missing");

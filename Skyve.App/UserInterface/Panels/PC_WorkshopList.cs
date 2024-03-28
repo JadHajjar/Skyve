@@ -1,5 +1,4 @@
 ﻿using Skyve.App.UserInterface.Content;
-using Skyve.App.UserInterface.Dropdowns;
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -76,6 +75,8 @@ public class PC_WorkshopList : PanelContent
 	{
 		if (!listLoading && !endOfPagesReached)
 		{
+			LC_Items.I_Refresh.Loading = true;
+
 			Task.Run(async () => LC_Items.ListControl.AddRange(await GetPackages(currentPage + 1)));
 		}
 	}
@@ -86,12 +87,28 @@ public class PC_WorkshopList : PanelContent
 
 		try
 		{
-			var list = await _workshopService.QueryFilesAsync(
-				WorkshopQuerySorting.Popularity,
-				LC_Items.TB_Search.Text,
-				LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray(),
-				limit: 30,
-				page: currentPage = page);
+			IEnumerable<IWorkshopInfo> list;
+
+			if (LC_Items.TB_Search.Text.StartsWith("@"))
+			{
+				list = await _workshopService.GetWorkshopItemsByUserAsync(
+				   LC_Items.TB_Search.Text.Substring(1),
+				   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
+				   null,
+				   LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray(),
+				   limit: 30,
+				   page: currentPage = page);
+
+			}
+			else
+			{
+				list = await _workshopService.QueryFilesAsync(
+				   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
+				   LC_Items.TB_Search.Text,
+				   LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray(),
+				   limit: 30,
+				   page: currentPage = page);
+			}
 
 			endOfPagesReached = list.Count() < 30;
 
@@ -106,20 +123,5 @@ public class PC_WorkshopList : PanelContent
 	protected virtual LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Package;
-	}
-
-	public void SetSorting(PackageSorting packageSorting, bool desc)
-	{
-		LC_Items.ListControl.SetSorting(packageSorting, desc);
-	}
-
-	public void SetCompatibilityFilter(CompatibilityNotificationFilter filter)
-	{
-		LC_Items.DD_ReportSeverity.SelectedItem = filter;
-	}
-
-	public void SetIncludedFilter(Generic.ThreeOptionToggle.Value filter)
-	{
-		LC_Items.OT_Included.SelectedValue = filter;
 	}
 }

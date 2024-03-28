@@ -158,24 +158,19 @@ public abstract class IDashboardItem : SlickImageControl
 
 		try
 		{
-			await ProcessDataLoad(token);
+			if (await ProcessDataLoad(token))
+				Loading = false;
 		}
 		catch (Exception ex)
 		{
+			Loading = false;
 			OnDataLoadError(ex);
-		}
-		finally
-		{
-			if (!token.IsCancellationRequested)
-			{
-				Loading = false;
-			}
 		}
 	}
 
-	protected virtual Task ProcessDataLoad(CancellationToken token)
+	protected virtual Task<bool> ProcessDataLoad(CancellationToken token)
 	{
-		return Task.CompletedTask;
+		return Task.FromResult(true);
 	}
 
 	protected virtual void OnDataLoadError(Exception ex)

@@ -65,7 +65,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		StartHeight = (int)(44 * UI.FontScale);
 	}
 
-	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo> args)
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo, Rectangles> args)
 	{
 		args.DoNotDraw = CurrentGroup != NotificationType.None && args.Item.GetNotification() != CurrentGroup;
 

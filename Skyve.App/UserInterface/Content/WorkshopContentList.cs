@@ -9,14 +9,15 @@ public class WorkshopContentList : ContentList
 
 	public WorkshopContentList(SkyvePage page, bool loaded, GetAllItems getItems, Func<LocaleHelper.Translation> getItemText) : base(page, loaded, getItems, getItemText)
 	{
+		DD_Sorting.WorkshopSort = true;
+		I_SortOrder.Visible = false;
 	}
 
 	protected override async void OnSearch()
 	{
 		var id = ++_id;
 
-		ListControl.Clear();
-		ListControl.Loading = true;
+		I_Refresh.Loading = true;
 
 		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
 		{

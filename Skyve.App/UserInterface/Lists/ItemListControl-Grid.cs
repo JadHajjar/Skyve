@@ -58,7 +58,12 @@ public partial class ItemListControl
 
 			DrawCompatibilityAndStatus(e, out var outerColor);
 
-			if (isEnabled)
+			if (e.DrawableItem.Tag is not null)
+			{
+				using var brush = new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 50 : 175, BackColor));
+				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
+			}
+			else if (isEnabled)
 			{
 				if (outerColor == default)
 				{
