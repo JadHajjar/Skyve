@@ -17,7 +17,7 @@
   "CompatibilityStatus": "สถานะความเข้ากันได้",
   "AnyStatus": "ทุกสถานะ",
   "NoLocalPackagesFound": "ไม่พบแพ็กเกจภายในคอมพิวเตอร์ของคุณ",
-  "NoPackagesMatchFilters": "No packages match what you're looking for.",
+  "NoPackagesMatchFilters": "ไม่มีแพ็กเกจไหนตรงกับที่คุณกำลังหา",
   "EnableAll": "เปิดใช้งานไอเทมทั้งหมด",
   "DisableAll": "ปิดใช้งานไอเทมทั้งหมด",
   "EnableAllFiltered": "Enable filtered items",
@@ -47,7 +47,7 @@
   "OpenPackagePage": "เปิดหน้าเพจของแพ็กเกจนี้",
   "OpenPackageFolder": {
     "One": "Open file location",
-    "Plural": "Open all selected packages' file locations"
+    "Plural": "เปิดตำแหน่งไฟล์ของแพ็กเกจทั้งหมดที่เลือก"
   },
   "OpenLocalFolder": "Open the folder containing this package",
   "ReDownloadPackage": {
@@ -78,7 +78,7 @@
   "HideFilters": "ซ่อนตัวกรอง",
   "DateSubscribed": "วันที่สมัครสมาชิก",
   "DateUpdated": "วันที่อัปเดต",
-  "FilterOutPackagesWithMods": "Hide code mods in the packages page",
+  "FilterOutPackagesWithMods": "ซ่อนม็อดด้านโค้ดนหน้าแพ็กเกจ",
   "FilterOutPackagesWithOneAsset": "ซ่อน แพ็กเกจแอสเซทเดี่ยวจากหน้าแพ็กเกจ",
   "CopyAuthorLink": "คัดลองลิงก์โพร์ไฟล์ของผู้สร้าง",
   "YourPlaysets": "เพลย์เซ็ตของคุณ",
@@ -204,7 +204,7 @@
     "Plural": "Disable the selected items in all your playsets"
   },
   "CopyPackageName": {
-    "One": "Copy the package's name",
+    "One": "คัดลอกชื่อแพ็กเกจ",
     "Plural": "คัดลอกชื่อแพ็กเกจที่เลือก"
   },
   "CopyAuthorId": {
@@ -289,7 +289,7 @@
   "Included": "รวมอยู่ในเกม",
   "Excluded": "แยกออกจากเกม",
   "OutOfDate": "ล้าสมัย",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "สถานะแพ็กเกจ",
   "Author": "ผู้สร้าง",
   "Include": "รวมอยู่ในเกม",
   "Unsubscribe": "Unsubscribe",
