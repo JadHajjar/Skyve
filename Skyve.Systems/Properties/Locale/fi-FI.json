@@ -124,7 +124,7 @@
   "JoinDiscord_Tip": "Kysy apua ja vastaanota päivityksiä työkalun käytöstä discord-palvelimella.",
   "OpenGuide_Tip": "Näytä online-opas päästäksesi alkuun Skyven kanssa.",
   "ResetButton_Tip": "Nollaa asetuksesi oletusarvoihin. Tämä ei vaikuta kansion asetuksiin.",
-  "ComplexListUI": "Advanced-user UI mode",
+  "ComplexListUI": "Edistyneen käyttäjän käyttöliittymätila",
   "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
   "NewGame": "Aloita uusi peli",
   "LoadSaveGame": "Jatka edellistä tallennusta",
@@ -133,7 +133,7 @@
   "ResetFolderButton_Tip": "Tämä toiminto edellyttää pelin avaamista ennen kuin voit käyttää työkalua uudestaan.",
   "AreYouSure": "Oletko varma, että haluat jatkaa?",
   "MapFileInfo": "Valitse karttatiedosto aloittaaksesi uuden pelin",
-  "BulkActions": "Bulk Actions",
+  "BulkActions": "Massatoiminnot",
   "CopyVersionNumber": "Kopioi versionumero",
   "FixAllTip": "Yritä ladata uudelleen kaikki paketit, joissa on ongelmia, tämä avaa Steamin hetkeksi",
   "FilterByThisReportStatus": "Suodata tämän raportin tilan mukaan",
@@ -149,7 +149,7 @@
   "LogZipFile": "Tallenna lokit tiedostoon",
   "LogFolders": "Loki Kansiot",
   "LogFileDrop": "Pudota tai valitse lokitiedosto, joka yksinkertaistetaan ja näytetään lokin sisällä olevien virheiden luettelo",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
+  "DefaultLogViewInfo": "Edellisen istunnon virheet näytetään automaattisesti täällä, tulokset päivitetään reaaliajassa.",
   "ErrorsInLog": "Lokissa on virheitä",
   "OpenLogFolder": "Avaa pelin lokikansio",
   "CopyLogFile": "Kopioi pelin lokitiedosto leikepöydälle",
@@ -174,7 +174,7 @@
   "ABANDONED": "HYLÄTTY",
   "ActionUnreversible": {
     "One": "Tätä toimintoa ei voi peruuttaa.",
-    "Plural": "This action can not be reversed. And will affect {0} packages."
+    "Plural": "Tätä toimintoa ei voi peruuttaa. Ja se vaikuttaa {0} pakettiin."
   },
   "AlwaysOpenFiltersAndActions": "Näytä suodattimien osio oletuksena",
   "AlwaysOpenFiltersAndActions_Tip": "Näytä suodattimet aina kun avataan sisältövälilehti",
@@ -182,11 +182,11 @@
   "FavoriteTotal": "Pelioita yhteensä: {0}",
   "PlaysetFilter": "Pelisetti Suodatin",
   "CheckDocumentsFolder": "Varmista, että Skyvellä on pääsy Tiedostot-kansioon, se käyttää sitä käyttöliittymä- ja kieliasetusten tallentamiseen.",
-  "FailedToSaveLanguage": "Failed to save the selected language",
+  "FailedToSaveLanguage": "Valitun kielen tallentaminen epäonnistui",
   "FailedToOpenTC": "Teeman vaihtajan avaaminen epäonnistui",
   "FailedToDeleteItem": "Kohteen poistaminen epäonnistui",
   "OpenChangelog": "Avaa Muutosloki",
-  "Changelog": "Change-log",
+  "Changelog": "Muutosloki",
   "DeleteAsset": {
     "One": "Poista tämä assetti",
     "Plural": "Poista valitut assetit"
@@ -204,11 +204,11 @@
     "Plural": "Poista valitut kohteet käytöstä kaikista peliseteistä"
   },
   "CopyPackageName": {
-    "One": "Copy the package's name",
+    "One": "Kopioi paketin nimi",
     "Plural": "Kopioi valittujen pakettien nimet"
   },
   "CopyAuthorId": {
-    "One": "Copy the author's ID",
+    "One": "Kopioi tekijän ID",
     "Plural": "Copy the selected packages' author IDs"
   },
   "CopyAuthorName": {
