@@ -537,8 +537,8 @@
   "Status": "Status",
   "PackageUsage": "Package Usage",
   "CodeMod": {
-    "One": "Code Mod",
-    "Plural": "Code Mods"
+    "One": "Mod kodu",
+    "Plural": "Mody kodu"
   },
   "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
   "FadeDisabledItems": "Fade out disabled mods & assets",
@@ -556,7 +556,7 @@
   "PartiallyIncluded": "Partially Included",
   "Links": "Links",
   "NoAssets": "Disable All Assets",
-  "NoMods": "Disable All Code-Mods",
+  "NoMods": "Wyłącz wszystkie mody kodu",
   "FavoritePlaysets": "Favorite Playsets",
   "OnlyShowErrors": "Only show warnings and errors",
   "RestartRequired": "Restart Required",
