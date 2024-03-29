@@ -20,7 +20,7 @@
   "NoPackagesMatchFilters": "ไม่มีแพ็กเกจไหนตรงกับที่คุณกำลังหา",
   "EnableAll": "เปิดใช้งานไอเทมทั้งหมด",
   "DisableAll": "ปิดใช้งานไอเทมทั้งหมด",
-  "EnableAllFiltered": "Enable filtered items",
+  "EnableAllFiltered": "เปิดใช้งานสิ่งที่กรองได้",
   "DisableAllFiltered": "Disable filtered items",
   "EnableAllSelected": "Enable selected items",
   "DisableAllSelected": "Disable selected items",
