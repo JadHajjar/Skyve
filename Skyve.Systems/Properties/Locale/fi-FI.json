@@ -209,10 +209,10 @@
   },
   "CopyAuthorId": {
     "One": "Kopioi tekijän ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "Plural": "Kopioi valittujen pakettien tekijän tunnukset"
   },
   "CopyAuthorName": {
-    "One": "Copy the author's name",
+    "One": "Kopioi tekijän nimi",
     "Plural": "Kopioi valittujen pakettien kirjoittajien nimet"
   },
   "Sorting_LastUsed": "Viimeksi Käytetty",
@@ -229,7 +229,7 @@
   "Sorting_Color": "Profiilin Väri",
   "CreateShortcutPlayset": "Luo pikakuvake sitä varten työpöydällä",
   "AskToLaunchGameForShortcut": "Haluatko että pikakuvake voi myös käynnistää pelin profiilisi avulla?",
-  "TextImportMissingInfo": "Load a text file containing Workshop IDs to easily subscribe to or manage them",
+  "TextImportMissingInfo": "Lataa tekstitiedosto, joka sisältää Workshop-tunnukset, jotta voit helposti tilata tai hallita niitä",
   "ImportFromText": "Tuo Tekstistä",
   "ImportFromClipboard": "Lataa teksti leikepöydältä",
   "ImportFromTextInfo": "Mikä tahansa tekstimuoto on tuettu",
@@ -252,7 +252,7 @@
     "One": "{0} tekijä valittu",
     "Plural": "{0} tekijää valittu"
   },
-  "Donate": "Donate",
+  "Donate": "Lahjoita",
   "FlipItemCopyFilterAction": "Vaihda Ctrl + Klikkaa -toimintoa suodattaaksesi sisältölistoja",
   "FlipItemCopyFilterAction_Tip": "Vaihtaa oletustoiminnon klikkaamalla tunnisteita niin, että normaali suodattimien ja Ctrl+Klikkaaminen suorittaa oletustoiminnon.",
   "AltClickTo": "Alt+Click to {0}",
@@ -264,18 +264,18 @@
   "LaunchArgsInfo": "Lisää ylimääräisiä argumentteja pelin käynnistämisessä",
   "SearchGenericPackages": "Etsi näistä paketeista..",
   "Sorting_Subscribers": "Tilaajia Yhteensä",
-  "Sorting_Votes": "Total Likes",
+  "Sorting_Votes": "Tykkäyksiä Yhteensä",
   "VotesCount": {
-    "One": "{1} like",
-    "Plural": "{1} likes"
+    "One": "{1} tykkäys",
+    "Plural": "{1} tykkäystä"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "{1} tilaaja",
+    "Plural": "{1} tilaajaa"
   },
-  "SearchWorkshop": "Search the workshop instead...",
-  "DiscoverWorkshop": "Look for mods on the workshop...",
-  "SearchWorkshopBrowser": "Search the workshop in your browser...",
+  "SearchWorkshop": "Etsi Workshopista sen sijaan...",
+  "DiscoverWorkshop": "Etsi modeja workshopista...",
+  "SearchWorkshopBrowser": "Etsi Workshopista selaimellasi...",
   "UnknownPackage": "Tuntematon Paketti",
   "Info": "Tiedot",
   "SelectThisPackage": "Valitse tämä paketti",
@@ -283,17 +283,17 @@
   "ControlToSelectMultiplePackages": "Ctrl + Klikkaa valitaksesi useita paketteja kerralla.",
   "Local": "Paikallinen",
   "Workshop": "Workshop",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "Yhteensopivuusraportti",
   "Enabled": "Käytössä",
   "Disabled": "Pois käytöstä",
   "Included": "Mukana",
   "Excluded": "Ei mukana",
   "OutOfDate": "Vanhentunut",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "Paketin tila",
   "Author": "Tekijä",
   "Include": "Sisällytä",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
+  "Unsubscribe": "Peruuta tilaus",
+  "Exclude": "Poista käytöstä",
   "Snooze": "Torkku",
   "UnSnooze": "Poista torkku",
   "Mod": {
@@ -313,8 +313,8 @@
     "Plural": "Profiles"
   },
   "ContainCount": {
-    "One": "Contains {0} {1}",
-    "Plural": "Contains {0} {1}"
+    "One": "Sisältää {0} {1}",
+    "Plural": "Sisältää {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} sisältyy",
