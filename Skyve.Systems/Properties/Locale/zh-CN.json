@@ -25,7 +25,7 @@
   "EnableAllSelected": "启用已选项目",
   "DisableAllSelected": "禁用已选项目",
   "CopyAllIds": "复制所有项目的名称和 ID",
-  "CopyAllIdsFiltered": "Copy all filtered items' names & IDs",
+  "CopyAllIdsFiltered": "复制所有筛选出的项目的名称和 ID",
   "CopyAllIdsSelected": "复制当前选择的所有项目的名称与数字 ID",
   "HelpLogs": "获取帮助和日志",
   "Preferences": "选项",
@@ -125,7 +125,7 @@
   "OpenGuide_Tip": "在线查阅 Skyve 使用指南，并开始使用 Skyve。",
   "ResetButton_Tip": "将您的设置重置为默认值。此操作不影响文件夹设置。",
   "ComplexListUI": "高级用户界面模式",
-  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
+  "ComplexListUI_Tip": "在用户界面显示更多信息和高级操作。",
   "NewGame": "新建一个存档",
   "LoadSaveGame": "继续游玩上次保存的存档",
   "DevOptions": "开发者启动选项",
@@ -149,15 +149,15 @@
   "LogZipFile": "将日志文件打包保存进压缩包",
   "LogFolders": "日志文件夹",
   "LogFileDrop": "将日志文件拖到此处；或单击此处，选择一个日志文件，以查看简化后的报错信息。",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
+  "DefaultLogViewInfo": "您最近游戏的报错将自动显示在这里，并实时更新。",
   "ErrorsInLog": "日志中的报错信息",
   "OpenLogFolder": "打开游戏的日志文件夹",
   "CopyLogFile": "将游戏日志文件复制到剪贴板",
   "OpenLOTLogFolder": "打开 Skyve 的日志文件夹",
   "CopyLOTLogFile": "将 Skyve 的日志文件复制到剪贴板",
-  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
+  "GenericIncludedTotal": "共 {2} 个 {0}，已装载 {1} 个",
+  "GenericIncludedAndEnabledTotal": "共 {2} 个 {0}，已装载并启用 {1} 个",
+  "GenericIncludedEnabledTotal": "共 {3} 个 {0}，已装载 {1} 个，其中已启用 {2} 个",
   "NewPlayset_Tip": "新建或导入配置文件",
   "ViewPlaysets_Tip": "查看和管理配置文件",
   "DeactivatePlayset_Tip": "Deactivate your current playset",
@@ -313,8 +313,8 @@
     "Plural": "配置文件"
   },
   "ContainCount": {
-    "One": "Contains {0} {1}",
-    "Plural": "Contains {0} {1}"
+    "One": "包含 {0} 个{1}",
+    "Plural": "包含 {0} 个{1}"
   },
   "IncludedCount": {
     "One": "已装载 {0} 个{1}",
@@ -369,7 +369,7 @@
   },
   "EditLinks": {
     "One": "编辑插件链接",
-    "Plural": "Edit selected items' Links"
+    "Plural": "编辑选中插件的链接"
   },
   "ShowAllReferencedPackages": "在“引用”选项卡显示被卸下的插件",
   "ShowAllReferencedPackages_Tip": "无论被引用的插件已装载或已卸下，都在插件详情页面的“引用”选项卡显示它们。",
@@ -505,7 +505,7 @@
   "UnsavedChangesPlayset": "此配置文件中的改动还没有保存",
   "ChangePlaysetSettings": "更改此配置文件的设置",
   "ViewCompatibilityReport": "查看完整报告",
-  "DashboardCustomizationInfo": "Customize your dashboard by dragging each section from its title.\r\nYou can also resize a section using the dotted triangle on its bottom-right corner.",
+  "DashboardCustomizationInfo": "拖动各个统计面板标题栏，可以移动它们，\n拖动统计面板右下角的点状三角形，可以调整大小。",
   "ViewAssetsWithIssues": "查看存在问题的资产",
   "ViewModsWithIssues": "查看存在问题的模组",
   "CreateShortcut": "创建 Skyve 的桌面快捷方式",
@@ -553,7 +553,7 @@
   "ModID": "模组ID",
   "Subscribers": "订阅者",
   "Votes": "点赞",
-  "PartiallyIncluded": "Partially Included",
+  "PartiallyIncluded": "装载了一部分",
   "Links": "链接",
   "NoAssets": "禁用所有资产",
   "NoMods": "禁用所有代码模组",
@@ -562,7 +562,7 @@
   "RestartRequired": "需要重启",
   "FailedToApplyChanges": "无法应用请求的更改",
   "ConfirmSelection": "确认选择",
-  "PackagesSelected": "Packages Selected ({0})",
+  "PackagesSelected": "选中的插件 ({0})",
   "PackagesSelectionInfo": "单击选择一个包，当你完成后点击“确认选择”",
   "CustomColor": "自定义颜色",
   "CustomThumbnail": "自定义缩略图",
@@ -583,6 +583,6 @@
   "ModsEnabled": "已启用模组",
   "AssetsEnabled": "已启用资产",
   "PackagesIncludedDisabled": "已包含&禁用的插件",
-  "OutOf": "{0} out of {1}",
+  "OutOf": "{1} 中的 {0}",
   "RecentlyUpdatedItem": "近期更新 {0}"
 }
