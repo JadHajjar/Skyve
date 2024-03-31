@@ -583,6 +583,6 @@
   "ModsEnabled": "已启用模组",
   "AssetsEnabled": "已启用资产",
   "PackagesIncludedDisabled": "已包含&禁用的插件",
-  "OutOf": "{1} 中的 {0}",
+  "OutOf": "{0} 个，共 {1} 个",
   "RecentlyUpdatedItem": "近期更新 {0}"
 }
