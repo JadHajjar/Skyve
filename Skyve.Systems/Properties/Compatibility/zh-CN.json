@@ -5,10 +5,10 @@
   "Previous": "上一个",
   "Skip": "跳过",
   "Note": "备注",
-  "NoteInfo": "Additional information to be displayed for the mod",
+  "NoteInfo": "为模组显示的额外信息",
   "BlackListName": "按名称列出黑名单",
   "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "GlobalTagsInfo": "所有玩家都会在 Skyve 中看到的标签",
   "Links": "链接",
   "StatusesCount": "状态 ({0})",
   "InteractionCount": "交互方式 ({0})",
@@ -19,7 +19,7 @@
   "StableNoNewFeatures": "稳定，只有修复 Bug 的更新",
   "StableNoFutureUpdates": "稳定，不再更新",
   "HasIssuesNoFutureUpdates": "存在问题，但不再更新",
-  "BreaksOnPatch": "Stable, potentially breaks on patch",
+  "BreaksOnPatch": "稳定，但游戏更新可能会损坏",
   "NotEnoughInformation": "没有足够的信息",
   "HasIssues": "存在问题",
   "Broken": "已损坏",
@@ -60,7 +60,7 @@
   "AttentionRequired": "需要注意",
   "Website": "网站",
   "Donation": "赞助",
-  "ManageCompatibilityData": "Compatibility Management",
+  "ManageCompatibilityData": "兼容性管理",
   "YourPackages": "管理您的模组",
   "AddPackages": "添加插件",
   "ConfirmEndSession": "您确定要关闭此会话吗？",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "请为此插件选择一个有效的用途。",
   "Interaction_Alternative": {
     "One": "'{1}' 可以作为 '{0}' 的备选方案。",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "下列任意一个插件可以作为 '{0}' 的备选方案："
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' 和 '{1}' 都含有相同的功能。",
@@ -114,12 +114,12 @@
   "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行更新了。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某个插件的重新上传版本。",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "'{0}' 是 '{1}' 的二次上传版本。"
   },
   "Status_CausesIssues": "目前已知 '{0}' 会导致游戏出现问题。",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "一旦存档中使用了 '{0}' ，此后，如果不启用 '{0}'，这个存档将无法加载。",
+    "One": "一旦在存档中使用了 '{0}' ，此后，如果不启用 '{0}' 被禁用时，这个存档将无法加载。\n\n您可以使用 '{1}' 来恢复无法加载的存档。请阅读其工坊页面描述，以了解更多信息。"
   },
   "Status_TestVersion": {
     "Zero": "这是测试版模组。请注意，测试版模组有可能出现意外问题。",
@@ -149,40 +149,40 @@
   "Stability_HasIssues": "'{0}' 可能存在问题。\n请小心使用。",
   "Stability_Broken": "'{0}' 已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
   "Stability_Incompatible": "'{0}' 已被标记为与当前游戏版本不兼容。\n请务必谨慎使用，或等待它更新适配后再使用。",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
+  "Stability_Local": "这是模组 '{0}' 的本地版本。\n\n本地模组通常仅用于测试。",
   "Stability_BrokenFromPatch": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。\n目前，您应该禁用它。",
   "Stability_BrokenFromPatchSafe": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "您应该将以下模组添加到配置文件中：",
+    "Plural": "您应该将以下模组添加到配置文件中："
   },
   "Action_RequiresConfiguration": "请遵循以下使用说明：",
   "Action_SelectOne": {
     "One": "对于 '{0}' 和 '{1}'，您应当只选择其中一个插件来使用：",
     "Plural": "对于 '{0}' 和下列插件，您应当只选择其中一个插件来使用："
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "您应该将 '{0}' 从配置文件中移除。",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "您应该将 '{1}' 从配置文件中移除。",
+    "Plural": "您应该将以下模组从配置文件中移除："
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
+  "Action_ExcludeThis": "您应该禁用 '{0}'。",
   "ExcludeThis": "禁用此插件",
   "Exclude": "禁用",
   "Unsubscribe": "取消订阅",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "您应该禁用 '{1}'。",
+    "Plural": "您应该禁用以下插件："
   },
   "Action_Switch": {
     "One": "您应当将其替换为 '{1}'。",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "您应当改为使用下面的任意一个插件："
   },
   "Action_IncludeThis": "您应当装载 '{0}'。",
   "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "您应该将以下模组添加到配置文件中：",
+    "Plural": "您应该将以下模组添加到配置文件中："
   },
   "NoRequiredDlcs": "没有前置 DLC",
   "DlcsSelected": {
@@ -222,8 +222,8 @@
     "Plural": "{0} 个{1} 需要替换"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} 个{1} 是必需的但没有启用",
+    "Plural": "{0} 个{1} 是必需的但没有启用"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",
@@ -255,12 +255,12 @@
   "ViewRequest": "查看请求",
   "CRT_RequiredItem": "前置项目",
   "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all recommended actions",
+  "ApplyAllActions": "执行所有推荐的操作",
   "SnoozeAll": "关闭所有问题的提醒",
-  "SnoozeAllFiltered": "Snooze all filtered issues",
+  "SnoozeAllFiltered": "关闭筛选出的问题的提醒",
   "LinkedPackages": "关联的插件",
   "NoTags": "没有标签",
   "NoLinks": "没有链接",
-  "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action"
+  "HideReviewedPackages": "隐藏已检查的模组",
+  "ApplyRecommendedAction": "执行推荐的操作"
 }
