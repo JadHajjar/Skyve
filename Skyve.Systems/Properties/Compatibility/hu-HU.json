@@ -5,10 +5,10 @@
   "Previous": "Előző",
   "Skip": "Kihagyás",
   "Note": "Megjegyzés",
-  "NoteInfo": "Additional information to be displayed for the mod",
+  "NoteInfo": "A modhoz megjelenítendő további információk",
   "BlackListName": "Feketelista név szerint",
-  "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "BlackListId": "Feketelista azonosító alapján",
+  "GlobalTagsInfo": "Címkék, amelyeket minden játékos látni fog a Skyve-ban",
   "Links": "Linkek",
   "StatusesCount": "Állapotok ({0})",
   "InteractionCount": "Interakciók ({0})",
@@ -19,7 +19,7 @@
   "StableNoNewFeatures": "Stabil, csak hibajavító frissítések történtek",
   "StableNoFutureUpdates": "Stabil, nincs várható több frissítés",
   "HasIssuesNoFutureUpdates": "Problémák vannak, de nem várható több frissítés",
-  "BreaksOnPatch": "Stable, potentially breaks on patch",
+  "BreaksOnPatch": "Stabil, esetleg eltörhet a folton",
   "NotEnoughInformation": "Nincs elég információ",
   "HasIssues": "Problémás",
   "Broken": "Hibás",
@@ -60,8 +60,8 @@
   "AttentionRequired": "Figyelem szükséges",
   "Website": "Honlap",
   "Donation": "Adományozz!",
-  "ManageCompatibilityData": "Compatibility Management",
-  "YourPackages": "Manage your mods",
+  "ManageCompatibilityData": "Kompatibilitás-kezelés",
+  "YourPackages": "Kezeld a modjaidat",
   "AddPackages": "Csomagok hozzáadása",
   "ConfirmEndSession": "Biztosan befejezi a munkamenetet?",
   "CrDataLoadFailed": "Nem sikerült betölteni az adatokat, próbálkozz újra később",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "Kérjük, válasszon érvényes használatot ehhez a csomaghoz.",
   "Interaction_Alternative": {
     "One": "A(z) „{1}” a(z) „{0}” alternatívájaként használható.",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "A következő csomagok bármelyike ​​használható a '{0}' alternatívájaként."
   },
   "Interaction_SameFunctionality": {
     "One": "A(z) „{0}” és a(z) „{1}” ugyanazokkal a funkciókkal rendelkezik.",
@@ -108,28 +108,28 @@
     "One": "A(z) '{0}' kötelező a következőhöz: '{1}'.",
     "Plural": "\"{0}\" szükséges a következő csomagokhoz."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Interaction_Identical": "Az alábbiakban ugyanannak a modnak több verziója látható.\nEgyidejű használatuk konfliktusokat okoz.",
+  "Status_Succeeded": "A(z) \"{0}\" utódja a következő: \"{1}\", Ön pedig már használja a következőt: \"{1}\". Nincs többé szükség a(z) „{0}” kifejezésre.",
   "Status_Deprecated": "A(z) „{0}” elavult, a készítője már nem támogatja.",
   "Status_AutoDeprecated": "A(z) '{0}' már régóta nem frissült.",
   "Status_Reupload": {
     "Zero": "A(z) „{0}” egy eredeti csomag újrafeltöltése.",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "A „{0}” a(z) „{1}” újrafeltöltése."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "A(z) „{0}” köztudottan problémákat okoz a játékban.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "Miután elmentette a várost a(z) \"{0}\" engedélyezésével, a továbbiakban nem tudja betölteni a mentést a \"{0}\" engedélyezése nélkül.",
+    "One": "Miután elmentette a várost a(z) \"{0}\" engedélyezésével, a továbbiakban nem tudja betölteni a mentést a \"{0}\" engedélyezése nélkül.\n\nSzükség esetén használd a „{1}” parancsot a mentés helyreállításához. További információért olvasd el a műhely leírását."
   },
   "Status_TestVersion": {
     "Zero": "Ez egy \"teszt\" verzió, ügyeljen arra, hogy a modok tesztverziói problémásak lehetnek és a frissítések váratlan hibákat okozhatnak.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Ez a(z) \"{1}\" \"teszt\" verziója.\nÜgyeljen arra, hogy a frissítések váratlan problémákat okozhatnak."
   },
   "Status_MissingDlc": {
     "One": "Hiányzik egy DLC a csomag használatához.",
     "Plural": "A csomag használatához hiányoznak a következő DLC-k:"
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "Ez egy függőségi mód, de nem úgy tűnik, hogy olyan csomagot használ, amely ezt igényli.",
   "Status_SourceCodeNotAvailable": "Ennek a modnak a forráskódja nem érhető el. Csak akkor használd, ha megbízol a készítőjében.",
   "SourceAvailable": "A forráskód elérhető",
   "StandardMod": "Standard Mod",
@@ -138,51 +138,51 @@
   "Status_SourceAvailable": "Ez a csomag nem figyelmeztet a hiányzó forráskódra.",
   "Status_StandardMod": "Ezt a csomagot a rendszer figyelmen kívül hagyja a hibaelhárításra váró modok feldolgozása során.",
   "OutputText": "Várt eredmények",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
+  "Stability_AssetNotReviewed": "A(z) „{0}” még nem lett felülvizsgálva.\nElőfordulhat, hogy a kompatibilitási információ nem pontos; bár az eszközök általában stabilak.",
+  "Stability_NotReviewed": "A(z) „{0}” még nem lett felülvizsgálva.\n\nElőfordulhat, hogy a kompatibilitási információ nem pontos.",
+  "Stability_Stable": "A '{0}' stabil. A szerzője még mindig aktívan dolgozik rajta és frissíti.",
+  "Stability_StableNoNewFeatures": "A „{0}” stabil, bár a szerző többé nem ad ki frissítéseket.\nÚj hibák esetén azonban továbbra is frissítik.",
+  "Stability_StableNoFutureUpdates": "A(z) „{0}” stabil, bár a szerző már nem támogatja, jövőbeli frissítések vagy hibajavítások nem valószínűek.",
+  "Stability_HasIssuesNoFutureUpdates": "A(z) \"{0}\" problémákat okozhat, és a szerző már nem támogatja, a jövőbeni frissítések vagy hibajavítások nem valószínűek.",
+  "Stability_BreaksOnPatch": "A(z) „{0}” nagy valószínűséggel tönkreteszi a játékot az új javítás megjelenésekor.",
+  "Stability_NotEnoughInformation": "Nincs elég információ a(z) „{0}” megfelelő ellenőrzéséhez.",
+  "Stability_HasIssues": "A(z) „{0}” problémákat okozhat.\nLegyél óvatos használat közben.",
+  "Stability_Broken": "'{0}' hibás.\nIsmeretes, hogy vagy megszakítja a játékot, vagy egyszerűen nem működik.",
+  "Stability_Incompatible": "A(z) „{0}” nem kompatibilis a jelenlegi játékverzióval.\nHasználd óvatosan, vagy kapcsold ki, amíg a frissítésre vársz.",
+  "Stability_Local": "Ez az eredeti mod '{0}' helyi változata.\n\nA helyi verziókat általában tesztelési célokra használják.",
+  "Stability_BrokenFromPatch": "A(z) „{1}” elromlott a játék {0}. javítása után. Kérjük, várd meg, amíg frissül, mielőtt használnád.\nAddig is le kell tiltanod.",
+  "Stability_BrokenFromPatchSafe": "A(z) „{1}” elromlott a játék {0}. javítása után. Kérjük, várd meg, amíg frissül, mielőtt használnád.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "A következő csomagot kell hozzáadnod a játékkészlethez.",
+    "Plural": "A következő csomagokat kell hozzáadnod a játékkészlethez."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "Kérjük, kövesd az alábbi utasításokat:",
   "Action_SelectOne": {
     "One": "A(z) '{0}' és '{1}' közül csak egyet válassz.",
     "Plural": "A(z) '{0}' és a következő csomagok közül csak egyet válassz."
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "El kell távolítani a(z) „{0}” elemet a játékkészletből.",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "El kell távolítani a(z) „{1}” elemet a játékkészletből.",
+    "Plural": "A következő csomagokat távolítsd el a játékkészletedből."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "Action_ExcludeThis": "Le kell tiltani a(z) '{0}' szolgáltatást.",
+  "ExcludeThis": "Tiltsa le ezt a csomagot",
+  "Exclude": "Letiltás",
   "Unsubscribe": "Leiratkozás",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "Le kell tiltania a(z) '{1}' szolgáltatást.",
+    "Plural": "Le kell tiltani a következő csomagokat."
   },
   "Action_Switch": {
     "One": "Válts a következőre: „{1}”.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "Válts az alábbi csomagok egyikére."
   },
   "Action_IncludeThis": "Fel kell vennie a következőt: „{0}”",
   "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "A következő csomagot kell hozzáadni a játékkészlethez.",
+    "Plural": "A következő csomagokat kell hozzáadnia a játékkészlethez."
   },
   "NoRequiredDlcs": "Nincs szükség további DLC-re",
   "DlcsSelected": {
@@ -222,8 +222,8 @@
     "Plural": "A(z) {0} {1} másikra váltani szükséges"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1}, amely kötelező, de nincs engedélyezve",
+    "Plural": "{0} {1}, amelyek kötelezőek, de nincsenek engedélyezve"
   },
   "PackageType": "Csomag típus",
   "GenericPackage": "Általános csomag",
@@ -236,12 +236,12 @@
   "ApplyChangedBeforeExit": "Nem mentett módosításaid vannak.\n\nAlkalmazni szeretnéd ezeket a változtatásokat, mielőtt folytatnád?",
   "AuthorRetired": "A(z) {0} szerzője, {1} visszavonult, vagy hosszú ideje inaktív.\n\nA csomagok jövőbeli frissítései és stabilitása nem garantált.",
   "AuthorMalicious": "A(z) {0} szerzője, {1} köztudottan rosszindulatú, és/vagy káros tartalmakat, például vírusokat tartalmaz a csomagjaiban.",
-  "ReviewRequests": "Review Requests",
+  "ReviewRequests": "Felülvizsgálati kérések",
   "ApplyRequestedChanges": "Alkalmazza a kért módosításokat",
   "ManagePackage": "Csomagok kezelése",
   "Banned": "Kitiltott",
   "NoIssues": "Nincsenek problémák",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "* Fiókod azonosítóját és naplóit a kéréssel együtt elküldjük",
   "ScenarioMaking": "Forgatókönyv-készítés",
   "ThemeMaking": "Témakészítés",
   "OtherCompatibilityWarnings": {
@@ -255,12 +255,12 @@
   "ViewRequest": "Kérelem megtekintése",
   "CRT_RequiredItem": "Szükséges elem",
   "RequiredItem": "Szükséges elem",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
-  "SnoozeAllFiltered": "Snooze all filtered issues",
+  "ApplyAllActions": "Alkalmazza az összes javasolt műveletet",
+  "SnoozeAll": "Az összes probléma elhalasztása",
+  "SnoozeAllFiltered": "Az összes szűrt probléma elhalasztása",
   "LinkedPackages": "Kapcsolt csomagok",
-  "NoTags": "No Tags",
-  "NoLinks": "No Links",
-  "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action"
+  "NoTags": "Nincsenek címkék",
+  "NoLinks": "Nincs link",
+  "HideReviewedPackages": "Ellenőrzött modok elrejtése",
+  "ApplyRecommendedAction": "Alkalmazza a javasolt műveletet"
 }
