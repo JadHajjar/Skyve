@@ -25,7 +25,7 @@ public class PC_WorkshopList : PanelContent
 			Dock = DockStyle.Fill
 		};
 
-		LC_Items.ListControl.ScrollEndReached += ListControl_ScrollEndReached;
+		LC_Items.ListControl.ScrollUpdate += ListControl_ScrollUpdate;
 
 		Controls.Add(LC_Items);
 
@@ -71,9 +71,9 @@ public class PC_WorkshopList : PanelContent
 		return await GetPackages(0);
 	}
 
-	private void ListControl_ScrollEndReached(object sender, EventArgs e)
+	private void ListControl_ScrollUpdate(object sender, int scrollIndex, int maxScroll)
 	{
-		if (!listLoading && !endOfPagesReached)
+		if (scrollIndex > maxScroll - 3 && !listLoading && !endOfPagesReached)
 		{
 			LC_Items.I_Refresh.Loading = true;
 

@@ -57,9 +57,6 @@
     <Compile Update="UserInterface\Dropdowns\AuthorDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageTypeDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageStatusTypeDropDown.cs" />
-    <Compile Update="UserInterface\Dropdowns\SortingWorkshopDropDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="UserInterface\Forms\EditTagsForm.cs" />
     <Compile Update="UserInterface\Generic\BigSelectionOptionControl.cs" />
     <Compile Update="UserInterface\Generic\SteamUserControl.cs" />

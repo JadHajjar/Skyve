@@ -32,7 +32,6 @@ public interface IUserSettings
 	DependencyResolveBehavior DependencyResolution { get; set; }
 	Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; }
 #if CS2
-	ParadoxLoginInfo ParadoxLogin { get; set; }
 	bool FilterIncludedByDefault { get; set; }
 	bool SyncBeforeLaunching { get; }
 #endif
