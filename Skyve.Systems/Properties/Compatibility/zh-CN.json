@@ -154,18 +154,18 @@
   "Stability_BrokenFromPatchSafe": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "您应该将以下模组添加到配置文件中：",
-    "Plural": "您应该将以下模组添加到配置文件中："
+    "One": "您应该将以下模组添加到配组中：",
+    "Plural": "您应该将以下模组添加到配组中："
   },
   "Action_RequiresConfiguration": "请遵循以下使用说明：",
   "Action_SelectOne": {
     "One": "对于 '{0}' 和 '{1}'，您应当只选择其中一个插件来使用：",
     "Plural": "对于 '{0}' 和下列插件，您应当只选择其中一个插件来使用："
   },
-  "Action_UnsubscribeThis": "您应该将 '{0}' 从配置文件中移除。",
+  "Action_UnsubscribeThis": "您应该将 '{0}' 从配组中移除。",
   "Action_UnsubscribeOther": {
-    "One": "您应该将 '{1}' 从配置文件中移除。",
-    "Plural": "您应该将以下模组从配置文件中移除："
+    "One": "您应该将 '{1}' 从配组中移除。",
+    "Plural": "您应该将以下模组从配组中移除："
   },
   "Action_ExcludeThis": "您应该禁用 '{0}'。",
   "ExcludeThis": "禁用此插件",
@@ -181,8 +181,8 @@
   },
   "Action_IncludeThis": "您应当装载 '{0}'。",
   "Action_IncludeOther": {
-    "One": "您应该将以下模组添加到配置文件中：",
-    "Plural": "您应该将以下模组添加到配置文件中："
+    "One": "您应该将以下模组添加到配组中：",
+    "Plural": "您应该将以下模组添加到配组中："
   },
   "NoRequiredDlcs": "没有前置 DLC",
   "DlcsSelected": {
