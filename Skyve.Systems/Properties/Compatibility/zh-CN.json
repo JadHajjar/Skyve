@@ -7,7 +7,7 @@
   "Note": "备注",
   "NoteInfo": "为模组显示的额外信息",
   "BlackListName": "按名称列出黑名单",
-  "BlackListId": "Black-list by ID",
+  "BlackListId": "按 ID 列出黑名单",
   "GlobalTagsInfo": "所有玩家都会在 Skyve 中看到的标签",
   "Links": "链接",
   "StatusesCount": "状态 ({0})",
@@ -129,7 +129,7 @@
     "One": "要使用这个插件，您需要购买一个 DLC。",
     "Plural": "要使用这个插件，您需要购买下列 DLC："
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "这是一个前置模组，但您似乎没有任何依赖于这个前置模组的插件。",
   "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
   "SourceAvailable": "源代码可用",
   "StandardMod": "标准模组",
