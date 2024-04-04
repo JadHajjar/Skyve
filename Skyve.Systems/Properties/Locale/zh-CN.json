@@ -543,7 +543,7 @@
   "ThisModIsRequiredYouCantDisableIt": "此模组是必需的，不能禁用。",
   "FadeDisabledItems": "减淡已禁用的模组和资产",
   "FadeDisabledItems_Tip": "本地内容列表中已禁用的模组和资产将被减淡",
-  "UsagePlayset": "{0} Playset",
+  "UsagePlayset": "{0} 配组",
   "GenericPlayset": "通用配组",
   "CompatibilityCenter": "兼容性中心",
   "Dependency": {
