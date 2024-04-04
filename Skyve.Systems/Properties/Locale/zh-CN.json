@@ -26,7 +26,7 @@
   "DisableAllSelected": "禁用已选项目",
   "CopyAllIds": "复制所有项目的名称和 ID",
   "CopyAllIdsFiltered": "复制所有筛选出的项目的名称和 ID",
-  "CopyAllIdsSelected": "复制当前选择的所有项目的名称与数字 ID",
+  "CopyAllIdsSelected": "复制所有选中项目的名称和 ID",
   "HelpLogs": "获取帮助和日志",
   "Preferences": "选项",
   "PlaysetName": "配组名称",
@@ -196,7 +196,7 @@
     "Plural": "删除已选的插件的文件"
   },
   "EnableThisItemInAllPlaysets": {
-    "One": "在所有的配组中开启",
+    "One": "在所有的配组中启用",
     "Plural": "Enable the selected items in all your playsets"
   },
   "DisableThisItemInAllPlaysets": {
@@ -401,7 +401,7 @@
   "RequestOption1": "报告此插件的问题，或补充缺少的信息",
   "RequestOption2": "为此插件补充状态信息",
   "RequestOption3": "补充此插件与另一个插件的交互方式",
-  "ActivePlayset": "激活配组",
+  "ActivePlayset": "启用的配组",
   "References": "引用",
   "OpenLog": "打开游戏日志文件",
   "OpenSkyveLog": "打开 Skyve 日志文件",
@@ -541,8 +541,8 @@
     "Plural": "代码模组"
   },
   "ThisModIsRequiredYouCantDisableIt": "此模组是必需的，不能禁用。",
-  "FadeDisabledItems": "减淡已禁用的模组和资产",
-  "FadeDisabledItems_Tip": "本地内容列表中已禁用的模组和资产将被减淡",
+  "FadeDisabledItems": "淡化显示已禁用的模组和资产",
+  "FadeDisabledItems_Tip": "本地内容列表中，已禁用的模组和资产将被淡化显示。",
   "UsagePlayset": "{0} 配组",
   "GenericPlayset": "通用配组",
   "CompatibilityCenter": "兼容性中心",
@@ -563,7 +563,7 @@
   "FailedToApplyChanges": "无法应用请求的更改",
   "ConfirmSelection": "确认选择",
   "PackagesSelected": "选中的插件 ({0})",
-  "PackagesSelectionInfo": "单击选择一个包，当你完成后点击“确认选择”",
+  "PackagesSelectionInfo": "点击选择一个插件，完成后点击“确认选择”。",
   "CustomColor": "自定义颜色",
   "CustomThumbnail": "自定义缩略图",
   "NoThumbnail": "禁用缩略图",
@@ -574,7 +574,7 @@
   "PlaysetThumbnailNotSet": "未选择自定义缩略图",
   "OpenPlaysetPage": "打开配组详情页",
   "Ready": "就绪",
-  "EditDashboard": "编辑仪表板",
+  "EditDashboard": "编辑统计面板",
   "AvailableWidgets": "可用组件",
   "HideExtraWidgets": "隐藏更多组件",
   "ResetLayout": "重置布局",
@@ -582,7 +582,7 @@
   "PackagesEnabled": "已启用的插件",
   "ModsEnabled": "已启用模组",
   "AssetsEnabled": "已启用资产",
-  "PackagesIncludedDisabled": "已包含&禁用的插件",
+  "PackagesIncludedDisabled": "已装载且已禁用的插件",
   "OutOf": "{0} 个，共 {1} 个",
   "RecentlyUpdatedItem": "近期更新 {0}"
 }
