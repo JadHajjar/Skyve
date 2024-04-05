@@ -401,7 +401,7 @@
   "RequestOption1": "报告此插件的问题，或补充缺少的信息",
   "RequestOption2": "为此插件补充状态信息",
   "RequestOption3": "补充此插件与另一个插件的交互方式",
-  "ActivePlayset": "启用的配组",
+  "ActivePlayset": "已启用的配组",
   "References": "引用",
   "OpenLog": "打开游戏日志文件",
   "OpenSkyveLog": "打开 Skyve 日志文件",
@@ -584,5 +584,5 @@
   "AssetsEnabled": "已启用资产",
   "PackagesIncludedDisabled": "已装载且已禁用的插件",
   "OutOf": "{0} 个，共 {1} 个",
-  "RecentlyUpdatedItem": "近期更新 {0}"
+  "RecentlyUpdatedItem": "近期更新的{0}"
 }
