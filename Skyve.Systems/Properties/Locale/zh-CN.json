@@ -401,7 +401,7 @@
   "RequestOption1": "报告此插件的问题，或补充缺少的信息",
   "RequestOption2": "为此插件补充状态信息",
   "RequestOption3": "补充此插件与另一个插件的交互方式",
-  "ActivePlayset": "已启用的配组",
+  "ActivePlayset": "使用中的配组",
   "References": "引用",
   "OpenLog": "打开游戏日志文件",
   "OpenSkyveLog": "打开 Skyve 日志文件",
