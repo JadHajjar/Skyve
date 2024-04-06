@@ -18,8 +18,8 @@
   "AnyStatus": "모든 상태",
   "NoLocalPackagesFound": "내 컴퓨터에 발견된 패키지가 없습니다.",
   "NoPackagesMatchFilters": "No packages match what you're looking for.",
-  "EnableAll": "Enable all items",
-  "DisableAll": "Disable all items",
+  "EnableAll": "모든 항목 활성화",
+  "DisableAll": "모든 항목 비활성화",
   "EnableAllFiltered": "Enable filtered items",
   "DisableAllFiltered": "Disable filtered items",
   "EnableAllSelected": "Enable selected items",
@@ -46,8 +46,8 @@
   "MissingPackages": "누락된 패키지",
   "OpenPackagePage": "이 패키지의 페이지를 열기",
   "OpenPackageFolder": {
-    "One": "Open file location",
-    "Plural": "Open all selected packages' file locations"
+    "One": "파일 위치 열기",
+    "Plural": "선택된 모든 패키지 파일 위치 열기"
   },
   "OpenLocalFolder": "Open the folder containing this package",
   "ReDownloadPackage": {
@@ -57,10 +57,10 @@
   "OpenAuthorPage": "제작자의 페이지 열기",
   "Sorting_Default": "기본 정렬",
   "Sorting_LastEdit": "마지막으로 수정한 시간",
-  "Sorting_DateCreated": "Date Created",
+  "Sorting_DateCreated": "만든 날짜",
   "Sorting_Usage": "Playset Usage",
-  "Sorting_Name": "Name",
-  "Sorting_FileSize": "File Size",
+  "Sorting_Name": "이름",
+  "Sorting_FileSize": "파일 크기",
   "Sorting_UpdateTime": "업데이트된 시간",
   "Sorting_SubscribeTime": "구독한 시간",
   "Sorting_Author": "제작자 이름",
@@ -108,7 +108,7 @@
   "HelpTranslate": "번역 개선하기",
   "HelpReset": "도움 & 초기화",
   "JoinDiscord": "Discord에서 도움 받기",
-  "OpenGuide": "Open the Wiki",
+  "OpenGuide": "위키 열기",
   "ResetFolderButton": "모든 폴더 설정 초기화",
   "LinkModAssets": "모드 안의 에셋을 모드의 '포함됨' 상태에 연결하기",
   "LinkModAssets_Tip": "일부 모드에는 그 모드가 제대로 작동하는 데 필요한 에셋이 포함되어 있습니다. 이 옵션을 활성화하면 해당 에셋들을 모드 자체에 연결하고 에셋 페이지에서 해당 에셋들을 숨겨 해당 에셋들을 실수로 제외하지 않도록 합니다.",
@@ -186,7 +186,7 @@
   "FailedToOpenTC": "테마 체인저를 열지 못했습니다",
   "FailedToDeleteItem": "항목을 삭제 하지 못했습니다",
   "OpenChangelog": "변경사항 열기",
-  "Changelog": "Change-log",
+  "Changelog": "업데이트 내역",
   "DeleteAsset": {
     "One": "이 에셋을 삭제",
     "Plural": "선택된 에셋을 삭제"
@@ -252,7 +252,7 @@
     "One": "제작자 {0}명 선택됨",
     "Plural": "제작자 {0}명 선택됨"
   },
-  "Donate": "Donate",
+  "Donate": "후원하기",
   "FlipItemCopyFilterAction": "콘텐츠 목록에서 필터링하기 위한 Alt+클릭 동작 바꾸기",
   "FlipItemCopyFilterAction_Tip": "라벨을 클릭할 때의 기본 동작을 맞바꿔 일반적인 클릭이 필터링을 하게 하고 Alt+클릭은 기본 작업을 하도록 합니다.",
   "AltClickTo": "Alt + 클릭으로 {0}",
@@ -267,7 +267,7 @@
   "Sorting_Votes": "Total Likes",
   "VotesCount": {
     "One": "{1} like",
-    "Plural": "{1} likes"
+    "Plural": "좋아요 {1}"
   },
   "SubscribersCount": {
     "One": "{1} subscriber",
@@ -403,8 +403,8 @@
   "RequestOption3": "누락된 다른 패키지와의 상호 작용을 추가하기",
   "ActivePlayset": "Active Playset",
   "References": "참조",
-  "OpenLog": "Open Game Log",
-  "OpenSkyveLog": "Open Skyve Log",
+  "OpenLog": "게임 로그 열기",
+  "OpenSkyveLog": "Skyve 로그 열기",
   "Sort By": "정렬",
   "FailedToFetchLogs": "로그를 가져오는 데 실패했습니다",
   "DiscoverPlaysets": "프로필 탐색",
@@ -537,8 +537,8 @@
   "Status": "Status",
   "PackageUsage": "Package Usage",
   "CodeMod": {
-    "One": "Code Mod",
-    "Plural": "Code Mods"
+    "One": "코드 모드",
+    "Plural": "코드 모드"
   },
   "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
   "FadeDisabledItems": "Fade out disabled mods & assets",
@@ -552,11 +552,11 @@
   },
   "ModID": "Mod ID",
   "Subscribers": "Subscribers",
-  "Votes": "Likes",
+  "Votes": "좋아요",
   "PartiallyIncluded": "Partially Included",
   "Links": "Links",
   "NoAssets": "Disable All Assets",
-  "NoMods": "Disable All Code-Mods",
+  "NoMods": "코드 모드 전체 비활성화",
   "FavoritePlaysets": "Favorite Playsets",
   "OnlyShowErrors": "Only show warnings and errors",
   "RestartRequired": "Restart Required",
@@ -574,15 +574,15 @@
   "PlaysetThumbnailNotSet": "No custom thumbnail selected",
   "OpenPlaysetPage": "Open this playset's page",
   "Ready": "Ready",
-  "EditDashboard": "Edit Dashboard",
+  "EditDashboard": "대시보드 편집",
   "AvailableWidgets": "Available Widgets",
   "HideExtraWidgets": "Hide Extra Widgets",
   "ResetLayout": "Reset Layout",
-  "ContentSummary": "Content Summary",
+  "ContentSummary": "콘텐츠 요약",
   "PackagesEnabled": "Packages Enabled",
   "ModsEnabled": "Mods Enabled",
   "AssetsEnabled": "Assets Enabled",
   "PackagesIncludedDisabled": "Packages Included & Disabled",
-  "OutOf": "{0} out of {1}",
+  "OutOf": "{0}/{1}",
   "RecentlyUpdatedItem": "Recently Updated {0}"
 }
