@@ -270,8 +270,8 @@
     "Plural": "좋아요 {1}"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "{1}명",
+    "Plural": "{1}명"
   },
   "SearchWorkshop": "Search the workshop instead...",
   "DiscoverWorkshop": "Look for mods on the workshop...",
@@ -292,7 +292,7 @@
   "PackageStatus": "Package Status",
   "Author": "제작자",
   "Include": "포함",
-  "Unsubscribe": "Unsubscribe",
+  "Unsubscribe": "구독 취소",
   "Exclude": "Exclude",
   "Snooze": "나중에 다시 알림",
   "UnSnooze": "다시 알림 해제",
@@ -551,7 +551,7 @@
     "Plural": "Dependencies"
   },
   "ModID": "Mod ID",
-  "Subscribers": "Subscribers",
+  "Subscribers": "구독자",
   "Votes": "좋아요",
   "PartiallyIncluded": "Partially Included",
   "Links": "Links",
