@@ -286,7 +286,7 @@
   "CompatibilityReport": "兼容性报告",
   "Enabled": "已启用",
   "Disabled": "已禁用",
-  "Included": "已装载（模组需要启用！）",
+  "Included": "已装载",
   "Excluded": "已卸下",
   "OutOfDate": "已过期",
   "PackageStatus": "插件状态",
@@ -529,7 +529,7 @@
     "One": "在您上次使用 Skyve 后，新增的插件 '{1}' 已安装",
     "Plural": "在您上次使用 Skyve 后，新增的 {0} 个插件已安装"
   },
-  "NoActivePlayset": "没有已激活的配组",
+  "NoActivePlayset": "没有使用中的配组",
   "RecentlyUpdated": "近期更新",
   "Manage": "管理",
   "Version": "版本",
@@ -547,8 +547,8 @@
   "GenericPlayset": "通用配组",
   "CompatibilityCenter": "兼容性中心",
   "Dependency": {
-    "One": "依赖",
-    "Plural": "依赖"
+    "One": "依赖于",
+    "Plural": "依赖于"
   },
   "ModID": "模组ID",
   "Subscribers": "订阅者",
