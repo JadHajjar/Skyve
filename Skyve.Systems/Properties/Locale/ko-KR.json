@@ -17,20 +17,20 @@
   "CompatibilityStatus": "호환성 상태",
   "AnyStatus": "모든 상태",
   "NoLocalPackagesFound": "내 컴퓨터에 발견된 패키지가 없습니다.",
-  "NoPackagesMatchFilters": "No packages match what you're looking for.",
+  "NoPackagesMatchFilters": "일치되는 패키지가 없습니다.",
   "EnableAll": "모든 항목 활성화",
   "DisableAll": "모든 항목 비활성화",
   "EnableAllFiltered": "Enable filtered items",
   "DisableAllFiltered": "Disable filtered items",
-  "EnableAllSelected": "Enable selected items",
-  "DisableAllSelected": "Disable selected items",
-  "CopyAllIds": "Copy all items' names & IDs",
+  "EnableAllSelected": "선택 항목 활성화",
+  "DisableAllSelected": "선택 항목 비활성화",
+  "CopyAllIds": "모든 항목의 이름 및 ID 복사",
   "CopyAllIdsFiltered": "Copy all filtered items' names & IDs",
   "CopyAllIdsSelected": "Copy all selected items' names & IDs",
   "HelpLogs": "도움 & 로그",
   "Preferences": "환경설정",
   "PlaysetName": "프로필 이름",
-  "RenamePlayset": "Rename this playset",
+  "RenamePlayset": "이 PLAYSET 이름 바꾸기",
   "StartScratch": "처음부터 프로필 만들기를 시작하기",
   "ContinueFromCurrent": "Clone your active playset",
   "GamePlay": "도시 플레이용",
@@ -39,9 +39,9 @@
   "SomePackagesWillBeDisabled": "이 프로필의 용도를 변경하여 일부 패키지가 제거될 것입니다.",
   "AffectedPackagesAre": "영향을 받는 패키지:",
   "ConfirmDeletePlayset": "'{0}' 프로필을 정말 삭제하시겠습니까?",
-  "ActivatePlayset": "Activate this playset",
+  "ActivatePlayset": "이 PLAYSET 활성화",
   "PlaysetMerge": "Add all of this playset's mods to your active playset",
-  "PlaysetExclude": "Remove all of this playset's mods from your active playset",
+  "PlaysetExclude": "이 PLAYSET에 포함된 모드를 현재 PLAYSET에서 모두 제거",
   "PlaysetDelete": "이 프로필 삭제",
   "MissingPackages": "누락된 패키지",
   "OpenPackagePage": "이 패키지의 페이지를 열기",
@@ -49,7 +49,7 @@
     "One": "파일 위치 열기",
     "Plural": "선택된 모든 패키지 파일 위치 열기"
   },
-  "OpenLocalFolder": "Open the folder containing this package",
+  "OpenLocalFolder": "이 패키지를 포함하는 폴더 열기",
   "ReDownloadPackage": {
     "One": "이 패키지를 다시 다운로드",
     "Plural": "선택된 모든 패키지를 다시 다운로드"
@@ -70,7 +70,7 @@
   "FolderSettings": "폴더 설정",
   "ShowDatesRelatively": "현재 시간에 상대적인 날짜 표기 보기",
   "CouldNotCreatePlayset": "Could not create a new playset.",
-  "CreatePlaysetHere": "Create a new playset or activate a previous one by clicking here",
+  "CreatePlaysetHere": "새 PLAYSET를 생성하거나 이전 PLAYSET를 활성화 하려면 여기를 클릭하세요",
   "Maintenance": "유지보수",
   "DisableNewModsByDefault": "Disable newly added mods by default",
   "DisableNewAssetsByDefault": "Disable newly added assets by default",
@@ -78,9 +78,9 @@
   "HideFilters": "필터 숨기기",
   "DateSubscribed": "구독한 날짜",
   "DateUpdated": "업데이트된 날짜",
-  "FilterOutPackagesWithMods": "Hide code mods in the packages page",
+  "FilterOutPackagesWithMods": "패키지 페이지에서 코드 모드 숨기기",
   "FilterOutPackagesWithOneAsset": "패키지 페이지에서 단일 에셋 패키지 숨기기",
-  "CopyAuthorLink": "Copy the author's profile link",
+  "CopyAuthorLink": "제작자 프로필 링크 복사",
   "YourPlaysets": "내 프로필",
   "UnFavoriteThisPlayset": "이 프로필을 즐겨찾기에서 삭제",
   "FavoriteThisPlayset": "이 프로필을 즐겨찾기에 추가",
@@ -204,11 +204,11 @@
     "Plural": "Disable the selected items in all your playsets"
   },
   "CopyPackageName": {
-    "One": "Copy the package's name",
+    "One": "패키지 이름 복사",
     "Plural": "선택된 패키지들의 이름 복사"
   },
   "CopyAuthorId": {
-    "One": "Copy the author's ID",
+    "One": "제작자 ID 복사",
     "Plural": "Copy the selected packages' author IDs"
   },
   "CopyAuthorName": {
@@ -266,7 +266,7 @@
   "Sorting_Subscribers": "총 구독자 수",
   "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} like",
+    "One": "좋아요 {1}",
     "Plural": "좋아요 {1}"
   },
   "SubscribersCount": {
