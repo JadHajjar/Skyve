@@ -17,7 +17,7 @@
   "CompatibilityStatus": "Báo cáo tương thích",
   "AnyStatus": "Trạng thái bất kỳ",
   "NoLocalPackagesFound": "Không có gói nào được tìm thấy trên máy tính của bạn.",
-  "NoPackagesMatchFilters": "No packages match what you're looking for.",
+  "NoPackagesMatchFilters": "Không có gói nào phù hợp với những gì bạn đang tìm kiếm.",
   "EnableAll": "Kích hoạt tất cả các mod",
   "DisableAll": "Vô hiệu hóa tất cả các mod",
   "EnableAllFiltered": "Enable filtered items",
@@ -72,8 +72,8 @@
   "CouldNotCreatePlayset": "Không thể tạo bộ sưu tập mod mới.",
   "CreatePlaysetHere": "Create a new playset or activate a previous one by clicking here",
   "Maintenance": "BẢO TRÌ",
-  "DisableNewModsByDefault": "Disable newly added mods by default",
-  "DisableNewAssetsByDefault": "Disable newly added assets by default",
+  "DisableNewModsByDefault": "Tắt các mod mới được đăng ký theo mặc định",
+  "DisableNewAssetsByDefault": "Tắt các assest mới được đăng ký theo mặc định",
   "ShowFilters": "Hiển thị bộ lọc",
   "HideFilters": "Ẩn bộ lọc",
   "DateSubscribed": "Ngày đăng ký",
@@ -92,8 +92,8 @@
   "AnyTags": "Bất kỳ thẻ",
   "AdvancedLaunchOptions": "Hiển thị cài đặt khởi động nâng cao",
   "MovePackageToLocalFolder": {
-    "One": "Copy package to a local folder",
-    "Plural": "Copy all selected packages to a local folder"
+    "One": "Sao chép gói vào một thư mục cục bộ",
+    "Plural": "Sao chép toàn bộ gói đã chọn vào một thư mục cục bộ"
   },
   "ModIsPrivate": "Mục là riêng tư",
   "YourDlcs": "DLC của bạn",
