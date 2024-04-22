@@ -7,8 +7,8 @@
   "Note": "補足",
   "NoteInfo": "Modに表示される詳細情報",
   "BlackListName": "名前でブラックリスト",
-  "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "BlackListId": "IDによるブラックリスト",
+  "GlobalTagsInfo": "Skyveですべてのプレーヤーに表示されるタグ",
   "Links": "リンク",
   "StatusesCount": "ステータス ({0})",
   "InteractionCount": "依存関係 ({0})",
@@ -60,8 +60,8 @@
   "AttentionRequired": "要注意",
   "Website": "ウェブサイト",
   "Donation": "寄付",
-  "ManageCompatibilityData": "Compatibility Management",
-  "YourPackages": "Manage your mods",
+  "ManageCompatibilityData": "互換性の管理",
+  "YourPackages": "Modを管理する",
   "AddPackages": "パッケージの追加",
   "ConfirmEndSession": "セッションを終了してもよろしいのですか？",
   "CrDataLoadFailed": "データのロードに失敗しました、後でやり直して下さい",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "パッケージの有効な用途を選択して下さい。",
   "Interaction_Alternative": {
     "One": "「{1}」は「{0}」の代替として使用可能です。",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "以下のいずれかのパッケージは '{0}' の代替として使用できます。"
   },
   "Interaction_SameFunctionality": {
     "One": "「{0}」と「{1}」は同じ機能があります。",
@@ -108,18 +108,18 @@
     "One": "「{1}」には「{0}」が必要です。",
     "Plural": "「{0}」 は以下のパッケージに必要です。"
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Interaction_Identical": "以下は同じModの複数のバージョンです。\n同時に使用すると競合が発生します。",
+  "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要です。",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
   "Status_AutoDeprecated": "「{0}」は長期間で更新されていません。",
   "Status_Reupload": {
     "Zero": "「{0}」はオリジナルパッケージの再アップロード版です。",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "これは「{1}」の再投稿版です。"
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "'{0}' はゲームに問題を引き起こす可能性があります。",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "「{0}」を有効にして新規でセーブを作成すると、「{0}」が無効の場合は該当するセーブデータのロードが不可能になります。",
+    "One": "「{0}」を有効にして新規でセーブを作成すると、「{0}」が無効の場合は該当するセーブデータのロードができません。\n\n必要に応じて、「{1}」を使ってセーブデータの復元を試して下さい。詳しくはワークショップの説明を確認して下さい。"
   },
   "Status_TestVersion": {
     "Zero": "これは「テスト」バージョンです。MODのテスト版は問題が発生する可能性や、更新すると想定外のエラーが発生する可能性があるので注意して下さい。",
