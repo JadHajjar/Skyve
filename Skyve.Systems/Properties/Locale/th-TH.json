@@ -151,7 +151,7 @@
   "LogFileDrop": "วางหรือเลือกไฟล์ Log เพื่อทำให้อ่านง่ายขึ้น แล้วแสดงรายการข้อผิดพลาดที่อยู่ภายใน Log",
   "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
   "ErrorsInLog": "ข้อผิดพลาดใน Log",
-  "OpenLogFolder": "เปิดโฟลเดอร์ Log ของเกมส์",
+  "OpenLogFolder": "เปิดโฟลเดอร์ Log ของเกม",
   "CopyLogFile": "คัดลอกไฟล์ Log ของเกมไปยังคลิปบอร์ด",
   "OpenLOTLogFolder": "เปิดโฟลเดอร์ Log ของ Skyve",
   "CopyLOTLogFile": "คัดลอกไฟล์ Log ของ Skyve ไปยังคลิปบอร์ด",
