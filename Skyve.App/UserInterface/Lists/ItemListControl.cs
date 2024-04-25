@@ -726,7 +726,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 	public void ShowRightClickMenu(IPackageIdentity item)
 	{
-		var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems((SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new IPackageIdentity[] { item }).Cast<IPackage>());
+		var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems((SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new IPackageIdentity[] { item }));
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 	}
