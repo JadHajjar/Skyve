@@ -254,7 +254,7 @@
   },
   "ViewRequest": "查看请求",
   "CRT_RequiredItem": "前置项目",
-  "RequiredItem": "Required Item",
+  "RequiredItem": "前置项目",
   "ApplyAllActions": "执行所有推荐的操作",
   "SnoozeAll": "关闭所有问题的提醒",
   "SnoozeAllFiltered": "关闭筛选出的问题的提醒",
