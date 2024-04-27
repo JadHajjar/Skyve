@@ -19,7 +19,7 @@
   "StableNoNewFeatures": "安定版 - バグ修正のみの更新",
   "StableNoFutureUpdates": "安定版 - これ以上の更新はありません",
   "HasIssuesNoFutureUpdates": "問題あり - アップデートはありません",
-  "BreaksOnPatch": "Stable, potentially breaks on patch",
+  "BreaksOnPatch": "安定していますが、アップデートで動作しなくなる可能性があります",
   "NotEnoughInformation": "情報が不足",
   "HasIssues": "問題あり",
   "Broken": "破損",
@@ -123,13 +123,13 @@
   },
   "Status_TestVersion": {
     "Zero": "これは「テスト」バージョンです。MODのテスト版は問題が発生する可能性や、更新すると想定外のエラーが発生する可能性があるので注意して下さい。",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "これは'{1}'のテストバージョンです。アップデートで動作しなくなる可能性があります。"
   },
   "Status_MissingDlc": {
     "One": "パッケージを使用するには、DLCが未購入・有効ではありません。",
     "Plural": "パッケージを使用するには、以下のDLCがありません。"
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "このModに依存しているModを使用していません。",
   "Status_SourceCodeNotAvailable": "MODのソースコードは公開されていません。作者を信頼できない場合は使用しないで下さい。",
   "SourceAvailable": "ソースコードは公開中",
   "StandardMod": "標準のMOD",
@@ -138,7 +138,7 @@
   "Status_SourceAvailable": "このパッケージは、不足しているソースコードについて警告しません。",
   "Status_StandardMod": "MODのトラブルシューティングの際、このパッケージは無視されます。",
   "OutputText": "予想される結果",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
+  "Stability_AssetNotReviewed": "{0}'はまだレビューされていません。 互換性情報は正確ではないかもしれませんが、アセットは安定しています。",
   "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
   "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
   "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
@@ -167,12 +167,12 @@
     "One": "You should remove '{1}' from your playset.",
     "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "Action_ExcludeThis": "「{0}」を無効にする必要があります。",
+  "ExcludeThis": "パッケージを無効化",
+  "Exclude": "無効化",
   "Unsubscribe": "サブスク解除",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
+    "One": "「{1}」を無効にする必要があります。",
     "Plural": "You should disable the following packages."
   },
   "Action_Switch": {
@@ -261,6 +261,6 @@
   "LinkedPackages": "Linked Packages",
   "NoTags": "No Tags",
   "NoLinks": "No Links",
-  "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action"
+  "HideReviewedPackages": "レビューしたModを隠す",
+  "ApplyRecommendedAction": "推奨されるアクションを適用"
 }
