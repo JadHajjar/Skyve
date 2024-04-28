@@ -259,8 +259,8 @@
   "SnoozeAll": "Alle Probleme stummschalten",
   "SnoozeAllFiltered": "Alle gefilterten Probleme stummschalten",
   "LinkedPackages": "Verknüpfte Pakete",
-  "NoTags": "Keine Tags",
-  "NoLinks": "Keine Links",
-  "HideReviewedPackages": "Überprüfte Mods ausblenden",
+  "NoTags": "Keine Schlagwörter",
+  "NoLinks": "Keine Verbindung",
+  "HideReviewedPackages": "Überprüfte Pakete ausblenden",
   "ApplyRecommendedAction": "Empfohlene Aktion anwenden"
 }
