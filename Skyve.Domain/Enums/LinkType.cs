@@ -12,5 +12,6 @@ public enum LinkType
 	X,
 	Paypal,
 	Patreon,
+	BuyMeACoffee,
 	Other = 99,
 }

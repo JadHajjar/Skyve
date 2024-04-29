@@ -45,12 +45,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
       <Compile Update="UserInterface\Content\ContentList.cs" />
-      <Compile Update="UserInterface\Content\IconTopButton.cs">
-        <SubType>UserControl</SubType>
-      </Compile>
-      <Compile Update="UserInterface\Content\PlaysetIcon.cs">
-        <SubType>UserControl</SubType>
-      </Compile>
+      <Compile Update="UserInterface\Content\IconTopButton.cs" />
+      <Compile Update="UserInterface\Content\PlaysetIcon.cs" />
     <Compile Update="UserInterface\Content\TroubleshootInfoControl.cs" />
     <Compile Update="UserInterface\Content\UserDescriptionControl.cs" />
     <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs" />
@@ -68,9 +64,7 @@
     <Compile Update="UserInterface\Lists\ReviewRequestList.cs" />
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs" />
-    <Compile Update="UserInterface\Panels\PC_PlaysetContents.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Panels\PC_PlaysetContents.cs" />
     <Compile Update="UserInterface\Panels\PC_Troubleshoot.cs" />
     <Compile Update="UserInterface\Panels\PC_UserPage.cs" />
     <Compile Update="UserInterface\Panels\PC_PlaysetList.cs" />

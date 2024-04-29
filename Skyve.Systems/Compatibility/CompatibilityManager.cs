@@ -392,7 +392,7 @@ public class CompatibilityManager : ICompatibilityManager
 					new StabilityStatus(stability, null, false),
 					workshopInfo?.CleanName(true),
 					$"Stability_{stability}",
-					[_citiesManager.GameVersion ?? packageData.ReviewedGameVersion ?? string.Empty]);
+					[_citiesManager.GameVersion ?? packageData.ReviewedGameVersion ?? string.Empty, workshopInfo?.CleanName(true) ?? package.Name]);
 			}
 			else
 			{

@@ -34,5 +34,6 @@ public interface IWorkshopService
 	Task<int> GetActivePlaysetId();
 	Task<List<IPlayset>> GetPlaysets(bool localOnly);
 	Task<bool> ToggleVote(IPackageIdentity packageIdentity);
+	Task<IModCommentsInfo?> GetComments(IPackageIdentity packageIdentity, int page = 1);
 #endif
 }
