@@ -125,7 +125,7 @@
   "OpenGuide_Tip": "Zobacz przewodnik online, aby rozpocząć ze Skyve.",
   "ResetButton_Tip": "Przywróć ustawienia domyślne. Nie ma to wpływu na ustawienia folderów.",
   "ComplexListUI": "Zaawansowany tryb interfejsu użytkownika",
-  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
+  "ComplexListUI_Tip": "Dodaje więcej zaawansowanych informacji i dodaje dodatkowe działania do interfejsu użytkownika.",
   "NewGame": "Rozpocznij nową grę",
   "LoadSaveGame": "Kontynuuj poprzednią grę",
   "DevOptions": "Opcje uruchamiania dewelopera",
@@ -133,7 +133,7 @@
   "ResetFolderButton_Tip": "Ta akcja będzie wymagała otwarcia gry, zanim będziesz mógł użyć tego narzędzia ponownie.",
   "AreYouSure": "Czy na pewno chcesz kontynuować?",
   "MapFileInfo": "Wybierz plik mapy, aby rozpocząć nową grę",
-  "BulkActions": "Bulk Actions",
+  "BulkActions": "Masowe akcje",
   "CopyVersionNumber": "Kopiuj numer wersji",
   "FixAllTip": "Próba ponownego pobrania wszystkich pakietów, które mają problemy, otworzy się na krótki moment",
   "FilterByThisReportStatus": "Filtruj według statusu tego raportu",
@@ -149,18 +149,18 @@
   "LogZipFile": "Zapisz logi do pliku",
   "LogFolders": "Foldery dziennika",
   "LogFileDrop": "Upuść lub wybierz plik dziennika, który ma zostać uproszczony i wyświetl listę błędów wewnątrz dziennika",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
+  "DefaultLogViewInfo": "Błędy Twojej ostatniej sesji zostaną tutaj automatycznie wyświetlone, wyniki są aktualizowane na bieżąco.",
   "ErrorsInLog": "Błędy w dzienniku",
   "OpenLogFolder": "Otwórz folder dziennika gry",
   "CopyLogFile": "Skopiuj do schowka plik dziennika gry",
   "OpenLOTLogFolder": "Otwórz folder dziennika Skyve",
   "CopyLOTLogFile": "Skopiuj plik dziennika Skyve do schowka",
-  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
+  "GenericIncludedTotal": "{0} uwzględnione: {1}, Razem: {2}",
+  "GenericIncludedAndEnabledTotal": "{0} uwzględnione i włączone: {1}, Total: {2}",
+  "GenericIncludedEnabledTotal": "{0} uwzględnione: {1}, z czego włączone: {2}, Razem: {3}",
   "NewPlayset_Tip": "Utwórz lub zaimportuj nowy zestaw",
-  "ViewPlaysets_Tip": "View & manage your playsets",
-  "DeactivatePlayset_Tip": "Deactivate your current playset",
+  "ViewPlaysets_Tip": "Wyświetl i zarządzaj zestawami",
+  "DeactivatePlayset_Tip": "Wyłącz bieżący zestaw",
   "NewGame_Tip": "Rozpoczyna nową grę podczas uruchamiania Cities: Skylines. Możesz określić mapę, którą chcesz rozpocząć w",
   "LoadSaveGame_Tip": "Załaduj grę oszczędzającą podczas uruchamiania Cities: Skylines. Niewybranie pliku oszczędzania będzie kontynuowało Twój ostatni zapis",
   "BETA": "BETA",
@@ -174,7 +174,7 @@
   "ABANDONED": "PORZUCONY",
   "ActionUnreversible": {
     "One": "Tej operacji nie można cofnąć!",
-    "Plural": "This action can not be reversed. And will affect {0} packages."
+    "Plural": "Ta operacja nie może zostać cofnięta i wpłynie na {0} pakietów."
   },
   "AlwaysOpenFiltersAndActions": "Domyślnie pokaż sekcję filtrów",
   "AlwaysOpenFiltersAndActions_Tip": "Zawsze otwieraj sekcję filtrów podczas wprowadzania karty zawartości",
@@ -182,11 +182,11 @@
   "FavoriteTotal": "Łącznie zestawy odtwarzania: {0}",
   "PlaysetFilter": "Filtr zestawów",
   "CheckDocumentsFolder": "Upewnij się, że Skyve ma dostęp do folderu dokumentów, używa go do przechowywania ustawień interfejsu użytkownika i języka.",
-  "FailedToSaveLanguage": "Failed to save the selected language",
+  "FailedToSaveLanguage": "Nie udało się zapisać wybranego języka",
   "FailedToOpenTC": "Nie udało się otworzyć Zmiany Motywu",
   "FailedToDeleteItem": "Nie udało się usunąć elementu",
   "OpenChangelog": "Otwórz dziennik zmian",
-  "Changelog": "Change-log",
+  "Changelog": "Dziennik zmian",
   "DeleteAsset": {
     "One": "Usuń zasób",
     "Plural": "Usuń wybrane zasoby"
@@ -196,23 +196,23 @@
     "Plural": "Usuń zaznaczone pakiety"
   },
   "EnableThisItemInAllPlaysets": {
-    "One": "Enable in all your playsets",
-    "Plural": "Enable the selected items in all your playsets"
+    "One": "Włącz we wszystkich zestawach",
+    "Plural": "Włącz zaznaczone elementy we wszystkich zestawach"
   },
   "DisableThisItemInAllPlaysets": {
-    "One": "Disable in all your playsets",
-    "Plural": "Disable the selected items in all your playsets"
+    "One": "Wyłącz we wszystkich zestawach",
+    "Plural": "Wyłącz wybrane elementy we wszystkich zestawach"
   },
   "CopyPackageName": {
-    "One": "Copy the package's name",
+    "One": "Skopiuj nazwę pakietu",
     "Plural": "Skopiuj nazwy zaznaczonych pakietów"
   },
   "CopyAuthorId": {
-    "One": "Copy the author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "Skopiuj ID autora",
+    "Plural": "Skopiuj ID autora wybranych pakietów"
   },
   "CopyAuthorName": {
-    "One": "Copy the author's name",
+    "One": "Skopiuj nazwę autora",
     "Plural": "Skopiuj nazwy autorów wybranych pakietów"
   },
   "Sorting_LastUsed": "Ostatni użyty czas",
@@ -224,12 +224,12 @@
   "OpenPlaysetFolder": "Otwórz lokalizację pliku dla tego zestawu",
   "ChangePlaysetColor": "Zmień kolor zestawu",
   "EditPlaysetName": "Edytuj nazwę zestawu",
-  "ResetPlaysetImage": "Reset this playset's thumbnail",
-  "ResetPlaysetColor": "Reset this playset's color",
+  "ResetPlaysetImage": "Zresetuj miniaturkę tego zestawu",
+  "ResetPlaysetColor": "Zresetuj kolor zestawu",
   "Sorting_Color": "Kolor profilu",
   "CreateShortcutPlayset": "Utwórz skrót na pulpicie",
   "AskToLaunchGameForShortcut": "Czy chcesz aby skrót również uruchomił grę z Twoim profilem?",
-  "TextImportMissingInfo": "Load a text file containing Workshop IDs to easily subscribe to or manage them",
+  "TextImportMissingInfo": "Załaduj plik tekstowy zawierający ID warsztatu, aby łatwo subskrybować lub zarządzać nim",
   "ImportFromText": "Importuj z tekstu",
   "ImportFromClipboard": "Załaduj tekst ze schowka",
   "ImportFromTextInfo": "Każdy format tekstu jest obsługiwany",
@@ -256,7 +256,7 @@
   "FlipItemCopyFilterAction": "Zamień zachowanie Ctrl+Kliknij do filtrowania na listach treści",
   "FlipItemCopyFilterAction_Tip": "Zamienia domyślne zachowanie klikania na etykiety, tak aby normalne klikanie i Ctrl + klikanie wykonywały domyślną akcję.",
   "AltClickTo": "Alt+Kliknij do {0}",
-  "FilterByThisAuthor": "Add '{0}' to your author filters",
+  "FilterByThisAuthor": "Dodaj '{0}' do filtrów autora",
   "AddToSearch": "Dodaj '{0}' do wyszukiwania",
   "CopyToClipboard": "Skopiuj '{0}' do schowka",
   "ViewPackageCR": "Zobacz raport zgodności tego pakietu",
@@ -273,9 +273,9 @@
     "One": "{1} subskrybent",
     "Plural": "{1} subskrybentów"
   },
-  "SearchWorkshop": "Search the workshop instead...",
-  "DiscoverWorkshop": "Look for mods on the workshop...",
-  "SearchWorkshopBrowser": "Search the workshop in your browser...",
+  "SearchWorkshop": "Zamiast tego przeszukaj warsztat...",
+  "DiscoverWorkshop": "Szukaj modów w warsztacie...",
+  "SearchWorkshopBrowser": "Przeszukaj warsztaty w swojej przeglądarce...",
   "UnknownPackage": "Nieznana paczka",
   "Info": "Informacje",
   "SelectThisPackage": "Wybierz ten pakiet",
@@ -289,11 +289,11 @@
   "Included": "Dołączony",
   "Excluded": "Wyłączony",
   "OutOfDate": "Przeterminowany",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "Status pakietu",
   "Author": "Autor",
   "Include": "Dołącz",
   "Unsubscribe": "Anuluj subskrypcje",
-  "Exclude": "Exclude",
+  "Exclude": "Wyklucz",
   "Snooze": "Drzemka",
   "UnSnooze": "Usuń drzemkę",
   "Mod": {
@@ -313,40 +313,40 @@
     "Plural": "Zestawy"
   },
   "ContainCount": {
-    "One": "Contains {0} {1}",
-    "Plural": "Contains {0} {1}"
+    "One": "Zawiera {0} {1}",
+    "Plural": "Zawiera {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} zawiera",
-    "Plural": "{0} {1} included"
+    "Plural": "{0} {1} uwzględnione"
   },
   "EnabledCount": {
     "One": "{0} {1} włączony",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0} {1} włączone"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} włączone i włączone",
-    "Plural": "{0} {1} included & enabled"
+    "Plural": "{0} {1} uwzględnione i włączone"
   },
   "LoadedCount": {
     "One": "{0} {1} załadowany",
-    "Plural": "{0} {1} loaded"
+    "Plural": "{0} {1} załadowano"
   },
   "ShowingCount": {
     "One": "Wyświetlanie {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "Plural": "Wyświetlanie {0} {1}"
   },
   "ShowingCountWarning": {
     "One": "Wyświetlanie {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {3}"
+    "Plural": "Wyświetlanie {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
     "One": "Wyświetlanie {0} {1}, {2} wybrane",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "Plural": "Wyświetlanie {0} {1}, {2} wybrane"
   },
   "ShowingSelectedCountWarning": {
     "One": "Wyświetlanie {0} {1}, {2} wybrane, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "Plural": "Wyświetlanie {0} {1}, {2} wybrane, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} jest ukryty z powodu użycia Twojego profilu",
@@ -368,8 +368,8 @@
     "Plural": "Edytuj tagi wybranych elementów"
   },
   "EditLinks": {
-    "One": "Edit this package's Links",
-    "Plural": "Edit selected items' Links"
+    "One": "Edytuj linki tego pakietu",
+    "Plural": "Edytuj linki wybranych elementów"
   },
   "ShowAllReferencedPackages": "Pokaż wyłączone pakiety w zakładce 'Odnośniki'",
   "ShowAllReferencedPackages_Tip": "Wyświetla zarówno wykluczone, jak i zawarte pakiety, które odwołują się do tego, który przeglądasz.",
@@ -382,7 +382,7 @@
   "RemovedByAuthor": "Usunięto przez autora",
   "Missing": "Brakujące",
   "LoggedInAs": "Zalogowany jako",
-  "LoggedInUser": "Logged in as {0}",
+  "LoggedInUser": "Zalogowano jako {0}",
   "UnknownUser": "Nieznany użytkownik",
   "AddMeaningfulDescription": "Dodaj znaczący opis do swojego żądania.",
   "ThisSubscribesTo": {
@@ -393,7 +393,7 @@
     "One": "W tym procesie anulujesz {0} pakiet.",
     "Plural": "W tym procesie anulujesz {0} pakietów."
   },
-  "ViewThisPlaysetsPackages": "View the mods in this playset",
+  "ViewThisPlaysetsPackages": "Zobacz mody w tym zestawie",
   "YouHavePackagesUser": {
     "One": "Masz {0} pakiet stworzony przez {1}",
     "Plural": "Masz {0} pakiety/ów stworzone przez {1}"
@@ -401,10 +401,10 @@
   "RequestOption1": "Zgłoś problem lub dodaj brakujące informacje",
   "RequestOption2": "Dodaj brakujący status dla pakietu",
   "RequestOption3": "Dodaj brakującą interakcję z innym pakietem",
-  "ActivePlayset": "Active Playset",
+  "ActivePlayset": "Aktywny zestaw",
   "References": "Odniesienia",
-  "OpenLog": "Open Game Log",
-  "OpenSkyveLog": "Open Skyve Log",
+  "OpenLog": "Otwórz dziennik gry",
+  "OpenSkyveLog": "Otwórz dziennik Skyve",
   "Sort By": "Sortuj według",
   "FailedToFetchLogs": "Nie udało się pobrać logów",
   "DiscoverPlaysets": "Odkryj Profile",
@@ -423,7 +423,7 @@
   "FailedToDownloadPlayset": "Nie udało się pobrać tego Profilu.\n\nSpróbuj ponownie później.",
   "UpdatePlaysetTip": "Uaktualnij swoją lokalną wersję tego Profilu",
   "DownloadPlaysetTip": "Pobierz ten Profil na swój komputer",
-  "EditPlaysetThumbnail": "Edit this playset's thumbnail",
+  "EditPlaysetThumbnail": "Edytuj miniaturkę tego zestawu",
   "MakePublic": "Make this profile Public",
   "MakePrivate": "Make this profile Private",
   "CopyPlaysetLink": "Skopiuj identyfikator Profilu",
@@ -434,9 +434,9 @@
   "PastePlaysetId": "Wklej identyfikator Profilu, który chcesz zaimportować",
   "AssumeInternetConnectivity": "Ignoruj sprawdzanie połączenia z Internetem",
   "AssumeInternetConnectivity_Tip": "Pomija sprawdzanie połączenia z internetem i automatycznie zakłada, że jesteś połączony.",
-  "SelectAll": "Select all items",
-  "DeselectAll": "Un-select all items",
-  "AddTagBox": "Add a new tag or search here",
+  "SelectAll": "Zaznacz wszystkie elementy",
+  "DeselectAll": "Odznacz wszystkie elementy",
+  "AddTagBox": "Dodaj nowy tag lub wyszukaj tutaj",
   "EditingMultipleTags": "Edycja tagów wielu pakietów nadpisze każdy z ich własnych tagów.",
   "EditTagsOfPackage": {
     "One": "Edytuj wszystkie tagi zasobów tego pakietu",
@@ -484,8 +484,8 @@
   "TroubleshootCauseResult": "Następujące pakiety mogą być przyczyną problemów",
   "VerifiedAuthor": "Zweryfikowany Autor",
   "EnableItem": "Włącz ten mod",
-  "DisableItem": "Disable this mod",
-  "SwitchToItem": "Switch to this mod",
+  "DisableItem": "Wyłącz ten mod",
+  "SwitchToItem": "Przełącz na ten mod",
   "FailedToImportPlayset": "Nie udało się zaimportować tego zestawu.",
   "FilterByEnabled": "Pokazuj tylko elementy włączone.",
   "FilterByDisabled": "Pokazuj tylko elementy wyłączone.",
@@ -505,7 +505,7 @@
   "UnsavedChangesPlayset": "Istnieją niezapisane zmiany w pakietach tego zestawu",
   "ChangePlaysetSettings": "Zmień ustawienia tego zestawu",
   "ViewCompatibilityReport": "Zobacz pełny raport",
-  "DashboardCustomizationInfo": "Customize your dashboard by dragging each section from its title.\r\nYou can also resize a section using the dotted triangle on its bottom-right corner.",
+  "DashboardCustomizationInfo": "Dostosuj swój pulpit nawigacyjny, przeciągając każdą sekcję z jej tytułu.\nMożesz także zmieniać rozmiar sekcji za pomocą kropkowanego trójkąta w jej dolnym prawym rogu.",
   "ViewAssetsWithIssues": "Zobacz obiekty z problemami",
   "ViewModsWithIssues": "Zobacz mody z problemami",
   "CreateShortcut": "Utwórz skrót",
@@ -533,19 +533,19 @@
   "RecentlyUpdated": "Ostatnia aktualizacja",
   "Manage": "Zarządzaj",
   "Version": "Wersja",
-  "UpdateTime": "Update Time",
+  "UpdateTime": "Czas aktualizacji",
   "Status": "Status",
-  "PackageUsage": "Package Usage",
+  "PackageUsage": "Użycie pakietu",
   "CodeMod": {
     "One": "Mod kodu",
     "Plural": "Mody kodu"
   },
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
-  "FadeDisabledItems": "Fade out disabled mods & assets",
-  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
-  "UsagePlayset": "{0} Playset",
-  "GenericPlayset": "Generic Playset",
-  "CompatibilityCenter": "Compatibility Center",
+  "ThisModIsRequiredYouCantDisableIt": "Ta modyfikacja jest wymagana, nie możesz jej wyłączyć.",
+  "FadeDisabledItems": "Wygaszanie wyłączonych modów i zasobów",
+  "FadeDisabledItems_Tip": "Wyłączone mody i zasoby na lokalnych listach zawartości zostaną wygaszone.",
+  "UsagePlayset": "{0} zestaw",
+  "GenericPlayset": "Ogólny zestaw",
+  "CompatibilityCenter": "Centrum kompatybilności",
   "Dependency": {
     "One": "Zależność",
     "Plural": "Zależności"
@@ -553,36 +553,36 @@
   "ModID": "ID moda",
   "Subscribers": "Subskrybentów",
   "Votes": "Polubienia",
-  "PartiallyIncluded": "Partially Included",
+  "PartiallyIncluded": "Częściowo uwzględnione",
   "Links": "Linki",
   "NoAssets": "Wyłącz wszystkie obiekty",
   "NoMods": "Wyłącz wszystkie mody kodu",
   "FavoritePlaysets": "Ulubione zestawy",
-  "OnlyShowErrors": "Only show warnings and errors",
-  "RestartRequired": "Restart Required",
-  "FailedToApplyChanges": "Failed to apply the requested changes.",
-  "ConfirmSelection": "Confirm Selection",
-  "PackagesSelected": "Packages Selected ({0})",
-  "PackagesSelectionInfo": "Click on a package to select it, click on 'Confirm Selection' once you're finished.",
+  "OnlyShowErrors": "Pokaż tylko ostrzeżenia i błędy",
+  "RestartRequired": "Wymagane ponowne uruchomienie",
+  "FailedToApplyChanges": "Nie udało się zastosować żądanych zmian.",
+  "ConfirmSelection": "Potwierdź wybór",
+  "PackagesSelected": "Wybrane pakiety ({0})",
+  "PackagesSelectionInfo": "Kliknij pakiet, aby go wybrać, a po zakończeniu kliknij „Potwierdź wybór”.",
   "CustomColor": "Niestandardowy Kolor",
   "CustomThumbnail": "Własna miniaturka",
   "NoThumbnail": "Wyłącz miniaturę",
-  "PlaysetUsageInfo": "Selecting a dedicated usage for your playset allows Skyve to automatically hide mods that either do not match, or are not compatible with, your selected usage.",
-  "PlaysetColorSet": "Custom color enabled",
-  "PlaysetColorNotSet": "No custom color selected",
-  "PlaysetThumbnailSet": "Custom thumbnail enabled",
-  "PlaysetThumbnailNotSet": "No custom thumbnail selected",
-  "OpenPlaysetPage": "Open this playset's page",
-  "Ready": "Ready",
+  "PlaysetUsageInfo": "Wybranie dedykowanego zastosowania dla Twojego zestawu pozwala Skyve automatycznie ukryć mody, które nie pasują lub nie są z nim kompatybilne.",
+  "PlaysetColorSet": "Niestandardowy kolor włączony",
+  "PlaysetColorNotSet": "Nie wybrano niestandardowego koloru",
+  "PlaysetThumbnailSet": "Niestandardowe miniaturki włączone",
+  "PlaysetThumbnailNotSet": "Nie wybrano niestandardowej miniaturki",
+  "OpenPlaysetPage": "Otwórz stronę tego zestawu",
+  "Ready": "Gotowe",
   "EditDashboard": "Edytuj panel",
-  "AvailableWidgets": "Available Widgets",
-  "HideExtraWidgets": "Hide Extra Widgets",
-  "ResetLayout": "Reset Layout",
-  "ContentSummary": "Content Summary",
+  "AvailableWidgets": "Dostępne widżety",
+  "HideExtraWidgets": "Ukryj dodatkowe widżety",
+  "ResetLayout": "Zresetuj układ",
+  "ContentSummary": "Podsumowanie treści",
   "PackagesEnabled": "Pakiety włączone",
   "ModsEnabled": "Mody włączone",
   "AssetsEnabled": "Obiekty włączone",
-  "PackagesIncludedDisabled": "Packages Included & Disabled",
+  "PackagesIncludedDisabled": "Pakiety zawarte i wyłączone",
   "OutOf": "{0} z {1}",
   "RecentlyUpdatedItem": "Ostatnia aktualizacja {0}"
 }
