@@ -14,7 +14,7 @@
   "InteractionCount": "Interazioni ({0})",
   "AddStatus": "Aggiungi status",
   "AddInteraction": "Aggiungi interazione",
-  "NotReviewed": "Non ancora revisionato",
+  "NotReviewed": "Non ancora recensito",
   "Stable": "Stabile",
   "StableNoNewFeatures": "Stabile, solo aggiornamenti per correzioni di bug",
   "StableNoFutureUpdates": "Stabile, nessun altro aggiornamento",
@@ -139,50 +139,50 @@
   "Status_StandardMod": "Questo pacchetto verrà ignorato durante l'elaborazione delle mod per la risoluzione dei problemi.",
   "OutputText": "Output atteso",
   "Stability_AssetNotReviewed": "'{0}' non è stato ancora recensito.\nLe informazioni di compatibilità potrebbero non essere accurate, anche se gli asset sono generalmente stabili.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
+  "Stability_NotReviewed": "'{0}' non è stato ancora recensito.\n\nLe informazioni di compatibilità potrebbero non essere accurate.",
+  "Stability_Stable": "'{0}' è stabile. Il suo autore sta ancora lavorando attivamente su di esso e lo aggiornandolo.",
+  "Stability_StableNoNewFeatures": "'{0}' è stabile, anche se l'autore non rilascerà più gli aggiornamenti della funzionalità.\nLo aggiorneranno comunque in caso di nuovi bug.",
+  "Stability_StableNoFutureUpdates": "'{0}' è stabile, anche se l'autore non lo supporta più, gli aggiornamenti futuri o le correzioni di bug sono improbabili.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' può causare problemi, e l'autore non lo supporta più, aggiornamenti futuri o correzioni di bug sono improbabili.",
+  "Stability_BreaksOnPatch": "'{0}' è molto probabile che non funzioni quando la nuova patch viene rilasciata.",
+  "Stability_NotEnoughInformation": "Non ci sono abbastanza informazioni per recensirlo correttamente '{0}'.",
+  "Stability_HasIssues": "'{0}' può causare problemi.\nFai attenzione mentre lo utilizzi.",
+  "Stability_Broken": "'{0}' è rotto.\nÈ noto che blocca il gioco o semplicemente non funziona.",
+  "Stability_Incompatible": "'{0}' è contrassegnato come non compatibile con la tua versione di gioco attuale.\nUsalo con cautela, oppure disabilitalo in attesa di aggiornamento.",
+  "Stability_Local": "Questa è una versione locale della sua mod originale '{0}'.\n\nLe versioni locali sono solitamente utilizzate per scopi di test.",
+  "Stability_BrokenFromPatch": "'{1}' rotto dopo la patch {0} del gioco. Si prega di attendere fino a quando non viene aggiornato prima di usarlo.\nNel frattempo, si dovrebbe disattivare.",
+  "Stability_BrokenFromPatchSafe": "'{1}' rotto dopo la patch {0} del gioco. Si prega di attendere fino a quando non viene aggiornato prima di usarlo.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "È necessario aggiungere il seguente pacchetto al playset.",
+    "Plural": "È necessario aggiungere il seguente pacchetto al playset."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "Seguire le seguenti istruzioni:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "Dovresti rimuovere '{0}' dal tuo playset.",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "Dovresti rimuovere '{1}' dal tuo playset.",
+    "Plural": "È necessario rimuovere i seguenti pacchetti dal playset."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "Action_ExcludeThis": "Dovresti disabilitare '{0}'.",
+  "ExcludeThis": "Disabilita questo pacchetto",
+  "Exclude": "Disabilita",
   "Unsubscribe": "Annulla sottoscrizione",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "Dovresti disabilitare '{1}'.",
+    "Plural": "Dovresti disabilitare i seguenti pacchetti."
   },
   "Action_Switch": {
     "One": "Dovresti passare a '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "Dovresti passare a uno dei seguenti pacchetti."
   },
   "Action_IncludeThis": "È necessario includere '{0}'",
   "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Dovresti aggiungere il seguente pacchetto al tuo playset.",
+    "Plural": "Dovresti aggiungere i seguenti pacchetti al playset."
   },
   "NoRequiredDlcs": "Nessun DLC richiesto",
   "DlcsSelected": {
@@ -190,7 +190,7 @@
     "Plural": "{0} DLC selezionati"
   },
   "RequiredDLCs": "DLC/CCP richiesti",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "Stabilità",
   "CRT_Successors": "Successori",
   "CRT_RequiredPackages": "Pacchetti Richiesti",
   "CRT_OptionalPackages": "Pacchetti Opzionali",
@@ -214,7 +214,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} dovrebbe essere esclusa",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} {1} dovrebbe essere escluso"
   },
   "UnsubscribeCount": "{0} {1} da cui dovreste annullare la sottoscrizione",
   "SwitchCount": {
@@ -222,8 +222,8 @@
     "Plural": "{0} {1} richiedono di passare ad un'altra"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1} che è richiesto ma non è abilitato",
+    "Plural": "{0} {1} che sono richiesti, ma non sono abilitati"
   },
   "PackageType": "Tipo Pacchetto",
   "GenericPackage": "Pacchetto Generico",
@@ -236,12 +236,12 @@
   "ApplyChangedBeforeExit": "Le modifiche non sono state salvate.\n\nVolete applicare queste modifiche prima di continuare?",
   "AuthorRetired": "L'autore di {0}, {1}, si è ritirato o è inattivo da molto tempo.\n\nI futuri aggiornamenti e la stabilità dei loro pacchetti non sono garantiti.",
   "AuthorMalicious": "L'autore di {0}, {1}, è noto per essere malintenzionato e/o per includere contenuti dannosi come i virus nei suoi pacchetti.",
-  "ReviewRequests": "Review Requests",
+  "ReviewRequests": "Richieste di Revisione",
   "ApplyRequestedChanges": "Applica le Modifiche Richieste",
   "ManagePackage": "Gestione del Pacchetto",
   "Banned": "Bannato",
   "NoIssues": "Nessun problema",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "*L'ID del tuo account e i log vengono inviati con la tua richiesta",
   "ScenarioMaking": "Creazione di scenari",
   "ThemeMaking": "Creazione di temi",
   "OtherCompatibilityWarnings": {
@@ -254,13 +254,13 @@
   },
   "ViewRequest": "Mostra richiesta",
   "CRT_RequiredItem": "Elemento richiesto",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
-  "SnoozeAllFiltered": "Snooze all filtered issues",
-  "LinkedPackages": "Linked Packages",
-  "NoTags": "No Tags",
-  "NoLinks": "No Links",
-  "HideReviewedPackages": "Hide reviewed mods",
+  "RequiredItem": "Oggetto Richiesto",
+  "ApplyAllActions": "Applica tutte le azioni consigliate",
+  "SnoozeAll": "Posponi tutti i problemi",
+  "SnoozeAllFiltered": "Posponi tutti i problemi filtrati",
+  "LinkedPackages": "Pacchetti Collegati",
+  "NoTags": "Nessun Tag",
+  "NoLinks": "Nessun Link",
+  "HideReviewedPackages": "Nascondi le mod recensite",
   "ApplyRecommendedAction": "Applica l'azione consigliata"
 }
