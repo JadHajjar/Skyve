@@ -44,7 +44,7 @@
   "SourceCodeNotAvailable": "Kod źródłowy nie jest dostępny",
   "MusicCanBeCopyrighted": "Umieszczona muzyka może być chroniona prawem autorskim",
   "IncompleteDescription": "Niekompletny opis",
-  "Successor": "Successor",
+  "Successor": "Następca..",
   "LoadAfter": "Załaduj po ..",
   "Alternative": "Alternative",
   "SameFunctionality": "Same Functionality",
@@ -97,8 +97,8 @@
     "Plural": "Brakuje Ci następujących opcjonalnych pakietów dla '{0}'."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' zakończył się sukcesem '{1}'.",
-    "Plural": "'{0}' został pomyślnie wykonany przez jeden z następujących pakietów."
+    "One": "'{0}' został zastąpiony przez '{1}'.",
+    "Plural": "'{0}' został zastąpiony przez jeden z następujących pakietów."
   },
   "Interaction_LoadAfter": {
     "One": "'{0}' załaduje się bezpośrednio po '{1}'.",
