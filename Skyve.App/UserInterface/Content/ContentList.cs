@@ -466,7 +466,7 @@ public partial class ContentList : SlickControl
 
 		if (OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.GetPackage()?.IsLocal)
+			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.IsLocal())
 			{
 				return true;
 			}
@@ -474,7 +474,7 @@ public partial class ContentList : SlickControl
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.IsIncluded(out var partiallyIncluded) || partiallyIncluded))
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (_packageUtil.IsIncluded(item, out var partiallyIncluded, SelectedPlayset) || partiallyIncluded))
 			{
 				return true;
 			}
@@ -482,7 +482,7 @@ public partial class ContentList : SlickControl
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (item.GetPackage()?.IsCodeMod == false || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.GetLocalPackage()?.IsEnabled()))
+			if (OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != _packageUtil.IsEnabled(item, SelectedPlayset))
 			{
 				return true;
 			}
@@ -551,7 +551,7 @@ public partial class ContentList : SlickControl
 			}
 		}
 
-		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.GetLocalPackage()?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
+		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.GetLocalPackageIdentity()?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
 		{
 			return true;
 		}
@@ -626,7 +626,7 @@ public partial class ContentList : SlickControl
 	{
 		return searchTerm.SearchCheck(item.Name)
 			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)
-			|| (!item.IsLocal() ? item.Id.ToString() : Path.GetFileName(item.GetLocalPackage()?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+			|| (!item.IsLocal() ? item.Id.ToString() : Path.GetFileName(item.GetLocalPackageIdentity()?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<IPackageIdentity> e)

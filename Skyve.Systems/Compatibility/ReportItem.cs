@@ -8,6 +8,7 @@ using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
 using Skyve.Domain.Systems;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,17 +36,24 @@ public class ReportItem : ICompatibilityItem
 
 	public string GetMessage(IWorkshopService workshopService, IPackageNameUtil packageNameUtil)
 	{
-		if (LocaleKey is not null && LocaleParams is not null)
+		try
 		{
-			return LocaleHelper.GetGlobalText(LocaleKey).Format(LocaleParams);
+			if (LocaleKey is not null && LocaleParams is not null)
+			{
+				return LocaleHelper.GetGlobalText(LocaleKey).Format(LocaleParams);
+			}
+
+			var translation = LocaleHelper.GetGlobalText(Status.LocaleKey);
+			var action = LocaleHelper.GetGlobalText($"Action_{Status.Action}");
+			var text = Packages?.Length switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
+			var actionText = Packages?.Length switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
+
+			return string.Format($"{text}\r\n\r\n{actionText}", PackageName, Packages?.Length is null or 0 ? string.Empty : packageNameUtil.CleanName(workshopService.GetInfo(Packages.FirstOrDefault())), true).Trim();
 		}
-
-		var translation = LocaleHelper.GetGlobalText(Status.LocaleKey);
-		var action = LocaleHelper.GetGlobalText($"Action_{Status.Action}");
-		var text = Packages?.Length switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
-		var actionText = Packages?.Length switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
-
-		return string.Format($"{text}\r\n\r\n{actionText}", PackageName, Packages?.Length is null or 0 ? string.Empty : packageNameUtil.CleanName(workshopService.GetInfo(Packages.FirstOrDefault())), true).Trim();
+		catch (Exception ex)
+		{
+			return $"TEXT_ERROR: {ex.GetType().Name} - {ex.Message}";
+		}
 	}
 
 	public override bool Equals(object? obj)
@@ -60,10 +68,10 @@ public class ReportItem : ICompatibilityItem
 	public override int GetHashCode()
 	{
 		var hashCode = 109806218;
-		hashCode = hashCode * -1521134295 + PackageId.GetHashCode();
-		hashCode = hashCode * -1521134295 + Type.GetHashCode();
-		hashCode = hashCode * -1521134295 + EqualityComparer<GenericLocalPackageIdentity[]?>.Default.GetHashCode(Packages);
-		hashCode = hashCode * -1521134295 + Status.GetHashCode();
+		hashCode = (hashCode * -1521134295) + PackageId.GetHashCode();
+		hashCode = (hashCode * -1521134295) + Type.GetHashCode();
+		hashCode = (hashCode * -1521134295) + EqualityComparer<GenericLocalPackageIdentity[]?>.Default.GetHashCode(Packages);
+		hashCode = (hashCode * -1521134295) + Status.GetHashCode();
 		return hashCode;
 	}
 

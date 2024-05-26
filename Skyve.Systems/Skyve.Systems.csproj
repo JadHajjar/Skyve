@@ -32,11 +32,11 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<LocaleJsonToClassExe>$([System.IO.Path]::GetFullPath('..\Extensions\LocaleJsonToClass\LocaleJsonToClass.exe'))</LocaleJsonToClassExe>
-		<LocaleJsonFile>"$([System.IO.Path]::GetFullPath('..\Skyve\Skyve.Systems\Properties\Locale.json'))"</LocaleJsonFile>
-		<LocaleCsFile>"$([System.IO.Path]::GetFullPath('..\Skyve\Skyve.Systems\Locale.cs'))"</LocaleCsFile>
-		<CRJsonFile>"$([System.IO.Path]::GetFullPath('..\Skyve\Skyve.Systems\Properties\Compatibility.json'))"</CRJsonFile>
-		<CRCsFile>"$([System.IO.Path]::GetFullPath('..\Skyve\Skyve.Systems\LocaleCR.cs'))"</CRCsFile>
+		<LocaleJsonToClassExe>$([System.IO.Path]::GetFullPath('$(SolutionDir)\..\Extensions\LocaleJsonToClass\LocaleJsonToClass.exe'))</LocaleJsonToClassExe>
+		<LocaleJsonFile>"$([System.IO.Path]::GetFullPath('$(SolutionDir)\..\Skyve\Skyve.Systems\Properties\Locale.json'))"</LocaleJsonFile>
+		<LocaleCsFile>"$([System.IO.Path]::GetFullPath('$(SolutionDir)\..\Skyve\Skyve.Systems\Locale.cs'))"</LocaleCsFile>
+		<CRJsonFile>"$([System.IO.Path]::GetFullPath('$(SolutionDir)\..\Skyve\Skyve.Systems\Properties\Compatibility.json'))"</CRJsonFile>
+		<CRCsFile>"$([System.IO.Path]::GetFullPath('$(SolutionDir)\..\Skyve\Skyve.Systems\LocaleCR.cs'))"</CRCsFile>
 	</PropertyGroup>
 
 	<Target Name="BuildLocale" BeforeTargets="PreBuildEvent">
