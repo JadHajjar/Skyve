@@ -273,29 +273,28 @@ public partial class PC_PlaysetList : PanelContent
 	{
 		try
 		{
-			var profile = _playsetManager.Playsets.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(file), StringComparison.InvariantCultureIgnoreCase));
+			var playset = _playsetManager.Playsets.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(file), StringComparison.InvariantCultureIgnoreCase));
 
 			if (Path.GetExtension(file).ToLower() is ".zip")
 			{
 				using var stream = File.OpenRead(file);
 				using var zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, false);
 
+#if CS2
+				var entry = zipArchive.GetEntry("Skyve\\CurrentPlayset.json") ?? zipArchive.GetEntry("Skyve/CurrentPlayset.json");
+#else
 				var entry = zipArchive.GetEntry("Skyve\\LogProfile.json") ?? zipArchive.GetEntry("Skyve/LogProfile.json");
+#endif
 
 				if (entry is null)
 				{
 					return;
 				}
 
-				file = Path.Combine(Path.GetTempPath(), $"{Path.GetFileNameWithoutExtension(file)}.json");
+				using var entryStream = entry.Open();
+				using var reader = new StreamReader(entryStream);
 
-				try
-				{
-					CrossIO.DeleteFile(file, true);
-				}
-				catch { }
-
-				entry.ExtractToFile(file);
+				file = await reader.ReadToEndAsync();
 			}
 
 #if CS1
@@ -318,18 +317,12 @@ public partial class PC_PlaysetList : PanelContent
 			else
 #endif
 			{
-				profile ??= await _playsetManager.ImportPlayset(file);
+				playset ??= await _playsetManager.CreateLogPlayset(file);
 			}
 
-			if (profile is not null)
+			if (playset is not null)
 			{
-				throw new NotImplementedException();
-				//var panel = new PC_GenericPackageList(profile.Packages, true)
-				//{
-				//	Text = profile.Name
-				//};
-
-				//Form.PushPanel(panel);
+				Form.PushPanel(new PC_PlaysetContents(playset));
 			}
 		}
 		catch (Exception ex)

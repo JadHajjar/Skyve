@@ -18,6 +18,7 @@ public interface IPlaysetManager
 	List<IPackage> GetInvalidPackages(IPlayset playset, PackageUsage usage);
 	Task<IPlayset?> CreateNewPlayset(string playsetName);
 	Task<IPlayset?> ImportPlayset(string fileName);
+	Task<IPlayset?> CreateLogPlayset(string file);
 	Task<bool> MergeIntoCurrentPlayset(IPlayset playset);
 	Task<bool> RenamePlayset(IPlayset playset, string text);
 	Task ActivatePlayset(IPlayset playset);
@@ -31,8 +32,8 @@ public interface IPlaysetManager
 	ICustomPlayset GetCustomPlayset(IPlayset playset);
 	Task DeactivateActivePlayset();
 	void Save(ICustomPlayset customPlayset);
-	Task<IEnumerable<IPackageIdentity>> GetPlaysetContents(IPlayset playset);
-	object GetLogPlayset();
+	Task<IEnumerable<IPlaysetPackage>> GetPlaysetContents(IPlayset playset);
+	Task<object> GetLogPlayset();
 
 #if CS1
 	IPlayset TemporaryPlayset { get; }

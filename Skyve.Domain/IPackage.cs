@@ -13,3 +13,9 @@ public interface IPackage : IPackageIdentity
 	//	bool IsEnabled(int playsetId);
 	//#endif
 }
+
+public interface IPlaysetPackage : IPackage
+{
+	bool IsEnabled { get; }
+	int LoadOrder { get; }
+}

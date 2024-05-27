@@ -358,7 +358,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (date.HasValue && !IsPackagePage)
 		{
-			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
+			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToLocalTime().ToRelatedString(true, false) : date.Value.ToLocalTime().ToString("g");
 			using var icon = IconManager.GetSmallIcon("UpdateTime");
 
 			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, icon, FormDesign.Design.AccentColor, tagRect, ContentAlignment.BottomLeft, large: true, mousePosition: CursorLocation);

@@ -313,7 +313,7 @@ public partial class ItemListControl
 
 			if (date != default)
 			{
-				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToLocalTime().ToRelatedString(true, false) : date.ToLocalTime().ToString("g");
 				var isRecent = date > DateTime.UtcNow.AddDays(-7);
 
 				e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("UpdateTime"), isRecent ? Color.FromArgb(125, FormDesign.Design.ActiveColor) : default, tagRect, ContentAlignment.TopLeft, smaller: false);

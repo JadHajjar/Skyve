@@ -62,10 +62,15 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		return SelectedItems.Select(x => x.Item);
 	}
 
-	protected ItemListControl(SkyvePage page)
+	protected ItemListControl(SkyvePage page, IPackageUtil? customPackageUtil = null)
 	{
 		_page = page;
 		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _userService, out _playsetManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
+
+		if (customPackageUtil is not null)
+		{
+			_packageUtil = customPackageUtil;
+		}
 
 		SeparateWithLines = true;
 		EnableSelection = true;
@@ -273,8 +278,8 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.ThenBy(x => x.Item.CleanName()),
 
 			_ => items
-				.OrderBy(x => !(x.Item.IsIncluded(out var partial) || partial))
-				.ThenBy(x => !x.Item.IsEnabled())
+				.OrderBy(x => !_packageUtil.IsIncluded(x.Item, out var partial) || partial)
+				.ThenBy(x => !_packageUtil.IsEnabled(x.Item, SelectedPlayset))
 				.ThenBy(x => x.Item.IsLocal())
 				.ThenBy(x => !x.Item.GetPackage()?.IsCodeMod)
 				.ThenBy(x => x.Item.CleanName())
@@ -324,7 +329,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 				if (enable || !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil))
 				{
-					await _modUtil.SetEnabled(item.Item, enable, SelectedPlayset);
+					await _packageUtil.SetEnabled(item.Item, enable, SelectedPlayset);
 				}
 			}
 
@@ -726,7 +731,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 	public void ShowRightClickMenu(IPackageIdentity item)
 	{
-		var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems((SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new IPackageIdentity[] { item }));
+		var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new IPackageIdentity[] { item });
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 	}
@@ -793,7 +798,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		public bool IsHovered(Control instance, Point location)
 		{
 			return
-				IncludedRect.Contains(location) ||
+				(IncludedRect.Contains(location) && !(instance as ItemListControl)!.IsGenericPage) ||
 				EnabledRect.Contains(location) ||
 				FolderRect.Contains(location) ||
 				WorkshopRect.Contains(location) ||
@@ -812,7 +817,9 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
 		{
-			if (IncludedRect.Contains(location))
+			var listControl = (instance as ItemListControl)!;
+
+			if (!listControl.IsGenericPage && IncludedRect.Contains(location))
 			{
 				var required = ServiceCenter.Get<IModLogicManager>().IsRequired(Item.GetLocalPackageIdentity(), ServiceCenter.Get<IModUtil>());
 				var isIncluded = Item.IsIncluded(out var partialIncluded) && !partialIncluded;
@@ -825,9 +832,9 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				{
 					text = !isIncluded
 						? (string)Locale.SubscribeToItem
-						: Item.IsEnabled()
-											? $"{Locale.DisableItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}"
-											: $"{Locale.EnableItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
+						: listControl._packageUtil.IsEnabled(Item, listControl.SelectedPlayset)
+							? $"{Locale.DisableItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}"
+							: $"{Locale.EnableItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
 				}
 
 				point = IncludedRect.Location;

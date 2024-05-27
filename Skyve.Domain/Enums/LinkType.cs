@@ -13,5 +13,7 @@ public enum LinkType
 	Paypal,
 	Patreon,
 	BuyMeACoffee,
+	Kofi,
+	Gitlabs,
 	Other = 99,
 }

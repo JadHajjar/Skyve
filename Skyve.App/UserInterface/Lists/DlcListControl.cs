@@ -105,7 +105,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		DrawIncludedButton(e, isIncluded, out var activeColor);
 
 		var height = (e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - GridPadding.Vertical) / 2;
-		var dateRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + GridPadding.Top), _settings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), "UpdateTime", height: height, smaller: true);
+		var dateRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + GridPadding.Top), _settings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToLocalTime().ToString("D"), "UpdateTime", height: height, smaller: true);
 
 		e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, dateRect.Bottom + GridPadding.Top), e.Item.Price.IfEmpty(Locale.Free), null, FormDesign.Design.GreenColor, height: height, smaller: true);
 

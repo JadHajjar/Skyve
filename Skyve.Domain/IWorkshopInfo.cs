@@ -25,4 +25,5 @@ public interface IWorkshopInfo : IPackageIdentity, IThumbnailObject
 	IEnumerable<IModChangelog> Changelog { get; }
 	IEnumerable<IThumbnailObject> Images { get; }
 	IEnumerable<ILink> Links { get; }
+	bool IsPartialInfo { get; }
 }

@@ -3,7 +3,9 @@
 using Skyve.Domain.Enums;
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace Skyve.Domain;
 public interface IPlayset : IThumbnailObject
@@ -49,4 +51,9 @@ public interface IOnlinePlayset : IThumbnailObject
 	bool Public { get; set; }
 	int Downloads { get; }
 	[CloneIgnore] IUser? Author { get; }
+}
+
+public interface ITemporaryPlayset : IPlayset
+{
+	Task<IEnumerable<IPackageIdentity>> GetPackages();
 }

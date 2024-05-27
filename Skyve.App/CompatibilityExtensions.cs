@@ -52,6 +52,9 @@ public static class CompatibilityExtensions
 			LinkType.Twitch => "Twitch",
 			LinkType.Patreon => "Patreon",
 			LinkType.X => "TwitterX",
+			LinkType.BuyMeACoffee => "BuyMeACoffee",
+			LinkType.Kofi => "Kofi",
+			LinkType.Gitlabs => "Gitlab",
 			_ => "Share",
 		};
 	}

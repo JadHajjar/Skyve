@@ -413,6 +413,46 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_BuyMeACoffee_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_BuyMeACoffee_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_BuyMeACoffee_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_BuyMeACoffee_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_BuyMeACoffee_32 {
+            get {
+                object obj = ResourceManager.GetObject("I_BuyMeACoffee_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_BuyMeACoffee_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_BuyMeACoffee_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Check_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Check_16", resourceCulture);
@@ -1593,6 +1633,46 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Gitlabs_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Gitlabs_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Gitlabs_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Gitlabs_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Gitlabs_32 {
+            get {
+                object obj = ResourceManager.GetObject("I_Gitlabs_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Gitlabs_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Gitlabs_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Globe_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Globe_16", resourceCulture);
@@ -1786,6 +1866,46 @@ namespace Skyve.App.Properties {
         internal static System.Drawing.Bitmap I_Install_48 {
             get {
                 object obj = ResourceManager.GetObject("I_Install_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Kofi_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Kofi_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Kofi_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Kofi_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Kofi_32 {
+            get {
+                object obj = ResourceManager.GetObject("I_Kofi_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Kofi_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Kofi_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

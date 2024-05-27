@@ -100,13 +100,13 @@ public partial class ItemListControl
 	{
 		activeColor = default;
 
-		if (localIdentity is null && e.Item.IsLocal())
+		if (!IsGenericPage && localIdentity is null && e.Item.IsLocal())
 		{
 			return; // missing local item
 		}
 
 		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
-		var isHovered = e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation));
+		var isHovered = !IsGenericPage && (e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation)));
 
 		if (!required && isIncluded && isHovered)
 		{
@@ -337,7 +337,7 @@ public partial class ItemListControl
 
 		if (Width / UI.FontScale >= 800 && date != default)
 		{
-			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToLocalTime().ToRelatedString(true, false) : date.ToLocalTime().ToString("g");
 			DrawCell(e, Columns.UpdateTime, dateText, "UpdateTime", active: false);
 		}
 	}

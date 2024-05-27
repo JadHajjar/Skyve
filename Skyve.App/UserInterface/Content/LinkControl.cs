@@ -59,8 +59,8 @@ public class LinkControl : SlickImageControl
 		DrawFocus(e.Graphics, client, Padding.Left, active);
 
 		var text = Link.Title.IfEmpty(LocaleCR.Get(Link.Type.ToString())).ToUpper();
-		using var font = UI.Font(7F, FontStyle.Bold).FitToWidth(text, client.Pad(Padding), e.Graphics);
-		var textHeight = (int)e.Graphics.Measure(text, font).Height;
+		using var font = UI.Font(7F, FontStyle.Bold).FitTo(text, client.Pad(Padding.Left, client.Height / 2, Padding.Right, Padding.Bottom), e.Graphics);
+		var textHeight = (int)e.Graphics.Measure(text, font, client.Width - Padding.Horizontal).Height;
 		using var img = (HoverState.HasFlag(HoverState.Hovered) ? Display ? "Link" : "Edit" : Link.Type.GetIcon()).Get(Height / 2)?.Color(activeColor);
 
 		if (img == null)

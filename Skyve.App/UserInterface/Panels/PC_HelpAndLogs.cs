@@ -131,13 +131,13 @@ public partial class PC_HelpAndLogs : PanelContent
 	private async void B_CopyZip_Click(object sender, EventArgs e)
 	{
 		B_CopyZip.Loading = true;
-		await Task.Run(() =>
+		await Task.Run(async () =>
 		{
 			try
 			{
 				var file = _logUtil.CreateZipFile();
 
-				PlatformUtil.SetFileInClipboard(file);
+				PlatformUtil.SetFileInClipboard(await file);
 			}
 			catch (Exception ex)
 			{
@@ -155,7 +155,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		B_SaveZip.Loading = true;
 
-		await Task.Run(() =>
+		await Task.Run(async () =>
 		{
 			try
 			{
@@ -165,7 +165,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 				var fileName = _logUtil.CreateZipFile(folder);
 
-				PlatformUtil.OpenFolder(fileName);
+				PlatformUtil.OpenFolder(await fileName);
 			}
 			catch (Exception ex)
 			{

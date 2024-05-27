@@ -319,7 +319,7 @@ public class CompatibilityManager : ICompatibilityManager
 			var modName = Path.GetFileName(filePath);
 			var duplicate = _packageManager.GetModsByName(modName);
 
-			if (duplicate.Count > 1 && duplicate.Count(x => x.Id > 0 ? _compatibilityHelper.IsPackageEnabled(x.Id, false) : _packageUtil.IsIncludedAndEnabled(x)) > 1)
+			if (duplicate.Count > 1 && duplicate.Count(x => _packageUtil.IsIncludedAndEnabled(x)) > 1)
 			{
 				info.Add(ReportType.Compatibility
 					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
@@ -415,12 +415,12 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (!package.IsLocal() && isCodeMod && packageData.Type is PackageType.GenericPackage)
 		{
-			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !packageData.IndexedStatuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true && workshopInfo?.Links?.Any(x => x.Type is LinkType.Github) != true)
+			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !packageData.IndexedStatuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Links?.Any(x => x.Type is LinkType.Github) != true)
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.NoAction });
 			}
 
-			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 30)
+			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 30)
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.NoAction });
 			}

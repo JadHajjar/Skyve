@@ -47,7 +47,7 @@ public partial class ContentList : SlickControl
 	public bool IsGenericPage { get => ListControl.IsGenericPage; set => ListControl.IsGenericPage = value; }
 	public IEnumerable<IPackageIdentity> Items => ListControl.Items;
 
-	public ContentList(SkyvePage page, bool loaded, GetAllItems getItems, Func<LocaleHelper.Translation> getItemText)
+	public ContentList(SkyvePage page, bool loaded, GetAllItems getItems, Func<LocaleHelper.Translation> getItemText, IPackageUtil? customPackageUtil = null)
 	{
 		Page = page;
 		GetItems = getItems;
@@ -55,9 +55,14 @@ public partial class ContentList : SlickControl
 
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _playsetManager, out _tagUtil, out _packageUtil, out _downloadService, out _workshopService);
 
+		if (customPackageUtil is not null)
+		{
+			_packageUtil = customPackageUtil;
+		}
+
 		ListControl = _settings.UserSettings.ComplexListUI
-			? new ItemListControl.Complex(Page) { Dock = DockStyle.Fill, Margin = new() }
-			: new ItemListControl.Simple(Page) { Dock = DockStyle.Fill, Margin = new() };
+			? new ItemListControl.Complex(Page, customPackageUtil) { Dock = DockStyle.Fill, Margin = new() }
+			: new ItemListControl.Simple(Page, customPackageUtil) { Dock = DockStyle.Fill, Margin = new() };
 
 		InitializeComponent();
 
@@ -135,6 +140,8 @@ public partial class ContentList : SlickControl
 
 		I_Actions.IsSelected = ListControl.SelectedItemsCount > 0;
 	}
+
+
 
 	protected async void RefreshAuthorAndTags()
 	{

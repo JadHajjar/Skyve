@@ -3,6 +3,7 @@ using Skyve.App.UserInterface.Panels;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 {
 	private ProfileSorting sorting;
 	private static IPlayset? downloading;
+	private bool dragActive;
 	private static readonly IPlayset? opening;
 	private readonly IOSelectionDialog imagePrompt;
 
@@ -254,18 +256,33 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 	{
 		base.OnPaint(e);
 
-		if (Loading || AnyVisibleItems())
+		if (!Loading && !AnyVisibleItems())
 		{
-			return;
+			e.Graphics.ResetClip();
+
+			using var font = UI.Font(9.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+			e.Graphics.DrawString(ItemCount == 0 ? Locale.NoPlaysetsFound : Locale.NoPlaysetsMatchFilters, font, brush, ClientRectangle, stringFormat);
 		}
 
-		e.Graphics.ResetClip();
 
-		using var font = UI.Font(9.75F, FontStyle.Italic);
-		using var brush = new SolidBrush(FormDesign.Design.LabelColor);
-		using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+		if (dragActive)
+		{
+			var border = (int)(16 * UI.FontScale);
+			var rectangle = ClientRectangle.Pad(border);
+			using var font = UI.Font(11.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+			using var backBrush = new SolidBrush(Color.FromArgb(200, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor)));
+			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale)) { DashStyle = DashStyle.Dash };
 
-		e.Graphics.DrawString(ItemCount == 0 ? Locale.NoPlaysetsFound : Locale.NoPlaysetsMatchFilters, font, brush, ClientRectangle, stringFormat);
+			e.Graphics.ResetClip();
+			e.Graphics.FillRoundedRectangle(backBrush, rectangle, border);
+			e.Graphics.DrawRoundedRectangle(pen, rectangle, border);
+			e.Graphics.DrawString(Locale.DropImportFile.Format(Locale.Playset), font, brush, ClientRectangle, stringFormat);
+		}
 	}
 
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<IPlayset, Rectangles> e)
@@ -614,12 +631,14 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			if (Path.GetExtension(file).ToLower() is ".zip" or ".json")
 			{
 				drgevent.Effect = DragDropEffects.Copy;
+				dragActive = true;
 				Invalidate();
 			}
 
 			return;
 		}
 
+		dragActive = false;
 		drgevent.Effect = DragDropEffects.None;
 		Invalidate();
 	}
@@ -628,6 +647,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 	{
 		base.OnDragLeave(e);
 
+		dragActive = false;
 		Invalidate();
 	}
 
@@ -654,6 +674,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			SortingChanged(false);
 		}
 
+		dragActive = false;
 		Invalidate();
 	}
 

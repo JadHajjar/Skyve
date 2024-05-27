@@ -317,7 +317,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			e.Graphics.ResetClip();
 			e.Graphics.FillRoundedRectangle(backBrush, rectangle, border);
 			e.Graphics.DrawRoundedRectangle(pen, rectangle, border);
-			e.Graphics.DrawString(Locale.DropImportCompatibility, font, brush, ClientRectangle, stringFormat);
+			e.Graphics.DrawString(Locale.DropImportFile.Format(Locale.CompatibilityReport), font, brush, ClientRectangle, stringFormat);
 		}
 	}
 

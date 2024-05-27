@@ -10,7 +10,7 @@ public partial class ItemListControl
 {
 	public partial class Simple : ItemListControl
 	{
-		public Simple(SkyvePage page) : base(page)
+		public Simple(SkyvePage page, IPackageUtil? customPackageUtil = null) : base(page, customPackageUtil)
 		{
 			GridItemSize = new Size(190, 260);
 			DynamicSizing = true;
@@ -174,7 +174,7 @@ public partial class ItemListControl
 
 			if (date != default)
 			{
-				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToLocalTime().ToRelatedString(true, false) : date.ToLocalTime().ToString("g");
 				var isRecent = date > DateTime.UtcNow.AddDays(-7) && e.BackColor != FormDesign.Design.ActiveColor;
 
 				using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);

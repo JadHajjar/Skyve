@@ -9,7 +9,7 @@ public partial class ItemListControl
 {
 	public partial class Complex : ItemListControl
 	{
-		public Complex(SkyvePage page) : base(page)
+		public Complex(SkyvePage page, IPackageUtil? customPackageUtil = null) : base(page, customPackageUtil)
 		{
 			GridItemSize = new Size(390, 150);
 		}
