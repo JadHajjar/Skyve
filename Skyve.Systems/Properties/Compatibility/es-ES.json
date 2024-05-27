@@ -119,17 +119,17 @@
   "Status_CausesIssues": "Se sabe que '{0}' causa problemas con el juego.",
   "Status_SavesCantLoadWithoutIt": {
     "Zero": "Al crear un nuevo guardado con '{0}' habilitado, ya no podrás cargar el mismo juego si '{0}' está deshabilitado.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "One": "Al guardar la ciudad con '{0}' habilitados, ya no vas a poder cargar esa partida sin '{0}' habilitados\n\nUsa '{1}' para recuperar tu partida guardada si es necesario. Lee la descripción del Workshop para más información."
   },
   "Status_TestVersion": {
     "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Esta es una versión 'Prueba' de '{1}'. Ten en cuenta que las actualizaciones pueden causar problemas inesperados."
   },
   "Status_MissingDlc": {
     "One": "Te falta un DLC para usar este paquete.",
     "Plural": "Le faltan los siguientes DLCs para usar este paquete."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "Esta es la dependencia de un mod, pero parece que no la estás usando en ningún paquete que lo requiera.",
   "Status_SourceCodeNotAvailable": "El código fuente de este mod no está disponible. No debería usarlo a menos que confíe en su autor.",
   "SourceAvailable": "El código fuente está disponible ",
   "StandardMod": "Mod standard",
@@ -138,24 +138,24 @@
   "Status_SourceAvailable": "Este paquete no avisará sobre la falta de código fuente.",
   "Status_StandardMod": "Este paquete será ignorado mientras se procesan los mods para solucionar.",
   "OutputText": "Salida esperada",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
+  "Stability_AssetNotReviewed": "'{0}' no ha sido revisado aun.\nLa información de compatibilidad puede no ser exacta; aunque los assets generalmente son estables.",
+  "Stability_NotReviewed": "'{0}' aún no ha sido revisado.\n\nLa información de compatibilidad puede no ser exacta.",
+  "Stability_Stable": "'{0}' es estable. Su autor aún está trabajando activamente en él y continúa actualizándolo.",
+  "Stability_StableNoNewFeatures": "'{0}' es estable, aunque el autor ya no publicará actualizaciones nuevas.\nSin embargo, lo actualizará en caso de nuevos errores.",
+  "Stability_StableNoFutureUpdates": "'{0}' estable, aunque el autor ya no le está dando soporte, las futuras actualizaciones o correcciones de errores no son probables.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' puede causar problemas, y el autor ya no lo soporta, futuras actualizaciones o correcciones de errores no son probables.",
+  "Stability_BreaksOnPatch": "Es muy probable que '{0}' deje de funcionar al  actualizarse el juego.",
   "Stability_NotEnoughInformation": "No hay suficiente información para hacer una evaluación de '{0}'.",
   "Stability_HasIssues": "'{0}' puede causar problemas.\nTenga cuidado al usarlo.",
-  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
+  "Stability_Broken": "'{0}' no funciona.\nSe sabe que afecta el juego o simplemente no funciona.",
+  "Stability_Incompatible": "'{0}' está marcado como no compatible con tu versión del juego actual.\nÚsalo cuidadosamente, o desactívalo mientras esperas a que lo actualicen.",
+  "Stability_Local": "Esta es una versión local de su mod original '{0}'.\n\nLas versiones locales generalmente se utilizan para pruebas.",
+  "Stability_BrokenFromPatch": "'{1}' dejó de funcionar después del parche {0} del juego. Por favor, espera hasta que se actualice antes de usarlo.\nMientras tanto, deberías deshabilitarlo.",
+  "Stability_BrokenFromPatchSafe": "'{1}' dejó de funcionar después del parche {0} del juego. Por favor, espera hasta que se actualice antes de usarlo.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Deberías añadir el siguiente paquete a tu playset.",
+    "Plural": "Deberías añadir los siguientes paquetes a tu playset."
   },
   "Action_RequiresConfiguration": "Recomendamos que sigas las siguientes instrucciones:",
   "Action_SelectOne": {
@@ -262,5 +262,5 @@
   "NoTags": "Sin etiquetas",
   "NoLinks": "Sin enlaces",
   "HideReviewedPackages": "Ocultar mods evaluados",
-  "ApplyRecommendedAction": "Aplicar todas las acciones recomendadas"
+  "ApplyRecommendedAction": "Aplicar acción recomendada"
 }
