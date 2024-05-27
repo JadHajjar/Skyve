@@ -47,7 +47,6 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		InitializeComponent();
 
-		ListControl.Visible = false;
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
 		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
@@ -78,8 +77,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (!_compatibilityManager.FirstLoadComplete)
 		{
-			PB_Loader.Visible = true;
-			PB_Loader.Loading = true;
+			ListControl.Loading = true;
 		}
 		else
 		{
@@ -126,9 +124,6 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		base.UIChanged();
 
-		PB_Loader.Size = UI.Scale(new Size(32, 32), UI.FontScale);
-		PB_Loader.Location = ClientRectangle.Center(PB_Loader.Size);
-
 		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
 			= I_SortOrder.Padding
 			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
@@ -163,7 +158,6 @@ public partial class PC_CompatibilityReport : PanelContent
 			this.TryInvoke(() =>
 			{
 				LoadReport(packages!);
-				PB_Loader.Hide();
 			});
 		}
 	}
@@ -174,18 +168,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			reports.RemoveAll(x => x.GetNotification() <= NotificationType.Info);
 
-			if (reports.Count == 0)
-			{
-				label1.Location = ClientRectangle.Center(label1.Size);
-				label1.Show();
-			}
-			else
-			{
-				label1.Hide();
-			}
-
 			ListControl.SetItems(reports);
-			ListControl.Visible = reports.Count > 0;
 
 			DD_Author.SetItems(reports);
 		}
@@ -414,7 +397,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		massSnoozeing = true;
 		I_Actions.Loading = true;
-		PB_Loader.Visible = true;
+		ListControl.Loading = true;
 		ListControl.Enabled = false;
 		_notifier.IsBulkUpdating = true;
 
@@ -430,7 +413,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		_notifier.IsBulkUpdating = false;
 		ListControl.Enabled = true;
-		PB_Loader.Visible = false;
+		ListControl.Loading = false;
 		I_Actions.Loading = false;
 		massSnoozeing = false;
 

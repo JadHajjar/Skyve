@@ -32,6 +32,7 @@ public interface IPlaysetManager
 	Task DeactivateActivePlayset();
 	void Save(ICustomPlayset customPlayset);
 	Task<IEnumerable<IPackageIdentity>> GetPlaysetContents(IPlayset playset);
+	object GetLogPlayset();
 
 #if CS1
 	IPlayset TemporaryPlayset { get; }

@@ -597,6 +597,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DownloadPlaysetTip => _instance.GetText("DownloadPlaysetTip");
 
 	/// <summary>
+	/// Release to import the compatibility information from this report
+	/// </summary>
+	public static Translation DropImportCompatibility => _instance.GetText("DropImportCompatibility");
+
+	/// <summary>
 	/// <para>Edit this package's compatibility</para>
 	/// <para>Plural: Edit selected packages' compatibility</para>
 	/// </summary>

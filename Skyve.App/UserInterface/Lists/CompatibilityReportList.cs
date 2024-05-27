@@ -5,6 +5,7 @@ using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +26,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	private PackageSorting sorting;
 	private bool headerHovered;
+	private bool dragActive;
 	private readonly Dictionary<IPackageIdentity, int> _modHeights = [];
 	private readonly Dictionary<NotificationType, Rectangle> _headerRects = [];
 
@@ -238,7 +240,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			e.Graphics.DrawImage(icon.Color(foreBrush.Color), iconBounds);
 
-			xpos += rectangle.Width+Padding.Horizontal;
+			xpos += rectangle.Width + Padding.Horizontal;
 
 			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos - 1, Padding.Top, 2, StartHeight - Padding.Vertical));
 		}
@@ -286,6 +288,37 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	protected override bool IsHeaderActionHovered(Point location)
 	{
 		return _headerRects.Values.Any(x => x.Contains(location));
+	}
+
+	protected override void OnPaint(PaintEventArgs e)
+	{
+		base.OnPaint(e);
+
+		if (ItemCount == 0 && !Loading)
+		{
+			using var font = UI.Font(9.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+			e.Graphics.ResetClip();
+			e.Graphics.DrawString(Locale.NoCompatibilityIssues, font, brush, ClientRectangle, stringFormat);
+		}
+
+		if (dragActive)
+		{
+			var border = (int)(16 * UI.FontScale);
+			var rectangle = ClientRectangle.Pad(border);
+			using var font = UI.Font(11.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+			using var backBrush = new SolidBrush(Color.FromArgb(200, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor)));
+			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale)) { DashStyle = DashStyle.Dash };
+
+			e.Graphics.ResetClip();
+			e.Graphics.FillRoundedRectangle(backBrush, rectangle, border);
+			e.Graphics.DrawRoundedRectangle(pen, rectangle, border);
+			e.Graphics.DrawString(Locale.DropImportCompatibility, font, brush, ClientRectangle, stringFormat);
+		}
 	}
 
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
@@ -886,6 +919,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	{
 		base.OnDragEnter(drgevent);
 
+		dragActive = false;
 		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop))
 		{
 			var file = ((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
@@ -893,6 +927,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			if (Path.GetExtension(file).ToLower() is ".zip" or ".json")
 			{
 				drgevent.Effect = DragDropEffects.Copy;
+				dragActive = true;
 				Invalidate();
 			}
 
@@ -907,6 +942,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	{
 		base.OnDragLeave(e);
 
+		dragActive = false;
 		Invalidate();
 	}
 
@@ -931,6 +967,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			(PanelContent.GetParentPanel(this) as PC_CompatibilityReport)!.Import(file);
 		}
 
+		dragActive = false;
 		Invalidate();
 	}
 
