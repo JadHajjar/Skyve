@@ -190,7 +190,7 @@
     "Plural": "DLC {0}개 선택됨"
   },
   "RequiredDLCs": "필요한 DLC/CCP",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "안정성",
   "CRT_Successors": "계승자",
   "CRT_RequiredPackages": "필요한 패키지",
   "CRT_OptionalPackages": "선택적 패키지",

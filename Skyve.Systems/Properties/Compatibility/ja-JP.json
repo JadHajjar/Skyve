@@ -5,10 +5,10 @@
   "Previous": "前へ",
   "Skip": "スキップ",
   "Note": "補足",
-  "NoteInfo": "Additional information to be displayed for the mod",
+  "NoteInfo": "Modに表示される詳細情報",
   "BlackListName": "名前でブラックリスト",
-  "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "BlackListId": "IDによるブラックリスト",
+  "GlobalTagsInfo": "Skyveですべてのプレーヤーに表示されるタグ",
   "Links": "リンク",
   "StatusesCount": "ステータス ({0})",
   "InteractionCount": "依存関係 ({0})",
@@ -19,7 +19,7 @@
   "StableNoNewFeatures": "安定版 - バグ修正のみの更新",
   "StableNoFutureUpdates": "安定版 - これ以上の更新はありません",
   "HasIssuesNoFutureUpdates": "問題あり - アップデートはありません",
-  "BreaksOnPatch": "Stable, potentially breaks on patch",
+  "BreaksOnPatch": "安定していますが、アップデートで動作しなくなる可能性があります",
   "NotEnoughInformation": "情報が不足",
   "HasIssues": "問題あり",
   "Broken": "破損",
@@ -60,8 +60,8 @@
   "AttentionRequired": "要注意",
   "Website": "ウェブサイト",
   "Donation": "寄付",
-  "ManageCompatibilityData": "Compatibility Management",
-  "YourPackages": "Manage your mods",
+  "ManageCompatibilityData": "互換性の管理",
+  "YourPackages": "Modを管理する",
   "AddPackages": "パッケージの追加",
   "ConfirmEndSession": "セッションを終了してもよろしいのですか？",
   "CrDataLoadFailed": "データのロードに失敗しました、後でやり直して下さい",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "パッケージの有効な用途を選択して下さい。",
   "Interaction_Alternative": {
     "One": "「{1}」は「{0}」の代替として使用可能です。",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "以下のいずれかのパッケージは '{0}' の代替として使用できます。"
   },
   "Interaction_SameFunctionality": {
     "One": "「{0}」と「{1}」は同じ機能があります。",
@@ -108,28 +108,28 @@
     "One": "「{1}」には「{0}」が必要です。",
     "Plural": "「{0}」 は以下のパッケージに必要です。"
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Interaction_Identical": "以下は同じModの複数のバージョンです。\n同時に使用すると競合が発生します。",
+  "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要です。",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
   "Status_AutoDeprecated": "「{0}」は長期間で更新されていません。",
   "Status_Reupload": {
     "Zero": "「{0}」はオリジナルパッケージの再アップロード版です。",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "これは「{1}」の再投稿版です。"
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "'{0}' はゲームに問題を引き起こす可能性があります。",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "「{0}」を有効にして新規でセーブを作成すると、「{0}」が無効の場合は該当するセーブデータのロードが不可能になります。",
+    "One": "「{0}」を有効にして新規でセーブを作成すると、「{0}」が無効の場合は該当するセーブデータのロードができません。\n\n必要に応じて、「{1}」を使ってセーブデータの復元を試して下さい。詳しくはワークショップの説明を確認して下さい。"
   },
   "Status_TestVersion": {
     "Zero": "これは「テスト」バージョンです。MODのテスト版は問題が発生する可能性や、更新すると想定外のエラーが発生する可能性があるので注意して下さい。",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "これは'{1}'のテストバージョンです。アップデートで動作しなくなる可能性があります。"
   },
   "Status_MissingDlc": {
     "One": "パッケージを使用するには、DLCが未購入・有効ではありません。",
     "Plural": "パッケージを使用するには、以下のDLCがありません。"
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "このModに依存しているModを使用していません。",
   "Status_SourceCodeNotAvailable": "MODのソースコードは公開されていません。作者を信頼できない場合は使用しないで下さい。",
   "SourceAvailable": "ソースコードは公開中",
   "StandardMod": "標準のMOD",
@@ -138,13 +138,13 @@
   "Status_SourceAvailable": "このパッケージは、不足しているソースコードについて警告しません。",
   "Status_StandardMod": "MODのトラブルシューティングの際、このパッケージは無視されます。",
   "OutputText": "予想される結果",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
+  "Stability_AssetNotReviewed": "{0}'はまだレビューされていません。 互換性情報は正確ではないかもしれませんが、アセットは安定しています。",
+  "Stability_NotReviewed": "{0}'はまだレビューされていません。\n\n互換性の情報が不正確な可能性があります。",
+  "Stability_Stable": "'{0}'は安定していて、作者が積極的に更新しています。",
+  "Stability_StableNoNewFeatures": "'{0}'は安定していますが、、新しい機能はもう追加されません。しかし、バグが発生した場合はアップデートされます。",
+  "Stability_StableNoFutureUpdates": "'{0}'は安定していますが、サポートは終了していて、今後のアップデートやバグ修正は期待できません。",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}'は問題を引き起こす可能性があり、サポートは終了しています。",
+  "Stability_BreaksOnPatch": "'{0}'はアップデートが行われると機能しなくなる可能性が高いです。",
   "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
   "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
   "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
@@ -167,12 +167,12 @@
     "One": "You should remove '{1}' from your playset.",
     "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "Action_ExcludeThis": "「{0}」を無効にする必要があります。",
+  "ExcludeThis": "パッケージを無効化",
+  "Exclude": "無効化",
   "Unsubscribe": "サブスク解除",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
+    "One": "「{1}」を無効にする必要があります。",
     "Plural": "You should disable the following packages."
   },
   "Action_Switch": {
@@ -261,6 +261,6 @@
   "LinkedPackages": "Linked Packages",
   "NoTags": "No Tags",
   "NoLinks": "No Links",
-  "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action"
+  "HideReviewedPackages": "レビューしたModを隠す",
+  "ApplyRecommendedAction": "推奨されるアクションを適用"
 }
