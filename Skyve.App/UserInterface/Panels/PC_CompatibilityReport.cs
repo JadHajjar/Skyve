@@ -169,6 +169,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			reports.RemoveAll(x => x.GetNotification() <= NotificationType.Info);
 
 			ListControl.SetItems(reports);
+			ListControl.Loading = false;
 
 			DD_Author.SetItems(reports);
 		}
