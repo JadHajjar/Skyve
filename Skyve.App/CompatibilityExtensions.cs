@@ -54,7 +54,7 @@ public static class CompatibilityExtensions
 			LinkType.X => "TwitterX",
 			LinkType.BuyMeACoffee => "BuyMeACoffee",
 			LinkType.Kofi => "Kofi",
-			LinkType.Gitlabs => "Gitlab",
+			LinkType.Gitlabs => "Gitlabs",
 			_ => "Share",
 		};
 	}
