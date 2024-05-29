@@ -1433,6 +1433,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OutOfDate => _instance.GetText("OutOfDate");
 
 	/// <summary>
+	/// Out of date {0}
+	/// </summary>
+	public static Translation OutOfDateItem => _instance.GetText("OutOfDateItem");
+
+	/// <summary>
 	/// <para>Package</para>
 	/// <para>Plural: Packages</para>
 	/// </summary>

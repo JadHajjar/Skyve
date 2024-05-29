@@ -588,5 +588,6 @@
   "RecentlyUpdatedItem": "Recently Updated {0}",
   "MassSubscribeWarningTitle": "Mass subscription warning",
   "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
-  "DropImportFile": "Release to import the {0} from this report"
+  "DropImportFile": "Release to import the {0} from this report",
+  "OutOfDateItem": "Out of date {0}"
 }
