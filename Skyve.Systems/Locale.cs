@@ -1449,9 +1449,14 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PackageIsNotDownloaded => _instance.GetText("PackageIsNotDownloaded");
 
 	/// <summary>
-	/// '{0}' is out of date  You are {1} behind
+	/// '{0}' is out of date You are {1} behind
 	/// </summary>
 	public static Translation PackageIsOutOfDate => _instance.GetText("PackageIsOutOfDate");
+
+	/// <summary>
+	/// '{0}' is out of date, you are on an older version of the mod.
+	/// </summary>
+	public static Translation PackageIsOutOfDateVersion => _instance.GetText("PackageIsOutOfDateVersion");
 
 	/// <summary>
 	/// Packages Enabled

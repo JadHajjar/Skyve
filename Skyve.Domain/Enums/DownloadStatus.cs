@@ -6,6 +6,7 @@ public enum DownloadStatus
 	OK,
 	Unknown,
 	OutOfDate,
+	OutOfDateVersion,
 	PartiallyDownloaded,
 	Removed,
 }

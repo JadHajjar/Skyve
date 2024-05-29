@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
@@ -7,6 +8,9 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 	private readonly Dictionary<IUser, int> _counts = [];
 	private readonly IImageService _imageManager;
 	private readonly IUserService _userService;
+
+	[DefaultValue(false)]
+	public bool HideUsage { get; set; }
 
 	public AuthorDropDown()
 	{
@@ -77,7 +81,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 		rectangle = rectangle.Pad(rectangle.Height + Padding.Left, 0, 0, 0);
 #endif
 
-		if (_counts.ContainsKey(item!))
+		if (!HideUsage && _counts.ContainsKey(item!))
 		{
 			using var brush2 = new SolidBrush(Color.FromArgb(200, foreColor));
 			e.Graphics.DrawString(Locale.ItemsCount.FormatPlural(_counts[item!]), Font, brush2, rectangle.Pad(0, 0, (int)(5 * UI.FontScale), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center });

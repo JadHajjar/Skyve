@@ -36,6 +36,11 @@ public class PC_PlaysetContents : PC_ContentList
 
 	private class TemporaryPlaysetPackageUtil(IPackageUtil packageUtil) : IPackageUtil
 	{
+		public string? GetSelectedVersion(IPackageIdentity package, int? playsetId = null)
+		{
+			return packageUtil.GetSelectedVersion(package, playsetId);
+		}
+
 		public DownloadStatus GetStatus(IPackageIdentity? mod, out string reason)
 		{
 			return packageUtil.GetStatus(mod, out reason);
@@ -80,6 +85,11 @@ public class PC_PlaysetContents : PC_ContentList
 		public Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null)
 		{
 			return Task.CompletedTask;
+		}
+
+		public Task SetVersion(IPackageIdentity package, string version, int? playsetId = null)
+		{
+			return packageUtil.SetVersion(package, version, playsetId);
 		}
 	}
 }

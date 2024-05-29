@@ -106,6 +106,9 @@ public partial class ContentList : SlickControl
 		ListControl.OpenWorkshopSearchInBrowser += LC_Items_OpenWorkshopSearchInBrowser;
 		ListControl.SelectedItemsChanged += ListControl_SelectedItemsChanged;
 
+		DD_Author.HideUsage = page is SkyvePage.Workshop or SkyvePage.Generic;
+		DD_Tags.HideUsage = page is SkyvePage.Workshop or SkyvePage.Generic;
+
 		_delayedSearch = new(350, DelayedSearch);
 		_delayedAuthorTagsRefresh = new(350, RefreshAuthorAndTags);
 

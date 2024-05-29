@@ -35,6 +35,9 @@ public enum StatusAction
 	[CRN(NotificationType.Info)]
 	IncludeOther = 10,
 
+	[CRN(NotificationType.Caution, false)]
+	UpdateVersion = 11,
+
 	[CRN(NotificationType.None, false)]
 	RequestReview = 99,
 }
