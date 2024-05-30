@@ -9,6 +9,8 @@ namespace Skyve.App.UserInterface.Lists;
 
 public partial class ItemListControl
 {
+	private List<(string text, int width)?> headers;
+
 	private int DrawScore(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo, int xdiff)
 	{
 		if (workshopInfo is null)
@@ -287,7 +289,9 @@ public partial class ItemListControl
 			}
 
 			if (!oneLine && tags.Count > 0)
+			{
 				e.DrawableItem.CachedHeight += tagRect.Height;
+			}
 		}
 		else
 		{
@@ -393,18 +397,18 @@ public partial class ItemListControl
 		e.Graphics.FillRectangle(seamBrush, seamRectangle);
 	}
 
-	protected override void DrawHeader(PaintEventArgs e)
+	protected override void OnPrePaint(PaintEventArgs e)
 	{
-		var headers = new List<(string text, int width)?>
-			{
-				(Locale.Package, 0),
-				(Locale.Version, 65),
-				(Locale.UpdateTime, 140),
-				(Locale.Author, 150),
-				(LocaleSlickUI.Tags, 0),
-				(Locale.Status, 160),
-				("", 80)
-			};
+		headers =
+		[
+			(Locale.Package, 0),
+			(Locale.Version, 65),
+			(Locale.UpdateTime, 140),
+			(Locale.Author, 150),
+			(LocaleSlickUI.Tags, 0),
+			(Locale.Status, 160),
+			("", 80)
+		];
 
 		if (Width / UI.FontScale < 500)
 		{
@@ -430,6 +434,29 @@ public partial class ItemListControl
 		var autoColumns = headers.Count(x => x?.width == 0);
 		var xPos = 0;
 
+		for (var i = 0; i < headers.Count; i++)
+		{
+			var header = headers[i];
+
+			if (header == null)
+			{
+				continue;
+			}
+
+			var width = header.Value.width == 0 ? (remainingWidth / autoColumns) : (int)(header.Value.width * UI.FontScale);
+
+			_columnSizes[(Columns)i] = (xPos, width);
+
+			xPos += width;
+		}
+	}
+
+	protected override void DrawHeader(PaintEventArgs e)
+	{
+		var remainingWidth = Width - (int)(headers.Sum(x => x?.width ?? 0) * UI.FontScale);
+		var autoColumns = headers.Count(x => x?.width == 0);
+		var xPos = 0;
+
 		using var font = UI.Font(7.5F, FontStyle.Bold);
 		using var brush = new SolidBrush(FormDesign.Design.LabelColor);
 		using var lineBrush = new SolidBrush(FormDesign.Design.AccentColor);
@@ -450,8 +477,6 @@ public partial class ItemListControl
 			var width = header.Value.width == 0 ? (remainingWidth / autoColumns) : (int)(header.Value.width * UI.FontScale);
 
 			e.Graphics.DrawString(header.Value.text.ToUpper(), font, brush, new Rectangle(xPos, 1, width, StartHeight).Pad(Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
-
-			_columnSizes[(Columns)i] = (xPos, width);
 
 			xPos += width;
 		}

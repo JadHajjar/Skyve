@@ -288,7 +288,6 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		logTraceControl.SetItems(logEnumerable);
 		logTraceControl.Invalidate();
-		P_ErrorsContainer.Invalidate();
 	}
 
 	private bool SearchLog(ILogTrace trace)
@@ -386,11 +385,6 @@ public partial class PC_HelpAndLogs : PanelContent
 		ServiceCenter.Get<IIOUtil>().Execute(_logger.LogFilePath, string.Empty);
 	}
 
-	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
-	{
-		slickSpacer3.Visible = slickScroll1.Percentage != 0;
-	}
-
 	private void TB_Search_IconClicked(object sender, EventArgs e)
 	{
 		TB_Search.Text = string.Empty;
@@ -413,17 +407,5 @@ public partial class PC_HelpAndLogs : PanelContent
 		}
 
 		return base.ProcessCmdKey(ref msg, keyData);
-	}
-
-	private void P_ErrorsContainer_Paint(object sender, PaintEventArgs e)
-	{
-		if (logTraceControl.Items.Any())
-			return;
-
-		using var font = UI.Font(9.75F, FontStyle.Italic);
-		using var brush = new SolidBrush(FormDesign.Design.InfoColor);
-		using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
-
-		e.Graphics.DrawString(Locale.DefaultLogViewInfo, font, brush, P_ErrorsContainer.ClientRectangle.Pad(Math.Min(P_ErrorsContainer.Height, P_ErrorsContainer. Width) / 3), format);
 	}
 }

@@ -71,9 +71,9 @@ public class PC_WorkshopList : PanelContent
 		return await GetPackages(0);
 	}
 
-	private void ListControl_ScrollUpdate(object sender, int scrollIndex, int maxScroll)
+	private void ListControl_ScrollUpdate(object sender, double scrollIndex, double maxScroll)
 	{
-		if (scrollIndex > maxScroll - 3 && !listLoading && !endOfPagesReached)
+		if (scrollIndex > maxScroll - 4.5 && !listLoading && !endOfPagesReached)
 		{
 			LC_Items.I_Refresh.Loading = true;
 

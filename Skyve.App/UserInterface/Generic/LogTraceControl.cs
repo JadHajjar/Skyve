@@ -5,105 +5,85 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
-public class LogTraceControl : SlickListControl<ILogTrace>
+public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceControl.Rectangles>
 {
-	private ILogTrace? copyHovered;
-	private ILogTrace? openHovered;
-	private ILogTrace? folderHovered;
-
 	public LogTraceControl()
 	{
-		CalculateItemSize += LogTraceControl_CalculateItemSize;
+		DynamicSizing = true;
 	}
 
 	protected override void UIChanged()
 	{
 		Padding = UI.Scale(new Padding(7), UI.FontScale);
 		Margin = UI.Scale(new Padding(3), UI.FontScale);
+
+		base.UIChanged();
 	}
 
-	private void LogTraceControl_CalculateItemSize(object sender, SizeSourceEventArgs<ILogTrace> e)
+	protected override void OnItemMouseClick(DrawableItem<ILogTrace, Rectangles> item, MouseEventArgs e)
 	{
-		var rect = ClientRectangle.Pad(Padding);
-		var y = rect.Top;
+		base.OnItemMouseClick(item, e);
 
-		using var smallFont = UI.Font("Consolas", 7F);
-		using var font = UI.Font("Consolas", 8F);
-
-		if (!string.IsNullOrWhiteSpace(e.Item.Type))
+		if (e.Button != MouseButtons.Left)
 		{
-			rect.Y += (int)(20 * UI.FontScale);
-			y += (int)(20 * UI.FontScale);
+			return;
 		}
 
-		y += (Padding.Top / 2) + (int)e.Graphics.Measure(e.Item.Title, font, rect.Width - Padding.Right).Height;
-
-		foreach (var item in e.Item.Trace)
+		if (item.Rectangles.ButtonRect.Contains(e.Location))
 		{
-			y += (int)e.Graphics.Measure(item, smallFont, Width - (2 * Padding.Horizontal)).Height + (int)(3 * UI.FontScale);
+			Clipboard.SetText(item.Item.ToString());
 		}
 
-		y += Padding.Bottom * 3 / 2;
-
-		e.Size = y;
-		e.Handled = true;
-	}
-
-	protected override void OnItemMouseClick(DrawableItem<ILogTrace> item, MouseEventArgs e)
-	{
-		if (e.Button == MouseButtons.Left && copyHovered == item.Item)
+		if (item.Rectangles.LinkRect.Contains(e.Location))
 		{
-			Clipboard.SetText(copyHovered.ToString());
+			ServiceCenter.Get<IIOUtil>().Execute(item.Item.SourceFile, string.Empty);
 		}
 
-		if (e.Button == MouseButtons.Left && openHovered == item.Item)
+		if (item.Rectangles.FolderRect.Contains(e.Location))
 		{
-			ServiceCenter.Get<IIOUtil>().Execute(openHovered.SourceFile, string.Empty);
-		}
-
-		if (e.Button == MouseButtons.Left && folderHovered == item.Item)
-		{
-			PlatformUtil.OpenFolder(folderHovered.SourceFile);
+			PlatformUtil.OpenFolder(item.Item.SourceFile);
 		}
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
-		copyHovered = openHovered = folderHovered = null;
 		base.OnPaint(e);
 
-		Cursor = copyHovered is not null || openHovered is not null || folderHovered is not null ? Cursors.Hand : Cursors.Default;
+		if (ItemCount > 0)
+		{
+			return;
+		}
+
+		using var font = UI.Font(9.75F, FontStyle.Italic);
+		using var brush = new SolidBrush(FormDesign.Design.InfoColor);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+
+		e.Graphics.DrawString(Locale.DefaultLogViewInfo, font, brush, ClientRectangle.Pad(Math.Min(Height, Width) / 3), format);
 	}
 
-	protected override void OnPaintItem(ItemPaintEventArgs<ILogTrace> e)
+	protected override Rectangles GenerateRectangles(ILogTrace item, Rectangle rectangle)
 	{
-		var rect = e.ClipRectangle.Pad(Padding);
-		var y = rect.Top;
+		var rects = new Rectangles(item)
+		{
+			ButtonRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(UI.Scale(new Size(20, 20), UI.FontScale), ContentAlignment.TopRight)
+		};
+		rects.LinkRect = new Rectangle(rects.ButtonRect.X - rects.ButtonRect.Width - Padding.Right, rects.ButtonRect.Y, rects.ButtonRect.Width, rects.ButtonRect.Height);
+		rects.FolderRect = new Rectangle(rects.LinkRect.X - rects.LinkRect.Width - Padding.Right, rects.LinkRect.Y, rects.LinkRect.Width, rects.LinkRect.Height);
+
+		return rects;
+	}
+
+	protected override void OnPaintItemList(ItemPaintEventArgs<ILogTrace, Rectangles> e)
+	{
+		base.OnPaintItemList(e);
+
+		var y = e.ClipRectangle.Y;
 
 		using var smallFont = UI.Font("Consolas", 7F);
 
-		var buttonRect = e.ClipRectangle.Pad(0, 0, Padding.Right, 0).Align(UI.Scale(new Size(20, 20), UI.FontScale), ContentAlignment.TopRight);
-		var linkRect = new Rectangle(buttonRect.X - buttonRect.Width - Padding.Right, buttonRect.Y, buttonRect.Width, buttonRect.Height);
-		var folderRect = new Rectangle(linkRect.X - linkRect.Width - Padding.Right, linkRect.Y, linkRect.Width, linkRect.Height);
-
-		if (buttonRect.Contains(CursorLocation))
-		{
-			copyHovered = e.Item;
-		}
-
-		if (linkRect.Contains(CursorLocation))
-		{
-			openHovered = e.Item;
-		}
-
-		if (folderRect.Contains(CursorLocation))
-		{
-			folderHovered = e.Item;
-		}
-
 		SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 		{
-			Rectangle = buttonRect,
+			Rectangle = e.Rects.ButtonRect,
 			Icon = "Copy",
 			Font = Font,
 			HoverState = HoverState,
@@ -116,7 +96,7 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 
 		if (!string.IsNullOrWhiteSpace(e.Item.Type))
 		{
-			var rect2 = rect;
+			var rect2 = e.ClipRectangle;
 			using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ForeColor));
 			using var titleFont = UI.Font("Consolas", 8.25F, FontStyle.Bold);
 			using var typeBrush = new SolidBrush(e.Item.Type switch { "INFO" => ForeColor, "WARN" => FormDesign.Design.YellowColor, _ => FormDesign.Design.RedColor });
@@ -142,12 +122,11 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 			e.Graphics.DrawString($")", titleFont, textBrush, rect2);
 			rect2.X += (int)e.Graphics.Measure($")", titleFont).Width;
 
-			rect.Y += (int)(20 * UI.FontScale);
 			y += (int)(20 * UI.FontScale);
 
 			SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 			{
-				Rectangle = linkRect,
+				Rectangle = e.Rects.LinkRect,
 				Icon = "Link",
 				Font = Font,
 				HoverState = HoverState,
@@ -156,7 +135,7 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 
 			SlickButton.Draw(e.Graphics, new ButtonDrawArgs
 			{
-				Rectangle = folderRect,
+				Rectangle = e.Rects.FolderRect,
 				Icon = "Folder",
 				Font = Font,
 				HoverState = HoverState,
@@ -164,9 +143,9 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 			});
 		}
 
-		e.Graphics.DrawString(e.Item.Title, font, titleBrush, rect.Pad(0, 0, Padding.Right, 0));
+		e.Graphics.DrawString(e.Item.Title, font, titleBrush, e.ClipRectangle.Pad(0, (int)(20 * UI.FontScale), Padding.Right, 0));
 
-		y += (Padding.Top / 2) + (int)e.Graphics.Measure(e.Item.Title, font, rect.Width - Padding.Right).Height;
+		y += (Padding.Top / 2) + (int)e.Graphics.Measure(e.Item.Title, font, e.ClipRectangle.Width - Padding.Right).Height;
 
 		foreach (var item in e.Item.Trace)
 		{
@@ -175,9 +154,36 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 			y += (int)e.Graphics.Measure(item, smallFont, Width - (2 * Padding.Horizontal)).Height + (int)(3 * UI.FontScale);
 		}
 
-		y += Padding.Bottom;
+		y += Padding.Bottom ;
 
 		using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1 * UI.FontScale));
-		e.Graphics.DrawLine(pen, rect.Left, y - pen.Width, rect.Right, y - pen.Width);
+		e.Graphics.DrawLine(pen, e.ClipRectangle.Left, y - pen.Width, e.ClipRectangle.Right, y - pen.Width);
+
+		e.DrawableItem.CachedHeight = y - e.ClipRectangle.Top;
+	}
+
+	public class Rectangles : IDrawableItemRectangles<ILogTrace>
+	{
+		public Rectangles(ILogTrace item)
+		{
+			Item = item;
+		}
+
+		public ILogTrace Item { get; set; }
+		public Rectangle ButtonRect { get; set; }
+		public Rectangle LinkRect { get; set; }
+		public Rectangle FolderRect { get; set; }
+
+		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
+		{
+			text = string.Empty;
+			point = default;
+			return false;
+		}
+
+		public bool IsHovered(Control instance, Point location)
+		{
+			return ButtonRect.Contains(location) || LinkRect.Contains(location) || FolderRect.Contains(location);
+		}
 	}
 }
