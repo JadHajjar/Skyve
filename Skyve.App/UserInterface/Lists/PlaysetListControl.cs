@@ -535,7 +535,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 			e.Rects.Content = new Rectangle(e.Rects.Text.Right, e.ClipRectangle.Y, rect.X - e.Rects.Text.Right, e.ClipRectangle.Height);
 		}
-		else
+		else if (e.HoverState.HasFlag(HoverState.Hovered))
 		{
 			e.Rects.ActivateButton = SlickButton.AlignAndDraw(e.Graphics, e.Rects.Content, ContentAlignment.MiddleRight, new ButtonDrawArgs
 			{

@@ -9,13 +9,14 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
 {
 	public LogTraceControl()
 	{
+		SeparateWithLines = true;
 		DynamicSizing = true;
+		ItemHeight = 75;
 	}
 
 	protected override void UIChanged()
 	{
-		Padding = UI.Scale(new Padding(7), UI.FontScale);
-		Margin = UI.Scale(new Padding(3), UI.FontScale);
+		Padding = UI.Scale(new Padding(7, 10, 7, 5), UI.FontScale);
 
 		base.UIChanged();
 	}
@@ -149,17 +150,12 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
 
 		foreach (var item in e.Item.Trace)
 		{
-			e.Graphics.DrawString(item, smallFont, textBrush, new Rectangle(Padding.Left + Padding.Horizontal, y, Width - (2 * Padding.Horizontal), Height));
+			e.Graphics.DrawString(item, smallFont, textBrush, new Rectangle(Padding.Left + Padding.Horizontal, y, e.ClipRectangle.Width - (2 * Padding.Horizontal), Height));
 
-			y += (int)e.Graphics.Measure(item, smallFont, Width - (2 * Padding.Horizontal)).Height + (int)(3 * UI.FontScale);
+			y += (int)e.Graphics.Measure(item, smallFont, e.ClipRectangle.Width - (2 * Padding.Horizontal)).Height + (int)(3 * UI.FontScale);
 		}
 
-		y += Padding.Bottom ;
-
-		using var pen = new Pen(FormDesign.Design.AccentColor, (float)(1 * UI.FontScale));
-		e.Graphics.DrawLine(pen, e.ClipRectangle.Left, y - pen.Width, e.ClipRectangle.Right, y - pen.Width);
-
-		e.DrawableItem.CachedHeight = y - e.ClipRectangle.Top;
+		e.DrawableItem.CachedHeight = y - e.ClipRectangle.Top + Padding.Vertical;
 	}
 
 	public class Rectangles : IDrawableItemRectangles<ILogTrace>

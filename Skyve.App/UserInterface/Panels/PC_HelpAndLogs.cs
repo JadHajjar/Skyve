@@ -79,8 +79,8 @@ public partial class PC_HelpAndLogs : PanelContent
 		I_Sort.Padding = UI.Scale(new Padding(3), UI.FontScale);
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
 		TLP_LogFiles.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10, 10, 10, 0), UI.UIScale);
-		TLP_LogFiles.Padding = TLP_Errors.Padding =  UI.Scale(new Padding(12), UI.UIScale);
-		DD_LogFile.Margin = UI.Scale(new Padding(12,14,12,6), UI.UIScale);
+		TLP_LogFiles.Padding = TLP_Errors.Padding = UI.Scale(new Padding(12), UI.UIScale);
+		DD_LogFile.Margin = UI.Scale(new Padding(12, 14, 12, 6), UI.UIScale);
 		P_Troubleshoot.Margin = UI.Scale(new Padding(10, 10, 5, 0), UI.UIScale);
 		TLP_Errors.Margin = UI.Scale(new Padding(10, 10, 5, 10), UI.UIScale);
 		L_Troubleshoot.Font = UI.Font(9F);
@@ -115,9 +115,16 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		try
 		{
-			defaultLogs = _logUtil.GetCurrentLogsTrace();
+			var logs = _logUtil.GetCurrentLogsTrace();
 
-			this.TryInvoke(() => SetTrace(defaultLogs));
+			if (defaultLogs != null && defaultLogs.Count == logs.Count && defaultLogs.SequenceEqual(logs))
+			{
+				return true;
+			}
+
+			defaultLogs = logs;
+
+			SetTrace(defaultLogs);
 
 			return true;
 		}
@@ -201,10 +208,11 @@ public partial class PC_HelpAndLogs : PanelContent
 					using var stream = File.OpenRead(file);
 					using var zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, false);
 
-					var entry = zipArchive.GetEntry("log.txt");
+					var entry = zipArchive.GetEntry("Log.log");
 
 					if (entry is null)
 					{
+						SetTrace(defaultLogs ?? []);
 						return null;
 					}
 
@@ -214,6 +222,7 @@ public partial class PC_HelpAndLogs : PanelContent
 				}
 				catch
 				{
+					SetTrace(defaultLogs ?? []);
 					return null;
 				}
 			}
@@ -234,24 +243,27 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 #endif
 
+			SetTrace(logs ?? defaultLogs ?? []);
+
 			return logs;
 		});
-
-		this.TryInvoke(() => SetTrace(selectedFileLogs ?? defaultLogs ?? []));
 
 		DD_LogFile.Loading = false;
 	}
 
 	private void CB_OnlyShowErrors_CheckChanged(object sender, EventArgs e)
 	{
-		if (CrossIO.FileExists(DD_LogFile.SelectedFile))
+		Task.Run(() =>
 		{
-			SetTrace(selectedFileLogs ?? []);
-		}
-		else
-		{
-			SetTrace(defaultLogs ?? []);
-		}
+			if (CrossIO.FileExists(DD_LogFile.SelectedFile))
+			{
+				SetTrace(selectedFileLogs ?? []);
+			}
+			else
+			{
+				SetTrace(defaultLogs ?? []);
+			}
+		});
 	}
 
 	private void I_Sort_Click(object sender, EventArgs e)
@@ -287,7 +299,6 @@ public partial class PC_HelpAndLogs : PanelContent
 		}
 
 		logTraceControl.SetItems(logEnumerable);
-		logTraceControl.Invalidate();
 	}
 
 	private bool SearchLog(ILogTrace trace)
@@ -357,7 +368,8 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private async void B_Troubleshoot_Click(object sender, EventArgs e)
 	{
-		ShowPrompt("Coming soon...", icon: PromptIcons.Info);return;
+		ShowPrompt("Coming soon...", icon: PromptIcons.Info);
+		return;
 		var sys = ServiceCenter.Get<ITroubleshootSystem>();
 
 		if (sys.IsInProgress)
