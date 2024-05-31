@@ -55,7 +55,7 @@
     <Compile Update="UserInterface\Dropdowns\PackageStatusTypeDropDown.cs" />
     <Compile Update="UserInterface\Forms\EditTagsForm.cs" />
     <Compile Update="UserInterface\Generic\BigSelectionOptionControl.cs" />
-    <Compile Update="UserInterface\Generic\SteamUserControl.cs" />
+    <Compile Update="UserInterface\Generic\AuthorControl.cs" />
     <Compile Update="UserInterface\Lists\ItemListControl-Shared.cs" />
     <Compile Update="UserInterface\Lists\OtherPlaysetPackage.cs" />
     <Compile Update="UserInterface\Content\PackageDescriptionControl.cs" />

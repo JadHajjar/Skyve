@@ -13,7 +13,7 @@ public partial class PC_UserPage : PanelContent
 	private readonly ISettings _settings;
 	private readonly IWorkshopService _workshopService;
 
-	private List<IPackageIdentity> userItems = [];
+	private readonly List<IPackageIdentity> userItems = [];
 
 	public IUser User { get; }
 
@@ -25,7 +25,8 @@ public partial class PC_UserPage : PanelContent
 
 		User = user;
 
-		PB_Icon.LoadImage(User.AvatarUrl, ServiceCenter.Get<IImageService>().GetImage);
+		var author = _workshopService.GetUser(user);
+
 		P_Info.SetUser(User, this);
 
 		T_Profiles.LinkedControl = L_Profiles = new(true)
@@ -117,20 +118,10 @@ public partial class PC_UserPage : PanelContent
 	protected override void UIChanged()
 	{
 		base.UIChanged();
-
-		PB_Icon.Width = TLP_Top.Height = (int)(128 / 2 * UI.FontScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
 	{
 		base.DesignChanged(design);
-
-		BackColor = design.AccentBackColor;
-		P_Content.BackColor = P_Back.BackColor = design.BackColor;
-	}
-
-	public override Color GetTopBarColor()
-	{
-		return FormDesign.Design.AccentBackColor;
 	}
 }

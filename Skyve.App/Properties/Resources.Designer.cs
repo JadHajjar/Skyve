@@ -453,6 +453,46 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Chat_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Chat_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Chat_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Chat_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Chat_32 {
+            get {
+                object obj = ResourceManager.GetObject("I_Chat_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Chat_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Chat_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Check_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Check_16", resourceCulture);
@@ -3276,6 +3316,46 @@ namespace Skyve.App.Properties {
         internal static System.Drawing.Bitmap I_RemoveSteam_24 {
             get {
                 object obj = ResourceManager.GetObject("I_RemoveSteam_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Reply_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Reply_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Reply_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Reply_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Reply_32 {
+            get {
+                object obj = ResourceManager.GetObject("I_Reply_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Reply_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Reply_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

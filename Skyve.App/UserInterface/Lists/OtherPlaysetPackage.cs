@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.App.Interfaces;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
@@ -93,6 +95,17 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 	protected override async void OnItemMouseClick(DrawableItem<IPlayset, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
+
+		if (e.Button == MouseButtons.Right)
+		{
+			this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item.Item, true)));
+			return;
+		}
+
+		if (e.Button != MouseButtons.Left)
+		{
+			return;
+		}
 
 		if (item.Rectangles.IncludedRect.Contains(e.Location))
 		{
