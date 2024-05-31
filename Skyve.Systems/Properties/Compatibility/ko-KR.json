@@ -167,13 +167,13 @@
     "One": "You should remove '{1}' from your playset.",
     "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
+  "Action_ExcludeThis": "'{0}'(을)를 비활성화 하는 것이 좋습니다.",
+  "ExcludeThis": "이 패키지 비활성화",
   "Exclude": "비활성화",
   "Unsubscribe": "구독 취소 필요",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "'{1}'(을)를 비활성화 하는 것이 좋습니다.",
+    "Plural": "다음 패키지를 비활성화 하는 것이 좋습니다."
   },
   "Action_Switch": {
     "One": "'{1}' 로 바꾸어야 합니다.",
