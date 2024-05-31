@@ -241,8 +241,8 @@
   "Vanilla Maps": "바닐라 지도",
   "ResetScrollOnPackageClick": "패키지의 페이지를 열 때 스크롤 재설정하기",
   "ResetScrollOnPackageClick_Tip": "패키지의 페이지를 열 때 해당 패키지가 목록의 맨 위에 표시되도록 스크롤 위치를 재설정합니다.",
-  "Workshop Save-games": "창작마당 저장 게임",
-  "Workshop Maps": "창작마당 지도",
+  "Workshop Save-games": "창작마당 세이브 파일",
+  "Workshop Maps": "창작마당 맵",
   "AnyAuthor": "모든 제작자",
   "ItemsCount": {
     "One": "항목 {0}개",
