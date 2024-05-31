@@ -530,7 +530,7 @@
     "Plural": "마지막 세션 이후 {0}개의 새 패키지가 설치되었습니다"
   },
   "NoActivePlayset": "No Active Playset",
-  "RecentlyUpdated": "Recently Updated",
+  "RecentlyUpdated": "최근에 업데이트된",
   "Manage": "Manage",
   "Version": "버전",
   "UpdateTime": "업데이트 날짜",
@@ -584,5 +584,5 @@
   "AssetsEnabled": "Assets Enabled",
   "PackagesIncludedDisabled": "Packages Included & Disabled",
   "OutOf": "{0}/{1}",
-  "RecentlyUpdatedItem": "Recently Updated {0}"
+  "RecentlyUpdatedItem": "최근에 업데이트된 {0}"
 }
