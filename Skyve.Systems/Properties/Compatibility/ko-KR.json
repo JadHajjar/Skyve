@@ -157,7 +157,7 @@
     "One": "You should add the following package to your playset.",
     "Plural": "You should add the following packages to your playset."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "다음 지침을 따르십시오.",
   "Action_SelectOne": {
     "One": "'{0}' 와 '{1}' 중 하나만 선택해야 합니다.",
     "Plural": "다음 패키지들과 '{0}' 중 하나만 선택해야 합니다."
@@ -169,7 +169,7 @@
   },
   "Action_ExcludeThis": "You should disable '{0}'.",
   "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "Exclude": "비활성화",
   "Unsubscribe": "구독 취소 필요",
   "Action_ExcludeOther": {
     "One": "You should disable '{1}'.",
@@ -254,7 +254,7 @@
   },
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "필요한 항목",
-  "RequiredItem": "Required Item",
+  "RequiredItem": "필요한 항목",
   "ApplyAllActions": "Apply all recommended actions",
   "SnoozeAll": "Snooze all issues",
   "SnoozeAllFiltered": "Snooze all filtered issues",
