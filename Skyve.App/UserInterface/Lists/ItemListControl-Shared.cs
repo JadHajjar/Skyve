@@ -1,4 +1,6 @@
-﻿using Skyve.Compatibility.Domain.Enums;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Domain;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -9,7 +11,7 @@ namespace Skyve.App.UserInterface.Lists;
 
 public partial class ItemListControl
 {
-	private List<(string text, int width)?> headers;
+	private List<(string text, int width)?> headers = [];
 
 	private int DrawScore(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo, int xdiff)
 	{
@@ -95,6 +97,39 @@ public partial class ItemListControl
 		}
 
 		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
+	}
+
+	private void DrawAuthorImage(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IUser author, Rectangle rectangle, Color color)
+	{
+		var image = _workshopService.GetUser(author).GetThumbnail();
+
+		if (image != null)
+		{
+			e.Graphics.DrawRoundImage(image, rectangle.Pad((int)(1.5 * UI.FontScale)));
+
+			if (e.HoverState.HasFlag(HoverState.Hovered))
+			{
+				using var pen = new Pen(color, 1.5f);
+
+				e.Graphics.DrawEllipse(pen, rectangle.Pad((int)(1.5 * UI.FontScale)));
+			}
+		}
+		else
+		{
+			using var authorIcon = IconManager.GetIcon("Author", rectangle.Height);
+
+			e.Graphics.DrawImage(authorIcon.Color(color, color.A), rectangle.CenterR(authorIcon.Size));
+		}
+
+		if (_userService.IsUserVerified(author))
+		{
+			var checkRect = rectangle.Align(new Size(rectangle.Height / 3, rectangle.Height / 3), ContentAlignment.BottomRight);
+
+			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
+
+			using var img = IconManager.GetIcon("Check", checkRect.Height);
+			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
+		}
 	}
 
 #if CS2
@@ -346,12 +381,12 @@ public partial class ItemListControl
 		}
 	}
 
-	private Rectangle DrawCell(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, Columns column, string text, DynamicIcon? dIcon, Color? backColor = null, Font? font = null, bool active = true, Padding padding = default)
+	private Rectangle DrawCell(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, Columns column, string text, DynamicIcon? dIcon, Color? backColor = null, Font? font = null, bool active = true, Padding padding = default, Color? textColor = null)
 	{
 		var cell = _columnSizes[column];
 		var rect = new Rectangle(cell.X, e.ClipRectangle.Y, cell.Width, e.ClipRectangle.Height).Pad(0, -Padding.Top, 0, -Padding.Bottom);
 
-		var textColor = backColor?.GetTextColor() ?? e.BackColor.GetTextColor();
+		textColor ??= backColor?.GetTextColor() ?? e.BackColor.GetTextColor();
 
 		if (active && rect.Contains(CursorLocation))
 		{
@@ -360,14 +395,14 @@ public partial class ItemListControl
 
 		if (dIcon != null)
 		{
-			using var icon = dIcon.Small.Color(textColor);
+			using var icon = dIcon.Small.Color(textColor.Value);
 
 			e.Graphics.DrawImage(icon, rect.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
 
 			rect = rect.Pad(icon.Width + Padding.Left, 0, 0, 0);
 		}
 
-		using (var brush = new SolidBrush(textColor))
+		using (var brush = new SolidBrush(textColor.Value))
 		using (font ??= UI.Font(7.5F))
 		{
 			var textRect = rect.Pad(padding + Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft, e.Graphics);
@@ -488,7 +523,7 @@ public partial class ItemListControl
 
 		if (author?.Name is not null and not "")
 		{
-			e.Rects.AuthorRect = DrawCell(e, Columns.Author, author.Name, "Author", font: UI.Font(8.25F));
+			e.Rects.AuthorRect = DrawCell(e, Columns.Author, author.Name, "Author", font: UI.Font(8.25F), textColor: UserIcon.GetUserColor(author.Id?.ToString() ?? string.Empty, true));
 		}
 		else if (localIdentity is not null)
 		{

@@ -40,7 +40,6 @@ partial class PC_UserPage
 			this.smartFlowPanel1 = new SlickControls.SmartFlowPanel();
 			this.roundedGroupPanel1 = new SlickControls.RoundedGroupPanel();
 			this.label1 = new System.Windows.Forms.Label();
-			this.P_Info = new Skyve.App.UserInterface.Content.UserDescriptionControl();
 			this.P_Content.SuspendLayout();
 			this.smartFlowPanel1.SuspendLayout();
 			this.roundedGroupPanel1.SuspendLayout();
@@ -140,24 +139,16 @@ partial class PC_UserPage
 			// 
 			// P_Info
 			// 
-			this.P_Info.Dock = System.Windows.Forms.DockStyle.Right;
-			this.P_Info.Location = new System.Drawing.Point(700, 30);
-			this.P_Info.Margin = new System.Windows.Forms.Padding(0);
-			this.P_Info.Name = "P_Info";
-			this.P_Info.Size = new System.Drawing.Size(216, 487);
-			this.P_Info.TabIndex = 3;
 			// 
 			// PC_UserPage
 			// 
 			this.Controls.Add(this.P_Content);
-			this.Controls.Add(this.P_Info);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Name = "PC_UserPage";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(916, 517);
 			this.Text = "Back";
 			this.Controls.SetChildIndex(this.base_Text, 0);
-			this.Controls.SetChildIndex(this.P_Info, 0);
 			this.Controls.SetChildIndex(this.P_Content, 0);
 			this.P_Content.ResumeLayout(false);
 			this.smartFlowPanel1.ResumeLayout(false);
@@ -170,7 +161,6 @@ partial class PC_UserPage
 
 	#endregion
 	private System.Windows.Forms.Panel P_Content;
-	private UserDescriptionControl P_Info;
 	private SlickControls.SlickTabControl tabControl;
 	public SlickControls.SlickTabControl.Tab T_Packages;
 	private SlickControls.SlickTabControl.Tab T_Profiles;

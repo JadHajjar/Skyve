@@ -6,41 +6,73 @@ namespace Skyve.App.UserInterface.Content;
 
 public class UserIcon : SlickImageControl
 {
-	[Category("Appearance"), DefaultValue(true)]
-	public bool HalfColor { get; set; } = true;
+	private readonly IWorkshopService _workshopService;
+
+	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+	public IUser? User { get; set; }
+	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+	public bool Collection { get; set; }
+
+	public UserIcon()
+	{
+		ServiceCenter.Get(out _workshopService);
+	}
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
-		if (HalfColor)
-		{
-			e.Graphics.Clear(FormDesign.Design.BackColor);
+		e.Graphics.SetUp(BackColor);
 
-			e.Graphics.FillRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), new Rectangle(0, 0, Width, Height / 2));
-		}
-		else
-		{
-			e.Graphics.Clear(BackColor);
-		}
+		var author = _workshopService?.GetUser(User);
+		var thumbnail = author?.GetThumbnail();
+
+		Loading = thumbnail is null && author?.AvatarUrl is not null and not "" && ConnectionHandler.IsConnected;
 
 		if (Loading)
 		{
+			using var accentBrush = new SolidBrush(FormDesign.Design.AccentBackColor);
+			e.Graphics.FillRoundedRectangle(accentBrush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));
+
 			DrawLoader(e.Graphics, ClientRectangle.CenterR(UI.Scale(new Size(32, 32), UI.UIScale)));
 			return;
 		}
 
 		e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
-		if (Image == null)
+		if (thumbnail != null)
 		{
-			using var image = IconManager.GetIcon("User", ClientRectangle.Height).Color(FormDesign.Design.AccentColor.GetTextColor());
-
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.AccentColor), ClientRectangle.Pad(1), (int)(10 * UI.FontScale));
-
-			e.Graphics.DrawImage(image, ClientRectangle.CenterR(image.Size));
+			e.Graphics.DrawRoundedImage(thumbnail, ClientRectangle.Pad(1), (int)(5 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			return;
 		}
-		else
+
+		using var brush = new SolidBrush(GetUserColor(User?.Id?.ToString() ?? string.Empty));
+		using var generic = IconManager.GetIcon("User", Height).Color(brush.Color.GetTextColor());
+
+		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));
+		e.Graphics.DrawImage(generic, ClientRectangle.CenterR(generic.Size));
+	}
+
+	public static Color GetUserColor(string username, bool textColor = false)
+	{
+		if (!ServiceCenter.Get<ISettings>().UserSettings.ColoredAuthorNames)
+			return FormDesign.Design.ForeColor;
+
+		// Compute a hash from the input string
+		var hash = username.GetHashCode();
+
+		// Use the hash to generate RGB values
+		// We'll use the lower 24 bits of the hash for the color
+		var r = (hash & 0xFF0000) >> 16;
+		var g = (hash & 0x00FF00) >> 8;
+		var b = hash & 0x0000FF;
+
+		// Create the color from the RGB values
+		var color = Color.FromArgb(r, g, b);
+
+		if (!textColor)
 		{
-			e.Graphics.DrawRoundedImage(Image, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			return color;
 		}
+
+		return color.MergeColor(FormDesign.Design.ForeColor, 75).Tint(Lum: FormDesign.Design.IsDarkTheme ? 4 : -2.5f, Sat: 3);
 	}
 }

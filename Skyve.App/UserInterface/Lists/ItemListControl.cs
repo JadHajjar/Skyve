@@ -44,6 +44,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
 	private readonly ITagsService _tagsService;
+	private readonly IWorkshopService _workshopService;
 	private readonly SkyvePage _page;
 
 	private enum Columns
@@ -65,7 +66,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	protected ItemListControl(SkyvePage page, IPackageUtil? customPackageUtil = null)
 	{
 		_page = page;
-		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _compatibilityManager, out _modLogicManager, out _userService, out _playsetManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
+		ServiceCenter.Get(out _settings, out _tagsService, out _notifier, out _workshopService, out _compatibilityManager, out _modLogicManager, out _userService, out _playsetManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
 
 		if (customPackageUtil is not null)
 		{

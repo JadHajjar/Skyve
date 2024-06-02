@@ -1,4 +1,6 @@
-﻿using Skyve.Compatibility.Domain.Enums;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Domain;
 
 using System.Drawing;
 using System.IO;
@@ -149,13 +151,12 @@ public partial class ItemListControl
 			{
 				var isHovered = rect.Contains(CursorLocation);
 
-				using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
-				using var icon = IconManager.GetIcon("Author", itemHeight + Padding.Top).Color(isHovered ? activeBrush.Color : brush.Color);
-				using var font = UI.Font(8.25F).FitToWidth(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
-				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline).FitToWidth(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+				using var authorBrush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 255 : 200, UserIcon.GetUserColor(author.Id?.ToString() ?? string.Empty, true)));
+				using var font = UI.Font(8.25F).FitToWidth(author.Name, rect.Pad(itemHeight + Padding.Top + Padding.Left, 0, 0, 0), e.Graphics);
+				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline).FitToWidth(author.Name, rect.Pad(itemHeight + Padding.Top + Padding.Left, 0, 0, 0), e.Graphics);
 
-				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(author.Name, isHovered ? fontUnderline : font, isHovered ? activeBrush : brush, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), stringFormat);
+				DrawAuthorImage(e, author, rect.Align(new Size(itemHeight + Padding.Top, itemHeight + Padding.Top), ContentAlignment.MiddleLeft), authorBrush.Color);
+				e.Graphics.DrawString(author.Name, isHovered ? fontUnderline : font, authorBrush, rect.Pad(itemHeight + Padding.Top + Padding.Left, 0, 0, 0), stringFormat);
 
 				e.Rects.AuthorRect = rect;
 			}

@@ -1,5 +1,6 @@
 ﻿using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Generic;
+using Skyve.App.UserInterface.Lists;
 
 namespace Skyve.App.UserInterface.Panels;
 
@@ -52,7 +53,7 @@ partial class PC_HelpAndLogs
 			this.TLP_Main = new SlickControls.SmartTablePanel();
 			this.TLP_Errors = new SlickControls.RoundedTableLayoutPanel();
 			this.CB_OnlyShowErrors = new SlickControls.SlickCheckbox();
-			this.logTraceControl = new Skyve.App.UserInterface.Generic.LogTraceControl();
+			this.logTraceControl = new Skyve.App.UserInterface.Lists.LogTraceControl();
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.I_Sort = new SlickControls.SlickIcon();
 			this.P_Troubleshoot = new SlickControls.RoundedGroupTableLayoutPanel();

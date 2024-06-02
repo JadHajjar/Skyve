@@ -43,7 +43,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is StatusType.DependencyMod && _compatibilityManager.GetPackagesThatReference(info, true).Any())
+		if (type is StatusType.DependencyMod && (!_packageAvailabilityService.IsPackageEnabled(info.Id, false) || _compatibilityManager.GetPackagesThatReference(info, true).Any()))
 		{
 			return;
 		}

@@ -1,4 +1,5 @@
-﻿using Skyve.Compatibility.Domain.Enums;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.Compatibility.Domain.Enums;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -166,15 +167,14 @@ public partial class ItemListControl
 				var rect = new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, 0);
 				var size = e.Graphics.Measure(author.Name, authorFont).ToSize();
 
-				using var authorIcon = IconManager.GetIcon("Author", size.Height);
-
-				e.Rects.AuthorRect = rect.Align(size + new Size(authorIcon.Width, 0), ContentAlignment.TopLeft);
+				e.Rects.AuthorRect = rect.Align(size + new Size(size.Height, 0), ContentAlignment.TopLeft);
 				e.DrawableItem.CachedHeight = e.Rects.AuthorRect.Bottom + (GridPadding.Top / 3);
 
 				var isHovered = e.Rects.AuthorRect.Contains(CursorLocation);
-				using var brush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : Color.FromArgb(200, ForeColor));
+				using var brush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 255 : 200, UserIcon.GetUserColor(author.Id?.ToString() ?? string.Empty, true)));
 
-				e.Graphics.DrawImage(authorIcon.Color(brush.Color, brush.Color.A), e.Rects.AuthorRect.Align(authorIcon.Size, ContentAlignment.MiddleLeft));
+				DrawAuthorImage(e, author, e.Rects.AuthorRect.Align(new(size.Height, size.Height), ContentAlignment.MiddleLeft), brush.Color);
+
 				e.Graphics.DrawString(author.Name, isHovered ? authorFontUnderline : authorFont, brush, e.Rects.AuthorRect, stringFormat);
 			}
 		}

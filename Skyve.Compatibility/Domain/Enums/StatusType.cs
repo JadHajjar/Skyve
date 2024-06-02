@@ -20,7 +20,7 @@ public enum StatusType
 	[CRN(NotificationType.Info, [StatusAction.NoAction, StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	TestVersion = 5,
 
-	[CRN(NotificationType.None, [StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.None, [StatusAction.NoAction, StatusAction.ExcludeThis, StatusAction.UnsubscribeThis], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	DependencyMod = 6,
 
 	[CRN(NotificationType.Warning, false)]

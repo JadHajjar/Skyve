@@ -273,6 +273,10 @@
     "One": "{1} subscriber",
     "Plural": "{1} subscribers"
   },
+  "FollowersCount": {
+    "One": "{1} follower",
+    "Plural": "{1} followers"
+  },
   "SearchWorkshop": "Search the workshop instead...",
   "DiscoverWorkshop": "Look for mods on the workshop...",
   "SearchWorkshopBrowser": "Search the workshop in your browser...",
@@ -589,5 +593,8 @@
   "MassSubscribeWarningTitle": "Mass subscription warning",
   "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
   "DropImportFile": "Release to import the {0} from this report",
-  "OutOfDateItem": "Out of date {0}"
+  "OutOfDateItem": "Out of date {0}",
+  "Bio": "Bio",
+  "ColoredAuthorNames": "Color authors & users' name and avatar",
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
 }

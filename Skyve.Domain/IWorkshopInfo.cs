@@ -27,4 +27,6 @@ public interface IWorkshopInfo : IPackageIdentity, IThumbnailObject
 	IEnumerable<IThumbnailObject> Images { get; }
 	IEnumerable<ILink> Links { get; }
 	bool IsPartialInfo { get; }
+
+	bool HasComments();
 }

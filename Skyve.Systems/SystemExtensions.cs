@@ -156,23 +156,6 @@ public static class SystemExtensions
 		return ImageService.GetImage(thumbnailUrl, true).Result;
 	}
 
-	public static Bitmap? GetUserAvatar(this IPackageIdentity? package)
-	{
-		return (package?.GetWorkshopInfo()?.Author).GetUserAvatar();
-	}
-
-	public static Bitmap? GetUserAvatar(this IWorkshopInfo? workshopInfo)
-	{
-		return (workshopInfo?.Author).GetUserAvatar();
-	}
-
-	public static Bitmap? GetUserAvatar(this IUser? user)
-	{
-		var url = user?.AvatarUrl;
-
-		return url is null or "" ? null : ImageService.GetImage(url, true).Result;
-	}
-
 	public static Bitmap? GetThumbnail(this IDlcInfo? dlc)
 	{
 		return dlc?.ThumbnailUrl is null or "" ? null : ImageService.GetImage(dlc.ThumbnailUrl, true, $"{dlc.Id}.png", false).Result;

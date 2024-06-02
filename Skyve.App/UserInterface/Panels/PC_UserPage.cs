@@ -1,4 +1,5 @@
-﻿using Skyve.App.UserInterface.Lists;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.App.UserInterface.Lists;
 
 using System.Drawing;
 using System.Threading;
@@ -14,6 +15,7 @@ public partial class PC_UserPage : PanelContent
 	private readonly IWorkshopService _workshopService;
 
 	private readonly List<IPackageIdentity> userItems = [];
+	private UserDescriptionControl P_Info;
 
 	public IUser User { get; }
 
@@ -24,10 +26,9 @@ public partial class PC_UserPage : PanelContent
 		InitializeComponent();
 
 		User = user;
-
-		var author = _workshopService.GetUser(user);
-
-		P_Info.SetUser(User, this);
+		Text = user.Name;
+		P_Info = new UserDescriptionControl(user) { Dock = System.Windows.Forms.DockStyle.Right };
+		Controls.Add(P_Info);
 
 		T_Profiles.LinkedControl = L_Profiles = new(true)
 		{

@@ -33,7 +33,8 @@ public interface IUserSettings
 	Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; }
 #if CS2
 	bool FilterIncludedByDefault { get; set; }
-	bool SyncBeforeLaunching { get; }
+	bool SyncBeforeLaunching { get; set; }
+	bool ColoredAuthorNames { get; set; }
 #endif
 
 	void Save();

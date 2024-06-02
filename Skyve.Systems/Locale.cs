@@ -223,6 +223,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation BETA => _instance.GetText("BETA");
 
 	/// <summary>
+	/// Bio
+	/// </summary>
+	public static Translation Bio => _instance.GetText("Bio");
+
+	/// <summary>
 	/// Bulk Actions
 	/// </summary>
 	public static Translation BulkActions => _instance.GetText("BulkActions");
@@ -267,6 +272,16 @@ public class Locale : LocaleHelper, ILocale
 	/// <para>Plural: Code Mods</para>
 	/// </summary>
 	public static Translation CodeMod => _instance.GetText("CodeMod");
+
+	/// <summary>
+	/// Color authors &amp; users' name and avatar
+	/// </summary>
+	public static Translation ColoredAuthorNames => _instance.GetText("ColoredAuthorNames");
+
+	/// <summary>
+	/// Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users.
+	/// </summary>
+	public static Translation ColoredAuthorNamesTip => _instance.GetText("ColoredAuthorNames_Tip");
 
 	/// <summary>
 	/// Compatibility Center
@@ -891,6 +906,12 @@ public class Locale : LocaleHelper, ILocale
 	/// Folder Settings
 	/// </summary>
 	public static Translation FolderSettings => _instance.GetText("FolderSettings");
+
+	/// <summary>
+	/// <para>{1} follower</para>
+	/// <para>Plural: {1} followers</para>
+	/// </summary>
+	public static Translation FollowersCount => _instance.GetText("FollowersCount");
 
 	/// <summary>
 	/// Free

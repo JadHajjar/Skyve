@@ -2,6 +2,8 @@
 
 using Skyve.Compatibility.Domain.Enums;
 
+using SlickControls;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -256,7 +258,7 @@ public partial class ItemListControl
 		{
 			var padding = GridView ? GridPadding : Padding;
 			var authorRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, 0, 0);
-			var authorImg = author.GetUserAvatar();
+			var authorImg = _workshopService.GetUser(author)?.GetThumbnail();
 
 			if (GridView)
 			{
@@ -273,10 +275,11 @@ public partial class ItemListControl
 
 				authorRect = e.Graphics.DrawLabel(author.Name, authorIcon, default, authorRect, ContentAlignment.TopLeft, mousePosition: CursorLocation);
 			}
-			//else
-			//{
-			//	authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorImg, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
-			//}
+			else
+			{
+				using var smallImage = new Bitmap(authorImg, authorImg.Size.GetProportionalDownscaledSize(IconManager.GetSmallScale()));
+				authorRect = e.Graphics.DrawLabel(author.Name, smallImage, default, authorRect, ContentAlignment.TopLeft, mousePosition: CursorLocation, recolor: false);
+			}
 
 			if (_userService.IsUserVerified(author))
 			{

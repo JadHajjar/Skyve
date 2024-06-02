@@ -15,7 +15,6 @@ public partial class PC_HelpAndLogs : PanelContent
 	private readonly ISettings _settings;
 	private readonly ILocationService _locationManager;
 	private readonly System.Timers.Timer timer;
-	private bool orderAsc;
 	private List<ILogTrace>? selectedFileLogs;
 	private List<ILogTrace>? defaultLogs;
 
@@ -24,6 +23,8 @@ public partial class PC_HelpAndLogs : PanelContent
 		ServiceCenter.Get(out _logger, out _logUtil, out _settings, out _locationManager);
 
 		InitializeComponent();
+
+		logTraceControl.CanDrawItem += LogTraceControl_CanDrawItem;
 
 		if (CrossIO.CurrentPlatform is Platform.Windows)
 		{
@@ -124,7 +125,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 			defaultLogs = logs;
 
-			SetTrace(defaultLogs);
+			logTraceControl.SetItems(defaultLogs);
 
 			return true;
 		}
@@ -212,7 +213,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 					if (entry is null)
 					{
-						SetTrace(defaultLogs ?? []);
+						logTraceControl.SetItems(defaultLogs ?? []);
 						return null;
 					}
 
@@ -222,7 +223,7 @@ public partial class PC_HelpAndLogs : PanelContent
 				}
 				catch
 				{
-					SetTrace(defaultLogs ?? []);
+					logTraceControl.SetItems(defaultLogs ?? []);
 					return null;
 				}
 			}
@@ -243,7 +244,7 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 #endif
 
-			SetTrace(logs ?? defaultLogs ?? []);
+			logTraceControl.SetItems(logs ?? defaultLogs ?? []);
 
 			return logs;
 		});
@@ -253,52 +254,31 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void CB_OnlyShowErrors_CheckChanged(object sender, EventArgs e)
 	{
-		Task.Run(() =>
-		{
-			if (CrossIO.FileExists(DD_LogFile.SelectedFile))
-			{
-				SetTrace(selectedFileLogs ?? []);
-			}
-			else
-			{
-				SetTrace(defaultLogs ?? []);
-			}
-		});
+		Task.Run(logTraceControl.FilterChanged);
 	}
 
 	private void I_Sort_Click(object sender, EventArgs e)
 	{
-		orderAsc = !orderAsc;
+		logTraceControl.OrderAsc = !logTraceControl.OrderAsc;
 
-		I_Sort.ImageName = orderAsc ? "SortAsc" : "SortDesc";
+		I_Sort.ImageName = logTraceControl.OrderAsc ? "SortAsc" : "SortDesc";
 
-		CB_OnlyShowErrors_CheckChanged(sender, e);
+		logTraceControl.SortingChanged();
 	}
 
-	private void SetTrace(List<ILogTrace> logs)
+	private void LogTraceControl_CanDrawItem(object sender, CanDrawItemEventArgs<ILogTrace> e)
 	{
-		IEnumerable<ILogTrace> logEnumerable = logs;
-
-		if (CB_OnlyShowErrors.Checked)
+		if (CB_OnlyShowErrors.Checked && e.Item.Type is "INFO" or "DEBUG")
 		{
-			logEnumerable = logEnumerable.Where(x => x.Type is not "INFO" and not "DEBUG");
+			e.DoNotDraw = true;
+			return;
 		}
 
-		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
+		if (!string.IsNullOrWhiteSpace(TB_Search.Text) && !SearchLog(e.Item))
 		{
-			logEnumerable = logEnumerable.Where(SearchLog);
+			e.DoNotDraw = true;
+			return;
 		}
-
-		if (orderAsc)
-		{
-			logEnumerable = logEnumerable.OrderBy(x => x.Timestamp);
-		}
-		else
-		{
-			logEnumerable = logEnumerable.OrderByDescending(x => x.Timestamp);
-		}
-
-		logTraceControl.SetItems(logEnumerable);
 	}
 
 	private bool SearchLog(ILogTrace trace)

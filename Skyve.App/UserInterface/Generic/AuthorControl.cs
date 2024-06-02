@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.App.UserInterface.Content;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
@@ -15,8 +17,16 @@ public class AuthorControl : SlickControl
 		Cursor = Cursors.Hand;
 
 		ServiceCenter.Get(out _userService, out _notifier, out _workshopService);
+	}
 
-		_notifier.WorkshopUsersInfoLoaded += Notifier_WorkshopUsersInfoLoaded;
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		if (Live)
+		{
+			_notifier.WorkshopUsersInfoLoaded += Notifier_WorkshopUsersInfoLoaded;
+		}
 	}
 
 	private void Notifier_WorkshopUsersInfoLoaded()
@@ -43,18 +53,27 @@ public class AuthorControl : SlickControl
 
 		var user = _workshopService.GetUser(Author);
 		var thumbnail = (user ?? Author).GetThumbnail();
+		var authorColor = UserIcon.GetUserColor(Author.Id?.ToString() ?? string.Empty, true);
 		var args = new ButtonDrawArgs
 		{
 			Text = user?.Name ?? Author.Name,
 			Icon = "Author",
 			AvailableSize = GetAvailableSize(),
-			HoverState = HoverState,
+			HoverState = base.HoverState & ~HoverState.Focused,
 			BorderRadius = (int)(5 * UI.FontScale),
-			Padding = UI.Scale(new Padding(thumbnail is not null ? 7 : 4, 4, 4, 4), UI.FontScale),
+			Padding = UI.Scale(new Padding(thumbnail is not null ? 7 : 4, 3, 4, 3), UI.FontScale),
 			Cursor = PointToClient(Cursor.Position),
+			ButtonType = ButtonType.Hidden,
+			ActiveColor = authorColor.MergeColor(base.BackColor, 75),
+			ForeColor = authorColor.MergeColor(base.ForeColor, 75)
 		};
 
 		SlickButton.Draw(e.Graphics, args);
+
+		if (!HoverState.HasFlag(HoverState.Pressed))
+		{
+			DrawFocus(e.Graphics, args.Rectangle, args.BorderRadius.Value, authorColor);
+		}
 
 		if (thumbnail is not null)
 		{

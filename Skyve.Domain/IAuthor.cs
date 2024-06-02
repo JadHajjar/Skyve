@@ -4,7 +4,7 @@ namespace Skyve.Domain;
 
 public interface IAuthor : IUser
 {
-	public List<ILink> ExternalLinks { get; set; }
-	public string Bio { get; set; }
-	public int FollowerCount { get; set; }
+	public List<ILink> Links { get; }
+	public string Bio { get; }
+	public int FollowerCount { get; }
 }
