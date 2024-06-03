@@ -101,7 +101,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		}
 		else
 		{
-			Padding = UI.Scale(new Padding(5, 2, 5, 2), UI.FontScale);
+			Padding = UI.Scale(new Padding(5, 2, 5, 2));
 		}
 	}
 
@@ -270,7 +270,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 		if (dragActive)
 		{
-			var border = (int)(16 * UI.FontScale);
+			var border = UI.Scale(16);
 			var rectangle = ClientRectangle.Pad(border);
 			using var font = UI.Font(11.75F, FontStyle.Italic);
 			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
@@ -288,7 +288,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<IPlayset, Rectangles> e)
 	{
 		var isActive = e.Item.Equals(_playsetManager.CurrentPlayset);
-		var borderRadius = (int)(5 * UI.FontScale);
+		var borderRadius = UI.Scale(5);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 		var customPlayset = e.Item.GetCustomPlayset();
 		var banner = customPlayset.GetThumbnail();
@@ -366,7 +366,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		{
 			Text = $"{Locale.ContainCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower())} • {e.Item.ModSize.SizeString(0)}",
 			BackColor = backColor.Tint(Lum: backColor.IsDark() ? 3 : -3),
-			Padding = UI.Scale(new Padding(4, 3, 4, 3), UI.FontScale),
+			Padding = UI.Scale(new Padding(4, 3, 4, 3)),
 			BorderRadius = borderRadius,
 			Font = smallTextFont
 		});
@@ -408,7 +408,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			using var brush = new SolidBrush(Color.FromArgb(100, FormDesign.Design.BackColor));
 			e.Graphics.FillRoundedRectangle(brush, e.ClipRectangle.InvertPad(GridPadding), borderRadius);
 
-			DrawLoader(e.Graphics, e.ClipRectangle.CenterR(UI.Scale(new Size(24, 24), UI.FontScale)));
+			DrawLoader(e.Graphics, e.ClipRectangle.CenterR(UI.Scale(new Size(24, 24))));
 		}
 
 		if (!isActive)
@@ -420,7 +420,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 				Text = Locale.ActivatePlayset.ToString().ToUpper(),
 				Icon = "Check",
 				Rectangle = e.Rects.ActivateButton,
-				Padding = UI.Scale(new Padding(8, 4, 8, 4), UI.FontScale),
+				Padding = UI.Scale(new Padding(8, 4, 8, 4)),
 				HoverState = e.HoverState,
 				Cursor = CursorLocation,
 				BackgroundColor = backColor.MergeColor(onBannerColor, 65),
@@ -431,7 +431,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 	private void DrawFavoriteButton(ItemPaintEventArgs<IPlayset, Rectangles> e, ICustomPlayset customPlayset, Color onBannerColor, SolidBrush onBannerBrush)
 	{
-		var borderRadius = (int)(5 * UI.FontScale);
+		var borderRadius = UI.Scale(5);
 		var favViewRect = ReadOnly ? e.Rects.ViewContents : e.Rects.Favorite;
 
 		if (e.HoverState.HasFlag(HoverState.Hovered) && favViewRect.Contains(CursorLocation))
@@ -459,7 +459,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<IPlayset, Rectangles> e)
 	{
-		var borderRadius = (int)(5 * UI.FontScale);
+		var borderRadius = UI.Scale(5);
 		var customPlayset = e.Item.GetCustomPlayset();
 		var banner = customPlayset.GetThumbnail();
 
@@ -526,7 +526,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			var rect = SlickButton.AlignAndDraw(e.Graphics, e.Rects.Content, ContentAlignment.MiddleRight, new ButtonDrawArgs
 			{
 				Text = Locale.ActivePlayset.One.ToUpper(),
-				Padding = UI.Scale(new Padding(2), UI.FontScale),
+				Padding = UI.Scale(new Padding(2)),
 				Font = font,
 				BorderRadius = Padding.Left,
 				ColorStyle = ColorStyle.Green,
@@ -541,7 +541,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			{
 				Text = Locale.ActivatePlayset.ToString().ToUpper(),
 				Icon = "Check",
-				Padding = UI.Scale(new Padding(4), UI.FontScale),
+				Padding = UI.Scale(new Padding(4)),
 				Cursor = CursorLocation,
 				HoverState = e.HoverState,
 				BackgroundColor = e.BackColor,
@@ -577,9 +577,9 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 		if (GridView)
 		{
-			var size = UI.Scale(new Size(32, 32), UI.FontScale);
+			var size = UI.Scale(new Size(32, 32));
 
-			rects.ActivateButton = new Rectangle(rectangle.X, rectangle.Bottom - (int)(24 * UI.FontScale), rectangle.Width, (int)(24 * UI.FontScale));
+			rects.ActivateButton = new Rectangle(rectangle.X, rectangle.Bottom - UI.Scale(24), rectangle.Width, UI.Scale(24));
 			rects.Thumbnail = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Width - GridPadding.Top);
 			rects.Content = new Rectangle(rectangle.X, rectangle.Y + rects.Thumbnail.Height + GridPadding.Top, rectangle.Width, rectangle.Height - rects.Thumbnail.Height - GridPadding.Top);
 
@@ -591,7 +591,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			rects.EditThumbnail = rects.Thumbnail.Pad(GridPadding).Align(size, ContentAlignment.TopRight);
 			rects.EditSettings = rects.Thumbnail.Pad(GridPadding).Align(size, ContentAlignment.BottomRight);
 
-			rects.DotsRect = rects.Text.Align(UI.Scale(new Size(24, 24), UI.FontScale), ContentAlignment.TopRight);
+			rects.DotsRect = rects.Text.Align(UI.Scale(new Size(24, 24)), ContentAlignment.TopRight);
 			rects.Text.Width -= rects.DotsRect.Width;
 		}
 		else

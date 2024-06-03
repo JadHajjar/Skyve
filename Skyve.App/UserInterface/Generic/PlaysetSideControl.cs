@@ -35,7 +35,7 @@ public class PlaysetSideControl : SlickControl
 
 	protected override void UIChanged()
 	{
-		Padding = UI.Scale(new Padding(10), UI.FontScale);
+		Padding = UI.Scale(new Padding(10));
 		_textBox.Font = UI.Font(12.5F);
 	}
 
@@ -129,9 +129,9 @@ public class PlaysetSideControl : SlickControl
 		Height = Width * 300 / 190;
 
 		var rectangle = ClientRectangle.Pad(Padding);
-		var size = UI.Scale(new Size(32, 32), UI.FontScale);
+		var size = UI.Scale(new Size(32, 32));
 
-		ActivateButton = new Rectangle(rectangle.X, rectangle.Bottom - (int)(36 * UI.FontScale), rectangle.Width, (int)(36 * UI.FontScale));
+		ActivateButton = new Rectangle(rectangle.X, rectangle.Bottom - UI.Scale(36), rectangle.Width, UI.Scale(36));
 		var Thumbnail = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Width - Padding.Top).Pad(-Padding.Top/2);
 
 		Favorite = Thumbnail.Pad(Padding).Pad(0, 0, 0, 0).Align(size, ContentAlignment.TopLeft);
@@ -142,7 +142,7 @@ public class PlaysetSideControl : SlickControl
 		var EditThumbnail = Thumbnail.Pad(Padding).Align(size, ContentAlignment.TopRight);
 		var EditSettings = Thumbnail.Pad(Padding).Align(size, ContentAlignment.BottomRight);
 
-		DotsRect = TextRect.Align(UI.Scale(new Size(32, 32), UI.FontScale), ContentAlignment.TopRight);
+		DotsRect = TextRect.Align(UI.Scale(new Size(32, 32)), ContentAlignment.TopRight);
 		TextRect.Width -= DotsRect.Width;
 
 		var isActive = Playset.Equals(_playsetManager.CurrentPlayset);
@@ -274,7 +274,7 @@ public class PlaysetSideControl : SlickControl
 				Icon = "Check",
 				Font = smallTextFont,
 				Rectangle = ActivateButton.Pad(0, Padding.Top, 0, 0),
-				Padding = UI.Scale(new Padding(8, 4, 8, 4), UI.FontScale),
+				Padding = UI.Scale(new Padding(8, 4, 8, 4)),
 				HoverState = HoverState & ~HoverState.Focused,
 				Cursor = CursorLocation,
 				BackgroundColor = backColor.MergeColor(onBannerColor, 65),

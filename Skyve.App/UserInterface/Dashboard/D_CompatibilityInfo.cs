@@ -305,7 +305,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 			e.Graphics.DrawLine(pen, e.ClipRectangle.X + Padding.Left, preferredHeight, e.ClipRectangle.Right - (Padding.Left * 2), preferredHeight);
 		}
 
-		preferredHeight += (int)(4 * UI.FontScale) + Margin.Top;
+		preferredHeight += UI.Scale(4) + Margin.Top;
 
 		rect.Y = preferredHeight;
 		rect.Height = e.ClipRectangle.ClipTo(mainSectionHeight).Bottom - preferredHeight;

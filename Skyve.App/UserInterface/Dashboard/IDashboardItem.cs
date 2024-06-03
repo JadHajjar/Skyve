@@ -73,8 +73,8 @@ public abstract class IDashboardItem : SlickImageControl
 
 	protected override void UIChanged()
 	{
-		Padding = UI.Scale(new Padding(10, 10, 4, 4), UI.FontScale);
-		BorderRadius = (int)(8 * UI.FontScale);
+		Padding = UI.Scale(new Padding(10, 10, 4, 4));
+		BorderRadius = UI.Scale(8);
 	}
 
 	protected void OnResizeRequested()
@@ -188,7 +188,7 @@ public abstract class IDashboardItem : SlickImageControl
 			using var pe = new PaintEventArgs(e.Graphics, ClientRectangle.Pad(Padding));
 			var height = pe.ClipRectangle.Y;
 
-			e.Graphics.FillRoundedRectangleWithShadow(pe.ClipRectangle.Pad((int)(2 * UI.FontScale)), BorderRadius, Padding.Right, FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 8 : -8), Color.FromArgb(20, FormDesign.Design.AccentColor), addOutline: true);
+			e.Graphics.FillRoundedRectangleWithShadow(pe.ClipRectangle.Pad(UI.Scale(2)), BorderRadius, Padding.Right, FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 8 : -8), Color.FromArgb(20, FormDesign.Design.AccentColor), addOutline: true);
 
 			DrawHeader(pe, true, ref height);
 
@@ -286,9 +286,9 @@ public abstract class IDashboardItem : SlickImageControl
 		}
 
 		var rectangle = e.ClipRectangle;
-		using var icon = dynamicIcon?.Get((int)(20 * UI.FontScale));
+		using var icon = dynamicIcon?.Get(UI.Scale(20));
 		var iconRectangle = new Rectangle(rectangle.Right - BorderRadius - icon?.Width ?? 0, rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
-		var textRect = new Rectangle(rectangle.X + BorderRadius, rectangle.Y, rectangle.Right - (2 * BorderRadius) - BorderRadius - iconRectangle.Width, (int)(26 * UI.FontScale));
+		var textRect = new Rectangle(rectangle.X + BorderRadius, rectangle.Y, rectangle.Right - (2 * BorderRadius) - BorderRadius - iconRectangle.Width, UI.Scale(26));
 		using var font = UI.Font(8.5F, FontStyle.Bold).FitTo(text, textRect, e.Graphics);
 		var titleHeight = (int)e.Graphics.Measure(text, font, rectangle.Right - (2 * BorderRadius) - iconRectangle.Right).Height + BorderRadius / 2;
 		textRect.Height = titleHeight + (BorderRadius * 3 / 2);
@@ -303,7 +303,7 @@ public abstract class IDashboardItem : SlickImageControl
 			if (applyDrawing)
 			{
 				using var brush = new SolidBrush(Color.FromArgb(150, FormDesign.Design.ForeColor));
-				e.Graphics.DrawString(subText, smallFont, brush, textRect.Pad((int)(2 * UI.FontScale), 0, 0, 0));
+				e.Graphics.DrawString(subText, smallFont, brush, textRect.Pad(UI.Scale(2), 0, 0, 0));
 			}
 
 			titleHeight += textHeight - (BorderRadius / 2);
@@ -338,7 +338,7 @@ public abstract class IDashboardItem : SlickImageControl
 
 	protected void DrawLoadingSection(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, string text, string? subText = null)
 	{
-		var iconSize = (int)(18 * UI.FontScale);
+		var iconSize = UI.Scale(18);
 		var iconRectangle = new Rectangle(e.ClipRectangle.Right - BorderRadius - iconSize, preferredHeight, iconSize, 0);
 
 		DrawSection(e, applyDrawing, ref preferredHeight, text, null, subText);
@@ -429,9 +429,9 @@ public abstract class IDashboardItem : SlickImageControl
 
 	private void DrawButtonInternal(PaintEventArgs e, bool applyDrawing, ref int preferredHeight, bool square, ButtonDrawArgs buttonArgs, ExtensionClass.action? clickAction)
 	{
-		buttonArgs.Padding = UI.Scale(new Padding(6, 3, 6, 3), UI.FontScale);
-		buttonArgs.BorderRadius = (int)(4 * UI.FontScale);
-		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, square ? buttonArgs.Rectangle.Height : buttonArgs.Size.Height.If(0, (int)(26 * UI.FontScale)));
+		buttonArgs.Padding = UI.Scale(new Padding(6, 3, 6, 3));
+		buttonArgs.BorderRadius = UI.Scale(4);
+		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, square ? buttonArgs.Rectangle.Height : buttonArgs.Size.Height.If(0, UI.Scale(26)));
 		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
 
 		if (buttonArgs.BackColor.A != 0 && buttonArgs.HoverState.HasFlag(HoverState.Hovered))

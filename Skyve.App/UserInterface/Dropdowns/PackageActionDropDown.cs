@@ -12,7 +12,7 @@ public class PackageActionDropDown : SlickSelectionDropDown<StatusAction>
 	{
 		base.UIChanged();
 
-		Width = (int)(175 * UI.FontScale);
+		Width = UI.Scale(175);
 	}
 
 	protected override bool SearchMatch(string searchText, StatusAction item)

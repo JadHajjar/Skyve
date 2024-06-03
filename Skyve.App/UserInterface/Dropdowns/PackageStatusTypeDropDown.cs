@@ -29,7 +29,7 @@ public class PackageStatusTypeDropDown<T> : SlickSelectionDropDown<T> where T : 
 	{
 		base.UIChanged();
 
-		Width = (int)(175 * UI.FontScale);
+		Width = UI.Scale(175);
 	}
 
 	protected override bool SearchMatch(string searchText, T item)

@@ -126,19 +126,19 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
 			= I_SortOrder.Padding
-			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
+			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5));
 
 		B_Filters.Size = B_Filters.GetAutoSize(true);
 
 		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin = OT_ModAsset.Margin
 			= DR_SubscribeTime.Margin = DR_ServerTime.Margin
-			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
+			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2));
 
-		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
-		DD_Sorting.Width = (int)(175 * UI.FontScale);
-		TB_Search.Width = (int)(250 * UI.FontScale);
+		I_ClearFilters.Size = UI.Scale(new Size(16, 16));
+		DD_Sorting.Width = UI.Scale(175);
+		TB_Search.Width = UI.Scale(250);
 
-		var size = (int)(30 * UI.FontScale) - 6;
+		var size = UI.Scale(30) - 6;
 
 		TB_Search.MaximumSize = I_Refresh.MaximumSize = B_Filters.MaximumSize = I_SortOrder.MaximumSize = DD_Sorting.MaximumSize = new Size(9999, size);
 		TB_Search.MinimumSize = I_Refresh.MinimumSize = B_Filters.MinimumSize = I_SortOrder.MinimumSize = DD_Sorting.MinimumSize = new Size(0, size);

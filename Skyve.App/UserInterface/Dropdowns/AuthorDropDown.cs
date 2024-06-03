@@ -65,14 +65,14 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 
 		if (icon != null)
 		{
-			e.Graphics.DrawRoundedImage(icon, avatarRect, (int)(4 * UI.FontScale));
+			e.Graphics.DrawRoundedImage(icon, avatarRect, UI.Scale(4));
 		}
 
 		if (_userService.IsUserVerified(item))
 		{
 			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
-			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
+			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-UI.Scale(2)));
 
 			using var img = IconManager.GetIcon("Check", checkRect.Height);
 			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
@@ -84,7 +84,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 		if (!HideUsage && _counts.ContainsKey(item!))
 		{
 			using var brush2 = new SolidBrush(Color.FromArgb(200, foreColor));
-			e.Graphics.DrawString(Locale.ItemsCount.FormatPlural(_counts[item!]), Font, brush2, rectangle.Pad(0, 0, (int)(5 * UI.FontScale), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center });
+			e.Graphics.DrawString(Locale.ItemsCount.FormatPlural(_counts[item!]), Font, brush2, rectangle.Pad(0, 0, UI.Scale(5), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center });
 
 			rectangle.Width -= (int)e.Graphics.Measure(Locale.ItemsCount.FormatPlural(_counts[item!]), Font).Width;
 		}
@@ -121,7 +121,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 			var icon = _imageManager.GetImage(item?.AvatarUrl, true).Result;
 			if (icon is not null)
 			{
-				e.Graphics.DrawRoundedImage(icon, iconRect, (int)(4 * UI.FontScale));
+				e.Graphics.DrawRoundedImage(icon, iconRect, UI.Scale(4));
 			}
 
 			iconRect.X += iconRect.Width * 9 / 10;

@@ -195,7 +195,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 		OnViewChanged();
 
-		StartHeight = _compactList ? (int)(24 * UI.FontScale) : 0;
+		StartHeight = _compactList ? UI.Scale(24) : 0;
 	}
 
 	protected override void CanDrawItemInternal(CanDrawItemEventArgs<IPackageIdentity, Rectangles> args)

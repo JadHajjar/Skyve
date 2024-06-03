@@ -18,7 +18,7 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
 
     protected override void UIChanged()
     {
-        Padding = UI.Scale(new Padding(7, 10, 7, 5), UI.FontScale);
+        Padding = UI.Scale(new Padding(7, 10, 7, 5));
 
         base.UIChanged();
     }
@@ -75,7 +75,7 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
     {
         var rects = new Rectangles(item)
         {
-            ButtonRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(UI.Scale(new Size(20, 20), UI.FontScale), ContentAlignment.TopRight)
+            ButtonRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(UI.Scale(new Size(20, 20)), ContentAlignment.TopRight)
         };
         rects.LinkRect = new Rectangle(rects.ButtonRect.X - rects.ButtonRect.Width - Padding.Right, rects.ButtonRect.Y, rects.ButtonRect.Width, rects.ButtonRect.Height);
         rects.FolderRect = new Rectangle(rects.LinkRect.X - rects.LinkRect.Width - Padding.Right, rects.LinkRect.Y, rects.LinkRect.Width, rects.LinkRect.Height);
@@ -132,7 +132,7 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
             e.Graphics.DrawString($")", titleFont, textBrush, rect2);
             rect2.X += (int)e.Graphics.Measure($")", titleFont).Width;
 
-            y += (int)(20 * UI.FontScale);
+            y += UI.Scale(20);
 
             SlickButton.Draw(e.Graphics, new ButtonDrawArgs
             {
@@ -153,7 +153,7 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
             });
         }
 
-        e.Graphics.DrawString(e.Item.Title, font, titleBrush, e.ClipRectangle.Pad(0, (int)(20 * UI.FontScale), Padding.Right, 0));
+        e.Graphics.DrawString(e.Item.Title, font, titleBrush, e.ClipRectangle.Pad(0, UI.Scale(20), Padding.Right, 0));
 
         y += Padding.Top / 2 + (int)e.Graphics.Measure(e.Item.Title, font, e.ClipRectangle.Width - Padding.Right).Height;
 
@@ -161,7 +161,7 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
         {
             e.Graphics.DrawString(item, smallFont, textBrush, new Rectangle(Padding.Left + Padding.Horizontal, y, e.ClipRectangle.Width - 2 * Padding.Horizontal, Height));
 
-            y += (int)e.Graphics.Measure(item, smallFont, e.ClipRectangle.Width - 2 * Padding.Horizontal).Height + (int)(3 * UI.FontScale);
+            y += (int)e.Graphics.Measure(item, smallFont, e.ClipRectangle.Width - 2 * Padding.Horizontal).Height + UI.Scale(3);
         }
 
         e.DrawableItem.CachedHeight = y - e.ClipRectangle.Top + Padding.Vertical;

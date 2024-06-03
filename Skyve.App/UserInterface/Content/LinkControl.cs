@@ -21,9 +21,9 @@ public class LinkControl : SlickImageControl
 	{
 		base.UIChanged();
 
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
-		Margin = UI.Scale(new Padding(3, 3, 6, 6), UI.FontScale);
-		Size = UI.Scale(new Size(55, 55), UI.FontScale);
+		Padding = UI.Scale(new Padding(5));
+		Margin = UI.Scale(new Padding(3, 3, 6, 6));
+		Size = UI.Scale(new Size(55, 55));
 	}
 
 	protected override void OnMouseClick(MouseEventArgs e)

@@ -60,8 +60,8 @@ public class AuthorControl : SlickControl
 			Icon = "Author",
 			AvailableSize = GetAvailableSize(),
 			HoverState = base.HoverState & ~HoverState.Focused,
-			BorderRadius = (int)(5 * UI.FontScale),
-			Padding = UI.Scale(new Padding(thumbnail is not null ? 7 : 4, 3, 4, 3), UI.FontScale),
+			BorderRadius = UI.Scale(5),
+			Padding = UI.Scale(new Padding(thumbnail is not null ? 7 : 4, 3, 4, 3)),
 			Cursor = PointToClient(Cursor.Position),
 			ButtonType = ButtonType.Hidden,
 			ActiveColor = authorColor.MergeColor(base.BackColor, 75),
@@ -84,7 +84,7 @@ public class AuthorControl : SlickControl
 		{
 			var checkRect = args.IconRectangle.Align(new Size(args.IconRectangle.Height / 3, args.IconRectangle.Height / 3), ContentAlignment.BottomRight);
 
-			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
+			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-UI.Scale(2)));
 
 			using var img = IconManager.GetIcon("Check", checkRect.Height);
 			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));

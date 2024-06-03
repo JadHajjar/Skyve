@@ -9,8 +9,8 @@ internal class D_Placeholder : SlickControl
 	{
 		e.Graphics.SetUp(BackColor);
 
-		var padding = (int)(12 * UI.FontScale);
-		var border = (int)(10 * UI.FontScale);
+		var padding = UI.Scale(12);
+		var border = UI.Scale(10);
 		var color = FormDesign.Design.ForeColor;
 
 		using var brush = new SolidBrush(Color.FromArgb(25, color));

@@ -30,7 +30,7 @@ public class UserIcon : SlickImageControl
 		if (Loading)
 		{
 			using var accentBrush = new SolidBrush(FormDesign.Design.AccentBackColor);
-			e.Graphics.FillRoundedRectangle(accentBrush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(accentBrush, ClientRectangle.Pad(1), UI.Scale(5));
 
 			DrawLoader(e.Graphics, ClientRectangle.CenterR(UI.Scale(new Size(32, 32), UI.UIScale)));
 			return;
@@ -40,14 +40,14 @@ public class UserIcon : SlickImageControl
 
 		if (thumbnail != null)
 		{
-			e.Graphics.DrawRoundedImage(thumbnail, ClientRectangle.Pad(1), (int)(5 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			e.Graphics.DrawRoundedImage(thumbnail, ClientRectangle.Pad(1), UI.Scale(5), FormDesign.Design.AccentBackColor);
 			return;
 		}
 
 		using var brush = new SolidBrush(GetUserColor(User?.Id?.ToString() ?? string.Empty));
 		using var generic = IconManager.GetIcon("User", Height * 8 / 10).Color(brush.Color.GetTextColor());
 
-		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));
+		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), UI.Scale(5));
 		e.Graphics.DrawImage(generic, ClientRectangle.CenterR(generic.Size));
 	}
 

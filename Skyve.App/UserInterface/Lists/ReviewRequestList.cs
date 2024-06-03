@@ -37,8 +37,8 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 	{
 		base.UIChanged();
 
-		GridPadding = UI.Scale(new Padding(5), UI.FontScale);
-		Padding = UI.Scale(new Padding(10), UI.FontScale);
+		GridPadding = UI.Scale(new Padding(5));
+		Padding = UI.Scale(new Padding(10));
 		Font = UI.Font(8.25F, FontStyle.Bold);
 	}
 
@@ -129,7 +129,7 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		using var fadedBrush = new SolidBrush(Color.FromArgb(200, FormDesign.Design.ForeColor));
 		e.Graphics.DrawString(e.Item.PackageNote, textFont, fadedBrush, noteRect);
 
-		e.Rects.ViewRectangle = new Rectangle(e.ClipRectangle.X, noteRect.Bottom + Padding.Vertical, e.ClipRectangle.Width, (int)(28 * UI.FontScale));
+		e.Rects.ViewRectangle = new Rectangle(e.ClipRectangle.X, noteRect.Bottom + Padding.Vertical, e.ClipRectangle.Width, UI.Scale(28));
 
 		using var buttonFont = UI.Font(9.5F);
 		SlickButton.Draw(e.Graphics, new ButtonDrawArgs

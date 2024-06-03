@@ -45,10 +45,10 @@ public partial class EditTagsForm : BaseForm
 	{
 		base.UIChanged();
 
-		TB_NewTag.Margin = UI.Scale(new Padding(7), UI.FontScale);
-		L_MultipleWarning.Margin = UI.Scale(new Padding(4), UI.FontScale);
+		TB_NewTag.Margin = UI.Scale(new Padding(7));
+		L_MultipleWarning.Margin = UI.Scale(new Padding(4));
 		L_MultipleWarning.Font = UI.Font(7.5F);
-		B_Apply.Margin = UI.Scale(new Padding(0, 0, 10, 10), UI.FontScale);
+		B_Apply.Margin = UI.Scale(new Padding(0, 0, 10, 10));
 	}
 
 	private void B_Apply_Click(object sender, EventArgs e)

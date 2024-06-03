@@ -79,9 +79,9 @@ public partial class PC_DLCs : PanelContent
 		base.UIChanged();
 
 		B_ExInclude.Size = UI.Scale(new Size(375, 26), UI.UIScale);
-		TB_Search.Margin = L_Duplicates.Margin = L_Counts.Margin = B_ExInclude.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		TB_Search.Margin = L_Duplicates.Margin = L_Counts.Margin = B_ExInclude.Margin = UI.Scale(new Padding(5));
 		L_Duplicates.Font = L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
-		TB_Search.Width = (int)(250 * UI.FontScale);
+		TB_Search.Width = UI.Scale(250);
 	}
 
 	public override bool KeyPressed(ref Message msg, Keys keyData)

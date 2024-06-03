@@ -26,7 +26,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 	{
 		base.UIChanged();
 
-		Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
+		Padding = UI.Scale(new Padding(3, 2, 3, 2));
 		Font = UI.Font(7F, FontStyle.Bold);
 	}
 
@@ -71,19 +71,19 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 			using var generic = IconManager.GetIcon(isUpToDate ? "Ok" : "Paradox", isUpToDate ? (imageRect.Height * 3 / 4) : imageRect.Height).Color(e.BackColor);
 			using var backBrush = new SolidBrush(isUpToDate ? FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.IconColor, 35) : FormDesign.Design.IconColor);
 
-			e.Graphics.FillRoundedRectangle(backBrush, imageRect, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(backBrush, imageRect, UI.Scale(5));
 			e.Graphics.DrawImage(generic, imageRect.CenterR(generic.Size));
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(thumbnail, imageRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
+			e.Graphics.DrawRoundedImage(thumbnail, imageRect, UI.Scale(5), FormDesign.Design.BackColor);
 
 			if (isUpToDate && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var greenBrush = new SolidBrush(Color.FromArgb(150, FormDesign.Design.GreenColor));
 				using var icon = IconManager.GetIcon("Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor.GetTextColor());
 
-				e.Graphics.FillRoundedRectangle(greenBrush, imageRect, (int)(5 * UI.FontScale));
+				e.Graphics.FillRoundedRectangle(greenBrush, imageRect, UI.Scale(5));
 				e.Graphics.DrawImage(icon, imageRect.CenterR(icon.Size));
 			}
 		}

@@ -36,7 +36,7 @@ public class MiniPackageControl : SlickControl
 	{
 		Height = (int)((Large ? 32 : 24) * UI.FontScale);
 
-		Padding = UI.Scale(new Padding(4), UI.FontScale);
+		Padding = UI.Scale(new Padding(4));
 	}
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -157,7 +157,7 @@ public class MiniPackageControl : SlickControl
 			using var generic = IconManager.GetIcon(IsDlc ? "Dlc" : "Package", imageRect.Height).Color(BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			e.Graphics.FillRoundedRectangle(brush, imageRect, (int)(4 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, imageRect, UI.Scale(4));
 			e.Graphics.DrawImage(generic, imageRect.CenterR(generic.Size));
 		}
 

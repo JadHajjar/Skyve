@@ -22,7 +22,7 @@ internal class ItemCountControl : Control
 		using var font = UI.Font(7.5F, FontStyle.Bold);
 		using var brush = new SolidBrush(FormDesign.Design.InfoColor);
 
-		var padding = UI.Scale(new Padding(5), UI.FontScale);
+		var padding = UI.Scale(new Padding(5));
 		var leftWidth = (int)e.Graphics.Measure(LeftText, font).Width;
 		var rightWidth = (int)e.Graphics.Measure(RightText, font).Width;
 

@@ -32,7 +32,7 @@ public class TagsDropDown : SlickMultiSelectionDropDown<ITag>
 		{
 			var text2 = Locale.ItemsCount.FormatPlural(_tagsService.GetTagUsage(item));
 			using var brush2 = new SolidBrush(Color.FromArgb(200, foreColor));
-			e.Graphics.DrawString(text2, Font, brush2, rectangle.Pad(0, 0, (int)(5 * UI.FontScale), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center });
+			e.Graphics.DrawString(text2, Font, brush2, rectangle.Pad(0, 0, UI.Scale(5), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center });
 
 			rectangle.Width -= (int)e.Graphics.Measure(text2, Font).Width;
 		}

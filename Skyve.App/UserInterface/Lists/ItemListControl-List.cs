@@ -222,7 +222,7 @@ public partial class ItemListControl
 
 			if (_settings.UserSettings.AdvancedIncludeEnable && item.GetPackage()?.IsCodeMod == true)
 			{
-				rects.EnabledRect = rects.IncludedRect = rectangle.Pad(Padding).Align(new Size((int)(includedSize * UI.FontScale), CompactList ? (int)(22 * UI.FontScale) : (rects.IconRect.Height / 2)), ContentAlignment.MiddleLeft);
+				rects.EnabledRect = rects.IncludedRect = rectangle.Pad(Padding).Align(new Size((int)(includedSize * UI.FontScale), CompactList ? UI.Scale(22) : (rects.IconRect.Height / 2)), ContentAlignment.MiddleLeft);
 
 				if (CompactList)
 				{
@@ -236,7 +236,7 @@ public partial class ItemListControl
 			}
 			else
 			{
-				rects.IncludedRect = rectangle.Pad(Padding).Align(UI.Scale(new Size(includedSize, CompactList ? 22 : includedSize), UI.FontScale), ContentAlignment.MiddleLeft);
+				rects.IncludedRect = rectangle.Pad(Padding).Align(UI.Scale(new Size(includedSize, CompactList ? 22 : includedSize)), ContentAlignment.MiddleLeft);
 			}
 
 			if (CompactList)
@@ -248,7 +248,7 @@ public partial class ItemListControl
 				rects.IconRect.X += rects.IncludedRect.Right + Padding.Horizontal;
 
 				using var font = UI.Font(9F, FontStyle.Bold);
-				rects.TextRect = rectangle.Pad(rects.IconRect.Right + Padding.Left, 0, IsPackagePage ? 0 : (int)(200 * UI.FontScale), rectangle.Height).AlignToFontSize(font, ContentAlignment.TopLeft);
+				rects.TextRect = rectangle.Pad(rects.IconRect.Right + Padding.Left, 0, IsPackagePage ? 0 : UI.Scale(200), rectangle.Height).AlignToFontSize(font, ContentAlignment.TopLeft);
 			}
 
 			rects.CenterRect = rects.TextRect.Pad(-Padding.Horizontal, 0, 0, 0);

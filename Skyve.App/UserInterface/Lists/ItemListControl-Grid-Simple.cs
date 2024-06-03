@@ -50,7 +50,7 @@ public partial class ItemListControl
 			{
 				using var pen = new Pen(outerColor, (float)(1.5 * UI.FontScale));
 
-				e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
+				e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), UI.Scale(5));
 			}
 
 			if (e.DrawableItem.Tag is not null)
@@ -79,7 +79,7 @@ public partial class ItemListControl
 			var notificationType = compatibilityReport?.GetNotification();
 			outerColor = default;
 
-			var height = (int)(20 * UI.FontScale);
+			var height = UI.Scale(20);
 			using var baseFont = UI.Font(9F, FontStyle.Bold);
 
 			if (GetStatusDescriptors(e.Item, out var text, out var icon, out var color))
@@ -94,7 +94,7 @@ public partial class ItemListControl
 				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text, rect.Pad(image.Width * 2, GridPadding.Top, image.Width * 2, GridPadding.Bottom), e.Graphics);
 				using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
-				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false, notificationType <= NotificationType.Info, notificationType <= NotificationType.Info);
+				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), UI.Scale(5), false, false, notificationType <= NotificationType.Info, notificationType <= NotificationType.Info);
 
 				e.Graphics.DrawString(text, font, textBrush, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), format);
 
@@ -123,7 +123,7 @@ public partial class ItemListControl
 				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text2, rect.Pad(image.Width * 2, GridPadding.Top, image.Width * 2, GridPadding.Bottom), e.Graphics);
 				using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
-				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), (int)(5 * UI.FontScale), false, false);
+				e.Graphics.FillRoundedRectangle(brush, rect.Pad(-GridPadding.Left + (int)(1.5 * UI.FontScale)), UI.Scale(5), false, false);
 
 				e.Graphics.DrawString(text2, font, textBrush, rect.Pad(image.Width * 2, 0, image.Width * 2, 0), format);
 
@@ -230,10 +230,10 @@ public partial class ItemListControl
 			var rects = new Rectangles(item)
 			{
 				IconRect = rectangle.Align(new Size(rectangle.Width, rectangle.Width), ContentAlignment.TopCenter),
-				IncludedRect = new Rectangle(new Point(rectangle.X, rectangle.Y + rectangle.Width + GridPadding.Top), UI.Scale(new Size(32, 32), UI.FontScale))
+				IncludedRect = new Rectangle(new Point(rectangle.X, rectangle.Y + rectangle.Width + GridPadding.Top), UI.Scale(new Size(32, 32)))
 			};
 
-			rects.DotsRect = new Rectangle(rectangle.X, rects.IncludedRect.Y, rectangle.Width, rects.IncludedRect.Height).Align(UI.Scale(new Size(16, 24), UI.FontScale), ContentAlignment.MiddleRight);
+			rects.DotsRect = new Rectangle(rectangle.X, rects.IncludedRect.Y, rectangle.Width, rects.IncludedRect.Height).Align(UI.Scale(new Size(16, 24)), ContentAlignment.MiddleRight);
 
 			using var titleFont = UI.Font(CompactList ? 8.25F : 10.5F, FontStyle.Bold);
 			rects.TextRect = new Rectangle(rectangle.X + rects.IncludedRect.Width + GridPadding.Left, rectangle.Y + rectangle.Width + GridPadding.Top, rectangle.Width - rects.IncludedRect.Width - GridPadding.Horizontal - rects.DotsRect.Width, 0).AlignToFontSize(titleFont, ContentAlignment.TopLeft);

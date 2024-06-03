@@ -58,12 +58,12 @@ public partial class CarouselControl : SlickControl
 
 	protected override void UIChanged()
 	{
-		Padding = UI.Scale(new Padding(3, 10, 3, 10), UI.FontScale);
-		roundedPanel.Padding = UI.Scale(new Padding(5), UI.FontScale);
-		slickScroll.Padding = UI.Scale(new Padding(0, 5, 0, 0), UI.FontScale);
+		Padding = UI.Scale(new Padding(3, 10, 3, 10));
+		roundedPanel.Padding = UI.Scale(new Padding(5));
+		slickScroll.Padding = UI.Scale(new Padding(0, 5, 0, 0));
 
 		var rectangle = new Rectangle(Padding.Left, Padding.Top, Width - Padding.Horizontal, (Width - Padding.Horizontal) * 9 / 16);
-		var bottomSize = (int)(64 * UI.FontScale);
+		var bottomSize = UI.Scale(64);
 
 		MainThumb.Size = new Size(Width - Padding.Horizontal, Math.Min((Width - Padding.Horizontal) * 9 / 16, Height - Padding.Vertical - bottomSize));
 		P_Thumbs.Height = bottomSize;
@@ -164,7 +164,7 @@ public partial class CarouselControl : SlickControl
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(image, imageRect = GetRectangle(rectangle, image!.Size), (int)(10 * UI.FontScale));
+			e.Graphics.DrawRoundedImage(image, imageRect = GetRectangle(rectangle, image!.Size), UI.Scale(10));
 		}
 
 		if (thumbnails.Count <= 1 || !MainThumb.HoverState.HasFlag(HoverState.Hovered))
@@ -179,7 +179,7 @@ public partial class CarouselControl : SlickControl
 			return;
 		}
 
-		var gap = (int)(64 * UI.FontScale);
+		var gap = UI.Scale(64);
 
 		var rect1 = new Rectangle(0, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
 		var rect2 = new Rectangle(MainThumb.Width - (gap * 2), imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
@@ -215,7 +215,7 @@ public partial class CarouselControl : SlickControl
 		}
 		else if (e.Button == MouseButtons.Left)
 		{
-			var gap = (int)(64 * UI.FontScale);
+			var gap = UI.Scale(64);
 
 			var rect1 = new Rectangle(0, 0, gap * 2, MainThumb.Height).CenterR(gap, gap);
 			var rect2 = new Rectangle(MainThumb.Width - (gap * 2), 0, gap * 2, MainThumb.Height).CenterR(gap, gap);

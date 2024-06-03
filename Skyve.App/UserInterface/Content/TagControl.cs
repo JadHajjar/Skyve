@@ -16,8 +16,8 @@ public class TagControl : SlickButton
 
 	protected override void UIChanged()
 	{
-		Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
-		Margin = UI.Scale(new Padding(3), UI.FontScale);
+		Padding = UI.Scale(new Padding(3, 2, 3, 2));
+		Margin = UI.Scale(new Padding(3));
 
 		base.UIChanged();
 	}
@@ -63,7 +63,7 @@ public class TagControl : SlickButton
 
 		PrepareLayout(graphics, args);
 
-		return args.Rectangle.Size + (TagInfo is null ? new Size((int)(20 * UI.FontScale), 0) : default);
+		return args.Rectangle.Size + (TagInfo is null ? new Size(UI.Scale(20), 0) : default);
 	}
 
 	protected override void OnPaint(PaintEventArgs e)

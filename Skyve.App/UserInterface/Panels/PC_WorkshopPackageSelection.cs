@@ -75,20 +75,20 @@ public partial class PC_WorkshopPackageSelection : PC_WorkshopList
 
 	protected override void UIChanged()
 	{
-		base_P_Side.Width = (int)(200 * UI.FontScale);
-		base_TLP_Side.Padding = UI.Scale(new Padding(5), UI.FontScale);
-		base_P_Side.Padding = UI.Scale(new Padding(0, 5, 5, 5), UI.FontScale);
-		LC_Items.Padding = new Padding(0, (int)(30 * UI.FontScale), 0, 0);
-		CustomTitleBounds = new Point( (int)(200 * UI.FontScale), 0);
+		base_P_Side.Width = UI.Scale(200);
+		base_TLP_Side.Padding = UI.Scale(new Padding(5));
+		base_P_Side.Padding = UI.Scale(new Padding(0, 5, 5, 5));
+		LC_Items.Padding = new Padding(0, UI.Scale(30), 0, 0);
+		CustomTitleBounds = new Point( UI.Scale(200), 0);
 
 		base.UIChanged();
 
-		B_Confirm.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		B_Confirm.Margin = UI.Scale(new Padding(5));
 		B_Confirm.Font = UI.Font(9F);
 		L_Info.Font = UI.Font(8F, FontStyle.Italic);
 		L_SelectedPackages.Font = UI.Font(9F, FontStyle.Bold);
-		L_Info.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		L_SelectedPackages.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		L_Info.Margin = UI.Scale(new Padding(5));
+		L_SelectedPackages.Margin = UI.Scale(new Padding(5));
 	}
 
 	protected override void LocaleChanged()

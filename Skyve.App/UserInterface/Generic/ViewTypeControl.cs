@@ -35,12 +35,12 @@ internal class ViewTypeControl : SlickControl
 
 	protected override void UIChanged()
 	{
-		Margin = UI.Scale(new Padding(4, 4, 4, 5), UI.FontScale);
-		Padding = UI.Scale(new Padding(3), UI.FontScale);
+		Margin = UI.Scale(new Padding(4, 4, 4, 5));
+		Padding = UI.Scale(new Padding(3));
 
-		var itemHeight = (int)(28 * UI.FontScale);
+		var itemHeight = UI.Scale(28);
 
-		Size = new Size((WithCompactList ? itemHeight : 0) + (WithList ? itemHeight : 0) + (WithGrid ? itemHeight : 0), itemHeight - (int)(4 * UI.FontScale));
+		Size = new Size((WithCompactList ? itemHeight : 0) + (WithList ? itemHeight : 0) + (WithGrid ? itemHeight : 0), itemHeight - UI.Scale(4));
 
 		var rect = ClientRectangle.Align(new Size(itemHeight, Height), ContentAlignment.MiddleLeft);
 

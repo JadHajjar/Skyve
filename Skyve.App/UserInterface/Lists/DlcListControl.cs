@@ -121,7 +121,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 			using var pen = new Pen(outerColor, (float)(1.5 * UI.FontScale));
 
-			e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
+			e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), UI.Scale(5));
 		}
 		else if (!_dlcManager.IsAvailable(e.Item.Id))
 		{
@@ -139,7 +139,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 			using var generic = IconManager.GetIcon("Dlc", e.Rects.IconRect.Height).Color(BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
 			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
 		}
 		else
@@ -147,7 +147,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 			drawThumbnail(thumbnail);
 		}
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
 	private void DrawTitleAndTagsAndVersion(ItemPaintEventArgs<IDlcInfo, Rectangles> e, bool isPressed)
@@ -184,7 +184,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		using var brush = e.Rects.IncludedRect.Gradient(activeColor);
 
-		e.Graphics.FillRoundedRectangle(brush, e.Rects.IncludedRect, (int)(4 * UI.FontScale));
+		e.Graphics.FillRoundedRectangle(brush, e.Rects.IncludedRect, UI.Scale(4));
 
 		using var includedIcon = incl.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
 
@@ -200,7 +200,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		rects.TextRect = rectangle.Pad(rects.IconRect.Width + GridPadding.Left, 0, 0, rectangle.Height).AlignToFontSize(UI.Font(10.5F, FontStyle.Bold), ContentAlignment.TopLeft);
 
-		rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.TopRight);
+		rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28)), ContentAlignment.TopRight);
 
 		rects.TextRect.Width = rects.IncludedRect.X - rects.TextRect.X;
 

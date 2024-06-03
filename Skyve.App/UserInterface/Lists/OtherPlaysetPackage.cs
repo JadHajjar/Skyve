@@ -48,7 +48,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 		base.UIChanged();
 
-		Padding = UI.Scale(new Padding(3, 1, 3, 1), UI.FontScale);
+		Padding = UI.Scale(new Padding(3, 1, 3, 1));
 	}
 
 	protected override void CanDrawItemInternal(CanDrawItemEventArgs<IPlayset, Rectangles> args)
@@ -190,7 +190,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 			SlickButton.AlignAndDraw(e.Graphics, rect, ContentAlignment.MiddleLeft, new ButtonDrawArgs
 			{
 				Text = Locale.ActivePlayset.One.ToUpper(),
-				Padding = UI.Scale(new Padding(1), UI.FontScale),
+				Padding = UI.Scale(new Padding(1)),
 				Font = smallFont,
 				BorderRadius = Padding.Left,
 				ColorStyle = ColorStyle.Green,
@@ -225,7 +225,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		{
 			using var brush = new SolidBrush(customPlayset.Color ?? FormDesign.Design.AccentColor);
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail, UI.Scale(5));
 
 			using var icon = customPlayset.Usage.GetIcon().Get(e.Rects.Thumbnail.Width * 3 / 4).Color(onBannerColor);
 
@@ -233,7 +233,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(banner, e.Rects.Thumbnail, (int)(5 * UI.FontScale));
+			e.Graphics.DrawRoundedImage(banner, e.Rects.Thumbnail, UI.Scale(5));
 		}
 	}
 
@@ -241,7 +241,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 	{
 		var rects = new Rectangles(item)
 		{
-			IncludedRect = rectangle.Pad(Padding + Padding).Align(UI.Scale(new Size(24, 24), UI.FontScale), ContentAlignment.MiddleLeft),
+			IncludedRect = rectangle.Pad(Padding + Padding).Align(UI.Scale(new Size(24, 24)), ContentAlignment.MiddleLeft),
 			LoadRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
 		};
 
@@ -303,7 +303,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		}
 
 		using var brush = e.Rects.IncludedRect.Gradient(activeColor);
-		e.Graphics.FillRoundedRectangle(brush, e.Rects.IncludedRect, (int)(4 * UI.FontScale));
+		e.Graphics.FillRoundedRectangle(brush, e.Rects.IncludedRect, UI.Scale(4));
 
 		if (e.DrawableItem.Loading)
 		{
@@ -374,7 +374,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 			using var brush = inclEnableRect.Gradient(activeColor);
 
-			e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(4 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, inclEnableRect, UI.Scale(4));
 
 			using var includedIcon = incl.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
 			using var enabledIcon = enabl?.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);

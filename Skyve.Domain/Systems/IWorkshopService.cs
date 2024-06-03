@@ -35,6 +35,7 @@ public interface IWorkshopService
 	Task<List<IPlayset>> GetPlaysets(bool localOnly);
 	Task<bool> ToggleVote(IPackageIdentity packageIdentity);
 	Task<IModCommentsInfo?> GetComments(IPackageIdentity packageIdentity, int page = 1);
+	Task<IModComment?> PostNewComment(IPackageIdentity packageIdentity, string comment);
 	IAuthor? GetUser(IUser? user);
 	Task<IAuthor?> GetUserAsync(IUser? user);
 #endif

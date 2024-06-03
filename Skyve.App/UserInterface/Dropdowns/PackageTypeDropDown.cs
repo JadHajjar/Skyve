@@ -27,7 +27,7 @@ public class PackageTypeDropDown : SlickSelectionDropDown<PackageType>
 	{
 		base.UIChanged();
 
-		Width = (int)(200 * UI.FontScale);
+		Width = UI.Scale(200);
 	}
 
 	protected override bool SearchMatch(string searchText, PackageType item)

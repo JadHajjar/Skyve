@@ -55,19 +55,19 @@ public class MiniThumbControl : SlickControl
 
 		if (cachedImage is null && image is not null)
 		{
-			cachedImage = image = new Bitmap(image, GetRectangle(ClientRectangle.Pad((int)(5 * UI.FontScale)), image.Size).Size);
+			cachedImage = image = new Bitmap(image, GetRectangle(ClientRectangle.Pad(UI.Scale(5)), image.Size).Size);
 		}
 
 		if (Selected || HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(Selected ? 220 : 100, FormDesign.Design.ActiveColor));
 
-			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), UI.Scale(5));
 		}
 
 		if (image != null)
 		{
-			e.Graphics.DrawRoundedImage(image, ClientRectangle.CenterR(image.Size), (int)(5 * UI.FontScale));
+			e.Graphics.DrawRoundedImage(image, ClientRectangle.CenterR(image.Size), UI.Scale(5));
 		}
 		else
 		{
@@ -77,7 +77,7 @@ public class MiniThumbControl : SlickControl
 
 		if (Label is not null and not "" && !HoverState.HasFlag(HoverState.Hovered))
 		{
-			e.Graphics.DrawLabel(Label, null, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor), ClientRectangle.Pad((int)(5 * UI.FontScale)), ContentAlignment.BottomLeft);
+			e.Graphics.DrawLabel(Label, null, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor), ClientRectangle.Pad(UI.Scale(5)), ContentAlignment.BottomLeft);
 		}
 	}
 

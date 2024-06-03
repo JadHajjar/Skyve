@@ -76,9 +76,9 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		base.UIChanged();
 
-		I_Sort.Size = UI.Scale(new Size(24, 24), UI.FontScale);
-		I_Sort.Padding = UI.Scale(new Padding(3), UI.FontScale);
-		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
+		I_Sort.Size = UI.Scale(new Size(24, 24));
+		I_Sort.Padding = UI.Scale(new Padding(3));
+		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0));
 		TLP_LogFiles.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10, 10, 10, 0), UI.UIScale);
 		TLP_LogFiles.Padding = TLP_Errors.Padding = UI.Scale(new Padding(12), UI.UIScale);
 		DD_LogFile.Margin = UI.Scale(new Padding(12, 14, 12, 6), UI.UIScale);
@@ -86,9 +86,9 @@ public partial class PC_HelpAndLogs : PanelContent
 		TLP_Errors.Margin = UI.Scale(new Padding(10, 10, 5, 10), UI.UIScale);
 		L_Troubleshoot.Font = UI.Font(9F);
 		CB_OnlyShowErrors.Font = UI.Font(7.5F);
-		CB_OnlyShowErrors.Padding = TB_Search.Margin = B_OpenSkyveLog.Margin = B_OpenLog.Margin = UI.Scale(new Padding(3), UI.FontScale);
-		tableLayoutPanel1.Width = (int)(250 * UI.FontScale);
-		B_OpenSkyveLog.Height = B_OpenLog.Height = (int)(48 * UI.FontScale);
+		CB_OnlyShowErrors.Padding = TB_Search.Margin = B_OpenSkyveLog.Margin = B_OpenLog.Margin = UI.Scale(new Padding(3));
+		tableLayoutPanel1.Width = UI.Scale(250);
+		B_OpenSkyveLog.Height = B_OpenLog.Height = UI.Scale(48);
 
 		foreach (var button in this.GetControls<SlickButton>())
 		{
@@ -98,8 +98,8 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 		}
 
-		TLP_Main.RowStyles[0].Height = (int)(125 * UI.FontScale);
-		TB_Search.Width = (int)(150 * UI.FontScale);
+		TLP_Main.RowStyles[0].Height = UI.Scale(125);
+		TB_Search.Width = UI.Scale(150);
 		B_SaveZip.Margin = UI.Scale(new Padding(10, 7, 10, 10), UI.UIScale);
 		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
 		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
