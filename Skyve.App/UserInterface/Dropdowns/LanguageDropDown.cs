@@ -176,7 +176,7 @@ public class LanguageDropDown : SlickSelectionDropDown<string>
 
 		if (Live)
 		{
-			ItemHeight = 22;
+			ItemHeight = 32;
 		}
 	}
 

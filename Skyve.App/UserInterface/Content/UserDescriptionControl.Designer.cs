@@ -29,9 +29,9 @@ partial class UserDescriptionControl
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
 			this.TLP_Side = new System.Windows.Forms.TableLayoutPanel();
 			this.TLP_Bio = new SlickControls.RoundedTableLayoutPanel();
 			this.L_Bio = new System.Windows.Forms.Label();
@@ -80,7 +80,7 @@ partial class UserDescriptionControl
 			this.TLP_Side.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Side.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Side.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Side.Size = new System.Drawing.Size(390, 176);
+			this.TLP_Side.Size = new System.Drawing.Size(390, 167);
 			this.TLP_Side.TabIndex = 1;
 			// 
 			// TLP_Bio
@@ -98,16 +98,16 @@ partial class UserDescriptionControl
 			this.TLP_Bio.RowCount = 2;
 			this.TLP_Bio.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Bio.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Bio.Size = new System.Drawing.Size(390, 32);
+			this.TLP_Bio.Size = new System.Drawing.Size(390, 26);
 			this.TLP_Bio.TabIndex = 21;
 			this.TLP_Bio.Visible = false;
 			// 
 			// L_Bio
 			// 
 			this.L_Bio.AutoSize = true;
-			this.L_Bio.Location = new System.Drawing.Point(3, 16);
+			this.L_Bio.Location = new System.Drawing.Point(3, 13);
 			this.L_Bio.Name = "L_Bio";
-			this.L_Bio.Size = new System.Drawing.Size(44, 16);
+			this.L_Bio.Size = new System.Drawing.Size(35, 13);
 			this.L_Bio.TabIndex = 4;
 			this.L_Bio.Text = "label1";
 			// 
@@ -115,9 +115,9 @@ partial class UserDescriptionControl
 			// 
 			this.L_BioLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.L_BioLabel.AutoSize = true;
-			this.L_BioLabel.Location = new System.Drawing.Point(173, 0);
+			this.L_BioLabel.Location = new System.Drawing.Point(177, 0);
 			this.L_BioLabel.Name = "L_BioLabel";
-			this.L_BioLabel.Size = new System.Drawing.Size(44, 16);
+			this.L_BioLabel.Size = new System.Drawing.Size(35, 13);
 			this.L_BioLabel.TabIndex = 0;
 			this.L_BioLabel.Text = "label4";
 			// 
@@ -130,13 +130,13 @@ partial class UserDescriptionControl
 			this.TLP_Links.Controls.Add(this.L_Links, 0, 0);
 			this.TLP_Links.Controls.Add(this.FLP_Package_Links, 0, 1);
 			this.TLP_Links.Dock = System.Windows.Forms.DockStyle.Top;
-			this.TLP_Links.Location = new System.Drawing.Point(0, 154);
+			this.TLP_Links.Location = new System.Drawing.Point(0, 148);
 			this.TLP_Links.Margin = new System.Windows.Forms.Padding(0);
 			this.TLP_Links.Name = "TLP_Links";
 			this.TLP_Links.RowCount = 2;
 			this.TLP_Links.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Links.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Links.Size = new System.Drawing.Size(390, 22);
+			this.TLP_Links.Size = new System.Drawing.Size(390, 19);
 			this.TLP_Links.TabIndex = 20;
 			this.TLP_Links.Visible = false;
 			// 
@@ -144,19 +144,20 @@ partial class UserDescriptionControl
 			// 
 			this.L_Links.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.L_Links.AutoSize = true;
-			this.L_Links.Location = new System.Drawing.Point(173, 0);
+			this.L_Links.Location = new System.Drawing.Point(177, 0);
 			this.L_Links.Name = "L_Links";
-			this.L_Links.Size = new System.Drawing.Size(44, 16);
+			this.L_Links.Size = new System.Drawing.Size(35, 13);
 			this.L_Links.TabIndex = 0;
 			this.L_Links.Text = "label4";
 			// 
 			// FLP_Package_Links
 			// 
 			this.FLP_Package_Links.Dock = System.Windows.Forms.DockStyle.Top;
-			this.FLP_Package_Links.Location = new System.Drawing.Point(3, 19);
+			this.FLP_Package_Links.Location = new System.Drawing.Point(3, 16);
 			this.FLP_Package_Links.Name = "FLP_Package_Links";
 			this.FLP_Package_Links.Size = new System.Drawing.Size(384, 0);
 			this.FLP_Package_Links.TabIndex = 1;
+			this.FLP_Package_Links.SizeChanged += new System.EventHandler(this.FLP_Package_Links_SizeChanged);
 			// 
 			// TLP_TopInfo
 			// 
@@ -199,7 +200,7 @@ partial class UserDescriptionControl
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			this.tableLayoutPanel3.RowCount = 1;
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(270, 24);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(276, 24);
 			this.tableLayoutPanel3.TabIndex = 9;
 			// 
 			// I_Verified
@@ -209,8 +210,8 @@ partial class UserDescriptionControl
 			this.I_Verified.ColorStyle = Extensions.ColorStyle.Green;
 			this.I_Verified.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_Verified.Enabled = false;
-			dynamicIcon5.Name = "Ok";
-			this.I_Verified.ImageName = dynamicIcon5;
+			dynamicIcon1.Name = "Ok";
+			this.I_Verified.ImageName = dynamicIcon1;
 			this.I_Verified.Location = new System.Drawing.Point(3, 3);
 			this.I_Verified.Name = "I_Verified";
 			this.I_Verified.Selected = true;
@@ -222,9 +223,9 @@ partial class UserDescriptionControl
 			// 
 			this.L_Name.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_Name.AutoSize = true;
-			this.L_Name.Location = new System.Drawing.Point(32, 4);
+			this.L_Name.Location = new System.Drawing.Point(32, 5);
 			this.L_Name.Name = "L_Name";
-			this.L_Name.Size = new System.Drawing.Size(44, 16);
+			this.L_Name.Size = new System.Drawing.Size(35, 13);
 			this.L_Name.TabIndex = 3;
 			this.L_Name.Text = "label1";
 			// 
@@ -242,10 +243,10 @@ partial class UserDescriptionControl
 			// 
 			this.I_More.AutoSize = true;
 			this.I_More.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.I_More.Location = new System.Drawing.Point(360, 0);
+			this.I_More.Location = new System.Drawing.Point(366, 0);
 			this.I_More.Margin = new System.Windows.Forms.Padding(0);
 			this.I_More.Name = "I_More";
-			this.I_More.Size = new System.Drawing.Size(30, 30);
+			this.I_More.Size = new System.Drawing.Size(24, 24);
 			this.I_More.SpaceTriggersClick = true;
 			this.I_More.TabIndex = 2;
 			this.I_More.Click += new System.EventHandler(this.I_More_Click);
@@ -261,7 +262,7 @@ partial class UserDescriptionControl
 			this.tableLayoutPanel1.Controls.Add(this.I_Followers, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.L_Followers, 1, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(90, 30);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(90, 24);
 			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
@@ -275,8 +276,8 @@ partial class UserDescriptionControl
 			this.I_Followers.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.I_Followers.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_Followers.Enabled = false;
-			dynamicIcon4.Name = "People";
-			this.I_Followers.ImageName = dynamicIcon4;
+			dynamicIcon2.Name = "People";
+			this.I_Followers.ImageName = dynamicIcon2;
 			this.I_Followers.Location = new System.Drawing.Point(3, 3);
 			this.I_Followers.Name = "I_Followers";
 			this.I_Followers.Size = new System.Drawing.Size(23, 18);
@@ -287,9 +288,9 @@ partial class UserDescriptionControl
 			// 
 			this.L_Followers.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_Followers.AutoSize = true;
-			this.L_Followers.Location = new System.Drawing.Point(32, 4);
+			this.L_Followers.Location = new System.Drawing.Point(32, 5);
 			this.L_Followers.Name = "L_Followers";
-			this.L_Followers.Size = new System.Drawing.Size(44, 16);
+			this.L_Followers.Size = new System.Drawing.Size(35, 13);
 			this.L_Followers.TabIndex = 3;
 			this.L_Followers.Text = "label1";
 			this.L_Followers.Visible = false;
@@ -305,7 +306,7 @@ partial class UserDescriptionControl
 			this.tableLayoutPanel2.Controls.Add(this.I_Packages, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.L_Packages, 1, 0);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel2.Location = new System.Drawing.Point(90, 54);
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(90, 48);
 			this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 1;
@@ -319,8 +320,8 @@ partial class UserDescriptionControl
 			this.I_Packages.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.I_Packages.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_Packages.Enabled = false;
-			dynamicIcon6.Name = "Package";
-			this.I_Packages.ImageName = dynamicIcon6;
+			dynamicIcon3.Name = "Package";
+			this.I_Packages.ImageName = dynamicIcon3;
 			this.I_Packages.Location = new System.Drawing.Point(3, 3);
 			this.I_Packages.Name = "I_Packages";
 			this.I_Packages.Size = new System.Drawing.Size(14, 21);
@@ -330,9 +331,9 @@ partial class UserDescriptionControl
 			// 
 			this.L_Packages.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_Packages.AutoSize = true;
-			this.L_Packages.Location = new System.Drawing.Point(23, 5);
+			this.L_Packages.Location = new System.Drawing.Point(23, 7);
 			this.L_Packages.Name = "L_Packages";
-			this.L_Packages.Size = new System.Drawing.Size(44, 16);
+			this.L_Packages.Size = new System.Drawing.Size(35, 13);
 			this.L_Packages.TabIndex = 3;
 			this.L_Packages.Text = "label1";
 			// 
@@ -350,9 +351,9 @@ partial class UserDescriptionControl
 			// 
 			this.base_slickScroll.Dock = System.Windows.Forms.DockStyle.Right;
 			this.base_slickScroll.LinkedControl = this.TLP_Side;
-			this.base_slickScroll.Location = new System.Drawing.Point(422, 0);
+			this.base_slickScroll.Location = new System.Drawing.Point(424, 0);
 			this.base_slickScroll.Name = "base_slickScroll";
-			this.base_slickScroll.Size = new System.Drawing.Size(8, 261);
+			this.base_slickScroll.Size = new System.Drawing.Size(6, 261);
 			this.base_slickScroll.Style = SlickControls.StyleType.Vertical;
 			this.base_slickScroll.TabIndex = 2;
 			this.base_slickScroll.TabStop = false;

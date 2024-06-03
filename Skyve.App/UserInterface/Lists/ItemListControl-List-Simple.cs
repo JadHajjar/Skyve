@@ -151,7 +151,7 @@ public partial class ItemListControl
 			{
 				var isHovered = rect.Contains(CursorLocation);
 
-				using var authorBrush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 255 : 200, UserIcon.GetUserColor(author.Id?.ToString() ?? string.Empty, true)));
+				using var authorBrush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : UserIcon.GetUserColor(author.Id?.ToString() ?? string.Empty, true));
 				using var font = UI.Font(8.25F).FitToWidth(author.Name, rect.Pad(itemHeight + Padding.Top + Padding.Left, 0, 0, 0), e.Graphics);
 				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline).FitToWidth(author.Name, rect.Pad(itemHeight + Padding.Top + Padding.Left, 0, 0, 0), e.Graphics);
 

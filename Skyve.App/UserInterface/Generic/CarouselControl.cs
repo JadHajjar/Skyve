@@ -29,7 +29,7 @@ public partial class CarouselControl : SlickControl
 		FLP_Thumbs.Controls.Clear(true);
 		FLP_Thumbs.Controls.AddRange(thumbnails.Reverse().ToArray(x =>
 		{
-			var thumb = new MiniThumb(x) { Selected = currentThumb == x, Dock = DockStyle.Left, Size = new Size(P_Thumbs.Height * 16 / 9, P_Thumbs.Height) };
+			var thumb = new MiniThumbControl(x) { Selected = currentThumb == x, Dock = DockStyle.Left, Size = new Size(P_Thumbs.Height * 16 / 9, P_Thumbs.Height) };
 
 			thumb.MouseClick += Thumb_MouseClick;
 
@@ -42,7 +42,7 @@ public partial class CarouselControl : SlickControl
 	{
 		if (e.Button == MouseButtons.Left)
 		{
-			foreach (MiniThumb item in FLP_Thumbs.Controls)
+			foreach (MiniThumbControl item in FLP_Thumbs.Controls)
 			{
 				if (item.Selected = sender == item)
 				{
@@ -68,7 +68,7 @@ public partial class CarouselControl : SlickControl
 		MainThumb.Size = new Size(Width - Padding.Horizontal, Math.Min((Width - Padding.Horizontal) * 9 / 16, Height - Padding.Vertical - bottomSize));
 		P_Thumbs.Height = bottomSize;
 
-		foreach (MiniThumb item in FLP_Thumbs.Controls)
+		foreach (MiniThumbControl item in FLP_Thumbs.Controls)
 		{
 			item.Size = new Size(P_Thumbs.Height * 16 / 9, P_Thumbs.Height);
 			item.cachedImage?.Dispose();
@@ -107,7 +107,7 @@ public partial class CarouselControl : SlickControl
 
 			var thumbnail = thumbnails.TryGet(index);
 
-			foreach (MiniThumb item in FLP_Thumbs.Controls)
+			foreach (MiniThumbControl item in FLP_Thumbs.Controls)
 			{
 				item.Selected = item.ThumbnailObject == thumbnail;
 				item.Invalidate();
@@ -244,93 +244,13 @@ public partial class CarouselControl : SlickControl
 
 			var thumbnail = thumbnails.TryGet(index);
 
-			foreach (MiniThumb item in FLP_Thumbs.Controls)
+			foreach (MiniThumbControl item in FLP_Thumbs.Controls)
 			{
 				item.Selected = item.ThumbnailObject == thumbnail;
 				item.Invalidate();
 			}
 
 			MainThumb.Invalidate();
-		}
-	}
-
-	private class MiniThumb : SlickControl
-	{
-		public Bitmap? cachedImage;
-		private bool _selected;
-
-		public MiniThumb(IThumbnailObject thumbnailObject)
-		{
-			Cursor = Cursors.Hand;
-			AutoInvalidate = false;
-			ThumbnailObject = thumbnailObject;
-			Margin = default;
-		}
-
-		public IThumbnailObject ThumbnailObject { get; }
-		public bool Selected
-		{
-			get => _selected; set
-			{
-				_selected = value;
-
-				if (value && Parent?.Parent is not null)
-				{
-					var screenPosition = new Rectangle(PointToScreen(default), Size);
-					var visibleBounds = new Rectangle(Parent.Parent.PointToScreen(default), Parent.Parent.Size);
-
-					if (!visibleBounds.Contains(screenPosition))
-					{
-						SlickScroll.GlobalScrollTo(this, 5);
-					}
-				}
-			}
-		}
-
-		protected override void OnHoverStateChanged()
-		{
-			base.OnHoverStateChanged();
-
-			Invalidate();
-		}
-
-		protected override void OnPaint(PaintEventArgs e)
-		{
-			e.Graphics.SetUp(BackColor);
-
-			var image = cachedImage ?? ThumbnailObject.GetThumbnail();
-
-			if (cachedImage is null && image is not null)
-			{
-				cachedImage = image = new Bitmap(image, GetRectangle(ClientRectangle.Pad((int)(5 * UI.FontScale)), image.Size).Size);
-			}
-
-			if (Selected || HoverState.HasFlag(HoverState.Hovered))
-			{
-				using var brush = new SolidBrush(Color.FromArgb(Selected ? 220 : 100, FormDesign.Design.ActiveColor));
-
-				e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));
-			}
-
-			if (image != null)
-			{
-				e.Graphics.DrawRoundedImage(image, ClientRectangle.CenterR(image.Size), (int)(5 * UI.FontScale));
-			}
-			else
-			{
-				using var icon = IconManager.GetIcon("Gallery", Height / 2).Color(FormDesign.Design.IconColor);
-				e.Graphics.DrawImage(icon, ClientRectangle.CenterR(icon.Size));
-			}
-		}
-
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				cachedImage?.Dispose();
-			}
-
-			base.Dispose(disposing);
 		}
 	}
 }

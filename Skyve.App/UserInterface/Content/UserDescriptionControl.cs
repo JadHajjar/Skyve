@@ -122,4 +122,12 @@ public partial class UserDescriptionControl : SlickControl
 	{
 		PlatformUtil.OpenUrl(User.ProfileUrl);
 	}
+
+	private void FLP_Package_Links_SizeChanged(object sender, EventArgs e)
+	{
+		foreach (Control ctrl in FLP_Package_Links.Controls)
+		{
+			ctrl.Size = new(ctrl.Parent.Width / 3 - ctrl.Margin.Horizontal, ctrl.Parent.Width / 3 - ctrl.Margin.Horizontal);
+		}
+	}
 }

@@ -31,7 +31,7 @@ public class PackageIcon : SlickImageControl
 
 		if (thumbnail == null)
 		{
-			using var generic = IconManager.GetIcon(Package is IAsset ? "Assets" : Package?.IsLocal() == true ? "Package" : "Paradox", Height).Color(BackColor);
+			using var generic = IconManager.GetIcon(Package is IAsset ? "Assets" : Package?.IsLocal() == true ? "Package" : "Paradox", Height * 8 / 10).Color(BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
 			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));

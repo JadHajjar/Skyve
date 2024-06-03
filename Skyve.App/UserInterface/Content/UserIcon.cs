@@ -45,7 +45,7 @@ public class UserIcon : SlickImageControl
 		}
 
 		using var brush = new SolidBrush(GetUserColor(User?.Id?.ToString() ?? string.Empty));
-		using var generic = IconManager.GetIcon("User", Height).Color(brush.Color.GetTextColor());
+		using var generic = IconManager.GetIcon("User", Height * 8 / 10).Color(brush.Color.GetTextColor());
 
 		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));
 		e.Graphics.DrawImage(generic, ClientRectangle.CenterR(generic.Size));
@@ -53,8 +53,10 @@ public class UserIcon : SlickImageControl
 
 	public static Color GetUserColor(string username, bool textColor = false)
 	{
-		if (!ServiceCenter.Get<ISettings>().UserSettings.ColoredAuthorNames)
+		if (!ServiceCenter.Get<ISettings>()?.UserSettings.ColoredAuthorNames ?? false)
+		{
 			return FormDesign.Design.ForeColor;
+		}
 
 		// Compute a hash from the input string
 		var hash = username.GetHashCode();
@@ -73,6 +75,7 @@ public class UserIcon : SlickImageControl
 			return color;
 		}
 
+		// adjust for better text readability 
 		return color.MergeColor(FormDesign.Design.ForeColor, 75).Tint(Lum: FormDesign.Design.IsDarkTheme ? 4 : -2.5f, Sat: 3);
 	}
 }
