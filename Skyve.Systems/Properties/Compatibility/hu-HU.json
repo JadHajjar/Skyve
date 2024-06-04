@@ -149,6 +149,7 @@
   "Stability_HasIssues": "A(z) „{0}” problémákat okozhat.\nLegyél óvatos használat közben.",
   "Stability_Broken": "'{0}' hibás.\nIsmeretes, hogy vagy megszakítja a játékot, vagy egyszerűen nem működik.",
   "Stability_Incompatible": "A(z) „{0}” nem kompatibilis a jelenlegi játékverzióval.\nHasználd óvatosan, vagy kapcsold ki, amíg a frissítésre vársz.",
+  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
   "Stability_Local": "Ez az eredeti mod '{0}' helyi változata.\n\nA helyi verziókat általában tesztelési célokra használják.",
   "Stability_BrokenFromPatch": "A(z) „{1}” elromlott a játék {0}. javítása után. Kérjük, várd meg, amíg frissül, mielőtt használnád.\nAddig is le kell tiltanod.",
   "Stability_BrokenFromPatchSafe": "A(z) „{1}” elromlott a játék {0}. javítása után. Kérjük, várd meg, amíg frissül, mielőtt használnád.",
