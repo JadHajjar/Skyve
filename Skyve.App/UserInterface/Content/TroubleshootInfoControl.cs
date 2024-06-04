@@ -80,7 +80,7 @@ public class TroubleshootInfoControl : SlickControl
 
 	protected override void UIChanged()
 	{
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
+		Padding = UI.Scale(new Padding(5));
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -142,12 +142,12 @@ public class TroubleshootInfoControl : SlickControl
 		using var backTextBrush = new SolidBrush(FormDesign.Design.MenuForeColor);
 		using var activeTextBrush = new SolidBrush(FormDesign.Design.ActiveForeColor);
 
-		e.Graphics.FillRoundedRectangle(backBarBrush, barRect, (int)(4 * UI.FontScale));
+		e.Graphics.FillRoundedRectangle(backBarBrush, barRect, UI.Scale(4));
 		e.Graphics.DrawString(text, Font, backTextBrush, barRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
 		e.Graphics.SetClip(new Rectangle(Padding.Left, 0, (Width - Padding.Horizontal) * _troubleshootSystem.CurrentStage / _troubleshootSystem.TotalStages, Height));
 
-		e.Graphics.FillRoundedRectangle(activeBarBrush, barRect, (int)(4 * UI.FontScale));
+		e.Graphics.FillRoundedRectangle(activeBarBrush, barRect, UI.Scale(4));
 		e.Graphics.DrawString(text, Font, activeTextBrush, barRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
 		e.Graphics.ResetClip();

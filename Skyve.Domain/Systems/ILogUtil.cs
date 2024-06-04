@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 public interface ILogUtil
@@ -8,8 +9,8 @@ public interface ILogUtil
 	string GameLogFile { get; }
 	string GameLogFolder { get; }
 
-	string CreateZipFile(string? folder = null);
-	void CreateZipToStream(Stream fileStream);
+	Task<string> CreateZipFile(string? folder = null);
+	Task CreateZipToStream(Stream fileStream);
 	List<ILogTrace> GetCurrentLogsTrace();
 #if CS2
 	List<ILogTrace> ExtractTrace(string originalFile, string log);

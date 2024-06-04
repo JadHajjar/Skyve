@@ -71,7 +71,7 @@ public class PackageAvailabilityService
 				{
 					foreach (var package in _compatibilityManager.FindPackage(item.Value, withAlternativesAndSuccessors))
 					{
-						if (isEnabled(package.LocalData))
+						if (isEnabled(package))
 						{
 							return true;
 						}
@@ -82,7 +82,7 @@ public class PackageAvailabilityService
 
 		foreach (var package in _compatibilityManager.FindPackage(indexedPackage, withAlternativesAndSuccessors))
 		{
-			if (isEnabled(package.LocalData))
+			if (isEnabled(package))
 			{
 				return true;
 			}
@@ -94,7 +94,7 @@ public class PackageAvailabilityService
 			{
 				foreach (var package in _compatibilityManager.FindPackage(item.Value, withAlternativesAndSuccessors))
 				{
-					if (isEnabled(package.LocalData))
+					if (isEnabled(package))
 					{
 						return true;
 					}
@@ -104,6 +104,6 @@ public class PackageAvailabilityService
 
 		return false;
 
-		bool isEnabled(ILocalPackageIdentity? package) => package is not null && _packageUtil.IsIncludedAndEnabled(package);
+		bool isEnabled(IPackageIdentity? package) => package is not null && _packageUtil.IsIncludedAndEnabled(package);
 	}
 }

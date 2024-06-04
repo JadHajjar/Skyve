@@ -1,0 +1,5 @@
+<Project>
+	<PropertyGroup>
+		<PDXAccountDataPath>$(USERPROFILE)\Documents\pdx_account.txt</PDXAccountDataPath>
+	</PropertyGroup>
+</Project>

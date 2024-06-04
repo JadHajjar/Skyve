@@ -18,7 +18,7 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 	{
 		base.UIChanged();
 
-		Width = (int)(200 * UI.FontScale);
+		Width = UI.Scale(200);
 	}
 
 	protected override IEnumerable<IDlcInfo> OrderItems(IEnumerable<IDlcInfo> items)
@@ -43,7 +43,7 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 
 		if (icon != null)
 		{
-			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height * 460 / 215, rectangle.Height), ContentAlignment.MiddleLeft), (int)(4 * UI.FontScale));
+			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height * 460 / 215, rectangle.Height), ContentAlignment.MiddleLeft), UI.Scale(4));
 		}
 
 		rectangle = rectangle.Pad((rectangle.Height * 460 / 215) + Padding.Left, 0, 0, 0);

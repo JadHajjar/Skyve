@@ -223,6 +223,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation BETA => _instance.GetText("BETA");
 
 	/// <summary>
+	/// Bio
+	/// </summary>
+	public static Translation Bio => _instance.GetText("Bio");
+
+	/// <summary>
 	/// Bulk Actions
 	/// </summary>
 	public static Translation BulkActions => _instance.GetText("BulkActions");
@@ -267,6 +272,16 @@ public class Locale : LocaleHelper, ILocale
 	/// <para>Plural: Code Mods</para>
 	/// </summary>
 	public static Translation CodeMod => _instance.GetText("CodeMod");
+
+	/// <summary>
+	/// Color authors &amp; users' name and avatar
+	/// </summary>
+	public static Translation ColoredAuthorNames => _instance.GetText("ColoredAuthorNames");
+
+	/// <summary>
+	/// Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users.
+	/// </summary>
+	public static Translation ColoredAuthorNamesTip => _instance.GetText("ColoredAuthorNames_Tip");
 
 	/// <summary>
 	/// Compatibility Center
@@ -597,6 +612,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DownloadPlaysetTip => _instance.GetText("DownloadPlaysetTip");
 
 	/// <summary>
+	/// Release to import the {0} from this report
+	/// </summary>
+	public static Translation DropImportFile => _instance.GetText("DropImportFile");
+
+	/// <summary>
 	/// <para>Edit this package's compatibility</para>
 	/// <para>Plural: Edit selected packages' compatibility</para>
 	/// </summary>
@@ -886,6 +906,12 @@ public class Locale : LocaleHelper, ILocale
 	/// Folder Settings
 	/// </summary>
 	public static Translation FolderSettings => _instance.GetText("FolderSettings");
+
+	/// <summary>
+	/// <para>{1} follower</para>
+	/// <para>Plural: {1} followers</para>
+	/// </summary>
+	public static Translation FollowersCount => _instance.GetText("FollowersCount");
 
 	/// <summary>
 	/// Free
@@ -1183,6 +1209,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation MapFileInfo => _instance.GetText("MapFileInfo");
 
 	/// <summary>
+	/// You're about to subscribe to {0} mods. Are you sure you want to continue?
+	/// </summary>
+	public static Translation MassSubscribeWarningInfo => _instance.GetText("MassSubscribeWarningInfo");
+
+	/// <summary>
+	/// Mass subscription warning
+	/// </summary>
+	public static Translation MassSubscribeWarningTitle => _instance.GetText("MassSubscribeWarningTitle");
+
+	/// <summary>
 	/// Missing
 	/// </summary>
 	public static Translation Missing => _instance.GetText("Missing");
@@ -1418,6 +1454,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OutOfDate => _instance.GetText("OutOfDate");
 
 	/// <summary>
+	/// Out of date {0}
+	/// </summary>
+	public static Translation OutOfDateItem => _instance.GetText("OutOfDateItem");
+
+	/// <summary>
 	/// <para>Package</para>
 	/// <para>Plural: Packages</para>
 	/// </summary>
@@ -1434,9 +1475,14 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PackageIsNotDownloaded => _instance.GetText("PackageIsNotDownloaded");
 
 	/// <summary>
-	/// '{0}' is out of date  You are {1} behind
+	/// '{0}' is out of date You are {1} behind
 	/// </summary>
 	public static Translation PackageIsOutOfDate => _instance.GetText("PackageIsOutOfDate");
+
+	/// <summary>
+	/// '{0}' is out of date, you are on an older version of the mod.
+	/// </summary>
+	public static Translation PackageIsOutOfDateVersion => _instance.GetText("PackageIsOutOfDateVersion");
 
 	/// <summary>
 	/// Packages Enabled

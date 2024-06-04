@@ -68,7 +68,7 @@ public class DragAndDropControl : SlickControl
 
 		if (Live)
 		{
-			Size = UI.Scale(new Size(325, 80), UI.FontScale);
+			Size = UI.Scale(new Size(325, 80));
 			Padding = UI.Scale(new Padding(10), UI.UIScale);
 			Font = UI.Font(9.75F);
 
@@ -146,7 +146,7 @@ public class DragAndDropControl : SlickControl
 			return;
 		}
 
-		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : Width - (int)(125 * UI.FontScale);
+		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : Width - UI.Scale(125);
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
@@ -186,9 +186,9 @@ public class DragAndDropControl : SlickControl
 		e.Graphics.SetUp(BackColor);
 
 		var fileHovered = false;
-		var border = (int)(4 * UI.FontScale);
+		var border = UI.Scale(4);
 		var cursor = PointToClient(MousePosition);
-		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : Width - (int)(125 * UI.FontScale);
+		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : Width - UI.Scale(125);
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{

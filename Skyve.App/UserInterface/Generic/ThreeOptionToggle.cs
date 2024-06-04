@@ -49,7 +49,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		if (Live)
 		{
 			Font = UI.Font(8.25F);
-			Padding = UI.Scale(new Padding(5), UI.FontScale);
+			Padding = UI.Scale(new Padding(5));
 			if (!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
 			{
 				Height = (int)(24 * UI.UIScale);
@@ -71,7 +71,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 	{
 		base.OnMouseClick(e);
 
-		var centerWidth = Math.Max(Width / 5, (int)(40 * UI.FontScale));
+		var centerWidth = Math.Max(Width / 5, UI.Scale(40));
 		var option1Hovered = e.Location.X < (Width - centerWidth) / 2;
 		var option2Hovered = e.Location.X > (Width + centerWidth) / 2;
 
@@ -93,7 +93,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 	{
 		base.OnMouseMove(e);
 
-		var centerWidth = Math.Max(Width / 5, (int)(40 * UI.FontScale));
+		var centerWidth = Math.Max(Width / 5, UI.Scale(40));
 		var option1Hovered = e.Location.X < (Width - centerWidth) / 2;
 		var option2Hovered = e.Location.X > (Width + centerWidth) / 2;
 
@@ -116,7 +116,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		e.Graphics.SetUp(BackColor);
 
 		var iconOnly = Width < 135 * UI.FontScale;
-		var centerWidth = Math.Max(Width / 5, (int)(40 * UI.FontScale));
+		var centerWidth = Math.Max(Width / 5, UI.Scale(40));
 		var cursorLocation = PointToClient(Cursor.Position);
 		var rectangle1 = new Rectangle(0, 0, (Width - centerWidth) / 2, Height - 1);
 		var rectangle2 = new Rectangle((Width + centerWidth) / 2, 0, (Width - centerWidth) / 2, Height - 1);

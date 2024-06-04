@@ -22,8 +22,8 @@ public class CompatibilitySectionPanel : SmartPanel
 	{
 		base.OnCreateControl();
 
-		Padding = UI.Scale(new Padding(12, 12 + 36, 12, 12), UI.FontScale);
-		Margin = UI.Scale(new Padding(6), UI.FontScale);
+		Padding = UI.Scale(new Padding(12, 12 + 36, 12, 12));
+		Margin = UI.Scale(new Padding(6));
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -39,11 +39,11 @@ public class CompatibilitySectionPanel : SmartPanel
 
 		rectangle = rectangle.Pad(Margin.Left / 2);
 
-		using var icon = GetTypeIcon().Get((int)(24 * UI.FontScale));
+		using var icon = GetTypeIcon().Get(UI.Scale(24));
 		var text = LocaleHelper.GetGlobalText($"CRT_{ReportType}");
 		var subText = (string?)null;
 		var iconRectangle = new Rectangle(rectangle.Right - margin.Right - icon?.Width ?? 0, rectangle.Y, icon?.Width ?? 0, icon?.Height ?? 0);
-		var textRect = new Rectangle(rectangle.X + margin.Left, rectangle.Y, rectangle.Right - margin.Horizontal - margin.Left - iconRectangle.Width, (int)(26 * UI.FontScale));
+		var textRect = new Rectangle(rectangle.X + margin.Left, rectangle.Y, rectangle.Right - margin.Horizontal - margin.Left - iconRectangle.Width, UI.Scale(26));
 		using var font = UI.Font(9.75F, FontStyle.Bold).FitTo(text, textRect, e.Graphics);
 		var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(text, font, rectangle.Right - margin.Horizontal - iconRectangle.Right).Height);
 		textRect.Height = titleHeight + margin.Top;
@@ -56,7 +56,7 @@ public class CompatibilitySectionPanel : SmartPanel
 			var textHeight = (int)e.Graphics.Measure(subText, smallFont, rectangle.Right - margin.Horizontal - iconRectangle.Right).Height;
 
 			using var subTextBrush = new SolidBrush(Color.FromArgb(150, FormDesign.Design.ForeColor));
-			e.Graphics.DrawString(subText, smallFont, subTextBrush, textRect.Pad((int)(2 * UI.FontScale), 0, 0, 0));
+			e.Graphics.DrawString(subText, smallFont, subTextBrush, textRect.Pad(UI.Scale(2), 0, 0, 0));
 
 			titleHeight += textHeight - (margin.Top / 2);
 			textRect.Y += textHeight - (margin.Top / 2);

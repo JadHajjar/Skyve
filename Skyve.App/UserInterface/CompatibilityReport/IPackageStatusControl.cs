@@ -119,11 +119,11 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 	protected override void UIChanged()
 	{
 		MinimumSize = UI.Scale(new Size(260, 0), UI.UIScale);
-		P_Main.Padding = UI.Scale(new Padding(12), UI.FontScale);
-		Margin = slickSpacer1.Margin = L_OutputTitle.Margin = UI.Scale(new Padding(3), UI.FontScale);
-		TB_Note.MinimumSize = new Size(0, (int)(64 * UI.FontScale));
-		I_Paste.Size = I_Copy.Size = I_AddPackage.Size = I_Note.Size = I_Close.Size = UI.Scale(new Size(28, 28), UI.FontScale);
-		I_Paste.Padding = I_Copy.Padding = I_AddPackage.Padding = I_Note.Padding = I_Close.Padding = UI.Scale(new Padding(3), UI.FontScale);
+		P_Main.Padding = UI.Scale(new Padding(12));
+		Margin = slickSpacer1.Margin = L_OutputTitle.Margin = UI.Scale(new Padding(3));
+		TB_Note.MinimumSize = new Size(0, UI.Scale(64));
+		I_Paste.Size = I_Copy.Size = I_AddPackage.Size = I_Note.Size = I_Close.Size = UI.Scale(new Size(28, 28));
+		I_Paste.Padding = I_Copy.Padding = I_AddPackage.Padding = I_Note.Padding = I_Close.Padding = UI.Scale(new Padding(3));
 		L_OutputTitle.Font = UI.Font(7.5F, FontStyle.Bold);
 	}
 

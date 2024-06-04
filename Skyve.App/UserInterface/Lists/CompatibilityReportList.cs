@@ -5,6 +5,7 @@ using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +26,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	private PackageSorting sorting;
 	private bool headerHovered;
+	private bool dragActive;
 	private readonly Dictionary<IPackageIdentity, int> _modHeights = [];
 	private readonly Dictionary<NotificationType, Rectangle> _headerRects = [];
 
@@ -60,12 +62,12 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		base.UIChanged();
 
-		Padding = UI.Scale(new Padding(8), UI.FontScale);
-		GridPadding = UI.Scale(new Padding(5), UI.FontScale);
-		StartHeight = (int)(44 * UI.FontScale);
+		Padding = UI.Scale(new Padding(8));
+		GridPadding = UI.Scale(new Padding(5));
+		StartHeight = UI.Scale(44);
 	}
 
-	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo> args)
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo, Rectangles> args)
 	{
 		args.DoNotDraw = CurrentGroup != NotificationType.None && args.Item.GetNotification() != CurrentGroup;
 
@@ -191,7 +193,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (!smaller)
 			{
-				width = Math.Min(Width / items.Count, (int)(250 * UI.FontScale));
+				width = Math.Min(Width / items.Count, UI.Scale(250));
 			}
 			else
 			{
@@ -238,7 +240,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			e.Graphics.DrawImage(icon.Color(foreBrush.Color), iconBounds);
 
-			xpos += rectangle.Width+Padding.Horizontal;
+			xpos += rectangle.Width + Padding.Horizontal;
 
 			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos - 1, Padding.Top, 2, StartHeight - Padding.Vertical));
 		}
@@ -288,6 +290,37 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		return _headerRects.Values.Any(x => x.Contains(location));
 	}
 
+	protected override void OnPaint(PaintEventArgs e)
+	{
+		base.OnPaint(e);
+
+		if (ItemCount == 0 && !Loading)
+		{
+			using var font = UI.Font(9.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+			e.Graphics.ResetClip();
+			e.Graphics.DrawString(Locale.NoCompatibilityIssues, font, brush, ClientRectangle, stringFormat);
+		}
+
+		if (dragActive)
+		{
+			var border = UI.Scale(16);
+			var rectangle = ClientRectangle.Pad(border);
+			using var font = UI.Font(11.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+			using var backBrush = new SolidBrush(Color.FromArgb(200, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor)));
+			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale)) { DashStyle = DashStyle.Dash };
+
+			e.Graphics.ResetClip();
+			e.Graphics.FillRoundedRectangle(backBrush, rectangle, border);
+			e.Graphics.DrawRoundedRectangle(pen, rectangle, border);
+			e.Graphics.DrawString(Locale.DropImportFile.Format(Locale.CompatibilityReport), font, brush, ClientRectangle, stringFormat);
+		}
+	}
+
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
 	{
 		var workshopInfo = e.Item.GetWorkshopInfo();
@@ -327,7 +360,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			using var generic = IconManager.GetIcon(e.Item.IsLocal() ? "Mods" : "Paradox", e.Rects.IconRect.Height).Color(e.BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
 			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
 		}
 		else if (e.Item.IsLocal())
@@ -344,10 +377,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		if (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IconRect.Contains(CursorLocation))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(75, 255, 255, 255));
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
 		}
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
 	private void DrawTitleAndTags(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
@@ -533,7 +566,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	private int DrawPackage(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ICompatibilityItem Message, IPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		e.Graphics.FillRoundedRectangleWithShadow(rectangle.Pad(GridPadding.Left), (int)(5 * UI.FontScale), GridPadding.Left);
+		e.Graphics.FillRoundedRectangleWithShadow(rectangle.Pad(GridPadding.Left), UI.Scale(5), GridPadding.Left);
 
 		var thumbRect = rectangle.ClipTo(rectangle.Width).Pad(GridPadding.Left + GridPadding.Top);
 		var textRect = rectangle.Pad(GridPadding.Left + GridPadding.Top, GridPadding.Vertical + thumbRect.Height + GridPadding.Top, GridPadding.Left + GridPadding.Top, GridPadding.Bottom);
@@ -556,8 +589,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			{
 				Cursor = cursor,
 				BorderRadius = GridPadding.Left,
-				Padding = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale),
-				Rectangle = new Rectangle(0, 0, textRect.Width, (int)(24 * UI.FontScale)),
+				Padding = UI.Scale(new Padding(4, 2, 4, 2)),
+				Rectangle = new Rectangle(0, 0, textRect.Width, UI.Scale(24)),
 				HoverState = HoverState & ~HoverState.Focused,
 				Text = action.Text,
 				Icon = action.Icon,
@@ -598,7 +631,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			using var generic = IconManager.GetIcon(package.IsCodeMod() ? "Mods" : "Package", rectangle.Height).Color(BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			e.Graphics.FillRoundedRectangle(brush, rectangle, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
 			e.Graphics.DrawImage(generic, rectangle.CenterR(generic.Size));
 		}
 		else if (package.IsLocal())
@@ -615,17 +648,17 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		if (HoverState.HasFlag(HoverState.Hovered) && rectangle.Contains(cursor))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(75, FormDesign.Design.ForeColor));
-			e.Graphics.FillRoundedRectangle(brush, rectangle, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
 		}
 
-		return rectangle.Height + (int)(16 * UI.FontScale);
+		return rectangle.Height + UI.Scale(16);
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, rectangle, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, rectangle, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
 	private int DrawTitleAndTags(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22), UI.FontScale), ContentAlignment.TopRight);
+		var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22)), ContentAlignment.TopRight);
 		e.Rects._modDotsRects[package] = dotsRect;
 		DrawDots(e, dotsRect, cursor);
 
@@ -886,6 +919,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	{
 		base.OnDragEnter(drgevent);
 
+		dragActive = false;
 		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop))
 		{
 			var file = ((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
@@ -893,6 +927,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			if (Path.GetExtension(file).ToLower() is ".zip" or ".json")
 			{
 				drgevent.Effect = DragDropEffects.Copy;
+				dragActive = true;
 				Invalidate();
 			}
 
@@ -907,6 +942,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	{
 		base.OnDragLeave(e);
 
+		dragActive = false;
 		Invalidate();
 	}
 
@@ -931,6 +967,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			(PanelContent.GetParentPanel(this) as PC_CompatibilityReport)!.Import(file);
 		}
 
+		dragActive = false;
 		Invalidate();
 	}
 
@@ -971,7 +1008,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	{
 		var rects = new Rectangles(item)
 		{
-			IconRect = rectangle.Pad(GridPadding).Align(UI.Scale(new Size(35, 35), UI.FontScale), ContentAlignment.TopLeft)
+			IconRect = rectangle.Pad(GridPadding).Align(UI.Scale(new Size(35, 35)), ContentAlignment.TopLeft)
 		};
 
 		rectangle = new Rectangle(rects.IconRect.X, rects.IconRect.Y, rectangle.Width - GridPadding.Horizontal, rects.IconRect.Height);

@@ -33,14 +33,16 @@ partial class PC_CompatibilityReport
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon21 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon22 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon23 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon24 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			this.TLP_Buttons = new System.Windows.Forms.TableLayoutPanel();
-			this.PB_Loader = new SlickControls.SlickPictureBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
+			this.TLP_MiddleBar = new System.Windows.Forms.TableLayoutPanel();
+			this.C_ViewTypeControl = new Skyve.App.UserInterface.Generic.ViewTypeControl();
+			this.L_Counts = new Skyve.App.UserInterface.Generic.ItemCountControl();
 			this.FLP_Search = new System.Windows.Forms.FlowLayoutPanel();
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.I_Refresh = new SlickControls.SlickIcon();
@@ -63,15 +65,11 @@ partial class PC_CompatibilityReport
 			this.DD_Author = new Skyve.App.UserInterface.Dropdowns.AuthorDropDown();
 			this.DD_Profile = new Skyve.App.UserInterface.Dropdowns.PlaysetsDropDown();
 			this.I_SortOrder = new SlickControls.SlickIcon();
-			this.TLP_MiddleBar = new System.Windows.Forms.TableLayoutPanel();
-			this.L_Counts = new Skyve.App.UserInterface.Generic.ItemCountControl();
-			this.C_ViewTypeControl = new Skyve.App.UserInterface.Generic.ViewTypeControl();
-			((System.ComponentModel.ISupportInitialize)(this.PB_Loader)).BeginInit();
 			this.TLP_Main.SuspendLayout();
+			this.TLP_MiddleBar.SuspendLayout();
 			this.FLP_Search.SuspendLayout();
 			this.P_FiltersContainer.SuspendLayout();
 			this.P_Filters.SuspendLayout();
-			this.TLP_MiddleBar.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// base_Text
@@ -97,16 +95,6 @@ partial class PC_CompatibilityReport
 			this.TLP_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Buttons.Size = new System.Drawing.Size(0, 0);
 			this.TLP_Buttons.TabIndex = 0;
-			// 
-			// PB_Loader
-			// 
-			this.PB_Loader.LoaderSpeed = 1D;
-			this.PB_Loader.Location = new System.Drawing.Point(640, 392);
-			this.PB_Loader.Name = "PB_Loader";
-			this.PB_Loader.Size = new System.Drawing.Size(32, 32);
-			this.PB_Loader.TabIndex = 102;
-			this.PB_Loader.TabStop = false;
-			this.PB_Loader.Visible = false;
 			// 
 			// label1
 			// 
@@ -150,6 +138,47 @@ partial class PC_CompatibilityReport
 			this.TLP_Main.Size = new System.Drawing.Size(1124, 778);
 			this.TLP_Main.TabIndex = 104;
 			// 
+			// TLP_MiddleBar
+			// 
+			this.TLP_MiddleBar.AutoSize = true;
+			this.TLP_MiddleBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TLP_MiddleBar.ColumnCount = 3;
+			this.TLP_Main.SetColumnSpan(this.TLP_MiddleBar, 3);
+			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.TLP_MiddleBar.Controls.Add(this.C_ViewTypeControl, 2, 0);
+			this.TLP_MiddleBar.Controls.Add(this.L_Counts, 1, 0);
+			this.TLP_MiddleBar.Dock = System.Windows.Forms.DockStyle.Top;
+			this.TLP_MiddleBar.Location = new System.Drawing.Point(0, 189);
+			this.TLP_MiddleBar.Margin = new System.Windows.Forms.Padding(0);
+			this.TLP_MiddleBar.Name = "TLP_MiddleBar";
+			this.TLP_MiddleBar.RowCount = 1;
+			this.TLP_MiddleBar.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_MiddleBar.Size = new System.Drawing.Size(1124, 35);
+			this.TLP_MiddleBar.TabIndex = 9;
+			// 
+			// C_ViewTypeControl
+			// 
+			this.C_ViewTypeControl.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.C_ViewTypeControl.Location = new System.Drawing.Point(971, 3);
+			this.C_ViewTypeControl.Name = "C_ViewTypeControl";
+			this.C_ViewTypeControl.Size = new System.Drawing.Size(150, 29);
+			this.C_ViewTypeControl.TabIndex = 3;
+			this.C_ViewTypeControl.Visible = false;
+			// 
+			// L_Counts
+			// 
+			this.L_Counts.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.L_Counts.Location = new System.Drawing.Point(0, 0);
+			this.L_Counts.Margin = new System.Windows.Forms.Padding(0);
+			this.L_Counts.Name = "L_Counts";
+			this.L_Counts.Size = new System.Drawing.Size(968, 35);
+			this.L_Counts.TabIndex = 4;
+			this.L_Counts.Text = "itemCountControl1";
+			// 
 			// FLP_Search
 			// 
 			this.FLP_Search.AutoSize = true;
@@ -167,12 +196,12 @@ partial class PC_CompatibilityReport
 			// 
 			// TB_Search
 			// 
-			dynamicIcon21.Name = "Search";
-			this.TB_Search.ImageName = dynamicIcon21;
+			dynamicIcon1.Name = "Search";
+			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
-			this.TB_Search.Padding = new System.Windows.Forms.Padding(5, 5, 47, 5);
+			this.TB_Search.Padding = new System.Windows.Forms.Padding(5, 5, 26, 5);
 			this.TB_Search.Placeholder = "SearchGenericPackages";
 			this.TB_Search.SelectedText = "";
 			this.TB_Search.SelectionLength = 0;
@@ -187,8 +216,8 @@ partial class PC_CompatibilityReport
 			// 
 			this.I_Refresh.ActiveColor = null;
 			this.I_Refresh.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon22.Name = "Refresh";
-			this.I_Refresh.ImageName = dynamicIcon22;
+			dynamicIcon2.Name = "Refresh";
+			this.I_Refresh.ImageName = dynamicIcon2;
 			this.I_Refresh.Location = new System.Drawing.Point(262, 3);
 			this.I_Refresh.Name = "I_Refresh";
 			this.I_Refresh.Size = new System.Drawing.Size(14, 14);
@@ -202,12 +231,12 @@ partial class PC_CompatibilityReport
 			this.B_Filters.AutoSize = true;
 			this.B_Filters.AutoSizeIcon = true;
 			this.B_Filters.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon23.Name = "Filter";
-			this.B_Filters.ImageName = dynamicIcon23;
+			dynamicIcon3.Name = "Filter";
+			this.B_Filters.ImageName = dynamicIcon3;
 			this.B_Filters.Location = new System.Drawing.Point(282, 3);
 			this.B_Filters.Name = "B_Filters";
 			this.B_Filters.Selected = false;
-			this.B_Filters.Size = new System.Drawing.Size(95, 24);
+			this.B_Filters.Size = new System.Drawing.Size(92, 24);
 			this.B_Filters.SpaceTriggersClick = true;
 			this.B_Filters.TabIndex = 1;
 			this.B_Filters.Text = "ShowFilters";
@@ -265,6 +294,7 @@ partial class PC_CompatibilityReport
 			this.DD_Sorting.SkyvePage = Skyve.Domain.Enums.SkyvePage.None;
 			this.DD_Sorting.TabIndex = 2;
 			this.DD_Sorting.Text = "Sort By";
+			this.DD_Sorting.WorkshopSort = false;
 			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
 			// 
 			// P_FiltersContainer
@@ -385,8 +415,8 @@ partial class PC_CompatibilityReport
 			this.I_ClearFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.I_ClearFilters.ColorStyle = Extensions.ColorStyle.Red;
 			this.I_ClearFilters.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon24.Name = "ClearFilter";
-			this.I_ClearFilters.ImageName = dynamicIcon24;
+			dynamicIcon4.Name = "ClearFilter";
+			this.I_ClearFilters.ImageName = dynamicIcon4;
 			this.I_ClearFilters.Location = new System.Drawing.Point(1085, 9);
 			this.I_ClearFilters.Name = "I_ClearFilters";
 			this.I_ClearFilters.Size = new System.Drawing.Size(30, 21);
@@ -476,52 +506,10 @@ partial class PC_CompatibilityReport
 			this.I_SortOrder.TabIndex = 1;
 			this.I_SortOrder.Click += new System.EventHandler(this.I_SortOrder_Click);
 			// 
-			// TLP_MiddleBar
-			// 
-			this.TLP_MiddleBar.AutoSize = true;
-			this.TLP_MiddleBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TLP_MiddleBar.ColumnCount = 3;
-			this.TLP_Main.SetColumnSpan(this.TLP_MiddleBar, 3);
-			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_MiddleBar.Controls.Add(this.C_ViewTypeControl, 2, 0);
-			this.TLP_MiddleBar.Controls.Add(this.L_Counts, 1, 0);
-			this.TLP_MiddleBar.Dock = System.Windows.Forms.DockStyle.Top;
-			this.TLP_MiddleBar.Location = new System.Drawing.Point(0, 189);
-			this.TLP_MiddleBar.Margin = new System.Windows.Forms.Padding(0);
-			this.TLP_MiddleBar.Name = "TLP_MiddleBar";
-			this.TLP_MiddleBar.RowCount = 1;
-			this.TLP_MiddleBar.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_MiddleBar.Size = new System.Drawing.Size(1124, 35);
-			this.TLP_MiddleBar.TabIndex = 9;
-			// 
-			// L_Counts
-			// 
-			this.L_Counts.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.L_Counts.Location = new System.Drawing.Point(0, 0);
-			this.L_Counts.Margin = new System.Windows.Forms.Padding(0);
-			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(968, 35);
-			this.L_Counts.TabIndex = 4;
-			this.L_Counts.Text = "itemCountControl1";
-			// 
-			// C_ViewTypeControl
-			// 
-			this.C_ViewTypeControl.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.C_ViewTypeControl.Location = new System.Drawing.Point(971, 3);
-			this.C_ViewTypeControl.Name = "C_ViewTypeControl";
-			this.C_ViewTypeControl.Size = new System.Drawing.Size(150, 29);
-			this.C_ViewTypeControl.TabIndex = 3;
-			this.C_ViewTypeControl.Visible = false;
-			// 
 			// PC_CompatibilityReport
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.Controls.Add(this.label1);
-			this.Controls.Add(this.PB_Loader);
 			this.Controls.Add(this.TLP_Buttons);
 			this.Controls.Add(this.TLP_Main);
 			this.Name = "PC_CompatibilityReport";
@@ -530,17 +518,15 @@ partial class PC_CompatibilityReport
 			this.Controls.SetChildIndex(this.TLP_Main, 0);
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.Controls.SetChildIndex(this.TLP_Buttons, 0);
-			this.Controls.SetChildIndex(this.PB_Loader, 0);
 			this.Controls.SetChildIndex(this.label1, 0);
-			((System.ComponentModel.ISupportInitialize)(this.PB_Loader)).EndInit();
 			this.TLP_Main.ResumeLayout(false);
 			this.TLP_Main.PerformLayout();
+			this.TLP_MiddleBar.ResumeLayout(false);
 			this.FLP_Search.ResumeLayout(false);
 			this.FLP_Search.PerformLayout();
 			this.P_FiltersContainer.ResumeLayout(false);
 			this.P_FiltersContainer.PerformLayout();
 			this.P_Filters.ResumeLayout(false);
-			this.TLP_MiddleBar.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -549,7 +535,6 @@ partial class PC_CompatibilityReport
 	#endregion
 	private System.Windows.Forms.TableLayoutPanel TLP_Buttons;
 	private CompatibilityReportList ListControl;
-	private SlickControls.SlickPictureBox PB_Loader;
 	private System.Windows.Forms.Label label1;
 	public System.Windows.Forms.TableLayoutPanel TLP_Main;
 	public System.Windows.Forms.FlowLayoutPanel FLP_Search;

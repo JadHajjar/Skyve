@@ -29,7 +29,7 @@ public partial class CarouselControl : SlickControl
 		FLP_Thumbs.Controls.Clear(true);
 		FLP_Thumbs.Controls.AddRange(thumbnails.Reverse().ToArray(x =>
 		{
-			var thumb = new MiniThumb(x) { Selected = currentThumb == x, Dock = DockStyle.Left, Size = new Size(P_Thumbs.Height * 16 / 9, P_Thumbs.Height) };
+			var thumb = new MiniThumbControl(x) { Selected = currentThumb == x, Dock = DockStyle.Left, Size = new Size(P_Thumbs.Height * 16 / 9, P_Thumbs.Height) };
 
 			thumb.MouseClick += Thumb_MouseClick;
 
@@ -42,7 +42,7 @@ public partial class CarouselControl : SlickControl
 	{
 		if (e.Button == MouseButtons.Left)
 		{
-			foreach (MiniThumb item in FLP_Thumbs.Controls)
+			foreach (MiniThumbControl item in FLP_Thumbs.Controls)
 			{
 				if (item.Selected = sender == item)
 				{
@@ -58,17 +58,17 @@ public partial class CarouselControl : SlickControl
 
 	protected override void UIChanged()
 	{
-		Padding = UI.Scale(new Padding(3, 10, 3, 10), UI.FontScale);
-		roundedPanel.Padding = UI.Scale(new Padding(5), UI.FontScale);
-		slickScroll.Padding = UI.Scale(new Padding(0, 5, 0, 0), UI.FontScale);
+		Padding = UI.Scale(new Padding(3, 10, 3, 10));
+		roundedPanel.Padding = UI.Scale(new Padding(5));
+		slickScroll.Padding = UI.Scale(new Padding(0, 5, 0, 0));
 
 		var rectangle = new Rectangle(Padding.Left, Padding.Top, Width - Padding.Horizontal, (Width - Padding.Horizontal) * 9 / 16);
-		var bottomSize = (int)(64 * UI.FontScale);
+		var bottomSize = UI.Scale(64);
 
 		MainThumb.Size = new Size(Width - Padding.Horizontal, Math.Min((Width - Padding.Horizontal) * 9 / 16, Height - Padding.Vertical - bottomSize));
 		P_Thumbs.Height = bottomSize;
 
-		foreach (MiniThumb item in FLP_Thumbs.Controls)
+		foreach (MiniThumbControl item in FLP_Thumbs.Controls)
 		{
 			item.Size = new Size(P_Thumbs.Height * 16 / 9, P_Thumbs.Height);
 			item.cachedImage?.Dispose();
@@ -107,7 +107,7 @@ public partial class CarouselControl : SlickControl
 
 			var thumbnail = thumbnails.TryGet(index);
 
-			foreach (MiniThumb item in FLP_Thumbs.Controls)
+			foreach (MiniThumbControl item in FLP_Thumbs.Controls)
 			{
 				item.Selected = item.ThumbnailObject == thumbnail;
 				item.Invalidate();
@@ -129,7 +129,7 @@ public partial class CarouselControl : SlickControl
 		var maxRatio = Math.Max(widthRatio, heightRatio);
 		var minRatio = Math.Min(widthRatio, heightRatio);
 
-		if (minRatio < 1)
+		if (minRatio < 1 || imageSize.Width <= imageSize.Height)
 		{
 			maxRatio = minRatio;
 		}
@@ -164,7 +164,7 @@ public partial class CarouselControl : SlickControl
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(image, imageRect = GetRectangle(rectangle, image!.Size), (int)(10 * UI.FontScale));
+			e.Graphics.DrawRoundedImage(image, imageRect = GetRectangle(rectangle, image!.Size), UI.Scale(10));
 		}
 
 		if (thumbnails.Count <= 1 || !MainThumb.HoverState.HasFlag(HoverState.Hovered))
@@ -179,10 +179,10 @@ public partial class CarouselControl : SlickControl
 			return;
 		}
 
-		var gap = (int)(64 * UI.FontScale);
+		var gap = UI.Scale(64);
 
 		var rect1 = new Rectangle(0, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
-		var rect2 = new Rectangle(MainThumb.Width - gap * 2, imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
+		var rect2 = new Rectangle(MainThumb.Width - (gap * 2), imageRect.Y, gap * 2, imageRect.Height).CenterR(gap, gap);
 		using var brush1 = new SolidBrush(Color.FromArgb(rect1.Contains(cursor) ? 255 : 125, BackColor.Tint(Lum: BackColor.IsDark() ? 6 : -6)));
 		using var brush2 = new SolidBrush(Color.FromArgb(rect2.Contains(cursor) ? 255 : 125, BackColor.Tint(Lum: BackColor.IsDark() ? 6 : -6)));
 
@@ -215,10 +215,10 @@ public partial class CarouselControl : SlickControl
 		}
 		else if (e.Button == MouseButtons.Left)
 		{
-			var gap = (int)(64 * UI.FontScale);
+			var gap = UI.Scale(64);
 
 			var rect1 = new Rectangle(0, 0, gap * 2, MainThumb.Height).CenterR(gap, gap);
-			var rect2 = new Rectangle(MainThumb.Width - gap * 2, 0, gap * 2, MainThumb.Height).CenterR(gap, gap);
+			var rect2 = new Rectangle(MainThumb.Width - (gap * 2), 0, gap * 2, MainThumb.Height).CenterR(gap, gap);
 
 			if (rect1.Contains(e.Location))
 			{
@@ -244,70 +244,13 @@ public partial class CarouselControl : SlickControl
 
 			var thumbnail = thumbnails.TryGet(index);
 
-			foreach (MiniThumb item in FLP_Thumbs.Controls)
+			foreach (MiniThumbControl item in FLP_Thumbs.Controls)
 			{
 				item.Selected = item.ThumbnailObject == thumbnail;
 				item.Invalidate();
 			}
 
 			MainThumb.Invalidate();
-		}
-	}
-
-	private class MiniThumb : SlickControl
-	{
-		public Bitmap? cachedImage;
-
-		public MiniThumb(IThumbnailObject thumbnailObject)
-		{
-			Cursor = Cursors.Hand;
-			AutoInvalidate = false;
-			ThumbnailObject = thumbnailObject;
-			Margin = default;
-		}
-
-		public IThumbnailObject ThumbnailObject { get; }
-		public bool Selected { get; set; }
-
-		protected override void OnHoverStateChanged()
-		{
-			base.OnHoverStateChanged();
-
-			Invalidate();
-		}
-
-		protected override void OnPaint(PaintEventArgs e)
-		{
-			e.Graphics.SetUp(BackColor);
-
-			var image = cachedImage ?? ThumbnailObject.GetThumbnail();
-
-			if (cachedImage is null && image is not null)
-			{
-				cachedImage = image = new Bitmap(image, GetRectangle(ClientRectangle.Pad((int)(5 * UI.FontScale)), image.Size).Size);
-			}
-
-			if (Selected || HoverState.HasFlag(HoverState.Hovered))
-			{
-				using var brush = new SolidBrush(Color.FromArgb(Selected ? 220 : 100, FormDesign.Design.ActiveColor));
-
-				e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), (int)(5 * UI.FontScale));
-			}
-
-			if (image != null)
-			{
-				e.Graphics.DrawRoundedImage(image, ClientRectangle.CenterR(image.Size), (int)(5 * UI.FontScale));
-			}
-		}
-
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				cachedImage?.Dispose();
-			}
-
-			base.Dispose(disposing);
 		}
 	}
 }

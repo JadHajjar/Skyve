@@ -134,20 +134,20 @@ public partial class PC_PlaysetList : PanelContent
 	{
 		base.UIChanged();
 
-		B_Deactivate.Size = B_Add.Size = B_Edit.Size = UI.Scale(new Size(24, 24), UI.FontScale);
+		B_Deactivate.Size = B_Add.Size = B_Edit.Size = UI.Scale(new Size(24, 24));
 		L_CurrentPlayset.Font = UI.Font(11F, FontStyle.Bold);
-		roundedPanel.Margin = TB_Search.Margin = L_Counts.Margin = L_FilterCount.Margin = DD_Sorting.Margin = DD_Usage.Margin = UI.Scale(new Padding(6), UI.FontScale);
-		B_DeactivatePlayset.Padding = B_AddPlayset.Padding = TLP_PlaysetName.Padding = UI.Scale(new Padding(3), UI.FontScale);
+		roundedPanel.Margin = TB_Search.Margin = L_Counts.Margin = L_FilterCount.Margin = DD_Sorting.Margin = DD_Usage.Margin = UI.Scale(new Padding(6));
+		B_DeactivatePlayset.Padding = B_AddPlayset.Padding = TLP_PlaysetName.Padding = UI.Scale(new Padding(3));
 		L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		B_Discover.Font = UI.Font(9F, FontStyle.Bold);
-		B_Discover.Margin = TLP_PlaysetName.Margin = B_DeactivatePlayset.Margin = B_AddPlayset.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		DD_Usage.Width = DD_Sorting.Width = (int)(180 * UI.FontScale);
-		TB_Search.Width = (int)(250 * UI.FontScale);
-		roundedPanel.Padding = new Padding((int)(2.5 * UI.FontScale) + 1, (int)(5 * UI.FontScale), (int)(2.5 * UI.FontScale), (int)(5 * UI.FontScale));
+		B_Discover.Margin = TLP_PlaysetName.Margin = B_DeactivatePlayset.Margin = B_AddPlayset.Margin = UI.Scale(new Padding(5));
+		DD_Usage.Width = DD_Sorting.Width = UI.Scale(180);
+		TB_Search.Width = UI.Scale(250);
+		roundedPanel.Padding = new Padding((int)(2.5 * UI.FontScale) + 1, UI.Scale(5), (int)(2.5 * UI.FontScale), UI.Scale(5));
 		TLP_PlaysetName.MinimumSize = new Size(0, B_AddPlayset.Height);
 		TLP_Top.Padding = new Padding(roundedPanel.Margin.Left, 0, roundedPanel.Margin.Right, 0);
 
-		var size = (int)(30 * UI.FontScale) - 6;
+		var size = UI.Scale(30) - 6;
 		TB_Search.MaximumSize = new Size(9999, size);
 		TB_Search.MinimumSize = new Size(0, size);
 	}
@@ -273,29 +273,28 @@ public partial class PC_PlaysetList : PanelContent
 	{
 		try
 		{
-			var profile = _playsetManager.Playsets.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(file), StringComparison.InvariantCultureIgnoreCase));
+			var playset = _playsetManager.Playsets.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(file), StringComparison.InvariantCultureIgnoreCase));
 
 			if (Path.GetExtension(file).ToLower() is ".zip")
 			{
 				using var stream = File.OpenRead(file);
 				using var zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, false);
 
+#if CS2
+				var entry = zipArchive.GetEntry("Skyve\\CurrentPlayset.json") ?? zipArchive.GetEntry("Skyve/CurrentPlayset.json");
+#else
 				var entry = zipArchive.GetEntry("Skyve\\LogProfile.json") ?? zipArchive.GetEntry("Skyve/LogProfile.json");
+#endif
 
 				if (entry is null)
 				{
 					return;
 				}
 
-				file = Path.Combine(Path.GetTempPath(), $"{Path.GetFileNameWithoutExtension(file)}.json");
+				using var entryStream = entry.Open();
+				using var reader = new StreamReader(entryStream);
 
-				try
-				{
-					CrossIO.DeleteFile(file, true);
-				}
-				catch { }
-
-				entry.ExtractToFile(file);
+				file = await reader.ReadToEndAsync();
 			}
 
 #if CS1
@@ -318,18 +317,12 @@ public partial class PC_PlaysetList : PanelContent
 			else
 #endif
 			{
-				profile ??= await _playsetManager.ImportPlayset(file);
+				playset ??= await _playsetManager.CreateLogPlayset(file);
 			}
 
-			if (profile is not null)
+			if (playset is not null)
 			{
-				throw new NotImplementedException();
-				//var panel = new PC_GenericPackageList(profile.Packages, true)
-				//{
-				//	Text = profile.Name
-				//};
-
-				//Form.PushPanel(panel);
+				Form.PushPanel(new PC_PlaysetContents(playset));
 			}
 		}
 		catch (Exception ex)

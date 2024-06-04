@@ -13,6 +13,7 @@ namespace Skyve.Domain
 #if CS2
 		GamingPlatform GamingPlatform { get; set; }
 		string UserIdentifier { get; set; }
+		string UserIdType { get; set; }
 #endif
 
 		void Save();

@@ -24,7 +24,7 @@ public class PlaysetIcon : SlickImageControl
 		{
 			using var brush = new SolidBrush(customPlayset.Color ?? FormDesign.Design.IconColor);
 
-			e.Graphics.FillRoundedRectangle(brush, ClientRectangle, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, ClientRectangle, UI.Scale(5));
 
 			using var icon = customPlayset.Usage.GetIcon().Get(ClientRectangle.Width * 3 / 4).Color(brush.Color.GetTextColor());
 
@@ -32,7 +32,7 @@ public class PlaysetIcon : SlickImageControl
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(banner, ClientRectangle, (int)(5 * UI.FontScale));
+			e.Graphics.DrawRoundedImage(banner, ClientRectangle, UI.Scale(5));
 		}
 	}
 }

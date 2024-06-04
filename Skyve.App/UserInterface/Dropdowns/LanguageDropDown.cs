@@ -176,14 +176,14 @@ public class LanguageDropDown : SlickSelectionDropDown<string>
 
 		if (Live)
 		{
-			ItemHeight = 22;
+			ItemHeight = 32;
 		}
 	}
 
 	protected override void UIChanged()
 	{
 		Font = UI.Font("Segoe UI", 8.25F);
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
+		Padding = UI.Scale(new Padding(5));
 	}
 
 	protected override void OnSizeChanged(EventArgs e)

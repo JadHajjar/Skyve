@@ -15,7 +15,6 @@ public partial class PC_HelpAndLogs : PanelContent
 	private readonly ISettings _settings;
 	private readonly ILocationService _locationManager;
 	private readonly System.Timers.Timer timer;
-	private bool orderAsc;
 	private List<ILogTrace>? selectedFileLogs;
 	private List<ILogTrace>? defaultLogs;
 
@@ -24,6 +23,8 @@ public partial class PC_HelpAndLogs : PanelContent
 		ServiceCenter.Get(out _logger, out _logUtil, out _settings, out _locationManager);
 
 		InitializeComponent();
+
+		logTraceControl.CanDrawItem += LogTraceControl_CanDrawItem;
 
 		if (CrossIO.CurrentPlatform is Platform.Windows)
 		{
@@ -75,19 +76,19 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		base.UIChanged();
 
-		I_Sort.Size = UI.Scale(new Size(24, 24), UI.FontScale);
-		I_Sort.Padding = UI.Scale(new Padding(3), UI.FontScale);
-		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
+		I_Sort.Size = UI.Scale(new Size(24, 24));
+		I_Sort.Padding = UI.Scale(new Padding(3));
+		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0));
 		TLP_LogFiles.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10, 10, 10, 0), UI.UIScale);
-		TLP_LogFiles.Padding = TLP_Errors.Padding =  UI.Scale(new Padding(12), UI.UIScale);
-		DD_LogFile.Margin = UI.Scale(new Padding(12,14,12,6), UI.UIScale);
+		TLP_LogFiles.Padding = TLP_Errors.Padding = UI.Scale(new Padding(12), UI.UIScale);
+		DD_LogFile.Margin = UI.Scale(new Padding(12, 14, 12, 6), UI.UIScale);
 		P_Troubleshoot.Margin = UI.Scale(new Padding(10, 10, 5, 0), UI.UIScale);
 		TLP_Errors.Margin = UI.Scale(new Padding(10, 10, 5, 10), UI.UIScale);
 		L_Troubleshoot.Font = UI.Font(9F);
 		CB_OnlyShowErrors.Font = UI.Font(7.5F);
-		CB_OnlyShowErrors.Padding = TB_Search.Margin = B_OpenSkyveLog.Margin = B_OpenLog.Margin = UI.Scale(new Padding(3), UI.FontScale);
-		tableLayoutPanel1.Width = (int)(250 * UI.FontScale);
-		B_OpenSkyveLog.Height = B_OpenLog.Height = (int)(48 * UI.FontScale);
+		CB_OnlyShowErrors.Padding = TB_Search.Margin = B_OpenSkyveLog.Margin = B_OpenLog.Margin = UI.Scale(new Padding(3));
+		tableLayoutPanel1.Width = UI.Scale(250);
+		B_OpenSkyveLog.Height = B_OpenLog.Height = UI.Scale(48);
 
 		foreach (var button in this.GetControls<SlickButton>())
 		{
@@ -97,8 +98,8 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 		}
 
-		TLP_Main.RowStyles[0].Height = (int)(125 * UI.FontScale);
-		TB_Search.Width = (int)(150 * UI.FontScale);
+		TLP_Main.RowStyles[0].Height = UI.Scale(125);
+		TB_Search.Width = UI.Scale(150);
 		B_SaveZip.Margin = UI.Scale(new Padding(10, 7, 10, 10), UI.UIScale);
 		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
 		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
@@ -115,9 +116,16 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		try
 		{
-			defaultLogs = _logUtil.GetCurrentLogsTrace();
+			var logs = _logUtil.GetCurrentLogsTrace();
 
-			this.TryInvoke(() => SetTrace(defaultLogs));
+			if (defaultLogs != null && defaultLogs.Count == logs.Count && defaultLogs.SequenceEqual(logs))
+			{
+				return true;
+			}
+
+			defaultLogs = logs;
+
+			logTraceControl.SetItems(defaultLogs);
 
 			return true;
 		}
@@ -131,13 +139,13 @@ public partial class PC_HelpAndLogs : PanelContent
 	private async void B_CopyZip_Click(object sender, EventArgs e)
 	{
 		B_CopyZip.Loading = true;
-		await Task.Run(() =>
+		await Task.Run(async () =>
 		{
 			try
 			{
 				var file = _logUtil.CreateZipFile();
 
-				PlatformUtil.SetFileInClipboard(file);
+				PlatformUtil.SetFileInClipboard(await file);
 			}
 			catch (Exception ex)
 			{
@@ -155,7 +163,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		B_SaveZip.Loading = true;
 
-		await Task.Run(() =>
+		await Task.Run(async () =>
 		{
 			try
 			{
@@ -165,7 +173,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 				var fileName = _logUtil.CreateZipFile(folder);
 
-				PlatformUtil.OpenFolder(fileName);
+				PlatformUtil.OpenFolder(await fileName);
 			}
 			catch (Exception ex)
 			{
@@ -201,10 +209,11 @@ public partial class PC_HelpAndLogs : PanelContent
 					using var stream = File.OpenRead(file);
 					using var zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, false);
 
-					var entry = zipArchive.GetEntry("log.txt");
+					var entry = zipArchive.GetEntry("Log.log");
 
 					if (entry is null)
 					{
+						logTraceControl.SetItems(defaultLogs ?? []);
 						return null;
 					}
 
@@ -214,6 +223,7 @@ public partial class PC_HelpAndLogs : PanelContent
 				}
 				catch
 				{
+					logTraceControl.SetItems(defaultLogs ?? []);
 					return null;
 				}
 			}
@@ -234,61 +244,41 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 #endif
 
+			logTraceControl.SetItems(logs ?? defaultLogs ?? []);
+
 			return logs;
 		});
-
-		this.TryInvoke(() => SetTrace(selectedFileLogs ?? defaultLogs ?? []));
 
 		DD_LogFile.Loading = false;
 	}
 
 	private void CB_OnlyShowErrors_CheckChanged(object sender, EventArgs e)
 	{
-		if (CrossIO.FileExists(DD_LogFile.SelectedFile))
-		{
-			SetTrace(selectedFileLogs ?? []);
-		}
-		else
-		{
-			SetTrace(defaultLogs ?? []);
-		}
+		Task.Run(logTraceControl.FilterChanged);
 	}
 
 	private void I_Sort_Click(object sender, EventArgs e)
 	{
-		orderAsc = !orderAsc;
+		logTraceControl.OrderAsc = !logTraceControl.OrderAsc;
 
-		I_Sort.ImageName = orderAsc ? "SortAsc" : "SortDesc";
+		I_Sort.ImageName = logTraceControl.OrderAsc ? "SortAsc" : "SortDesc";
 
-		CB_OnlyShowErrors_CheckChanged(sender, e);
+		logTraceControl.SortingChanged();
 	}
 
-	private void SetTrace(List<ILogTrace> logs)
+	private void LogTraceControl_CanDrawItem(object sender, CanDrawItemEventArgs<ILogTrace> e)
 	{
-		IEnumerable<ILogTrace> logEnumerable = logs;
-
-		if (CB_OnlyShowErrors.Checked)
+		if (CB_OnlyShowErrors.Checked && e.Item.Type is "INFO" or "DEBUG")
 		{
-			logEnumerable = logEnumerable.Where(x => x.Type is not "INFO" and not "DEBUG");
+			e.DoNotDraw = true;
+			return;
 		}
 
-		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
+		if (!string.IsNullOrWhiteSpace(TB_Search.Text) && !SearchLog(e.Item))
 		{
-			logEnumerable = logEnumerable.Where(SearchLog);
+			e.DoNotDraw = true;
+			return;
 		}
-
-		if (orderAsc)
-		{
-			logEnumerable = logEnumerable.OrderBy(x => x.Timestamp);
-		}
-		else
-		{
-			logEnumerable = logEnumerable.OrderByDescending(x => x.Timestamp);
-		}
-
-		logTraceControl.SetItems(logEnumerable);
-		logTraceControl.Invalidate();
-		P_ErrorsContainer.Invalidate();
 	}
 
 	private bool SearchLog(ILogTrace trace)
@@ -358,7 +348,8 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private async void B_Troubleshoot_Click(object sender, EventArgs e)
 	{
-		ShowPrompt("Coming soon...", icon: PromptIcons.Info);return;
+		ShowPrompt("Coming soon...", icon: PromptIcons.Info);
+		return;
 		var sys = ServiceCenter.Get<ITroubleshootSystem>();
 
 		if (sys.IsInProgress)
@@ -386,11 +377,6 @@ public partial class PC_HelpAndLogs : PanelContent
 		ServiceCenter.Get<IIOUtil>().Execute(_logger.LogFilePath, string.Empty);
 	}
 
-	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
-	{
-		slickSpacer3.Visible = slickScroll1.Percentage != 0;
-	}
-
 	private void TB_Search_IconClicked(object sender, EventArgs e)
 	{
 		TB_Search.Text = string.Empty;
@@ -413,17 +399,5 @@ public partial class PC_HelpAndLogs : PanelContent
 		}
 
 		return base.ProcessCmdKey(ref msg, keyData);
-	}
-
-	private void P_ErrorsContainer_Paint(object sender, PaintEventArgs e)
-	{
-		if (logTraceControl.Items.Any())
-			return;
-
-		using var font = UI.Font(9.75F, FontStyle.Italic);
-		using var brush = new SolidBrush(FormDesign.Design.InfoColor);
-		using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
-
-		e.Graphics.DrawString(Locale.DefaultLogViewInfo, font, brush, P_ErrorsContainer.ClientRectangle.Pad(Math.Min(P_ErrorsContainer.Height, P_ErrorsContainer. Width) / 3), format);
 	}
 }

@@ -59,20 +59,20 @@ public class IncludeAllButton : SlickControl
 
 	protected override void UIChanged()
 	{
-		Margin = UI.Scale(new Padding(4, 4, 4, 5), UI.FontScale);
-		Padding = UI.Scale(new Padding(3), UI.FontScale);
+		Margin = UI.Scale(new Padding(4, 4, 4, 5));
+		Padding = UI.Scale(new Padding(3));
 
-		var ItemHeight = (int)(28 * UI.FontScale);
+		var ItemHeight = UI.Scale(28);
 
 #if CS2
-		size = Size = new Size((ItemHeight * 2) + Margin.Horizontal, ItemHeight - (int)(4 * UI.FontScale));
+		size = Size = new Size((ItemHeight * 2) + Margin.Horizontal, ItemHeight - UI.Scale(4));
 
 		var rect = ClientRectangle.Align(new Size(ItemHeight, Height), ContentAlignment.MiddleLeft);
 		IncludedRect = rect;
 		rect.X += rect.Width + Margin.Horizontal;
 		ActionRect = rect;
 #else
-		Size = new Size(ItemHeight * (_doubleButtons ? 3 : 2), ItemHeight - (int)(4 * UI.FontScale));
+		Size = new Size(ItemHeight * (_doubleButtons ? 3 : 2), ItemHeight - UI.Scale(4));
 #endif
 
 		//if (IsSelected)
@@ -350,7 +350,7 @@ public class IncludeAllButton : SlickControl
 	{
 		e.Graphics.SetUp(BackColor);
 
-		var width = (int)(28 * UI.FontScale);
+		var width = UI.Scale(28);
 		var rectangle = ClientRectangle;
 		var CursorLocation = PointToClient(Cursor.Position);
 		var color = FormDesign.Design.ActiveColor;

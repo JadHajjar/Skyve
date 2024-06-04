@@ -1,4 +1,6 @@
-﻿using Skyve.Compatibility.Domain.Enums;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Domain;
 
 using System.Drawing;
 using System.IO;
@@ -10,7 +12,7 @@ public partial class ItemListControl
 {
 	public partial class Simple : ItemListControl
 	{
-		public Simple(SkyvePage page) : base(page)
+		public Simple(SkyvePage page, IPackageUtil? customPackageUtil = null) : base(page, customPackageUtil)
 		{
 			GridItemSize = new Size(190, 260);
 			DynamicSizing = true;
@@ -62,7 +64,12 @@ public partial class ItemListControl
 
 			e.Graphics.ResetClip();
 
-			if (!isEnabled && isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
+			if (e.DrawableItem.Tag is not null)
+			{
+				using var brush = new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 50 : 175, BackColor));
+				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
+			}
+			else if (!isEnabled && isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(Padding));
@@ -112,7 +119,12 @@ public partial class ItemListControl
 
 			e.Graphics.ResetClip();
 
-			if (!isEnabled && isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
+			if (e.DrawableItem.Tag is not null)
+			{
+				using var brush = new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 50 : 175, BackColor));
+				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
+			}
+			else if (!isEnabled && isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(Padding));
@@ -139,13 +151,12 @@ public partial class ItemListControl
 			{
 				var isHovered = rect.Contains(CursorLocation);
 
-				using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
-				using var icon = IconManager.GetIcon("Author", itemHeight + Padding.Top).Color(isHovered ? activeBrush.Color : brush.Color);
-				using var font = UI.Font(8.25F).FitToWidth(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
-				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline).FitToWidth(author.Name, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+				using var authorBrush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : UserIcon.GetUserColor(author.Id?.ToString() ?? string.Empty, true));
+				using var font = UI.Font(8.25F).FitToWidth(author.Name, rect.Pad(itemHeight + Padding.Top + Padding.Left, 0, 0, 0), e.Graphics);
+				using var fontUnderline = UI.Font(8.25F, FontStyle.Underline).FitToWidth(author.Name, rect.Pad(itemHeight + Padding.Top + Padding.Left, 0, 0, 0), e.Graphics);
 
-				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
-				e.Graphics.DrawString(author.Name, isHovered ? fontUnderline : font, isHovered ? activeBrush : brush, rect.Pad(icon.Width + Padding.Left, 0, 0, 0), stringFormat);
+				DrawAuthorImage(e, author, rect.Align(new Size(itemHeight + Padding.Top, itemHeight + Padding.Top), ContentAlignment.MiddleLeft), authorBrush.Color);
+				e.Graphics.DrawString(author.Name, isHovered ? fontUnderline : font, authorBrush, rect.Pad(itemHeight + Padding.Top + Padding.Left, 0, 0, 0), stringFormat);
 
 				e.Rects.AuthorRect = rect;
 			}
@@ -164,7 +175,7 @@ public partial class ItemListControl
 
 			if (date != default)
 			{
-				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToLocalTime().ToRelatedString(true, false) : date.ToLocalTime().ToString("g");
 				var isRecent = date > DateTime.UtcNow.AddDays(-7) && e.BackColor != FormDesign.Design.ActiveColor;
 
 				using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
@@ -224,7 +235,7 @@ public partial class ItemListControl
 
 		private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor)
 		{
-			var height = CompactList ? ((int)(18 * UI.FontScale)) : (Math.Max(e.Rects.WorkshopRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
+			var height = CompactList ? (UI.Scale(18)) : (Math.Max(e.Rects.WorkshopRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
 
 			if (notificationType > NotificationType.Info)
 			{
@@ -284,7 +295,7 @@ public partial class ItemListControl
 
 			var includedSize = CompactList ? 26 : 30;
 
-			rects.IncludedRect = rectangle.Pad(Padding + new Padding(0, 0, 0, (int)(1.5 * UI.FontScale))).Align(UI.Scale(new Size(includedSize, CompactList ? 18 : includedSize), UI.FontScale), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(Padding + new Padding(0, 0, 0, (int)(1.5 * UI.FontScale))).Align(UI.Scale(new Size(includedSize, CompactList ? 18 : includedSize)), ContentAlignment.MiddleLeft);
 
 			if (CompactList)
 			{

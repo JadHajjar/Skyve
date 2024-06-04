@@ -21,7 +21,7 @@ public class TagListControl : SlickControl
 	{
 		base.UIChanged();
 
-		Padding = UI.Scale(new Padding(7, 7, 7, 32), UI.FontScale);
+		Padding = UI.Scale(new Padding(7, 7, 7, 32));
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -32,7 +32,7 @@ public class TagListControl : SlickControl
 		var tagsRect = new Rectangle(Padding.Left, Padding.Top, 0, 0);
 		var hovered = false;
 		var autoTags = true;
-		var padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
+		var padding = UI.Scale(new Padding(3, 2, 3, 2));
 		using var font = UI.Font(7.75F);
 
 		_tagRects.Clear();

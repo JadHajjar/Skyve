@@ -1,4 +1,6 @@
-﻿using Skyve.Compatibility.Domain.Enums;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Domain;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -9,6 +11,8 @@ namespace Skyve.App.UserInterface.Lists;
 
 public partial class ItemListControl
 {
+	private List<(string text, int width)?> headers = [];
+
 	private int DrawScore(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo, int xdiff)
 	{
 		if (workshopInfo is null)
@@ -39,7 +43,7 @@ public partial class ItemListControl
 			using var generic = IconManager.GetIcon(e.Item is IAsset ? "Assets" : _page is SkyvePage.Mods ? "Mods" : _page is SkyvePage.Packages ? "Package" : "Paradox", e.Rects.IconRect.Height).Color(e.BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
 			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
 		}
 		else if (e.Item.IsLocal())
@@ -56,7 +60,7 @@ public partial class ItemListControl
 		if (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IconRect.Contains(CursorLocation))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(75, 255, 255, 255));
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
 		}
 
 		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
@@ -68,7 +72,7 @@ public partial class ItemListControl
 
 			if (!GridView || _settings.UserSettings.ComplexListUI)
 			{
-				e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, (int)(5 * UI.FontScale));
+				e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, UI.Scale(5));
 
 				return;
 			}
@@ -86,13 +90,46 @@ public partial class ItemListControl
 
 			gradientBrush.InterpolationColors = cblend;
 
-			e.Graphics.FillRoundedRectangle(gradientBrush, e.Rects.IconRect.Pad(0, e.Rects.IconRect.Height * 2 / 3, 0, 0), (int)(5 * UI.FontScale));
-			e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(gradientBrush, e.Rects.IconRect.Pad(0, e.Rects.IconRect.Height * 2 / 3, 0, 0), UI.Scale(5));
+			e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, UI.Scale(5));
 
 			e.Graphics.DrawString(Locale.RecentlyUpdated, font, dateBrush, e.Rects.IconRect.Pad(GridPadding), stringFormat);
 		}
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5), FormDesign.Design.BackColor);
+	}
+
+	private void DrawAuthorImage(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IUser author, Rectangle rectangle, Color color)
+	{
+		var image = _workshopService.GetUser(author).GetThumbnail();
+
+		if (image != null)
+		{
+			e.Graphics.DrawRoundImage(image, rectangle.Pad((int)(1.5 * UI.FontScale)));
+
+			if (e.HoverState.HasFlag(HoverState.Hovered))
+			{
+				using var pen = new Pen(color, 1.5f);
+
+				e.Graphics.DrawEllipse(pen, rectangle.Pad((int)(1.5 * UI.FontScale)));
+			}
+		}
+		else
+		{
+			using var authorIcon = IconManager.GetIcon("Author", rectangle.Height);
+
+			e.Graphics.DrawImage(authorIcon.Color(color, color.A), rectangle.CenterR(authorIcon.Size));
+		}
+
+		if (_userService.IsUserVerified(author))
+		{
+			var checkRect = rectangle.Align(new Size(rectangle.Height / 3, rectangle.Height / 3), ContentAlignment.BottomRight);
+
+			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-UI.Scale(2)));
+
+			using var img = IconManager.GetIcon("Check", checkRect.Height);
+			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
+		}
 	}
 
 #if CS2
@@ -100,13 +137,13 @@ public partial class ItemListControl
 	{
 		activeColor = default;
 
-		if (localIdentity is null && e.Item.IsLocal())
+		if (!IsGenericPage && localIdentity is null && e.Item.IsLocal())
 		{
 			return; // missing local item
 		}
 
 		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
-		var isHovered = e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation));
+		var isHovered = !IsGenericPage && (e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation)));
 
 		if (!required && isIncluded && isHovered)
 		{
@@ -146,7 +183,7 @@ public partial class ItemListControl
 		}
 
 		using var brush = e.Rects.IncludedRect.Gradient(activeColor);
-		e.Graphics.FillRoundedRectangle(brush, e.Rects.IncludedRect, (int)(4 * UI.FontScale));
+		e.Graphics.FillRoundedRectangle(brush, e.Rects.IncludedRect, UI.Scale(4));
 
 		if (e.DrawableItem.Loading)
 		{
@@ -234,7 +271,7 @@ public partial class ItemListControl
 
 			using var brush = inclEnableRect.Gradient(activeColor);
 
-			e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(4 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, inclEnableRect, UI.Scale(4));
 
 			using var includedIcon = incl.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
 			using var enabledIcon = enabl?.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
@@ -287,7 +324,9 @@ public partial class ItemListControl
 			}
 
 			if (!oneLine && tags.Count > 0)
+			{
 				e.DrawableItem.CachedHeight += tagRect.Height;
+			}
 		}
 		else
 		{
@@ -337,17 +376,17 @@ public partial class ItemListControl
 
 		if (Width / UI.FontScale >= 800 && date != default)
 		{
-			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToLocalTime().ToRelatedString(true, false) : date.ToLocalTime().ToString("g");
 			DrawCell(e, Columns.UpdateTime, dateText, "UpdateTime", active: false);
 		}
 	}
 
-	private Rectangle DrawCell(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, Columns column, string text, DynamicIcon? dIcon, Color? backColor = null, Font? font = null, bool active = true, Padding padding = default)
+	private Rectangle DrawCell(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, Columns column, string text, DynamicIcon? dIcon, Color? backColor = null, Font? font = null, bool active = true, Padding padding = default, Color? textColor = null)
 	{
 		var cell = _columnSizes[column];
 		var rect = new Rectangle(cell.X, e.ClipRectangle.Y, cell.Width, e.ClipRectangle.Height).Pad(0, -Padding.Top, 0, -Padding.Bottom);
 
-		var textColor = backColor?.GetTextColor() ?? e.BackColor.GetTextColor();
+		textColor ??= backColor?.GetTextColor() ?? e.BackColor.GetTextColor();
 
 		if (active && rect.Contains(CursorLocation))
 		{
@@ -356,14 +395,14 @@ public partial class ItemListControl
 
 		if (dIcon != null)
 		{
-			using var icon = dIcon.Small.Color(textColor);
+			using var icon = dIcon.Small.Color(textColor.Value);
 
 			e.Graphics.DrawImage(icon, rect.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
 
 			rect = rect.Pad(icon.Width + Padding.Left, 0, 0, 0);
 		}
 
-		using (var brush = new SolidBrush(textColor))
+		using (var brush = new SolidBrush(textColor.Value))
 		using (font ??= UI.Font(7.5F))
 		{
 			var textRect = rect.Pad(padding + Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft, e.Graphics);
@@ -393,18 +432,18 @@ public partial class ItemListControl
 		e.Graphics.FillRectangle(seamBrush, seamRectangle);
 	}
 
-	protected override void DrawHeader(PaintEventArgs e)
+	protected override void OnPrePaint(PaintEventArgs e)
 	{
-		var headers = new List<(string text, int width)?>
-			{
-				(Locale.Package, 0),
-				(Locale.Version, 65),
-				(Locale.UpdateTime, 140),
-				(Locale.Author, 150),
-				(LocaleSlickUI.Tags, 0),
-				(Locale.Status, 160),
-				("", 80)
-			};
+		headers =
+		[
+			(Locale.Package, 0),
+			(Locale.Version, 65),
+			(Locale.UpdateTime, 140),
+			(Locale.Author, 150),
+			(LocaleSlickUI.Tags, 0),
+			(Locale.Status, 160),
+			("", 80)
+		];
 
 		if (Width / UI.FontScale < 500)
 		{
@@ -430,6 +469,29 @@ public partial class ItemListControl
 		var autoColumns = headers.Count(x => x?.width == 0);
 		var xPos = 0;
 
+		for (var i = 0; i < headers.Count; i++)
+		{
+			var header = headers[i];
+
+			if (header == null)
+			{
+				continue;
+			}
+
+			var width = header.Value.width == 0 ? (remainingWidth / autoColumns) : (int)(header.Value.width * UI.FontScale);
+
+			_columnSizes[(Columns)i] = (xPos, width);
+
+			xPos += width;
+		}
+	}
+
+	protected override void DrawHeader(PaintEventArgs e)
+	{
+		var remainingWidth = Width - (int)(headers.Sum(x => x?.width ?? 0) * UI.FontScale);
+		var autoColumns = headers.Count(x => x?.width == 0);
+		var xPos = 0;
+
 		using var font = UI.Font(7.5F, FontStyle.Bold);
 		using var brush = new SolidBrush(FormDesign.Design.LabelColor);
 		using var lineBrush = new SolidBrush(FormDesign.Design.AccentColor);
@@ -451,8 +513,6 @@ public partial class ItemListControl
 
 			e.Graphics.DrawString(header.Value.text.ToUpper(), font, brush, new Rectangle(xPos, 1, width, StartHeight).Pad(Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 
-			_columnSizes[(Columns)i] = (xPos, width);
-
 			xPos += width;
 		}
 	}
@@ -463,7 +523,7 @@ public partial class ItemListControl
 
 		if (author?.Name is not null and not "")
 		{
-			e.Rects.AuthorRect = DrawCell(e, Columns.Author, author.Name, "Author", font: UI.Font(8.25F));
+			e.Rects.AuthorRect = DrawCell(e, Columns.Author, author.Name, "Author", font: UI.Font(8.25F), textColor: UserIcon.GetUserColor(author.Id?.ToString() ?? string.Empty, true));
 		}
 		else if (localIdentity is not null)
 		{
@@ -475,8 +535,8 @@ public partial class ItemListControl
 	{
 		var padding = GridView ? GridPadding : Padding;
 		var size = _settings.UserSettings.ComplexListUI ?
-			UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale) :
-			UI.Scale(CompactList ? new Size(18, 18) : new Size(22, 22), UI.FontScale);
+			UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28)) :
+			UI.Scale(CompactList ? new Size(18, 18) : new Size(22, 22));
 		var rect = new Rectangle(e.ClipRectangle.Right, e.ClipRectangle.Y, 0, e.ClipRectangle.Height).Pad(padding);
 
 		if (localIdentity is not null)

@@ -62,9 +62,9 @@ internal class D_NotificationCenter : IDashboardItem
 			using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 			using var brush = new SolidBrush(FormDesign.Design.InfoColor);
 
-			e.Graphics.DrawString(Locale.NoNotifications, Font, brush, new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, (int)(25 * UI.FontScale)), format);
+			e.Graphics.DrawString(Locale.NoNotifications, Font, brush, new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, UI.Scale(25)), format);
 
-			preferredHeight += (int)(25 * UI.FontScale) + Margin.Vertical;
+			preferredHeight += UI.Scale(25) + Margin.Vertical;
 		}
 		else
 		{

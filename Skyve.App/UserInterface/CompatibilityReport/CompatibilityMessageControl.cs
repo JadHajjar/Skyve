@@ -58,7 +58,7 @@ public class CompatibilityMessageControl : SlickControl
 	{
 		base.UIChanged();
 
-		Padding = UI.Scale(new Padding(5, 8, 5, 8), UI.FontScale);
+		Padding = UI.Scale(new Padding(5, 8, 5, 8));
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)
@@ -324,7 +324,7 @@ public class CompatibilityMessageControl : SlickControl
 
 	private int DrawPackage(PaintEventArgs e, IPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		e.Graphics.FillRoundedRectangleWithShadow(rectangle.Pad(Padding.Left), (int)(5 * UI.FontScale), Padding.Left);
+		e.Graphics.FillRoundedRectangleWithShadow(rectangle.Pad(Padding.Left), UI.Scale(5), Padding.Left);
 
 		var thumbRect = rectangle.ClipTo(rectangle.Width).Pad(Padding.Left + Padding.Top);
 		var textRect = rectangle.Pad(Padding.Left + Padding.Top, Padding.Vertical + thumbRect.Height, Padding.Left + Padding.Top, Padding.Bottom);
@@ -347,8 +347,8 @@ public class CompatibilityMessageControl : SlickControl
 			{
 				Cursor = cursor,
 				BorderRadius = Padding.Left,
-				Padding = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale),
-				Rectangle = new Rectangle(0, 0, textRect.Width, (int)(24 * UI.FontScale)),
+				Padding = UI.Scale(new Padding(4, 2, 4, 2)),
+				Rectangle = new Rectangle(0, 0, textRect.Width, UI.Scale(24)),
 				HoverState = HoverState & ~HoverState.Focused,
 				Text = action.Text,
 				Icon = action.Icon,
@@ -389,7 +389,7 @@ public class CompatibilityMessageControl : SlickControl
 			using var generic = IconManager.GetIcon(package.IsCodeMod() ? "Mods" : "Package", rectangle.Height).Color(BackColor);
 			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			e.Graphics.FillRoundedRectangle(brush, rectangle, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
 			e.Graphics.DrawImage(generic, rectangle.CenterR(generic.Size));
 		}
 		else if (package.IsLocal())
@@ -406,17 +406,17 @@ public class CompatibilityMessageControl : SlickControl
 		if (HoverState.HasFlag(HoverState.Hovered) && rectangle.Contains(cursor))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(75, FormDesign.Design.ForeColor));
-			e.Graphics.FillRoundedRectangle(brush, rectangle, (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
 		}
 
-		return rectangle.Height + (int)(16 * UI.FontScale);
+		return rectangle.Height + UI.Scale(16);
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, rectangle, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, rectangle, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
 	private int DrawTitleAndTags(PaintEventArgs e, IPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22), UI.FontScale), ContentAlignment.TopRight);
+		var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22)), ContentAlignment.TopRight);
 		_modDotsRects[package] = dotsRect;
 		DrawDots(e, dotsRect, cursor);
 

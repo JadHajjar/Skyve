@@ -16,8 +16,8 @@ public interface IWorkshopService
 	Task<IWorkshopInfo?> GetInfoAsync(IPackageIdentity identity);
 	IPackage GetPackage(IPackageIdentity identity);
 	Task<IPackage> GetPackageAsync(IPackageIdentity identity);
-	Task<IEnumerable<IWorkshopInfo>> GetWorkshopItemsByUserAsync(object userId);
-	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null);
+	Task<IEnumerable<IWorkshopInfo>> GetWorkshopItemsByUserAsync(object userId, WorkshopQuerySorting sorting = WorkshopQuerySorting.DateCreated, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null, int? page = null);
+	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null, int? page = null);
 
 #if CS2
 	event Action? ContextAvailable;
@@ -34,5 +34,9 @@ public interface IWorkshopService
 	Task<int> GetActivePlaysetId();
 	Task<List<IPlayset>> GetPlaysets(bool localOnly);
 	Task<bool> ToggleVote(IPackageIdentity packageIdentity);
+	Task<IModCommentsInfo?> GetComments(IPackageIdentity packageIdentity, int page = 1);
+	Task<IModComment?> PostNewComment(IPackageIdentity packageIdentity, string comment);
+	IAuthor? GetUser(IUser? user);
+	Task<IAuthor?> GetUserAsync(IUser? user);
 #endif
 }

@@ -149,9 +149,9 @@ public partial class PC_MainPage : PanelContent
 	{
 		base.UIChanged();
 
-		P_Scroll.Width = (int)(15 * UI.FontScale);
-		P_Board.Padding = new Padding(0, 0, 0, (int)(48 * UI.FontScale));
-		P_AvailableWidgets.Padding = UI.Scale(new Padding(6), UI.FontScale);
+		P_Scroll.Width = UI.Scale(15);
+		P_Board.Padding = new Padding(0, 0, 0, UI.Scale(48));
+		P_AvailableWidgets.Padding = UI.Scale(new Padding(6));
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -323,7 +323,7 @@ public partial class PC_MainPage : PanelContent
 
 		if (!ModifierKeys.HasFlag(Keys.Alt))
 		{
-			var margin = (int)(32 * UI.FontScale);
+			var margin = UI.Scale(32);
 			var closestX = P_Board.Controls
 				.Where(x => x != control && x is IDashboardItem)
 				.Select(x => x.Left)
@@ -337,7 +337,7 @@ public partial class PC_MainPage : PanelContent
 
 				if (MoveItem is not null && rect.Right > P_Container.Width)
 				{
-					rect.X = Math.Min(rect.X, P_Container.Width - (int)(32 * UI.FontScale));
+					rect.X = Math.Min(rect.X, P_Container.Width - UI.Scale(32));
 					rect.Width = P_Container.Width - rect.X;
 				}
 			}
@@ -387,7 +387,7 @@ public partial class PC_MainPage : PanelContent
 		}
 		else
 		{
-			rect.X = Math.Min(rect.X, P_Container.Width - (int)(32 * UI.FontScale));
+			rect.X = Math.Min(rect.X, P_Container.Width - UI.Scale(32));
 
 			if (MoveItem is not null && rect.Right > P_Container.Width)
 			{
@@ -436,7 +436,7 @@ public partial class PC_MainPage : PanelContent
 	{
 		if (sender is IDashboardItem dash)
 		{
-			dash.Margin = dash.Parent == FLP_AvailableWidgets ? default : UI.Scale(new Padding(8), UI.FontScale);
+			dash.Margin = dash.Parent == FLP_AvailableWidgets ? default : UI.Scale(new Padding(8));
 		}
 	}
 
@@ -457,7 +457,7 @@ public partial class PC_MainPage : PanelContent
 
 		P_Board.SuspendLayout();
 
-		var small = P_Container.Width < (int)(500 * UI.FontScale);
+		var small = P_Container.Width < UI.Scale(500);
 		var controls = P_Board.Controls.OfType<IDashboardItem>().ToList(x => new DashItemRect(x));
 
 		foreach (var dashItem in controls)
@@ -583,7 +583,7 @@ public partial class PC_MainPage : PanelContent
 		if (P_Container == sender || P_Container.Height < P_Board.Height + P_Board.Padding.Bottom)
 		{
 			var control = (SlickControl)sender;
-			var rectangle = (P_Container == sender || P_Container.Height > P_Board.Height ? P_Container : P_Board).ClientRectangle.Pad(0, 0, 0, !P_AvailableWidgets.Visible ? (int)(8 * UI.FontScale) : 0);
+			var rectangle = (P_Container == sender || P_Container.Height > P_Board.Height ? P_Container : P_Board).ClientRectangle.Pad(0, 0, 0, !P_AvailableWidgets.Visible ? UI.Scale(8) : 0);
 
 			rectangle = rectangle.Pad(0, rectangle.Bottom - P_Board.Padding.Bottom * 3 / 4, 0, 0);
 
@@ -627,7 +627,7 @@ public partial class PC_MainPage : PanelContent
 
 			if (!_settings.SessionSettings.DashboardFirstTimeShown)
 			{
-				var textRect = rectangle.Pad(resetRect.Width + (int)(16 * UI.FontScale), 0, rectangle.Right - (cancelRect == default ? editRect.X : cancelRect.X) + (int)(8 * UI.FontScale), 0);
+				var textRect = rectangle.Pad(resetRect.Width + UI.Scale(16), 0, rectangle.Right - (cancelRect == default ? editRect.X : cancelRect.X) + UI.Scale(8), 0);
 				using var font = UI.Font(8.5F, FontStyle.Italic).FitTo(Locale.DashboardCustomizationInfo, textRect, e.Graphics);
 				using var brush = new SolidBrush(FormDesign.Design.InfoColor);
 				using var format = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far };
@@ -641,7 +641,7 @@ public partial class PC_MainPage : PanelContent
 	{
 		if (item.DrawHeaderOnly)
 		{
-			item.Size = new Size((int)(200 * UI.FontScale), rectangle?.Height ?? (int)(32 * UI.FontScale));
+			item.Size = new Size(UI.Scale(200), rectangle?.Height ?? UI.Scale(32));
 			_dashItemSizes[item.Key] = new DashboardSetting(new(default, item.Size), true);
 			return;
 		}

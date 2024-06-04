@@ -47,7 +47,6 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		InitializeComponent();
 
-		ListControl.Visible = false;
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
 		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
@@ -78,8 +77,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (!_compatibilityManager.FirstLoadComplete)
 		{
-			PB_Loader.Visible = true;
-			PB_Loader.Loading = true;
+			ListControl.Loading = true;
 		}
 		else
 		{
@@ -126,24 +124,21 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		base.UIChanged();
 
-		PB_Loader.Size = UI.Scale(new Size(32, 32), UI.FontScale);
-		PB_Loader.Location = ClientRectangle.Center(PB_Loader.Size);
-
 		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
 			= I_SortOrder.Padding
-			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
+			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5));
 
 		B_Filters.Size = B_Filters.GetAutoSize(true);
 
 		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin = OT_ModAsset.Margin
 			= DR_SubscribeTime.Margin = DR_ServerTime.Margin
-			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
+			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2));
 
-		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
-		DD_Sorting.Width = (int)(175 * UI.FontScale);
-		TB_Search.Width = (int)(250 * UI.FontScale);
+		I_ClearFilters.Size = UI.Scale(new Size(16, 16));
+		DD_Sorting.Width = UI.Scale(175);
+		TB_Search.Width = UI.Scale(250);
 
-		var size = (int)(30 * UI.FontScale) - 6;
+		var size = UI.Scale(30) - 6;
 
 		TB_Search.MaximumSize = I_Refresh.MaximumSize = B_Filters.MaximumSize = I_SortOrder.MaximumSize = DD_Sorting.MaximumSize = new Size(9999, size);
 		TB_Search.MinimumSize = I_Refresh.MinimumSize = B_Filters.MinimumSize = I_SortOrder.MinimumSize = DD_Sorting.MinimumSize = new Size(0, size);
@@ -163,7 +158,6 @@ public partial class PC_CompatibilityReport : PanelContent
 			this.TryInvoke(() =>
 			{
 				LoadReport(packages!);
-				PB_Loader.Hide();
 			});
 		}
 	}
@@ -174,18 +168,8 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			reports.RemoveAll(x => x.GetNotification() <= NotificationType.Info);
 
-			if (reports.Count == 0)
-			{
-				label1.Location = ClientRectangle.Center(label1.Size);
-				label1.Show();
-			}
-			else
-			{
-				label1.Hide();
-			}
-
 			ListControl.SetItems(reports);
-			ListControl.Visible = reports.Count > 0;
+			ListControl.Loading = false;
 
 			DD_Author.SetItems(reports);
 		}
@@ -414,7 +398,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		massSnoozeing = true;
 		I_Actions.Loading = true;
-		PB_Loader.Visible = true;
+		ListControl.Loading = true;
 		ListControl.Enabled = false;
 		_notifier.IsBulkUpdating = true;
 
@@ -430,7 +414,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		_notifier.IsBulkUpdating = false;
 		ListControl.Enabled = true;
-		PB_Loader.Visible = false;
+		ListControl.Loading = false;
 		I_Actions.Loading = false;
 		massSnoozeing = false;
 

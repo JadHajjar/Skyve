@@ -1,5 +1,6 @@
 ﻿using Skyve.App.UserInterface.Dropdowns;
 
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -7,17 +8,20 @@ namespace Skyve.App.UserInterface.Panels;
 public partial class PC_ContentList : PanelContent
 {
 	protected internal readonly ContentList LC_Items;
+	private readonly IPackageUtil _packageUtil;
 	private readonly bool _itemsReady;
 
 	public virtual SkyvePage Page { get; }
 
 	public PC_ContentList() : this(false) { }
 
-	public PC_ContentList(bool load, bool itemsReady = false) : base(load)
+	public PC_ContentList(bool load, bool itemsReady = false, IPackageUtil? customPackageUtil = null) : base(load)
 	{
 		Padding = new Padding(0, 30, 0, 0);
 
-		LC_Items = new(Page, !load, GetItems, GetItemText)
+		_packageUtil = customPackageUtil ?? ServiceCenter.Get<IPackageUtil>();
+
+		LC_Items = new(Page, !load, GetItems, GetItemText, customPackageUtil)
 		{
 			TabIndex = 0,
 			Dock = DockStyle.Fill
@@ -58,19 +62,19 @@ public partial class PC_ContentList : PanelContent
 		return false;
 	}
 
-	protected virtual Task<IEnumerable<IPackageIdentity>> GetItems()
+	protected virtual Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
 		throw new NotImplementedException();
 	}
 
 	protected virtual async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)
 	{
-		await ServiceCenter.Get<IPackageUtil>().SetIncluded(filteredItems, included);
+		await _packageUtil.SetIncluded(filteredItems, included);
 	}
 
 	protected virtual async Task SetEnabled(IEnumerable<IPackageIdentity> filteredItems, bool enabled)
 	{
-		await ServiceCenter.Get<IPackageUtil>().SetEnabled(filteredItems, enabled);
+		await _packageUtil.SetEnabled(filteredItems, enabled);
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()

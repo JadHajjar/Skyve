@@ -2,6 +2,8 @@
 
 using Skyve.Compatibility.Domain.Enums;
 
+using SlickControls;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -58,7 +60,12 @@ public partial class ItemListControl
 
 			DrawCompatibilityAndStatus(e, out var outerColor);
 
-			if (isEnabled)
+			if (e.DrawableItem.Tag is not null)
+			{
+				using var brush = new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 50 : 175, BackColor));
+				e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
+			}
+			else if (isEnabled)
 			{
 				if (outerColor == default)
 				{
@@ -67,7 +74,7 @@ public partial class ItemListControl
 
 				using var pen = new Pen(outerColor, (float)(1.5 * UI.FontScale));
 
-				e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
+				e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), UI.Scale(5));
 			}
 			else if (isIncluded && !IsPackagePage && _settings.UserSettings.FadeDisabledItems && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
@@ -121,7 +128,7 @@ public partial class ItemListControl
 			}
 			else
 			{
-				tagsRect = new(e.ClipRectangle.Width * 5 / 10, e.Rects.TextRect.Bottom + (int)(20 * UI.FontScale) + (Padding.Bottom * 2), maxTagX - (e.ClipRectangle.Width * 4 / 10), (int)(20 * UI.FontScale));
+				tagsRect = new(e.ClipRectangle.Width * 5 / 10, e.Rects.TextRect.Bottom + UI.Scale(20) + (Padding.Bottom * 2), maxTagX - (e.ClipRectangle.Width * 4 / 10), UI.Scale(20));
 			}
 
 			var location = tagsRect.Location;
@@ -182,7 +189,7 @@ public partial class ItemListControl
 
 		private void DrawDividerLine(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 		{
-			var lineRect = new Rectangle(e.ClipRectangle.X, e.Rects.IconRect.Bottom + GridPadding.Vertical, e.ClipRectangle.Width, (int)(2 * UI.FontScale));
+			var lineRect = new Rectangle(e.ClipRectangle.X, e.Rects.IconRect.Bottom + GridPadding.Vertical, e.ClipRectangle.Width, UI.Scale(2));
 			using var lineBrush = new LinearGradientBrush(lineRect, default, default, 0F);
 
 			lineBrush.InterpolationColors = new ColorBlend
@@ -233,11 +240,11 @@ public partial class ItemListControl
 
 			if (GridView)
 			{
-				rect.Y += (int)(40 * UI.FontScale) + (GridPadding.Bottom / 2);
+				rect.Y += UI.Scale(40) + (GridPadding.Bottom / 2);
 			}
 			else
 			{
-				rect.Y += (int)(20 * UI.FontScale) + (Padding.Bottom * 2);
+				rect.Y += UI.Scale(20) + (Padding.Bottom * 2);
 			}
 
 			using var authorIcon = IconManager.GetSmallIcon("Folder");
@@ -251,15 +258,15 @@ public partial class ItemListControl
 		{
 			var padding = GridView ? GridPadding : Padding;
 			var authorRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, 0, 0);
-			var authorImg = author.GetUserAvatar();
+			var authorImg = _workshopService.GetUser(author)?.GetThumbnail();
 
 			if (GridView)
 			{
-				authorRect.Y += (int)(40 * UI.FontScale) + (GridPadding.Bottom / 2);
+				authorRect.Y += UI.Scale(40) + (GridPadding.Bottom / 2);
 			}
 			else
 			{
-				authorRect.Y += (int)(20 * UI.FontScale) + (Padding.Bottom * 2);
+				authorRect.Y += UI.Scale(20) + (Padding.Bottom * 2);
 			}
 
 			if (authorImg is null)
@@ -268,17 +275,18 @@ public partial class ItemListControl
 
 				authorRect = e.Graphics.DrawLabel(author.Name, authorIcon, default, authorRect, ContentAlignment.TopLeft, mousePosition: CursorLocation);
 			}
-			//else
-			//{
-			//	authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorImg, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
-			//}
+			else
+			{
+				using var smallImage = new Bitmap(authorImg, authorImg.Size.GetProportionalDownscaledSize(IconManager.GetSmallScale()));
+				authorRect = e.Graphics.DrawLabel(author.Name, smallImage, default, authorRect, ContentAlignment.TopLeft, mousePosition: CursorLocation, recolor: false);
+			}
 
 			if (_userService.IsUserVerified(author))
 			{
-				var avatarRect = authorRect.Pad(padding).Align(CompactList ? UI.Scale(new Size(18, 18), UI.FontScale) : new(authorRect.Height * 3 / 4, authorRect.Height * 3 / 4), ContentAlignment.MiddleLeft);
+				var avatarRect = authorRect.Pad(padding).Align(CompactList ? UI.Scale(new Size(18, 18)) : new(authorRect.Height * 3 / 4, authorRect.Height * 3 / 4), ContentAlignment.MiddleLeft);
 				var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
-				e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
+				e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-UI.Scale(2)));
 
 				using var img = IconManager.GetIcon("Check", checkRect.Height);
 
@@ -308,7 +316,7 @@ public partial class ItemListControl
 
 			if (date != default)
 			{
-				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+				var dateText = _settings.UserSettings.ShowDatesRelatively ? date.ToLocalTime().ToRelatedString(true, false) : date.ToLocalTime().ToString("g");
 				var isRecent = date > DateTime.UtcNow.AddDays(-7);
 
 				e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("UpdateTime"), isRecent ? Color.FromArgb(125, FormDesign.Design.ActiveColor) : default, tagRect, ContentAlignment.TopLeft, smaller: false);
@@ -323,7 +331,7 @@ public partial class ItemListControl
 			}
 
 			var rect = GridView
-				? new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + (int)(20 * UI.FontScale) + (GridPadding.Bottom / 2), 0, 0)
+				? new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + UI.Scale(20) + (GridPadding.Bottom / 2), 0, 0)
 				: new Rectangle(e.ClipRectangle.Width * 5 / 10, e.Rects.TextRect.Bottom + (Padding.Bottom * 2), 0, 0);
 
 			e.Rects.ScoreRect = e.Graphics.DrawLabel(Locale.VotesCount.FormatPlural(workshopInfo.VoteCount, workshopInfo.VoteCount.ToString("N0"))
@@ -346,13 +354,13 @@ public partial class ItemListControl
 		{
 			var rects = new Rectangles(item)
 			{
-				IconRect = rectangle.Pad(GridPadding).Align(UI.Scale(new Size(80, 80), UI.FontScale), ContentAlignment.TopLeft)
+				IconRect = rectangle.Pad(GridPadding).Align(UI.Scale(new Size(80, 80)), ContentAlignment.TopLeft)
 			};
 
 			using var font = UI.Font(11.25F, FontStyle.Bold);
 			rects.TextRect = rectangle.Pad(rects.IconRect.Width + (GridPadding.Left * 2), GridPadding.Top, GridPadding.Right, rectangle.Height).AlignToFontSize(font, ContentAlignment.TopLeft);
 
-			rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.TopRight);
+			rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28)), ContentAlignment.TopRight);
 
 			if (_settings.UserSettings.AdvancedIncludeEnable && item.GetPackage()?.IsCodeMod == true)
 			{

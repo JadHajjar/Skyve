@@ -26,8 +26,8 @@ public partial class AddLinkForm : BaseForm
 	{
 		base.UIChanged();
 
-		B_AddLink.Margin = UI.Scale(new Padding(10), UI.FontScale);
-		B_Apply.Margin = UI.Scale(new Padding(0, 0, 10, 10), UI.FontScale);
+		B_AddLink.Margin = UI.Scale(new Padding(10));
+		B_Apply.Margin = UI.Scale(new Padding(0, 0, 10, 10));
 	}
 
 	private void B_AddLink_Click(object sender, EventArgs e)
@@ -78,9 +78,9 @@ public partial class AddLinkForm : BaseForm
 			deleteButton = new SlickIcon();
 
 			icon.ImageName = packageLink.Type.GetIcon();
-			icon.Size = UI.Scale(new Size(24, 24), UI.FontScale);
-			icon.Padding = UI.Scale(new Padding(5), UI.FontScale);
-			icon.Margin = UI.Scale(new Padding(10, 3, 3, 3), UI.FontScale);
+			icon.Size = UI.Scale(new Size(24, 24));
+			icon.Padding = UI.Scale(new Padding(5));
+			icon.Margin = UI.Scale(new Padding(10, 3, 3, 3));
 			icon.Click += Icon_Click;
 
 			tbLink.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -94,11 +94,11 @@ public partial class AddLinkForm : BaseForm
 			tbName.Placeholder = "Link Name";
 			tbName.Text = packageLink.Title;
 
-			deleteButton.Size = UI.Scale(new Size(24, 24), UI.FontScale);
-			deleteButton.Padding = UI.Scale(new Padding(5), UI.FontScale);
+			deleteButton.Size = UI.Scale(new Size(24, 24));
+			deleteButton.Padding = UI.Scale(new Padding(5));
 			deleteButton.ImageName = "Trash";
 			deleteButton.ColorStyle = ColorStyle.Red;
-			deleteButton.Margin = UI.Scale(new Padding(3, 3, 10, 3), UI.FontScale);
+			deleteButton.Margin = UI.Scale(new Padding(3, 3, 10, 3));
 			deleteButton.Click += (s, e) => Dispose();
 
 			ColumnStyles.Add(new());

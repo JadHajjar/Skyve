@@ -18,4 +18,5 @@ public enum PackageStability
 	[CRN(NotificationType.Caution, false)] Local = 97,
 	[CRN(NotificationType.Caution, false)] AuthorRetired = 96,
 	[CRN(NotificationType.Info, false)] BrokenFromPatchSafe = 95,
+	[CRN(NotificationType.Info, false)] AssetIncompatible = 94,
 }
