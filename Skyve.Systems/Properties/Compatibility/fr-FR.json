@@ -149,6 +149,7 @@
   "Stability_HasIssues": "'{0}' peut causer des problèmes, veuillez l'utiliser prudemment.",
   "Stability_Broken": "'{0}' a cessé de fonctionner.\nCelui ci est connu pour planter la partie ou ne plus fonctionner.",
   "Stability_Incompatible": "'{0}' est marqué comme incompatible avec la version actuelle de votre jeu.\nUtilisez-le avec attention ou désactivez-le en attendant qu'il soit mis à jour.",
+  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
   "Stability_Local": "Ceci est une version locale de son mod original '{0}'.\n\nLes versions locales sont généralement utilisées à des fins de test.",
   "Stability_BrokenFromPatch": "'{1}' ne fonctionne plus après le patch {0} du jeu. Veuillez attendre qu'elle soit mise à jour avant de l'utiliser.\nEn attendant, vous devriez la désactiver.",
   "Stability_BrokenFromPatchSafe": "'{1}' a cessé de fonctionner après le patch {0} du jeu. Veuillez attendre qu'il soit mis à jour avant de l'utiliser.",
