@@ -75,9 +75,18 @@ public class MiniThumbControl : SlickControl
 			e.Graphics.DrawImage(icon, ClientRectangle.CenterR(icon.Size));
 		}
 
-		if (Label is not null and not "" && !HoverState.HasFlag(HoverState.Hovered))
+		if (Label is not null and not "")
 		{
-			e.Graphics.DrawLabel(Label, null, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor), ClientRectangle.Pad(UI.Scale(5)), ContentAlignment.BottomLeft);
+			var padding = UI.Scale(new Padding(3));
+			using var smallFont = UI.Font(6.5F);
+			using var backBrush = new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Hovered) ? 100 : 255, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor)));
+			using var foreBrush = new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Hovered) ? 100 : 255, backBrush.Color.GetTextColor()));
+			using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+			var size = Size.Round(e.Graphics.Measure(Label, smallFont, Width - (padding.Horizontal * 2))) + padding.Size;
+			var rectangle = ClientRectangle.Pad(padding).Align(size, ContentAlignment.BottomCenter);
+
+			e.Graphics.FillRoundedRectangle(backBrush, rectangle, padding.Left);
+			e.Graphics.DrawString(Label, smallFont, foreBrush, rectangle, format);
 		}
 	}
 

@@ -35,10 +35,7 @@ public partial class PC_UserPage : PanelContent
 			GridView = true,
 		};
 
-		T_Packages.LinkedControl = LC_Items = new ContentList(SkyvePage.User, false, GetItems, GetItemText)
-		{
-			IsGenericPage = true
-		};
+		T_Packages.LinkedControl = LC_Items = new ContentList(SkyvePage.User, false, GetItems, GetItemText);
 
 		LC_Items.TB_Search.Placeholder = "SearchGenericPackages";
 
