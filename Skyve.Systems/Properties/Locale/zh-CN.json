@@ -273,6 +273,10 @@
     "One": "订阅量：{1}",
     "Plural": "订阅量：{1}"
   },
+  "FollowersCount": {
+    "One": "{1} follower",
+    "Plural": "{1} followers"
+  },
   "SearchWorkshop": "搜索创意工坊…",
   "DiscoverWorkshop": "在工坊查找模组...",
   "SearchWorkshopBrowser": "在浏览器中搜索创意工坊…",
@@ -377,7 +381,8 @@
   "TreatOptionalAsRequired_Tip": "启用后，如果缺少了可选插件，将会显示“缺少前置”的警告。",
   "AddCustomTag": "添加自定义标签",
   "PackageIsNotDownloaded": "插件 '{0}' 已从您的电脑中删除",
-  "PackageIsOutOfDate": "插件 '{0}' 已经过期\n\n您的版本已落后 {1}",
+  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
+  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
   "PackageIsMaybeOutOfDate": "插件 '{0}' 可能已过期，它已经于 {1} 进行了更新",
   "RemovedByAuthor": "已被作者删除",
   "Missing": "丢失",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "已启用资产",
   "PackagesIncludedDisabled": "已装载且已禁用的插件",
   "OutOf": "{0} 个，共 {1} 个",
-  "RecentlyUpdatedItem": "近期更新的{0}"
+  "RecentlyUpdatedItem": "近期更新的{0}",
+  "MassSubscribeWarningTitle": "Mass subscription warning",
+  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
+  "DropImportFile": "Release to import the {0} from this report",
+  "OutOfDateItem": "Out of date {0}",
+  "Bio": "Bio",
+  "ColoredAuthorNames": "Color authors & users' name and avatar",
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
 }
