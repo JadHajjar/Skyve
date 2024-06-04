@@ -22,33 +22,44 @@ public class UserIcon : SlickImageControl
 	{
 		e.Graphics.SetUp(BackColor);
 
-		var author = _workshopService?.GetUser(User);
-		var thumbnail = author?.GetThumbnail();
-
-		Loading = thumbnail is null && author?.AvatarUrl is not null and not "" && ConnectionHandler.IsConnected;
-
-		if (Loading)
+		try
 		{
-			using var accentBrush = new SolidBrush(FormDesign.Design.AccentBackColor);
-			e.Graphics.FillRoundedRectangle(accentBrush, ClientRectangle.Pad(1), UI.Scale(5));
+			var author = _workshopService?.GetUser(User);
+			var thumbnail = author?.GetThumbnail();
 
-			DrawLoader(e.Graphics, ClientRectangle.CenterR(UI.Scale(new Size(32, 32), UI.UIScale)));
-			return;
+			Loading = thumbnail is null && author?.AvatarUrl is not null and not "" && ConnectionHandler.IsConnected;
+
+			if (Loading)
+			{
+				using var accentBrush = new SolidBrush(FormDesign.Design.AccentBackColor);
+				e.Graphics.FillRoundedRectangle(accentBrush, ClientRectangle.Pad(1), UI.Scale(5));
+
+				DrawLoader(e.Graphics, ClientRectangle.CenterR(UI.Scale(new Size(32, 32), UI.UIScale)));
+				return;
+			}
+
+			e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+			if (thumbnail != null)
+			{
+				e.Graphics.DrawRoundedImage(thumbnail, ClientRectangle.Pad(1), UI.Scale(5), FormDesign.Design.AccentBackColor);
+				return;
+			}
+
+			using var brush = new SolidBrush(GetUserColor(User?.Id?.ToString() ?? string.Empty));
+			using var generic = IconManager.GetIcon("User", Height * 8 / 10).Color(brush.Color.GetTextColor());
+
+			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), UI.Scale(5));
+			e.Graphics.DrawImage(generic, ClientRectangle.CenterR(generic.Size));
 		}
-
-		e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-
-		if (thumbnail != null)
+		finally
 		{
-			e.Graphics.DrawRoundedImage(thumbnail, ClientRectangle.Pad(1), UI.Scale(5), FormDesign.Design.AccentBackColor);
-			return;
+			if (HoverState.HasFlag(HoverState.Hovered) && Cursor == Cursors.Hand)
+			{
+				using var lightBrush = new SolidBrush(Color.FromArgb(50, FormDesign.Design.ForeColor));
+				e.Graphics.FillRoundedRectangle(lightBrush, ClientRectangle.Pad(1), UI.Scale(5));
+			}
 		}
-
-		using var brush = new SolidBrush(GetUserColor(User?.Id?.ToString() ?? string.Empty));
-		using var generic = IconManager.GetIcon("User", Height * 8 / 10).Color(brush.Color.GetTextColor());
-
-		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), UI.Scale(5));
-		e.Graphics.DrawImage(generic, ClientRectangle.CenterR(generic.Size));
 	}
 
 	public static Color GetUserColor(string username, bool textColor = false)
