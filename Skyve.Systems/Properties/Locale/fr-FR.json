@@ -382,7 +382,7 @@
   "AddCustomTag": "Ajouter un tag personnalisé",
   "PackageIsNotDownloaded": "'{0}' a été retiré de votre ordinateur",
   "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
-  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
+  "PackageIsOutOfDateVersion": "\"{0}\" est obsolète, vous utilisez une ancienne version du mod.",
   "PackageIsMaybeOutOfDate": "'{0}' peut être obsolète, il a été mis à jour {1}",
   "RemovedByAuthor": "Supprimé par l'auteur",
   "Missing": "Manquant",
@@ -590,11 +590,11 @@
   "PackagesIncludedDisabled": "Paquets inclus et désactivés",
   "OutOf": "{0} sur {1}",
   "RecentlyUpdatedItem": "{0} mis à jour récemment",
-  "MassSubscribeWarningTitle": "Mass subscription warning",
-  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
+  "MassSubscribeWarningTitle": "Avertissement d'abonnement de masse",
+  "MassSubscribeWarningInfo": "Vous êtes sur le point de vous abonner à {0} mods. Êtes-vous sûr de vouloir continuer ?",
   "DropImportFile": "Release to import the {0} from this report",
-  "OutOfDateItem": "Out of date {0}",
+  "OutOfDateItem": "{0} obsolète",
   "Bio": "Bio",
-  "ColoredAuthorNames": "Color authors & users' name and avatar",
-  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
+  "ColoredAuthorNames": "Colorer les noms et avatars des auteurs et utilisateurs",
+  "ColoredAuthorNames_Tip": "Ajoute une couleur unique à chaque auteur/utilisateur, le nom d'utilisateur et l'avatar utiliseront cette couleur pour qu'il soit plus simple de discerner les différents utilisateurs."
 }
