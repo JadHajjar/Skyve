@@ -1,4 +1,5 @@
-﻿using Skyve.App.Utilities;
+﻿using Skyve.App.UserInterface.Content;
+using Skyve.App.Utilities;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,11 +8,12 @@ namespace Skyve.App.UserInterface.Lists;
 public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRequestList.Rectangles>
 {
 	private readonly IUserService _userService;
+	private readonly IWorkshopService _workshopService;
 	private readonly INotifier _notifier;
 
 	public ReviewRequestList()
 	{
-		ServiceCenter.Get(out _userService, out _notifier);
+		ServiceCenter.Get(out _userService, out _notifier, out _workshopService);
 
 		SeparateWithLines = true;
 		DynamicSizing = true;
@@ -88,16 +90,25 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		base.OnPaintItemGrid(e);
 
 		var user = _userService.TryGetUser(e.Item.UserId);
+		var avatar = _workshopService.GetUser(user).GetThumbnail();
 
 		using var font = UI.Font(10F);
-		using var icon = IconManager.GetIcon("User", font.Height * 5 / 4).Color(FormDesign.Design.ForeColor);
-		using var brush = new SolidBrush(FormDesign.Design.ForeColor);
+		using var brush = new SolidBrush(UserIcon.GetUserColor(user.Id?.ToString() ?? string.Empty, true));
+		using var icon = IconManager.GetIcon("User", font.Height * 5 / 4).Color(brush.Color);
 
 		var nameSize = e.Graphics.Measure(user.Name, font);
 		var nameHeight = Math.Max(icon.Height, (int)nameSize.Height);
 		e.Rects.UserRectangle = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, nameHeight);
 
-		e.Graphics.DrawImage(icon, e.Rects.UserRectangle.Align(new Size(nameHeight, nameHeight), ContentAlignment.MiddleLeft).CenterR(icon.Size));
+		if (avatar is null)
+		{
+			e.Graphics.DrawImage(icon, e.Rects.UserRectangle.Align(new Size(nameHeight, nameHeight), ContentAlignment.MiddleLeft).CenterR(icon.Size));
+		}
+		else
+		{
+			e.Graphics.DrawRoundImage(avatar, e.Rects.UserRectangle.Align(new Size(nameHeight, nameHeight), ContentAlignment.MiddleLeft).CenterR(icon.Size));
+		}
+
 		e.Graphics.DrawString(user.Name, font, brush, e.Rects.UserRectangle.Pad(nameHeight + GridPadding.Left, 0, 0, 0));
 
 		using var smallFont = UI.Font(7.5F);
