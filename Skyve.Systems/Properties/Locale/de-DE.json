@@ -275,7 +275,7 @@
   },
   "FollowersCount": {
     "One": "{1} Follower",
-    "Plural": "{1} followers"
+    "Plural": "{1} Follower"
   },
   "SearchWorkshop": "Durchsuche stattdessen den Workshop...",
   "DiscoverWorkshop": "Suche nach Mods im Workshop...",
@@ -381,8 +381,8 @@
   "TreatOptionalAsRequired_Tip": "Im Wesentlichen zeigt dies die fehlende Abhängigkeitsbenachrichtigung für optionale Pakete.",
   "AddCustomTag": "Benutzerdefiniertes Tag hinzufügen",
   "PackageIsNotDownloaded": "'{0}' wurde von deinem Computer entfernt",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
-  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
+  "PackageIsOutOfDate": "'{0}' ist veraltet\n\nDu hängst {1} hinterher",
+  "PackageIsOutOfDateVersion": "'{0}' ist veraltet, du hast eine ältere Version des Mods.",
   "PackageIsMaybeOutOfDate": "'{0}' kann veraltet sein, es wurde aktualisiert {1}",
   "RemovedByAuthor": "Vom Autor entfernt",
   "Missing": "Fehlend",
@@ -590,11 +590,11 @@
   "PackagesIncludedDisabled": "Pakete enthalten & deaktiviert",
   "OutOf": "{0} von {1}",
   "RecentlyUpdatedItem": "Vor Kurzem aktualisiert{0}",
-  "MassSubscribeWarningTitle": "Mass subscription warning",
-  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
-  "DropImportFile": "Release to import the {0} from this report",
-  "OutOfDateItem": "Out of date {0}",
+  "MassSubscribeWarningTitle": "Massenabo-Warnung",
+  "MassSubscribeWarningInfo": "Sie sind dabei, {0} Mods zu abonnieren. Möchten Sie wirklich fortfahren?",
+  "DropImportFile": "Geben Sie die Freigabe zum Importieren der {0} aus diesem Bericht",
+  "OutOfDateItem": "Veraltet {0}",
   "Bio": "Bio",
-  "ColoredAuthorNames": "Color authors & users' name and avatar",
-  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
+  "ColoredAuthorNames": "Benutzerfarbe, Username, Avatar",
+  "ColoredAuthorNames_Tip": "Fügt eine eindeutige Farbe für jeden Autor/Benutzer hinzu, der Name und der Avatar des Benutzers werden diese Farbe verwenden, so das es einfacher ist, die einzelnen Benutzer zu verfolgen."
 }
