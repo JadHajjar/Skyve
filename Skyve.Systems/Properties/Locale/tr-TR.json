@@ -208,7 +208,7 @@
     "Plural": "Copy the selected packages' names"
   },
   "CopyAuthorId": {
-    "One": "Copy the author's ID",
+    "One": "Yazarın kimliğini kopyala",
     "Plural": "Copy the selected packages' author IDs"
   },
   "CopyAuthorName": {
