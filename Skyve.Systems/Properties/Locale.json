@@ -382,7 +382,10 @@
   "AddCustomTag": "Add a custom tag",
   "PackageIsNotDownloaded": "'{0}' was removed from your computer",
   "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
-  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
+  "PackageIsOutOfDateVersion": {
+    "One": "'{0}' is out of date, you are on an older version of the mod.",
+    "Plural": "{0} {1} are out of date, you are on older versions of these mods."
+  },
   "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
   "RemovedByAuthor": "Removed by author",
   "Missing": "Missing",

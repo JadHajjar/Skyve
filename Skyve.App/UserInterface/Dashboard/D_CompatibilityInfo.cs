@@ -100,7 +100,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 				return Task.FromResult(false);
 			}
 
-			if (!mod.IsIncluded())
+			if (!mod.IsEnabled())
 			{
 				continue;
 			}

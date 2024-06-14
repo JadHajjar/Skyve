@@ -516,6 +516,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DeselectAll => _instance.GetText("DeselectAll");
 
 	/// <summary>
+	/// Detected Issues
+	/// </summary>
+	public static Translation DetectedIssues => _instance.GetText("DetectedIssues");
+
+	/// <summary>
 	/// Developer Launch Options
 	/// </summary>
 	public static Translation DevOptions => _instance.GetText("DevOptions");
@@ -886,6 +891,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Filter items using this date
 	/// </summary>
 	public static Translation FilterSinceThisDate => _instance.GetText("FilterSinceThisDate");
+
+	/// <summary>
+	/// Fix All Issues
+	/// </summary>
+	public static Translation FixAllIssues => _instance.GetText("FixAllIssues");
 
 	/// <summary>
 	/// Attempt to re-download all packages that have issues, this will open steam for a brief moment
@@ -1480,7 +1490,8 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PackageIsOutOfDate => _instance.GetText("PackageIsOutOfDate");
 
 	/// <summary>
-	/// '{0}' is out of date, you are on an older version of the mod.
+	/// <para>'{0}' is out of date, you are on an older version of the mod.</para>
+	/// <para>Plural: {0} {1} are out of date, you are on older versions of these mods.</para>
 	/// </summary>
 	public static Translation PackageIsOutOfDateVersion => _instance.GetText("PackageIsOutOfDateVersion");
 
