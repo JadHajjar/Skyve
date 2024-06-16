@@ -149,18 +149,18 @@
   "LogZipFile": "Sla logs op in bestand",
   "LogFolders": "Log mappen",
   "LogFileDrop": "Drop of selecteer een logboekbestand om te worden vereenvoudigd en de lijst met fouten in het logboek weergeven",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
+  "DefaultLogViewInfo": "De fouten van de laatste sessie worden hier automatisch weergegeven, de resultaten worden live bijgewerkt.",
   "ErrorsInLog": "Fouten in het logboek",
   "OpenLogFolder": "Open de logmap van het spel",
   "CopyLogFile": "Kopieer het logbestand van het spel naar het klembord",
   "OpenLOTLogFolder": "Open Skyve's logmap",
   "CopyLOTLogFile": "Kopieer Skyve's logbestand naar klembord",
-  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
+  "GenericIncludedTotal": "{0} inbegrepen: {1}, Totaal: {2}",
+  "GenericIncludedAndEnabledTotal": "{0} inbegrepen & ingeschakeld: {1}, Totaal: {2}",
+  "GenericIncludedEnabledTotal": "{0} inbegrepen: {1}, waarvan ingeschakeld: {2}, Totaal: {3}",
   "NewPlayset_Tip": "Nieuwe afspeelset maken of importeren",
-  "ViewPlaysets_Tip": "View & manage your playsets",
-  "DeactivatePlayset_Tip": "Deactivate your current playset",
+  "ViewPlaysets_Tip": "Bekijk en beheer je playsets",
+  "DeactivatePlayset_Tip": "Deactiveer je huidige playset",
   "NewGame_Tip": "Start een nieuw spel wanneer je Cities: Skylines opent. Je kunt aangeven in welke map je wilt starten",
   "LoadSaveGame_Tip": "Laad een opgeslagen spel wanneer u Cities: Skylines opstart. Het niet selecteren van een opgeslagen bestand zal uw laatste save voortzetten",
   "BETA": "BETA",
@@ -174,7 +174,7 @@
   "ABANDONED": "GEABANDEERD",
   "ActionUnreversible": {
     "One": "Deze actie kan niet ongedaan worden gemaakt.",
-    "Plural": "This action can not be reversed. And will affect {0} packages."
+    "Plural": "Deze actie kan niet ongedaan worden gemaakt. En zal invloed hebben op {0} pakketten."
   },
   "AlwaysOpenFiltersAndActions": "Toon de filtersectie standaard",
   "AlwaysOpenFiltersAndActions_Tip": "Altijd de filters sectie openen bij het invoeren van een inhoudstabblad",
@@ -182,11 +182,11 @@
   "FavoriteTotal": "Totale afspeelsets: {0}",
   "PlaysetFilter": "Afspeelset filter",
   "CheckDocumentsFolder": "Zorg ervoor dat Skyve toegang heeft tot je documentenmap, het gebruikt het om je UI & Taal instellingen op te slaan.",
-  "FailedToSaveLanguage": "Failed to save the selected language",
+  "FailedToSaveLanguage": "Fout bij het opslaan van de geselecteerde taal",
   "FailedToOpenTC": "Kon Thema Wijziger niet openen",
   "FailedToDeleteItem": "Kan item niet verwijderen",
   "OpenChangelog": "Wijzigingslogboek openen",
-  "Changelog": "Change-log",
+  "Changelog": "Wijzigingslogboek",
   "DeleteAsset": {
     "One": "Verwijder dit bestand",
     "Plural": "De geselecteerde assets verwijderen"
@@ -196,12 +196,12 @@
     "Plural": "Verwijder de geselecteerde pakketten"
   },
   "EnableThisItemInAllPlaysets": {
-    "One": "Enable in all your playsets",
+    "One": "Activeer in alle playsets",
     "Plural": "Enable the selected items in all your playsets"
   },
   "DisableThisItemInAllPlaysets": {
-    "One": "Disable in all your playsets",
-    "Plural": "Disable the selected items in all your playsets"
+    "One": "Uitschakelen in alle playsets",
+    "Plural": "Schakel de geselecteerde items uit in al je playsets"
   },
   "CopyPackageName": {
     "One": "Copy the package's name",
