@@ -9,4 +9,5 @@ public interface IInterfaceService
 	void OpenPackagePage(IPackageIdentity package, bool openCompatibilityPage = false);
 	void OpenPlaysetPage(IPlayset playset, bool settingsTab = false);
 	bool AskForDependencyConfirmation(List<IPackageIdentity> packages, List<IPackageIdentity> dependencies);
+	void OpenLogReport(bool save);
 }

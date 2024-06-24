@@ -136,7 +136,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		}
 	}
 
-	private async void B_CopyZip_Click(object sender, EventArgs e)
+	public async void B_CopyZip_Click(object sender, EventArgs e)
 	{
 		B_CopyZip.Loading = true;
 		await Task.Run(async () =>
@@ -159,7 +159,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		B_CopyZip.ImageName = "CopyFile";
 	}
 
-	private async void B_SaveZip_Click(object sender, EventArgs e)
+	public async void B_SaveZip_Click(object sender, EventArgs e)
 	{
 		B_SaveZip.Loading = true;
 

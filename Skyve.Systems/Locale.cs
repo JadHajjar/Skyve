@@ -28,6 +28,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ExcludeItem => GetGlobalText(nameof(ExcludeItem));
 	public static Translation ViewOnWorkshop => GetGlobalText(nameof(ViewOnWorkshop));
 	public static Translation CopyWorkshopLink => GetGlobalText(nameof(CopyWorkshopLink));
+	public static Translation CopyWorkshopMarkdownLink => GetGlobalText(nameof(CopyWorkshopMarkdownLink));
 	public static Translation CopyWorkshopId => GetGlobalText(nameof(CopyWorkshopId));
 	public static Translation IncludeThisItemInAllPlaysets => GetGlobalText(nameof(IncludeThisItemInAllPlaysets));
 	public static Translation ExcludeThisItemInAllPlaysets => GetGlobalText(nameof(ExcludeThisItemInAllPlaysets));

@@ -65,7 +65,7 @@ public class PackageNameUtil : IPackageNameUtil
 
 			if (workshopInfo?.Name is null or "")
 			{
-				return _locale.Get("UnknownPackage");
+				return $"{_locale.Get("UnknownPackage")} #{package?.Id}";
 			}
 
 			return CleanName(workshopInfo, out tags, keepTags);
