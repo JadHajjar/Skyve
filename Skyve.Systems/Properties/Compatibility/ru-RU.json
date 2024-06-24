@@ -5,10 +5,10 @@
   "Previous": "Предыдущий",
   "Skip": "Пропустить",
   "Note": "Примечание",
-  "NoteInfo": "Additional information to be displayed for the mod",
+  "NoteInfo": "Дополнительная информация, отображаемая для мода",
   "BlackListName": "Чёрный список по имени",
-  "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "BlackListId": "Чёрный список по ID",
+  "GlobalTagsInfo": "Метки, которые будут видеть все игроки в Skyve",
   "Links": "Ссылки",
   "StatusesCount": "Statuses ({0})",
   "InteractionCount": "Взаимодействия ({0})",
@@ -16,10 +16,10 @@
   "AddInteraction": "Добавить взаимодействие",
   "NotReviewed": "Еще не проверено",
   "Stable": "Конюшня",
-  "StableNoNewFeatures": "Stable, only bug-fix updates",
-  "StableNoFutureUpdates": "Stable, no more updates",
-  "HasIssuesNoFutureUpdates": "Has issues, no more updates",
-  "BreaksOnPatch": "Stable, potentially breaks on patch",
+  "StableNoNewFeatures": "Стабильное обновление, только исправление ошибок",
+  "StableNoFutureUpdates": "Стабильное обновление, нет обновлений",
+  "HasIssuesNoFutureUpdates": "Имеет проблемы, больше нет обновлений",
+  "BreaksOnPatch": "Стабильный, потенциально сломается на патче",
   "NotEnoughInformation": "Недостаточно информации",
   "HasIssues": "Имеет проблемы",
   "Broken": "Сломано",
@@ -61,7 +61,7 @@
   "Website": "Сайт",
   "Donation": "Пожертвовать",
   "ManageCompatibilityData": "Compatibility Management",
-  "YourPackages": "Manage your mods",
+  "YourPackages": "Управляйте вашими модами",
   "AddPackages": "Добавить пакеты",
   "ConfirmEndSession": "Вы уверены, что хотите завершить сеанс?",
   "CrDataLoadFailed": "Не удалось загрузить данные, повторите попытку позже",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "Пожалуйста, выберите правильное использование для этого пакета.",
   "Interaction_Alternative": {
     "One": "'{1}' можно использовать в качестве альтернативы '{0}'.",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "Любой из следующих пакетов может быть использован в качестве альтернативы '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' и '{1}' ' имеют одинаковые функции.",
@@ -105,11 +105,11 @@
     "Plural": "'{0}' будет загружаться сразу после следующих пакетов."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' требуется для работы '{1}'.",
+    "Plural": "'{0}' требуется для следующих пакетов."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Interaction_Identical": "Следующие моды это разные версии одного и того же.\nИспользование их в одно и то же время будет вызывать многочисленные ошибки.",
+  "Status_Succeeded": "'{0}' успешно ' '{1}', и вы уже используете '{1}'. Больше нет необходимости в '{0}'.",
   "Status_Deprecated": "'{0}' является устаревшим, он больше не поддерживается его автором.",
   "Status_AutoDeprecated": "'{0}' давно не обновлялся, вероятно, больше не поддерживается автором.",
   "Status_Reupload": {
