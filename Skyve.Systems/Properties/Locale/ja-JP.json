@@ -273,6 +273,10 @@
     "One": "{1} subscriber",
     "Plural": "{1} subscribers"
   },
+  "FollowersCount": {
+    "One": "{1} follower",
+    "Plural": "{1} followers"
+  },
   "SearchWorkshop": "Search the workshop instead...",
   "DiscoverWorkshop": "Look for mods on the workshop...",
   "SearchWorkshopBrowser": "Search the workshop in your browser...",
@@ -377,7 +381,8 @@
   "TreatOptionalAsRequired_Tip": "基本的にオプションパッケージで不足している依存関係を通知＆表示します。",
   "AddCustomTag": "カスタムタグを追加",
   "PackageIsNotDownloaded": "「{0}」はPCから削除済",
-  "PackageIsOutOfDate": "「{0}」は古いバージョン\n\n{1} を経過しています",
+  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
+  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
   "PackageIsMaybeOutOfDate": "「{0}」は古い可能性がありますが、{1} は更新済み",
   "RemovedByAuthor": "作者によって削除済み",
   "Missing": "不明",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "Assets Enabled",
   "PackagesIncludedDisabled": "Packages Included & Disabled",
   "OutOf": "{0} out of {1}",
-  "RecentlyUpdatedItem": "Recently Updated {0}"
+  "RecentlyUpdatedItem": "Recently Updated {0}",
+  "MassSubscribeWarningTitle": "Mass subscription warning",
+  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
+  "DropImportFile": "Release to import the {0} from this report",
+  "OutOfDateItem": "Out of date {0}",
+  "Bio": "Bio",
+  "ColoredAuthorNames": "Color authors & users' name and avatar",
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
 }

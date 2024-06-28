@@ -149,6 +149,7 @@
   "Stability_HasIssues": "'{0}' 可能存在问题。\n请小心使用。",
   "Stability_Broken": "'{0}' 已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
   "Stability_Incompatible": "'{0}' 已被标记为与当前游戏版本不兼容。\n请务必谨慎使用，或等待它更新适配后再使用。",
+  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
   "Stability_Local": "这是模组 '{0}' 的本地版本。\n\n本地模组通常仅用于测试。",
   "Stability_BrokenFromPatch": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。\n目前，您应该禁用它。",
   "Stability_BrokenFromPatchSafe": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。",

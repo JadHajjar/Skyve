@@ -1,8 +1,8 @@
 {
   "CompatibilityInfo": "সামঞ্জস্যতা প্রতিবেদন",
   "Dashboard": "ড্যাশবোর্ড",
-  "SearchDlcs": "আপনার ডিএলসিগুলির মাধ্যমে অনুসন্ধান করুন ..",
-  "SearchPackages": "আপনার প্যাকেজগুলির মাধ্যমে অনুসন্ধান করুন ..",
+  "SearchDlcs": "আপনার ডিএলসিগুলোর মধ্যে অনুসন্ধান করুন..",
+  "SearchPackages": "আপনার প্যাকেজগুলোর মধ্যে অনুসন্ধান করুন..",
   "Vanilla": "ভ্যানিলা",
   "UpToDate": "আপ টু ডেট",
   "StatusUnknown": "অজানা অবস্থা",
@@ -273,6 +273,10 @@
     "One": "{1} subscriber",
     "Plural": "{1} subscribers"
   },
+  "FollowersCount": {
+    "One": "{1} follower",
+    "Plural": "{1} followers"
+  },
   "SearchWorkshop": "Search the workshop instead...",
   "DiscoverWorkshop": "Look for mods on the workshop...",
   "SearchWorkshopBrowser": "Search the workshop in your browser...",
@@ -377,7 +381,8 @@
   "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages.",
   "AddCustomTag": "Add a custom tag",
   "PackageIsNotDownloaded": "'{0}' was removed from your computer",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
+  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
+  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
   "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
   "RemovedByAuthor": "Removed by author",
   "Missing": "Missing",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "Assets Enabled",
   "PackagesIncludedDisabled": "Packages Included & Disabled",
   "OutOf": "{0} out of {1}",
-  "RecentlyUpdatedItem": "Recently Updated {0}"
+  "RecentlyUpdatedItem": "Recently Updated {0}",
+  "MassSubscribeWarningTitle": "Mass subscription warning",
+  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
+  "DropImportFile": "Release to import the {0} from this report",
+  "OutOfDateItem": "Out of date {0}",
+  "Bio": "Bio",
+  "ColoredAuthorNames": "Color authors & users' name and avatar",
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
 }

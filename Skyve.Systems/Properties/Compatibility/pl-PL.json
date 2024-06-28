@@ -149,6 +149,7 @@
   "Stability_HasIssues": "'{0}' może powodować problemy.\nBądź ostrożny używając go.",
   "Stability_Broken": "'{0}' powoduje problemy.\nPsuje grę, lub zwyczajnie nie działa.",
   "Stability_Incompatible": "'{0}' jest oznaczony jako niekompatybilny z twoją aktualną wersją gry.\nUżywaj go ostrożnie, lub dezaktywuj, czekając na jego aktualizację.",
+  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
   "Stability_Local": "To jest lokalna wersja modyfikacja '{0}'.\n\nLokalne wersje modyfikacji są zwykle używane do testów.",
   "Stability_BrokenFromPatch": "'{1}' powoduje problemy po aktualizacji gry {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.\nW międzyczasie powinieneś go dezaktywować.",
   "Stability_BrokenFromPatchSafe": "'{1}' powoduje problemy po aktualizacji gry {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.",

@@ -273,6 +273,10 @@
     "One": "{1} assinante",
     "Plural": "{1} Assinantes"
   },
+  "FollowersCount": {
+    "One": "{1} seguidor",
+    "Plural": "{1} seguidores"
+  },
   "SearchWorkshop": "Em vez disso, procure na oficina...",
   "DiscoverWorkshop": "Procurar por mods na oficina...",
   "SearchWorkshopBrowser": "Pesquisar na oficina no seu navegador...",
@@ -377,7 +381,8 @@
   "TreatOptionalAsRequired_Tip": "Essencialmente, isto exibe a notificação de dependência que falta para pacotes opcionais.",
   "AddCustomTag": "Adicionar uma etiqueta personalizada",
   "PackageIsNotDownloaded": "'{0}' foi removido do seu computador",
-  "PackageIsOutOfDate": "'{0}' está desatualizado\r\n\r\nVocê está {1} atrás",
+  "PackageIsOutOfDate": "'{0}' está desatualizado\nVocê está {1} atrasado(a)",
+  "PackageIsOutOfDateVersion": "'{0}' está desatualizado, você está usando uma versão mais antiga do mod.",
   "PackageIsMaybeOutOfDate": "'{0}' pode estar desatualizado, foi atualizado {1}",
   "RemovedByAuthor": "Removido pelo autor",
   "Missing": "Faltando",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "Recursos Habilitados",
   "PackagesIncludedDisabled": "Pacotes Incluídos e Desabilitados",
   "OutOf": "{0} de {1}",
-  "RecentlyUpdatedItem": "Atualizado recentemente {0}"
+  "RecentlyUpdatedItem": "Atualizado recentemente {0}",
+  "MassSubscribeWarningTitle": "Aviso de assinatura em massa",
+  "MassSubscribeWarningInfo": "Você está prestes a se inscrever em {0} mods. Tem certeza de que deseja continuar?",
+  "DropImportFile": "Solte para importar o {0} deste relatório",
+  "OutOfDateItem": "Desatualizado {0}",
+  "Bio": "Biografia",
+  "ColoredAuthorNames": "Colorir o nome e avatar de autores e usuários",
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
 }

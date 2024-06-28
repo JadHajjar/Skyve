@@ -273,6 +273,10 @@
     "One": "{1} Abonnent",
     "Plural": "{1} Abonnenten"
   },
+  "FollowersCount": {
+    "One": "{1} Follower",
+    "Plural": "{1} Follower"
+  },
   "SearchWorkshop": "Durchsuche stattdessen den Workshop...",
   "DiscoverWorkshop": "Suche nach Mods im Workshop...",
   "SearchWorkshopBrowser": "Durchsuche den Workshop in deinem Browser...",
@@ -378,6 +382,7 @@
   "AddCustomTag": "Benutzerdefiniertes Tag hinzufügen",
   "PackageIsNotDownloaded": "'{0}' wurde von deinem Computer entfernt",
   "PackageIsOutOfDate": "'{0}' ist veraltet\n\nDu hängst {1} hinterher",
+  "PackageIsOutOfDateVersion": "'{0}' ist veraltet, du hast eine ältere Version des Mods.",
   "PackageIsMaybeOutOfDate": "'{0}' kann veraltet sein, es wurde aktualisiert {1}",
   "RemovedByAuthor": "Vom Autor entfernt",
   "Missing": "Fehlend",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "Assets aktiviert",
   "PackagesIncludedDisabled": "Pakete enthalten & deaktiviert",
   "OutOf": "{0} von {1}",
-  "RecentlyUpdatedItem": "Vor Kurzem aktualisiert{0}"
+  "RecentlyUpdatedItem": "Vor Kurzem aktualisiert{0}",
+  "MassSubscribeWarningTitle": "Massenabo-Warnung",
+  "MassSubscribeWarningInfo": "Sie sind dabei, {0} Mods zu abonnieren. Möchten Sie wirklich fortfahren?",
+  "DropImportFile": "Geben Sie die Freigabe zum Importieren der {0} aus diesem Bericht",
+  "OutOfDateItem": "Veraltet {0}",
+  "Bio": "Bio",
+  "ColoredAuthorNames": "Benutzerfarbe, Username, Avatar",
+  "ColoredAuthorNames_Tip": "Fügt eine eindeutige Farbe für jeden Autor/Benutzer hinzu, der Name und der Avatar des Benutzers werden diese Farbe verwenden, so das es einfacher ist, die einzelnen Benutzer zu verfolgen."
 }

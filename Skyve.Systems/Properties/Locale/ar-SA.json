@@ -273,6 +273,10 @@
     "One": "{1} subscriber",
     "Plural": "{1} subscribers"
   },
+  "FollowersCount": {
+    "One": "{1} follower",
+    "Plural": "{1} followers"
+  },
   "SearchWorkshop": "Search the workshop instead...",
   "DiscoverWorkshop": "Look for mods on the workshop...",
   "SearchWorkshopBrowser": "Search the workshop in your browser...",
@@ -377,7 +381,8 @@
   "TreatOptionalAsRequired_Tip": "في الأساس، يعرض هذا إشعار التبعية الناقص للحزم الاختيارية.",
   "AddCustomTag": "إضافة علامة مخصصة",
   "PackageIsNotDownloaded": "تمت إزالة{0}' من جهاز الكمبيوتر الخاص بك",
-  "PackageIsOutOfDate": "'{0}' قديم التاريخ\r\n\r\nأنت {1} خلف",
+  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
+  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
   "PackageIsMaybeOutOfDate": "'{0}' قد يكون قديما، لقد تم تحديث {1}",
   "RemovedByAuthor": "Removed by author",
   "Missing": "مفقود",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "Assets Enabled",
   "PackagesIncludedDisabled": "Packages Included & Disabled",
   "OutOf": "{0} out of {1}",
-  "RecentlyUpdatedItem": "Recently Updated {0}"
+  "RecentlyUpdatedItem": "Recently Updated {0}",
+  "MassSubscribeWarningTitle": "Mass subscription warning",
+  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
+  "DropImportFile": "Release to import the {0} from this report",
+  "OutOfDateItem": "Out of date {0}",
+  "Bio": "Bio",
+  "ColoredAuthorNames": "Color authors & users' name and avatar",
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
 }
