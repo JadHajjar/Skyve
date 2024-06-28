@@ -38,5 +38,6 @@ public interface IWorkshopService
 	Task<IModComment?> PostNewComment(IPackageIdentity packageIdentity, string comment);
 	IAuthor? GetUser(IUser? user);
 	Task<IAuthor?> GetUserAsync(IUser? user);
+	ILink? GetCommentsPageUrl(IPackageIdentity packageIdentity);
 #endif
 }

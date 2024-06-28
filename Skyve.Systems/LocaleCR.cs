@@ -727,6 +727,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityBrokenFromPatchSafe => _instance.GetText("Stability_BrokenFromPatchSafe");
 
 	/// <summary>
+	/// '{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.
+	/// </summary>
+	public static Translation StabilityBrokenFromPatchUpdated => _instance.GetText("Stability_BrokenFromPatchUpdated");
+
+	/// <summary>
 	/// '{0}' can cause issues. Be careful while using it.
 	/// </summary>
 	public static Translation StabilityHasIssues => _instance.GetText("Stability_HasIssues");

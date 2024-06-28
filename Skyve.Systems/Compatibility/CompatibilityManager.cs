@@ -352,13 +352,13 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 		else if (stability is PackageStability.BrokenFromPatch)
 		{
-			if (IsCompatible((localPackage?.SuggestedGameVersion).IfEmpty(workshopInfo?.SuggestedGameVersion), null))
-			{
-				stability = PackageStability.NotReviewed;
-			}
-			else if (!_compatibilityHelper.IsPackageEnabled(package.Id, false))
+			if (!_compatibilityHelper.IsPackageEnabled(package.Id, false))
 			{
 				stability = PackageStability.BrokenFromPatchSafe;
+			}
+			else if (workshopInfo?.ServerTime > packageData.ReviewDate)
+			{
+				stability = PackageStability.BrokenFromPatchUpdated;
 			}
 		}
 
