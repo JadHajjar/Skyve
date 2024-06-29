@@ -274,8 +274,8 @@
     "Plural": "{1} subskrybentów"
   },
   "FollowersCount": {
-    "One": "{1} follower",
-    "Plural": "{1} followers"
+    "One": "{1} subskrybent",
+    "Plural": "{1} subskrybentów"
   },
   "SearchWorkshop": "Zamiast tego przeszukaj warsztat...",
   "DiscoverWorkshop": "Szukaj modów w warsztacie...",
@@ -590,10 +590,10 @@
   "PackagesIncludedDisabled": "Pakiety zawarte i wyłączone",
   "OutOf": "{0} z {1}",
   "RecentlyUpdatedItem": "Ostatnia aktualizacja {0}",
-  "MassSubscribeWarningTitle": "Mass subscription warning",
-  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
+  "MassSubscribeWarningTitle": "Ostrzeżenie o masowej subskrypcji",
+  "MassSubscribeWarningInfo": "Za moment zasubskrybujesz {0} modów. Czy na pewno chcesz kontynuować?",
   "DropImportFile": "Release to import the {0} from this report",
-  "OutOfDateItem": "Out of date {0}",
+  "OutOfDateItem": "Nieaktualny {0}",
   "Bio": "Bio",
   "ColoredAuthorNames": "Color authors & users' name and avatar",
   "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
