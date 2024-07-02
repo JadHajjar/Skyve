@@ -12,6 +12,8 @@ public class PC_WorkshopList : PanelContent
 	private int currentPage;
 	private bool listLoading;
 	private bool endOfPagesReached;
+	
+	private static List<ITag> lastSelectedTags = new();
 
 	public PC_WorkshopList() : base(false)
 	{
@@ -26,6 +28,8 @@ public class PC_WorkshopList : PanelContent
 		};
 
 		LC_Items.ListControl.ScrollUpdate += ListControl_ScrollUpdate;
+		LC_Items.DD_Tags.SelectedItems = lastSelectedTags;
+		LC_Items.DD_Tags.SelectedItemChanged += DD_Tags_SelectedItemChanged;
 
 		Controls.Add(LC_Items);
 
@@ -34,6 +38,11 @@ public class PC_WorkshopList : PanelContent
 #else
 		Text = "Steam Workshop";
 #endif
+	}
+
+	private void DD_Tags_SelectedItemChanged(object sender, EventArgs e)
+	{
+		lastSelectedTags = LC_Items.DD_Tags.SelectedItems.ToList();
 	}
 
 	protected override async void OnCreateControl()
