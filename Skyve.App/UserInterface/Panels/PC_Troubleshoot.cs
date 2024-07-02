@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
@@ -103,7 +105,7 @@ public partial class PC_Troubleshoot : PanelContent
 
 		await Task.Run(() => ServiceCenter.Get<ITroubleshootSystem>().Start(_settings));
 
-		Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
+		//Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
 	}
 
 	private async void B_Assets_Click(object sender, EventArgs e)
@@ -117,12 +119,12 @@ public partial class PC_Troubleshoot : PanelContent
 
 		await Task.Run(() => ServiceCenter.Get<ITroubleshootSystem>().Start(_settings));
 
-		Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
+		//Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
 	}
 
 	private void B_CompView_Click(object sender, EventArgs e)
 	{
-		Form.SetPanel<PC_CompatibilityReport>(Program.MainForm.PI_Compatibility);
+		//Form.SetPanel<PC_CompatibilityReport>(Program.MainForm.PI_Compatibility);
 	}
 
 	private void B_CompSkip_Click(object sender, EventArgs e)
@@ -140,7 +142,7 @@ public partial class PC_Troubleshoot : PanelContent
 			{
 				new BackgroundAction(() =>
 				{
-					ServiceCenter.Get<IWorkshopService>().CleanDownload(faultyPackages);
+					ServiceCenter.Get<ITroubleshootSystem>().CleanDownload(faultyPackages.ToList(x => x.LocalData!));
 				}).Run();
 
 				PushBack();
@@ -153,8 +155,11 @@ public partial class PC_Troubleshoot : PanelContent
 		TLP_New.Hide();
 	}
 
-	private bool CheckStrict(ILocalPackageWithContents localPackage)
+	private bool CheckStrict(IPackage localPackage)
 	{
+#if CS2
+		return false;
+#endif
 		var workshopInfo = localPackage.GetWorkshopInfo();
 
 		if (localPackage.IsLocal)
@@ -162,7 +167,7 @@ public partial class PC_Troubleshoot : PanelContent
 			return false;
 		}
 
-		if (localPackage.Mod is not null && _modLogicManager.IsRequired(localPackage.Mod, _modUtil))
+		if (localPackage.IsCodeMod && _modLogicManager.IsRequired(localPackage.LocalData, _modUtil))
 		{
 			return false;
 		}
@@ -173,7 +178,7 @@ public partial class PC_Troubleshoot : PanelContent
 		}
 
 		var sizeServer = workshopInfo.ServerSize;
-		var localSize = localPackage.LocalSize;
+		var localSize = localPackage.LocalData.FileSize;
 
 		if (sizeServer != 0 && localSize != 0 && sizeServer != localSize)
 		{
@@ -181,7 +186,7 @@ public partial class PC_Troubleshoot : PanelContent
 		}
 
 		var updatedServer = workshopInfo.ServerTime;
-		var updatedLocal = localPackage.LocalTime;
+		var updatedLocal = localPackage.LocalData.LocalTime;
 
 		if (updatedServer != default && updatedLocal != default && updatedServer > updatedLocal)
 		{

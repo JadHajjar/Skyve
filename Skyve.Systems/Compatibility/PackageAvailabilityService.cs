@@ -1,53 +1,47 @@
 ﻿using Extensions;
 
 using Skyve.Domain;
-using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
-using Skyve.Systems.Compatibility.Domain;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Skyve.Systems.Compatibility;
 public class PackageAvailabilityService
 {
 	private readonly IPackageManager _packageManager;
-	private readonly IPackageUtil _contentUtil;
+	private readonly IPackageUtil _packageUtil;
+	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly CompatibilityManager _compatibilityManager;
 	private readonly Dictionary<ulong, (bool enabled, bool enabledWithAlternatives)> _cache;
 
-	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil contentUtil, ILogger logger, CompatibilityManager compatibilityManager)
+	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil packageUtil, ISkyveDataManager skyveDataManager, CompatibilityManager compatibilityManager)
 	{
 		_packageManager = packageManager;
-		_contentUtil = contentUtil;
+		_packageUtil = packageUtil;
+		_skyveDataManager = skyveDataManager;
 		_compatibilityManager = compatibilityManager;
-		_cache = new();
+		_cache = [];
+	}
 
+	public bool IsPackageEnabled(ulong id, bool withAlternativesAndSuccessors)
+	{
+		return _cache.TryGetValue(id, out var status) && (withAlternativesAndSuccessors ? status.enabledWithAlternatives : status.enabled);
+	}
+
+	internal void RefreshCache()
+	{
 		var ids = new List<ulong>();
 
 		ids.AddRange(_packageManager.Packages.Select(x => x.Id));
-		ids.AddRange(_compatibilityManager.CompatibilityData.Packages.Keys);
+		ids.AddRange(_skyveDataManager.GetPackagesKeys());
 
-		logger.Info($"[Compatibility] Caching package availability for {ids.Distinct().Count(x => x > 0)} items");
-
+		_cache.Clear();
 		foreach (var package in ids.Distinct().Where(x => x > 0))
 		{
 			_cache[package] = (GetPackageEnabled(package, false), GetPackageEnabled(package, true));
 		}
-
-		logger.Info("[Compatibility] Package Availability Cached");
-	}
-
-	public bool IsPackageEnabled(ulong steamId, bool withAlternativesAndSuccessors)
-	{
-		if (_cache.TryGetValue(steamId, out var status))
-		{
-			return withAlternativesAndSuccessors ? status.enabledWithAlternatives : status.enabled;
-		}
-
-		return false;
 	}
 
 	internal void UpdateInclusionStatus(ulong id)
@@ -55,11 +49,11 @@ public class PackageAvailabilityService
 		_cache[id] = (GetPackageEnabled(id, false), GetPackageEnabled(id, true));
 	}
 
-	private bool GetPackageEnabled(ulong steamId, bool withAlternativesAndSuccessors)
+	private bool GetPackageEnabled(ulong id, bool withAlternativesAndSuccessors)
 	{
-		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
+		var indexedPackage = _skyveDataManager.TryGetPackageInfo(id);
 
-		if (isEnabled(_packageManager.GetPackageById(new GenericPackageIdentity(steamId))))
+		if (isEnabled(_packageManager.GetPackageById(new GenericPackageIdentity(id))?.LocalData))
 		{
 			return true;
 		}
@@ -73,7 +67,7 @@ public class PackageAvailabilityService
 		{
 			foreach (var item in indexedPackage.RequirementAlternatives)
 			{
-				if (item.Key != steamId)
+				if (item.Key != id)
 				{
 					foreach (var package in _compatibilityManager.FindPackage(item.Value, withAlternativesAndSuccessors))
 					{
@@ -96,7 +90,7 @@ public class PackageAvailabilityService
 
 		foreach (var item in indexedPackage.Group)
 		{
-			if (item.Key != steamId)
+			if (item.Key != id)
 			{
 				foreach (var package in _compatibilityManager.FindPackage(item.Value, withAlternativesAndSuccessors))
 				{
@@ -110,6 +104,6 @@ public class PackageAvailabilityService
 
 		return false;
 
-		bool isEnabled(ILocalPackage? package) => package is not null && _contentUtil.IsIncludedAndEnabled(package);
+		bool isEnabled(IPackageIdentity? package) => package is not null && _packageUtil.IsIncludedAndEnabled(package);
 	}
 }

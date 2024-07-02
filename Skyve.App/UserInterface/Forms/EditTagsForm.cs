@@ -6,9 +6,11 @@ public partial class EditTagsForm : BaseForm
 	private readonly ITagsService _tagsService = ServiceCenter.Get<ITagsService>();
 	private readonly List<ITag> _tags;
 
-	public List<ILocalPackage> Packages { get; }
+	public event Action<IEnumerable<string>>? ApplyTags;
 
-	public EditTagsForm(IEnumerable<ILocalPackage> packages)
+	public List<IPackageIdentity> Packages { get; }
+
+	public EditTagsForm(IEnumerable<IPackageIdentity> packages, IEnumerable<ITag>? tags = null)
 	{
 		InitializeComponent();
 
@@ -22,10 +24,10 @@ public partial class EditTagsForm : BaseForm
 		}
 		else
 		{
-			Text = Locale.TagsTitle.Format(Packages[0].ToString());
+			Text = Locale.TagsTitle.Format(Packages[0].CleanName(true));
 		}
 
-		_tags = new(Packages.SelectMany(x => x.GetTags().Where(x => x.IsCustom)).Distinct(x => x.Value));
+		_tags = tags?.ToList() ?? new(Packages.SelectMany(x => x.GetTags().Where(x => x.IsCustom)).Distinct(x => x.Value));
 
 		TLC.Tags.AddRange(_tags);
 		TLC.AllTags.AddRange(_tagsService.GetDistinctTags().OrderByDescending(x => _tags.Any(t => t.Value == x.Value)).ThenByDescending(x => x.IsCustom).ThenByDescending(_tagsService.GetTagUsage));
@@ -43,19 +45,26 @@ public partial class EditTagsForm : BaseForm
 	{
 		base.UIChanged();
 
-		TB_NewTag.Margin = UI.Scale(new Padding(7), UI.FontScale);
-		L_MultipleWarning.Margin = UI.Scale(new Padding(4), UI.FontScale);
+		TB_NewTag.Margin = UI.Scale(new Padding(7));
+		L_MultipleWarning.Margin = UI.Scale(new Padding(4));
 		L_MultipleWarning.Font = UI.Font(7.5F);
-		B_Apply.Margin = UI.Scale(new Padding(0, 0, 10, 10), UI.FontScale);
+		B_Apply.Margin = UI.Scale(new Padding(0, 0, 10, 10));
 	}
 
 	private void B_Apply_Click(object sender, EventArgs e)
 	{
 		DialogResult = DialogResult.OK;
 
-		foreach (var package in Packages)
+		if (ApplyTags is not null)
 		{
-			ServiceCenter.Get<ITagsService>().SetTags(package, TLC.Tags.Select(x => x.Value).Distinct());
+			ApplyTags(TLC.Tags.Select(x => x.Value).Distinct());
+		}
+		else
+		{
+			foreach (var package in Packages)
+			{
+				_tagsService.SetTags(package, TLC.Tags.Select(x => x.Value).Distinct());
+			}
 		}
 
 		Close();

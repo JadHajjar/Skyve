@@ -1,0 +1,13 @@
+<Project>
+	<PropertyGroup Condition="'$(BuildType)' == 'Stable'">
+		<AssemblyVersion>0.1.0.0</AssemblyVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(BuildType)' != 'Stable'">
+		<AssemblyVersion>0.1.0.0</AssemblyVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<FileVersion>0.1.5</FileVersion>
+	</PropertyGroup>
+</Project>

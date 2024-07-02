@@ -1,36 +1,53 @@
 ﻿using Skyve.Domain.Enums;
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 public interface IPlaysetManager
 {
-	ICustomPlayset CurrentPlayset { get; }
-	IEnumerable<ICustomPlayset> Playsets { get; }
-	ICustomPlayset TemporaryPlayset { get; }
+	IPlayset? CurrentPlayset { get; }
+	ICustomPlayset? CurrentCustomPlayset { get; }
+	IEnumerable<IPlayset> Playsets { get; }
+
+	Task<IPlayset?> AddPlayset(IPlayset newPlayset);
+	void CreateShortcut(IPlayset item);
+	Task<bool> DeletePlayset(IPlayset playset);
+	Task<bool> ExcludeFromCurrentPlayset(IPlayset playset);
+	string GetFileName(IPlayset playset);
+	List<IPackage> GetInvalidPackages(IPlayset playset, PackageUsage usage);
+	Task<IPlayset?> CreateNewPlayset(string playsetName);
+	Task<IPlayset?> ImportPlayset(string fileName);
+	Task<IPlayset?> CreateLogPlayset(string file);
+	Task<bool> MergeIntoCurrentPlayset(IPlayset playset);
+	Task<bool> RenamePlayset(IPlayset playset, string text);
+	Task ActivatePlayset(IPlayset playset);
+	Task Initialize();
+	Task SetIncludedForAll(IPackageIdentity package, bool value);
+	Task SetIncludedForAll(IEnumerable<IPackageIdentity> packages, bool value);
+	Task SetEnabledForAll(IPackageIdentity package, bool value);
+	Task SetEnabledForAll(IEnumerable<IPackageIdentity> packages, bool value);
+	Task<IPlayset?> ClonePlayset(IPlayset playset);
+	IPlayset? GetPlayset(int id);
+	ICustomPlayset GetCustomPlayset(IPlayset playset);
+	Task DeactivateActivePlayset();
+	void Save(ICustomPlayset customPlayset);
+	Task<IEnumerable<IPlaysetPackage>> GetPlaysetContents(IPlayset playset);
+	Task<object> GetLogPlayset();
+
+#if CS1
+	IPlayset TemporaryPlayset { get; }
 
 	event PromptMissingItemsDelegate PromptMissingItems;
 
-	ICustomPlayset GetNewPlayset();
-	string GetNewPlaysetName();
-	void AddPlayset(ICustomPlayset playset);
-	void DeletePlayset(ICustomPlayset playset);
-	ICustomPlayset? ImportPlayset(string obj);
-	void ExcludeFromCurrentPlayset(IPlayset playset);
-	void MergeIntoCurrentPlayset(IPlayset playset);
+	void OnAutoSave();
+	void SaveLsmSettings(IPlayset profile);
+	void RunFirstTimeSetup();
+	bool Save(IPlayset? playset, bool forced = false);
 	void GatherInformation(IPlayset playset);
 	IAsset? GetAsset(IPlaysetEntry asset);
 	IMod? GetMod(IPlaysetEntry mod);
-	bool IsPackageIncludedInPlayset(IPackage package, IPlayset playset);
-	bool RenamePlayset(IPlayset playset, string newName);
-	bool Save(IPlayset? playset, bool forced = false);
-	void SetIncludedFor(IPackage package, IPlayset playset, bool value);
-	void SetIncludedForAll(IPackage package, bool value);
-	void SetCurrentPlayset(ICustomPlayset playset);
-	string GetFileName(IPlayset profile);
-	void CreateShortcut(IPlayset item);
-	List<ILocalPackageWithContents> GetInvalidPackages(PackageUsage usage);
-	void SaveLsmSettings(IPlayset profile);
-	ICustomPlayset? ConvertLegacyPlayset(string profilePath, bool removeLegacyFile = true);
-	void RunFirstTimeSetup();
+	string GetNewPlaysetName();
+	IPlayset? ConvertLegacyPlayset(string profilePath, bool removeLegacyFile = true);
+#endif
 }

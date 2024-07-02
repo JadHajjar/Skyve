@@ -1,17 +1,22 @@
 ﻿using Skyve.Domain.Enums;
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 
 public interface IPackageUtil
 {
-	IEnumerable<ILocalPackage> GetPackagesThatReference(IPackage package, bool withExcluded = false);
-	DownloadStatus GetStatus(IPackage mod, out string reason);
-	bool IsEnabled(ILocalPackage package);
-	bool IsIncluded(ILocalPackage localPackage);
-	bool IsIncluded(ILocalPackage localPackage, out bool partiallyIncluded);
-	bool IsIncludedAndEnabled(ILocalPackage package);
-	void SetIncluded(ILocalPackage localPackage, bool value);
-	void SetEnabled(ILocalPackage localPackage, bool value);
+	DownloadStatus GetStatus(IPackageIdentity? mod, out string reason);
+
+	bool IsEnabled(IPackageIdentity package, int? playsetId = null);
+	bool IsIncluded(IPackageIdentity package, int? playsetId = null);
+	bool IsIncluded(IPackageIdentity package, out bool partiallyIncluded, int? playsetId = null);
+	bool IsIncludedAndEnabled(IPackageIdentity package, int? playsetId = null);
+	Task SetIncluded(IPackageIdentity package, bool value, int? playsetId = null);
+	Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null);
+	Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null);
+	Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null);
+	Task SetVersion(IPackageIdentity package, string? version, int? playsetId = null);
+	string? GetSelectedVersion(IPackageIdentity package, int? playsetId = null);
 }

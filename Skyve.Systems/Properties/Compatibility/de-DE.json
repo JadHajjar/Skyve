@@ -5,11 +5,10 @@
   "Previous": "Vorherige",
   "Skip": "Überspringen",
   "Note": "Notiz",
-  "NoteInfo": "Zusätzlicher Informationstext, der für das Paket angezeigt wird",
+  "NoteInfo": "Zusätzliche Information, die für die Mod angezeigt wird",
   "BlackListName": "Namen auf die Sperrliste setzen",
-  "BlackListId": "ID auf die Sperrliste setzen",
-  "GlobalTags": "Globale Tags",
-  "GlobalTagsInfo": "Schlagwörter, die alle Spieler in der App sehen werden",
+  "BlackListId": "Sperrliste nach ID",
+  "GlobalTagsInfo": "Schlagwörter, die alle Spieler in Skyve sehen werden",
   "Links": "Links",
   "StatusesCount": "Stati ({0})",
   "InteractionCount": "Interaktionen ({0})",
@@ -20,6 +19,7 @@
   "StableNoNewFeatures": "Stabil, nur Bugfix-Updates",
   "StableNoFutureUpdates": "Stabil, keine weiteren Updates",
   "HasIssuesNoFutureUpdates": "Hat Probleme, keine weiteren Updates",
+  "BreaksOnPatch": "Stabil, kann beim Patch kaputtgehen",
   "NotEnoughInformation": "Nicht genügend Informationen",
   "HasIssues": "Hat Probleme",
   "Broken": "Defekt",
@@ -60,9 +60,8 @@
   "AttentionRequired": "Aufmerksamkeit erforderlich",
   "Website": "Webseite",
   "Donation": "Spenden",
-  "ManageSinglePackage": "Bestimmte Pakete verwalten",
-  "ManageCompatibilityData": "Kompatibilitätsdaten verwalten",
-  "YourPackages": "Pakete verwalten",
+  "ManageCompatibilityData": "Kompatibilitätsverwaltung",
+  "YourPackages": "Verwalte deine Mods",
   "AddPackages": "Pakete hinzufügen",
   "ConfirmEndSession": "Sind Sie sicher, dass Sie Ihre Sitzung abschließen möchten?",
   "CrDataLoadFailed": "Fehler beim Laden der Daten, versuche es später erneut",
@@ -75,7 +74,7 @@
   "PleaseReviewPackageUsage": "Bitte wähle eine gültige Nutzung für dieses Paket.",
   "Interaction_Alternative": {
     "One": "'{1}' kann als Alternative zu '{0} ' verwendet werden.",
-    "Plural": "Eines der folgenden Pakete kann als Alternative zu '{0} ' verwendet werden."
+    "Plural": "Jedes der folgenden Pakete kann als Alternative zu '{0} ' verwendet werden."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' und '{1}' haben die gleichen Funktionalitäten.",
@@ -109,18 +108,18 @@
     "One": "'{0}' ist für '{1}' erforderlich.",
     "Plural": "'{0}' ist für die folgenden Pakete erforderlich."
   },
-  "Interaction_Identical": "Dies sind mehrere Versionen des gleichen Paketes.\n\nNur eines von ihnen auswählen.",
+  "Interaction_Identical": "Die folgenden sind mehrere Versionen derselben Mod.\nGleichzeitiges Verwenden wird Konflikte verursachen.",
   "Status_Succeeded": "'{0}' wurde von '{1}' abgelöst.\n\nDu verwendest bereits '{1}', sodass es keine Notwendigkeit mehr für '{0}' gibt.",
   "Status_Deprecated": "'{0}' ist veraltet, es wird nicht mehr vom Autor unterstützt.",
   "Status_AutoDeprecated": "'{0}' wurde seit langer Zeit nicht mehr aktualisiert.",
   "Status_Reupload": {
     "Zero": "'{0}' ist eine erneut hochgeladene Kopie eines Originalpakets.",
-    "One": "Dies ist eine erneut hochgeladene Kopie von '{1}'."
+    "One": "'{0}' ist ein Neu-Upload von '{1}'."
   },
-  "Status_CausesIssues": "'{0}' verursacht Probleme mit dem Spiel.",
+  "Status_CausesIssues": "'{0}' ist bekannt dafür, Probleme mit dem Spiel zu verursachen.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "Wenn beim Erstellen eines neuen Spielstands '{0}' aktiviert ist, kann dieser Spielstand nicht mehr geladen werden, wenn '{0}' deaktiviert wird.",
-    "One": "Wenn beim Erstellen eines neuen Spielstands '{0}' aktiviert ist, kann dieser Spielstand nicht mehr geladen werden, wenn '{0}' deaktiviert wird.\n\nBenutze '{1}', um den Spielstand wiederherzustellen, falls nötig. Lese die Workshopbeschreibung für weitere Informationen."
+    "Zero": "Nach dem Speichern mit '{0}' aktiviert, kann der Spielstand nicht mehr geladen werden, ohne das '{0}' aktiv ist.",
+    "One": "Nach dem Speichern mit '{0}' aktiviert, kann der Spielstand nicht mehr geladen werden, ohne das '{0}' aktiv ist.\n\nBenutze '{1}' um den Spielstand wiederherzustellen, falls nötig. Lese die Workshopbeschreibung für weitere Informationen."
   },
   "Status_TestVersion": {
     "Zero": "Dies ist eine 'Test'-Version. Beachte, dass Testversionen von Mods Probleme verursachen können und Aktualisierungen zu unerwarteten Fehlern führen können.",
@@ -139,49 +138,52 @@
   "Status_SourceAvailable": "Dieses Paket wird nicht vor fehlendem Quellcode warnen.",
   "Status_StandardMod": "Dieses Paket wird während Fehlersuche bei den zu prüfenden Mods ignoriert.",
   "OutputText": "Erwartete Ausgabe",
-  "Stability_AssetNotReviewed": "Dieses Asset wurde noch nicht überprüft.\n\nDie Kompatibilitätsinformationen sind möglicherweise nicht präzise; obwohl Assets im Allgemeinen stabil sind",
-  "Stability_NotReviewed": "Dieses Paket wurde noch nicht überprüft.\n\nDie Kompatibilitätsinformationen sind möglicherweise nicht präzise.",
-  "Stability_Stable": "Dieses Paket ist stabil. Der Autor arbeitet immer noch aktiv daran und aktualisiert es.",
-  "Stability_StableNoNewFeatures": "Dieses Paket ist stabil, aber der Autor wird keine weiteren Funktionen hinzufügen.\nSollten neue Fehler auftauchen, werden diese jedoch behoben werden.",
-  "Stability_StableNoFutureUpdates": "Dieses Paket ist stabil, aber der Autor unterstützt diese Mod nicht mehr und daher sind zukünftige Aktualisierungen oder Bugfixes unwahrscheinlich.",
-  "Stability_HasIssuesNoFutureUpdates": "Dieses Paket ist kann Probleme verursachen, aber der Autor unterstützt diese Mod nicht mehr und daher sind zukünftige Aktualisierungen oder Bugfixes unwahrscheinlich.",
-  "Stability_NotEnoughInformation": "Es gibt nicht genügend Informationen, um dieses Paket ordnungsgemäß zu überprüfen.",
-  "Stability_HasIssues": "Dieses Paket kann Probleme verursachen.\nSei vorsichtig, wenn du es verwendest.",
-  "Stability_Broken": "Dieses Paket ist defekt.\nEs ist bekannt, dass es entweder Spielfunktionen zerstört oder einfach nicht funktioniert.",
-  "Stability_Incompatible": "Dieses Paket ist nicht kompatibel mit dem Spiel oder zerstört Spielfunktionen.\n\nDu solltest es sofort entfernen.",
-  "Stability_Local": "Dieses Paket ist eine lokale Version der veröffentlichten Mod '{0}'.\n\nLokale Versionen werden in der Regel für Testzwecke verwendet oder für den Fall, dass du keine Steam-Version des Spiels besitzt.\n\nÜberprüfe die Links des Pakets, um nach Aktualisierungen für die Mod zu suchen.",
-  "Stability_BrokenFromPatch": "Dieses Paket ist seit dem letzten Spiel-Update defekt. Bitte warte, bis es aktualisiert wird, bevor du es wieder verwendest.",
+  "Stability_AssetNotReviewed": "'{0}' wurde noch nicht überprüft.\nDie Kompatibilitätsinformationen sind möglicherweise nicht korrekt, obwohl Assets im Allgemeinen stabil sind.",
+  "Stability_NotReviewed": "'{0}' wurde noch nicht überprüft.\n\nDie Kompatibilitätsinformationen sind möglicherweise nicht korrekt.",
+  "Stability_Stable": "'{0}' ist stabil. Der Autor arbeitet immer noch aktiv daran und aktualisiert es.",
+  "Stability_StableNoNewFeatures": "'{0}' ist stabil, obwohl der Autor keine Updates mehr veröffentlichen wird.\nSie werden es jedoch im Falle neuer Fehler immer noch aktualisieren.",
+  "Stability_StableNoFutureUpdates": "Obwohl der Autor '{0}' nicht mehr unterstützt, ist es stabil. Zukünftige Updates und Bugfixes sind aber unwahrscheinlich.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' kann Probleme verursachen und der Autor unterstützt es nicht mehr, zukünftige Updates oder Bugfixes sind unwahrscheinlich.",
+  "Stability_BreaksOnPatch": "'{0}' wird sehr wahrscheinlich kaputt gehen, wenn der neue Patch veröffentlicht wird.",
+  "Stability_NotEnoughInformation": "Es gibt nicht genügend Informationen, um '{0} ' richtig zu überprüfen.",
+  "Stability_HasIssues": "'{0}' kann Probleme verursachen.\nSeien Sie vorsichtig, wenn Sie es verwenden.",
+  "Stability_Broken": "'{0}' ist defekt.\nEs ist bekannt, das es entweder Spielfunktionen zerstört oder einfach nicht funktioniert.",
+  "Stability_Incompatible": "'{0}' ist als nicht kompatibel mit deiner aktuellen Spielversion markiert.\nBenutzen Sie es vorsichtig oder deaktivieren Sie es während Sie darauf warten, dass es aktualisiert wird.",
+  "Stability_AssetIncompatible": "'{0}' ist mit deiner aktuellen Spielversion als nicht kompatibel markiert.\nBei neuen Updates treten selten Fehler auf, die Verwendung sollte daher kein Problem sein.",
+  "Stability_Local": "Dies ist eine lokale Version der ursprünglichen Mod '{0}'.\n\nLokale Versionen werden normalerweise zum Testen verwendet.",
+  "Stability_BrokenFromPatch": "'{1}' funktioniert seit Patch {0} nicht mehr. Bitte warte, bis es aktualisiert wird, bevor du es verwendest.\nBis dahin solltest du es deaktivieren.",
+  "Stability_BrokenFromPatchSafe": "'{1}' funktioniert seit Patch {0} nicht mehr. Bitte warte, bis es aktualisiert wird, bevor du es verwendest.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "Du solltest folgendes Paket abonnieren:",
-    "Plural": "Du solltest diese Pakete abonnieren:"
+    "One": "Du solltest das folgende Paket deinem Playset hinzufügen.",
+    "Plural": "Du solltest die folgenden Pakete zu deinem Playset hinzufügen."
   },
-  "Action_RequiresConfiguration": "Du solltest folgenden Anweisungen folgen:",
+  "Action_RequiresConfiguration": "Bitte folgen Sie den folgenden Anweisungen:",
   "Action_SelectOne": {
     "One": "Du solltest dich zwischen '{0}' und '{1}' entscheiden.",
     "Plural": "Du solltest dich zwischen '{0}' und den folgenden Paketen entscheiden."
   },
-  "Action_UnsubscribeThis": "Du solltest '{0}' abbestellen.",
+  "Action_UnsubscribeThis": "Du solltest '{0}' von deinem Playset entfernen.",
   "Action_UnsubscribeOther": {
-    "One": "Du solltest '{1}' abbestellen.",
-    "Plural": "Du solltest folgende Pakete abbestellen:"
+    "One": "Du solltest '{1}' von deinem Playset entfernen.",
+    "Plural": "Du solltest die folgenden Pakete von deinem Playset entfernen."
   },
-  "Action_ExcludeThis": "Du solltest '{0}' ausschließen.",
-  "ExcludeThis": "Dieses Paket ausschließen",
-  "Exclude": "Ausschließen",
+  "Action_ExcludeThis": "Du solltest '{0} ' deaktivieren.",
+  "ExcludeThis": "Dieses Paket deaktivieren",
+  "Exclude": "Deaktivieren",
   "Unsubscribe": "Abbestellen",
   "Action_ExcludeOther": {
-    "One": "Du solltest '{1}' ausschließen.",
-    "Plural": "Folgende Pakete sollten ausgeschlossen werden:"
+    "One": "Du solltest '{1} ' deaktivieren.",
+    "Plural": "Du solltest die folgenden Pakete deaktivieren."
   },
   "Action_Switch": {
     "One": "Sie sollten zu '{1}' wechseln.",
-    "Plural": "Sie sollten zu einem der folgenden Pakete wechseln:"
+    "Plural": "Du solltest zu einem der folgenden Pakete wechseln."
   },
   "Action_IncludeThis": "Du solltest '{0}' hinzufügen",
   "Action_IncludeOther": {
-    "One": "Folgende Pakete sollten hinzugefügt werden:",
-    "Plural": "Du solltest diese Pakete hinzufügen:"
+    "One": "Du solltest das folgende Paket zu deinem Playset hinzufügen.",
+    "Plural": "Du solltest die folgenden Pakete zu deinem Playset hinzufügen."
   },
   "NoRequiredDlcs": "Keine erforderlichen DLCs",
   "DlcsSelected": {
@@ -215,10 +217,14 @@
     "One": "{0} {1} sollte ausgeschlossen werden",
     "Plural": "{0} {1} sollte ausgeschlossen werden"
   },
-  "UnsubscribeCount": "{0} {1}, die Sie abbestellen sollten",
+  "UnsubscribeCount": "{0} {1}, die du abbestellen solltest",
   "SwitchCount": {
     "One": "{0} {1} muss zu einem anderen wechseln",
     "Plural": "{0} {1} müssen zu einem anderen wechseln"
+  },
+  "RequiredItemCount": {
+    "One": "{0} {1}, das erforderlich ist, aber nicht aktiviert ist",
+    "Plural": "{0} {1}, die erforderlich sind, aber nicht aktiviert sind"
   },
   "PackageType": "Pakettyp",
   "GenericPackage": "Generisches Paket",
@@ -231,12 +237,12 @@
   "ApplyChangedBeforeExit": "Du hast ungespeicherte Änderungen.\n\nMöchtest du diese Änderungen anwenden, bevor du fortfährst?",
   "AuthorRetired": "Der Autor von {0}, {1}, hat sich zurückgezogen oder ist seit langem inaktiv.\n\nZukünftige Updates & Stabilität für deren Pakete sind nicht garantiert.",
   "AuthorMalicious": "Der Autor von {0}, {1}, ist als böswillig bekannt und/oder dafür, schädliche Inhalte wie Viren in deren Pakete einzubauen.",
-  "ReviewRequests": "Überprüfungsanfragen {0}",
+  "ReviewRequests": "Überprüfe Anfragen",
   "ApplyRequestedChanges": "Angeforderte Änderungen anwenden",
   "ManagePackage": "Paket verwalten",
   "Banned": "Gesperrt",
   "NoIssues": "Keine Probleme",
-  "RequestReviewDisclaimer": "*Deine Steam ID und Protokolle werden mit deiner Anfrage gesendet",
+  "RequestReviewDisclaimer": "*Deine Account-ID und Logs werden mit deiner Anfrage gesendet",
   "ScenarioMaking": "Szenario-Erstellung",
   "ThemeMaking": "Themen-Erstellung",
   "OtherCompatibilityWarnings": {
@@ -250,6 +256,12 @@
   "ViewRequest": "Anfrage anzeigen",
   "CRT_RequiredItem": "Erforderlicher Gegenstand",
   "RequiredItem": "Erforderlicher Gegenstand",
-  "ApplyAllActions": "Alle verfügbaren Aktionen anwenden",
-  "SnoozeAll": "Alle angezeigten Probleme ausblenden"
+  "ApplyAllActions": "Alle empfohlenen Aktionen anwenden",
+  "SnoozeAll": "Alle Probleme stummschalten",
+  "SnoozeAllFiltered": "Alle gefilterten Probleme stummschalten",
+  "LinkedPackages": "Verknüpfte Pakete",
+  "NoTags": "Keine Schlagwörter",
+  "NoLinks": "Keine Verbindung",
+  "HideReviewedPackages": "Überprüfte Pakete ausblenden",
+  "ApplyRecommendedAction": "Empfohlene Aktion anwenden"
 }

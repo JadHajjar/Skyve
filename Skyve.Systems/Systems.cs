@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility;
 
@@ -12,21 +13,16 @@ public static class SystemsProgram
 
 	public static IServiceCollection AddSkyveSystems(this IServiceCollection services)
 	{
-		services.AddSingleton<IBulkUtil, BulkUtil>();
 		services.AddSingleton<ILocale, Locale>();
 		services.AddSingleton<IImageService, ImageSystem>();
 		services.AddSingleton<IIOUtil, IOUtil>();
-		services.AddSingleton<ILogger, LoggerSystem>();
 		services.AddSingleton<INotifier, NotifierSystem>();
 		services.AddSingleton<IPackageNameUtil, PackageNameUtil>();
 		services.AddSingleton<IPackageUtil, PackageUtil>();
-		services.AddSingleton<SkyveApiUtil>();
 		services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
-		services.AddTransient<ILoadOrderHelper, LoadOrderHelper>();
 
-		Locale.Load();
-		LocaleCR.Load();
-		LocaleCRNotes.Load();
+		services.AddTransient<ILoadOrderHelper, LoadOrderHelper>();
+		services.AddTransient<ApiUtil>();
 
 		return services;
 	}

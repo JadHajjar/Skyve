@@ -17,7 +17,15 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 	public event EventHandler? SelectedValueChanged;
 
 	[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-	public Value SelectedValue { get => _selectedValue; set { _selectedValue = value; Invalidate(); SelectedValueChanged?.Invoke(this, EventArgs.Empty); } }
+	public Value SelectedValue
+	{
+		get => _selectedValue; set
+		{
+			_selectedValue = value;
+			Invalidate();
+			SelectedValueChanged?.Invoke(this, EventArgs.Empty);
+		}
+	}
 	[Category("Appearance"), DefaultValue("")]
 	public string Option1 { get; set; } = string.Empty;
 	[Category("Appearance"), DefaultValue("")]
@@ -41,7 +49,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		if (Live)
 		{
 			Font = UI.Font(8.25F);
-			Padding = UI.Scale(new Padding(5), UI.FontScale);
+			Padding = UI.Scale(new Padding(5));
 			if (!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
 			{
 				Height = (int)(24 * UI.UIScale);
@@ -63,7 +71,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 	{
 		base.OnMouseClick(e);
 
-		var centerWidth = Math.Max(Width / 5, (int)(40 * UI.FontScale));
+		var centerWidth = Math.Max(Width / 5, UI.Scale(40));
 		var option1Hovered = e.Location.X < (Width - centerWidth) / 2;
 		var option2Hovered = e.Location.X > (Width + centerWidth) / 2;
 
@@ -85,7 +93,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 	{
 		base.OnMouseMove(e);
 
-		var centerWidth = Math.Max(Width / 5, (int)(40 * UI.FontScale));
+		var centerWidth = Math.Max(Width / 5, UI.Scale(40));
 		var option1Hovered = e.Location.X < (Width - centerWidth) / 2;
 		var option2Hovered = e.Location.X > (Width + centerWidth) / 2;
 
@@ -107,8 +115,8 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 	{
 		e.Graphics.SetUp(BackColor);
 
-		var iconOnly = Width < 200 * UI.FontScale;
-		var centerWidth = Math.Max(Width / 5, (int)(40 * UI.FontScale));
+		var iconOnly = Width < 135 * UI.FontScale;
+		var centerWidth = Math.Max(Width / 5, UI.Scale(40));
 		var cursorLocation = PointToClient(Cursor.Position);
 		var rectangle1 = new Rectangle(0, 0, (Width - centerWidth) / 2, Height - 1);
 		var rectangle2 = new Rectangle((Width + centerWidth) / 2, 0, (Width - centerWidth) / 2, Height - 1);
@@ -116,16 +124,22 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		var option1Hovered = rectangle1.Contains(cursorLocation) && HoverState.HasFlag(HoverState.Hovered);
 		var option2Hovered = rectangle2.Contains(cursorLocation) && HoverState.HasFlag(HoverState.Hovered);
 		var noneHovered = rectangleNone.Contains(cursorLocation) && HoverState.HasFlag(HoverState.Hovered);
-		var textColor1 = SelectedValue == Value.Option1 || option1Hovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
-		var textColor2 = SelectedValue == Value.Option2 || option2Hovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
-		var textColorNone = SelectedValue == Value.None || noneHovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
+		var textColor1 = FormDesign.Design.ForeColor;
+		var textColor2 = FormDesign.Design.ForeColor;
+		var textColorNone = FormDesign.Design.ForeColor;
 
-		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 4, -4))), ClientRectangle, Padding.Left);
+		using var backBrush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 4 : -4));
+		e.Graphics.FillRoundedRectangle(backBrush, ClientRectangle, Padding.Left);
 
 		// Option 1
 		if (option1Hovered || SelectedValue == Value.Option1)
 		{
-			e.Graphics.FillRoundedRectangle(rectangle1.Gradient(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) || SelectedValue == Value.Option1 ? 255 : 100, OptionStyle1.GetColor()), 0.5F), rectangle1, Padding.Left, topRight: false, botRight: false);
+			var color = Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) || SelectedValue == Value.Option1 ? 255 : 100, OptionStyle1.GetColor());
+			using var brush = rectangle1.Gradient(color, 0.5F);
+
+			textColor1 = color.GetTextColor();
+
+			e.Graphics.FillRoundedRectangle(brush, rectangle1, Padding.Left, topRight: false, botRight: false);
 		}
 
 		if (Image1 != null)
@@ -138,7 +152,11 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 				if (!iconOnly)
 				{
-					e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option1), Font, new SolidBrush(textColor1), rectangle1.Pad(Padding).Pad(Padding.Left + img1.Width, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Near });
+					var rectangle = rectangle1.Pad(Padding).Pad(Padding.Left + img1.Width, 0, 0, 0);
+					using var brush = new SolidBrush(textColor1);
+					using var font = UI.Font(8.25F).FitToWidth(LocaleHelper.GetGlobalText(Option1), rectangle, e.Graphics);
+					using var format = new StringFormat { LineAlignment = StringAlignment.Center };
+					e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option1), font, brush, rectangle, format);
 				}
 			}
 		}
@@ -146,7 +164,12 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		// Option 2
 		if (option2Hovered || SelectedValue == Value.Option2)
 		{
-			e.Graphics.FillRoundedRectangle(rectangle2.Gradient(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) || SelectedValue == Value.Option2 ? 255 : 100, OptionStyle2.GetColor()), 0.5F), rectangle2, Padding.Left, topLeft: false, botLeft: false);
+			var color = Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) || SelectedValue == Value.Option2 ? 255 : 100, OptionStyle2.GetColor());
+			using var brush = rectangle2.Gradient(color, 0.5F);
+
+			textColor2 = color.GetTextColor();
+
+			e.Graphics.FillRoundedRectangle(brush, rectangle2, Padding.Left, topLeft: false, botLeft: false);
 		}
 
 		if (Image2 != null)
@@ -159,7 +182,11 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 				if (!iconOnly)
 				{
-					e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option2), Font, new SolidBrush(textColor2), rectangle2.Pad(Padding).Pad(0, 0, Padding.Right + img2.Width, 0).AlignToFontSize(Font, ContentAlignment.MiddleRight), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far });
+					var rectangle = rectangle2.Pad(Padding).Pad(0, 0, Padding.Right + img2.Width, 0);
+					using var brush = new SolidBrush(textColor2);
+					using var font = UI.Font(8.25F).FitToWidth(LocaleHelper.GetGlobalText(Option2), rectangle, e.Graphics);
+					using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far };
+					e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option2), font, brush, rectangle, format);
 				}
 			}
 		}
@@ -167,15 +194,21 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		// Center
 		if (noneHovered || SelectedValue == Value.None)
 		{
-			e.Graphics.FillRectangle(rectangleNone.Gradient(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) || SelectedValue == Value.None ? 255 : 100, FormDesign.Design.ActiveColor), 0.5F), rectangleNone);
+			var color = Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) || SelectedValue == Value.None ? 255 : 100, FormDesign.Design.ActiveColor);
+			using var brush = rectangleNone.Gradient(color, 0.5F);
+
+			textColorNone = color.GetTextColor();
+
+			e.Graphics.FillRectangle(brush, rectangleNone);
 		}
 
-		using var slash = IconManager.GetIcon("I_Slash", Height - Padding.Vertical).Color(textColorNone);
+		using var slash = IconManager.GetIcon("Slash", Height - Padding.Vertical).Color(textColorNone);
 		e.Graphics.DrawImage(slash, ClientRectangle.CenterR(slash.Size));
 
 		if (!Enabled)
 		{
-			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, BackColor)), ClientRectangle);
+			using var brush = new SolidBrush(Color.FromArgb(100, BackColor));
+			e.Graphics.FillRectangle(brush, ClientRectangle);
 		}
 	}
 

@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
-using Skyve.Domain;
+using Microsoft.Extensions.DependencyInjection;
+
 using Skyve.Domain.Systems;
 
 using System;
@@ -17,17 +18,19 @@ public class LoggerSystem : ILogger
 	private bool failed;
 	private readonly bool _disabled;
 	private readonly Stopwatch? _stopwatch;
+	private readonly IServiceProvider _provider;
 
 	public string LogFilePath { get; }
 	public string PreviousLogFilePath { get; }
 
-	public LoggerSystem(ISettings _)
+	public LoggerSystem(string name, SaveHandler saveHandler, IServiceProvider provider)
 	{
-		var folder = CrossIO.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
+		var folder = CrossIO.Combine(saveHandler.SaveDirectory, SaveHandler.AppName, "Logs");
 
-		PreviousLogFilePath = CrossIO.Combine(folder, $"SkyveApp_Previous.log");
-		LogFilePath = CrossIO.Combine(folder, $"SkyveApp.log");
+		PreviousLogFilePath = CrossIO.Combine(folder, $"{name}_Previous.log");
+		LogFilePath = CrossIO.Combine(folder, $"{name}.log");
 
+		_provider = provider;
 		_stopwatch = Stopwatch.StartNew();
 
 		try
@@ -44,21 +47,24 @@ public class LoggerSystem : ILogger
 				File.Move(LogFilePath, PreviousLogFilePath);
 			}
 
-			File.WriteAllBytes(LogFilePath, new byte[0]);
-
-			_stopwatch = Stopwatch.StartNew();
+			File.WriteAllBytes(LogFilePath, []);
 
 			var assembly = Assembly.GetEntryAssembly();
 			var details = assembly.GetName();
 
-#if Stable
+			_stopwatch = Stopwatch.StartNew();
+
+#if STABLE
 			Info($"Skyve Stable v{details.Version}");
-#else
+#elif Release
 			Info($"Skyve Beta v{details.Version}");
+#else
+			Info($"Skyve Debug v{details.Version}");
 #endif
 
 			Info($"Now  = {DateTime.Now:yyyy-MM-dd hh:mm:ss tt}");
 			Info($"Here = {Application.StartupPath}");
+			Info($"SaveLocation = {saveHandler.SaveDirectory}");
 		}
 		catch
 		{
@@ -91,7 +97,12 @@ public class LoggerSystem : ILogger
 		ProcessLog("FATAL", $"{message}\r\n{exception}\r\n");
 	}
 
-	private void ProcessLog(string type, object content)
+	public void Exception(object message)
+	{
+		ProcessLog("FATAL", message);
+	}
+
+	protected void ProcessLog(string type, object content)
 	{
 		if (_disabled)
 		{
@@ -127,7 +138,7 @@ public class LoggerSystem : ILogger
 				{
 					failed = true;
 
-					ServiceCenter.Get<INotifier>().OnLoggerFailed(ex);
+					_provider.GetService<INotifier>()?.OnLoggerFailed(ex);
 				}
 			}
 		}

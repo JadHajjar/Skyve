@@ -32,7 +32,7 @@ public class DoubleButton : SlickControl
 		if (Live)
 		{
 			Font = UI.Font(8.25F);
-			Padding = UI.Scale(new Padding(5), UI.FontScale);
+			Padding = UI.Scale(new Padding(5));
 		}
 	}
 

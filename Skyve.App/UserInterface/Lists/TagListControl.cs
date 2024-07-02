@@ -6,22 +6,22 @@ namespace Skyve.App.UserInterface.Lists;
 public class TagListControl : SlickControl
 {
 	private readonly ITagsService _tagsService;
-	private readonly List<(Rectangle rectangle, string tag)> _tagRects = new();
+	private readonly List<(Rectangle rectangle, string tag)> _tagRects = [];
 
-	public List<ITag> Tags { get; } = new();
-	public List<ITag> AllTags { get; } = new();
+	public List<ITag> Tags { get; } = [];
+	public List<ITag> AllTags { get; } = [];
 	public string? CurrentSearch { get; set; }
 
-    public TagListControl()
-    {
+	public TagListControl()
+	{
 		ServiceCenter.Get(out _tagsService);
-    }
+	}
 
-    protected override void UIChanged()
+	protected override void UIChanged()
 	{
 		base.UIChanged();
 
-		Padding = UI.Scale(new Padding(7, 7, 7, 32), UI.FontScale);
+		Padding = UI.Scale(new Padding(7, 7, 7, 32));
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -32,59 +32,70 @@ public class TagListControl : SlickControl
 		var tagsRect = new Rectangle(Padding.Left, Padding.Top, 0, 0);
 		var hovered = false;
 		var autoTags = true;
+		var padding = UI.Scale(new Padding(3, 2, 3, 2));
+		using var font = UI.Font(7.75F);
 
 		_tagRects.Clear();
 
 		using var fadeBrush = new SolidBrush(Color.FromArgb(150, BackColor));
 
-		foreach (var item in AllTags)
+		foreach (var item in AllTags.OrderBy(x => !x.IsCustom))
 		{
-			if (!autoTags == !item.IsCustom && !Tags.Any(t => t.Value == item.Value))
+			if (!autoTags == !item.IsCustom)
 			{
 				using var brush = new SolidBrush(FormDesign.Design.ActiveColor);
-				using var font = UI.Font(9F, FontStyle.Bold);
+				using var titleFont = UI.Font(7.75F, FontStyle.Bold);
 
 				if (tagsRect.Y != Padding.Top || tagsRect.X != Padding.Left)
 				{
 					tagsRect.X = Padding.Left;
-					tagsRect.Y += tagsRect.Height + Padding.Top * 3 / 2;
+					tagsRect.Y += tagsRect.Height + (Padding.Top * 5 / 2);
 				}
 
-				e.Graphics.DrawString(autoTags ? Locale.CustomTags : Locale.WorkshopAndGameTags, font, brush, tagsRect.Location);
+				var text = (autoTags ? Locale.CustomTags : Locale.WorkshopAndGameTags).One.ToUpper();
+				e.Graphics.DrawString(text, titleFont, brush, tagsRect.Location);
 
-				var textSize = e.Graphics.Measure(autoTags ? Locale.CustomTags : Locale.WorkshopAndGameTags, font);
+				var textSize = e.Graphics.Measure(text, titleFont);
 
 				using var activePen = new Pen(FormDesign.Design.ActiveColor, (int)(UI.FontScale * 2)) { DashStyle = DashStyle.Dot, DashCap = DashCap.Round };
-				e.Graphics.DrawLine(activePen, tagsRect.X + textSize.Width, tagsRect.Y + (int)textSize.Height / 2, Width - Padding.Right, tagsRect.Y + (int)textSize.Height / 2);
+				e.Graphics.DrawLine(activePen, tagsRect.X + textSize.Width, tagsRect.Y + ((int)textSize.Height / 2), Width - Padding.Right, tagsRect.Y + ((int)textSize.Height / 2));
 
-				tagsRect.Y += (int)textSize.Height + Padding.Top / 2;
+				tagsRect.Y += (int)textSize.Height + Padding.Top;
 
 				autoTags = !autoTags;
 			}
 
-			using var tagIcon = IconManager.GetSmallIcon(item.Icon);
-			var size = e.Graphics.MeasureLabel(item.Value, tagIcon, large: true);
+			using var buttonArgs = new ButtonDrawArgs
+			{
+				Cursor = cursorLocation,
+				HoverState = HoverState & ~HoverState.Focused,
+				Font = font,
+				Icon = item.Icon,
+				Text = item.Value,
+				Padding = padding,
+				Enabled = string.IsNullOrEmpty(CurrentSearch) || CurrentSearch.SearchCheck(item.Value),
+				ButtonType = Tags.Any(t => t.Value == item.Value) ? ButtonType.Active : ButtonType.Normal
+			};
 
-			if (tagsRect.X + size.Width + Padding.Right > Width)
+			SlickButton.PrepareLayout(e.Graphics, buttonArgs);
+
+			if (tagsRect.X + buttonArgs.Rectangle.Width + Padding.Right > Width)
 			{
 				tagsRect.X = Padding.Left;
-				tagsRect.Y += size.Height + Padding.Top;
+				tagsRect.Y += buttonArgs.Rectangle.Height + Padding.Top;
 			}
 
-			var rect = e.Graphics.DrawLabel(item.Value, tagIcon, Tags.Any(t => t.Value == item.Value) ? FormDesign.Design.ActiveColor : Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, ContentAlignment.TopLeft, large: true, mousePosition: cursorLocation);
+			buttonArgs.Rectangle = new Rectangle(tagsRect.Location, buttonArgs.Rectangle.Size);
 
-			if (!string.IsNullOrEmpty(CurrentSearch) && !CurrentSearch.SearchCheck(item.Value))
-			{
-				e.Graphics.FillRectangle(fadeBrush, rect);
-			}
+			SlickButton.SetUpColors(buttonArgs);
 
-			_tagRects.Add((rect, item.Value));
+			SlickButton.DrawButton(e.Graphics, buttonArgs);
 
-			hovered |= rect.Contains(cursorLocation);
+			_tagRects.Add((buttonArgs.Rectangle, item.Value));
 
-			tagsRect.Height = rect.Height;
-
-			tagsRect.X += size.Width + Padding.Right;
+			hovered |= buttonArgs.Rectangle.Contains(cursorLocation);
+			tagsRect.Height = buttonArgs.Rectangle.Height;
+			tagsRect.X += buttonArgs.Rectangle.Width + Padding.Right;
 		}
 
 		if (Height > Parent.Height)
@@ -95,8 +106,8 @@ public class TagListControl : SlickControl
 			e.Graphics.FillRectangle(brush, rect);
 		}
 
-		using var pen = new Pen(FormDesign.Design.AccentColor, (float)(UI.FontScale * 1.5));
-		e.Graphics.DrawLine(pen, Padding.Left, -Top, Width - Padding.Horizontal, -Top);
+		//using var pen = new Pen(FormDesign.Design.AccentColor, (float)(UI.FontScale * 1.5));
+		//e.Graphics.DrawLine(pen, Padding.Left, -Top, Width - Padding.Horizontal, -Top);
 
 		Height = tagsRect.Bottom + Padding.Bottom;
 
@@ -118,7 +129,7 @@ public class TagListControl : SlickControl
 		{
 			if (item.rectangle.Contains(e.Location))
 			{
-				if (e.Button == MouseButtons.Right || e.Button == MouseButtons.Left && Tags.Any(t => t.Value == item.tag))
+				if (e.Button == MouseButtons.Right || (e.Button == MouseButtons.Left && Tags.Any(t => t.Value == item.tag)))
 				{
 					Tags.RemoveAll(t => t.Value == item.tag);
 				}

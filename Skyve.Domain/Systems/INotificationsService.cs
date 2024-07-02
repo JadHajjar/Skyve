@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 public interface INotificationsService
 {
 	event Action OnNewNotification;
 	public IEnumerable<INotificationInfo> GetNotifications();
+	public IEnumerable<TNotificationInfo> GetNotifications<TNotificationInfo>() where TNotificationInfo : INotificationInfo;
 	void SendNotification(INotificationInfo notification);
+	void RemoveNotificationsOfType<TNotificationInfo>() where TNotificationInfo : INotificationInfo;
+	void RemoveNotification(INotificationInfo notification);
 }

@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.App.Utilities;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
@@ -103,7 +105,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		DrawIncludedButton(e, isIncluded, out var activeColor);
 
 		var height = (e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - GridPadding.Vertical) / 2;
-		var dateRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + GridPadding.Top), _settings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), "I_UpdateTime", height: height, smaller: true);
+		var dateRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + GridPadding.Top), _settings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToLocalTime().ToString("D"), "UpdateTime", height: height, smaller: true);
 
 		e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X, dateRect.Bottom + GridPadding.Top), e.Item.Price.IfEmpty(Locale.Free), null, FormDesign.Design.GreenColor, height: height, smaller: true);
 
@@ -115,11 +117,11 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		if (isIncluded)
 		{
-			var outerColor = Color.FromArgb(FormDesign.Design.Type == FormDesignType.Dark ? 65 : 100, activeColor);
+			var outerColor = Color.FromArgb(FormDesign.Design.IsDarkTheme ? 65 : 100, activeColor);
 
 			using var pen = new Pen(outerColor, (float)(1.5 * UI.FontScale));
 
-			e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
+			e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), UI.Scale(5));
 		}
 		else if (!_dlcManager.IsAvailable(e.Item.Id))
 		{
@@ -134,16 +136,18 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		if (thumbnail is null)
 		{
-			using var generic = Properties.Resources.I_DlcIcon.Color(FormDesign.Design.IconColor);
+			using var generic = IconManager.GetIcon("Dlc", e.Rects.IconRect.Height).Color(BackColor);
+			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			drawThumbnail(generic);
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
+			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
 		}
 		else
 		{
 			drawThumbnail(thumbnail);
 		}
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
 	private void DrawTitleAndTagsAndVersion(ItemPaintEventArgs<IDlcInfo, Rectangles> e, bool isPressed)
@@ -159,7 +163,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 	{
 		activeColor = default;
 
-		var incl = new DynamicIcon(!_dlcManager.IsAvailable(e.Item.Id) ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled");
+		var incl = new DynamicIcon(!_dlcManager.IsAvailable(e.Item.Id) ? "Slash" : isIncluded ? "Ok" : "Enabled");
 
 		if (isIncluded)
 		{
@@ -180,7 +184,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		using var brush = e.Rects.IncludedRect.Gradient(activeColor);
 
-		e.Graphics.FillRoundedRectangle(brush, e.Rects.IncludedRect, (int)(4 * UI.FontScale));
+		e.Graphics.FillRoundedRectangle(brush, e.Rects.IncludedRect, UI.Scale(4));
 
 		using var includedIcon = incl.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
 
@@ -196,7 +200,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		rects.TextRect = rectangle.Pad(rects.IconRect.Width + GridPadding.Left, 0, 0, rectangle.Height).AlignToFontSize(UI.Font(10.5F, FontStyle.Bold), ContentAlignment.TopLeft);
 
-		rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.TopRight);
+		rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28)), ContentAlignment.TopRight);
 
 		rects.TextRect.Width = rects.IncludedRect.X - rects.TextRect.X;
 
@@ -225,11 +229,11 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 			{
 				if (ServiceCenter.Get<IDlcManager>().IsIncluded(Item))
 				{
-					text = Locale.ExcludePackage.Format(Item.Name);
+					text = Locale.ExcludeItem.Format(Item.Name);
 				}
 				else
 				{
-					text = Locale.IncludePackage.Format(Item.Name);
+					text = Locale.IncludeItem.Format(Item.Name);
 				}
 
 				point = IncludedRect.Location;

@@ -1,6 +1,10 @@
 ﻿using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dashboard;
@@ -13,15 +17,13 @@ internal class D_CompatibilityInfo : IDashboardItem
 	private readonly IPackageManager _contentManager;
 	private readonly ICompatibilityManager _compatibilityManager;
 
-	private Dictionary<NotificationType, int> compatibilityModCounts;
-	private Dictionary<NotificationType, int> compatibilityAssetCounts;
+	private Dictionary<NotificationType, int> compatibilityModCounts = [];
+	private Dictionary<NotificationType, int> compatibilityAssetCounts = [];
 	private int mainSectionHeight;
 	private int modsSectionHeight;
 
 	public D_CompatibilityInfo()
 	{
-		compatibilityModCounts = new();
-		compatibilityAssetCounts = new();
 		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager, out _compatibilityManager);
 	}
 
@@ -50,112 +52,101 @@ internal class D_CompatibilityInfo : IDashboardItem
 		}
 	}
 
-	protected override void OnHandleCreated(EventArgs e)
+	protected override void OnCreateControl()
 	{
-		base.OnHandleCreated(e);
+		base.OnCreateControl();
 
-		if (!Live)
+		if (_notifier.IsContentLoaded)
 		{
-			return;
-		}
-
-		if (!_notifier.IsContentLoaded)
-		{
-			Loading = true;
-
-			_notifier.ContentLoaded += Invalidate;
+			LoadData();
 		}
 		else
 		{
-			Notifier_CompatibilityReportProcessed();
+			Loading = true;
 		}
 
-		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
-		_notifier.PackageInformationUpdated += Notifier_CompatibilityReportProcessed;
-		_notifier.PlaysetChanged += Notifier_CompatibilityReportProcessed;
-		_notifier.CompatibilityReportProcessed += Notifier_CompatibilityReportProcessed;
+		_notifier.ContentLoaded += LoadData;
+		_notifier.WorkshopInfoUpdated += LoadData;
+		_notifier.PackageInformationUpdated += LoadData;
+		_notifier.PackageInclusionUpdated += LoadData;
+		_notifier.PlaysetChanged += LoadData;
 	}
 
 	protected override void Dispose(bool disposing)
 	{
 		base.Dispose(disposing);
 
-		_notifier.ContentLoaded -= Invalidate;
-		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
-		_notifier.PackageInformationUpdated -= Notifier_CompatibilityReportProcessed;
-		_notifier.PlaysetChanged -= Notifier_CompatibilityReportProcessed;
-		_notifier.CompatibilityReportProcessed -= Notifier_CompatibilityReportProcessed;
+		_notifier.ContentLoaded -= LoadData;
+		_notifier.WorkshopInfoUpdated -= LoadData;
+		_notifier.PackageInformationUpdated -= LoadData;
+		_notifier.PackageInclusionUpdated -= LoadData;
+		_notifier.PlaysetChanged -= LoadData;
 	}
 
-	private void Notifier_CompatibilityReportProcessed()
+	protected override Task<bool> ProcessDataLoad(CancellationToken token)
 	{
-		lock (this)
+		if (!_notifier.IsContentLoaded)
 		{
-			var compatibilityModCounts = new Dictionary<NotificationType, int>();
-			var compatibilityAssetCounts = new Dictionary<NotificationType, int>();
+			return Task.FromResult(false);
+		}
 
-			foreach (var mod in _contentManager.Packages)
+		var compatibilityModCounts = new Dictionary<NotificationType, int>();
+		var compatibilityAssetCounts = new Dictionary<NotificationType, int>();
+
+		foreach (var mod in _contentManager.Packages)
+		{
+			if (token.IsCancellationRequested)
 			{
-				if (!_packageUtil.IsIncluded(mod))
-				{
-					continue;
-				}
+				return Task.FromResult(false);
+			}
 
-				var notif = mod.GetCompatibilityInfo(cacheOnly: true).GetNotification();
+			if (!mod.IsEnabled())
+			{
+				continue;
+			}
 
-				if (notif <= NotificationType.Info)
-				{
-					continue;
-				}
+			var notif = mod.GetCompatibilityInfo(cacheOnly: true).GetNotification();
 
-				if (mod.IsMod)
+			if (notif <= NotificationType.Info)
+			{
+				continue;
+			}
+
+			if (mod.IsCodeMod)
+			{
+				if (compatibilityModCounts.ContainsKey(notif))
 				{
-					if (compatibilityModCounts.ContainsKey(notif))
-					{
-						compatibilityModCounts[notif]++;
-					}
-					else
-					{
-						compatibilityModCounts[notif] = 1;
-					}
+					compatibilityModCounts[notif]++;
 				}
 				else
 				{
-					if (compatibilityAssetCounts.ContainsKey(notif))
-					{
-						compatibilityAssetCounts[notif]++;
-					}
-					else
-					{
-						compatibilityAssetCounts[notif] = 1;
-					}
+					compatibilityModCounts[notif] = 1;
 				}
 			}
-
-			this.compatibilityModCounts = compatibilityModCounts;
-			this.compatibilityAssetCounts = compatibilityAssetCounts;
-
-			if (Loading)
+			else
 			{
-				Loading = false;
+				if (compatibilityAssetCounts.ContainsKey(notif))
+				{
+					compatibilityAssetCounts[notif]++;
+				}
+				else
+				{
+					compatibilityAssetCounts[notif] = 1;
+				}
 			}
-
-			OnResizeRequested();
 		}
-	}
 
-	private void CentralManager_WorkshopInfoUpdated()
-	{
-		if (Loading && _compatibilityManager.FirstLoadComplete)
+		if (token.IsCancellationRequested)
 		{
-			OnResizeRequested();
+			return Task.FromResult(false);
+		}
 
-			Loading = false;
-		}
-		else
-		{
-			Invalidate();
-		}
+		this.compatibilityModCounts = compatibilityModCounts;
+		this.compatibilityAssetCounts = compatibilityAssetCounts;
+
+		OnResizeRequested();
+
+		return Task.FromResult(true);
 	}
 
 	protected override DrawingDelegate GetDrawingMethod(int width)
@@ -180,69 +171,38 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawLoadingSection(e, applyDrawing, Locale.CompatibilityReport, "I_CompatibilityReport", ref preferredHeight);
+		DrawLoadingSection(e, applyDrawing, ref preferredHeight, Locale.CompatibilityReport);
+	}
+
+	protected override void DrawHeader(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
+	{
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.CompatibilityReport, "CompatibilityReport");
 	}
 
 	private void DrawNoIssues(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.CompatibilityReport, "CompatibilityReport");
 
-		e.Graphics.DrawStringItem(Locale.NoCompatibilityIssues
-			, Font
-			, fore
-			, e.ClipRectangle.Pad(Margin)
-			, ref preferredHeight
-			, applyDrawing);
+		DrawValue(e, e.ClipRectangle.Pad(Margin), string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Package.Plural.ToLower()), string.Empty, applyDrawing, ref preferredHeight, "Check");
 
-		preferredHeight += Margin.Top;
-
-		mainSectionHeight = preferredHeight - e.ClipRectangle.Y;
-
-		preferredHeight += Margin.Top;
-
-		DrawButton(e, applyDrawing, ref preferredHeight, ViewCompatibilityReport, new()
-		{
-			Text = Locale.ViewCompatibilityReport,
-			Icon = "I_ViewFile",
-			Rectangle = e.ClipRectangle
-		});
-
-		preferredHeight -= Margin.Bottom;
+		preferredHeight += BorderRadius;
 	}
 
 	private void DrawSplit(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.CompatibilityReport, "CompatibilityReport");
 
 		var rect = new Rectangle(e.ClipRectangle.X, preferredHeight, (e.ClipRectangle.Width / 2) - (Padding.Left / 2), mainSectionHeight - preferredHeight + e.ClipRectangle.Y);
 
-		if (applyDrawing)
-		{
-			using var modIcon = IconManager.GetIcon("I_Mods", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
-			e.Graphics.DrawImage(modIcon, rect.CenterR(modIcon.Size));
-		}
-
 		if (compatibilityModCounts.Count == 0)
 		{
-			e.Graphics.DrawStringItem(string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Mod.Plural.ToLower())
-			, Font
-			, fore
-			, rect.Pad(Margin)
-			, ref preferredHeight
-			, applyDrawing
-			, "I_Check");
+			DrawValue(e, rect.Pad(Margin), string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Mod.Plural.ToLower()), string.Empty, applyDrawing, ref preferredHeight, "Check");
 		}
 		else
 		{
 			foreach (var group in compatibilityModCounts.OrderBy(x => x.Key))
 			{
-				e.Graphics.DrawStringItem(LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Mod.FormatPlural(group.Value).ToLower())
-					, Font
-					, group.Key.GetColor()
-					, rect.Pad(Margin	)
-					, ref preferredHeight
-					, applyDrawing
-					, group.Key.GetIcon(true));
+				DrawValue(e, rect.Pad(Margin), string.Format(LocaleCR.Get($"{group.Key}Count").Plural, string.Empty, Locale.Mod.Plural).Trim(), group.Value.ToString(), applyDrawing, ref preferredHeight, group.Key.GetIcon(true), group.Key.GetColor());
 			}
 		}
 
@@ -260,33 +220,15 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 		preferredHeight = rect.Y;
 
-		if (applyDrawing)
-		{
-			using var assetIcon = IconManager.GetIcon("I_Assets", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
-			e.Graphics.DrawImage(assetIcon, rect.CenterR(assetIcon.Size));
-		}
-
 		if (compatibilityAssetCounts.Count == 0)
 		{
-			e.Graphics.DrawStringItem(string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Asset.Plural.ToLower())
-				, Font
-				, fore
-				, rect.Pad(Margin)
-				, ref preferredHeight
-				, applyDrawing
-				, "I_Check");
+			DrawValue(e, rect.Pad(Margin), string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Asset.Plural.ToLower()), string.Empty, applyDrawing, ref preferredHeight, "Check");
 		}
 		else
 		{
 			foreach (var group in compatibilityAssetCounts.OrderBy(x => x.Key))
 			{
-				e.Graphics.DrawStringItem(LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Asset.FormatPlural(group.Value).ToLower())
-					, Font
-					, group.Key.GetColor()
-					, rect.Pad(Margin)
-					, ref preferredHeight
-					, applyDrawing
-					, group.Key.GetIcon(true));
+				DrawValue(e, rect.Pad(Margin), string.Format(LocaleCR.Get($"{group.Key}Count").Plural, string.Empty, Locale.Asset.Plural).Trim(), group.Value.ToString(), applyDrawing, ref preferredHeight, group.Key.GetIcon(true), group.Key.GetColor());
 			}
 		}
 
@@ -294,15 +236,16 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 		mainSectionHeight = preferredHeight - e.ClipRectangle.Y;
 
-		preferredHeight += Margin.Top;
+		preferredHeight += BorderRadius;
 
 		var buttonRect = new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width / 3, 1);
 
 		DrawButton(e, applyDrawing, ref preferredHeight, ViewModsWithIssues, new()
 		{
 			Text = Locale.ViewModsWithIssues,
-			Icon = "I_Mods",
-			Rectangle = buttonRect.Pad(0,0,Margin.Right,0)
+			Icon = "Mods",
+			ButtonType = ButtonType.Dimmed,
+			Rectangle = buttonRect.Pad(0, 0, Margin.Right, 0).Pad(Margin)
 		});
 
 		var maxHeight = preferredHeight;
@@ -313,8 +256,9 @@ internal class D_CompatibilityInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, ViewCompatibilityReport, new()
 		{
 			Text = Locale.ViewCompatibilityReport,
-			Icon = "I_ViewFile",
-			Rectangle = buttonRect.Pad(Margin.Left, 0, Margin.Right, 0)
+			Icon = "ViewFile",
+			ButtonType = ButtonType.Dimmed,
+			Rectangle = buttonRect.Pad(Margin.Left, 0, Margin.Right, 0).Pad(Margin)
 		});
 
 		maxHeight = Math.Max(maxHeight, preferredHeight);
@@ -325,52 +269,35 @@ internal class D_CompatibilityInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, ViewAssetsWithIssues, new()
 		{
 			Text = Locale.ViewAssetsWithIssues,
-			Icon = "I_Assets",
-			Rectangle = buttonRect.Pad(Margin.Left, 0, 0, 0)
+			Icon = "Assets",
+			ButtonType = ButtonType.Dimmed,
+			Rectangle = buttonRect.Pad(Margin.Left, 0, 0, 0).Pad(Margin)
 		});
 
-		preferredHeight = Math.Max(maxHeight, preferredHeight) - Margin.Bottom;
+		preferredHeight = Math.Max(maxHeight, preferredHeight) + BorderRadius / 2;
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out var fore, ref preferredHeight);
-		
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.CompatibilityReport, "CompatibilityReport");
+
 		var rect = new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, modsSectionHeight - preferredHeight);
 
 		if (compatibilityModCounts.Count == 0)
 		{
-			e.Graphics.DrawStringItem(string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Mod.Plural.ToLower())
-			, Font
-			, fore
-			, e.ClipRectangle.Pad(Margin)
-			, ref preferredHeight
-			, applyDrawing
-			, "I_Check");
+			DrawValue(e, rect.Pad(Margin), string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Mod.Plural.ToLower()), string.Empty, applyDrawing, ref preferredHeight, "Check");
 		}
 		else
 		{
-			if (applyDrawing)
-			{
-				using var modIcon = IconManager.GetIcon("I_Mods", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
-				e.Graphics.DrawImage(modIcon, rect.CenterR(modIcon.Size));
-			}
-
 			foreach (var group in compatibilityModCounts.OrderBy(x => x.Key))
 			{
-				e.Graphics.DrawStringItem(LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Mod.FormatPlural(group.Value).ToLower())
-					, Font
-					, group.Key.GetColor()
-					, e.ClipRectangle.Pad(Margin)
-					, ref preferredHeight
-					, applyDrawing
-					, group.Key.GetIcon(true));
+				DrawValue(e, rect.Pad(Margin), string.Format(LocaleCR.Get($"{group.Key}Count").Plural, string.Empty, Locale.Mod.Plural).Trim(), group.Value.ToString(), applyDrawing, ref preferredHeight, group.Key.GetIcon(true), group.Key.GetColor());
 			}
 		}
 
 		modsSectionHeight = preferredHeight;
 
-		preferredHeight += Margin.Top;
+		preferredHeight += BorderRadius;
 
 		if (applyDrawing)
 		{
@@ -378,54 +305,37 @@ internal class D_CompatibilityInfo : IDashboardItem
 			e.Graphics.DrawLine(pen, e.ClipRectangle.X + Padding.Left, preferredHeight, e.ClipRectangle.Right - (Padding.Left * 2), preferredHeight);
 		}
 
-		preferredHeight += (int)(4 * UI.FontScale) + Margin.Top;
+		preferredHeight += UI.Scale(4) + Margin.Top;
 
 		rect.Y = preferredHeight;
 		rect.Height = e.ClipRectangle.ClipTo(mainSectionHeight).Bottom - preferredHeight;
 
 		if (compatibilityAssetCounts.Count == 0)
 		{
-			e.Graphics.DrawStringItem(string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Asset.Plural.ToLower())
-				, Font
-				, fore
-				, e.ClipRectangle.Pad(Margin)
-				, ref preferredHeight
-				, applyDrawing
-				, "I_Check");
+			DrawValue(e, rect.Pad(Margin), string.Format(Locale.NoCompatibilityIssues.Plural, Locale.Asset.Plural.ToLower()), string.Empty, applyDrawing, ref preferredHeight, "Check");
 		}
 		else
 		{
-			if (applyDrawing)
-			{
-				using var assetIcon = IconManager.GetIcon("I_Assets", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
-				e.Graphics.DrawImage(assetIcon, rect.CenterR(assetIcon.Size));
-			}
-
 			foreach (var group in compatibilityAssetCounts.OrderBy(x => x.Key))
 			{
-				e.Graphics.DrawStringItem(LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Asset.FormatPlural(group.Value).ToLower())
-					, Font
-					, group.Key.GetColor()
-					, e.ClipRectangle.Pad(Margin)
-					, ref preferredHeight
-					, applyDrawing
-					, group.Key.GetIcon(true));
+				DrawValue(e, rect.Pad(Margin), string.Format(LocaleCR.Get($"{group.Key}Count").Plural, string.Empty, Locale.Asset.Plural).Trim(), group.Value.ToString(), applyDrawing, ref preferredHeight, group.Key.GetIcon(true), group.Key.GetColor());
 			}
 		}
 
-		preferredHeight += Margin.Top;
+		preferredHeight += BorderRadius;
 
 		mainSectionHeight = preferredHeight - e.ClipRectangle.Y;
 
-		preferredHeight += Margin.Top;
+		preferredHeight += BorderRadius;
 
 		DrawButton(e, applyDrawing, ref preferredHeight, ViewCompatibilityReport, new()
 		{
 			Text = Locale.ViewCompatibilityReport,
-			Icon = "I_ViewFile",
-			Rectangle = e.ClipRectangle
+			Icon = "ViewFile",
+			ButtonType = ButtonType.Dimmed,
+			Rectangle = e.ClipRectangle.Pad(Margin)
 		});
 
-		preferredHeight -= Margin.Bottom;
+		preferredHeight += BorderRadius / 2;
 	}
 }

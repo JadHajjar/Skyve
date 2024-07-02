@@ -1,107 +1,102 @@
 ﻿using Extensions;
 
-using Newtonsoft.Json;
-
-using Skyve.Domain.Systems;
-
 using System;
 using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
+using System.Reflection;
 
 namespace Skyve.Domain;
-public abstract class ConfigFile
+public abstract class ConfigFile : IExtendedSaveObject
 {
-	protected bool AutoRefresh { get; set; }
-	protected string FilePath { get; }
+	private FileWatcher? watcher;
+	private bool autoRefresh;
+	private string? filePath;
 
-	protected ConfigFile(string filePath)
+	protected bool AutoRefresh
 	{
-		FilePath = filePath;
-	}
-
-	protected void OnLoad() { }
-
-	public virtual void Save()
-	{
-		try
+		get => autoRefresh;
+		set
 		{
-			var xml = Path.GetExtension(FilePath).Equals(".xml", StringComparison.InvariantCultureIgnoreCase);
+			autoRefresh = value;
 
-			if (xml)
+			if (watcher is not null)
 			{
-				SerializeXml();
-			}
-			else
-			{
-				SerializeJson();
+				watcher.EnableRaisingEvents = value;
 			}
 		}
-		catch (Exception ex)
+	}
+
+	public SaveHandler? Handler { get; set; }
+
+	protected ConfigFile()
+	{
+	}
+
+	public void Reset()
+	{
+		Clear(this, new(WatcherChangeTypes.Deleted, string.Empty));
+	}
+
+	protected virtual void OnLoad(string filePath)
+	{
+		if (!autoRefresh || (this.filePath == filePath && watcher is not null))
 		{
-			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to save the config file: " + Path.GetFileName(FilePath));
+			return;
+		}
+
+		this.filePath = filePath;
+
+		watcher = new FileWatcher
+		{
+			Path = Path.GetDirectoryName(filePath),
+			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
+			Filter = Path.GetFileName(filePath),
+			EnableRaisingEvents = true
+		};
+
+		watcher.Changed += ReLoad;
+		watcher.Created += ReLoad;
+		watcher.Deleted += Clear;
+	}
+
+	void IExtendedSaveObject.OnPreSave(string filePath)
+	{
+		if (watcher is not null && autoRefresh)
+		{
+			watcher.EnableRaisingEvents = false;
 		}
 	}
 
-	protected static T? Load<T>(string filePath) where T : ConfigFile
+	void IExtendedSaveObject.OnPostSave(string filePath)
 	{
-		if (!CrossIO.FileExists(filePath))
+		if (watcher is not null && autoRefresh)
 		{
-			return null;
+			watcher.EnableRaisingEvents = autoRefresh;
 		}
-
-		try
-		{
-			var xml = Path.GetExtension(filePath).Equals(".xml", StringComparison.InvariantCultureIgnoreCase);
-
-			var obj = xml ? DeserializeXml<T>(filePath) : DeserializeJson<T>(filePath);
-
-			obj?.OnLoad();
-
-			return obj;
-		}
-		catch (Exception ex)
-		{
-			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load the config file: " + Path.GetFileName(filePath));
-		}
-
-		return null;
 	}
 
-	private void SerializeJson()
+	void IExtendedSaveObject.OnLoad(string filePath)
 	{
-		ISave.Write(FilePath, JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented), false);
+		OnLoad(filePath);
 	}
 
-	private static T DeserializeJson<T>(string filePath) where T : ConfigFile
+	private void Clear(object sender, FileWatcherEventArgs e)
 	{
-		var fileContents = ISave.Read(filePath);
+		var type = GetType();
+		var obj = (ConfigFile)Activator.CreateInstance(type);
 
-		if (string.IsNullOrEmpty(fileContents))
+		foreach (var item in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
 		{
-			throw new Exception("File contents empty");
+			if (item.CanWrite && item.CanRead && item.PropertyType != typeof(SaveHandler))
+			{
+				item.SetValue(this, item.GetValue(obj));
+			}
 		}
-
-		return JsonConvert.DeserializeObject<T>(fileContents);
 	}
 
-	private void SerializeXml()
+	private void ReLoad(object sender, FileWatcherEventArgs e)
 	{
-		var serializer = new XmlSerializer(GetType());
-		using var writer = new StreamWriter(FilePath);
+		var saveName = GetType().GetCustomAttribute<SaveNameAttribute>(false);
 
-		Directory.CreateDirectory(Path.GetDirectoryName(FilePath));
-
-		using var xmlWriter = new XmlTextWriter(writer);
-		xmlWriter.Formatting = System.Xml.Formatting.Indented;
-		serializer.Serialize(xmlWriter, this, new(new[] { XmlQualifiedName.Empty }));
-	}
-
-	private static T? DeserializeXml<T>(string filePath) where T : class
-	{
-		var ser = new XmlSerializer(typeof(T));
-		using var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-
-		return ser.Deserialize(fs) as T;
+		Handler?.Load(this, saveName.FileName, saveName.AppName, saveName.Local);
 	}
 }

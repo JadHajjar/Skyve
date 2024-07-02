@@ -5,8 +5,8 @@ namespace Skyve.Domain.Systems;
 public interface IUpdateManager
 {
 	bool IsFirstTime();
-	bool IsPackageKnown(ILocalPackage package);
-	DateTime GetLastUpdateTime(ILocalPackage package);
+	bool IsPackageKnown(ILocalPackageData package);
+	DateTime GetLastUpdateTime(ILocalPackageData package);
 	void SendUpdateNotifications();
-	IEnumerable<ILocalPackageWithContents>? GetNewOrUpdatedPackages();
+	IEnumerable<ILocalPackageData>? GetNewOrUpdatedPackages();
 }

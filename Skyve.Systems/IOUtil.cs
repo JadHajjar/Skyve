@@ -17,7 +17,7 @@ internal class IOUtil : IIOUtil
 		_logger = logger;
 	}
 
-	public Process? Execute(string exeFile, string args, bool useShellExecute = true, bool createNoWindow = false)
+	public Process? Execute(string exeFile, string args, bool useShellExecute = true, bool createNoWindow = false, bool administrator = false)
 	{
 		try
 		{
@@ -41,6 +41,11 @@ internal class IOUtil : IIOUtil
 				UseShellExecute = useShellExecute && CrossIO.CurrentPlatform is not Platform.MacOSX,
 				CreateNoWindow = createNoWindow || CrossIO.CurrentPlatform is not Platform.MacOSX,
 			};
+
+			if (administrator)
+			{
+				startInfo.Verb = "runas";
+			}
 
 			var process = new Process { StartInfo = startInfo };
 

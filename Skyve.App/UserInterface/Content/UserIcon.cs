@@ -6,42 +6,87 @@ namespace Skyve.App.UserInterface.Content;
 
 public class UserIcon : SlickImageControl
 {
-	[Category("Appearance"), DefaultValue(true)]
-	public bool HalfColor { get; set; } = true;
+	private readonly IWorkshopService _workshopService;
+
+	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+	public IUser? User { get; set; }
+	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+	public bool Collection { get; set; }
+
+	public UserIcon()
+	{
+		ServiceCenter.Get(out _workshopService);
+	}
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
-		if (HalfColor)
+		e.Graphics.SetUp(BackColor);
+
+		try
 		{
-			e.Graphics.Clear(FormDesign.Design.BackColor);
+			var author = _workshopService?.GetUser(User);
+			var thumbnail = author?.GetThumbnail();
 
-			e.Graphics.FillRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), new Rectangle(0, 0, Width, Height / 2));
+			Loading = thumbnail is null && author?.AvatarUrl is not null and not "" && ConnectionHandler.IsConnected;
+
+			if (Loading)
+			{
+				using var accentBrush = new SolidBrush(FormDesign.Design.AccentBackColor);
+				e.Graphics.FillRoundedRectangle(accentBrush, ClientRectangle.Pad(1), UI.Scale(5));
+
+				DrawLoader(e.Graphics, ClientRectangle.CenterR(UI.Scale(new Size(32, 32), UI.UIScale)));
+				return;
+			}
+
+			e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+			if (thumbnail != null)
+			{
+				e.Graphics.DrawRoundedImage(thumbnail, ClientRectangle.Pad(1), UI.Scale(5), FormDesign.Design.AccentBackColor);
+				return;
+			}
+
+			using var brush = new SolidBrush(GetUserColor(User?.Id?.ToString() ?? string.Empty));
+			using var generic = IconManager.GetIcon("User", Height * 8 / 10).Color(brush.Color.GetTextColor());
+
+			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), UI.Scale(5));
+			e.Graphics.DrawImage(generic, ClientRectangle.CenterR(generic.Size));
 		}
-		else
+		finally
 		{
-			e.Graphics.Clear(BackColor);
+			if (HoverState.HasFlag(HoverState.Hovered) && Cursor == Cursors.Hand)
+			{
+				using var lightBrush = new SolidBrush(Color.FromArgb(50, FormDesign.Design.ForeColor));
+				e.Graphics.FillRoundedRectangle(lightBrush, ClientRectangle.Pad(1), UI.Scale(5));
+			}
 		}
+	}
 
-		if (Loading)
+	public static Color GetUserColor(string username, bool textColor = false)
+	{
+		if (!ServiceCenter.Get<ISettings>()?.UserSettings.ColoredAuthorNames ?? false)
 		{
-			DrawLoader(e.Graphics, ClientRectangle.CenterR(UI.Scale(new Size(32, 32), UI.UIScale)));
-			return;
+			return FormDesign.Design.ForeColor;
 		}
 
-		e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+		// Compute a hash from the input string
+		var hash = username.GetHashCode();
 
-		if (Image == null)
+		// Use the hash to generate RGB values
+		// We'll use the lower 24 bits of the hash for the color
+		var r = (hash & 0xFF0000) >> 16;
+		var g = (hash & 0x00FF00) >> 8;
+		var b = hash & 0x0000FF;
+
+		// Create the color from the RGB values
+		var color = Color.FromArgb(r, g, b);
+
+		if (!textColor)
 		{
-			using var image = Properties.Resources.I_AssetIcon.Color(FormDesign.Design.IconColor);
-
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.IconColor), ClientRectangle, (int)(10 * UI.FontScale));
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1), (int)(10 * UI.FontScale));
-
-			e.Graphics.DrawRoundedImage(image, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			return color;
 		}
-		else
-		{
-			e.Graphics.DrawRoundedImage(Image, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
-		}
+
+		// adjust for better text readability 
+		return color.MergeColor(FormDesign.Design.ForeColor, 75).Tint(Lum: FormDesign.Design.IsDarkTheme ? 4 : -2.5f, Sat: 3);
 	}
 }

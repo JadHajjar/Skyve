@@ -14,9 +14,10 @@ public interface ITroubleshootSystem
 
 	event Action? StageChanged;
 	event Action? AskForConfirmation;
-	event Action<List<ILocalPackage>>? PromptResult;
+	event Action<List<ILocalPackageIdentity>>? PromptResult;
 
 	void ApplyConfirmation(bool issuePersists);
+	void CleanDownload(List<ILocalPackageData> localPackageDatas);
 	void NextStage();
 	void Start(ITroubleshootSettings settings);
 	void Stop(bool keepSettings);

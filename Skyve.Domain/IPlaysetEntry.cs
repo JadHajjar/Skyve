@@ -2,7 +2,7 @@
 
 public interface IPlaysetEntry : ILocalPackageIdentity
 {
-	bool IsMod { get; }
+	bool IsCodeMod { get; }
 	string? RelativePath { get; set; }
 }
 

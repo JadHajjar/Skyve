@@ -1,134 +1,59 @@
-﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_GenericPackageList : PC_ContentList<IPackage>
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Skyve.App.UserInterface.Panels;
+public class PC_GenericPackageList : PC_ContentList
 {
-	private readonly List<IPackage> _items = new();
+	private readonly List<IPackageIdentity> _items = [];
 	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
 	public override SkyvePage Page => SkyvePage.Generic;
 
-	public PC_GenericPackageList(IEnumerable<IPackageIdentity> items, bool groupItems) : base(true)
+	public PC_GenericPackageList(IEnumerable<IPackageIdentity> items, bool groupItems) : base(true, true)
 	{
 		LC_Items.IsGenericPage = true;
-
 		LC_Items.TB_Search.Placeholder = "SearchGenericPackages";
 
-		var compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+		var skyveDataManager = ServiceCenter.Get<ISkyveDataManager>();
 
 		if (!groupItems)
 		{
-			foreach (var item in items)
-			{
-				if (item is IPackage localPackage)
-				{
-					_items.Add(localPackage);
-				}
-				else
-				{
-					_items.Add(new GenericWorkshopPackage(item));
-				}
-			}
+			_items.AddRange(items);
 		}
 		else
 		{
-			foreach (var package in items.GroupBy(x => x.Id))
+			foreach (var packages in items.GroupBy(x => x.Id))
 			{
-				if (package.Key != 0)
+				if (packages.Key != 0)
 				{
-					if (compatibilityManager.IsBlacklisted(package.First()))
+					if (skyveDataManager.IsBlacklisted(packages.First()))
 					{
 						continue;
 					}
 
-					var steamPackage = package.Last();
+					var package = packages.Last();
 
-					if (steamPackage.GetWorkshopInfo()?.IsRemoved == true)
+					if (package.GetWorkshopInfo()?.IsRemoved == true)
 					{
 						continue;
 					}
 
-					_items.Add(steamPackage is IPackage localPackage ? localPackage : new GenericWorkshopPackage(steamPackage));
+					_items.Add(package);
 				}
 				else
 				{
-					foreach (var item in package)
+					foreach (var item in packages)
 					{
-						if (item is IPackage localPackage)
-						{
-							_items.Add(localPackage);
-						}
-						else
-						{
-							_items.Add(new GenericWorkshopPackage(item));
-						}
+						_items.Add(item);
 					}
 				}
 			}
 		}
-
-		_notifier.WorkshopInfoUpdated += _notifier_WorkshopPackagesInfoLoaded;
-
-		LC_Items.RefreshItems();
 	}
 
-	protected override void Dispose(bool disposing)
+	protected override async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
-		if (disposing)
-		{
-			_notifier.WorkshopInfoUpdated -= _notifier_WorkshopPackagesInfoLoaded;
-		}
-
-		base.Dispose(disposing);
-	}
-
-	private void _notifier_WorkshopPackagesInfoLoaded()
-	{
-		LC_Items.ListControl.Invalidate();
-	}
-
-	protected override IEnumerable<IPackage> GetItems()
-	{
-		return _items;
-	}
-
-	protected override string GetCountText()
-	{
-		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
-
-		foreach (var item in _items)
-		{
-			var package = item.LocalParentPackage;
-
-			if (package is null)
-			{
-				continue;
-			}
-
-			if (package.IsIncluded())
-			{
-				packagesIncluded++;
-
-				if (package.Mod is not null)
-				{
-					modsIncluded++;
-
-					if (package.Mod.IsEnabled())
-					{
-						modsEnabled++;
-					}
-				}
-			}
-		}
-
-		var total = LC_Items.ItemCount;
-
-		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
-		{
-			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
-		}
-
-		return modsIncluded == modsEnabled
-			? string.Format(Locale.PackageIncludedAndEnabledTotal, packagesIncluded, total)
-			: string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
+		return await Task.FromResult(_items);
 	}
 
 	protected override LocaleHelper.Translation GetItemText()

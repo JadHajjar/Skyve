@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
@@ -10,7 +12,7 @@ public class PackageActionDropDown : SlickSelectionDropDown<StatusAction>
 	{
 		base.UIChanged();
 
-		Width = (int)(175 * UI.FontScale);
+		Width = UI.Scale(175);
 	}
 
 	protected override bool SearchMatch(string searchText, StatusAction item)
@@ -25,10 +27,13 @@ public class PackageActionDropDown : SlickSelectionDropDown<StatusAction>
 		var text = LocaleCR.Get(!IsFlipped || item is StatusAction.NoAction ? item.ToString() : $"Flipped{item}");
 		var color = CRNAttribute.GetNotification(item).GetColor();
 
-		using var icon = IconManager.GetIcon("I_Actions", rectangle.Height - 2).Color(color);
+		using var icon = IconManager.GetIcon("Actions", rectangle.Height - 2).Color(color);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		using var brush = new SolidBrush(foreColor);
+		using var font = UI.Font(8.25F).FitTo(text, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center };
+		e.Graphics.DrawString(text, font, brush, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), format);
 	}
 }

@@ -1,8 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 public interface ISubscriptionsManager
 {
+	bool IsSubscribing(IPackageIdentity package);
+	Task<bool> Subscribe(IEnumerable<IPackageIdentity> ids, int? playsetId = null);
+	Task<bool> UnSubscribe(IEnumerable<IPackageIdentity> ids, int? playsetId = null);
+
+#if CS1
 	List<ulong> PendingSubscribingTo { get; }
 	List<ulong> PendingUnsubscribingFrom { get; }
 	List<ulong> SubscribingTo { get; }
@@ -12,7 +19,14 @@ public interface ISubscriptionsManager
 
 	void Start();
 	void CancelPendingItems();
-	bool IsSubscribing(IPackage package);
-	bool Subscribe(IEnumerable<IPackageIdentity> ids);
-	bool UnSubscribe(IEnumerable<IPackageIdentity> ids);
+#else
+	SubscriptionStatus Status { get; }
+
+	event Action UpdateDisplayNotification;
+
+	void OnInstallFinished(PackageInstallProgress info);
+	void OnInstallProgress(PackageInstallProgress info);
+	void OnInstallStarted(PackageInstallProgress info);
+	void OnDownloadProgress(PackageDownloadProgress info);
+#endif
 }

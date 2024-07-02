@@ -1,26 +1,23 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
-	<Import Project="../../Skyve/Config.props" />
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
+    <Import Project="../../Skyve/Config.props" />
   <PropertyGroup>
-	  <Description>Helps to manage your mods and assets</Description>
-	  <Configurations>Debug;Release;Stable</Configurations>
-	  <DebugType>embedded</DebugType>
-	  <DebugSymbols>true</DebugSymbols>
-	  <Nullable>enable</Nullable>
-	  <DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
+      <Description>Helps to manage your mods and assets</Description>
+      <DebugType>embedded</DebugType>
+      <DebugSymbols>true</DebugSymbols>
+      <Nullable>enable</Nullable>
+      <DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
-	  <Deterministic>false</Deterministic>
-	  <LangVersion>latest</LangVersion>
-	  <TargetFramework>net4.7.2</TargetFramework>
+      <Deterministic>true</Deterministic>
+      <LangVersion>latest</LangVersion>
     <UseWindowsForms>true</UseWindowsForms>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
     <SignAssembly>true</SignAssembly>
     <NeutralLanguage>en</NeutralLanguage>
     <Title>Skyve</Title>
   </PropertyGroup>
 
-    <ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
@@ -28,8 +25,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
     <ProjectReference Include="..\..\SlickControls\SlickControls.csproj" />
-	<ProjectReference Include="..\..\Skyve\Skyve.Domain\Skyve.Domain.csproj" />
-	<ProjectReference Include="..\..\Skyve\Skyve.Systems\Skyve.Systems.csproj" />
+    <ProjectReference Include="..\..\Skyve\Skyve.Domain\Skyve.Domain.csproj" />
+    <ProjectReference Include="..\..\Skyve\Skyve.Systems\Skyve.Systems.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,49 +44,33 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="UserInterface\Bubbles\FavoriteProfileBubble.cs" />
-    <Compile Update="UserInterface\Bubbles\PlaysetBubble.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Content\ContentList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Content\TroubleshootInfoControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Content\DownloadsInfoControl.cs" />
-    <Compile Update="UserInterface\Content\UserDescriptionControl.cs" />
-    <Compile Update="UserInterface\Dashboard\D_AssetInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+      <Compile Update="UserInterface\Content\ContentList.cs" />
+      <Compile Update="UserInterface\Content\IconTopButton.cs" />
+      <Compile Update="UserInterface\Content\PlaysetIcon.cs" />
+    <Compile Update="UserInterface\Content\TroubleshootInfoControl.cs" />
     <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\AuthorDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageTypeDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageStatusTypeDropDown.cs" />
     <Compile Update="UserInterface\Forms\EditTagsForm.cs" />
     <Compile Update="UserInterface\Generic\BigSelectionOptionControl.cs" />
-    <Compile Update="UserInterface\Generic\SteamUserControl.cs" />
-    <Compile Update="UserInterface\Lists\OtherProfilePackage.cs" />
-    <Compile Update="UserInterface\Content\PackageDescriptionControl.cs" />
+    <Compile Update="UserInterface\Generic\AuthorControl.cs" />
+    <Compile Update="UserInterface\Lists\ItemListControl-Shared.cs" />
+    <Compile Update="UserInterface\Lists\OtherPlaysetPackage.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageStatusDropDown.cs" />
     <Compile Update="UserInterface\Lists\CompatibilityReportList.cs" />
     <Compile Update="UserInterface\Lists\ReviewRequestList.cs" />
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs" />
-    <Compile Update="UserInterface\Panels\PC_ManageCompatibilitySelection.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Panels\PC_Troubleshoot.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Panels\PC_PlaysetAdd.cs" />
+    <Compile Update="UserInterface\Panels\PC_PlaysetContents.cs" />
+    <Compile Update="UserInterface\Panels\PC_Troubleshoot.cs" />
     <Compile Update="UserInterface\Panels\PC_UserPage.cs" />
     <Compile Update="UserInterface\Panels\PC_PlaysetList.cs" />
     <Compile Update="UserInterface\Panels\PC_Packages.cs" />
     <Compile Update="UserInterface\Generic\NewProfileOptionControl.cs" />
     <Compile Update="UserInterface\Dropdowns\LanguageDropDown.cs" />
-    <Compile Update="UserInterface\Dropdowns\ProfileSortingDropDown.cs" />
-    <Compile Update="UserInterface\Dropdowns\ProfilesDropDown.cs" />
+    <Compile Update="UserInterface\Dropdowns\PlaysetSortingDropDown.cs" />
+    <Compile Update="UserInterface\Dropdowns\PlaysetsDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\TagsDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\SortingDropDown.cs" />
     <Compile Update="UserInterface\Generic\DoubleButton.cs" />
@@ -101,9 +82,4 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
-	<ItemGroup>
-	  <None Include="UserInterface\Lists\ItemListControl-Grid.cs" />
-	  <None Include="UserInterface\Lists\ItemListControl-List.cs" />
-	</ItemGroup>
 </Project>

@@ -16,7 +16,14 @@ public class BigSelectionOptionControl : SlickImageControl
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 	[EditorBrowsable(EditorBrowsableState.Always)]
 	[Bindable(true)]
-	public override string Text { get => base.Text; set { base.Text = value; UIChanged(); } }
+	public override string Text
+	{
+		get => base.Text; set
+		{
+			base.Text = value;
+			UIChanged();
+		}
+	}
 
 	public bool FromScratch { get; set; }
 
@@ -25,9 +32,9 @@ public class BigSelectionOptionControl : SlickImageControl
 		if (Live)
 		{
 			Font = UI.Font(11.25F, FontStyle.Bold);
-			Margin = UI.Scale(new Padding(Parent.Controls.IndexOf(this) % 2 * 100, 15, 100 - (Parent.Controls.IndexOf(this) % 2 * 100), 15), UI.FontScale);
-			Padding = UI.Scale(new Padding(15), UI.FontScale);
-			Size = UI.Scale(new Size(250, 90), UI.FontScale);
+			Margin = UI.Scale(new Padding(Parent.Controls.IndexOf(this) % 2 * 100, 15, 100 - (Parent.Controls.IndexOf(this) % 2 * 100), 15));
+			Padding = UI.Scale(new Padding(15));
+			Size = UI.Scale(new Size(250, 90));
 		}
 	}
 
@@ -40,7 +47,7 @@ public class BigSelectionOptionControl : SlickImageControl
 
 		SlickButton.GetColors(out var fore, out var back, HoverState, FromScratch ? ColorStyle.Green : ColorStyle.Active);
 
-		if (!HoverState.HasFlag(HoverState.Pressed) && FormDesign.Design.Type == FormDesignType.Light)
+		if (!HoverState.HasFlag(HoverState.Pressed) && !FormDesign.Design.IsDarkTheme)
 		{
 			back = back.Tint(Lum: 1.5F);
 		}

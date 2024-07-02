@@ -27,7 +27,15 @@ public interface IUserSettings
 	bool ShowFolderSettings { get; set; }
 	bool TreatOptionalAsRequired { get; set; }
 	bool SnapDashToGrid { get; set; }
+	bool ComplexListUI { get; set; }
+	bool FadeDisabledItems { get; set; }
+	DependencyResolveBehavior DependencyResolution { get; set; }
 	Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; }
+#if CS2
+	bool FilterIncludedByDefault { get; set; }
+	bool SyncBeforeLaunching { get; set; }
+	bool ColoredAuthorNames { get; set; }
+#endif
 
 	void Save();
 }

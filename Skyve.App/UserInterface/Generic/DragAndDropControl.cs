@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Skyve.App.Utilities;
+
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -30,7 +32,14 @@ public class DragAndDropControl : SlickControl
 	public string? StartingFolder { get => _selectionDialog.StartingFolder; set => _selectionDialog.StartingFolder = value; }
 
 	[Category("Behavior"), DefaultValue(null)]
-	public string? SelectedFile { get => _selectedFile; set { _selectedFile = value; Invalidate(); } }
+	public string? SelectedFile
+	{
+		get => _selectedFile; set
+		{
+			_selectedFile = value;
+			Invalidate();
+		}
+	}
 
 	[Category("Behavior"), DefaultValue(null)]
 	public Dictionary<string, string>? PinnedFolders { get => _selectionDialog.PinnedFolders; set => _selectionDialog.PinnedFolders = value; }
@@ -59,7 +68,7 @@ public class DragAndDropControl : SlickControl
 
 		if (Live)
 		{
-			Size = UI.Scale(new Size(325, 80), UI.FontScale);
+			Size = UI.Scale(new Size(300, 80));
 			Padding = UI.Scale(new Padding(10), UI.UIScale);
 			Font = UI.Font(9.75F);
 
@@ -137,11 +146,11 @@ public class DragAndDropControl : SlickControl
 			return;
 		}
 
-		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : Width - (int)(125 * UI.FontScale);
+		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : Width - UI.Scale(125);
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
-			using var removeIcon = IconManager.GetIcon("I_X");
+			using var removeIcon = IconManager.GetIcon("X");
 
 			var fileRect = new Rectangle(0, 0, Width - availableWidth, Height).Pad(Padding.Left);
 			var removeRect = fileRect.Align(new Size(removeIcon.Width + Padding.Left, removeIcon.Height + Padding.Top), ContentAlignment.TopRight);
@@ -177,14 +186,14 @@ public class DragAndDropControl : SlickControl
 		e.Graphics.SetUp(BackColor);
 
 		var fileHovered = false;
-		var border = (int)(4 * UI.FontScale);
+		var border = UI.Scale(4);
 		var cursor = PointToClient(MousePosition);
-		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : Width - (int)(125 * UI.FontScale);
+		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : Width - UI.Scale(125);
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
-			using var fileIcon = IconManager.GetLargeIcon("I_File").Color(FormDesign.Design.MenuForeColor);
-			using var removeIcon = IconManager.GetIcon("I_X").Color(FormDesign.Design.MenuForeColor);
+			using var fileIcon = IconManager.GetLargeIcon("File").Color(FormDesign.Design.MenuForeColor);
+			using var removeIcon = IconManager.GetIcon("X").Color(FormDesign.Design.MenuForeColor);
 
 			var textSize = e.Graphics.Measure(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), Width - availableWidth - Padding.Horizontal);
 			var fileHeight = (int)textSize.Height + 3 + fileIcon.Height + Padding.Top;
@@ -221,7 +230,7 @@ public class DragAndDropControl : SlickControl
 		e.Graphics.DrawRoundedRectangle(pen, ClientRectangle.Pad((int)(1.5 * UI.FontScale)), border);
 
 		var text = LocaleHelper.GetGlobalText(Text);
-		var size = e.Graphics.Measure(text, Font, availableWidth - 2 * Padding.Horizontal - (UI.FontScale >= 2 ? 48 : 24));
+		var size = e.Graphics.Measure(text, Font, availableWidth - (2 * Padding.Horizontal) - (UI.FontScale >= 2 ? 48 : 24));
 		var width = (int)size.Width + 3 + Padding.Left + (UI.FontScale >= 2 ? 48 : 24);
 		var rect = new Rectangle(Width - availableWidth, 0, availableWidth, Height).CenterR(width, Math.Max(UI.FontScale >= 2 ? 48 : 24, (int)size.Height + 3));
 
@@ -231,7 +240,7 @@ public class DragAndDropControl : SlickControl
 		}
 		else
 		{
-			using var icon = IconManager.GetLargeIcon("I_DragDrop").Color(color);
+			using var icon = IconManager.GetLargeIcon("DragDrop").Color(color);
 
 			e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
 		}

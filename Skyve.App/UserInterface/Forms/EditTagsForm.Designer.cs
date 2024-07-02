@@ -50,8 +50,8 @@ partial class EditTagsForm
 			// 
 			this.base_P_Content.AutoScroll = true;
 			this.base_P_Content.Controls.Add(this.tableLayoutPanel1);
-			this.base_P_Content.Location = new System.Drawing.Point(1, 43);
-			this.base_P_Content.Size = new System.Drawing.Size(387, 445);
+			this.base_P_Content.Location = new System.Drawing.Point(1, 51);
+			this.base_P_Content.Size = new System.Drawing.Size(387, 437);
 			// 
 			// base_P_Controls
 			// 
@@ -84,20 +84,21 @@ partial class EditTagsForm
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(387, 445);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(387, 437);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// B_Apply
 			// 
 			this.B_Apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.B_Apply.AutoSize = true;
+			this.B_Apply.ButtonType = SlickControls.ButtonType.Active;
 			this.B_Apply.ColorShade = null;
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_Ok";
+			dynamicIcon1.Name = "Ok";
 			this.B_Apply.ImageName = dynamicIcon1;
-			this.B_Apply.Location = new System.Drawing.Point(334, 419);
+			this.B_Apply.Location = new System.Drawing.Point(300, 400);
 			this.B_Apply.Name = "B_Apply";
-			this.B_Apply.Size = new System.Drawing.Size(50, 23);
+			this.B_Apply.Size = new System.Drawing.Size(84, 34);
 			this.B_Apply.SpaceTriggersClick = true;
 			this.B_Apply.TabIndex = 100;
 			this.B_Apply.Text = "Apply";
@@ -111,7 +112,7 @@ partial class EditTagsForm
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(3, 61);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(381, 352);
+			this.panel1.Size = new System.Drawing.Size(381, 333);
 			this.panel1.TabIndex = 101;
 			// 
 			// TLC
@@ -126,9 +127,9 @@ partial class EditTagsForm
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll1.LinkedControl = this.TLC;
-			this.slickScroll1.Location = new System.Drawing.Point(371, 0);
+			this.slickScroll1.Location = new System.Drawing.Point(375, 0);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(10, 352);
+			this.slickScroll1.Size = new System.Drawing.Size(6, 333);
 			this.slickScroll1.SmallHandle = true;
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 1;
@@ -140,11 +141,10 @@ partial class EditTagsForm
 			this.tableLayoutPanel1.SetColumnSpan(this.TB_NewTag, 2);
 			this.TB_NewTag.Dock = System.Windows.Forms.DockStyle.Top;
 			this.TB_NewTag.EnterTriggersClick = true;
-			dynamicIcon2.Name = "I_Add";
+			dynamicIcon2.Name = "Add";
 			this.TB_NewTag.ImageName = dynamicIcon2;
 			this.TB_NewTag.Location = new System.Drawing.Point(3, 3);
 			this.TB_NewTag.Name = "TB_NewTag";
-			this.TB_NewTag.Padding = new System.Windows.Forms.Padding(0, 16, 0, 16);
 			this.TB_NewTag.Placeholder = "AddTagBox";
 			this.TB_NewTag.SelectedText = "";
 			this.TB_NewTag.SelectionLength = 0;
@@ -159,7 +159,7 @@ partial class EditTagsForm
 			// 
 			this.L_MultipleWarning.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_MultipleWarning.AutoSize = true;
-			this.L_MultipleWarning.Location = new System.Drawing.Point(3, 421);
+			this.L_MultipleWarning.Location = new System.Drawing.Point(3, 407);
 			this.L_MultipleWarning.Name = "L_MultipleWarning";
 			this.L_MultipleWarning.Size = new System.Drawing.Size(45, 19);
 			this.L_MultipleWarning.TabIndex = 103;

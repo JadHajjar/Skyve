@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Drawing;
 using System.Windows.Forms;
 
 
@@ -25,7 +27,7 @@ public class PackageTypeDropDown : SlickSelectionDropDown<PackageType>
 	{
 		base.UIChanged();
 
-		Width = (int)(200 * UI.FontScale);
+		Width = UI.Scale(200);
 	}
 
 	protected override bool SearchMatch(string searchText, PackageType item)
@@ -39,10 +41,13 @@ public class PackageTypeDropDown : SlickSelectionDropDown<PackageType>
 	{
 		var text = LocaleCR.Get($"{item}");
 
-		using var icon = IconManager.GetIcon("I_Cog", rectangle.Height - 2).Color(foreColor);
+		using var icon = IconManager.GetIcon("Cog", rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		using var brush = new SolidBrush(foreColor);
+		using var font = UI.Font(8.25F).FitTo(text, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center };
+		e.Graphics.DrawString(text, font, brush, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), format);
 	}
 }

@@ -80,7 +80,7 @@ public class TroubleshootInfoControl : SlickControl
 
 	protected override void UIChanged()
 	{
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
+		Padding = UI.Scale(new Padding(5));
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -96,11 +96,11 @@ public class TroubleshootInfoControl : SlickControl
 
 		var y = Padding.Top;
 
-		using var buttonIcon = IconManager.GetSmallIcon("I_Skip");
+		using var buttonIcon = IconManager.GetSmallIcon("Skip");
 		var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, Locale.NextStage, UI.Font(6.75F), new(4, 3, 2, 2));
 		buttonRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomRight);
 
-		using var cancelButtonIcon = IconManager.GetSmallIcon("I_Cancel");
+		using var cancelButtonIcon = IconManager.GetSmallIcon("Cancel");
 		buttonSize = SlickButton.GetSize(e.Graphics, cancelButtonIcon, LocaleSlickUI.Cancel, UI.Font(6.75F), new(4, 3, 2, 2));
 		cancelRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomLeft);
 
@@ -115,9 +115,9 @@ public class TroubleshootInfoControl : SlickControl
 
 		y += Padding.Top;
 
-		if (_troubleshootSystem.WaitingForGameLaunch || _troubleshootSystem.WaitingForGameClose && CrossIO.CurrentPlatform is Platform.Windows)
+		if (_troubleshootSystem.WaitingForGameLaunch || (_troubleshootSystem.WaitingForGameClose && CrossIO.CurrentPlatform is Platform.Windows))
 		{
-			using var launchButtonIcon = IconManager.GetSmallIcon("I_CS");
+			using var launchButtonIcon = IconManager.GetSmallIcon("CS");
 			launchRect = new Rectangle(Padding.Left, y + buttonSize.Height + Padding.Bottom, Width - Padding.Horizontal, buttonSize.Height);
 
 			SlickButton.DrawButton(e, launchRect, LocaleHelper.GetGlobalText(_citiesManager.IsRunning() ? "StopCities" : "StartCities"), UI.Font(6.75F), launchButtonIcon, null, launchRect.Contains(PointToClient(Cursor.Position)) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Active);
@@ -142,12 +142,12 @@ public class TroubleshootInfoControl : SlickControl
 		using var backTextBrush = new SolidBrush(FormDesign.Design.MenuForeColor);
 		using var activeTextBrush = new SolidBrush(FormDesign.Design.ActiveForeColor);
 
-		e.Graphics.FillRoundedRectangle(backBarBrush, barRect, (int)(4 * UI.FontScale));
+		e.Graphics.FillRoundedRectangle(backBarBrush, barRect, UI.Scale(4));
 		e.Graphics.DrawString(text, Font, backTextBrush, barRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
 		e.Graphics.SetClip(new Rectangle(Padding.Left, 0, (Width - Padding.Horizontal) * _troubleshootSystem.CurrentStage / _troubleshootSystem.TotalStages, Height));
 
-		e.Graphics.FillRoundedRectangle(activeBarBrush, barRect, (int)(4 * UI.FontScale));
+		e.Graphics.FillRoundedRectangle(activeBarBrush, barRect, UI.Scale(4));
 		e.Graphics.DrawString(text, Font, activeTextBrush, barRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
 		e.Graphics.ResetClip();
@@ -174,7 +174,7 @@ public class TroubleshootInfoControl : SlickControl
 		}
 	}
 
-	private void PromptResult(List<ILocalPackage> list)
+	private void PromptResult(List<ILocalPackageIdentity> list)
 	{
 		MessagePrompt.Show(Locale.TroubleshootCauseResult + "\r\n\r\n" + list.ListStrings("\r\n"), icon: PromptIcons.Ok, form: Program.MainForm);
 	}
@@ -183,7 +183,7 @@ public class TroubleshootInfoControl : SlickControl
 	{
 		base.OnMouseClick(e);
 
-		if (e.Button == MouseButtons.None || e.Button == MouseButtons.Left && buttonRect.Contains(e.Location))
+		if (e.Button == MouseButtons.None || (e.Button == MouseButtons.Left && buttonRect.Contains(e.Location)))
 		{
 			if (_troubleshootSystem.WaitingForPrompt)
 			{

@@ -54,13 +54,13 @@ public partial class PC_DLCs : PanelContent
 
 	protected override void LocaleChanged()
 	{
-		Text = $"{Locale.DLCs} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
+		Text = $"{Locale.DLCs} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 		L_Duplicates.Text = Locale.DlcUpdateNotice;
 	}
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
-		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "Search" : "ClearSearch";
 		LC_DLCs.FilterChanged();
 		RefreshCounts();
 	}
@@ -79,9 +79,9 @@ public partial class PC_DLCs : PanelContent
 		base.UIChanged();
 
 		B_ExInclude.Size = UI.Scale(new Size(375, 26), UI.UIScale);
-		TB_Search.Margin = L_Duplicates.Margin = L_Counts.Margin = B_ExInclude.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		TB_Search.Margin = L_Duplicates.Margin = L_Counts.Margin = B_ExInclude.Margin = UI.Scale(new Padding(5));
 		L_Duplicates.Font = L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
-		TB_Search.Width = (int)(250 * UI.FontScale);
+		TB_Search.Width = UI.Scale(250);
 	}
 
 	public override bool KeyPressed(ref Message msg, Keys keyData)

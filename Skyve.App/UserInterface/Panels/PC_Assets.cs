@@ -1,11 +1,19 @@
-﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_Assets : PC_ContentList<IAsset>
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Skyve.App.UserInterface.Panels;
+public class PC_Assets : PC_ContentList
 {
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 	private readonly IPackageManager _contentManager = ServiceCenter.Get<IPackageManager>();
+
 	public PC_Assets()
 	{
+		if (_settings.UserSettings.FilterIncludedByDefault)
+		{
+			LC_Items.OT_Included.SelectedValue = Generic.ThreeOptionToggle.Value.Option1;
+		}
 	}
 
 	public override SkyvePage Page => SkyvePage.Assets;
@@ -14,26 +22,17 @@ public class PC_Assets : PC_ContentList<IAsset>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset.Name}";
+		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override IEnumerable<IAsset> GetItems()
+	protected override async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
 		if (_settings.UserSettings.LinkModAssets)
 		{
-			return _contentManager.Assets.Where(x => !(x.LocalParentPackage?.IsMod ?? false));
+			return _contentManager.Assets.Where(x => !(x.GetLocalPackage()?.IsCodeMod ?? false));
 		}
 
-		return _contentManager.Assets;
-	}
-
-	protected override string GetCountText()
-	{
-		var assetsIncluded = _contentManager.Assets.Count(x => x.IsIncluded());
-		var total = LC_Items.ItemCount;
-		var text = string.Empty;
-
-		return string.Format(Locale.AssetIncludedTotal, assetsIncluded, total);
+		return await Task.FromResult(_contentManager.Assets);
 	}
 
 	protected override LocaleHelper.Translation GetItemText()

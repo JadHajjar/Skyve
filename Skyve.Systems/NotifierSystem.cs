@@ -3,7 +3,6 @@
 using Skyve.Domain.Systems;
 
 using System;
-using System.Diagnostics;
 
 namespace Skyve.Systems;
 internal class NotifierSystem : INotifier
@@ -22,6 +21,10 @@ internal class NotifierSystem : INotifier
 	public event Action? WorkshopInfoUpdated;
 	public event Action? WorkshopUsersInfoLoaded;
 	public event Action? CompatibilityDataLoaded;
+	public event Action? WorkshopSyncStarted;
+	public event Action? WorkshopSyncEnded;
+	public event Action? SkyveUpdateAvailable;
+	public event Action? SnoozeChanged;
 
 	private readonly DelayedAction _delayedPackageInformationUpdated;
 	private readonly DelayedAction _delayedPackageInclusionUpdated;
@@ -45,15 +48,17 @@ internal class NotifierSystem : INotifier
 	}
 
 	public bool IsContentLoaded { get; private set; }
-	public bool BulkUpdating { get; set; }
-	public bool ApplyingPlayset { get; set; }
-	public bool PlaysetsLoaded { get; set; }
+	public bool IsBulkUpdating { get; set; }
+	public bool IsApplyingPlayset { get; set; }
+	public bool IsPlaysetsLoaded { get; set; }
+	public bool IsWorkshopSyncInProgress { get; set; }
 
 	public void OnContentLoaded()
 	{
 		IsContentLoaded = true;
 
-		_delayedContentLoaded.Run();
+		RunAndLog(ContentLoaded, nameof(ContentLoaded));
+		//_delayedContentLoaded.Run();
 	}
 
 	public void OnWorkshopInfoUpdated()
@@ -85,7 +90,7 @@ internal class NotifierSystem : INotifier
 		if (IsContentLoaded)
 		{
 			_delayedPackageInclusionUpdated.Run();
-			_delayedPackageInformationUpdated.Run();
+			//_delayedPackageInformationUpdated.Run();
 		}
 	}
 
@@ -136,5 +141,25 @@ internal class NotifierSystem : INotifier
 		_logger.Info("[Auto - Started  ] " + name);
 		action?.Invoke();
 		_logger.Info("[Auto - Completed] " + name);
+	}
+
+	public void OnWorkshopSyncStarted()
+	{
+		WorkshopSyncStarted?.Invoke();
+	}
+
+	public void OnWorkshopSyncEnded()
+	{
+		WorkshopSyncEnded?.Invoke();
+	}
+
+	public void OnSkyveUpdateAvailable()
+	{
+		SkyveUpdateAvailable?.Invoke();
+	}
+
+	public void OnSnoozeChanged()
+	{
+		SnoozeChanged?.Invoke();
 	}
 }

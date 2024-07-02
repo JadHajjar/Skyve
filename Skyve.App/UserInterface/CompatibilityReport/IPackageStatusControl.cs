@@ -2,6 +2,8 @@
 using Skyve.App.UserInterface.Dropdowns;
 
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -13,9 +15,9 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 	public readonly PackageStatusTypeDropDown<T> typeDropDown;
 
 	public event EventHandler? ValuesChanged;
-	public IPackage? CurrentPackage { get; }
+	public IPackageIdentity? CurrentPackage { get; }
 
-	public IPackageStatusControl(IPackage? currentPackage, TBase? item = default, bool restricted = false)
+	public IPackageStatusControl(IPackageIdentity? currentPackage, TBase? item = default, bool restricted = false)
 	{
 		InitializeComponent();
 
@@ -109,19 +111,19 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 
 	protected override void DesignChanged(FormDesign design)
 	{
-		P_Main.BackColor = design.BackColor;
+		P_Main.BackColor = design.AccentBackColor;
 		L_OutputTitle.ForeColor = design.LabelColor;
 		L_Output.ForeColor = design.InfoColor;
 	}
 
 	protected override void UIChanged()
 	{
-		MinimumSize = UI.Scale(new Size(250, 0), UI.UIScale);
-		P_Main.Padding = slickSpacer1.Margin = L_OutputTitle.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		CloseIcon.Size = UI.Scale(new Size(16, 16), UI.FontScale);
-		TB_Note.MinimumSize = new Size(0, (int)(64 * UI.FontScale));
-		I_Paste.Size = I_Copy.Size = I_AddPackage.Size = I_Note.Size = UI.Scale(new Size(24, 24), UI.FontScale);
-		I_Paste.Padding = I_Copy.Padding = I_AddPackage.Padding = I_Note.Padding = UI.Scale(new Padding(5), UI.FontScale);
+		MinimumSize = UI.Scale(new Size(260, 0), UI.UIScale);
+		P_Main.Padding = UI.Scale(new Padding(12));
+		Margin = slickSpacer1.Margin = L_OutputTitle.Margin = UI.Scale(new Padding(3));
+		TB_Note.MinimumSize = new Size(0, UI.Scale(64));
+		I_Paste.Size = I_Copy.Size = I_AddPackage.Size = I_Note.Size = I_Close.Size = UI.Scale(new Size(28, 28));
+		I_Paste.Padding = I_Copy.Padding = I_AddPackage.Padding = I_Note.Padding = I_Close.Padding = UI.Scale(new Padding(3));
 		L_OutputTitle.Font = UI.Font(7.5F, FontStyle.Bold);
 	}
 
@@ -132,11 +134,11 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 
 	private void I_AddPackage_Click(object sender, EventArgs e)
 	{
-		var form = new PC_SelectPackage();
+		var form = new PC_WorkshopPackageSelection(P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Id));
 
 		form.PackageSelected += Form_PackageSelected;
 
-		Program.MainForm.PushPanel(null, form);
+		Program.MainForm.PushPanel(form);
 	}
 
 	private void Form_PackageSelected(IEnumerable<ulong> packages)
@@ -170,7 +172,11 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 			return;
 		}
 
+#if CS2
+		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{5,6})");
+#else
 		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{8,20})");
+#endif
 
 		foreach (Match item in matches)
 		{

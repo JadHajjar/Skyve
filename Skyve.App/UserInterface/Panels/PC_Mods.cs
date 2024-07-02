@@ -1,9 +1,17 @@
-﻿namespace Skyve.App.UserInterface.Panels;
-public class PC_Mods : PC_ContentList<IMod>
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Skyve.App.UserInterface.Panels;
+public class PC_Mods : PC_ContentList
 {
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
+
 	public PC_Mods()
 	{
-
+		if (_settings.UserSettings.FilterIncludedByDefault)
+		{
+			LC_Items.OT_Included.SelectedValue = Generic.ThreeOptionToggle.Value.Option1;
+		}
 	}
 
 	public override SkyvePage Page => SkyvePage.Mods;
@@ -12,32 +20,12 @@ public class PC_Mods : PC_ContentList<IMod>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Mod.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
+		Text = $"{Locale.Mod.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
-	protected override IEnumerable<IMod> GetItems()
+	protected override async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
-		return ServiceCenter.Get<IPackageManager>().Mods;
-	}
-
-	protected override string GetCountText()
-	{
-		var mods = LC_Items.Items;
-		var modsIncluded = mods.Count(x => x.IsIncluded());
-		var modsEnabled = mods.Count(x => x.IsEnabled() && x.IsIncluded());
-		var total = LC_Items.ItemCount;
-
-		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
-		{
-			return string.Format(Locale.ModIncludedTotal, modsIncluded, total);
-		}
-
-		if (modsIncluded == modsEnabled)
-		{
-			return string.Format(Locale.ModIncludedAndEnabledTotal, modsIncluded, total);
-		}
-
-		return string.Format(Locale.ModIncludedEnabledTotal, modsIncluded, modsEnabled, total);
+		return await Task.FromResult(ServiceCenter.Get<IPackageManager>().Packages.Where(x => x.IsCodeMod));
 	}
 
 	protected override LocaleHelper.Translation GetItemText()

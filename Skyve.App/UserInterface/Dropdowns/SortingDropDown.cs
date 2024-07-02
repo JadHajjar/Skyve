@@ -5,6 +5,7 @@ namespace Skyve.App.UserInterface.Dropdowns;
 public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 {
 	public SkyvePage SkyvePage { get; set; }
+	public bool WorkshopSort { get; set; }
 
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -12,7 +13,7 @@ public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(PackageSorting)).Cast<PackageSorting>().Where(x => x < PackageSorting.Mod).ToArray();
+			Items = Enum.GetValues(typeof(PackageSorting)).Cast<PackageSorting>().Where(x => WorkshopSort ? x > PackageSorting.WorkshopSorting : x < PackageSorting.Mod).ToArray();
 
 			selectedItem = (PackageSorting)ServiceCenter.Get<ISettings>().UserSettings.PageSettings.GetOrAdd(SkyvePage).Sorting;
 		}
@@ -22,7 +23,7 @@ public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 	{
 		if (e.Button == MouseButtons.Middle)
 		{
-			SelectedItem = PackageSorting.Default;
+			SelectedItem = WorkshopSort ? PackageSorting.Best : PackageSorting.Default;
 		}
 
 		base.OnMouseClick(e);
@@ -42,7 +43,6 @@ public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 
 	public override void ResetValue()
 	{
-
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageSorting item)
@@ -53,24 +53,28 @@ public class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		using var brush = new SolidBrush(foreColor);
+		using var font = UI.Font(8.25F).FitTo(text, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center };
+		e.Graphics.DrawString(text, font, brush, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), format);
 	}
 
 	private static string GetIcon(PackageSorting item)
 	{
 		return item switch
 		{
-			PackageSorting.Name => "I_FileName",
-			PackageSorting.Author => "I_Developer",
-			PackageSorting.FileSize => "I_MicroSd",
-			PackageSorting.CompatibilityReport => "I_CompatibilityReport",
-			PackageSorting.UpdateTime => "I_UpdateTime",
-			PackageSorting.SubscribeTime => "I_Add",
-			PackageSorting.Status => "I_Broken",
-			PackageSorting.Subscribers => "I_People",
-			PackageSorting.Votes => "I_Vote",
-			PackageSorting.LoadOrder => "I_Wrench",
-			_ => "I_Check",
+			PackageSorting.Name or PackageSorting.WorkshopName => "FileName",
+			PackageSorting.Author => "Author",
+			PackageSorting.FileSize => "MicroSd",
+			PackageSorting.CompatibilityReport => "CompatibilityReport",
+			PackageSorting.UpdateTime or PackageSorting.DateUpdated => "UpdateTime",
+			PackageSorting.SubscribeTime or PackageSorting.DateCreated => "Add",
+			PackageSorting.Status => "Broken",
+			PackageSorting.Subscribers or PackageSorting.Popularity => "People",
+			PackageSorting.Votes => "Vote",
+			PackageSorting.LoadOrder => "Wrench",
+			PackageSorting.Best => "Star",
+			_ => "Check",
 		};
 	}
 }

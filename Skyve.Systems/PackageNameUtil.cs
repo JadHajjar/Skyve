@@ -1,7 +1,7 @@
 ﻿using Extensions;
 
+using Skyve.Compatibility.Domain.Enums;
 using Skyve.Domain;
-using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
 using System;
@@ -32,11 +32,17 @@ public class PackageNameUtil : IPackageNameUtil
 
 		var text = _tagRegex.Replace(package.Name, string.Empty);
 
-		if (package is IPackage lp && lp.IsBuiltIn)
+		if (text.IndexOf(' ') < 0)
 		{
 			text = text.FormatWords();
 		}
 
+#if CS1
+		if (package is IPackage lp && lp.IsBuiltIn)
+		{
+			text = text.FormatWords();
+		}
+#endif
 		return keepTags
 			? text.RemoveDoubleSpaces().RegexRemove(" +(?=[\\]\\)])").RegexRemove("(?<=[\\[\\(]) +")
 			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
@@ -44,16 +50,33 @@ public class PackageNameUtil : IPackageNameUtil
 
 	public string CleanName(IPackageIdentity? package, out List<(Color Color, string Text)> tags, bool keepTags = false)
 	{
-		tags = new();
+		tags = [];
 
-		if (package?.Name is null or "")
+		IWorkshopInfo? workshopInfo;
+
+        if (package is IPackageRequirement requirement && requirement.IsDlc)
+        {
+			return package.Name;
+        }
+
+        if (package?.Name is null or "")
 		{
-			return _locale.Get("UnknownPackage");
+			workshopInfo = package?.GetWorkshopInfo();
+
+			if (workshopInfo?.Name is null or "")
+			{
+				return $"{_locale.Get("UnknownPackage")} #{package?.Id}";
+			}
+
+			return CleanName(workshopInfo, out tags, keepTags);
 		}
 
-		var lp = package as IPackage;
-		var isLocal = lp?.IsLocal ?? false;
-		var isBuiltIn = lp?.IsBuiltIn ?? false;
+		if (package is IAsset)
+		{
+			return package.Name;
+		}
+
+		var isLocal = package.IsLocal();
 		var text = _tagRegex.Replace(package.Name, string.Empty);
 		var tagMatches = _bracketsRegex.Matches(text);
 
@@ -61,11 +84,19 @@ public class PackageNameUtil : IPackageNameUtil
 			? text.RemoveDoubleSpaces().RegexRemove(" +(?=[\\]\\)])").RegexRemove("(?<=[\\[\\(]) +")
 			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
 
-		if (isBuiltIn)
+		if (text.IndexOf(' ') < 0)
 		{
 			text = text.FormatWords();
 		}
-		else if (isLocal)
+
+#if CS1
+		if (lp?.IsBuiltIn ?? false)
+		{
+			text = text.FormatWords();
+		}
+		else
+#endif
+		if (isLocal)
 		{
 			tags.Add((FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), _locale.Get("Local").One.ToUpper()));
 		}
@@ -97,7 +128,7 @@ public class PackageNameUtil : IPackageNameUtil
 			}
 		}
 
-		var workshopInfo = package.GetWorkshopInfo();
+		workshopInfo = package.GetWorkshopInfo();
 
 		if (workshopInfo is null)
 		{
@@ -108,13 +139,9 @@ public class PackageNameUtil : IPackageNameUtil
 		{
 			tags.Add((FormDesign.Design.RedColor, _locale.Get("Banned").One.ToUpper()));
 		}
-		else if (workshopInfo.IsIncompatible)
-		{
-			tags.Add((FormDesign.Design.RedColor, _locale.Get("Incompatible").One.ToUpper()));
-		}
 		else
 		{
-			var info = ServiceCenter.Get<ICompatibilityManager>().GetPackageInfo(package);
+			var info = package.GetPackageInfo();
 
 			if (info?.Stability is PackageStability.Broken)
 			{

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Skyve.Domain.Systems;
 public interface IInterfaceService
 {
+	void OpenParadoxLogin();
 	void OpenOptionsPage();
-	void ViewSpecificPackages(List<ILocalPackageWithContents> packages, string title);
+	void ViewSpecificPackages(List<IPackageIdentity> packages, string title);
+	void OpenPackagePage(IPackageIdentity package, bool openCompatibilityPage = false);
+	void OpenPlaysetPage(IPlayset playset, bool settingsTab = false);
+	bool AskForDependencyConfirmation(List<IPackageIdentity> packages, List<IPackageIdentity> dependencies);
+	void OpenLogReport(bool save);
 }

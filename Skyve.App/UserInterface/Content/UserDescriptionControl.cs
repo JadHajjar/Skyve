@@ -1,156 +1,133 @@
 ﻿using Skyve.App.UserInterface.Panels;
+using Skyve.App.Utilities;
 
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
-public class UserDescriptionControl : SlickImageControl
+public partial class UserDescriptionControl : SlickControl
 {
-	private Rectangles? rects;
-	public IUser? User { get; private set; }
-	public PC_UserPage? UserPage { get; private set; }
+	public IUser User { get; }
+	public PC_UserPage? UserPage { get; set; }
 
-	private readonly IPackageManager _contentManager;
-	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IWorkshopService _workshopService;
+	private readonly IPackageManager _packageManager;
+	private readonly IUserService _userService;
+	private readonly INotifier _notifier;
 
-	public UserDescriptionControl()
+	public UserDescriptionControl(IUser user)
 	{
-		_contentManager = ServiceCenter.Get<IPackageManager>();
-		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+		ServiceCenter.Get(out _workshopService, out _userService, out _packageManager, out _notifier);
+
+		InitializeComponent();
+
+		User = user;
+		PB_Icon.User = User;
+
+		SetInfo();
+
+		_notifier.WorkshopUsersInfoLoaded += _notifier_WorkshopUsersInfoLoaded;
+
+#if CS2
+		I_More.ImageName = "Paradox";
+#else
+		I_More.ImageName = "Steam";
+#endif
 	}
 
-	public void SetUser(IUser user, PC_UserPage? page)
+	private void _notifier_WorkshopUsersInfoLoaded()
 	{
-		UserPage = page;
-		User = user;
+		this.TryInvoke(SetInfo);
+	}
 
-		Invalidate();
+	private void SetInfo()
+	{
+		var author = _workshopService.GetUser(User);
+
+		L_Name.Text = (author ?? User).Name;
+
+		var count = _packageManager.Packages.Count(x => User.Equals(x.GetWorkshopInfo()?.Author));
+		L_Packages.Text = Locale.YouHavePackagesUser.FormatPlural(count, User.Name);
+
+		I_Verified.Visible = _userService.IsUserVerified(User);
+
+		if (author == null)
+		{
+			return;
+		}
+
+		L_Bio.Text = author.Bio;
+		TLP_Bio.Visible = !string.IsNullOrEmpty(author.Bio);
+
+		L_Followers.Text = Locale.FollowersCount.FormatPlural(author.FollowerCount, author.FollowerCount);
+		I_Followers.Visible = L_Followers.Visible = author.FollowerCount > 1;
+
+		var links = new List<ILink>();
+
+		links.AddRange(author?.Links ?? []);
+		links = links.DistinctList(x => x.Url);
+
+		if (!links.ToList(x => x.Url).SequenceEqual(FLP_Package_Links.Controls.OfType<LinkControl>().Select(x => x.Link.Url)))
+		{
+			FLP_Package_Links.SuspendDrawing();
+			FLP_Package_Links.Controls.Clear(true);
+			FLP_Package_Links.Controls.AddRange(links.ToArray(x => new LinkControl(x, true)));
+			FLP_Package_Links.ResumeDrawing();
+		}
+
+		TLP_Links.Visible = links.Count > 0;
+	}
+
+	protected override void LocaleChanged()
+	{
+		L_Links.Text = Locale.Links.One.ToUpper();
+		L_BioLabel.Text = Locale.Bio.One.ToUpper();
+
+		SlickTip.SetTo(I_Verified, Locale.VerifiedAuthor);
+		SlickTip.SetTo(I_More, Locale.OpenAuthorPage);
 	}
 
 	protected override void UIChanged()
 	{
-		Padding = UI.Scale(new Padding(4), UI.FontScale);
+		base.UIChanged();
+
+		Width = (int)(260 * UI.FontScale);
+
+		L_Name.Font = UI.Font(11.25F, FontStyle.Bold);
+		PB_Icon.Size = UI.Scale(new Size(72, 72), UI.FontScale);
+		I_Verified.Size = I_Followers.Size = I_Packages.Size = UI.Scale(new Size(16, 16), UI.FontScale);
+		I_More.MinimumSize = UI.Scale(new Size(24, 24), UI.FontScale);
+		TLP_Side.Padding = UI.Scale(new Padding(8, 0, 0, 0), UI.FontScale);
+		TLP_TopInfo.Padding = UI.Scale(new Padding(0, 0, 8, 0), UI.FontScale);
+		TLP_TopInfo.Margin = base_slickSpacer.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		base_slickSpacer.Height = (int)UI.FontScale;
+		L_Name.Margin = UI.Scale(new Padding(I_Verified.Visible ? 0 : 3, 5, 5, 5), UI.FontScale);
+		L_Bio.Margin =  I_More.Padding = TLP_Bio.Padding = TLP_Bio.Margin = TLP_Links.Padding = TLP_Links.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		L_Followers.Font = L_Packages.Font = UI.Font(7F);
+		L_BioLabel.Font = L_Links.Font = UI.Font(7F, FontStyle.Bold);
+		I_Verified.Margin = I_Followers.Margin = I_Packages.Margin = UI.Scale(new Padding(5, 0, 1, 0), UI.FontScale);
+		L_Followers.Margin = L_Packages.Margin = UI.Scale(new Padding(2, 3, 0, 3), UI.FontScale);
+		L_BioLabel.Margin = L_Links.Margin = UI.Scale(new Padding(3), UI.FontScale);
 	}
 
-	protected override void OnMouseMove(MouseEventArgs e)
+	protected override void DesignChanged(FormDesign design)
 	{
-		base.OnMouseMove(e);
+		base.DesignChanged(design);
 
-		if (rects?.SteamRect.Contains(e.Location) == true)
-		{
-			SlickTip.SetTo(this, Locale.OpenAuthorPage, offset: rects.SteamRect.Location);
-
-			Cursor = Cursors.Hand;
-		}
-		else
-		{
-			if (rects?.TextRect.Pad(0, 0, (int)(-24 * UI.FontScale), 0).Contains(e.Location) == true && User is not null && _compatibilityManager.IsUserVerified(User))
-			{
-				SlickTip.SetTo(this, "VerifiedAuthor");
-			}
-			else
-			{
-				SlickTip.SetTo(this, null);
-			}
-
-			Cursor = Cursors.Default;
-		}
+		L_BioLabel.ForeColor = L_Links.ForeColor = design.LabelColor;
+		TLP_Bio.BackColor = TLP_Links.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme ? 6 : -5);
 	}
 
-	protected override void OnMouseClick(MouseEventArgs e)
+	private void I_More_Click(object sender, EventArgs e)
 	{
-		base.OnMouseClick(e);
-
-		if (e.Button == MouseButtons.Left && rects?.SteamRect.Contains(e.Location) == true)
-		{
-			PlatformUtil.OpenUrl(User!.ProfileUrl);
-		}
+		PlatformUtil.OpenUrl(User.ProfileUrl);
 	}
 
-	protected override void OnPaint(PaintEventArgs e)
+	private void FLP_Package_Links_SizeChanged(object sender, EventArgs e)
 	{
-		if (UserPage is not null)
+		foreach (Control ctrl in FLP_Package_Links.Controls)
 		{
-			e.Graphics.Clear(FormDesign.Design.BackColor);
-			e.Graphics.FillRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), ClientRectangle.Pad(0, 0, 0, Height / 2));
-			e.Graphics.SetUp();
-		}
-		else
-		{
-			e.Graphics.SetUp(FormDesign.Design.AccentBackColor);
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1, Height / 2 + 1, 1, 1), (int)(5 * UI.FontScale));
-		}
-
-		if (User == null)
-		{
-			return;
-		}
-
-		rects = new Rectangles();
-
-		DrawTitle(e);
-		DrawButtons(e);
-
-		var count = _contentManager.Packages.Count(x => User.Equals(x.GetWorkshopInfo()?.Author));
-
-		if (count == 0)
-		{
-			return;
-		}
-
-		var text = Locale.YouHavePackagesUser.FormatPlural(count, User.Name);
-		using var font = UI.Font(9F);
-		var textSize = e.Graphics.Measure(text, font);
-
-		var rect = ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding).Align(Size.Ceiling(textSize), ContentAlignment.TopLeft);
-
-		using var brush = new SolidBrush(FormDesign.Design.InfoColor);
-		e.Graphics.DrawString(text, font, brush, rect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
-	}
-
-	private void DrawButtons(PaintEventArgs e)
-	{
-		rects!.SteamRect = ClientRectangle.Pad(0, 0, 0, Height / 2).Pad(Padding).Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.BottomRight);
-
-		using var icon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height * 3 / 4);
-
-		SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, icon, null, rects.SteamRect.Contains(CursorLocation) ? HoverState & ~HoverState.Focused : HoverState.Normal);
-	}
-
-	private void DrawTitle(PaintEventArgs e)
-	{
-		var text = User!.Name;
-		using var font = UI.Font(11.25F, FontStyle.Bold);
-		var textSize = e.Graphics.Measure(text, font);
-
-		rects!.TextRect = ClientRectangle.Pad(0, 0, 0, Height / 2).Pad(Padding).Align(Size.Ceiling(textSize), ContentAlignment.BottomLeft);
-
-		using var brush = new SolidBrush(FormDesign.Design.ForeColor);
-		e.Graphics.DrawString(text, font, brush, rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
-
-		if (_compatibilityManager.IsUserVerified(User))
-		{
-			var checkRect = rects.TextRect.Align(UI.Scale(new Size(16, 16), UI.FontScale), ContentAlignment.MiddleLeft);
-			checkRect.X += rects.TextRect.Width;
-
-			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect);
-
-			checkRect = checkRect.Pad((int)(3 * UI.FontScale));
-
-			using var img = IconManager.GetIcon("I_Check", checkRect.Height);
-			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
-		}
-	}
-
-	private class Rectangles
-	{
-		public Rectangle TextRect;
-		public Rectangle SteamRect;
-
-		public bool Contain(Point location)
-		{
-			return
-				SteamRect.Contains(location);
+			ctrl.Size = new(ctrl.Parent.Width / 3 - ctrl.Margin.Horizontal, ctrl.Parent.Width / 3 - ctrl.Margin.Horizontal);
 		}
 	}
 }

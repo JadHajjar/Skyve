@@ -1,51 +1,253 @@
-﻿using Skyve.App.UserInterface.Lists;
-
-using System.Drawing;
+﻿using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
-public class IncludeAllButton<T> : SlickControl where T : IPackage
+public class IncludeAllButton : SlickControl
 {
+	public delegate Task TaskAction();
+
 	private readonly bool _doubleButtons;
-	private readonly Func<List<T>> GetPackages;
+	private readonly Func<List<IPackageIdentity>> GetPackages;
 	private Rectangle IncludedRect;
-	private Rectangle EnabledRect;
 	private Rectangle ActionRect;
+#if CS1
+	private Rectangle EnabledRect;
+#endif
 
 	public event EventHandler? ActionClicked;
-	public event EventHandler? IncludeAllClicked;
-	public event EventHandler? ExcludeAllClicked;
-	public event EventHandler? EnableAllClicked;
-	public event EventHandler? DisableAllClicked;
-	public event EventHandler? SubscribeAllClicked;
-
+	public TaskAction? IncludeAllClicked;
+	public TaskAction? ExcludeAllClicked;
+	public TaskAction? EnableAllClicked;
+	public TaskAction? DisableAllClicked;
+	public TaskAction? SubscribeAllClicked;
+	private Size size;
+	private bool _isSelected;
 	private readonly ISettings _settings;
+	private readonly IPackageManager _packageManager;
+	private readonly IPackageUtil _packageUtil;
 
-	public IncludeAllButton(Func<List<T>> getMethod)
+	public bool IsSelected
 	{
+		get => _isSelected; set
+		{
+			_isSelected = value;
+
+			//if (!value)
+			//{
+			//	Size = size;
+			//	ActionRect = ClientRectangle.Align(IncludedRect.Size, ContentAlignment.MiddleRight);
+			//}
+			//else
+			{
+				SetExpandedSize();
+			}
+
+			Invalidate();
+		}
+	}
+
+	public IncludeAllButton(Func<List<IPackageIdentity>> getMethod)
+	{
+		ServiceCenter.Get(out _settings, out _packageManager, out _packageUtil);
+
 		Margin = default;
 		Cursor = Cursors.Hand;
 		GetPackages = getMethod;
-		_settings = ServiceCenter.Get<ISettings>();
 		_doubleButtons = _settings.UserSettings.AdvancedIncludeEnable;
 	}
 
 	protected override void UIChanged()
 	{
-		Margin = Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
+		Margin = UI.Scale(new Padding(4, 4, 4, 5));
+		Padding = UI.Scale(new Padding(3));
 
-		var ItemHeight = (int)(28 * UI.FontScale);
-		var includeItemHeight = ItemHeight;
+		var ItemHeight = UI.Scale(28);
 
-		Size = new Size(includeItemHeight * (_doubleButtons ? 3 : 2), includeItemHeight - (int)(4 * UI.FontScale));
+#if CS2
+		size = Size = new Size((ItemHeight * 2) + Margin.Horizontal, ItemHeight - UI.Scale(4));
+
+		var rect = ClientRectangle.Align(new Size(ItemHeight, Height), ContentAlignment.MiddleLeft);
+		IncludedRect = rect;
+		rect.X += rect.Width + Margin.Horizontal;
+		ActionRect = rect;
+#else
+		Size = new Size(ItemHeight * (_doubleButtons ? 3 : 2), ItemHeight - UI.Scale(4));
+#endif
+
+		//if (IsSelected)
+		{
+			SetExpandedSize();
+		}
 	}
+
+	private void SetExpandedSize()
+	{
+		var action = new DynamicIcon("Actions");
+		using var graphics = CreateGraphics();
+		using var font = UI.Font(8.25F);
+		using var actionIcon = action.Get(IncludedRect.Width * 3 / 4);
+		var size = SlickButton.GetSize(graphics, actionIcon, "BulkActions", font, Padding);
+
+		Size = new Size(IncludedRect.Width + Margin.Horizontal + size.Width, Height);
+		ActionRect = new Rectangle(Width - size.Width, IncludedRect.Y, size.Width, IncludedRect.Height);
+	}
+
+#if CS2
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		base.OnMouseMove(e);
+
+		var packages = GetPackages();
+		var subscribe = packages.Any(x => !_packageUtil.IsIncluded(x));
+		var enable = subscribe || packages.Any(x => !_packageUtil.IsEnabled(x));
+
+		if (IncludedRect.Contains(e.Location))
+		{
+			if (subscribe)
+			{
+				SlickTip.SetTo(this, "IncludeAll");
+			}
+			else if (enable)
+			{
+				SlickTip.SetTo(this, "EnableAll");
+			}
+			else
+			{
+				SlickTip.SetTo(this, "DisableAll");
+			}
+
+			Cursor.Current = Cursors.Hand;
+		}
+		else if (ActionRect.Contains(e.Location))
+		{
+			SlickTip.SetTo(this, "BulkActions");
+
+			Cursor.Current = Cursors.Hand;
+		}
+		else
+		{
+			SlickTip.SetTo(this, null);
+
+			Cursor.Current = Cursors.Default;
+		}
+	}
+
+	protected override async void OnMouseClick(MouseEventArgs e)
+	{
+		base.OnMouseClick(e);
+
+		if (e.Button == MouseButtons.Left)
+		{
+			var packages = GetPackages();
+			var subscribe = packages.Any(x => !_packageUtil.IsIncluded(x));
+			var enable = subscribe || packages.Any(x => !_packageUtil.IsEnabled(x));
+
+			if (IncludedRect.Contains(e.Location) && !Loading)
+			{
+				Loading = true;
+
+				if (subscribe)
+				{
+					if (IncludeAllClicked is not null)
+					{
+						await IncludeAllClicked();
+					}
+				}
+				else if (enable)
+				{
+					if (EnableAllClicked is not null)
+					{
+						await EnableAllClicked();
+					}
+				}
+				else
+				{
+					if (DisableAllClicked is not null)
+					{
+						await DisableAllClicked();
+					}
+				}
+
+				Loading = false;
+			}
+			else if (ActionRect.Contains(e.Location))
+			{
+				ActionClicked?.Invoke(this, e);
+			}
+		}
+		else if (e.Button == MouseButtons.Right)
+		{
+			ActionClicked?.Invoke(this, e);
+		}
+	}
+
+	protected override void OnPaint(PaintEventArgs e)
+	{
+		e.Graphics.SetUp(BackColor);
+
+		var cursorLocation = PointToClient(Cursor.Position);
+		var packages = GetPackages();
+		var subscribe = packages.Any(x => !_packageUtil.IsIncluded(x));
+		var enable = subscribe || packages.Any(x => !_packageUtil.IsEnabled(x));
+
+		if (IncludedRect.Contains(cursorLocation))
+		{
+			enable = !enable;
+		}
+
+		{
+			SlickButton.GetColors(out var fore, out var back, IncludedRect.Contains(cursorLocation) ? HoverState : default, subscribe ? ColorStyle.Active : enable ? ColorStyle.Red : ColorStyle.Green);
+
+			var incl = new DynamicIcon(subscribe ? "Add" : enable ? "Enabled" : "Ok");
+			using var inclIcon = incl.Get(IncludedRect.Width * 3 / 4);
+			using var brush1 = IncludedRect.Gradient(back, 1.5F);
+
+			e.Graphics.FillRoundedRectangle(brush1, IncludedRect, Margin.Left);
+
+			if (Loading)
+			{
+				DrawLoader(e.Graphics, IncludedRect.CenterR(inclIcon.Size), fore);
+			}
+			else
+			{
+				e.Graphics.DrawImage(inclIcon.Color(fore), IncludedRect.CenterR(inclIcon.Size));
+			}
+		}
+
+		{
+			SlickButton.GetColors(out var fore, out var back, ActionRect.Contains(cursorLocation) ? HoverState : default, buttonType: IsSelected ? ButtonType.Active : ButtonType.Normal);
+
+			var action = new DynamicIcon("Actions");
+			using var actionIcon = action.Get(IncludedRect.Width * 3 / 4);
+			using var brush2 = ActionRect.Gradient(back, 1.5F);
+
+			e.Graphics.FillRoundedRectangle(brush2, ActionRect, Margin.Left);
+
+			//if (IsSelected)
+			//{
+				using var brush3 = ActionRect.Gradient(fore, 1.5F);
+				using var font = UI.Font(8.25F);
+				using var stringFormat = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center };
+
+				e.Graphics.DrawString(LocaleHelper.GetGlobalText("BulkActions"), font, brush3, ActionRect.Pad(Padding), stringFormat);
+				e.Graphics.DrawImage(actionIcon.Color(fore), ActionRect.Pad(Padding).Align(actionIcon.Size, ContentAlignment.MiddleLeft));
+			//}
+			//else
+			//{
+			//	e.Graphics.DrawImage(actionIcon.Color(fore), ActionRect.CenterR(actionIcon.Size));
+			//}
+		}
+	}
+#else
 
 	protected override void OnMouseMove(MouseEventArgs e)
 	{
 		base.OnMouseMove(e);
 
 		var packages = GetPackages();
-		var subscribe = packages.Any(x => x.LocalPackage is null);
+		var localPackages = packages.ToList(x => _packageManager.GetPackageById(x));
+		var subscribe = localPackages.Any(x => x is null);
 
 		if (IncludedRect.Contains(e.Location))
 		{
@@ -53,7 +255,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "SubscribeAll");
 			}
-			else if (packages.SelectWhereNotNull(x => x.LocalPackage).All(x => x!.IsIncluded()))
+			else if (localPackages.SelectWhereNotNull().All(x => _packageUtil.IsIncluded(x!)))
 			{
 				SlickTip.SetTo(this, "ExcludeAll");
 			}
@@ -61,6 +263,8 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "IncludeAll");
 			}
+
+			Cursor.Current = Cursors.Hand;
 		}
 		else if (EnabledRect.Contains(e.Location))
 		{
@@ -68,7 +272,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "SubscribeAll");
 			}
-			else if (packages.SelectWhereNotNull(x => x.LocalParentPackage?.Mod).All(x => x!.IsEnabled()))
+			else if (localPackages.SelectWhereNotNull().All(x => _packageUtil.IsEnabled(x!)))
 			{
 				SlickTip.SetTo(this, "DisableAll");
 			}
@@ -76,10 +280,18 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "EnableAll");
 			}
+
+			Cursor.Current = Cursors.Hand;
 		}
 		else if (ActionRect.Contains(e.Location))
 		{
-			SlickTip.SetTo(this, "OtherActions");
+			SlickTip.SetTo(this, "BulkActions");
+
+			Cursor.Current = Cursors.Hand;
+		}
+		else
+		{
+			Cursor.Current = Cursors.Default;
 		}
 	}
 
@@ -90,7 +302,8 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 		if (e.Button == MouseButtons.Left)
 		{
 			var packages = GetPackages();
-			var subscribe = packages.Any(x => x.LocalPackage is null);
+			var localPackages = packages.ToList(x => _packageManager.GetPackageById(x));
+			var subscribe = localPackages.Any(x => x is null);
 
 			if (IncludedRect.Contains(e.Location))
 			{
@@ -98,7 +311,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 				{
 					SubscribeAllClicked?.Invoke(this, e);
 				}
-				else if (packages.SelectWhereNotNull(x => x.LocalPackage).All(x => x!.IsIncluded()))
+				else if (localPackages.SelectWhereNotNull().All(x => _packageUtil.IsIncluded(x!)))
 				{
 					ExcludeAllClicked?.Invoke(this, e);
 				}
@@ -113,7 +326,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 				{
 					SubscribeAllClicked?.Invoke(this, e);
 				}
-				else if (packages.SelectWhereNotNull(x => x.LocalParentPackage?.Mod).All(x => x!.IsEnabled()))
+				else if (localPackages.SelectWhereNotNull().All(x => _packageUtil.IsEnabled(x!)))
 				{
 					DisableAllClicked?.Invoke(this, e);
 				}
@@ -137,14 +350,15 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 	{
 		e.Graphics.SetUp(BackColor);
 
-		var width = (int)(28 * UI.FontScale);
+		var width = UI.Scale(28);
 		var rectangle = ClientRectangle;
 		var CursorLocation = PointToClient(Cursor.Position);
 		var color = FormDesign.Design.ActiveColor;
 		var packages = GetPackages();
-		var subscribe = packages.Any(x => x.LocalPackage is null);
-		var include = !subscribe && packages.All(x => x.LocalPackage!.IsIncluded());
-		var enable = !subscribe && packages.SelectWhereNotNull(x => x.LocalParentPackage?.Mod).All(x => x!.IsEnabled());
+		var localPackages = packages.ToList(x => _packageManager.GetPackageById(x));
+		var subscribe = localPackages.Any(x => x is null);
+		var include = !subscribe && localPackages.Any(x => _packageUtil.IsIncluded(x!));
+		var enable = !subscribe && localPackages.Any(x => _packageUtil.IsEnabled(x!));
 
 		if (_doubleButtons && !subscribe)
 		{
@@ -171,39 +385,42 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			}
 		}
 
-		var incl = new DynamicIcon(subscribe ? "I_Add" : include ? "I_Ok" : "I_Enabled");
-		var inclIcon = incl.Get(width * 3 / 4);
-
-		if (HoverState.HasFlag(HoverState.Hovered) && IncludedRect.Contains(CursorLocation))
 		{
-			using var brush1 = IncludedRect.Gradient(HoverState.HasFlag(HoverState.Pressed) ? color : Color.FromArgb(30, ForeColor), 1.5F);
-			e.Graphics.FillRoundedRectangle(brush1, IncludedRect, 4);
-		}
+			var incl = new DynamicIcon(subscribe ? "Add" : include ? "Ok" : "Enabled");
+			using var inclIcon = incl.Get(width * 3 / 4);
 
-		e.Graphics.DrawImage(inclIcon.Color(!IncludedRect.Contains(CursorLocation) ? ForeColor : HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : color), IncludedRect.CenterR(inclIcon.Size));
+			SlickButton.GetColors(out var fore, out var back, IncludedRect.Contains(CursorLocation) ? HoverState : default, subscribe ? ColorStyle.Active : include ? ColorStyle.Red : ColorStyle.Green);
+
+			using var brush1 = IncludedRect.Gradient(back, 1.5F);
+
+			e.Graphics.FillRoundedRectangle(brush1, IncludedRect, 4);
+			e.Graphics.DrawImage(inclIcon.Color(fore), IncludedRect.CenterR(inclIcon.Size));
+		}
 
 		if (_doubleButtons && EnabledRect != default)
 		{
-			var enl = new DynamicIcon(enable ? "I_Checked" : "I_Checked_OFF");
-			var enlIcon = enl.Get(width * 3 / 4);
+			var enl = new DynamicIcon(enable ? "Checked" : "Checked_OFF");
+			using var enlIcon = enl.Get(width * 3 / 4);
 
-			if (HoverState.HasFlag(HoverState.Hovered) && EnabledRect.Contains(CursorLocation))
 			{
-				using var brush2 = EnabledRect.Gradient(HoverState.HasFlag(HoverState.Pressed) ? color : Color.FromArgb(30, ForeColor), 1.5F);
+				SlickButton.GetColors(out var fore, out var back, EnabledRect.Contains(CursorLocation) ? HoverState : default, include ? ColorStyle.Red : ColorStyle.Green);
+
+				using var brush2 = EnabledRect.Gradient(back, 1.5F);
+
 				e.Graphics.FillRoundedRectangle(brush2, EnabledRect, 4);
+				e.Graphics.DrawImage(enlIcon.Color(fore), EnabledRect.CenterR(enlIcon.Size));
 			}
-			e.Graphics.DrawImage(enlIcon.Color(!EnabledRect.Contains(CursorLocation) ? ForeColor : HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : color), EnabledRect.CenterR(enlIcon.Size));
 		}
 
-		var action = new DynamicIcon("I_Actions");
-		var actionIcon = action.Get(width * 3 / 4);
+		var action = new DynamicIcon("Actions");
+		using var actionIcon = action.Get(width * 3 / 4);
 
-		if (HoverState.HasFlag(HoverState.Hovered) && ActionRect.Contains(CursorLocation))
 		{
-			using var brush3 = ActionRect.Gradient(HoverState.HasFlag(HoverState.Pressed) ? color : Color.FromArgb(30, ForeColor), 1.5F);
+			SlickButton.GetColors(out var fore, out var back, ActionRect.Contains(CursorLocation) ? HoverState : default);
+			using var brush3 = ActionRect.Gradient(back, 1.5F);
 			e.Graphics.FillRoundedRectangle(brush3, ActionRect, 4);
+			e.Graphics.DrawImage(actionIcon.Color(fore), EnabledRect.CenterR(actionIcon.Size));
 		}
-
-		e.Graphics.DrawImage(actionIcon.Color(!ActionRect.Contains(CursorLocation) ? ForeColor : HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : color), ActionRect.CenterR(actionIcon.Size));
 	}
+#endif
 }

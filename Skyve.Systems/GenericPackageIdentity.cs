@@ -1,14 +1,24 @@
 ﻿using Skyve.Domain;
 
 namespace Skyve.Systems;
-public readonly struct GenericPackageIdentity : IPackageIdentity
+public struct GenericPackageIdentity : IPackageIdentity
 {
-	public ulong Id { get; }
-	public readonly string Name => this.GetWorkshopInfo()?.Name ?? string.Empty;
-	public readonly string? Url => this.GetWorkshopInfo()?.Url;
+	private string? _name;
+	private string? _url;
 
-	public GenericPackageIdentity(ulong id)
+	public GenericPackageIdentity()
+	{
+
+	}
+
+	public GenericPackageIdentity(ulong id, string? name = null, string? url = null)
 	{
 		Id = id;
+		_name = name;
+		_url = url;
 	}
+
+	public ulong Id { get; set; }
+	public string Name { get => _name ?? this.GetWorkshopInfo()?.Name ?? string.Empty; set => _name = value; }
+	public string? Url { get => _url ?? this.GetWorkshopInfo()?.Url; set => _url = value; }
 }

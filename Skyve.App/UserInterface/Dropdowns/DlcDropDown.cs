@@ -18,7 +18,7 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 	{
 		base.UIChanged();
 
-		Width = (int)(200 * UI.FontScale);
+		Width = UI.Scale(200);
 	}
 
 	protected override IEnumerable<IDlcInfo> OrderItems(IEnumerable<IDlcInfo> items)
@@ -34,17 +34,19 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IDlcInfo item, bool selected)
 	{
 		if (item is null)
-		{ return; }
+		{
+			return;
+		}
 
 		var text = item.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP");
 		var icon = item.GetThumbnail();
 
 		if (icon != null)
 		{
-			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height * 460 / 215, rectangle.Height), ContentAlignment.MiddleLeft), (int)(4 * UI.FontScale));
+			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height * 460 / 215, rectangle.Height), ContentAlignment.MiddleLeft), UI.Scale(4));
 		}
 
-		rectangle = rectangle.Pad(rectangle.Height * 460 / 215 + Padding.Left, 0, 0, 0);
+		rectangle = rectangle.Pad((rectangle.Height * 460 / 215) + Padding.Left, 0, 0, 0);
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 	}
@@ -60,7 +62,7 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 
 		if (!items.Any())
 		{
-			using var icon = IconManager.GetIcon("I_Slash", rectangle.Height - 2).Color(foreColor);
+			using var icon = IconManager.GetIcon("Slash", rectangle.Height - 2).Color(foreColor);
 
 			e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

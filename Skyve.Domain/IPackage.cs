@@ -1,17 +1,21 @@
-﻿using Extensions;
-
-using System.Collections.Generic;
-
-namespace Skyve.Domain;
+﻿namespace Skyve.Domain;
 public interface IPackage : IPackageIdentity
 {
-	bool IsMod { get; }
+	string? Version { get; }
+	bool IsCodeMod { get; }
 	bool IsLocal { get; }
+#if CS1
 	bool IsBuiltIn { get; }
-	[CloneIgnore]
-	ILocalPackageWithContents? LocalParentPackage { get; }
-	[CloneIgnore]
-	ILocalPackage? LocalPackage { get; }
-	[CloneIgnore]
-	IEnumerable<IPackageRequirement> Requirements { get; }
+#endif
+	ILocalPackageData? LocalData { get; }
+	//#if CS2
+	//	bool IsIncluded(int playsetId);
+	//	bool IsEnabled(int playsetId);
+	//#endif
+}
+
+public interface IPlaysetPackage : IPackage
+{
+	bool IsEnabled { get; }
+	int LoadOrder { get; }
 }

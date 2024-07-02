@@ -1,62 +1,28 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
 	<Import Project="../../Skyve/Config.props" />
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
 		<Description>Helps to manage your mods and assets</Description>
-		<Configurations>Debug;Release;Stable</Configurations>
 		<DebugType>embedded</DebugType>
 		<DebugSymbols>true</DebugSymbols>
 		<Nullable>enable</Nullable>
 		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup>
-		<Deterministic>false</Deterministic>
-		<TargetFramework>net4.7.2</TargetFramework>
+		<Deterministic>true</Deterministic>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
 		<SignAssembly>True</SignAssembly>
 		<NeutralLanguage>en</NeutralLanguage>
 	</PropertyGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="Properties\*.json" />
 		<EmbeddedResource Include="Properties\*\*.json" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Properties\Locale.json" />
-	  <None Remove="Properties\Locale\ar-SA.json" />
-	  <None Remove="Properties\Locale\bn-BD.json" />
-	  <None Remove="Properties\Locale\cs-CZ.json" />
-	  <None Remove="Properties\Locale\de-DE.json" />
-	  <None Remove="Properties\Locale\el-GR.json" />
-	  <None Remove="Properties\Locale\en-GB.json" />
-	  <None Remove="Properties\Locale\es-ES.json" />
-	  <None Remove="Properties\Locale\fi-FI.json" />
-	  <None Remove="Properties\Locale\fr-FR.json" />
-	  <None Remove="Properties\Locale\hi-IN.json" />
-	  <None Remove="Properties\Locale\hu-HU.json" />
-	  <None Remove="Properties\Locale\id-ID.json" />
-	  <None Remove="Properties\Locale\it-IT.json" />
-	  <None Remove="Properties\Locale\ja-JP.json" />
-	  <None Remove="Properties\Locale\ka-GE.json" />
-	  <None Remove="Properties\Locale\ko-KR.json" />
-	  <None Remove="Properties\Locale\nl-NL.json" />
-	  <None Remove="Properties\Locale\no-NO.json" />
-	  <None Remove="Properties\Locale\pl-PL.json" />
-	  <None Remove="Properties\Locale\pt-BR.json" />
-	  <None Remove="Properties\Locale\pt-PT.json" />
-	  <None Remove="Properties\Locale\ro-RO.json" />
-	  <None Remove="Properties\Locale\ru-RU.json" />
-	  <None Remove="Properties\Locale\sr-CS.json" />
-	  <None Remove="Properties\Locale\sv-SE.json" />
-	  <None Remove="Properties\Locale\th-TH.json" />
-	  <None Remove="Properties\Locale\tr-TR.json" />
-	  <None Remove="Properties\Locale\uk-UA.json" />
-	  <None Remove="Properties\Locale\vi-VN.json" />
-	  <None Remove="Properties\Locale\zh-CN.json" />
-	  <None Remove="Properties\Locale\zh-TW.json" />
+		<None Remove="Properties\*.json" />
+		<None Remove="Properties\*\*.json" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+		<ProjectReference Include="..\Skyve.Compatibility\Skyve.Compatibility.csproj" />
 		<ProjectReference Include="..\Skyve.Domain\Skyve.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
@@ -64,4 +30,17 @@
 		<Reference Include="System.Windows.Forms" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 	</ItemGroup>
+
+	<PropertyGroup>
+		<LocaleJsonToClassExe>$([System.IO.Path]::GetFullPath('$(SolutionDir)\..\Extensions\LocaleJsonToClass\LocaleJsonToClass.exe'))</LocaleJsonToClassExe>
+		<LocaleJsonFile>"$([System.IO.Path]::GetFullPath('$(SolutionDir)\..\Skyve\Skyve.Systems\Properties\Locale.json'))"</LocaleJsonFile>
+		<LocaleCsFile>"$([System.IO.Path]::GetFullPath('$(SolutionDir)\..\Skyve\Skyve.Systems\Locale.cs'))"</LocaleCsFile>
+		<CRJsonFile>"$([System.IO.Path]::GetFullPath('$(SolutionDir)\..\Skyve\Skyve.Systems\Properties\Compatibility.json'))"</CRJsonFile>
+		<CRCsFile>"$([System.IO.Path]::GetFullPath('$(SolutionDir)\..\Skyve\Skyve.Systems\LocaleCR.cs'))"</CRCsFile>
+	</PropertyGroup>
+
+	<Target Name="BuildLocale" BeforeTargets="PreBuildEvent">
+		<Exec Command="$(LocaleJsonToClassExe) $(LocaleJsonFile) $(LocaleCsFile)" />
+		<Exec Command="$(LocaleJsonToClassExe) $(CRJsonFile) $(CRCsFile)" />
+	</Target>
 </Project>

@@ -104,7 +104,7 @@ partial class PC_DLCs
 			// T_YourDlcs
 			// 
 			this.T_YourDlcs.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "I_User";
+			dynamicIcon4.Name = "User";
 			this.T_YourDlcs.IconName = dynamicIcon4;
 			this.T_YourDlcs.LinkedControl = null;
 			this.T_YourDlcs.Location = new System.Drawing.Point(3, 3);
@@ -119,7 +119,7 @@ partial class PC_DLCs
 			// T_AllDlcs
 			// 
 			this.T_AllDlcs.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_Discover";
+			dynamicIcon1.Name = "Discover";
 			this.T_AllDlcs.IconName = dynamicIcon1;
 			this.T_AllDlcs.LinkedControl = null;
 			this.T_AllDlcs.Location = new System.Drawing.Point(159, 3);
@@ -159,7 +159,7 @@ partial class PC_DLCs
 			// 
 			this.TB_Search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-			dynamicIcon3.Name = "I_Search";
+			dynamicIcon3.Name = "Search";
 			this.TB_Search.ImageName = dynamicIcon3;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
@@ -218,8 +218,8 @@ partial class PC_DLCs
 			// 
 			this.B_ExInclude.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.B_ExInclude.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_ExInclude.Image1 = "I_Check";
-			this.B_ExInclude.Image2 = "I_X";
+			this.B_ExInclude.Image1 = "Check";
+			this.B_ExInclude.Image2 = "X";
 			this.B_ExInclude.Location = new System.Drawing.Point(556, 3);
 			this.B_ExInclude.Name = "B_ExInclude";
 			this.B_ExInclude.Option1 = "IncludeAll";
@@ -246,7 +246,6 @@ partial class PC_DLCs
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.Controls.Add(this.TLP_Main);
-			this.LabelBounds = new System.Drawing.Point(-2, 3);
 			this.Name = "PC_DLCs";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(932, 713);

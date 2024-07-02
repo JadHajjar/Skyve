@@ -1,13 +1,14 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.UserInterface.Panels;
+using Skyve.App.Utilities;
+using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 
-using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Skyve.App.UserInterface.Lists;
 public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInfo, CompatibilityReportList.Rectangles>
@@ -16,21 +17,18 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IDlcManager _dlcManager;
-	private readonly IBulkUtil _bulkUtil;
 	private readonly ISettings _settings;
 	private readonly IModLogicManager _modLogicManager;
 	private readonly IModUtil _modUtil;
-
-#pragma warning disable IDE1006
-#pragma warning disable CS0649
-	private readonly bool CompactList;
-	private readonly bool IsPackagePage;
-#pragma warning restore CS0649
-#pragma warning restore IDE1006
+	private readonly IWorkshopService _workshopService;
+	private readonly IPackageNameUtil _packageNameUtil;
+	private readonly ICompatibilityActionsHelper _compatibilityActions;
 
 	private PackageSorting sorting;
 	private bool headerHovered;
-	private readonly Dictionary<NotificationType, Rectangle> _headerRects = new();
+	private bool dragActive;
+	private readonly Dictionary<IPackageIdentity, int> _modHeights = [];
+	private readonly Dictionary<NotificationType, Rectangle> _headerRects = [];
 
 	public bool SortDescending { get; private set; }
 	public NotificationType CurrentGroup { get; private set; }
@@ -44,9 +42,14 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		DynamicSizing = true;
 		AllowDrop = true;
 
-		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _bulkUtil, out _settings, out _modUtil, out _modLogicManager);
+		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityActions, out _compatibilityManager, out _packageUtil, out _dlcManager, out _settings, out _modUtil, out _modLogicManager, out _workshopService, out _packageNameUtil);
+	}
 
-		if (_settings is not null && _settings.UserSettings.PageSettings.ContainsKey(SkyvePage.CompatibilityReport))
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		if (Live && _settings.UserSettings.PageSettings.ContainsKey(SkyvePage.CompatibilityReport))
 		{
 			sorting = (PackageSorting)_settings.UserSettings.PageSettings[SkyvePage.CompatibilityReport].Sorting;
 			SortDescending = _settings.UserSettings.PageSettings[SkyvePage.CompatibilityReport].DescendingSort;
@@ -55,18 +58,18 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	protected override void UIChanged()
 	{
-		GridItemSize = new Size(380, 380);
+		GridItemSize = new Size(400, 380);
 
 		base.UIChanged();
 
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
-		GridPadding = UI.Scale(new Padding(3), UI.FontScale);
-		StartHeight = (int)(32 * UI.FontScale);
+		Padding = UI.Scale(new Padding(8));
+		GridPadding = UI.Scale(new Padding(5));
+		StartHeight = UI.Scale(44);
 	}
 
-	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo> args)
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo, Rectangles> args)
 	{
-		args.DoNotDraw = args.Item.Package is null || (CurrentGroup != NotificationType.None && args.Item.GetNotification() != CurrentGroup);
+		args.DoNotDraw = CurrentGroup != NotificationType.None && args.Item.GetNotification() != CurrentGroup;
 
 		base.CanDrawItemInternal(args);
 	}
@@ -81,7 +84,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		base.SetItems(items);
 
 		DoFilterChanged();
-	
+
 		GroupChanged?.Invoke(this, EventArgs.Empty);
 	}
 
@@ -110,49 +113,49 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		items = sorting switch
 		{
 			PackageSorting.FileSize => items
-				.OrderBy(x => x.Item.Package?.LocalSize),
+				.OrderBy(x => x.Item.GetLocalPackage()?.FileSize),
 
 			PackageSorting.Name => items
-				.OrderBy(x => x.Item.Package?.ToString()),
+				.OrderBy(x => x.Item.ToString()),
 
 			PackageSorting.Author => items
-				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.Author?.Name ?? string.Empty),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.Author?.Name ?? string.Empty),
 
 			PackageSorting.Status => items
-				.OrderBy(x => x.Item.Package is null ? default : _packageUtil.GetStatus(x.Item.Package, out _)),
+				.OrderBy(x => _packageUtil.GetStatus(x.Item, out _)),
 
 			PackageSorting.UpdateTime => items
-				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.ServerTime ?? x.Item.Package?.LocalTime),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.ServerTime ?? x.Item.GetLocalPackage()?.LocalTime ?? default),
 
 			PackageSorting.SubscribeTime => items
-				.OrderBy(x => x.Item.Package?.LocalTime),
+				.OrderBy(x => x.Item.GetLocalPackage()?.LocalTime),
 
 			PackageSorting.Mod => items
-				.OrderBy(x => Path.GetFileName(x.Item.Package?.FilePath ?? string.Empty)),
+				.OrderBy(x => Path.GetFileName(x.Item.GetLocalPackage()?.FilePath ?? string.Empty)),
 
 			PackageSorting.None => items,
 
 			PackageSorting.CompatibilityReport => items
 				.OrderByDescending(x => x.Item.GetNotification())
-				.ThenBy(x => x.Item.Package?.ToString()),
+				.ThenBy(x => x.Item.ToString()),
 
 			PackageSorting.Subscribers => items
-				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.Subscribers),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.Subscribers),
 
 			PackageSorting.Votes => items
-				.OrderBy(x => x.Item.Package?.GetWorkshopInfo()?.Score),
+				.OrderBy(x => x.Item.GetWorkshopInfo()?.VoteCount),
 
 			PackageSorting.LoadOrder => items
-				.OrderBy(x => !x.Item.Package?.IsIncluded())
-				.ThenByDescending(x => x.Item.Package is null ? 0 : _modUtil.GetLoadOrder(x.Item.Package))
-				.ThenBy(x => x.Item.Package?.ToString()),
+				.OrderBy(x => !x.Item.IsIncluded())
+				.ThenByDescending(x => x.Item.GetPackage() is null ? 0 : _modUtil.GetLoadOrder(x.Item.GetPackage()!))
+				.ThenBy(x => x.Item.ToString()),
 
 			_ => items
 				.OrderByDescending(x => x.Item.GetNotification())
-				.ThenBy(x => !(x.Item.Package is ILocalPackageWithContents lp && (lp.IsIncluded(out var partial) || partial)))
-				.ThenBy(x => x.Item.Package?.IsLocal)
-				.ThenBy(x => !x.Item.Package?.IsMod)
-				.ThenBy(x => x.Item.Package?.CleanName() ?? x.Item.Package?.CleanName())
+				.ThenBy(x => !(x.Item.IsIncluded(out var partial) || partial))
+				.ThenBy(x => x.Item.IsLocal())
+				.ThenBy(x => !x.Item.GetLocalPackage()?.IsCodeMod)
+				.ThenBy(x => x.Item.CleanName() ?? x.Item.CleanName())
 		};
 
 		if (SortDescending)
@@ -165,11 +168,16 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 	protected override void DrawHeader(PaintEventArgs e)
 	{
+		if (ItemCount == 0)
+		{
+			return;
+		}
+
 		var items = Items.GroupBy(x => x.GetNotification()).OrderByDescending(x => x.Key).ToList();
 
 		items.Insert(0, Items.GroupBy(x => NotificationType.None).FirstOrDefault());
 
-		var smaller = Width < items.Count * 175 * UI.FontScale;
+		var smaller = Width < items.Count * 100 * UI.FontScale;
 		var xpos = 0;
 
 		using var brush = new SolidBrush(FormDesign.Design.AccentBackColor);
@@ -183,26 +191,22 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		{
 			int width;
 
-			using var font = UI.Font(9.75F);
-			using var icon = (item.Key == NotificationType.None ? "I_CompatibilityReport": item.Key.GetIcon(true)).Get(font.Height + Padding.Top);
-			var text = (item.Key == NotificationType.None ? LocaleHelper.GetGlobalText("All") : LocaleCR.Get(item.Key.ToString())) + $" ({item.Count()})";
-
 			if (!smaller)
 			{
-				width = Math.Min(Width / items.Count, (int)(300 * UI.FontScale));
-			}
-			else if (CurrentGroup == item.Key)
-			{
-				width = SlickButton.GetSize(e.Graphics, icon, text, font, Padding).Width;
+				width = Math.Min(Width / items.Count, UI.Scale(250));
 			}
 			else
 			{
 				width = StartHeight;
 			}
 
-			var rectangle = new Rectangle(xpos, 0, width, StartHeight);
+			var rectangle = new Rectangle(xpos, 0, width, StartHeight).Pad(Padding);
 
 			_headerRects[item.Key] = rectangle;
+
+			var text = (item.Key == NotificationType.None ? LocaleHelper.GetGlobalText("All") : LocaleCR.Get(item.Key.ToString())) + $" ({item.Count()})";
+			using var icon = (item.Key == NotificationType.None ? "CompatibilityReport" : item.Key.GetIcon(true)).Get((StartHeight - Padding.Vertical) * 3 / 4);
+			using var font = UI.Font(9.75F, CurrentGroup == item.Key ? FontStyle.Bold : FontStyle.Regular).FitToWidth(text, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);
 
 			var baseColor = item.Key == NotificationType.None ? FormDesign.Design.ActiveColor : item.Key.GetColor();
 			using var foreBrush = new SolidBrush(CurrentGroup == item.Key ? baseColor.GetTextColor() : baseColor.MergeColor(ForeColor, 80));
@@ -212,13 +216,12 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			if (CurrentGroup == item.Key)
 			{
-				using var backBrush = Gradient(baseColor, 0.3F);
-				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(Padding.Top * 3 / 4), Padding.Left);
+				e.Graphics.FillRoundedRectangleWithShadow(rectangle, GridPadding.Left, Padding.Left, Color.FromArgb(200, baseColor), Color.FromArgb(6, baseColor));
 			}
 			else if (rectangle.Contains(CursorLocation) && HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var backBrush = new SolidBrush(Color.FromArgb(50, baseColor));
-				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(Padding.Top * 3 / 4), Padding.Left);
+				e.Graphics.FillRoundedRectangle(backBrush, rectangle, GridPadding.Left);
 			}
 
 			if (!smaller || CurrentGroup == item.Key)
@@ -237,12 +240,11 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 			e.Graphics.DrawImage(icon.Color(foreBrush.Color), iconBounds);
 
-			xpos += rectangle.Width;
+			xpos += rectangle.Width + Padding.Horizontal;
 
-			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos + 1, Padding.Top, 1, StartHeight - Padding.Vertical));
+			e.Graphics.FillRectangle(accentBrush, new Rectangle(xpos - 1, Padding.Top, 2, StartHeight - Padding.Vertical));
 		}
 
-		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, 0, Width, (int)UI.FontScale));
 		e.Graphics.FillRectangle(accentBrush, new Rectangle(0, StartHeight - (int)UI.FontScale, Width, (int)UI.FontScale));
 	}
 
@@ -288,366 +290,80 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		return _headerRects.Values.Any(x => x.Contains(location));
 	}
 
+	protected override void OnPaint(PaintEventArgs e)
+	{
+		base.OnPaint(e);
+
+		if (ItemCount == 0 && !Loading)
+		{
+			using var font = UI.Font(9.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+			e.Graphics.ResetClip();
+			e.Graphics.DrawString(Locale.NoCompatibilityIssues, font, brush, ClientRectangle, stringFormat);
+		}
+
+		if (dragActive)
+		{
+			var border = UI.Scale(16);
+			var rectangle = ClientRectangle.Pad(border);
+			using var font = UI.Font(11.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+			using var backBrush = new SolidBrush(Color.FromArgb(200, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor)));
+			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale)) { DashStyle = DashStyle.Dash };
+
+			e.Graphics.ResetClip();
+			e.Graphics.FillRoundedRectangle(backBrush, rectangle, border);
+			e.Graphics.DrawRoundedRectangle(pen, rectangle, border);
+			e.Graphics.DrawString(Locale.DropImportFile.Format(Locale.CompatibilityReport), font, brush, ClientRectangle, stringFormat);
+		}
+	}
+
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
 	{
-		if (e.Item.Package is null)
-		{
-			return;
-		}
+		var workshopInfo = e.Item.GetWorkshopInfo();
+		var message = e.Item.ReportItems?.Any() == true ? e.Item.ReportItems.OrderBy(x => _compatibilityManager.IsSnoozed(x) ? 0 : x.Status.Notification).LastOrDefault() : null;
+		var clip = e.ClipRectangle;
 
-		var package = e.Item.Package;
-		var localPackage = package.LocalPackage;
-		var localParentPackage = localPackage?.LocalParentPackage;
-		var workshopInfo = package.GetWorkshopInfo();
-		var partialIncluded = false;
-		var isPressed = false;
-		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(package.LocalPackage!, out partialIncluded)) || partialIncluded;
-
-		if (e.IsSelected)
-		{
-			e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
-		}
-		else
-		{
-			e.BackColor = BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 5, -5));
-		}
-
-		if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
-		{
-			e.BackColor = e.BackColor.MergeColor(FormDesign.Design.ActiveColor, e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
-
-			isPressed = e.HoverState.HasFlag(HoverState.Pressed);
-		}
-
-		base.OnPaintItemGrid(e);
+		e.BackColor = BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 3f : -3f);
+		e.Graphics.ResetClip();
+		e.Graphics.FillRoundedRectangleWithShadow(e.ClipRectangle.InvertPad(GridPadding), GridPadding.Left, Padding.Right / 2, e.BackColor, message is null ? null : Color.FromArgb(6, message.Status.Notification.GetColor()), addOutline: true);
+		e.Graphics.SetClip(clip);
 
 		DrawThumbnail(e);
-		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
-		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out _);
-		DrawButtons(e, isPressed, localParentPackage, workshopInfo);
+		DrawTitleAndTags(e);
 
-		DrawReport(e, DrawDividerLine(e, e.Rects.IconRect.Bottom), isPressed);
-	}
-
-	private void DrawReport(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, int baseY, bool isPressed)
-	{
-		var Message = e.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == e.Item.GetNotification() && !_compatibilityManager.IsSnoozed(x));
-
-		if (Message is null)
-			return;
-
-		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
-		var reportRect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, 9999).Pad(0, baseY - e.ClipRectangle.Y, 0, 0);
-		var cursor = PointToClient(Cursor.Position);
-		var pad = (int)(6 * UI.FontScale);
-		var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
-		var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
-		using var font = UI.Font(8.25F);
-		using var smallFont = UI.Font(7.5F);
-		var iconRect = new Rectangle(e.Rects.IncludedRect.X, baseY, e.Rects.IncludedRect.Width, e.Rects.IncludedRect.Height);
-		var messageSize = e.Graphics.Measure(Message.Message, font, reportRect.Width - (iconRect.Width * 2) - pad);
-		var noteSize = e.Graphics.Measure(note, smallFont, reportRect.Width - (iconRect.Width * 2) - pad);
-		using var brush = new SolidBrush(color);
-		using var icon = Message.Status.Notification.GetIcon(false).Get(e.Rects.IncludedRect.Width * 3 / 4);
-		var y = baseY + (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
-
-		GetAllButton(Message, out var allText, out var allIcon, out var colorStyle);
-
-		iconRect.Height = y - baseY;
-		iconRect = iconRect.CenterR(iconRect.Width, iconRect.Width);
-
-		e.Graphics.FillRoundedRectangle(brush, iconRect, pad);
-
-		e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
-
-		if (Message.Status.Notification > NotificationType.Info && Message.PackageId != 0)
+		if (workshopInfo is not null)
 		{
-			e.Rects.SnoozeRect = iconRect;
-			e.Rects.SnoozeRect.X = e.ClipRectangle.Right - e.Rects.SnoozeRect.Width;
-
-			var purple = Color.FromArgb(100, 60, 220);
-			var isSnoozed = _compatibilityManager.IsSnoozed(Message);
-
-			if (HoverState.HasFlag(HoverState.Hovered) && !HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor))
-			{
-				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(125, purple)), e.Rects.SnoozeRect, pad);
-			}
-			else if (isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor)))
-			{
-				e.Graphics.FillRoundedRectangle(new SolidBrush(purple), e.Rects.SnoozeRect, pad);
-			}
-
-			using var snoozeIcon = IconManager.GetLargeIcon("I_Snooze");
-			e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && e.Rects.SnoozeRect.Contains(cursor)) ? purple.GetTextColor() : FormDesign.Design.IconColor), e.Rects.SnoozeRect.CenterR(icon.Size));
+			e.Rects.AuthorRect = DrawAuthor(e, workshopInfo, e.Rects.CenterRect.Pad(GridPadding.Left / 2, e.Rects.TextRect.Height + GridPadding.Top, 0, 0), CursorLocation);
 		}
 
-		using var textBrush = new SolidBrush(FormDesign.Design.ForeColor);
-		e.Graphics.DrawString(Message.Message, font, textBrush, reportRect.Pad(iconRect.Width + pad, 0, iconRect.Width, 0));
-
-		if (note is not null)
+		if (message is not null)
 		{
-			using var smallTextBrush = new SolidBrush(Color.FromArgb(200, ForeColor));
-			e.Graphics.DrawString(note, smallFont, smallTextBrush, reportRect.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0));
-		}
-
-		if (allText is not null || Message.Packages.Length > 0)
-		{
-			y = DrawDividerLine(e, y);
-		}
-
-		if (allText is not null)
-		{
-			e.Rects.AllButtonRect = new Rectangle(e.ClipRectangle.X + iconRect.Width, y, e.ClipRectangle.Width - (iconRect.Width * 2), (int)(26 * UI.FontScale));
-
-			using var buttonIcon = IconManager.GetIcon(allIcon, e.Rects.AllButtonRect.Height * 3 / 4);
-
-			SlickButton.DrawButton(e, e.Rects.AllButtonRect, allText, UI.Font(9F), buttonIcon, UI.Scale(new Padding(4), UI.FontScale), e.Rects.AllButtonRect.Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, colorStyle, buttonType: ButtonType.Active);
-
-			y += e.Rects.AllButtonRect.Height + GridPadding.Vertical;
-		}
-
-		if (Message.Packages.Length > 0)
-		{
-			var isDlc = Message.Type == ReportType.DlcMissing;
-			var rect = new Rectangle(reportRect.X, y, reportRect.Width, (int)(32 * UI.FontScale) + GridPadding.Vertical).Pad(GridPadding);
-
-			{
-				foreach (var packageID in Message.Packages)
-				{
-					var fore = ForeColor;
-
-					e.Rects.modRects[packageID] = rect;
-
-					if (rect.Contains(cursor) && (!e.Rects.buttonRects.ContainsKey(packageID) || !e.Rects.buttonRects[packageID].Contains(cursor)))
-					{
-						if (HoverState.HasFlag(HoverState.Pressed))
-						{
-							fore = FormDesign.Design.ActiveColor;
-						}
-
-						using var gradientbrush = new LinearGradientBrush(reportRect.Pad(rect.Height / 2, 0, (int)(100 * UI.FontScale), 0), Color.FromArgb(50, fore), Color.Empty, LinearGradientMode.Horizontal);
-
-						e.Graphics.FillRectangle(gradientbrush, rect.Pad(rect.Height / 2, 0, (int)(100 * UI.FontScale), 0));
-					}
-
-					var dlc = isDlc ? _dlcManager.Dlcs.FirstOrDefault(x => x.Id == packageID.Id) : null;
-					var package = dlc is null ? packageID : null;
-					var packageThumbnail = dlc?.GetThumbnail() ?? package.GetThumbnail();
-
-					if ((package?.IsLocal ?? false) && packageThumbnail is not null)
-					{
-						using var unsatImg = new Bitmap(packageThumbnail, new Size(rect.Height, rect.Height)).Tint(Sat: 0);
-						e.Graphics.DrawRoundedImage(unsatImg, rect.Align(new Size(rect.Height, rect.Height), ContentAlignment.TopLeft), (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
-					}
-					else
-					{
-						e.Graphics.DrawRoundedImage(packageThumbnail ?? (dlc is null ? Properties.Resources.I_ModIcon : Properties.Resources.I_DlcIcon).Color(fore), rect.Align(new Size(isDlc ? rect.Height * 460 / 215 : rect.Height, rect.Height), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
-					}
-
-					List<(Color Color, string Text)>? tags = null;
-
-					var textRect = rect.Pad((isDlc ? rect.Height * 460 / 215 : rect.Height) + GridPadding.Horizontal, 0, 0, 0).AlignToFontSize(UI.Font(7.5F, FontStyle.Bold), ContentAlignment.TopLeft);
-
-					e.Graphics.DrawString(dlc?.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP") ?? package?.CleanName(out tags) ?? Locale.UnknownPackage, UI.Font(7.5F, FontStyle.Bold), new SolidBrush(fore), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
-
-					var tagRect = new Rectangle(textRect.Left, textRect.Y, 0, textRect.Height);
-
-					if (tags is not null)
-					{
-						foreach (var item in tags)
-						{
-							tagRect.X += Padding.Left + e.Graphics.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
-						}
-					}
-
-					string? buttonText = null;
-					string? iconName = null;
-
-					switch (Message.Status.Action)
-					{
-						case StatusAction.SubscribeToPackages:
-							var p = package?.LocalParentPackage;
-
-							if (p is null)
-							{
-								buttonText = Locale.Subscribe;
-								iconName = "I_Add";
-							}
-							else if (!p.IsIncluded())
-							{
-								buttonText = Locale.Include;
-								iconName = "I_Check";
-							}
-							else if (!(p.Mod?.IsEnabled() ?? true))
-							{
-								buttonText = Locale.Enable;
-								iconName = "I_Enabled";
-							}
-							break;
-						case StatusAction.SelectOne:
-							buttonText = Locale.SelectThisPackage;
-							iconName = "I_Ok";
-							break;
-						case StatusAction.Switch:
-							buttonText = Locale.Switch;
-							iconName = "I_Switch";
-							break;
-					}
-
-					if (buttonText is null || package?.GetWorkshopInfo()?.IsCollection == true)
-					{
-						rect.Y += e.Rects.modRects[packageID].Height + GridPadding.Vertical;
-						continue;
-					}
-
-					var buttonIcon = IconManager.GetIcon(iconName);
-					var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, buttonText, UI.Font(7.5F), UI.Scale(new Padding(3), UI.FontScale));
-
-					e.Rects.buttonRects[packageID] = rect.Align(buttonSize, ContentAlignment.MiddleRight);
-
-					SlickButton.DrawButton(e, e.Rects.buttonRects[packageID], buttonText, UI.Font(7.5F), buttonIcon, UI.Scale(new Padding(3), UI.FontScale), e.Rects.buttonRects[packageID].Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, Message.Status.Action is StatusAction.SelectOne ? ColorStyle.Active : ColorStyle.Green, backColor);
-
-					rect.Y += e.Rects.modRects[packageID].Height + GridPadding.Vertical;
-				}
-			}
-
-			y = rect.Y;
-		}
-
-		var otherWarnings = e.Item.ReportItems.Count(x => x.Status.Notification >= NotificationType.Caution) - 1;
-		var finalY = y + (int)e.Graphics.Measure(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, reportRect.Width - (2 * iconRect.Width) - GridPadding.Horizontal).Height + GridPadding.Vertical;
-		var bottomRect = new Rectangle(e.ClipRectangle.X, y + (GridPadding.Vertical * 3), e.ClipRectangle.Width, finalY - y).Pad(GridPadding);
-
-
-		//if (bottomRect.Y > y + GridPadding.Vertical * 3)
-		//{
-		//	bottomRect.Y =  y + GridPadding.Vertical * 3;
-
-		//	e.Graphics.FillRectangle(new SolidBrush(BackColor), new Rectangle(e.ClipRectangle.X, bottomRect.Y, e.ClipRectangle.Width, e.ClipRectangle.Bottom - bottomRect.Y + GridPadding.Vertical * 2).InvertPad(GridPadding));
-		//}
-
-		//{
-		//	using var fillBrush = new SolidBrush(e.BackColor);
-
-		//	e.Graphics.FillRoundedRectangle(fillBrush, bottomRect.InvertPad(GridPadding + GridPadding).Pad(0, -GridPadding.Vertical, 0, -GridPadding.Vertical), (int)(5 * UI.FontScale), false, false);
-
-		//	var maxY = bottomRect.Y - GridPadding.Vertical * 2;
-
-		//	foreach (var key in e.Rects.modRects.Keys.ToList())
-		//	{
-		//		if (e.Rects.modRects[key].Y > maxY)
-		//			e.Rects.modRects[key] = default;
-		//		else if (e.Rects.modRects[key].Bottom > maxY)
-		//			e.Rects.modRects[key] = e.Rects.modRects[key].Pad(0, 0, 0, e.Rects.modRects[key].Bottom - maxY);
-		//	}
-		//	foreach (var key in e.Rects.buttonRects.Keys.ToList())
-		//	{
-		//		if (e.Rects.buttonRects[key].Y > maxY)
-		//			e.Rects.buttonRects[key] = default;
-		//		else if (e.Rects.buttonRects[key].Bottom > maxY)
-		//			e.Rects.buttonRects[key] = e.Rects.buttonRects[key].Pad(0, 0, 0, e.Rects.buttonRects[key].Bottom - maxY);
-		//	}
-		//}
-
-		DrawDividerLine(e, bottomRect.Y - (GridPadding.Vertical * 4));
-
-		e.Graphics.DrawString(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, textBrush, bottomRect.Pad(iconRect.Width + GridPadding.Left, 0, iconRect.Width + GridPadding.Left, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-
-		if (otherWarnings > 0)
-		{
-			var iconRect2 = bottomRect.Align(iconRect.Size, ContentAlignment.MiddleLeft);
-
-			e.Graphics.FillRoundedRectangle(brush, iconRect2, pad);
-
-			using var icon2 = IconManager.GetIcon("I_Info", e.Rects.IncludedRect.Width * 3 / 4);
-			e.Graphics.DrawImage(icon2.Color(color.GetTextColor()), iconRect2.CenterR(icon2.Size));
-		}
-
-		var rect3 = bottomRect.Align(iconRect.Size, ContentAlignment.MiddleRight);
-		using var cricon = IconManager.GetIcon("I_CompatibilityReport", iconRect.Height * 3 / 4);
-
-		SlickButton.DrawButton(e, rect3, string.Empty, Font, cricon, null, rect3.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
-
-		e.Rects.CompatibilityRect = rect3;
-
-		e.DrawableItem.CachedHeight = finalY - e.ClipRectangle.Y + (GridPadding.Vertical * 5) + Padding.Vertical;
-	}
-
-	private void GetAllButton(ICompatibilityItem Message, out string? allText, out string? allIcon, out ColorStyle colorStyle)
-	{
-		allText = null;
-		allIcon = null;
-		colorStyle = ColorStyle.Red;
-
-		switch (Message.Status.Action)
-		{
-			case StatusAction.SubscribeToPackages:
-			{
-				var max = Message.Packages.Max(x =>
-				{
-					var p = x.GetLocalPackage();
-
-					if (p is null)
-					{
-						return 3;
-					}
-					else if (!p.IsIncluded())
-					{
-						return 2;
-					}
-					else if (!p.IsEnabled())
-					{
-						return 1;
-					}
-
-					return 0;
-				});
-
-				colorStyle = ColorStyle.Green;
-				allText = max switch { 3 => Locale.SubscribeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
-				allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
-			}
-			break;
-			case StatusAction.RequiresConfiguration:
-				allText = _compatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
-				allIcon = "I_Snooze";
-				colorStyle = ColorStyle.Active;
-				break;
-			case StatusAction.UnsubscribeThis:
-				allText = Locale.Unsubscribe;
-				allIcon = "I_RemoveSteam";
-				break;
-			case StatusAction.UnsubscribeOther:
-				allText = Message.Packages?.Length switch { 0 => null, _ => Locale.UnsubscribeAll };
-				allIcon = "I_RemoveSteam";
-				break;
-			case StatusAction.ExcludeThis:
-				allText = Locale.Exclude;
-				allIcon = "I_X";
-				break;
-			case StatusAction.ExcludeOther:
-				allText = Message.Packages?.Length switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
-				allIcon = "I_X";
-				break;
-			case StatusAction.RequestReview:
-				allText = LocaleCR.RequestReview;
-				allIcon = "I_RequestReview";
-				colorStyle = ColorStyle.Active;
-				break;
+			DrawReport(e, message);
 		}
 	}
 
 	private void DrawThumbnail(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
 	{
-		var thumbnail = e.Item.Package.GetThumbnail();
+		if (!e.InvalidRects.Any(x => x.IntersectsWith(e.Rects.IconRect)))
+		{
+			return;
+		}
+
+		var thumbnail = e.Item.GetThumbnail();
 
 		if (thumbnail is null)
 		{
-			using var generic = (e.Item is ILocalPackageWithContents ? Properties.Resources.I_CollectionIcon : e.Item.Package!.IsMod ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
+			using var generic = IconManager.GetIcon(e.Item.IsLocal() ? "Mods" : "Paradox", e.Rects.IconRect.Height).Color(e.BackColor);
+			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			drawThumbnail(generic);
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
+			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
 		}
-		else if (e.Item.Package!.IsLocal)
+		else if (e.Item.IsLocal())
 		{
 			using var unsatImg = new Bitmap(thumbnail, e.Rects.IconRect.Size).Tint(Sat: 0);
 
@@ -658,214 +374,380 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			drawThumbnail(thumbnail);
 		}
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, (int)(5 * UI.FontScale), FormDesign.Design.BackColor);
-	}
-
-	private int DrawDividerLine(PaintEventArgs e, int y)
-	{
-		var lineRect = new Rectangle(e.ClipRectangle.X + GridPadding.Horizontal, y + (GridPadding.Vertical * 2), e.ClipRectangle.Width - (GridPadding.Horizontal * 2), (int)(2 * UI.FontScale));
-		using var lineBrush = new LinearGradientBrush(lineRect, default, default, 0F);
-
-		lineBrush.InterpolationColors = new ColorBlend
+		if (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IconRect.Contains(CursorLocation))
 		{
-			Colors = new[] { Color.Empty, FormDesign.Design.AccentColor, FormDesign.Design.AccentColor, Color.Empty },
-			Positions = new[] { 0.0f, 0.2f, 0.8f, 1f }
-		};
+			using var brush = new SolidBrush(Color.FromArgb(75, 255, 255, 255));
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
+		}
 
-		e.Graphics.FillRectangle(lineBrush, lineRect);
-
-		return y + (GridPadding.Vertical * 4);
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
-	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+	private void DrawTitleAndTags(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
 	{
-		using var font = UI.Font(9F, FontStyle.Bold);
-		var mod = e.Item is not IAsset;
-		var tags = new List<(Color Color, string Text)>();
-		var text = mod ? e.Item.Package!.CleanName(out tags) : e.Item.ToString();
-		using var brush = new SolidBrush(isPressed ? FormDesign.Design.ActiveForeColor : (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) && !IsPackagePage ? FormDesign.Design.ActiveColor : ForeColor);
-		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near });
+		var padding = GridView ? GridPadding : Padding;
+		var text = e.Item.CleanName(out var tags);
 
-		var isVersion = localParentPackage?.Mod is not null && !e.Item.Package!.IsBuiltIn && !IsPackagePage;
-		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.Package!.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackage lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
-		var date = workshopInfo?.ServerTime ?? e.Item.Package!.LocalParentPackage?.LocalTime;
+		using var font = UI.Font(9.25F, FontStyle.Bold);
+		var textRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Y, e.Rects.TextRect.Width, Height);
 
-		var padding = GridView ? GridPadding : GridPadding;
-		var textSize = e.Graphics.Measure(text, font);
-		var tagRect = new Rectangle(e.Rects.TextRect.X + (int)textSize.Width, e.Rects.TextRect.Y, 0, e.Rects.TextRect.Height);
+		var textSize = e.Graphics.Measure(text, font, textRect.Width);
+		var oneLineSize = e.Graphics.Measure(text, font);
+		var oneLine = textSize.Height == oneLineSize.Height;
+		var tagRect = new Rectangle(e.Rects.TextRect.X + (oneLine ? (int)textSize.Width : 0), textRect.Y + (oneLine ? 0 : (int)textSize.Height), 0, (int)oneLineSize.Height);
+
+		e.Rects.TextRect.Height = (int)textSize.Height + (GridPadding.Top / 3);
+		e.Rects.CenterRect = e.Rects.TextRect.Pad(0, -GridPadding.Top, 0, 0);
+		e.DrawableItem.CachedHeight = e.Rects.TextRect.Bottom;
+
+		using var brushTitle = new SolidBrush(e.Rects.CenterRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : e.BackColor.GetTextColor());
+
+		e.Graphics.DrawString(text, font, brushTitle, textRect);
 
 		for (var i = 0; i < tags.Count; i++)
 		{
-			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true);
+			var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ComplexListUI);
 
-			if (i == 0 && !string.IsNullOrEmpty(versionText))
+			if (tagRect.X + tagSize.Width > e.Rects.TextRect.Right)
 			{
-				e.Rects.VersionRect = rect;
+				tagRect.Y += tagRect.Height;
+				tagRect.X = e.Rects.TextRect.X;
+				e.DrawableItem.CachedHeight += tagRect.Height;
 			}
+
+			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ComplexListUI);
 
 			tagRect.X += padding.Left + rect.Width;
 		}
 
-		tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.IconRect.Y, 0, e.Rects.IconRect.Height);
-
-		if (e.Item.Package!.Id > 0)
+		if (!oneLine && tags.Count > 0)
 		{
-			using var icon = IconManager.GetSmallIcon("I_Steam");
-
-			e.Rects.SteamIdRect = e.Graphics.DrawLabel(e.Item.Package.Id.ToString(), icon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: CursorLocation);
-
-			tagRect.X += padding.Left + e.Rects.SteamIdRect.Width;
-		}
-
-		if (workshopInfo?.Author is not null)
-		{
-			using var icon = IconManager.GetSmallIcon("I_Developer");
-
-			e.Rects.AuthorRect = e.Graphics.DrawLabel(workshopInfo?.Author.Name, icon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: CursorLocation);
-
-			tagRect.X += padding.Left + e.Rects.AuthorRect.Width;
-		}
-
-		tagRect.X = e.Rects.TextRect.X;
-		tagRect.Y -= (int)(14 * UI.FontScale);
-
-		if (!string.IsNullOrEmpty(versionText))
-		{
-			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: localParentPackage?.Mod is not null ? CursorLocation : null);
-
-			tagRect.X += padding.Left + e.Rects.VersionRect.Width;
-		}
-
-		if (date.HasValue && !IsPackagePage)
-		{
-			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
-
-			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.BottomLeft, smaller: true, mousePosition: CursorLocation);
+			e.DrawableItem.CachedHeight += tagRect.Height;
 		}
 	}
 
-	private void DrawIncludedButton(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, bool isIncluded, bool partialIncluded, ILocalPackageWithContents? package, out Color activeColor)
+	private void DrawReport(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ICompatibilityItem Message)
 	{
-		activeColor = default;
+		var color = Message.Status.Notification.GetColor().Tint(Lum: FormDesign.Design.IsDarkTheme ? 6 : -6);
+		var isSnoozed = _compatibilityManager.IsSnoozed(Message);
+		var text = Message.GetMessage(_workshopService, _packageNameUtil);
+		var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
+		var rectangle = e.ClipRectangle.Pad(GridPadding);
+		var cursor = PointToClient(Cursor.Position);
 
-		if (package is null && e.Item.Package!.IsLocal)
+		rectangle.Y = e.Rects.IconRect.Bottom + (GridPadding.Top * 3);
+
+		using var barBrush = Gradient(color, e.ClipRectangle, 1.25f);
+		using var icon = Message.Status.Notification.GetIcon(false).Default;
+		using var brush = new SolidBrush(FormDesign.Design.ForeColor);
+		using var fadedBrush = new SolidBrush(Color.FromArgb(200, FormDesign.Design.ForeColor));
+		using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ForeColor, 85));
+		using var font = UI.Font(8.25F);
+		using var smallFont = UI.Font(7.5F);
+		using var tinyFont = UI.Font(7F, FontStyle.Bold);
+		using var tinyUnderlineFont = UI.Font(7F, FontStyle.Bold | FontStyle.Underline);
+
+		e.Graphics.DrawImage(icon.Color(color), e.ClipRectangle.Pad(GridPadding).Align(icon.Size, ContentAlignment.TopRight));
+
+		e.Graphics.DrawString(text, font, brush, rectangle.Pad(GridPadding.Horizontal, 0, 0, 0));
+		rectangle.Y += GridPadding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width - GridPadding.Horizontal).Height;
+
+		e.Graphics.FillRoundedRectangle(barBrush, Rectangle.FromLTRB(e.ClipRectangle.X + GridPadding.Left, e.Rects.IconRect.Bottom + GridPadding.Vertical, e.ClipRectangle.X + GridPadding.Left + GridPadding.Left, rectangle.Y), GridPadding.Left / 2);
+
+		if (note is not null)
 		{
-			return; // missing local item
+			e.Graphics.DrawString(note, smallFont, fadedBrush, rectangle.Pad(GridPadding.Top + GridPadding.Horizontal, -GridPadding.Left, 0, 0));
+			rectangle.Y += GridPadding.Top - GridPadding.Left + (int)e.Graphics.Measure(note, smallFont, rectangle.Width - GridPadding.Top - GridPadding.Horizontal).Height;
 		}
 
-		var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
-		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item.Package!) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
-		var mod = package?.Mod;
-		var required = mod is not null && _modLogicManager.IsRequired(mod, _modUtil);
+		rectangle.Y += GridPadding.Top;
 
-		DynamicIcon? enabl = null;
-		if (_settings.UserSettings.AdvancedIncludeEnable && mod is not null)
+		if (Message.Status.Action is StatusAction.RequestReview)
 		{
-			enabl = new DynamicIcon(mod.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
-
-			if (isIncluded)
+			e.Rects.bulkActionRect = SlickButton.AlignAndDraw(e.Graphics, rectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
 			{
-				activeColor = partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled() ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor;
-			}
-			else if (mod.IsEnabled())
+				Text = LocaleCR.RequestReview,
+				Icon = "RequestReview",
+				Font = font,
+				BackgroundColor = FormDesign.Design.BackColor,
+				Cursor = cursor,
+				HoverState = HoverState & ~HoverState.Focused,
+			}).Rectangle;
+
+			rectangle.Y += e.Rects.bulkActionRect.Height;
+		}
+
+		var bulkAction = _compatibilityActions.GetBulkAction(Message);
+
+		if (bulkAction is not null)
+		{
+			e.Rects.bulkActionRect = SlickButton.AlignAndDraw(e.Graphics, rectangle.Pad(GridPadding.Top), ContentAlignment.TopCenter, new ButtonDrawArgs
 			{
-				activeColor = FormDesign.Design.YellowColor;
+				Text = bulkAction.Text,
+				Icon = bulkAction.Icon,
+				Font = font,
+				ActiveColor = bulkAction.Color,
+				ButtonType = ButtonType.Active,
+				Cursor = cursor,
+				HoverState = HoverState & ~HoverState.Focused,
+			}).Rectangle;
+
+			rectangle.Y += e.Rects.bulkActionRect.Height + GridPadding.Vertical;
+		}
+
+		var preferredSize = Message.Packages.Count() > 3 ? 100 : 115;
+		var columns = (int)Math.Max(1, Math.Floor(rectangle.Width / (preferredSize * UI.FontScale)));
+		var columnWidth = rectangle.Width / columns;
+		var currentY = new int[columns];
+		var index = 0;
+
+		foreach (var item in Message.Packages)
+		{
+			var bounds = new Rectangle(rectangle.X + (index * columnWidth), rectangle.Y + currentY[index], columnWidth, _modHeights.TryGet(item).If(0, columnWidth * 10 / 8));
+
+			currentY[index] += (e.Rects._modHeights[item] = _modHeights[item] = DrawPackage(e, Message, item, bounds, cursor)) + GridPadding.Top;
+
+			index = (index + 1) % columns;
+		}
+
+		rectangle.Y += currentY.Max() + GridPadding.Top;
+
+		var bottomText = 0;
+		var hasRecommendedAction = _compatibilityActions.HasRecommendedAction(Message);
+
+		if (hasRecommendedAction)
+		{
+			e.Rects.recommendedActionRect = new Rectangle(rectangle.Location, e.Graphics.Measure(LocaleCR.ApplyRecommendedAction, tinyFont).ToSize());
+
+			e.Graphics.DrawString(LocaleCR.ApplyRecommendedAction, e.Rects.recommendedActionRect.Contains(cursor) ? tinyUnderlineFont : tinyFont, activeBrush, e.Rects.recommendedActionRect.X, e.Rects.recommendedActionRect.Y - (GridPadding.Top / 2));
+
+			rectangle.X += e.Rects.recommendedActionRect.Width + GridPadding.Horizontal;
+			bottomText = e.Rects.recommendedActionRect.Height;
+		}
+
+		if (_compatibilityActions.CanSnooze(Message))
+		{
+			if (isSnoozed && Enabled)
+			{
+				using var fadeBrush = new SolidBrush(Color.FromArgb(125, BackColor));
+
+				e.Graphics.FillRectangle(fadeBrush, e.ClipRectangle);
 			}
-		}
-		else if (isIncluded)
-		{
-			activeColor = partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
+
+			e.Rects.snoozeRect = new Rectangle(rectangle.Location, e.Graphics.Measure(isSnoozed ? Locale.UnSnooze : Locale.Snooze, tinyFont).ToSize());
+
+			rectangle.X += e.Rects.snoozeRect.Width + GridPadding.Horizontal;
+			bottomText = Math.Max(bottomText, e.Rects.snoozeRect.Height);
+
+			using var purpleBrush = new SolidBrush(Color.FromArgb(isSnoozed ? 255 : 200, 100, 60, 220));
+			e.Graphics.DrawString(isSnoozed ? Locale.UnSnooze : Locale.Snooze, e.Rects.snoozeRect.Contains(cursor) ? tinyUnderlineFont : tinyFont, purpleBrush, e.Rects.snoozeRect.X, e.Rects.snoozeRect.Y - (GridPadding.Top / 2));
 		}
 
-		Color iconColor;
+		{
+			e.Rects.compatibilityReport = new Rectangle(rectangle.Location, e.Graphics.Measure(Locale.ViewCompatibilityReport, tinyFont).ToSize());
 
-		if (required && activeColor != default)
-		{
-			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
-			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
+			bottomText = Math.Max(bottomText, e.Rects.compatibilityReport.Height);
+
+			using var labelBrush = new SolidBrush(FormDesign.Design.LabelColor);
+			e.Graphics.DrawString(Locale.ViewCompatibilityReport, e.Rects.compatibilityReport.Contains(cursor) ? tinyUnderlineFont : tinyFont, labelBrush, e.Rects.compatibilityReport.X, e.Rects.compatibilityReport.Y - (GridPadding.Top / 2));
 		}
-		else if (activeColor == default && inclEnableRect.Contains(CursorLocation))
+
+		if (e.DrawableItem.Loading)
 		{
-			activeColor = Color.FromArgb(20, ForeColor);
-			iconColor = FormDesign.Design.ForeColor;
+			using var fadeBrush = new SolidBrush(Color.FromArgb(125, e.BackColor));
+
+			e.Graphics.FillRectangle(fadeBrush, e.ClipRectangle);
+
+			DrawLoader(e.Graphics, e.ClipRectangle);
+		}
+
+		e.DrawableItem.CachedHeight = rectangle.Y - e.ClipRectangle.Y + bottomText + Padding.Vertical + GridPadding.Vertical;
+	}
+
+	private int DrawPackage(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ICompatibilityItem Message, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	{
+		e.Graphics.FillRoundedRectangleWithShadow(rectangle.Pad(GridPadding.Left), UI.Scale(5), GridPadding.Left);
+
+		var thumbRect = rectangle.ClipTo(rectangle.Width).Pad(GridPadding.Left + GridPadding.Top);
+		var textRect = rectangle.Pad(GridPadding.Left + GridPadding.Top, GridPadding.Vertical + thumbRect.Height + GridPadding.Top, GridPadding.Left + GridPadding.Top, GridPadding.Bottom);
+
+		DrawThumbnail(e, package, thumbRect, cursor);
+
+		rectangle.Height = thumbRect.Width + GridPadding.Vertical;
+
+		rectangle.Height += DrawTitleAndTags(e, package, textRect, cursor) + GridPadding.Top;
+
+		rectangle.Height += DrawAuthor(e, package, new Rectangle(textRect.X, rectangle.Bottom, textRect.Width, textRect.Height), cursor).Height + (GridPadding.Top / 3);
+
+		e.Rects._modRects[package] = thumbRect;
+
+		var action = _compatibilityActions.GetAction(Message, package);
+
+		if (action != null)
+		{
+			using var buttonArgs = new ButtonDrawArgs
+			{
+				Cursor = cursor,
+				BorderRadius = GridPadding.Left,
+				Padding = UI.Scale(new Padding(4, 2, 4, 2)),
+				Rectangle = new Rectangle(0, 0, textRect.Width, UI.Scale(24)),
+				HoverState = HoverState & ~HoverState.Focused,
+				Text = action.Text,
+				Icon = action.Icon,
+			};
+
+			if (Message.Status.Action is StatusAction.ExcludeOther or StatusAction.UnsubscribeOther)
+			{
+				buttonArgs.ButtonType = ButtonType.Active;
+			}
+			else
+			{
+				buttonArgs.BackgroundColor = BackColor;
+				buttonArgs.ButtonType = ButtonType.Dimmed;
+			}
+
+			SlickButton.PrepareLayout(e.Graphics, buttonArgs);
+
+			buttonArgs.Rectangle = new Rectangle(textRect.X, rectangle.Bottom + GridPadding.Top, textRect.Width, buttonArgs.Rectangle.Height);
+
+			e.Rects._actionRects[package] = (buttonArgs, action);
+
+			SlickButton.SetUpColors(buttonArgs);
+
+			SlickButton.DrawButton(e.Graphics, buttonArgs);
+
+			return rectangle.Height + buttonArgs.Rectangle.Height + GridPadding.Vertical + GridPadding.Left;
+		}
+
+		return rectangle.Height + (GridPadding.Left * 2);
+	}
+
+	private int DrawThumbnail(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	{
+		var thumbnail = package.GetThumbnail();
+
+		if (thumbnail is null)
+		{
+			using var generic = IconManager.GetIcon(package.IsCodeMod() ? "Mods" : "Package", rectangle.Height).Color(BackColor);
+			using var brush = new SolidBrush(FormDesign.Design.IconColor);
+
+			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
+			e.Graphics.DrawImage(generic, rectangle.CenterR(generic.Size));
+		}
+		else if (package.IsLocal())
+		{
+			using var unsatImg = new Bitmap(thumbnail, rectangle.Size).Tint(Sat: 0);
+
+			drawThumbnail(unsatImg);
 		}
 		else
 		{
-			iconColor = activeColor.GetTextColor();
+			drawThumbnail(thumbnail);
 		}
 
-		using var brush = inclEnableRect.Gradient(activeColor);
-
-		e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(4 * UI.FontScale));
-
-		using var includedIcon = incl.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
-		using var enabledIcon = enabl?.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
-
-		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
-		if (enabledIcon is not null)
+		if (HoverState.HasFlag(HoverState.Hovered) && rectangle.Contains(cursor))
 		{
-			e.Graphics.DrawImage(enabledIcon, e.Rects.EnabledRect.CenterR(includedIcon.Size));
+			using var brush = new SolidBrush(Color.FromArgb(75, FormDesign.Design.ForeColor));
+			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
 		}
+
+		return rectangle.Height + UI.Scale(16);
+
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, rectangle, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
-	private void DrawButtons(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, bool isPressed, ILocalPackageWithContents? parentPackage, IWorkshopInfo? workshopInfo)
+	private int DrawTitleAndTags(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		var padding = GridView ? GridPadding : GridPadding;
-		var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
-		var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + ((e.Rects.IconRect.Height - size.Height) / 2), size.Width, size.Height);
-		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
+		var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22)), ContentAlignment.TopRight);
+		e.Rects._modDotsRects[package] = dotsRect;
+		DrawDots(e, dotsRect, cursor);
 
-		if (parentPackage is not null)
+		rectangle = rectangle.Pad(0, 0, dotsRect.Width, 0);
+
+		var text = package.CleanName(out var tags);
+
+		using var font = UI.Font(7.25F, FontStyle.Bold);
+		var textRect = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
+
+		var textSize = e.Graphics.Measure(text, font, textRect.Width);
+		var oneLineSize = e.Graphics.Measure(text, font);
+		var oneLine = textSize.Height == oneLineSize.Height;
+		var tagRect = new Rectangle(rectangle.X + (oneLine ? (int)textSize.Width : 0), textRect.Y + (oneLine ? 0 : (int)textSize.Height), 0, (int)oneLineSize.Height);
+
+		textRect.Height = rectangle.Height = (int)textSize.Height + (GridPadding.Top / 3);
+		var finalY = rectangle.Height;
+
+		using var brushTitle = new SolidBrush(FormDesign.Design.ForeColor);
+
+		e.Graphics.DrawString(text, font, brushTitle, textRect);
+
+		for (var i = 0; i < tags.Count; i++)
 		{
-			rect.X -= rect.Width + padding.Left;
+			var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: true);
+
+			if (tagRect.X + tagSize.Width > rectangle.Right)
+			{
+				tagRect.Y += tagRect.Height;
+				tagRect.X = rectangle.X;
+				finalY += tagRect.Height;
+			}
+
+			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true);
+
+			tagRect.X += GridPadding.Left + rect.Width;
 		}
 
-		if (!IsPackagePage && workshopInfo?.Url is not null)
+		if (!oneLine && tags.Count > 0)
 		{
-			rect.X -= rect.Width + padding.Left;
+			finalY += tagRect.Height;
 		}
 
-		using var brush = new SolidBrush(e.BackColor);
-		e.Graphics.FillRectangle(brush, new Rectangle(rect.X + rect.Width, e.Rects.IconRect.Y, e.ClipRectangle.Right - rect.X - padding.Left, e.Rects.IconRect.Height));
-
-		rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + ((e.Rects.IconRect.Height - size.Height) / 2), size.Width, size.Height);
-
-		if (parentPackage is not null)
-		{
-			using var icon = IconManager.GetIcon("I_Folder", size.Height * 3 / 4);
-
-			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
-
-			e.Rects.FolderRect = rect;
-
-			rect.X -= rect.Width + padding.Left;
-		}
-
-		if (!IsPackagePage && workshopInfo?.Url is not null)
-		{
-			using var icon = IconManager.GetIcon("I_Steam", rect.Height * 3 / 4);
-
-			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
-
-			e.Rects.SteamRect = rect;
-
-			rect.X -= rect.Width + padding.Left;
-		}
-
-		var seamRectangle = new Rectangle(rect.X + rect.Width - (int)(40 * UI.UIScale), e.ClipRectangle.Y, (int)(40 * UI.UIScale), e.ClipRectangle.Height);
-
-		using var seamBrush = new LinearGradientBrush(seamRectangle, Color.Empty, e.BackColor, 0F);
-
-		e.Graphics.FillRectangle(seamBrush, seamRectangle);
+		return finalY;
 	}
 
-	protected override void OnItemMouseClick(DrawableItem<ICompatibilityInfo, Rectangles> item, MouseEventArgs e)
+	private Rectangle DrawAuthor(PaintEventArgs e, IPackageIdentity package, Rectangle rect, Point cursor)
+	{
+		var author = package.GetWorkshopInfo()?.Author;
+
+		if (author is null)
+		{
+			return default;
+		}
+
+		using var authorFont = UI.Font(6.75F, FontStyle.Regular);
+		using var authorFontUnderline = UI.Font(6.75F, FontStyle.Underline);
+		using var stringFormat = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center };
+
+		var size = e.Graphics.Measure(author.Name, authorFont).ToSize();
+
+		using var authorIcon = IconManager.GetIcon("Author", size.Height);
+
+		var authorRect = rect.Align(size + new Size(authorIcon.Width, 0), ContentAlignment.TopLeft);
+
+		var isHovered = authorRect.Contains(cursor);
+		using var brush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : Color.FromArgb(200, ForeColor));
+
+		e.Graphics.DrawImage(authorIcon.Color(brush.Color, brush.Color.A), authorRect.Align(authorIcon.Size, ContentAlignment.MiddleLeft));
+		e.Graphics.DrawString(author.Name, isHovered ? authorFontUnderline : authorFont, brush, authorRect, stringFormat);
+
+		return authorRect;
+	}
+
+	private void DrawDots(PaintEventArgs e, Rectangle rectangle, Point cursor)
+	{
+		var isHovered = rectangle.Contains(cursor);
+		using var img = IconManager.GetIcon("VertialMore", rectangle.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.IconColor);
+
+		e.Graphics.DrawImage(img, rectangle.CenterR(img.Size));
+	}
+
+	protected override async void OnItemMouseClick(DrawableItem<ICompatibilityInfo, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
 		if (e.Button == MouseButtons.Right)
 		{
-			ShowRightClickMenu(item.Item.Package!);
+			ShowRightClickMenu(item.Item);
 			return;
 		}
 
@@ -876,316 +758,168 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		var rects = item.Rectangles;
 
-		if (rects.IncludedRect.Contains(e.Location))
-		{
-			if (item.Item.Package!.LocalPackage is not ILocalPackage localPackage)
-			{
-				if (!item.Item.Package!.IsLocal)
-				{
-					_subscriptionsManager.Subscribe(new IPackage[] { item.Item.Package! });
-				}
-
-				return;
-			}
-
-			{
-				_packageUtil.SetIncluded(localPackage, !_packageUtil.IsIncluded(localPackage));
-			}
-
-			return;
-		}
-
-		if (rects.EnabledRect.Contains(e.Location) && item.Item.Package!.LocalPackage is not null)
-		{
-			{
-				_packageUtil.SetEnabled(item.Item.Package!.LocalPackage, !_packageUtil.IsEnabled(item.Item.Package!.LocalPackage));
-			}
-
-			return;
-		}
-
-		if (rects.FolderRect.Contains(e.Location))
-		{
-			PlatformUtil.OpenFolder(item.Item.Package!.LocalPackage?.FilePath);
-			return;
-		}
-
-		if (rects.SteamRect.Contains(e.Location) && item.Item.Package!.GetWorkshopInfo()?.Url is string url)
-		{
-			PlatformUtil.OpenUrl(url);
-			return;
-		}
-
-		if (rects.AuthorRect.Contains(e.Location) && item.Item.Package!.GetWorkshopInfo()?.Author is IUser user)
-		{
-			{
-				var pc = new PC_UserPage(user);
-
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
-			}
-
-			return;
-		}
-
-		if (rects.FolderNameRect.Contains(e.Location) && item.Item.Package!.IsLocal)
-		{
-			{
-				Clipboard.SetText(Path.GetFileName(item.Item.Package.LocalPackage?.Folder ?? string.Empty));
-
-			}
-
-			return;
-		}
-
-		if (rects.SteamIdRect.Contains(e.Location))
-		{
-			{
-				Clipboard.SetText(item.Item.Package!.Id.ToString());
-			}
-
-			return;
-		}
-
-		if (rects.CompatibilityRect.Contains(e.Location))
-		{
-			{
-				var pc = new PC_PackagePage((IPackage?)item.Item.Package!.GetLocalPackage() ?? item.Item.Package!, true);
-
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
-
-				if (_settings.UserSettings.ResetScrollOnPackageClick)
-				{
-					ScrollTo(item.Item);
-				}
-			}
-			return;
-		}
-
-		if (rects.VersionRect.Contains(e.Location) && item.Item.Package!.LocalParentPackage?.Mod is IMod mod)
-		{
-			Clipboard.SetText(mod.Version.GetString());
-		}
-
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
-			Program.MainForm.PushPanel(null, item.Item.Package!.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.Package!) : new PC_PackagePage((IPackage?)item.Item.Package!.GetLocalPackage() ?? item.Item.Package!));
-
-			if (_settings.UserSettings.ResetScrollOnPackageClick)
+			if (e.Button == MouseButtons.Right)
 			{
-				ScrollTo(item.Item);
+				ShowRightClickMenu(item.Item);
+				return;
 			}
 
-			return;
+			if (e.Button == MouseButtons.Left)
+			{
+				ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item.GetPackage() ?? (IPackageIdentity)item.Item, false);
+				return;
+			}
 		}
 
-		if (rects.DateRect.Contains(e.Location))
+		if (rects.DotsRect.Contains(e.Location))
 		{
-			var date = item.Item.Package!.GetWorkshopInfo()?.ServerTime ?? item.Item.Package!.LocalParentPackage?.LocalTime;
+			ShowRightClickMenu(item.Item);
+			return;
+		}
 
-			if (date.HasValue)
-			{
-				{
-					Clipboard.SetText(date.Value.ToString("g"));
-				}
-			}
+		if (rects.AuthorRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Author is IUser user)
+		{
+			Program.MainForm.PushPanel(new PC_UserPage(user));
 
 			return;
 		}
 
-		var Message = item.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == item.Item.GetNotification() && !_compatibilityManager.IsSnoozed(x));
+		var Message = item.Item.ReportItems?.Any() == true ? item.Item.ReportItems.OrderBy(x => _compatibilityManager.IsSnoozed(x) ? 0 : x.Status.Notification).LastOrDefault() : null;
 
-		foreach (var rect in rects.buttonRects)
+		if (Message is null)
+		{
+			return;
+		}
+
+		foreach (var rect in rects._modRects)
 		{
 			if (rect.Value.Contains(e.Location))
 			{
 				if (e.Button == MouseButtons.Left)
 				{
-					Clicked(item.Item, Message, rect.Key, true);
+					if (Message.Type is ReportType.DlcMissing)
+					{
+						PlatformUtil.OpenUrl(rect.Key.Url);
+					}
+					else
+					{
+						ServiceCenter.Get<IInterfaceService>().OpenPackagePage(rect.Key, false);
+					}
+				}
+				else if (e.Button == MouseButtons.Right)
+				{
+					var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(rect.Key);
+
+					SlickToolStrip.Show(Program.MainForm, items);
 				}
 
 				return;
 			}
 		}
 
-		foreach (var rect in rects.modRects)
+		foreach (var rect in rects._modDotsRects)
 		{
 			if (rect.Value.Contains(e.Location))
 			{
-				if (e.Button == MouseButtons.Left)
-				{
-					Clicked(item.Item, Message, rect.Key, false);
-				}
-				else if (e.Button == MouseButtons.Right && rect.Key.GetLocalPackage() is not null)
-				{
-					var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(rect.Key.GetLocalPackage()!);
+				var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(rect.Key);
 
-					this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
-				}
+				SlickToolStrip.Show(Program.MainForm, items);
 
 				return;
 			}
 		}
 
-		if (e.Button == MouseButtons.Left && rects.SnoozeRect.Contains(e.Location))
+		if (e.Button == MouseButtons.Left && rects.compatibilityReport.Contains(e.Location))
+		{
+			ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Item, true);
+
+			return;
+		}
+
+		if (e.Button == MouseButtons.Left && rects.snoozeRect.Contains(e.Location))
 		{
 			_compatibilityManager.ToggleSnoozed(Message);
-			DoFilterChanged();
+
+			return;
 		}
 
-		if (e.Button == MouseButtons.Left && rects.AllButtonRect.Contains(e.Location))
+		if (e.Button == MouseButtons.Left)
 		{
-			switch (Message.Status.Action)
+			foreach (var rect in rects._actionRects)
 			{
-				case StatusAction.SubscribeToPackages:
-					_subscriptionsManager.Subscribe(Message.Packages.Where(x => x.GetLocalPackage() is null));
-					_bulkUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
-					_bulkUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
-					break;
-				case StatusAction.RequiresConfiguration:
-					_compatibilityManager.ToggleSnoozed(Message);
-					FilterChanged();
-					break;
-				case StatusAction.UnsubscribeThis:
-					_subscriptionsManager.UnSubscribe(new[] { item.Item.Package! });
-					break;
-				case StatusAction.UnsubscribeOther:
-					_subscriptionsManager.UnSubscribe(Message.Packages!);
-					break;
-				case StatusAction.ExcludeThis:
+				if (rect.Value.Rectangle.Contains(e.Location))
 				{
-					var pp = item.Item.Package!.GetLocalPackage();
-					if (pp is not null)
-					{
-						_packageUtil.SetIncluded(pp, false);
-					}
+					await Invoke(item, Message, rect.Value.Action, rect.Key);
+
+					return;
 				}
-				break;
-				case StatusAction.ExcludeOther:
-					foreach (var p in Message.Packages!)
-					{
-						var pp = p.GetLocalPackage();
-						if (pp is not null)
-						{
-							_packageUtil.SetIncluded(pp, false);
-						}
-					}
-					break;
-				case StatusAction.RequestReview:
-					Program.MainForm.PushPanel(null, new PC_RequestReview(item.Item.Package!));
-					break;
 			}
-
-			_compatibilityManager.QuickUpdate(Message);
 		}
-	}
 
-	public void ShowRightClickMenu(IPackage item)
-	{
-		var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item);
-
-		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
-	}
-
-	private void Clicked(ICompatibilityInfo info, ICompatibilityItem Message, IPackageIdentity item, bool button)
-	{
-		var package = item.GetWorkshopPackage();
-
-		if (!button)
+		if (e.Button == MouseButtons.Left && rects.recommendedActionRect.Contains(e.Location))
 		{
-			if (Message.Type is ReportType.DlcMissing)
+			var action = _compatibilityActions.GetRecommendedAction(Message);
+
+			if (action != null)
 			{
-				PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.Id}");
-			}
-			else if (package is not null)
-			{
-				Program.MainForm.PushPanel(null, package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(package) : new PC_PackagePage(package));
-			}
-			else
-			{
-				PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={item.Id}");
+				await Invoke(item, Message, action);
 			}
 
 			return;
 		}
 
-		var p = package?.LocalParentPackage;
-
-		if (p is null)
+		if (e.Button == MouseButtons.Left && rects.bulkActionRect.Contains(e.Location))
 		{
-			//_subscribingTo.Add(item);
+			if (Message.Status.Action is StatusAction.RequestReview)
+			{
+				return;
+			}
 
-			Loading = true;
+			var action = _compatibilityActions.GetBulkAction(Message);
 
-			_subscriptionsManager.Subscribe(new[] { item });
+			if (action != null)
+			{
+				await Invoke(item, Message, action);
+			}
 		}
-		else
-		{
-			_packageUtil.SetIncluded(p, true);
-			_packageUtil.SetEnabled(p, true);
-		}
-
-		switch (Message.Status.Action)
-		{
-			case StatusAction.SelectOne:
-				foreach (var id in Message.Packages!)
-				{
-					if (id != item)
-					{
-						var pp = id.GetLocalPackage();
-
-						if (pp is not null)
-						{
-							_packageUtil.SetIncluded(pp, false);
-						}
-					}
-				}
-				break;
-			case StatusAction.Switch:
-				_packageUtil.SetIncluded(info.Package!.LocalParentPackage!, false);
-				break;
-		}
-
-		_compatibilityManager.QuickUpdate(Message);
 	}
 
-	protected override Rectangles GenerateRectangles(ICompatibilityInfo item, Rectangle rectangle)
+	private async Task Invoke(DrawableItem<ICompatibilityInfo, Rectangles> item, ICompatibilityItem Message, ICompatibilityActionInfo action, IPackageIdentity? package = null)
 	{
-		var rects = new Rectangles(item)
+		Loading = item.Loading = true;
+		Enabled = false;
+
+		try
 		{
-			IconRect = rectangle.Align(UI.Scale(new Size(48, 48), UI.FontScale), ContentAlignment.TopLeft)
-		};
+			await action.Invoke(Message, package);
 
-		rectangle.Height = rects.IconRect.Height;
-
-		var includedSize = 28;
-
-		if (_settings.UserSettings.AdvancedIncludeEnable && item.Package?.LocalParentPackage?.Mod is not null)
-		{
-			rects.EnabledRect = rects.IncludedRect = rectangle.Pad(GridPadding).Align(UI.Scale(new Size(includedSize, includedSize), UI.FontScale), ContentAlignment.MiddleLeft);
-
-			rects.EnabledRect.X += rects.EnabledRect.Width;
+			//_compatibilityManager.QuickUpdate(Message);
 		}
-		else
+		catch (Exception ex)
 		{
-			rects.IncludedRect = rectangle.Pad(GridPadding).Align(UI.Scale(new Size(includedSize, includedSize), UI.FontScale), ContentAlignment.MiddleLeft);
+			MessagePrompt.Show(ex, Locale.FailedToApplyChanges, form: Program.MainForm);
 		}
 
-		{
-			rects.IconRect.X = Math.Max(rects.IncludedRect.Right, rects.EnabledRect.Right) + GridPadding.Horizontal;
+		await Task.Delay(2000);
 
-			rects.TextRect = rectangle.Pad(rects.IconRect.Right - rectangle.X + GridPadding.Left, 0, 0, rectangle.Height).AlignToFontSize(UI.Font(9F, FontStyle.Bold), ContentAlignment.TopLeft);
-		}
+		Loading = item.Loading = false;
+		Enabled = true;
+	}
 
-		rects.CenterRect = rects.TextRect.Pad(-GridPadding.Horizontal, 0, 0, 0);
+	public void ShowRightClickMenu(IPackageIdentity item)
+	{
+		var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item);
 
-		return rects;
+		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
 	}
 
 	protected override void OnDragEnter(DragEventArgs drgevent)
 	{
 		base.OnDragEnter(drgevent);
 
-
+		dragActive = false;
 		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop))
 		{
 			var file = ((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
@@ -1193,8 +927,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			if (Path.GetExtension(file).ToLower() is ".zip" or ".json")
 			{
 				drgevent.Effect = DragDropEffects.Copy;
+				dragActive = true;
 				Invalidate();
 			}
+
 			return;
 		}
 
@@ -1206,6 +942,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	{
 		base.OnDragLeave(e);
 
+		dragActive = false;
 		Invalidate();
 	}
 
@@ -1230,6 +967,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			(PanelContent.GetParentPanel(this) as PC_CompatibilityReport)!.Import(file);
 		}
 
+		dragActive = false;
 		Invalidate();
 	}
 
@@ -1266,191 +1004,67 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 	}
 
+	protected override Rectangles GenerateRectangles(ICompatibilityInfo item, Rectangle rectangle)
+	{
+		var rects = new Rectangles(item)
+		{
+			IconRect = rectangle.Pad(GridPadding).Align(UI.Scale(new Size(35, 35)), ContentAlignment.TopLeft)
+		};
+
+		rectangle = new Rectangle(rects.IconRect.X, rects.IconRect.Y, rectangle.Width - GridPadding.Horizontal, rects.IconRect.Height);
+
+		rects.TextRect = rectangle.Pad(rects.IconRect.Right - rectangle.X + GridPadding.Left, 0, rects.IconRect.Width, rectangle.Height);
+
+		return rects;
+	}
+
 	public class Rectangles : IDrawableItemRectangles<ICompatibilityInfo>
 	{
-		public Rectangle IncludedRect;
-		public Rectangle EnabledRect;
-		public Rectangle FolderRect;
 		public Rectangle IconRect;
 		public Rectangle TextRect;
-		public Rectangle SteamRect;
 		public Rectangle CenterRect;
 		public Rectangle AuthorRect;
-		public Rectangle VersionRect;
-		public Rectangle DateRect;
-		public Dictionary<IPackageIdentity, Rectangle> buttonRects = new();
-		public Dictionary<IPackageIdentity, Rectangle> modRects = new();
-		public Rectangle SteamIdRect;
-		public Rectangle SnoozeRect;
-		public Rectangle AllButtonRect;
-		public Rectangle CompatibilityRect;
+		public Rectangle DotsRect;
+
+		public readonly Dictionary<IPackageIdentity, (Rectangle Rectangle, ICompatibilityActionInfo Action)> _actionRects = [];
+		public readonly Dictionary<IPackageIdentity, Rectangle> _modRects = [];
+		public readonly Dictionary<IPackageIdentity, Rectangle> _modDotsRects = [];
+		public readonly Dictionary<IPackageIdentity, int> _modHeights = [];
+		public Rectangle bulkActionRect;
+		public Rectangle recommendedActionRect;
+		public Rectangle snoozeRect;
+		public Rectangle compatibilityReport;
+
+		public bool Enabled;
 
 		public ICompatibilityInfo Item { get; set; }
-		public Rectangle FolderNameRect { get; set; }
 
 		public Rectangles(ICompatibilityInfo item)
 		{
 			Item = item;
+			Enabled = true;
 		}
 
 		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
 		{
-			if (IncludedRect.Contains(location))
-			{
-				if (Item.Package?.LocalPackage is null)
-				{
-					if (Item.Package?.IsLocal == false)
-					{
-						text = Locale.SubscribeToItem;
-						point = IncludedRect.Location;
-						return true;
-					}
-					else
-					{
-						text = string.Empty;
-						point = default;
-						return false;
-					}
-				}
-
-				if (Item.Package.LocalPackage.IsIncluded())
-				{
-					text = $"{Locale.ExcludePackage.Format(Item.Package.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByIncluded.ToString().ToLower())}";
-				}
-				else
-				{
-					text = $"{Locale.IncludePackage.Format(Item.Package.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByExcluded.ToString().ToLower())}";
-				}
-
-				point = IncludedRect.Location;
-				return true;
-			}
-
-			if (EnabledRect.Contains(location) && Item.Package?.LocalParentPackage?.Mod is IMod mod1)
-			{
-				if (mod1.IsEnabled())
-				{
-					text = $"{Locale.DisablePackage.Format(mod1.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}";
-				}
-				else
-				{
-					text = $"{Locale.EnablePackage.Format(mod1.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
-				}
-
-				point = EnabledRect.Location;
-				return true;
-			}
-
-			if (SteamRect.Contains(location))
-			{
-				text = Locale.ViewOnSteam;
-				point = SteamRect.Location;
-				return true;
-			}
-
-			if (SteamIdRect.Contains(location))
-			{
-				text = getFilterTip(string.Format(Locale.CopyToClipboard, Item.Package?.Id), string.Format(Locale.AddToSearch, Item.Package?.Id));
-				point = SteamIdRect.Location;
-				return true;
-			}
-
-			if (FolderNameRect.Contains(location))
-			{
-				var folder = Path.GetFileName(Item.Package?.LocalPackage?.Folder ?? string.Empty);
-				text = getFilterTip(string.Format(Locale.CopyToClipboard, folder), string.Format(Locale.AddToSearch, folder));
-				point = FolderNameRect.Location;
-				return true;
-			}
-
-			if (AuthorRect.Contains(location))
-			{
-				text = getFilterTip(Locale.OpenAuthorPage, Locale.FilterByThisAuthor.Format(Item.Package?.GetWorkshopInfo()?.Author?.Name ?? "this author"));
-				point = AuthorRect.Location;
-				return true;
-			}
-
-			if (FolderRect.Contains(location))
-			{
-				text = Locale.OpenLocalFolder;
-				point = FolderRect.Location;
-				return true;
-			}
-
-			if (CompatibilityRect.Contains(location))
-			{
-				text = getFilterTip(Locale.ViewPackageCR, Locale.FilterByThisReportStatus);
-				point = CompatibilityRect.Location;
-				return true;
-			}
-
-			if (VersionRect.Contains(location) && Item.Package?.LocalParentPackage?.Mod is IMod mod)
-			{
-				text = Locale.CopyVersionNumber;
-				point = VersionRect.Location;
-				return true;
-			}
-
-			if (CenterRect.Contains(location) || IconRect.Contains(location))
-			{
-				{
-					text = Locale.OpenPackagePage;
-				}
-
-				point = CenterRect.Location;
-				return true;
-			}
-
-			if (DateRect.Contains(location))
-			{
-				var date = Item.Package?.GetWorkshopInfo()?.ServerTime ?? Item.Package?.LocalParentPackage?.LocalTime;
-				if (date.HasValue)
-				{
-					text = getFilterTip(string.Format(Locale.CopyToClipboard, date.Value.ToString("g")), Locale.FilterSinceThisDate);
-					point = DateRect.Location;
-					return true;
-				}
-			}
-
-			if (SnoozeRect.Contains(location))
-			{
-				text = Locale.Snooze;
-				point = SnoozeRect.Location;
-				return true;
-			}
-
-			if (AllButtonRect.Contains(location))
-			{
-				text = Locale.Snooze;
-				point = AllButtonRect.Location;
-				return true;
-			}
-
 			text = string.Empty;
 			point = default;
 			return false;
-
-			static string getFilterTip(string? text, string? _) => text ?? "";
 		}
 
 		public bool IsHovered(Control instance, Point location)
 		{
 			return
-				SnoozeRect.Contains(location) ||
-				AllButtonRect.Contains(location) ||
-				CompatibilityRect.Contains(location) ||
-				IncludedRect.Contains(location) ||
-				EnabledRect.Contains(location) ||
-				FolderRect.Contains(location) ||
-				SteamIdRect.Contains(location) ||
-				SteamRect.Contains(location) ||
-				AuthorRect.Contains(location) ||
 				IconRect.Contains(location) ||
-				CenterRect.Contains(location) ||
-				DateRect.Contains(location) ||
-				buttonRects.Values.Any(x => x.Contains(location)) ||
-				modRects.Values.Any(x => x.Contains(location)) ||
-				(VersionRect.Contains(location) && Item?.Package?.LocalParentPackage?.Mod is not null);
+				TextRect.Contains(location) ||
+				AuthorRect.Contains(location) ||
+				snoozeRect.Contains(location) ||
+				bulkActionRect.Contains(location) ||
+				recommendedActionRect.Contains(location) ||
+				compatibilityReport.Contains(location) ||
+				_actionRects.Any(x => x.Value.Rectangle.Contains(location)) ||
+				_modRects.Any(x => x.Value.Contains(location)) ||
+				_modDotsRects.Any(x => x.Value.Contains(location));
 		}
 	}
 }

@@ -2,9 +2,8 @@
 
 using Newtonsoft.Json;
 
-using Skyve.Domain;
+using Skyve.Compatibility.Domain;
 using Skyve.Domain.Systems;
-using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 using System.IO;
@@ -15,31 +14,31 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Skyve.Systems;
-public static class ApiUtil
+public class ApiUtil(ILogger logger)
 {
-	private static readonly ILogger _logger = ServiceCenter.Get<ILogger>();
+	private readonly ILogger _logger = logger;
 
-	public static async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
+	public async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
 	{
 		return await Get<T>(url, new (string, string)[0], queryParams);
 	}
 
-	public static async Task<T?> Get<T>(string url, (string, string)[] headers, params (string, object)[] queryParams)
+	public async Task<T?> Get<T>(string url, (string, string)[] headers, params (string, object)[] queryParams)
 	{
 		return await Send<T>("GET", url, headers, queryParams);
 	}
 
-	public static async Task<T?> Delete<T>(string url, params (string, object)[] queryParams)
+	public async Task<T?> Delete<T>(string url, params (string, object)[] queryParams)
 	{
 		return await Delete<T>(url, new (string, string)[0], queryParams);
 	}
 
-	public static async Task<T?> Delete<T>(string url, (string, string)[] headers, params (string, object)[] queryParams)
+	public async Task<T?> Delete<T>(string url, (string, string)[] headers, params (string, object)[] queryParams)
 	{
 		return await Send<T>("DELETE", url, headers, queryParams);
 	}
 
-	private static async Task<T?> Send<T>(string method, string baseUrl, (string, string)[] headers, params (string, object)[] queryParams)
+	private async Task<T?> Send<T>(string method, string baseUrl, (string, string)[] headers, params (string, object)[] queryParams)
 	{
 		var url = baseUrl;
 
@@ -61,11 +60,20 @@ public static class ApiUtil
 				request.Headers.Add(item.Item1, item.Item2);
 			}
 
+#if !STABLE
 			_logger.Info($"[API] [GET] {baseUrl}");
+#endif
 
 			using var response = request.GetResponse();
 			using var dataStream = response.GetResponseStream();
 			using var reader = new StreamReader(dataStream);
+
+			if (typeof(T) == typeof(byte[]))
+			{
+				using var memoryStream = new MemoryStream();
+				reader.BaseStream.CopyTo(memoryStream);
+				return (T)(object)memoryStream.ToArray();
+			}
 
 			var responseContent = reader.ReadToEnd();
 
@@ -79,12 +87,19 @@ public static class ApiUtil
 			httpClient.DefaultRequestHeaders.Add(item.Item1, item.Item2);
 		}
 
+#if !STABLE
 		_logger.Info($"[API] [GET] {baseUrl}");
+#endif
 
 		var httpResponse = await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(method), new Uri(url)));
 
 		if (httpResponse.IsSuccessStatusCode)
 		{
+			if (typeof(T) == typeof(byte[]))
+			{
+				return (T)(object)await httpResponse.Content.ReadAsByteArrayAsync();
+			}
+
 			var response = await httpResponse.Content.ReadAsStringAsync();
 
 			return JsonConvert.DeserializeObject<T>(response);
@@ -100,12 +115,12 @@ public static class ApiUtil
 			: default;
 	}
 
-	public static async Task<T?> Post<TBody, T>(string url, TBody body, params (string, object)[] queryParams)
+	public async Task<T?> Post<TBody, T>(string url, TBody body, params (string, object)[] queryParams)
 	{
 		return await Post<TBody, T>(url, body, new (string, string)[0], queryParams);
 	}
 
-	public static async Task<T?> Post<TBody, T>(string baseUrl, TBody body, (string, string)[] headers, params (string, object)[] queryParams)
+	public async Task<T?> Post<TBody, T>(string baseUrl, TBody body, (string, string)[] headers, params (string, object)[] queryParams)
 	{
 		var url = baseUrl;
 		var json = JsonConvert.SerializeObject(body);
@@ -133,7 +148,9 @@ public static class ApiUtil
 			request.ContentType = "application/json";
 			request.ContentLength = postDataBytes.Length;
 
+#if !STABLE
 			_logger.Info($"[API] [POST] {baseUrl}");
+#endif
 
 			using (var requestStream = request.GetRequestStream())
 			{
@@ -143,6 +160,13 @@ public static class ApiUtil
 			using var response = request.GetResponse();
 			using var dataStream = response.GetResponseStream();
 			using var reader = new StreamReader(dataStream);
+
+			if (typeof(T) == typeof(byte[]))
+			{
+				using var memoryStream = new MemoryStream();
+				reader.BaseStream.CopyTo(memoryStream);
+				return (T)(object)memoryStream.ToArray();
+			}
 
 			var responseContent = reader.ReadToEnd();
 
@@ -159,10 +183,17 @@ public static class ApiUtil
 		var content = new StringContent(json, Encoding.UTF8, "application/json");
 		var httpResponse = await httpClient.PostAsync(url, content);
 
+#if !STABLE
 		_logger.Info($"[API] [POST] {baseUrl}");
+#endif
 
 		if (httpResponse.IsSuccessStatusCode)
 		{
+			if (typeof(T) == typeof(byte[]))
+			{
+				return (T)(object)await httpResponse.Content.ReadAsByteArrayAsync();
+			}
+
 			var response = await httpResponse.Content.ReadAsStringAsync();
 
 			return JsonConvert.DeserializeObject<T>(response);
