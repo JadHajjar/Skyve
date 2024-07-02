@@ -68,7 +68,7 @@ public class DragAndDropControl : SlickControl
 
 		if (Live)
 		{
-			Size = UI.Scale(new Size(325, 80));
+			Size = UI.Scale(new Size(300, 80));
 			Padding = UI.Scale(new Padding(10), UI.UIScale);
 			Font = UI.Font(9.75F);
 
