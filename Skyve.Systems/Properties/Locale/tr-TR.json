@@ -148,13 +148,13 @@
   "LogZipCopy": "Kayıtları panoya kopyala",
   "LogZipFile": "Kayıtları dosyaya kaydet",
   "LogFolders": "Kayıt klasörleri",
-  "LogFileDrop": "Drop or select a log file to be simplified and display the list of errors inside the log",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
-  "ErrorsInLog": "Errors in the Log",
-  "OpenLogFolder": "Open the game's log folder",
-  "CopyLogFile": "Copy the game's log file to clipboard",
-  "OpenLOTLogFolder": "Open Skyve's log folder",
-  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
+  "LogFileDrop": "Basitleştirilecek bir günlük dosyasını bırakın veya seçin ve günlük içindeki hataların listesini görüntüleyin",
+  "DefaultLogViewInfo": "Son oturumunuzdaki hatalar burada otomatik olarak gösterilecek, sonuçlar canlı olarak güncellenecektir.",
+  "ErrorsInLog": "Günlükteki Hatalar",
+  "OpenLogFolder": "Oyunun günlük klasörünü açın",
+  "CopyLogFile": "Oyunun günlük dosyasını panoya kopyala",
+  "OpenLOTLogFolder": "Skyve'nin günlük klasörünü açın",
+  "CopyLOTLogFile": "Skyve'nin günlük dosyasını panoya kopyala",
   "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
   "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
   "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
@@ -208,7 +208,7 @@
     "Plural": "Copy the selected packages' names"
   },
   "CopyAuthorId": {
-    "One": "Copy the author's ID",
+    "One": "Yazarın kimliğini kopyala",
     "Plural": "Copy the selected packages' author IDs"
   },
   "CopyAuthorName": {
@@ -245,7 +245,7 @@
   "Workshop Maps": "Atölye haritaları",
   "AnyAuthor": "Any Author",
   "ItemsCount": {
-    "One": "{0} item",
+    "One": "{0} öğe",
     "Plural": "{0} items"
   },
   "AuthorsSelected": {
@@ -272,6 +272,10 @@
   "SubscribersCount": {
     "One": "{1} subscriber",
     "Plural": "{1} subscribers"
+  },
+  "FollowersCount": {
+    "One": "{1} follower",
+    "Plural": "{1} followers"
   },
   "SearchWorkshop": "Search the workshop instead...",
   "DiscoverWorkshop": "Look for mods on the workshop...",
@@ -377,7 +381,8 @@
   "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages.",
   "AddCustomTag": "Add a custom tag",
   "PackageIsNotDownloaded": "'{0}' was removed from your computer",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
+  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
+  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
   "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
   "RemovedByAuthor": "Removed by author",
   "Missing": "Missing",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "Assets Enabled",
   "PackagesIncludedDisabled": "Packages Included & Disabled",
   "OutOf": "{0} out of {1}",
-  "RecentlyUpdatedItem": "Recently Updated {0}"
+  "RecentlyUpdatedItem": "Recently Updated {0}",
+  "MassSubscribeWarningTitle": "Mass subscription warning",
+  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
+  "DropImportFile": "Release to import the {0} from this report",
+  "OutOfDateItem": "Out of date {0}",
+  "Bio": "Bio",
+  "ColoredAuthorNames": "Color authors & users' name and avatar",
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
 }

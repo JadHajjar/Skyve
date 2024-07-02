@@ -113,7 +113,7 @@
   "LinkModAssets": "Link Assets van mods naar de status 'opgenomen' van de mod",
   "LinkModAssets_Tip": "Sommige mods bevatten assets die nodig zijn om ze goed te laten functioneren. Het inschakelen van deze optie koppelt die assets aan de mod zelf en verbergt die activa van de Assets pagina, zodat je ze niet per ongeluk uitsluit.",
   "ShowDatesRelatively_Tip": "Wijzigt de indeling van de datums die worden weergegeven in inhoudslijsten naar relatieve tijd. Bijvoorbeeld: gisteren om 2:10 uur",
-  "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
+  "DisableNewModsByDefault_Tip": "Wanneer u abonneert of een mod toevoegt, zal de tool automatisch uitsluiten of toevoegen op basis van deze instelling wanneer de tool is gelanceerd.",
   "DisableNewAssetsByDefault_Tip": "Wanneer u abonneert of een asset toevoegt, zal de tool automatisch uitsluiten of toevoegen op basis van deze instelling wanneer de tool is gelanceerd.",
   "FilterOutPackagesWithOneAsset_Tip": "Pakketten die slechts één kenmerk erin hebben, worden niet weergegeven op de pagina Pakketten. Ze worden nog steeds getoond op de pagina Activa.",
   "FilterOutPackagesWithMods_Tip": "Pakketten die een mod bevatten worden niet weergegeven op de pagina Pakketten. Ze worden nog steeds getoond op de pagina Mods.",
@@ -124,8 +124,8 @@
   "JoinDiscord_Tip": "Vraag om hulp en ontvang updates over de tool op de discord server.",
   "OpenGuide_Tip": "Bekijk de online handleiding om te beginnen met Skyve.",
   "ResetButton_Tip": "Reset uw instellingen naar de standaarden. Dit heeft geen invloed op de instellingen van de mappen.",
-  "ComplexListUI": "Advanced-user UI mode",
-  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
+  "ComplexListUI": "Geavanceerde gebruikers-UI modus",
+  "ComplexListUI_Tip": "Voegt meer geavanceerde informatie toe en voegt extra acties toe aan de gebruikersinterface.",
   "NewGame": "Start een nieuwe save game",
   "LoadSaveGame": "Ga door met een vorige save game",
   "DevOptions": "Opties Developer Launch",
@@ -149,18 +149,18 @@
   "LogZipFile": "Sla logs op in bestand",
   "LogFolders": "Log mappen",
   "LogFileDrop": "Drop of selecteer een logboekbestand om te worden vereenvoudigd en de lijst met fouten in het logboek weergeven",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
+  "DefaultLogViewInfo": "De fouten van de laatste sessie worden hier automatisch weergegeven, de resultaten worden live bijgewerkt.",
   "ErrorsInLog": "Fouten in het logboek",
   "OpenLogFolder": "Open de logmap van het spel",
   "CopyLogFile": "Kopieer het logbestand van het spel naar het klembord",
   "OpenLOTLogFolder": "Open Skyve's logmap",
   "CopyLOTLogFile": "Kopieer Skyve's logbestand naar klembord",
-  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
+  "GenericIncludedTotal": "{0} inbegrepen: {1}, Totaal: {2}",
+  "GenericIncludedAndEnabledTotal": "{0} inbegrepen & ingeschakeld: {1}, Totaal: {2}",
+  "GenericIncludedEnabledTotal": "{0} inbegrepen: {1}, waarvan ingeschakeld: {2}, Totaal: {3}",
   "NewPlayset_Tip": "Nieuwe afspeelset maken of importeren",
-  "ViewPlaysets_Tip": "View & manage your playsets",
-  "DeactivatePlayset_Tip": "Deactivate your current playset",
+  "ViewPlaysets_Tip": "Bekijk en beheer je playsets",
+  "DeactivatePlayset_Tip": "Deactiveer je huidige playset",
   "NewGame_Tip": "Start een nieuw spel wanneer je Cities: Skylines opent. Je kunt aangeven in welke map je wilt starten",
   "LoadSaveGame_Tip": "Laad een opgeslagen spel wanneer u Cities: Skylines opstart. Het niet selecteren van een opgeslagen bestand zal uw laatste save voortzetten",
   "BETA": "BETA",
@@ -174,7 +174,7 @@
   "ABANDONED": "GEABANDEERD",
   "ActionUnreversible": {
     "One": "Deze actie kan niet ongedaan worden gemaakt.",
-    "Plural": "This action can not be reversed. And will affect {0} packages."
+    "Plural": "Deze actie kan niet ongedaan worden gemaakt. En zal invloed hebben op {0} pakketten."
   },
   "AlwaysOpenFiltersAndActions": "Toon de filtersectie standaard",
   "AlwaysOpenFiltersAndActions_Tip": "Altijd de filters sectie openen bij het invoeren van een inhoudstabblad",
@@ -182,11 +182,11 @@
   "FavoriteTotal": "Totale afspeelsets: {0}",
   "PlaysetFilter": "Afspeelset filter",
   "CheckDocumentsFolder": "Zorg ervoor dat Skyve toegang heeft tot je documentenmap, het gebruikt het om je UI & Taal instellingen op te slaan.",
-  "FailedToSaveLanguage": "Failed to save the selected language",
+  "FailedToSaveLanguage": "Fout bij het opslaan van de geselecteerde taal",
   "FailedToOpenTC": "Kon Thema Wijziger niet openen",
   "FailedToDeleteItem": "Kan item niet verwijderen",
   "OpenChangelog": "Wijzigingslogboek openen",
-  "Changelog": "Change-log",
+  "Changelog": "Wijzigingslogboek",
   "DeleteAsset": {
     "One": "Verwijder dit bestand",
     "Plural": "De geselecteerde assets verwijderen"
@@ -196,12 +196,12 @@
     "Plural": "Verwijder de geselecteerde pakketten"
   },
   "EnableThisItemInAllPlaysets": {
-    "One": "Enable in all your playsets",
+    "One": "Activeer in alle playsets",
     "Plural": "Enable the selected items in all your playsets"
   },
   "DisableThisItemInAllPlaysets": {
-    "One": "Disable in all your playsets",
-    "Plural": "Disable the selected items in all your playsets"
+    "One": "Uitschakelen in alle playsets",
+    "Plural": "Schakel de geselecteerde items uit in al je playsets"
   },
   "CopyPackageName": {
     "One": "Copy the package's name",
@@ -272,6 +272,10 @@
   "SubscribersCount": {
     "One": "{1} subscriber",
     "Plural": "{1} subscribers"
+  },
+  "FollowersCount": {
+    "One": "{1} follower",
+    "Plural": "{1} followers"
   },
   "SearchWorkshop": "Search the workshop instead...",
   "DiscoverWorkshop": "Look for mods on the workshop...",
@@ -377,7 +381,8 @@
   "TreatOptionalAsRequired_Tip": "Dit toont in wezen de ontbrekende afhankelijkheidsnotificatie voor optionele pakketten.",
   "AddCustomTag": "Een aangepaste tag toevoegen",
   "PackageIsNotDownloaded": "'{0}' is verwijderd van uw computer",
-  "PackageIsOutOfDate": "'{0}' is verouderd\r\n\r\nJe bent {1} achter",
+  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
+  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
   "PackageIsMaybeOutOfDate": "'{0}' kan verouderd zijn, het werd {1} bijgewerkt",
   "RemovedByAuthor": "Removed by author",
   "Missing": "Ontbrekende",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "Assets Enabled",
   "PackagesIncludedDisabled": "Packages Included & Disabled",
   "OutOf": "{0} out of {1}",
-  "RecentlyUpdatedItem": "Recently Updated {0}"
+  "RecentlyUpdatedItem": "Recently Updated {0}",
+  "MassSubscribeWarningTitle": "Mass subscription warning",
+  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
+  "DropImportFile": "Release to import the {0} from this report",
+  "OutOfDateItem": "Out of date {0}",
+  "Bio": "Bio",
+  "ColoredAuthorNames": "Color authors & users' name and avatar",
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
 }

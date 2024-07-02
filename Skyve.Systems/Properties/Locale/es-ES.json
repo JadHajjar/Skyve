@@ -273,6 +273,10 @@
     "One": "{1} suscriptor",
     "Plural": "{1} suscriptores"
   },
+  "FollowersCount": {
+    "One": "{1} follower",
+    "Plural": "{1} followers"
+  },
   "SearchWorkshop": "Buscar en el workshop...",
   "DiscoverWorkshop": "Busca mods en el taller...",
   "SearchWorkshopBrowser": "Buscar en el workshop a través del navegador...",
@@ -377,7 +381,8 @@
   "TreatOptionalAsRequired_Tip": "Esencialmente, esto muestra la notificación de dependencias que faltan para los paquetes opcionales.",
   "AddCustomTag": "Agregar etiqueta personalizada",
   "PackageIsNotDownloaded": "'{0}' ha sido eliminado de tu ordenador",
-  "PackageIsOutOfDate": "'{0}' está desactualizado\n\nEstás {1} detrás",
+  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
+  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
   "PackageIsMaybeOutOfDate": "'{0}' puede estar desactualizado, fue actualizado {1}",
   "RemovedByAuthor": "Eliminado por el autor",
   "Missing": "Faltan",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "Assets habilitados",
   "PackagesIncludedDisabled": "Paquetes incluidos y deshabilitados",
   "OutOf": "{0} de {1}",
-  "RecentlyUpdatedItem": "Recientemente Actualizados {0}"
+  "RecentlyUpdatedItem": "Recientemente Actualizados {0}",
+  "MassSubscribeWarningTitle": "Mass subscription warning",
+  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
+  "DropImportFile": "Release to import the {0} from this report",
+  "OutOfDateItem": "Out of date {0}",
+  "Bio": "Bio",
+  "ColoredAuthorNames": "Color authors & users' name and avatar",
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
 }

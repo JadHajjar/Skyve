@@ -5,10 +5,10 @@
   "Previous": "Предыдущий",
   "Skip": "Пропустить",
   "Note": "Примечание",
-  "NoteInfo": "Additional information to be displayed for the mod",
+  "NoteInfo": "Дополнительная информация, отображаемая для мода",
   "BlackListName": "Чёрный список по имени",
-  "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "BlackListId": "Чёрный список по ID",
+  "GlobalTagsInfo": "Метки, которые будут видеть все игроки в Skyve",
   "Links": "Ссылки",
   "StatusesCount": "Statuses ({0})",
   "InteractionCount": "Взаимодействия ({0})",
@@ -16,10 +16,10 @@
   "AddInteraction": "Добавить взаимодействие",
   "NotReviewed": "Еще не проверено",
   "Stable": "Конюшня",
-  "StableNoNewFeatures": "Stable, only bug-fix updates",
-  "StableNoFutureUpdates": "Stable, no more updates",
-  "HasIssuesNoFutureUpdates": "Has issues, no more updates",
-  "BreaksOnPatch": "Stable, potentially breaks on patch",
+  "StableNoNewFeatures": "Стабильное обновление, только исправление ошибок",
+  "StableNoFutureUpdates": "Стабильное обновление, нет обновлений",
+  "HasIssuesNoFutureUpdates": "Имеет проблемы, больше нет обновлений",
+  "BreaksOnPatch": "Стабильный, потенциально сломается на патче",
   "NotEnoughInformation": "Недостаточно информации",
   "HasIssues": "Имеет проблемы",
   "Broken": "Сломано",
@@ -61,7 +61,7 @@
   "Website": "Сайт",
   "Donation": "Пожертвовать",
   "ManageCompatibilityData": "Compatibility Management",
-  "YourPackages": "Manage your mods",
+  "YourPackages": "Управляйте вашими модами",
   "AddPackages": "Добавить пакеты",
   "ConfirmEndSession": "Вы уверены, что хотите завершить сеанс?",
   "CrDataLoadFailed": "Не удалось загрузить данные, повторите попытку позже",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "Пожалуйста, выберите правильное использование для этого пакета.",
   "Interaction_Alternative": {
     "One": "'{1}' можно использовать в качестве альтернативы '{0}'.",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "Любой из следующих пакетов может быть использован в качестве альтернативы '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' и '{1}' ' имеют одинаковые функции.",
@@ -105,21 +105,21 @@
     "Plural": "'{0}' будет загружаться сразу после следующих пакетов."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' требуется для работы '{1}'.",
+    "Plural": "'{0}' требуется для следующих пакетов."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Interaction_Identical": "Следующие моды это разные версии одного и того же.\nИспользование их в одно и то же время будет вызывать многочисленные ошибки.",
+  "Status_Succeeded": "'{0}' успешно ' '{1}', и вы уже используете '{1}'. Больше нет необходимости в '{0}'.",
   "Status_Deprecated": "'{0}' является устаревшим, он больше не поддерживается его автором.",
   "Status_AutoDeprecated": "'{0}' давно не обновлялся, вероятно, больше не поддерживается автором.",
   "Status_Reupload": {
     "Zero": "'{0}' является повторной загрузкой оригинального пакета.",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "\"{0}\" это переопубликовка \"{1}\"."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "\"{0}\" может вызывать ошибки в игре.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "После сохранения мира с включенным \"{0}\", вы больше не сможете загрузить это сохранения без включенного \"{0}\".",
+    "One": "После сохранения мира с включенным \"{0}\", вы больше не сможете загрузить это сохранения без включенного \"{0}\".\nИспользуйте \"{1}\" чтобы восстановить сохранение, если это необходимо. Прочитайте его описание в Мастерской для дополнительной информации."
   },
   "Status_TestVersion": {
     "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
@@ -129,7 +129,7 @@
     "One": "You're missing the '{0}' DLC to use this package.",
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "Это мод зависимости, но, скорее всего, вы не используете никакого пакета, требующего его.",
   "Status_SourceCodeNotAvailable": "Исходный код этого мода недоступен. Вы не должны использовать его, если вы не доверяете его автору.",
   "SourceAvailable": "Исходный код доступен",
   "StandardMod": "Standard Mod",
@@ -138,17 +138,18 @@
   "Status_SourceAvailable": "Этот пакет не будет предупреждать об отсутствии исходного кода.",
   "Status_StandardMod": "Этот пакет будет проигнорирован при обработке выявленных модов.",
   "OutputText": "Ожидаемый вывод",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
+  "Stability_AssetNotReviewed": "\"{0}\" ещё не проверен.\nИнформация совместимости может быть неточной; хотя, ассеты в общем стабильны.",
+  "Stability_NotReviewed": "\"{0}\" ещё не был проверен.\nИнформация о стабильности может быть неверной.",
+  "Stability_Stable": "\"{0}\" стабилен. Автор до сих пор активно разрабатывает его и обновляет.",
+  "Stability_StableNoNewFeatures": "'{0}' стабильный, хотя автор больше не будет выпускать обновления, добавляющие новые возможности.\nОн все же будут обновлять его в случае новых ошибок.",
+  "Stability_StableNoFutureUpdates": "'{0}' является стабильным, хотя автор больше не разрабатывает его, будущие обновления или исправления ошибок вряд-ли выйдут.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' является нестабильным, и автор больше не разрабатывает его, будущие обновления или исправления ошибок вряд-ли выйдут.",
+  "Stability_BreaksOnPatch": "'{0}' с большой вероятностью сломается при выпуске нового патча.",
+  "Stability_NotEnoughInformation": "Недостаточно информации для надлежащего обзора '{0}'.",
+  "Stability_HasIssues": "\"{0}\" может вызвать проблемы.\nИспользуйте его с осторожностью.",
   "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
   "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
+  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
   "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
   "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
   "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
