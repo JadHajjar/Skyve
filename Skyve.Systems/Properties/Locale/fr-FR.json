@@ -273,6 +273,10 @@
     "One": "{1} abonné",
     "Plural": "{1} abonnés"
   },
+  "FollowersCount": {
+    "One": "{1} Abonné",
+    "Plural": "{1} Abonnés"
+  },
   "SearchWorkshop": "Rechercher sur le Workshop à la place...",
   "DiscoverWorkshop": "Rechercher des mods sur le Workshop...",
   "SearchWorkshopBrowser": "Rechercher sur le Workshop dans votre navigateur...",
@@ -377,7 +381,8 @@
   "TreatOptionalAsRequired_Tip": "Essentiellement, cela affiche la notification de dépendance manquante pour les paquets optionnels.",
   "AddCustomTag": "Ajouter un tag personnalisé",
   "PackageIsNotDownloaded": "'{0}' a été retiré de votre ordinateur",
-  "PackageIsOutOfDate": "'{0}' est obsolète\r\n\r\nVous êtes {1} en retard",
+  "PackageIsOutOfDate": "'{0}' est obsolète\nVous êtes {1} en retard",
+  "PackageIsOutOfDateVersion": "\"{0}\" est obsolète, vous utilisez une ancienne version du mod.",
   "PackageIsMaybeOutOfDate": "'{0}' peut être obsolète, il a été mis à jour {1}",
   "RemovedByAuthor": "Supprimé par l'auteur",
   "Missing": "Manquant",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "Assets activés",
   "PackagesIncludedDisabled": "Paquets inclus et désactivés",
   "OutOf": "{0} sur {1}",
-  "RecentlyUpdatedItem": "{0} mis à jour récemment"
+  "RecentlyUpdatedItem": "{0} mis à jour récemment",
+  "MassSubscribeWarningTitle": "Avertissement d'abonnement de masse",
+  "MassSubscribeWarningInfo": "Vous êtes sur le point de vous abonner à {0} mods. Êtes-vous sûr de vouloir continuer ?",
+  "DropImportFile": "Relâchez pour importer le {0} de ce rapport",
+  "OutOfDateItem": "{0} obsolète",
+  "Bio": "Bio",
+  "ColoredAuthorNames": "Colorer les noms et avatars des auteurs et utilisateurs",
+  "ColoredAuthorNames_Tip": "Ajoute une couleur unique à chaque auteur/utilisateur, le nom d'utilisateur et l'avatar utiliseront cette couleur pour qu'il soit plus simple de discerner les différents utilisateurs."
 }

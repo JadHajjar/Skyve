@@ -273,6 +273,10 @@
     "One": "{1} feliratkozó",
     "Plural": "{1} feliratkozó"
   },
+  "FollowersCount": {
+    "One": "{1} követő",
+    "Plural": "{1} követő"
+  },
   "SearchWorkshop": "Inkább keress a műhelyben...",
   "DiscoverWorkshop": "Keress modokat a műhelyben...",
   "SearchWorkshopBrowser": "Keressen a műhelyben a böngészőjében...",
@@ -377,7 +381,8 @@
   "TreatOptionalAsRequired_Tip": "Ez lényegében az opcionális csomagok hiányzó függőségi értesítését jeleníti meg.",
   "AddCustomTag": "Egyedi címke hozzáadása",
   "PackageIsNotDownloaded": "A(z) „{0}” eltávolítva a számítógépről",
-  "PackageIsOutOfDate": "\"{0}\" elavult\n\nÖn {1} lemaradt",
+  "PackageIsOutOfDate": "\"{0}\" elavult\n{1} lemaradt",
+  "PackageIsOutOfDateVersion": "A(z) '{0}' elavult, a mod régebbi verzióját használod.",
   "PackageIsMaybeOutOfDate": "Lehet, hogy a \"{0}\" elavult, frissítve: {1}",
   "RemovedByAuthor": "A szerző eltávolította",
   "Missing": "Hiányzó",
@@ -584,5 +589,12 @@
   "AssetsEnabled": "Engedélyezett assetek",
   "PackagesIncludedDisabled": "Engedélyezett & letiltott csomagok",
   "OutOf": "{0}/{1}",
-  "RecentlyUpdatedItem": "Nemrég frissítve: {0}"
+  "RecentlyUpdatedItem": "Nemrég frissítve: {0}",
+  "MassSubscribeWarningTitle": "Tömeges előfizetés!",
+  "MassSubscribeWarningInfo": "Arra készülsz, hogy előfizess a(z) {0} modra. Biztos vagy benne, hogy folytatni akarod?",
+  "DropImportFile": "Engedd fel a(z) {0} importálásához ebből a jelentésből",
+  "OutOfDateItem": "{0} már elavult ",
+  "Bio": "Bemutatkozás",
+  "ColoredAuthorNames": "Színes a szerzők és a felhasználók neve és avatarja",
+  "ColoredAuthorNames_Tip": "Minden szerzőhöz/felhasználóhoz egyedi színt ad, a felhasználó neve és avatarja ezt a színt fogja használni, így könnyebb nyomon követni az egyes felhasználókat."
 }

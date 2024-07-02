@@ -149,6 +149,7 @@
   "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
   "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
   "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
+  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
   "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
   "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
   "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
@@ -157,7 +158,7 @@
     "One": "You should add the following package to your playset.",
     "Plural": "You should add the following packages to your playset."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "다음 지침을 따르십시오.",
   "Action_SelectOne": {
     "One": "'{0}' 와 '{1}' 중 하나만 선택해야 합니다.",
     "Plural": "다음 패키지들과 '{0}' 중 하나만 선택해야 합니다."
@@ -167,13 +168,13 @@
     "One": "You should remove '{1}' from your playset.",
     "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "Action_ExcludeThis": "'{0}'(을)를 비활성화 하는 것이 좋습니다.",
+  "ExcludeThis": "이 패키지 비활성화",
+  "Exclude": "비활성화",
   "Unsubscribe": "구독 취소 필요",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "'{1}'(을)를 비활성화 하는 것이 좋습니다.",
+    "Plural": "다음 패키지를 비활성화 하는 것이 좋습니다."
   },
   "Action_Switch": {
     "One": "'{1}' 로 바꾸어야 합니다.",
@@ -254,7 +255,7 @@
   },
   "ViewRequest": "View Request",
   "CRT_RequiredItem": "필요한 항목",
-  "RequiredItem": "Required Item",
+  "RequiredItem": "필요한 항목",
   "ApplyAllActions": "Apply all recommended actions",
   "SnoozeAll": "Snooze all issues",
   "SnoozeAllFiltered": "Snooze all filtered issues",
