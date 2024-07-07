@@ -153,6 +153,7 @@
   "Stability_Local": "Esta é uma versão local do seu mod original '{0}'.\n\nversões locais são geralmente usadas para fins de teste.",
   "Stability_BrokenFromPatch": "'{1}' quebrou após a atualização {0} do jogo. Por favor, aguarde até que seja atualizado antes de usá-lo.\nEnquanto isso, você deve desativá-lo.",
   "Stability_BrokenFromPatchSafe": "'{1}' quebrou após a atualização {0} do jogo. Por favor, espere até que seja atualizado antes de usá-lo.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Você deve adicionar o seguinte pacote ao seu perfil.",
@@ -200,6 +201,8 @@
   "CRT_Alternatives": "Alternativas",
   "CRT_Status": "Situações",
   "CRT_Ambiguous": "Ambiguidade",
+  "CRT_RequiredItem": "Item Necessário",
+  "CRT_RequestReview": "Review Request Status",
   "LastReviewDate": "Foi revisado pela última vez em {0}",
   "RequestReviewInfo": "Está enfrentando problemas com este pacote?\nSolicite uma revisão aqui.",
   "RequestReview": "Solicitar uma revisão",
@@ -254,7 +257,6 @@
     "Plural": "Excluir estes pedidos"
   },
   "ViewRequest": "Ver pedido",
-  "CRT_RequiredItem": "Item Necessário",
   "RequiredItem": "Item Necessário",
   "ApplyAllActions": "Aplicar todas as ações recomendadas",
   "SnoozeAll": "Adiar todos os problemas encontrados",
@@ -263,5 +265,10 @@
   "NoTags": "Sem Etiquetas",
   "NoLinks": "Sem links",
   "HideReviewedPackages": "Ocultar mods revisados",
-  "ApplyRecommendedAction": "Aplicar ação recomendada"
+  "ApplyRecommendedAction": "Aplicar ação recomendada",
+  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
+  "EditHistory": "Edit History",
+  "EditNote": "Edit Note",
+  "EditNoteInfo": "Leave a note for other managers to see in the future",
+  "RequestReviewUpdate": "Send a new request to be reviewed"
 }
