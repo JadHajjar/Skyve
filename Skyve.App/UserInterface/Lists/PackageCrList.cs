@@ -49,7 +49,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 		var clipRectangle = e.ClipRectangle;
 		var imageRect = clipRectangle.Pad(Padding.Left);
 		var thumbnail = e.Item.GetThumbnail();
-		var isUpToDate = ShowCompleted && cr?.ReviewDate > e.Item.GetWorkshopInfo()?.ServerTime;
+		var isUpToDate = ShowCompleted && cr?.ReviewDate.ToLocalTime() > e.Item.GetWorkshopInfo()?.ServerTime.ToLocalTime();
 
 		imageRect.Width = imageRect.Height;
 

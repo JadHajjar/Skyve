@@ -20,6 +20,7 @@ public class ReviewRequest : IPackageIdentity, IEquatable<ReviewRequest?>
 	public bool IsInteraction { get; set; }
 	public bool IsStatus { get; set; }
 	public DateTime Timestamp { get; set; }
+	public string? SaveUrl { get; set; }
 
 	ulong IPackageIdentity.Id => PackageId;
 	string IPackageIdentity.Name => string.Empty;

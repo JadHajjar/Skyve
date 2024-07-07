@@ -16,6 +16,7 @@ public class CompatibilityMessageControl : SlickControl
 	private readonly Dictionary<IPackageIdentity, Rectangle> _modDotsRects = [];
 	private readonly Dictionary<IPackageIdentity, int> _modHeights = [];
 	private Rectangle bulkActionRect;
+	private Rectangle dismissActionRect;
 	private Rectangle recommendedActionRect;
 	private Rectangle snoozeRect;
 
@@ -67,6 +68,7 @@ public class CompatibilityMessageControl : SlickControl
 
 		var hovered = snoozeRect.Contains(e.Location)
 			|| bulkActionRect.Contains(e.Location)
+			|| dismissActionRect.Contains(e.Location)
 			|| recommendedActionRect.Contains(e.Location)
 			|| _actionRects.Any(x => x.Value.Rectangle.Contains(e.Location))
 			|| _modRects.Any(x => x.Value.Contains(e.Location))
@@ -158,12 +160,28 @@ public class CompatibilityMessageControl : SlickControl
 				return;
 			}
 
+			if (Message.Status.Action is StatusAction.MarkAsRead)
+			{
+				PackageCompatibilityReportControl.RemoveReviewInfo();
+
+				await ServiceCenter.Get<IUpdateManager>().MarkReviewReplyAsRead(PackageCompatibilityReportControl.Package);
+
+				return;
+			}
+
 			var action = _compatibilityActions.GetBulkAction(Message);
 
 			if (action != null)
 			{
 				await Invoke(action);
 			}
+		}
+
+		if (e.Button == MouseButtons.Left && dismissActionRect.Contains(e.Location))
+		{
+			PackageCompatibilityReportControl.RemoveReviewInfo();
+
+			await ServiceCenter.Get<IUpdateManager>().MarkReviewReplyAsRead(PackageCompatibilityReportControl.Package);
 		}
 	}
 
@@ -229,7 +247,7 @@ public class CompatibilityMessageControl : SlickControl
 			{
 				bulkActionRect = SlickButton.AlignAndDraw(e.Graphics, rectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
 				{
-					Text = LocaleCR.RequestReview,
+					Text = Message.Type is ReportType.RequestReview ? LocaleCR.RequestReviewUpdate : LocaleCR.RequestReview,
 					Icon = "RequestReview",
 					Font = font,
 					BackgroundColor = FormDesign.Design.BackColor,
@@ -237,7 +255,36 @@ public class CompatibilityMessageControl : SlickControl
 					HoverState = HoverState & ~HoverState.Focused,
 				}).Rectangle;
 
+				if (Message.Type is ReportType.RequestReview)
+				{
+					dismissActionRect = SlickButton.AlignAndDraw(e.Graphics, rectangle.Pad(bulkActionRect.Width + Padding.Left, 0, 0, 0), ContentAlignment.TopLeft, new ButtonDrawArgs
+					{
+						Text = Locale.Dismiss,
+						Icon = "Ok",
+						Font = font,
+						ButtonType = ButtonType.Dimmed,
+						BackgroundColor = FormDesign.Design.BackColor,
+						Cursor = cursor,
+						HoverState = HoverState & ~HoverState.Focused,
+					}).Rectangle;
+				}
+
 				rectangle.Y += bulkActionRect.Height;
+			}
+
+			if (Message.Status.Action is StatusAction.MarkAsRead)
+			{
+				dismissActionRect = SlickButton.AlignAndDraw(e.Graphics, rectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
+				{
+					Text = Locale.Dismiss,
+					Icon = "Ok",
+					Font = font,
+					BackgroundColor = FormDesign.Design.BackColor,
+					Cursor = cursor,
+					HoverState = HoverState & ~HoverState.Focused,
+				}).Rectangle;
+
+				rectangle.Y += dismissActionRect.Height;
 			}
 
 			var bulkAction = _compatibilityActions.GetBulkAction(Message);

@@ -95,6 +95,7 @@ public class CompatibilitySectionPanel : SmartPanel
 			ReportType.OptionalPackages => "Recommendations",
 			ReportType.Compatibility => "Compatibilities",
 			ReportType.RequiredItem => "Important",
+			ReportType.RequestReview => "RequestReview",
 			_ => "CompatibilityReport",
 		};
 	}

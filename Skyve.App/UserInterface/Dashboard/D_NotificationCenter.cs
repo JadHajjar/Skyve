@@ -45,30 +45,55 @@ internal class D_NotificationCenter : IDashboardItem
 
 		sectionHeight = preferredHeight - e.ClipRectangle.Y;
 
-		preferredHeight += Margin.Top;
+		var notifications = _notificationsService.GetNotifications().OrderByDescending(x => x.Time).ToList();
 
-		var noNotifications = true;
-
-		foreach (var item in _notificationsService.GetNotifications().OrderByDescending(x => x.Time))
+		foreach (var item in notifications)
 		{
-			noNotifications = false;
 			Draw(e, applyDrawing, ref preferredHeight, item);
 
-			preferredHeight += Margin.Top / 2;
+			preferredHeight += BorderRadius / 2;
 		}
 
-		if (noNotifications)
+		if (notifications.Count == 0)
 		{
 			using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 			using var brush = new SolidBrush(FormDesign.Design.InfoColor);
 
 			e.Graphics.DrawString(Locale.NoNotifications, Font, brush, new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, UI.Scale(25)), format);
 
-			preferredHeight += UI.Scale(25) + Margin.Vertical;
+			preferredHeight += UI.Scale(25) + BorderRadius;
 		}
 		else
 		{
-			preferredHeight -= Margin.Top / 2;
+			preferredHeight += BorderRadius / 2;
+
+			if (notifications.Any(x => x.CanBeRead))
+			{
+				using var font = UI.Font(7.5F);
+
+				DrawButton(e, applyDrawing, ref preferredHeight, MarkAllAsRead, new ButtonDrawArgs
+				{
+					Font = font,
+					Icon = "Check",
+					ButtonType = ButtonType.Dimmed,
+					Size = new Size(0, UI.Scale(20)),
+					Text = Locale.MarkAllAsRead,
+					Rectangle = e.ClipRectangle.Pad(BorderRadius)
+				});
+
+				preferredHeight += BorderRadius / 2;
+			}
+		}
+	}
+	
+	private void MarkAllAsRead()
+	{
+		foreach (var item in _notificationsService.GetNotifications())
+		{
+			if (item.CanBeRead)
+			{
+				item.OnRead();
+			}
 		}
 	}
 
@@ -78,15 +103,15 @@ internal class D_NotificationCenter : IDashboardItem
 		var maxWidth = e.ClipRectangle.Width - Margin.Horizontal - icon.Width - Margin.Left;
 		using var titleFont = UI.Font(8.75F, FontStyle.Bold).FitToWidth(notification.Title, new Rectangle(0, 0, maxWidth, maxWidth), e.Graphics);
 		using var smallFont = UI.Font(7F);
-		var titleBounds = e.Graphics.Measure(notification.Title, titleFont, maxWidth + (Margin.Left / 2));
+		var titleBounds = e.Graphics.Measure(notification.Title, titleFont, maxWidth + (BorderRadius / 2));
 		var descBounds = notification.Description is null ? default : e.Graphics.Measure(notification.Description, smallFont, maxWidth);
-		var rectangle = new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, Math.Max(icon.Height, (int)titleBounds.Height) + (int)descBounds.Height).Pad(Margin.Left / 2);
+		var rectangle = new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, Math.Max(icon.Height, (int)titleBounds.Height + (int)descBounds.Height) + BorderRadius).Pad(BorderRadius / 2);
 
 		if (applyDrawing)
 		{
 			if (notification.HasAction && rectangle.Contains(CursorLocation))
 			{
-				using var backBrush = new SolidBrush(HoverState.HasFlag(HoverState.Pressed) ? BackColor : FormDesign.Design.AccentBackColor);
+				using var backBrush = new SolidBrush((HoverState.HasFlag(HoverState.Pressed) ? BackColor : FormDesign.Design.AccentBackColor).Tint(Lum: FormDesign.Design.IsDarkTheme ? 3 : -3));
 				e.Graphics.FillRoundedRectangle(backBrush, rectangle.Pad(0, -Margin.Top / 2, 0, -Margin.Top / 2), Margin.Left / 2);
 
 				_buttonActions[rectangle.Pad(0, -Margin.Top / 2, 0, -Margin.Top / 2)] = notification.OnClick;
@@ -106,22 +131,15 @@ internal class D_NotificationCenter : IDashboardItem
 
 		if (notification.Description is not null)
 		{
-			preferredHeight += (int)titleBounds.Height;
-
 			if (applyDrawing)
 			{
 				using var brush = new SolidBrush(FormDesign.Design.ForeColor.MergeColor(BackColor, 75));
+				using var format = new StringFormat { LineAlignment = string.IsNullOrEmpty(notification.Title) ? StringAlignment.Center : StringAlignment.Near };
 
-				e.Graphics.DrawString(notification.Description, smallFont, brush, new Rectangle(e.ClipRectangle.X + (Margin.Left / 2) + icon.Width + Margin.Horizontal, preferredHeight, maxWidth, e.ClipRectangle.Height));
+				e.Graphics.DrawString(notification.Description, smallFont, brush, new Rectangle(e.ClipRectangle.X + (Margin.Left / 2) + icon.Width + Margin.Horizontal, rectangle.Y + (int)titleBounds.Height, maxWidth, rectangle.Height), format);
 			}
-
-			preferredHeight += Math.Max((icon.Height * 3 / 4) - (int)titleBounds.Height, (int)descBounds.Height);
-		}
-		else
-		{
-			preferredHeight += Math.Max(icon.Height * 3 / 4, (int)titleBounds.Height);
 		}
 
-		preferredHeight += Margin.Top*3/2;
+		preferredHeight += rectangle.Height + BorderRadius;
 	}
 }

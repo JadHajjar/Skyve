@@ -133,4 +133,17 @@ public class PC_WorkshopList : PanelContent
 	{
 		return Locale.Package;
 	}
+
+	public void SetSettings(PackageSorting sorting, string[]? selectedTags)
+	{
+		LC_Items.DD_Sorting.SelectedItem = sorting;
+		LC_Items.DD_Tags.SelectedItems = selectedTags?.Select(ServiceCenter.Get<ITagsService>().CreateWorkshopTag);
+	}
+
+	private class TagItem(string value, string icon, bool isCustom) : ITag
+	{
+		public string Value { get; } = value;
+		public string Icon { get; } = icon;
+		public bool IsCustom { get; } = isCustom;
+	}
 }

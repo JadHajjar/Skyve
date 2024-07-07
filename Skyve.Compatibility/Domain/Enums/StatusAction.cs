@@ -39,5 +39,8 @@ public enum StatusAction
 	UpdateVersion = 11,
 
 	[CRN(NotificationType.None, false)]
+	MarkAsRead = 98,
+
+	[CRN(NotificationType.None, false)]
 	RequestReview = 99,
 }

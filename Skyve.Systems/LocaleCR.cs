@@ -86,6 +86,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation AddInteraction => _instance.GetText("AddInteraction");
 
 	/// <summary>
+	/// Please add a note describing what is wrong with this package.
+	/// </summary>
+	public static Translation AddMeaningfulNote => _instance.GetText("AddMeaningfulNote");
+
+	/// <summary>
 	/// Add Packages
 	/// </summary>
 	public static Translation AddPackages => _instance.GetText("AddPackages");
@@ -237,6 +242,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation CRTOptionalPackages => _instance.GetText("CRT_OptionalPackages");
 
 	/// <summary>
+	/// Review Request Status
+	/// </summary>
+	public static Translation CRTRequestReview => _instance.GetText("CRT_RequestReview");
+
+	/// <summary>
 	/// Required Item
 	/// </summary>
 	public static Translation CRTRequiredItem => _instance.GetText("CRT_RequiredItem");
@@ -287,6 +297,21 @@ public class LocaleCR : LocaleHelper
 	/// Donate
 	/// </summary>
 	public static Translation Donation => _instance.GetText("Donation");
+
+	/// <summary>
+	/// Edit History
+	/// </summary>
+	public static Translation EditHistory => _instance.GetText("EditHistory");
+
+	/// <summary>
+	/// Edit Note
+	/// </summary>
+	public static Translation EditNote => _instance.GetText("EditNote");
+
+	/// <summary>
+	/// Leave a note for other managers to see in the future
+	/// </summary>
+	public static Translation EditNoteInfo => _instance.GetText("EditNoteInfo");
 
 	/// <summary>
 	/// Disable
@@ -594,6 +619,11 @@ public class LocaleCR : LocaleHelper
 	/// Are you experiencing issues with this package?
 	/// </summary>
 	public static Translation RequestReviewInfo => _instance.GetText("RequestReviewInfo");
+
+	/// <summary>
+	/// Send a new request to be reviewed
+	/// </summary>
+	public static Translation RequestReviewUpdate => _instance.GetText("RequestReviewUpdate");
 
 	/// <summary>
 	/// Required DLCs / CCPs

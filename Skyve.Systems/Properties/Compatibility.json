@@ -201,6 +201,8 @@
   "CRT_Alternatives": "Alternatives",
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Ambiguity",
+  "CRT_RequiredItem": "Required Item",
+  "CRT_RequestReview": "Review Request Status",
   "LastReviewDate": "It was last reviewed on {0}",
   "RequestReviewInfo": "Are you experiencing issues with this package?",
   "RequestReview": "Request a review",
@@ -255,7 +257,6 @@
     "Plural": "Delete these requests"
   },
   "ViewRequest": "View Request",
-  "CRT_RequiredItem": "Required Item",
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all recommended actions",
   "SnoozeAll": "Snooze all issues",
@@ -264,5 +265,10 @@
   "NoTags": "No Tags",
   "NoLinks": "No Links",
   "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action"
+  "ApplyRecommendedAction": "Apply recommended action",
+  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
+  "EditHistory": "Edit History",
+  "EditNote": "Edit Note",
+  "EditNoteInfo": "Leave a note for other managers to see in the future",
+  "RequestReviewUpdate": "Send a new request to be reviewed"
 }

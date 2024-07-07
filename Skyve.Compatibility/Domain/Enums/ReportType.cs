@@ -2,6 +2,7 @@
 
 public enum ReportType
 {
+	RequestReview,
 	Stability,
 	Successors,
 	RequiredPackages,

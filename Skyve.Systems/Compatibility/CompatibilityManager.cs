@@ -198,7 +198,14 @@ public class CompatibilityManager : ICompatibilityManager
 				_snoozedItems.Add(new SnoozedItem(compatibilityItem));
 			}
 
-			_saveHandler.Save(_snoozedItems, SNOOZE_FILE);
+			try
+			{
+				_saveHandler.Save(_snoozedItems, SNOOZE_FILE);
+			}
+			catch (Exception ex)
+			{
+				_logger.Exception(ex);
+			}
 		}
 
 		if (compatibilityItem is ReportItem reportItem && reportItem.Package is not null)

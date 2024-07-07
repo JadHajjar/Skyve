@@ -25,6 +25,9 @@ public class DragAndDropControl : SlickControl
 	[Bindable(true)]
 	public override string Text { get => base.Text; set => base.Text = value; }
 
+	[Category("Appearance"), DefaultValue(null)]
+	public string? ImageName { get; set; }
+
 	[Category("Behavior"), DefaultValue(null)]
 	public string[]? ValidExtensions { get => _selectionDialog.ValidExtensions; set => _selectionDialog.ValidExtensions = value; }
 
@@ -192,7 +195,7 @@ public class DragAndDropControl : SlickControl
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
-			using var fileIcon = IconManager.GetLargeIcon("File").Color(FormDesign.Design.MenuForeColor);
+			using var fileIcon = IconManager.GetLargeIcon(ImageName ?? "File").Color(FormDesign.Design.MenuForeColor);
 			using var removeIcon = IconManager.GetIcon("X").Color(FormDesign.Design.MenuForeColor);
 
 			var textSize = e.Graphics.Measure(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), Width - availableWidth - Padding.Horizontal);
