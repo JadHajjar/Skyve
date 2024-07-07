@@ -799,7 +799,7 @@ public partial class ContentList : SlickControl
 			, new ()
 			, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count() ? new (Locale.SelectAll, "DragDrop",  ListControl.SelectAll) : null
 			, ListControl.SelectedItemsCount > 0 ? new (Locale.DeselectAll, "Select", ListControl.DeselectAll) : null
-			, new (isSelected ? Locale.CopyAllIdsSelected : isFiltered ? Locale.CopyAllIdsFiltered : Locale.CopyAllIds, "Copy", () => Clipboard.SetText(items.ListStrings(x => x.IsLocal() ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
+			, new (isSelected ? Locale.CopyAllIdsSelected : isFiltered ? Locale.CopyAllIdsFiltered : Locale.CopyAllIds, "Copy", () => Clipboard.SetText(items.ListStrings(x => x.IsLocal() ? $"Local: {x.Name} {x.GetLocalPackage()?.Version}" : $"{x.Id}: {x.Name} {x.GetLocalPackage()?.Version}", CrossIO.NewLine)))
 #if CS1
 			, new (Locale.SubscribeAll, "Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DownloadAll, "Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))

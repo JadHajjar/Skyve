@@ -10,7 +10,9 @@ public interface INotificationInfo
 	string Icon { get; }
 	Color? Color { get; }
 	bool HasAction { get; }
+	bool CanBeRead { get; }
 
+	void OnRead();
 	void OnClick();
 	void OnRightClick();
 }

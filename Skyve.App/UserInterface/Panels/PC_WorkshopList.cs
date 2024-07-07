@@ -12,6 +12,8 @@ public class PC_WorkshopList : PanelContent
 	private int currentPage;
 	private bool listLoading;
 	private bool endOfPagesReached;
+	
+	private static List<ITag> lastSelectedTags = new();
 
 	public PC_WorkshopList() : base(false)
 	{
@@ -26,6 +28,8 @@ public class PC_WorkshopList : PanelContent
 		};
 
 		LC_Items.ListControl.ScrollUpdate += ListControl_ScrollUpdate;
+		LC_Items.DD_Tags.SelectedItems = lastSelectedTags;
+		LC_Items.DD_Tags.SelectedItemChanged += DD_Tags_SelectedItemChanged;
 
 		Controls.Add(LC_Items);
 
@@ -34,6 +38,11 @@ public class PC_WorkshopList : PanelContent
 #else
 		Text = "Steam Workshop";
 #endif
+	}
+
+	private void DD_Tags_SelectedItemChanged(object sender, EventArgs e)
+	{
+		lastSelectedTags = LC_Items.DD_Tags.SelectedItems.ToList();
 	}
 
 	protected override async void OnCreateControl()
@@ -123,5 +132,18 @@ public class PC_WorkshopList : PanelContent
 	protected virtual LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Package;
+	}
+
+	public void SetSettings(PackageSorting sorting, string[]? selectedTags)
+	{
+		LC_Items.DD_Sorting.SelectedItem = sorting;
+		LC_Items.DD_Tags.SelectedItems = selectedTags?.Select(ServiceCenter.Get<ITagsService>().CreateWorkshopTag);
+	}
+
+	private class TagItem(string value, string icon, bool isCustom) : ITag
+	{
+		public string Value { get; } = value;
+		public string Icon { get; } = icon;
+		public bool IsCustom { get; } = isCustom;
 	}
 }

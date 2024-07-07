@@ -15,4 +15,5 @@ public interface ISkyveDataManager
 	IIndexedPackageCompatibilityInfo? GetPackageCompatibilityInfo(IPackageIdentity identity);
 	IIndexedPackageCompatibilityInfo TryGetPackageInfo(ulong id);
 	IEnumerable<ulong> GetPackagesKeys();
+	Task<ReviewReply?> GetReviewStatus(IPackageIdentity package);
 }

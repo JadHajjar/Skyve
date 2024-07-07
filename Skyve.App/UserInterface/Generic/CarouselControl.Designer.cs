@@ -78,7 +78,6 @@ partial class CarouselControl
 			// 
 			// slickScroll
 			// 
-			this.slickScroll.AlwaysOpen = true;
 			this.slickScroll.Dock = System.Windows.Forms.DockStyle.Top;
 			this.slickScroll.LinkedControl = this.FLP_Thumbs;
 			this.slickScroll.Location = new System.Drawing.Point(0, 250);

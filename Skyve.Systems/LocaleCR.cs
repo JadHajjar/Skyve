@@ -86,6 +86,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation AddInteraction => _instance.GetText("AddInteraction");
 
 	/// <summary>
+	/// Please add a note describing what is wrong with this package.
+	/// </summary>
+	public static Translation AddMeaningfulNote => _instance.GetText("AddMeaningfulNote");
+
+	/// <summary>
 	/// Add Packages
 	/// </summary>
 	public static Translation AddPackages => _instance.GetText("AddPackages");
@@ -237,6 +242,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation CRTOptionalPackages => _instance.GetText("CRT_OptionalPackages");
 
 	/// <summary>
+	/// Review Request Status
+	/// </summary>
+	public static Translation CRTRequestReview => _instance.GetText("CRT_RequestReview");
+
+	/// <summary>
 	/// Required Item
 	/// </summary>
 	public static Translation CRTRequiredItem => _instance.GetText("CRT_RequiredItem");
@@ -287,6 +297,21 @@ public class LocaleCR : LocaleHelper
 	/// Donate
 	/// </summary>
 	public static Translation Donation => _instance.GetText("Donation");
+
+	/// <summary>
+	/// Edit History
+	/// </summary>
+	public static Translation EditHistory => _instance.GetText("EditHistory");
+
+	/// <summary>
+	/// Edit Note
+	/// </summary>
+	public static Translation EditNote => _instance.GetText("EditNote");
+
+	/// <summary>
+	/// Leave a note for other managers to see in the future
+	/// </summary>
+	public static Translation EditNoteInfo => _instance.GetText("EditNoteInfo");
 
 	/// <summary>
 	/// Disable
@@ -596,6 +621,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation RequestReviewInfo => _instance.GetText("RequestReviewInfo");
 
 	/// <summary>
+	/// Send a new request to be reviewed
+	/// </summary>
+	public static Translation RequestReviewUpdate => _instance.GetText("RequestReviewUpdate");
+
+	/// <summary>
 	/// Required DLCs / CCPs
 	/// </summary>
 	public static Translation RequiredDLCs => _instance.GetText("RequiredDLCs");
@@ -725,6 +755,11 @@ public class LocaleCR : LocaleHelper
 	/// '{1}' broke after patch {0} of the game. Please wait until it is updated before using it.
 	/// </summary>
 	public static Translation StabilityBrokenFromPatchSafe => _instance.GetText("Stability_BrokenFromPatchSafe");
+
+	/// <summary>
+	/// '{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.
+	/// </summary>
+	public static Translation StabilityBrokenFromPatchUpdated => _instance.GetText("Stability_BrokenFromPatchUpdated");
 
 	/// <summary>
 	/// '{0}' can cause issues. Be careful while using it.

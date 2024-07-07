@@ -15,5 +15,6 @@ public enum LinkType
 	BuyMeACoffee,
 	Kofi,
 	Gitlabs,
+	Paradox,
 	Other = 99,
 }

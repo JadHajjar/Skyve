@@ -152,7 +152,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			{
 				var info = x.GetCompatibilityInfo(cacheOnly: true);
 
-				return info.GetNotification() is not NotificationType.Unsubscribe && !_packageUtil.IsIncluded(x) ? null : info;
+				return info.GetNotification() is not NotificationType.Unsubscribe && !_packageUtil.IsEnabled(x) ? null : info;
 			}).ToList();
 
 			this.TryInvoke(() =>

@@ -1,6 +1,8 @@
 ﻿using Skyve.App.UserInterface.Generic;
+using Skyve.Compatibility.Domain;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
+using Skyve.Systems.Compatibility.Domain;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -10,19 +12,21 @@ public class PackageCompatibilityReportControl : SmartPanel
 {
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly INotifier _notifier;
+	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly Dictionary<ReportType, CompatibilitySectionPanel> _panels = [];
+	private ReportItem? reviewStatusItem;
 
 	public IPackageIdentity Package { get; }
 	public ICompatibilityInfo? Report { get; private set; }
 
 	public PackageCompatibilityReportControl(IPackageIdentity package)
 	{
-		ServiceCenter.Get(out _notifier, out _compatibilityManager);
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _skyveDataManager);
 
 		Package = package;
 	}
 
-	protected override void OnCreateControl()
+	protected override async void OnCreateControl()
 	{
 		base.OnCreateControl();
 
@@ -34,6 +38,30 @@ public class PackageCompatibilityReportControl : SmartPanel
 		_notifier.CompatibilityReportProcessed += CentralManager_PackageInformationUpdated;
 
 		Reset();
+
+		var reviewStatus = await _skyveDataManager.GetReviewStatus(Package);
+
+		if (reviewStatus != null)
+		{
+			reviewStatusItem = new ReportItem
+			{
+				LocaleKey = reviewStatus.Message,
+				LocaleParams = [Package.CleanName()],
+				PackageId = reviewStatus.PackageId,
+				PackageName = Package.CleanName(),
+				Type = ReportType.RequestReview,
+				Status = new GenericPackageStatus
+				{
+					Action = reviewStatus.RequestUpdate ? StatusAction.RequestReview : reviewStatus.Message is "ReviewPending" ? default : StatusAction.MarkAsRead,
+					Notification = NotificationType.Info
+				}
+			};
+
+			_panels[ReportType.RequestReview].ReportItems.Add(reviewStatusItem);
+			_panels[ReportType.RequestReview].Controls.Add(new CompatibilityMessageControl(this, ReportType.RequestReview, reviewStatusItem));
+
+			this.TryInvoke(Reset);
+		}
 	}
 
 	protected override void Dispose(bool disposing)
@@ -58,12 +86,14 @@ public class PackageCompatibilityReportControl : SmartPanel
 			{
 				Report = _compatibilityManager.GetCompatibilityInfo(Package, true);
 
-				foreach (var panel in _panels)
+				foreach (var panel in _panels.Where(x => x.Key is not ReportType.RequestReview))
 				{
-					var reportItems = Report.ReportItems.AllWhere(x => x.Type == panel.Key);
+					var reportItems = Report.ReportItems.AllWhere(x => x.Type == panel.Key && (reviewStatusItem is null || x.Status.Action != StatusAction.RequestReview));
 
 					if (reportItems.SequenceEqual(panel.Value.ReportItems))
+					{
 						continue;
+					}
 
 					panel.Value.ReportItems = reportItems;
 					panel.Value.Controls.Clear(true);
@@ -74,6 +104,8 @@ public class PackageCompatibilityReportControl : SmartPanel
 					}
 				}
 			}
+
+			PerformLayout();
 		}
 		finally
 		{
@@ -90,7 +122,8 @@ public class PackageCompatibilityReportControl : SmartPanel
 		var index = 0;
 
 		foreach (var panel in _panels
-			.OrderBy(x => x.Key is not ReportType.Stability)
+			.OrderBy(x => x.Key is not ReportType.RequestReview)
+			.ThenBy(x => x.Key is not ReportType.Stability)
 			.ThenByDescending(x => x.Value.ReportItems.Max(y => y.Status?.Notification))
 			.ThenByDescending(x => x.Value.ReportItems.Sum(y => y.Packages.Count())))
 		{
@@ -117,5 +150,15 @@ public class PackageCompatibilityReportControl : SmartPanel
 		}
 
 		base.OnLayout(levent);
+	}
+
+	internal void RemoveReviewInfo()
+	{
+		reviewStatusItem = null;
+
+		_panels[ReportType.RequestReview].ReportItems.Clear();
+		_panels[ReportType.RequestReview].Controls.Clear(true);
+
+		Reset();
 	}
 }

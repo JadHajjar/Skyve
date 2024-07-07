@@ -28,6 +28,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ExcludeItem => GetGlobalText(nameof(ExcludeItem));
 	public static Translation ViewOnWorkshop => GetGlobalText(nameof(ViewOnWorkshop));
 	public static Translation CopyWorkshopLink => GetGlobalText(nameof(CopyWorkshopLink));
+	public static Translation CopyWorkshopMarkdownLink => GetGlobalText(nameof(CopyWorkshopMarkdownLink));
 	public static Translation CopyWorkshopId => GetGlobalText(nameof(CopyWorkshopId));
 	public static Translation IncludeThisItemInAllPlaysets => GetGlobalText(nameof(IncludeThisItemInAllPlaysets));
 	public static Translation ExcludeThisItemInAllPlaysets => GetGlobalText(nameof(ExcludeThisItemInAllPlaysets));
@@ -413,6 +414,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CouldNotCreatePlayset => _instance.GetText("CouldNotCreatePlayset");
 
 	/// <summary>
+	/// Could not upload your file at this time
+	/// </summary>
+	public static Translation CouldNotUploadFile => _instance.GetText("CouldNotUploadFile");
+
+	/// <summary>
 	/// Create a new playset or activate a previous one by clicking here
 	/// </summary>
 	public static Translation CreatePlaysetHere => _instance.GetText("CreatePlaysetHere");
@@ -516,6 +522,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DeselectAll => _instance.GetText("DeselectAll");
 
 	/// <summary>
+	/// Detected Issues
+	/// </summary>
+	public static Translation DetectedIssues => _instance.GetText("DetectedIssues");
+
+	/// <summary>
 	/// Developer Launch Options
 	/// </summary>
 	public static Translation DevOptions => _instance.GetText("DevOptions");
@@ -580,6 +591,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Look for mods on the workshop...
 	/// </summary>
 	public static Translation DiscoverWorkshop => _instance.GetText("DiscoverWorkshop");
+
+	/// <summary>
+	/// Dismiss
+	/// </summary>
+	public static Translation Dismiss => _instance.GetText("Dismiss");
 
 	/// <summary>
 	/// {0} total DLCs owned
@@ -888,6 +904,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FilterSinceThisDate => _instance.GetText("FilterSinceThisDate");
 
 	/// <summary>
+	/// Fix All Issues
+	/// </summary>
+	public static Translation FixAllIssues => _instance.GetText("FixAllIssues");
+
+	/// <summary>
 	/// Attempt to re-download all packages that have issues, this will open steam for a brief moment
 	/// </summary>
 	public static Translation FixAllTip => _instance.GetText("FixAllTip");
@@ -1088,6 +1109,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation LaunchTooltip => _instance.GetText("LaunchTooltip");
 
 	/// <summary>
+	/// Let the requester know that the issue was fixed
+	/// </summary>
+	public static Translation LetUserKnowIsFixed => _instance.GetText("LetUserKnowIsFixed");
+
+	/// <summary>
+	/// Let the requester know that you need a save-game to properly review
+	/// </summary>
+	public static Translation LetUserKnowSaveFileNeeded => _instance.GetText("LetUserKnowSaveFileNeeded");
+
+	/// <summary>
 	/// Left-Hand Traffic
 	/// </summary>
 	public static Translation LHT => _instance.GetText("LHT");
@@ -1209,6 +1240,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation MapFileInfo => _instance.GetText("MapFileInfo");
 
 	/// <summary>
+	/// Mark all as read
+	/// </summary>
+	public static Translation MarkAllAsRead => _instance.GetText("MarkAllAsRead");
+
+	/// <summary>
+	/// Mark as read
+	/// </summary>
+	public static Translation MarkAsRead => _instance.GetText("MarkAsRead");
+
+	/// <summary>
 	/// You're about to subscribe to {0} mods. Are you sure you want to continue?
 	/// </summary>
 	public static Translation MassSubscribeWarningInfo => _instance.GetText("MassSubscribeWarningInfo");
@@ -1259,6 +1300,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Multiple Skyves Detected
 	/// </summary>
 	public static Translation MultipleSkyvesDetected => _instance.GetText("MultipleSkyvesDetected");
+
+	/// <summary>
+	/// New
+	/// </summary>
+	public static Translation New => _instance.GetText("New");
 
 	/// <summary>
 	/// Start a new game
@@ -1480,7 +1526,8 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PackageIsOutOfDate => _instance.GetText("PackageIsOutOfDate");
 
 	/// <summary>
-	/// '{0}' is out of date, you are on an older version of the mod.
+	/// <para>'{0}' is out of date, you are on an older version of the mod.</para>
+	/// <para>Plural: {0} {1} are out of date, you are on older versions of these mods.</para>
 	/// </summary>
 	public static Translation PackageIsOutOfDateVersion => _instance.GetText("PackageIsOutOfDateVersion");
 
@@ -1653,6 +1700,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation RenamePlayset => _instance.GetText("RenamePlayset");
 
 	/// <summary>
+	/// Reply to requester
+	/// </summary>
+	public static Translation ReplyToRequester => _instance.GetText("ReplyToRequester");
+
+	/// <summary>
 	/// Report an issue or add missing information
 	/// </summary>
 	public static Translation RequestOption1 => _instance.GetText("RequestOption1");
@@ -1743,14 +1795,49 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation RestartRequired => _instance.GetText("RestartRequired");
 
 	/// <summary>
+	/// The issue you've reported has now been fixed. You can use the {0} again.
+	/// </summary>
+	public static Translation ReviewIsFixed => _instance.GetText("ReviewIsFixed");
+
+	/// <summary>
+	/// The issue you've reported needs more information to be identified. Please send a new Request with a save-game attached to it to be reviewed.
+	/// </summary>
+	public static Translation ReviewIsSaveFileNeeded => _instance.GetText("ReviewIsSaveFileNeeded");
+
+	/// <summary>
+	/// The compatibility information of '{0}' was updated after your review request.
+	/// </summary>
+	public static Translation ReviewIsUpdated => _instance.GetText("ReviewIsUpdated");
+
+	/// <summary>
+	/// Your review request for '{0}' has been received but is still pending review.
+	/// </summary>
+	public static Translation ReviewPending => _instance.GetText("ReviewPending");
+
+	/// <summary>
 	/// Failed to send your review request for '{0}'.  {1}
 	/// </summary>
 	public static Translation ReviewRequestFailed => _instance.GetText("ReviewRequestFailed");
 
 	/// <summary>
+	/// Review Request Update
+	/// </summary>
+	public static Translation ReviewRequestNotification => _instance.GetText("ReviewRequestNotification");
+
+	/// <summary>
+	/// Your review request for '{0}' has a new update
+	/// </summary>
+	public static Translation ReviewRequestNotificationInfo => _instance.GetText("ReviewRequestNotificationInfo");
+
+	/// <summary>
 	/// Your review request for '{0}' has been sent!  Thank you for your feedback.
 	/// </summary>
 	public static Translation ReviewRequestSent => _instance.GetText("ReviewRequestSent");
+
+	/// <summary>
+	/// Select a save-game to send with your request to help us investigate the issue
+	/// </summary>
+	public static Translation ReviewSaveFileInfo => _instance.GetText("ReviewSaveFileInfo");
 
 	/// <summary>
 	/// Search through your DLCs..
@@ -1801,6 +1888,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Select this package
 	/// </summary>
 	public static Translation SelectThisPackage => _instance.GetText("SelectThisPackage");
+
+	/// <summary>
+	/// Send the reply
+	/// </summary>
+	public static Translation SendReply => _instance.GetText("SendReply");
 
 	/// <summary>
 	/// Send the request for review
@@ -2295,6 +2387,11 @@ public class Locale : LocaleHelper, ILocale
 	/// View Mods with issues
 	/// </summary>
 	public static Translation ViewModsWithIssues => _instance.GetText("ViewModsWithIssues");
+
+	/// <summary>
+	/// View more on the workshop
+	/// </summary>
+	public static Translation ViewMoreWorkshop => _instance.GetText("ViewMoreWorkshop");
 
 	/// <summary>
 	/// View this package's Github repository

@@ -297,7 +297,7 @@ internal class ImageSystem : IImageService
 				{
 					try
 					{
-						CrossIO.DeleteFile(item);
+						CrossIO.DeleteFile(item, true);
 					}
 					catch { }
 				}
@@ -313,7 +313,7 @@ internal class ImageSystem : IImageService
 			{
 				if (item.LastAccessTimeUtc < DateTime.Now.AddDays(-30))
 				{
-					CrossIO.DeleteFile(item.FullName);
+					CrossIO.DeleteFile(item.FullName, true);
 				}
 			}
 			catch { }
