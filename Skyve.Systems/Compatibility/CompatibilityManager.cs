@@ -369,6 +369,18 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
+		if (stability is PackageStability.BrokenFromNewVersion)
+		{
+			if (!_compatibilityHelper.IsPackageEnabled(package.Id, false))
+			{
+				stability = PackageStability.BrokenFromNewVersionSafe;
+			}
+			else if (workshopInfo?.ServerTime > packageData.ReviewDate)
+			{
+				stability = PackageStability.NotEnoughInformation;
+			}
+		}
+
 		if (packageData.Id > 0 && !_compatibilityHelper.IsPackageEnabled(package.Id, false))
 		{
 			var requiredFor = GetRequiredFor(packageData.Id);
@@ -400,6 +412,14 @@ public class CompatibilityManager : ICompatibilityManager
 					workshopInfo?.CleanName(true),
 					$"Stability_{stability}",
 					[_citiesManager.GameVersion ?? packageData.ReviewedGameVersion ?? string.Empty, workshopInfo?.CleanName(true) ?? package.Name]);
+			}
+			else if (stability is PackageStability.BrokenFromNewVersion or PackageStability.BrokenFromNewVersionSafe)
+			{
+				info.AddWithLocale(ReportType.Stability,
+					new StabilityStatus(stability, null, false),
+					workshopInfo?.CleanName(true),
+					$"Stability_{stability}",
+					[workshopInfo?.Version is null ? string.Empty : $" (v{workshopInfo?.Version})", workshopInfo?.CleanName(true) ?? package.Name]);
 			}
 			else
 			{

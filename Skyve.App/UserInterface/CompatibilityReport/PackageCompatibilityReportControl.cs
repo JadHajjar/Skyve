@@ -58,7 +58,7 @@ public class PackageCompatibilityReportControl : SmartPanel
 			};
 
 			_panels[ReportType.RequestReview].ReportItems.Add(reviewStatusItem);
-			_panels[ReportType.RequestReview].Controls.Add(new CompatibilityMessageControl(this, ReportType.RequestReview, reviewStatusItem));
+			_panels[ReportType.RequestReview].Controls.Add(new CompatibilityMessageControl(this, ReportType.RequestReview, reviewStatusItem) { LinkToFollow = reviewStatus.Link });
 
 			this.TryInvoke(Reset);
 		}
