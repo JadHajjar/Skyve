@@ -149,10 +149,11 @@
   "Stability_HasIssues": "'{0}' puede causar problemas.\nTenga cuidado al usarlo.",
   "Stability_Broken": "'{0}' no funciona.\nSe sabe que afecta el juego o simplemente no funciona.",
   "Stability_Incompatible": "'{0}' está marcado como no compatible con tu versión del juego actual.\nÚsalo cuidadosamente, o desactívalo mientras esperas a que lo actualicen.",
-  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
+  "Stability_AssetIncompatible": "'{0}' está marcado como no compatible con tu versión actual del juego.\nAssets generalmente no dejan de funcionar al actualizarse el juego, no deberías tener problemas al usarlo.",
   "Stability_Local": "Esta es una versión local de su mod original '{0}'.\n\nLas versiones locales generalmente se utilizan para pruebas.",
   "Stability_BrokenFromPatch": "'{1}' dejó de funcionar después del parche {0} del juego. Por favor, espera hasta que se actualice antes de usarlo.\nMientras tanto, deberías deshabilitarlo.",
   "Stability_BrokenFromPatchSafe": "'{1}' dejó de funcionar después del parche {0} del juego. Por favor, espera hasta que se actualice antes de usarlo.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Deberías añadir el siguiente paquete a tu playset.",
@@ -200,6 +201,8 @@
   "CRT_Alternatives": "Alternativas",
   "CRT_Status": "Estados",
   "CRT_Ambiguous": "Ambigüedad",
+  "CRT_RequiredItem": "Artículo requerido",
+  "CRT_RequestReview": "Review Request Status",
   "LastReviewDate": "Revisado por última vez el {0}",
   "RequestReviewInfo": "¿Tienes problemas con este paquete?",
   "RequestReview": "Solicitar revisión",
@@ -254,7 +257,6 @@
     "Plural": "Eliminar estas solicitudes"
   },
   "ViewRequest": "Ver solicitud",
-  "CRT_RequiredItem": "Artículo requerido",
   "RequiredItem": "Artículo requerido",
   "ApplyAllActions": "Aplicar todas las acciones recomendadas",
   "SnoozeAll": "Posponer todos los problemas",
@@ -263,5 +265,10 @@
   "NoTags": "Sin etiquetas",
   "NoLinks": "Sin enlaces",
   "HideReviewedPackages": "Ocultar mods evaluados",
-  "ApplyRecommendedAction": "Aplicar acción recomendada"
+  "ApplyRecommendedAction": "Aplicar acción recomendada",
+  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
+  "EditHistory": "Edit History",
+  "EditNote": "Edit Note",
+  "EditNoteInfo": "Leave a note for other managers to see in the future",
+  "RequestReviewUpdate": "Send a new request to be reviewed"
 }

@@ -153,6 +153,7 @@
   "Stability_Local": "这是模组 '{0}' 的本地版本。\n\n本地模组通常仅用于测试。",
   "Stability_BrokenFromPatch": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。\n目前，您应该禁用它。",
   "Stability_BrokenFromPatchSafe": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。",
+  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "您应该将以下模组添加到配组中：",
@@ -200,6 +201,8 @@
   "CRT_Alternatives": "备选方案",
   "CRT_Status": "状态",
   "CRT_Ambiguous": "不明确性",
+  "CRT_RequiredItem": "前置项目",
+  "CRT_RequestReview": "Review Request Status",
   "LastReviewDate": "最近一次检查于 {0}",
   "RequestReviewInfo": "使用此插件时遇到问题？",
   "RequestReview": "申请检查",
@@ -254,7 +257,6 @@
     "Plural": "删除这些请求"
   },
   "ViewRequest": "查看请求",
-  "CRT_RequiredItem": "前置项目",
   "RequiredItem": "前置项目",
   "ApplyAllActions": "执行所有推荐的操作",
   "SnoozeAll": "关闭所有问题的提醒",
@@ -263,5 +265,10 @@
   "NoTags": "没有标签",
   "NoLinks": "没有链接",
   "HideReviewedPackages": "隐藏已检查的模组",
-  "ApplyRecommendedAction": "执行推荐的操作"
+  "ApplyRecommendedAction": "执行推荐的操作",
+  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
+  "EditHistory": "Edit History",
+  "EditNote": "Edit Note",
+  "EditNoteInfo": "Leave a note for other managers to see in the future",
+  "RequestReviewUpdate": "Send a new request to be reviewed"
 }

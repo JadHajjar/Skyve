@@ -153,6 +153,7 @@
   "Stability_Local": "Ceci est une version locale de son mod original '{0}'.\n\nLes versions locales sont généralement utilisées à des fins de test.",
   "Stability_BrokenFromPatch": "'{1}' ne fonctionne plus après le patch {0} du jeu. Veuillez attendre qu'elle soit mise à jour avant de l'utiliser.\nEn attendant, vous devriez la désactiver.",
   "Stability_BrokenFromPatchSafe": "'{1}' a cessé de fonctionner après le patch {0} du jeu. Veuillez attendre qu'il soit mis à jour avant de l'utiliser.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Vous devez ajouter le paquet suivant à votre playset.",
@@ -200,6 +201,8 @@
   "CRT_Alternatives": "Alternatives",
   "CRT_Status": "Statuts",
   "CRT_Ambiguous": "Ambiguité",
+  "CRT_RequiredItem": "Élément requis",
+  "CRT_RequestReview": "Review Request Status",
   "LastReviewDate": "La dernière révision a eu lieu le {0}",
   "RequestReviewInfo": "Vous rencontrez des problèmes avec ce paquet ?",
   "RequestReview": "Demander une révision",
@@ -254,7 +257,6 @@
     "Plural": "Supprimer ces demandes"
   },
   "ViewRequest": "Voir la demande",
-  "CRT_RequiredItem": "Élément requis",
   "RequiredItem": "Élément requis",
   "ApplyAllActions": "Appliquer toutes les actions recommandées",
   "SnoozeAll": "Ignorer tout les problèmes",
@@ -263,5 +265,10 @@
   "NoTags": "Aucun tag",
   "NoLinks": "Aucun lien",
   "HideReviewedPackages": "Masquer les mods révisés",
-  "ApplyRecommendedAction": "Appliquer toutes les actions recommandées"
+  "ApplyRecommendedAction": "Appliquer toutes les actions recommandées",
+  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
+  "EditHistory": "Edit History",
+  "EditNote": "Edit Note",
+  "EditNoteInfo": "Leave a note for other managers to see in the future",
+  "RequestReviewUpdate": "Send a new request to be reviewed"
 }
