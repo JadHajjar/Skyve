@@ -382,7 +382,10 @@
   "AddCustomTag": "Een aangepaste tag toevoegen",
   "PackageIsNotDownloaded": "'{0}' is verwijderd van uw computer",
   "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
-  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
+  "PackageIsOutOfDateVersion": {
+    "One": "'{0}' is out of date, you are on an older version of the mod.",
+    "Plural": "{0} {1} are out of date, you are on older versions of these mods."
+  },
   "PackageIsMaybeOutOfDate": "'{0}' kan verouderd zijn, het werd {1} bijgewerkt",
   "RemovedByAuthor": "Removed by author",
   "Missing": "Ontbrekende",
@@ -596,5 +599,24 @@
   "OutOfDateItem": "Out of date {0}",
   "Bio": "Bio",
   "ColoredAuthorNames": "Color authors & users' name and avatar",
-  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users.",
+  "DetectedIssues": "Detected Issues",
+  "FixAllIssues": "Fix All Issues",
+  "MarkAllAsRead": "Mark all as read",
+  "MarkAsRead": "Mark as read",
+  "Dismiss": "Dismiss",
+  "New": "New",
+  "ViewMoreWorkshop": "View more on the workshop",
+  "ReviewSaveFileInfo": "Select a save-game to send with your request to help us investigate the issue",
+  "CouldNotUploadFile": "Could not upload your file at this time",
+  "ReplyToRequester": "Reply to requester",
+  "SendReply": "Send the reply",
+  "LetUserKnowIsFixed": "Let the requester know that the issue was fixed",
+  "LetUserKnowSaveFileNeeded": "Let the requester know that you need a save-game to properly review",
+  "ReviewRequestNotification": "Review Request Update",
+  "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
+  "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
+  "ReviewIsSaveFileNeeded": "The issue you've reported needs more information to be identified. Please send a new Request with a save-game attached to it to be reviewed.",
+  "ReviewIsUpdated": "The compatibility information of '{0}' was updated after your review request.",
+  "ReviewPending": "Your review request for '{0}' has been received but is still pending review."
 }

@@ -274,8 +274,8 @@
     "Plural": "{1} suscriptores"
   },
   "FollowersCount": {
-    "One": "{1} follower",
-    "Plural": "{1} followers"
+    "One": "{1} seguidor",
+    "Plural": "{1} seguidores"
   },
   "SearchWorkshop": "Buscar en el workshop...",
   "DiscoverWorkshop": "Busca mods en el taller...",
@@ -381,8 +381,11 @@
   "TreatOptionalAsRequired_Tip": "Esencialmente, esto muestra la notificación de dependencias que faltan para los paquetes opcionales.",
   "AddCustomTag": "Agregar etiqueta personalizada",
   "PackageIsNotDownloaded": "'{0}' ha sido eliminado de tu ordenador",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
-  "PackageIsOutOfDateVersion": "'{0}' is out of date, you are on an older version of the mod.",
+  "PackageIsOutOfDate": "'{0}' está desactualizado\n\nEstás {1} detrás",
+  "PackageIsOutOfDateVersion": {
+    "One": "'{0}' is out of date, you are on an older version of the mod.",
+    "Plural": "{0} {1} are out of date, you are on older versions of these mods."
+  },
   "PackageIsMaybeOutOfDate": "'{0}' puede estar desactualizado, fue actualizado {1}",
   "RemovedByAuthor": "Eliminado por el autor",
   "Missing": "Faltan",
@@ -590,11 +593,30 @@
   "PackagesIncludedDisabled": "Paquetes incluidos y deshabilitados",
   "OutOf": "{0} de {1}",
   "RecentlyUpdatedItem": "Recientemente Actualizados {0}",
-  "MassSubscribeWarningTitle": "Mass subscription warning",
-  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
-  "DropImportFile": "Release to import the {0} from this report",
-  "OutOfDateItem": "Out of date {0}",
+  "MassSubscribeWarningTitle": "Advertencia de suscripción masiva",
+  "MassSubscribeWarningInfo": "Estás a punto de suscribirte a {0} mods. ¿Estás seguro de que quieres continuar?",
+  "DropImportFile": "Soltar para importar el {0} de este informe",
+  "OutOfDateItem": "{0} desactualizado",
   "Bio": "Bio",
-  "ColoredAuthorNames": "Color authors & users' name and avatar",
-  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users."
+  "ColoredAuthorNames": "Colorear autores y nombres de usuario y avatar",
+  "ColoredAuthorNames_Tip": "Agregar un color único a cada usuario, el nombre del usuario y su avatar utilizará ese color para identificarlo de manera más fácil.",
+  "DetectedIssues": "Detected Issues",
+  "FixAllIssues": "Fix All Issues",
+  "MarkAllAsRead": "Mark all as read",
+  "MarkAsRead": "Mark as read",
+  "Dismiss": "Dismiss",
+  "New": "New",
+  "ViewMoreWorkshop": "View more on the workshop",
+  "ReviewSaveFileInfo": "Select a save-game to send with your request to help us investigate the issue",
+  "CouldNotUploadFile": "Could not upload your file at this time",
+  "ReplyToRequester": "Reply to requester",
+  "SendReply": "Send the reply",
+  "LetUserKnowIsFixed": "Let the requester know that the issue was fixed",
+  "LetUserKnowSaveFileNeeded": "Let the requester know that you need a save-game to properly review",
+  "ReviewRequestNotification": "Review Request Update",
+  "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
+  "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
+  "ReviewIsSaveFileNeeded": "The issue you've reported needs more information to be identified. Please send a new Request with a save-game attached to it to be reviewed.",
+  "ReviewIsUpdated": "The compatibility information of '{0}' was updated after your review request.",
+  "ReviewPending": "Your review request for '{0}' has been received but is still pending review."
 }

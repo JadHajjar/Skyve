@@ -153,6 +153,7 @@
   "Stability_Local": "Ez az eredeti mod '{0}' helyi változata.\n\nA helyi verziókat általában tesztelési célokra használják.",
   "Stability_BrokenFromPatch": "A(z) „{1}” elromlott a játék {0}. javítása után. Kérjük, várd meg, amíg frissül, mielőtt használnád.\nAddig is le kell tiltanod.",
   "Stability_BrokenFromPatchSafe": "A(z) „{1}” elromlott a játék {0}. javítása után. Kérjük, várd meg, amíg frissül, mielőtt használnád.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "A következő csomagot kell hozzáadnod a játékkészlethez.",
@@ -200,6 +201,8 @@
   "CRT_Alternatives": "Alternatívák",
   "CRT_Status": "Státuszok",
   "CRT_Ambiguous": "Kétértelműség",
+  "CRT_RequiredItem": "Szükséges elem",
+  "CRT_RequestReview": "Review Request Status",
   "LastReviewDate": "Utolsó értékelése ekkor történt: {0}",
   "RequestReviewInfo": "Problémákat tapasztalsz ezzel a csomaggal?",
   "RequestReview": "Kérj felülvizsgálatot",
@@ -254,7 +257,6 @@
     "Plural": "Törölje ezeket a kéréseket"
   },
   "ViewRequest": "Kérelem megtekintése",
-  "CRT_RequiredItem": "Szükséges elem",
   "RequiredItem": "Szükséges elem",
   "ApplyAllActions": "Alkalmazza az összes javasolt műveletet",
   "SnoozeAll": "Az összes probléma elhalasztása",
@@ -263,5 +265,10 @@
   "NoTags": "Nincsenek címkék",
   "NoLinks": "Nincs link",
   "HideReviewedPackages": "Ellenőrzött modok elrejtése",
-  "ApplyRecommendedAction": "Alkalmazza a javasolt műveletet"
+  "ApplyRecommendedAction": "Alkalmazza a javasolt műveletet",
+  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
+  "EditHistory": "Edit History",
+  "EditNote": "Edit Note",
+  "EditNoteInfo": "Leave a note for other managers to see in the future",
+  "RequestReviewUpdate": "Send a new request to be reviewed"
 }

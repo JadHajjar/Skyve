@@ -153,6 +153,7 @@
   "Stability_Local": "To jest lokalna wersja modyfikacja '{0}'.\n\nLokalne wersje modyfikacji są zwykle używane do testów.",
   "Stability_BrokenFromPatch": "'{1}' powoduje problemy po aktualizacji gry {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.\nW międzyczasie powinieneś go dezaktywować.",
   "Stability_BrokenFromPatchSafe": "'{1}' powoduje problemy po aktualizacji gry {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Powinieneś dodać poniższą modyfikację do swojej listy.",
@@ -200,6 +201,8 @@
   "CRT_Alternatives": "Alternatywne",
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Niejasność",
+  "CRT_RequiredItem": "Wymagany przedmiot",
+  "CRT_RequestReview": "Review Request Status",
   "LastReviewDate": "Ostatnio sprawdzono {0}",
   "RequestReviewInfo": "Czy napotkałeś problemy z tą modyfikacją?",
   "RequestReview": "Poproś o sprawdzenie",
@@ -254,7 +257,6 @@
     "Plural": "Usuń te prośby"
   },
   "ViewRequest": "Wyświetl prośbę",
-  "CRT_RequiredItem": "Wymagany przedmiot",
   "RequiredItem": "Wymagany przedmiot",
   "ApplyAllActions": "Zastosuj wszystkie zalecane działania",
   "SnoozeAll": "Uśpij wszystkie problemy",
@@ -263,5 +265,10 @@
   "NoTags": "Brak tagów",
   "NoLinks": "Brak linków",
   "HideReviewedPackages": "Ukryj sprawdzone modyfikacje",
-  "ApplyRecommendedAction": "Zastosuj zalecane działanie"
+  "ApplyRecommendedAction": "Zastosuj zalecane działanie",
+  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
+  "EditHistory": "Edit History",
+  "EditNote": "Edit Note",
+  "EditNoteInfo": "Leave a note for other managers to see in the future",
+  "RequestReviewUpdate": "Send a new request to be reviewed"
 }

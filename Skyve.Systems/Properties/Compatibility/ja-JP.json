@@ -153,6 +153,7 @@
   "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
   "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
   "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "You should add the following package to your playset.",
@@ -200,6 +201,8 @@
   "CRT_Alternatives": "変更可能",
   "CRT_Status": "ステータス",
   "CRT_Ambiguous": "不明瞭",
+  "CRT_RequiredItem": "必要アイテム",
+  "CRT_RequestReview": "Review Request Status",
   "LastReviewDate": "最後にレビューした日: {0}",
   "RequestReviewInfo": "このパッケージで問題が発生しましたか？",
   "RequestReview": "レビューを依頼",
@@ -254,7 +257,6 @@
     "Plural": "リクエストを削除"
   },
   "ViewRequest": "リクエストを表示",
-  "CRT_RequiredItem": "必要アイテム",
   "RequiredItem": "Required Item",
   "ApplyAllActions": "Apply all recommended actions",
   "SnoozeAll": "Snooze all issues",
@@ -263,5 +265,10 @@
   "NoTags": "No Tags",
   "NoLinks": "No Links",
   "HideReviewedPackages": "レビューしたModを隠す",
-  "ApplyRecommendedAction": "推奨されるアクションを適用"
+  "ApplyRecommendedAction": "推奨されるアクションを適用",
+  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
+  "EditHistory": "Edit History",
+  "EditNote": "Edit Note",
+  "EditNoteInfo": "Leave a note for other managers to see in the future",
+  "RequestReviewUpdate": "Send a new request to be reviewed"
 }
