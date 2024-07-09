@@ -146,28 +146,28 @@
   "Stability_HasIssuesNoFutureUpdates": "'{0}'は問題を引き起こす可能性があり、サポートは終了しています。",
   "Stability_BreaksOnPatch": "'{0}'はアップデートが行われると機能しなくなる可能性が高いです。",
   "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_HasIssues": "「{0}」は問題を引き起こす可能性があります。\n使用時は注意して下さい。",
+  "Stability_Broken": "「{0}」は破損しています。\nゲームがプレイできない・既に動作しないことが判明しています。",
   "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
   "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
+  "Stability_Local": "このパッケージは、オリジナルMOD 「{0}」のローカルバージョンです。\n\n一般的にローカルバージョンは、テスト目的で使用されます。",
   "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
+  "Stability_BrokenFromPatchSafe": "「{1}」はパッチ {0} で壊れました。アップデートして対応するまでしばらく待って下さい。",
   "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "以下のパッケージをプレイセットに追加して下さい.",
+    "Plural": "以下のパッケージをプレイセットに追加して下さい."
   },
   "Action_RequiresConfiguration": "Please follow the following instructions:",
   "Action_SelectOne": {
     "One": "「{0}」と「{1}」の中から、どちらか1つだけを選択して下さい。",
     "Plural": "「{0}」と以下のパッケージから、どちらか1つだけを選択して下さい。"
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "「{0}」をプレイセットから削除して下さい。",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "「{1}」をプレイセットから削除して下さい。",
+    "Plural": "以下のパッケージをプレイセットから削除して下さい."
   },
   "Action_ExcludeThis": "「{0}」を無効にする必要があります。",
   "ExcludeThis": "パッケージを無効化",
@@ -175,16 +175,16 @@
   "Unsubscribe": "サブスク解除",
   "Action_ExcludeOther": {
     "One": "「{1}」を無効にする必要があります。",
-    "Plural": "You should disable the following packages."
+    "Plural": "以下のパッケージを無効にして下さい。"
   },
   "Action_Switch": {
     "One": "「{1}」に切り替えて下さい。",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "以下のいずれかのパッケージに切り替える必要があります。"
   },
   "Action_IncludeThis": "「{0}」を含める必要があります。",
   "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "以下のパッケージをプレイセットに追加して下さい.",
+    "Plural": "以下のパッケージをプレイセットに追加して下さい."
   },
   "NoRequiredDlcs": "必須DLCは無し",
   "DlcsSelected": {
@@ -192,7 +192,7 @@
     "Plural": "DLCを選択中: {0} 個"
   },
   "RequiredDLCs": "DLC/CCPが必要",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "安定性",
   "CRT_Successors": "移行先",
   "CRT_RequiredPackages": "必須パッケージ",
   "CRT_OptionalPackages": "オプションパッケージ",
