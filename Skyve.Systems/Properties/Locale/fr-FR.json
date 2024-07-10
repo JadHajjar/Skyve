@@ -274,8 +274,8 @@
     "Plural": "{1} abonnés"
   },
   "FollowersCount": {
-    "One": "{1} abonné",
-    "Plural": "{1} abonnés"
+    "One": "{1} Abonné",
+    "Plural": "{1} Abonnés"
   },
   "SearchWorkshop": "Rechercher sur le Workshop à la place...",
   "DiscoverWorkshop": "Rechercher des mods sur le Workshop...",
@@ -381,9 +381,9 @@
   "TreatOptionalAsRequired_Tip": "Essentiellement, cela affiche la notification de dépendance manquante pour les paquets optionnels.",
   "AddCustomTag": "Ajouter un tag personnalisé",
   "PackageIsNotDownloaded": "'{0}' a été retiré de votre ordinateur",
-  "PackageIsOutOfDate": "« {0} » est obsolète\nVous êtes {1} en retard",
+  "PackageIsOutOfDate": "'{0}' est obsolète\nVous êtes {1} en retard",
   "PackageIsOutOfDateVersion": {
-    "One": "« {0} » est obsolète, vous utilisez une ancienne version du mod.",
+    "One": "'{0}' est obsolète, vous utilisez une ancienne version du mod.",
     "Plural": "{0} {1} sont obsolètes, vous utilisez une ancienne version de ces mods."
   },
   "PackageIsMaybeOutOfDate": "'{0}' peut être obsolète, il a été mis à jour {1}",
@@ -614,7 +614,7 @@
   "LetUserKnowIsFixed": "Faites savoir à la personne qui a signalé que le problème a été résolu",
   "LetUserKnowSaveFileNeeded": "Faites savoir à la personne qui a signalé que vous avez besoin d’une sauvegarde pour analyser la situation",
   "ReviewRequestNotification": "Mise à jour pour votre signalement",
-  "ReviewRequestNotificationInfo": "Votre signalement pour « {0} » a reçu une mise à jour",
+  "ReviewRequestNotificationInfo": "Votre signalement pour '{0}' a reçu une mise à jour",
   "ReviewIsFixed": "Le problème que vous avez signalé a été résolu. Vous pouvez à nouveau utiliser « {0} » !",
   "ReviewIsSaveFileNeeded": "Le problème que vous avez signalé nécessite plus d’informations pour être analysé. Veuillez envoyer une nouvelle requête en attachant votre sauvegarde.",
   "ReviewIsUpdated": "Les informations de compatibilité de « {0} » ont été mises à jour après votre signalement.",
