@@ -274,8 +274,8 @@
     "Plural": "{1} abonnés"
   },
   "FollowersCount": {
-    "One": "{1} Abonné",
-    "Plural": "{1} Abonnés"
+    "One": "{1} abonné",
+    "Plural": "{1} abonnés"
   },
   "SearchWorkshop": "Rechercher sur le Workshop à la place...",
   "DiscoverWorkshop": "Rechercher des mods sur le Workshop...",
@@ -381,7 +381,7 @@
   "TreatOptionalAsRequired_Tip": "Essentiellement, cela affiche la notification de dépendance manquante pour les paquets optionnels.",
   "AddCustomTag": "Ajouter un tag personnalisé",
   "PackageIsNotDownloaded": "'{0}' a été retiré de votre ordinateur",
-  "PackageIsOutOfDate": "'{0}' est obsolète\nVous êtes {1} en retard",
+  "PackageIsOutOfDate": "« {0} » est obsolète\nVous êtes {1} en retard",
   "PackageIsOutOfDateVersion": {
     "One": "« {0} » est obsolète, vous utilisez une ancienne version du mod.",
     "Plural": "{0} {1} sont obsolètes, vous utilisez une ancienne version de ces mods."
@@ -609,14 +609,14 @@
   "ViewMoreWorkshop": "Voir plus sur le workshop",
   "ReviewSaveFileInfo": "Sélectionnez une sauvegarde à envoyer avec votre demande pour nous aider à enquêter sur le problème",
   "CouldNotUploadFile": "Impossible de téléverser votre fichier pour le moment",
-  "ReplyToRequester": "Répondre au demandeur",
+  "ReplyToRequester": "Répondre à la personne qui a émis le signalement",
   "SendReply": "Envoyer la réponse",
-  "LetUserKnowIsFixed": "Faites savoir au demandeur que le problème a été résolu",
-  "LetUserKnowSaveFileNeeded": "Faites savoir au demandeur que vous avez besoin d’une sauvegarde pour analyser la situation",
-  "ReviewRequestNotification": "Mise à jour de votre requête",
-  "ReviewRequestNotificationInfo": "Votre requête pour « {0} » a reçu une mise à jour",
+  "LetUserKnowIsFixed": "Faites savoir à la personne qui a signalé que le problème a été résolu",
+  "LetUserKnowSaveFileNeeded": "Faites savoir à la personne qui a signalé que vous avez besoin d’une sauvegarde pour analyser la situation",
+  "ReviewRequestNotification": "Mise à jour pour votre signalement",
+  "ReviewRequestNotificationInfo": "Votre signalement pour « {0} » a reçu une mise à jour",
   "ReviewIsFixed": "Le problème que vous avez signalé a été résolu. Vous pouvez à nouveau utiliser « {0} » !",
-  "ReviewIsSaveFileNeeded": "The issue you've reported needs more information to be identified. Please send a new Request with a save-game attached to it to be reviewed.",
-  "ReviewIsUpdated": "The compatibility information of '{0}' was updated after your review request.",
-  "ReviewPending": "Your review request for '{0}' has been received but is still pending review."
+  "ReviewIsSaveFileNeeded": "Le problème que vous avez signalé nécessite plus d’informations pour être analysé. Veuillez envoyer une nouvelle requête en attachant votre sauvegarde.",
+  "ReviewIsUpdated": "Les informations de compatibilité de « {0} » ont été mises à jour après votre signalement.",
+  "ReviewPending": "Votre signalement pour « {0} » a été reçu mais n’a pas encore été revu."
 }
