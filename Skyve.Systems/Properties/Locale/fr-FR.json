@@ -615,8 +615,8 @@
   "LetUserKnowSaveFileNeeded": "Faites savoir à la personne qui a signalé que vous avez besoin d’une sauvegarde pour analyser la situation",
   "ReviewRequestNotification": "Mise à jour pour votre signalement",
   "ReviewRequestNotificationInfo": "Votre signalement pour '{0}' a reçu une mise à jour",
-  "ReviewIsFixed": "Le problème que vous avez signalé a été résolu. Vous pouvez à nouveau utiliser « {0} » !",
+  "ReviewIsFixed": "Le problème que vous avez signalé a été résolu. Vous pouvez utiliser {0} à nouveau.",
   "ReviewIsSaveFileNeeded": "Le problème que vous avez signalé nécessite plus d’informations pour être analysé. Veuillez envoyer une nouvelle requête en attachant votre sauvegarde.",
-  "ReviewIsUpdated": "Les informations de compatibilité de « {0} » ont été mises à jour après votre signalement.",
-  "ReviewPending": "Votre signalement pour « {0} » a été reçu mais n’a pas encore été revu."
+  "ReviewIsUpdated": "Les informations de compatibilité de '{0}' ont été mises à jour après votre signalement.",
+  "ReviewPending": "Votre signalement pour '{0}' a été reçu mais n’a pas encore été revu."
 }
