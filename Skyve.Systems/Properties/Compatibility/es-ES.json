@@ -153,7 +153,7 @@
   "Stability_Local": "Esta es una versión local de su mod original '{0}'.\n\nLas versiones locales generalmente se utilizan para pruebas.",
   "Stability_BrokenFromPatch": "'{1}' dejó de funcionar después del parche {0} del juego. Por favor, espera hasta que se actualice antes de usarlo.\nMientras tanto, deberías deshabilitarlo.",
   "Stability_BrokenFromPatchSafe": "'{1}' dejó de funcionar después del parche {0} del juego. Por favor, espera hasta que se actualice antes de usarlo.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' se rompió después del parche {0} del juego. Pero se actualizó recientemente, podría ser seguro de usar.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Deberías añadir el siguiente paquete a tu playset.",
@@ -202,7 +202,7 @@
   "CRT_Status": "Estados",
   "CRT_Ambiguous": "Ambigüedad",
   "CRT_RequiredItem": "Artículo requerido",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequestReview": "Estado de la solicitud de revisión",
   "LastReviewDate": "Revisado por última vez el {0}",
   "RequestReviewInfo": "¿Tienes problemas con este paquete?",
   "RequestReview": "Solicitar revisión",
@@ -266,9 +266,9 @@
   "NoLinks": "Sin enlaces",
   "HideReviewedPackages": "Ocultar mods evaluados",
   "ApplyRecommendedAction": "Aplicar acción recomendada",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "AddMeaningfulNote": "Por favor agregue una nota describiendo lo que está mal en este paquete.",
+  "EditHistory": "Historial de ediciones",
+  "EditNote": "Editar Nota",
+  "EditNoteInfo": "Deja una nota para que otros administradores la vean en el futuro",
+  "RequestReviewUpdate": "Enviar una nueva solicitud para ser revisada"
 }
