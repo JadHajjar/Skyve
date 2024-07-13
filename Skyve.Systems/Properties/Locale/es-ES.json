@@ -383,8 +383,8 @@
   "PackageIsNotDownloaded": "'{0}' ha sido eliminado de tu ordenador",
   "PackageIsOutOfDate": "'{0}' está desactualizado\n\nEstás {1} detrás",
   "PackageIsOutOfDateVersion": {
-    "One": "'{0}' is out of date, you are on an older version of the mod.",
-    "Plural": "{0} {1} are out of date, you are on older versions of these mods."
+    "One": "'{0}' está desactualizado, estás usando una versión antigua del mod.",
+    "Plural": "{0} {1} están desactualizados, estás utilizando versiones antiguas de estos mods."
   },
   "PackageIsMaybeOutOfDate": "'{0}' puede estar desactualizado, fue actualizado {1}",
   "RemovedByAuthor": "Eliminado por el autor",
@@ -614,9 +614,9 @@
   "LetUserKnowIsFixed": "Let the requester know that the issue was fixed",
   "LetUserKnowSaveFileNeeded": "Let the requester know that you need a save-game to properly review",
   "ReviewRequestNotification": "Review Request Update",
-  "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
-  "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
-  "ReviewIsSaveFileNeeded": "The issue you've reported needs more information to be identified. Please send a new Request with a save-game attached to it to be reviewed.",
-  "ReviewIsUpdated": "The compatibility information of '{0}' was updated after your review request.",
-  "ReviewPending": "Your review request for '{0}' has been received but is still pending review."
+  "ReviewRequestNotificationInfo": "Tu solicitud de revisión para '{0}' tiene una nueva actualización",
+  "ReviewIsFixed": "El problema que reportaste ha sido arreglado. Puedes usar {0} de nuevo.",
+  "ReviewIsSaveFileNeeded": "El problema que ha reportado necesita más información para ser identificado. Por favor, envía una nueva solicitud adjuntando un archivo de juego guardado para que sea revisado.",
+  "ReviewIsUpdated": "La información de compatibilidad de '{0}' se actualizó después de tu solicitud de revisión.",
+  "ReviewPending": "Su solicitud de revisión para '{0}' ha sido recibida, pero todavía está pendiente de revisión."
 }
