@@ -615,7 +615,7 @@
   "LetUserKnowSaveFileNeeded": "Let the requester know that you need a save-game to properly review",
   "ReviewRequestNotification": "Review Request Update",
   "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
-  "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
+  "ReviewIsFixed": "Сообщенная вами проблема была исправлена. Вы можете использовать {0} снова.",
   "ReviewIsSaveFileNeeded": "The issue you've reported needs more information to be identified. Please send a new Request with a save-game attached to it to be reviewed.",
   "ReviewIsUpdated": "The compatibility information of '{0}' was updated after your review request.",
   "ReviewPending": "Your review request for '{0}' has been received but is still pending review."
