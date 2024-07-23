@@ -267,8 +267,8 @@
   "HideReviewedPackages": "Ukryj sprawdzone modyfikacje",
   "ApplyRecommendedAction": "Zastosuj zalecane działanie",
   "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "EditHistory": "Edytuj historię",
+  "EditNote": "Edytuj notatkę",
+  "EditNoteInfo": "Zostaw notatkę dla innych menedżerów na przyszłość",
+  "RequestReviewUpdate": "Wyślij nową prośbę do sprawdzenia"
 }
