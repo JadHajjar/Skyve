@@ -2,7 +2,7 @@
   "CompatibilityInfo": "Informacje o zgodności",
   "Dashboard": "Panel",
   "SearchDlcs": "Przeszukaj swoje DLC.",
-  "SearchPackages": "Przeszukaj swoje pakiety ..",
+  "SearchPackages": "Przeszukaj swoje pakiety...",
   "Vanilla": "Podstawa",
   "UpToDate": "Aktualny",
   "StatusUnknown": "Nieznany status",
@@ -381,7 +381,7 @@
   "TreatOptionalAsRequired_Tip": "Zasadniczo wyświetla to brakujące powiadomienie o zależności dla opcjonalnych pakietów.",
   "AddCustomTag": "Dodaj niestandardowy tag",
   "PackageIsNotDownloaded": "'{0}' został usunięty z komputera",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
+  "PackageIsOutOfDate": "{0} jest nieaktualne\n{1} jest nieaktualne",
   "PackageIsOutOfDateVersion": {
     "One": "'{0} jest przestarzały, używasz starszej wersji tej modyfikacji.",
     "Plural": "{0} {1} są przestarzałe, używasz starszych wersji tych modyfikacji."
