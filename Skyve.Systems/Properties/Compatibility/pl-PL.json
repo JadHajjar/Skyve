@@ -202,7 +202,7 @@
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Niejasność",
   "CRT_RequiredItem": "Wymagany przedmiot",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequestReview": "Status prośby o sprawdzenie",
   "LastReviewDate": "Ostatnio sprawdzono {0}",
   "RequestReviewInfo": "Czy napotkałeś problemy z tą modyfikacją?",
   "RequestReview": "Poproś o sprawdzenie",
