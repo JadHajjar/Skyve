@@ -178,9 +178,9 @@
   },
   "AlwaysOpenFiltersAndActions": "Varsayılan olarak filtreler kısmını göster",
   "AlwaysOpenFiltersAndActions_Tip": "Herhangi bir içerik sekmesine girdiğinde filtreler kısmını her zaman aç",
-  "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "Total playsets: {0}",
-  "PlaysetFilter": "Playset Filter",
+  "FavoritePlaysetTotal": "Favori oyun setleri: {0}, Toplam: {1}",
+  "FavoriteTotal": "Toplam oyun setleri: {0}",
+  "PlaysetFilter": "Oyun seti filtresi",
   "CheckDocumentsFolder": "Skyve'ın dokümanlar dosyanıza erişimi olduğuna emin olun. Bunu UI ve dil ayarlarınız için kullanır.",
   "FailedToSaveLanguage": "Seçili dili kaydetme başarısız oldu",
   "FailedToOpenTC": "Tema Değiştirici açılamadı",
@@ -263,41 +263,41 @@
   "CustomLaunchArguments": "Özel Başlatma Argümanları",
   "LaunchArgsInfo": "Oyunu başlatırken ilave argümanlar ekleyin",
   "SearchGenericPackages": "Bu paketler arasında ara..",
-  "Sorting_Subscribers": "Total Subscribers",
-  "Sorting_Votes": "Total Likes",
+  "Sorting_Subscribers": "Toplam Aboneler",
+  "Sorting_Votes": "Toplam Beğeniler",
   "VotesCount": {
-    "One": "{1} like",
-    "Plural": "{1} likes"
+    "One": "{1} beğeni",
+    "Plural": "{1} beğeni"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "{1} abone",
+    "Plural": "{1} abone"
   },
   "FollowersCount": {
-    "One": "{1} follower",
-    "Plural": "{1} followers"
+    "One": "{1} takipçi",
+    "Plural": "{1} takipçi"
   },
-  "SearchWorkshop": "Search the workshop instead...",
-  "DiscoverWorkshop": "Look for mods on the workshop...",
-  "SearchWorkshopBrowser": "Search the workshop in your browser...",
-  "UnknownPackage": "Unknown Package",
-  "Info": "Info",
+  "SearchWorkshop": "Atölyeyi ara...",
+  "DiscoverWorkshop": "Atölyede modlara gözat...",
+  "SearchWorkshopBrowser": "Atölyeyi tarayıcınızda ara...",
+  "UnknownPackage": "Bilinmeyen Paket",
+  "Info": "Bilgi",
   "SelectThisPackage": "Bu paketi seçin",
   "SelectPackage": "Bir paket seçin",
   "ControlToSelectMultiplePackages": "Aynı anda birden fazla paket seçmek için ctrl ile birlikte seçin.",
   "Local": "Yerel",
   "Workshop": "Atölye",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "Uyumluluk raporu",
   "Enabled": "Etkinleştirildi",
   "Disabled": "Devre Dışı Bırakıldı",
   "Included": "Dahil",
   "Excluded": "Hariç tutuldu",
   "OutOfDate": "Güncel değil",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "Paket Durumu",
   "Author": "Oluşturan",
   "Include": "Ekle",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
+  "Unsubscribe": "Abonelikten Çık",
+  "Exclude": "Hariç Tut",
   "Snooze": "Ertele",
   "UnSnooze": "Ertelemeyi kaldır",
   "Mod": {
@@ -313,58 +313,58 @@
     "Plural": "Paketler"
   },
   "Playset": {
-    "One": "Playset",
+    "One": "Oyun Seti",
     "Plural": "Profiles"
   },
   "ContainCount": {
-    "One": "Contains {0} {1}",
-    "Plural": "Contains {0} {1}"
+    "One": "{0} {1} İçerir",
+    "Plural": "{0} {1} İçerir"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{0} {1} dahil",
+    "Plural": "{0} {1} dahil"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} etkinleştirilmiş",
+    "Plural": "{0} {1} etkinleştirilmiş"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{0} {1} dahil ve etkinleştirilmiş",
+    "Plural": "{0} {1} dahil ve etkinleştirilmiş"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{0} {1} yüklendi",
+    "Plural": "{0} {1} yüklendi"
   },
   "ShowingCount": {
-    "One": "Showing {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "One": "{0} {1} gösteriliyor",
+    "Plural": "{0} {1} gösteriliyor"
   },
   "ShowingCountWarning": {
     "One": "Showing {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {3}"
+    "Plural": "{0} {1} {3} gösteriliyor"
   },
   "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "One": "{0} {1} gösteriliyor, {2} seçildi",
+    "Plural": "{0} {1} gösteriliyor, {2} seçildi"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "{0} {1} gösteriliyor, {2} seçildi, {3}",
+    "Plural": "{0} {1} gösteriliyor, {2} seçildi, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} is hidden because of your profile's usage",
     "Plural": "{0} {1} are hidden because of your profile's usage"
   },
   "EditCompatibility": {
-    "One": "Edit this package's compatibility",
-    "Plural": "Edit selected packages' compatibility"
+    "One": "Bu paketin uyumluluğunu düzenle",
+    "Plural": "Seçili paketlerin uyumluluğunu düzenle"
   },
-  "AnyIssue": "Any Issue",
-  "AnyUsage": "Any Usage",
-  "ExplainIssue": "Describe your issue here",
+  "AnyIssue": "Herhangi Bir Sorun",
+  "AnyUsage": "Herhangi Bir Kullanım",
+  "ExplainIssue": "Sorununuzu burada açıklayın",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
-  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "ReviewRequestSent": "'{0}' için olan inceleme talebiniz gönderildi!\n\nDeri bildiriminiz için teşekkür ederiz.",
   "ReviewRequestFailed": "'{0}' için olan inceleme isteğiniz gönderilirken bir hata oluştu.\n\n{1}",
   "SendReview": "İnceleme için istek gönderin",
   "EditTags": {
@@ -485,7 +485,7 @@
     "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
   },
   "TroubleshootViewComp": "View my compatibility report",
-  "TroubleshootSkipComp": "Skip & continue troubleshooting",
+  "TroubleshootSkipComp": "Atla ve sorun gidermeye devam et",
   "SkyveDetectedFaultyPackages": "Skyve bazı paketlerinizin tam indirilmediğini tespit etti, onları düzeltmek ister misiniz?",
   "FaultyPackagesTitle": "Bozuk Paketler Tespit Edildi",
   "CleanupInfoTitle": "Temizleme nedir?",
@@ -542,51 +542,51 @@
   "Manage": "Yönet",
   "Version": "Sürüm",
   "UpdateTime": "Güncelleme Vakti",
-  "Status": "Status",
-  "PackageUsage": "Package Usage",
+  "Status": "Durum",
+  "PackageUsage": "Paket Kullanımı",
   "CodeMod": {
-    "One": "Code Mod",
-    "Plural": "Code Mods"
+    "One": "Kod Modu",
+    "Plural": "Kod Modları"
   },
-  "ThisModIsRequiredYouCantDisableIt": "This mod is required, you can not disable it.",
-  "FadeDisabledItems": "Fade out disabled mods & assets",
-  "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
-  "UsagePlayset": "{0} Playset",
-  "GenericPlayset": "Generic Playset",
-  "CompatibilityCenter": "Compatibility Center",
+  "ThisModIsRequiredYouCantDisableIt": "Bu mod gerekli, devre dışı bırakamazsınız.",
+  "FadeDisabledItems": "Devre dışı bırakılan modları ve varlıkları soldur",
+  "FadeDisabledItems_Tip": "Yerel içerik listesindeki devre dışı bırakılan modlar ve varlıkların rengi soluk duracaktır.",
+  "UsagePlayset": "{0} Oyun Seti",
+  "GenericPlayset": "Sıradan Oyun Seti",
+  "CompatibilityCenter": "Uyumluluk Merkezi",
   "Dependency": {
-    "One": "Dependency",
-    "Plural": "Dependencies"
+    "One": "Gereksinim",
+    "Plural": "Gereksinimler"
   },
-  "ModID": "Mod ID",
-  "Subscribers": "Subscribers",
-  "Votes": "Likes",
-  "PartiallyIncluded": "Partially Included",
-  "Links": "Links",
-  "NoAssets": "Disable All Assets",
-  "NoMods": "Disable All Code-Mods",
-  "FavoritePlaysets": "Favorite Playsets",
-  "OnlyShowErrors": "Only show warnings and errors",
-  "RestartRequired": "Restart Required",
-  "FailedToApplyChanges": "Failed to apply the requested changes.",
-  "ConfirmSelection": "Confirm Selection",
-  "PackagesSelected": "Packages Selected ({0})",
-  "PackagesSelectionInfo": "Click on a package to select it, click on 'Confirm Selection' once you're finished.",
-  "CustomColor": "Custom Color",
-  "CustomThumbnail": "Custom Thumbnail",
-  "NoThumbnail": "Disable Thumbnail",
-  "PlaysetUsageInfo": "Selecting a dedicated usage for your playset allows Skyve to automatically hide mods that either do not match, or are not compatible with, your selected usage.",
-  "PlaysetColorSet": "Custom color enabled",
-  "PlaysetColorNotSet": "No custom color selected",
-  "PlaysetThumbnailSet": "Custom thumbnail enabled",
-  "PlaysetThumbnailNotSet": "No custom thumbnail selected",
-  "OpenPlaysetPage": "Open this playset's page",
-  "Ready": "Ready",
-  "EditDashboard": "Edit Dashboard",
-  "AvailableWidgets": "Available Widgets",
-  "HideExtraWidgets": "Hide Extra Widgets",
-  "ResetLayout": "Reset Layout",
-  "ContentSummary": "Content Summary",
+  "ModID": "Mod ID'si",
+  "Subscribers": "Aboneler",
+  "Votes": "Beğeniler",
+  "PartiallyIncluded": "Kısmen Dahil",
+  "Links": "Bağlantılar",
+  "NoAssets": "Tüm Varlıkları Devre Dışı Bırak",
+  "NoMods": "Tüm Kod Modlarını Devre Dışı Bırak",
+  "FavoritePlaysets": "Favori Oyun Setleri",
+  "OnlyShowErrors": "Sadece uyarı ve hataları göster",
+  "RestartRequired": "Yeniden Başlatma Gerekli",
+  "FailedToApplyChanges": "İstenen değişikleri uygulama başarısız oldu.",
+  "ConfirmSelection": "Seçimi Onayla",
+  "PackagesSelected": "Paketler Seçildi ({0})",
+  "PackagesSelectionInfo": "Bir paketi seçmek için üzerine tıklayın, işiniz bitince 'Seçimi Onayla' butonuna basın.",
+  "CustomColor": "Özel Renk",
+  "CustomThumbnail": "Özel Önizleme Resmi",
+  "NoThumbnail": "Önizleme Resmini Devre Dışı Bırak",
+  "PlaysetUsageInfo": "Oyun setiniz için bir kullanım tarzı seçtiğiniz takdirde Skyve bu tarzla uyuşmayan veya uyumlu olmayan modları gizler.",
+  "PlaysetColorSet": "Özel Renk Etkin",
+  "PlaysetColorNotSet": "Özel Renk Seçilmedi",
+  "PlaysetThumbnailSet": "Özel Önizleme Resmi Etkin",
+  "PlaysetThumbnailNotSet": "Özel Önizleme Resmi Seçilmedi",
+  "OpenPlaysetPage": "Bu oyun setinin sayfasını aç",
+  "Ready": "Hazır",
+  "EditDashboard": "Menüyü Düzenle",
+  "AvailableWidgets": "Mevcut Araç Kutuları",
+  "HideExtraWidgets": "İlave Araç Kutularını Gizle",
+  "ResetLayout": "Düzeni Sıfırla",
+  "ContentSummary": "İçerik Özeti",
   "PackagesEnabled": "Packages Enabled",
   "ModsEnabled": "Mods Enabled",
   "AssetsEnabled": "Assets Enabled",
