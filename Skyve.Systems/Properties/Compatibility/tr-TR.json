@@ -73,28 +73,28 @@
   "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
   "PleaseReviewPackageUsage": "Lütfen bu paket için geçerli bir kullanım türü seçin.",
   "Interaction_Alternative": {
-    "One": "'{1}' can be used as an alternative to '{0}'.",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "One": "'{1}' '{0}'ın yerine alternatif olarak kullanılabilir.",
+    "Plural": "Sıradaki paketlerin herhangi biri '{0}' yerine alternatif olarak kullanılabilir."
   },
   "Interaction_SameFunctionality": {
-    "One": "'{0}' and '{1}' have the same functionalities.",
-    "Plural": "'{0}' and the following packages have the same functionalities."
+    "One": "'{0}' ve '{1}' aynı işlevi görüyor.",
+    "Plural": "'{0}' ve sıradaki paketler aynı işlevi görüyor."
   },
   "Interaction_IncompatibleWith": {
-    "One": "'{0}' and '{1}' are not compatible with each other.",
-    "Plural": "'{0}' is not compatible with any of the following packages."
+    "One": "'{0}' ve '{1}' birbiriyle uyumlu değiller.",
+    "Plural": "'{0}' sıradaki paketlerin hiçbiriyle uyumlu değil."
   },
   "Interaction_CausesIssuesWith": {
-    "One": "'{0}' can cause issues when used with '{1}'.",
-    "Plural": "'{0}' can cause issues when used with the following mods."
+    "One": "'{0}' ile '{1}' beraber kullanıldıkları takdirde sorunlara sebep olabilir.",
+    "Plural": "'{0}' sıradaki modlar ile kullanıldığında sorunlara sebep olabilir."
   },
   "Interaction_RequiredPackages": {
-    "One": "You're missing a required package for '{0}'.",
-    "Plural": "You're missing the following required packages for '{0}'."
+    "One": "'{0}' için gerekli olan bir paket eksik.",
+    "Plural": "'{0}' için gerekli olan sıradaki paketler eksik."
   },
   "Interaction_OptionalPackages": {
-    "One": "You're missing an optional package for '{0}'.",
-    "Plural": "You're missing the following optional packages for '{0}'."
+    "One": "'{0}' için olan isteğe bağlı bir paket eksik.",
+    "Plural": "'{0}' için isteğe bağlı olan sıradaki paketler eksik."
   },
   "Interaction_SucceededBy": {
     "One": "'{0}' is succeeded by '{1}'.",
