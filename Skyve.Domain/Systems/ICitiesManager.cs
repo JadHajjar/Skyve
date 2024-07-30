@@ -12,6 +12,7 @@ public interface ICitiesManager
 	bool IsRunning();
 	void Kill();
 	void Launch();
+	void RunSafeMode();
 	void RunStub();
 	void SetLaunchingStatus(bool launching);
 }
