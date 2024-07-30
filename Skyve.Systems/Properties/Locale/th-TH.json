@@ -274,8 +274,8 @@
     "Plural": "{1} สมัครสมาชิก"
   },
   "FollowersCount": {
-    "One": "{1} follower",
-    "Plural": "{1} followers"
+    "One": "{1} ผู้ติดตาม",
+    "Plural": "{1} ผู้ติดตาม"
   },
   "SearchWorkshop": "ค้นหาจากเวิร์กชอป",
   "DiscoverWorkshop": "มองหาม็อดในเวิร์กชอป...",

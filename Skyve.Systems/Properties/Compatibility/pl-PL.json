@@ -149,11 +149,11 @@
   "Stability_HasIssues": "'{0}' może powodować problemy.\nBądź ostrożny używając go.",
   "Stability_Broken": "'{0}' powoduje problemy.\nPsuje grę, lub zwyczajnie nie działa.",
   "Stability_Incompatible": "'{0}' jest oznaczony jako niekompatybilny z twoją aktualną wersją gry.\nUżywaj go ostrożnie, lub dezaktywuj, czekając na jego aktualizację.",
-  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
+  "Stability_AssetIncompatible": "'{0}' jest oznaczony jako niezgodny z aktualną wersją gry.\nZasoby rzadko psują się z nowymi aktualizacjami, więc używanie tego powinno być w porządku.",
   "Stability_Local": "To jest lokalna wersja modyfikacja '{0}'.\n\nLokalne wersje modyfikacji są zwykle używane do testów.",
   "Stability_BrokenFromPatch": "'{1}' powoduje problemy po aktualizacji gry {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.\nW międzyczasie powinieneś go dezaktywować.",
   "Stability_BrokenFromPatchSafe": "'{1}' powoduje problemy po aktualizacji gry {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' zepsuł się po poprawce gry {0}, ale został niedawno zaktualizowany. Jego użycie może być bezpieczne.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Powinieneś dodać poniższą modyfikację do swojej listy.",
@@ -202,7 +202,7 @@
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Niejasność",
   "CRT_RequiredItem": "Wymagany przedmiot",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequestReview": "Status prośby o sprawdzenie",
   "LastReviewDate": "Ostatnio sprawdzono {0}",
   "RequestReviewInfo": "Czy napotkałeś problemy z tą modyfikacją?",
   "RequestReview": "Poproś o sprawdzenie",
@@ -266,9 +266,9 @@
   "NoLinks": "Brak linków",
   "HideReviewedPackages": "Ukryj sprawdzone modyfikacje",
   "ApplyRecommendedAction": "Zastosuj zalecane działanie",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "AddMeaningfulNote": "Dodaj notatkę opisującą to, co jest nie tak z tym pakietem.",
+  "EditHistory": "Edytuj historię",
+  "EditNote": "Edytuj notatkę",
+  "EditNoteInfo": "Zostaw notatkę dla innych menedżerów na przyszłość",
+  "RequestReviewUpdate": "Wyślij nową prośbę do sprawdzenia"
 }
