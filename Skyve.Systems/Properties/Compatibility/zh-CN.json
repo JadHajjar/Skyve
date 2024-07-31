@@ -153,7 +153,7 @@
   "Stability_Local": "这是模组 '{0}' 的本地版本。\n\n本地模组通常仅用于测试。",
   "Stability_BrokenFromPatch": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。\n目前，您应该禁用它。",
   "Stability_BrokenFromPatchSafe": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' 在游戏更新 {0} 后损坏了。但是它最近进行了更新，也许能够安全地使用。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "您应该将以下模组添加到配组中：",
