@@ -202,10 +202,10 @@
   "CRT_Status": "状态",
   "CRT_Ambiguous": "不明确性",
   "CRT_RequiredItem": "前置项目",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequestReview": "检查请求的状态",
   "LastReviewDate": "最近一次检查于 {0}",
   "RequestReviewInfo": "使用此插件时遇到问题？",
-  "RequestReview": "申请检查",
+  "RequestReview": "请求检查",
   "MissingDependencyCount": {
     "One": "{0} 个{1} 缺少前置",
     "Plural": "{0} 个{1} 缺少前置"
@@ -240,12 +240,12 @@
   "ApplyChangedBeforeExit": "当前存在尚未保存的改动。\n\n在继续操作前，要保存并应用这些改动吗？",
   "AuthorRetired": "{0} 的作者 {1} 已经退坑，或者长期不活跃。\n对于该作者制作的插件，无法保证其将来是否能够稳定运行，以及是否更新。",
   "AuthorMalicious": "已知 {0} 的作者 {1} 存在恶意，并且其制作的插件中含有病毒等有害内容。",
-  "ReviewRequests": "检查申请",
+  "ReviewRequests": "检查请求",
   "ApplyRequestedChanges": "应用申请的改动",
   "ManagePackage": "管理插件",
   "Banned": "已被封禁",
   "NoIssues": "没有问题",
-  "RequestReviewDisclaimer": "* 发送申请时，您的账号 ID 和日志文件也会一并发送",
+  "RequestReviewDisclaimer": "* 发送请求时，您的账号 ID 和日志文件也会一并发送",
   "ScenarioMaking": "制作剧本",
   "ThemeMaking": "制作地图主题",
   "OtherCompatibilityWarnings": {
@@ -266,9 +266,9 @@
   "NoLinks": "没有链接",
   "HideReviewedPackages": "隐藏已检查的模组",
   "ApplyRecommendedAction": "执行推荐的操作",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "AddMeaningfulNote": "请说明此插件的问题所在。",
+  "EditHistory": "编辑历史记录",
+  "EditNote": "编辑备注",
+  "EditNoteInfo": "留下说明以供其他管理人员之后查看",
+  "RequestReviewUpdate": "发送要检查的新请求"
 }
