@@ -256,7 +256,7 @@
   "FlipItemCopyFilterAction": "无需按住 Alt 键，左键点击标签可直接将其添加到筛选标签",
   "FlipItemCopyFilterAction_Tip": "启用此选项后，如果按住 Alt 键 + 鼠标左键点击一个标签，则可以查看该标签相关信息；如果不按住 Alt 键，鼠标左键点击一个标签，则可以将该标签添加到筛选选项的标签中。",
   "AltClickTo": "按住 Alt + 左键点击，{0}",
-  "FilterByThisAuthor": "Add '{0}' to your author filters",
+  "FilterByThisAuthor": "将作者 \"{0}\" 添加到筛选条件",
   "AddToSearch": "将“ {0} ”添加到筛选标签",
   "CopyToClipboard": "将 '{0}' 复制到您的剪贴板",
   "ViewPackageCR": "查看此插件的兼容性信息",
@@ -555,8 +555,8 @@
   "GenericPlayset": "通用配组",
   "CompatibilityCenter": "兼容性中心",
   "Dependency": {
-    "One": "依赖于",
-    "Plural": "依赖于"
+    "One": "前置项目",
+    "Plural": "前置项目"
   },
   "ModID": "模组ID",
   "Subscribers": "订阅者",
@@ -615,8 +615,8 @@
   "LetUserKnowSaveFileNeeded": "让请求者知道需要存档才能正确地检查",
   "ReviewRequestNotification": "检查请求的更新",
   "ReviewRequestNotificationInfo": "您对“{0}”的检查请求有一个新的动态。",
-  "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
-  "ReviewIsSaveFileNeeded": "The issue you've reported needs more information to be identified. Please send a new Request with a save-game attached to it to be reviewed.",
-  "ReviewIsUpdated": "The compatibility information of '{0}' was updated after your review request.",
-  "ReviewPending": "Your review request for '{0}' has been received but is still pending review."
+  "ReviewIsFixed": "您报告的问题现已修复。您可以继续使用 {0}。",
+  "ReviewIsSaveFileNeeded": "您报告的问题需要更多信息才能调查。请发送一个新请求并附带一个存档以便检查。",
+  "ReviewIsUpdated": "在您请求检查后，'{0}' 的兼容性信息已更新。",
+  "ReviewPending": "您对 '{0}' 的检查请求已收到，但仍在等待中。"
 }
