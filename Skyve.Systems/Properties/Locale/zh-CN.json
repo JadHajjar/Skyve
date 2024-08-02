@@ -41,7 +41,7 @@
   "ConfirmDeletePlayset": "您确定要删除配组“{0}”吗？",
   "ActivatePlayset": "启用配组",
   "PlaysetMerge": "将其中的模组全部添加到当前配组",
-  "PlaysetExclude": "Remove all of this playset's mods from your active playset",
+  "PlaysetExclude": "将此配组中的所有模组从当前配组中移除",
   "PlaysetDelete": "删除此配组",
   "MissingPackages": "缺失的插件",
   "OpenPackagePage": "打开此插件的详情页面",
@@ -197,11 +197,11 @@
   },
   "EnableThisItemInAllPlaysets": {
     "One": "在所有的配组中启用",
-    "Plural": "Enable the selected items in all your playsets"
+    "Plural": "在所有配组中启用选中的模组"
   },
   "DisableThisItemInAllPlaysets": {
     "One": "在所有的配组中禁用",
-    "Plural": "Disable the selected items in all your playsets"
+    "Plural": "在所有配组中禁用选中的模组"
   },
   "CopyPackageName": {
     "One": "复制插件名称",
