@@ -597,7 +597,7 @@
   "MassSubscribeWarningInfo": "您即将订阅 {0} 个模组，确定要继续吗？",
   "DropImportFile": "松开鼠标即可从此报告中导入 {0}",
   "OutOfDateItem": "已过期{0}",
-  "Bio": "Bio",
+  "Bio": "个性签名",
   "ColoredAuthorNames": "为作者和用户的名字和头像添加颜色标记",
   "ColoredAuthorNames_Tip": "为作者/用户添加一个独特的颜色标记，用户名和头像将使用由改颜色标记，以便关注特定的用户。",
   "DetectedIssues": "检测到的问题",
