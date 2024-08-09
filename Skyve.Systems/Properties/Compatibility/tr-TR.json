@@ -98,17 +98,17 @@
   },
   "Interaction_SucceededBy": {
     "One": "'{0}' is succeeded by '{1}'.",
-    "Plural": "'{0}' is succeeded by either one of the following packages."
+    "Plural": "'{0}' sıradaki paketlerin hiçbiriyle uyumlu değil."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "{0} {1}'den sonra yüklenecek.",
+    "Plural": "{0} paketlerden hemen sonra yüklenecek."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "{1} için {0} lazım.",
+    "Plural": "Paketler için {0} lazım."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Interaction_Identical": "Takip edenler aynı mod'un farklı versiyonları.\nBunları aynı anda kullanmak çatışma oluşturacak.",
   "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
   "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
@@ -118,26 +118,26 @@
   },
   "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "Şehrini {0} ile kaydettikten sonra, {0} aktif olmadan tekrar yükleyemeyeceksin.",
+    "One": "Şehrini {0} ile kaydettikten sonra, {0} aktif olmadan tekrar yükleyemeyeceksin.\n\nGerekli olursa kaydını kurtarmak için {1}'i kullan. Daha fazla bilgi için atölye yazısını oku."
   },
   "Status_TestVersion": {
     "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Bu {1}'in test versiyonu.\nYapılan değişiklerin beklenmedik sorunlar yaratabileceğinin farkında ol."
   },
   "Status_MissingDlc": {
     "One": "You're missing the '{0}' DLC to use this package.",
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
-  "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
-  "SourceAvailable": "Source code is available",
-  "StandardMod": "Standard Mod",
-  "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
+  "Status_DependencyMod": "Bu bir bağımlılık modu, ama bunu kullanan bir paket kullanmıyorsun gibi gözüküyor.",
+  "Status_SourceCodeNotAvailable": "Bu mod'un kaynak kodu erişilebilir değil. Yapımcısına güvenmediğin sürece kullanmamalısın.",
+  "SourceAvailable": "Kaynak kod erişilebilir",
+  "StandardMod": "Standart Mod",
+  "Status_MusicCanBeCopyrighted": "Bu paketin içindeki müzik telif hakkına tabi tutuluyor olabilir. Yayındayken kullanmamak en iyisi.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
-  "Status_SourceAvailable": "This package will not warn about missing source code.",
+  "Status_SourceAvailable": "Bu paket eksik kaynak kod hakkında uyarmayacak.",
   "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
-  "OutputText": "Expected Output",
+  "OutputText": "Beklenen Çıktı",
   "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
   "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
   "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
