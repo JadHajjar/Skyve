@@ -8,7 +8,7 @@
   "StatusUnknown": "Statut inconnu",
   "PartiallyDownloaded": "Partiellement téléchargé",
   "LaunchSettings": "Paramètres de lancement",
-  "IncludesItemsYouDoNotHave": "Inclure les éléments que vous n'avez pas",
+  "IncludesItemsYouDoNotHave": "Inclut des éléments que vous n'avez pas",
   "OtherPlaysets": "Autres Playsets",
   "ViewPlaysets": "Voir vos playsets",
   "AddPlayset": "Ajouter un playset",
@@ -47,7 +47,7 @@
   "OpenPackagePage": "Ouvrir la page de ce paquet",
   "OpenPackageFolder": {
     "One": "Ouvrir l'emplacement du fichier",
-    "Plural": "Ouvrir l'emplacement des fichiers des paquets sélectionnés"
+    "Plural": "Ouvrir les emplacements des fichiers des paquets sélectionnés"
   },
   "OpenLocalFolder": "Ouvrir le dossier contenant ce paquet",
   "ReDownloadPackage": {
@@ -79,7 +79,7 @@
   "DateSubscribed": "Date d'abonnement",
   "DateUpdated": "Date de mise à jour",
   "FilterOutPackagesWithMods": "Masquer les mods de code sur la page des paquets",
-  "FilterOutPackagesWithOneAsset": "Masquer les paquets à assemblage unique de la page Paquet",
+  "FilterOutPackagesWithOneAsset": "Masquer les paquets contenant un seul asset de la page Paquet",
   "CopyAuthorLink": "Copier le lien du profil de l'auteur",
   "YourPlaysets": "Vos Playsets",
   "UnFavoriteThisPlayset": "Supprimer ce playset des favoris",
