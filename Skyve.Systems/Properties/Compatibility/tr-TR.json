@@ -97,7 +97,7 @@
     "Plural": "'{0}' için isteğe bağlı olan sıradaki paketler eksik."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' is succeeded by '{1}'.",
+    "One": "'{0}' yerine artık '{1}' var.",
     "Plural": "'{0}' sıradaki paketlerin hiçbiriyle uyumlu değil."
   },
   "Interaction_LoadAfter": {
@@ -109,14 +109,14 @@
     "Plural": "Paketler için {0} lazım."
   },
   "Interaction_Identical": "Takip edenler aynı mod'un farklı versiyonları.\nBunları aynı anda kullanmak çatışma oluşturacak.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
-  "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
+  "Status_Succeeded": "'{0}' yerine artık '{1}' var ve zaten '{1}' yüklü. '{0}' artık lazım olmadığı için kaldırabilirsiniz.",
+  "Status_Deprecated": "'{0}' artık kullanılmamaktadır ve yapımcısı tarafından desteklenmemektedir.",
   "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
-    "Zero": "'{0}' is a re-upload of an original package.",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "Zero": "'{0}' özgün bir paketin yeniden yüklenmiş halidir.",
+    "One": "'{0}' '{1}' paketinin yeniden yüklenmiş halidir."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "'{0}' oyununuzla ilgili sorunlar çıkarabilir.",
   "Status_SavesCantLoadWithoutIt": {
     "Zero": "Şehrini {0} ile kaydettikten sonra, {0} aktif olmadan tekrar yükleyemeyeceksin.",
     "One": "Şehrini {0} ile kaydettikten sonra, {0} aktif olmadan tekrar yükleyemeyeceksin.\n\nGerekli olursa kaydını kurtarmak için {1}'i kullan. Daha fazla bilgi için atölye yazısını oku."
@@ -136,13 +136,13 @@
   "Status_MusicCanBeCopyrighted": "Bu paketin içindeki müzik telif hakkına tabi tutuluyor olabilir. Yayındayken kullanmamak en iyisi.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "Status_SourceAvailable": "Bu paket eksik kaynak kod hakkında uyarmayacak.",
-  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
+  "Status_StandardMod": "Sorun giderme için modlar işlenirken bu paket gözardı edilecektir.",
   "OutputText": "Beklenen Çıktı",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_AssetNotReviewed": "'{0}' daha incelenmedi.\nUyumluluk bilgisi doğru olmayabilir ama varlıklar genellikle kararlıdır.",
+  "Stability_NotReviewed": "'{0}' daha incelenmedi.\nUyumluluk bilgisi doğru olmayabilir.",
+  "Stability_Stable": "'{0}' kararlı. Yapımcısı etkin olarak üzerinde çalışıp güncellemektedir.",
+  "Stability_StableNoNewFeatures": "'{0}' kararlı ancak yapımcısı ilerleyen vakitlerde herhangi bir özellik güncellemesi yayınlamayacak.\nOlası bir hata durumunda ise hata giderme güncellemeleri olacaktır.",
+  "Stability_StableNoFutureUpdates": "'{0}' kararlı ancak yapımcısı büyük ihtimalle gelecekte herhangi bir özellik veya hata giderme güncellemesi yayınlamayacak.",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
