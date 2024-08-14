@@ -153,7 +153,7 @@
   "Stability_Local": "Bu '{0}' modunun yerel bir sürümü.\n\nYerel Sürümler genellikle deneme amaçlı kullanılırlar.",
   "Stability_BrokenFromPatch": "'{1}' {0} oyun yamasından sonra bozuldu. Lütfen güncellenene kadar devre dışı bırakın.",
   "Stability_BrokenFromPatchSafe": "'{1}' {0} oyun yamasından sonra bozuldu. Lütfen kullanmadan önce güncellenene kadar bekleyin.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' {0} oyun yamasından sonra bozuldu ancak yakın zamanda güncellendi, bu yüzden kullanılmasında sakınca yok.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Belirtilen paketi oyun setinize eklemelisiniz.",
@@ -167,7 +167,7 @@
   "Action_UnsubscribeThis": "'{0}' oyun setinizden kaldırılmalı.",
   "Action_UnsubscribeOther": {
     "One": "'{1}' oyun setinizden kaldırılmalı.",
-    "Plural": "You should remove the following packages from your playset."
+    "Plural": "Belirtilen paketleri oyun setinizden kaldırmalısınız."
   },
   "Action_ExcludeThis": "'{0}' devre dışı bırakılmalı.",
   "ExcludeThis": "Bu Paketi Devre Dışı Bırak",
@@ -175,11 +175,11 @@
   "Unsubscribe": "Aboneliği kaldır",
   "Action_ExcludeOther": {
     "One": "'{1}' devre dışı bırakılmalı.",
-    "Plural": "You should disable the following packages."
+    "Plural": "Belirtilen paketleri devre dışı bırakmalısınız."
   },
   "Action_Switch": {
     "One": "'{1}' e geçmelisiniz.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "Belirtilen paketlerden birine geçmelisiniz."
   },
   "Action_IncludeThis": "'{0}' dahil edilmeli",
   "Action_IncludeOther": {
@@ -207,39 +207,39 @@
   "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
   "RequestReview": "Request Review",
   "MissingDependencyCount": {
-    "One": "{0} {1} is missing dependencies",
-    "Plural": "{0} {1} are missing dependencies"
+    "One": "{0} {1} eksik gereksinimleri var",
+    "Plural": "{0} {1} eksik gereksinimleri var"
   },
-  "CautionCount": "{0} {1} where caution is advised",
-  "WarningCount": "{0} {1} with a warning",
+  "CautionCount": "{0} {1} dikkat gerektiriyor",
+  "WarningCount": "{0} {1} dair uyarılar var",
   "AttentionRequiredCount": {
-    "One": "{0} {1} requires your attention",
-    "Plural": "{0} {1} require your attention"
+    "One": "{0} {1} ilgilenmenizi gerektiriyor",
+    "Plural": "{0} {1} ilgilenmenizi gerektiriyor"
   },
   "ExcludeCount": {
-    "One": "{0} {1} should be excluded",
-    "Plural": "{0} {1} should be excluded"
+    "One": "{0} {1} hariç tutulmalı",
+    "Plural": "{0} {1} hariç tutulmalı"
   },
-  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "UnsubscribeCount": "{0} {1} aboneliğinden çıklımalı",
   "SwitchCount": {
-    "One": "{0} {1} requires switching to another",
-    "Plural": "{0} {1} require switching to another"
+    "One": "{0} {1} başka birine geçmenizi gerektiriyor",
+    "Plural": "{0} {1} başka birine geçmenizi gerektiriyor"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1} lazım ancak etkinleştirilmemiş",
+    "Plural": "{0} {1} lazım ancak etkinleştirilmemiş"
   },
   "PackageType": "Paket Türü",
   "GenericPackage": "Genel Paket",
   "MusicPack": "Müzik Paketi",
-  "ThemeMix": "Theme Mix",
+  "ThemeMix": "Tema Karışımı",
   "IMTMarkings": "IMT işaretlemeleri",
   "RenderItPreset": "Render it! Ön ayarı",
-  "POFont": "Procedural Object Font/Module",
-  "NameList": "Name-List/Game Translations",
-  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
+  "POFont": "Yöntemsel Nesne Yazı Tipi/Modülü",
+  "NameList": "İsim Listesi/Oyun Çevirileri",
+  "ApplyChangedBeforeExit": "Kaydedilmemiş değişiklikleriniz var.\n\nDevam etmeden önce uygulamak ister misiniz?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages.",
+  "AuthorMalicious": "{0} yapımcısı {1} zararlı yazılımlar veya hasar verebilecek programlar dağıtmakla biliniyor.",
   "ReviewRequests": "İnceleme İstekleri",
   "ApplyRequestedChanges": "İstenen Değişiklikleri Uygula",
   "ManagePackage": "Paketi Yönet",
