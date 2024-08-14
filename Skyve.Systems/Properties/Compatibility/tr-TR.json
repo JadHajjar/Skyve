@@ -150,23 +150,23 @@
   "Stability_Broken": "'{0}' bozuk.\nOyunu ya bozduğu ya da çalışmadığı bilinmektedir.",
   "Stability_Incompatible": "'{0}' mevcut oyun sürümünüzle uyumlu değil.\nYa dikkatli kullanın ya da güncellenene kadar devre dışı bırakın.",
   "Stability_AssetIncompatible": "'{0}' mevcut oyun sürümünüzle uyumlu değil.\nVarlıklar yeni güncellemelerle genellikle bozulmaz, bu yüzden büyük ihtimalle sorun olmayacaktır.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
+  "Stability_Local": "Bu '{0}' modunun yerel bir sürümü.\n\nYerel Sürümler genellikle deneme amaçlı kullanılırlar.",
+  "Stability_BrokenFromPatch": "'{1}' {0} oyun yamasından sonra bozuldu. Lütfen güncellenene kadar devre dışı bırakın.",
+  "Stability_BrokenFromPatchSafe": "'{1}' {0} oyun yamasından sonra bozuldu. Lütfen kullanmadan önce güncellenene kadar bekleyin.",
   "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Belirtilen paketi oyun setinize eklemelisiniz.",
+    "Plural": "Belirtilen paketleri oyun setinize eklemelisiniz."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "Sıradaki yönergeleri takip edin:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "'{0}' oyun setinizden kaldırılmalı.",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
+    "One": "'{1}' oyun setinizden kaldırılmalı.",
     "Plural": "You should remove the following packages from your playset."
   },
   "Action_ExcludeThis": "'{0}' devre dışı bırakılmalı.",
@@ -181,10 +181,10 @@
     "One": "'{1}' e geçmelisiniz.",
     "Plural": "You should switch to one of the following packages."
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "'{0}' dahil edilmeli",
   "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Belirtilen paketi oyun setinize eklemelisiniz.",
+    "Plural": "Belirtilen paketleri oyun setinize eklemelisiniz."
   },
   "NoRequiredDlcs": "Gerekli DLC yok",
   "DlcsSelected": {
@@ -233,23 +233,23 @@
   "GenericPackage": "Genel Paket",
   "MusicPack": "Müzik Paketi",
   "ThemeMix": "Theme Mix",
-  "IMTMarkings": "IMT Markings",
-  "RenderItPreset": "Render it! Preset",
+  "IMTMarkings": "IMT işaretlemeleri",
+  "RenderItPreset": "Render it! Ön ayarı",
   "POFont": "Procedural Object Font/Module",
   "NameList": "Name-List/Game Translations",
   "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages.",
-  "ReviewRequests": "Review Requests",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making",
+  "ReviewRequests": "İnceleme İstekleri",
+  "ApplyRequestedChanges": "İstenen Değişiklikleri Uygula",
+  "ManagePackage": "Paketi Yönet",
+  "Banned": "Yasaklı",
+  "NoIssues": "Sorun Yok",
+  "RequestReviewDisclaimer": "*Hesabınızın ID'si ve kayıtları sizin isteğinizle gönderildi",
+  "ScenarioMaking": "Senaryo Yapımı",
+  "ThemeMaking": "Tema Yapımı",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
+    "One": "Bu paketin bir tane daha uyumluluk uyarısı var",
     "Plural": "Bu paketin {0} tane uyumluluk uyarıları var"
   },
   "DeleteRequests": {
