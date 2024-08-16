@@ -46,7 +46,7 @@
   "MissingPackages": "Missing Packages",
   "OpenPackagePage": "Open this Package's page",
   "OpenPackageFolder": {
-    "One": "Open file location",
+    "One": "Otvori lokaciju fajla",
     "Plural": "Open all selected packages' file locations"
   },
   "OpenLocalFolder": "Open the folder containing this package",
@@ -57,10 +57,10 @@
   "OpenAuthorPage": "Open the author's page",
   "Sorting_Default": "Default Sorting",
   "Sorting_LastEdit": "Last Edit Time",
-  "Sorting_DateCreated": "Date Created",
+  "Sorting_DateCreated": "Datum kreiranja",
   "Sorting_Usage": "Playset Usage",
-  "Sorting_Name": "Name",
-  "Sorting_FileSize": "File Size",
+  "Sorting_Name": "Naziv",
+  "Sorting_FileSize": "Vеličina datotеkе",
   "Sorting_UpdateTime": "Update Time",
   "Sorting_SubscribeTime": "Subscribe Time",
   "Sorting_Author": "Author Name",
