@@ -613,7 +613,7 @@
   "SendReply": "Antwort senden",
   "LetUserKnowIsFixed": "Lasse den Anfrager wissen, dass das Problem behoben wurde",
   "LetUserKnowSaveFileNeeded": "Lasse den Anfrager wissen, dass du ein Spielstand für die Überprüfung benötigst",
-  "ReviewRequestNotification": "Review Request Update",
+  "ReviewRequestNotification": "Überprüfungsanfrage aktualisieren",
   "ReviewRequestNotificationInfo": "Deine Überprüfungsanfrage für '{0}' hat eine neue Benachrichtigung",
   "ReviewIsFixed": "Das von dir gemeldete Problem wurde behoben. Du kannst {0} wieder nutzen.",
   "ReviewIsSaveFileNeeded": "Das von dir gemeldete Problem benötigt mehr Informationen, um identifiziert zu werden. Bitte sende eine neue Anfrage mit einem Spielstand, damit es überprüft werden kann.",
