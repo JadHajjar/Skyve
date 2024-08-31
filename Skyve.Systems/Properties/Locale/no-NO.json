@@ -252,7 +252,7 @@
     "One": "{0} forfatter valgt",
     "Plural": "{0} forfattere valgt"
   },
-  "Donate": "Donate",
+  "Donate": "Donere",
   "FlipItemCopyFilterAction": "Bytt om Ctrl+klikk oppførsel for filtrering i innholdslisten",
   "FlipItemCopyFilterAction_Tip": "Bytter standard virkemåte for å klikke på etiketter slik at normale klikk på filtre og Ctrl+klikking utfører standardhandlingen.",
   "AltClickTo": "Alt+Click to {0}",
@@ -264,22 +264,22 @@
   "LaunchArgsInfo": "Legg til ekstra argumenter når du starter spillet",
   "SearchGenericPackages": "Søk gjennom disse pakkene.",
   "Sorting_Subscribers": "Antall Abonnenter",
-  "Sorting_Votes": "Total Likes",
+  "Sorting_Votes": "Totalt antall likerklikk",
   "VotesCount": {
-    "One": "{1} like",
-    "Plural": "{1} likes"
+    "One": "{1} likerklikk",
+    "Plural": "{1} likerklikk"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "{1} abonnent",
+    "Plural": "{1} abonnenter"
   },
   "FollowersCount": {
-    "One": "{1} follower",
-    "Plural": "{1} followers"
+    "One": "{1} følger",
+    "Plural": "{1} følgere"
   },
-  "SearchWorkshop": "Search the workshop instead...",
-  "DiscoverWorkshop": "Look for mods on the workshop...",
-  "SearchWorkshopBrowser": "Search the workshop in your browser...",
+  "SearchWorkshop": "Søk på workshop i stedet...",
+  "DiscoverWorkshop": "Se etter mods i workshop...",
+  "SearchWorkshopBrowser": "Søk i workshop i nettleseren din...",
   "UnknownPackage": "Ukjent pakke",
   "Info": "Informasjon",
   "SelectThisPackage": "Velg denne pakken",
@@ -287,7 +287,7 @@
   "ControlToSelectMultiplePackages": "Ctrl + Klikk for å velge flere pakker på en gang.",
   "Local": "Lokal",
   "Workshop": "Verksted",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "Kompatibilitetsrapport",
   "Enabled": "Aktivert",
   "Disabled": "Funksjonshemmet",
   "Included": "Inkludert",
