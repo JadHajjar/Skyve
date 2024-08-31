@@ -202,7 +202,7 @@
   "CRT_Status": "Stati",
   "CRT_Ambiguous": "Ambiguità",
   "CRT_RequiredItem": "Elemento richiesto",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequestReview": "Revisione Richiesta Stato",
   "LastReviewDate": "L'ultima revisione è stata effettuata {0}",
   "RequestReviewInfo": "Stai avendo problemi con questo pacchetto?",
   "RequestReview": "Richiedi una revisione",
@@ -266,9 +266,9 @@
   "NoLinks": "Nessun Link",
   "HideReviewedPackages": "Nascondi le mod recensite",
   "ApplyRecommendedAction": "Applica l'azione consigliata",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "AddMeaningfulNote": "Si prega di aggiungere una nota che descriva ciò che è sbagliato con questo pacchetto.",
+  "EditHistory": "Modifica Cronologia",
+  "EditNote": "Modifica Nota",
+  "EditNoteInfo": "Lascia una nota per altri manager da vedere in futuro",
+  "RequestReviewUpdate": "Invia una nuova richieda da revisionare"
 }

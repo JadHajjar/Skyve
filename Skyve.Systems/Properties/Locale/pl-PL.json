@@ -595,7 +595,7 @@
   "RecentlyUpdatedItem": "Ostatnia aktualizacja {0}",
   "MassSubscribeWarningTitle": "Ostrzeżenie o masowej subskrypcji",
   "MassSubscribeWarningInfo": "Za moment zasubskrybujesz {0} modów. Czy na pewno chcesz kontynuować?",
-  "DropImportFile": "Release to import the {0} from this report",
+  "DropImportFile": "Upuść, aby zaimportować {0} z tego raportu",
   "OutOfDateItem": "Nieaktualny {0}",
   "Bio": "Bio",
   "ColoredAuthorNames": "Pokoloruj nazwy i awatary użytkowników i autorów",
