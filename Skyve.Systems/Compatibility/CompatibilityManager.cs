@@ -442,12 +442,12 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (!package.IsLocal() && isCodeMod && packageData.Type is PackageType.GenericPackage)
 		{
-			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !packageData.IndexedStatuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Links?.Any(x => x.Type is LinkType.Github) != true)
+			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !packageData.IndexedStatuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Links?.Any(x => x.Type is LinkType.Github) != true && !_userService.IsUserVerified(workshopInfo?.Author))
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.NoAction });
 			}
 
-			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 30)
+			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 30 && !_userService.IsUserVerified(workshopInfo?.Author))
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.NoAction });
 			}

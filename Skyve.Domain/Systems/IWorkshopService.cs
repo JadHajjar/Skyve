@@ -39,5 +39,6 @@ public interface IWorkshopService
 	IAuthor? GetUser(IUser? user);
 	Task<IAuthor?> GetUserAsync(IUser? user);
 	ILink? GetCommentsPageUrl(IPackageIdentity packageIdentity);
+	bool IsLocal(IPackageIdentity identity);
 #endif
 }

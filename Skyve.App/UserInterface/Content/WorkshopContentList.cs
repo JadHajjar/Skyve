@@ -13,6 +13,13 @@ public class WorkshopContentList : ContentList
 		I_SortOrder.Visible = false;
 	}
 
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		DD_SearchTime.Visible = DD_Sorting.SelectedItem is PackageSorting.Best;
+	}
+
 	protected override async void OnSearch()
 	{
 		var id = ++_id;

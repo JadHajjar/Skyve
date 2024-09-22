@@ -1,6 +1,5 @@
 ﻿using Skyve.App.UserInterface.Content;
 using Skyve.Compatibility.Domain.Enums;
-using Skyve.Domain;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -151,7 +150,11 @@ public partial class ItemListControl
 			isEnabled = !isEnabled;
 		}
 
-		if (isEnabled)
+		if (isIncluded && isHovered && ModifierKeys.HasFlag(Keys.Alt))
+		{
+			activeColor = FormDesign.Design.RedColor;
+		}
+		else if (isEnabled)
 		{
 			activeColor = isPartialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
 		}
@@ -208,7 +211,7 @@ public partial class ItemListControl
 			return;
 		}
 
-		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : (isHovered && ModifierKeys.HasFlag(Keys.Alt)) ? "X" : "Enabled");
+		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : (isHovered && isIncluded && ModifierKeys.HasFlag(Keys.Alt)) ? "X" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : "Enabled");
 		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
@@ -354,7 +357,6 @@ public partial class ItemListControl
 
 				tagRect.X += padding.Left + rect.Width;
 			}
-
 		}
 	}
 

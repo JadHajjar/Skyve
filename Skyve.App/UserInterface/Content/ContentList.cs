@@ -144,8 +144,6 @@ public partial class ContentList : SlickControl
 		I_Actions.IsSelected = ListControl.SelectedItemsCount > 0;
 	}
 
-
-
 	protected async void RefreshAuthorAndTags()
 	{
 		var items = new List<IPackageIdentity>(ListControl.Items);
@@ -305,7 +303,7 @@ public partial class ContentList : SlickControl
 	{
 		base.UIChanged();
 
-		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
+		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding = DD_SearchTime.Margin
 			= I_SortOrder.Padding = B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5));
 
 		B_Filters.Size = B_Filters.GetAutoSize(true);
@@ -317,13 +315,14 @@ public partial class ContentList : SlickControl
 		TLP_MiddleBar.Padding = UI.Scale(new Padding(3, 0, 3, 0));
 
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16));
+		DD_SearchTime.Width = UI.Scale(100);
 		DD_Sorting.Width = UI.Scale(175);
 		TB_Search.Width = UI.Scale(250);
 
 		var size = UI.Scale(30) - 6;
 
-		TB_Search.MaximumSize = I_Refresh.MaximumSize = B_Filters.MaximumSize = I_SortOrder.MaximumSize = DD_Sorting.MaximumSize = new Size(9999, size);
-		TB_Search.MinimumSize = I_Refresh.MinimumSize = B_Filters.MinimumSize = I_SortOrder.MinimumSize = DD_Sorting.MinimumSize = new Size(0, size);
+		TB_Search.MaximumSize = I_Refresh.MaximumSize = B_Filters.MaximumSize = I_SortOrder.MaximumSize = DD_Sorting.MaximumSize = DD_SearchTime.MaximumSize = new Size(9999, size);
+		TB_Search.MinimumSize = I_Refresh.MinimumSize = B_Filters.MinimumSize = I_SortOrder.MinimumSize = DD_Sorting.MinimumSize = DD_SearchTime.MinimumSize = new Size(0, size);
 	}
 
 	private void B_Filters_Click(object sender, MouseEventArgs? e)
@@ -377,6 +376,8 @@ public partial class ContentList : SlickControl
 		this.TryInvoke(RefreshCounts);
 
 		RefreshAuthorAndTags();
+
+		I_Refresh.Loading = false;
 	}
 
 	private void CentralManager_WorkshopInfoUpdated()
@@ -391,6 +392,8 @@ public partial class ContentList : SlickControl
 
 	private async void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
 	{
+		DD_SearchTime.Visible = DD_Sorting.SelectedItem == PackageSorting.Best;
+
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.Sorting = (int)DD_Sorting.SelectedItem;
 		_settings.UserSettings.Save();
@@ -668,6 +671,8 @@ public partial class ContentList : SlickControl
 
 		L_Counts.Invalidate();
 		I_Actions.Invalidate();
+
+		if (Page is not SkyvePage.Workshop)
 		I_Refresh.Loading = false;
 	}
 
@@ -1018,5 +1023,10 @@ public partial class ContentList : SlickControl
 		}
 
 		return false;
+	}
+
+	private async void DD_SearchTime_SelectedItemChanged(object sender, EventArgs e)
+	{
+		await RefreshItems();
 	}
 }
