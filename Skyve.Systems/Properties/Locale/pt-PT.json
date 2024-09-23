@@ -17,7 +17,7 @@
   "CompatibilityStatus": "Status de compatibilidade",
   "AnyStatus": "Qualquer Status",
   "NoLocalPackagesFound": "Não há pacotes encontrados no seu computador.",
-  "NoPackagesMatchFilters": "No packages match what you're looking for.",
+  "NoPackagesMatchFilters": "Nenhum pacote corresponde ao que estás à procura.",
   "EnableAll": "Enable all items",
   "DisableAll": "Desativar todos os recursos",
   "EnableAllFiltered": "Ativar recursos filtrados",
