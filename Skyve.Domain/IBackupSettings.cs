@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace Skyve.Domain;
 public interface IBackupSettings
 {
-	
+	string? DestinationFolder { get; }
 }

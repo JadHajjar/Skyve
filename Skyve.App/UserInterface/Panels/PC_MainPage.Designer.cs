@@ -39,6 +39,7 @@ partial class PC_MainPage
 			this.P_Scroll = new System.Windows.Forms.Panel();
 			this.FLP_AvailableWidgets = new SlickControls.RoundedGroupFlowLayoutPanel();
 			this.P_AvailableWidgets = new System.Windows.Forms.Panel();
+			this.slickButton1 = new SlickControls.SlickButton();
 			this.P_Container.SuspendLayout();
 			this.P_Scroll.SuspendLayout();
 			this.P_AvailableWidgets.SuspendLayout();
@@ -46,7 +47,6 @@ partial class PC_MainPage
 			// 
 			// base_Text
 			// 
-			this.base_Text.ColorStyle = Extensions.ColorStyle.Active;
 			this.base_Text.Size = new System.Drawing.Size(150, 39);
 			this.base_Text.Text = "Dashboard";
 			// 
@@ -78,14 +78,16 @@ partial class PC_MainPage
 			// 
 			// slickScroll
 			// 
+			this.slickScroll.AnimatedValue = 8;
 			this.slickScroll.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll.LinkedControl = this.P_Board;
-			this.slickScroll.Location = new System.Drawing.Point(4, 0);
+			this.slickScroll.Location = new System.Drawing.Point(-6, 0);
 			this.slickScroll.Name = "slickScroll";
-			this.slickScroll.Size = new System.Drawing.Size(8, 340);
+			this.slickScroll.Size = new System.Drawing.Size(18, 340);
 			this.slickScroll.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll.TabIndex = 3;
 			this.slickScroll.TabStop = false;
+			this.slickScroll.TargetAnimationValue = 8;
 			this.slickScroll.Text = "slickScroll1";
 			// 
 			// P_Scroll
@@ -125,9 +127,22 @@ partial class PC_MainPage
 			this.P_AvailableWidgets.TabIndex = 7;
 			this.P_AvailableWidgets.Visible = false;
 			// 
+			// slickButton1
+			// 
+			this.slickButton1.AutoSize = true;
+			this.slickButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.slickButton1.Location = new System.Drawing.Point(0, 0);
+			this.slickButton1.Name = "slickButton1";
+			this.slickButton1.Size = new System.Drawing.Size(100, 32);
+			this.slickButton1.SpaceTriggersClick = true;
+			this.slickButton1.TabIndex = 8;
+			this.slickButton1.Text = "slickButton1";
+			this.slickButton1.Click += new System.EventHandler(this.slickButton1_Click);
+			// 
 			// PC_MainPage
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.Controls.Add(this.slickButton1);
 			this.Controls.Add(this.P_Container);
 			this.Controls.Add(this.P_Scroll);
 			this.Controls.Add(this.P_AvailableWidgets);
@@ -139,6 +154,7 @@ partial class PC_MainPage
 			this.Controls.SetChildIndex(this.P_Scroll, 0);
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.Controls.SetChildIndex(this.P_Container, 0);
+			this.Controls.SetChildIndex(this.slickButton1, 0);
 			this.P_Container.ResumeLayout(false);
 			this.P_Container.PerformLayout();
 			this.P_Scroll.ResumeLayout(false);
@@ -157,4 +173,5 @@ partial class PC_MainPage
 	private System.Windows.Forms.Panel P_Scroll;
 	private RoundedGroupFlowLayoutPanel FLP_AvailableWidgets;
 	private System.Windows.Forms.Panel P_AvailableWidgets;
+	private SlickButton slickButton1;
 }

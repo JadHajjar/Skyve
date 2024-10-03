@@ -1,5 +1,6 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.Utilities;
+using Skyve.Domain.Systems;
 
 using System.Drawing;
 using System.IO;
@@ -200,6 +201,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		selectedFileLogs = await Task.Run(() =>
 		{
+			var logs = new List<ILogTrace>();
 			var zip = file.ToLower().EndsWith(".zip");
 
 			if (zip)
@@ -209,17 +211,18 @@ public partial class PC_HelpAndLogs : PanelContent
 					using var stream = File.OpenRead(file);
 					using var zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, false);
 
-					var entry = zipArchive.GetEntry("Log.log");
-
-					if (entry is null)
+					foreach (var item in zipArchive.Entries.Where(x => x.FullName.EndsWith(".log", StringComparison.InvariantCultureIgnoreCase)))
 					{
-						logTraceControl.SetItems(defaultLogs ?? []);
-						return null;
+						var temp = CrossIO.GetTempFileName();
+
+						item.ExtractToFile(temp);
+
+						logs.AddRange(_logUtil.ExtractTrace(item.FullName, temp));
+
+						CrossIO.DeleteFile(temp, true);
 					}
 
-					file = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.txt");
-
-					entry.ExtractToFile(file);
+					return logs;
 				}
 				catch
 				{
@@ -229,7 +232,7 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 
 #if CS2
-			var logs = _logUtil.ExtractTrace(file, file);
+			logs = _logUtil.ExtractTrace(file, file);
 
 			DD_LogFile.SelectedFile = file;
 #else
@@ -244,11 +247,10 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 #endif
 
-			logTraceControl.SetItems(logs ?? defaultLogs ?? []);
-
 			return logs;
 		});
 
+		logTraceControl.SetItems(selectedFileLogs ?? defaultLogs ?? []);
 		DD_LogFile.Loading = false;
 	}
 
