@@ -1,6 +1,5 @@
 ﻿using Skyve.App.Interfaces;
 using Skyve.App.Utilities;
-using Skyve.Domain.Systems;
 
 using System.Drawing;
 using System.IO;
@@ -39,6 +38,8 @@ public partial class PC_HelpAndLogs : PanelContent
 				SlickTip.SetTo(button, LocaleHelper.GetGlobalText($"{button.Text}_Tip"));
 			}
 		}
+
+		SSS_LogLevel.SelectedItem = SSS_LogLevel.Items[3];
 
 		if (CrossIO.CurrentPlatform is not Platform.Windows)
 		{
@@ -86,8 +87,8 @@ public partial class PC_HelpAndLogs : PanelContent
 		P_Troubleshoot.Margin = UI.Scale(new Padding(10, 10, 5, 0), UI.UIScale);
 		TLP_Errors.Margin = UI.Scale(new Padding(10, 10, 5, 10), UI.UIScale);
 		L_Troubleshoot.Font = UI.Font(9F);
-		CB_OnlyShowErrors.Font = UI.Font(7.5F);
-		CB_OnlyShowErrors.Padding = TB_Search.Margin = B_OpenSkyveLog.Margin = B_OpenLog.Margin = UI.Scale(new Padding(3));
+		TB_Search.Margin = B_OpenSkyveLog.Margin = B_OpenLog.Margin = UI.Scale(new Padding(3));
+		SSS_LogLevel.Size = UI.Scale(new Size(450, 24));
 		tableLayoutPanel1.Width = UI.Scale(250);
 		B_OpenSkyveLog.Height = B_OpenLog.Height = UI.Scale(48);
 
@@ -254,7 +255,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		DD_LogFile.Loading = false;
 	}
 
-	private void CB_OnlyShowErrors_CheckChanged(object sender, EventArgs e)
+	private void SSS_LogLevel_SelectedItemChanged(object sender, EventArgs e)
 	{
 		Task.Run(logTraceControl.FilterChanged);
 	}
@@ -270,7 +271,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void LogTraceControl_CanDrawItem(object sender, CanDrawItemEventArgs<ILogTrace> e)
 	{
-		if (CB_OnlyShowErrors.Checked && e.Item.Type is "INFO" or "DEBUG")
+		if (!Compare(e.Item.Type, (string)SSS_LogLevel.SelectedItem))
 		{
 			e.DoNotDraw = true;
 			return;
@@ -281,6 +282,24 @@ public partial class PC_HelpAndLogs : PanelContent
 			e.DoNotDraw = true;
 			return;
 		}
+	}
+
+	private bool Compare(string type, string level)
+	{
+		if (type == level)
+		{
+			return true;
+		}
+
+		return level switch
+		{
+			"ERROR" => type is "FATAL" or "CRITICAL" or "EMERGENCY",
+			"WARN" => type is "FATAL" or "CRITICAL" or "EMERGENCY" or "ERROR",
+			"DEBUG" => type is "FATAL" or "CRITICAL" or "EMERGENCY" or "ERROR" or "WARN",
+			"INFO" => type is "FATAL" or "CRITICAL" or "EMERGENCY" or "ERROR" or "WARN" or "DEBUG",
+			"TRACE" => type is "FATAL" or "CRITICAL" or "EMERGENCY" or "ERROR" or "WARN" or "DEBUG" or "INFO",
+			_ => true,
+		};
 	}
 
 	private bool SearchLog(ILogTrace trace)
@@ -388,7 +407,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "Search" : "ClearSearch";
 
-		CB_OnlyShowErrors_CheckChanged(sender, e);
+		SSS_LogLevel_SelectedItemChanged(sender, e);
 	}
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

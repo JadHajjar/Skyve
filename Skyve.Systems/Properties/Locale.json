@@ -18,6 +18,7 @@
   "AnyStatus": "Any Status",
   "NoLocalPackagesFound": "No packages found on your computer.",
   "NoPackagesMatchFilters": "No packages match what you're looking for.",
+  "NoLogsMatchFilters": "No logs match what you're looking for.",
   "EnableAll": "Enable all items",
   "DisableAll": "Disable all items",
   "EnableAllFiltered": "Enable filtered items",

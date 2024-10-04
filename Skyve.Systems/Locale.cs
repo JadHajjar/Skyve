@@ -1369,6 +1369,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation NoLocalPackagesFound => _instance.GetText("NoLocalPackagesFound");
 
 	/// <summary>
+	/// No logs match what you're looking for.
+	/// </summary>
+	public static Translation NoLogsMatchFilters => _instance.GetText("NoLogsMatchFilters");
+
+	/// <summary>
 	/// Disable All Code-Mods
 	/// </summary>
 	public static Translation NoMods => _instance.GetText("NoMods");

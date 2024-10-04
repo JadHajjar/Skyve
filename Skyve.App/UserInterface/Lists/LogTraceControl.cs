@@ -59,17 +59,23 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
     {
         base.OnPaint(e);
 
-        if (ItemCount > 0)
+        if (ItemCount == 0)
         {
-            return;
+            using var font = UI.Font(9.75F, FontStyle.Italic);
+            using var brush = new SolidBrush(FormDesign.Design.InfoColor);
+            using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+
+            e.Graphics.DrawString(Locale.DefaultLogViewInfo, font, brush, ClientRectangle.Pad(Math.Min(Height, Width) / 3), format);
         }
+        else if (FilteredCount == 0)
+        {
+			using var font = UI.Font(9.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.InfoColor);
+			using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
 
-        using var font = UI.Font(9.75F, FontStyle.Italic);
-        using var brush = new SolidBrush(FormDesign.Design.InfoColor);
-        using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
-
-        e.Graphics.DrawString(Locale.DefaultLogViewInfo, font, brush, ClientRectangle.Pad(Math.Min(Height, Width) / 3), format);
-    }
+			e.Graphics.DrawString(Locale.NoLogsMatchFilters, font, brush, ClientRectangle.Pad(Math.Min(Height, Width) / 3), format);
+		}
+	}
 
     protected override Rectangles GenerateRectangles(ILogTrace item, Rectangle rectangle)
     {
