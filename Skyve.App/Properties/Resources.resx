@@ -1714,4 +1714,16 @@
   <data name="I_History_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_History_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="I_Shield_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Shield_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Shield_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Shield_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Shield_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Shield_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Shield_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Shield_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
