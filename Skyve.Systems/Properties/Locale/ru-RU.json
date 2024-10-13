@@ -156,7 +156,7 @@
   "OpenLOTLogFolder": "Открыть папку журнала Skyve",
   "CopyLOTLogFile": "Копировать журнал Skyve в буфер обмена",
   "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
+  "GenericIncludedAndEnabledTotal": "",
   "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
   "NewPlayset_Tip": "Создать или импортировать новый игровой набор",
   "ViewPlaysets_Tip": "Просмотр и управление вашими игровыми наборами",
