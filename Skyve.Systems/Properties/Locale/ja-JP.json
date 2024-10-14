@@ -40,7 +40,7 @@
   "AffectedPackagesAre": "影響を受けるパッケージ:",
   "ConfirmDeletePlayset": "本当にプレイセット 「{0}」を削除しますか？",
   "ActivatePlayset": "このプレイセットをアクティブにする",
-  "PlaysetMerge": "Add all of this playset's mods to your active playset",
+  "PlaysetMerge": "このプレイセットのMODを有効なプレイセットに追加する",
   "PlaysetExclude": "Remove all of this playset's mods from your active playset",
   "PlaysetDelete": "プレイセットを削除",
   "MissingPackages": "パッケージが不足中",
