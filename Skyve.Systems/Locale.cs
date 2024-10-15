@@ -219,6 +219,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation AvailableWidgets => _instance.GetText("AvailableWidgets");
 
 	/// <summary>
+	/// Backup Center
+	/// </summary>
+	public static Translation BackupCenter => _instance.GetText("BackupCenter");
+
+	/// <summary>
+	/// Backup &amp; Restore
+	/// </summary>
+	public static Translation BackupRestore => _instance.GetText("BackupRestore");
+
+	/// <summary>
 	/// BETA
 	/// </summary>
 	public static Translation BETA => _instance.GetText("BETA");
