@@ -17,7 +17,7 @@ internal class ImageSystem : IImageService
 {
 	private readonly Dictionary<string, object> _lockObjects = [];
 	private readonly System.Timers.Timer _cacheClearTimer;
-	private readonly Dictionary<string, (Bitmap image, DateTime lastAccessed)> _cache = [];
+	private readonly Dictionary<string, (Bitmap image, DateTime lastAccessed, Size? downscale)> _cache = [];
 	private readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(15);
 	private readonly HttpClient _httpClient = new();
 	private readonly ImageProcessor _imageProcessor;
@@ -79,29 +79,22 @@ internal class ImageSystem : IImageService
 	{
 		try
 		{
-			if (url is null || !await Ensure(url, localOnly, fileName, square, isFilePath))
+			if (url is null)
 			{
 				return null;
 			}
 
 			var filePath = File(url, fileName);
-			var cache = GetCache(filePath.Name);
+			var cache = GetCache(filePath.Name, downscaleTo);
 
 			if (cache != null)
 			{
 				return cache;
 			}
 
-			if (filePath.Exists)
+			if (await Ensure(url, localOnly, fileName, square, isFilePath, downscaleTo))
 			{
-				lock (LockObj(filePath.Name))
-				{
-					try
-					{
-						return AddCache(filePath.Name, (Bitmap)Image.FromFile(filePath.FullName), downscaleTo);
-					}
-					catch { }
-				}
+				return GetCache(filePath.Name, downscaleTo);
 			}
 		}
 		catch (Exception ex)
@@ -112,7 +105,7 @@ internal class ImageSystem : IImageService
 		return null;
 	}
 
-	public async Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true, bool isFilePath = false)
+	public async Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true, bool isFilePath = false, Size? downscaleTo = null)
 	{
 		if (url is null or "")
 		{
@@ -123,36 +116,45 @@ internal class ImageSystem : IImageService
 
 		lock (LockObj(filePath.Name))
 		{
-			if (isFilePath)
-			{
-				if (CrossIO.FileExists(url))
-				{
-					if (!filePath.Exists || new FileInfo(url).Length != filePath.Length)
-					{
-						filePath.Directory.Create();
-
-						System.IO.File.Copy(url, filePath.FullName, true);
-					}
-
-					return true;
-				}
-			}
-
-			else if (filePath.Exists)
+			if (_cache.TryGetValue(filePath.Name, out var data) && data.downscale == downscaleTo)
 			{
 				return true;
 			}
 
 			if (localOnly)
 			{
-				_imageProcessor.Add(new(url, fileName, square));
+				_imageProcessor.Add(new(url, fileName, square, isFilePath, downscaleTo));
 
 				return false;
+			}
+
+			if (filePath.Exists)
+			{
+				AddCache(filePath.Name, (Bitmap)Image.FromFile(filePath.FullName), downscaleTo);
+
+				_notifier.OnRefreshUI();
+				
+				return true;
 			}
 		}
 
 		var tries = 1;
 		start:
+
+		if (isFilePath)
+		{
+			if (CrossIO.FileExists(url))
+			{
+				if (!filePath.Exists || new FileInfo(url).Length != filePath.Length)
+				{
+					filePath.Directory.Create();
+
+					System.IO.File.Copy(url, filePath.FullName, true);
+				}
+
+				return true;
+			}
+		}
 
 		if (!ConnectionHandler.IsConnected)
 		{
@@ -231,19 +233,19 @@ internal class ImageSystem : IImageService
 		if (_cache.ContainsKey(key))
 		{
 			_cache[key].image.Dispose();
-			_cache[key] = (image, DateTime.Now);
+			_cache[key] = (image, DateTime.Now, downscaleTo);
 		}
 		else
 		{
-			_cache.Add(key, (image, DateTime.Now));
+			_cache.Add(key, (image, DateTime.Now, downscaleTo));
 		}
 
 		return image;
 	}
 
-	public Bitmap? GetCache(string key)
+	public Bitmap? GetCache(string key, Size? downscaleTo)
 	{
-		if (_cache.TryGetValue(key, out var value))
+		if (_cache.TryGetValue(key, out var value) && value.downscale == downscaleTo)
 		{
 			if (DateTime.Now - value.lastAccessed > _expirationTime)
 			{
@@ -284,7 +286,7 @@ internal class ImageSystem : IImageService
 	{
 		lock (_lockObjects)
 		{
-			foreach (var (image, lastAccessed) in _cache.Values)
+			foreach (var (image, lastAccessed, downscale) in _cache.Values)
 			{
 				image?.Dispose();
 			}

@@ -227,6 +227,11 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			args.DrawableItem.Bounds = Rectangle.Empty;
 			args.DrawableItem.Hidden = args.DoNotDraw;
+
+			if (args.DoNotDraw)
+			{
+				SelectedItems.Remove(args.DrawableItem);
+			}
 		}
 		else if (_page is SkyvePage.Workshop)
 		{

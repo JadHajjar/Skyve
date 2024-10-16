@@ -50,7 +50,7 @@ public partial class ItemListControl
 			{
 				using var pen = new Pen(outerColor, (float)(1.5 * UI.FontScale));
 
-				e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), UI.Scale(5));
+				e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.ClipTo(e.DrawableItem.CachedHeight - Padding.Vertical - GridPadding.Vertical).InvertPad(GridPadding - new Padding((int)pen.Width)), UI.Scale(5));
 			}
 
 			if (e.DrawableItem.Tag is not null)

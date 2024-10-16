@@ -24,8 +24,6 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		InitializeComponent();
 
-		logTraceControl.CanDrawItem += LogTraceControl_CanDrawItem;
-
 		if (CrossIO.CurrentPlatform is Platform.Windows)
 		{
 			DD_LogFile.StartingFolder = CrossIO.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
@@ -39,7 +37,8 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 		}
 
-		SSS_LogLevel.SelectedItem = SSS_LogLevel.Items[3];
+		SSS_LogLevel.SelectedItem = SSS_LogLevel.Items[0];
+		logTraceControl.LogLevel =(string) SSS_LogLevel.SelectedItem;
 
 		if (CrossIO.CurrentPlatform is not Platform.Windows)
 		{
@@ -257,6 +256,8 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void SSS_LogLevel_SelectedItemChanged(object sender, EventArgs e)
 	{
+		logTraceControl.LogLevel = (string)SSS_LogLevel.SelectedItem;
+
 		Task.Run(logTraceControl.FilterChanged);
 	}
 
@@ -267,59 +268,6 @@ public partial class PC_HelpAndLogs : PanelContent
 		I_Sort.ImageName = logTraceControl.OrderAsc ? "SortAsc" : "SortDesc";
 
 		logTraceControl.SortingChanged();
-	}
-
-	private void LogTraceControl_CanDrawItem(object sender, CanDrawItemEventArgs<ILogTrace> e)
-	{
-		if (!Compare(e.Item.Type, (string)SSS_LogLevel.SelectedItem))
-		{
-			e.DoNotDraw = true;
-			return;
-		}
-
-		if (!string.IsNullOrWhiteSpace(TB_Search.Text) && !SearchLog(e.Item))
-		{
-			e.DoNotDraw = true;
-			return;
-		}
-	}
-
-	private bool Compare(string type, string level)
-	{
-		if (type == level)
-		{
-			return true;
-		}
-
-		return level switch
-		{
-			"ERROR" => type is "FATAL" or "CRITICAL" or "EMERGENCY",
-			"WARN" => type is "FATAL" or "CRITICAL" or "EMERGENCY" or "ERROR",
-			"DEBUG" => type is "FATAL" or "CRITICAL" or "EMERGENCY" or "ERROR" or "WARN",
-			"INFO" => type is "FATAL" or "CRITICAL" or "EMERGENCY" or "ERROR" or "WARN" or "DEBUG",
-			"TRACE" => type is "FATAL" or "CRITICAL" or "EMERGENCY" or "ERROR" or "WARN" or "DEBUG" or "INFO",
-			_ => true,
-		};
-	}
-
-	private bool SearchLog(ILogTrace trace)
-	{
-		if (trace.Type.Contains(TB_Search.Text, StringComparison.InvariantCultureIgnoreCase)
-			|| Path.GetFileName(trace.SourceFile).Contains(TB_Search.Text, StringComparison.InvariantCultureIgnoreCase)
-			|| TB_Search.Text.SearchCheck(trace.Title))
-		{
-			return true;
-		}
-
-		for (var i = 0; i < trace.Trace.Count; i++)
-		{
-			if (TB_Search.Text.SearchCheck(trace.Trace[i]))
-			{
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private bool DD_LogFile_ValidFile(object sender, string arg)
@@ -405,9 +353,10 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
+		logTraceControl.SearchText = TB_Search.Text;
 		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "Search" : "ClearSearch";
 
-		SSS_LogLevel_SelectedItemChanged(sender, e);
+		Task.Run(logTraceControl.FilterChanged);
 	}
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

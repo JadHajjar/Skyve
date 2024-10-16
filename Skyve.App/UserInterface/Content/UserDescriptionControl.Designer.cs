@@ -200,7 +200,7 @@ partial class UserDescriptionControl
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			this.tableLayoutPanel3.RowCount = 1;
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(276, 24);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(274, 24);
 			this.tableLayoutPanel3.TabIndex = 9;
 			// 
 			// I_Verified
@@ -243,10 +243,10 @@ partial class UserDescriptionControl
 			// 
 			this.I_More.AutoSize = true;
 			this.I_More.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.I_More.Location = new System.Drawing.Point(366, 0);
+			this.I_More.Location = new System.Drawing.Point(364, 0);
 			this.I_More.Margin = new System.Windows.Forms.Padding(0);
 			this.I_More.Name = "I_More";
-			this.I_More.Size = new System.Drawing.Size(24, 24);
+			this.I_More.Size = new System.Drawing.Size(26, 26);
 			this.I_More.SpaceTriggersClick = true;
 			this.I_More.TabIndex = 2;
 			this.I_More.Click += new System.EventHandler(this.I_More_Click);
@@ -262,7 +262,7 @@ partial class UserDescriptionControl
 			this.tableLayoutPanel1.Controls.Add(this.I_Followers, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.L_Followers, 1, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(90, 24);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(90, 26);
 			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
@@ -306,7 +306,7 @@ partial class UserDescriptionControl
 			this.tableLayoutPanel2.Controls.Add(this.I_Packages, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.L_Packages, 1, 0);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel2.Location = new System.Drawing.Point(90, 48);
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(90, 50);
 			this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 1;
@@ -349,14 +349,16 @@ partial class UserDescriptionControl
 			// 
 			// base_slickScroll
 			// 
+			this.base_slickScroll.AnimatedValue = 8;
 			this.base_slickScroll.Dock = System.Windows.Forms.DockStyle.Right;
 			this.base_slickScroll.LinkedControl = this.TLP_Side;
-			this.base_slickScroll.Location = new System.Drawing.Point(424, 0);
+			this.base_slickScroll.Location = new System.Drawing.Point(414, 0);
 			this.base_slickScroll.Name = "base_slickScroll";
-			this.base_slickScroll.Size = new System.Drawing.Size(6, 261);
+			this.base_slickScroll.Size = new System.Drawing.Size(16, 261);
 			this.base_slickScroll.Style = SlickControls.StyleType.Vertical;
 			this.base_slickScroll.TabIndex = 2;
 			this.base_slickScroll.TabStop = false;
+			this.base_slickScroll.TargetAnimationValue = 8;
 			this.base_slickScroll.Text = "slickScroll1";
 			// 
 			// UserDescriptionControl

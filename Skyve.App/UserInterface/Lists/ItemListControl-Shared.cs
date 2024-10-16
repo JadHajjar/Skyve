@@ -95,7 +95,7 @@ public partial class ItemListControl
 			e.Graphics.DrawString(Locale.RecentlyUpdated, font, dateBrush, e.Rects.IconRect.Pad(GridPadding), stringFormat);
 		}
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5), FormDesign.Design.BackColor);
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5));
 	}
 
 	private void DrawAuthorImage(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IUser author, Rectangle rectangle, Color color)
