@@ -1,5 +1,6 @@
 ﻿using Skyve.App.Utilities;
 
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -71,22 +72,27 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
 
 	private bool SearchLog(ILogTrace trace)
 	{
-		if (trace.Type.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase)
-			|| Path.GetFileName(trace.SourceFile).Contains(SearchText, StringComparison.InvariantCultureIgnoreCase)
-			|| SearchText.SearchCheck(trace.Title))
+		if (CheckText(trace.Type)
+			|| CheckText(Path.GetFileName(trace.SourceFile))
+			|| CheckText(trace.Title))
 		{
 			return true;
 		}
 
 		for (var i = 0; i < trace.Trace.Count; i++)
 		{
-			if (SearchText.SearchCheck(trace.Trace[i]))
+			if (CheckText(trace.Trace[i]))
 			{
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+	private bool CheckText(in string text)
+	{
+		return text.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase);
 	}
 
 	protected override void OnItemMouseClick(DrawableItem<ILogTrace, Rectangles> item, MouseEventArgs e)

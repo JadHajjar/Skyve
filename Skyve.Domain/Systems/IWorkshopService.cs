@@ -40,5 +40,6 @@ public interface IWorkshopService
 	Task<IAuthor?> GetUserAsync(IUser? user);
 	ILink? GetCommentsPageUrl(IPackageIdentity packageIdentity);
 	bool IsLocal(IPackageIdentity identity);
+	Task Shutdown();
 #endif
 }

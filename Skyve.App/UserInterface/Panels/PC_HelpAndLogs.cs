@@ -15,6 +15,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	private readonly ISettings _settings;
 	private readonly ILocationService _locationManager;
 	private readonly System.Timers.Timer timer;
+	private readonly DelayedAction delayedFilter;
 	private List<ILogTrace>? selectedFileLogs;
 	private List<ILogTrace>? defaultLogs;
 
@@ -38,7 +39,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		}
 
 		SSS_LogLevel.SelectedItem = SSS_LogLevel.Items[0];
-		logTraceControl.LogLevel =(string) SSS_LogLevel.SelectedItem;
+		logTraceControl.LogLevel = (string)SSS_LogLevel.SelectedItem;
 
 		if (CrossIO.CurrentPlatform is not Platform.Windows)
 		{
@@ -49,6 +50,8 @@ public partial class PC_HelpAndLogs : PanelContent
 		timer = new System.Timers.Timer(5000);
 		timer.Elapsed += Timer_Elapsed;
 		timer.Start();
+
+		delayedFilter = new DelayedAction(150, logTraceControl.FilterChanged);
 	}
 
 	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -258,7 +261,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		logTraceControl.LogLevel = (string)SSS_LogLevel.SelectedItem;
 
-		Task.Run(logTraceControl.FilterChanged);
+		delayedFilter.Run();
 	}
 
 	private void I_Sort_Click(object sender, EventArgs e)
@@ -356,7 +359,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		logTraceControl.SearchText = TB_Search.Text;
 		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "Search" : "ClearSearch";
 
-		Task.Run(logTraceControl.FilterChanged);
+		delayedFilter.Run();
 	}
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
