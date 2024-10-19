@@ -245,7 +245,7 @@
   "ManagePackage": "パッケージの管理",
   "Banned": "BAN済み",
   "NoIssues": "問題なし",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "*あなたのアカウントのIDとログはあなたのリクエストとともに送信されます",
   "ScenarioMaking": "シナリオの作成",
   "ThemeMaking": "テーマの作成",
   "OtherCompatibilityWarnings": {
@@ -257,18 +257,18 @@
     "Plural": "リクエストを削除"
   },
   "ViewRequest": "リクエストを表示",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
+  "RequiredItem": "必要アイテム",
+  "ApplyAllActions": "推奨されるすべてのアクションを適用",
+  "SnoozeAll": "すべての問題をスヌーズする",
   "SnoozeAllFiltered": "Snooze all filtered issues",
-  "LinkedPackages": "Linked Packages",
-  "NoTags": "No Tags",
-  "NoLinks": "No Links",
+  "LinkedPackages": "リンクされたパッケージ",
+  "NoTags": "タグなし",
+  "NoLinks": "リンクなし",
   "HideReviewedPackages": "レビューしたModを隠す",
   "ApplyRecommendedAction": "推奨されるアクションを適用",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "AddMeaningfulNote": "このパッケージの何が間違っているかを説明するメモを追加してください。",
+  "EditHistory": "編集履歴",
+  "EditNote": "メモを編集",
+  "EditNoteInfo": "他のマネージャーが将来表示するメモを残してください",
+  "RequestReviewUpdate": "レビューされる新しいリクエストを送信"
 }
