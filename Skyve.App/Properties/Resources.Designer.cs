@@ -703,6 +703,46 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_ClockSettings_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_ClockSettings_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_ClockSettings_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_ClockSettings_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_ClockSettings_32 {
+            get {
+                object obj = ResourceManager.GetObject("I_ClockSettings_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_ClockSettings_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_ClockSettings_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Cog_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Cog_16", resourceCulture);

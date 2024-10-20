@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace Skyve.Systems;
 
-internal class ImageSystem : IImageService
+internal class ImageService : IImageService
 {
 	private readonly Dictionary<string, object> _lockObjects = [];
 	private readonly System.Timers.Timer _cacheClearTimer;
 	private readonly Dictionary<string, (Bitmap image, DateTime lastAccessed, Size? downscale)> _cache = [];
-	private readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(15);
+	private readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(30);
 	private readonly HttpClient _httpClient = new();
 	private readonly ImageProcessor _imageProcessor;
 	private readonly INotifier _notifier;
@@ -27,7 +27,7 @@ internal class ImageSystem : IImageService
 
 	internal string ThumbnailFolder { get; }
 
-	public ImageSystem(INotifier notifier, ILogger logger, SaveHandler saveHandler)
+	public ImageService(INotifier notifier, ILogger logger, SaveHandler saveHandler)
 	{
 		_imageProcessor = new(this);
 		_cacheClearTimer = new System.Timers.Timer(_expirationTime.TotalMilliseconds);
@@ -37,7 +37,7 @@ internal class ImageSystem : IImageService
 		_logger = logger;
 		_saveHandler = saveHandler;
 
-		ThumbnailFolder = CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, "Thumbs");
+		ThumbnailFolder = CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, ".Thumbs");
 
 		new BackgroundAction(ClearOldImages).Run();
 	}
@@ -133,7 +133,7 @@ internal class ImageSystem : IImageService
 				AddCache(filePath.Name, (Bitmap)Image.FromFile(filePath.FullName), downscaleTo);
 
 				_notifier.OnRefreshUI();
-				
+
 				return true;
 			}
 		}
@@ -309,6 +309,8 @@ internal class ImageSystem : IImageService
 
 	private void ClearOldImages()
 	{
+		UpdateFolderLocation();
+
 		foreach (var item in new DirectoryInfo(ThumbnailFolder).EnumerateFiles())
 		{
 			try
@@ -322,6 +324,27 @@ internal class ImageSystem : IImageService
 		}
 	}
 
+	private void UpdateFolderLocation()
+	{
+		var oldThumbnailFolder = CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, "Thumbs");
+
+		try
+		{
+			if (Directory.Exists(oldThumbnailFolder))
+			{
+				if (Directory.Exists(ThumbnailFolder))
+				{
+					new DirectoryInfo(oldThumbnailFolder).Delete(true);
+				}
+				else
+				{
+					Directory.Move(CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, "Thumbs"), CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, ".Thumbs"));
+				}
+			}
+		}
+		catch { }
+	}
+
 	public string? FindImage(string pattern)
 	{
 		if (!Directory.Exists(ThumbnailFolder))
@@ -331,11 +354,6 @@ internal class ImageSystem : IImageService
 
 		var file = Directory.EnumerateFiles(ThumbnailFolder, pattern).OrderByDescending(System.IO.File.GetCreationTime).FirstOrDefault();
 
-		if (!string.IsNullOrEmpty(file))
-		{
-			return Path.GetFileName(file);
-		}
-
-		return null;
+		return !string.IsNullOrEmpty(file) ? Path.GetFileName(file) : null;
 	}
 }

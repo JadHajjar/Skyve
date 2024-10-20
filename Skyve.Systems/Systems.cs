@@ -14,7 +14,7 @@ public static class SystemsProgram
 	public static IServiceCollection AddSkyveSystems(this IServiceCollection services)
 	{
 		services.AddSingleton<ILocale, Locale>();
-		services.AddSingleton<IImageService, ImageSystem>();
+		services.AddSingleton<IImageService, ImageService>();
 		services.AddSingleton<IIOUtil, IOUtil>();
 		services.AddSingleton<INotifier, NotifierSystem>();
 		services.AddSingleton<IPackageNameUtil, PackageNameUtil>();
