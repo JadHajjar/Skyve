@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 namespace Skyve.Domain.Systems;
 public interface IImageService
 {
+	string ThumbnailFolder { get; }
+
 	void ClearCache(bool deleteFiles);
 	Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true, bool isFilePath = false, Size? downscaleTo = null);
 	FileInfo File(string url, string? fileName = null);

@@ -1,6 +1,8 @@
-﻿namespace Skyve.Domain.Systems;
+﻿using System.Threading.Tasks;
+
+namespace Skyve.Domain.Systems;
 
 public interface IBackupService
 {
-	void Run();
+	Task Run();
 }

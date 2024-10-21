@@ -18,19 +18,19 @@ internal class ImageService : IImageService
 	private readonly Dictionary<string, object> _lockObjects = [];
 	private readonly System.Timers.Timer _cacheClearTimer;
 	private readonly Dictionary<string, (Bitmap image, DateTime lastAccessed, Size? downscale)> _cache = [];
-	private readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(30);
+	private readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(60);
 	private readonly HttpClient _httpClient = new();
 	private readonly ImageProcessor _imageProcessor;
 	private readonly INotifier _notifier;
 	private readonly ILogger _logger;
 	private readonly SaveHandler _saveHandler;
 
-	internal string ThumbnailFolder { get; }
+	public string ThumbnailFolder { get; }
 
 	public ImageService(INotifier notifier, ILogger logger, SaveHandler saveHandler)
 	{
 		_imageProcessor = new(this);
-		_cacheClearTimer = new System.Timers.Timer(_expirationTime.TotalMilliseconds);
+		_cacheClearTimer = new(TimeSpan.FromMinutes(10).TotalMilliseconds);
 		_cacheClearTimer.Elapsed += CacheClearTimer_Elapsed;
 		_cacheClearTimer.Start();
 		_notifier = notifier;
@@ -330,16 +330,18 @@ internal class ImageService : IImageService
 
 		try
 		{
-			if (Directory.Exists(oldThumbnailFolder))
+			if (!Directory.Exists(oldThumbnailFolder))
 			{
-				if (Directory.Exists(ThumbnailFolder))
-				{
-					new DirectoryInfo(oldThumbnailFolder).Delete(true);
-				}
-				else
-				{
-					Directory.Move(CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, "Thumbs"), CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, ".Thumbs"));
-				}
+				return;
+			}
+
+			if (Directory.Exists(ThumbnailFolder))
+			{
+				new DirectoryInfo(oldThumbnailFolder).Delete(true);
+			}
+			else
+			{
+				Directory.Move(CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, "Thumbs"), CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, ".Thumbs"));
 			}
 		}
 		catch { }

@@ -56,7 +56,7 @@ public partial class ItemListControl
 			drawThumbnail(thumbnail);
 		}
 
-		if (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IconRect.Contains(CursorLocation))
+		if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IconRect.Contains(CursorLocation))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(75, 255, 255, 255));
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
@@ -150,13 +150,17 @@ public partial class ItemListControl
 			isEnabled = !isEnabled;
 		}
 
-		if (isIncluded && isHovered && ModifierKeys.HasFlag(Keys.Alt))
+		if (isIncluded && !required && isHovered && ModifierKeys.HasFlag(Keys.Alt))
 		{
 			activeColor = FormDesign.Design.RedColor;
 		}
 		else if (isEnabled)
 		{
 			activeColor = isPartialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
+		}
+		else if (required)
+		{
+			activeColor = Color.FromArgb(200, ForeColor.MergeColor(BackColor));
 		}
 
 		Color iconColor;
