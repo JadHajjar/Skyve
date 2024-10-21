@@ -639,5 +639,7 @@
   "CleanupStorageBased": "Delete old backups once the total storage used exceeds:",
   "CleanupCountBased": "Delete old backups once the total amount of backups exceeds:",
   "DoBackupNow": "Backup Files Now",
-  "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or reinstallation."
+  "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or reinstallation.",
+  "BackupFailed": "Backup Failed",
+  "CheckLogsAndTryAgain": "Check the logs for any errors and try again."
 }

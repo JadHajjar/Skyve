@@ -27,7 +27,7 @@ public interface IWorkshopService
 	bool IsAvailable { get; }
 
 	Task Initialize();
-	Task Login();
+	Task<bool> Login();
 	Task<bool> Login(string email, string password, bool rememberMe);
 	Task WaitUntilReady();
 	Task RunSync();

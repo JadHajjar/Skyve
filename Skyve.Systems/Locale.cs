@@ -239,6 +239,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation BackupDescriptionInfo => _instance.GetText("BackupDescriptionInfo");
 
 	/// <summary>
+	/// Backup Failed
+	/// </summary>
+	public static Translation BackupFailed => _instance.GetText("BackupFailed");
+
+	/// <summary>
 	/// Include local mods in scheduled backups
 	/// </summary>
 	public static Translation BackupIncludeLocalMods => _instance.GetText("BackupIncludeLocalMods");
@@ -317,6 +322,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Make sure Skyve has access to your documents folder, it uses it to store your UI &amp; Language settings.
 	/// </summary>
 	public static Translation CheckDocumentsFolder => _instance.GetText("CheckDocumentsFolder");
+
+	/// <summary>
+	/// Check the logs for any errors and try again.
+	/// </summary>
+	public static Translation CheckLogsAndTryAgain => _instance.GetText("CheckLogsAndTryAgain");
 
 	/// <summary>
 	/// Delete old backups once the total amount of backups exceeds:
