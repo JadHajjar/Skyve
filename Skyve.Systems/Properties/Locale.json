@@ -635,7 +635,7 @@
   "ScheduleOnNewSave": "Do a backup each time a city is saved",
   "BackupIncludeSaveGames": "Include savegame files in scheduled backups",
   "BackupIncludeLocalMods": "Include local mods in scheduled backups",
-  "CleanupTimeBased": "Delete any backups olders than:",
+  "CleanupTimeBased": "Delete all backups olders than:",
   "CleanupStorageBased": "Delete old backups once the total storage used exceeds:",
   "CleanupCountBased": "Delete old backups once the total amount of backups exceeds:",
   "DoBackupNow": "Backup Files Now",

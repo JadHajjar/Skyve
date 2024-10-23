@@ -18,14 +18,14 @@
 	</PropertyGroup>
 	
 	<PropertyGroup Label="Versions">
-		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' == 'Stable'">0.10.2.5</Version> <!--CS2 STABLE-->
-		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">0.10.2.5</Version> <!--CS2 BETA-->
+		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' == 'Stable'">1.0.0-pre</Version> <!--CS2 STABLE-->
+		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">1.0.0-pre</Version> <!--CS2 BETA-->
 		
 		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' == 'Stable'">3.3.2.1</Version> <!--CS1 STABLE-->
 		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' != 'Stable'">3.3.2.1</Version> <!--CS1 BETA-->
 
 		<FileVersion>$(Version)</FileVersion>
-		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(BuildType)' == 'Debug'">

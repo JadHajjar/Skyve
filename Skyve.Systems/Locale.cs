@@ -344,7 +344,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CleanupStorageBased => _instance.GetText("CleanupStorageBased");
 
 	/// <summary>
-	/// Delete any backups olders than:
+	/// Delete all backups olders than:
 	/// </summary>
 	public static Translation CleanupTimeBased => _instance.GetText("CleanupTimeBased");
 

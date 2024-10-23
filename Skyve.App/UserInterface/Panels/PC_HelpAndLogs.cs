@@ -28,6 +28,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		if (CrossIO.CurrentPlatform is Platform.Windows)
 		{
 			DD_LogFile.StartingFolder = CrossIO.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+			DD_LogFile.PinnedFolders = new() { [Path.GetFileName(_settings.FolderSettings.AppDataPath)] = _settings.FolderSettings.AppDataPath };
 		}
 
 		foreach (var button in TLP_HelpLogs.GetControls<SlickButton>())
