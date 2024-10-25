@@ -97,178 +97,178 @@
     "Plural": "'{0}' için isteğe bağlı olan sıradaki paketler eksik."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' is succeeded by '{1}'.",
-    "Plural": "'{0}' is succeeded by either one of the following packages."
+    "One": "'{0}' yerine artık '{1}' var.",
+    "Plural": "'{0}' sıradaki paketlerin hiçbiriyle uyumlu değil."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "{0} {1}'den sonra yüklenecek.",
+    "Plural": "{0} paketlerden hemen sonra yüklenecek."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "{1} için {0} lazım.",
+    "Plural": "Paketler için {0} lazım."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
-  "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
+  "Interaction_Identical": "Takip edenler aynı mod'un farklı versiyonları.\nBunları aynı anda kullanmak çatışma oluşturacak.",
+  "Status_Succeeded": "'{0}' yerine artık '{1}' var ve zaten '{1}' yüklü. '{0}' artık lazım olmadığı için kaldırabilirsiniz.",
+  "Status_Deprecated": "'{0}' artık kullanılmamaktadır ve yapımcısı tarafından desteklenmemektedir.",
   "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
-    "Zero": "'{0}' is a re-upload of an original package.",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "Zero": "'{0}' özgün bir paketin yeniden yüklenmiş halidir.",
+    "One": "'{0}' '{1}' paketinin yeniden yüklenmiş halidir."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "'{0}' oyununuzla ilgili sorunlar çıkarabilir.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "Şehrini {0} ile kaydettikten sonra, {0} aktif olmadan tekrar yükleyemeyeceksin.",
+    "One": "Şehrini {0} ile kaydettikten sonra, {0} aktif olmadan tekrar yükleyemeyeceksin.\n\nGerekli olursa kaydını kurtarmak için {1}'i kullan. Daha fazla bilgi için atölye yazısını oku."
   },
   "Status_TestVersion": {
     "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Bu {1}'in test versiyonu.\nYapılan değişiklerin beklenmedik sorunlar yaratabileceğinin farkında ol."
   },
   "Status_MissingDlc": {
     "One": "You're missing the '{0}' DLC to use this package.",
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
-  "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
-  "SourceAvailable": "Source code is available",
-  "StandardMod": "Standard Mod",
-  "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
+  "Status_DependencyMod": "Bu bir bağımlılık modu, ama bunu kullanan bir paket kullanmıyorsun gibi gözüküyor.",
+  "Status_SourceCodeNotAvailable": "Bu mod'un kaynak kodu erişilebilir değil. Yapımcısına güvenmediğin sürece kullanmamalısın.",
+  "SourceAvailable": "Kaynak kod erişilebilir",
+  "StandardMod": "Standart Mod",
+  "Status_MusicCanBeCopyrighted": "Bu paketin içindeki müzik telif hakkına tabi tutuluyor olabilir. Yayındayken kullanmamak en iyisi.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
-  "Status_SourceAvailable": "This package will not warn about missing source code.",
-  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
-  "OutputText": "Expected Output",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
-  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Status_SourceAvailable": "Bu paket eksik kaynak kod hakkında uyarmayacak.",
+  "Status_StandardMod": "Sorun giderme için modlar işlenirken bu paket gözardı edilecektir.",
+  "OutputText": "Beklenen Çıktı",
+  "Stability_AssetNotReviewed": "'{0}' daha incelenmedi.\nUyumluluk bilgisi doğru olmayabilir ama varlıklar genellikle kararlıdır.",
+  "Stability_NotReviewed": "'{0}' daha incelenmedi.\nUyumluluk bilgisi doğru olmayabilir.",
+  "Stability_Stable": "'{0}' kararlı. Yapımcısı etkin olarak üzerinde çalışıp güncellemektedir.",
+  "Stability_StableNoNewFeatures": "'{0}' kararlı ancak yapımcısı ilerleyen vakitlerde herhangi bir özellik güncellemesi yayınlamayacak.\nOlası bir hata durumunda ise hata giderme güncellemeleri olacaktır.",
+  "Stability_StableNoFutureUpdates": "'{0}' kararlı ancak yapımcısı büyük ihtimalle gelecekte herhangi bir özellik veya hata giderme güncellemesi yayınlamayacak.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' sorunlara sebep olabilir ve yapımcısı büyük ihtimalle herhangi bir hata giderme veya özellik güncellemesi yayınlamayacak.",
+  "Stability_BreaksOnPatch": "Yeni bir oyun yaması yayınlandığı takdirde '{0}' büyük ihtimalle bozulacak.",
+  "Stability_NotEnoughInformation": "'{0}' yeterli bilgi olmadığından düzgünce incelenemiyor.",
+  "Stability_HasIssues": "'{0}' sorun çıkarabilir.\nKullanırken dikkatli olun.",
+  "Stability_Broken": "'{0}' bozuk.\nOyunu ya bozduğu ya da çalışmadığı bilinmektedir.",
+  "Stability_Incompatible": "'{0}' mevcut oyun sürümünüzle uyumlu değil.\nYa dikkatli kullanın ya da güncellenene kadar devre dışı bırakın.",
+  "Stability_AssetIncompatible": "'{0}' mevcut oyun sürümünüzle uyumlu değil.\nVarlıklar yeni güncellemelerle genellikle bozulmaz, bu yüzden büyük ihtimalle sorun olmayacaktır.",
+  "Stability_Local": "Bu '{0}' modunun yerel bir sürümü.\n\nYerel Sürümler genellikle deneme amaçlı kullanılırlar.",
+  "Stability_BrokenFromPatch": "'{1}' {0} oyun yamasından sonra bozuldu. Lütfen güncellenene kadar devre dışı bırakın.",
+  "Stability_BrokenFromPatchSafe": "'{1}' {0} oyun yamasından sonra bozuldu. Lütfen kullanmadan önce güncellenene kadar bekleyin.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' {0} oyun yamasından sonra bozuldu ancak yakın zamanda güncellendi, bu yüzden kullanılmasında sakınca yok.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Belirtilen paketi oyun setinize eklemelisiniz.",
+    "Plural": "Belirtilen paketleri oyun setinize eklemelisiniz."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "Sıradaki yönergeleri takip edin:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "'{0}' oyun setinizden kaldırılmalı.",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "'{1}' oyun setinizden kaldırılmalı.",
+    "Plural": "Belirtilen paketleri oyun setinizden kaldırmalısınız."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "Action_ExcludeThis": "'{0}' devre dışı bırakılmalı.",
+  "ExcludeThis": "Bu Paketi Devre Dışı Bırak",
+  "Exclude": "Devre Dışı Bırak",
   "Unsubscribe": "Aboneliği kaldır",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "'{1}' devre dışı bırakılmalı.",
+    "Plural": "Belirtilen paketleri devre dışı bırakmalısınız."
   },
   "Action_Switch": {
-    "One": "You should switch to '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "One": "'{1}' e geçmelisiniz.",
+    "Plural": "Belirtilen paketlerden birine geçmelisiniz."
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "'{0}' dahil edilmeli",
   "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Belirtilen paketi oyun setinize eklemelisiniz.",
+    "Plural": "Belirtilen paketleri oyun setinize eklemelisiniz."
   },
-  "NoRequiredDlcs": "No Required DLCs",
+  "NoRequiredDlcs": "Gerekli DLC yok",
   "DlcsSelected": {
-    "One": "{0} DLC selected",
-    "Plural": "{0} DLCs selected"
+    "One": "{0} DLC seçildi",
+    "Plural": "{0} tane DLC seçildi"
   },
   "RequiredDLCs": "Required DLCs/CCPs",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "Kararlılık",
   "CRT_Successors": "Halefler",
-  "CRT_RequiredPackages": "Required Packages",
-  "CRT_OptionalPackages": "Optional Packages",
-  "CRT_DlcMissing": "Missing DLCs/CCPs",
-  "CRT_Compatibility": "Compatibility Issues",
+  "CRT_RequiredPackages": "Gerekli Paketler",
+  "CRT_OptionalPackages": "İsteğe Bağlı Paketler",
+  "CRT_DlcMissing": "Eksik DLCler veya CCPler",
+  "CRT_Compatibility": "Uyumluluk Sorunları",
   "CRT_Alternatives": "Alternatifler",
-  "CRT_Status": "Statuses",
-  "CRT_Ambiguous": "Ambiguity",
-  "CRT_RequiredItem": "Required Item",
-  "CRT_RequestReview": "Review Request Status",
-  "LastReviewDate": "It was last reviewed on {0}",
+  "CRT_Status": "Durumlar",
+  "CRT_Ambiguous": "Belirsizlik",
+  "CRT_RequiredItem": "Gerekli Nesne",
+  "CRT_RequestReview": "İnceleme İsteği Durumu",
+  "LastReviewDate": "En son {0} tarihinde incelendi",
   "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
   "RequestReview": "Request Review",
   "MissingDependencyCount": {
-    "One": "{0} {1} is missing dependencies",
-    "Plural": "{0} {1} are missing dependencies"
+    "One": "{0} {1} eksik gereksinimleri var",
+    "Plural": "{0} {1} eksik gereksinimleri var"
   },
-  "CautionCount": "{0} {1} where caution is advised",
-  "WarningCount": "{0} {1} with a warning",
+  "CautionCount": "{0} {1} dikkat gerektiriyor",
+  "WarningCount": "{0} {1} dair uyarılar var",
   "AttentionRequiredCount": {
-    "One": "{0} {1} requires your attention",
-    "Plural": "{0} {1} require your attention"
+    "One": "{0} {1} ilgilenmenizi gerektiriyor",
+    "Plural": "{0} {1} ilgilenmenizi gerektiriyor"
   },
   "ExcludeCount": {
-    "One": "{0} {1} should be excluded",
-    "Plural": "{0} {1} should be excluded"
+    "One": "{0} {1} hariç tutulmalı",
+    "Plural": "{0} {1} hariç tutulmalı"
   },
-  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "UnsubscribeCount": "{0} {1} aboneliğinden çıklımalı",
   "SwitchCount": {
-    "One": "{0} {1} requires switching to another",
-    "Plural": "{0} {1} require switching to another"
+    "One": "{0} {1} başka birine geçmenizi gerektiriyor",
+    "Plural": "{0} {1} başka birine geçmenizi gerektiriyor"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1} lazım ancak etkinleştirilmemiş",
+    "Plural": "{0} {1} lazım ancak etkinleştirilmemiş"
   },
-  "PackageType": "Package Type",
-  "GenericPackage": "Generic Package",
-  "MusicPack": "Music Pack",
-  "ThemeMix": "Theme Mix",
-  "IMTMarkings": "IMT Markings",
-  "RenderItPreset": "Render it! Preset",
-  "POFont": "Procedural Object Font/Module",
-  "NameList": "Name-List/Game Translations",
-  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
+  "PackageType": "Paket Türü",
+  "GenericPackage": "Genel Paket",
+  "MusicPack": "Müzik Paketi",
+  "ThemeMix": "Tema Karışımı",
+  "IMTMarkings": "IMT işaretlemeleri",
+  "RenderItPreset": "Render it! Ön ayarı",
+  "POFont": "Yöntemsel Nesne Yazı Tipi/Modülü",
+  "NameList": "İsim Listesi/Oyun Çevirileri",
+  "ApplyChangedBeforeExit": "Kaydedilmemiş değişiklikleriniz var.\n\nDevam etmeden önce uygulamak ister misiniz?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages.",
-  "ReviewRequests": "Review Requests",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making",
+  "AuthorMalicious": "{0} yapımcısı {1} zararlı yazılımlar veya hasar verebilecek programlar dağıtmakla biliniyor.",
+  "ReviewRequests": "İnceleme İstekleri",
+  "ApplyRequestedChanges": "İstenen Değişiklikleri Uygula",
+  "ManagePackage": "Paketi Yönet",
+  "Banned": "Yasaklı",
+  "NoIssues": "Sorun Yok",
+  "RequestReviewDisclaimer": "*Hesabınızın ID'si ve kayıtları sizin isteğinizle gönderildi",
+  "ScenarioMaking": "Senaryo Yapımı",
+  "ThemeMaking": "Tema Yapımı",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "Bu paketin bir tane daha uyumluluk uyarısı var",
+    "Plural": "Bu paketin {0} tane uyumluluk uyarıları var"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "Bu isteği sil",
+    "Plural": "Bu istekleri sil"
   },
-  "ViewRequest": "View Request",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
-  "SnoozeAllFiltered": "Snooze all filtered issues",
-  "LinkedPackages": "Linked Packages",
-  "NoTags": "No Tags",
-  "NoLinks": "No Links",
-  "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "ViewRequest": "İsteği görüntüle",
+  "RequiredItem": "Gerekli Nesne",
+  "ApplyAllActions": "Tüm önerilen işlemleri uygula",
+  "SnoozeAll": "Tüm sorunları sustur",
+  "SnoozeAllFiltered": "Tüm filtrelenmiş sorunları sustur",
+  "LinkedPackages": "Bağlı Paketler",
+  "NoTags": "Etiket Yok",
+  "NoLinks": "Bağlantılar Yok",
+  "HideReviewedPackages": "İncelenmiş modları gizle",
+  "ApplyRecommendedAction": "Önerilen işlemi uygula",
+  "AddMeaningfulNote": "Lütfen bu paketin sorununu açıklayan bir not ekleyin.",
+  "EditHistory": "Geçmişi Düzenle",
+  "EditNote": "Notu Düzenle",
+  "EditNoteInfo": "İleride diğer yöneticilerin de görmesi için bir not bırakın",
+  "RequestReviewUpdate": "İncelenmesi için yeni bir istek yollayın"
 }

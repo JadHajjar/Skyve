@@ -153,7 +153,7 @@
   "Stability_Local": "Esta es una versión local de su mod original '{0}'.\n\nLas versiones locales generalmente se utilizan para pruebas.",
   "Stability_BrokenFromPatch": "'{1}' dejó de funcionar después del parche {0} del juego. Por favor, espera hasta que se actualice antes de usarlo.\nMientras tanto, deberías deshabilitarlo.",
   "Stability_BrokenFromPatchSafe": "'{1}' dejó de funcionar después del parche {0} del juego. Por favor, espera hasta que se actualice antes de usarlo.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' se rompió después del parche {0} del juego. Pero se actualizó recientemente, podría ser seguro de usar.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' dejó de funcionar después del parche {0} del juego. Pero se actualizó recientemente, podría ser seguro de usar.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Deberías añadir el siguiente paquete a tu playset.",

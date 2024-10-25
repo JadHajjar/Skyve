@@ -1,80 +1,80 @@
 {
   "Usage": "Utilização",
   "Stability": "Estabilidade",
-  "ApplyContinue": "Aplicar e Continuar",
+  "ApplyContinue": "Aplicar e continuar",
   "Previous": "Anterior",
-  "Skip": "Pular",
+  "Skip": "Passar",
   "Note": "Observação",
-  "NoteInfo": "Additional information to be displayed for the mod",
-  "BlackListName": "Lista Negra por nome",
-  "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "NoteInfo": "Informações adicionais a serem mostradas para o mod",
+  "BlackListName": "Lista negra por nome",
+  "BlackListId": "Lista negra por nome",
+  "GlobalTagsInfo": "Marca todos os jogadores que verão no Skyve",
   "Links": "Links",
   "StatusesCount": "Estados ({0})",
   "InteractionCount": "Interações ({0})",
-  "AddStatus": "Adicionar Estado",
-  "AddInteraction": "Adicionar Interação",
+  "AddStatus": "Adicionar estado",
+  "AddInteraction": "Adicionar interação",
   "NotReviewed": "Ainda não analisado",
   "Stable": "Estável",
-  "StableNoNewFeatures": "Stable, only bug-fix updates",
-  "StableNoFutureUpdates": "Stable, no more updates",
-  "HasIssuesNoFutureUpdates": "Has issues, no more updates",
-  "BreaksOnPatch": "Stable, potentially breaks on patch",
+  "StableNoNewFeatures": "Estável, apenas atualizações de correções",
+  "StableNoFutureUpdates": "Estável, sem mais atualizações",
+  "HasIssuesNoFutureUpdates": "Tem problemas, sem mais atualizações",
+  "BreaksOnPatch": "Estável, mas pode falhar com o patch",
   "NotEnoughInformation": "Não há informação suficiente",
   "HasIssues": "Tem problemas",
   "Broken": "Quebrado",
   "Incompatible": "Incompatível",
-  "CityBuilding": "Construção da Cidade",
-  "AssetCreation": "Criação de Recurso",
-  "MapCreation": "Criação de Mapa",
+  "CityBuilding": "Construção da cidade",
+  "AssetCreation": "Criação de recurso",
+  "MapCreation": "Criação de mapa",
   "NoAction": "Não fazer nada",
-  "SubscribeToPackages": "Assine os pacotes vinculados",
+  "SubscribeToPackages": "Subscrever os pacotes vinculados",
   "RequiresConfiguration": "Requer uma configuração específica",
-  "SelectOne": "Selecione qualquer um",
+  "SelectOne": "Seleciona qualquer um",
   "UnsubscribeThis": "Cancelar inscrição neste pacote",
-  "UnsubscribeOther": "Cancelar assinatura de pacotes vinculados",
+  "UnsubscribeOther": "Cancelar inscrição de pacotes vinculados",
   "Switch": "Mudar para pacote vinculado",
   "FlippedSwitch": "Alternar para este pacote",
   "Deprecated": "Descontinuado",
-  "Reupload": "Re-enviar",
-  "CausesIssues": "Causa Problemas",
-  "SavesCantLoadWithoutIt": "Jogos salvos não podem carregar sem isso",
+  "Reupload": "Reenviar",
+  "CausesIssues": "Causa problemas",
+  "SavesCantLoadWithoutIt": "Os jogos guardados não podem ser carregados sem isso",
   "TestVersion": "Versão de teste",
   "DependencyMod": "Mod de dependência",
   "SourceCodeNotAvailable": "O código-fonte não está disponível",
   "MusicCanBeCopyrighted": "A música incluída pode ter direitos autorais",
-  "IncompleteDescription": "Descrição Incompleta",
+  "IncompleteDescription": "Descrição incompleta",
   "Successor": "Sucessor",
-  "LoadAfter": "Carregar Depois ...",
+  "LoadAfter": "Carregar depois",
   "Alternative": "Alternativa",
-  "SameFunctionality": "Mesma Funcionalidade",
-  "RequirementAlternative": "Alternativa para Requisito",
+  "SameFunctionality": "Mesma funcionalidade",
+  "RequirementAlternative": "Alternativa para requisito",
   "IncompatibleWith": "Incompatível com ..",
   "CausesIssuesWith": "Causa problemas com ..",
   "RequiredPackages": "Requer ..",
-  "StatusType": "Tipo de Estado",
-  "InteractionType": "Tipo de Interação",
-  "MissingDependency": "Dependência Faltando",
+  "StatusType": "Tipo de estado",
+  "InteractionType": "Tipo de interação",
+  "MissingDependency": "Dependência em falta",
   "Caution": "Cuidado",
   "Warning": "ATENÇÃO",
-  "AttentionRequired": "Atenção Necessária",
+  "AttentionRequired": "Atenção necessária",
   "Website": "site",
   "Donation": "Doar",
-  "ManageCompatibilityData": "Compatibility Management",
-  "YourPackages": "Manage your mods",
-  "AddPackages": "Adicionar Pacotes",
-  "ConfirmEndSession": "Tem certeza que deseja concluir sua sessão?",
-  "CrDataLoadFailed": "Falha ao carregar os dados, tente novamente mais tarde",
+  "ManageCompatibilityData": "Gestão de compatibilidade",
+  "YourPackages": "Gerir mods",
+  "AddPackages": "Adicionar pacotes",
+  "ConfirmEndSession": "Tens a certeza que queres terminar a tua sessão?",
+  "CrDataLoadFailed": "Falha ao carregar os dados, tenta novamente mais tarde",
   "AddGlobalTag": "Adicionar uma tag global",
   "ReuseData": "Reutilizar dados anteriores",
-  "ReuseData_Tip": "Reutilize os dados de compatibilidade do seu último pacote salvo para este.\r\nSegure Shift para aplicar e continuar",
-  "PleaseReviewTheStability": "Por favor, reveja a estabilidade deste pacote antes de salvar.",
-  "PleaseReviewPackageStatuses": "Por favor, revise os status deste pacote antes de salvar.\r\nAlguns têm um tipo de status inválido.",
-  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
-  "PleaseReviewPackageUsage": "Por favor, selecione um uso válido para este pacote.",
+  "ReuseData_Tip": "Reutiliza os dados de compatibilidade do teu último pacote guardado para este.\r\nMantém Shift pressionado para aplicar e continuar",
+  "PleaseReviewTheStability": "Por favor, revê a estabilidade deste pacote antes de guardar.",
+  "PleaseReviewPackageStatuses": "Por favor, revê os estados deste pacote antes de guardar.\r\nAlguns têm um tipo de estado inválido.",
+  "PleaseReviewPackageInteractions": "Por favor, revê as interações deste pacote antes de guardar.\r\nAlgumas têm um tipo de interação inválido.",
+  "PleaseReviewPackageUsage": "Por favor, seleciona um uso válido para este pacote.",
   "Interaction_Alternative": {
     "One": "'{1}' pode ser usado como uma alternativa a '{0}'.",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "Qualquer um dos seguintes pacotes pode ser usado como uma alternativa a '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' e '{1}' têm as mesmas funcionalidades.",
@@ -82,54 +82,54 @@
   },
   "Interaction_IncompatibleWith": {
     "One": "'{0}' e '{1}' não são compatíveis entre si.",
-    "Plural": "'{0}' não é compatível com qualquer um dos seguintes pacotes."
+    "Plural": "'{0}' não é compatível com nenhum dos seguintes pacotes."
   },
   "Interaction_CausesIssuesWith": {
     "One": "'{0}' pode causar problemas quando usado com '{1}'.",
     "Plural": "'{0}' pode causar problemas quando usado com os seguintes módulos."
   },
   "Interaction_RequiredPackages": {
-    "One": "Está faltando um pacote necessário para '{0}'.",
-    "Plural": "Está faltando os seguintes pacotes obrigatórios para '{0}'."
+    "One": "Está em falta um pacote necessário para '{0}'.",
+    "Plural": "Estão em falta os seguintes pacotes obrigatórios para '{0}'."
   },
   "Interaction_OptionalPackages": {
-    "One": "Está faltando um pacote opcional para '{0}'.",
-    "Plural": "Faltam os seguintes pacotes opcionais para '{0}'."
+    "One": "Está em falta um pacote opcional para '{0}'.",
+    "Plural": "Estão em falta os seguintes pacotes opcionais para '{0}'."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' foi bem-sucedido por '{1}'.",
-    "Plural": "'{0}' foi bem sucedido por um dos seguintes pacotes."
+    "One": "'{0}' foi substituído por '{1}'.",
+    "Plural": "'{0}' foi substituído por um dos seguintes pacotes."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' carregará diretamente após '{1}'.",
-    "Plural": "'{0}' carregará diretamente após os seguintes pacotes."
+    "One": "'{0}' será carregado diretamente após '{1}'.",
+    "Plural": "'{0}' será carregado diretamente após os seguintes pacotes."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' é necessário para '{1}'.",
+    "Plural": "'{0}' é necessário para os seguintes pacotes."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Interaction_Identical": "Os seguintes mods são versões duplicadas do mesmo mesmo.\nUsar-los ao mesmo tempo pode criar conflitos.",
+  "Status_Succeeded": "'{0}' foi bem-sucedido por '{1}', já estás a usar '{1}'. Não há mais necessidade de '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto, não é mais suportado pelo seu autor.",
   "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' é um re-envio de um pacote original.",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "'{0}' é uma nova atualização de '{1}'."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "'{0}' é conhecido por causar problemas no jogo.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "Depois de guardares a tua cidade com '{0}' ativado, não poderás mais carregar o jogo guardado sem '{0}' ativado.",
+    "One": "Depois de guardares a tua cidade com '{0}' ativado, não poderás mais carregar o jogo guardado sem '{0}' ativado.\nUtiliza '{1}' para recuperar o teu jogo guardado se necessário. Lê a descrição do Workshop para mais informações."
   },
   "Status_TestVersion": {
     "Zero": "Esta é uma versão de Teste esteja ciente que versões de teste de mods podem causar problemas e que atualizações nele podem causar erros inesperados.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Esta é uma versão 'Test' de '{1}'.\nEstá ciente de que atualizações podem causar problemas inesperados."
   },
   "Status_MissingDlc": {
-    "One": "Você não tem a DLC '{0} para usar este pacote.",
-    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Não tens a DLC '{0}' para usar este pacote.",
+    "Plural": "Esta é uma versão de teste de '{1}'.\r\nTem em atenção que as atualizações podem causar problemas inesperados."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "Este é um mod de dependência, mas não parece que estejas a usar qualquer pacote que o requeira.",
   "Status_SourceCodeNotAvailable": "O código-fonte deste mod não está disponível. Você não deve usá-lo a menos que confie em seu autor.",
   "SourceAvailable": "O código fonte está disponível",
   "StandardMod": "Standard Mod",
@@ -138,137 +138,137 @@
   "Status_SourceAvailable": "Este pacote não vai avisar sobre falta do código-fonte.",
   "Status_StandardMod": "Este pacote será ignorado durante o processamento dos mods para serem solucionados.",
   "OutputText": "Saída Esperada",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
-  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_AssetNotReviewed": "'{0}' ainda não foi classificado.\nA informação de compatibilidade pode não ser precisa; no entanto, os recursos são geralmente estáveis.",
+  "Stability_NotReviewed": "'{0}' ainda não foi revisto. \n\nA informação de compatibilidade pode não ser precisa.",
+  "Stability_Stable": "'{0}' é estável. O autor continua a trabalhar ativamente nele e a atualizá-lo.",
+  "Stability_StableNoNewFeatures": "'{0}' é estável, embora o autor já não vá lançar atualizações de funcionalidades. No entanto, continuará a atualizá-lo em caso de novos erros.",
+  "Stability_StableNoFutureUpdates": "'{0}' é estável, embora o autor já não ofereça suporte. Atualizações futuras ou correções de erros são improváveis.",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' pode causar problemas, e o autor já não oferece suporte. Atualizações futuras ou correções de erros são improváveis.",
+  "Stability_BreaksOnPatch": "É muito provável que '{0}' deixe de funcionar quando o novo patch for lançado.",
+  "Stability_NotEnoughInformation": "Não há informação suficiente para avaliar corretamente '{0}'.",
+  "Stability_HasIssues": "'{0}' pode causar problemas. Tem cuidado ao usá-lo.",
+  "Stability_Broken": "{0}' está avariado. \nÉ conhecido por falhar no jogo ou simplesmente não funcionar.",
+  "Stability_Incompatible": "'{0}' é marcado como incompatível com a tua versão atual do jogo.\r\nUsa-o com cautela ou desativa-o enquanto esperas que seja atualizado.",
+  "Stability_AssetIncompatible": "'{0}' é marcado como incompatível com a tua versão atual do jogo.\r\nOs assets raramente falham com novas atualizações, por isso deves estar seguro ao usá-lo.",
+  "Stability_Local": "Esta é uma versão local do mod original '{0}'.\r\n\r\nVersões locais são normalmente usadas para propósitos de teste.",
+  "Stability_BrokenFromPatch": "'{1}' falhou após o patch {0} do jogo. Por favor, aguarda até que seja atualizado antes de usá-lo.\r\nEntretanto, deves desativá-lo.",
+  "Stability_BrokenFromPatchSafe": "'{1}' falhou após o patch {0} do jogo. Por favor, aguarda até que seja atualizado antes de usá-lo.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' falhou após o patch {0} do jogo. Mas foi recentemente atualizado, pode ser seguro usá-lo.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Deves adicionar o seguinte pacote ao teu playset.",
+    "Plural": "Deves adicionar os seguintes pacotes ao teu playset."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "Por favor, segue as seguintes instruções:",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "Deves usar apenas um entre '{0}' e '{1}'.",
+    "Plural": "Deves usar apenas um entre '{0}' e os seguintes pacotes."
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "Deves remover '{0}' do teu playset.",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "Deves remover '{1}' do teu playset.",
+    "Plural": "Deves remover os seguintes pacotes do teu playset."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "Action_ExcludeThis": "Deves desativar '{0}'.",
+  "ExcludeThis": "Desativar este pacote",
+  "Exclude": "Desativar",
   "Unsubscribe": "Cancelar assinatura",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "Deves desativar '{1}'.",
+    "Plural": "Deves desativar os seguintes pacotes."
   },
   "Action_Switch": {
-    "One": "Você deve mudar para '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "One": "Deves mudar para '{1}'.",
+    "Plural": "Deves mudar para um dos seguintes pacotes."
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "Deves incluir '{0}'",
   "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Deves adicionar o seguinte pacote ao teu playset.",
+    "Plural": "Deves adicionar os seguintes pacotes ao teu playset."
   },
   "NoRequiredDlcs": "DLCs não necessários",
   "DlcsSelected": {
     "One": "{0} DLC selecionado",
     "Plural": "{0} DLCs selecionados"
   },
-  "RequiredDLCs": "DLCs/CCPs Necessárias",
-  "CRT_Stability": "Stability",
+  "RequiredDLCs": "DLCs/CCPs necessárias",
+  "CRT_Stability": "Estabilidade",
   "CRT_Successors": "Sucessores",
-  "CRT_RequiredPackages": "Pacotes Necessários",
-  "CRT_OptionalPackages": "Pacotes Opcionais",
-  "CRT_DlcMissing": "DLCs/CCPs ausentes",
-  "CRT_Compatibility": "Problemas de Compatibilidade",
+  "CRT_RequiredPackages": "Pacotes necessários",
+  "CRT_OptionalPackages": "Pacotes opcionais",
+  "CRT_DlcMissing": "DLCs/CCPs em falta",
+  "CRT_Compatibility": "Problemas de compatibilidade",
   "CRT_Alternatives": "Alternativas",
   "CRT_Status": "Estados",
   "CRT_Ambiguous": "Ambiguidade",
-  "CRT_RequiredItem": "Required Item",
-  "CRT_RequestReview": "Review Request Status",
-  "LastReviewDate": "Foi revisada pela última vez em {0}",
-  "RequestReviewInfo": "Está tendo problemas com este pacote?\nSolicite uma nova análise aqui:",
-  "RequestReview": "Solicitar Análise",
+  "CRT_RequiredItem": "Item necessário",
+  "CRT_RequestReview": "Estado da solicitação de revisão",
+  "LastReviewDate": "Foi revisto pela última vez em {0}",
+  "RequestReviewInfo": "Estás a ter problemas com este pacote?\nSolicita uma nova análise aqui:",
+  "RequestReview": "Solicitar análise",
   "MissingDependencyCount": {
-    "One": "{0} {1} está faltando dependências",
-    "Plural": "{0} {1} estão faltando dependências"
+    "One": "{0} {1} está com dependências em falta",
+    "Plural": "{0} {1} têm dependências em falta"
   },
   "CautionCount": "{0} {1} onde é aconselhado cuidado",
   "WarningCount": "{0} {1} com um aviso",
   "AttentionRequiredCount": {
-    "One": "{0} {1} requer sua atenção",
-    "Plural": "{0} {1} requer sua atenção"
+    "One": "{0} {1} requer a tua atenção",
+    "Plural": "{0} {1} requerem a tua atenção"
   },
   "ExcludeCount": {
     "One": "{0} {1} deve ser excluído",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} {1} devem ser excluídos"
   },
-  "UnsubscribeCount": "{0} {1} Que você deve cancelar a assinatura de",
+  "UnsubscribeCount": "{0} {1} que deves cancelar a assinatura",
   "SwitchCount": {
     "One": "{0} {1} requer mudança para outro",
-    "Plural": "{0} {1} requer mudança para outro"
+    "Plural": "{0} {1} requerem mudança para outro"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1} é necessário, mas não está ativado",
+    "Plural": "{0} {1} são necessários, mas não estão ativados"
   },
   "PackageType": "Tipo de pacote",
-  "GenericPackage": "Pacote Genérico",
+  "GenericPackage": "Pacote genérico",
   "MusicPack": "Pacote de música",
-  "ThemeMix": "Misturar tema",
+  "ThemeMix": "Mistura de temas",
   "IMTMarkings": "Marcações IMT",
-  "RenderItPreset": "Renderizar isso! Predefinição",
-  "POFont": "Fonte de Objeto Procedural",
-  "NameList": "Nome-Lista/Traduções de Jogo",
-  "ApplyChangedBeforeExit": "Você tem alterações não salvas.\r\n\r\nGostaria de aplicar essas alterações antes de continuar?",
-  "AuthorRetired": "O autor de {0}, {1}, se aposentou ou está inativo há muito tempo.\n\nAs atualizações futuras e a estabilidade dos pacotes não são garantidas.",
-  "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus em suas embalagens.",
-  "ReviewRequests": "Review Requests",
+  "RenderItPreset": "Renderiza isto! Predefinição",
+  "POFont": "Fonte de objeto procedural",
+  "NameList": "Lista de nomes/Traduções do jogo",
+  "ApplyChangedBeforeExit": "Tens alterações não guardadas.\r\n\r\nGostarias de aplicar estas alterações antes de continuares?",
+  "AuthorRetired": "O autor de {0}, {1}, reformou-se ou está inativo há muito tempo.\n\nAs atualizações futuras e a estabilidade dos pacotes não são garantidas.",
+  "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus nos seus pacotes.",
+  "ReviewRequests": "Solicitações de revisão",
   "ApplyRequestedChanges": "Aplicar alterações solicitadas",
-  "ManagePackage": "Gerenciar pacote",
+  "ManagePackage": "Gerir pacote",
   "Banned": "Banido",
   "NoIssues": "Sem problemas",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
-  "ScenarioMaking": "Cenário/Fabricação",
-  "ThemeMaking": "Criação de Temas",
+  "RequestReviewDisclaimer": "*A ID da tua conta e registos são enviados com a tua solicitação",
+  "ScenarioMaking": "Criação de cenários",
+  "ThemeMaking": "Criação de temas",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "Este pacote tem outro aviso de compatibilidade",
+    "Plural": "Este pacote tem {0} outros avisos de compatibilidade"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "Eliminar esta solicitação",
+    "Plural": "Eliminar estas solicitações"
   },
-  "ViewRequest": "View Request",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
-  "SnoozeAllFiltered": "Snooze all filtered issues",
-  "LinkedPackages": "Linked Packages",
-  "NoTags": "No Tags",
-  "NoLinks": "No Links",
-  "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "ViewRequest": "Ver solicitação",
+  "RequiredItem": "Item necessário",
+  "ApplyAllActions": "Aplicar todas as ações recomendadas",
+  "SnoozeAll": "Adiar todos os problemas",
+  "SnoozeAllFiltered": "Adiar todos os problemas filtrados",
+  "LinkedPackages": "Pacotes vinculados",
+  "NoTags": "Sem etiquetas",
+  "NoLinks": "Sem links",
+  "HideReviewedPackages": "Ocultar mods revistos",
+  "ApplyRecommendedAction": "Aplicar ação recomendada",
+  "AddMeaningfulNote": "Por favor, adiciona uma nota descrevendo o que está errado com este pacote.",
+  "EditHistory": "Histórico de edições",
+  "EditNote": "Editar nota",
+  "EditNoteInfo": "Deixa uma nota para que outros gestores a vejam no futuro",
+  "RequestReviewUpdate": "Enviar uma nova solicitação para ser revista"
 }

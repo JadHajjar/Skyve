@@ -41,7 +41,7 @@
   "ConfirmDeletePlayset": "您确定要删除配组“{0}”吗？",
   "ActivatePlayset": "启用配组",
   "PlaysetMerge": "将其中的模组全部添加到当前配组",
-  "PlaysetExclude": "Remove all of this playset's mods from your active playset",
+  "PlaysetExclude": "将此配组中的所有模组从当前配组中移除",
   "PlaysetDelete": "删除此配组",
   "MissingPackages": "缺失的插件",
   "OpenPackagePage": "打开此插件的详情页面",
@@ -197,11 +197,11 @@
   },
   "EnableThisItemInAllPlaysets": {
     "One": "在所有的配组中启用",
-    "Plural": "Enable the selected items in all your playsets"
+    "Plural": "在所有配组中启用选中的模组"
   },
   "DisableThisItemInAllPlaysets": {
     "One": "在所有的配组中禁用",
-    "Plural": "Disable the selected items in all your playsets"
+    "Plural": "在所有配组中禁用选中的模组"
   },
   "CopyPackageName": {
     "One": "复制插件名称",
@@ -256,7 +256,7 @@
   "FlipItemCopyFilterAction": "无需按住 Alt 键，左键点击标签可直接将其添加到筛选标签",
   "FlipItemCopyFilterAction_Tip": "启用此选项后，如果按住 Alt 键 + 鼠标左键点击一个标签，则可以查看该标签相关信息；如果不按住 Alt 键，鼠标左键点击一个标签，则可以将该标签添加到筛选选项的标签中。",
   "AltClickTo": "按住 Alt + 左键点击，{0}",
-  "FilterByThisAuthor": "Add '{0}' to your author filters",
+  "FilterByThisAuthor": "将作者 \"{0}\" 添加到筛选条件",
   "AddToSearch": "将“ {0} ”添加到筛选标签",
   "CopyToClipboard": "将 '{0}' 复制到您的剪贴板",
   "ViewPackageCR": "查看此插件的兼容性信息",
@@ -274,8 +274,8 @@
     "Plural": "订阅量：{1}"
   },
   "FollowersCount": {
-    "One": "{1} follower",
-    "Plural": "{1} followers"
+    "One": "{1} 个关注者",
+    "Plural": "{1} 个关注者"
   },
   "SearchWorkshop": "搜索创意工坊…",
   "DiscoverWorkshop": "在工坊查找模组...",
@@ -366,7 +366,7 @@
   "ExplainIssueInfo": "您的描述应尽可能地详细，其中包含遇到了什么问题以及重现此问题的方法",
   "ReviewRequestSent": "您对于 '{0}' 的检查申请已经发送成功！\n\n感谢您的反馈。",
   "ReviewRequestFailed": "无法发送您关于 “{0}” 的检查申请。\n\n{1}",
-  "SendReview": "发送检查申请",
+  "SendReview": "发送检查请求",
   "EditTags": {
     "One": "编辑此插件的标签",
     "Plural": "编辑所有已选的插件的标签"
@@ -381,10 +381,10 @@
   "TreatOptionalAsRequired_Tip": "启用后，如果缺少了可选插件，将会显示“缺少前置”的警告。",
   "AddCustomTag": "添加自定义标签",
   "PackageIsNotDownloaded": "插件 '{0}' 已从您的电脑中删除",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
+  "PackageIsOutOfDate": "插件 '{0}' 已经过期\n\n您的版本已落后 {1}",
   "PackageIsOutOfDateVersion": {
-    "One": "'{0}' is out of date, you are on an older version of the mod.",
-    "Plural": "{0} {1} are out of date, you are on older versions of these mods."
+    "One": "'{0}' 已经过期，你正在使用此模组的旧版本。",
+    "Plural": "{0} 个{1} 已经过期，你正在使用它们的旧版本。"
   },
   "PackageIsMaybeOutOfDate": "插件 '{0}' 可能已过期，它已经于 {1} 进行了更新",
   "RemovedByAuthor": "已被作者删除",
@@ -392,7 +392,7 @@
   "LoggedInAs": "登录为",
   "LoggedInUser": "登录为 {0}",
   "UnknownUser": "未知用户",
-  "AddMeaningfulDescription": "发送申请前，请提供有效的描述信息。",
+  "AddMeaningfulDescription": "发送请求前，请提供有效的描述信息。",
   "ThisSubscribesTo": {
     "One": "在此进程中，您将订阅 {0} 个插件。",
     "Plural": "在此进程中，您将订阅 {0} 个插件。"
@@ -555,8 +555,8 @@
   "GenericPlayset": "通用配组",
   "CompatibilityCenter": "兼容性中心",
   "Dependency": {
-    "One": "依赖于",
-    "Plural": "依赖于"
+    "One": "前置项目",
+    "Plural": "前置项目"
   },
   "ModID": "模组ID",
   "Subscribers": "订阅者",
@@ -593,30 +593,30 @@
   "PackagesIncludedDisabled": "已装载且已禁用的插件",
   "OutOf": "{0} 个，共 {1} 个",
   "RecentlyUpdatedItem": "近期更新的{0}",
-  "MassSubscribeWarningTitle": "Mass subscription warning",
-  "MassSubscribeWarningInfo": "You're about to subscribe to {0} mods. Are you sure you want to continue?",
-  "DropImportFile": "Release to import the {0} from this report",
-  "OutOfDateItem": "Out of date {0}",
-  "Bio": "Bio",
-  "ColoredAuthorNames": "Color authors & users' name and avatar",
-  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users.",
-  "DetectedIssues": "Detected Issues",
-  "FixAllIssues": "Fix All Issues",
+  "MassSubscribeWarningTitle": "大批量订阅警告",
+  "MassSubscribeWarningInfo": "您即将订阅 {0} 个模组，确定要继续吗？",
+  "DropImportFile": "松开鼠标即可从此报告中导入 {0}",
+  "OutOfDateItem": "已过期{0}",
+  "Bio": "个性签名",
+  "ColoredAuthorNames": "为作者和用户的名字和头像添加颜色标记",
+  "ColoredAuthorNames_Tip": "为作者/用户添加一个独特的颜色标记，用户名和头像将使用由改颜色标记，以便关注特定的用户。",
+  "DetectedIssues": "检测到的问题",
+  "FixAllIssues": "全部修复",
   "MarkAllAsRead": "全部已读",
   "MarkAsRead": "已读",
   "Dismiss": "忽略",
   "New": "新建",
   "ViewMoreWorkshop": "在工坊中查看",
-  "ReviewSaveFileInfo": "Select a save-game to send with your request to help us investigate the issue",
-  "CouldNotUploadFile": "Could not upload your file at this time",
-  "ReplyToRequester": "Reply to requester",
+  "ReviewSaveFileInfo": "选择一个存档与您的请求一起发送，以便我们调查问题",
+  "CouldNotUploadFile": "目前无法上传您的文件",
+  "ReplyToRequester": "回复给请求者",
   "SendReply": "发送回复",
-  "LetUserKnowIsFixed": "Let the requester know that the issue was fixed",
-  "LetUserKnowSaveFileNeeded": "Let the requester know that you need a save-game to properly review",
-  "ReviewRequestNotification": "Review Request Update",
-  "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
-  "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
-  "ReviewIsSaveFileNeeded": "The issue you've reported needs more information to be identified. Please send a new Request with a save-game attached to it to be reviewed.",
-  "ReviewIsUpdated": "The compatibility information of '{0}' was updated after your review request.",
-  "ReviewPending": "Your review request for '{0}' has been received but is still pending review."
+  "LetUserKnowIsFixed": "让请求者知道问题已经解决",
+  "LetUserKnowSaveFileNeeded": "让请求者知道需要存档才能正确地检查",
+  "ReviewRequestNotification": "检查请求的更新",
+  "ReviewRequestNotificationInfo": "您对“{0}”的检查请求有一个新的动态。",
+  "ReviewIsFixed": "您报告的问题现已修复。您可以继续使用 {0}。",
+  "ReviewIsSaveFileNeeded": "您报告的问题需要更多信息才能调查。请发送一个新请求并附带一个存档以便检查。",
+  "ReviewIsUpdated": "在您请求检查后，'{0}' 的兼容性信息已更新。",
+  "ReviewPending": "您对 '{0}' 的检查请求已收到，但仍在等待中。"
 }

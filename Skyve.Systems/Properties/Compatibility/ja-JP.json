@@ -145,21 +145,21 @@
   "Stability_StableNoFutureUpdates": "'{0}'は安定していますが、サポートは終了していて、今後のアップデートやバグ修正は期待できません。",
   "Stability_HasIssuesNoFutureUpdates": "'{0}'は問題を引き起こす可能性があり、サポートは終了しています。",
   "Stability_BreaksOnPatch": "'{0}'はアップデートが行われると機能しなくなる可能性が高いです。",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
+  "Stability_NotEnoughInformation": "'{0} ' を適切にレビューするのに十分な情報がありません。",
   "Stability_HasIssues": "「{0}」は問題を引き起こす可能性があります。\n使用時は注意して下さい。",
   "Stability_Broken": "「{0}」は破損しています。\nゲームがプレイできない・既に動作しないことが判明しています。",
-  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
-  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
+  "Stability_Incompatible": "「{0}」は、現在のゲーム バージョンと互換性がないとマークされています。\n注意して使用するか、更新されるまで無効にしてください。",
+  "Stability_AssetIncompatible": "「{0}」 は、現在のゲーム バージョンと互換性がないとマークされています。\nアセットが新しいアップデートで壊れることはめったにないので、問題なく使用できるはずです。",
   "Stability_Local": "このパッケージは、オリジナルMOD 「{0}」のローカルバージョンです。\n\n一般的にローカルバージョンは、テスト目的で使用されます。",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromPatch": "「{1}」 はゲームパッチ {0} 更新後に壊れました。使用する前に更新されるまでお待ちください。\nそれまでの間、無効にしてください。",
   "Stability_BrokenFromPatchSafe": "「{1}」はパッチ {0} で壊れました。アップデートして対応するまでしばらく待って下さい。",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' はゲームのパッチ {0} 後に壊れました。しかし、最近更新されたため、安全に使用できます。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "以下のパッケージをプレイセットに追加して下さい.",
     "Plural": "以下のパッケージをプレイセットに追加して下さい."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "以下の手順に従ってください:",
   "Action_SelectOne": {
     "One": "「{0}」と「{1}」の中から、どちらか1つだけを選択して下さい。",
     "Plural": "「{0}」と以下のパッケージから、どちらか1つだけを選択して下さい。"
@@ -202,7 +202,7 @@
   "CRT_Status": "ステータス",
   "CRT_Ambiguous": "不明瞭",
   "CRT_RequiredItem": "必要アイテム",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequestReview": "リクエストのステータスを確認",
   "LastReviewDate": "最後にレビューした日: {0}",
   "RequestReviewInfo": "このパッケージで問題が発生しましたか？",
   "RequestReview": "レビューを依頼",
@@ -218,7 +218,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} は除外が必要",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} {1} は除外が必要"
   },
   "UnsubscribeCount": "{0} {1} はサブスク解除が必要",
   "SwitchCount": {
@@ -226,8 +226,8 @@
     "Plural": "{0} {1} は他へ切り替えが必要"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1} は必須ですが有効になっていません",
+    "Plural": "{0} {1} は必須ですが有効になっていません"
   },
   "PackageType": "パッケージのタイプ",
   "GenericPackage": "標準パッケージ",
@@ -240,12 +240,12 @@
   "ApplyChangedBeforeExit": "保存していない変更点があります。\n\n続行する前に、これらの変更を適用しますか？",
   "AuthorRetired": "{0} / {1} の作者は引退済みか長期間で活動していません。\n\n今後のアップデートやパッケージの安定性は保証されません。",
   "AuthorMalicious": "{0} / {1} の作者は、マルウェアなどのウイルスのような有害コンテンツをパッケージに含めたことで知られています。",
-  "ReviewRequests": "Review Requests",
+  "ReviewRequests": "レビューをリクエスト",
   "ApplyRequestedChanges": "リクエストの変更を適用",
   "ManagePackage": "パッケージの管理",
   "Banned": "BAN済み",
   "NoIssues": "問題なし",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "*あなたのアカウントのIDとログはあなたのリクエストとともに送信されます",
   "ScenarioMaking": "シナリオの作成",
   "ThemeMaking": "テーマの作成",
   "OtherCompatibilityWarnings": {
@@ -257,18 +257,18 @@
     "Plural": "リクエストを削除"
   },
   "ViewRequest": "リクエストを表示",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
+  "RequiredItem": "必要アイテム",
+  "ApplyAllActions": "推奨されるすべてのアクションを適用",
+  "SnoozeAll": "すべての問題をスヌーズする",
   "SnoozeAllFiltered": "Snooze all filtered issues",
-  "LinkedPackages": "Linked Packages",
-  "NoTags": "No Tags",
-  "NoLinks": "No Links",
+  "LinkedPackages": "リンクされたパッケージ",
+  "NoTags": "タグなし",
+  "NoLinks": "リンクなし",
   "HideReviewedPackages": "レビューしたModを隠す",
   "ApplyRecommendedAction": "推奨されるアクションを適用",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "AddMeaningfulNote": "このパッケージの何が間違っているかを説明するメモを追加してください。",
+  "EditHistory": "編集履歴",
+  "EditNote": "メモを編集",
+  "EditNoteInfo": "他のマネージャーが将来表示するメモを残してください",
+  "RequestReviewUpdate": "レビューされる新しいリクエストを送信"
 }
