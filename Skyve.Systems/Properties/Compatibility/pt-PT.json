@@ -151,6 +151,8 @@
   "Stability_Incompatible": "'{0}' é marcado como incompatível com a tua versão atual do jogo.\r\nUsa-o com cautela ou desativa-o enquanto esperas que seja atualizado.",
   "Stability_AssetIncompatible": "'{0}' é marcado como incompatível com a tua versão atual do jogo.\r\nOs assets raramente falham com novas atualizações, por isso deves estar seguro ao usá-lo.",
   "Stability_Local": "Esta é uma versão local do mod original '{0}'.\r\n\r\nVersões locais são normalmente usadas para propósitos de teste.",
+  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
   "Stability_BrokenFromPatch": "'{1}' falhou após o patch {0} do jogo. Por favor, aguarda até que seja atualizado antes de usá-lo.\r\nEntretanto, deves desativá-lo.",
   "Stability_BrokenFromPatchSafe": "'{1}' falhou após o patch {0} do jogo. Por favor, aguarda até que seja atualizado antes de usá-lo.",
   "Stability_BrokenFromPatchUpdated": "'{1}' falhou após o patch {0} do jogo. Mas foi recentemente atualizado, pode ser seguro usá-lo.",
