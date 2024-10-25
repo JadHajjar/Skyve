@@ -17,6 +17,7 @@ public class CompatibilityMessageControl : SlickControl
 	private readonly Dictionary<IPackageIdentity, int> _modHeights = [];
 	private Rectangle bulkActionRect;
 	private Rectangle dismissActionRect;
+	private Rectangle linkActionRect;
 	private Rectangle recommendedActionRect;
 	private Rectangle snoozeRect;
 
@@ -29,6 +30,7 @@ public class CompatibilityMessageControl : SlickControl
 	public ReportType Type { get; }
 	public ICompatibilityItem Message { get; }
 	public PackageCompatibilityReportControl PackageCompatibilityReportControl { get; }
+	public string? LinkToFollow { get; set; }
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
@@ -68,6 +70,7 @@ public class CompatibilityMessageControl : SlickControl
 
 		var hovered = snoozeRect.Contains(e.Location)
 			|| bulkActionRect.Contains(e.Location)
+			|| linkActionRect.Contains(e.Location)
 			|| dismissActionRect.Contains(e.Location)
 			|| recommendedActionRect.Contains(e.Location)
 			|| _actionRects.Any(x => x.Value.Rectangle.Contains(e.Location))
@@ -183,6 +186,11 @@ public class CompatibilityMessageControl : SlickControl
 
 			await ServiceCenter.Get<IUpdateManager>().MarkReviewReplyAsRead(PackageCompatibilityReportControl.Package);
 		}
+
+		if (e.Button == MouseButtons.Left && linkActionRect.Contains(e.Location))
+		{
+			PlatformUtil.OpenUrl(LinkToFollow);
+		}
 	}
 
 	private async Task Invoke(ICompatibilityActionInfo action, IPackageIdentity? package = null)
@@ -243,9 +251,28 @@ public class CompatibilityMessageControl : SlickControl
 				rectangle.Y += Padding.Top - Margin.Left + (int)e.Graphics.Measure(note, smallFont, rectangle.Width - Padding.Top).Height;
 			}
 
+			var buttonRectangle = rectangle;
+			var buttonHeight = 0;
+
+			if (!string.IsNullOrEmpty(LinkToFollow))
+			{
+				linkActionRect = SlickButton.AlignAndDraw(e.Graphics, buttonRectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
+				{
+					Text = $"Go to {new Uri(LinkToFollow).Host}",
+					Icon = "Share",
+					Font = font,
+					ButtonType = ButtonType.Active,
+					Cursor = cursor,
+					HoverState = HoverState & ~HoverState.Focused,
+				}).Rectangle;
+
+				buttonRectangle = buttonRectangle.Pad(linkActionRect.Width + Padding.Left, 0, 0, 0);
+				buttonHeight = linkActionRect.Height;
+			}
+
 			if (Message.Status.Action is StatusAction.RequestReview)
 			{
-				bulkActionRect = SlickButton.AlignAndDraw(e.Graphics, rectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
+				bulkActionRect = SlickButton.AlignAndDraw(e.Graphics, buttonRectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
 				{
 					Text = Message.Type is ReportType.RequestReview ? LocaleCR.RequestReviewUpdate : LocaleCR.RequestReview,
 					Icon = "RequestReview",
@@ -255,37 +282,28 @@ public class CompatibilityMessageControl : SlickControl
 					HoverState = HoverState & ~HoverState.Focused,
 				}).Rectangle;
 
-				if (Message.Type is ReportType.RequestReview)
-				{
-					dismissActionRect = SlickButton.AlignAndDraw(e.Graphics, rectangle.Pad(bulkActionRect.Width + Padding.Left, 0, 0, 0), ContentAlignment.TopLeft, new ButtonDrawArgs
-					{
-						Text = Locale.Dismiss,
-						Icon = "Ok",
-						Font = font,
-						ButtonType = ButtonType.Dimmed,
-						BackgroundColor = FormDesign.Design.BackColor,
-						Cursor = cursor,
-						HoverState = HoverState & ~HoverState.Focused,
-					}).Rectangle;
-				}
-
-				rectangle.Y += bulkActionRect.Height;
+				buttonRectangle = buttonRectangle.Pad(bulkActionRect.Width + Padding.Left, 0, 0, 0);
+				buttonHeight = bulkActionRect.Height;
 			}
 
-			if (Message.Status.Action is StatusAction.MarkAsRead)
+			if (Message.Type is ReportType.RequestReview || Message.Status.Action is StatusAction.MarkAsRead)
 			{
-				dismissActionRect = SlickButton.AlignAndDraw(e.Graphics, rectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
+				dismissActionRect = SlickButton.AlignAndDraw(e.Graphics, buttonRectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
 				{
 					Text = Locale.Dismiss,
 					Icon = "Ok",
 					Font = font,
+					ButtonType = ButtonType.Dimmed,
 					BackgroundColor = FormDesign.Design.BackColor,
 					Cursor = cursor,
 					HoverState = HoverState & ~HoverState.Focused,
 				}).Rectangle;
 
-				rectangle.Y += dismissActionRect.Height;
+				buttonRectangle = buttonRectangle.Pad(dismissActionRect.Width + Padding.Left, 0, 0, 0);
+				buttonHeight = dismissActionRect.Height;
 			}
+
+			rectangle.Y += buttonHeight;
 
 			var bulkAction = _compatibilityActions.GetBulkAction(Message);
 

@@ -17,7 +17,7 @@ public interface IWorkshopService
 	IPackage GetPackage(IPackageIdentity identity);
 	Task<IPackage> GetPackageAsync(IPackageIdentity identity);
 	Task<IEnumerable<IWorkshopInfo>> GetWorkshopItemsByUserAsync(object userId, WorkshopQuerySorting sorting = WorkshopQuerySorting.DateCreated, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null, int? page = null);
-	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null, int? page = null);
+	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, WorkshopSearchTime searchTime = WorkshopSearchTime.AllTime, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null, int? page = null);
 
 #if CS2
 	event Action? ContextAvailable;
@@ -27,7 +27,7 @@ public interface IWorkshopService
 	bool IsAvailable { get; }
 
 	Task Initialize();
-	Task Login();
+	Task<bool> Login();
 	Task<bool> Login(string email, string password, bool rememberMe);
 	Task WaitUntilReady();
 	Task RunSync();
@@ -39,5 +39,7 @@ public interface IWorkshopService
 	IAuthor? GetUser(IUser? user);
 	Task<IAuthor?> GetUserAsync(IUser? user);
 	ILink? GetCommentsPageUrl(IPackageIdentity packageIdentity);
+	bool IsLocal(IPackageIdentity identity);
+	Task Shutdown();
 #endif
 }

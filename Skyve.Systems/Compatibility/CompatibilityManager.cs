@@ -369,6 +369,18 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
+		if (stability is PackageStability.BrokenFromNewVersion)
+		{
+			if (!_compatibilityHelper.IsPackageEnabled(package.Id, false))
+			{
+				stability = PackageStability.BrokenFromNewVersionSafe;
+			}
+			else if (workshopInfo?.ServerTime > packageData.ReviewDate)
+			{
+				stability = PackageStability.NotEnoughInformation;
+			}
+		}
+
 		if (packageData.Id > 0 && !_compatibilityHelper.IsPackageEnabled(package.Id, false))
 		{
 			var requiredFor = GetRequiredFor(packageData.Id);
@@ -401,6 +413,14 @@ public class CompatibilityManager : ICompatibilityManager
 					$"Stability_{stability}",
 					[_citiesManager.GameVersion ?? packageData.ReviewedGameVersion ?? string.Empty, workshopInfo?.CleanName(true) ?? package.Name]);
 			}
+			else if (stability is PackageStability.BrokenFromNewVersion or PackageStability.BrokenFromNewVersionSafe)
+			{
+				info.AddWithLocale(ReportType.Stability,
+					new StabilityStatus(stability, null, false),
+					workshopInfo?.CleanName(true),
+					$"Stability_{stability}",
+					[workshopInfo?.Version is null ? string.Empty : $" (v{workshopInfo?.Version})", workshopInfo?.CleanName(true) ?? package.Name]);
+			}
 			else
 			{
 				info.Add(ReportType.Stability, new StabilityStatus(stability, null, false), workshopInfo?.CleanName(true), []);
@@ -422,12 +442,12 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (!package.IsLocal() && isCodeMod && packageData.Type is PackageType.GenericPackage)
 		{
-			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !packageData.IndexedStatuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Links?.Any(x => x.Type is LinkType.Github) != true)
+			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !packageData.IndexedStatuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Links?.Any(x => x.Type is LinkType.Github) != true && !_userService.IsUserVerified(workshopInfo?.Author))
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.NoAction });
 			}
 
-			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 30)
+			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 30 && !_userService.IsUserVerified(workshopInfo?.Author))
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.NoAction });
 			}

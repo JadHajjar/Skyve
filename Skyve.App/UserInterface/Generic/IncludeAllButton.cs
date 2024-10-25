@@ -62,12 +62,12 @@ public class IncludeAllButton : SlickControl
 		Margin = UI.Scale(new Padding(4, 4, 4, 5));
 		Padding = UI.Scale(new Padding(3));
 
-		var ItemHeight = UI.Scale(28);
+		var itemHeight = UI.Scale(28);
 
 #if CS2
-		size = Size = new Size((ItemHeight * 2) + Margin.Horizontal, ItemHeight - UI.Scale(4));
+		size = Size = new Size((itemHeight * 2) + Margin.Horizontal, itemHeight - UI.Scale(4));
 
-		var rect = ClientRectangle.Align(new Size(ItemHeight, Height), ContentAlignment.MiddleLeft);
+		var rect = ClientRectangle.Align(new Size(itemHeight, Height), ContentAlignment.MiddleLeft);
 		IncludedRect = rect;
 		rect.X += rect.Width + Margin.Horizontal;
 		ActionRect = rect;

@@ -15,6 +15,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	private readonly ISettings _settings;
 	private readonly ILocationService _locationManager;
 	private readonly System.Timers.Timer timer;
+	private readonly DelayedAction delayedFilter;
 	private List<ILogTrace>? selectedFileLogs;
 	private List<ILogTrace>? defaultLogs;
 
@@ -24,11 +25,10 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		InitializeComponent();
 
-		logTraceControl.CanDrawItem += LogTraceControl_CanDrawItem;
-
 		if (CrossIO.CurrentPlatform is Platform.Windows)
 		{
 			DD_LogFile.StartingFolder = CrossIO.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+			DD_LogFile.PinnedFolders = new() { [Path.GetFileName(_settings.FolderSettings.AppDataPath)] = _settings.FolderSettings.AppDataPath };
 		}
 
 		foreach (var button in TLP_HelpLogs.GetControls<SlickButton>())
@@ -39,6 +39,9 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 		}
 
+		SSS_LogLevel.SelectedItem = SSS_LogLevel.Items[0];
+		logTraceControl.LogLevel = (string)SSS_LogLevel.SelectedItem;
+
 		if (CrossIO.CurrentPlatform is not Platform.Windows)
 		{
 			B_SaveZip.ButtonType = ButtonType.Active;
@@ -48,6 +51,8 @@ public partial class PC_HelpAndLogs : PanelContent
 		timer = new System.Timers.Timer(5000);
 		timer.Elapsed += Timer_Elapsed;
 		timer.Start();
+
+		delayedFilter = new DelayedAction(150, logTraceControl.FilterChanged);
 	}
 
 	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -85,8 +90,8 @@ public partial class PC_HelpAndLogs : PanelContent
 		P_Troubleshoot.Margin = UI.Scale(new Padding(10, 10, 5, 0), UI.UIScale);
 		TLP_Errors.Margin = UI.Scale(new Padding(10, 10, 5, 10), UI.UIScale);
 		L_Troubleshoot.Font = UI.Font(9F);
-		CB_OnlyShowErrors.Font = UI.Font(7.5F);
-		CB_OnlyShowErrors.Padding = TB_Search.Margin = B_OpenSkyveLog.Margin = B_OpenLog.Margin = UI.Scale(new Padding(3));
+		TB_Search.Margin = B_OpenSkyveLog.Margin = B_OpenLog.Margin = UI.Scale(new Padding(3));
+		SSS_LogLevel.Size = UI.Scale(new Size(450, 24));
 		tableLayoutPanel1.Width = UI.Scale(250);
 		B_OpenSkyveLog.Height = B_OpenLog.Height = UI.Scale(48);
 
@@ -200,6 +205,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		selectedFileLogs = await Task.Run(() =>
 		{
+			var logs = new List<ILogTrace>();
 			var zip = file.ToLower().EndsWith(".zip");
 
 			if (zip)
@@ -209,17 +215,18 @@ public partial class PC_HelpAndLogs : PanelContent
 					using var stream = File.OpenRead(file);
 					using var zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, false);
 
-					var entry = zipArchive.GetEntry("Log.log");
-
-					if (entry is null)
+					foreach (var item in zipArchive.Entries.Where(x => x.FullName.EndsWith(".log", StringComparison.InvariantCultureIgnoreCase)))
 					{
-						logTraceControl.SetItems(defaultLogs ?? []);
-						return null;
+						var temp = CrossIO.GetTempFileName();
+
+						item.ExtractToFile(temp);
+
+						logs.AddRange(_logUtil.ExtractTrace(item.FullName, temp));
+
+						CrossIO.DeleteFile(temp, true);
 					}
 
-					file = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.txt");
-
-					entry.ExtractToFile(file);
+					return logs;
 				}
 				catch
 				{
@@ -229,7 +236,7 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 
 #if CS2
-			var logs = _logUtil.ExtractTrace(file, file);
+			logs = _logUtil.ExtractTrace(file, file);
 
 			DD_LogFile.SelectedFile = file;
 #else
@@ -244,17 +251,18 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 #endif
 
-			logTraceControl.SetItems(logs ?? defaultLogs ?? []);
-
 			return logs;
 		});
 
+		logTraceControl.SetItems(selectedFileLogs ?? defaultLogs ?? []);
 		DD_LogFile.Loading = false;
 	}
 
-	private void CB_OnlyShowErrors_CheckChanged(object sender, EventArgs e)
+	private void SSS_LogLevel_SelectedItemChanged(object sender, EventArgs e)
 	{
-		Task.Run(logTraceControl.FilterChanged);
+		logTraceControl.LogLevel = (string)SSS_LogLevel.SelectedItem;
+
+		delayedFilter.Run();
 	}
 
 	private void I_Sort_Click(object sender, EventArgs e)
@@ -264,41 +272,6 @@ public partial class PC_HelpAndLogs : PanelContent
 		I_Sort.ImageName = logTraceControl.OrderAsc ? "SortAsc" : "SortDesc";
 
 		logTraceControl.SortingChanged();
-	}
-
-	private void LogTraceControl_CanDrawItem(object sender, CanDrawItemEventArgs<ILogTrace> e)
-	{
-		if (CB_OnlyShowErrors.Checked && e.Item.Type is "INFO" or "DEBUG")
-		{
-			e.DoNotDraw = true;
-			return;
-		}
-
-		if (!string.IsNullOrWhiteSpace(TB_Search.Text) && !SearchLog(e.Item))
-		{
-			e.DoNotDraw = true;
-			return;
-		}
-	}
-
-	private bool SearchLog(ILogTrace trace)
-	{
-		if (trace.Type.Contains(TB_Search.Text, StringComparison.InvariantCultureIgnoreCase)
-			|| Path.GetFileName(trace.SourceFile).Contains(TB_Search.Text, StringComparison.InvariantCultureIgnoreCase)
-			|| TB_Search.Text.SearchCheck(trace.Title))
-		{
-			return true;
-		}
-
-		for (var i = 0; i < trace.Trace.Count; i++)
-		{
-			if (TB_Search.Text.SearchCheck(trace.Trace[i]))
-			{
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private bool DD_LogFile_ValidFile(object sender, string arg)
@@ -384,9 +357,10 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
+		logTraceControl.SearchText = TB_Search.Text;
 		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "Search" : "ClearSearch";
 
-		CB_OnlyShowErrors_CheckChanged(sender, e);
+		delayedFilter.Run();
 	}
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

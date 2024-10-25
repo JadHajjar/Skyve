@@ -113,6 +113,7 @@ public class PC_WorkshopList : PanelContent
 			{
 				list = await _workshopService.QueryFilesAsync(
 				   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
+				   LC_Items.DD_SearchTime.SelectedItem,
 				   LC_Items.TB_Search.Text,
 				   LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray(),
 				   limit: 30,
@@ -145,5 +146,21 @@ public class PC_WorkshopList : PanelContent
 		public string Value { get; } = value;
 		public string Icon { get; } = icon;
 		public bool IsCustom { get; } = isCustom;
+	}
+
+	private void InitializeComponent()
+	{
+			this.SuspendLayout();
+			// 
+			// base_Text
+			// 
+			this.base_Text.Size = new System.Drawing.Size(150, 39);
+			// 
+			// PC_WorkshopList
+			// 
+			this.Name = "PC_WorkshopList";
+			this.ResumeLayout(false);
+			this.PerformLayout();
+
 	}
 }

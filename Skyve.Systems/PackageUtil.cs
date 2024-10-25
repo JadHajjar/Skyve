@@ -32,71 +32,60 @@ public class PackageUtil : IPackageUtil
 
 	public bool IsIncluded(IPackageIdentity identity, int? playsetId = null)
 	{
-		if (identity is IAsset asset)
-		{
-			return _assetUtil.IsIncluded(asset, playsetId);
-		}
+		//if (identity is IAsset asset)
+		//{
+		//	return _assetUtil.IsIncluded(asset, playsetId);
+		//}
 
 		return _modUtil.IsIncluded(identity, playsetId);
 	}
 
 	public bool IsIncluded(IPackageIdentity identity, out bool partiallyIncluded, int? playsetId = null)
 	{
-		if (identity is ILocalPackageData localPackage)
+		//if (identity is IAsset asset)
+		//{
+		//	partiallyIncluded = false;
+		//	return _assetUtil.IsIncluded(asset, playsetId);
+		//}
+
+		bool included, excluded = false;
+
+		if (_modUtil.IsIncluded(identity, playsetId))
 		{
-			bool included, excluded = false;
-
-			if (_modUtil.IsIncluded(localPackage, playsetId))
-			{
-				included = true;
-			}
-			else
-			{
-				partiallyIncluded = false;
-
-				return false;
-			}
-
-			foreach (var item in localPackage.Assets)
-			{
-				if (_assetUtil.IsIncluded(item, playsetId))
-				{
-					included = true;
-				}
-				else
-				{
-					excluded = true;
-				}
-
-				if (included && excluded)
-				{
-					partiallyIncluded = true;
-
-					return true;
-				}
-			}
-
+			included = true;
+		}
+		else
+		{
 			partiallyIncluded = false;
 
-			return included;
-		}
-
-		if (identity is IAsset asset)
-		{
-			partiallyIncluded = false;
-			return _assetUtil.IsIncluded(asset, playsetId);
-		}
-
-		var package = identity.GetLocalPackage();
-
-		if (package is not null)
-		{
-			return IsIncluded(package, out partiallyIncluded, playsetId);
+			return false;
 		}
 
 		partiallyIncluded = false;
 
-		return _modUtil.IsIncluded(identity, playsetId);
+		//if (identity.GetLocalPackage() is ILocalPackageData localPackage)
+		//{
+		//	foreach (var item in localPackage.Assets)
+		//	{
+		//		if (_assetUtil.IsIncluded(item, playsetId))
+		//		{
+		//			included = true;
+		//		}
+		//		else
+		//		{
+		//			excluded = true;
+		//		}
+
+		//		if (included && excluded)
+		//		{
+		//			partiallyIncluded = true;
+
+		//			return true;
+		//		}
+		//	}
+		//}
+
+		return included;
 	}
 
 	public bool IsEnabled(IPackageIdentity package, int? playsetId = null)
@@ -122,10 +111,10 @@ public class PackageUtil : IPackageUtil
 
 		var assets = packageList.SelectMany(x => x.GetLocalPackage()?.Assets ?? []);
 
-		foreach (var asset in assets)
-		{
-			await _assetUtil.SetIncluded(asset, value, playsetId);
-		}
+		//foreach (var asset in assets)
+		//{
+		//	await _assetUtil.SetIncluded(asset, value, playsetId);
+		//}
 
 		await _modUtil.SetIncluded(packages, value, playsetId);
 
@@ -156,11 +145,11 @@ public class PackageUtil : IPackageUtil
 		//	_bulkUtil.SetIncluded(new[] { localPackage }, value);
 		//}
 		//else
-		if (localPackage is IAsset asset)
-		{
-			await _assetUtil.SetIncluded(asset, value, playsetId);
-		}
-		else
+		//if (localPackage is IAsset asset)
+		//{
+		//	await _assetUtil.SetIncluded(asset, value, playsetId);
+		//}
+		//else
 		{
 			await _modUtil.SetIncluded(localPackage, value, playsetId);
 		}

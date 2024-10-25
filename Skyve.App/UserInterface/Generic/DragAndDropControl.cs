@@ -245,7 +245,10 @@ public class DragAndDropControl : SlickControl
 		{
 			using var icon = IconManager.GetLargeIcon("DragDrop").Color(color);
 
-			e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
+			if (icon is not null)
+			{
+				e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
+			}
 		}
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(color), rect.Align(size.ToSize(), ContentAlignment.MiddleRight).Pad(-2));

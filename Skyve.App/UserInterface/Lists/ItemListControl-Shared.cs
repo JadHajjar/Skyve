@@ -1,6 +1,5 @@
 ﻿using Skyve.App.UserInterface.Content;
 using Skyve.Compatibility.Domain.Enums;
-using Skyve.Domain;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -57,7 +56,7 @@ public partial class ItemListControl
 			drawThumbnail(thumbnail);
 		}
 
-		if (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IconRect.Contains(CursorLocation))
+		if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IconRect.Contains(CursorLocation))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(75, 255, 255, 255));
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
@@ -96,7 +95,7 @@ public partial class ItemListControl
 			e.Graphics.DrawString(Locale.RecentlyUpdated, font, dateBrush, e.Rects.IconRect.Pad(GridPadding), stringFormat);
 		}
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5), FormDesign.Design.BackColor);
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5));
 	}
 
 	private void DrawAuthorImage(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IUser author, Rectangle rectangle, Color color)
@@ -151,9 +150,17 @@ public partial class ItemListControl
 			isEnabled = !isEnabled;
 		}
 
-		if (isEnabled)
+		if (isIncluded && !required && isHovered && ModifierKeys.HasFlag(Keys.Alt))
+		{
+			activeColor = FormDesign.Design.RedColor;
+		}
+		else if (isEnabled)
 		{
 			activeColor = isPartialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
+		}
+		else if (required)
+		{
+			activeColor = Color.FromArgb(200, ForeColor.MergeColor(BackColor));
 		}
 
 		Color iconColor;
@@ -208,7 +215,7 @@ public partial class ItemListControl
 			return;
 		}
 
-		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : (isHovered && ModifierKeys.HasFlag(Keys.Alt)) ? "X" : "Enabled");
+		var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : (isHovered && isIncluded && ModifierKeys.HasFlag(Keys.Alt)) ? "X" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : "Enabled");
 		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
@@ -354,7 +361,6 @@ public partial class ItemListControl
 
 				tagRect.X += padding.Left + rect.Width;
 			}
-
 		}
 	}
 

@@ -4,6 +4,7 @@ using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Skyve.Systems;
@@ -11,16 +12,15 @@ internal class ImageProcessor : PeriodicProcessor<ImageProcessor.ImageRequest, I
 {
 	private readonly IImageService _imageManager;
 
-	public ImageProcessor(IImageService imageManager) : base(100, 500, null)
+	public ImageProcessor(IImageService imageManager) : base(10, 150, null)
 	{
 		_imageManager = imageManager;
 	}
 
 	protected override bool CanProcess()
 	{
-		return ConnectionHandler.IsConnected;
+		return true;
 	}
-
 
 	protected override async Task<(Dictionary<ImageRequest, TimeStampedImage>, bool)> ProcessItems(List<ImageRequest> entities)
 	{
@@ -28,7 +28,7 @@ internal class ImageProcessor : PeriodicProcessor<ImageProcessor.ImageRequest, I
 		{
 			if (!string.IsNullOrWhiteSpace(img.Url))
 			{
-				await _imageManager.Ensure(img.Url, false, img.FileName, img.Square);
+				await _imageManager.Ensure(img.Url, false, img.FileName, img.Square, img.IsFilePath, img.DownscaleTo);
 			}
 		}
 
@@ -40,16 +40,20 @@ internal class ImageProcessor : PeriodicProcessor<ImageProcessor.ImageRequest, I
 
 	internal readonly struct ImageRequest
 	{
-		public ImageRequest(string url, string? fileName, bool square)
+		public ImageRequest(string url, string? fileName, bool square, bool isFilePath, Size? downscaleTo)
 		{
 			Url = url;
 			FileName = fileName;
 			Square = square;
+			IsFilePath = isFilePath;
+			DownscaleTo = downscaleTo;
 		}
 
 		public string Url { get; }
 		public string? FileName { get; }
 		public bool Square { get; }
+		public bool IsFilePath { get; }
+		public Size? DownscaleTo { get; }
 	}
 
 	internal readonly struct TimeStampedImage : ITimestamped

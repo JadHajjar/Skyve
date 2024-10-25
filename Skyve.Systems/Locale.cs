@@ -219,6 +219,66 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation AvailableWidgets => _instance.GetText("AvailableWidgets");
 
 	/// <summary>
+	/// Backup
+	/// </summary>
+	public static Translation Backup => _instance.GetText("Backup");
+
+	/// <summary>
+	/// Backup Center
+	/// </summary>
+	public static Translation BackupCenter => _instance.GetText("BackupCenter");
+
+	/// <summary>
+	/// Cleanup Settings
+	/// </summary>
+	public static Translation BackupCleanup => _instance.GetText("BackupCleanup");
+
+	/// <summary>
+	/// Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.  This ensures your current cities and preferences are safely stored in case of system issues or reinstallation.
+	/// </summary>
+	public static Translation BackupDescriptionInfo => _instance.GetText("BackupDescriptionInfo");
+
+	/// <summary>
+	/// Backup Failed
+	/// </summary>
+	public static Translation BackupFailed => _instance.GetText("BackupFailed");
+
+	/// <summary>
+	/// Include local mods in scheduled backups
+	/// </summary>
+	public static Translation BackupIncludeLocalMods => _instance.GetText("BackupIncludeLocalMods");
+
+	/// <summary>
+	/// Include savegame files in scheduled backups
+	/// </summary>
+	public static Translation BackupIncludeSaveGames => _instance.GetText("BackupIncludeSaveGames");
+
+	/// <summary>
+	/// Backup Files Location
+	/// </summary>
+	public static Translation BackupPath => _instance.GetText("BackupPath");
+
+	/// <summary>
+	/// Select a folder where you want to save your backups
+	/// </summary>
+	public static Translation BackupPathPlaceholder => _instance.GetText("BackupPathPlaceholder");
+
+	/// <summary>
+	/// Backup &amp; Restore
+	/// </summary>
+	public static Translation BackupRestore => _instance.GetText("BackupRestore");
+
+	/// <summary>
+	/// Schedule Settings
+	/// </summary>
+	public static Translation BackupSchedule => _instance.GetText("BackupSchedule");
+
+	/// <summary>
+	/// Basic Settings
+	/// </summary>
+	public static Translation BasicSettings => _instance.GetText("BasicSettings");
+
+	/// <summary>
 	/// BETA
 	/// </summary>
 	public static Translation BETA => _instance.GetText("BETA");
@@ -264,9 +324,29 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CheckDocumentsFolder => _instance.GetText("CheckDocumentsFolder");
 
 	/// <summary>
+	/// Check the logs for any errors and try again.
+	/// </summary>
+	public static Translation CheckLogsAndTryAgain => _instance.GetText("CheckLogsAndTryAgain");
+
+	/// <summary>
+	/// Delete old backups once the total amount of backups exceeds:
+	/// </summary>
+	public static Translation CleanupCountBased => _instance.GetText("CleanupCountBased");
+
+	/// <summary>
 	/// What is a cleanup?
 	/// </summary>
 	public static Translation CleanupInfoTitle => _instance.GetText("CleanupInfoTitle");
+
+	/// <summary>
+	/// Delete old backups once the total storage used exceeds:
+	/// </summary>
+	public static Translation CleanupStorageBased => _instance.GetText("CleanupStorageBased");
+
+	/// <summary>
+	/// Delete all backups olders than:
+	/// </summary>
+	public static Translation CleanupTimeBased => _instance.GetText("CleanupTimeBased");
 
 	/// <summary>
 	/// <para>Code Mod</para>
@@ -613,6 +693,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DlcUpdateNotice => _instance.GetText("DlcUpdateNotice");
 
 	/// <summary>
+	/// Backup Files Now
+	/// </summary>
+	public static Translation DoBackupNow => _instance.GetText("DoBackupNow");
+
+	/// <summary>
 	/// Donate
 	/// </summary>
 	public static Translation Donate => _instance.GetText("Donate");
@@ -695,6 +780,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Enable selected items
 	/// </summary>
 	public static Translation EnableAllSelected => _instance.GetText("EnableAllSelected");
+
+	/// <summary>
+	/// Enable scheduled backups
+	/// </summary>
+	public static Translation EnableAutoBackup => _instance.GetText("EnableAutoBackup");
 
 	/// <summary>
 	/// Enabled
@@ -1028,6 +1118,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Include
 	/// </summary>
 	public static Translation Include => _instance.GetText("Include");
+
+	/// <summary>
+	/// Include Auto-Save savegames while backing up savegame files
+	/// </summary>
+	public static Translation IncludeAutoSavesBackup => _instance.GetText("IncludeAutoSavesBackup");
 
 	/// <summary>
 	/// Included
@@ -1367,6 +1462,11 @@ public class Locale : LocaleHelper, ILocale
 	/// No packages found on your computer.
 	/// </summary>
 	public static Translation NoLocalPackagesFound => _instance.GetText("NoLocalPackagesFound");
+
+	/// <summary>
+	/// No logs match what you're looking for.
+	/// </summary>
+	public static Translation NoLogsMatchFilters => _instance.GetText("NoLogsMatchFilters");
 
 	/// <summary>
 	/// Disable All Code-Mods
@@ -1838,6 +1938,21 @@ public class Locale : LocaleHelper, ILocale
 	/// Select a save-game to send with your request to help us investigate the issue
 	/// </summary>
 	public static Translation ReviewSaveFileInfo => _instance.GetText("ReviewSaveFileInfo");
+
+	/// <summary>
+	/// Do a backup each time the game is closed
+	/// </summary>
+	public static Translation ScheduleOnGameClose => _instance.GetText("ScheduleOnGameClose");
+
+	/// <summary>
+	/// Do a backup each time a city is saved
+	/// </summary>
+	public static Translation ScheduleOnNewSave => _instance.GetText("ScheduleOnNewSave");
+
+	/// <summary>
+	/// Do daily backups on specific times
+	/// </summary>
+	public static Translation ScheduleOnSpecificTimes => _instance.GetText("ScheduleOnSpecificTimes");
 
 	/// <summary>
 	/// Search through your DLCs..
