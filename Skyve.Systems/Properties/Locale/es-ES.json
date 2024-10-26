@@ -628,7 +628,7 @@
   "BackupSchedule": "Ajustes de Programación",
   "EnableAutoBackup": "Habilitar respaldos programados",
   "BackupPath": "Ubicación de los archivos de respaldo",
-  "BackupPathPlaceholder": "Seleccione una carpeta donde desea guardar sus respaldos",
+  "BackupPathPlaceholder": "Seleccione la carpeta donde desea guardar sus respaldos",
   "IncludeAutoSavesBackup": "Incluir Guardado Automáticos al respaldar los archivos de juegos guardados",
   "ScheduleOnSpecificTimes": "Hacer respaldos diarios en horarios específicos",
   "ScheduleOnGameClose": "Hacer un respaldo cada vez que el juego es cerrado",
@@ -639,7 +639,7 @@
   "CleanupStorageBased": "Eliminar respaldos antiguos una vez que exceda el almacenamiento total:",
   "CleanupCountBased": "Eliminar respaldos antiguos una vez superada la cantidad total de copias de seguridad:",
   "DoBackupNow": "Respaldar Archivos Ahora",
-  "BackupDescriptionInfo": "Respaldar manualmente un juego guardado, configuración u otra información relevante para salvaguardar tus ciudades o mods.\n\nEsto aseguro que tus ciudades actuales y preferencias queden a resguardo en caso de un problema de sistema o reinstalación.",
+  "BackupDescriptionInfo": "Respaldar manualmente un juego guardado, configuración u otra información relevante para salvaguardar tus ciudades o mods.\n\nEsto asegura que tus ciudades actuales y preferencias queden a resguardo en caso de un problema de sistema o reinstalación.",
   "BackupFailed": "Fallo al Respaldar",
   "CheckLogsAndTryAgain": "Compruebe los registros en busca de errores e inténtelo de nuevo."
 }
