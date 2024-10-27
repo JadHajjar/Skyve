@@ -151,6 +151,8 @@
   "Stability_Incompatible": "'{0}' è contrassegnato come non compatibile con la tua versione di gioco attuale.\nUsalo con cautela, oppure disabilitalo in attesa di aggiornamento.",
   "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
   "Stability_Local": "Questa è una versione locale della sua mod originale '{0}'.\n\nLe versioni locali sono solitamente utilizzate per scopi di test.",
+  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
   "Stability_BrokenFromPatch": "'{1}' rotto dopo la patch {0} del gioco. Si prega di attendere fino a quando non viene aggiornato prima di usarlo.\nNel frattempo, si dovrebbe disattivare.",
   "Stability_BrokenFromPatchSafe": "'{1}' rotto dopo la patch {0} del gioco. Si prega di attendere fino a quando non viene aggiornato prima di usarlo.",
   "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
@@ -202,7 +204,7 @@
   "CRT_Status": "Stati",
   "CRT_Ambiguous": "Ambiguità",
   "CRT_RequiredItem": "Elemento richiesto",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequestReview": "Revisione Richiesta Stato",
   "LastReviewDate": "L'ultima revisione è stata effettuata {0}",
   "RequestReviewInfo": "Stai avendo problemi con questo pacchetto?",
   "RequestReview": "Richiedi una revisione",
@@ -266,9 +268,9 @@
   "NoLinks": "Nessun Link",
   "HideReviewedPackages": "Nascondi le mod recensite",
   "ApplyRecommendedAction": "Applica l'azione consigliata",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "AddMeaningfulNote": "Si prega di aggiungere una nota che descriva ciò che è sbagliato con questo pacchetto.",
+  "EditHistory": "Modifica Cronologia",
+  "EditNote": "Modifica Nota",
+  "EditNoteInfo": "Lascia una nota per altri manager da vedere in futuro",
+  "RequestReviewUpdate": "Invia una nuova richieda da revisionare"
 }

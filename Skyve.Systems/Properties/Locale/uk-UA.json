@@ -18,6 +18,7 @@
   "AnyStatus": "Будь-який статус",
   "NoLocalPackagesFound": "На вашому комп’ютері не знайдено жодних пакунків.",
   "NoPackagesMatchFilters": "Немає пакетів, які відповідають тому, що ви шукаєте.",
+  "NoLogsMatchFilters": "No logs match what you're looking for.",
   "EnableAll": "Увімкнути всі елементи",
   "DisableAll": "Вимкнути всі елементи",
   "EnableAllFiltered": "Увімкнути відфільтровані елементи",
@@ -618,5 +619,41 @@
   "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
   "ReviewIsSaveFileNeeded": "The issue you've reported needs more information to be identified. Please send a new Request with a save-game attached to it to be reviewed.",
   "ReviewIsUpdated": "The compatibility information of '{0}' was updated after your review request.",
-  "ReviewPending": "Your review request for '{0}' has been received but is still pending review."
+  "ReviewPending": "Your review request for '{0}' has been received but is still pending review.",
+  "Backup": {
+    "One": "Backup",
+    "Plural": "Backups"
+  },
+  "BackupHistory": "Backup History",
+  "BackupCenter": "Backup Center",
+  "BackupRestore": "Backup & Restore",
+  "BasicSettings": "Basic Settings",
+  "BackupCleanup": "Cleanup Settings",
+  "BackupSchedule": "Schedule Settings",
+  "EnableAutoBackup": "Enable scheduled backups",
+  "BackupPath": "Backup Files Location",
+  "BackupPathPlaceholder": "Select a folder where you want to save your backups",
+  "IncludeAutoSavesBackup": "Include Auto-Save savegames while backing up savegame files",
+  "ScheduleOnSpecificTimes": "Do daily backups on specific times",
+  "ScheduleOnGameClose": "Do a backup each time the game is closed",
+  "ScheduleOnNewSave": "Do a backup each time a city is saved",
+  "BackupIncludeSaveGames": "Include savegame files in scheduled backups",
+  "BackupIncludeLocalMods": "Include local mods in scheduled backups",
+  "CleanupTimeBased": "Delete all backups olders than:",
+  "CleanupStorageBased": "Delete old backups once the total storage used exceeds:",
+  "CleanupCountBased": "Delete old backups once the total amount of backups exceeds:",
+  "DoBackupNow": "Backup Files Now",
+  "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or reinstallation.",
+  "BackupFailed": "Backup Failed",
+  "CheckLogsAndTryAgain": "Check the logs for any errors and try again.",
+  "RestorePoint": {
+    "One": "One restore point from {1}",
+    "Plural": "{0} restore points, most recently from {1}"
+  },
+  "BackupCount": {
+    "One": "{1} backup",
+    "Plural": "{0} {1} backups"
+  },
+  "SelectBackup": "Select a backup",
+  "SelectRestoreInfo": "Select a restore point from the Backup History to start the Restore process."
 }

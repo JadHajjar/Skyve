@@ -151,9 +151,11 @@
   "Stability_Incompatible": "'{0}' ist als nicht kompatibel mit deiner aktuellen Spielversion markiert.\nBenutzen Sie es vorsichtig oder deaktivieren Sie es während Sie darauf warten, dass es aktualisiert wird.",
   "Stability_AssetIncompatible": "'{0}' ist mit deiner aktuellen Spielversion als nicht kompatibel markiert.\nBei neuen Updates treten selten Fehler auf, die Verwendung sollte daher kein Problem sein.",
   "Stability_Local": "Dies ist eine lokale Version der ursprünglichen Mod '{0}'.\n\nLokale Versionen werden normalerweise zum Testen verwendet.",
+  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
   "Stability_BrokenFromPatch": "'{1}' funktioniert seit Patch {0} nicht mehr. Bitte warte, bis es aktualisiert wird, bevor du es verwendest.\nBis dahin solltest du es deaktivieren.",
   "Stability_BrokenFromPatchSafe": "'{1}' funktioniert seit Patch {0} nicht mehr. Bitte warte, bis es aktualisiert wird, bevor du es verwendest.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' brach nach Patch {0} des Spiels, wurde jedoch vor kurzem aktualisiert. Es könnte sicher zur Nutzung sein.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Du solltest das folgende Paket deinem Playset hinzufügen.",
@@ -202,7 +204,7 @@
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Unklarheit",
   "CRT_RequiredItem": "Erforderlicher Gegenstand",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequestReview": "Status der Überprüfungsanfrage",
   "LastReviewDate": "Es wurde zuletzt am {0} überprüft",
   "RequestReviewInfo": "Haben Sie Probleme mit dem Paket?",
   "RequestReview": "Überprüfung anfordern",
@@ -266,9 +268,9 @@
   "NoLinks": "Keine Verbindung",
   "HideReviewedPackages": "Überprüfte Pakete ausblenden",
   "ApplyRecommendedAction": "Empfohlene Aktion anwenden",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "AddMeaningfulNote": "Bitte füge eine Notiz hinzu, welche beschreibt was mit dem Paket nicht stimmt.",
+  "EditHistory": "Bearbeitungsverlauf",
+  "EditNote": "Notiz bearbeiten",
+  "EditNoteInfo": "Hinterlasse eine Notiz, welche andere Manager in Zukunft sehen können",
+  "RequestReviewUpdate": "Sende zur Überprüfung eine neue Anfrage"
 }
