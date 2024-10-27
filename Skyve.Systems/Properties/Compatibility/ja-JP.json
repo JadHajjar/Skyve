@@ -151,6 +151,8 @@
   "Stability_Incompatible": "「{0}」は、現在のゲーム バージョンと互換性がないとマークされています。\n注意して使用するか、更新されるまで無効にしてください。",
   "Stability_AssetIncompatible": "「{0}」 は、現在のゲーム バージョンと互換性がないとマークされています。\nアセットが新しいアップデートで壊れることはめったにないので、問題なく使用できるはずです。",
   "Stability_Local": "このパッケージは、オリジナルMOD 「{0}」のローカルバージョンです。\n\n一般的にローカルバージョンは、テスト目的で使用されます。",
+  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
   "Stability_BrokenFromPatch": "「{1}」 はゲームパッチ {0} 更新後に壊れました。使用する前に更新されるまでお待ちください。\nそれまでの間、無効にしてください。",
   "Stability_BrokenFromPatchSafe": "「{1}」はパッチ {0} で壊れました。アップデートして対応するまでしばらく待って下さい。",
   "Stability_BrokenFromPatchUpdated": "'{1}' はゲームのパッチ {0} 後に壊れました。しかし、最近更新されたため、安全に使用できます。",

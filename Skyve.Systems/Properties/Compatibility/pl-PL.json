@@ -151,6 +151,8 @@
   "Stability_Incompatible": "'{0}' jest oznaczony jako niekompatybilny z twoją aktualną wersją gry.\nUżywaj go ostrożnie, lub dezaktywuj, czekając na jego aktualizację.",
   "Stability_AssetIncompatible": "'{0}' jest oznaczony jako niezgodny z aktualną wersją gry.\nZasoby rzadko psują się z nowymi aktualizacjami, więc używanie tego powinno być w porządku.",
   "Stability_Local": "To jest lokalna wersja modyfikacja '{0}'.\n\nLokalne wersje modyfikacji są zwykle używane do testów.",
+  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
   "Stability_BrokenFromPatch": "'{1}' powoduje problemy po aktualizacji gry {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.\nW międzyczasie powinieneś go dezaktywować.",
   "Stability_BrokenFromPatchSafe": "'{1}' powoduje problemy po aktualizacji gry {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.",
   "Stability_BrokenFromPatchUpdated": "'{1}' zepsuł się po poprawce gry {0}, ale został niedawno zaktualizowany. Jego użycie może być bezpieczne.",

@@ -151,6 +151,8 @@
   "Stability_Incompatible": "'{0}' mevcut oyun sürümünüzle uyumlu değil.\nYa dikkatli kullanın ya da güncellenene kadar devre dışı bırakın.",
   "Stability_AssetIncompatible": "'{0}' mevcut oyun sürümünüzle uyumlu değil.\nVarlıklar yeni güncellemelerle genellikle bozulmaz, bu yüzden büyük ihtimalle sorun olmayacaktır.",
   "Stability_Local": "Bu '{0}' modunun yerel bir sürümü.\n\nYerel Sürümler genellikle deneme amaçlı kullanılırlar.",
+  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
   "Stability_BrokenFromPatch": "'{1}' {0} oyun yamasından sonra bozuldu. Lütfen güncellenene kadar devre dışı bırakın.",
   "Stability_BrokenFromPatchSafe": "'{1}' {0} oyun yamasından sonra bozuldu. Lütfen kullanmadan önce güncellenene kadar bekleyin.",
   "Stability_BrokenFromPatchUpdated": "'{1}' {0} oyun yamasından sonra bozuldu ancak yakın zamanda güncellendi, bu yüzden kullanılmasında sakınca yok.",

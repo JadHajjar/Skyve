@@ -58,7 +58,7 @@
   "Caution": "Cuidado",
   "Warning": "ATENÇÃO",
   "AttentionRequired": "Atenção necessária",
-  "Website": "site",
+  "Website": "Site",
   "Donation": "Doar",
   "ManageCompatibilityData": "Gestão de compatibilidade",
   "YourPackages": "Gerir mods",
@@ -111,7 +111,7 @@
   "Interaction_Identical": "Os seguintes mods são versões duplicadas do mesmo mesmo.\nUsar-los ao mesmo tempo pode criar conflitos.",
   "Status_Succeeded": "'{0}' foi bem-sucedido por '{1}', já estás a usar '{1}'. Não há mais necessidade de '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto, não é mais suportado pelo seu autor.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' não é atualizado há muito tempo, provavelmente já não tem suporte do seu autor.",
   "Status_Reupload": {
     "Zero": "'{0}' é um re-envio de um pacote original.",
     "One": "'{0}' é uma nova atualização de '{1}'."
@@ -122,7 +122,7 @@
     "One": "Depois de guardares a tua cidade com '{0}' ativado, não poderás mais carregar o jogo guardado sem '{0}' ativado.\nUtiliza '{1}' para recuperar o teu jogo guardado se necessário. Lê a descrição do Workshop para mais informações."
   },
   "Status_TestVersion": {
-    "Zero": "Esta é uma versão de Teste esteja ciente que versões de teste de mods podem causar problemas e que atualizações nele podem causar erros inesperados.",
+    "Zero": "Esta é uma versão de Teste está ciente que versões de teste de mods podem causar problemas e que atualizações nele podem causar erros inesperados.",
     "One": "Esta é uma versão 'Test' de '{1}'.\nEstá ciente de que atualizações podem causar problemas inesperados."
   },
   "Status_MissingDlc": {
@@ -151,6 +151,8 @@
   "Stability_Incompatible": "'{0}' é marcado como incompatível com a tua versão atual do jogo.\r\nUsa-o com cautela ou desativa-o enquanto esperas que seja atualizado.",
   "Stability_AssetIncompatible": "'{0}' é marcado como incompatível com a tua versão atual do jogo.\r\nOs assets raramente falham com novas atualizações, por isso deves estar seguro ao usá-lo.",
   "Stability_Local": "Esta é uma versão local do mod original '{0}'.\r\n\r\nVersões locais são normalmente usadas para propósitos de teste.",
+  "Stability_BrokenFromNewVersion": "'{1}' deixou de funcionar após a sua última atualização{0}. Por favor, aguarda até que seja atualizado antes de o usares.\r\nEntretanto, deves desativá-lo.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' deixou de funcionar após a sua última atualização{0}. Por favor, aguarda até que seja atualizado antes de o usares.",
   "Stability_BrokenFromPatch": "'{1}' falhou após o patch {0} do jogo. Por favor, aguarda até que seja atualizado antes de usá-lo.\r\nEntretanto, deves desativá-lo.",
   "Stability_BrokenFromPatchSafe": "'{1}' falhou após o patch {0} do jogo. Por favor, aguarda até que seja atualizado antes de usá-lo.",
   "Stability_BrokenFromPatchUpdated": "'{1}' falhou após o patch {0} do jogo. Mas foi recentemente atualizado, pode ser seguro usá-lo.",
