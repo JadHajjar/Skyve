@@ -112,7 +112,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		OnViewChanged();
 	}
 
-	protected override IEnumerable<DrawableItem<IPlayset, Rectangles>> OrderItems(IEnumerable<DrawableItem<IPlayset, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<IPlayset>> OrderItems(IEnumerable<IDrawableItem<IPlayset>> items)
 	{
 		return sorting switch
 		{
@@ -571,7 +571,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 #endif
 	}
 
-	protected override Rectangles GenerateRectangles(IPlayset item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<IPlayset> GenerateRectangles(IPlayset item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item);
 

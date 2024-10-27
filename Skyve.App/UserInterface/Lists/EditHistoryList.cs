@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-public class EditHistoryList : SlickStackedListControl<PackageEdit, EditHistoryList.Rectangles>
+public class EditHistoryList : SlickStackedListControl<PackageEdit>
 {
 	private readonly IUserService _userService;
 	private readonly IWorkshopService _workshopService;
@@ -29,12 +29,11 @@ public class EditHistoryList : SlickStackedListControl<PackageEdit, EditHistoryL
 		Padding = UI.Scale(new Padding(5));
 	}
 
-	protected override IEnumerable<DrawableItem<PackageEdit, Rectangles>> OrderItems(IEnumerable<DrawableItem<PackageEdit, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<PackageEdit>> OrderItems(IEnumerable<IDrawableItem<PackageEdit>> items)
 	{
 		return items.OrderByDescending(x => x.Item.EditDate);
 	}
-
-	protected override void OnPaintItemList(ItemPaintEventArgs<PackageEdit, Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<PackageEdit, GenericDrawableItemRectangles<PackageEdit>> e)
 	{
 		base.OnPaintItemList(e);
 
@@ -84,28 +83,6 @@ public class EditHistoryList : SlickStackedListControl<PackageEdit, EditHistoryL
 			using var authorIcon = IconManager.GetIcon("Author", rectangle.Height);
 
 			e.Graphics.DrawImage(authorIcon.Color(color, color.A), rectangle.CenterR(authorIcon.Size));
-		}
-	}
-
-	public class Rectangles : IDrawableItemRectangles<PackageEdit>
-	{
-		public PackageEdit Item { get; set; }
-
-		public Rectangles(PackageEdit item)
-		{
-			Item = item;
-		}
-
-		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
-		{
-			text = string.Empty;
-			point = default;
-			return false;
-		}
-
-		public bool IsHovered(Control instance, Point location)
-		{
-			return false;
 		}
 	}
 }

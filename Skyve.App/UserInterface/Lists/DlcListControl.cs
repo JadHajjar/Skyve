@@ -37,7 +37,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		}
 	}
 
-	protected override IEnumerable<DrawableItem<IDlcInfo, Rectangles>> OrderItems(IEnumerable<DrawableItem<IDlcInfo, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<IDlcInfo>> OrderItems(IEnumerable<IDrawableItem<IDlcInfo>> items)
 	{
 		return items.OrderByDescending(x => x.Item.ReleaseDate);
 	}
@@ -191,7 +191,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
 	}
 
-	protected override Rectangles GenerateRectangles(IDlcInfo item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<IDlcInfo> GenerateRectangles(IDlcInfo item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item)
 		{

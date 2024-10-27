@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Skyve.App.UserInterface.Lists;
+
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -31,13 +33,7 @@ public class PackageIcon : SlickImageControl
 
 		if (thumbnail == null)
 		{
-			using var generic = IconManager.GetIcon(Package is IAsset ? "Assets" : Package?.IsLocal() == true ? "Package" : "Paradox", Height * 8 / 10).Color(BackColor);
-			using var brush = new SolidBrush(FormDesign.Design.IconColor);
-
-			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), UI.Scale(5));
-			e.Graphics.DrawImage(generic, ClientRectangle.CenterR(generic.Size));
-
-			return;
+			thumbnail = Package is IAsset ? ItemListControl.AssetThumb : Package?.IsLocal() == true ? ItemListControl.PackageThumb : ItemListControl.WorkshopThumb;
 		}
 
 		if (Package?.IsLocal() ?? false)

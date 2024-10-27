@@ -199,9 +199,6 @@
   <data name="I_AskHelp_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_AskHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="I_City_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\I_City.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="I_Wrench_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Wrench_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1737,5 +1734,47 @@
   </data>
   <data name="I_ClockSettings_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_ClockSettings_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_City_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_City_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_City_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_City_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_FileSettings_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_File Settings_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_FileSettings_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_File Settings_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_FileSettings_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_File Settings_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_FileSettings_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_File Settings_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_RestoreBackup_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_RestoreBackup_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_RestoreBackup_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_RestoreBackup_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_RestoreBackup_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_RestoreBackup_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_RestoreBackup_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_RestoreBackup_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Thumb_Asset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Thumb_Asset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Thumb_Mod" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Thumb_Mod.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Thumb_Package" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Thumb_Package.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Thumb_Pdx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Thumb_Pdx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -44,12 +44,12 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		Font = UI.Font(8.25F, FontStyle.Bold);
 	}
 
-	protected override IEnumerable<DrawableItem<ReviewRequest, Rectangles>> OrderItems(IEnumerable<DrawableItem<ReviewRequest, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<ReviewRequest>> OrderItems(IEnumerable<IDrawableItem<ReviewRequest>> items)
 	{
 		return items.OrderBy(x => x.Item.Timestamp);
 	}
 
-	protected override Rectangles GenerateRectangles(ReviewRequest item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<ReviewRequest> GenerateRectangles(ReviewRequest item, Rectangle rectangle)
 	{
 		return new Rectangles(item);
 	}
