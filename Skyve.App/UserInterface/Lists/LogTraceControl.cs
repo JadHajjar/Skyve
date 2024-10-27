@@ -26,14 +26,14 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
 		base.UIChanged();
 	}
 
-	protected override IEnumerable<DrawableItem<ILogTrace, Rectangles>> OrderItems(IEnumerable<DrawableItem<ILogTrace, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<ILogTrace>> OrderItems(IEnumerable<IDrawableItem<ILogTrace>> items)
 	{
 		return OrderAsc
 			? items.OrderBy(x => x.Item.Timestamp)
 			: items.OrderByDescending(x => x.Item.Timestamp);
 	}
 
-	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ILogTrace, Rectangles> args)
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ILogTrace> args)
 	{
 		if (!Compare(args.Item.Type, LogLevel))
 		{
@@ -142,7 +142,7 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
 		}
 	}
 
-	protected override Rectangles GenerateRectangles(ILogTrace item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<ILogTrace> GenerateRectangles(ILogTrace item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item)
 		{

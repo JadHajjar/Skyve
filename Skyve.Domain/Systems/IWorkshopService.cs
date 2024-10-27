@@ -20,7 +20,7 @@ public interface IWorkshopService
 	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, WorkshopSearchTime searchTime = WorkshopSearchTime.AllTime, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null, int? page = null);
 
 #if CS2
-	event Action? ContextAvailable;
+	event Action? OnContextAvailable;
 
 	bool IsLoggedIn { get; }
 	bool IsLoginPending { get; }
@@ -41,5 +41,6 @@ public interface IWorkshopService
 	ILink? GetCommentsPageUrl(IPackageIdentity packageIdentity);
 	bool IsLocal(IPackageIdentity identity);
 	Task Shutdown();
+	void RepairContext();
 #endif
 }

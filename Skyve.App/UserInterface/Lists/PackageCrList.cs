@@ -1,11 +1,13 @@
 ﻿using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
+using SlickControls;
+
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCrList.Rectangles>
+public class PackageCrList : SlickStackedListControl<IPackageIdentity>
 {
 	private readonly IWorkshopService _workshopService;
 	private readonly ICompatibilityManager _compatibilityManager;
@@ -30,17 +32,17 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 		Font = UI.Font(7F, FontStyle.Bold);
 	}
 
-	protected override IEnumerable<DrawableItem<IPackageIdentity, Rectangles>> OrderItems(IEnumerable<DrawableItem<IPackageIdentity, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<IPackageIdentity>> OrderItems(IEnumerable<IDrawableItem<IPackageIdentity>> items)
 	{
 		return items.OrderByDescending(x => _workshopService.GetInfo(x.Item)?.ServerTime);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<IPackageIdentity, Rectangles> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<IPackageIdentity, GenericDrawableItemRectangles<IPackageIdentity>> item, Point location)
 	{
 		return true;
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<IPackageIdentity, GenericDrawableItemRectangles<IPackageIdentity>> e)
 	{
 		base.OnPaintItemList(e);
 
@@ -122,22 +124,5 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity, PackageCr
 		using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 		e.Graphics.DrawString(text, font2, brush, textRect, format);
-	}
-
-	public class Rectangles : IDrawableItemRectangles<IPackageIdentity>
-	{
-		public IPackageIdentity Item { get; set; }
-
-		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
-		{
-			text = string.Empty;
-			point = default;
-			return false;
-		}
-
-		public bool IsHovered(Control instance, Point location)
-		{
-			return true;
-		}
 	}
 }

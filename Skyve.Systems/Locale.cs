@@ -219,7 +219,8 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation AvailableWidgets => _instance.GetText("AvailableWidgets");
 
 	/// <summary>
-	/// Backup
+	/// <para>Backup</para>
+	/// <para>Plural: Backups</para>
 	/// </summary>
 	public static Translation Backup => _instance.GetText("Backup");
 
@@ -234,6 +235,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation BackupCleanup => _instance.GetText("BackupCleanup");
 
 	/// <summary>
+	/// <para>{1} backup</para>
+	/// <para>Plural: {0} {1} backups</para>
+	/// </summary>
+	public static Translation BackupCount => _instance.GetText("BackupCount");
+
+	/// <summary>
 	/// Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.  This ensures your current cities and preferences are safely stored in case of system issues or reinstallation.
 	/// </summary>
 	public static Translation BackupDescriptionInfo => _instance.GetText("BackupDescriptionInfo");
@@ -242,6 +249,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Backup Failed
 	/// </summary>
 	public static Translation BackupFailed => _instance.GetText("BackupFailed");
+
+	/// <summary>
+	/// Backup History
+	/// </summary>
+	public static Translation BackupHistory => _instance.GetText("BackupHistory");
 
 	/// <summary>
 	/// Include local mods in scheduled backups
@@ -1895,6 +1907,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation RestartRequired => _instance.GetText("RestartRequired");
 
 	/// <summary>
+	/// <para>One restore point from {1}</para>
+	/// <para>Plural: {0} restore points, most recently from {1}</para>
+	/// </summary>
+	public static Translation RestorePoint => _instance.GetText("RestorePoint");
+
+	/// <summary>
 	/// The issue you've reported has now been fixed. You can use the {0} again.
 	/// </summary>
 	public static Translation ReviewIsFixed => _instance.GetText("ReviewIsFixed");
@@ -1990,6 +2008,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SelectAll => _instance.GetText("SelectAll");
 
 	/// <summary>
+	/// Select a backup
+	/// </summary>
+	public static Translation SelectBackup => _instance.GetText("SelectBackup");
+
+	/// <summary>
 	/// The file you selected is not valid
 	/// </summary>
 	public static Translation SelectedFileInvalid => _instance.GetText("SelectedFileInvalid");
@@ -1998,6 +2021,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Select a package
 	/// </summary>
 	public static Translation SelectPackage => _instance.GetText("SelectPackage");
+
+	/// <summary>
+	/// Select a restore point from the Backup History to start the Restore process.
+	/// </summary>
+	public static Translation SelectRestoreInfo => _instance.GetText("SelectRestoreInfo");
 
 	/// <summary>
 	/// Select this package

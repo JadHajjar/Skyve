@@ -199,7 +199,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		StartHeight = _compactList ? UI.Scale(24) : 0;
 	}
 
-	protected override void CanDrawItemInternal(CanDrawItemEventArgs<IPackageIdentity, Rectangles> args)
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<IPackageIdentity> args)
 	{
 		if (_playsetManager.CurrentCustomPlayset?.Usage > 0)
 		{
@@ -245,7 +245,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 	}
 
-	protected override IEnumerable<DrawableItem<IPackageIdentity, Rectangles>> OrderItems(IEnumerable<DrawableItem<IPackageIdentity, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<IPackageIdentity>> OrderItems(IEnumerable<IDrawableItem<IPackageIdentity>> items)
 	{
 		if (sorting > PackageSorting.WorkshopSorting)
 		{
@@ -593,7 +593,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 		foreach (var item in items)
 		{
-			Invalidate(item.Rectangles.IncludedRect);
+			Invalidate(((Rectangles)item.Rectangles).IncludedRect);
 		}
 	}
 

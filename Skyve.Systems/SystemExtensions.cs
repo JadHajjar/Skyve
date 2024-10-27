@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Extensions;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
@@ -194,5 +196,23 @@ public static class SystemExtensions
 	public static ICustomPlayset GetCustomPlayset(this IPlayset playset)
 	{
 		return PlaysetManager.GetCustomPlayset(playset);
+	}
+
+	public static LocaleHelper.Translation GetTypeTranslation(this IBackupMetaData meta)
+	{
+		return LocaleHelper.GetGlobalText("Backup_" + meta.Type);
+	}
+
+	public static string GetIcon(this IBackupMetaData meta)
+	{
+		return meta.Type switch
+		{
+			"SaveGames" => "City",
+			"ActivePlayset" => "Playsets",
+			"SettingsFiles" => "UserOptions",
+			"ModsSettingsFiles" => "FileSettings",
+			"LocalMods" => "Mods",
+			_ => string.Empty,
+		};
 	}
 }

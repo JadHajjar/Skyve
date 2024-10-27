@@ -3,12 +3,15 @@ using Skyve.App.UserInterface.Panels;
 using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
+using Skyve.Domain;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using static Skyve.App.UserInterface.Lists.ItemListControl;
 
 namespace Skyve.App.UserInterface.Lists;
 public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInfo, CompatibilityReportList.Rectangles>
@@ -67,7 +70,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		StartHeight = UI.Scale(44);
 	}
 
-	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo, Rectangles> args)
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<ICompatibilityInfo> args)
 	{
 		args.DoNotDraw = CurrentGroup != NotificationType.None && args.Item.GetNotification() != CurrentGroup;
 
@@ -108,7 +111,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 	}
 
-	protected override IEnumerable<DrawableItem<ICompatibilityInfo, Rectangles>> OrderItems(IEnumerable<DrawableItem<ICompatibilityInfo, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<ICompatibilityInfo>> OrderItems(IEnumerable<IDrawableItem<ICompatibilityInfo>> items)
 	{
 		items = sorting switch
 		{
@@ -357,11 +360,14 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (thumbnail is null)
 		{
-			using var generic = IconManager.GetIcon(e.Item.IsLocal() ? "Mods" : "Paradox", e.Rects.IconRect.Height).Color(e.BackColor);
-			using var brush = new SolidBrush(FormDesign.Design.IconColor);
+			thumbnail = e.Item.IsLocal()
+				? e.Item is IAsset ? AssetThumbUnsat : e.Item.IsLocal() ? ModThumbUnsat : WorkshopThumbUnsat
+				: e.Item is IAsset ? AssetThumb : e.Item.IsLocal() ? ModThumb : WorkshopThumb;
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
-			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
+			if (thumbnail is not null)
+			{
+				drawThumbnail(thumbnail);
+			}
 		}
 		else if (e.Item.IsLocal())
 		{
@@ -886,7 +892,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 	}
 
-	private async Task Invoke(DrawableItem<ICompatibilityInfo, Rectangles> item, ICompatibilityItem Message, ICompatibilityActionInfo action, IPackageIdentity? package = null)
+	private async Task Invoke(IDrawableItem<ICompatibilityInfo> item, ICompatibilityItem Message, ICompatibilityActionInfo action, IPackageIdentity? package = null)
 	{
 		Loading = item.Loading = true;
 		Enabled = false;
@@ -1004,7 +1010,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 	}
 
-	protected override Rectangles GenerateRectangles(ICompatibilityInfo item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<ICompatibilityInfo> GenerateRectangles(ICompatibilityInfo item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item)
 		{

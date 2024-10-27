@@ -51,7 +51,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		Padding = UI.Scale(new Padding(3, 1, 3, 1));
 	}
 
-	protected override void CanDrawItemInternal(CanDrawItemEventArgs<IPlayset, Rectangles> args)
+	protected override void CanDrawItemInternal(CanDrawItemEventArgs<IPlayset> args)
 	{
 		base.CanDrawItemInternal(args);
 
@@ -67,7 +67,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		}
 	}
 
-	protected override IEnumerable<DrawableItem<IPlayset, Rectangles>> OrderItems(IEnumerable<DrawableItem<IPlayset, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<IPlayset>> OrderItems(IEnumerable<IDrawableItem<IPlayset>> items)
 	{
 		return items.OrderByDescending(x => x.Item.DateUpdated);
 	}
@@ -237,7 +237,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		}
 	}
 
-	protected override Rectangles GenerateRectangles(IPlayset item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<IPlayset> GenerateRectangles(IPlayset item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item)
 		{

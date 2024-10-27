@@ -61,7 +61,7 @@ public class ReportItem : ICompatibilityItem
 		return obj is ReportItem item &&
 			   PackageId == item.PackageId &&
 			   Type == item.Type &&
-			   (Packages?.SequenceEqual(item.Packages) ?? item.Packages is null) &&
+			   (Packages?.SequenceEqual(item.Packages ?? []) ?? item.Packages is null) &&
 			   Status.Equals(item.Status);
 	}
 

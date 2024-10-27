@@ -11,6 +11,26 @@ namespace Skyve.App.UserInterface.Lists;
 public partial class ItemListControl
 {
 	private List<(string text, int width)?> headers = [];
+	public static Bitmap? AssetThumb { get; private set; }
+	public static Bitmap? AssetThumbUnsat { get; private set; }
+	public static Bitmap? ModThumb { get; private set; }
+	public static Bitmap? ModThumbUnsat { get; private set; }
+	public static Bitmap? PackageThumb { get; private set; }
+	public static Bitmap? PackageThumbUnsat { get; private set; }
+	public static Bitmap? WorkshopThumb{ get; private set; }
+	public static Bitmap? WorkshopThumbUnsat { get; private set; }
+
+	public static void LoadThumbnails()
+	{
+		WorkshopThumb = Properties.Resources.Thumb_Pdx;
+		WorkshopThumbUnsat = Properties.Resources.Thumb_Pdx.Tint(Sat: 0);
+		PackageThumb = Properties.Resources.Thumb_Package;
+		PackageThumbUnsat = Properties.Resources.Thumb_Package.Tint(Sat: 0);
+		AssetThumb = Properties.Resources.Thumb_Asset;
+		AssetThumbUnsat = Properties.Resources.Thumb_Asset.Tint(Sat: 0);
+		ModThumb = Properties.Resources.Thumb_Mod;
+		ModThumbUnsat = Properties.Resources.Thumb_Mod.Tint(Sat: 0);
+	}
 
 	private int DrawScore(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo, int xdiff)
 	{
@@ -39,11 +59,14 @@ public partial class ItemListControl
 
 		if (thumbnail is null)
 		{
-			using var generic = IconManager.GetIcon(e.Item is IAsset ? "Assets" : _page is SkyvePage.Mods ? "Mods" : _page is SkyvePage.Packages ? "Package" : "Paradox", e.Rects.IconRect.Height).Color(e.BackColor);
-			using var brush = new SolidBrush(FormDesign.Design.IconColor);
+			thumbnail = e.Item.IsLocal()
+				? e.Item is IAsset ? AssetThumbUnsat : _page is SkyvePage.Mods ? ModThumbUnsat : _page is SkyvePage.Packages ? PackageThumbUnsat : WorkshopThumbUnsat
+				: e.Item is IAsset ? AssetThumb : _page is SkyvePage.Mods ? ModThumb : _page is SkyvePage.Packages ? PackageThumb : WorkshopThumb;
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
-			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
+			if (thumbnail is not null)
+			{
+				drawThumbnail(thumbnail);
+			}
 		}
 		else if (e.Item.IsLocal())
 		{
@@ -607,13 +630,11 @@ public partial class ItemListControl
 		{
 			e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
 		}
-		else if (!IsPackagePage && hasStatus)
-		{
-			e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
-		}
 		else
 		{
-			e.BackColor = e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.AccentBackColor : BackColor;
+			e.BackColor = !IsPackagePage && hasStatus
+				? statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25)
+				: e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.AccentBackColor : BackColor;
 		}
 
 		if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))

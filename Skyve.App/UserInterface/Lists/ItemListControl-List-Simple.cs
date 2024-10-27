@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
 
-public partial class ItemListControl
+public abstract partial class ItemListControl
 {
 	public partial class Simple : ItemListControl
 	{
@@ -279,7 +279,7 @@ public partial class ItemListControl
 			}
 		}
 
-		protected override Rectangles GenerateRectangles(IPackageIdentity item, Rectangle rectangle)
+		protected override IDrawableItemRectangles<IPackageIdentity> GenerateRectangles(IPackageIdentity item, Rectangle rectangle)
 		{
 			return GridView ? GenerateGridRectangles(item, rectangle) : GenerateListRectangles(item, rectangle);
 		}
