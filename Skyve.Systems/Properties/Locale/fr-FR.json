@@ -621,10 +621,10 @@
   "ReviewIsUpdated": "Les informations de compatibilité de '{0}' ont été mises à jour après votre signalement.",
   "ReviewPending": "Votre signalement pour '{0}' a été reçu mais n’a pas encore été revu.",
   "Backup": {
-    "One": "Backup",
-    "Plural": "Backups"
+    "One": "Archive",
+    "Plural": "Archives"
   },
-  "BackupHistory": "Backup History",
+  "BackupHistory": "Historique des Archives",
   "BackupCenter": "Centre des Archives",
   "BackupRestore": "Archiver et Restaurer",
   "BasicSettings": "Paramètres de Base",
@@ -647,13 +647,13 @@
   "BackupFailed": "Échec de l'archivage",
   "CheckLogsAndTryAgain": "Check the logs for any errors and try again.",
   "RestorePoint": {
-    "One": "One restore point from {1}",
+    "One": "Un point de restauration du {1}",
     "Plural": "{0} restore points, most recently from {1}"
   },
   "BackupCount": {
     "One": "{1} backup",
     "Plural": "{0} {1} backups"
   },
-  "SelectBackup": "Select a backup",
-  "SelectRestoreInfo": "Select a restore point from the Backup History to start the Restore process."
+  "SelectBackup": "Sélectionnez une archive",
+  "SelectRestoreInfo": "Sélectionnez un point de restauration de l'Historique des Archives pour commencer le processus de Restauration."
 }
