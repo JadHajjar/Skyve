@@ -621,10 +621,10 @@
   "ReviewIsUpdated": "A informação de compatibilidade de '{0}' foi atualizada após o teu pedido de revisão.",
   "ReviewPending": "O teu pedido de revisão para '{0}' foi recebido, mas ainda está pendente de revisão.",
   "Backup": {
-    "One": "Backup",
-    "Plural": "Backups"
+    "One": "Cópia de segurança",
+    "Plural": "Cópias de segurança"
   },
-  "BackupHistory": "Backup History",
+  "BackupHistory": "Histórico de cópias de segurança",
   "BackupCenter": "Centro de cópia de segurança",
   "BackupRestore": "Cópia de segurança e restauração",
   "BasicSettings": "Definições básicas",
@@ -647,13 +647,13 @@
   "BackupFailed": "A cópia de segurança falhou",
   "CheckLogsAndTryAgain": "Verifica os registos de erros e tenta novamente.",
   "RestorePoint": {
-    "One": "One restore point from {1}",
-    "Plural": "{0} restore points, most recently from {1}"
+    "One": "Um ponto de restauração a partir de {1}",
+    "Plural": "{0} restaurar pontos, mais recentemente a partir de {1}"
   },
   "BackupCount": {
-    "One": "{1} backup",
-    "Plural": "{0} {1} backups"
+    "One": "{1} cópia de segurança",
+    "Plural": "{0} {1} cópias de segurança"
   },
-  "SelectBackup": "Select a backup",
-  "SelectRestoreInfo": "Select a restore point from the Backup History to start the Restore process."
+  "SelectBackup": "Selecionar cópia de segurança",
+  "SelectRestoreInfo": "Seleciona um ponto de restauração a partir do histórico de cópias de segurança para começar o processo de restauração."
 }
