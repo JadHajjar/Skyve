@@ -620,7 +620,11 @@
   "ReviewIsSaveFileNeeded": "Проблема, о которой вы сообщили, требует дополнительной информации. Пожалуйста, направьте новый запрос с сохраненной игрой для проверки.",
   "ReviewIsUpdated": "Информация о совместимости '{0}' была обновлена после вашего запроса на проверку.",
   "ReviewPending": "Ваш запрос на отзыв для '{0}' был получен, но все еще ожидает рассмотрения.",
-  "Backup": "Backup",
+  "Backup": {
+    "One": "Backup",
+    "Plural": "Backups"
+  },
+  "BackupHistory": "Backup History",
   "BackupCenter": "Backup Center",
   "BackupRestore": "Backup & Restore",
   "BasicSettings": "Basic Settings",
@@ -641,5 +645,15 @@
   "DoBackupNow": "Backup Files Now",
   "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or reinstallation.",
   "BackupFailed": "Backup Failed",
-  "CheckLogsAndTryAgain": "Check the logs for any errors and try again."
+  "CheckLogsAndTryAgain": "Check the logs for any errors and try again.",
+  "RestorePoint": {
+    "One": "One restore point from {1}",
+    "Plural": "{0} restore points, most recently from {1}"
+  },
+  "BackupCount": {
+    "One": "{1} backup",
+    "Plural": "{0} {1} backups"
+  },
+  "SelectBackup": "Select a backup",
+  "SelectRestoreInfo": "Select a restore point from the Backup History to start the Restore process."
 }

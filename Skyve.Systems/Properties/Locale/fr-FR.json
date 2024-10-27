@@ -620,7 +620,11 @@
   "ReviewIsSaveFileNeeded": "Le problème que vous avez signalé nécessite plus d’informations pour être analysé. Veuillez envoyer une nouvelle requête en attachant votre sauvegarde.",
   "ReviewIsUpdated": "Les informations de compatibilité de '{0}' ont été mises à jour après votre signalement.",
   "ReviewPending": "Votre signalement pour '{0}' a été reçu mais n’a pas encore été revu.",
-  "Backup": "Archive",
+  "Backup": {
+    "One": "Backup",
+    "Plural": "Backups"
+  },
+  "BackupHistory": "Backup History",
   "BackupCenter": "Centre des Archives",
   "BackupRestore": "Archiver et Restaurer",
   "BasicSettings": "Paramètres de Base",
@@ -641,5 +645,15 @@
   "DoBackupNow": "Archiver les Fichiers Maintenant",
   "BackupDescriptionInfo": "Archivez manuellement vos sauvegardes de jeu, paramètres, et autre information importante pour protéger vos villes et mods.\n\nCela assure que vos villes et paramètres actuelles sont bien enregistré en cas de problème du système ou de réinstallation.",
   "BackupFailed": "Échec de l'archivage",
-  "CheckLogsAndTryAgain": "Check the logs for any errors and try again."
+  "CheckLogsAndTryAgain": "Check the logs for any errors and try again.",
+  "RestorePoint": {
+    "One": "One restore point from {1}",
+    "Plural": "{0} restore points, most recently from {1}"
+  },
+  "BackupCount": {
+    "One": "{1} backup",
+    "Plural": "{0} {1} backups"
+  },
+  "SelectBackup": "Select a backup",
+  "SelectRestoreInfo": "Select a restore point from the Backup History to start the Restore process."
 }

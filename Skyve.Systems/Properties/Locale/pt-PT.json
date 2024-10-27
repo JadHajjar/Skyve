@@ -620,7 +620,11 @@
   "ReviewIsSaveFileNeeded": "O problema que relataste necessita de mais informações para ser identificado. Por favor, envia um novo pedido com um jogo guardado anexado para revisão.",
   "ReviewIsUpdated": "A informação de compatibilidade de '{0}' foi atualizada após o teu pedido de revisão.",
   "ReviewPending": "O teu pedido de revisão para '{0}' foi recebido, mas ainda está pendente de revisão.",
-  "Backup": "Cópia de segurança",
+  "Backup": {
+    "One": "Backup",
+    "Plural": "Backups"
+  },
+  "BackupHistory": "Backup History",
   "BackupCenter": "Centro de cópia de segurança",
   "BackupRestore": "Cópia de segurança e restauração",
   "BasicSettings": "Definições básicas",
@@ -641,5 +645,15 @@
   "DoBackupNow": "Fazer cópia de segurança agora",
   "BackupDescriptionInfo": "Faz manualmente uma cópia de segurança dos ficheiros de jogos guardados, definições e outras informações relevantes para proteger as tuas cidades e mods.\r\n\r\nIsto garante que as tuas cidades e preferências atuais estão guardadas em segurança, em caso de problemas de sistema ou reinstalação.",
   "BackupFailed": "A cópia de segurança falhou",
-  "CheckLogsAndTryAgain": "Verifica os registos de erros e tenta novamente."
+  "CheckLogsAndTryAgain": "Verifica os registos de erros e tenta novamente.",
+  "RestorePoint": {
+    "One": "One restore point from {1}",
+    "Plural": "{0} restore points, most recently from {1}"
+  },
+  "BackupCount": {
+    "One": "{1} backup",
+    "Plural": "{0} {1} backups"
+  },
+  "SelectBackup": "Select a backup",
+  "SelectRestoreInfo": "Select a restore point from the Backup History to start the Restore process."
 }
