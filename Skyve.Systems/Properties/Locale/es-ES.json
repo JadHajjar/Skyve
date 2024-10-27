@@ -621,10 +621,10 @@
   "ReviewIsUpdated": "La información de compatibilidad de '{0}' se actualizó después de tu solicitud de revisión.",
   "ReviewPending": "Su solicitud de revisión para '{0}' ha sido recibida, pero todavía está pendiente de revisión.",
   "Backup": {
-    "One": "Backup",
-    "Plural": "Backups"
+    "One": "Respaldo",
+    "Plural": "Respaldos"
   },
-  "BackupHistory": "Backup History",
+  "BackupHistory": "Historial de respaldo",
   "BackupCenter": "Centro de Respaldos",
   "BackupRestore": "Respaldo y Restauración",
   "BasicSettings": "Ajustes Básicos",
@@ -647,13 +647,13 @@
   "BackupFailed": "Fallo al Respaldar",
   "CheckLogsAndTryAgain": "Compruebe los registros en busca de errores e inténtelo de nuevo.",
   "RestorePoint": {
-    "One": "One restore point from {1}",
-    "Plural": "{0} restore points, most recently from {1}"
+    "One": "Un punto de restauración desde {1}",
+    "Plural": "{0} puntos de restauración, más recientemente desde {1}"
   },
   "BackupCount": {
-    "One": "{1} backup",
-    "Plural": "{0} {1} backups"
+    "One": "{1} respaldo",
+    "Plural": "{0} {1} respaldos"
   },
-  "SelectBackup": "Select a backup",
-  "SelectRestoreInfo": "Select a restore point from the Backup History to start the Restore process."
+  "SelectBackup": "Seleccione un respaldo",
+  "SelectRestoreInfo": "Seleccione un punto de restauración del historial de respaldos para iniciar el proceso de restauración."
 }
