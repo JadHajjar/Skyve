@@ -762,19 +762,4 @@ public partial class PC_MainPage : PanelContent
 		public IDashboardItem Item { get; set; } = item;
 		public Rectangle Rectangle { get; set; }
 	}
-
-	private void slickButton1_Click(object sender, EventArgs e)
-	{
-		var backupManager = ServiceCenter.Get<IBackupSystem>();
-
-		foreach (var item in backupManager.GetAllBackups().GroupBy(x => x.MetaData.Type))
-		{
-			foreach (var grp in item.GroupBy(x => x.MetaData.Name))
-			{
-
-			}
-		}
-
-		backupManager.DoCleanup();
-	}
 }

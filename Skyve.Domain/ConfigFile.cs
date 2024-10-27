@@ -33,7 +33,23 @@ public abstract class ConfigFile : IExtendedSaveObject
 
 	public void Reset()
 	{
-		Clear(this, new(WatcherChangeTypes.Deleted, string.Empty));
+		var type = GetType();
+		var obj = (ConfigFile)Activator.CreateInstance(type);
+
+		foreach (var item in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+		{
+			if (item.CanWrite && item.CanRead && item.PropertyType != typeof(SaveHandler))
+			{
+				item.SetValue(this, item.GetValue(obj));
+			}
+		}
+	}
+
+	public void Reload()
+	{
+		var saveName = GetType().GetCustomAttribute<SaveNameAttribute>(false);
+
+		Handler?.Load(this, saveName.FileName, saveName.AppName, saveName.Local);
 	}
 
 	protected virtual void OnLoad(string filePath)
@@ -81,22 +97,11 @@ public abstract class ConfigFile : IExtendedSaveObject
 
 	private void Clear(object sender, FileWatcherEventArgs e)
 	{
-		var type = GetType();
-		var obj = (ConfigFile)Activator.CreateInstance(type);
-
-		foreach (var item in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
-		{
-			if (item.CanWrite && item.CanRead && item.PropertyType != typeof(SaveHandler))
-			{
-				item.SetValue(this, item.GetValue(obj));
-			}
-		}
+		Reset();
 	}
 
 	private void ReLoad(object sender, FileWatcherEventArgs e)
 	{
-		var saveName = GetType().GetCustomAttribute<SaveNameAttribute>(false);
-
-		Handler?.Load(this, saveName.FileName, saveName.AppName, saveName.Local);
+		Reload();
 	}
 }
