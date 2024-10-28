@@ -326,12 +326,17 @@ public class CompatibilityManager : ICompatibilityManager
 			var modName = Path.GetFileName(filePath);
 			var duplicate = _packageManager.GetModsByName(modName);
 
-			if (duplicate.Count > 1 && duplicate.Count(x => _packageUtil.IsIncludedAndEnabled(x)) > 1)
+			if (duplicate.Count > 1)
 			{
-				info.Add(ReportType.Compatibility
-					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
-					, workshopInfo?.Name
-					, duplicate.Select(x => new GenericLocalPackageIdentity(x.Id, x.Name, x.Url, x.LocalData?.Folder, x.LocalData?.FilePath, x.LocalData?.FileSize ?? default, x.LocalData?.LocalTime ?? default)).ToArray());
+				duplicate.RemoveAll(x => !_packageUtil.IsIncludedAndEnabled(x));
+
+				if (duplicate.Count > 1)
+				{
+					info.Add(ReportType.Compatibility
+						, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
+						, workshopInfo?.Name
+						, duplicate.Select(x => new GenericLocalPackageIdentity(x.Id, x.Name, x.Url, x.LocalData?.Folder, x.LocalData?.FilePath, x.LocalData?.FileSize ?? default, x.LocalData?.LocalTime ?? default)).ToArray());
+				}
 			}
 		}
 
