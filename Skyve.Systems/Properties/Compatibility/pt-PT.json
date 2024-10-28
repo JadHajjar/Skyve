@@ -158,18 +158,18 @@
   "Stability_BrokenFromPatchUpdated": "'{1}' falhou após o patch {0} do jogo. Mas foi recentemente atualizado, pode ser seguro usá-lo.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "Deves adicionar o seguinte pacote ao teu playset.",
-    "Plural": "Deves adicionar os seguintes pacotes ao teu playset."
+    "One": "Deves adicionar o seguinte pacote ao teu conjunto.",
+    "Plural": "Deves adicionar os seguintes pacotes ao teu conjunto."
   },
   "Action_RequiresConfiguration": "Por favor, segue as seguintes instruções:",
   "Action_SelectOne": {
     "One": "Deves usar apenas um entre '{0}' e '{1}'.",
     "Plural": "Deves usar apenas um entre '{0}' e os seguintes pacotes."
   },
-  "Action_UnsubscribeThis": "Deves remover '{0}' do teu playset.",
+  "Action_UnsubscribeThis": "Deves remover '{0}' do teu conjunto.",
   "Action_UnsubscribeOther": {
-    "One": "Deves remover '{1}' do teu playset.",
-    "Plural": "Deves remover os seguintes pacotes do teu playset."
+    "One": "Deves remover '{1}' do teu conjunto.",
+    "Plural": "Deves remover os seguintes pacotes do teu conjunto."
   },
   "Action_ExcludeThis": "Deves desativar '{0}'.",
   "ExcludeThis": "Desativar este pacote",
@@ -185,8 +185,8 @@
   },
   "Action_IncludeThis": "Deves incluir '{0}'",
   "Action_IncludeOther": {
-    "One": "Deves adicionar o seguinte pacote ao teu playset.",
-    "Plural": "Deves adicionar os seguintes pacotes ao teu playset."
+    "One": "Deves adicionar o seguinte pacote ao teu conjunto.",
+    "Plural": "Deves adicionar os seguintes pacotes ao teu conjunto."
   },
   "NoRequiredDlcs": "DLCs não necessários",
   "DlcsSelected": {
@@ -205,7 +205,7 @@
   "CRT_Ambiguous": "Ambiguidade",
   "CRT_RequiredItem": "Item necessário",
   "CRT_RequestReview": "Estado da solicitação de revisão",
-  "LastReviewDate": "Foi revisto pela última vez em {0}",
+  "LastReviewDate": "Foi revisto pela última vez a {0}",
   "RequestReviewInfo": "Estás a ter problemas com este pacote?\nSolicita uma nova análise aqui:",
   "RequestReview": "Solicitar análise",
   "MissingDependencyCount": {
