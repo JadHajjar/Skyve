@@ -181,7 +181,7 @@ public class PackageUtil : IPackageUtil
 			return DownloadStatus.Removed;
 		}
 
-		var latestVersion = workshopInfo.VersionId.SmartParse();
+		var latestVersion = workshopInfo.Version.SmartParse();
 		var currentVersion = _modUtil.GetSelectedVersion(mod!).SmartParse();
 
 		if (latestVersion > currentVersion && currentVersion != 0)

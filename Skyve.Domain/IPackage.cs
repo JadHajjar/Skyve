@@ -1,7 +1,6 @@
 ﻿namespace Skyve.Domain;
 public interface IPackage : IPackageIdentity
 {
-	string? Version { get; }
 	bool IsCodeMod { get; }
 	bool IsLocal { get; }
 	bool IsBuiltIn { get; }

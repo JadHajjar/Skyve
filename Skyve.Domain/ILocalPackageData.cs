@@ -2,8 +2,8 @@
 public interface ILocalPackageData : ILocalPackageIdentity
 {
 	IPackage Package { get; }
-	string? Version { get; }
 	bool IsCodeMod { get; }
+	string? VersionName { get; }
 	IAsset[] Assets { get; }
 	IThumbnailObject[] Images { get; }
 #if CS2
