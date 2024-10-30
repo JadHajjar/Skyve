@@ -242,12 +242,12 @@
   "ApplyChangedBeforeExit": "저장되지 않은 변경사항이 있습니다.\n\n계속하기 전에 변경사항을 적용하시겠습니까?",
   "AuthorRetired": "{0}의 제작자인 {1}는 제작을 그만두었거나 오랫동안 활동하지 않았습니다.\n\n그의 패키지에 대한 앞으로의 업데이트와 안정성은 보장되지 않습니다.",
   "AuthorMalicious": "{0}의 제작자인 {1}는 바이러스와 같은 유해하거나 악성인 콘텐츠를 자신의 패키지에 포함시키는 것으로 알려져 있습니다.",
-  "ReviewRequests": "Review Requests",
+  "ReviewRequests": "재검토 요청",
   "ApplyRequestedChanges": "요청된 변경사항 적용",
   "ManagePackage": "패키지 관리",
   "Banned": "차단됨",
   "NoIssues": "문제 없음",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "*당신의 계정 ID와 로그를 요청과 함께 전송했습니다.",
   "ScenarioMaking": "시나리오 제작용",
   "ThemeMaking": "테마 제작용",
   "OtherCompatibilityWarnings": {
@@ -255,10 +255,10 @@
     "Plural": "이 패키지에는 {0}개의 다른 호환성 경고가 더 있습니다."
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "이 요청을 삭제",
+    "Plural": "이 요청들을 삭제"
   },
-  "ViewRequest": "View Request",
+  "ViewRequest": "요청 보기",
   "RequiredItem": "필요한 항목",
   "ApplyAllActions": "Apply all recommended actions",
   "SnoozeAll": "Snooze all issues",
@@ -269,8 +269,8 @@
   "HideReviewedPackages": "Hide reviewed mods",
   "ApplyRecommendedAction": "Apply recommended action",
   "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
+  "EditHistory": "수정 내역",
+  "EditNote": "메모 수정",
   "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "RequestReviewUpdate": "재검토를 위한 새로운 요청 보내기"
 }
