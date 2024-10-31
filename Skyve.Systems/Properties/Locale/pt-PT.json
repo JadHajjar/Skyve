@@ -241,7 +241,7 @@
   "Custom Maps": "Mapas Personalizados",
   "Vanilla Maps": "Mapas Básicos",
   "ResetScrollOnPackageClick": "Redefinir a rol agem quando abrir a página de um pacote",
-  "ResetScrollOnPackageClick_Tip": "Quando abrir a página de um pacote, redefine a rolagem para que o pacote selecionado esteja no topo da lista.",
+  "ResetScrollOnPackageClick_Tip": "Ao abrir a página do pacote, redefine a ordem para que o pacote selecionado fique no topo da lista.",
   "Workshop Save-games": "Jogos Salvos da Oficina",
   "Workshop Maps": "Mapas da Oficina",
   "AnyAuthor": "Qualquer Autor",
