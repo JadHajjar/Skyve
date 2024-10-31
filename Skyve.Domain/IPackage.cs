@@ -5,10 +5,7 @@ public interface IPackage : IPackageIdentity
 	bool IsLocal { get; }
 	bool IsBuiltIn { get; }
 	ILocalPackageData? LocalData { get; }
-	//#if CS2
-	//	bool IsIncluded(int playsetId);
-	//	bool IsEnabled(int playsetId);
-	//#endif
+	string? VersionName { get; }
 }
 
 public interface IPlaysetPackage : IPackage

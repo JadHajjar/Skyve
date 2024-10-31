@@ -86,10 +86,5 @@ public class PC_PlaysetContents : PC_ContentList
 		{
 			return Task.CompletedTask;
 		}
-
-		public Task SetVersion(IPackageIdentity package, string? version, int? playsetId = null)
-		{
-			return packageUtil.SetVersion(package, version, playsetId);
-		}
 	}
 }

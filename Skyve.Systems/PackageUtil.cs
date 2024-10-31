@@ -133,11 +133,6 @@ public class PackageUtil : IPackageUtil
 		await _modUtil.SetEnabled(packages, value, playsetId);
 	}
 
-	public async Task SetVersion(IPackageIdentity package, string version, int? playsetId = null)
-	{
-		await _modUtil.SetVersion(package, version, playsetId);
-	}
-
 	public async Task SetIncluded(IPackageIdentity localPackage, bool value, int? playsetId = null)
 	{
 		//if (localPackage is ILocalPackageData localPackageData && localPackageData.Assets.Length > 0)

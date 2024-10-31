@@ -25,7 +25,7 @@ public class ReviewRequest : IPackageIdentity, IEquatable<ReviewRequest?>
 	ulong IPackageIdentity.Id => PackageId;
 	string IPackageIdentity.Name => string.Empty;
 	string? IPackageIdentity.Url => string.Empty;
-	string? IPackageIdentity.Version { get; }
+	string? IPackageIdentity.Version { get; set; }
 
 	public override bool Equals(object? obj)
 	{

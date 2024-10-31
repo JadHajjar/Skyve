@@ -34,7 +34,7 @@ public class ReportItem : ICompatibilityItem
 	string IPackageIdentity.Name => PackageName ?? PackageId.ToString();
 	string? IPackageIdentity.Url { get; }
 	IEnumerable<IPackageIdentity> ICompatibilityItem.Packages => Packages?.Cast<IPackageIdentity>() ?? [];
-	string? IPackageIdentity.Version { get; }
+	string? IPackageIdentity.Version { get; set; }
 
 	public string GetMessage(IWorkshopService workshopService, IPackageNameUtil packageNameUtil)
 	{

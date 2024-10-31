@@ -56,7 +56,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		I_Actions.ExcludeAllClicked += ExcludeAll;
 		I_Actions.EnableAllClicked += EnableAll;
 		I_Actions.DisableAllClicked += DisableAll;
-		I_Actions.SubscribeAllClicked += SubscribeAll;
+		I_Actions.SubscribeAllClicked += IncludeAll;
 
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
@@ -189,9 +189,8 @@ public partial class PC_CompatibilityReport : PanelContent
 			{
 				StatusAction.SubscribeToPackages => () =>
 				{
-					_subscriptionsManager.Subscribe(message.Packages.Where(x => !x.IsInstalled()));
-					_packageUtil.SetIncluded(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
-					_packageUtil.SetEnabled(message.Packages.SelectWhereNotNull(x => x.GetLocalPackage())!, true);
+					_packageUtil.SetIncluded(message.Packages, true);
+					_packageUtil.SetEnabled(message.Packages, true);
 					_compatibilityManager.QuickUpdate(message);
 				}
 				,
@@ -203,13 +202,13 @@ public partial class PC_CompatibilityReport : PanelContent
 				,
 				StatusAction.UnsubscribeThis => () =>
 				{
-					_subscriptionsManager.UnSubscribe(new[] { report });
+					_packageUtil.SetIncluded(report, true);
 					_compatibilityManager.QuickUpdate(message);
 				}
 				,
 				StatusAction.UnsubscribeOther => () =>
 				{
-					_subscriptionsManager.UnSubscribe(message.Packages!);
+					_packageUtil.SetIncluded(message.Packages!, false);
 					_compatibilityManager.QuickUpdate(message);
 				}
 				,
@@ -526,54 +525,54 @@ public partial class PC_CompatibilityReport : PanelContent
 	}
 #endif
 
-	private async Task UnsubscribeAll()
-	{
-		if (MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisUnsubscribesFrom.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
-		{
-			return;
-		}
+	//private async Task UnsubscribeAll()
+	//{
+	//	if (MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisUnsubscribesFrom.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
+	//	{
+	//		return;
+	//	}
 
-		I_Actions.Loading = true;
-		await ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.FilteredItems.Cast<IPackageIdentity>());
-		I_Actions.Loading = false;
-		ListControl.Invalidate();
-		I_Actions.Invalidate();
-	}
+	//	I_Actions.Loading = true;
+	//	await ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(ListControl.FilteredItems.Cast<IPackageIdentity>());
+	//	I_Actions.Loading = false;
+	//	ListControl.Invalidate();
+	//	I_Actions.Invalidate();
+	//}
 
-	private async Task SubscribeAll()
-	{
-		var removeBadPackages = false;
-		var steamIds = ListControl.SafeGetItems().AllWhere(x => x.Item.GetLocalPackage() == null && x.Item.Id != 0);
+	//private async Task SubscribeAll()
+	//{
+	//	var removeBadPackages = false;
+	//	var steamIds = ListControl.SafeGetItems().AllWhere(x => x.Item.GetLocalPackage() == null && x.Item.Id != 0);
 
-		foreach (var item in steamIds.ToList())
-		{
-			var report = item.Item.GetCompatibilityInfo();
+	//	foreach (var item in steamIds.ToList())
+	//	{
+	//		var report = item.Item.GetCompatibilityInfo();
 
-			if (report.GetNotification() >= NotificationType.Unsubscribe)
-			{
-				if (!removeBadPackages && MessagePrompt.Show(Locale.ItemsShouldNotBeSubscribedInfo + "\r\n\r\n" + Locale.WouldYouLikeToSkipThose, PromptButtons.YesNo, PromptIcons.Hand, form: Program.MainForm) == DialogResult.No)
-				{
-					break;
-				}
-				else
-				{
-					removeBadPackages = true;
-				}
+	//		if (report.GetNotification() >= NotificationType.Unsubscribe)
+	//		{
+	//			if (!removeBadPackages && MessagePrompt.Show(Locale.ItemsShouldNotBeSubscribedInfo + "\r\n\r\n" + Locale.WouldYouLikeToSkipThose, PromptButtons.YesNo, PromptIcons.Hand, form: Program.MainForm) == DialogResult.No)
+	//			{
+	//				break;
+	//			}
+	//			else
+	//			{
+	//				removeBadPackages = true;
+	//			}
 
-				steamIds.Remove(item);
-				ListControl.RemoveAll(x => x.Id == item.Item.Id);
-			}
-		}
+	//			steamIds.Remove(item);
+	//			ListControl.RemoveAll(x => x.Id == item.Item.Id);
+	//		}
+	//	}
 
-		if (steamIds.Count == 0 || MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisSubscribesTo.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
-		{
-			return;
-		}
+	//	if (steamIds.Count == 0 || MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisSubscribesTo.FormatPlural(ListControl.FilteredItems.Count()), PromptButtons.YesNo, form: Program.MainForm) != DialogResult.Yes)
+	//	{
+	//		return;
+	//	}
 
-		await ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x => (IPackageIdentity)x.Item));
-		ListControl.Invalidate();
-		I_Actions.Invalidate();
-	}
+	//	await ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x => (IPackageIdentity)x.Item));
+	//	ListControl.Invalidate();
+	//	I_Actions.Invalidate();
+	//}
 
 	private async void DeleteAll(object sender, EventArgs e)
 	{

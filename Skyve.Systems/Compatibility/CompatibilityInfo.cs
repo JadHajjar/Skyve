@@ -20,7 +20,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data;
 	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast<ICompatibilityItem>();
-	string? IPackageIdentity.Version { get; }
+	string? IPackageIdentity.Version { get; set; }
 
 	[Obsolete("Reserved for DTO", true)]
 	public CompatibilityInfo()

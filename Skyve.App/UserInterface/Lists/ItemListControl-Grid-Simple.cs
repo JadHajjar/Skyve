@@ -185,8 +185,8 @@ public partial class ItemListControl
 			var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 			var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-			var isVersion = (package?.IsCodeMod ?? workshopInfo?.IsCodeMod ??  false) && !string.IsNullOrEmpty(package?.Version);
-			var versionText = isVersion ? "v" + package!.Version : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
+			var isVersion = (package?.IsCodeMod ?? workshopInfo?.IsCodeMod ??  false) && !string.IsNullOrEmpty(package?.VersionName);
+			var versionText = isVersion ? "v" + package!.VersionName : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
 
 			var packageTags = e.Item.GetTags(IsPackagePage).ToList();
