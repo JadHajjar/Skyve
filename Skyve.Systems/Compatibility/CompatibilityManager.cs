@@ -410,7 +410,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (stability is not PackageStability.Stable && isCompatible && !author.Malicious)
 		{
-			if (stability is PackageStability.BrokenFromPatch or PackageStability.BrokenFromPatchSafe)
+			if (stability is PackageStability.BrokenFromPatch or PackageStability.BrokenFromPatchSafe or PackageStability.BrokenFromPatchUpdated)
 			{
 				info.AddWithLocale(ReportType.Stability,
 					new StabilityStatus(stability, null, false),
