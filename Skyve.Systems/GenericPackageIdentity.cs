@@ -11,6 +11,14 @@ public class GenericPackageIdentity : IPackageIdentity
 
 	}
 
+	public GenericPackageIdentity(IPackageIdentity packageIdentity)
+	{
+		Id = packageIdentity.Id;
+		Name = packageIdentity.Name;
+		Url = packageIdentity.Url;
+		Version = packageIdentity.Version;
+	}
+
 	public GenericPackageIdentity(ulong id, string? name = null, string? url = null, string? version = null)
 	{
 		Id = id;

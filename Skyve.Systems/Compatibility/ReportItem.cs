@@ -22,7 +22,7 @@ public class ReportItem : ICompatibilityItem
 	public string? LocaleKey { get; set; }
 	[JsonIgnore] public ILocalPackageIdentity[]? Packages { get; set; }
 	public object[]? LocaleParams { get; set; }
-	[JsonProperty("Packages")] public GenericLocalPackageIdentity[]? DtoPackages { get => Packages.Select(x => new GenericLocalPackageIdentity(x)).ToArray(); set => Packages.Cast<ILocalPackageIdentity>().ToArray(); }
+	[JsonProperty("Packages")] public GenericLocalPackageIdentity[]? DtoPackages { get => Packages?.Select(x => new GenericLocalPackageIdentity(x)).ToArray() ?? []; set => Packages = value.Cast<ILocalPackageIdentity>().ToArray(); }
 
 #nullable disable
 	[JsonIgnore] public IGenericPackageStatus Status { get; set; }
