@@ -654,6 +654,12 @@
     "One": "{1} Backup",
     "Plural": "{0} {1} Backups"
   },
-  "SelectBackup": "Selecionar um backup",
-  "SelectRestoreInfo": "Selecione um ponto de restauração do Histórico de Backup para iniciar o processo de restauração."
+  "SelectRestoreInfo": "Select a restore point from the list of backups to start the restore process.",
+  "RestoreFileConfirm": {
+    "One": "Are you sure you want to restore this backup of {1}?",
+    "Plural": "Are you sure you want to restore these backups?"
+  },
+  "RestoreSuccessful": "Restore Successful",
+  "RestoreFailed": "Failed to restore this backup. Check the logs for more information",
+  "StartRestore": "Start Restore Process"
 }
