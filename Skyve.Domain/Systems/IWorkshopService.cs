@@ -8,7 +8,6 @@ namespace Skyve.Domain.Systems;
 public interface IWorkshopService
 {
 	bool IsReady { get; }
-	IDisposable Lock { get; }
 
 	void ClearCache();
 	Task<IEnumerable<ITag>> GetAvailableTags();
@@ -29,7 +28,6 @@ public interface IWorkshopService
 	Task Initialize();
 	Task<bool> Login();
 	Task<bool> Login(string email, string password, bool rememberMe);
-	Task WaitUntilReady();
 	Task RunSync();
 	Task<int> GetActivePlaysetId();
 	Task<List<IPlayset>> GetPlaysets(bool localOnly);
