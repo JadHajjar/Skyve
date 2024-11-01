@@ -10,4 +10,5 @@ public interface IInterfaceService
 	void OpenPlaysetPage(IPlayset playset, bool settingsTab = false);
 	bool AskForDependencyConfirmation(List<IPackageIdentity> packages, List<IPackageIdentity> dependencies);
 	void OpenLogReport(bool save);
+	void RestoreBackup(string restoreBackup);
 }

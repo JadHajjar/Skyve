@@ -17,6 +17,5 @@ public interface IPackageUtil
 	Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null);
 	Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null);
 	Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null);
-	Task SetVersion(IPackageIdentity package, string? version, int? playsetId = null);
 	string? GetSelectedVersion(IPackageIdentity package, int? playsetId = null);
 }

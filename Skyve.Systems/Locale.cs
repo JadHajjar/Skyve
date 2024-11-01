@@ -1907,10 +1907,26 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation RestartRequired => _instance.GetText("RestartRequired");
 
 	/// <summary>
+	/// Failed to restore this backup. Check the logs for more information
+	/// </summary>
+	public static Translation RestoreFailed => _instance.GetText("RestoreFailed");
+
+	/// <summary>
+	/// <para>Are you sure you want to restore this backup of {1}?</para>
+	/// <para>Plural: Are you sure you want to restore these backups?</para>
+	/// </summary>
+	public static Translation RestoreFileConfirm => _instance.GetText("RestoreFileConfirm");
+
+	/// <summary>
 	/// <para>One restore point from {1}</para>
 	/// <para>Plural: {0} restore points, most recently from {1}</para>
 	/// </summary>
 	public static Translation RestorePoint => _instance.GetText("RestorePoint");
+
+	/// <summary>
+	/// Restore Successful
+	/// </summary>
+	public static Translation RestoreSuccessful => _instance.GetText("RestoreSuccessful");
 
 	/// <summary>
 	/// The issue you've reported has now been fixed. You can use the {0} again.
@@ -2008,11 +2024,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SelectAll => _instance.GetText("SelectAll");
 
 	/// <summary>
-	/// Select a backup
-	/// </summary>
-	public static Translation SelectBackup => _instance.GetText("SelectBackup");
-
-	/// <summary>
 	/// The file you selected is not valid
 	/// </summary>
 	public static Translation SelectedFileInvalid => _instance.GetText("SelectedFileInvalid");
@@ -2023,7 +2034,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SelectPackage => _instance.GetText("SelectPackage");
 
 	/// <summary>
-	/// Select a restore point from the Backup History to start the Restore process.
+	/// Select a restore point from the list of backups to start the restore process.
 	/// </summary>
 	public static Translation SelectRestoreInfo => _instance.GetText("SelectRestoreInfo");
 
@@ -2225,6 +2236,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Troubleshooting step {0} / {1}
 	/// </summary>
 	public static Translation StageCounter => _instance.GetText("StageCounter");
+
+	/// <summary>
+	/// Start Restore Process
+	/// </summary>
+	public static Translation StartRestore => _instance.GetText("StartRestore");
 
 	/// <summary>
 	/// Start a playset from scratch

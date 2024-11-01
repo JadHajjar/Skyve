@@ -32,17 +32,16 @@ partial class PC_MainPage
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
-			this.P_Container = new SlickControls.SlickControl();
-			this.P_Board = new SlickControls.SlickControl();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			this.slickScroll = new SlickControls.SlickScroll();
 			this.P_Scroll = new System.Windows.Forms.Panel();
 			this.FLP_AvailableWidgets = new SlickControls.RoundedGroupFlowLayoutPanel();
 			this.P_AvailableWidgets = new System.Windows.Forms.Panel();
-			this.slickButton1 = new SlickControls.SlickButton();
-			this.P_Container.SuspendLayout();
+			this.P_Board = new SlickControls.SlickControl();
+			this.P_Container = new SlickControls.SlickControl();
 			this.P_Scroll.SuspendLayout();
 			this.P_AvailableWidgets.SuspendLayout();
+			this.P_Container.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// base_Text
@@ -50,19 +49,56 @@ partial class PC_MainPage
 			this.base_Text.Size = new System.Drawing.Size(150, 39);
 			this.base_Text.Text = "Dashboard";
 			// 
-			// P_Container
+			// slickScroll
 			// 
-			this.P_Container.Controls.Add(this.P_Board);
-			this.P_Container.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.P_Container.Location = new System.Drawing.Point(0, 24);
-			this.P_Container.Name = "P_Container";
-			this.P_Container.Size = new System.Drawing.Size(771, 340);
-			this.P_Container.TabIndex = 2;
-			this.P_Container.Paint += new System.Windows.Forms.PaintEventHandler(this.P_Container_Paint);
-			this.P_Container.Layout += new System.Windows.Forms.LayoutEventHandler(this.P_Board_Layout);
-			this.P_Container.MouseClick += new System.Windows.Forms.MouseEventHandler(this.P_Board_MouseClick);
-			this.P_Container.MouseMove += new System.Windows.Forms.MouseEventHandler(this.P_Board_MouseMove);
-			this.P_Container.Resize += new System.EventHandler(this.P_Container_Resize);
+			this.slickScroll.AnimatedValue = 8;
+			this.slickScroll.Dock = System.Windows.Forms.DockStyle.Right;
+			this.slickScroll.LinkedControl = this.P_Board;
+			this.slickScroll.Location = new System.Drawing.Point(-4, 0);
+			this.slickScroll.Name = "slickScroll";
+			this.slickScroll.Size = new System.Drawing.Size(16, 345);
+			this.slickScroll.Style = SlickControls.StyleType.Vertical;
+			this.slickScroll.TabIndex = 3;
+			this.slickScroll.TabStop = false;
+			this.slickScroll.TargetAnimationValue = 8;
+			this.slickScroll.Text = "slickScroll1";
+			// 
+			// P_Scroll
+			// 
+			this.P_Scroll.Controls.Add(this.slickScroll);
+			this.P_Scroll.Dock = System.Windows.Forms.DockStyle.Right;
+			this.P_Scroll.Location = new System.Drawing.Point(771, 24);
+			this.P_Scroll.Name = "P_Scroll";
+			this.P_Scroll.Size = new System.Drawing.Size(12, 345);
+			this.P_Scroll.TabIndex = 4;
+			// 
+			// FLP_AvailableWidgets
+			// 
+			this.FLP_AvailableWidgets.AddOutline = true;
+			this.FLP_AvailableWidgets.AddShadow = true;
+			this.FLP_AvailableWidgets.AutoSize = true;
+			this.FLP_AvailableWidgets.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.FLP_AvailableWidgets.Dock = System.Windows.Forms.DockStyle.Top;
+			dynamicIcon2.Name = "Grid";
+			this.FLP_AvailableWidgets.ImageName = dynamicIcon2;
+			this.FLP_AvailableWidgets.Location = new System.Drawing.Point(0, 0);
+			this.FLP_AvailableWidgets.Name = "FLP_AvailableWidgets";
+			this.FLP_AvailableWidgets.Padding = new System.Windows.Forms.Padding(16, 53, 16, 16);
+			this.FLP_AvailableWidgets.Size = new System.Drawing.Size(783, 69);
+			this.FLP_AvailableWidgets.TabIndex = 6;
+			this.FLP_AvailableWidgets.Text = "AvailableWidgets";
+			// 
+			// P_AvailableWidgets
+			// 
+			this.P_AvailableWidgets.AutoSize = true;
+			this.P_AvailableWidgets.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.P_AvailableWidgets.Controls.Add(this.FLP_AvailableWidgets);
+			this.P_AvailableWidgets.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.P_AvailableWidgets.Location = new System.Drawing.Point(0, 369);
+			this.P_AvailableWidgets.Name = "P_AvailableWidgets";
+			this.P_AvailableWidgets.Size = new System.Drawing.Size(783, 69);
+			this.P_AvailableWidgets.TabIndex = 7;
+			this.P_AvailableWidgets.Visible = false;
 			// 
 			// P_Board
 			// 
@@ -76,73 +112,23 @@ partial class PC_MainPage
 			this.P_Board.MouseClick += new System.Windows.Forms.MouseEventHandler(this.P_Board_MouseClick);
 			this.P_Board.MouseMove += new System.Windows.Forms.MouseEventHandler(this.P_Board_MouseMove);
 			// 
-			// slickScroll
+			// P_Container
 			// 
-			this.slickScroll.AnimatedValue = 8;
-			this.slickScroll.Dock = System.Windows.Forms.DockStyle.Right;
-			this.slickScroll.LinkedControl = this.P_Board;
-			this.slickScroll.Location = new System.Drawing.Point(-6, 0);
-			this.slickScroll.Name = "slickScroll";
-			this.slickScroll.Size = new System.Drawing.Size(18, 340);
-			this.slickScroll.Style = SlickControls.StyleType.Vertical;
-			this.slickScroll.TabIndex = 3;
-			this.slickScroll.TabStop = false;
-			this.slickScroll.TargetAnimationValue = 8;
-			this.slickScroll.Text = "slickScroll1";
-			// 
-			// P_Scroll
-			// 
-			this.P_Scroll.Controls.Add(this.slickScroll);
-			this.P_Scroll.Dock = System.Windows.Forms.DockStyle.Right;
-			this.P_Scroll.Location = new System.Drawing.Point(771, 24);
-			this.P_Scroll.Name = "P_Scroll";
-			this.P_Scroll.Size = new System.Drawing.Size(12, 340);
-			this.P_Scroll.TabIndex = 4;
-			// 
-			// FLP_AvailableWidgets
-			// 
-			this.FLP_AvailableWidgets.AddOutline = true;
-			this.FLP_AvailableWidgets.AddShadow = true;
-			this.FLP_AvailableWidgets.AutoSize = true;
-			this.FLP_AvailableWidgets.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.FLP_AvailableWidgets.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon1.Name = "Grid";
-			this.FLP_AvailableWidgets.ImageName = dynamicIcon1;
-			this.FLP_AvailableWidgets.Location = new System.Drawing.Point(0, 0);
-			this.FLP_AvailableWidgets.Name = "FLP_AvailableWidgets";
-			this.FLP_AvailableWidgets.Padding = new System.Windows.Forms.Padding(18, 56, 18, 18);
-			this.FLP_AvailableWidgets.Size = new System.Drawing.Size(783, 74);
-			this.FLP_AvailableWidgets.TabIndex = 6;
-			this.FLP_AvailableWidgets.Text = "AvailableWidgets";
-			// 
-			// P_AvailableWidgets
-			// 
-			this.P_AvailableWidgets.AutoSize = true;
-			this.P_AvailableWidgets.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.P_AvailableWidgets.Controls.Add(this.FLP_AvailableWidgets);
-			this.P_AvailableWidgets.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.P_AvailableWidgets.Location = new System.Drawing.Point(0, 364);
-			this.P_AvailableWidgets.Name = "P_AvailableWidgets";
-			this.P_AvailableWidgets.Size = new System.Drawing.Size(783, 74);
-			this.P_AvailableWidgets.TabIndex = 7;
-			this.P_AvailableWidgets.Visible = false;
-			// 
-			// slickButton1
-			// 
-			this.slickButton1.AutoSize = true;
-			this.slickButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.slickButton1.Location = new System.Drawing.Point(0, 0);
-			this.slickButton1.Name = "slickButton1";
-			this.slickButton1.Size = new System.Drawing.Size(100, 32);
-			this.slickButton1.SpaceTriggersClick = true;
-			this.slickButton1.TabIndex = 8;
-			this.slickButton1.Text = "slickButton1";
-			this.slickButton1.Click += new System.EventHandler(this.slickButton1_Click);
+			this.P_Container.Controls.Add(this.P_Board);
+			this.P_Container.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.P_Container.Location = new System.Drawing.Point(0, 24);
+			this.P_Container.Name = "P_Container";
+			this.P_Container.Size = new System.Drawing.Size(771, 345);
+			this.P_Container.TabIndex = 2;
+			this.P_Container.Paint += new System.Windows.Forms.PaintEventHandler(this.P_Container_Paint);
+			this.P_Container.Layout += new System.Windows.Forms.LayoutEventHandler(this.P_Board_Layout);
+			this.P_Container.MouseClick += new System.Windows.Forms.MouseEventHandler(this.P_Board_MouseClick);
+			this.P_Container.MouseMove += new System.Windows.Forms.MouseEventHandler(this.P_Board_MouseMove);
+			this.P_Container.Resize += new System.EventHandler(this.P_Container_Resize);
 			// 
 			// PC_MainPage
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.Controls.Add(this.slickButton1);
 			this.Controls.Add(this.P_Container);
 			this.Controls.Add(this.P_Scroll);
 			this.Controls.Add(this.P_AvailableWidgets);
@@ -152,26 +138,23 @@ partial class PC_MainPage
 			this.Text = "Dashboard";
 			this.Controls.SetChildIndex(this.P_AvailableWidgets, 0);
 			this.Controls.SetChildIndex(this.P_Scroll, 0);
-			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.Controls.SetChildIndex(this.P_Container, 0);
-			this.Controls.SetChildIndex(this.slickButton1, 0);
-			this.P_Container.ResumeLayout(false);
-			this.P_Container.PerformLayout();
+			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.P_Scroll.ResumeLayout(false);
 			this.P_AvailableWidgets.ResumeLayout(false);
 			this.P_AvailableWidgets.PerformLayout();
+			this.P_Container.ResumeLayout(false);
+			this.P_Container.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 	}
 
 	#endregion
-
-	private SlickControl P_Container;
-	private SlickControl P_Board;
 	private SlickScroll slickScroll;
 	private System.Windows.Forms.Panel P_Scroll;
 	private RoundedGroupFlowLayoutPanel FLP_AvailableWidgets;
 	private System.Windows.Forms.Panel P_AvailableWidgets;
-	private SlickButton slickButton1;
+	private SlickControl P_Board;
+	private SlickControl P_Container;
 }

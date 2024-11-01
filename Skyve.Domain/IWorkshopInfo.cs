@@ -8,8 +8,8 @@ public interface IWorkshopInfo : IPackageIdentity, IThumbnailObject
 	string? ThumbnailUrl { get; }
 	string? ShortDescription { get; }
 	string? Description { get; }
-	string? VersionId { get; }
-	string? Version { get; }
+	string? LatestVersion { get; }
+	string? VersionName { get; }
 	string? SuggestedGameVersion { get; }
 	DateTime ServerTime { get; }
 	long ServerSize { get; }

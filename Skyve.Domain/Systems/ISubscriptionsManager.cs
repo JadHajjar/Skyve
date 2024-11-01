@@ -6,8 +6,6 @@ namespace Skyve.Domain.Systems;
 public interface ISubscriptionsManager
 {
 	bool IsSubscribing(IPackageIdentity package);
-	Task<bool> Subscribe(IEnumerable<IPackageIdentity> ids, int? playsetId = null);
-	Task<bool> UnSubscribe(IEnumerable<IPackageIdentity> ids, int? playsetId = null);
 
 #if CS1
 	List<ulong> PendingSubscribingTo { get; }
@@ -16,6 +14,9 @@ public interface ISubscriptionsManager
 	List<ulong> UnsubscribingFrom { get; }
 	bool SubscriptionsPending { get; }
 	bool Redownload { get; set; }
+
+	Task<bool> Subscribe(IEnumerable<IPackageIdentity> ids, int? playsetId = null);
+	Task<bool> UnSubscribe(IEnumerable<IPackageIdentity> ids, int? playsetId = null);
 
 	void Start();
 	void CancelPendingItems();
@@ -28,5 +29,7 @@ public interface ISubscriptionsManager
 	void OnInstallProgress(PackageInstallProgress info);
 	void OnInstallStarted(PackageInstallProgress info);
 	void OnDownloadProgress(PackageDownloadProgress info);
+	void AddSubscribing(IEnumerable<IPackageIdentity> ids);
+	void RemoveSubscribing(IEnumerable<IPackageIdentity> ids);
 #endif
 }

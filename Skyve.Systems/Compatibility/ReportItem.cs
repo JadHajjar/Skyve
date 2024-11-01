@@ -19,9 +19,10 @@ public class ReportItem : ICompatibilityItem
 	public ulong PackageId { get; set; }
 	public string? PackageName { get; set; }
 	public ReportType Type { get; set; }
-	public GenericLocalPackageIdentity[]? Packages { get; set; }
 	public string? LocaleKey { get; set; }
+	[JsonIgnore] public ILocalPackageIdentity[]? Packages { get; set; }
 	public object[]? LocaleParams { get; set; }
+	[JsonProperty("Packages")] public GenericLocalPackageIdentity[]? DtoPackages { get => Packages?.Select(x => new GenericLocalPackageIdentity(x)).ToArray() ?? []; set => Packages = value.Cast<ILocalPackageIdentity>().ToArray(); }
 
 #nullable disable
 	[JsonIgnore] public IGenericPackageStatus Status { get; set; }
@@ -33,6 +34,7 @@ public class ReportItem : ICompatibilityItem
 	string IPackageIdentity.Name => PackageName ?? PackageId.ToString();
 	string? IPackageIdentity.Url { get; }
 	IEnumerable<IPackageIdentity> ICompatibilityItem.Packages => Packages?.Cast<IPackageIdentity>() ?? [];
+	string? IPackageIdentity.Version { get; set; }
 
 	public string GetMessage(IWorkshopService workshopService, IPackageNameUtil packageNameUtil)
 	{
@@ -70,7 +72,7 @@ public class ReportItem : ICompatibilityItem
 		var hashCode = 109806218;
 		hashCode = (hashCode * -1521134295) + PackageId.GetHashCode();
 		hashCode = (hashCode * -1521134295) + Type.GetHashCode();
-		hashCode = (hashCode * -1521134295) + EqualityComparer<GenericLocalPackageIdentity[]?>.Default.GetHashCode(Packages);
+		hashCode = (hashCode * -1521134295) + EqualityComparer<GenericLocalPackageIdentity[]?>.Default.GetHashCode(DtoPackages);
 		hashCode = (hashCode * -1521134295) + Status.GetHashCode();
 		return hashCode;
 	}

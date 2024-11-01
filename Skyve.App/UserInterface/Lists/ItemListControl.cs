@@ -480,7 +480,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 		if (rects.VersionRect.Contains(e.Location) && item.Item.GetLocalPackage() is ILocalPackageData localPackageData)
 		{
-			Clipboard.SetText(localPackageData.Version);
+			Clipboard.SetText(localPackageData.VersionName);
 		}
 
 		if (rects.ScoreRect.Contains(e.Location))

@@ -133,11 +133,6 @@ public class PackageUtil : IPackageUtil
 		await _modUtil.SetEnabled(packages, value, playsetId);
 	}
 
-	public async Task SetVersion(IPackageIdentity package, string version, int? playsetId = null)
-	{
-		await _modUtil.SetVersion(package, version, playsetId);
-	}
-
 	public async Task SetIncluded(IPackageIdentity localPackage, bool value, int? playsetId = null)
 	{
 		//if (localPackage is ILocalPackageData localPackageData && localPackageData.Assets.Length > 0)
@@ -181,7 +176,7 @@ public class PackageUtil : IPackageUtil
 			return DownloadStatus.Removed;
 		}
 
-		var latestVersion = workshopInfo.VersionId.SmartParse();
+		var latestVersion = workshopInfo.Version.SmartParse();
 		var currentVersion = _modUtil.GetSelectedVersion(mod!).SmartParse();
 
 		if (latestVersion > currentVersion && currentVersion != 0)

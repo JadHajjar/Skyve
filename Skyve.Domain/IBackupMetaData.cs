@@ -13,4 +13,5 @@ public interface IBackupMetaData
 	string? Root { get; }
 	string? Type { get; }
 	RestoreAction RestoreType { get; }
+	string? ItemMetaDataType { get; set; }
 }

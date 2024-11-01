@@ -11,6 +11,9 @@ public class WorkshopContentList : ContentList
 	{
 		DD_Sorting.WorkshopSort = true;
 		I_SortOrder.Visible = false;
+
+		TLP_Main.SetColumn(DD_SearchTime, 2);
+		TLP_Main.SetColumn(I_SortOrder, 1);
 	}
 
 	protected override void OnCreateControl()

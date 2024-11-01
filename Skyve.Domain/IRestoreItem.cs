@@ -8,6 +8,8 @@ namespace Skyve.Domain;
 public interface IRestoreItem
 {
 	IBackupMetaData MetaData { get; }
+	object? ItemMetaData { get; }
 	FileInfo BackupFile { get; }
+
 	Task<bool> Restore(IBackupSystem backupManager);
 }
