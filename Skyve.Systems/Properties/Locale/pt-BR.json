@@ -643,7 +643,8 @@
   "CleanupStorageBased": "Excluir backups antigos, quando o armazenamento total exceder:",
   "CleanupCountBased": "Excluir backups antigos, quando o número de backups exceder:",
   "DoBackupNow": "Fazer backup de arquivos agora",
-  "BackupDescriptionInfo": "Fazer backup manual de arquivos salvos, configurações e outras informações relevantes para proteger suas cidades e mods.\n\nIsso garante que suas cidades e preferências atuais sejam armazenadas com segurança em caso de problemas de sistema ou reinstalação.",
+  "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or re-installation.",
+  "RestoreDescriptionInfo": "Select which backups you'd like to restore.\r\nA backup will be taken before the restore process begins to safeguard your current files.",
   "BackupFailed": "Falha ao fazer Backup",
   "CheckLogsAndTryAgain": "Verifique se existem erros nos logs e tente novamente.",
   "RestorePoint": {
