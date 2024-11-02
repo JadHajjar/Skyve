@@ -2383,6 +2383,16 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Map_32 {
+            get {
+                object obj = ResourceManager.GetObject("I_Map_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Map_48 {
             get {
                 object obj = ResourceManager.GetObject("I_Map_48", resourceCulture);
@@ -2686,6 +2696,46 @@ namespace Skyve.App.Properties {
         internal static System.Drawing.Bitmap I_ModWarning_48 {
             get {
                 object obj = ResourceManager.GetObject("I_ModWarning_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Money_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Money_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Money_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Money_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Money_32 {
+            get {
+                object obj = ResourceManager.GetObject("I_Money_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Money_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Money_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

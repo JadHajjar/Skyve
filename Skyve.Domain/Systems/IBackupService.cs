@@ -1,8 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 
 public interface IBackupService
 {
-	Task Run();
+	Func<Task>? PreBackupTask { get; set; }
+	Func<Task>? PostBackupTask { get; set; }
+
+	Task<bool> Run();
 }

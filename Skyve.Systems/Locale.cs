@@ -241,7 +241,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation BackupCount => _instance.GetText("BackupCount");
 
 	/// <summary>
-	/// Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.  This ensures your current cities and preferences are safely stored in case of system issues or reinstallation.
+	/// Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.  This ensures your current cities and preferences are safely stored in case of system issues or re-installation.
 	/// </summary>
 	public static Translation BackupDescriptionInfo => _instance.GetText("BackupDescriptionInfo");
 
@@ -1905,6 +1905,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Restart Required
 	/// </summary>
 	public static Translation RestartRequired => _instance.GetText("RestartRequired");
+
+	/// <summary>
+	/// Select which backups you'd like to restore. A backup will be taken before the restore process begins to safeguard your current files.
+	/// </summary>
+	public static Translation RestoreDescriptionInfo => _instance.GetText("RestoreDescriptionInfo");
 
 	/// <summary>
 	/// Failed to restore this backup. Check the logs for more information
