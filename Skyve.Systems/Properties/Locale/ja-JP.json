@@ -633,7 +633,7 @@
   "EnableAutoBackup": "Enable scheduled backups",
   "BackupPath": "Backup Files Location",
   "BackupPathPlaceholder": "Select a folder where you want to save your backups",
-  "IncludeAutoSavesBackup": "Include Auto-Save savegames while backing up savegame files",
+  "IncludeAutoSavesBackup": "セーブデータのバックアップ中に自動保存を含める",
   "ScheduleOnSpecificTimes": "Do daily backups on specific times",
   "ScheduleOnGameClose": "Do a backup each time the game is closed",
   "ScheduleOnNewSave": "Do a backup each time a city is saved",
