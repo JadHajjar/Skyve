@@ -643,7 +643,8 @@
   "CleanupStorageBased": "当使用的总存储量超过以下时删除旧备份：",
   "CleanupCountBased": "当备份总量超过以下时删除旧备份：",
   "DoBackupNow": "立即备份文件",
-  "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or reinstallation.",
+  "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or re-installation.",
+  "RestoreDescriptionInfo": "Select which backups you'd like to restore.\r\nA backup will be taken before the restore process begins to safeguard your current files.",
   "BackupFailed": "Backup Failed",
   "CheckLogsAndTryAgain": "Check the logs for any errors and try again.",
   "RestorePoint": {
