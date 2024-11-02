@@ -33,7 +33,7 @@ public interface IPlaysetManager
 	Task DeactivateActivePlayset();
 	void Save(ICustomPlayset customPlayset);
 	Task<IEnumerable<IPlaysetPackage>> GetPlaysetContents(IPlayset playset);
-	Task<object> GetLogPlayset();
+	Task<object> GenerateImportPlayset(IPlayset? playset);
 
 #if CS1
 	IPlayset TemporaryPlayset { get; }

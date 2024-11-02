@@ -31,6 +31,7 @@ public interface IWorkshopService
 	Task RunSync();
 	Task<int> GetActivePlaysetId();
 	Task<List<IPlayset>> GetPlaysets(bool localOnly);
+	Task<IPlayset?> GetCurrentPlayset();
 	Task<bool> ToggleVote(IPackageIdentity packageIdentity);
 	Task<IModCommentsInfo?> GetComments(IPackageIdentity packageIdentity, int page = 1, int limit = 20);
 	Task<IModComment?> PostNewComment(IPackageIdentity packageIdentity, string comment);

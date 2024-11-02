@@ -212,6 +212,7 @@ public static class SystemExtensions
 			"SettingsFiles" => "UserOptions",
 			"ModsSettingsFiles" => "FileSettings",
 			"LocalMods" => "Mods",
+			"Maps" => "Map",
 			_ => string.Empty,
 		};
 	}

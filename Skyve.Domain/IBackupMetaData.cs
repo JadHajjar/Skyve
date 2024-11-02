@@ -10,6 +10,7 @@ public interface IBackupMetaData
 	string? Name { get; set; }
 	DateTime BackupTime { get; set; }
 	DateTime ContentTime { get; }
+	int FileCount { get; set; }
 	string? Root { get; }
 	string? Type { get; }
 	RestoreAction RestoreType { get; }
