@@ -643,7 +643,8 @@
   "CleanupStorageBased": "Eliminar respaldos antiguos una vez que exceda el almacenamiento total:",
   "CleanupCountBased": "Eliminar respaldos antiguos una vez superada la cantidad total de copias de seguridad:",
   "DoBackupNow": "Respaldar Archivos Ahora",
-  "BackupDescriptionInfo": "Respaldar manualmente un juego guardado, configuración u otra información relevante para salvaguardar tus ciudades o mods.\n\nEsto asegura que tus ciudades actuales y preferencias queden a resguardo en caso de un problema de sistema o reinstalación.",
+  "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or re-installation.",
+  "RestoreDescriptionInfo": "Select which backups you'd like to restore.\r\nA backup will be taken before the restore process begins to safeguard your current files.",
   "BackupFailed": "Fallo al Respaldar",
   "CheckLogsAndTryAgain": "Compruebe los registros en busca de errores e inténtelo de nuevo.",
   "RestorePoint": {
