@@ -654,12 +654,12 @@
     "One": "{1} respaldo",
     "Plural": "{0} {1} respaldos"
   },
-  "SelectRestoreInfo": "Select a restore point from the list of backups to start the restore process.",
+  "SelectRestoreInfo": "Seleccione un punto de restauración de la lista de respaldos para iniciar el proceso de restauración.",
   "RestoreFileConfirm": {
-    "One": "Are you sure you want to restore this backup of {1}?",
-    "Plural": "Are you sure you want to restore these backups?"
+    "One": "¿Está seguro que desea restaurar este respaldo de {1}?",
+    "Plural": "¿Está seguro que desea restaurar este respaldo?"
   },
-  "RestoreSuccessful": "Restore Successful",
-  "RestoreFailed": "Failed to restore this backup. Check the logs for more information",
-  "StartRestore": "Start Restore Process"
+  "RestoreSuccessful": "Restauración Exitosa",
+  "RestoreFailed": "Error al restaurar este respaldo. Compruebe los registros para más información",
+  "StartRestore": "Iniciar Proceso de Restauración"
 }
