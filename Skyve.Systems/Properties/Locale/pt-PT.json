@@ -189,8 +189,8 @@
   "OpenChangelog": "Abrir registo de alterações",
   "Changelog": "Registo de alterações",
   "DeleteAsset": {
-    "One": "Apagar este ativo",
-    "Plural": "Apagar os ativos selecionados"
+    "One": "Apagar este recurso",
+    "Plural": "Apagar os recursos selecionados"
   },
   "DeletePackage": {
     "One": "Apagar este pacote",
