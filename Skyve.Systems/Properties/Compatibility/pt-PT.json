@@ -9,20 +9,20 @@
   "BlackListName": "Lista negra por nome",
   "BlackListId": "Lista negra por nome",
   "GlobalTagsInfo": "Marca todos os jogadores que verão no Skyve",
-  "Links": "Links",
+  "Links": "Ligações",
   "StatusesCount": "Estados ({0})",
   "InteractionCount": "Interações ({0})",
   "AddStatus": "Adicionar estado",
   "AddInteraction": "Adicionar interação",
-  "NotReviewed": "Ainda não analisado",
+  "NotReviewed": "Por analisar",
   "Stable": "Estável",
   "StableNoNewFeatures": "Estável, apenas atualizações de correções",
-  "StableNoFutureUpdates": "Estável, sem mais atualizações",
+  "StableNoFutureUpdates": "Estável, mas sem atualizações",
   "HasIssuesNoFutureUpdates": "Tem problemas, sem mais atualizações",
   "BreaksOnPatch": "Estável, mas pode falhar com o patch",
   "NotEnoughInformation": "Não há informação suficiente",
   "HasIssues": "Tem problemas",
-  "Broken": "Quebrado",
+  "Broken": "Corrompido",
   "Incompatible": "Incompatível",
   "CityBuilding": "Construção da cidade",
   "AssetCreation": "Criação de recurso",
@@ -31,8 +31,8 @@
   "SubscribeToPackages": "Subscrever os pacotes vinculados",
   "RequiresConfiguration": "Requer uma configuração específica",
   "SelectOne": "Seleciona qualquer um",
-  "UnsubscribeThis": "Cancelar inscrição neste pacote",
-  "UnsubscribeOther": "Cancelar inscrição de pacotes vinculados",
+  "UnsubscribeThis": "Cancelar subscrição deste pacote",
+  "UnsubscribeOther": "Cancelar subscrição de pacotes vinculados",
   "Switch": "Mudar para pacote vinculado",
   "FlippedSwitch": "Alternar para este pacote",
   "Deprecated": "Descontinuado",
@@ -56,7 +56,7 @@
   "InteractionType": "Tipo de interação",
   "MissingDependency": "Dependência em falta",
   "Caution": "Cuidado",
-  "Warning": "ATENÇÃO",
+  "Warning": "Atenção",
   "AttentionRequired": "Atenção necessária",
   "Website": "Site",
   "Donation": "Doar",
@@ -65,7 +65,7 @@
   "AddPackages": "Adicionar pacotes",
   "ConfirmEndSession": "Tens a certeza que queres terminar a tua sessão?",
   "CrDataLoadFailed": "Falha ao carregar os dados, tenta novamente mais tarde",
-  "AddGlobalTag": "Adicionar uma tag global",
+  "AddGlobalTag": "Adicionar uma etiqueta global",
   "ReuseData": "Reutilizar dados anteriores",
   "ReuseData_Tip": "Reutiliza os dados de compatibilidade do teu último pacote guardado para este.\r\nMantém Shift pressionado para aplicar e continuar",
   "PleaseReviewTheStability": "Por favor, revê a estabilidade deste pacote antes de guardar.",
@@ -86,15 +86,15 @@
   },
   "Interaction_CausesIssuesWith": {
     "One": "'{0}' pode causar problemas quando usado com '{1}'.",
-    "Plural": "'{0}' pode causar problemas quando usado com os seguintes módulos."
+    "Plural": "'{0}' pode causar problemas quando usado com os seguintes mods."
   },
   "Interaction_RequiredPackages": {
     "One": "Está em falta um pacote necessário para '{0}'.",
-    "Plural": "Estão em falta os seguintes pacotes obrigatórios para '{0}'."
+    "Plural": "Os seguintes pacotes obrigatórios para '{0}' estão em falta."
   },
   "Interaction_OptionalPackages": {
     "One": "Está em falta um pacote opcional para '{0}'.",
-    "Plural": "Estão em falta os seguintes pacotes opcionais para '{0}'."
+    "Plural": "Os seguintes pacotes opcionais para '{0}' estão em falta."
   },
   "Interaction_SucceededBy": {
     "One": "'{0}' foi substituído por '{1}'.",
@@ -108,12 +108,12 @@
     "One": "'{0}' é necessário para '{1}'.",
     "Plural": "'{0}' é necessário para os seguintes pacotes."
   },
-  "Interaction_Identical": "Os seguintes mods são versões duplicadas do mesmo mesmo.\nUsar-los ao mesmo tempo pode criar conflitos.",
+  "Interaction_Identical": "Os seguintes mods são versões duplicadas do mesmo mod.\nUsar-los ao mesmo tempo pode criar conflitos.",
   "Status_Succeeded": "'{0}' foi bem-sucedido por '{1}', já estás a usar '{1}'. Não há mais necessidade de '{0}'.",
-  "Status_Deprecated": "'{0}' está obsoleto, não é mais suportado pelo seu autor.",
+  "Status_Deprecated": "'{0}' está obsoleto, ne ão é mais suportado pelo seu autor.",
   "Status_AutoDeprecated": "'{0}' não é atualizado há muito tempo, provavelmente já não tem suporte do seu autor.",
   "Status_Reupload": {
-    "Zero": "'{0}' é um re-envio de um pacote original.",
+    "Zero": "'{0}' é um reenvio de um pacote original.",
     "One": "'{0}' é uma nova atualização de '{1}'."
   },
   "Status_CausesIssues": "'{0}' é conhecido por causar problemas no jogo.",
@@ -188,7 +188,7 @@
     "One": "Deves adicionar o seguinte pacote ao teu conjunto.",
     "Plural": "Deves adicionar os seguintes pacotes ao teu conjunto."
   },
-  "NoRequiredDlcs": "DLCs não necessários",
+  "NoRequiredDlcs": "Não requer DLCs",
   "DlcsSelected": {
     "One": "{0} DLC selecionado",
     "Plural": "{0} DLCs selecionados"
@@ -219,8 +219,8 @@
     "Plural": "{0} {1} requerem a tua atenção"
   },
   "ExcludeCount": {
-    "One": "{0} {1} deve ser excluído",
-    "Plural": "{0} {1} devem ser excluídos"
+    "One": "{0} {1} deve ser apagado",
+    "Plural": "{0} {1} devem ser apagados"
   },
   "UnsubscribeCount": "{0} {1} que deves cancelar a assinatura",
   "SwitchCount": {
