@@ -655,12 +655,12 @@
     "One": "{1} backup",
     "Plural": "{0} {1} backups"
   },
-  "SelectRestoreInfo": "Select a restore point from the list of backups to start the restore process.",
+  "SelectRestoreInfo": "Sélectionnez un point de restauration de la liste des archives pour commencer le processus de restauration.",
   "RestoreFileConfirm": {
-    "One": "Are you sure you want to restore this backup of {1}?",
-    "Plural": "Are you sure you want to restore these backups?"
+    "One": "Êtes-vous sûr de vouloir restaurer cette archive de {1}?",
+    "Plural": "Êtes-vous sûr de vouloir restaurer ces archives ?"
   },
-  "RestoreSuccessful": "Restore Successful",
-  "RestoreFailed": "Failed to restore this backup. Check the logs for more information",
-  "StartRestore": "Start Restore Process"
+  "RestoreSuccessful": "Restauration Réussie",
+  "RestoreFailed": "Échec de la restauration de cette archive. Vérifiez les logs pour plus d'informations",
+  "StartRestore": "Démarrer le Processus de Restauration"
 }
