@@ -52,6 +52,7 @@ internal class NotifierSystem : INotifier
 	public bool IsApplyingPlayset { get; set; }
 	public bool IsPlaysetsLoaded { get; set; }
 	public bool IsWorkshopSyncInProgress { get; set; }
+	public bool IsBackingUp { get; set; }
 
 	public void OnContentLoaded()
 	{

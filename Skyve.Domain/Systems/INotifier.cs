@@ -8,6 +8,7 @@ public interface INotifier
 	bool IsApplyingPlayset { get; set; }
 	bool IsPlaysetsLoaded { get; set; }
 	bool IsWorkshopSyncInProgress { get; set; }
+	bool IsBackingUp { get; set; }
 
 	event Action? ContentLoaded;
 	event Action? PackageInformationUpdated;

@@ -102,6 +102,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation AffectedPackagesAre => _instance.GetText("AffectedPackagesAre");
 
 	/// <summary>
+	/// All File Types
+	/// </summary>
+	public static Translation AllContentTypes => _instance.GetText("AllContentTypes");
+
+	/// <summary>
 	/// All DLCs
 	/// </summary>
 	public static Translation AllDlcs => _instance.GetText("AllDlcs");
@@ -233,6 +238,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Cleanup Settings
 	/// </summary>
 	public static Translation BackupCleanup => _instance.GetText("BackupCleanup");
+
+	/// <summary>
+	/// Select which types of files to include in your backups.
+	/// </summary>
+	public static Translation BackupContentInfo => _instance.GetText("BackupContentInfo");
 
 	/// <summary>
 	/// <para>{1} backup</para>
@@ -426,6 +436,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Content Summary
 	/// </summary>
 	public static Translation ContentSummary => _instance.GetText("ContentSummary");
+
+	/// <summary>
+	/// File Types
+	/// </summary>
+	public static Translation ContentToBackup => _instance.GetText("ContentToBackup");
 
 	/// <summary>
 	/// Clone your active playset
@@ -2057,6 +2072,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Send the request for review
 	/// </summary>
 	public static Translation SendReview => _instance.GetText("SendReview");
+
+	/// <summary>
+	/// Set up the settings first.
+	/// </summary>
+	public static Translation SetupSettingsFirst => _instance.GetText("SetupSettingsFirst");
 
 	/// <summary>
 	/// Upload this playset

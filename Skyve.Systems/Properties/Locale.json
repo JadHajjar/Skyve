@@ -662,5 +662,9 @@
   },
   "RestoreSuccessful": "Restore Successful",
   "RestoreFailed": "Failed to restore this backup. Check the logs for more information",
-  "StartRestore": "Start Restore Process"
+  "StartRestore": "Start Restore Process",
+  "ContentToBackup": "File Types",
+  "AllContentTypes": "All File Types",
+  "BackupContentInfo": "Select which types of files to include in your backups.",
+  "SetupSettingsFirst": "Set up the settings first."
 }
