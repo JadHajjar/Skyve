@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dashboard;
+public class DashboardItemAttribute(string id) : Attribute
+{
+	public string Id { get; } = id;
+}
+
 public abstract class IDashboardItem : SlickImageControl
 {
 	private CancellationTokenSource? tokenSource;

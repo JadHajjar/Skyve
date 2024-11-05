@@ -177,6 +177,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ApplyPlaysetNameBeforeExit => _instance.GetText("ApplyPlaysetNameBeforeExit");
 
 	/// <summary>
+	/// Archived
+	/// </summary>
+	public static Translation Archived => _instance.GetText("Archived");
+
+	/// <summary>
 	/// Are you sure you want to proceed?
 	/// </summary>
 	public static Translation AreYouSure => _instance.GetText("AreYouSure");
@@ -291,9 +296,14 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation BackupRestore => _instance.GetText("BackupRestore");
 
 	/// <summary>
-	/// Schedule Settings
+	/// Backup Schedule
 	/// </summary>
 	public static Translation BackupSchedule => _instance.GetText("BackupSchedule");
+
+	/// <summary>
+	/// Schedule Settings
+	/// </summary>
+	public static Translation BackupScheduleSettings => _instance.GetText("BackupScheduleSettings");
 
 	/// <summary>
 	/// Basic Settings

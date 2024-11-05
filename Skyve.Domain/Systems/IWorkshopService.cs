@@ -20,6 +20,8 @@ public interface IWorkshopService
 
 #if CS2
 	event Action? OnContextAvailable;
+	event Action? OnLogin;
+	event Action? OnLogout;
 
 	bool IsLoggedIn { get; }
 	bool IsLoginPending { get; }

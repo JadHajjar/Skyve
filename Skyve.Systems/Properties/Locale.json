@@ -629,7 +629,8 @@
   "BackupRestore": "Backup & Restore",
   "BasicSettings": "Basic Settings",
   "BackupCleanup": "Cleanup Settings",
-  "BackupSchedule": "Schedule Settings",
+  "BackupSchedule": "Backup Schedule",
+  "BackupScheduleSettings": "Schedule Settings",
   "EnableAutoBackup": "Enable scheduled backups",
   "BackupPath": "Backup Files Location",
   "BackupPathPlaceholder": "Select a folder where you want to save your backups",
@@ -666,5 +667,6 @@
   "ContentToBackup": "File Types",
   "AllContentTypes": "All File Types",
   "BackupContentInfo": "Select which types of files to include in your backups.",
-  "SetupSettingsFirst": "Set up the settings first."
+  "SetupSettingsFirst": "Set up the settings first.",
+  "Archived": "Archived"
 }
