@@ -628,12 +628,12 @@
   "BackupCenter": "备份中心",
   "BackupRestore": "备份 & 恢复",
   "BasicSettings": "基本设置",
-  "BackupCleanup": "清除设置",
+  "BackupCleanup": "清理程序设置",
   "BackupSchedule": "计划设置",
-  "EnableAutoBackup": "启用计划备份",
+  "EnableAutoBackup": "启用计划性备份",
   "BackupPath": "备份文件位置",
-  "BackupPathPlaceholder": "选择要保存您备份的文件夹",
-  "IncludeAutoSavesBackup": "备份保存游戏文件时包括通过自动保存保存的游戏文件",
+  "BackupPathPlaceholder": "选择备份文件的存储文件夹",
+  "IncludeAutoSavesBackup": "备份自动保存的存档",
   "ScheduleOnSpecificTimes": "在特定时间进行每日备份",
   "ScheduleOnGameClose": "每次游戏关闭时都进行备份",
   "ScheduleOnNewSave": "每次保存城市时都进行备份",
@@ -643,24 +643,24 @@
   "CleanupStorageBased": "当使用的总存储量超过以下时删除旧备份：",
   "CleanupCountBased": "当备份总量超过以下时删除旧备份：",
   "DoBackupNow": "立即备份文件",
-  "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or re-installation.",
-  "RestoreDescriptionInfo": "Select which backups you'd like to restore.\r\nA backup will be taken before the restore process begins to safeguard your current files.",
-  "BackupFailed": "Backup Failed",
-  "CheckLogsAndTryAgain": "Check the logs for any errors and try again.",
+  "BackupDescriptionInfo": "手动备份存档文件、设置和其他相关信息，以保护你的城市和模组。 \n如遇系统问题或重装游戏，此操作可以确保安全地存储当前城市和设置。",
+  "RestoreDescriptionInfo": "请选择你想要恢复的备份。\n在开始恢复之前将再一次备份文件，以保护你当前的文件。",
+  "BackupFailed": "备份失败",
+  "CheckLogsAndTryAgain": "检查日志中是否有错误，然后重试。",
   "RestorePoint": {
-    "One": "One restore point from {1}",
-    "Plural": "{0} restore points, most recently from {1}"
+    "One": "从 {1} 的还原点",
+    "Plural": "{0} 个还原点，最近的来自 {1}"
   },
   "BackupCount": {
-    "One": "{1} backup",
-    "Plural": "{0} {1} backups"
+    "One": "{1} 个备份",
+    "Plural": "{0} 个{1}备份"
   },
-  "SelectRestoreInfo": "Select a restore point from the list of backups to start the restore process.",
+  "SelectRestoreInfo": "从备份列表中选择还原点，以开始恢复进程。",
   "RestoreFileConfirm": {
-    "One": "Are you sure you want to restore this backup of {1}?",
-    "Plural": "Are you sure you want to restore these backups?"
+    "One": "你确定要恢复 {1} 的这个备份吗？",
+    "Plural": "你确定要恢复这些备份吗？"
   },
-  "RestoreSuccessful": "Restore Successful",
-  "RestoreFailed": "Failed to restore this backup. Check the logs for more information",
-  "StartRestore": "Start Restore Process"
+  "RestoreSuccessful": "恢复成功",
+  "RestoreFailed": "此备份恢复失败。请检查日志以获取更多信息。",
+  "StartRestore": "开始进行恢复"
 }
