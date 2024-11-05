@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
 using System;
@@ -53,6 +54,7 @@ internal class NotifierSystem : INotifier
 	public bool IsPlaysetsLoaded { get; set; }
 	public bool IsWorkshopSyncInProgress { get; set; }
 	public bool IsBackingUp { get; set; }
+	public SkyveContext Context { get; set; }
 
 	public void OnContentLoaded()
 	{

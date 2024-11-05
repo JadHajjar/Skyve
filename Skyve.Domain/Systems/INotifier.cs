@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Skyve.Domain.Enums;
+
+using System;
 
 namespace Skyve.Domain.Systems;
 public interface INotifier
@@ -9,6 +11,7 @@ public interface INotifier
 	bool IsPlaysetsLoaded { get; set; }
 	bool IsWorkshopSyncInProgress { get; set; }
 	bool IsBackingUp { get; set; }
+	SkyveContext Context { get; set; }
 
 	event Action? ContentLoaded;
 	event Action? PackageInformationUpdated;
