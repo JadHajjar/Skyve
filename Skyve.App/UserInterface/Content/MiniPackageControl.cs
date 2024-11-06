@@ -88,7 +88,7 @@ public class MiniPackageControl : SlickControl
 
 					if (!isIncluded || ModifierKeys.HasFlag(Keys.Alt))
 					{
-						await _modUtil.SetIncluded(Package, !isIncluded);
+						await _modUtil.SetIncluded(Package, !isIncluded, withVersion: false);
 					}
 					else
 					{
@@ -96,7 +96,7 @@ public class MiniPackageControl : SlickControl
 
 						if (enable || !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil))
 						{
-							await _modUtil.SetEnabled(Package, enable);
+							await _modUtil.SetEnabled(Package, enable, withVersion: false);
 						}
 					}
 
@@ -204,8 +204,8 @@ public class MiniPackageControl : SlickControl
 	private void DrawIncludedButton(PaintEventArgs e, Rectangle buttonRect)
 	{
 		var localIdentity = Package!.GetLocalPackageIdentity();
-		var isIncluded = Package!.IsIncluded(out var isPartialIncluded);
-		var isEnabled = Package!.IsEnabled();
+		var isIncluded = Package!.IsIncluded(out var isPartialIncluded, false);
+		var isEnabled = Package!.IsEnabled(false);
 		Color activeColor = default;
 		string text;
 

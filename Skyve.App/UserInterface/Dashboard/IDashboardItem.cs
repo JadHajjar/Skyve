@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dashboard;
+public class DashboardItemAttribute(string id) : Attribute
+{
+	public string Id { get; } = id;
+}
+
 public abstract class IDashboardItem : SlickImageControl
 {
 	private CancellationTokenSource? tokenSource;
@@ -432,7 +437,7 @@ public abstract class IDashboardItem : SlickImageControl
 		buttonArgs.Padding = UI.Scale(new Padding(6, 3, 6, 3));
 		buttonArgs.BorderRadius = UI.Scale(4);
 		buttonArgs.Rectangle = new Rectangle(buttonArgs.Rectangle.X, preferredHeight, buttonArgs.Rectangle.Width, square ? buttonArgs.Rectangle.Height : buttonArgs.Size.Height.If(0, UI.Scale(26)));
-		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
+		buttonArgs.HoverState = buttonArgs.Rectangle.Contains(CursorLocation) && buttonArgs.Enabled ? (HoverState & ~HoverState.Focused) : HoverState.Normal;
 
 		if (buttonArgs.BackColor.A != 0 && buttonArgs.HoverState.HasFlag(HoverState.Hovered))
 		{
@@ -446,7 +451,7 @@ public abstract class IDashboardItem : SlickImageControl
 			return;
 		}
 
-		if (clickAction is not null)
+		if (clickAction is not null && buttonArgs.Enabled)
 		{
 			_buttonActions.Add(buttonArgs.Rectangle, clickAction);
 		}

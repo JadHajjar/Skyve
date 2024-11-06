@@ -6,4 +6,5 @@ public enum RestoreAction
 	Overwrite = 1,
 	ClearRoot = 2,
 	ClearRootOfSimilarFileTypes = 3,
+	RestoreIfMissing = 4,
 }

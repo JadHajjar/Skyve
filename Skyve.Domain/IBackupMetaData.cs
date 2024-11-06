@@ -13,6 +13,6 @@ public interface IBackupMetaData
 	int FileCount { get; set; }
 	string? Root { get; }
 	string? Type { get; }
-	RestoreAction RestoreType { get; }
+	RestoreAction RestoreType { get; set; }
 	string? ItemMetaDataType { get; set; }
 }

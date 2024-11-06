@@ -63,19 +63,19 @@ public static class SystemExtensions
 		return identity.GetLocalPackage()?.IsCodeMod ?? false;
 	}
 
-	public static bool IsIncluded(this IPackageIdentity package)
+	public static bool IsIncluded(this IPackageIdentity package, bool withVersion = true)
 	{
-		return PackageUtil.IsIncluded(package);
+		return PackageUtil.IsIncluded(package, withVersion: withVersion);
 	}
 
-	public static bool IsIncluded(this IPackageIdentity package, out bool partiallyIncluded)
+	public static bool IsIncluded(this IPackageIdentity package, out bool partiallyIncluded, bool withVersion = true)
 	{
-		return PackageUtil.IsIncluded(package, out partiallyIncluded);
+		return PackageUtil.IsIncluded(package, out partiallyIncluded, withVersion: withVersion);
 	}
 
-	public static bool IsEnabled(this IPackageIdentity package)
+	public static bool IsEnabled(this IPackageIdentity package, bool withVersion = true)
 	{
-		return PackageUtil.IsEnabled(package);
+		return PackageUtil.IsEnabled(package, withVersion: withVersion);
 	}
 
 	public static IPackage? GetPackage(this IPackageIdentity identity)

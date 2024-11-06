@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
 using System;
@@ -25,6 +26,8 @@ internal class NotifierSystem : INotifier
 	public event Action? WorkshopSyncEnded;
 	public event Action? SkyveUpdateAvailable;
 	public event Action? SnoozeChanged;
+	public event Action? BackupEnded;
+	public event Action? BackupStarted;
 
 	private readonly DelayedAction _delayedPackageInformationUpdated;
 	private readonly DelayedAction _delayedPackageInclusionUpdated;
@@ -52,6 +55,8 @@ internal class NotifierSystem : INotifier
 	public bool IsApplyingPlayset { get; set; }
 	public bool IsPlaysetsLoaded { get; set; }
 	public bool IsWorkshopSyncInProgress { get; set; }
+	public bool IsBackingUp { get; set; }
+	public SkyveContext Context { get; set; }
 
 	public void OnContentLoaded()
 	{
@@ -138,9 +143,9 @@ internal class NotifierSystem : INotifier
 
 	private void RunAndLog(Action? action, string name)
 	{
-		_logger.Info("[Auto - Started  ] " + name);
+		_logger.Info(string.Format("[Auto] {0}", name));
+
 		action?.Invoke();
-		_logger.Info("[Auto - Completed] " + name);
 	}
 
 	public void OnWorkshopSyncStarted()
@@ -161,5 +166,15 @@ internal class NotifierSystem : INotifier
 	public void OnSnoozeChanged()
 	{
 		SnoozeChanged?.Invoke();
+	}
+
+	public void OnBackupEnded()
+	{
+		BackupEnded?.Invoke();
+	}
+
+	public void OnBackupStarted()
+	{
+		BackupStarted?.Invoke();
 	}
 }

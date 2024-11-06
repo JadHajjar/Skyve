@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Skyve.Domain.Enums;
+
+using System;
 
 namespace Skyve.Domain.Systems;
 public interface INotifier
@@ -8,6 +10,8 @@ public interface INotifier
 	bool IsApplyingPlayset { get; set; }
 	bool IsPlaysetsLoaded { get; set; }
 	bool IsWorkshopSyncInProgress { get; set; }
+	bool IsBackingUp { get; set; }
+	SkyveContext Context { get; set; }
 
 	event Action? ContentLoaded;
 	event Action? PackageInformationUpdated;
@@ -24,6 +28,8 @@ public interface INotifier
 	event Action? WorkshopSyncEnded;
 	event Action? SkyveUpdateAvailable;
 	event Action? SnoozeChanged;
+	event Action? BackupStarted;
+	event Action? BackupEnded;
 	event Action<Exception>? LoggerFailed;
 
 	void OnLoggerFailed(Exception ex);
@@ -42,4 +48,6 @@ public interface INotifier
 	void OnWorkshopSyncEnded();
 	void OnSkyveUpdateAvailable();
 	void OnSnoozeChanged();
+	void OnBackupStarted();
+	void OnBackupEnded();
 }

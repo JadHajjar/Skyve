@@ -303,8 +303,10 @@ public partial class ContentList : SlickControl
 	{
 		base.UIChanged();
 
-		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding = DD_SearchTime.Margin
-			= I_SortOrder.Padding = B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5));
+		I_SortOrder.Padding = I_Refresh.Padding = UI.Scale(new Padding(4));
+
+		P_FiltersContainer.Padding = TB_Search.Margin = B_Filters.Padding = DD_SearchTime.Margin
+			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5));
 
 		B_Filters.Size = B_Filters.GetAutoSize(true);
 
@@ -673,7 +675,9 @@ public partial class ContentList : SlickControl
 		I_Actions.Invalidate();
 
 		if (Page is not SkyvePage.Workshop)
-		I_Refresh.Loading = false;
+		{
+			I_Refresh.Loading = false;
+		}
 	}
 
 	protected string GetCountText()

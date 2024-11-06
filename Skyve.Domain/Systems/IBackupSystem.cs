@@ -13,6 +13,8 @@ public interface IBackupSystem
 	void DoCleanup();
 	List<IRestoreItem> GetAllBackups();
 	long GetBackupsSizeOnDisk();
+	string[] GetBackupTypes();
+	List<string> ListAllFilesInBackup(IRestoreItem restoreItem);
 	IRestoreItem? LoadBackupFile(string fileName);
 	Task<bool> Restore(IBackupMetaData metaData, string file);
 	void Save(IBackupMetaData metaData, string[] files, object? itemMetaData);
