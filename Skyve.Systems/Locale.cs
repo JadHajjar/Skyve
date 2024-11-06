@@ -276,6 +276,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation BackupIncludeLocalMods => _instance.GetText("BackupIncludeLocalMods");
 
 	/// <summary>
+	/// Include maps in scheduled backups
+	/// </summary>
+	public static Translation BackupIncludeMaps => _instance.GetText("BackupIncludeMaps");
+
+	/// <summary>
 	/// Include savegame files in scheduled backups
 	/// </summary>
 	public static Translation BackupIncludeSaveGames => _instance.GetText("BackupIncludeSaveGames");
@@ -1041,7 +1046,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FirstBackup => _instance.GetText("FirstBackup");
 
 	/// <summary>
-	/// You are doing your first ever backup. This might take a while depending on how many save-games and files you have.  Future backups will take less time as they will only backup new or updated files.
+	/// You are doing your first ever backup. This might take a while depending on how many savegames and files you have.  Future backups will take less time as they will only backup new or updated files.
 	/// </summary>
 	public static Translation FirstBackupDescription => _instance.GetText("FirstBackupDescription");
 
@@ -1261,7 +1266,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation LetUserKnowIsFixed => _instance.GetText("LetUserKnowIsFixed");
 
 	/// <summary>
-	/// Let the requester know that you need a save-game to properly review
+	/// Let the requester know that you need a savegame to properly review
 	/// </summary>
 	public static Translation LetUserKnowSaveFileNeeded => _instance.GetText("LetUserKnowSaveFileNeeded");
 
@@ -1297,22 +1302,22 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation LoadsAssetOnLaunch => _instance.GetText("LoadsAssetOnLaunch");
 
 	/// <summary>
-	/// Continue a previous save-game
+	/// Continue a previous savegame
 	/// </summary>
 	public static Translation LoadSaveGame => _instance.GetText("LoadSaveGame");
 
 	/// <summary>
-	/// Load a save-game when launching Cities: Skylines. Not selecting a save-file will continue your latest save
+	/// Load a savegame when launching Cities: Skylines. Not selecting a save-file will continue your latest save
 	/// </summary>
 	public static Translation LoadSaveGameTip => _instance.GetText("LoadSaveGame_Tip");
 
 	/// <summary>
-	/// Continues your latest save-game on launch
+	/// Continues your latest savegame on launch
 	/// </summary>
 	public static Translation LoadsSaveGameOnLaunch => _instance.GetText("LoadsSaveGameOnLaunch");
 
 	/// <summary>
-	/// Continues the '{0}' save-game on launch
+	/// Continues the '{0}' savegame on launch
 	/// </summary>
 	public static Translation LoadsSaveGameWithMap => _instance.GetText("LoadsSaveGameWithMap");
 
@@ -1979,7 +1984,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ReviewIsFixed => _instance.GetText("ReviewIsFixed");
 
 	/// <summary>
-	/// The issue you've reported needs more information to be identified. Please send a new Request with a save-game attached to it to be reviewed.
+	/// The issue you've reported needs more information to be identified. Please send a new Request with a savegame attached to it to be reviewed.
 	/// </summary>
 	public static Translation ReviewIsSaveFileNeeded => _instance.GetText("ReviewIsSaveFileNeeded");
 
@@ -2014,7 +2019,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ReviewRequestSent => _instance.GetText("ReviewRequestSent");
 
 	/// <summary>
-	/// Select a save-game to send with your request to help us investigate the issue
+	/// Select a savegame to send with your request to help us investigate the issue
 	/// </summary>
 	public static Translation ReviewSaveFileInfo => _instance.GetText("ReviewSaveFileInfo");
 
@@ -2679,9 +2684,9 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation WorkshopMaps => _instance.GetText("Workshop Maps");
 
 	/// <summary>
-	/// Workshop Save-games
+	/// Workshop Savegames
 	/// </summary>
-	public static Translation WorkshopSavegames => _instance.GetText("Workshop Save-games");
+	public static Translation WorkshopSavegames => _instance.GetText("Workshop Savegames");
 
 	/// <summary>
 	/// Workshop &amp; In-Game Tags
@@ -2700,9 +2705,9 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation YouHavePackagesUser => _instance.GetText("YouHavePackagesUser");
 
 	/// <summary>
-	/// Your Save-games
+	/// Your Savegames
 	/// </summary>
-	public static Translation YourSavegames => _instance.GetText("Your Save-games");
+	public static Translation YourSavegames => _instance.GetText("Your Savegames");
 
 	/// <summary>
 	/// Your DLCs
