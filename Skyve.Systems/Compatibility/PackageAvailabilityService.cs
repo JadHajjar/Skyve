@@ -104,6 +104,6 @@ public class PackageAvailabilityService
 
 		return false;
 
-		bool isEnabled(IPackageIdentity? package) => package is not null && _packageUtil.IsIncludedAndEnabled(package);
+		bool isEnabled(IPackageIdentity? package) => package is not null && _packageUtil.IsIncludedAndEnabled(package, withVersion: false);
 	}
 }

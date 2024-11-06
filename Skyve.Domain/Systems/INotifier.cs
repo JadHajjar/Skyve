@@ -28,6 +28,8 @@ public interface INotifier
 	event Action? WorkshopSyncEnded;
 	event Action? SkyveUpdateAvailable;
 	event Action? SnoozeChanged;
+	event Action? BackupStarted;
+	event Action? BackupEnded;
 	event Action<Exception>? LoggerFailed;
 
 	void OnLoggerFailed(Exception ex);
@@ -46,4 +48,6 @@ public interface INotifier
 	void OnWorkshopSyncEnded();
 	void OnSkyveUpdateAvailable();
 	void OnSnoozeChanged();
+	void OnBackupStarted();
+	void OnBackupEnded();
 }

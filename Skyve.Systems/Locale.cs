@@ -281,6 +281,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation BackupIncludeSaveGames => _instance.GetText("BackupIncludeSaveGames");
 
 	/// <summary>
+	/// Backup is in progress
+	/// </summary>
+	public static Translation BackupInProgress => _instance.GetText("BackupInProgress");
+
+	/// <summary>
 	/// Backup Files Location
 	/// </summary>
 	public static Translation BackupPath => _instance.GetText("BackupPath");
@@ -1029,6 +1034,16 @@ public class Locale : LocaleHelper, ILocale
 	/// Filter items using this date
 	/// </summary>
 	public static Translation FilterSinceThisDate => _instance.GetText("FilterSinceThisDate");
+
+	/// <summary>
+	/// First Backup
+	/// </summary>
+	public static Translation FirstBackup => _instance.GetText("FirstBackup");
+
+	/// <summary>
+	/// You are doing your first ever backup. This might take a while depending on how many save-games and files you have.  Future backups will take less time as they will only backup new or updated files.
+	/// </summary>
+	public static Translation FirstBackupDescription => _instance.GetText("FirstBackupDescription");
 
 	/// <summary>
 	/// Fix All Issues

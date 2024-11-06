@@ -46,43 +46,43 @@ public class PC_PlaysetContents : PC_ContentList
 			return packageUtil.GetStatus(mod, out reason);
 		}
 
-		public bool IsEnabled(IPackageIdentity package, int? playsetId = null)
+		public bool IsEnabled(IPackageIdentity package, int? playsetId = null, bool withVersion = true)
 		{
 			return (package as IPlaysetPackage)?.IsEnabled ?? false;
 		}
 
-		public bool IsIncluded(IPackageIdentity package, int? playsetId = null)
+		public bool IsIncluded(IPackageIdentity package, int? playsetId = null, bool withVersion = true)
 		{
 			return true;
 		}
 
-		public bool IsIncluded(IPackageIdentity package, out bool partiallyIncluded, int? playsetId = null)
+		public bool IsIncluded(IPackageIdentity package, out bool partiallyIncluded, int? playsetId = null, bool withVersion = true)
 		{
 			partiallyIncluded = false;
 			return true;
 		}
 
-		public bool IsIncludedAndEnabled(IPackageIdentity package, int? playsetId = null)
+		public bool IsIncludedAndEnabled(IPackageIdentity package, int? playsetId = null, bool withVersion = true)
 		{
 			return (package as IPlaysetPackage)?.IsEnabled ?? false;
 		}
 
-		public Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null)
+		public Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null, bool withVersion = true)
 		{
 			return Task.CompletedTask;
 		}
 
-		public Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null)
+		public Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null, bool withVersion = true)
 		{
 			return Task.CompletedTask;
 		}
 
-		public Task SetIncluded(IPackageIdentity package, bool value, int? playsetId = null)
+		public Task SetIncluded(IPackageIdentity package, bool value, int? playsetId = null, bool withVersion = true)
 		{
 			return Task.CompletedTask;
 		}
 
-		public Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null)
+		public Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null, bool withVersion = true)
 		{
 			return Task.CompletedTask;
 		}

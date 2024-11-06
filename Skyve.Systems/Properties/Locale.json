@@ -668,5 +668,8 @@
   "AllContentTypes": "All File Types",
   "BackupContentInfo": "Select which types of files to include in your backups.",
   "SetupSettingsFirst": "Set up the settings first.",
-  "Archived": "Archived"
+  "Archived": "Archived",
+  "BackupInProgress": "Backup is in progress",
+  "FirstBackup": "First Backup",
+  "FirstBackupDescription": "You are doing your first ever backup. This might take a while depending on how many save-games and files you have.\r\n\r\nFuture backups will take less time as they will only backup new or updated files."
 }
