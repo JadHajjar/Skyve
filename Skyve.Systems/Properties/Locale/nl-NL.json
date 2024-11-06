@@ -444,7 +444,7 @@
   "AssumeInternetConnectivity": "Negeer internetverbinding controles",
   "AssumeInternetConnectivity_Tip": "Slaat het checken voor een internetverbinding over en neemt automatisch aan dat je verbonden bent.",
   "SelectAll": "Select all items",
-  "DeselectAll": "Un-select all items",
+  "DeselectAll": "Deselecteer alle items",
   "AddTagBox": "Add a new tag or search here",
   "EditingMultipleTags": "Het bewerken van de tags van meerdere pakketten overschrijft elk van hun aangepaste tags.",
   "EditTagsOfPackage": {
