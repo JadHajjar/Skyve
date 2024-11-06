@@ -509,8 +509,8 @@
     "One": "No Compatibility issues detected.",
     "Plural": "No compatibility issues with your {0} were detected."
   },
-  "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
-  "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
+  "SnapDashToGrid": "Toon en koppel dashboard secties aan een raster",
+  "SnapDashToGrid_Tip": ".",
   "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
   "ChangePlaysetSettings": "Change this playset's settings",
   "ViewCompatibilityReport": "View the full report",
