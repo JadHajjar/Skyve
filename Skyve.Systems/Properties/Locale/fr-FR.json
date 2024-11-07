@@ -673,6 +673,6 @@
   "BackupInProgress": "Archivage en cours",
   "FirstBackup": "Première Archive",
   "FirstBackupDescription": "Vous êtes en train d'effectuer votre première archive. Cela peut prendre un certain temps en fonction du nombre de sauvegardes et de fichiers que vous avez.\n\nLes archives suivantes prendront moins de temps, car elles n'archiveront que les nouveaux fichiers ou ceux mis à jour.",
-  "InvalidFolder": "Invalid Folder",
-  "ChooseDifferentBackupLocation": "You can not backup your files inside the main AppData folder of the game, nor in a personal user folder.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive."
+  "InvalidFolder": "Dossier invalide",
+  "ChooseDifferentBackupLocation": "Vous ne pouvez par archiver vos fichiers dans le dossier AppData du jeu, ni dans un dossier utilisateur personnel.\n\nSélectionnez un emplacement différent qui n'est pas dans le même dossier, de préférence sur un autre support de stockage."
 }
