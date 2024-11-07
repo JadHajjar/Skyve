@@ -27,7 +27,7 @@ public partial class EditTagsForm : BaseForm
 			Text = Locale.TagsTitle.Format(Packages[0].CleanName(true));
 		}
 
-		_tags = tags?.ToList() ?? new(Packages.SelectMany(x => x.GetTags().Where(x => x.IsCustom)).Distinct(x => x.Value));
+		_tags = tags?.ToList() ?? new(Packages.SelectMany(x => x.GetTags()).Distinct(x => x.Value));
 
 		TLC.Tags.AddRange(_tags);
 		TLC.AllTags.AddRange(_tagsService.GetDistinctTags().OrderByDescending(x => _tags.Any(t => t.Value == x.Value)).ThenByDescending(x => x.IsCustom).ThenByDescending(_tagsService.GetTagUsage));
@@ -38,6 +38,7 @@ public partial class EditTagsForm : BaseForm
 	{
 		base.DesignChanged(design);
 
+		base_P_Top_Spacer.BackColor = base_P_Top.BackColor = design.BackColor;
 		L_MultipleWarning.ForeColor = design.YellowColor.MergeColor(design.RedColor);
 	}
 

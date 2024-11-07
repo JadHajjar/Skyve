@@ -158,7 +158,14 @@ public class CompatibilityMessageControl : SlickControl
 		{
 			if (Message.Status.Action is StatusAction.RequestReview)
 			{
-				Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().RequestReviewPanel(PackageCompatibilityReportControl.Package));
+				if (ServiceCenter.Get<IUserService>().User.Manager)
+				{
+					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().CompatibilityManagementPanel(PackageCompatibilityReportControl.Package));
+				}
+				else
+				{
+					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().RequestReviewPanel(PackageCompatibilityReportControl.Package));
+				}
 
 				return;
 			}
@@ -272,10 +279,12 @@ public class CompatibilityMessageControl : SlickControl
 
 			if (Message.Status.Action is StatusAction.RequestReview)
 			{
+				var isManager = ServiceCenter.Get<IUserService>().User.Manager;
+
 				bulkActionRect = SlickButton.AlignAndDraw(e.Graphics, buttonRectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
 				{
-					Text = Message.Type is ReportType.RequestReview ? LocaleCR.RequestReviewUpdate : LocaleCR.RequestReview,
-					Icon = "RequestReview",
+					Text = isManager ? Locale.EditCompatibility : Message.Type is ReportType.RequestReview ? LocaleCR.RequestReviewUpdate : LocaleCR.RequestReview,
+					Icon = isManager ? "CompatibilityReport" : "RequestReview",
 					Font = font,
 					BackgroundColor = FormDesign.Design.BackColor,
 					Cursor = cursor,

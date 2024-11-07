@@ -371,6 +371,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CheckLogsAndTryAgain => _instance.GetText("CheckLogsAndTryAgain");
 
 	/// <summary>
+	/// You can not backup your files inside the main AppData folder of the game, nor in a personal user folder.  Choose a different location that is not in the same folder, preferably on another drive.
+	/// </summary>
+	public static Translation ChooseDifferentBackupLocation => _instance.GetText("ChooseDifferentBackupLocation");
+
+	/// <summary>
 	/// Delete old backups once the total amount of backups exceeds:
 	/// </summary>
 	public static Translation CleanupCountBased => _instance.GetText("CleanupCountBased");
@@ -1217,6 +1222,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Invalid
 	/// </summary>
 	public static Translation Invalid => _instance.GetText("Invalid");
+
+	/// <summary>
+	/// Invalid Folder
+	/// </summary>
+	public static Translation InvalidFolder => _instance.GetText("InvalidFolder");
 
 	/// <summary>
 	/// <para>{0} item</para>
