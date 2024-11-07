@@ -674,5 +674,5 @@
   "FirstBackup": "Primer Respaldo",
   "FirstBackupDescription": "Estás realizando el Respaldo Inicial. Este proceso puede tardar un poco, dependiendo de la cantidad de juegos guardados y archivos que tengas.\n\nLos respaldos futuros demorarán menos tiempo, ya que solo guardarán archivos nuevos o actualizados.",
   "InvalidFolder": "Carpeta no Válida",
-  "ChooseDifferentBackupLocation": "You can not backup your files inside the main AppData folder of the game, nor in a personal user folder.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive."
+  "ChooseDifferentBackupLocation": "No puede hacer copias de seguridad de sus archivos dentro de la carpeta principal de AppData del juego, ni en una carpeta de usuario personal.\n\nElija una ubicación diferente que no esté en la misma carpeta y preferiblemente en otra unidad."
 }
