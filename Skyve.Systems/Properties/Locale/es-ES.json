@@ -659,20 +659,20 @@
   },
   "SelectRestoreInfo": "Seleccione un punto de restauración de la lista de respaldos para iniciar el proceso de restauración.",
   "RestoreFileConfirm": {
-    "One": "¿Está seguro que desea restaurar este respaldo de {1}?",
-    "Plural": "¿Está seguro que desea restaurar este respaldo?"
+    "One": "¿Está seguro que desea restaurar esta copia de seguridad de {1}?",
+    "Plural": "¿Está seguro que desea restaurar esta copia de seguridad?"
   },
   "RestoreSuccessful": "Restauración Exitosa",
-  "RestoreFailed": "Error al restaurar este respaldo. Compruebe los registros para más información",
+  "RestoreFailed": "Error al restaurar esta copia de seguridad. Compruebe los registros para más información",
   "StartRestore": "Iniciar Proceso de Restauración",
   "ContentToBackup": "Tipos de Archivo",
   "AllContentTypes": "Todos los Archivos",
   "BackupContentInfo": "Selecciona qué tipos de archivos incluir en tus respaldos.",
   "SetupSettingsFirst": "Primero establezca las configuraciones.",
   "Archived": "Archivado",
-  "BackupInProgress": "Respaldo en progreso",
-  "FirstBackup": "Primer Respaldo",
-  "FirstBackupDescription": "Estás realizando el Respaldo Inicial. Este proceso puede tardar un poco, dependiendo de la cantidad de juegos guardados y archivos que tengas.\n\nLos respaldos futuros demorarán menos tiempo, ya que solo guardarán archivos nuevos o actualizados.",
+  "BackupInProgress": "Copia de seguridad en progreso",
+  "FirstBackup": "Primera copia de seguridad",
+  "FirstBackupDescription": "Estás realizando la primera copia de seguridad. Este proceso puede tardar un poco, dependiendo de la cantidad de juegos guardados y archivos que tengas.\n\nLas futuras copias de seguridad demorarán menos tiempo, ya que solo guardarán archivos nuevos o actualizados.",
   "InvalidFolder": "Carpeta no Válida",
   "ChooseDifferentBackupLocation": "No puede hacer copias de seguridad de sus archivos dentro de la carpeta principal de AppData del juego, ni en una carpeta de usuario personal.\n\nElija una ubicación diferente que no esté en la misma carpeta y preferiblemente en otra unidad."
 }
