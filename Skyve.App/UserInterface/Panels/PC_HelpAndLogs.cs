@@ -291,12 +291,12 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_Discord_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenUrl("https://discord.gg/E4k8ZEtRxd");
+		PlatformUtil.OpenUrl("https://skyve-mod.com/discord");
 	}
 
 	private void B_Guide_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenUrl("https://bit.ly/40x93vk");
+		PlatformUtil.OpenUrl("https://skyve-mod.com/guide");
 	}
 
 	private void B_ChangeLog_Click(object sender, EventArgs e)
@@ -306,7 +306,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_Donate_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenUrl("https://www.buymeacoffee.com/tdwsvillage");
+		PlatformUtil.OpenUrl("https://skyve-mod.com/donate");
 	}
 
 	private void B_OpenLog_Click(object sender, EventArgs e)

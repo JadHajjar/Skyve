@@ -6,4 +6,5 @@ public interface IAppInterfaceService : IInterfaceService
 	PanelContent NewPlaysetPanel();
 	PanelContent UtilitiesPanel();
 	PanelContent RequestReviewPanel(IPackageIdentity package);
+	PanelContent CompatibilityManagementPanel(IPackageIdentity package);
 }
