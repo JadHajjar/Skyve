@@ -673,6 +673,6 @@
   "BackupInProgress": "正在备份中",
   "FirstBackup": "首次备份",
   "FirstBackupDescription": "您正在进行您的首次备份。这将会花费一段时间，耗时长短取决于存档和文件的数量。\n未来的备份会更快，因为未来只会备份新建的或有更新的文件。",
-  "InvalidFolder": "Invalid Folder",
-  "ChooseDifferentBackupLocation": "You can not backup your files inside the main AppData folder of the game, nor in a personal user folder.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive."
+  "InvalidFolder": "无效的文件夹",
+  "ChooseDifferentBackupLocation": "您不能将文件备份到游戏的主 AppData 文件夹，或个人用户文件夹中。 \n请选择另一个位置，最好是在另一个盘上。"
 }
