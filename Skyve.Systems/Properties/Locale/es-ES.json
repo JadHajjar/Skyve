@@ -674,5 +674,7 @@
   "FirstBackup": "Primera copia de seguridad",
   "FirstBackupDescription": "Estás realizando la primera copia de seguridad. Este proceso puede tardar un poco, dependiendo de la cantidad de juegos guardados y archivos que tengas.\n\nLas futuras copias de seguridad demorarán menos tiempo, ya que solo guardarán archivos nuevos o actualizados.",
   "InvalidFolder": "Carpeta no Válida",
-  "ChooseDifferentBackupLocation": "No puede hacer copias de seguridad de sus archivos dentro de la carpeta principal de AppData del juego, ni en una carpeta de usuario personal.\n\nElija una ubicación diferente que no esté en la misma carpeta y preferiblemente en otra unidad."
+  "ChooseDifferentBackupLocation": "No puede hacer copias de seguridad de sus archivos dentro de la carpeta principal de AppData del juego, ni en una carpeta de usuario personal.\n\nElija una ubicación diferente que no esté en la misma carpeta y preferiblemente en otra unidad.",
+  "RestoreBackup": "Restaurar este respaldo",
+  "DeleteBackup": "Eliminar este respaldo"
 }
