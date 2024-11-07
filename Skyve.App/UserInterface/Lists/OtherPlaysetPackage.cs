@@ -12,12 +12,12 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModLogicManager _modLogicManager;
 	private readonly IModUtil _modUtil;
-	private readonly ISubscriptionsManager _subscriptionsManager;
+	private readonly IWorkshopService _workshopService;
 	private readonly INotifier _notifier;
 
 	public OtherPlaysetPackage(IPackageIdentity package)
 	{
-		ServiceCenter.Get(out _notifier, out _packageUtil, out _playsetManager, out _modLogicManager, out _modUtil, out _subscriptionsManager);
+		ServiceCenter.Get(out _notifier, out _packageUtil, out _playsetManager, out _modLogicManager, out _modUtil, out _workshopService);
 		SeparateWithLines = true;
 		Package = package;
 		SetItems(_playsetManager.Playsets);
@@ -169,6 +169,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		var localIdentity = Package.GetLocalPackageIdentity();
 		var isIncluded = _packageUtil.IsIncluded(Package, out var partialIncluded, e.Item.Id) || partialIncluded;
 		var isEnabled = _packageUtil.IsEnabled(Package, e.Item.Id);
+		var version = isIncluded ? Package.GetWorkshopInfo()?.Changelog.FirstOrDefault(x => x.VersionId == Package.Version)?.Version : null;
 
 		DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, localIdentity, out var activeColor);
 
@@ -196,6 +197,11 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 				ColorStyle = ColorStyle.Green,
 				ButtonType = ButtonType.Active
 			});
+		}
+
+		if (!string.IsNullOrEmpty(version))
+		{
+			e.Graphics.DrawLabel("v" + version, null, Color.FromArgb(80, version == Package.GetWorkshopInfo()?.Changelog.LastOrDefault().Version ? FormDesign.Design.GreenColor : FormDesign.Design.OrangeColor), e.ClipRectangle.Pad(0, 0, (Padding.Right * 3) + e.ClipRectangle.Height, 0), ContentAlignment.MiddleRight);
 		}
 
 		if (isIncluded)

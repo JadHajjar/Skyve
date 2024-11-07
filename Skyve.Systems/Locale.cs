@@ -632,6 +632,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DeleteAsset => _instance.GetText("DeleteAsset");
 
 	/// <summary>
+	/// Delete this backup
+	/// </summary>
+	public static Translation DeleteBackup => _instance.GetText("DeleteBackup");
+
+	/// <summary>
 	/// <para>Delete this package</para>
 	/// <para>Plural: Delete the selected packages</para>
 	/// </summary>
@@ -1960,6 +1965,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Restart Required
 	/// </summary>
 	public static Translation RestartRequired => _instance.GetText("RestartRequired");
+
+	/// <summary>
+	/// Restore this backup
+	/// </summary>
+	public static Translation RestoreBackup => _instance.GetText("RestoreBackup");
 
 	/// <summary>
 	/// Select which backups you'd like to restore. A backup will be taken before the restore process begins to safeguard your current files.
