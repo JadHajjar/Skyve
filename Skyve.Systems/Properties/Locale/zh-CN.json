@@ -672,5 +672,5 @@
   "Archived": "已存档",
   "BackupInProgress": "正在备份中",
   "FirstBackup": "首次备份",
-  "FirstBackupDescription": "You are doing your first ever backup. This might take a while depending on how many savegames and files you have.\r\n\r\nFuture backups will take less time as they will only backup new or updated files."
+  "FirstBackupDescription": "您正在进行您的首次备份。这将会花费一段时间，耗时长短取决于存档和文件的数量。\n未来的备份会更快，因为未来只会备份新建的或有更新的文件。"
 }
