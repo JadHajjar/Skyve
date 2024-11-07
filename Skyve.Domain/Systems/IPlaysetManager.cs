@@ -17,7 +17,7 @@ public interface IPlaysetManager
 	string GetFileName(IPlayset playset);
 	List<IPackage> GetInvalidPackages(IPlayset playset, PackageUsage usage);
 	Task<IPlayset?> CreateNewPlayset(string playsetName);
-	Task<IPlayset?> ImportPlayset(string fileName);
+	Task<IPlayset?> ImportPlayset(string fileName, bool createNew = false);
 	Task<IPlayset?> CreateLogPlayset(string file);
 	Task<bool> MergeIntoCurrentPlayset(IPlayset playset);
 	Task<bool> RenamePlayset(IPlayset playset, string text);
