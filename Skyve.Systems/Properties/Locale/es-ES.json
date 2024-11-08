@@ -634,7 +634,7 @@
   "EnableAutoBackup": "Habilitar respaldos programados",
   "BackupPath": "Ubicación de los archivos de respaldo",
   "BackupPathPlaceholder": "Seleccione la carpeta donde desea guardar sus respaldos",
-  "IncludeAutoSavesBackup": "Incluir Guardado Automáticos al respaldar los archivos de juegos guardados",
+  "IncludeAutoSavesBackup": "Incluir los Juegos Guardados Automáticamente al respaldar los archivos de Juegos Guardados",
   "ScheduleOnSpecificTimes": "Hacer respaldos diarios en horarios específicos",
   "ScheduleOnGameClose": "Hacer un respaldo cada vez que el juego es cerrado",
   "ScheduleOnNewSave": "Hacer un respaldo cada vez que una ciudad es guardada",
