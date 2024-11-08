@@ -133,23 +133,16 @@ public class MiniPackageControl : SlickControl
 		var image = Package?.GetThumbnail();
 		var textRect = ClientRectangle.Pad(1, 1, ReadOnly && !ShowIncluded ? 1 : (imageRect.Width + Padding.Horizontal), 1);
 
-		if (HoverState.HasFlag(HoverState.Hovered) && textRect.Contains(PointToClient(Cursor.Position)))
-		{
-			using var backBrush = new SolidBrush(Color.FromArgb(25, FormDesign.Design.ForeColor));
-
-			e.Graphics.FillRoundedRectangle(backBrush, textRect, Padding.Left);
-		}
-
 		if (image is not null)
 		{
 			if (Package!.IsLocal())
 			{
 				using var unsatImg = new Bitmap(image, imageRect.Size).Tint(Sat: 0);
-				e.Graphics.DrawRoundedImage(unsatImg, imageRect, Padding.Left);
+				e.Graphics.DrawRoundedImage(unsatImg, imageRect, Padding.Left, BackColor);
 			}
 			else
 			{
-				e.Graphics.DrawRoundedImage(image, imageRect, Padding.Left);
+				e.Graphics.DrawRoundedImage(image, imageRect, Padding.Left, BackColor);
 			}
 		}
 		else
@@ -159,6 +152,13 @@ public class MiniPackageControl : SlickControl
 
 			e.Graphics.FillRoundedRectangle(brush, imageRect, UI.Scale(4));
 			e.Graphics.DrawImage(generic, imageRect.CenterR(generic.Size));
+		}
+
+		if (HoverState.HasFlag(HoverState.Hovered) && textRect.Contains(PointToClient(Cursor.Position)))
+		{
+			using var backBrush = new SolidBrush(Color.FromArgb(25, FormDesign.Design.ForeColor));
+
+			e.Graphics.FillRoundedRectangle(backBrush, textRect, Padding.Left);
 		}
 
 		List<(Color Color, string Text)>? tags = null;

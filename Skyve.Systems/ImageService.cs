@@ -30,7 +30,7 @@ internal class ImageService : IImageService
 	public ImageService(INotifier notifier, ILogger logger, SaveHandler saveHandler)
 	{
 		_imageProcessor = new(this);
-		_cacheClearTimer = new(TimeSpan.FromMinutes(10).TotalMilliseconds);
+		_cacheClearTimer = new(TimeSpan.FromMinutes(20).TotalMilliseconds);
 		_cacheClearTimer.Elapsed += CacheClearTimer_Elapsed;
 		_cacheClearTimer.Start();
 		_notifier = notifier;

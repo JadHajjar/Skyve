@@ -17,7 +17,7 @@ public partial class ItemListControl
 	public static Bitmap? ModThumbUnsat { get; private set; }
 	public static Bitmap? PackageThumb { get; private set; }
 	public static Bitmap? PackageThumbUnsat { get; private set; }
-	public static Bitmap? WorkshopThumb{ get; private set; }
+	public static Bitmap? WorkshopThumb { get; private set; }
 	public static Bitmap? WorkshopThumbUnsat { get; private set; }
 
 	public static void LoadThumbnails()
@@ -118,7 +118,13 @@ public partial class ItemListControl
 			e.Graphics.DrawString(Locale.RecentlyUpdated, font, dateBrush, e.Rects.IconRect.Pad(GridPadding), stringFormat);
 		}
 
-		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5));
+		void drawThumbnail(Bitmap generic)
+		{
+			e.Graphics.DrawRoundedImage(generic, e.Rects.IconRect, UI.Scale(5));
+
+			using var pen = new Pen(e.BackColor, 1.5f) { Alignment = PenAlignment.Center };
+			e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, UI.Scale(5));
+		}
 	}
 
 	private void DrawAuthorImage(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IUser author, Rectangle rectangle, Color color)
@@ -393,8 +399,8 @@ public partial class ItemListControl
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
-		var isVersion = (package?.IsCodeMod ?? workshopInfo?.IsCodeMod ?? false);
-		var versionText = isVersion ? "v" + package?.VersionName ?? (workshopInfo?.Changelog.FirstOrDefault(x => x.VersionId == package?.Version)?.Version) : null;
+		var isVersion = package?.IsCodeMod ?? workshopInfo?.IsCodeMod ?? false;
+		var versionText = isVersion ? package?.VersionName ?? (workshopInfo?.Changelog.FirstOrDefault(x => x.VersionId == package?.Version)?.Version) : null;
 		versionText = versionText is not null ? $"v{versionText}" : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
 		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localPackageIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
