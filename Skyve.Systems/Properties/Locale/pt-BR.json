@@ -675,6 +675,6 @@
   "FirstBackupDescription": "Você está fazendo o seu primeiro backup. Isso pode demorar um pouco dependendo de quantos jogos salvos e arquivos você tem.\n\nOs backups futuros levarão menos tempo pois apenas farão backup dos arquivos novos ou atualizados.",
   "InvalidFolder": "Pasta Inválida",
   "ChooseDifferentBackupLocation": "Você não pode fazer backup de seus arquivos dentro da pasta principal do jogo em AppData nem em uma pasta pessoal de Usuário.\n\nEscolha um local diferente que não esteja na mesma pasta, de preferência em outra unidade.",
-  "RestoreBackup": "Restore this backup",
-  "DeleteBackup": "Delete this backup"
+  "RestoreBackup": "Restaurar esse backup",
+  "DeleteBackup": "Excluir este backup"
 }
