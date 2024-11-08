@@ -151,11 +151,11 @@
   "Stability_Incompatible": "'{0}' está marcado como não compatível com a versão atual do seu jogo.\nUse-o cautelosamente, ou desative-o enquanto espera que seja atualizado.",
   "Stability_AssetIncompatible": "'{0}' está marcado como incompatível com a versão atual do seu jogo.\nRecursos raramente quebram com novas atualizações, então você deve conseguir usá-lo sem problemas.",
   "Stability_Local": "Esta é uma versão local do seu mod original '{0}'.\n\nversões locais são geralmente usadas para fins de teste.",
-  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
+  "Stability_BrokenFromNewVersion": "'{1}' quebrou após a última atualização {0}. Por favor, aguarde até que seja atualizado antes de usá-lo.\nEnquanto isso, você deve desativá-lo.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' quebrou após a última atualização{0}. Por favor, aguarde até que seja atualizado antes de usá-lo.",
   "Stability_BrokenFromPatch": "'{1}' quebrou após a atualização {0} do jogo. Por favor, aguarde até que seja atualizado antes de usá-lo.\nEnquanto isso, você deve desativá-lo.",
   "Stability_BrokenFromPatchSafe": "'{1}' quebrou após a atualização {0} do jogo. Por favor, espere até que seja atualizado antes de usá-lo.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' quebrou após a atualização {0} do jogo. Mas foi recentemente atualizado, pode ser seguro de usar.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Você deve adicionar o seguinte pacote ao seu perfil.",
@@ -204,7 +204,7 @@
   "CRT_Status": "Situações",
   "CRT_Ambiguous": "Ambiguidade",
   "CRT_RequiredItem": "Item Necessário",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequestReview": "Status da Solicitação de Revisão",
   "LastReviewDate": "Foi revisado pela última vez em {0}",
   "RequestReviewInfo": "Está enfrentando problemas com este pacote?\nSolicite uma revisão aqui.",
   "RequestReview": "Solicitar uma revisão",
@@ -268,9 +268,9 @@
   "NoLinks": "Sem links",
   "HideReviewedPackages": "Ocultar mods revisados",
   "ApplyRecommendedAction": "Aplicar ação recomendada",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "AddMeaningfulNote": "Por favor, adicione uma nota descrevendo o que há de errado com este pacote.",
+  "EditHistory": "Histórico de Edições",
+  "EditNote": "Editar Nota",
+  "EditNoteInfo": "Deixe uma nota para outros gerenciadores verem no futuro",
+  "RequestReviewUpdate": "Envie um novo pedido para ser revisado"
 }

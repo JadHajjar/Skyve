@@ -128,7 +128,7 @@
   "ComplexListUI": "Modo de UI avanzado",
   "ComplexListUI_Tip": "Añade más información avanzada y añade acciones adicionales a la interfaz de usuario.",
   "NewGame": "Comenzar una nueva partida",
-  "LoadSaveGame": "Continuar partida anterior",
+  "LoadSaveGame": "Continuar partida previa",
   "DevOptions": "Opciones de Ejecución Avanzadas",
   "ResetButton": "Restablecer Opciones",
   "ResetFolderButton_Tip": "Esta acción requerirá que ejecutes el juego antes de que puedas utilizar la herramienta de nuevo.",
@@ -236,13 +236,13 @@
   "ImportFromTextInfo": "Cualquier formato de texto es compatible",
   "NoPlaysetsFound": "No hay playsets para mostrar",
   "NoPlaysetsMatchFilters": "Ningún playset coincide con tu búsqueda",
-  "Your Save-games": "Tus partidas guardadas",
+  "Your Savegames": "Tus Partidas Guardadas",
   "App Data": "App Data",
   "Custom Maps": "Mapas Personalizados",
   "Vanilla Maps": "Mapas Vanilla",
   "ResetScrollOnPackageClick": "Restablecer desplazamiento al abrir la página de un paquete",
   "ResetScrollOnPackageClick_Tip": "Al abrir la página de un paquete, reinicia el desplazamiento para que el paquete seleccionado esté en la parte superior de la lista.",
-  "Workshop Save-games": "Juegos guardados del workshop",
+  "Workshop Savegames": "Partidas Guardadas del Workshop",
   "Workshop Maps": "Mapas del workshop",
   "AnyAuthor": "Cualquier autor",
   "ItemsCount": {
@@ -521,7 +521,7 @@
   "CreateShortcut_Tip": "Crear acceso directo en el escritorio.",
   "StartsNewGameOnLaunch": "Comienza una nueva partida al iniciar",
   "StartsNewGameWithMap": "Comienza una nueva partida con el mapa '{0}' al iniciar",
-  "LoadsSaveGameOnLaunch": "Continua tu última partida de guardada al iniciar",
+  "LoadsSaveGameOnLaunch": "Continúa tu última partida guardada al iniciar",
   "LoadsSaveGameWithMap": "Continúa la partida guardada '{0}' al iniciar",
   "StartsNewAssetOnLaunch": "Inicia el editor con un nuevo activo al iniciar",
   "LoadsAssetOnLaunch": "Comienza con la pantalla de carga del editor al iniciar",
@@ -621,15 +621,16 @@
   "ReviewIsUpdated": "La información de compatibilidad de '{0}' se actualizó después de tu solicitud de revisión.",
   "ReviewPending": "Su solicitud de revisión para '{0}' ha sido recibida, pero todavía está pendiente de revisión.",
   "Backup": {
-    "One": "Backup",
-    "Plural": "Backups"
+    "One": "Respaldo",
+    "Plural": "Respaldos"
   },
-  "BackupHistory": "Backup History",
+  "BackupHistory": "Historial de respaldo",
   "BackupCenter": "Centro de Respaldos",
   "BackupRestore": "Respaldo y Restauración",
   "BasicSettings": "Ajustes Básicos",
   "BackupCleanup": "Ajustes de Limpieza",
-  "BackupSchedule": "Ajustes de Programación",
+  "BackupSchedule": "Respaldos Programados",
+  "BackupScheduleSettings": "Configuración de Programación",
   "EnableAutoBackup": "Habilitar respaldos programados",
   "BackupPath": "Ubicación de los archivos de respaldo",
   "BackupPathPlaceholder": "Seleccione la carpeta donde desea guardar sus respaldos",
@@ -639,21 +640,41 @@
   "ScheduleOnNewSave": "Hacer un respaldo cada vez que una ciudad es guardada",
   "BackupIncludeSaveGames": "Incluir archivos guardados en respaldos programados",
   "BackupIncludeLocalMods": "Incluir mods locales en respaldos programados",
+  "BackupIncludeMaps": "Incluir mapas en respaldos programados",
   "CleanupTimeBased": "Borrar todos los respaldos más antiguos que:",
   "CleanupStorageBased": "Eliminar respaldos antiguos una vez que exceda el almacenamiento total:",
   "CleanupCountBased": "Eliminar respaldos antiguos una vez superada la cantidad total de copias de seguridad:",
   "DoBackupNow": "Respaldar Archivos Ahora",
   "BackupDescriptionInfo": "Respaldar manualmente un juego guardado, configuración u otra información relevante para salvaguardar tus ciudades o mods.\n\nEsto asegura que tus ciudades actuales y preferencias queden a resguardo en caso de un problema de sistema o reinstalación.",
+  "RestoreDescriptionInfo": "Seleccione los respaldos que desea restaurar.\nSe hará un respaldo antes de que el proceso de restauración comience para proteger sus archivos actuales.",
   "BackupFailed": "Fallo al Respaldar",
   "CheckLogsAndTryAgain": "Compruebe los registros en busca de errores e inténtelo de nuevo.",
   "RestorePoint": {
-    "One": "One restore point from {1}",
-    "Plural": "{0} restore points, most recently from {1}"
+    "One": "Un punto de restauración desde {1}",
+    "Plural": "{0} puntos de restauración, más recientemente desde {1}"
   },
   "BackupCount": {
-    "One": "{1} backup",
-    "Plural": "{0} {1} backups"
+    "One": "{1} respaldo",
+    "Plural": "{0} {1} respaldos"
   },
-  "SelectBackup": "Select a backup",
-  "SelectRestoreInfo": "Select a restore point from the Backup History to start the Restore process."
+  "SelectRestoreInfo": "Seleccione un punto de restauración de la lista de respaldos para iniciar el proceso de restauración.",
+  "RestoreFileConfirm": {
+    "One": "¿Está seguro que desea restaurar esta copia de seguridad de {1}?",
+    "Plural": "¿Está seguro que desea restaurar esta copia de seguridad?"
+  },
+  "RestoreSuccessful": "Restauración Exitosa",
+  "RestoreFailed": "Error al restaurar esta copia de seguridad. Compruebe los registros para más información",
+  "StartRestore": "Iniciar Proceso de Restauración",
+  "ContentToBackup": "Tipos de Archivo",
+  "AllContentTypes": "Todos los Archivos",
+  "BackupContentInfo": "Selecciona qué tipos de archivos incluir en tus respaldos.",
+  "SetupSettingsFirst": "Primero establezca las configuraciones.",
+  "Archived": "Archivado",
+  "BackupInProgress": "Copia de seguridad en progreso",
+  "FirstBackup": "Primera copia de seguridad",
+  "FirstBackupDescription": "Estás realizando la primera copia de seguridad. Este proceso puede tardar un poco, dependiendo de la cantidad de juegos guardados y archivos que tengas.\n\nLas futuras copias de seguridad demorarán menos tiempo, ya que solo guardarán archivos nuevos o actualizados.",
+  "InvalidFolder": "Carpeta no Válida",
+  "ChooseDifferentBackupLocation": "No puede hacer copias de seguridad de sus archivos dentro de la carpeta principal de AppData del juego, ni en una carpeta de usuario personal.\n\nElija una ubicación diferente que no esté en la misma carpeta y preferiblemente en otra unidad.",
+  "RestoreBackup": "Restaurar este respaldo",
+  "DeleteBackup": "Eliminar este respaldo"
 }
