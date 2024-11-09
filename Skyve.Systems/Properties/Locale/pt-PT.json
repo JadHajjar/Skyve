@@ -2,7 +2,7 @@
   "CompatibilityInfo": "Informações de compatibilidade",
   "Dashboard": "Painel",
   "SearchDlcs": "Pesquise nas suas DLCs..",
-  "SearchPackages": "Pesquise nos seus pacotes..",
+  "SearchPackages": "Pesquisa nos teus pacotes..",
   "Vanilla": "Padrão",
   "UpToDate": "Atualizado",
   "StatusUnknown": "Status desconhecido",
@@ -377,7 +377,7 @@
     "Plural": "Editar os links dos pacotes selecionados"
   },
   "ShowAllReferencedPackages": "Mostrar pacotes excluídos no separador 'Referências'",
-  "ShowAllReferencedPackages_Tip": "Exibe os pacotes excluídos e incluídos que fazem referência ao que estás a visualizar.",
+  "ShowAllReferencedPackages_Tip": "Mostra os pacotes excluídos e incluídos que fazem referência ao que estás a visualizar.",
   "TreatOptionalAsRequired": "Tratar pacotes opcionais como necessários",
   "TreatOptionalAsRequired_Tip": "Basicamente, isto mostra a notificação de dependência em falta para pacotes opcionais.",
   "AddCustomTag": "Adicionar uma etiqueta personalizada",
