@@ -66,7 +66,7 @@
   "Sorting_SubscribeTime": "訂閱時間",
   "Sorting_Author": "作者名稱",
   "Sorting_Status": "外掛程式狀態",
-  "Sorting_CompatibilityReport": "相容性問題嚴重程度",
+  "Sorting_CompatibilityReport": "相容性報告",
   "Sorting_LoadOrder": "載入順序",
   "FolderSettings": "資料夾設置",
   "ShowDatesRelatively": "顯示當前時間的相對日期",
@@ -288,7 +288,7 @@
   "ControlToSelectMultiplePackages": "按住 Ctrl 並左鍵點擊，可選擇多個外掛程式。",
   "Local": "本地",
   "Workshop": "工作坊",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "相容性報告",
   "Enabled": "已啟用",
   "Disabled": "已禁用",
   "Included": "已裝載（模組需要啟用！）",
@@ -358,8 +358,8 @@
     "Plural": "{0} {1} 由於當前組態檔案的用途已被隱藏"
   },
   "EditCompatibility": {
-    "One": "Edit this package's compatibility",
-    "Plural": "Edit selected packages' compatibility"
+    "One": "編輯此外掛程式的相容性",
+    "Plural": "編輯已選擇外掛程式的相容性"
   },
   "AnyIssue": "任意問題",
   "AnyUsage": "任意用途",
@@ -482,10 +482,10 @@
   "TroubleshootNextStageTip": "Skip the current stage. Use it if you've already completed it and want to proceed.",
   "TroubleshootBubbleTip": "This is the troubleshooting menu, it will guide you throughout the process.\r\nYou can close Skyve and continue later, it will remember your progress.",
   "TroubleshootCompAsk": {
-    "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
-    "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
+    "One": "您有一個外掛程式存在嚴重的相容性警告。\n建議您在進行故障排除前，先處理這個問題。",
+    "Plural": "您有 {0} 個外掛程式存在嚴重的相容性警告。\n建議您在進行故障排除前，先處理這個問題。"
   },
-  "TroubleshootViewComp": "View my compatibility report",
+  "TroubleshootViewComp": "查看我的相容性報告",
   "TroubleshootSkipComp": "Skip & continue troubleshooting",
   "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
   "FaultyPackagesTitle": "Faulty Packages Detected",
@@ -506,14 +506,14 @@
   "ViewAllYourItems": "View all your {0}",
   "ViewRecentlyUpdatedItems": "View recently updated {0}",
   "NoCompatibilityIssues": {
-    "One": "No Compatibility issues detected.",
-    "Plural": "No compatibility issues with your {0} were detected."
+    "One": "沒有檢測到相容性問題。",
+    "Plural": "在您的 {0} 中未檢測到相容性問題。"
   },
   "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
   "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
   "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
   "ChangePlaysetSettings": "Change this playset's settings",
-  "ViewCompatibilityReport": "View the full report",
+  "ViewCompatibilityReport": "查看完整報告",
   "DashboardCustomizationInfo": "Customize your dashboard by dragging each section from its title.\r\nYou can also resize a section using the dotted triangle on its bottom-right corner.",
   "ViewAssetsWithIssues": "View Assets with issues",
   "ViewModsWithIssues": "View Mods with issues",
@@ -554,7 +554,7 @@
   "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
   "UsagePlayset": "{0} Playset",
   "GenericPlayset": "Generic Playset",
-  "CompatibilityCenter": "Compatibility Center",
+  "CompatibilityCenter": "相容性中心",
   "Dependency": {
     "One": "Dependency",
     "Plural": "Dependencies"
@@ -618,7 +618,7 @@
   "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
   "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
   "ReviewIsSaveFileNeeded": "The issue you've reported needs more information to be identified. Please send a new Request with a savegame attached to it to be reviewed.",
-  "ReviewIsUpdated": "The compatibility information of '{0}' was updated after your review request.",
+  "ReviewIsUpdated": "您申請檢視的 {0} 相容性資訊已更新。",
   "ReviewPending": "Your review request for '{0}' has been received but is still pending review.",
   "Backup": {
     "One": "Backup",
