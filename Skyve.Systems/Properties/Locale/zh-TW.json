@@ -94,17 +94,17 @@
   "AdvancedLaunchOptions": "顯示進階啟動選項",
   "MovePackageToLocalFolder": {
     "One": "將外掛程式複製到本機資料夾",
-    "Plural": "將所有選中的外掛程式製到本機資料夾"
+    "Plural": "將所有選定的套件複製到本機資料夾"
   },
   "ModIsPrivate": "此項目已被隱藏",
   "YourDlcs": "您的 DLC",
   "AllDlcs": "所有 DLC",
   "DLCs": "DLC 和 CCP",
   "LaunchTooltip": "點擊以啟動 / 關閉 Cities: Skylines，或在程式中任意位置按 [F5]",
-  "SelectedFileInvalid": "您選擇的檔無效",
+  "SelectedFileInvalid": "您選取的檔案無效",
   "ShowingFilteredItems": "當前顯示 {0} 項，共 {1} 項",
   "ThemeUIScale": "介面主題與UI縮放",
-  "SearchPlaysets": "Search through these Playsets..",
+  "SearchPlaysets": "搜尋這些遊戲設定...",
   "AdvancedSettings": "進階設置",
   "HelpTranslate": "幫助改進翻譯",
   "HelpReset": "幫助與重置",
