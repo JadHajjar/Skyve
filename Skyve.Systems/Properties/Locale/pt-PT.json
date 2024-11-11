@@ -8,7 +8,7 @@
   "StatusUnknown": "Status desconhecido",
   "PartiallyDownloaded": "Parcialmente baixado",
   "LaunchSettings": "Definições de lançamento",
-  "IncludesItemsYouDoNotHave": "Inclui itens que você não tem",
+  "IncludesItemsYouDoNotHave": "Inclui elementos que você não tem",
   "OtherPlaysets": "Outros conjuntos",
   "ViewPlaysets": "Ver os teus conjuntos",
   "AddPlayset": "Adicionar conjunto",
@@ -19,7 +19,7 @@
   "NoLocalPackagesFound": "Não foram encontrados pacotes no teu computador.",
   "NoPackagesMatchFilters": "Nenhum pacote corresponde ao que procuras.",
   "NoLogsMatchFilters": "Nenhum log corresponde ao que procuras.",
-  "EnableAll": "Ativar todos os itens",
+  "EnableAll": "Ativar todos os elementos",
   "DisableAll": "Desativar todos os recursos",
   "EnableAllFiltered": "Ativar recursos filtrados",
   "DisableAllFiltered": "Desativar recursos filtrados",
@@ -96,13 +96,13 @@
     "One": "Mover o pacote para uma pasta local",
     "Plural": "Mover todos os pacotes selecionados para uma pasta local"
   },
-  "ModIsPrivate": "Este item é privado",
+  "ModIsPrivate": "Este elemento é privado",
   "YourDlcs": "As tuas DLCs",
   "AllDlcs": "Todas as DLCs",
   "DLCs": "DLCs e CCPs",
   "LaunchTooltip": "Clica para iniciar/parar Cities: Skylines ou usa {0} em qualquer lugar da aplicação",
   "SelectedFileInvalid": "O ficheiro selecionado não é válido",
-  "ShowingFilteredItems": "A mostrar {0} de {1} itens no total",
+  "ShowingFilteredItems": "A mostrar {0} de {1} elementos no total",
   "ThemeUIScale": "Escala do tema e UI",
   "SearchPlaysets": "Pesquisar nos conjuntos..",
   "AdvancedSettings": "Definições avançadas",
@@ -139,13 +139,13 @@
   "FixAllTip": "Tentar baixar novamente todos os pacotes que tenham problemas, isto abrirá a Steam por um breve instante",
   "FilterByThisReportStatus": "Filtrar por estado do relatório",
   "FilterByThisPackageStatus": "Filtrar por estado do pacote",
-  "FilterSinceThisDate": "Filtrar itens que usam esta data",
+  "FilterSinceThisDate": "Filtrar elementos que usam esta data",
   "FilterByThisTag": "Adicionar '{0}' às etiquetas filtradas",
   "ItemsShouldNotBeSubscribedInfo": "Estás prestes a subscrever pacotes que podem estar danificados ou com outros problemas sérios.",
   "WouldYouLikeToSkipThose": "Queres ignorar esses pacotes?",
   "HelpSupport": "Ajuda e suporte",
-  "LogZipCopy_Tip": "Cria um ficheiro zip contendo todas as informações de registo necessárias para que alguém possa te ajudar com o teu problema. Podes colá-lo diretamente num canal do Discord.",
-  "LogZipFile_Tip": "Criar um ficheiro zip contendo todas as informações de registo necessárias para que alguém te ajude com o problema. A pasta com o ficheiro será aberta automaticamente.",
+  "LogZipCopy_Tip": "Cria um ficheiro zip que contenha todas as informações de registo necessárias para que alguém possa te ajudar com o teu problema. Podes colá-lo diretamente num canal do Discord.",
+  "LogZipFile_Tip": "Criar um ficheiro zip que contenha todas as informações de registo necessárias para que alguém te ajude com o problema. A pasta com o ficheiro será aberta automaticamente.",
   "LogZipCopy": "Copiar logs para a área de transferência",
   "LogZipFile": "Guardar logs para ficheiro",
   "LogFolders": "Pastas de registos",
@@ -185,7 +185,7 @@
   "CheckDocumentsFolder": "Certifica-te de que o Skyve tem acesso à tua pasta de documentos, ela é usada para armazenar as tuas definições de UI e idioma.",
   "FailedToSaveLanguage": "Falha ao guardar o idioma selecionado",
   "FailedToOpenTC": "Falha ao abrir o alterador de tema",
-  "FailedToDeleteItem": "Falha ao apagar item",
+  "FailedToDeleteItem": "Falha ao apagar elemento",
   "OpenChangelog": "Abrir registo de alterações",
   "Changelog": "Registo de alterações",
   "DeleteAsset": {
@@ -198,11 +198,11 @@
   },
   "EnableThisItemInAllPlaysets": {
     "One": "Ativar em todos os teus conjuntos",
-    "Plural": "Ativar os itens selecionados em todos os teus conjuntos"
+    "Plural": "Ativar os elementos selecionados em todos os teus conjuntos"
   },
   "DisableThisItemInAllPlaysets": {
     "One": "Desativar em todos os teus conjuntos",
-    "Plural": "Desativar os itens selecionados em todos os teus conjuntos"
+    "Plural": "Desativar os elementos selecionados em todos os teus conjuntos"
   },
   "CopyPackageName": {
     "One": "Copiar o nome do pacote",
@@ -230,7 +230,7 @@
   "Sorting_Color": "Cor do conjunto",
   "CreateShortcutPlayset": "Criar um atalho para este conjunto na tua área de trabalho",
   "AskToLaunchGameForShortcut": "Queres que o atalho também abra o jogo com o teu conjunto?",
-  "TextImportMissingInfo": "Carregar um ficheiro de texto contendo IDs do Workshop para facilmente subscrever ou gerir os pacotes",
+  "TextImportMissingInfo": "Carrega um ficheiro de texto que contenha IDs do Workshop para facilmente subscrever ou gerir os pacotes",
   "ImportFromText": "Importar do texto",
   "ImportFromClipboard": "Carregar texto da área de transferência",
   "ImportFromTextInfo": "Qualquer formato de texto é suportado",
@@ -246,8 +246,8 @@
   "Workshop Maps": "Mapas da Oficina",
   "AnyAuthor": "Qualquer Autor",
   "ItemsCount": {
-    "One": "{0} item",
-    "Plural": "{0} itens"
+    "One": "{0} elemento",
+    "Plural": "{0} elementos"
   },
   "AuthorsSelected": {
     "One": "{0} autor selecionado",
@@ -443,8 +443,8 @@
   "PastePlaysetId": "Cola o ID do conjunto que queres importar",
   "AssumeInternetConnectivity": "Ignorar verificações de ligação à Internet",
   "AssumeInternetConnectivity_Tip": "Ignora a verificação de internet e assume automaticamente que estás ligado.",
-  "SelectAll": "Selecionar todos os itens",
-  "DeselectAll": "Desselecionar todos os itens",
+  "SelectAll": "Selecionar todos os elementos",
+  "DeselectAll": "Desselecionar todos os elementos",
   "AddTagBox": "Adicionar uma nova etiqueta ou pesquisar aqui",
   "EditingMultipleTags": "Editar etiquetas de vários pacotes irá substituir cada uma das tuas etiquetas personalizadas.",
   "EditTagsOfPackage": {
@@ -496,10 +496,10 @@
   "DisableItem": "Desativar este mod",
   "SwitchToItem": "Trocar para este mod",
   "FailedToImportPlayset": "Falha ao importar este conjunto.",
-  "FilterByEnabled": "Mostrar apenas itens ativados.",
-  "FilterByDisabled": "Mostrar apenas itens desativados.",
-  "FilterByIncluded": "Mostrar apenas itens incluídos.",
-  "FilterByExcluded": "Mostrar apenas itens excluídos.",
+  "FilterByEnabled": "Mostrar apenas elementos ativados.",
+  "FilterByDisabled": "Mostrar apenas elementos desativados.",
+  "FilterByIncluded": "Mostrar apenas elementos incluídos.",
+  "FilterByExcluded": "Mostrar apenas elementos excluídos.",
   "ViewOnGithub": "Ver o repositório deste pacote no Github",
   "ViewXOnSteam": "Ver '{0}' na Steam",
   "Free": "Grátis",
