@@ -288,7 +288,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			PackageSorting.LoadOrder => items
 				.OrderBy(x => !x.Item.GetLocalPackage()?.IsIncluded())
-				.ThenByDescending(x => x.Item.GetPackage() is IPackage package ? _modUtil.GetLoadOrder(package) : 0)
+				.ThenBy(x => x.Item.GetPackage() is IPackage package ? _modUtil.GetLoadOrder(package) : 0)
 				.ThenBy(x => x.Item.CleanName()),
 
 			_ => items
