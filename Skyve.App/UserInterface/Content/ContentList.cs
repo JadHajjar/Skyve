@@ -457,17 +457,15 @@ public partial class ContentList : SlickControl
 
 	private bool IsFilteredOut(IPackageIdentity item)
 	{
-#if CS2
-		if (!ListControl.IsGenericPage && _playsetManager.CurrentPlayset is null)
-#else
+#if !CS2
 		if (!ListControl.IsGenericPage && (_playsetManager.CurrentCustomPlayset?.DisableWorkshop ?? false))
-#endif
 		{
 			if (item.GetPackage()?.IsLocal == true)
 			{
 				return true;
 			}
 		}
+#endif
 
 		if (ListControl.IsGenericPage && item.GetWorkshopInfo()?.IsInvalid == true)
 		{
