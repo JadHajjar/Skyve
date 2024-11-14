@@ -674,7 +674,7 @@
   "FirstBackup": "Erste Sicherung",
   "FirstBackupDescription": "Du machst deine allererste Sicherung. Dies kann eine Weile dauern, je nachdem, wie viele Speicherspiele und Dateien du besitzt.\n\nZukünftige Sicherungen benötigen weniger Zeit, da sie nur neue oder aktualisierte Dateien sichern.",
   "InvalidFolder": "Ungültiger Ordner",
-  "ChooseDifferentBackupLocation": "Sie können Ihre Dateien weder im AppData-Ordner des Spiels noch in einem persönlichen Benutzerordner sichern.\n\nWählen Sie einen anderen Ort, der nicht im selben Ordner ist, vorzugsweise auf einem anderen Laufwerk.",
+  "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "Diese Sicherung wiederherstellen",
   "DeleteBackup": "Diese Sicherung löschen"
 }
