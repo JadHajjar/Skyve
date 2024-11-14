@@ -305,7 +305,7 @@ public partial class ItemListControl
 			var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
 #else
 			var isVersion = (package?.IsCodeMod ?? workshopInfo?.IsCodeMod ?? false);
-			var versionText = isVersion ? "v" + package?.VersionName ?? (workshopInfo?.Changelog.FirstOrDefault(x => x.VersionId == package?.Version)?.Version) : null;
+			var versionText = isVersion ? package?.VersionName ?? (workshopInfo?.Changelog.FirstOrDefault(x => x.VersionId == package?.Version)?.Version) : null;
 			versionText = versionText is not null ? $"v{versionText}" : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
 			var tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + (GridView ? GridPadding.Bottom / 2 : (Padding.Bottom * 2)), 0, 0);

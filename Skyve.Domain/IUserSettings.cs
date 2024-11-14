@@ -35,6 +35,7 @@ public interface IUserSettings
 	bool FilterIncludedByDefault { get; set; }
 	bool SyncBeforeLaunching { get; set; }
 	bool ColoredAuthorNames { get; set; }
+	bool DisableLogCleanup { get; set; }
 #endif
 
 	void Save();

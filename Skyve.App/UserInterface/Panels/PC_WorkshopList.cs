@@ -135,10 +135,11 @@ public class PC_WorkshopList : PanelContent
 		return Locale.Package;
 	}
 
-	public void SetSettings(PackageSorting sorting, string[]? selectedTags)
+	public void SetSettings(PackageSorting sorting, string[]? selectedTags, WorkshopSearchTime searchTime = WorkshopSearchTime.Month)
 	{
 		LC_Items.DD_Sorting.SelectedItem = sorting;
 		LC_Items.DD_Tags.SelectedItems = selectedTags?.Select(ServiceCenter.Get<ITagsService>().CreateWorkshopTag);
+		LC_Items.DD_SearchTime.SelectedItem = searchTime;
 	}
 
 	private class TagItem(string value, string icon, bool isCustom) : ITag

@@ -371,7 +371,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CheckLogsAndTryAgain => _instance.GetText("CheckLogsAndTryAgain");
 
 	/// <summary>
-	/// You can not backup your files inside the main AppData folder of the game, nor in a personal user folder.  Choose a different location that is not in the same folder, preferably on another drive.
+	/// You can not backup your files inside the this folder, Skyve does not have access to save files here.  Choose a different location that is not in the same folder, preferably on another drive.
 	/// </summary>
 	public static Translation ChooseDifferentBackupLocation => _instance.GetText("ChooseDifferentBackupLocation");
 
