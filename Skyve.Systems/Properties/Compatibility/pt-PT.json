@@ -203,7 +203,7 @@
   "CRT_Alternatives": "Alternativas",
   "CRT_Status": "Estados",
   "CRT_Ambiguous": "Ambiguidade",
-  "CRT_RequiredItem": "Item necessário",
+  "CRT_RequiredItem": "Elemento necessário",
   "CRT_RequestReview": "Estado da solicitação de revisão",
   "LastReviewDate": "Foi revisto pela última vez a {0}",
   "RequestReviewInfo": "Estás a ter problemas com este pacote?\nSolicita uma nova análise aqui:",
@@ -259,7 +259,7 @@
     "Plural": "Eliminar estas solicitações"
   },
   "ViewRequest": "Ver solicitação",
-  "RequiredItem": "Item necessário",
+  "RequiredItem": "Elemento necessário",
   "ApplyAllActions": "Aplicar todas as ações recomendadas",
   "SnoozeAll": "Ignorar todos os problemas",
   "SnoozeAllFiltered": "Colocar em espera todos os problemas filtrados",
