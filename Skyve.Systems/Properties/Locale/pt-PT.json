@@ -674,7 +674,7 @@
   "FirstBackup": "Primeira cópia de segurança",
   "FirstBackupDescription": "Estás a fazer a primeira cópia de segurança. Isto pode demorar um tempo dependendo de quantas gravações e ficheiros tens.",
   "InvalidFolder": "Pasta inválida",
-  "ChooseDifferentBackupLocation": "Não podes fazer cópia de segurança dos teus ficheiros dentro da pasta principal do jogo AppData nem numa pasta de utilizadores pessoais.\n\nEscolhe um local diferente que não esteja na mesma pasta, de preferência noutra unidade.",
+  "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "Restaurar esta cópia de segurança",
   "DeleteBackup": "Apagar cópia de segurança"
 }
