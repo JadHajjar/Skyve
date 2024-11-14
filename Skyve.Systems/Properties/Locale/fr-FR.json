@@ -674,7 +674,7 @@
   "FirstBackup": "Première Archive",
   "FirstBackupDescription": "Vous êtes en train d'effectuer votre première archive. Cela peut prendre un certain temps en fonction du nombre de sauvegardes et de fichiers que vous avez.\n\nLes archives suivantes prendront moins de temps, car elles n'archiveront que les nouveaux fichiers ou ceux mis à jour.",
   "InvalidFolder": "Dossier invalide",
-  "ChooseDifferentBackupLocation": "Vous ne pouvez par archiver vos fichiers dans le dossier AppData du jeu, ni dans un dossier utilisateur personnel.\n\nSélectionnez un emplacement différent qui n'est pas dans le même dossier, de préférence sur un autre support de stockage.",
+  "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "Restaurer cette archive",
   "DeleteBackup": "Supprimer cette archive"
 }
