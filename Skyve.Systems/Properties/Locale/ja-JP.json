@@ -674,7 +674,7 @@
   "FirstBackup": "最初のバックアップ",
   "FirstBackupDescription": "初回のバックアップを行っています。 セーブゲームやファイルの数によっては時間がかかる場合があります。\n\n次回以降は、新しいファイルや更新されたファイルのみをバックアップする為、初回よりも早く終わります。",
   "InvalidFolder": "無効なフォルダ",
-  "ChooseDifferentBackupLocation": "ゲームのメインのAppDataフォルダの中や、個人のユーザーフォルダの中にファイルをバックアップすることはできません。\n\n 同じフォルダではない別の場所、できれば別のドライブを選択してください。",
+  "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "このバックアップで復元",
   "DeleteBackup": "バックアップを削除"
 }
