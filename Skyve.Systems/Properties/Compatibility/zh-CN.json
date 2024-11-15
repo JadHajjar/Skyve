@@ -209,8 +209,8 @@
   "RequestReviewInfo": "使用此插件时遇到问题？",
   "RequestReview": "请求检查",
   "MissingDependencyCount": {
-    "One": "{0} 个{1} 缺少前置",
-    "Plural": "{0} 个{1} 缺少前置"
+    "One": "缺少前置的{1}",
+    "Plural": "缺少前置的{1}"
   },
   "CautionCount": "{0} 个{1} 建议谨慎使用",
   "WarningCount": "{0} 个{1} 带有警告",
@@ -220,7 +220,7 @@
   },
   "ExcludeCount": {
     "One": "{0} 个{1} 应当被卸下",
-    "Plural": "{0} 个{1} 应当被卸下"
+    "Plural": "应当被卸下的{1}"
   },
   "UnsubscribeCount": "{0} 个{1} 应当取消订阅",
   "SwitchCount": {
@@ -228,8 +228,8 @@
     "Plural": "{0} 个{1} 需要替换"
   },
   "RequiredItemCount": {
-    "One": "{0} 个{1} 是必需的但没有启用",
-    "Plural": "{0} 个{1} 是必需的但没有启用"
+    "One": "必需但未启用的{1}",
+    "Plural": "必需但未启用的{1}"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",

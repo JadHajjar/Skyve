@@ -411,7 +411,7 @@
   "RequestOption2": "为此插件补充状态信息",
   "RequestOption3": "补充此插件与另一个插件的交互方式",
   "ActivePlayset": "使用中的配组",
-  "References": "引用",
+  "References": "引用关系",
   "OpenLog": "打开游戏日志文件",
   "OpenSkyveLog": "打开 Skyve 日志文件",
   "Sort By": "排序方式",
@@ -597,7 +597,7 @@
   "MassSubscribeWarningTitle": "大批量订阅警告",
   "MassSubscribeWarningInfo": "您即将订阅 {0} 个模组，确定要继续吗？",
   "DropImportFile": "松开鼠标即可从此报告中导入 {0}",
-  "OutOfDateItem": "已过期{0}",
+  "OutOfDateItem": "已过期的{0}",
   "Bio": "个性签名",
   "ColoredAuthorNames": "为作者和用户的名字和头像添加颜色标记",
   "ColoredAuthorNames_Tip": "为作者/用户添加一个独特的颜色标记，用户名和头像将使用由改颜色标记，以便关注特定的用户。",
@@ -674,7 +674,7 @@
   "FirstBackup": "首次备份",
   "FirstBackupDescription": "您正在进行您的首次备份。这将会花费一段时间，耗时长短取决于存档和文件的数量。\n未来的备份会更快，因为未来只会备份新建的或有更新的文件。",
   "InvalidFolder": "无效的文件夹",
-  "ChooseDifferentBackupLocation": "您不能将文件备份到游戏的主 AppData 文件夹，或个人用户文件夹中。 \n请选择另一个位置，最好是在另一个盘上。",
+  "ChooseDifferentBackupLocation": "您不能将文件备份到此文件夹，Skyve 在此处没有权限。 \n请选择另一个位置，最好是在另一个盘上。",
   "RestoreBackup": "用此备份进行恢复",
   "DeleteBackup": "删除此备份"
 }
