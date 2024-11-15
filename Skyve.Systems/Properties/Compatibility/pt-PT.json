@@ -110,7 +110,7 @@
   },
   "Interaction_Identical": "Os seguintes mods são versões duplicadas do mesmo mod.\nUsar-los ao mesmo tempo pode criar conflitos.",
   "Status_Succeeded": "'{0}' foi bem-sucedido por '{1}', já estás a usar '{1}'. Não há mais necessidade de '{0}'.",
-  "Status_Deprecated": "'{0}' está obsoleto, ne ão é mais suportado pelo seu autor.",
+  "Status_Deprecated": "'{0}' está obsoleto, e não é mais suportado pelo seu autor.",
   "Status_AutoDeprecated": "'{0}' não é atualizado há muito tempo, provavelmente já não tem suporte do seu autor.",
   "Status_Reupload": {
     "Zero": "'{0}' é um reenvio de um pacote original.",
@@ -118,8 +118,8 @@
   },
   "Status_CausesIssues": "'{0}' é conhecido por causar problemas no jogo.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "Depois de guardares a tua cidade com '{0}' ativado, não poderás mais carregar o jogo guardado sem '{0}' ativado.",
-    "One": "Depois de guardares a tua cidade com '{0}' ativado, não poderás mais carregar o jogo guardado sem '{0}' ativado.\nUtiliza '{1}' para recuperar o teu jogo guardado se necessário. Lê a descrição do Workshop para mais informações."
+    "Zero": "Depois de guardares a tua cidade com '{0}' ativado, não poderás mais carregar a gravação sem '{0}' ativado.",
+    "One": "Depois de guardares a tua cidade com '{0}' ativado, não poderás mais carregar a gravação sem '{0}' ativado.\nUtiliza '{1}' para recuperar a tua gravação se necessário. Lê a descrição do Workshop para mais informações."
   },
   "Status_TestVersion": {
     "Zero": "Esta é uma versão de teste do mod original. Está ciente que as versões de teste dos mods podem causar problemas inesperados.",
@@ -203,7 +203,7 @@
   "CRT_Alternatives": "Alternativas",
   "CRT_Status": "Estados",
   "CRT_Ambiguous": "Ambiguidade",
-  "CRT_RequiredItem": "Item necessário",
+  "CRT_RequiredItem": "Elemento necessário",
   "CRT_RequestReview": "Estado da solicitação de revisão",
   "LastReviewDate": "Foi revisto pela última vez a {0}",
   "RequestReviewInfo": "Estás a ter problemas com este pacote?\nSolicita uma nova análise aqui:",
@@ -259,7 +259,7 @@
     "Plural": "Eliminar estas solicitações"
   },
   "ViewRequest": "Ver solicitação",
-  "RequiredItem": "Item necessário",
+  "RequiredItem": "Elemento necessário",
   "ApplyAllActions": "Aplicar todas as ações recomendadas",
   "SnoozeAll": "Ignorar todos os problemas",
   "SnoozeAllFiltered": "Colocar em espera todos os problemas filtrados",

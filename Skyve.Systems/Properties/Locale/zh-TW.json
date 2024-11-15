@@ -18,7 +18,7 @@
   "AnyStatus": "任何狀態",
   "NoLocalPackagesFound": "在您的電腦上找不到外掛程式。",
   "NoPackagesMatchFilters": "沒有符合要求的組件",
-  "NoLogsMatchFilters": "No logs match what you're looking for.",
+  "NoLogsMatchFilters": "沒有符合您搜尋條件的日誌",
   "EnableAll": "全部開啟",
   "DisableAll": "全部關閉",
   "EnableAllFiltered": "開啟篩選後的項目",
@@ -26,31 +26,31 @@
   "EnableAllSelected": "開啟已選的項目",
   "DisableAllSelected": "關閉已選的項目",
   "CopyAllIds": "複製所有項目的名稱與ID",
-  "CopyAllIdsFiltered": "Copy all filtered items' names & IDs",
-  "CopyAllIdsSelected": "Copy all selected items' names & IDs",
+  "CopyAllIdsFiltered": "複製所有篩選項目的名稱和ID。",
+  "CopyAllIdsSelected": "複製所有選定項目的名稱和ID",
   "HelpLogs": "獲取説明和日誌",
   "Preferences": "選項",
   "PlaysetName": "設定檔名稱",
-  "RenamePlayset": "Rename this playset",
+  "RenamePlayset": "將此遊戲設定檔重新命名",
   "StartScratch": "從頭開始創建一個設定檔",
-  "ContinueFromCurrent": "Clone your active playset",
+  "ContinueFromCurrent": "克隆您當前啟用的遊戲設定組",
   "GamePlay": "建設城市",
   "EditorPlay": "製作資產",
   "PlaysetUsage": "設定檔用途",
   "SomePackagesWillBeDisabled": "更改此設定檔的用途將會移除某些外掛程式。",
   "AffectedPackagesAre": "受影響的外掛程式為：",
   "ConfirmDeletePlayset": "您確定要刪除設定檔「{0}」嗎？",
-  "ActivatePlayset": "Activate this playset",
-  "PlaysetMerge": "Add all of this playset's mods to your active playset",
-  "PlaysetExclude": "Remove all of this playset's mods from your active playset",
+  "ActivatePlayset": "啟用此遊戲設定檔",
+  "PlaysetMerge": "將這個遊戲作用中的所有模組增加到你已啟用的遊戲設定組中",
+  "PlaysetExclude": "清空在目前使用設定檔中的所有模組",
   "PlaysetDelete": "刪除這個設定檔",
   "MissingPackages": "缺失的外掛程式",
   "OpenPackagePage": "打開此外掛程式的詳情頁面",
   "OpenPackageFolder": {
     "One": "Open file location",
-    "Plural": "Open all selected packages' file locations"
+    "Plural": "打開所有選取套件的檔案位置"
   },
-  "OpenLocalFolder": "Open the folder containing this package",
+  "OpenLocalFolder": "打開包含此套件的資料夾",
   "ReDownloadPackage": {
     "One": "重新下載此外掛程式",
     "Plural": "重新下載所有選中的外掛程式"
@@ -66,11 +66,11 @@
   "Sorting_SubscribeTime": "訂閱時間",
   "Sorting_Author": "作者名稱",
   "Sorting_Status": "外掛程式狀態",
-  "Sorting_CompatibilityReport": "相容性問題嚴重程度",
+  "Sorting_CompatibilityReport": "相容性報告",
   "Sorting_LoadOrder": "載入順序",
   "FolderSettings": "資料夾設置",
   "ShowDatesRelatively": "顯示當前時間的相對日期",
-  "CouldNotCreatePlayset": "Could not create a new playset.",
+  "CouldNotCreatePlayset": "無法建立新的遊戲設定檔",
   "CreatePlaysetHere": "Create a new playset or activate a previous one by clicking here",
   "Maintenance": "維護",
   "DisableNewModsByDefault": "Disable newly added mods by default",
@@ -94,17 +94,17 @@
   "AdvancedLaunchOptions": "顯示進階啟動選項",
   "MovePackageToLocalFolder": {
     "One": "將外掛程式複製到本機資料夾",
-    "Plural": "將所有選中的外掛程式製到本機資料夾"
+    "Plural": "將所有選定的套件複製到本機資料夾"
   },
   "ModIsPrivate": "此項目已被隱藏",
   "YourDlcs": "您的 DLC",
   "AllDlcs": "所有 DLC",
   "DLCs": "DLC 和 CCP",
   "LaunchTooltip": "點擊以啟動 / 關閉 Cities: Skylines，或在程式中任意位置按 [F5]",
-  "SelectedFileInvalid": "您選擇的檔無效",
+  "SelectedFileInvalid": "您選取的檔案無效",
   "ShowingFilteredItems": "當前顯示 {0} 項，共 {1} 項",
   "ThemeUIScale": "介面主題與UI縮放",
-  "SearchPlaysets": "Search through these Playsets..",
+  "SearchPlaysets": "搜尋這些遊戲設定...",
   "AdvancedSettings": "進階設置",
   "HelpTranslate": "幫助改進翻譯",
   "HelpReset": "幫助與重置",
@@ -288,7 +288,7 @@
   "ControlToSelectMultiplePackages": "按住 Ctrl 並左鍵點擊，可選擇多個外掛程式。",
   "Local": "本地",
   "Workshop": "工作坊",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "相容性報告",
   "Enabled": "已啟用",
   "Disabled": "已禁用",
   "Included": "已裝載（模組需要啟用！）",
@@ -358,8 +358,8 @@
     "Plural": "{0} {1} 由於當前組態檔案的用途已被隱藏"
   },
   "EditCompatibility": {
-    "One": "Edit this package's compatibility",
-    "Plural": "Edit selected packages' compatibility"
+    "One": "編輯此外掛程式的相容性",
+    "Plural": "編輯已選擇外掛程式的相容性"
   },
   "AnyIssue": "任意問題",
   "AnyUsage": "任意用途",
@@ -482,10 +482,10 @@
   "TroubleshootNextStageTip": "Skip the current stage. Use it if you've already completed it and want to proceed.",
   "TroubleshootBubbleTip": "This is the troubleshooting menu, it will guide you throughout the process.\r\nYou can close Skyve and continue later, it will remember your progress.",
   "TroubleshootCompAsk": {
-    "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
-    "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
+    "One": "您有一個外掛程式存在嚴重的相容性警告。\n建議您在進行故障排除前，先處理這個問題。",
+    "Plural": "您有 {0} 個外掛程式存在嚴重的相容性警告。\n建議您在進行故障排除前，先處理這個問題。"
   },
-  "TroubleshootViewComp": "View my compatibility report",
+  "TroubleshootViewComp": "查看我的相容性報告",
   "TroubleshootSkipComp": "Skip & continue troubleshooting",
   "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
   "FaultyPackagesTitle": "Faulty Packages Detected",
@@ -506,14 +506,14 @@
   "ViewAllYourItems": "View all your {0}",
   "ViewRecentlyUpdatedItems": "View recently updated {0}",
   "NoCompatibilityIssues": {
-    "One": "No Compatibility issues detected.",
-    "Plural": "No compatibility issues with your {0} were detected."
+    "One": "沒有檢測到相容性問題。",
+    "Plural": "在您的 {0} 中未檢測到相容性問題。"
   },
   "SnapDashToGrid": "Show, and snap dashboard sections to, a grid guide",
   "SnapDashToGrid_Tip": "While editing dashboard sections, displays a 12-column grid which sections snap to.",
   "UnsavedChangesPlayset": "There are un-saved changes to the packages of this playset",
   "ChangePlaysetSettings": "Change this playset's settings",
-  "ViewCompatibilityReport": "View the full report",
+  "ViewCompatibilityReport": "查看完整報告",
   "DashboardCustomizationInfo": "Customize your dashboard by dragging each section from its title.\r\nYou can also resize a section using the dotted triangle on its bottom-right corner.",
   "ViewAssetsWithIssues": "View Assets with issues",
   "ViewModsWithIssues": "View Mods with issues",
@@ -554,7 +554,7 @@
   "FadeDisabledItems_Tip": "Disabled mods & assets in your local content lists will be faded out.",
   "UsagePlayset": "{0} Playset",
   "GenericPlayset": "Generic Playset",
-  "CompatibilityCenter": "Compatibility Center",
+  "CompatibilityCenter": "相容性中心",
   "Dependency": {
     "One": "Dependency",
     "Plural": "Dependencies"
@@ -618,7 +618,7 @@
   "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
   "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
   "ReviewIsSaveFileNeeded": "The issue you've reported needs more information to be identified. Please send a new Request with a savegame attached to it to be reviewed.",
-  "ReviewIsUpdated": "The compatibility information of '{0}' was updated after your review request.",
+  "ReviewIsUpdated": "您申請檢視的 {0} 相容性資訊已更新。",
   "ReviewPending": "Your review request for '{0}' has been received but is still pending review.",
   "Backup": {
     "One": "Backup",
@@ -674,7 +674,7 @@
   "FirstBackup": "First Backup",
   "FirstBackupDescription": "You are doing your first ever backup. This might take a while depending on how many savegames and files you have.\r\n\r\nFuture backups will take less time as they will only backup new or updated files.",
   "InvalidFolder": "Invalid Folder",
-  "ChooseDifferentBackupLocation": "You can not backup your files inside the main AppData folder of the game, nor in a personal user folder.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
+  "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "Restore this backup",
   "DeleteBackup": "Delete this backup"
 }

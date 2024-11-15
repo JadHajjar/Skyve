@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Informazioni sulla compatibilità",
+  "CompatibilityInfo": "Informazioni di compatibilità",
   "Dashboard": "Pannello di controllo",
   "SearchDlcs": "Cerca tra i tuoi DLC...",
   "SearchPackages": "Cerca nei tuoi pacchetti...",
@@ -674,7 +674,7 @@
   "FirstBackup": "Primo backup",
   "FirstBackupDescription": "Stai eseguendo il tuo primo backup in assoluto. Questo potrebbe richiedere un po' di tempo, a seconda del numero di salvataggi e file che possiedi.\n\nI backup futuri richiederanno meno tempo, in quanto verranno salvati solo i file nuovi o aggiornati.",
   "InvalidFolder": "Cartella non valida",
-  "ChooseDifferentBackupLocation": "Non puoi eseguire il backup dei file all'interno della cartella principale di AppData del gioco né in una cartella personale dell'utente.\n\nScegli una posizione diversa che non si trovi nella stessa cartella, preferibilmente su un altro drive.",
+  "ChooseDifferentBackupLocation": "Non puoi eseguire il backup dei tuoi file all'interno di questa cartella, Skyve non ha accesso per salvare i file qui.\n\nScegli un'altra posizione che non si trovi nella stessa cartella, preferibilmente su un altro disco.",
   "RestoreBackup": "Ripristina questo backup",
   "DeleteBackup": "Elimina questo backup"
 }

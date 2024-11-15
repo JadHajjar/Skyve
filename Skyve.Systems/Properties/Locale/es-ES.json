@@ -634,7 +634,7 @@
   "EnableAutoBackup": "Habilitar respaldos programados",
   "BackupPath": "Ubicación de los archivos de respaldo",
   "BackupPathPlaceholder": "Seleccione la carpeta donde desea guardar sus respaldos",
-  "IncludeAutoSavesBackup": "Incluir Guardado Automáticos al respaldar los archivos de juegos guardados",
+  "IncludeAutoSavesBackup": "Incluir los Juegos Guardados Automáticamente al respaldar los archivos de Juegos Guardados",
   "ScheduleOnSpecificTimes": "Hacer respaldos diarios en horarios específicos",
   "ScheduleOnGameClose": "Hacer un respaldo cada vez que el juego es cerrado",
   "ScheduleOnNewSave": "Hacer un respaldo cada vez que una ciudad es guardada",
@@ -674,7 +674,7 @@
   "FirstBackup": "Primera copia de seguridad",
   "FirstBackupDescription": "Estás realizando la primera copia de seguridad. Este proceso puede tardar un poco, dependiendo de la cantidad de juegos guardados y archivos que tengas.\n\nLas futuras copias de seguridad demorarán menos tiempo, ya que solo guardarán archivos nuevos o actualizados.",
   "InvalidFolder": "Carpeta no Válida",
-  "ChooseDifferentBackupLocation": "No puede hacer copias de seguridad de sus archivos dentro de la carpeta principal de AppData del juego, ni en una carpeta de usuario personal.\n\nElija una ubicación diferente que no esté en la misma carpeta y preferiblemente en otra unidad.",
+  "ChooseDifferentBackupLocation": "No puede guardar respaldos de sus archivos dentro de esta carpeta, ya que Skyve no posee los permisos necesarios para hacerlo. \n\nElige una ubicación diferente que no esté en la misma carpeta y preferiblemente en otra unidad.",
   "RestoreBackup": "Restaurar este respaldo",
   "DeleteBackup": "Eliminar este respaldo"
 }
