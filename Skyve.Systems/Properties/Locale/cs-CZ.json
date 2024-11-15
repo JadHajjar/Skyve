@@ -674,7 +674,7 @@
   "FirstBackup": "První záloha",
   "FirstBackupDescription": "Děláte svou první zálohu. Může to chvíli trvat v závislosti na počtu vašich uložených her a souborů.\n\nBudoucí zálohy budou trvat méně času, protože budou zálohovat pouze nové nebo aktualizované soubory.",
   "InvalidFolder": "Neplatná složka",
-  "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
+  "ChooseDifferentBackupLocation": "Nemůžete zálohovat své soubory uvnitř této složky, Skyve nemá přístup k ukládání souborů v této složce.\n\nVyberte jiné umístění, které není ve stejné složce, pokud možno na jiném disku.",
   "RestoreBackup": "Obnovit tuto zálohu",
   "DeleteBackup": "Odstranit tuto zálohu"
 }
