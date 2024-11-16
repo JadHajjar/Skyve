@@ -141,14 +141,14 @@
   "Stability_AssetNotReviewed": "'{0}' wurde noch nicht überprüft.\nDie Kompatibilitätsinformationen sind möglicherweise nicht korrekt, obwohl Assets im Allgemeinen stabil sind.",
   "Stability_NotReviewed": "'{0}' wurde noch nicht überprüft.\n\nDie Kompatibilitätsinformationen sind möglicherweise nicht korrekt.",
   "Stability_Stable": "'{0}' ist stabil. Der Autor arbeitet immer noch aktiv daran und aktualisiert es.",
-  "Stability_StableNoNewFeatures": "'{0}' ist stabil, obwohl der Autor keine Updates mehr veröffentlichen wird.\nSie werden es jedoch im Falle neuer Fehler immer noch aktualisieren.",
+  "Stability_StableNoNewFeatures": "'{0}' ist stabil, obwohl der Autor keine Updates mehr veröffentlichen wird.\nEr wird es jedoch im Falle neuer Fehler immer noch aktualisieren.",
   "Stability_StableNoFutureUpdates": "Obwohl der Autor '{0}' nicht mehr unterstützt, ist es stabil. Zukünftige Updates und Bugfixes sind aber unwahrscheinlich.",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' kann Probleme verursachen und der Autor unterstützt es nicht mehr, zukünftige Updates oder Bugfixes sind unwahrscheinlich.",
   "Stability_BreaksOnPatch": "'{0}' wird sehr wahrscheinlich kaputt gehen, wenn der neue Patch veröffentlicht wird.",
   "Stability_NotEnoughInformation": "Es gibt nicht genügend Informationen, um '{0} ' richtig zu überprüfen.",
-  "Stability_HasIssues": "'{0}' kann Probleme verursachen.\nSeien Sie vorsichtig, wenn Sie es verwenden.",
+  "Stability_HasIssues": "'{0}' kann Probleme verursachen.\nSei vorsichtig, wenn Du es verwendest.",
   "Stability_Broken": "'{0}' ist defekt.\nEs ist bekannt, das es entweder Spielfunktionen zerstört oder einfach nicht funktioniert.",
-  "Stability_Incompatible": "'{0}' ist als nicht kompatibel mit deiner aktuellen Spielversion markiert.\nBenutzen Sie es vorsichtig oder deaktivieren Sie es während Sie darauf warten, dass es aktualisiert wird.",
+  "Stability_Incompatible": "'{0}' ist als nicht kompatibel mit deiner aktuellen Spielversion markiert.\nVerwende es unter Vorsicht oder deaktiviere es während du darauf wartest, dass es aktualisiert wird.",
   "Stability_AssetIncompatible": "'{0}' ist mit deiner aktuellen Spielversion als nicht kompatibel markiert.\nBei neuen Updates treten selten Fehler auf, die Verwendung sollte daher kein Problem sein.",
   "Stability_Local": "Dies ist eine lokale Version der ursprünglichen Mod '{0}'.\n\nLokale Versionen werden normalerweise zum Testen verwendet.",
   "Stability_BrokenFromNewVersion": "'{1}' funktioniert seit dem letzten Update{0} nicht mehr. Bitte warte, bis es aktualisiert wird, bevor du es verwendest.\nBis dahin solltest du es deaktivieren.",
@@ -158,18 +158,18 @@
   "Stability_BrokenFromPatchUpdated": "'{1}' brach nach Patch {0} des Spiels, wurde jedoch vor kurzem aktualisiert. Es könnte sicher zur Nutzung sein.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "Du solltest das folgende Paket deinem Playset hinzufügen.",
-    "Plural": "Du solltest die folgenden Pakete zu deinem Playset hinzufügen."
+    "One": "Du solltest das folgende Paket deinem Spielset hinzufügen.",
+    "Plural": "Du solltest die folgenden Pakete zu deinem Spielset hinzufügen."
   },
-  "Action_RequiresConfiguration": "Bitte folgen Sie den folgenden Anweisungen:",
+  "Action_RequiresConfiguration": "Bitte folge den folgenden Anweisungen:",
   "Action_SelectOne": {
     "One": "Du solltest dich zwischen '{0}' und '{1}' entscheiden.",
     "Plural": "Du solltest dich zwischen '{0}' und den folgenden Paketen entscheiden."
   },
-  "Action_UnsubscribeThis": "Du solltest '{0}' von deinem Playset entfernen.",
+  "Action_UnsubscribeThis": "Du solltest '{0}' von deinem Spielset entfernen.",
   "Action_UnsubscribeOther": {
-    "One": "Du solltest '{1}' von deinem Playset entfernen.",
-    "Plural": "Du solltest die folgenden Pakete von deinem Playset entfernen."
+    "One": "Du solltest '{1}' von deinem Spielset entfernen.",
+    "Plural": "Du solltest die folgenden Pakete von deinem Spielset entfernen."
   },
   "Action_ExcludeThis": "Du solltest '{0} ' deaktivieren.",
   "ExcludeThis": "Dieses Paket deaktivieren",
@@ -185,8 +185,8 @@
   },
   "Action_IncludeThis": "Du solltest '{0}' hinzufügen",
   "Action_IncludeOther": {
-    "One": "Du solltest das folgende Paket zu deinem Playset hinzufügen.",
-    "Plural": "Du solltest die folgenden Pakete zu deinem Playset hinzufügen."
+    "One": "Du solltest das folgende Paket zu deinem Spielset hinzufügen.",
+    "Plural": "Du solltest die folgenden Pakete zu deinem Spielset hinzufügen."
   },
   "NoRequiredDlcs": "Keine erforderlichen DLCs",
   "DlcsSelected": {
