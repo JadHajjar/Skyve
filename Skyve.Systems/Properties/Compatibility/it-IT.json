@@ -163,8 +163,8 @@
   },
   "Action_RequiresConfiguration": "Seguire le seguenti istruzioni:",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "Tra '{0}' e '{1}', dovresti sceglierne solo uno.",
+    "Plural": "Tra '{0}' e i seguenti pacchetti, dovresti sceglierne solo uno."
   },
   "Action_UnsubscribeThis": "Dovresti rimuovere '{0}' dal tuo playset.",
   "Action_UnsubscribeOther": {
