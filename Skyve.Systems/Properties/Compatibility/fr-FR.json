@@ -122,7 +122,7 @@
     "One": "Après avoir sauvegardé votre ville avec '{0}' d'activé, vous ne serez plus capable de charger cette sauvegarde sans '{0}' d'activé.\n\nUtilisez '{1}' pour récupérer votre sauvegarde si besoin. Lisez la description du workshop pour plus d'informations."
   },
   "Status_TestVersion": {
-    "Zero": "Ceci est une version test du mod original. Sachez que les mises à jour de celui-ci peuvent causes des problèmes inattendus.",
+    "Zero": "Ceci est une version de test ; gardez en mémoire que les versions de test (ainsi que leurs mises à jour intempestives) peuvent causer des problèmes inattendus.",
     "One": "Ceci est une version test de '{1}'. \nSachez que les mises à jour de celui-ci peuvent causes des problèmes inattendus."
   },
   "Status_MissingDlc": {
