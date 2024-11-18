@@ -30,9 +30,9 @@
   "NoAction": "Nic nie rób",
   "SubscribeToPackages": "Subskrybuj połączone pakiety",
   "RequiresConfiguration": "Wymaga określonej konfiguracji",
-  "SelectOne": "Wybierz jedne",
+  "SelectOne": "Wybierz jedno",
   "UnsubscribeThis": "Anuluj subskrypcję tego pakietu",
-  "UnsubscribeOther": "Wypisz się z powiązanych pakietów",
+  "UnsubscribeOther": "Anuluj subskrypcje powiązanych pakietów",
   "Switch": "Przełącz na powiązany pakiet",
   "FlippedSwitch": "Przełącz na ten pakiet",
   "Deprecated": "Przestarzałe",
@@ -46,7 +46,7 @@
   "IncompleteDescription": "Niekompletny opis",
   "Successor": "Następca..",
   "LoadAfter": "Załaduj po ..",
-  "Alternative": "Alternative",
+  "Alternative": "Alternatywa do ..",
   "SameFunctionality": "Same Functionality",
   "RequirementAlternative": "Alternatywne Wymaganie Dla ..",
   "IncompatibleWith": "Niekompatybilne z ..",
@@ -70,7 +70,7 @@
   "ReuseData_Tip": "Ponownie wykorzystuje dane kompatybilności z ostatniego zapisanego pakietu dla tego pakietu.\r\nPrzytrzymaj Shift, aby zastosować i kontynuować",
   "PleaseReviewTheStability": "Przed zapisaniem sprawdź stabilność tego pakietu.",
   "PleaseReviewPackageStatuses": "Przed zapisaniem sprawdź statusy tego pakietu.\r\nNiektóre mają nieprawidłowy typ statusu.",
-  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageInteractions": "Przed zapisaniem sprawdź interakcje tego pakietu.\nNiektóre mają nieprawidłowy typ interakcji lub nie ma połączonego pakietu.",
   "PleaseReviewPackageUsage": "Wybierz prawidłowe użycie tego pakietu.",
   "Interaction_Alternative": {
     "One": "'{1}' może być użyty jako alternatywa '{0}'.",
@@ -126,7 +126,7 @@
     "One": "To jest wersja testowa '{1}'.\nMiej na uwadze, że aktualizacje tej modyfikacji mogą powodować nieoczekiwane problemy."
   },
   "Status_MissingDlc": {
-    "One": "You're missing the '{0}' DLC to use this package.",
+    "One": "Nie posiadasz wymaganego DLC do tej modyfikacji.",
     "Plural": "Nie posiadasz wymaganych DLC do tej modyfikacji."
   },
   "Status_DependencyMod": "Ta modyfikacja jest używana jako podstawa do innych modyfikacji, jednak nie posiadasz żadnych modyfikacji wymagających jej.",
@@ -134,7 +134,7 @@
   "SourceAvailable": "Kod źródłowy jest dostępny",
   "StandardMod": "Standardowa Modyfikacja",
   "Status_MusicCanBeCopyrighted": "Muzyka w tym pakiecie może być chroniona prawem autorskim. Najlepiej nie używać jej podczas streamingu.",
-  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_IncompleteDescription": "Opis tego modu w Warsztacie jest zbyt krótki. Nie powinieneś go używać, chyba że ufasz jego autorowi.",
   "Status_SourceAvailable": "Ten pakiet nie będzie ostrzegał przed brakującym kodem źródłowym.",
   "Status_StandardMod": "Ten pakiet zostanie zignorowany podczas przetwarzania modów do rozwiązania problemów.",
   "OutputText": "Oczekiwany wynik",
@@ -151,8 +151,8 @@
   "Stability_Incompatible": "'{0}' jest oznaczony jako niekompatybilny z twoją aktualną wersją gry.\nUżywaj go ostrożnie, lub dezaktywuj, czekając na jego aktualizację.",
   "Stability_AssetIncompatible": "'{0}' jest oznaczony jako niezgodny z aktualną wersją gry.\nZasoby rzadko psują się z nowymi aktualizacjami, więc używanie tego powinno być w porządku.",
   "Stability_Local": "To jest lokalna wersja modyfikacja '{0}'.\n\nLokalne wersje modyfikacji są zwykle używane do testów.",
-  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
+  "Stability_BrokenFromNewVersion": "'{1}' powoduje problemy po jego aktualizacji {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.\nW międzyczasie powinieneś go dezaktywować.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' powoduje problemy po jego aktualizacji {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.",
   "Stability_BrokenFromPatch": "'{1}' powoduje problemy po aktualizacji gry {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.\nW międzyczasie powinieneś go dezaktywować.",
   "Stability_BrokenFromPatchSafe": "'{1}' powoduje problemy po aktualizacji gry {0}. Zaczekaj do wydania aktualizacji modyfikacji, zanim go użyjesz.",
   "Stability_BrokenFromPatchUpdated": "'{1}' zepsuł się po poprawce gry {0}, ale został niedawno zaktualizowany. Jego użycie może być bezpieczne.",
@@ -163,8 +163,8 @@
   },
   "Action_RequiresConfiguration": "Proszę postępować zgodnie z poniższymi instrukcjami:",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "Pomiędzy '{0}' a '{1}' powinieneś wybrać tylko jedno z nich.",
+    "Plural": "Pomiędzy '{0}' a następującymi pakietami, należy wybrać tylko jeden."
   },
   "Action_UnsubscribeThis": "Powinieneś usunąć '{0}' ze swojej listy.",
   "Action_UnsubscribeOther": {
@@ -176,8 +176,8 @@
   "Exclude": "Dezaktywuj",
   "Unsubscribe": "Anuluj subskrypcję",
   "Action_ExcludeOther": {
-    "One": "Powinieneś zdezaktywować '{1}'.",
-    "Plural": "Powinieneś zdezaktywować poniższe modyfikacje."
+    "One": "Powinieneś dezaktywować '{1}'.",
+    "Plural": "Powinieneś dezaktywować poniższe modyfikacje."
   },
   "Action_Switch": {
     "One": "Powinieneś przełączyć się na '{1}'.",
@@ -201,7 +201,7 @@
   "CRT_DlcMissing": "Brakujące DLC/CCP",
   "CRT_Compatibility": "Problemy ze zgodnością",
   "CRT_Alternatives": "Alternatywne",
-  "CRT_Status": "Statuses",
+  "CRT_Status": "Statusy",
   "CRT_Ambiguous": "Niejasność",
   "CRT_RequiredItem": "Wymagany przedmiot",
   "CRT_RequestReview": "Status prośby o sprawdzenie",
@@ -209,8 +209,8 @@
   "RequestReviewInfo": "Czy napotkałeś problemy z tą modyfikacją?",
   "RequestReview": "Poproś o sprawdzenie",
   "MissingDependencyCount": {
-    "One": "{0} {1} brakuje podstawy",
-    "Plural": "{0} {1} brakuje podstawy"
+    "One": "{0} {1} brakuje zależności",
+    "Plural": "{0} {1} brakuje zależności"
   },
   "CautionCount": "{0} {1} gdzie zaleca się ostrożność",
   "WarningCount": "{0} {1} z ostrzeżeniem",
@@ -236,11 +236,11 @@
   "MusicPack": "Pakiet muzyczny",
   "ThemeMix": "Miks motywów",
   "IMTMarkings": "Oznaczenia IMT",
-  "RenderItPreset": "Renderowanie! Ustawienie",
+  "RenderItPreset": "Render it! Preset",
   "POFont": "Czcionka/moduł obiektu proceduralnego",
   "NameList": "Tłumaczenia listy nazw/Gry",
   "ApplyChangedBeforeExit": "Masz niezapisane zmiany.\r\n\r\nCzy chcesz zastosować te zmiany przed kontynuowaniem?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorRetired": "Autor {0}, {1}, przeszedł na emeryturę lub był nieaktywny od dłuższego czasu.\n\nPrzyszłe aktualizacje i stabilność dla jego pakietów nie są gwarantowane.",
   "AuthorMalicious": "Autor {0}, {1}, znany jest jako złośliwy i/lub zawierający szkodliwe treści, takie jak wirusy w ich opakowaniach.",
   "ReviewRequests": "Przejrzyj prośby",
   "ApplyRequestedChanges": "Zastosuj żądane zmiany",
@@ -249,7 +249,7 @@
   "NoIssues": "Brak problemów",
   "RequestReviewDisclaimer": "*ID twojego konta oraz logi są wysłane za twoją prośbą",
   "ScenarioMaking": "Tworzenie scenariusza",
-  "ThemeMaking": "Tworzenie tematu",
+  "ThemeMaking": "Tworzenie motywu",
   "OtherCompatibilityWarnings": {
     "One": "Ten pakiet zawiera jedno inne ostrzeżenie dotyczące zgodności",
     "Plural": "Ten pakiet zawiera {0} innych ostrzeżeń dotyczących zgodności"

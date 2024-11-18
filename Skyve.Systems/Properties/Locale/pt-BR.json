@@ -674,7 +674,7 @@
   "FirstBackup": "Primeiro Backup",
   "FirstBackupDescription": "Você está fazendo o seu primeiro backup. Isso pode demorar um pouco dependendo de quantos jogos salvos e arquivos você tem.\n\nOs backups futuros levarão menos tempo pois apenas farão backup dos arquivos novos ou atualizados.",
   "InvalidFolder": "Pasta Inválida",
-  "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
+  "ChooseDifferentBackupLocation": "Você não pode fazer backup de seus arquivos dentro desta pasta, Skyve não tem acesso para salvar arquivos aqui.\n\nEscolha um local diferente que não esteja na mesma pasta, de preferência em outra unidade.",
   "RestoreBackup": "Restaurar esse backup",
   "DeleteBackup": "Excluir este backup"
 }
