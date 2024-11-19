@@ -51,7 +51,7 @@ internal class D_NotificationCenter : IDashboardItem
 		foreach (var group in notifications.GroupBy(GetDateGroup))
 		{
 			e.Graphics.DrawStringItem(group.Key.ToUpper(), groupFont, FormDesign.Design.LabelColor, e.ClipRectangle.Width, 1, ref preferredHeight, applyDrawing);
-			
+
 			preferredHeight -= BorderRadius / 3;
 
 			foreach (var item in group)
@@ -145,7 +145,7 @@ internal class D_NotificationCenter : IDashboardItem
 		using var titleFont = UI.Font(8.75F, FontStyle.Bold).FitTo(notification.Title, new Rectangle(0, 0, maxWidth - timeWidth, UI.Scale(32)), e.Graphics);
 		using var smallFont = UI.Font(7F);
 		var titleBounds = e.Graphics.Measure(notification.Title, titleFont, maxWidth - timeWidth + (BorderRadius / 2));
-		var descBounds = notification.Description is null ? default : e.Graphics.Measure(notification.Description, smallFont, maxWidth);
+		var descBounds = notification.Description is null ? default : e.Graphics.Measure(notification.Description, smallFont, maxWidth - (string.IsNullOrEmpty(notification.Title) ? timeWidth : 0));
 		var rectangle = new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, Math.Max(icon.Height, (int)titleBounds.Height + (int)descBounds.Height) + BorderRadius).Pad(BorderRadius / 2);
 
 		if (applyDrawing)
@@ -166,11 +166,11 @@ internal class D_NotificationCenter : IDashboardItem
 			e.Graphics.DrawImage(icon.Color(FormDesign.Design.ForeColor), rectangle.Pad(Margin.Left, -Margin.Top / 2, 0, -Margin.Top / 2).Align(icon.Size, ContentAlignment.MiddleLeft));
 
 			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
-			using var rightAlign = new StringFormat { Alignment = StringAlignment.Far };
+			using var rightAlign = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = string.IsNullOrEmpty(notification.Title) ? StringAlignment.Center : StringAlignment.Near };
 
-			e.Graphics.DrawString(timeText, timeFont, brush, new Rectangle(e.ClipRectangle.X + icon.Width + (Margin.Left / 2) + Margin.Horizontal - (Margin.Left / 2), preferredHeight, maxWidth + (Margin.Left / 2), e.ClipRectangle.Height).Pad(UI.Scale(2)), rightAlign);
-			
-			e.Graphics.DrawString(notification.Title, titleFont, brush, new Rectangle(e.ClipRectangle.X + icon.Width + (Margin.Left / 2) + Margin.Horizontal - (Margin.Left / 2), preferredHeight, maxWidth -timeWidth+ (Margin.Left / 2), e.ClipRectangle.Height));
+			e.Graphics.DrawString(timeText, timeFont, brush, new Rectangle(e.ClipRectangle.X + icon.Width + (Margin.Left / 2) + Margin.Horizontal - (Margin.Left / 2), rectangle.Y, maxWidth + (Margin.Left / 2), rectangle.Height).Pad(UI.Scale(2)), rightAlign);
+
+			e.Graphics.DrawString(notification.Title, titleFont, brush, new Rectangle(e.ClipRectangle.X + icon.Width + (Margin.Left / 2) + Margin.Horizontal - (Margin.Left / 2), rectangle.Y, maxWidth - timeWidth + (Margin.Left / 2), rectangle.Height));
 		}
 
 		if (notification.Description is not null)
@@ -180,7 +180,7 @@ internal class D_NotificationCenter : IDashboardItem
 				using var brush = new SolidBrush(FormDesign.Design.ForeColor.MergeColor(BackColor, 75));
 				using var format = new StringFormat { LineAlignment = string.IsNullOrEmpty(notification.Title) ? StringAlignment.Center : StringAlignment.Near };
 
-				e.Graphics.DrawString(notification.Description, smallFont, brush, new Rectangle(e.ClipRectangle.X + (Margin.Left / 2) + icon.Width + Margin.Horizontal, rectangle.Y + (int)titleBounds.Height, maxWidth, rectangle.Height), format);
+				e.Graphics.DrawString(notification.Description, smallFont, brush, new Rectangle(e.ClipRectangle.X + (Margin.Left / 2) + icon.Width + Margin.Horizontal, rectangle.Y + (int)titleBounds.Height, maxWidth - (string.IsNullOrEmpty(notification.Title) ? timeWidth : 0), rectangle.Height), format);
 			}
 		}
 
