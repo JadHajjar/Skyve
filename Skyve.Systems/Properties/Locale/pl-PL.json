@@ -644,13 +644,13 @@
   "CleanupTimeBased": "Delete all backups olders than:",
   "CleanupStorageBased": "Delete old backups once the total storage used exceeds:",
   "CleanupCountBased": "Delete old backups once the total amount of backups exceeds:",
-  "DoBackupNow": "Backup Files Now",
+  "DoBackupNow": "Tworzenie kopii zapasowej",
   "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or re-installation.",
   "RestoreDescriptionInfo": "Select which backups you'd like to restore.\r\nA backup will be taken before the restore process begins to safeguard your current files.",
   "BackupFailed": "Backup Failed",
   "CheckLogsAndTryAgain": "Check the logs for any errors and try again.",
   "RestorePoint": {
-    "One": "One restore point from {1}",
+    "One": "Punkt przywracania z {1}",
     "Plural": "{0} restore points, most recently from {1}"
   },
   "BackupCount": {
@@ -674,7 +674,7 @@
   "FirstBackup": "First Backup",
   "FirstBackupDescription": "You are doing your first ever backup. This might take a while depending on how many savegames and files you have.\r\n\r\nFuture backups will take less time as they will only backup new or updated files.",
   "InvalidFolder": "Invalid Folder",
-  "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
+  "ChooseDifferentBackupLocation": "Nie możesz utworzyć kopii zapasowej plików w tym folderze, Skyve nie ma dostępu do zapisywania plików w tej lokalizacji.\n\nWybierz inną lokalizację, która nie jest w tym samym folderze, najlepiej na innym dysku.",
   "RestoreBackup": "Restore this backup",
   "DeleteBackup": "Delete this backup"
 }
