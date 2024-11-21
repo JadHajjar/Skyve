@@ -6,8 +6,8 @@
   "Vanilla": "原版",
   "UpToDate": "最新",
   "StatusUnknown": "未知狀態",
-  "PartiallyDownloaded": "沒有完整下載",
-  "LaunchSettings": "啟動選項",
+  "PartiallyDownloaded": "部分已下載完成",
+  "LaunchSettings": "啟動設定",
   "IncludesItemsYouDoNotHave": "警告：此設定檔中含有您尚未擁有的項目",
   "OtherPlaysets": "其他設定檔",
   "ViewPlaysets": "查看您的設定檔",
@@ -126,7 +126,7 @@
   "OpenGuide_Tip": "以網路查閱指南並開始使用 Skyve。",
   "ResetButton_Tip": "將您的設置重置為預設值。此操作不影響資料夾設置。",
   "ComplexListUI": "進階使用者介面模式",
-  "ComplexListUI_Tip": "為使用者介面新增更進階的資訊與額外操作選項。 ",
+  "ComplexListUI_Tip": "為使用者介面新增更進階的資訊與額外操作選項。",
   "NewGame": "新建一個存檔",
   "LoadSaveGame": "繼續先前的存檔",
   "DevOptions": "開發者啟動選項",
@@ -210,7 +210,7 @@
   },
   "CopyAuthorId": {
     "One": "複製作者的 ID",
-    "Plural": "複製所選包作者的 ID"
+    "Plural": "複製所選套件作者的 ID"
   },
   "CopyAuthorName": {
     "One": "複製作者的名稱",
@@ -281,7 +281,7 @@
   "SearchWorkshop": "改為搜尋工作坊...",
   "DiscoverWorkshop": "在工作坊尋找模組...",
   "SearchWorkshopBrowser": "在瀏覽器中搜尋工作坊...",
-  "UnknownPackage": "未知外掛程式",
+  "UnknownPackage": "未知套件",
   "Info": "提示",
   "SelectThisPackage": "選擇此外掛程式",
   "SelectPackage": "選擇一個外掛程式",
@@ -294,11 +294,11 @@
   "Included": "已裝載（模組需要啟用！）",
   "Excluded": "已卸載",
   "OutOfDate": "已過期",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "套件狀態",
   "Author": "作者",
   "Include": "裝載",
   "Unsubscribe": "取消訂閱",
-  "Exclude": "Exclude",
+  "Exclude": "排除",
   "Snooze": "稍後提醒",
   "UnSnooze": "取消稍後提醒",
   "Mod": {
@@ -310,40 +310,40 @@
     "Plural": "資產"
   },
   "Package": {
-    "One": "外掛程式",
-    "Plural": "外掛程式"
+    "One": "套件",
+    "Plural": "套件"
   },
   "Playset": {
     "One": "設定檔",
     "Plural": "設定檔"
   },
   "ContainCount": {
-    "One": "Contains {0} {1}",
-    "Plural": "Contains {0} {1}"
+    "One": "包含 {0} {1}",
+    "Plural": "包含 {0} {1}"
   },
   "IncludedCount": {
-    "One": "已裝載 {0} {1}",
-    "Plural": "{0} {1} included"
+    "One": "{0} {1} 已包含",
+    "Plural": "{0} {1} 已包含"
   },
   "EnabledCount": {
-    "One": "已啟用 {0} {1} ",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} 已啟用",
+    "Plural": "{0} {1} 已啟用"
   },
   "IncludedEnabledCount": {
-    "One": "已裝載並啟用 {0} {1} ",
-    "Plural": "{0} {1} included & enabled"
+    "One": "包含 {0} {1} 且已啟用",
+    "Plural": "包含 {0} {1} 且已啟用"
   },
   "LoadedCount": {
-    "One": "已載入 {0} {1} ",
-    "Plural": "{0} {1} loaded"
+    "One": "{0} {1} 已載入",
+    "Plural": "{0} {1} 已載入"
   },
   "ShowingCount": {
     "One": "當前顯示 {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "Plural": "當前顯示 {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "當前顯示 {0} {1}，{2}",
-    "Plural": "Showing {0} {1}, {3}"
+    "One": "當前顯示 {0} {1}, {3}",
+    "Plural": "當前顯示 {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
     "One": "Showing {0} {1}, {2} selected",
@@ -457,12 +457,12 @@
   },
   "CustomTags": "Custom Tags",
   "WorkshopAndGameTags": "工作坊和遊戲內標籤",
-  "TroubleshootIssues": "Troubleshoot Issues",
+  "TroubleshootIssues": "排查疑難問題",
   "ViewTroubleshootOptions": "View troubleshooting options",
-  "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
-  "TroubleshootCaused": "A mod or asset I'm using is causing issues",
-  "TroubleshootNew": "A recent mod update or new subscription is causing issues",
-  "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
+  "TroubleshootInfo": "如果您有導致問題或缺失的模組或資源，但不知道是哪一個，請嘗試在此進行疑難排解：",
+  "TroubleshootCaused": "我正在使用的模組或資源導致了問題",
+  "TroubleshootNew": "最近的模組更新或新的訂閱導致了問題",
+  "TroubleshootMissing": "我缺少某個模組或資源，這導致了問題",
   "TroubleshootSelection": "Which option best describes your situation?",
   "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?",
   "IDAndTags": "ID & Tags",
@@ -490,7 +490,7 @@
   "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
   "FaultyPackagesTitle": "Faulty Packages Detected",
   "CleanupInfoTitle": "What is a cleanup?",
-  "TroubleshootCauseResult": "The following packages might be the cause of your issues",
+  "TroubleshootCauseResult": "以下套件可能是您問題的根源",
   "VerifiedAuthor": "Verified Author",
   "EnableItem": "Enable this mod",
   "DisableItem": "Disable this mod",
@@ -629,18 +629,18 @@
   "BackupRestore": "Backup & Restore",
   "BasicSettings": "Basic Settings",
   "BackupCleanup": "Cleanup Settings",
-  "BackupSchedule": "Backup Schedule",
-  "BackupScheduleSettings": "Schedule Settings",
-  "EnableAutoBackup": "Enable scheduled backups",
+  "BackupSchedule": "備份排程",
+  "BackupScheduleSettings": "排程設定",
+  "EnableAutoBackup": "啟用排程備份",
   "BackupPath": "Backup Files Location",
   "BackupPathPlaceholder": "Select a folder where you want to save your backups",
   "IncludeAutoSavesBackup": "Include Auto-Save savegames while backing up savegame files",
-  "ScheduleOnSpecificTimes": "Do daily backups on specific times",
-  "ScheduleOnGameClose": "Do a backup each time the game is closed",
-  "ScheduleOnNewSave": "Do a backup each time a city is saved",
-  "BackupIncludeSaveGames": "Include savegame files in scheduled backups",
-  "BackupIncludeLocalMods": "Include local mods in scheduled backups",
-  "BackupIncludeMaps": "Include maps in scheduled backups",
+  "ScheduleOnSpecificTimes": "在特定時間進行每日備份",
+  "ScheduleOnGameClose": "每次關閉遊戲時執行備份",
+  "ScheduleOnNewSave": "每次儲存城市遊戲進度時執行備份",
+  "BackupIncludeSaveGames": "將存檔檔案包含在排程備份中",
+  "BackupIncludeLocalMods": "將本地模組包含在排程備份中",
+  "BackupIncludeMaps": "將地圖包含在排程備份中",
   "CleanupTimeBased": "Delete all backups olders than:",
   "CleanupStorageBased": "Delete old backups once the total storage used exceeds:",
   "CleanupCountBased": "Delete old backups once the total amount of backups exceeds:",
