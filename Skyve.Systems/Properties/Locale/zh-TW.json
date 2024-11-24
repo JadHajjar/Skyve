@@ -346,12 +346,12 @@
     "Plural": "當前顯示 {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "One": "顯示 {0} {1}, {2} 已選擇",
+    "Plural": "顯示 {0} {1}，已選擇 {2} 個"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "顯示 {0} {1}，已選擇 {2} 個，{3}",
+    "Plural": "顯示 {0} {1}，已選擇 {2} 個，{3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} 由於當前組態檔案的用途已被隱藏",
@@ -361,20 +361,20 @@
     "One": "編輯此外掛程式的相容性",
     "Plural": "編輯已選擇外掛程式的相容性"
   },
-  "AnyIssue": "任意問題",
-  "AnyUsage": "任意用途",
+  "AnyIssue": "任何問題",
+  "AnyUsage": "任何用途",
   "ExplainIssue": "在此處描述您遇到的問題",
-  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ExplainIssueInfo": "請在這裡盡可能提供有關發生的事情以及如何重現的所有信息。",
   "ReviewRequestSent": "您對於 '{0}' 的檢查申請已經傳送成功！\n\n謝謝您的反饋。",
   "ReviewRequestFailed": "無法傳送您關於 「{0}」 的檢查申請。\n\n{1}",
   "SendReview": "傳送檢查申請",
   "EditTags": {
-    "One": "Edit this package's Tags",
-    "Plural": "Edit selected items' Tags"
+    "One": "編輯此套件的標籤",
+    "Plural": "編輯選取項目的標籤"
   },
   "EditLinks": {
-    "One": "Edit this package's Links",
-    "Plural": "Edit selected items' Links"
+    "One": "編輯此套件的連結",
+    "Plural": "編輯選取項目的連結"
   },
   "ShowAllReferencedPackages": "在「引用」選項卡顯示被卸下的外掛",
   "ShowAllReferencedPackages_Tip": "參考您正在查看的頁面，可以同時顯示已裝載與已卸下的外掛。",
@@ -382,16 +382,16 @@
   "TreatOptionalAsRequired_Tip": "一般來說，它會顯示這些可選外掛缺失的必需物品資訊。",
   "AddCustomTag": "新增自訂標籤",
   "PackageIsNotDownloaded": "「{0}」已從您的電腦中刪除",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\nYou are {1} behind",
+  "PackageIsOutOfDate": "「{0}」已過期\n您落後了 {1} 版本",
   "PackageIsOutOfDateVersion": {
-    "One": "'{0}' is out of date, you are on an older version of the mod.",
-    "Plural": "{0} {1} are out of date, you are on older versions of these mods."
+    "One": "「{0}」已過期，您正在使用舊版本的模組。",
+    "Plural": "「{0}」和「{1}」已過期，您正在使用這些模組的舊版本。"
   },
   "PackageIsMaybeOutOfDate": "外掛 「{0}」 可能已過期，它已經進行了更新 「{1}」",
-  "RemovedByAuthor": "Removed by author",
+  "RemovedByAuthor": "作者已移除",
   "Missing": "丟失",
   "LoggedInAs": "登錄為",
-  "LoggedInUser": "Logged in as {0}",
+  "LoggedInUser": "以 {0} 身份登入",
   "UnknownUser": "未知使用者",
   "AddMeaningfulDescription": "傳送申請前，請先新增一個有意義的描述。",
   "ThisSubscribesTo": {
@@ -402,7 +402,7 @@
     "One": "在此處理程序中，您將取消訂閱 {0} 個外掛。",
     "Plural": "在此處理程序中，您將取消訂閱 {0} 個外掛。"
   },
-  "ViewThisPlaysetsPackages": "View the mods in this playset",
+  "ViewThisPlaysetsPackages": "查看此遊戲 playset 中的模組",
   "YouHavePackagesUser": {
     "One": "你有{0} 個包裹是{1} 做的",
     "Plural": "你有{0} 個包裹是{1} 做的"
@@ -410,18 +410,18 @@
   "RequestOption1": "舉報錯誤或補齊失漏資訊",
   "RequestOption2": "為包裹補齊失漏資訊",
   "RequestOption3": "為包裹補齊與其他包裹的互動",
-  "ActivePlayset": "Active Playset",
+  "ActivePlayset": "活躍的Playset",
   "References": "資料依屬",
-  "OpenLog": "Open Game Log",
-  "OpenSkyveLog": "Open Skyve Log",
+  "OpenLog": "開啟遊戲日誌",
+  "OpenSkyveLog": "開啟 Skyve 日誌",
   "Sort By": "排序方式",
   "FailedToFetchLogs": "獲取記錄檔失敗",
-  "DiscoverPlaysets": "Discover Playsets",
+  "DiscoverPlaysets": "發現 Playsets",
   "AllUsages": "全部用途",
   "Invalid": "無效的",
-  "UpdatePlayset": "Update Playset",
+  "UpdatePlayset": "更新 Playsets",
   "FailedToRetrievePlaysets": "Failed to retrieve the Playset Discovery",
-  "DownloadPlayset": "Download Playset",
+  "DownloadPlayset": "下載 Playset",
   "ReloadAllData": "重新載入所有資料",
   "ResetSnoozes": "重設所有稍後提醒設定",
   "ResetModsCache": "重設模組的快取",
