@@ -1,7 +1,7 @@
 {
   "CompatibilityInfo": "Informações de compatibilidade",
   "Dashboard": "Painel",
-  "SearchDlcs": "Pesquise nas suas DLCs..",
+  "SearchDlcs": "Pesquise nas tuas DLCs..",
   "SearchPackages": "Pesquisa nos teus pacotes..",
   "Vanilla": "Padrão",
   "UpToDate": "Atualizado",
@@ -593,7 +593,7 @@
   "AssetsEnabled": "Recursos ativados",
   "PackagesIncludedDisabled": "Pacotes incluídos e desativados",
   "OutOf": "{0} de {1}",
-  "RecentlyUpdatedItem": "{0} recentemente atualizado",
+  "RecentlyUpdatedItem": "{0} atualizados recentemente",
   "MassSubscribeWarningTitle": "Aviso de subscrição em massa",
   "MassSubscribeWarningInfo": "Estás prestes a subscrever {0} mods. Tens a certeza de que queres continuar?",
   "DropImportFile": "Libertar para importar {0} deste relatório",
