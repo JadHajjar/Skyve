@@ -16,10 +16,10 @@
   "AddInteraction": "添加對話模式",
   "NotReviewed": "尚未檢查",
   "Stable": "穩定的",
-  "StableNoNewFeatures": "Stable, only bug-fix updates",
-  "StableNoFutureUpdates": "Stable, no more updates",
-  "HasIssuesNoFutureUpdates": "Has issues, no more updates",
-  "BreaksOnPatch": "Stable, potentially breaks on patch",
+  "StableNoNewFeatures": "穩定版，僅包含錯誤修復更新",
+  "StableNoFutureUpdates": "穩定版，不再更新",
+  "HasIssuesNoFutureUpdates": "有問題，不再更新",
+  "BreaksOnPatch": "穩定版，但可能在補丁更新時出現問題",
   "NotEnoughInformation": "沒有足夠的資訊",
   "HasIssues": "存在問題",
   "Broken": "損壞的",
@@ -61,7 +61,7 @@
   "Website": "網站",
   "Donation": "贊助",
   "ManageCompatibilityData": "相容性管理",
-  "YourPackages": "Manage your mods",
+  "YourPackages": "管理您的 Mods",
   "AddPackages": "添加外掛程式",
   "ConfirmEndSession": "您確定要關閉此會話嗎？",
   "CrDataLoadFailed": "數據載入失敗，請稍後重試",
@@ -74,7 +74,7 @@
   "PleaseReviewPackageUsage": "請為此外掛程式選擇一個有效的用法。",
   "Interaction_Alternative": {
     "One": "'{1}' 可以作為 '{0}' 的替代方案。",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "以下任一套件都可以作為「{0}」的替代方案使用。"
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' 和 '{1}' 具有相同的功能。",
@@ -105,88 +105,88 @@
     "Plural": "「{0}」將在以下外掛程式載入完成之後直接載入。"
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "「{0}」是「{1}」所需的必要項目。",
+    "Plural": "「{0}」是以下套件所需的必要項目。"
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Interaction_Identical": "以下是同一模組的多個版本。 同時使用它們會導致衝突。",
+  "Status_Succeeded": "{0}「會被」{1}「取代，而您已經在使用」{1}'。不再需要 '{0}'。",
   "Status_Deprecated": "'{0}' 已經廢棄，不再受到作者的支持。",
   "Status_AutoDeprecated": "「{0}」已經很長時間沒有進行過更新，可能不再受到作者的支援。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某個原始外掛程式的重新上傳版本。",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "{0}「 是重新上傳的 」{1}'。"
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "已知 '{0}' 會導致遊戲問題",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "在啟用「{0}」後儲存您的城市，您將無法在未啟用「{0}」的情況下加載該存檔。",
+    "One": "在啟用「{0}」後儲存您的城市，您將無法在未啟用「{0}」的情況下載入該存檔。\n\n如有需要，請使用「{1}」來恢復您的存檔。更多資訊請參閱其工作坊描述。"
   },
   "Status_TestVersion": {
     "Zero": "這是某個原版模組的測試版。請注意，測試版模組可能會出現意外問題。",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "這是「{1}」的「測試」版本。"
   },
   "Status_MissingDlc": {
-    "One": "要使用這個外掛程式，您必須購買 '{0}' DLC。",
-    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "您缺少一個DLC才能使用此套件。",
+    "Plural": "您缺少以下DLC才能使用此套件。"
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "這是一個依賴模組，但看起來您並未使用任何需要它的套件。",
   "Status_SourceCodeNotAvailable": "此模組的原始程式碼不可用。除非您信任此模組的作者，否則不應使用此模組。",
   "SourceAvailable": "原始程式碼公開",
-  "StandardMod": "Standard Mod",
+  "StandardMod": "標準模組",
   "Status_MusicCanBeCopyrighted": "此模組所含音樂可能受到版權保護。最好不要在串流直播時使用此模組。",
   "Status_IncompleteDescription": "這個模組的工作坊頁面描述非常短。除非你信任此模組的作者，否則不應使用此模組。",
-  "Status_SourceAvailable": "This package will not warn about missing source code.",
-  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
+  "Status_SourceAvailable": "此套件不會警告缺少程式碼。",
+  "Status_StandardMod": "在處理需要進行故障排除的模組時，這個套件將被忽略。",
   "OutputText": "預期輸出",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
-  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
-  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_AssetNotReviewed": "「{0}」尚未被審核過。兼容性資訊可能不準確；雖然資源通常是穩定的。",
+  "Stability_NotReviewed": "「{0}」尚未被審核過。\n\n兼容性資訊可能不準確。",
+  "Stability_Stable": "「{0}」是穩定的。它的作者仍在積極工作並更新它。",
+  "Stability_StableNoNewFeatures": "「{0}」是穩定的，儘管作者將不再發布功能更新。 \n不過，作者仍會在出現新錯誤時進行更新。",
+  "Stability_StableNoFutureUpdates": "「{0}」是穩定的，儘管作者不再支持它，未來的更新或錯誤修復不太可能發佈。",
+  "Stability_HasIssuesNoFutureUpdates": "「{0}」可能會引發問題，且作者不再支持它，未來的更新或錯誤修復不太可能發佈。",
+  "Stability_BreaksOnPatch": "「{0}」在新補丁發佈時很可能會損壞。",
+  "Stability_NotEnoughInformation": "目前沒有足夠的資訊來正確審核「{0}」。",
+  "Stability_HasIssues": "「{0}」可能會引發問題。\n使用時請小心。",
+  "Stability_Broken": "「{0}」已損壞。已知會導致遊戲崩潰或根本無法運作。",
+  "Stability_Incompatible": "「{0}」標註為與您當前的遊戲版本不兼容。使用時請小心，或在等待更新時禁用它。",
+  "Stability_AssetIncompatible": "「{0}」標註為與您當前的遊戲版本不兼容。資源在新更新中很少會損壞，所以使用它應該沒問題。",
+  "Stability_Local": "這是其原始模組「{0}」的本地版本。\n\n本地版本通常用於測試目的。",
+  "Stability_BrokenFromNewVersion": "「{1}」在最新更新後損壞了「{0}」。請等到它更新後再使用。 同時，您應該禁用它。",
+  "Stability_BrokenFromNewVersionSafe": "「{1}」在最新更新後損壞了「{0}」。請等到它更新後再使用。",
+  "Stability_BrokenFromPatch": "「{1}」在遊戲的補丁「{0}」後損壞。請等到它更新後再使用。 同時，您應該禁用它。",
+  "Stability_BrokenFromPatchSafe": "「{1}」在遊戲的補丁「{0}」後損壞。請等到它更新後再使用。",
+  "Stability_BrokenFromPatchUpdated": "「{1}」在遊戲的補丁「{0}」後損壞。但最近已更新，使用可能是安全的。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "您應該將以下套件新增到您的 playset。",
+    "Plural": "您應該將以下套件新增到您的 playset。"
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "請遵循以下指示：",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "在「{0}」和「{1}」之間，您應該只選擇其中一個。",
+    "Plural": "在「{0}」和以下套件之間，您應該只選擇其中一個。"
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "您應該從您的 playset 中移除「{0}」。",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "您應該從您的 playset 中移除「{1}」。",
+    "Plural": "您應該從您的 playset 中移除以下套件。"
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "Action_ExcludeThis": "您應該禁用「{0}」。",
+  "ExcludeThis": "禁用此套件。",
+  "Exclude": "停用",
   "Unsubscribe": "取消訂閱",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "您應該禁用「{1}」。",
+    "Plural": "您應該禁用以下套件。"
   },
   "Action_Switch": {
     "One": "您應當改為使用 '{1}'。",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "您應該切換到以下套件之一。"
   },
-  "Action_IncludeThis": "You should include '{0}'",
+  "Action_IncludeThis": "您應該包含「{0}」。",
   "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "您應該將以下套件添加到您的 playset 中。",
+    "Plural": "您應該將以下套件添加到您的 playset 中。"
   },
   "NoRequiredDlcs": "沒有前置 DLC",
   "DlcsSelected": {
@@ -194,7 +194,7 @@
     "Plural": "已選擇 {0} 個DLC"
   },
   "RequiredDLCs": "前置 DLC/CCP",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "穩定性",
   "CRT_Successors": "繼任模組",
   "CRT_RequiredPackages": "必需物品",
   "CRT_OptionalPackages": "可選外掛程式",
@@ -203,8 +203,8 @@
   "CRT_Alternatives": "備選方案",
   "CRT_Status": "狀態",
   "CRT_Ambiguous": "不明確的",
-  "CRT_RequiredItem": "Required Item",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequiredItem": "必需項目",
+  "CRT_RequestReview": "審核請求狀態",
   "LastReviewDate": "最近一次檢查於 {0}",
   "RequestReviewInfo": "使用此外掛程式時遇到問題？\n請在這裡申請新的審查：",
   "RequestReview": "申請審查",
@@ -220,7 +220,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} 應該被刪除",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "應排除「{0}」和「{1}」。"
   },
   "UnsubscribeCount": "您應該取消訂閱 {0} {1}",
   "SwitchCount": {
@@ -228,8 +228,8 @@
     "Plural": "{0} {1} 需要切換到另一個"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "「{0}」和「{1}」是必需的，但尚未啟用。",
+    "Plural": "「{0}」和「{1}」是必需的，但尚未啟用。"
   },
   "PackageType": "外掛類型",
   "GenericPackage": "普通外掛",
@@ -242,35 +242,35 @@
   "ApplyChangedBeforeExit": "當前存在尚未保存的改動。\n\n在繼續操作前，您想保存並應用這些改動嗎？",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "已知 {0} 的作者 {1} 存在惡意，並且其製作的外掛中含有病毒等有害內容。",
-  "ReviewRequests": "Review Requests",
+  "ReviewRequests": "審核請求",
   "ApplyRequestedChanges": "應用請求的改動",
   "ManagePackage": "管理外掛",
   "Banned": "封鎖",
   "NoIssues": "沒有問題",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "*您的帳戶ID和日誌將與您的請求一起發送。",
   "ScenarioMaking": "製作情況用",
   "ThemeMaking": "制作主题用",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "此套件有一個其他的兼容性警告。",
+    "Plural": "此套件有 {0} 個其他兼容性警告。"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "刪除此請求",
+    "Plural": "刪除這些請求"
   },
-  "ViewRequest": "View Request",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
-  "SnoozeAllFiltered": "Snooze all filtered issues",
-  "LinkedPackages": "Linked Packages",
-  "NoTags": "No Tags",
-  "NoLinks": "No Links",
-  "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "ViewRequest": "查看請求",
+  "RequiredItem": "必需項目",
+  "ApplyAllActions": "應用所有建議的操作",
+  "SnoozeAll": "暫停所有問題",
+  "SnoozeAllFiltered": "暫停所有篩選過的問題",
+  "LinkedPackages": "關聯套件",
+  "NoTags": "無標籤",
+  "NoLinks": "無連結",
+  "HideReviewedPackages": "隱藏已審核的模組",
+  "ApplyRecommendedAction": "採取建議的操作",
+  "AddMeaningfulNote": "請新增一則說明，描述此套件存在的問題。",
+  "EditHistory": "編輯歷史記錄",
+  "EditNote": "編輯說明",
+  "EditNoteInfo": "留下一則備註，供未來的管理者參考。",
+  "RequestReviewUpdate": "發送一個新請求以供審核。"
 }
