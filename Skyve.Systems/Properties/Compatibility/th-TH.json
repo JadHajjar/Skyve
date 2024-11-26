@@ -94,7 +94,7 @@
   },
   "Interaction_OptionalPackages": {
     "One": "คุณขาดแพ็กเกจเสริมสำหรับ '{0}'",
-    "Plural": "You're missing the following optional packages for '{0}'."
+    "Plural": "คุณขาดแพ็กเกจเสริมต่อไปนี้สำหรับ '{0}'"
   },
   "Interaction_SucceededBy": {
     "One": "'{0}' ได้รับการ รับช่วงต่อ จาก '{1}'",
