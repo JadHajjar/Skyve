@@ -112,12 +112,12 @@ internal class D_NotificationCenter : IDashboardItem
 			return LocaleSlickUI.EarlierThisWeek;
 		}
 
-		if (info.Time > DateTime.Now.AddDays(-30))
+		if (info.Time.Month == DateTime.Now.Month && info.Time.Year == DateTime.Now.Year)
 		{
 			return LocaleSlickUI.EarlierThisMonth;
 		}
 
-		return info.Time.ToString("ddd yyyyy");
+		return info.Time.ToString("ddd yyyy");
 	}
 
 	private void MarkAllAsRead()
