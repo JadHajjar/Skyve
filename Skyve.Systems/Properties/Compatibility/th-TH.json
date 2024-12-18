@@ -131,7 +131,7 @@
   },
   "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "ม็อดนี้ไม่พร้อมที่จะเปิดเผยซอร์สโค้ด คุณไม่ควรใช้งานมัน เว้นแต่คุณจะเชื่อถือในตัวของผู้สร้างผลงาน",
-  "SourceAvailable": "Source code is available",
+  "SourceAvailable": "พร้อมเปิดเผยชอร์จโค๊ด",
   "StandardMod": "ม็อดมาตราฐาน",
   "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
   "Status_IncompleteDescription": "คำอธิบายของเวิร์กชอปนี้สั้นเกินไป คุณไม่ควรใช้มัน เว้นแต่คุณจะเชื่อถือในตัวของผู้สร้างผลงาน",
@@ -172,8 +172,8 @@
     "Plural": "You should remove the following packages from your playset."
   },
   "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
+  "ExcludeThis": "ปิดใช้งานแพ็กเกจนี้",
+  "Exclude": "ปิดใช้งาน",
   "Unsubscribe": "ยกเลิกการสมัครสมาชิก",
   "Action_ExcludeOther": {
     "One": "You should disable '{1}'.",
