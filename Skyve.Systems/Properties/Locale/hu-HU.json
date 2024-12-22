@@ -654,7 +654,7 @@
     "Plural": "{0} restore points, most recently from {1}"
   },
   "BackupCount": {
-    "One": "{1} backup",
+    "One": "{1} biztonsági mentés",
     "Plural": "{0} {1} backups"
   },
   "SelectRestoreInfo": "Select a restore point from the list of backups to start the restore process.",
