@@ -126,16 +126,10 @@ public partial class CarouselControl : SlickControl
 		var widthRatio = (double)rectangle.Width / imageSize.Width;
 		var heightRatio = (double)rectangle.Height / imageSize.Height;
 
-		var maxRatio = Math.Max(widthRatio, heightRatio);
 		var minRatio = Math.Min(widthRatio, heightRatio);
 
-		if (minRatio < 1 || imageSize.Width <= imageSize.Height)
-		{
-			maxRatio = minRatio;
-		}
-
-		var newWidth = (int)(imageSize.Width * maxRatio);
-		var newHeight = (int)(imageSize.Height * maxRatio);
+		var newWidth = (int)(imageSize.Width * minRatio);
+		var newHeight = (int)(imageSize.Height * minRatio);
 
 		return rectangle.CenterR(newWidth, newHeight);
 	}
