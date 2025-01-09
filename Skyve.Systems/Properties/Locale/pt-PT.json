@@ -384,7 +384,7 @@
   "PackageIsNotDownloaded": "'{0}' foi removido do teu computador",
   "PackageIsOutOfDate": "'{0}' está desatualizado\r\nEstás {1} atrasado",
   "PackageIsOutOfDateVersion": {
-    "One": "'{0}' está desatualizado, estás numa versão antiga do mod.",
+    "One": "'{0}' está desatualizado, tens uma versão antiga do mod.",
     "Plural": "{0} {1} estão desatualizados, estás em versões antigas destes mods."
   },
   "PackageIsMaybeOutOfDate": "'{0}' pode estar desatualizado, foi atualizado há {1}",
