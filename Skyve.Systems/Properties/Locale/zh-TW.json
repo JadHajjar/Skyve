@@ -531,7 +531,7 @@
   "PackageUpdates": "Package Updates",
   "PackagesUpdatedSinceSession": {
     "One": "'{1}' got updated since your last session",
-    "Plural": "{0} packages got updated since your last session"
+    "Plural": "自上次會話以來，有 {0} 個封包已更新"
   },
   "NewPackages": "New Packages",
   "NewPackagesSinceSession": {
