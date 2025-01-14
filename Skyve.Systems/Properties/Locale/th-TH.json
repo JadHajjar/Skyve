@@ -539,7 +539,7 @@
     "Plural": "มีการติดตั้งแพ็กเกจใหม่ {0} รายการนับตั้งแต่เซสชันล่าสุดของคุณ"
   },
   "NoActivePlayset": "ไม่มีเพลย์เช็ตที่ใช้งานอยู่",
-  "RecentlyUpdated": "อัปเดทเมื่อไม่นานมานี้",
+  "RecentlyUpdated": "ที่เพิ่งอัปเดต",
   "Manage": "จัดการ",
   "Version": "เวอร์ชัน",
   "UpdateTime": "เวลาอัปเดต",
@@ -593,7 +593,7 @@
   "AssetsEnabled": "แอสเซสที่เปิดใช้งาน",
   "PackagesIncludedDisabled": "แพ็กเกจที่รวมเข้า & แยกออก",
   "OutOf": "{0} จาก {1}",
-  "RecentlyUpdatedItem": "อัปเดทเมื่อไม่นานมานี้ {0}",
+  "RecentlyUpdatedItem": "{0} ที่เพิ่งอัปเดท",
   "MassSubscribeWarningTitle": "คำเตือนการสมัครรับข้อมูลจำนวนมาก",
   "MassSubscribeWarningInfo": "คุณกำลังจะสมัครรับข้อมูลม็อด {0} ราย คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ",
   "DropImportFile": "ปล่อยเพื่อนำเข้า {0} จากรายงานนี้",
