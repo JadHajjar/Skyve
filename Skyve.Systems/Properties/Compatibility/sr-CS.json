@@ -118,21 +118,21 @@
   },
   "Status_CausesIssues": "'{0}' je poznat da pravi probleme sa igrom.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "Nakon čuvanja grada sa '{0}' uključenim, više nećete moći da učitate taj sejv bez '{0}'.",
+    "One": "Nakon čuvanja grada sa '{0}' uključenim, više nećete moći da učitate taj sejv bez '{0}'.\n\nKoristite '{1}' da povratite sejv ako je potrebno. Pročitajte njegov opis za više informacija."
   },
   "Status_TestVersion": {
-    "Zero": "This is a 'Test' version, be aware that test versions of mods can cause issues and that updates to it might cause unexpected errors.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "Zero": "Ovo je 'Test' verzija, budite svesni da test verzije modova mogu praviti probleme i da ažuriranje istih može izazvati neočekivane greške.",
+    "One": "Ovo je 'Test' verzija '{1}'-a.\nBudite svesni da ažuriranja mogu izazvati neočekivane probleme."
   },
   "Status_MissingDlc": {
-    "One": "You're missing a DLC to use this package.",
-    "Plural": "You're missing the following DLCs to use this package."
+    "One": "Nedostaje vam DLC da biste koristili ovaj paket.",
+    "Plural": "Nedostaju vam sledeći DLC-evi da biste koristili ovaj paket."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
-  "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
-  "SourceAvailable": "Source code is available",
-  "StandardMod": "Standard Mod",
+  "Status_DependencyMod": "Ovo je mod zavisnosti, ali izgleda da ne koristite ni jedan paket koji ga zahteva.",
+  "Status_SourceCodeNotAvailable": "Izvorni kod ovog moda nije dostupan. Ne bi trebalo koristiti ga osim ako verujete autoru.",
+  "SourceAvailable": "Izvorni kod je dostupan",
+  "StandardMod": "Standardni Mod",
   "Status_MusicCanBeCopyrighted": "Muzika u ovom paketu je možda zaštićena copyright-om. Najbolje je ne koristiti ih dok strimujete.",
   "Status_IncompleteDescription": "Workshop opis ovog mod-a je previše kratak. Ne bi trebalo koristiti ga osim ako verujete autoru.",
   "Status_SourceAvailable": "Ovaj paket neće upozoravati o nedostajaćem izvornom kodu.",
@@ -199,78 +199,78 @@
   "CRT_RequiredPackages": "Potrebni paketi",
   "CRT_OptionalPackages": "Opcioni Paketi",
   "CRT_DlcMissing": "Nedostaju DLC-evi/CCP-ovi",
-  "CRT_Compatibility": "Compatibility Issues",
-  "CRT_Alternatives": "Alternatives",
-  "CRT_Status": "Statuses",
-  "CRT_Ambiguous": "Ambiguity",
-  "CRT_RequiredItem": "Required Item",
-  "CRT_RequestReview": "Review Request Status",
-  "LastReviewDate": "It was last reviewed on {0}",
-  "RequestReviewInfo": "Are you experiencing issues with this package?",
-  "RequestReview": "Request a review",
+  "CRT_Compatibility": "Problemi sa kompatibilnošću",
+  "CRT_Alternatives": "Alternative",
+  "CRT_Status": "Statusi",
+  "CRT_Ambiguous": "Dvosmislenost",
+  "CRT_RequiredItem": "Potreban predmet",
+  "CRT_RequestReview": "Pregled statusa zahteva",
+  "LastReviewDate": "Zadnji put je ažurirano {0}",
+  "RequestReviewInfo": "Da li imate problem sa ovim paketom?",
+  "RequestReview": "Zatraži pregled",
   "MissingDependencyCount": {
-    "One": "{0} {1} is missing dependencies",
-    "Plural": "{0} {1} are missing dependencies"
+    "One": "{0} {1} nedostaje mod zavisnosti",
+    "Plural": "{0} {1} nedostaje mod zavisnosti"
   },
-  "CautionCount": "{0} {1} where caution is advised",
-  "WarningCount": "{0} {1} with a warning",
+  "CautionCount": "{0} {1} kojima se savetuje oprez",
+  "WarningCount": "{0} {1} sa upozorenjem",
   "AttentionRequiredCount": {
-    "One": "{0} {1} requires your attention",
-    "Plural": "{0} {1} require your attention"
+    "One": "{0} {1} zahteva vašu pažnju",
+    "Plural": "{0} {1} zahtevaju vašu pažnju"
   },
   "ExcludeCount": {
-    "One": "{0} {1} should be excluded",
-    "Plural": "{0} {1} should be excluded"
+    "One": "{0} {1} bi trebao biti isključen",
+    "Plural": "{0} {1} bi trebalo biti isključeno"
   },
-  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "UnsubscribeCount": "{0} {1} od kojih bi se trebali otkazati pretplatu",
   "SwitchCount": {
-    "One": "{0} {1} requires switching to another",
-    "Plural": "{0} {1} require switching to another"
+    "One": "{0} {1} zahteva zamenu sa drugim",
+    "Plural": "{0} {1} zahtevaju zamenu sa drugim"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1} koji je potreban ali nije uključen",
+    "Plural": "{0} {1} koji su potrebni ali nisu uključeni"
   },
-  "PackageType": "Package Type",
-  "GenericPackage": "Generic Package",
-  "MusicPack": "Music Pack",
-  "ThemeMix": "Theme Mix",
-  "IMTMarkings": "IMT Markings",
-  "RenderItPreset": "Render it! Preset",
-  "POFont": "Procedural Object Font/Module",
-  "NameList": "Name-List/Game Translations",
-  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\n\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages.",
-  "ReviewRequests": "Review Requests",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making",
+  "PackageType": "Vrsta paketa",
+  "GenericPackage": "Običan paket",
+  "MusicPack": "Paket muzike",
+  "ThemeMix": "Miks teme",
+  "IMTMarkings": "IMT Oznake",
+  "RenderItPreset": "Render It! Preset",
+  "POFont": "Font/Modul Proceduralnim Objekata",
+  "NameList": "Lista imena/Prevodi igre",
+  "ApplyChangedBeforeExit": "Imate nesačuvane promene.\n\nDa li želite da ih primenite pre nastavljanja?",
+  "AuthorRetired": "Autor {0}, {1}, je otišao u penziju ili je neaktivan već duže vreme.\n\nBuduća ažuriranja i stabilnost njihovih paketa nisu garantovani.",
+  "AuthorMalicious": "Poznato je da autor {0}, {1}, zlonameran i/ili da u svoje pakete uključuje štetan sadržaj poput virusa.",
+  "ReviewRequests": "Pregled zahteva",
+  "ApplyRequestedChanges": "Primeni tražene promene",
+  "ManagePackage": "Podešavanje paketa",
+  "Banned": "Banovan",
+  "NoIssues": "Nema problema",
+  "RequestReviewDisclaimer": "*ID vašeg naloga i logovi će biti poslati sa vašim zahtevom",
+  "ScenarioMaking": "Pravljenje scenarija",
+  "ThemeMaking": "Pravljenje tema",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "Ovaj paket ima još jedno upozorenje kompatibilnosti",
+    "Plural": "Ovaj paket ima {0} drugih upozorenje kompatibilnosti"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "Obriši ovaj zahtev",
+    "Plural": "Obriši ove zahteve"
   },
-  "ViewRequest": "View Request",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
-  "SnoozeAllFiltered": "Snooze all filtered issues",
+  "ViewRequest": "Pogledaj zahtev",
+  "RequiredItem": "Potreban predmet",
+  "ApplyAllActions": "Primeni sve preporučene akcije",
+  "SnoozeAll": "Odloži sve probleme",
+  "SnoozeAllFiltered": "Odloži sve filterovane probleme",
   "LinkedPackages": "Povezani paketi",
   "NoTags": "Nema oznaka",
   "NoLinks": "Nema linkova",
   "HideReviewedPackages": "Sakrij pregledane modove",
-  "ApplyRecommendedAction": "Apply recommended action",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
+  "ApplyRecommendedAction": "Primeni preporučenu akciju",
+  "AddMeaningfulNote": "Molimo dodajte napomenu koja opisuje šta nije uredu sa ovim paketom.",
   "EditHistory": "Uredi istoriju",
   "EditNote": "Izmeni belešku",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "EditNoteInfo": "Ostavite napomenu za druge menadžere da vide u budućnosti",
+  "RequestReviewUpdate": "Pošalji novi zahtev na pregled"
 }
