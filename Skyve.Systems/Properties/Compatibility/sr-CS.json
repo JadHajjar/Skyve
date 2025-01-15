@@ -11,9 +11,9 @@
   "GlobalTagsInfo": "Tagovi koji će svi igrači videti na Skyve-u",
   "Links": "Linkovi",
   "StatusesCount": "Statusi ({0})",
-  "InteractionCount": "Interactions ({0})",
+  "InteractionCount": "Interkacije ({0})",
   "AddStatus": "Dodaj status",
-  "AddInteraction": "Add Interaction",
+  "AddInteraction": "Dodaj interakciju",
   "NotReviewed": "Još uvek nije pregledan",
   "Stable": "Stabilno",
   "StableNoNewFeatures": "Stabilno, samo popravljeni bagovi",
@@ -36,7 +36,7 @@
   "Switch": "Prebaci se na povezan paket",
   "FlippedSwitch": "Prebaci se na ovaj paket",
   "Deprecated": "Prevaziđeno",
-  "Reupload": "Re-Upload",
+  "Reupload": "Ponovo postavi",
   "CausesIssues": "Pravi probleme",
   "SavesCantLoadWithoutIt": "Sačuvani gradovi se ne mogu učitati bez njega",
   "TestVersion": "Test verzija",
@@ -60,63 +60,63 @@
   "AttentionRequired": "Potrebna je pažnja",
   "Website": "Veb stranica",
   "Donation": "Doniraj",
-  "ManageCompatibilityData": "Compatibility Management",
-  "YourPackages": "Manage your mods",
-  "AddPackages": "Add Packages",
-  "ConfirmEndSession": "Are you sure you want to conclude your session?",
-  "CrDataLoadFailed": "Failed to load data, try again later",
-  "AddGlobalTag": "Add a global tag",
-  "ReuseData": "Re-use Previous Data",
-  "ReuseData_Tip": "Re-uses the compatibility data from your last saved package for this one.\r\nHold Shift to also apply & continue",
-  "PleaseReviewTheStability": "Please review the stability of this package before saving.",
-  "PleaseReviewPackageStatuses": "Please review the statuses of this package before saving.\r\nSome have an invalid Status Type.",
-  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type or don't have a linked package.",
-  "PleaseReviewPackageUsage": "Please select a valid usage for this package.",
+  "ManageCompatibilityData": "Upravljanje kompatibilnošću",
+  "YourPackages": "Upravljaj svoje modove",
+  "AddPackages": "Dodaj pakete",
+  "ConfirmEndSession": "Da li ste sigurni da želite da završite sesiju?",
+  "CrDataLoadFailed": "Učitavanje podataka nije uspelo, pokušajte ponovo kasnije",
+  "AddGlobalTag": "Dodaj globalnu oznaku",
+  "ReuseData": "Ponovo koristi prošle podatke",
+  "ReuseData_Tip": "Ponovno koristi podatke kompatibilnosti sa vašeg poslednjeg sačuvanog paketa za ovaj.\nDržite Shift da takođe primenite i nastavite",
+  "PleaseReviewTheStability": "Molimo proverite stabilnost ovog paketa pre čuvanja.",
+  "PleaseReviewPackageStatuses": "Molimo proverite statuse ovog paketa pre čuvanja.\nNeki imaju nevažeći tip statusa.",
+  "PleaseReviewPackageInteractions": "Molimo proverite interakcije ovog paketa pre čuvanja.\nNeki imaju nevažeći tip interakcije ili nemaju povezani paket.",
+  "PleaseReviewPackageUsage": "Molimo izaberite ispravnu upotrebu za ovaj paket.",
   "Interaction_Alternative": {
-    "One": "'{1}' can be used as an alternative to '{0}'.",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "One": "'{1}' se može koristiti kao alternativa za '{0}'.",
+    "Plural": "Bilo koji od sledećih paketa se može koristiti kao alternativa za '{0}'."
   },
   "Interaction_SameFunctionality": {
-    "One": "'{0}' and '{1}' have the same functionalities.",
-    "Plural": "'{0}' and the following packages have the same functionalities."
+    "One": "'{0}' i '{1}' imaju iste funkcije.",
+    "Plural": "'{0}' i sledeći paketi imaju iste funkcije."
   },
   "Interaction_IncompatibleWith": {
-    "One": "'{0}' and '{1}' are not compatible with each other.",
-    "Plural": "'{0}' is not compatible with any of the following packages."
+    "One": "'{0}' i '{1}' nisu kompatibilni jedni s drugim.",
+    "Plural": "'{0}' nije kompatibilan sa ni jednim od sledećih paketa."
   },
   "Interaction_CausesIssuesWith": {
-    "One": "'{0}' can cause issues when used with '{1}'.",
-    "Plural": "'{0}' can cause issues when used with the following mods."
+    "One": "'{0}' može praviti probleme kad se koristi sa '{1}'.",
+    "Plural": "'{0}' može praviti probleme kad se koristi sa sledećim modovima."
   },
   "Interaction_RequiredPackages": {
-    "One": "You're missing a required package for '{0}'.",
-    "Plural": "You're missing the following required packages for '{0}'."
+    "One": "Nedostaje vam potreban paket za '{0}'.",
+    "Plural": "Nedostaju vam sledeći potrebni paketi za '{0}'."
   },
   "Interaction_OptionalPackages": {
-    "One": "You're missing an optional package for '{0}'.",
-    "Plural": "You're missing the following optional packages for '{0}'."
+    "One": "Nedostaje vam opcioni paket za '{0}'.",
+    "Plural": "Nedostaju vam sledeći opcioni paketi za '{0}'."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' is succeeded by '{1}'.",
-    "Plural": "'{0}' is succeeded by either one of the following packages."
+    "One": "'{1}' je zamenio '{0}'.",
+    "Plural": "'{0}' je zamenjen jednim od sledećih paketa."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}' će se učitati odmah posle '{1}'.",
+    "Plural": "'{0}' će se učitati direktno posle sledećih paketa."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' je potreban za '{1}'.",
+    "Plural": "'{0}' je potreban za sledeće pakete."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
-  "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
+  "Interaction_Identical": "Ispod se nalaze nekoliko verzija istog moda.\nKoriščenje njih u isto vreme će praviti probleme.",
+  "Status_Succeeded": "'{1}' je zamenio '{0}', a vi već koristite '{1}'. Nema potrebe za '{0}'.",
+  "Status_Deprecated": "'{0}' je zastareo, više nije podržan od autora.",
+  "Status_AutoDeprecated": "'{0}' nije ažuriran već duže vreme.",
   "Status_Reupload": {
-    "Zero": "'{0}' is a re-upload of an original package.",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "Zero": "'{0}' je re-upload originalnog paketa.",
+    "One": "'{0}' je re-upload '{1}'-a."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "'{0}' je poznat da pravi probleme sa igrom.",
   "Status_SavesCantLoadWithoutIt": {
     "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
     "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
