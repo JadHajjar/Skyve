@@ -1,7 +1,7 @@
 {
   "CompatibilityInfo": "Informacje o zgodności",
   "Dashboard": "Panel",
-  "SearchDlcs": "Przeszukaj swoje DLC.",
+  "SearchDlcs": "Przeszukaj swoje DLC...",
   "SearchPackages": "Przeszukaj swoje pakiety...",
   "Vanilla": "Podstawa",
   "UpToDate": "Aktualny",
@@ -299,8 +299,8 @@
   "Include": "Dołącz",
   "Unsubscribe": "Anuluj subskrypcje",
   "Exclude": "Wyklucz",
-  "Snooze": "Drzemka",
-  "UnSnooze": "Usuń drzemkę",
+  "Snooze": "Odłóż",
+  "UnSnooze": "Przywróć",
   "Mod": {
     "One": "Mod",
     "Plural": "Mody"
@@ -423,7 +423,7 @@
   "FailedToRetrievePlaysets": "Nie udało się pobrać zestawów",
   "DownloadPlayset": "Pobierz zestaw",
   "ReloadAllData": "Przeładuj wszystkie dane",
-  "ResetSnoozes": "Resetuj wszystkie drzemki",
+  "ResetSnoozes": "Resetuj wszystkie odłożone",
   "ResetModsCache": "Zresetuj pamięć podręczną modów",
   "ResetCompatibilityCache": "Zresetuj pamięć podręczną raportu zgodności",
   "ResetImageCache": "Wyczyść obrazy z pamięci podręcznej",
