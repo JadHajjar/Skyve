@@ -8,6 +8,7 @@ using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,6 +31,8 @@ public partial class ContentList : SlickControl
 	private readonly List<string> searchTermsOr = [];
 	private readonly List<string> searchTermsAnd = [];
 	private readonly List<string> searchTermsExclude = [];
+	public WorkshopTagsControl? TagsControl;
+	public WorkshopPaginationControl? PaginationControl;
 	public readonly ItemListControl ListControl;
 
 	private readonly ISettings _settings;
@@ -81,7 +84,7 @@ public partial class ContentList : SlickControl
 #endif
 
 		TLP_Main.Controls.Add(ListControl, 0, TLP_Main.RowCount - 1);
-		TLP_Main.SetColumnSpan(ListControl, TLP_Main.ColumnCount);
+		TLP_Main.SetColumnSpan(ListControl, page is SkyvePage.Workshop ? TLP_Main.ColumnCount - 1 : TLP_Main.ColumnCount);
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
 #if CS2
@@ -149,7 +152,13 @@ public partial class ContentList : SlickControl
 		var items = new List<IPackageIdentity>(ListControl.Items);
 
 		DD_Author.SetItems(items);
-		DD_Tags.Items = Page is SkyvePage.Workshop ? (await _workshopService.GetAvailableTags()).ToArray() : _tagUtil.GetDistinctTags().ToArray();
+		DD_Tags.Items = _tagUtil.GetDistinctTags().ToArray();
+
+		if (TagsControl is not null)
+		{
+			TagsControl.Tags = (await _workshopService.GetAvailableTags()).ToArray();
+			TagsControl.Loading = false;
+		}
 	}
 
 	private void LC_Items_OpenWorkshopSearch()
@@ -157,7 +166,13 @@ public partial class ContentList : SlickControl
 		var panel = new PC_WorkshopList();
 
 		panel.LC_Items.TB_Search.Text = TB_Search.Text;
-		panel.LC_Items.OT_ModAsset.SelectedValue = Page is SkyvePage.Mods ? ThreeOptionToggle.Value.Option1 : Page is SkyvePage.Assets ? ThreeOptionToggle.Value.Option2 : ThreeOptionToggle.Value.None;
+		panel.LC_Items.TagsControl!.SelectedTags.AddRange(DD_Tags.SelectedItems.Where(x => x.IsWorkshop));
+
+		if (Page is SkyvePage.Mods)
+		{
+			panel.LC_Items.TagsControl!.SelectedTags.Clear();
+			panel.LC_Items.TagsControl!.SelectedTags.Add(_tagUtil.CreateWorkshopTag("Code Mod"));
+		}
 
 		Program.MainForm.PushPanel(panel);
 	}
@@ -165,7 +180,21 @@ public partial class ContentList : SlickControl
 	private void LC_Items_OpenWorkshopSearchInBrowser()
 	{
 #if CS2
-		PlatformUtil.OpenUrl("https://mods.paradoxplaza.com/games/cities_skylines_2");
+		const string url = "https://mods.paradoxplaza.com/games/cities_skylines_2";
+
+		var query = new List<string>();
+
+		if (TB_Search.Text.Length > 0)
+		{
+			query.Add($"search={WebUtility.UrlEncode(TB_Search.Text)}");
+		}
+
+		if (DD_Tags.SelectedItems.Any(x => x.IsWorkshop))
+		{
+			query.Add($"tags={DD_Tags.SelectedItems.Where(x => x.IsWorkshop).ListStrings(x => WebUtility.UrlEncode(x.Value), "%2C")}");
+		}
+
+		PlatformUtil.OpenUrl(url + (query.Any() ? $"?{string.Join("&", query)}" : ""));
 #else
 		PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/browse/?appid=255710&searchtext={WebUtility.UrlEncode(TB_Search.Text)}&browsesort=trend&section=readytouseitems&actualsort=trend&p=1&days=365" + (Page is SkyvePage.Mods ? "&requiredtags%5B0%5D=Mod" : ""));
 #endif
@@ -394,7 +423,7 @@ public partial class ContentList : SlickControl
 
 	private async void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
 	{
-		DD_SearchTime.Visible = DD_Sorting.SelectedItem == PackageSorting.Best;
+		DD_SearchTime.Enabled = DD_Sorting.SelectedItem == PackageSorting.Best;
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.Sorting = (int)DD_Sorting.SelectedItem;
@@ -413,10 +442,13 @@ public partial class ContentList : SlickControl
 	private void DelayedSearch()
 	{
 		ListControl.DoFilterChanged();
+
 		this.TryInvoke(RefreshCounts);
+
+		I_Refresh.Loading = false;
 	}
 
-	private async void FilterChanged(object sender, EventArgs e)
+	protected async void FilterChanged(object sender, EventArgs e)
 	{
 		if (!clearingFilters && Live)
 		{
@@ -428,8 +460,10 @@ public partial class ContentList : SlickControl
 
 				await RefreshItems();
 			}
-			else if (Page is SkyvePage.Workshop && sender == DD_Tags)
+			else if (sender == TagsControl)
 			{
+				PaginationControl!.Page = 0;
+
 				await RefreshItems();
 			}
 			else

@@ -15,8 +15,8 @@ public interface IWorkshopService
 	Task<IWorkshopInfo?> GetInfoAsync(IPackageIdentity identity);
 	IPackage GetPackage(IPackageIdentity identity);
 	Task<IPackage> GetPackageAsync(IPackageIdentity identity);
-	Task<IEnumerable<IWorkshopInfo>> GetWorkshopItemsByUserAsync(object userId, WorkshopQuerySorting sorting = WorkshopQuerySorting.DateCreated, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null, int? page = null);
-	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(WorkshopQuerySorting sorting, WorkshopSearchTime searchTime = WorkshopSearchTime.AllTime, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null, int? page = null);
+	Task<(IEnumerable<IWorkshopInfo> Mods, int TotalCount)> GetWorkshopItemsByUserAsync(object userId, WorkshopQuerySorting sorting = WorkshopQuerySorting.DateCreated, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null, int? page = null);
+	Task<(IEnumerable<IWorkshopInfo> Mods, int TotalCount)> QueryFilesAsync(WorkshopQuerySorting sorting, WorkshopSearchTime searchTime = WorkshopSearchTime.AllTime, string? query = null, string[]? requiredTags = null, bool all = false, int? limit = null, int? page = null);
 
 #if CS2
 	event Action? OnContextAvailable;

@@ -424,7 +424,7 @@ public class CompatibilityManager : ICompatibilityManager
 					new StabilityStatus(stability, null, false),
 					workshopInfo?.CleanName(true),
 					$"Stability_{stability}",
-					[workshopInfo?.Version is null ? string.Empty : $" (v{workshopInfo?.Version})", workshopInfo?.CleanName(true) ?? package.Name]);
+					[workshopInfo?.VersionName is null ? string.Empty : $" (v{workshopInfo?.VersionName})", workshopInfo?.CleanName(true) ?? package.Name]);
 			}
 			else
 			{

@@ -6,6 +6,7 @@ using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
@@ -668,6 +669,24 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			if (Loading || AnyVisibleItems())
 			{
+				if (ItemCount > 5 && _page == SkyvePage.Workshop && scrollVisible)
+				{
+					var itemList = SafeGetItems();
+
+					var maxIndex = GetMaxScrollIndex(itemList);
+					var displayedRows = GetDisplayedRows();
+
+					if (ScrollIndex < maxIndex)
+					{
+						var size = (int)(UI.Scale(150) * Math.Min(1, (maxIndex - ScrollIndex) / (displayedRows / 3)));
+						var rect = new Rectangle(0, Height - size, Width, size + 1);
+
+						using var gradientBrush = new LinearGradientBrush(rect, Color.FromArgb(0, BackColor),  BackColor, 90f);
+
+						e.Graphics.FillRectangle(gradientBrush, rect);
+					}
+				}
+
 				return;
 			}
 

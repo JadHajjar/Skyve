@@ -57,7 +57,7 @@ public partial class PC_UserPage : PanelContent
 
 	protected async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
-		return await _workshopService.GetWorkshopItemsByUserAsync(User.Id!);
+		return (await _workshopService.GetWorkshopItemsByUserAsync(User.Id!)).Mods;
 	}
 
 	protected async Task SetIncluded(IEnumerable<IPackageIdentity> filteredItems, bool included)

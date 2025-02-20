@@ -88,7 +88,7 @@ public partial class ItemListControl
 		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
 		var isRecent = date > DateTime.UtcNow.AddDays(-7);
 
-		if (isRecent && !IsPackagePage)
+		if (isRecent && !IsPackagePage && _page is not SkyvePage.Workshop)
 		{
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(2 * UI.FontScale));
 

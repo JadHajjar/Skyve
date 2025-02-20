@@ -20,6 +20,6 @@ public enum PackageStability
 	[CRN(NotificationType.Caution, false)] AuthorRetired = 96,
 	[CRN(NotificationType.Info, false)] BrokenFromPatchSafe = 95,
 	[CRN(NotificationType.Info, false)] AssetIncompatible = 94,
-	[CRN(NotificationType.Caution, false)] BrokenFromPatchUpdated = 93,
-	[CRN(NotificationType.Info, false)] BrokenFromNewVersionSafe = 92,
+	[CRN(NotificationType.Warning, false)] BrokenFromPatchUpdated = 93,
+	[CRN(NotificationType.Warning, false)] BrokenFromNewVersionSafe = 92,
 }
