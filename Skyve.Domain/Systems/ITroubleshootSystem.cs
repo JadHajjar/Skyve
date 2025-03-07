@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 public interface ITroubleshootSystem
@@ -14,11 +15,10 @@ public interface ITroubleshootSystem
 
 	event Action? StageChanged;
 	event Action? AskForConfirmation;
-	event Action<List<ILocalPackageIdentity>>? PromptResult;
+	event Action<IEnumerable<ILocalPackageIdentity>>? PromptResult;
 
-	void ApplyConfirmation(bool issuePersists);
-	void CleanDownload(List<ILocalPackageData> localPackageDatas);
-	void NextStage();
-	void Start(ITroubleshootSettings settings);
-	void Stop(bool keepSettings);
+	void GoToNextStage();
+	Task<bool> Start(ITroubleshootSettings settings);
+	Task<bool> ApplyConfirmation(bool issuePersists);
+	Task<bool> Stop(bool keepSettings);
 }

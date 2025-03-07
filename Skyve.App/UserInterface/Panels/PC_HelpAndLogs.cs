@@ -321,8 +321,6 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private async void B_Troubleshoot_Click(object sender, EventArgs e)
 	{
-		ShowPrompt("Coming soon...", icon: PromptIcons.Info);
-		return;
 		var sys = ServiceCenter.Get<ITroubleshootSystem>();
 
 		if (sys.IsInProgress)

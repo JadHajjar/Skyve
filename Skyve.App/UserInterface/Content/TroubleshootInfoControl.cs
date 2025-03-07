@@ -191,7 +191,7 @@ public class TroubleshootInfoControl : SlickControl
 			}
 			else if (_troubleshootSystem.WaitingForGameLaunch || _troubleshootSystem.WaitingForGameClose)
 			{
-				await Task.Run(_troubleshootSystem.NextStage);
+				await Task.Run(_troubleshootSystem.GoToNextStage);
 			}
 		}
 		else if (e.Button == MouseButtons.Left && launchRect.Contains(e.Location))

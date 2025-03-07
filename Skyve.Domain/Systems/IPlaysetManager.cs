@@ -12,12 +12,12 @@ public interface IPlaysetManager
 
 	Task<IPlayset?> AddPlayset(IPlayset newPlayset);
 	void CreateShortcut(IPlayset item);
-	Task<bool> DeletePlayset(IPlayset playset);
+	Task<bool> DeletePlayset(IPlayset? playset);
 	Task<bool> ExcludeFromCurrentPlayset(IPlayset playset);
 	string GetFileName(IPlayset playset);
 	List<IPackage> GetInvalidPackages(IPlayset playset, PackageUsage usage);
 	Task<IPlayset?> CreateNewPlayset(string playsetName);
-	Task<IPlayset?> ImportPlayset(string fileName, bool createNew = false);
+	Task<IPlayset?> ImportPlayset(string fileName, bool createNew = true);
 	Task<IPlayset?> CreateLogPlayset(string file);
 	Task<bool> MergeIntoCurrentPlayset(IPlayset playset);
 	Task<bool> RenamePlayset(IPlayset playset, string text);
