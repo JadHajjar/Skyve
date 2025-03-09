@@ -318,8 +318,8 @@
     "Plural": "Плейсеты"
   },
   "ContainCount": {
-    "One": "Contains {0} {1}",
-    "Plural": "Contains {0} {1}"
+    "One": "Содержит {0} {1}",
+    "Plural": "Содержит {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} включено",
@@ -596,7 +596,7 @@
   "RecentlyUpdatedItem": "Недавно обновленные {0}",
   "MassSubscribeWarningTitle": "Предупреждение о массовой подписке",
   "MassSubscribeWarningInfo": "Вы собираетесь подписаться на {0} моды. Вы уверены, что хотите продолжить?",
-  "DropImportFile": "Release to import the {0} from this report",
+  "DropImportFile": "Отпустите для импорта {0} из этого отчета",
   "OutOfDateItem": "Устарел {0}",
   "Bio": "Bio",
   "ColoredAuthorNames": "Color authors & users' name and avatar",
