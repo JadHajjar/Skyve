@@ -151,15 +151,15 @@
   "Stability_Incompatible": "'{0}' помечен как несовместимый с текущей версией игры.\nИспользуйте с осторожностью, или же выключите его, пока он не обновлён.",
   "Stability_AssetIncompatible": "",
   "Stability_Local": ".",
-  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_BrokenFromNewVersion": "'{1}' сломался после его последнего обновления{0}. Пожалуйста, подождите, пока он не будет обновлен перед его использованием.\r\nТем временем, вы должны отключить его.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' сломался после последнего обновления{0}. Пожалуйста, дождитесь обновления перед его использованием.",
+  "Stability_BrokenFromPatch": "'{1}' сломался после патча {0} игры. Пожалуйста, подождите, пока он не будет обновлен перед его использованием.\r\nТем временем, вы должны отключить его.",
+  "Stability_BrokenFromPatchSafe": "'{1}' сломался после последнего обновления{0}. Пожалуйста, дождитесь обновления перед его использованием.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' сломался после патча {0} игры. Недавно было обновлено, можно использовать его в безопасности.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+    "One": "Вы должны добавить следующий пакет в плейсет.",
+    "Plural": "Вы должны добавить следующие пакеты в плейсет."
   },
   "Action_RequiresConfiguration": "Пожалуйста, следуйте инструкциям:",
   "Action_SelectOne": {
@@ -169,7 +169,7 @@
   "Action_UnsubscribeThis": "Вы должны удалить '{0}' из вашего плейсета.",
   "Action_UnsubscribeOther": {
     "One": "Вы должны удалить '{1}' из вашего плейсета.",
-    "Plural": "You should remove the following packages from your playset."
+    "Plural": "Вы должны добавить следующие пакеты в плейсет."
   },
   "Action_ExcludeThis": "Вы должны отключить '{0}'.",
   "ExcludeThis": "Отключите этот пакет",
@@ -181,7 +181,7 @@
   },
   "Action_Switch": {
     "One": "Вы должны переключиться на '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "Вы должны переключиться на один из следующих пакетов."
   },
   "Action_IncludeThis": "Вы должны добавить '{0}'",
   "Action_IncludeOther": {
@@ -203,8 +203,8 @@
   "CRT_Alternatives": "Альтернативы",
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Неоднозначность",
-  "CRT_RequiredItem": "Required Item",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequiredItem": "Требуемые предметы",
+  "CRT_RequestReview": "Просмотреть запросы",
   "LastReviewDate": "Последний обзор был рассмотрен {0}",
   "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
   "RequestReview": "Request Review",
@@ -220,7 +220,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} должно быть исключено",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} {1} должно быть исключено"
   },
   "UnsubscribeCount": "{0} {1} , который вы должны отказаться от подписки",
   "SwitchCount": {
@@ -228,8 +228,8 @@
     "Plural": "{0} {1} требует переключения на другой"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1} , который является обязательным, но не включен",
+    "Plural": "{0} {1} , который является обязательным, но не включен"
   },
   "PackageType": "Тип пакета",
   "GenericPackage": "Универсальный пакет",
@@ -259,18 +259,18 @@
     "Plural": "Удалить эти запросы"
   },
   "ViewRequest": "Просмотреть запрос",
-  "RequiredItem": "Required Item",
+  "RequiredItem": "Требуемые предметы",
   "ApplyAllActions": "Применить все рекомендованные действия",
   "SnoozeAll": "Отложить все проблемы",
   "SnoozeAllFiltered": "Отложить все отфильтрованные проблемы",
   "LinkedPackages": "Связанные пакеты",
   "NoTags": "Без тегов",
-  "NoLinks": "No Links",
-  "HideReviewedPackages": "Hide reviewed mods",
+  "NoLinks": "Нет ссылок",
+  "HideReviewedPackages": "Скрыть рецензированные моды",
   "ApplyRecommendedAction": "Применить рекомендуемое действие",
   "AddMeaningfulNote": "Пожалуйста, добавьте примечание с описанием того, что не так с этим пакетом.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "EditHistory": "Править Историю",
+  "EditNote": "Редактировать Заметку",
+  "EditNoteInfo": "Оставьте заметку для других менеджеров, чтобы увидеть в будущем",
+  "RequestReviewUpdate": "Отправить новый запрос для рассмотрения"
 }
