@@ -67,22 +67,22 @@ public class PC_PlaysetContents : PC_ContentList
 			return (package as IPlaysetPackage)?.IsEnabled ?? false;
 		}
 
-		public Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null, bool withVersion = true)
+		public Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null)
 		{
 			return Task.CompletedTask;
 		}
 
-		public Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null, bool withVersion = true)
+		public Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null)
 		{
 			return Task.CompletedTask;
 		}
 
-		public Task SetIncluded(IPackageIdentity package, bool value, int? playsetId = null, bool withVersion = true)
+		public Task SetIncluded(IPackageIdentity package, bool value, int? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
 		{
 			return Task.CompletedTask;
 		}
 
-		public Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null, bool withVersion = true)
+		public Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
 		{
 			return Task.CompletedTask;
 		}

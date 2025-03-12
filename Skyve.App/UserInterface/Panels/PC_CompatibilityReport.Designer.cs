@@ -63,7 +63,7 @@ partial class PC_CompatibilityReport
 			this.DD_PackageStatus = new Skyve.App.UserInterface.Dropdowns.PackageStatusDropDown();
 			this.DD_Tags = new Skyve.App.UserInterface.Dropdowns.TagsDropDown();
 			this.DD_Author = new Skyve.App.UserInterface.Dropdowns.AuthorDropDown();
-			this.DD_Profile = new Skyve.App.UserInterface.Dropdowns.PlaysetsDropDown();
+			this.DD_Playset = new Skyve.App.UserInterface.Dropdowns.PlaysetsDropDown();
 			this.I_SortOrder = new SlickControls.SlickIcon();
 			this.TLP_Main.SuspendLayout();
 			this.TLP_MiddleBar.SuspendLayout();
@@ -329,7 +329,7 @@ partial class PC_CompatibilityReport
 			this.P_Filters.Controls.Add(this.DD_PackageStatus, 2, 2);
 			this.P_Filters.Controls.Add(this.DD_Tags, 2, 1);
 			this.P_Filters.Controls.Add(this.DD_Author, 3, 1);
-			this.P_Filters.Controls.Add(this.DD_Profile, 3, 2);
+			this.P_Filters.Controls.Add(this.DD_Playset, 3, 2);
 			this.P_Filters.Dock = System.Windows.Forms.DockStyle.Top;
 			this.P_Filters.Location = new System.Drawing.Point(0, 0);
 			this.P_Filters.Name = "P_Filters";
@@ -485,16 +485,16 @@ partial class PC_CompatibilityReport
 			// 
 			// DD_Profile
 			// 
-			this.DD_Profile.AccentBackColor = true;
-			this.DD_Profile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.DD_Playset.AccentBackColor = true;
+			this.DD_Playset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_Profile.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Profile.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Profile.Location = new System.Drawing.Point(843, 62);
-			this.DD_Profile.Name = "DD_Profile";
-			this.DD_Profile.Size = new System.Drawing.Size(272, 20);
-			this.DD_Profile.TabIndex = 9;
-			this.DD_Profile.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
+			this.DD_Playset.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Playset.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_Playset.Location = new System.Drawing.Point(843, 62);
+			this.DD_Playset.Name = "DD_Profile";
+			this.DD_Playset.Size = new System.Drawing.Size(272, 20);
+			this.DD_Playset.TabIndex = 9;
+			this.DD_Playset.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// I_SortOrder
 			// 
@@ -554,7 +554,7 @@ partial class PC_CompatibilityReport
 	internal Dropdowns.PackageStatusDropDown DD_PackageStatus;
 	internal Dropdowns.TagsDropDown DD_Tags;
 	internal Dropdowns.AuthorDropDown DD_Author;
-	internal Dropdowns.PlaysetsDropDown DD_Profile;
+	internal Dropdowns.PlaysetsDropDown DD_Playset;
 	internal SlickIcon I_SortOrder;
 	internal SlickSpacer slickSpacer2;
 	internal SlickSpacer slickSpacer1;

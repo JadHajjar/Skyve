@@ -297,7 +297,7 @@ public partial class ContentList : SlickControl
 		DD_PackageStatus.Text = Locale.PackageStatus;
 		DD_ReportSeverity.Text = Locale.CompatibilityStatus;
 		DD_Tags.Text = LocaleSlickUI.Tags;
-		DD_Profile.Text = Locale.PlaysetFilter;
+		DD_Playset.Text = Locale.PlaysetFilter;
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
 		DR_ServerTime.Text = Locale.DateUpdated;
 		DD_Author.Text = Locale.Author;
@@ -341,7 +341,7 @@ public partial class ContentList : SlickControl
 
 		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin = OT_ModAsset.Margin
 			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
-			= DD_Author.Margin = DD_PackageStatus.Margin = DD_PackageUsage.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2));
+			= DD_Author.Margin = DD_PackageStatus.Margin = DD_PackageUsage.Margin = DD_Playset.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2));
 
 		TLP_MiddleBar.Padding = UI.Scale(new Padding(3, 0, 3, 0));
 
@@ -624,9 +624,13 @@ public partial class ContentList : SlickControl
 			}
 		}
 
-		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
+#if CS1
+		if (DD_Playset.SelectedItem is not null && !DD_Playset.SelectedItem.Temporary)
+#else
+		if (DD_Playset.SelectedItem is not null)
+#endif
 		{
-			return !_packageUtil.IsIncluded(item, DD_Profile.SelectedItem.Id);
+			return !_packageUtil.IsIncluded(item, DD_Playset.SelectedItem.Id);
 		}
 
 		if (!searchEmpty && Page is not SkyvePage.Workshop)

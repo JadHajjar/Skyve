@@ -103,9 +103,7 @@ public partial class PC_Troubleshoot : PanelContent
 
 		_settings.Mods = true;
 
-		await Task.Run(() => ServiceCenter.Get<ITroubleshootSystem>().Start(_settings));
-
-		//Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
+		await StartTroubleshooting();
 	}
 
 	private async void B_Assets_Click(object sender, EventArgs e)
@@ -117,14 +115,26 @@ public partial class PC_Troubleshoot : PanelContent
 
 		B_Assets.Loading = true;
 
-		await Task.Run(() => ServiceCenter.Get<ITroubleshootSystem>().Start(_settings));
+		await StartTroubleshooting();
+	}
 
-		//Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
+	private async Task StartTroubleshooting()
+	{
+		var applyResult = await ServiceCenter.Get<ITroubleshootSystem>().Start(_settings);
+
+		if (applyResult >= TroubleshootResult.Error)
+		{
+			MessagePrompt.Show(Locale.TroubleshootActionFailed
+				+ "\r\n"
+				+ LocaleHelper.GetGlobalText($"Troubleshoot{applyResult}"), PromptButtons.OK, PromptIcons.Error, Program.MainForm);
+		}
+
+		PushBack();
 	}
 
 	private void B_CompView_Click(object sender, EventArgs e)
 	{
-		//Form.SetPanel<PC_CompatibilityReport>(Program.MainForm.PI_Compatibility);
+		Form.PushPanel<PC_CompatibilityReport>();
 	}
 
 	private void B_CompSkip_Click(object sender, EventArgs e)
@@ -134,6 +144,7 @@ public partial class PC_Troubleshoot : PanelContent
 
 	private void Next2()
 	{
+#if CS1
 		if (_settings.ItemIsCausingIssues || _settings.NewItemCausingIssues)
 		{
 			var faultyPackages = ServiceCenter.Get<IPackageManager>().Packages.AllWhere(x => x.IsIncluded() && CheckStrict(x));
@@ -149,17 +160,16 @@ public partial class PC_Troubleshoot : PanelContent
 				return;
 			}
 		}
+#endif
 
 		TLP_ModAsset.Show();
 		TLP_Comp.Hide();
 		TLP_New.Hide();
 	}
 
+#if CS1
 	private bool CheckStrict(IPackage localPackage)
 	{
-#if CS2
-		return false;
-#endif
 		var workshopInfo = localPackage.GetWorkshopInfo();
 
 		if (localPackage.IsLocal)
@@ -195,6 +205,7 @@ public partial class PC_Troubleshoot : PanelContent
 
 		return false;
 	}
+#endif
 
 	private class TroubleshootSettings : ITroubleshootSettings
 	{

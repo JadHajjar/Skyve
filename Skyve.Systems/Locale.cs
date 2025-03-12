@@ -2437,7 +2437,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TreatOptionalAsRequiredTip => _instance.GetText("TreatOptionalAsRequired_Tip");
 
 	/// <summary>
-	/// Did the last changes fix the issue that you're trying to solve?
+	/// Applying your action failed.
+	/// </summary>
+	public static Translation TroubleshootActionFailed => _instance.GetText("TroubleshootActionFailed");
+
+	/// <summary>
+	/// Did you still experience any issues with the current mod configuration?
 	/// </summary>
 	public static Translation TroubleshootAskIfFixed => _instance.GetText("TroubleshootAskIfFixed");
 
@@ -2450,6 +2455,11 @@ public class Locale : LocaleHelper, ILocale
 	/// This is the troubleshooting menu, it will guide you throughout the process. You can close Skyve and continue later, it will remember your progress.
 	/// </summary>
 	public static Translation TroubleshootBubbleTip => _instance.GetText("TroubleshootBubbleTip");
+
+	/// <summary>
+	/// Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.
+	/// </summary>
+	public static Translation TroubleshootBusy => _instance.GetText("TroubleshootBusy");
 
 	/// <summary>
 	/// Stop the troubleshooting process.
@@ -2473,9 +2483,29 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootCompAsk => _instance.GetText("TroubleshootCompAsk");
 
 	/// <summary>
+	/// Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.
+	/// </summary>
+	public static Translation TroubleshootCouldNotCreatePlayset => _instance.GetText("TroubleshootCouldNotCreatePlayset");
+
+	/// <summary>
+	/// An error occurred, try again later, or check the logs for more information.
+	/// </summary>
+	public static Translation TroubleshootError => _instance.GetText("TroubleshootError");
+
+	/// <summary>
+	/// The troubleshooting was inconclusive. The issue might not be related to a specific mod, or it might be caused by multiple mods.
+	/// </summary>
+	public static Translation TroubleshootInconclusive => _instance.GetText("TroubleshootInconclusive");
+
+	/// <summary>
 	/// If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:
 	/// </summary>
 	public static Translation TroubleshootInfo => _instance.GetText("TroubleshootInfo");
+
+	/// <summary>
+	/// The troubleshooting state is no longer valid. Please start a new troubleshooting session.
+	/// </summary>
+	public static Translation TroubleshootInvalidState => _instance.GetText("TroubleshootInvalidState");
 
 	/// <summary>
 	/// Troubleshoot Issues
@@ -2501,6 +2531,16 @@ public class Locale : LocaleHelper, ILocale
 	/// Skip the current stage. Use it if you've already completed it and want to proceed.
 	/// </summary>
 	public static Translation TroubleshootNextStageTip => _instance.GetText("TroubleshootNextStageTip");
+
+	/// <summary>
+	/// You need to have an active playset to troubleshoot.
+	/// </summary>
+	public static Translation TroubleshootNoActivePlayset => _instance.GetText("TroubleshootNoActivePlayset");
+
+	/// <summary>
+	/// No mods match what you're trying to troubleshoot.
+	/// </summary>
+	public static Translation TroubleshootNoPacakgesToProcess => _instance.GetText("TroubleshootNoPacakgesToProcess");
 
 	/// <summary>
 	/// Which option best describes your situation?

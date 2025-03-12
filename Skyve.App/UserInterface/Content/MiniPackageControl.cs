@@ -96,7 +96,7 @@ public class MiniPackageControl : SlickControl
 
 						if (enable || !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil))
 						{
-							await _modUtil.SetEnabled(Package, enable, withVersion: false);
+							await _modUtil.SetEnabled(Package, enable);
 						}
 					}
 

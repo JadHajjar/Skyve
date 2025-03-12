@@ -5,7 +5,6 @@ using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Skyve.Systems;
@@ -48,7 +47,7 @@ public class PackageUtil : IPackageUtil
 		//	return _assetUtil.IsIncluded(asset, playsetId);
 		//}
 
-		bool included, excluded = false;
+		bool included;
 
 		if (_modUtil.IsIncluded(identity, playsetId, withVersion))
 		{
@@ -95,64 +94,27 @@ public class PackageUtil : IPackageUtil
 
 	public bool IsIncludedAndEnabled(IPackageIdentity package, int? playsetId = null, bool withVersion = true)
 	{
-		return /*IsIncluded(package, playsetId, withVersion) &&*/ IsEnabled(package, playsetId, withVersion);
+		return IsEnabled(package, playsetId, withVersion);
 	}
 
-	public async Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null, bool withVersion = true)
+	public async Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
 	{
-		var packageList = packages.ToList();
-
-		if (packageList.Count == 0)
-		{
-			return;
-		}
-
-		_notifier.IsBulkUpdating = true;
-
-		var assets = packageList.SelectMany(x => x.GetLocalPackage()?.Assets ?? []);
-
-		//foreach (var asset in assets)
-		//{
-		//	await _assetUtil.SetIncluded(asset, value, playsetId);
-		//}
-
-		await _modUtil.SetIncluded(packages, value, playsetId, withVersion);
-
-		_notifier.IsBulkUpdating = false;
-
-		if (_notifier.IsContentLoaded)
-		{
-			_notifier.OnInclusionUpdated();
-			_assetUtil.SaveChanges();
-			_notifier.OnRefreshUI(true);
-		}
+		await _modUtil.SetIncluded(packages, value, playsetId, withVersion, promptForDependencies);
 	}
 
-	public async Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null, bool withVersion = true)
+	public async Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null)
 	{
-		await _modUtil.SetEnabled(packages, value, playsetId, withVersion);
+		await _modUtil.SetEnabled(packages, value, playsetId);
 	}
 
-	public async Task SetIncluded(IPackageIdentity localPackage, bool value, int? playsetId = null, bool withVersion = true)
+	public async Task SetIncluded(IPackageIdentity package, bool value, int? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
 	{
-		//if (localPackage is ILocalPackageData localPackageData && localPackageData.Assets.Length > 0)
-		//{
-		//	_bulkUtil.SetIncluded(new[] { localPackage }, value);
-		//}
-		//else
-		//if (localPackage is IAsset asset)
-		//{
-		//	await _assetUtil.SetIncluded(asset, value, playsetId);
-		//}
-		//else
-		{
-			await _modUtil.SetIncluded(localPackage, value, playsetId, withVersion);
-		}
+		await _modUtil.SetIncluded(package, value, playsetId, withVersion, promptForDependencies);
 	}
 
-	public async Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null, bool withVersion = true)
+	public async Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null)
 	{
-		await _modUtil.SetEnabled(package, value, playsetId, withVersion);
+		await _modUtil.SetEnabled(package, value, playsetId);
 	}
 
 	public string? GetSelectedVersion(IPackageIdentity package, int? playsetId = null)

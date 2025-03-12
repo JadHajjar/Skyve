@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Skyve.Domain.Enums;
+
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,6 +9,7 @@ public interface ITroubleshootSystem
 {
 	int CurrentStage { get; }
 	bool IsInProgress { get; }
+	bool IsBusy { get; }
 	int TotalStages { get; }
 	string CurrentAction { get; }
 	bool WaitingForGameLaunch { get; }
@@ -18,7 +21,7 @@ public interface ITroubleshootSystem
 	event Action<IEnumerable<ILocalPackageIdentity>>? PromptResult;
 
 	void GoToNextStage();
-	Task<bool> Start(ITroubleshootSettings settings);
-	Task<bool> ApplyConfirmation(bool issuePersists);
-	Task<bool> Stop(bool keepSettings);
+	Task<TroubleshootResult> Start(ITroubleshootSettings settings);
+	Task<TroubleshootResult> ApplyConfirmation(bool issuePersists);
+	Task<TroubleshootResult> Stop(bool keepSettings);
 }

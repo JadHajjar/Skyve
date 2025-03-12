@@ -65,7 +65,7 @@ partial class ContentList
 			this.DD_Tags = new Skyve.App.UserInterface.Dropdowns.TagsDropDown();
 			this.DD_ReportSeverity = new Skyve.App.UserInterface.Dropdowns.ReportSeverityDropDown();
 			this.DD_Author = new Skyve.App.UserInterface.Dropdowns.AuthorDropDown();
-			this.DD_Profile = new Skyve.App.UserInterface.Dropdowns.PlaysetsDropDown();
+			this.DD_Playset = new Skyve.App.UserInterface.Dropdowns.PlaysetsDropDown();
 			this.DD_PackageUsage = new Skyve.App.UserInterface.Dropdowns.PackageUsageDropDown();
 			this.I_SortOrder = new SlickControls.SlickIcon();
 			this.DD_SearchTime = new Skyve.App.UserInterface.Dropdowns.WorkshopSearchTimeDropDown();
@@ -286,7 +286,7 @@ partial class ContentList
 			this.P_Filters.Controls.Add(this.DD_Tags, 2, 1);
 			this.P_Filters.Controls.Add(this.DD_ReportSeverity, 3, 2);
 			this.P_Filters.Controls.Add(this.DD_Author, 3, 1);
-			this.P_Filters.Controls.Add(this.DD_Profile, 3, 3);
+			this.P_Filters.Controls.Add(this.DD_Playset, 3, 3);
 			this.P_Filters.Controls.Add(this.DD_PackageUsage, 2, 3);
 			this.P_Filters.Dock = System.Windows.Forms.DockStyle.Top;
 			this.P_Filters.Location = new System.Drawing.Point(0, 0);
@@ -460,17 +460,17 @@ partial class ContentList
 			// 
 			// DD_Profile
 			// 
-			this.DD_Profile.AccentBackColor = true;
-			this.DD_Profile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.DD_Playset.AccentBackColor = true;
+			this.DD_Playset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_Profile.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Profile.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Profile.ItemHeight = 24;
-			this.DD_Profile.Location = new System.Drawing.Point(704, 90);
-			this.DD_Profile.Name = "DD_Profile";
-			this.DD_Profile.Size = new System.Drawing.Size(228, 20);
-			this.DD_Profile.TabIndex = 10;
-			this.DD_Profile.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
+			this.DD_Playset.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Playset.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_Playset.ItemHeight = 24;
+			this.DD_Playset.Location = new System.Drawing.Point(704, 90);
+			this.DD_Playset.Name = "DD_Profile";
+			this.DD_Playset.Size = new System.Drawing.Size(228, 20);
+			this.DD_Playset.TabIndex = 10;
+			this.DD_Playset.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_PackageUsage
 			// 
@@ -544,7 +544,7 @@ partial class ContentList
 	public System.Windows.Forms.Panel P_FiltersContainer;
 	internal SlickControls.SlickLabel B_Filters;
 	internal TagsDropDown DD_Tags;
-	internal PlaysetsDropDown DD_Profile;
+	internal PlaysetsDropDown DD_Playset;
 	internal SlickControls.SlickIcon I_Refresh;
 	internal SlickControls.SlickDateRange DR_SubscribeTime;
 	internal SlickControls.SlickDateRange DR_ServerTime;
