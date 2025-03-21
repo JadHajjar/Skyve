@@ -533,7 +533,7 @@
     "One": "「{1}」自上次會話後已更新",
     "Plural": "自上次會話以來，有 {0} 個封包已更新"
   },
-  "NewPackages": "New Packages",
+  "NewPackages": "新套件",
   "NewPackagesSinceSession": {
     "One": "自上次會話後，已安裝「{1}」",
     "Plural": "自上次會話後，已安裝 {0} 個新封包"
@@ -546,8 +546,8 @@
   "Status": "狀態",
   "PackageUsage": "封包使用情況",
   "CodeMod": {
-    "One": "Code Mod",
-    "Plural": "Code Mods"
+    "One": "程式碼模組",
+    "Plural": "程式碼模組集"
   },
   "ThisModIsRequiredYouCantDisableIt": "此模組是必要的，無法停用。",
   "FadeDisabledItems": "淡化停用的模組與資產",
@@ -641,40 +641,40 @@
   "BackupIncludeSaveGames": "將存檔檔案包含在排程備份中",
   "BackupIncludeLocalMods": "將本地模組包含在排程備份中",
   "BackupIncludeMaps": "將地圖包含在排程備份中",
-  "CleanupTimeBased": "Delete all backups olders than:",
-  "CleanupStorageBased": "Delete old backups once the total storage used exceeds:",
-  "CleanupCountBased": "Delete old backups once the total amount of backups exceeds:",
-  "DoBackupNow": "Backup Files Now",
-  "BackupDescriptionInfo": "Manually back up savegame files, settings, and other relevant information to safeguard your cities and mods.\r\n\r\nThis ensures your current cities and preferences are safely stored in case of system issues or re-installation.",
-  "RestoreDescriptionInfo": "Select which backups you'd like to restore.\r\nA backup will be taken before the restore process begins to safeguard your current files.",
-  "BackupFailed": "Backup Failed",
-  "CheckLogsAndTryAgain": "Check the logs for any errors and try again.",
+  "CleanupTimeBased": "刪除早於以下日期的所有備份：",
+  "CleanupStorageBased": "當總儲存空間使用量超過時刪除舊備份：",
+  "CleanupCountBased": "當備份總數超過時刪除舊備份：",
+  "DoBackupNow": "立即備份檔案",
+  "BackupDescriptionInfo": "手動備份存檔檔案、設定和其他相關資訊，以保護您的城市和模組。\n這確保您當前的城市和偏好設定在系統問題或重新安裝時能夠被安全儲存。",
+  "RestoreDescriptionInfo": "選擇您想還原的備份。\n在還原過程開始前將進行一次備份，以保護您當前的檔案。",
+  "BackupFailed": "備份失敗",
+  "CheckLogsAndTryAgain": "檢查日誌中的任何錯誤並重試。",
   "RestorePoint": {
-    "One": "One restore point from {1}",
-    "Plural": "{0} restore points, most recently from {1}"
+    "One": "來自 {1} 的一個還原點",
+    "Plural": "{0} 個還原點，最近來自 {1}"
   },
   "BackupCount": {
-    "One": "{1} backup",
-    "Plural": "{0} {1} backups"
+    "One": "{1} 備份",
+    "Plural": "{0} {1} 備份"
   },
-  "SelectRestoreInfo": "Select a restore point from the list of backups to start the restore process.",
+  "SelectRestoreInfo": "從備份列表中選擇一個還原點以開始還原過程。",
   "RestoreFileConfirm": {
-    "One": "Are you sure you want to restore this backup of {1}?",
-    "Plural": "Are you sure you want to restore these backups?"
+    "One": "您確定要還原 {1} 的這個備份嗎？",
+    "Plural": "您確定要還原這些備份嗎？"
   },
-  "RestoreSuccessful": "Restore Successful",
-  "RestoreFailed": "Failed to restore this backup. Check the logs for more information",
-  "StartRestore": "Start Restore Process",
-  "ContentToBackup": "File Types",
-  "AllContentTypes": "All File Types",
-  "BackupContentInfo": "Select which types of files to include in your backups.",
-  "SetupSettingsFirst": "Set up the settings first.",
-  "Archived": "Archived",
-  "BackupInProgress": "Backup is in progress",
-  "FirstBackup": "First Backup",
-  "FirstBackupDescription": "You are doing your first ever backup. This might take a while depending on how many savegames and files you have.\r\n\r\nFuture backups will take less time as they will only backup new or updated files.",
-  "InvalidFolder": "Invalid Folder",
-  "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
-  "RestoreBackup": "Restore this backup",
-  "DeleteBackup": "Delete this backup"
+  "RestoreSuccessful": "還原成功",
+  "RestoreFailed": "無法還原此備份。請檢查日誌以獲取更多資訊",
+  "StartRestore": "開始還原過程",
+  "ContentToBackup": "檔案類型",
+  "AllContentTypes": "所有檔案類型",
+  "BackupContentInfo": "選擇要包含在備份中的檔案類型。",
+  "SetupSettingsFirst": "先設定好選項。",
+  "Archived": "已存檔",
+  "BackupInProgress": "備份進行中",
+  "FirstBackup": "首次備份",
+  "FirstBackupDescription": "您正在進行第一次備份。根據您的存檔和檔案數量，這可能需要一些時間。 \n未來的備份將花費較少時間，因為它們只會備份新的或更新的檔案。",
+  "InvalidFolder": "無效資料夾",
+  "ChooseDifferentBackupLocation": "您無法在此資料夾內備份檔案，Skyve 無權在此儲存檔案。\n\n選擇一個不在同一資料夾中的不同位置，最好在另一個磁碟上。",
+  "RestoreBackup": "還原此備份",
+  "DeleteBackup": "刪除此備份"
 }
