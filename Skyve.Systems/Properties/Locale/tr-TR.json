@@ -18,7 +18,7 @@
   "AnyStatus": "Herhangi bir Durum",
   "NoLocalPackagesFound": "Bilgisayarınızda paket bulunamadı.",
   "NoPackagesMatchFilters": "Aradığınızla eşleşen paket yok.",
-  "NoLogsMatchFilters": "No logs match what you're looking for.",
+  "NoLogsMatchFilters": "Aradığınızla eşleşen herhangi bir günlük bulunamadı.",
   "EnableAll": "Tüm öğeleri etkinleştir",
   "DisableAll": "Tüm öğeleri devre dışı bırak",
   "EnableAllFiltered": "Filtrelenen öğeleri etkinleştir",
