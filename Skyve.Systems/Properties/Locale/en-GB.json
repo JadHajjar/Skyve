@@ -254,7 +254,7 @@
     "Plural": "{0} authors selected"
   },
   "Donate": "Donate",
-  "FlipItemCopyFilterAction": "Swap Ctrl+Click behavior for filtering in the content lists",
+  "FlipItemCopyFilterAction": "Swap Ctrl+Click behaviour for filtering in the content lists",
   "FlipItemCopyFilterAction_Tip": "Swaps the default behavior of clicking on labels so that normal clicking filters and Ctrl+Clicking performs the default action.",
   "AltClickTo": "Alt+Click to {0}",
   "FilterByThisAuthor": "Add '{0}' to your author filters",
