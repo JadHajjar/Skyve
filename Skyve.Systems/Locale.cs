@@ -2472,7 +2472,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootCaused => _instance.GetText("TroubleshootCaused");
 
 	/// <summary>
-	/// The following packages might be the cause of your issues
+	/// The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.
 	/// </summary>
 	public static Translation TroubleshootCauseResult => _instance.GetText("TroubleshootCauseResult");
 

@@ -487,7 +487,7 @@
   },
   "TroubleshootViewComp": "View my compatibility report",
   "TroubleshootSkipComp": "Skip & continue troubleshooting",
-  "TroubleshootCauseResult": "The following packages might be the cause of your issues",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
   "TroubleshootActionFailed": "Applying your action failed.",
   "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
   "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",

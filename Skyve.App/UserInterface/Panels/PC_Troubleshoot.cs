@@ -125,7 +125,7 @@ public partial class PC_Troubleshoot : PanelContent
 		if (applyResult >= TroubleshootResult.Error)
 		{
 			MessagePrompt.Show(Locale.TroubleshootActionFailed
-				+ "\r\n"
+				+ "\r\n\r\n"
 				+ LocaleHelper.GetGlobalText($"Troubleshoot{applyResult}"), PromptButtons.OK, PromptIcons.Error, Program.MainForm);
 		}
 

@@ -28,6 +28,9 @@ public class TroubleshootInfoControl : SlickControl
 
 		if (Loading)
 		{
+			Cursor = Cursors.Default;
+			SlickTip.SetTo(this, Locale.TroubleshootBubbleTip);
+
 			return;
 		}
 
@@ -50,6 +53,81 @@ public class TroubleshootInfoControl : SlickControl
 		{
 			Cursor = Cursors.Default;
 			SlickTip.SetTo(this, Locale.TroubleshootBubbleTip);
+		}
+	}
+
+	protected override async void OnMouseClick(MouseEventArgs e)
+	{
+		base.OnMouseClick(e);
+
+		if (Loading)
+		{
+			return;
+		}
+
+		if (e.Button == MouseButtons.None || (e.Button == MouseButtons.Left && buttonRect.Contains(e.Location)))
+		{
+			if (_troubleshootSystem.WaitingForPrompt)
+			{
+				AskForConfirmation();
+			}
+			else if (_troubleshootSystem.WaitingForGameLaunch || _troubleshootSystem.WaitingForGameClose)
+			{
+				await Task.Run(_troubleshootSystem.GoToNextStage);
+			}
+		}
+		else if (e.Button == MouseButtons.Left && launchRect.Contains(e.Location))
+		{
+			if (_citiesManager.IsAvailable())
+			{
+				if (_citiesManager.IsRunning())
+				{
+					new BackgroundAction("Stopping Cities: Skylines", _citiesManager.Kill).Run();
+				}
+				else
+				{
+					new BackgroundAction("Starting Cities: Skylines", _citiesManager.Launch).Run();
+				}
+			}
+		}
+		else if (e.Button == MouseButtons.Left && cancelRect.Contains(e.Location))
+		{
+			TroubleshootResult applyResult;
+
+			switch (MessagePrompt.Show(Locale.CancelTroubleshootMessage, Locale.CancelTroubleshootTitle, PromptButtons.YesNoCancel, PromptIcons.Hand, form: Program.MainForm))
+			{
+				case DialogResult.Yes:
+					applyResult = await _troubleshootSystem.Stop(false);
+					Hide();
+					break;
+				case DialogResult.No:
+					applyResult = await _troubleshootSystem.Stop(true);
+					Hide();
+					break;
+				default:
+					return;
+			}
+
+			if (applyResult < TroubleshootResult.Error)
+			{
+				return;
+			}
+
+			MessagePrompt.Show(Locale.TroubleshootActionFailed
+				+ "\r\n\r\n"
+				+ LocaleHelper.GetGlobalText($"Troubleshoot{applyResult}"), PromptButtons.OK, PromptIcons.Error, Program.MainForm);
+		}
+	}
+
+	private void PromptResult(IEnumerable<ILocalPackageIdentity> list)
+	{
+		if (list.Any())
+		{
+			MessagePrompt.Show(Locale.TroubleshootCauseResult + "\r\n\r\n" + list.ListStrings(x => x.CleanName(), "\r\n"), icon: PromptIcons.Ok, form: Program.MainForm);
+		}
+		else
+		{
+			MessagePrompt.Show(Locale.TroubleshootInconclusive, icon: PromptIcons.Hand, form: Program.MainForm);
 		}
 	}
 
@@ -219,82 +297,7 @@ public class TroubleshootInfoControl : SlickControl
 		}
 
 		MessagePrompt.Show(Locale.TroubleshootActionFailed
-			+ "\r\n"
+			+ "\r\n\r\n"
 			+ LocaleHelper.GetGlobalText($"Troubleshoot{applyResult}"), PromptButtons.OK, PromptIcons.Error, Program.MainForm);
-	}
-
-	private void PromptResult(IEnumerable<ILocalPackageIdentity> list)
-	{
-		if (list.Any())
-		{
-			MessagePrompt.Show(Locale.TroubleshootCauseResult + "\r\n\r\n" + list.ListStrings("\r\n"), icon: PromptIcons.Ok, form: Program.MainForm);
-		}
-		else
-		{
-			MessagePrompt.Show(Locale.TroubleshootInconclusive, icon: PromptIcons.Hand, form: Program.MainForm);
-		}
-	}
-
-	protected override async void OnMouseClick(MouseEventArgs e)
-	{
-		base.OnMouseClick(e);
-
-		if (Loading)
-		{
-			return;
-		}
-
-		if (e.Button == MouseButtons.None || (e.Button == MouseButtons.Left && buttonRect.Contains(e.Location)))
-		{
-			if (_troubleshootSystem.WaitingForPrompt)
-			{
-				AskForConfirmation();
-			}
-			else if (_troubleshootSystem.WaitingForGameLaunch || _troubleshootSystem.WaitingForGameClose)
-			{
-				await Task.Run(_troubleshootSystem.GoToNextStage);
-			}
-		}
-		else if (e.Button == MouseButtons.Left && launchRect.Contains(e.Location))
-		{
-			if (_citiesManager.IsAvailable())
-			{
-				if (_citiesManager.IsRunning())
-				{
-					new BackgroundAction("Stopping Cities: Skylines", _citiesManager.Kill).Run();
-				}
-				else
-				{
-					new BackgroundAction("Starting Cities: Skylines", _citiesManager.Launch).Run();
-				}
-			}
-		}
-		else if (e.Button == MouseButtons.Left && cancelRect.Contains(e.Location))
-		{
-			TroubleshootResult applyResult;
-
-			switch (MessagePrompt.Show(Locale.CancelTroubleshootMessage, Locale.CancelTroubleshootTitle, PromptButtons.YesNoCancel, PromptIcons.Hand, form: Program.MainForm))
-			{
-				case DialogResult.Yes:
-					applyResult = await _troubleshootSystem.Stop(false);
-					Hide();
-					break;
-				case DialogResult.No:
-					applyResult = await _troubleshootSystem.Stop(true);
-					Hide();
-					break;
-				default:
-					return;
-			}
-
-			if (applyResult < TroubleshootResult.Error)
-			{
-				return;
-			}
-
-			MessagePrompt.Show(Locale.TroubleshootActionFailed
-				+ "\r\n"
-				+ LocaleHelper.GetGlobalText($"Troubleshoot{applyResult}"), PromptButtons.OK, PromptIcons.Error, Program.MainForm);
-		}
 	}
 }
