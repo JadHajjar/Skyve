@@ -1,6 +1,4 @@
-﻿using Skyve.App.Interfaces;
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -39,10 +37,8 @@ public static class PlatformUtil
 					return;
 				}
 			}
-			else
-			{
-				Process.Start(url);
-			}
+
+			Process.Start(url);
 		}
 		catch (Exception ex)
 		{
@@ -53,6 +49,11 @@ public static class PlatformUtil
 	public static bool ExecuteSteam(string args)
 	{
 		var file = ServiceCenter.Get<ILocationService>().SteamPathWithExe;
+
+		if (!CrossIO.FileExists(file))
+		{
+			return false;
+		}
 
 		ServiceCenter.Get<IIOUtil>().Execute(file, args);
 

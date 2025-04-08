@@ -267,7 +267,6 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			e.Graphics.DrawString(ItemCount == 0 ? Locale.NoPlaysetsFound : Locale.NoPlaysetsMatchFilters, font, brush, ClientRectangle, stringFormat);
 		}
 
-
 		if (dragActive)
 		{
 			var border = UI.Scale(16);

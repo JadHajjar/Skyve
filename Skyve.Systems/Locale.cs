@@ -571,6 +571,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CreateShortcutPlayset => _instance.GetText("CreateShortcutPlayset");
 
 	/// <summary>
+	/// Creator pack by {0}
+	/// </summary>
+	public static Translation CreatorPackBy => _instance.GetText("CreatorPackBy");
+
+	/// <summary>
 	/// Custom Maps
 	/// </summary>
 	public static Translation CustomMaps => _instance.GetText("Custom Maps");
@@ -1675,6 +1680,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Out of date {0}
 	/// </summary>
 	public static Translation OutOfDateItem => _instance.GetText("OutOfDateItem");
+
+	/// <summary>
+	/// Owned
+	/// </summary>
+	public static Translation Owned => _instance.GetText("Owned");
 
 	/// <summary>
 	/// <para>Package</para>

@@ -117,7 +117,7 @@ internal class D_NotificationCenter : IDashboardItem
 			return LocaleSlickUI.EarlierThisMonth;
 		}
 
-		return info.Time.ToString("ddd yyyy");
+		return info.Time.ToString("MMM yyyy");
 	}
 
 	private void MarkAllAsRead()
