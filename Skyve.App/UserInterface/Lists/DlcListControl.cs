@@ -179,7 +179,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		using var smallFont = UI.Font(8.25F);
 
-		var y = e.Rects.TextRect.Y + nameHeight + UI.Scale(2);
+		var y = e.Rects.TextRect.Y + nameHeight;
 
 		if (e.Item.Creators?.Any() ?? false)
 		{
@@ -250,7 +250,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		using var font = UI.Font(11.25F, FontStyle.Bold);
 
-		rects.TextRect = new Rectangle(rects.IconRect.X, rects.IconRect.Bottom, rects.IconRect.Width, font.Height + UI.Scale(2));
+		rects.TextRect = new Rectangle(rects.IconRect.X, rects.IconRect.Bottom+UI.Scale(4), rects.IconRect.Width, font.Height + UI.Scale(2));
 
 		//rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28)), ContentAlignment.TopRight);
 
