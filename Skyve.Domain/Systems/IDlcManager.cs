@@ -9,10 +9,12 @@ public interface IDlcManager
 
 	IEnumerable<IDlcInfo> Dlcs { get; }
 
-	bool IsAvailable(uint dlcId);
-	void SetExcludedDlcs(IEnumerable<uint> uints);
+	bool IsAvailable(ulong dlc);
+	bool IsAvailable(IDlcInfo dlc);
+	void SetExcludedDlcs(IEnumerable<IDlcInfo> uints);
 	bool IsIncluded(IDlcInfo dlc);
 	void SetIncluded(IDlcInfo dlc, bool value);
-	List<uint> GetExcludedDlcs();
+	List<IDlcInfo> GetExcludedDlcs();
+	IDlcInfo TryGetDlc(string displayName);
 	Task UpdateDLCs();
 }

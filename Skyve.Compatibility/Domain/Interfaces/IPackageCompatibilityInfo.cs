@@ -18,7 +18,7 @@ public interface IPackageCompatibilityInfo
 	PackageStability Stability { get; }
 	PackageUsage Usage { get; }
 	PackageType Type { get; }
-	List<uint>? RequiredDLCs { get; }
+	List<ulong>? RequiredDLCs { get; }
 	List<string>? Tags { get; }
 	List<ILink>? Links { get; }
 	List<IPackageStatus<InteractionType>> Interactions { get; }

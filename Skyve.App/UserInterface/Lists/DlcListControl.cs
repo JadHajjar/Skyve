@@ -59,7 +59,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		if (e.Button == MouseButtons.Left)
 		{
-			if (rects.IncludedRect.Contains(e.Location) && _dlcManager.IsAvailable(item.Item.Id))
+			if (rects.IncludedRect.Contains(e.Location) && _dlcManager.IsAvailable(item.Item))
 			{
 				_dlcManager.SetIncluded(item.Item, !_dlcManager.IsIncluded(item.Item));
 			}
@@ -107,7 +107,11 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		var height = DrawTitleAndTagsAndVersion(e);
 
-		if (!_dlcManager.IsAvailable(e.Item.Id))
+		if (string.IsNullOrEmpty(e.Item.Price) && (e.Item.ReleaseDate == DateTime.MinValue || e.Item.ReleaseDate > DateTime.UtcNow.Date))
+		{
+			e.Graphics.DrawLabel("TBD", null, FormDesign.Design.InfoColor, e.Rects.TextRect.ClipTo(height - e.Rects.TextRect.Y), ContentAlignment.BottomRight);
+		}
+		else if (!_dlcManager.IsAvailable(e.Item))
 		{
 			e.Graphics.DrawLabel(e.Item.Price.IfEmpty(Locale.Free), null, FormDesign.Design.GreenColor, e.Rects.TextRect.ClipTo(height - e.Rects.TextRect.Y), ContentAlignment.BottomRight);
 		}
@@ -140,20 +144,20 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 	private void DrawThumbnail(ItemPaintEventArgs<IDlcInfo, Rectangles> e)
 	{
-		var thumbnail = e.Item.GetThumbnail();
+		var thumbnail = e.Item is IThumbnailObject thumbnailObject ? thumbnailObject.GetThumbnail() : null;
 
-		if (thumbnail is null)
-		{
-			using var generic = IconManager.GetIcon("Dlc", e.Rects.IconRect.Height).Color(BackColor);
-			using var brush = new SolidBrush(FormDesign.Design.IconColor);
+		//if (thumbnail is null)
+		//{
+		//	using var generic = IconManager.GetIcon("Dlc", e.Rects.IconRect.Height).Color(BackColor);
+		//	using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
-			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
-		}
-		else
-		{
-			drawThumbnail(thumbnail);
-		}
+		//	e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
+		//	e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
+		//}
+		//else
+		//{
+		drawThumbnail(thumbnail ?? Properties.Resources.Cities2Dlc);
+		//}
 
 		void drawThumbnail(Bitmap image)
 		{
@@ -170,11 +174,12 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		using var font = UI.Font(11.25F, FontStyle.Bold).FitToWidth(text, e.Rects.TextRect, e.Graphics);
 		using var brush = new SolidBrush(/*e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor :*/ ForeColor);
 
-		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect);
+		var nameHeight = e.Graphics.DrawHighResText(text, font, brush, e.Rects.TextRect, 1.5f);
+		//e.Graphics.DrawString(text, font, brush, e.Rects.TextRect.ClipTo(e.Rects.TextRect.Height + UI.Scale(4)));
 
 		using var smallFont = UI.Font(8.25F);
 
-		var y = e.Rects.TextRect.Bottom;
+		var y = e.Rects.TextRect.Y + nameHeight + UI.Scale(2);
 
 		if (e.Item.Creators?.Any() ?? false)
 		{
@@ -188,7 +193,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		if (e.Item.ReleaseDate.Year > 1)
 		{
-			using var smallBrush = new SolidBrush(FormDesign.Design.ForeColor);
+			using var smallBrush = new SolidBrush(FormDesign.Design.LabelColor);
 			var subText = _settings.UserSettings.ShowDatesRelatively
 				? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false)
 				: e.Item.ReleaseDate.ToLocalTime().ToString("D");
@@ -198,18 +203,18 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 			y += (int)e.Graphics.Measure(subText, smallFont, e.Rects.TextRect.Width - UI.Scale(50)).Height;
 		}
 
-		return y + GridPadding.Bottom / 2;
+		return y + (GridPadding.Bottom / 2);
 	}
 
 	private void DrawIncludedButton(ItemPaintEventArgs<IDlcInfo, Rectangles> e, bool isIncluded, out Color activeColor)
 	{
 		activeColor = default;
 
-		var incl = new DynamicIcon(!_dlcManager.IsAvailable(e.Item.Id) ? "Slash" : isIncluded ? "Ok" : "Enabled");
+		var incl = new DynamicIcon(!_dlcManager.IsAvailable(e.Item) ? "Slash" : isIncluded ? "Ok" : "Enabled");
 
 		if (isIncluded)
 		{
-			activeColor = !_dlcManager.IsAvailable(e.Item.Id) ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
+			activeColor = !_dlcManager.IsAvailable(e.Item) ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
 		}
 
 		Color iconColor;
@@ -240,7 +245,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		var rects = new Rectangles(item)
 		{
 			CenterRect = rectangle,
-			IconRect = rectangle.Align(new Size(rectangle.Width, (rectangle.Width) * 215 / 460), ContentAlignment.TopCenter)
+			IconRect = rectangle.Align(new Size(rectangle.Width, rectangle.Width * 215 / 460), ContentAlignment.TopCenter)
 		};
 
 		using var font = UI.Font(11.25F, FontStyle.Bold);
@@ -268,7 +273,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
 		{
-			if (IncludedRect.Contains(location) && ServiceCenter.Get<IDlcManager>().IsAvailable(Item.Id))
+			if (IncludedRect.Contains(location) && ServiceCenter.Get<IDlcManager>().IsAvailable(Item))
 			{
 				if (ServiceCenter.Get<IDlcManager>().IsIncluded(Item))
 				{

@@ -30,6 +30,11 @@ public class PackageNameUtil : IPackageNameUtil
 			return string.Empty;
 		}
 
+		if (package is IDlcInfo)
+		{
+			return package.Name.RegexRemove("^.+?- ").RegexRemove("(Content )?Creator Pack: ");
+		}
+
 		var text = _tagRegex.Replace(package.Name, string.Empty);
 
 		if (text.IndexOf(' ') < 0)
@@ -54,12 +59,12 @@ public class PackageNameUtil : IPackageNameUtil
 
 		IWorkshopInfo? workshopInfo;
 
-        if (package is IPackageRequirement requirement && requirement.IsDlc)
-        {
-			return package.Name;
-        }
+		if (package is IDlcInfo)
+		{
+			return package.Name.RegexRemove("^.+?- ").RegexRemove("(Content )?Creator Pack: ");
+		}
 
-        if (package?.Name is null or "")
+		if (package?.Name is null or "")
 		{
 			workshopInfo = package?.GetWorkshopInfo();
 

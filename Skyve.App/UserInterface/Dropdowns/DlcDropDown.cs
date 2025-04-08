@@ -39,7 +39,7 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 		}
 
 		var text = item.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP");
-		var icon = item.GetThumbnail();
+		var icon = item is IThumbnailObject thumbnailObject ? thumbnailObject.GetThumbnail() : null;
 
 		if (icon != null)
 		{

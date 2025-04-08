@@ -24,6 +24,7 @@ public static class SystemExtensions
 	private static IPackageUtil? _packageUtil;
 	private static ITagsService? _tagService;
 	private static IPlaysetManager? _playsetManager;
+	private static IDlcManager _dlcManager;
 
 	private static IWorkshopService WorkshopService => _workshopService ??= serviceProvider!.GetService<IWorkshopService>()!;
 	private static ICompatibilityManager CompatibilityManager => _compatibilityManager ??= serviceProvider!.GetService<ICompatibilityManager>()!;
@@ -156,11 +157,6 @@ public static class SystemExtensions
 		}
 
 		return ImageService.GetImage(thumbnailUrl, true).Result;
-	}
-
-	public static Bitmap? GetThumbnail(this IDlcInfo? dlc)
-	{
-		return dlc?.ThumbnailUrl is null or "" ? null : ImageService.GetImage(dlc.ThumbnailUrl, true, $"{dlc.Id}.png", false).Result;
 	}
 
 	public static IEnumerable<ITag> GetTags(this IPackageIdentity package, bool ignoreParent = false)
