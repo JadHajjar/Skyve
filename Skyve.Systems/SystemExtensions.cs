@@ -24,7 +24,6 @@ public static class SystemExtensions
 	private static IPackageUtil? _packageUtil;
 	private static ITagsService? _tagService;
 	private static IPlaysetManager? _playsetManager;
-	private static IDlcManager _dlcManager;
 
 	private static IWorkshopService WorkshopService => _workshopService ??= serviceProvider!.GetService<IWorkshopService>()!;
 	private static ICompatibilityManager CompatibilityManager => _compatibilityManager ??= serviceProvider!.GetService<ICompatibilityManager>()!;
@@ -59,7 +58,9 @@ public static class SystemExtensions
 	public static bool IsCodeMod(this IPackageIdentity identity)
 	{
 		if (identity.Id > 0 && identity.GetWorkshopInfo() is IWorkshopInfo workshopInfo)
+		{
 			return workshopInfo.IsCodeMod;
+		}
 
 		return identity.GetLocalPackage()?.IsCodeMod ?? false;
 	}
@@ -91,7 +92,7 @@ public static class SystemExtensions
 			return packageData.Package;
 		}
 
-		return PackageManager.GetPackageById(identity);
+		return PackageManager.GetPackageById(identity)?.Package;
 	}
 
 	public static bool IsInstalled(this IPackageIdentity identity)
@@ -111,7 +112,7 @@ public static class SystemExtensions
 			return package.LocalData;
 		}
 
-		return PackageManager.GetPackageById(identity)?.LocalData;
+		return PackageManager.GetPackageById(identity);
 	}
 
 	public static ILocalPackageIdentity? GetLocalPackageIdentity(this IPackageIdentity identity)
@@ -126,7 +127,7 @@ public static class SystemExtensions
 			return package.LocalData;
 		}
 
-		return PackageManager.GetPackageById(identity)?.LocalData;
+		return PackageManager.GetPackageById(identity);
 	}
 
 	public static Bitmap? GetThumbnail<T>(this T? identity) where T : IPackageIdentity

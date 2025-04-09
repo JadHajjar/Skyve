@@ -2,6 +2,7 @@
 using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
+using Skyve.Domain.Systems;
 
 using System.Drawing;
 using System.Threading.Tasks;
@@ -11,10 +12,10 @@ namespace Skyve.App.UserInterface.CompatibilityReport;
 
 public class CompatibilityMessageControl : SlickControl
 {
-	private readonly Dictionary<IPackageIdentity, (Rectangle Rectangle, ICompatibilityActionInfo Action)> _actionRects = [];
-	private readonly Dictionary<IPackageIdentity, Rectangle> _modRects = [];
-	private readonly Dictionary<IPackageIdentity, Rectangle> _modDotsRects = [];
-	private readonly Dictionary<IPackageIdentity, int> _modHeights = [];
+	private readonly Dictionary<ICompatibilityPackageIdentity, (Rectangle Rectangle, ICompatibilityActionInfo Action)> _actionRects = [];
+	private readonly Dictionary<ICompatibilityPackageIdentity, Rectangle> _modRects = [];
+	private readonly Dictionary<ICompatibilityPackageIdentity, Rectangle> _modDotsRects = [];
+	private readonly Dictionary<ICompatibilityPackageIdentity, int> _modHeights = [];
 	private Rectangle bulkActionRect;
 	private Rectangle dismissActionRect;
 	private Rectangle linkActionRect;
@@ -25,6 +26,7 @@ public class CompatibilityMessageControl : SlickControl
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IWorkshopService _workshopService;
 	private readonly IPackageNameUtil _packageNameUtil;
+	private readonly IImageService _imageService;
 	private readonly ICompatibilityActionsHelper _compatibilityActions;
 
 	public ReportType Type { get; }
@@ -34,7 +36,7 @@ public class CompatibilityMessageControl : SlickControl
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
-		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _compatibilityActions, out _workshopService, out _packageNameUtil);
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _compatibilityActions, out _workshopService, out _packageNameUtil, out _imageService);
 
 		Dock = DockStyle.Top;
 		Type = type;
@@ -99,7 +101,7 @@ public class CompatibilityMessageControl : SlickControl
 						ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Key, false);
 					}
 				}
-				else if (e.Button == MouseButtons.Right)
+				else if (e.Button == MouseButtons.Right && !item.Key.IsDlc)
 				{
 					var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item.Key);
 
@@ -112,7 +114,7 @@ public class CompatibilityMessageControl : SlickControl
 
 		foreach (var item in _modDotsRects)
 		{
-			if (item.Value.Contains(e.Location))
+			if (item.Value.Contains(e.Location) && !item.Key.IsDlc)
 			{
 				var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item.Key);
 
@@ -396,16 +398,16 @@ public class CompatibilityMessageControl : SlickControl
 		catch { }
 	}
 
-	private int DrawPackage(PaintEventArgs e, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	private int DrawPackage(PaintEventArgs e, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
 		e.Graphics.FillRoundedRectangleWithShadow(rectangle.Pad(Padding.Left), UI.Scale(5), Padding.Left);
 
-		var thumbRect = rectangle.ClipTo(rectangle.Width).Pad(Padding.Left + Padding.Top);
+		var thumbRect = rectangle.ClipTo(package.IsDlc ? (rectangle.Width * 215 / 460 + (Padding.Left + Padding.Top)) : rectangle.Width).Pad(Padding.Left + Padding.Top);
 		var textRect = rectangle.Pad(Padding.Left + Padding.Top, Padding.Vertical + thumbRect.Height, Padding.Left + Padding.Top, Padding.Bottom);
 
 		DrawThumbnail(e, package, thumbRect, cursor);
 
-		rectangle.Height = thumbRect.Width + Padding.Vertical;
+		rectangle.Height = thumbRect.Height + Padding.Vertical;
 
 		rectangle.Height += DrawTitleAndTags(e, package, textRect, cursor);
 
@@ -454,9 +456,16 @@ public class CompatibilityMessageControl : SlickControl
 		return rectangle.Height + (Padding.Left * 2);
 	}
 
-	private int DrawThumbnail(PaintEventArgs e, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	private int DrawThumbnail(PaintEventArgs e, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		var thumbnail = package.GetThumbnail();
+		Bitmap? thumbnail;
+
+		if (package.IsDlc)
+		{
+			var thumbnailUrl = package.Id > 10 ? $"https://cdn.akamai.steamstatic.com/steam/apps/{package.Id}/header.jpg" : null;
+			thumbnail = thumbnailUrl is null or "" ? null : _imageService.GetImage(thumbnailUrl, true, $"Dlc_{package.Id}.png", false).Result;
+			thumbnail ??= Properties.Resources.Cities2Dlc;
+		}else thumbnail = package.GetThumbnail();
 
 		if (thumbnail is null)
 		{
@@ -466,7 +475,7 @@ public class CompatibilityMessageControl : SlickControl
 			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
 			e.Graphics.DrawImage(generic, rectangle.CenterR(generic.Size));
 		}
-		else if (package.IsLocal())
+		else if (!package.IsDlc && package.IsLocal())
 		{
 			using var unsatImg = new Bitmap(thumbnail, rectangle.Size).Tint(Sat: 0);
 
@@ -488,15 +497,24 @@ public class CompatibilityMessageControl : SlickControl
 		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, rectangle, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
-	private int DrawTitleAndTags(PaintEventArgs e, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	private int DrawTitleAndTags(PaintEventArgs e, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22)), ContentAlignment.TopRight);
-		_modDotsRects[package] = dotsRect;
-		DrawDots(e, dotsRect, cursor);
+		if (!package.IsDlc)
+		{
+			var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22)), ContentAlignment.TopRight);
+			_modDotsRects[package] = dotsRect;
+			DrawDots(e, dotsRect, cursor);
 
-		rectangle = rectangle.Pad(0, 0, dotsRect.Width, 0);
+			rectangle = rectangle.Pad(0, 0, dotsRect.Width, 0);
+		}
 
 		var text = package.CleanName(out var tags);
+
+		if (package.IsDlc)
+		{
+			tags.Clear();
+			text = text.RegexRemove("^.+?- ").RegexRemove("(Content )?Creator Pack: ");
+		}
 
 		using var font = UI.Font(8.25F, FontStyle.Bold);
 		var textRect = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);

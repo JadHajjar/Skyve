@@ -6,10 +6,8 @@ using System;
 using System.Collections.Generic;
 
 namespace Skyve.Compatibility.Domain.Interfaces;
-public interface IPackageCompatibilityInfo
+public interface IPackageCompatibilityInfo : IPackageIdentity
 {
-	ulong Id { get; }
-	string? Name { get; }
 	string? FileName { get; }
 	string? AuthorId { get; }
 	string? Note { get; }

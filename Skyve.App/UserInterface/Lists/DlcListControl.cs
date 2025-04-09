@@ -174,8 +174,18 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		using var font = UI.Font(11.25F, FontStyle.Bold).FitToWidth(text, e.Rects.TextRect, e.Graphics);
 		using var brush = new SolidBrush(/*e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor :*/ ForeColor);
 
-		var nameHeight = e.Graphics.DrawHighResText(text, font, brush, e.Rects.TextRect, 1.5f);
-		//e.Graphics.DrawString(text, font, brush, e.Rects.TextRect.ClipTo(e.Rects.TextRect.Height + UI.Scale(4)));
+		int nameHeight;
+
+		if (UI.FontScale >= 1.25)
+		{
+			nameHeight = e.Graphics.DrawHighResText(text, font, brush, e.Rects.TextRect, 2f);
+		}
+		else
+		{
+			nameHeight = e.Rects.TextRect.Height;
+
+			e.Graphics.DrawString(text, font, brush, e.Rects.TextRect.ClipTo(e.Rects.TextRect.Height + UI.Scale(4)));
+		}
 
 		using var smallFont = UI.Font(8.25F);
 
@@ -250,7 +260,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		using var font = UI.Font(11.25F, FontStyle.Bold);
 
-		rects.TextRect = new Rectangle(rects.IconRect.X, rects.IconRect.Bottom+UI.Scale(4), rects.IconRect.Width, font.Height + UI.Scale(2));
+		rects.TextRect = new Rectangle(rects.IconRect.X, rects.IconRect.Bottom + UI.Scale(4), rects.IconRect.Width, font.Height + UI.Scale(2));
 
 		//rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28)), ContentAlignment.TopRight);
 

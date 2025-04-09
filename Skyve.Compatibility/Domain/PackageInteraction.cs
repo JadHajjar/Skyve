@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Extensions;
+
+using Newtonsoft.Json;
 
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
@@ -12,7 +14,7 @@ public class PackageInteraction : IPackageStatus<InteractionType>
 {
 	public InteractionType Type { get; set; }
 	public StatusAction Action { get; set; }
-	public ulong[]? Packages { get; set; }
+	public List<CompatibilityPackageReference>? Packages { get; set; }
 	public string? Note { get; set; }
 	[JsonIgnore] public int IntType { get => (int)Type; set => Type = (InteractionType)value; }
 	[JsonIgnore] public string LocaleKey => $"Interaction_{Type}";
@@ -26,6 +28,7 @@ public class PackageInteraction : IPackageStatus<InteractionType>
 			return type > action ? type : action;
 		}
 	}
+	IEnumerable<ICompatibilityPackageIdentity> IGenericPackageStatus.Packages { get => Packages ?? []; set => Packages = value.ToList(x => new CompatibilityPackageReference(x)); }
 
 	public PackageInteraction()
 	{
@@ -49,7 +52,7 @@ public class PackageInteraction : IPackageStatus<InteractionType>
 	{
 		var hashCode = 498602157;
 		hashCode = hashCode * -1521134295 + Type.GetHashCode();
-		hashCode = hashCode * -1521134295 + EqualityComparer<ulong[]?>.Default.GetHashCode(Packages);
+		hashCode = hashCode * -1521134295 + EqualityComparer<IEnumerable<ulong>>.Default.GetHashCode(Packages?.Select(x => x.Id) ?? []);
 		return hashCode;
 	}
 }

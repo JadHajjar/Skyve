@@ -2,6 +2,7 @@
 using Skyve.App.UserInterface.Dropdowns;
 
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
@@ -51,7 +52,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 			TB_Note.Text = item.Note;
 			TB_Note.Visible = I_Note.Selected = !string.IsNullOrWhiteSpace(item.Note);
 
-			foreach (var package in item.Packages ?? new ulong[0])
+			foreach (var package in item.Packages ?? [])
 			{
 				P_Packages.Controls.Add(new MiniPackageControl(package) { Dock = DockStyle.Top });
 			}
@@ -106,7 +107,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		Type = typeDropDown.SelectedItem,
 		Action = DD_Action.SelectedItem,
 		Note = TB_Note.Text,
-		Packages = P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Id).ToArray(),
+		Packages = P_Packages.Controls.OfType<MiniPackageControl>().Select(x => new CompatibilityPackageReference(x.Package)).ToArray(),
 	};
 
 	protected override void DesignChanged(FormDesign design)

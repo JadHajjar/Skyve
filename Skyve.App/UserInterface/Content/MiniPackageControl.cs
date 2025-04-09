@@ -15,7 +15,7 @@ public class MiniPackageControl : SlickControl
 	private readonly IModUtil _modUtil;
 	private readonly IDlcManager _dlcManager;
 
-	public IPackageIdentity? Package => _package ?? _workshopService.GetInfo(new GenericPackageIdentity(Id));
+	public IPackageIdentity Package => (_package ?? _workshopService.GetInfo(new GenericPackageIdentity(Id))) ?? new GenericPackageIdentity(Id);
 	public ulong Id { get; }
 
 	public bool ReadOnly { get; set; }
@@ -236,6 +236,11 @@ public class MiniPackageControl : SlickControl
 		if (localIdentity is null && Package!.IsLocal())
 		{
 			return; // missing local item
+		}
+
+		if (IsDlc && !isIncluded)
+		{
+			return;
 		}
 
 		var required = !IsDlc && _modLogicManager.IsRequired(localIdentity, _modUtil);

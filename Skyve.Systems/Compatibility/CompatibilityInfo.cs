@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 
+using Skyve.Compatibility.Domain;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
@@ -10,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Skyve.Systems.Compatibility.Domain;
-public class CompatibilityInfo : ICompatibilityInfo
+public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdentity
 {
 	public ulong Id { get; set; }
 	public string Name { get; set; }
@@ -21,6 +22,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data;
 	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast<ICompatibilityItem>();
 	string? IPackageIdentity.Version { get; set; }
+	bool ICompatibilityPackageIdentity.IsDlc { get; }
 
 	[Obsolete("Reserved for DTO", true)]
 	public CompatibilityInfo()
@@ -39,7 +41,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 		ReportItems = [];
 	}
 
-	public void Add(ReportType type, IGenericPackageStatus status, string? packageName, GenericLocalPackageIdentity[] packages)
+	public void Add(ReportType type, IGenericPackageStatus status, string? packageName, CompatibilityPackageReference[] packages)
 	{
 		ReportItems.Add(new ReportItem
 		{

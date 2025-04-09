@@ -7,9 +7,9 @@ public interface IPackageManager
 	IEnumerable<IPackage> Packages { get; }
 	IEnumerable<IAsset> SaveGames { get; }
 
-	IPackage? GetPackageById(IPackageIdentity identity);
-	IPackage? GetPackageByFolder(string folder);
-	List<IPackage> GetModsByName(string modName);
+	ILocalPackageData? GetPackageById(IPackageIdentity identity);
+	ILocalPackageData? GetPackageByFolder(string folder);
+	List<ILocalPackageData> GetModsByName(string modName);
 	void AddPackage(IPackage package);
 	void RemovePackage(IPackage package);
 	void SetPackages(List<IPackage> content);

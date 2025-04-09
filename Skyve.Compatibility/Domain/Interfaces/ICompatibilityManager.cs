@@ -11,7 +11,7 @@ public interface ICompatibilityManager
 
 	IEnumerable<IPackage> GetPackagesThatReference(IPackageIdentity package, bool withExcluded = false);
 	ICompatibilityInfo GetCompatibilityInfo(IPackageIdentity package, bool noCache = false, bool cacheOnly = false);
-	IPackageIdentity GetFinalSuccessor(IPackageIdentity item);
+	ICompatibilityPackageIdentity GetFinalSuccessor(ICompatibilityPackageIdentity package);
 	NotificationType GetNotification(ICompatibilityInfo info);
 	bool IsSnoozed(ICompatibilityItem reportItem);
 	void ResetSnoozes();

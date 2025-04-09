@@ -61,7 +61,7 @@ public class CompatibilityManager : ICompatibilityManager
 		_userService = userService;
 		_saveHandler = saveHandler;
 		_citiesManager = citiesManager;
-		_compatibilityHelper = new CompatibilityHelper(this, _settings, _packageManager, _packageUtil, _workshopService, _skyveDataManager);
+		_compatibilityHelper = new CompatibilityHelper(this, _settings, _packageManager, _packageUtil, _workshopService, _skyveDataManager, _dlcManager);
 
 		LoadSnoozedData();
 
@@ -242,7 +242,7 @@ public class CompatibilityManager : ICompatibilityManager
 		return info.ReportItems?.Any() == true ? info.ReportItems.Max(x => IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
 	}
 
-	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)
+	public ICompatibilityPackageIdentity GetFinalSuccessor(ICompatibilityPackageIdentity package)
 	{
 		//if (!CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
 		//{
@@ -268,7 +268,7 @@ public class CompatibilityManager : ICompatibilityManager
 		return package;
 	}
 
-	internal IEnumerable<IPackage> FindPackage(IIndexedPackageCompatibilityInfo package, bool withAlternativesAndSuccessors)
+	internal IEnumerable<ILocalPackageIdentity> FindPackage(IIndexedPackageCompatibilityInfo package, bool withAlternativesAndSuccessors)
 	{
 		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Id));
 
@@ -277,7 +277,7 @@ public class CompatibilityManager : ICompatibilityManager
 			yield return localPackage;
 		}
 
-		localPackage = _packageManager.GetModsByName(Path.GetFileName(package.FileName)).FirstOrDefault(x => x.IsLocal);
+		localPackage = _packageManager.GetModsByName(Path.GetFileName(package.FileName)).FirstOrDefault(x => x.IsLocal());
 
 		if (localPackage is not null)
 		{
@@ -335,7 +335,7 @@ public class CompatibilityManager : ICompatibilityManager
 					info.Add(ReportType.Compatibility
 						, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
 						, workshopInfo?.Name
-						, duplicate.Select(x => new GenericLocalPackageIdentity(x.Id, x.Name, x.Url, x.LocalData?.Folder, x.LocalData?.FilePath, x.LocalData?.FileSize ?? default, x.LocalData?.LocalTime ?? default)).ToArray());
+						, duplicate.Select(x => new CompatibilityPackageReference(x)).ToArray());
 				}
 			}
 		}
@@ -364,7 +364,7 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 		else if (stability is PackageStability.BrokenFromPatch)
 		{
-			if (!_compatibilityHelper.IsPackageEnabled(package.Id, false))
+			if (!_compatibilityHelper.IsPackageEnabled(package, false))
 			{
 				stability = PackageStability.BrokenFromPatchSafe;
 			}
@@ -376,7 +376,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (stability is PackageStability.BrokenFromNewVersion)
 		{
-			if (!_compatibilityHelper.IsPackageEnabled(package.Id, false))
+			if (!_compatibilityHelper.IsPackageEnabled(package, false))
 			{
 				stability = PackageStability.BrokenFromNewVersionSafe;
 			}
@@ -386,7 +386,7 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
-		if (packageData.Id > 0 && !_compatibilityHelper.IsPackageEnabled(package.Id, false))
+		if (packageData.Id > 0 && !_compatibilityHelper.IsPackageEnabled(package, false))
 		{
 			var requiredFor = GetRequiredFor(packageData.Id);
 
@@ -399,7 +399,7 @@ public class CompatibilityManager : ICompatibilityManager
 					Type = ReportType.RequiredItem,
 					Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
 					PackageName = package.CleanName(true),
-					Packages = requiredFor.ToArray(x => new GenericLocalPackageIdentity(x))
+					Packages = [.. requiredFor]
 				});
 			}
 		}
@@ -476,17 +476,42 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
-		if (packageData.RequiredDLCs?.Any() ?? false)
+		if (!packageData.IndexedInteractions.ContainsKey(InteractionType.RequiredPackages)
+			&& !packageData.IndexedInteractions.ContainsKey(InteractionType.OptionalPackages)
+			&& package.IsIncluded()
+			&& (workshopInfo?.Requirements.Any(x => x is not IDlcInfo) ?? false))
 		{
-			var missing = packageData.RequiredDLCs.Where(x => !_dlcManager.IsAvailable(x));
+			_compatibilityHelper.HandleInteraction(info, new PackageInteraction
+			{
+				Type = InteractionType.RequiredPackages,
+				Action = StatusAction.SubscribeToPackages,
+				Packages = workshopInfo?.Requirements.Where(x => x is not IDlcInfo).ToList(x => new CompatibilityPackageReference(x))
+			});
+		}
 
-			if (missing.Any())
+		if (package.IsIncluded() && ((packageData.RequiredDLCs?.Any() ?? false) || (workshopInfo?.Requirements.Any(x => x is IDlcInfo) ?? false)))
+		{
+			var missing = new List<CompatibilityPackageReference>();
+
+			foreach (var item in packageData.RequiredDLCs ?? [])
+			{
+				if (!_dlcManager.IsAvailable(item))
+					missing.Add(new CompatibilityPackageReference(_dlcManager.TryGetDlc(item)));
+			}
+
+			foreach (var item in workshopInfo?.Requirements?.OfType<IDlcInfo>() ?? [])
+			{
+				if (!_dlcManager.IsAvailable(item))
+					missing.Add(new CompatibilityPackageReference(item));
+			}
+
+			if (missing.Count > 0)
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus
 				{
 					Type = StatusType.MissingDlc,
 					Action = StatusAction.NoAction,
-					Packages = missing.Select(x => (ulong)x).ToArray()
+					Packages = missing
 				});
 			}
 		}
@@ -521,7 +546,7 @@ public class CompatibilityManager : ICompatibilityManager
 			info.Add(ReportType.Stability,
 				new StabilityStatus(PackageStability.Local, null, false),
 				_packageNameUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Id)), true),
-				[new GenericLocalPackageIdentity(packageData.Id)]);
+				[new CompatibilityPackageReference(packageData)]);
 		}
 
 		if (!package.IsLocal() && !author.Malicious && isCompatible)
@@ -546,7 +571,7 @@ public class CompatibilityManager : ICompatibilityManager
 		return ExtensionClass.IsPatternMatch(_citiesManager.GameVersion, version);
 	}
 
-	internal List<ulong>? GetRequiredFor(ulong id)
+	internal List<ICompatibilityPackageIdentity>? GetRequiredFor(ulong id)
 	{
 		return _compatibilityHelper.GetRequiredFor(id);
 	}
@@ -561,7 +586,7 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			foreach (var requirement in localPackage.GetWorkshopInfo()?.Requirements ?? [])
 			{
-				if (GetFinalSuccessor(requirement)?.Id == package.Id)
+				if (GetFinalSuccessor(new CompatibilityPackageReference(requirement))?.Id == package.Id)
 				{
 					yield return localPackage;
 				}
