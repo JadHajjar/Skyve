@@ -23,8 +23,8 @@ public interface IPlaysetManager
 	Task<bool> RenamePlayset(IPlayset playset, string text);
 	Task ActivatePlayset(IPlayset playset);
 	Task Initialize();
-	Task SetIncludedForAll(IPackageIdentity package, bool value);
-	Task SetIncludedForAll(IEnumerable<IPackageIdentity> packages, bool value);
+	Task SetIncludedForAll(IPackageIdentity package, bool value, bool withVersion = true, bool promptForDependencies = true);
+	Task SetIncludedForAll(IEnumerable<IPackageIdentity> packages, bool value, bool withVersion = true, bool promptForDependencies = true);
 	Task SetEnabledForAll(IPackageIdentity package, bool value);
 	Task SetEnabledForAll(IEnumerable<IPackageIdentity> packages, bool value);
 	Task<IPlayset?> ClonePlayset(IPlayset playset);

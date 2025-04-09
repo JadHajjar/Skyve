@@ -3,7 +3,6 @@ using Skyve.App.UserInterface.Panels;
 using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
-using Skyve.Domain;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -25,6 +24,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	private readonly IModUtil _modUtil;
 	private readonly IWorkshopService _workshopService;
 	private readonly IPackageNameUtil _packageNameUtil;
+	private readonly IImageService _imageService;
 	private readonly ICompatibilityActionsHelper _compatibilityActions;
 
 	private PackageSorting sorting;
@@ -45,7 +45,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		DynamicSizing = true;
 		AllowDrop = true;
 
-		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityActions, out _compatibilityManager, out _packageUtil, out _dlcManager, out _settings, out _modUtil, out _modLogicManager, out _workshopService, out _packageNameUtil);
+		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityActions, out _compatibilityManager, out _packageUtil, out _dlcManager, out _settings, out _modUtil, out _modLogicManager, out _workshopService, out _packageNameUtil, out _imageService);
 	}
 
 	protected override void OnCreateControl()
@@ -570,16 +570,16 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		e.DrawableItem.CachedHeight = rectangle.Y - e.ClipRectangle.Y + bottomText + Padding.Vertical + GridPadding.Vertical;
 	}
 
-	private int DrawPackage(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ICompatibilityItem Message, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	private int DrawPackage(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ICompatibilityItem Message, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
 		e.Graphics.FillRoundedRectangleWithShadow(rectangle.Pad(GridPadding.Left), UI.Scale(5), GridPadding.Left);
 
-		var thumbRect = rectangle.ClipTo(rectangle.Width).Pad(GridPadding.Left + GridPadding.Top);
+		var thumbRect = rectangle.ClipTo(package.IsDlc ? ((rectangle.Width * 215 / 460) + GridPadding.Left + GridPadding.Top) : rectangle.Width).Pad(GridPadding.Left + GridPadding.Top);
 		var textRect = rectangle.Pad(GridPadding.Left + GridPadding.Top, GridPadding.Vertical + thumbRect.Height + GridPadding.Top, GridPadding.Left + GridPadding.Top, GridPadding.Bottom);
 
 		DrawThumbnail(e, package, thumbRect, cursor);
 
-		rectangle.Height = thumbRect.Width + GridPadding.Vertical;
+		rectangle.Height = thumbRect.Height + GridPadding.Vertical;
 
 		rectangle.Height += DrawTitleAndTags(e, package, textRect, cursor) + GridPadding.Top;
 
@@ -628,25 +628,26 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		return rectangle.Height + (GridPadding.Left * 2);
 	}
 
-	private int DrawThumbnail(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	private int DrawThumbnail(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		var thumbnail = package.GetThumbnail();
+		Bitmap? thumbnail;
 
-		if (thumbnail is null)
+		if (package.IsDlc)
 		{
-			using var generic = IconManager.GetIcon(package.IsCodeMod() ? "Mods" : "Package", rectangle.Height).Color(BackColor);
-			using var brush = new SolidBrush(FormDesign.Design.IconColor);
-
-			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
-			e.Graphics.DrawImage(generic, rectangle.CenterR(generic.Size));
-		}
-		else if (package.IsLocal())
-		{
-			using var unsatImg = new Bitmap(thumbnail, rectangle.Size).Tint(Sat: 0);
-
-			drawThumbnail(unsatImg);
+			var thumbnailUrl = package.Id > 10 ? $"https://cdn.akamai.steamstatic.com/steam/apps/{package.Id}/header.jpg" : null;
+			thumbnail = thumbnailUrl is null or "" ? null : _imageService.GetImage(thumbnailUrl, true, $"Dlc_{package.Id}.png", false).Result;
+			thumbnail ??= Properties.Resources.Cities2Dlc;
 		}
 		else
+		{
+			thumbnail = package.GetThumbnail();
+		}
+
+		thumbnail ??= package.IsLocal()
+			? package is IAsset ? AssetThumbUnsat : package.IsCodeMod() ? ModThumbUnsat : package.IsLocal() ? PackageThumbUnsat : WorkshopThumbUnsat
+			: package is IAsset ? AssetThumb : package.IsCodeMod() ? ModThumb : package.IsLocal() ? PackageThumb : WorkshopThumb;
+
+		if (thumbnail is not null)
 		{
 			drawThumbnail(thumbnail);
 		}
@@ -662,15 +663,24 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, rectangle, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
-	private int DrawTitleAndTags(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	private int DrawTitleAndTags(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22)), ContentAlignment.TopRight);
-		e.Rects._modDotsRects[package] = dotsRect;
-		DrawDots(e, dotsRect, cursor);
+		if (!package.IsDlc)
+		{
+			var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22)), ContentAlignment.TopRight);
+			e.Rects._modDotsRects[package] = dotsRect;
+			DrawDots(e, dotsRect, cursor);
 
-		rectangle = rectangle.Pad(0, 0, dotsRect.Width, 0);
+			rectangle = rectangle.Pad(0, 0, dotsRect.Width, 0);
+		}
 
 		var text = package.CleanName(out var tags);
+
+		if (package.IsDlc)
+		{
+			tags.Clear();
+			text = text.RegexRemove("^.+?- ").RegexRemove("(Content )?Creator Pack: ");
+		}
 
 		using var font = UI.Font(7.25F, FontStyle.Bold);
 		var textRect = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
@@ -814,7 +824,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 						ServiceCenter.Get<IInterfaceService>().OpenPackagePage(rect.Key, false);
 					}
 				}
-				else if (e.Button == MouseButtons.Right)
+				else if (e.Button == MouseButtons.Right && !rect.Key.IsDlc)
 				{
 					var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(rect.Key);
 
@@ -1032,10 +1042,10 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		public Rectangle AuthorRect;
 		public Rectangle DotsRect;
 
-		public readonly Dictionary<IPackageIdentity, (Rectangle Rectangle, ICompatibilityActionInfo Action)> _actionRects = [];
-		public readonly Dictionary<IPackageIdentity, Rectangle> _modRects = [];
-		public readonly Dictionary<IPackageIdentity, Rectangle> _modDotsRects = [];
-		public readonly Dictionary<IPackageIdentity, int> _modHeights = [];
+		public readonly Dictionary<ICompatibilityPackageIdentity, (Rectangle Rectangle, ICompatibilityActionInfo Action)> _actionRects = [];
+		public readonly Dictionary<ICompatibilityPackageIdentity, Rectangle> _modRects = [];
+		public readonly Dictionary<ICompatibilityPackageIdentity, Rectangle> _modDotsRects = [];
+		public readonly Dictionary<ICompatibilityPackageIdentity, int> _modHeights = [];
 		public Rectangle bulkActionRect;
 		public Rectangle recommendedActionRect;
 		public Rectangle snoozeRect;

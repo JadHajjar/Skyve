@@ -2,11 +2,12 @@
 using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
-using Skyve.Domain.Systems;
 
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using static Skyve.App.UserInterface.Lists.ItemListControl;
 
 namespace Skyve.App.UserInterface.CompatibilityReport;
 
@@ -402,7 +403,7 @@ public class CompatibilityMessageControl : SlickControl
 	{
 		e.Graphics.FillRoundedRectangleWithShadow(rectangle.Pad(Padding.Left), UI.Scale(5), Padding.Left);
 
-		var thumbRect = rectangle.ClipTo(package.IsDlc ? (rectangle.Width * 215 / 460 + (Padding.Left + Padding.Top)) : rectangle.Width).Pad(Padding.Left + Padding.Top);
+		var thumbRect = rectangle.ClipTo(package.IsDlc ? ((rectangle.Width * 215 / 460) + Padding.Left + Padding.Top) : rectangle.Width).Pad(Padding.Left + Padding.Top);
 		var textRect = rectangle.Pad(Padding.Left + Padding.Top, Padding.Vertical + thumbRect.Height, Padding.Left + Padding.Top, Padding.Bottom);
 
 		DrawThumbnail(e, package, thumbRect, cursor);
@@ -465,23 +466,17 @@ public class CompatibilityMessageControl : SlickControl
 			var thumbnailUrl = package.Id > 10 ? $"https://cdn.akamai.steamstatic.com/steam/apps/{package.Id}/header.jpg" : null;
 			thumbnail = thumbnailUrl is null or "" ? null : _imageService.GetImage(thumbnailUrl, true, $"Dlc_{package.Id}.png", false).Result;
 			thumbnail ??= Properties.Resources.Cities2Dlc;
-		}else thumbnail = package.GetThumbnail();
-
-		if (thumbnail is null)
-		{
-			using var generic = IconManager.GetIcon(package.IsCodeMod() ? "Mods" : "Package", rectangle.Height).Color(BackColor);
-			using var brush = new SolidBrush(FormDesign.Design.IconColor);
-
-			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
-			e.Graphics.DrawImage(generic, rectangle.CenterR(generic.Size));
-		}
-		else if (!package.IsDlc && package.IsLocal())
-		{
-			using var unsatImg = new Bitmap(thumbnail, rectangle.Size).Tint(Sat: 0);
-
-			drawThumbnail(unsatImg);
 		}
 		else
+		{
+			thumbnail = package.GetThumbnail();
+		}
+
+		thumbnail ??= package.IsLocal()
+			? package is IAsset ? AssetThumbUnsat : package.IsCodeMod() ? ModThumbUnsat : package.IsLocal() ? PackageThumbUnsat : WorkshopThumbUnsat
+			: package is IAsset ? AssetThumb : package.IsCodeMod() ? ModThumb : package.IsLocal() ? PackageThumb : WorkshopThumb;
+
+		if (thumbnail is not null)
 		{
 			drawThumbnail(thumbnail);
 		}

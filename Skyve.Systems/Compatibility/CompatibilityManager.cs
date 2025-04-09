@@ -493,16 +493,20 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			var missing = new List<CompatibilityPackageReference>();
 
-			foreach (var item in packageData.RequiredDLCs ?? [])
+			foreach (var dlc in packageData.RequiredDLCs ?? [])
 			{
-				if (!_dlcManager.IsAvailable(item))
-					missing.Add(new CompatibilityPackageReference(_dlcManager.TryGetDlc(item)));
+				if (dlc > 10 && !_dlcManager.IsAvailable(dlc))
+				{
+					missing.Add(new CompatibilityPackageReference(_dlcManager.TryGetDlc(dlc)));
+				}
 			}
 
-			foreach (var item in workshopInfo?.Requirements?.OfType<IDlcInfo>() ?? [])
+			foreach (var dlc in workshopInfo?.Requirements?.OfType<IDlcInfo>() ?? [])
 			{
-				if (!_dlcManager.IsAvailable(item))
-					missing.Add(new CompatibilityPackageReference(item));
+				//if (dlc.Id > 10 && !_dlcManager.IsAvailable(dlc))
+				{
+					missing.Add(new CompatibilityPackageReference(dlc));
+				}
 			}
 
 			if (missing.Count > 0)
