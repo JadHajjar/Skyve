@@ -11,4 +11,6 @@ public interface IDlcInfo
 	float Discount { get; set; }
 	string[]? Creators { get; set; }
 	string? Url { get; }
+	bool IsFree { get; set; }
+	string? ExpectedRelease { get; set; }
 }

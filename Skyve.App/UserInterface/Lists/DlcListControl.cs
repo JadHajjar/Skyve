@@ -2,6 +2,7 @@
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
@@ -48,7 +49,26 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 	protected override IEnumerable<IDrawableItem<IDlcInfo>> OrderItems(IEnumerable<IDrawableItem<IDlcInfo>> items)
 	{
-		return items.OrderByDescending(x => x.Item.ReleaseDate);
+		return items.OrderByDescending(x =>
+		{
+			if (x.Item.ReleaseDate.Year > 1)
+			{
+				return x.Item.ReleaseDate;
+			}
+
+			if (int.TryParse(x.Item.ExpectedRelease, out var year))
+			{
+				return new DateTime(year, 12, 32);
+			}
+
+			var match = Regex.Match(x.Item.ExpectedRelease, @"Q(\d) (\d+)");
+			if (match.Success)
+			{
+				return new DateTime(int.Parse(match.Groups[2].Value), int.Parse(match.Groups[1].Value) * 3, 1);
+			}
+
+			return DateTime.MaxValue;
+		});
 	}
 
 	protected override void OnItemMouseClick(DrawableItem<IDlcInfo, Rectangles> item, MouseEventArgs e)
@@ -107,13 +127,9 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		var height = DrawTitleAndTagsAndVersion(e);
 
-		if (string.IsNullOrEmpty(e.Item.Price) && (e.Item.ReleaseDate == DateTime.MinValue || e.Item.ReleaseDate > DateTime.UtcNow.Date))
+		if (!_dlcManager.IsAvailable(e.Item))
 		{
-			e.Graphics.DrawLabel("TBD", null, FormDesign.Design.InfoColor, e.Rects.TextRect.ClipTo(height - e.Rects.TextRect.Y), ContentAlignment.BottomRight);
-		}
-		else if (!_dlcManager.IsAvailable(e.Item))
-		{
-			e.Graphics.DrawLabel(e.Item.Price.IfEmpty(Locale.Free), null, FormDesign.Design.GreenColor, e.Rects.TextRect.ClipTo(height - e.Rects.TextRect.Y), ContentAlignment.BottomRight);
+			e.Graphics.DrawLabel(e.Item.IsFree ? Locale.Free : e.Item.Price, null, FormDesign.Design.GreenColor, e.Rects.TextRect.ClipTo(height - e.Rects.TextRect.Y), ContentAlignment.BottomRight);
 		}
 		else
 		{
@@ -201,10 +217,9 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 			y += (int)e.Graphics.Measure(subText, smallFont, e.Rects.TextRect.Width - UI.Scale(50)).Height;
 		}
 
-		if (e.Item.ReleaseDate.Year > 1)
 		{
 			using var smallBrush = new SolidBrush(FormDesign.Design.LabelColor);
-			var subText = _settings.UserSettings.ShowDatesRelatively
+			var subText = e.Item.ReleaseDate.Year <= 1 ? e.Item.ExpectedRelease : _settings.UserSettings.ShowDatesRelatively
 				? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false)
 				: e.Item.ReleaseDate.ToLocalTime().ToString("D");
 
