@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
+using static Skyve.App.UserInterface.Lists.ItemListControl;
+
 namespace Skyve.App.UserInterface.Content;
 public class MiniPackageControl : SlickControl
 {
@@ -154,28 +156,22 @@ public class MiniPackageControl : SlickControl
 		{
 			imageRect.Width = imageRect.Height * 460 / 215;
 
-			image ??= Properties.Resources.Cities2Dlc;
+			image ??= Package.Id == 2427731 ? Properties.Resources.Cities2Landmark : Properties.Resources.Cities2Dlc;
+		}
+		else if (Package is null)
+		{
+			image ??= PackageThumb;
+		}
+		else
+		{
+			image ??= Package.IsLocal()
+				? Package is IAsset ? AssetThumbUnsat : Package.IsCodeMod() ? ModThumbUnsat : Package.IsLocal() ? PackageThumbUnsat : WorkshopThumbUnsat
+				: Package is IAsset ? AssetThumb : Package.IsCodeMod() ? ModThumb : Package.IsLocal() ? PackageThumb : WorkshopThumb;
 		}
 
 		if (image is not null)
 		{
-			if (!IsDlc && Package!.IsLocal())
-			{
-				using var unsatImg = new Bitmap(image, imageRect.Size).Tint(Sat: 0);
-				e.Graphics.DrawRoundedImage(unsatImg, imageRect, Padding.Left / 2, BackColor);
-			}
-			else
-			{
-				e.Graphics.DrawRoundedImage(image, imageRect, Padding.Left / 2, BackColor);
-			}
-		}
-		else
-		{
-			using var generic = IconManager.GetIcon(IsDlc ? "Dlc" : "Package", imageRect.Height).Color(BackColor);
-			using var brush = new SolidBrush(FormDesign.Design.IconColor);
-
-			e.Graphics.FillRoundedRectangle(brush, imageRect, UI.Scale(2));
-			e.Graphics.DrawImage(generic, imageRect.CenterR(generic.Size));
+			e.Graphics.DrawRoundedImage(image, imageRect, Padding.Left / 2, BackColor);
 		}
 
 		if (HoverState.HasFlag(HoverState.Hovered) && textRect.Contains(PointToClient(Cursor.Position)))

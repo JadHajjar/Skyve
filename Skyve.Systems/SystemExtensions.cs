@@ -112,6 +112,11 @@ public static class SystemExtensions
 			return package.LocalData;
 		}
 
+		if (identity is ICompatibilityInfo compatibilityInfo && compatibilityInfo.LocalData is not null)
+		{
+			return compatibilityInfo.LocalData;
+		}
+
 		return PackageManager.GetPackageById(identity);
 	}
 

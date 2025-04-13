@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Skyve.App.UserInterface.Content;
+
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,6 +10,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 	private readonly Dictionary<IUser, int> _counts = [];
 	private readonly IImageService _imageManager;
 	private readonly IUserService _userService;
+	private readonly IWorkshopService _workshopService;
 
 	[DefaultValue(false)]
 	public bool HideUsage { get; set; }
@@ -16,28 +19,12 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 	{
 		_imageManager = ServiceCenter.Get<IImageService>();
 		_userService = ServiceCenter.Get<IUserService>();
+		_workshopService = ServiceCenter.Get<IWorkshopService>();
 	}
 
-	public void SetItems<T>(IEnumerable<T?> enumerable) where T : IPackageIdentity
+	public void RefreshItems()
 	{
-		lock (this)
-		{
-			_counts.Clear();
-
-			foreach (var item in enumerable.SelectWhereNotNull(x => x?.GetWorkshopInfo()?.Author))
-			{
-				if (_counts.ContainsKey(item!))
-				{
-					_counts[item!]++;
-				}
-				else
-				{
-					_counts[item!] = 1;
-				}
-			}
-
-			Items = [.. _counts.Keys];
-		}
+		Items = _workshopService.GetKnownUsers().ToArray();
 	}
 
 	protected override IEnumerable<IUser> OrderItems(IEnumerable<IUser> items)
@@ -59,27 +46,11 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 
 		var text = item.Name;
 
-#if CS1
-		var icon = _imageManager.GetImage(item.AvatarUrl, true).Result;
-		var avatarRect = rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
-
-		if (icon != null)
-		{
-			e.Graphics.DrawRoundedImage(icon, avatarRect, UI.Scale(4));
-		}
-
-		if (_userService.IsUserVerified(item))
-		{
-			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
-
-			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-UI.Scale(2)));
-
-			using var img = IconManager.GetIcon("Check", checkRect.Height);
-			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
-		}
+		using var brush = new SolidBrush(hoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : Color.FromArgb(hoverState.HasFlag(HoverState.Hovered) ? 255 : 200, UserIcon.GetUserColor(item.Id?.ToString() ?? string.Empty, true)));
+	
+		DrawAuthorImage(e, item, rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft), brush.Color, hoverState);
 
 		rectangle = rectangle.Pad(rectangle.Height + Padding.Left, 0, 0, 0);
-#endif
 
 		if (!HideUsage && _counts.ContainsKey(item!))
 		{
@@ -89,10 +60,43 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 			rectangle.Width -= (int)e.Graphics.Measure(Locale.ItemsCount.FormatPlural(_counts[item!]), Font).Width;
 		}
 
-		using var brush = new SolidBrush(foreColor);
 		using var font = UI.Font(8.25F).FitTo(text, rectangle, e.Graphics);
 		using var format = new StringFormat { LineAlignment = StringAlignment.Center };
 		e.Graphics.DrawString(text, font, brush, rectangle, format);
+	}
+
+	private void DrawAuthorImage(PaintEventArgs e, IUser author, Rectangle rectangle, Color color, HoverState hoverState)
+	{
+		var image = _workshopService.GetUser(author).GetThumbnail();
+
+		if (image != null)
+		{
+			e.Graphics.DrawRoundImage(image, rectangle.Pad((int)(1.5 * UI.FontScale)));
+
+			if (hoverState.HasFlag(HoverState.Hovered))
+			{
+				using var pen = new Pen(color, 1.5f);
+
+				e.Graphics.DrawEllipse(pen, rectangle.Pad((int)(1.5 * UI.FontScale)));
+			}
+		}
+		else
+		{
+			using var authorIcon = IconManager.GetIcon("Author", rectangle.Height);
+
+			e.Graphics.DrawImage(authorIcon.Color(color, color.A), rectangle.CenterR(authorIcon.Size));
+		}
+
+		if (_userService.IsUserVerified(author))
+		{
+			var checkRect = rectangle.Align(new Size(rectangle.Height / 3, rectangle.Height / 3), ContentAlignment.BottomRight);
+
+			using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor);
+			e.Graphics.FillEllipse(greenBrush, checkRect.Pad(-UI.Scale(2)));
+
+			using var img = IconManager.GetIcon("Check", checkRect.Height);
+			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
+		}
 	}
 
 	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<IUser> items)

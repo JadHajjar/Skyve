@@ -18,6 +18,7 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 	public string Url { get; set; }
 	public List<ReportItem> ReportItems { get; set; }
 	[JsonIgnore] public IIndexedPackageCompatibilityInfo? Data { get; }
+	[JsonIgnore] public ILocalPackageData? LocalData { get; }
 
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data;
 	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast<ICompatibilityItem>();
@@ -39,6 +40,7 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 		Url = package.Url ?? string.Empty;
 		Data = packageData;
 		ReportItems = [];
+		LocalData = package.GetLocalPackage();
 	}
 
 	public void Add(ReportType type, IGenericPackageStatus status, string? packageName, CompatibilityPackageReference[] packages)
@@ -54,7 +56,7 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 		});
 	}
 
-	public void AddWithLocale(ReportType type, IGenericPackageStatus status, string? packageName, string localeKey, object[] localeParams)
+	public void AddWithLocale(ReportType type, IGenericPackageStatus status, string? _, string localeKey, object[] localeParams)
 	{
 		ReportItems.Add(new ReportItem
 		{

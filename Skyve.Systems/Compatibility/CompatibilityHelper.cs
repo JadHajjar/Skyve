@@ -105,7 +105,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.IsIncluded() != true)
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && !_packageAvailabilityService.IsPackageEnabled(info, false))
 		{
 			return;
 		}
@@ -119,7 +119,7 @@ public class CompatibilityHelper
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
 		{
-			if (info.IsIncluded() != true)
+			if (!_packageAvailabilityService.IsPackageEnabled(info, false))
 			{
 				return;
 			}

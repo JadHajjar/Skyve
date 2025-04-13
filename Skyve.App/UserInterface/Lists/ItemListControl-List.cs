@@ -197,7 +197,7 @@ public partial class ItemListControl
 			}
 		}
 
-		protected override IDrawableItemRectangles<IPackageIdentity> GenerateRectangles(IPackageIdentity item, Rectangle rectangle)
+		protected override IDrawableItemRectangles<IPackageIdentity> GenerateRectangles(IPackageIdentity item, Rectangle rectangle, IDrawableItemRectangles<IPackageIdentity> current)
 		{
 			if (GridView)
 			{

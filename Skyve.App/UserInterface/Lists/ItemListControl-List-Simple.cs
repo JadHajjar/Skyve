@@ -279,7 +279,7 @@ public abstract partial class ItemListControl
 			}
 		}
 
-		protected override IDrawableItemRectangles<IPackageIdentity> GenerateRectangles(IPackageIdentity item, Rectangle rectangle)
+		protected override IDrawableItemRectangles<IPackageIdentity> GenerateRectangles(IPackageIdentity item, Rectangle rectangle, IDrawableItemRectangles<IPackageIdentity> current)
 		{
 			return GridView ? GenerateGridRectangles(item, rectangle) : GenerateListRectangles(item, rectangle);
 		}

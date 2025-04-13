@@ -9,6 +9,7 @@ using Skyve.Compatibility.Domain.Interfaces;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -151,7 +152,7 @@ public partial class ContentList : SlickControl
 	{
 		var items = new List<IPackageIdentity>(ListControl.Items);
 
-		DD_Author.SetItems(items);
+		DD_Author.RefreshItems();
 		DD_Tags.Items = _tagUtil.GetDistinctTags().ToArray();
 
 		if (TagsControl is not null)
@@ -332,7 +333,7 @@ public partial class ContentList : SlickControl
 	{
 		base.UIChanged();
 
-		I_SortOrder.Padding = I_Refresh.Padding = UI.Scale(new Padding(4));
+		I_SortOrder.Padding = I_Refresh.Padding = UI.Scale(new Padding(5));
 
 		P_FiltersContainer.Padding = TB_Search.Margin = B_Filters.Padding = DD_SearchTime.Margin
 			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5));
@@ -352,8 +353,10 @@ public partial class ContentList : SlickControl
 
 		var size = UI.Scale(30) - 6;
 
-		TB_Search.MaximumSize = I_Refresh.MaximumSize = B_Filters.MaximumSize = I_SortOrder.MaximumSize = DD_Sorting.MaximumSize = DD_SearchTime.MaximumSize = new Size(9999, size);
-		TB_Search.MinimumSize = I_Refresh.MinimumSize = B_Filters.MinimumSize = I_SortOrder.MinimumSize = DD_Sorting.MinimumSize = DD_SearchTime.MinimumSize = new Size(0, size);
+		TB_Search.MaximumSize = B_Filters.MaximumSize = DD_Sorting.MaximumSize = DD_SearchTime.MaximumSize = new Size(9999, size);
+		TB_Search.MinimumSize = B_Filters.MinimumSize = DD_Sorting.MinimumSize = DD_SearchTime.MinimumSize = new Size(0, size);
+		
+		I_SortOrder.Size = I_Refresh.Size = new(size, size);
 	}
 
 	private void B_Filters_Click(object sender, MouseEventArgs? e)
@@ -537,7 +540,9 @@ public partial class ContentList : SlickControl
 
 		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.GetPackage()?.IsCodeMod)
+			var isCodeMod = item.IsCodeMod() && (item.GetPackageInfo()?.Type is null or PackageType.GenericPackage);
+
+			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == isCodeMod)
 			{
 				return true;
 			}
@@ -616,7 +621,7 @@ public partial class ContentList : SlickControl
 			}
 		}
 
-		if (Page is not SkyvePage.Workshop && DD_Tags.SelectedItems.Any())
+		if (DD_Tags.SelectedItems.Any())
 		{
 			if (!_tagUtil.HasAllTags(item, DD_Tags.SelectedItems))
 			{

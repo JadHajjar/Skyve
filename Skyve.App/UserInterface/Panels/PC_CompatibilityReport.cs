@@ -50,6 +50,9 @@ public partial class PC_CompatibilityReport : PanelContent
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
 		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
+		notificationFilterControl.ListControl = ListControl;
+		notificationFilterControl.SelectedGroupChanged += (_, _) => ListControl.DoFilterChanged();
+
 		I_Actions = new IncludeAllButton(() => ListControl.FilteredItems.Cast<IPackageIdentity>().ToList()!);
 		I_Actions.ActionClicked += I_Actions_Click;
 		I_Actions.IncludeAllClicked += IncludeAll;
@@ -83,6 +86,8 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			CompatibilityManager_ReportProcessed();
 		}
+
+		I_SortOrder.ImageName = ListControl.SortDescending ? "SortDesc" : "SortAsc";
 
 		_delayedSearch = new(350, DelayedSearch);
 
@@ -124,8 +129,9 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		base.UIChanged();
 
-		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
-			= I_SortOrder.Padding
+		I_SortOrder.Padding = I_Refresh.Padding = UI.Scale(new Padding(5));
+
+		P_FiltersContainer.Padding = TB_Search.Margin = B_Filters.Padding
 			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5));
 
 		B_Filters.Size = B_Filters.GetAutoSize(true);
@@ -140,8 +146,10 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		var size = UI.Scale(30) - 6;
 
-		TB_Search.MaximumSize = I_Refresh.MaximumSize = B_Filters.MaximumSize = I_SortOrder.MaximumSize = DD_Sorting.MaximumSize = new Size(9999, size);
-		TB_Search.MinimumSize = I_Refresh.MinimumSize = B_Filters.MinimumSize = I_SortOrder.MinimumSize = DD_Sorting.MinimumSize = new Size(0, size);
+		TB_Search.MaximumSize = B_Filters.MaximumSize = DD_Sorting.MaximumSize = new Size(9999, size);
+		TB_Search.MinimumSize = B_Filters.MinimumSize = DD_Sorting.MinimumSize = new Size(0, size);
+
+		I_SortOrder.Size = I_Refresh.Size = new(size, size);
 	}
 
 	private void CompatibilityManager_ReportProcessed()
@@ -168,10 +176,11 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			reports.RemoveAll(x => x.GetNotification() <= NotificationType.Info);
 
+			notificationFilterControl.CurrentGroup = NotificationType.None;
 			ListControl.SetItems(reports);
 			ListControl.Loading = false;
 
-			DD_Author.SetItems(reports);
+			DD_Author.RefreshItems();
 		}
 		catch (Exception ex)
 		{
@@ -287,14 +296,11 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (keyData == (Keys.Control | Keys.Tab))
 		{
-			ListControl.Next();
 			return true;
 		}
 
 		if (keyData == (Keys.Control | Keys.Shift | Keys.Tab))
 		{
-
-			ListControl.Previous();
 			return true;
 		}
 
@@ -718,16 +724,21 @@ public partial class PC_CompatibilityReport : PanelContent
 		FilterChanged(sender, e);
 	}
 
-	private bool IsFilteredOut(IPackageIdentity item)
+	private bool IsFilteredOut(ICompatibilityInfo item)
 	{
 		if (!firstFilterPassed)
 		{
 			return false;
 		}
 
+		if (notificationFilterControl.CurrentGroup != NotificationType.None && item.GetNotification() != notificationFilterControl.CurrentGroup)
+		{
+			return true;
+		}
+
 		if (OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.GetPackage()?.IsLocal)
+			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.IsLocal())
 			{
 				return true;
 			}
@@ -735,7 +746,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.IsIncluded(out var partiallyIncluded) || partiallyIncluded))
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (_packageUtil.IsIncluded(item, out var partiallyIncluded) || partiallyIncluded))
 			{
 				return true;
 			}
@@ -743,7 +754,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (item.GetPackage()?.IsCodeMod == false || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != (item.GetLocalPackage()?.IsEnabled()))
+			if (OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 != _packageUtil.IsEnabled(item))
 			{
 				return true;
 			}
@@ -751,7 +762,9 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.GetPackage()?.IsCodeMod)
+			var isCodeMod = item.IsCodeMod() && (item.GetPackageInfo()?.Type is null or PackageType.GenericPackage);
+
+			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == isCodeMod)
 			{
 				return true;
 			}
@@ -783,7 +796,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			}
 		}
 
-		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.GetLocalPackage()?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
+		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.GetLocalPackageIdentity()?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
 		{
 			return true;
 		}
@@ -818,7 +831,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			return !_packageUtil.IsIncluded(item, DD_Playset.SelectedItem.Id);
 		}
 
-		if (!searchEmpty)
+		if (!searchEmpty && Page is not SkyvePage.Workshop)
 		{
 			for (var i = 0; i < searchTermsExclude.Count; i++)
 			{

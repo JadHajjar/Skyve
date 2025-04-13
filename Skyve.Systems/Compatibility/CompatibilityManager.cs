@@ -503,7 +503,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 			foreach (var dlc in workshopInfo?.Requirements?.OfType<IDlcInfo>() ?? [])
 			{
-				//if (dlc.Id > 10 && !_dlcManager.IsAvailable(dlc))
+				if (dlc.Id > 10 && !_dlcManager.IsAvailable(dlc))
 				{
 					missing.Add(new CompatibilityPackageReference(dlc));
 				}

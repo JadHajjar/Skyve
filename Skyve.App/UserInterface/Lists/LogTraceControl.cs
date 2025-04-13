@@ -142,7 +142,7 @@ public class LogTraceControl : SlickStackedListControl<ILogTrace, LogTraceContro
 		}
 	}
 
-	protected override IDrawableItemRectangles<ILogTrace> GenerateRectangles(ILogTrace item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<ILogTrace> GenerateRectangles(ILogTrace item, Rectangle rectangle, IDrawableItemRectangles<ILogTrace> current)
 	{
 		var rects = new Rectangles(item)
 		{

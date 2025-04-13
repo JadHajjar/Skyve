@@ -165,7 +165,7 @@ partial class ContentList
 			this.B_Filters.Location = new System.Drawing.Point(43, 3);
 			this.B_Filters.Name = "B_Filters";
 			this.B_Filters.Selected = false;
-			this.B_Filters.Size = new System.Drawing.Size(114, 28);
+			this.B_Filters.Size = new System.Drawing.Size(117, 28);
 			this.B_Filters.SpaceTriggersClick = true;
 			this.B_Filters.TabIndex = 1;
 			this.B_Filters.Text = "ShowFilters";
@@ -458,7 +458,7 @@ partial class ContentList
 			this.DD_Author.TabIndex = 6;
 			this.DD_Author.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
-			// DD_Profile
+			// DD_Playset
 			// 
 			this.DD_Playset.AccentBackColor = true;
 			this.DD_Playset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -467,7 +467,7 @@ partial class ContentList
 			this.DD_Playset.Font = new System.Drawing.Font("Nirmala UI", 15F);
 			this.DD_Playset.ItemHeight = 24;
 			this.DD_Playset.Location = new System.Drawing.Point(704, 90);
-			this.DD_Playset.Name = "DD_Profile";
+			this.DD_Playset.Name = "DD_Playset";
 			this.DD_Playset.Size = new System.Drawing.Size(228, 20);
 			this.DD_Playset.TabIndex = 10;
 			this.DD_Playset.SelectedItemChanged += new System.EventHandler(this.FilterChanged);

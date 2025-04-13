@@ -61,14 +61,15 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 				return new DateTime(year, 12, 32);
 			}
 
-			var match = Regex.Match(x.Item.ExpectedRelease, @"Q(\d) (\d+)");
+			var match = Regex.Match(x.Item.ExpectedRelease ?? string.Empty, @"Q(\d) (\d+)");
 			if (match.Success)
 			{
 				return new DateTime(int.Parse(match.Groups[2].Value), int.Parse(match.Groups[1].Value) * 3, 1);
 			}
 
 			return DateTime.MaxValue;
-		});
+		}).ThenByDescending(x => x.Item.Price)
+		.ThenBy(x => x.Item.Name);
 	}
 
 	protected override void OnItemMouseClick(DrawableItem<IDlcInfo, Rectangles> item, MouseEventArgs e)
@@ -120,7 +121,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 		if (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.CenterRect.Contains(CursorLocation))
 		{
-			e.Graphics.FillRoundedRectangleWithShadow(e.ClipRectangle, UI.Scale(5), UI.Scale(6), FormDesign.Design.AccentBackColor, Color.FromArgb(20, FormDesign.Design.AccentBackColor.MergeColor(FormDesign.Design.InfoColor)), true);
+			e.Graphics.FillRoundedRectangleWithShadow(e.ClipRectangle, UI.Scale(5), UI.Scale(6), FormDesign.Design.AccentBackColor, Color.FromArgb(10, FormDesign.Design.AccentBackColor.MergeColor(FormDesign.Design.InfoColor)), true);
 		}
 
 		DrawThumbnail(e);
@@ -172,7 +173,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		//}
 		//else
 		//{
-		drawThumbnail(thumbnail ?? Properties.Resources.Cities2Dlc);
+		drawThumbnail(thumbnail ?? (e.Item.Id == 2427731 ? Properties.Resources.Cities2Landmark : Properties.Resources.Cities2Dlc));
 		//}
 
 		void drawThumbnail(Bitmap image)
@@ -263,7 +264,7 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
 	}
 
-	protected override IDrawableItemRectangles<IDlcInfo> GenerateRectangles(IDlcInfo item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<IDlcInfo> GenerateRectangles(IDlcInfo item, Rectangle rectangle, IDrawableItemRectangles<IDlcInfo> current)
 	{
 		rectangle = rectangle.Pad(GridPadding.Left / 2);
 

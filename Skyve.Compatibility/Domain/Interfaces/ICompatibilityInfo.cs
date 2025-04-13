@@ -7,4 +7,5 @@ public interface ICompatibilityInfo : IPackageIdentity
 {
 	IPackageCompatibilityInfo? Info { get; }
 	IEnumerable<ICompatibilityItem> ReportItems { get; }
+	ILocalPackageData? LocalData { get; }
 }

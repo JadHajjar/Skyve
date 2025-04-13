@@ -153,7 +153,8 @@ public partial class ItemListControl
 		{
 			var checkRect = rectangle.Align(new Size(rectangle.Height / 3, rectangle.Height / 3), ContentAlignment.BottomRight);
 
-			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-UI.Scale(2)));
+			using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor);
+			e.Graphics.FillEllipse(greenBrush, checkRect.Pad(-UI.Scale(2)));
 
 			using var img = IconManager.GetIcon("Check", checkRect.Height);
 			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));

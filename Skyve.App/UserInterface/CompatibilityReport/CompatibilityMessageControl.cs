@@ -465,7 +465,7 @@ public class CompatibilityMessageControl : SlickControl
 		{
 			var thumbnailUrl = package.Id > 10 ? $"https://cdn.akamai.steamstatic.com/steam/apps/{package.Id}/header.jpg" : null;
 			thumbnail = thumbnailUrl is null or "" ? null : _imageService.GetImage(thumbnailUrl, true, $"Dlc_{package.Id}.png", false).Result;
-			thumbnail ??= Properties.Resources.Cities2Dlc;
+			thumbnail ??= package.Id == 2427731 ? Properties.Resources.Cities2Landmark : Properties.Resources.Cities2Dlc;
 		}
 		else
 		{

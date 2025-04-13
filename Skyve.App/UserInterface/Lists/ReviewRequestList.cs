@@ -49,7 +49,7 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		return items.OrderBy(x => x.Item.Timestamp);
 	}
 
-	protected override IDrawableItemRectangles<ReviewRequest> GenerateRectangles(ReviewRequest item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<ReviewRequest> GenerateRectangles(ReviewRequest item, Rectangle rectangle, IDrawableItemRectangles<ReviewRequest> current)
 	{
 		return new Rectangles(item);
 	}

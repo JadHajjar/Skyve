@@ -286,10 +286,10 @@ public partial class ItemListControl
 				var avatarRect = authorRect.Pad(padding).Align(CompactList ? UI.Scale(new Size(18, 18)) : new(authorRect.Height * 3 / 4, authorRect.Height * 3 / 4), ContentAlignment.MiddleLeft);
 				var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
-				e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-UI.Scale(2)));
+				using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor);
+				e.Graphics.FillEllipse(greenBrush, checkRect.Pad(-UI.Scale(2)));
 
 				using var img = IconManager.GetIcon("Check", checkRect.Height);
-
 				e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 			}
 

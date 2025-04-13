@@ -39,6 +39,7 @@ public interface IWorkshopService
 	Task<IModComment?> PostNewComment(IPackageIdentity packageIdentity, string comment);
 	IAuthor? GetUser(IUser? user);
 	Task<IAuthor?> GetUserAsync(IUser? user);
+	IEnumerable<IUser> GetKnownUsers();
 	ILink? GetCommentsPageUrl(IPackageIdentity packageIdentity);
 	bool IsLocal(IPackageIdentity identity);
 	Task Shutdown();
