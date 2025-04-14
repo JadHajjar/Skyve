@@ -14,7 +14,11 @@ public class PackageStabilityDropDown : SlickSelectionDropDown<PackageStability>
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(PackageStability)).Cast<PackageStability>().Where(x => CRNAttribute.GetAttribute(x).Browsable).ToArray();
+			Items = Enum.GetValues(typeof(PackageStability))
+				.Cast<PackageStability>()
+				.Where(x => CRNAttribute.GetAttribute(x).Browsable)
+				.OrderBy(x => CRNAttribute.GetAttribute(x).Notification)
+				.ToArray();
 		}
 	}
 

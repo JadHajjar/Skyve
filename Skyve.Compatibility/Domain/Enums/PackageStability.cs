@@ -12,6 +12,7 @@ public enum PackageStability
 	[CRN(NotificationType.None)] StableNoFutureUpdates = 7,
 	[CRN(NotificationType.Warning)] HasIssuesNoFutureUpdates = 8,
 	[CRN(NotificationType.Caution)] BreaksOnPatch = 9,
+	[CRN(NotificationType.Caution)] NumerousReports = 11,
 
 	[CRN(NotificationType.Info, false)] NotReviewed = 0,
 	[CRN(NotificationType.Warning, false)] Incompatible = 99,

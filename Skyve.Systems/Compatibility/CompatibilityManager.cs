@@ -408,6 +408,11 @@ public class CompatibilityManager : ICompatibilityManager
 
 		var author = _userService.TryGetUser(packageData.AuthorId);
 
+		if (packageData.ActiveReports < 4 && CRNAttribute.GetNotification(stability) < NotificationType.Caution)
+		{
+			stability = PackageStability.NumerousReports;
+		}
+
 		if (stability is not PackageStability.Stable && isCompatible && !author.Malicious)
 		{
 			if (stability is PackageStability.BrokenFromPatch or PackageStability.BrokenFromPatchSafe or PackageStability.BrokenFromPatchUpdated)

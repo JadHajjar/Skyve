@@ -37,6 +37,11 @@ public class NotificationFilterControl : SlickControl
 
 			CurrentGroup = item.Key;
 
+			if (ListControl != null)
+			{
+				ListControl.AllStatuses = CurrentGroup is NotificationType.None;
+			}
+
 			SelectedGroupChanged?.Invoke(this, EventArgs.Empty);
 
 			return;
@@ -57,7 +62,7 @@ public class NotificationFilterControl : SlickControl
 		e.Graphics.DrawString(Locale.CompatibilityStatus.Plural.ToUpper(), headerFont, brush, ClientRectangle.Pad(Padding), format);
 		e.Graphics.DrawLine(pen, pen.Width, -5, pen.Width, Height + 5);
 
-		if (ListControl is null|| ListControl.ItemCount == 0)
+		if (ListControl is null || ListControl.ItemCount == 0)
 		{
 			return;
 		}
@@ -79,7 +84,7 @@ public class NotificationFilterControl : SlickControl
 
 			var text = (item.Key == NotificationType.None ? LocaleSlickUI.All : LocaleCR.Get(item.Key.ToString())).ToString();
 			var subText = Locale.ItemsCount.FormatPlural(item.Count());
-			using var icon = (item.Key == NotificationType.None ? "CompatibilityReport" : item.Key.GetIcon(true)).Get(font.Height * 4 / 3);
+			using var icon = (item.Key == NotificationType.None ? "CompatibilityReport" : item.Key.GetIcon(true)).Default;
 
 			var baseColor = item.Key == NotificationType.None ? FormDesign.Design.ActiveColor : item.Key.GetColor();
 			using var foreBrush = new SolidBrush(CurrentGroup == item.Key ? baseColor.GetTextColor() : baseColor.MergeColor(ForeColor, 80));

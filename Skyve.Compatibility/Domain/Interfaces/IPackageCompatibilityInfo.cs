@@ -16,6 +16,7 @@ public interface IPackageCompatibilityInfo : IPackageIdentity
 	PackageStability Stability { get; }
 	PackageUsage Usage { get; }
 	PackageType Type { get; }
+	int ActiveReports { get; }
 	List<ulong>? RequiredDLCs { get; }
 	List<string>? Tags { get; }
 	List<ILink>? Links { get; }

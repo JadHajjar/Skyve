@@ -177,6 +177,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			reports.RemoveAll(x => x.GetNotification() <= NotificationType.Info);
 
 			notificationFilterControl.CurrentGroup = NotificationType.None;
+			ListControl.AllStatuses = true;
 			ListControl.SetItems(reports);
 			ListControl.Loading = false;
 

@@ -123,6 +123,11 @@ public partial class CarouselControl : SlickControl
 
 	private static Rectangle GetRectangle(Rectangle rectangle, Size imageSize)
 	{
+		if (imageSize.Width < rectangle.Width && imageSize.Height < rectangle.Height && imageSize.Width > rectangle.Width/2 && imageSize.Height > rectangle.Height / 2)
+		{
+			rectangle = rectangle.CenterR(imageSize.Width, imageSize.Height);
+		}
+
 		var widthRatio = (double)rectangle.Width / imageSize.Width;
 		var heightRatio = (double)rectangle.Height / imageSize.Height;
 

@@ -182,6 +182,16 @@ public class LocaleCR : LocaleHelper
 	public static Translation Broken => _instance.GetText("Broken");
 
 	/// <summary>
+	/// Broken from its latest version
+	/// </summary>
+	public static Translation BrokenFromNewVersion => _instance.GetText("BrokenFromNewVersion");
+
+	/// <summary>
+	/// Broken from the lastest patch
+	/// </summary>
+	public static Translation BrokenFromPatch => _instance.GetText("BrokenFromPatch");
+
+	/// <summary>
 	/// Causes Issues
 	/// </summary>
 	public static Translation CausesIssues => _instance.GetText("CausesIssues");
@@ -555,6 +565,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation NotReviewed => _instance.GetText("NotReviewed");
 
 	/// <summary>
+	/// Has multiple reports
+	/// </summary>
+	public static Translation NumerousReports => _instance.GetText("NumerousReports");
+
+	/// <summary>
 	/// <para>This package has one other compatibility warning</para>
 	/// <para>Plural: This package has {0} other compatibility warnings</para>
 	/// </summary>
@@ -800,6 +815,11 @@ public class LocaleCR : LocaleHelper
 	/// '{0}' has not been reviewed yet.  The compatibility info may not be accurate.
 	/// </summary>
 	public static Translation StabilityNotReviewed => _instance.GetText("Stability_NotReviewed");
+
+	/// <summary>
+	/// There are multiple active reports for '{0}' at the moment. Caution is advised while the issue is being investigated.
+	/// </summary>
+	public static Translation StabilityNumerousReports => _instance.GetText("Stability_NumerousReports");
 
 	/// <summary>
 	/// '{0}' is stable. It's author is still actively working on it and updating it.

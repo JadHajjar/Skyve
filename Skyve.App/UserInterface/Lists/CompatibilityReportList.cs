@@ -325,13 +325,13 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		e.Graphics.DrawString(text, font, brush, rectangle.Pad(GridPadding.Horizontal, 0, 0, 0));
 		rectangle.Y += GridPadding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width - GridPadding.Horizontal).Height;
 
-		e.Graphics.FillRoundedRectangle(barBrush, Rectangle.FromLTRB(e.ClipRectangle.X + GridPadding.Left, e.Rects.CenterRect.Y + GridPadding.Vertical, e.ClipRectangle.X + GridPadding.Left + GridPadding.Left, rectangle.Y), GridPadding.Left / 2);
-
 		if (note is not null)
 		{
 			e.Graphics.DrawString(note, smallFont, fadedBrush, rectangle.Pad(GridPadding.Top + GridPadding.Horizontal, -GridPadding.Left, 0, 0));
 			rectangle.Y += GridPadding.Top - GridPadding.Left + (int)e.Graphics.Measure(note, smallFont, rectangle.Width - GridPadding.Top - GridPadding.Horizontal).Height;
 		}
+
+		e.Graphics.FillRoundedRectangle(barBrush, Rectangle.FromLTRB(e.ClipRectangle.X + GridPadding.Left, e.Rects.CenterRect.Y + GridPadding.Vertical, e.ClipRectangle.X + GridPadding.Left + GridPadding.Left, rectangle.Y), GridPadding.Left / 2);
 
 		rectangle.Y += GridPadding.Top;
 
@@ -673,7 +673,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		var rects = item.Rectangles;
 
-		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
+		if (rects.TextRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
 			if (e.Button == MouseButtons.Right)
 			{
