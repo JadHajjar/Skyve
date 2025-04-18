@@ -161,11 +161,13 @@ public class CompatibilityMessageControl : SlickControl
 		{
 			if (Message.Status.Action is StatusAction.RequestReview)
 			{
+#if !DEBUG
 				if (ServiceCenter.Get<IUserService>().User.Manager)
 				{
 					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().CompatibilityManagementPanel(PackageCompatibilityReportControl.Package));
 				}
 				else
+#endif
 				{
 					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().RequestReviewPanel(PackageCompatibilityReportControl.Package));
 				}
@@ -252,6 +254,11 @@ public class CompatibilityMessageControl : SlickControl
 
 			e.Graphics.DrawImage(icon.Color(FormDesign.Design.ForeColor), new Rectangle(ClientRectangle.X + (Padding.Left * 2), 0, ClientRectangle.Width, Height).Align(icon.Size, ContentAlignment.MiddleLeft));
 
+			if (Message.Status.Action is StatusAction.RequestReview)
+			{
+				DrawPackageInfo(e, brush, fadedBrush, ref rectangle);
+			}
+
 			e.Graphics.DrawString(text, font, brush, rectangle);
 			rectangle.Y += Padding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width).Height;
 
@@ -282,7 +289,11 @@ public class CompatibilityMessageControl : SlickControl
 
 			if (Message.Status.Action is StatusAction.RequestReview)
 			{
+#if !DEBUG
 				var isManager = ServiceCenter.Get<IUserService>().User.Manager;
+#else
+				var isManager = false;
+#endif
 
 				bulkActionRect = SlickButton.AlignAndDraw(e.Graphics, buttonRectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
 				{
@@ -397,6 +408,52 @@ public class CompatibilityMessageControl : SlickControl
 			Height = rectangle.Y + bottomText;
 		}
 		catch { }
+	}
+
+	private void DrawPackageInfo(PaintEventArgs e, SolidBrush brush, SolidBrush fadedBrush, ref Rectangle rectangle)
+	{
+		var packageData = Message.GetPackageInfo();
+
+		if (packageData is null) return;
+
+		using var font = UI.Font(9F, FontStyle.Bold);
+		using var tinyFont = UI.Font(7F);
+
+		var startPos = rectangle.Location;
+
+		e.Graphics.DrawString(LocaleCR.LastReview.ToUpper(), tinyFont, fadedBrush, rectangle);
+		rectangle.Y += (int)e.Graphics.Measure(LocaleCR.LastReview.ToUpper(), tinyFont, rectangle.Width).Height;
+
+		var dateText = packageData.ReviewDate == DateTime.MinValue ? LocaleCR.NotReviewed.One : packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.MDY);
+		e.Graphics.DrawString(dateText, font, brush, rectangle);
+		rectangle.Y += (int)e.Graphics.Measure(dateText, font, rectangle.Width).Height;
+
+		if (rectangle.Width > UI.Scale(250))
+		{
+			var rect = new Rectangle(rectangle.X + rectangle.Width / 2, startPos.Y, rectangle.Width / 2, rectangle.Height);
+
+			e.Graphics.DrawString(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, fadedBrush, rect);
+			rect.Y += (int)e.Graphics.Measure(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, rect.Width).Height;
+
+			var text = LocaleCR.ActiveReportsCount.FormatPlural(packageData.ActiveReports);
+			e.Graphics.DrawString(text, font, brush, rect);
+			rect.Y += (int)e.Graphics.Measure(text, font, rect.Width).Height;
+
+			rectangle.Y = Math.Max(rectangle.Y, rect.Y);
+		}
+		else
+		{
+		rectangle.Y += Padding.Top;
+
+			e.Graphics.DrawString(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, fadedBrush, rectangle);
+			rectangle.Y += (int)e.Graphics.Measure(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, rectangle.Width).Height;
+
+			var text = LocaleCR.ActiveReportsCount.FormatPlural(packageData.ActiveReports);
+			e.Graphics.DrawString(text, font, brush, rectangle);
+			rectangle.Y += (int)e.Graphics.Measure(text, font, rectangle.Width).Height;
+		}
+
+		rectangle.Y += Padding.Top;
 	}
 
 	private int DrawPackage(PaintEventArgs e, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)

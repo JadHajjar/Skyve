@@ -43,6 +43,11 @@ public class CompatibilityHelper
 			return;
 		}
 
+		if (type is StatusType.MusicCanBeCopyrighted && _settings.UserSettings.DisableContentCreatorWarnings)
+		{
+			return;
+		}
+
 		if (type is StatusType.DependencyMod && (!_packageAvailabilityService.IsPackageEnabled(info, false) || _compatibilityManager.GetPackagesThatReference(info, true).Any()))
 		{
 			return;

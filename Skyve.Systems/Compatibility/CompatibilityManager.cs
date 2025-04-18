@@ -563,7 +563,8 @@ public class CompatibilityManager : ICompatibilityManager
 			info.AddWithLocale(ReportType.Stability,
 				new StabilityStatus(PackageStability.Stable, string.Empty, true),
 				workshopInfo?.CleanName(true),
-				(stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"),
+				LocaleCR.RequestReviewInfo,
+				//(stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"),
 				[]);
 		}
 

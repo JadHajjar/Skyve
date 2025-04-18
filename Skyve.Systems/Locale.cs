@@ -689,6 +689,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DisableAllSelected => _instance.GetText("DisableAllSelected");
 
 	/// <summary>
+	/// Disable Content-Creator related warnings
+	/// </summary>
+	public static Translation DisableContentCreatorWarnings => _instance.GetText("DisableContentCreatorWarnings");
+
+	/// <summary>
+	/// Disables warnings related to creating content and copyright claims.
+	/// </summary>
+	public static Translation DisableContentCreatorWarningsTip => _instance.GetText("DisableContentCreatorWarnings_Tip");
+
+	/// <summary>
 	/// Disabled
 	/// </summary>
 	public static Translation Disabled => _instance.GetText("Disabled");

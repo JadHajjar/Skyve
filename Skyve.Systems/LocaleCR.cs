@@ -76,6 +76,18 @@ public class LocaleCR : LocaleHelper
 	public static Translation ActionUnsubscribeThis => _instance.GetText("Action_UnsubscribeThis");
 
 	/// <summary>
+	/// <para>One active report</para>
+	/// <para>Zero: No active reports</para>
+	/// <para>Plural: {0} active reports</para>
+	/// </summary>
+	public static Translation ActiveReportsCount => _instance.GetText("ActiveReportsCount");
+
+	/// <summary>
+	/// Active Review Requests
+	/// </summary>
+	public static Translation ActiveReviewRequests => _instance.GetText("ActiveReviewRequests");
+
+	/// <summary>
 	/// Add a global tag
 	/// </summary>
 	public static Translation AddGlobalTag => _instance.GetText("AddGlobalTag");
@@ -457,6 +469,11 @@ public class LocaleCR : LocaleHelper
 	/// Interaction Type
 	/// </summary>
 	public static Translation InteractionType => _instance.GetText("InteractionType");
+
+	/// <summary>
+	/// Last Review
+	/// </summary>
+	public static Translation LastReview => _instance.GetText("LastReview");
 
 	/// <summary>
 	/// It was last reviewed on {0}

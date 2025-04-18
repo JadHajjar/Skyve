@@ -112,6 +112,8 @@
   "OpenGuide": "Open the Wiki",
   "ResetFolderButton": "Reset all folder settings",
   "LinkModAssets": "Link assets from mods to the mod's 'Included' status",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Some mods include assets that are required for them to function properly. Enabling this option links those assets to the mod itself and hides those assets from the Assets page so you don't exclude them by mistake.",
   "ShowDatesRelatively_Tip": "Changes the format of dates that are displayed in content lists to relative time. For example; Yesterday at 2:10 pm",
   "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",

@@ -276,5 +276,12 @@
   "EditHistory": "Edit History",
   "EditNote": "Edit Note",
   "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "RequestReviewUpdate": "Send a new request to be reviewed",
+  "LastReview": "Last Review",
+  "ActiveReviewRequests": "Active Review Requests",
+  "ActiveReportsCount": {
+    "Zero": "No active reports",
+    "One": "One active report",
+    "Plural": "{0} active reports"
+  }
 }
