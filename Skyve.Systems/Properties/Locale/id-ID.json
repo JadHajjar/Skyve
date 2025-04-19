@@ -52,7 +52,7 @@
   },
   "OpenLocalFolder": "Open the folder containing this package",
   "ReDownloadPackage": {
-    "One": "Download ulang paket ini",
+    "One": "Unduh ulang paket ini",
     "Plural": "Download ulang semua paket yang dipilih"
   },
   "OpenAuthorPage": "Buka halaman penulis",
