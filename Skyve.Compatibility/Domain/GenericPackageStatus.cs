@@ -31,6 +31,7 @@ public class GenericPackageStatus : IGenericPackageStatus
 
 	public StatusAction Action { get; set; }
 	public List<CompatibilityPackageReference>? Packages { get; set; }
+	public string? Header { get; set; }
 	public string? Note { get; set; }
 	public int IntType { get; set; }
 	public string? Type { get; set; }
@@ -62,6 +63,7 @@ public class GenericPackageStatus : IGenericPackageStatus
 			nameof(PackageInteraction) => new PackageInteraction { Packages = [.. Packages] },
 			nameof(PackageStatus) => new PackageStatus { Packages = [.. Packages] },
 			nameof(StabilityStatus) => new StabilityStatus { Packages = [.. Packages] },
+			nameof(SavegameEffectStatus) => new SavegameEffectStatus { Packages = [.. Packages] },
 			_ => new GenericPackageStatus { Packages = [.. Packages] },
 		});
 

@@ -16,6 +16,8 @@ public interface IPackageCompatibilityInfo : IPackageIdentity
 	PackageStability Stability { get; }
 	PackageUsage Usage { get; }
 	PackageType Type { get; }
+	SavegameEffect SavegameEffect { get; }
+	string? RemovalSteps { get; }
 	int ActiveReports { get; }
 	List<ulong>? RequiredDLCs { get; }
 	List<string>? Tags { get; }

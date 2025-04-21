@@ -242,6 +242,13 @@ public class CompatibilityManager : ICompatibilityManager
 		return info.ReportItems?.Any() == true ? info.ReportItems.Max(x => IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
 	}
 
+	public StatusAction GetAction(ICompatibilityInfo info)
+	{
+		var item = info.ReportItems?.Any() == true ? info.ReportItems.OrderBy(x => IsSnoozed(x) ? 0 : x.Status.Notification).LastOrDefault() : null;
+
+		return item?.Status.Action ?? StatusAction.NoAction;
+	}
+
 	public ICompatibilityPackageIdentity GetFinalSuccessor(ICompatibilityPackageIdentity package)
 	{
 		//if (!CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
@@ -319,7 +326,7 @@ public class CompatibilityManager : ICompatibilityManager
 		var info = new CompatibilityInfo(package, packageData);
 		var workshopInfo = package.GetWorkshopInfo();
 		var localPackage = package.GetLocalPackage();
-		var isCodeMod = workshopInfo?.IsCodeMod ?? localPackage?.IsCodeMod ?? false;
+		var isCodeMod = (workshopInfo?.IsCodeMod ?? localPackage?.IsCodeMod ?? false) && IsCodeMod(packageData?.Type);
 
 		if (isCodeMod && localPackage?.FilePath is string filePath && Path.GetExtension(filePath).Equals(".dll", StringComparison.InvariantCultureIgnoreCase))
 		{
@@ -341,19 +348,38 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 
 		var isCompatible = IsCompatible((localPackage?.SuggestedGameVersion).IfEmpty(workshopInfo?.SuggestedGameVersion), packageData?.ReviewedGameVersion);
-		if (!isCompatible)
-		{
-			info.Add(ReportType.Stability, new StabilityStatus(isCodeMod ? PackageStability.Incompatible : PackageStability.AssetIncompatible, null, false), workshopInfo?.CleanName(true), []);
-		}
-
-		isCompatible |= !isCodeMod;
 
 		if (packageData is null)
 		{
 			return info;
 		}
 
+		if (packageData.Id > 0 && !_compatibilityHelper.IsPackageEnabled(package, false))
+		{
+			var requiredFor = GetRequiredFor(packageData.Id);
+
+			if (requiredFor is not null)
+			{
+				info.ReportItems.Add(new ReportItem
+				{
+					Package = package.GetPackage(),
+					PackageId = packageData.Id,
+					Type = ReportType.RequiredItem,
+					Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
+					PackageName = package.CleanName(true),
+					Packages = [.. requiredFor]
+				});
+			}
+		}
+
 		var stability = packageData.Stability;
+		var author = _userService.TryGetUser(packageData.AuthorId);
+		var packageName = workshopInfo?.CleanName(true);
+
+		if (!isCompatible)
+		{
+			stability = isCodeMod ? PackageStability.Incompatible : PackageStability.AssetIncompatible;
+		}
 
 		if (stability is PackageStability.BreaksOnPatch)
 		{
@@ -386,66 +412,60 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
-		if (packageData.Id > 0 && !_compatibilityHelper.IsPackageEnabled(package, false))
-		{
-			var requiredFor = GetRequiredFor(packageData.Id);
-
-			if (requiredFor is not null)
-			{
-				info.ReportItems.Add(new ReportItem
-				{
-					Package = package.GetPackage(),
-					PackageId = packageData.Id,
-					Type = ReportType.RequiredItem,
-					Status = new PackageInteraction(InteractionType.RequiredItem, StatusAction.IncludeThis),
-					PackageName = package.CleanName(true),
-					Packages = [.. requiredFor]
-				});
-			}
-		}
-
 		_compatibilityUtil.PopulatePackageReport(packageData, info, _compatibilityHelper);
 
-		var author = _userService.TryGetUser(packageData.AuthorId);
+		if (author.Malicious && CRNAttribute.GetNotification(stability) <= NotificationType.Caution)
+		{
+			stability = PackageStability.AuthorMalicious;
+		}
 
-		if (packageData.ActiveReports < 4 && CRNAttribute.GetNotification(stability) < NotificationType.Caution)
+		if (packageData.ActiveReports > 4 && CRNAttribute.GetNotification(stability) < NotificationType.Caution)
 		{
 			stability = PackageStability.NumerousReports;
 		}
 
-		if (stability is not PackageStability.Stable && isCompatible && !author.Malicious)
+		if (packageData.Type != PackageType.GenericPackage)
 		{
-			if (stability is PackageStability.BrokenFromPatch or PackageStability.BrokenFromPatchSafe or PackageStability.BrokenFromPatchUpdated)
-			{
-				info.AddWithLocale(ReportType.Stability,
-					new StabilityStatus(stability, null, false),
-					workshopInfo?.CleanName(true),
-					$"Stability_{stability}",
-					[_citiesManager.GameVersion ?? packageData.ReviewedGameVersion ?? string.Empty, workshopInfo?.CleanName(true) ?? package.Name]);
-			}
-			else if (stability is PackageStability.BrokenFromNewVersion or PackageStability.BrokenFromNewVersionSafe)
-			{
-				info.AddWithLocale(ReportType.Stability,
-					new StabilityStatus(stability, null, false),
-					workshopInfo?.CleanName(true),
-					$"Stability_{stability}",
-					[workshopInfo?.VersionName is null ? string.Empty : $" (v{workshopInfo?.VersionName})", workshopInfo?.CleanName(true) ?? package.Name]);
-			}
-			else
-			{
-				info.Add(ReportType.Stability, new StabilityStatus(stability, null, false), workshopInfo?.CleanName(true), []);
-			}
+			info.Add(ReportType.Info, new PackageTypeStatus(packageData.Type) { Note = stability is PackageStability.Stable ? packageData.Note : null }, packageName, []);
+		}
+
+		if (packageData.SavegameEffect != SavegameEffect.None)
+		{
+			info.Add(ReportType.Info, new SavegameEffectStatus(packageData.SavegameEffect, packageData.RemovalSteps), packageName, []);
+		}
+
+		if (stability is PackageStability.BrokenFromPatch or PackageStability.BrokenFromPatchSafe or PackageStability.BrokenFromPatchUpdated)
+		{
+			info.AddWithLocale(ReportType.Stability,
+				new StabilityStatus(stability, null, false) { Note = packageData.Note },
+				packageName,
+				$"Stability_{stability}",
+				[_citiesManager.GameVersion ?? packageData.ReviewedGameVersion ?? string.Empty, packageName ?? package.Name]);
+		}
+		else if (stability is PackageStability.BrokenFromNewVersion or PackageStability.BrokenFromNewVersionSafe)
+		{
+			info.AddWithLocale(ReportType.Stability,
+				new StabilityStatus(stability, null, false) { Note = packageData.Note },
+				packageName,
+				$"Stability_{stability}",
+				[workshopInfo?.VersionName is null ? string.Empty : $" (v{workshopInfo?.VersionName})", packageName ?? package.Name]);
+		}
+		else if (stability is not PackageStability.Stable)
+		{
+			info.Add(ReportType.Stability, new StabilityStatus(stability, null, false) { Note = packageData.Note }, packageName, []);
+		}
+		else if (!string.IsNullOrEmpty(packageData.Note) && packageData.Type == PackageType.GenericPackage)
+		{
+			info.Add(ReportType.Info,
+				new GenericPackageStatus() { Notification = NotificationType.Info, Note = packageData.Note },
+				packageName,
+				[]);
 		}
 
 		foreach (var status in packageData.IndexedStatuses)
 		{
 			foreach (var item in status.Value)
 			{
-				if (item.Status.Action is StatusAction.Switch && packageData.SucceededBy is not null)
-				{
-					continue;
-				}
-
 				_compatibilityHelper.HandleStatus(info, item.Status);
 			}
 		}
@@ -527,9 +547,9 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (author.Malicious)
 		{
-			info.AddWithLocale(ReportType.Stability,
+			info.AddWithLocale(ReportType.Info,
 				new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis },
-				workshopInfo?.CleanName(true),
+				packageName,
 				"AuthorMalicious",
 				[_packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name)]);
 		}
@@ -537,38 +557,35 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			info.AddWithLocale(ReportType.Stability,
 				new StabilityStatus(PackageStability.AuthorRetired, null, false),
-				workshopInfo?.CleanName(true),
+				packageName,
 				"AuthorRetired",
 				[_packageNameUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name)]);
 		}
 
-		if (!string.IsNullOrEmpty(packageData.Note))
-		{
-			info.Add(ReportType.Stability,
-				new GenericPackageStatus() { Notification = NotificationType.Info, Note = packageData.Note },
-				workshopInfo?.CleanName(true),
-				[]);
-		}
-
 		if (package.IsLocal())
 		{
-			info.Add(ReportType.Stability,
+			info.Add(ReportType.Info,
 				new StabilityStatus(PackageStability.Local, null, false),
 				_packageNameUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Id)), true),
 				[new CompatibilityPackageReference(packageData)]);
 		}
 
-		if (!package.IsLocal() && !author.Malicious && isCompatible)
+		if (!package.IsLocal() && !author.Malicious)
 		{
-			info.AddWithLocale(ReportType.Stability,
-				new StabilityStatus(PackageStability.Stable, string.Empty, true),
-				workshopInfo?.CleanName(true),
+			info.AddWithLocale(ReportType.Info,
+				new StabilityStatus(stability is PackageStability.NotReviewed ? PackageStability.NotReviewed : PackageStability.ReiewRequest, string.Empty, true),
+				packageName,
 				LocaleCR.RequestReviewInfo,
 				//(stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"),
 				[]);
 		}
 
 		return info;
+	}
+
+	private bool IsCodeMod(PackageType? type)
+	{
+		return type is null or PackageType.GenericPackage or PackageType.VisualMod or PackageType.SimulationMod;
 	}
 
 	private bool IsCompatible(string? version, string? reviewedGameVersion)

@@ -322,8 +322,22 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		e.Graphics.DrawImage(icon.Color(color), e.ClipRectangle.Pad(GridPadding).Align(icon.Size, ContentAlignment.TopRight));
 
-		e.Graphics.DrawString(text, font, brush, rectangle.Pad(GridPadding.Horizontal, 0, 0, 0));
-		rectangle.Y += GridPadding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width - GridPadding.Horizontal).Height;
+		if (string.IsNullOrEmpty(Message.Status.Header))
+		{
+			e.Graphics.DrawString(text, font, brush, rectangle.Pad(GridPadding.Horizontal, 0, 0, 0));
+			rectangle.Y += GridPadding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width - GridPadding.Horizontal).Height;
+		}
+		else
+		{
+			using var fontBold = UI.Font(9F, FontStyle.Bold);
+			using var tinyFontNotBold = UI.Font(7F);
+
+			e.Graphics.DrawString(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFontNotBold, fadedBrush, rectangle.Pad(GridPadding.Horizontal, 0, 0, 0));
+			rectangle.Y += (int)e.Graphics.Measure(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFontNotBold, rectangle.Width - GridPadding.Horizontal).Height;
+
+			e.Graphics.DrawString(text, fontBold, brush, rectangle.Pad(GridPadding.Horizontal, 0, 0, 0));
+			rectangle.Y += GridPadding.Top + (int)e.Graphics.Measure(text, fontBold, rectangle.Width - GridPadding.Horizontal).Height;
+		}
 
 		if (note is not null)
 		{

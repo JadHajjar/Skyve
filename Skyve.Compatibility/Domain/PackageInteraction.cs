@@ -15,6 +15,7 @@ public class PackageInteraction : IPackageStatus<InteractionType>
 	public InteractionType Type { get; set; }
 	public StatusAction Action { get; set; }
 	public List<CompatibilityPackageReference>? Packages { get; set; }
+	public string? Header { get; set; }
 	public string? Note { get; set; }
 	[JsonIgnore] public int IntType { get => (int)Type; set => Type = (InteractionType)value; }
 	[JsonIgnore] public string LocaleKey => $"Interaction_{Type}";
@@ -54,5 +55,16 @@ public class PackageInteraction : IPackageStatus<InteractionType>
 		hashCode = hashCode * -1521134295 + Type.GetHashCode();
 		hashCode = hashCode * -1521134295 + EqualityComparer<IEnumerable<ulong>>.Default.GetHashCode(Packages?.Select(x => x.Id) ?? []);
 		return hashCode;
+	}
+
+	public IPackageStatus<InteractionType> Duplicate()
+	{
+		return new PackageInteraction
+		{
+			Type = Type,
+			Action = Action,
+			Packages = Packages,
+			Note = Note,
+		};
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
@@ -23,7 +24,26 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 
 	protected override IEnumerable<IDlcInfo> OrderItems(IEnumerable<IDlcInfo> items)
 	{
-		return items.OrderByDescending(x => SelectedItems.Contains(x)).ThenByDescending(x => x.ReleaseDate);
+		return items.OrderByDescending(x => SelectedItems.Contains(x)).ThenByDescending(x =>
+		{
+			if (x.ReleaseDate.Year > 1)
+			{
+				return x.ReleaseDate;
+			}
+
+			if (int.TryParse(x.ExpectedRelease, out var year))
+			{
+				return new DateTime(year, 12, 32);
+			}
+
+			var match = Regex.Match(x.ExpectedRelease ?? string.Empty, @"Q(\d) (\d+)");
+			if (match.Success)
+			{
+				return new DateTime(int.Parse(match.Groups[2].Value), int.Parse(match.Groups[1].Value) * 3, 1);
+			}
+
+			return DateTime.MaxValue;
+		});
 	}
 
 	protected override bool SearchMatch(string searchText, IDlcInfo item)
@@ -40,6 +60,8 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 
 		var text = item.Name.RegexRemove("^.+?- ").RegexRemove("(Content )?Creator Pack: ");
 		var icon = item is IThumbnailObject thumbnailObject ? thumbnailObject.GetThumbnail() : null;
+
+		icon ??= (item.Id == 2427731 ? Properties.Resources.Cities2Landmark : Properties.Resources.Cities2Dlc);
 
 		if (icon != null)
 		{

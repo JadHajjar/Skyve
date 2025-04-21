@@ -9,6 +9,7 @@ public interface IGenericPackageStatus
 {
 	StatusAction Action { get; set; }
 	IEnumerable<ICompatibilityPackageIdentity> Packages { get; set; }
+	string? Header { get; set; }
 	string? Note { get; set; }
 	NotificationType Notification { get; }
 	int IntType { get; set; }

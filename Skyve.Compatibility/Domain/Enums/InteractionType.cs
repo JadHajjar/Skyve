@@ -5,7 +5,7 @@ public enum InteractionType
 	[CRN(NotificationType.None, false)]
 	None = 0,
 
-	[CRN(NotificationType.Switch, [StatusAction.Switch, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.Obsolete, [StatusAction.Switch, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	Successor = 1,
 
 	[CRN(NotificationType.None, [StatusAction.SelectOne, StatusAction.Switch, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
@@ -20,7 +20,7 @@ public enum InteractionType
 	[CRN(NotificationType.Info, [StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	RequirementAlternative = 5,
 
-	[CRN(NotificationType.Caution, [StatusAction.SelectOne, StatusAction.Switch, StatusAction.UnsubscribeThis, StatusAction.UnsubscribeOther, StatusAction.ExcludeThis, StatusAction.ExcludeOther, StatusAction.RequiresConfiguration, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.CanAdd)]
+	[CRN(NotificationType.Warning, [StatusAction.SelectOne, StatusAction.Switch, StatusAction.UnsubscribeThis, StatusAction.UnsubscribeOther, StatusAction.ExcludeThis, StatusAction.ExcludeOther, StatusAction.RequiresConfiguration, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.CanAdd)]
 	CausesIssuesWith = 6,
 
 	[CRN(NotificationType.MissingDependency, [StatusAction.SubscribeToPackages, StatusAction.NoAction])]
@@ -40,6 +40,6 @@ public enum InteractionType
 	[CRN(NotificationType.Info, false)]
 	SucceededBy = 1000,
 
-	[CRN(NotificationType.AttentionRequired, false)]
+	[CRN(NotificationType.ActionRequired, false)]
 	Identical = 1001,
 }

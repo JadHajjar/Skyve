@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Favorite this playset",
   "NoDlcsNoInternet": "Could not load DLCs, please connect to the internet",
   "NoDlcsOpenGame": "No DLCs match your search",
-  "DlcUpdateNotice": "If your DLCs are not showing here, make sure to open the game at least once",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "{0} total DLCs owned",
   "Unfiltered": "Unfiltered",
   "AnyTags": "Any Tags",
@@ -102,7 +102,6 @@
   "DLCs": "DLCs & CCPs",
   "LaunchTooltip": "Click to launch/stop Cities: Skylines or use {0} anywhere in the app",
   "SelectedFileInvalid": "The file you selected is not valid",
-  "ShowingFilteredItems": "Showing {0} out of {1} total items",
   "ThemeUIScale": "Theme & UI Scale",
   "SearchPlaysets": "Search through these Playsets..",
   "AdvancedSettings": "Advanced Settings",
@@ -158,9 +157,9 @@
   "CopyLogFile": "Copy the game's log file to clipboard",
   "OpenLOTLogFolder": "Open Skyve's log folder",
   "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
-  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Create or import a new playset",
   "ViewPlaysets_Tip": "View & manage your playsets",
   "DeactivatePlayset_Tip": "Deactivate your current playset",
@@ -343,17 +342,21 @@
     "One": "Showing {0} {1}",
     "Plural": "Showing {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "Showing {0} {1}, {3}",
-    "Plural": "Showing {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} is hidden because of your playset's usage",

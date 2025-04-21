@@ -1,5 +1,6 @@
 ﻿using Skyve.App.UserInterface.Lists;
 using Skyve.Compatibility.Domain.Enums;
+using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,6 +10,7 @@ public class NotificationFilterControl : SlickControl
 {
 	private readonly Dictionary<NotificationType, Rectangle> _groupRects = [];
 	public CompatibilityReportList? ListControl { get; set; }
+	public Func<ICompatibilityInfo, bool>? Filter { get; set; }
 	public NotificationType CurrentGroup { get; set; }
 
 	public event EventHandler? SelectedGroupChanged;
@@ -62,13 +64,20 @@ public class NotificationFilterControl : SlickControl
 		e.Graphics.DrawString(Locale.CompatibilityStatus.Plural.ToUpper(), headerFont, brush, ClientRectangle.Pad(Padding), format);
 		e.Graphics.DrawLine(pen, pen.Width, -5, pen.Width, Height + 5);
 
-		if (ListControl is null || ListControl.ItemCount == 0)
+		if (ListControl is null || Filter is null)
 		{
 			return;
 		}
 
-		var items = ListControl.Items.GroupBy(x => x.GetNotification()).OrderByDescending(x => x.Key).ToList();
-		items.Insert(0, ListControl.Items.GroupBy(x => NotificationType.None).FirstOrDefault());
+		var items = ListControl.Items.Where(Filter).ToList();
+
+		if (items.Count == 0)
+		{
+			return;
+		}
+
+		var compatibilityItems = items.GroupBy(x => x.GetNotification()).OrderByDescending(x => x.Key).ToList();
+		compatibilityItems.Insert(0, items.GroupBy(x => NotificationType.None).FirstOrDefault());
 
 		if (Loading)
 		{
@@ -78,7 +87,9 @@ public class NotificationFilterControl : SlickControl
 		var cursor = PointToClient(Cursor.Position);
 		var y = Padding.Top * 4;
 
-		foreach (var item in items)
+		_groupRects.Clear();
+
+		foreach (var item in compatibilityItems)
 		{
 			var rectangle = new Rectangle(Padding.Left, y, Width - Padding.Horizontal, UI.Scale(50)).Pad(Padding);
 

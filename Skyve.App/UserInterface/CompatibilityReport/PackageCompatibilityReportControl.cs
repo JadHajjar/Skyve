@@ -122,8 +122,7 @@ public class PackageCompatibilityReportControl : SmartPanel
 		var index = 0;
 
 		foreach (var panel in _panels
-			.OrderBy(x => x.Key is not ReportType.RequestReview)
-			.ThenBy(x => x.Key is not ReportType.Stability)
+			.OrderBy(x => x.Key <= ReportType.Stability ? (int)x.Key : int.MaxValue)
 			.ThenByDescending(x => x.Value.ReportItems.Max(y => y.Status?.Notification))
 			.ThenByDescending(x => x.Value.ReportItems.Sum(y => y.Packages.Count())))
 		{

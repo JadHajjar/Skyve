@@ -35,7 +35,6 @@ public partial class PC_CompatibilityReport : PanelContent
 	private readonly INotifier _notifier;
 	private readonly IPackageUtil _packageUtil;
 	private readonly ISettings _settings;
-	private readonly IDownloadService _downloadService;
 	private readonly IPlaysetManager _playsetManager;
 	private readonly ITagsService _tagUtil;
 
@@ -43,7 +42,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	public PC_CompatibilityReport() : base(ServiceCenter.Get<IUserService>().User.Manager && !ServiceCenter.Get<IUserService>().User.Malicious)
 	{
-		ServiceCenter.Get(out _subscriptionsManager, out _tagUtil, out _compatibilityActions, out _playsetManager, out _downloadService, out _settings, out _packageUtil, out _compatibilityManager, out _contentManager, out _notifier, out IUserService userService);
+		ServiceCenter.Get(out _subscriptionsManager, out _tagUtil, out _compatibilityActions, out _playsetManager, out _settings, out _packageUtil, out _compatibilityManager, out _contentManager, out _notifier, out IUserService userService);
 
 		InitializeComponent();
 
@@ -51,6 +50,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
 		notificationFilterControl.ListControl = ListControl;
+		notificationFilterControl.Filter = x => !IsFilteredOut(x, false);
 		notificationFilterControl.SelectedGroupChanged += (_, _) => ListControl.DoFilterChanged();
 
 		I_Actions = new IncludeAllButton(() => ListControl.FilteredItems.Cast<IPackageIdentity>().ToList()!);
@@ -94,7 +94,13 @@ public partial class PC_CompatibilityReport : PanelContent
 		_notifier.ContentLoaded += CompatibilityManager_ReportProcessed;
 		_notifier.CompatibilityReportProcessed += CompatibilityManager_ReportProcessed;
 		_notifier.SnoozeChanged += CompatibilityManager_ReportProcessed;
+
 		new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
+		
+		if (_settings.UserSettings.FilterIncludedByDefault)
+		{
+			OT_Included.SelectedValue = ThreeOptionToggle.Value.Option1;
+		}
 	}
 
 	protected void RefreshAuthorAndTags()
@@ -160,7 +166,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			{
 				var info = x.GetCompatibilityInfo(cacheOnly: true);
 
-				return info.GetNotification() is not NotificationType.Unsubscribe && !_packageUtil.IsEnabled(x) ? null : info;
+				return info.GetAction() is StatusAction.ExcludeThis or StatusAction.UnsubscribeThis or StatusAction.Switch && !_packageUtil.IsIncluded(x) ? null : info;
 			}).ToList();
 
 			this.TryInvoke(() =>
@@ -176,7 +182,6 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			reports.RemoveAll(x => x.GetNotification() <= NotificationType.Info);
 
-			notificationFilterControl.CurrentGroup = NotificationType.None;
 			ListControl.AllStatuses = true;
 			ListControl.SetItems(reports);
 			ListControl.Loading = false;
@@ -282,7 +287,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		if (!e.DoNotDraw)
 		{
-			e.DoNotDraw = IsFilteredOut(e.Item);
+			e.DoNotDraw = IsFilteredOut(e.Item, true);
 		}
 	}
 
@@ -652,12 +657,12 @@ public partial class PC_CompatibilityReport : PanelContent
 		if (ListControl.ItemCount > 0)
 		{
 			var countText = GetCountText();
-			var format = ListControl.SelectedItemsCount == 0 ? (UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning) : (UsageFilteredOut == 0 ? Locale.ShowingSelectedCount : Locale.ShowingSelectedCountWarning);
+			var format = ListControl.SelectedItemsCount == 0 ? (UsageFilteredOut == 0 ? Locale.TotalCount : Locale.TotalCountWarning) : (UsageFilteredOut == 0 ? Locale.TotalSelectedCount : Locale.TotalSelectedCountWarning);
 			var filteredText = format.FormatPlural(
-				ListControl.FilteredCount,
-				Locale.Package.FormatPlural(ListControl.FilteredCount).ToLower(),
+				ListControl.ItemCount,
+				Locale.Package.FormatPlural(ListControl.ItemCount).ToLower(),
 				ListControl.SelectedItemsCount,
-				Locale.ItemsHidden.FormatPlural(UsageFilteredOut, Locale.Package.FormatPlural(ListControl.FilteredCount).ToLower()));
+				Locale.ItemsHidden.FormatPlural(UsageFilteredOut, Locale.Package.FormatPlural(UsageFilteredOut).ToLower()));
 
 			L_Counts.RightText = countText;
 			L_Counts.LeftText = filteredText;
@@ -669,6 +674,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			I_Actions.Visible = false;
 		}
 
+		notificationFilterControl.Invalidate();
 		L_Counts.Invalidate();
 		I_Actions.Invalidate();
 		I_Refresh.Loading = false;
@@ -676,10 +682,10 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	protected string GetCountText()
 	{
-		var mods = ListControl.Items.ToList();
+		var mods = ListControl.FilteredItems.ToList();
 		var modsIncluded = mods.Count(x => _packageUtil.IsIncluded(x));
 		var modsEnabled = mods.Count(x => _packageUtil.IsIncludedAndEnabled(x));
-		var count = ListControl.ItemCount;
+		var count = ListControl.FilteredCount;
 
 #if CS1
 		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
@@ -725,14 +731,14 @@ public partial class PC_CompatibilityReport : PanelContent
 		FilterChanged(sender, e);
 	}
 
-	private bool IsFilteredOut(ICompatibilityInfo item)
+	private bool IsFilteredOut(ICompatibilityInfo item, bool withGrouping)
 	{
 		if (!firstFilterPassed)
 		{
 			return false;
 		}
 
-		if (notificationFilterControl.CurrentGroup != NotificationType.None && item.GetNotification() != notificationFilterControl.CurrentGroup)
+		if (withGrouping && notificationFilterControl.CurrentGroup != NotificationType.None && item.GetNotification() != notificationFilterControl.CurrentGroup)
 		{
 			return true;
 		}
@@ -749,7 +755,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (_packageUtil.IsIncluded(item, out var partiallyIncluded) || partiallyIncluded))
 			{
-				return true;
+				return item.GetNotification() is not NotificationType.RequiredItem;
 			}
 		}
 

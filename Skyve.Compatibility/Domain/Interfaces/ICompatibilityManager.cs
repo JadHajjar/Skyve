@@ -13,6 +13,7 @@ public interface ICompatibilityManager
 	ICompatibilityInfo GetCompatibilityInfo(IPackageIdentity package, bool noCache = false, bool cacheOnly = false);
 	ICompatibilityPackageIdentity GetFinalSuccessor(ICompatibilityPackageIdentity package);
 	NotificationType GetNotification(ICompatibilityInfo info);
+	StatusAction GetAction(ICompatibilityInfo info);
 	bool IsSnoozed(ICompatibilityItem reportItem);
 	void ResetSnoozes();
 	void ToggleSnoozed(ICompatibilityItem reportItem);

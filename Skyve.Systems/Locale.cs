@@ -760,7 +760,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DLCs => _instance.GetText("DLCs");
 
 	/// <summary>
-	/// If your DLCs are not showing here, make sure to open the game at least once
+	/// If your owned DLCs are not showing correctly, make sure to open the game at least once
 	/// </summary>
 	public static Translation DlcUpdateNotice => _instance.GetText("DlcUpdateNotice");
 
@@ -1117,17 +1117,17 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation GamePlay => _instance.GetText("GamePlay");
 
 	/// <summary>
-	/// {0} included &amp; enabled: {1}, Total: {2}
+	/// {0} included &amp; enabled: {1}, out of {2}
 	/// </summary>
 	public static Translation GenericIncludedAndEnabledTotal => _instance.GetText("GenericIncludedAndEnabledTotal");
 
 	/// <summary>
-	/// {0} included: {1}, of which are enabled: {2}, Total: {3}
+	/// {0} included: {1}, of which are enabled: {2}, out of {3}
 	/// </summary>
 	public static Translation GenericIncludedEnabledTotal => _instance.GetText("GenericIncludedEnabledTotal");
 
 	/// <summary>
-	/// {0} included: {1}, Total: {2}
+	/// {0} included: {1}, out of {2}
 	/// </summary>
 	public static Translation GenericIncludedTotal => _instance.GetText("GenericIncludedTotal");
 
@@ -2190,29 +2190,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ShowingCount => _instance.GetText("ShowingCount");
 
 	/// <summary>
-	/// <para>Showing {0} {1}, {3}</para>
-	/// <para>Plural: Showing {0} {1}, {3}</para>
-	/// </summary>
-	public static Translation ShowingCountWarning => _instance.GetText("ShowingCountWarning");
-
-	/// <summary>
-	/// Showing {0} out of {1} total items
-	/// </summary>
-	public static Translation ShowingFilteredItems => _instance.GetText("ShowingFilteredItems");
-
-	/// <summary>
-	/// <para>Showing {0} {1}, {2} selected</para>
-	/// <para>Plural: Showing {0} {1}, {2} selected</para>
-	/// </summary>
-	public static Translation ShowingSelectedCount => _instance.GetText("ShowingSelectedCount");
-
-	/// <summary>
-	/// <para>Showing {0} {1}, {2} selected, {3}</para>
-	/// <para>Plural: Showing {0} {1}, {2} selected, {3}</para>
-	/// </summary>
-	public static Translation ShowingSelectedCountWarning => _instance.GetText("ShowingSelectedCountWarning");
-
-	/// <summary>
 	/// Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?
 	/// </summary>
 	public static Translation SkyveDetectedFaultyPackages => _instance.GetText("SkyveDetectedFaultyPackages");
@@ -2445,6 +2422,30 @@ public class Locale : LocaleHelper, ILocale
 	/// {0} of included assets
 	/// </summary>
 	public static Translation TotalAssetSize => _instance.GetText("TotalAssetSize");
+
+	/// <summary>
+	/// <para>{0} total {1}</para>
+	/// <para>Plural: {0} total {1}</para>
+	/// </summary>
+	public static Translation TotalCount => _instance.GetText("TotalCount");
+
+	/// <summary>
+	/// <para>{0} total {1}, {3}</para>
+	/// <para>Plural: {0} total {1}, {3}</para>
+	/// </summary>
+	public static Translation TotalCountWarning => _instance.GetText("TotalCountWarning");
+
+	/// <summary>
+	/// <para>{0} total {1}, {2} selected</para>
+	/// <para>Plural: {0} total {1}, {2} selected</para>
+	/// </summary>
+	public static Translation TotalSelectedCount => _instance.GetText("TotalSelectedCount");
+
+	/// <summary>
+	/// <para>{0} total {1}, {2} selected, {3}</para>
+	/// <para>Plural: {0} total {1}, {2} selected, {3}</para>
+	/// </summary>
+	public static Translation TotalSelectedCountWarning => _instance.GetText("TotalSelectedCountWarning");
 
 	/// <summary>
 	/// Treat optional packages as required

@@ -173,7 +173,7 @@ public partial class CarouselControl : SlickControl
 
 		var cursor = MainThumb.PointToClient(Cursor.Position);
 
-		if (!imageRect.Contains(cursor) || cursor.X.IsWithin(MainThumb.Width / 3, MainThumb.Width * 2 / 3))
+		if (!rectangle.Contains(cursor) || cursor.X.IsWithin(MainThumb.Width / 3, MainThumb.Width * 2 / 3))
 		{
 			return;
 		}

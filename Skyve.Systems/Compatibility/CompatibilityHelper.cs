@@ -10,6 +10,8 @@ using Skyve.Systems.Compatibility.Domain;
 using System.Collections.Generic;
 using System.Linq;
 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 namespace Skyve.Systems.Compatibility;
 public class CompatibilityHelper
 {
@@ -53,15 +55,18 @@ public class CompatibilityHelper
 			return;
 		}
 
+		status = status.Duplicate();
+
+		var packages = status.Packages?.ToList() ?? [];
+
 		if (type is StatusType.Deprecated && status.Action is StatusAction.Switch && (status.Packages?.Any() ?? false))
 		{
 			if (info.Data?.SucceededBy is not null || HandleSucceededBy(info, status.Packages))
 			{
-				return;
+				status.Action = StatusAction.UnsubscribeThis;
+				packages = [];
 			}
 		}
-
-		var packages = status.Packages?.ToList() ?? [];
 
 		if (status.Action is StatusAction.Switch && status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
 		{
@@ -78,13 +83,19 @@ public class CompatibilityHelper
 			}
 		}
 
+		if (status.Action is StatusAction.UnsubscribeThis or StatusAction.ExcludeThis && !_packageAvailabilityService.IsPackageEnabled(info, false))
+		{
+			status.Action = StatusAction.DoNotAdd;
+		}
+
 		var reportType = type switch
 		{
 			StatusType.Deprecated => packages.Count == 0 ? ReportType.Stability : ReportType.Successors,
 			StatusType.CausesIssues or StatusType.SavesCantLoadWithoutIt or StatusType.AutoDeprecated => ReportType.Stability,
-			StatusType.DependencyMod or StatusType.TestVersion or StatusType.MusicCanBeCopyrighted => ReportType.Status,
+			StatusType.DependencyMod or StatusType.MusicCanBeCopyrighted => ReportType.Status,
 			StatusType.SourceCodeNotAvailable or StatusType.IncompleteDescription or StatusType.Reupload => ReportType.Ambiguous,
 			StatusType.MissingDlc => ReportType.DlcMissing,
+			StatusType.TestVersion => ReportType.Info,
 			_ => ReportType.Status,
 		};
 
@@ -153,9 +164,16 @@ public class CompatibilityHelper
 			return;
 		}
 
+		interaction = interaction.Duplicate();
+
 		if (type is InteractionType.OptionalPackages && _settings.UserSettings.TreatOptionalAsRequired)
 		{
 			type = InteractionType.RequiredPackages;
+		}
+
+		if (interaction.Action is StatusAction.UnsubscribeThis or StatusAction.ExcludeThis && !_packageAvailabilityService.IsPackageEnabled(info, false))
+		{
+			interaction.Action = StatusAction.DoNotAdd;
 		}
 
 		var reportType = type switch

@@ -26,6 +26,7 @@ public class StabilityStatus : IPackageStatus<PackageStability>
 	public PackageStability Type { get; set; }
 	public StatusAction Action { get; set; }
 	public List<CompatibilityPackageReference>? Packages { get; set; }
+	public string? Header { get; set; }
 	public string? Note { get; set; }
 	public NotificationType Notification => CRNAttribute.GetNotification(Type);
 	[JsonIgnore] public int IntType { get => (int)Type; set => Type = (PackageStability)value; }
@@ -45,5 +46,16 @@ public class StabilityStatus : IPackageStatus<PackageStability>
 		hashCode = hashCode * -1521134295 + Type.GetHashCode();
 		hashCode = hashCode * -1521134295 + EqualityComparer<IEnumerable<ulong>>.Default.GetHashCode(Packages?.Select(x => x.Id) ?? []);
 		return hashCode;
+	}
+
+	public IPackageStatus<PackageStability> Duplicate()
+	{
+		return new StabilityStatus
+		{
+			Type = Type,
+			Action = Action,
+			Packages = Packages,
+			Note = Note,
+		};
 	}
 }

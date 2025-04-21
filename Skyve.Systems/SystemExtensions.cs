@@ -195,6 +195,11 @@ public static class SystemExtensions
 		return CompatibilityManager.GetNotification(compatibilityInfo);
 	}
 
+	public static StatusAction GetAction(this ICompatibilityInfo compatibilityInfo)
+	{
+		return CompatibilityManager.GetAction(compatibilityInfo);
+	}
+
 	public static ICustomPlayset GetCustomPlayset(this IPlayset playset)
 	{
 		return PlaysetManager.GetCustomPlayset(playset);

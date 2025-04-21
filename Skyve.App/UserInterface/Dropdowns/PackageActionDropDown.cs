@@ -25,9 +25,10 @@ public class PackageActionDropDown : SlickSelectionDropDown<StatusAction>
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, StatusAction item)
 	{
 		var text = LocaleCR.Get(!IsFlipped || item is StatusAction.NoAction ? item.ToString() : $"Flipped{item}");
-		var color = CRNAttribute.GetNotification(item).GetColor();
+		var notification = CRNAttribute.GetNotification(item);
+		var color = notification.GetColor();
 
-		using var icon = IconManager.GetIcon("Actions", rectangle.Height - 2).Color(color);
+		using var icon = notification.GetIcon(false).Get(rectangle.Height - 2).Color(color);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

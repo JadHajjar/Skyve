@@ -86,6 +86,7 @@ public class CompatibilitySectionPanel : SmartPanel
 	{
 		return ReportType switch
 		{
+			ReportType.Info => "Info",
 			ReportType.Stability => "Stability",
 			ReportType.DlcMissing or ReportType.RequiredPackages => "MissingMod",
 			ReportType.Ambiguous => "Malicious",

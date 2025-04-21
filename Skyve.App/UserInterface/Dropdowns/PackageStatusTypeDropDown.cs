@@ -21,7 +21,10 @@ public class PackageStatusTypeDropDown<T> : SlickSelectionDropDown<T> where T : 
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(T)).Cast<T>().Where(x => CRNAttribute.GetAttribute(x).Browsable && (!_restricted || CRNAttribute.GetAttribute(x).AllowedChange != CRNAttribute.ChangeType.Deny)).ToArray();
+			Items = Enum.GetValues(typeof(T)).Cast<T>()
+				.Where(x => CRNAttribute.GetAttribute(x).Browsable && (!_restricted || CRNAttribute.GetAttribute(x).AllowedChange != CRNAttribute.ChangeType.Deny))
+				.OrderBy(CRNAttribute.GetNotification)
+				.ToArray();
 		}
 	}
 
@@ -34,17 +37,23 @@ public class PackageStatusTypeDropDown<T> : SlickSelectionDropDown<T> where T : 
 
 	protected override bool SearchMatch(string searchText, T item)
 	{
-		var text = LocaleCR.Get($"{item}");
+		var text = GetText(item);
 
 		return searchText.SearchCheck(text);
 	}
 
+	protected virtual LocaleHelper.Translation GetText(T item)
+	{
+		return LocaleCR.Get(item.ToString());
+	}
+
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, T item)
 	{
-		var text = LocaleCR.Get($"{item}");
-		var color = CRNAttribute.GetNotification(item).GetColor();
+		var text = GetText(item);
+		var notification = CRNAttribute.GetNotification(item);
+		var color = notification.GetColor();
 
-		using var icon = IconManager.GetIcon("Stability", rectangle.Height - 2).Color(color);
+		using var icon = notification.GetIcon(true).Get(rectangle.Height - 2).Color(color);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

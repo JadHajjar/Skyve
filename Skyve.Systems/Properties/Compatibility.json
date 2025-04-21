@@ -61,6 +61,8 @@
   "Caution": "Caution",
   "Warning": "Warning",
   "AttentionRequired": "Attention Required",
+  "ActionRequired": "Action Required",
+  "Obsolete": "Obsolete",
   "Website": "Website",
   "Donation": "Donate",
   "ManageCompatibilityData": "Compatibility Management",
@@ -143,7 +145,7 @@
   "OutputText": "Expected Output",
   "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
   "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
+  "Stability_Stable": "'{0}' is stable. Its author is still actively working on it and updating it.",
   "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
@@ -160,6 +162,7 @@
   "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
   "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
   "Stability_NumerousReports": "There are multiple active reports for '{0}' at the moment. Caution is advised while the issue is being investigated.",
+  "Stability_Obsolete": "'{0}' is obsolete, its usage is no longer needed, or is redundant due to the game or other mods having the same functionality.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "You should add the following package to your playset.",
@@ -192,6 +195,7 @@
     "One": "You should add the following package to your playset.",
     "Plural": "You should add the following packages to your playset."
   },
+  "Action_DoNotAdd": "You should not use '{0}'",
   "NoRequiredDlcs": "No Required DLCs",
   "DlcsSelected": {
     "One": "{0} DLC selected",
@@ -209,6 +213,7 @@
   "CRT_Ambiguous": "Ambiguity",
   "CRT_RequiredItem": "Required Item",
   "CRT_RequestReview": "Review Request Status",
+  "CRT_Info": "Information",
   "LastReviewDate": "It was last reviewed on {0}",
   "RequestReviewInfo": "Are you experiencing issues with this package?",
   "RequestReview": "Request a review",
@@ -218,6 +223,15 @@
   },
   "CautionCount": "{0} {1} where caution is advised",
   "WarningCount": "{0} {1} with a warning",
+  "ObsoleteCount": {
+    "One": "{0} {1} that is obsolete",
+    "Plural": "{0} {1} that are obsolete"
+  },
+  "BrokenCount": {
+    "One": "{0} {1} that is broken",
+    "Plural": "{0} {1} that are broken"
+  },
+  "ActionRequiredCount": "{0} {1} where your action is required",
   "AttentionRequiredCount": {
     "One": "{0} {1} requires your attention",
     "Plural": "{0} {1} require your attention"
@@ -239,10 +253,18 @@
   "GenericPackage": "Generic Package",
   "MusicPack": "Music Pack",
   "ThemeMix": "Theme Mix",
+  "ContentPackage": "Content/Asset Package",
+  "VisualMod": "Visual Mod",
+  "SimulationMod": "Simulation Mod",
   "IMTMarkings": "IMT Markings",
   "RenderItPreset": "Render it! Preset",
   "POFont": "Procedural Object Font/Module",
-  "NameList": "Name-List/Game Translations",
+  "NameList": "Name-List / Game Translations",
+  "PackageType_MusicPack": "Music pack for the in-game radio.",
+  "PackageType_ContentPackage": "Content or asset package that do not run any code or mod.",
+  "PackageType_VisualMod": "Visual modifications or map theme textures.",
+  "PackageType_SimulationMod": "Simulation mod that directly alters how the gameplay of the game.",
+  "PackageType_NameList": "Extra game translations or name-list files.",
   "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\n\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages.",
@@ -283,5 +305,16 @@
     "Zero": "No active reports",
     "One": "One active report",
     "Plural": "{0} active reports"
-  }
+  },
+  "SavegameEffect": "Effect on savegames after removal",
+  "AssetsRemain": "Normal asset",
+  "EffectsLinger": "Effects linger after removal",
+  "RequiresManualAction": "Requires manual action to remove",
+  "BreaksSave": "Breaks savegames when removed",
+  "SavegameEffect_AssetsRemain": "Removing assets leaves a grey box where they were placed in your city. These obsolete objects should be cleared to prevent any side effects.",
+  "SavegameEffect_EffectsLinger": "Removing this mod will not remove its effects from your city.",
+  "SavegameEffect_RequiresManualAction": "Removing this mod will require additional actions to properly remove it from your city.",
+  "SavegameEffect_BreaksSave": "Removing this mod will break any city that it was used in. Make sure to create backups of your city before using it.",
+  "RemovalNote": "Removal Note",
+  "RemovalNoteInfo": "Describe the steps to safely remove the mod from a savegame..."
 }

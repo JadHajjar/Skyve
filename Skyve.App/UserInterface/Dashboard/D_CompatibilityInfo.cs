@@ -100,7 +100,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 				return Task.FromResult(false);
 			}
 
-			if (!mod.IsEnabled())
+			if (mod.GetCompatibilityInfo(cacheOnly: true).GetAction() is StatusAction.ExcludeThis or StatusAction.UnsubscribeThis or StatusAction.Switch && !_packageUtil.IsIncluded(mod))
 			{
 				continue;
 			}
@@ -108,6 +108,11 @@ internal class D_CompatibilityInfo : IDashboardItem
 			var notif = mod.GetCompatibilityInfo(cacheOnly: true).GetNotification();
 
 			if (notif <= NotificationType.Info)
+			{
+				continue;
+			}
+
+			if (_settings.UserSettings.FilterIncludedByDefault && notif is not NotificationType.RequiredItem && !_packageUtil.IsIncluded(mod))
 			{
 				continue;
 			}

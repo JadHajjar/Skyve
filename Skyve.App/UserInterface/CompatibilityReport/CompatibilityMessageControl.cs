@@ -259,12 +259,26 @@ public class CompatibilityMessageControl : SlickControl
 				DrawPackageInfo(e, brush, fadedBrush, ref rectangle);
 			}
 
-			e.Graphics.DrawString(text, font, brush, rectangle);
-			rectangle.Y += Padding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width).Height;
+			if (string.IsNullOrEmpty(Message.Status.Header))
+			{
+				e.Graphics.DrawString(text, font, brush, rectangle);
+				rectangle.Y += Padding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width).Height;
+			}
+			else
+			{
+				using var fontBold = UI.Font(9F, FontStyle.Bold);
+				using var tinyFontNotBold = UI.Font(7F);
+
+				e.Graphics.DrawString(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFontNotBold, fadedBrush, rectangle);
+				rectangle.Y += (int)e.Graphics.Measure(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFontNotBold, rectangle.Width).Height;
+
+				e.Graphics.DrawString(text, fontBold, brush, rectangle);
+				rectangle.Y += Padding.Top + (int)e.Graphics.Measure(text, fontBold, rectangle.Width).Height;
+			}
 
 			if (note is not null)
 			{
-				e.Graphics.DrawString(note, smallFont, fadedBrush, rectangle.Pad(Padding.Top, -Margin.Left, 0, 0));
+				e.Graphics.DrawString(note, smallFont, fadedBrush, rectangle.Pad(Padding.Top, string.IsNullOrEmpty(text) ? -Padding.Left : -Margin.Left, 0, 0));
 				rectangle.Y += Padding.Top - Margin.Left + (int)e.Graphics.Measure(note, smallFont, rectangle.Width - Padding.Top).Height;
 			}
 
@@ -414,7 +428,10 @@ public class CompatibilityMessageControl : SlickControl
 	{
 		var packageData = Message.GetPackageInfo();
 
-		if (packageData is null) return;
+		if (packageData is null)
+		{
+			return;
+		}
 
 		using var font = UI.Font(9F, FontStyle.Bold);
 		using var tinyFont = UI.Font(7F);
@@ -430,7 +447,7 @@ public class CompatibilityMessageControl : SlickControl
 
 		if (rectangle.Width > UI.Scale(250))
 		{
-			var rect = new Rectangle(rectangle.X + rectangle.Width / 2, startPos.Y, rectangle.Width / 2, rectangle.Height);
+			var rect = new Rectangle(rectangle.X + (rectangle.Width / 2), startPos.Y, rectangle.Width / 2, rectangle.Height);
 
 			e.Graphics.DrawString(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, fadedBrush, rect);
 			rect.Y += (int)e.Graphics.Measure(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, rect.Width).Height;
@@ -443,7 +460,7 @@ public class CompatibilityMessageControl : SlickControl
 		}
 		else
 		{
-		rectangle.Y += Padding.Top;
+			rectangle.Y += Padding.Top;
 
 			e.Graphics.DrawString(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, fadedBrush, rectangle);
 			rectangle.Y += (int)e.Graphics.Measure(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, rectangle.Width).Height;

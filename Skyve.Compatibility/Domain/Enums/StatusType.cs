@@ -5,7 +5,7 @@ public enum StatusType
 	[CRN(NotificationType.None, false)]
 	None = 0,
 
-	[CRN(NotificationType.Caution, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.SubscribeToPackages, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.Obsolete, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.SubscribeToPackages, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	Deprecated = 1,
 
 	[CRN(NotificationType.Warning, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.SubscribeToPackages, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
@@ -14,7 +14,7 @@ public enum StatusType
 	[CRN(NotificationType.Warning, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.RequiresConfiguration, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	CausesIssues = 3,
 
-	[CRN(NotificationType.Warning, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.RequiresConfiguration, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.AttentionRequired, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.RequiresConfiguration, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	SavesCantLoadWithoutIt = 4,
 
 	[CRN(NotificationType.Info, [StatusAction.NoAction, StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch], AllowedChange = CRNAttribute.ChangeType.Deny)]
@@ -23,7 +23,7 @@ public enum StatusType
 	[CRN(NotificationType.None, [StatusAction.NoAction, StatusAction.ExcludeThis, StatusAction.UnsubscribeThis], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	DependencyMod = 6,
 
-	[CRN(NotificationType.Warning, false)]
+	[CRN(NotificationType.Caution, false)]
 	SourceCodeNotAvailable = 7,
 
 	[CRN(NotificationType.Caution, [StatusAction.NoAction])]
@@ -43,7 +43,7 @@ public enum StatusType
 	[CRN(NotificationType.MissingDependency, false)]
 	MissingDlc = 1000,
 
-	[CRN(NotificationType.Unsubscribe, false)]
+	[CRN(NotificationType.Obsolete, false)]
 	Succeeded = 1001,
 
 	[CRN(NotificationType.Info, false)]

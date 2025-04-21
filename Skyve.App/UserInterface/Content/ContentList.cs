@@ -695,12 +695,12 @@ public partial class ContentList : SlickControl
 		if (ListControl.ItemCount > 0)
 		{
 			var countText = GetCountText();
-			var format = ListControl.SelectedItemsCount == 0 ? (ListControl.UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning) : (ListControl.UsageFilteredOut == 0 ? Locale.ShowingSelectedCount : Locale.ShowingSelectedCountWarning);
+			var format = ListControl.SelectedItemsCount == 0 ? (ListControl.UsageFilteredOut == 0 ? Locale.TotalCount : Locale.TotalCountWarning) : (ListControl.UsageFilteredOut == 0 ? Locale.TotalSelectedCount : Locale.TotalSelectedCountWarning);
 			var filteredText = format.FormatPlural(
-				ListControl.FilteredCount,
-				GetItemText().FormatPlural(ListControl.FilteredCount).ToLower(),
+				ListControl.ItemCount,
+				GetItemText().FormatPlural(ListControl.ItemCount).ToLower(),
 				ListControl.SelectedItemsCount,
-				Locale.ItemsHidden.FormatPlural(ListControl.UsageFilteredOut, GetItemText().FormatPlural(ListControl.FilteredCount).ToLower()));
+				Locale.ItemsHidden.FormatPlural(ListControl.UsageFilteredOut, GetItemText().FormatPlural(ListControl.UsageFilteredOut).ToLower()));
 
 			L_Counts.RightText = countText;
 			L_Counts.LeftText = filteredText;
@@ -723,10 +723,10 @@ public partial class ContentList : SlickControl
 
 	protected string GetCountText()
 	{
-		var mods = ListControl.Items.ToList();
+		var mods = ListControl.FilteredItems.ToList();
 		var modsIncluded = mods.Count(x => _packageUtil.IsIncluded(x, SelectedPlayset));
 		var modsEnabled = mods.Count(x => _packageUtil.IsIncludedAndEnabled(x, SelectedPlayset));
-		var count = ListControl.ItemCount;
+		var count = ListControl.FilteredCount;
 
 #if CS1
 		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
