@@ -61,8 +61,6 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 		var text = item.Name.RegexRemove("^.+?- ").RegexRemove("(Content )?Creator Pack: ");
 		var icon = item is IThumbnailObject thumbnailObject ? thumbnailObject.GetThumbnail() : null;
 
-		icon ??= (item.Id == 2427731 ? Properties.Resources.Cities2Landmark : Properties.Resources.Cities2Dlc);
-
 		if (icon != null)
 		{
 			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height * 460 / 215, rectangle.Height), ContentAlignment.MiddleLeft), UI.Scale(3), hoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveColor : BackColor);

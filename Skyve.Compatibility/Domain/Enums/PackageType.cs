@@ -14,4 +14,5 @@ public enum PackageType
 	ContentPackage = 8,
 	VisualMod = 9,
 	SimulationMod = 10,
+	MapSavegame = 11
 }

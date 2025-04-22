@@ -57,6 +57,11 @@ public static class SystemExtensions
 
 	public static bool IsCodeMod(this IPackageIdentity identity)
 	{
+		if (!(GetPackageInfo(identity)?.Type is null or PackageType.GenericPackage or PackageType.SimulationMod))
+		{
+			return false;
+		}
+
 		if (identity.Id > 0 && identity.GetWorkshopInfo() is IWorkshopInfo workshopInfo)
 		{
 			return workshopInfo.IsCodeMod;

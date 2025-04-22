@@ -515,9 +515,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (package.IsDlc)
 		{
-			var thumbnailUrl = package.Id > 10 ? $"https://cdn.akamai.steamstatic.com/steam/apps/{package.Id}/header.jpg" : null;
-			thumbnail = thumbnailUrl is null or "" ? null : _imageService.GetImage(thumbnailUrl, true, $"Dlc_{package.Id}.png", false).Result;
-			thumbnail ??= package.Id == 2427731 ? Properties.Resources.Cities2Landmark : Properties.Resources.Cities2Dlc;
+			thumbnail = _dlcManager.TryGetDlc(package.Id) is IThumbnailObject thumbnailObject ? thumbnailObject.GetThumbnail() : null;
 		}
 		else
 		{

@@ -1,4 +1,5 @@
 ﻿using Skyve.App.Interfaces;
+using Skyve.App.UserInterface.Panels;
 using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
@@ -29,6 +30,7 @@ public class CompatibilityMessageControl : SlickControl
 	private readonly IPackageNameUtil _packageNameUtil;
 	private readonly IImageService _imageService;
 	private readonly ICompatibilityActionsHelper _compatibilityActions;
+	private readonly IDlcManager _dlcManager;
 
 	public ReportType Type { get; }
 	public ICompatibilityItem Message { get; }
@@ -37,7 +39,7 @@ public class CompatibilityMessageControl : SlickControl
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
-		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _compatibilityActions, out _workshopService, out _packageNameUtil, out _imageService);
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _compatibilityActions, out _workshopService, out _packageNameUtil, out _imageService, out _dlcManager);
 
 		Dock = DockStyle.Top;
 		Type = type;
@@ -537,9 +539,7 @@ public class CompatibilityMessageControl : SlickControl
 
 		if (package.IsDlc)
 		{
-			var thumbnailUrl = package.Id > 10 ? $"https://cdn.akamai.steamstatic.com/steam/apps/{package.Id}/header.jpg" : null;
-			thumbnail = thumbnailUrl is null or "" ? null : _imageService.GetImage(thumbnailUrl, true, $"Dlc_{package.Id}.png", false).Result;
-			thumbnail ??= package.Id == 2427731 ? Properties.Resources.Cities2Landmark : Properties.Resources.Cities2Dlc;
+			thumbnail = _dlcManager.TryGetDlc(package.Id) is IThumbnailObject thumbnailObject ? thumbnailObject.GetThumbnail() : null;
 		}
 		else
 		{

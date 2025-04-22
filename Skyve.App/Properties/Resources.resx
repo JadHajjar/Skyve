@@ -1810,12 +1810,6 @@
   <data name="I_Archived_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Archived_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Cities2Dlc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Cities2Dlc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Cities2Landmark" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Cities2Landmark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="I_Hammer_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Hammer_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

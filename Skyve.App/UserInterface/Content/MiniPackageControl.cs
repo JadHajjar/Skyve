@@ -155,8 +155,6 @@ public class MiniPackageControl : SlickControl
 		if (Package is IDlcInfo)
 		{
 			imageRect.Width = imageRect.Height * 460 / 215;
-
-			image ??= Package.Id == 2427731 ? Properties.Resources.Cities2Landmark : Properties.Resources.Cities2Dlc;
 		}
 		else if (Package is null)
 		{

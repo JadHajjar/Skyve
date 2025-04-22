@@ -372,7 +372,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation EditNote => _instance.GetText("EditNote");
 
 	/// <summary>
-	/// Leave a note for other managers to see in the future
+	/// Leave a note for other managers to see in the future.
 	/// </summary>
 	public static Translation EditNoteInfo => _instance.GetText("EditNoteInfo");
 
@@ -557,6 +557,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation MapCreation => _instance.GetText("MapCreation");
 
 	/// <summary>
+	/// Map / Savegame
+	/// </summary>
+	public static Translation MapSavegame => _instance.GetText("MapSavegame");
+
+	/// <summary>
 	/// Missing Dependency
 	/// </summary>
 	public static Translation MissingDependency => _instance.GetText("MissingDependency");
@@ -660,9 +665,14 @@ public class LocaleCR : LocaleHelper
 	public static Translation PackageType => _instance.GetText("PackageType");
 
 	/// <summary>
-	/// Content or asset package that do not run any code or mod.
+	/// Content or asset package that does not include any code.
 	/// </summary>
 	public static Translation PackageTypeContentPackage => _instance.GetText("PackageType_ContentPackage");
+
+	/// <summary>
+	/// Map, or Savegame.
+	/// </summary>
+	public static Translation PackageTypeMapSavegame => _instance.GetText("PackageType_MapSavegame");
 
 	/// <summary>
 	/// Music pack for the in-game radio.
@@ -675,7 +685,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation PackageTypeNameList => _instance.GetText("PackageType_NameList");
 
 	/// <summary>
-	/// Simulation mod that directly alters how the gameplay of the game.
+	/// Simulation mod that directly alters the gameplay of the game.
 	/// </summary>
 	public static Translation PackageTypeSimulationMod => _instance.GetText("PackageType_SimulationMod");
 
@@ -745,7 +755,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation RequestReviewInfo => _instance.GetText("RequestReviewInfo");
 
 	/// <summary>
-	/// Send a new request to be reviewed
+	/// Send a new request for review.
 	/// </summary>
 	public static Translation RequestReviewUpdate => _instance.GetText("RequestReviewUpdate");
 
@@ -821,7 +831,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation SavegameEffectAssetsRemain => _instance.GetText("SavegameEffect_AssetsRemain");
 
 	/// <summary>
-	/// Removing this mod will break any city that it was used in. Make sure to create backups of your city before using it.
+	/// Removing this mod will break any city it was used in. Make sure to create backups of your city before using it.
 	/// </summary>
 	public static Translation SavegameEffectBreaksSave => _instance.GetText("SavegameEffect_BreaksSave");
 
@@ -831,7 +841,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation SavegameEffectEffectsLinger => _instance.GetText("SavegameEffect_EffectsLinger");
 
 	/// <summary>
-	/// Removing this mod will require additional actions to properly remove it from your city.
+	/// Removing this mod will require additional steps to properly remove it from your city.
 	/// </summary>
 	public static Translation SavegameEffectRequiresManualAction => _instance.GetText("SavegameEffect_RequiresManualAction");
 

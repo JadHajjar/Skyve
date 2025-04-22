@@ -477,7 +477,7 @@ public class CompatibilityManager : ICompatibilityManager
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.NoAction });
 			}
 
-			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 30 && !_userService.IsUserVerified(workshopInfo?.Author))
+			if (!packageData.IndexedStatuses.ContainsKey(StatusType.TestVersion) && !(workshopInfo?.IsPartialInfo ?? false) && workshopInfo?.Description is not null && workshopInfo.Description.GetWords().Length <= 25 && !_userService.IsUserVerified(workshopInfo?.Author))
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.NoAction });
 			}
@@ -575,8 +575,7 @@ public class CompatibilityManager : ICompatibilityManager
 			info.AddWithLocale(ReportType.Info,
 				new StabilityStatus(stability is PackageStability.NotReviewed ? PackageStability.NotReviewed : PackageStability.ReiewRequest, string.Empty, true),
 				packageName,
-				LocaleCR.RequestReviewInfo,
-				//(stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"),
+				nameof(LocaleCR.RequestReviewInfo),
 				[]);
 		}
 

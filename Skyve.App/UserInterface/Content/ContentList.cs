@@ -540,7 +540,7 @@ public partial class ContentList : SlickControl
 
 		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			var isCodeMod = item.IsCodeMod() && (item.GetPackageInfo()?.Type is null or PackageType.GenericPackage);
+			var isCodeMod = item.IsCodeMod();
 
 			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == isCodeMod)
 			{

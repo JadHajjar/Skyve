@@ -69,6 +69,7 @@ public static class CompatibilityExtensions
 			PackageType.VisualMod => "Palette",
 			PackageType.MusicPack => "Music",
 			PackageType.NameList => "Translate",
+			PackageType.MapSavegame => "Map",
 			_ => "Cog",
 		};
 	}

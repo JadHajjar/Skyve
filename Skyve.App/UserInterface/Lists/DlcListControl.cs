@@ -163,18 +163,18 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 	{
 		var thumbnail = e.Item is IThumbnailObject thumbnailObject ? thumbnailObject.GetThumbnail() : null;
 
-		//if (thumbnail is null)
-		//{
-		//	using var generic = IconManager.GetIcon("Dlc", e.Rects.IconRect.Height).Color(BackColor);
-		//	using var brush = new SolidBrush(FormDesign.Design.IconColor);
+		if (thumbnail is null)
+		{
+			using var generic = IconManager.GetIcon("Dlc", e.Rects.IconRect.Height).Color(BackColor);
+			using var brush = new SolidBrush(FormDesign.Design.IconColor);
 
-		//	e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
-		//	e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
-		//}
-		//else
-		//{
-		drawThumbnail(thumbnail ?? (e.Item.Id == 2427731 ? Properties.Resources.Cities2Landmark : Properties.Resources.Cities2Dlc));
-		//}
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.IconRect, UI.Scale(5));
+			e.Graphics.DrawImage(generic, e.Rects.IconRect.CenterR(generic.Size));
+		}
+		else
+		{
+			drawThumbnail(thumbnail);
+		}
 
 		void drawThumbnail(Bitmap image)
 		{

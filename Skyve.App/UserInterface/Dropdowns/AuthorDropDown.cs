@@ -48,7 +48,7 @@ public class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 
 		using var brush = new SolidBrush(hoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : Color.FromArgb(hoverState.HasFlag(HoverState.Hovered) ? 255 : 200, UserIcon.GetUserColor(item.Id?.ToString() ?? string.Empty, true)));
 	
-		DrawAuthorImage(e, item, rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft), brush.Color, hoverState);
+		DrawAuthorImage(e, item, rectangle.Align(new Size(rectangle.Height + UI.Scale(2), rectangle.Height + UI.Scale(2)), ContentAlignment.MiddleLeft), brush.Color, hoverState);
 
 		rectangle = rectangle.Pad(rectangle.Height + Padding.Left, 0, 0, 0);
 

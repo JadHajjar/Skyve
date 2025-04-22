@@ -24,7 +24,7 @@ public partial class PC_WorkshopPackageSelection : PC_WorkshopList
 		P_Packages.ControlAdded += P_Packages_ControlChanged;
 		P_Packages.ControlRemoved += P_Packages_ControlChanged;
 
-		LC_Items.OT_ModAsset.SelectedValue = Generic.ThreeOptionToggle.Value.Option1;
+		LC_Items.TagsControl!.SelectedTags.Add(ServiceCenter.Get<ITagsService>().CreateWorkshopTag("Code Mod"));
 		LC_Items.ListControl.IsSelection = true;
 		LC_Items.ListControl.PackageSelected += ListControl_PackageSelected;
 		LC_Items.ListControl.PackageUnSelected += ListControl_PackageUnSelected;
