@@ -546,13 +546,22 @@ public class CompatibilityMessageControl : SlickControl
 			thumbnail = package.GetThumbnail();
 		}
 
-		thumbnail ??= package.IsLocal()
-			? package is IAsset ? AssetThumbUnsat : package.IsCodeMod() ? ModThumbUnsat : package.IsLocal() ? PackageThumbUnsat : WorkshopThumbUnsat
-			: package is IAsset ? AssetThumb : package.IsCodeMod() ? ModThumb : package.IsLocal() ? PackageThumb : WorkshopThumb;
-
-		if (thumbnail is not null)
+		if (thumbnail is not null && !package.IsDlc && package.IsLocal())
 		{
-			drawThumbnail(thumbnail);
+			using var unsatImg = thumbnail.ToGrayscale();
+
+			drawThumbnail(unsatImg);
+		}
+		else
+		{
+			thumbnail ??= package.IsLocal()
+				? package is IAsset ? AssetThumbUnsat : package.IsCodeMod() ? ModThumbUnsat : package.IsLocal() ? PackageThumbUnsat : WorkshopThumbUnsat
+				: package is IAsset ? AssetThumb : package.IsCodeMod() ? ModThumb : package.IsLocal() ? PackageThumb : WorkshopThumb;
+
+			if (thumbnail is not null)
+			{
+				drawThumbnail(thumbnail);
+			}
 		}
 
 		if (HoverState.HasFlag(HoverState.Hovered) && rectangle.Contains(cursor))

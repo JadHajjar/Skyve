@@ -18,7 +18,7 @@ public partial class PC_CompatibilityReport : PanelContent
 {
 	private bool customReportLoaded;
 	private bool searchEmpty = true;
-	private bool clearingFilters;
+	private bool clearingFilters = true;
 	private bool firstFilterPassed;
 	private bool massSnoozeing;
 	private readonly int UsageFilteredOut;
@@ -46,6 +46,11 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		InitializeComponent();
 
+		if (_settings.UserSettings.FilterIncludedByDefault)
+		{
+			OT_Included.SelectedValue = ThreeOptionToggle.Value.Option1;
+		}
+
 		ListControl.CanDrawItem += LC_Items_CanDrawItem;
 		ListControl.SelectedItemsChanged += (_, _) => RefreshCounts();
 
@@ -53,7 +58,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		notificationFilterControl.Filter = x => !IsFilteredOut(x, false);
 		notificationFilterControl.SelectedGroupChanged += (_, _) => ListControl.DoFilterChanged();
 
-		I_Actions = new IncludeAllButton(() => ListControl.FilteredItems.Cast<IPackageIdentity>().ToList()!);
+		I_Actions = new IncludeAllButton(() => new List<IPackageIdentity>(ListControl.FilteredItems));
 		I_Actions.ActionClicked += I_Actions_Click;
 		I_Actions.IncludeAllClicked += IncludeAll;
 		I_Actions.ExcludeAllClicked += ExcludeAll;
@@ -95,12 +100,9 @@ public partial class PC_CompatibilityReport : PanelContent
 		_notifier.CompatibilityReportProcessed += CompatibilityManager_ReportProcessed;
 		_notifier.SnoozeChanged += CompatibilityManager_ReportProcessed;
 
+		clearingFilters = false;
+
 		new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
-		
-		if (_settings.UserSettings.FilterIncludedByDefault)
-		{
-			OT_Included.SelectedValue = ThreeOptionToggle.Value.Option1;
-		}
 	}
 
 	protected void RefreshAuthorAndTags()
@@ -180,7 +182,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		try
 		{
-			reports.RemoveAll(x => x.GetNotification() <= NotificationType.Info);
+			reports.RemoveAll(x => GetNotification(x) <= NotificationType.LocalMod);
 
 			ListControl.AllStatuses = true;
 			ListControl.SetItems(reports);
@@ -192,6 +194,11 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report");
 		}
+	}
+
+	private NotificationType GetNotification(ICompatibilityInfo info)
+	{
+		return info.ReportItems?.Any() == true ? info.ReportItems.Max(x => x.Status.Notification) : NotificationType.None;
 	}
 
 	private ExtensionClass.action? GetAction(ICompatibilityInfo report)
@@ -738,9 +745,19 @@ public partial class PC_CompatibilityReport : PanelContent
 			return false;
 		}
 
-		if (withGrouping && notificationFilterControl.CurrentGroup != NotificationType.None && item.GetNotification() != notificationFilterControl.CurrentGroup)
+		if (withGrouping)
 		{
-			return true;
+			var valid = notificationFilterControl.CurrentGroup switch
+			{
+				NotificationType.Snoozed => item.GetNotification() <= NotificationType.Info,
+				NotificationType.None => item.GetNotification() > NotificationType.Info,
+				_ => item.GetNotification() == notificationFilterControl.CurrentGroup
+			};
+
+			if (!valid)
+			{
+				return true;
+			}
 		}
 
 		if (OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)

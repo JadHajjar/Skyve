@@ -30,6 +30,7 @@ public class PackageInteraction : IPackageStatus<InteractionType>
 		}
 	}
 	IEnumerable<ICompatibilityPackageIdentity> IGenericPackageStatus.Packages { get => Packages ?? []; set => Packages = value.ToList(x => new CompatibilityPackageReference(x)); }
+	string IGenericPackageStatus.Class => nameof(PackageInteraction);
 
 	public PackageInteraction()
 	{

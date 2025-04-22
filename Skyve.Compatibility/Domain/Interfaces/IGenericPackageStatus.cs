@@ -14,4 +14,5 @@ public interface IGenericPackageStatus
 	NotificationType Notification { get; }
 	int IntType { get; set; }
 	string LocaleKey { get; }
+	string Class { get; }
 }

@@ -9,34 +9,35 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Skyve.Compatibility.Domain;
-public class StabilityStatus : IPackageStatus<PackageStability>
+
+public class PackageTypeStatus : IPackageStatus<PackageType>
 {
-	public StabilityStatus(PackageStability type, string? note, bool review)
+	public PackageTypeStatus(PackageType type)
 	{
+		Notification = NotificationType.Info;
+		Header = nameof(PackageType);
 		Type = type;
-		Action = type is PackageStability.Broken ? StatusAction.UnsubscribeThis : review ? StatusAction.RequestReview : StatusAction.NoAction;
-		Note = note;
 	}
 
-	public StabilityStatus()
+	public PackageTypeStatus()
 	{
 
 	}
 
-	public PackageStability Type { get; set; }
+	public PackageType Type { get; set; }
 	public StatusAction Action { get; set; }
 	public List<CompatibilityPackageReference>? Packages { get; set; }
 	public string? Header { get; set; }
 	public string? Note { get; set; }
-	public NotificationType Notification => CRNAttribute.GetNotification(Type);
-	[JsonIgnore] public int IntType { get => (int)Type; set => Type = (PackageStability)value; }
-	[JsonIgnore] public string LocaleKey => $"Stability_{Type}";
+	public NotificationType Notification { get; }
+	[JsonIgnore] public int IntType { get => (int)Type; set => Type = (PackageType)value; }
+	[JsonIgnore] public string LocaleKey => $"PackageType_{Type}";
 	IEnumerable<ICompatibilityPackageIdentity> IGenericPackageStatus.Packages { get => Packages ?? []; set => Packages = value.ToList(x => new CompatibilityPackageReference(x)); }
-	string IGenericPackageStatus.Class => nameof(StabilityStatus);
+	string IGenericPackageStatus.Class => nameof(PackageTypeStatus);
 
 	public override bool Equals(object? obj)
 	{
-		return obj is StabilityStatus status &&
+		return obj is PackageTypeStatus status &&
 			   Type == status.Type &&
 			   (Packages?.SequenceEqual(status.Packages) ?? status.Packages is null);
 	}
@@ -49,9 +50,9 @@ public class StabilityStatus : IPackageStatus<PackageStability>
 		return hashCode;
 	}
 
-	public IPackageStatus<PackageStability> Duplicate()
+	public IPackageStatus<PackageType> Duplicate()
 	{
-		return new StabilityStatus
+		return new PackageTypeStatus
 		{
 			Type = Type,
 			Action = Action,
@@ -60,3 +61,4 @@ public class StabilityStatus : IPackageStatus<PackageStability>
 		};
 	}
 }
+

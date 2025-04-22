@@ -33,6 +33,7 @@ public class PackageStatus : IPackageStatus<StatusType>
 	[JsonIgnore] public int IntType { get => (int)Type; set => Type = (StatusType)value; }
 	[JsonIgnore] public string LocaleKey => $"Status_{Type}";
 	IEnumerable<ICompatibilityPackageIdentity> IGenericPackageStatus.Packages { get => Packages ?? []; set => Packages = value.ToList(x => new CompatibilityPackageReference(x)); }
+	string IGenericPackageStatus.Class => nameof(PackageStatus);
 
 	public PackageStatus()
 	{

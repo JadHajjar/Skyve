@@ -38,6 +38,7 @@ public class GenericPackageStatus : IGenericPackageStatus
 	[JsonIgnore] public string LocaleKey => string.Empty;
 	[JsonIgnore] public NotificationType Notification { get; set; }
 	IEnumerable<ICompatibilityPackageIdentity> IGenericPackageStatus.Packages { get => Packages ?? []; set => Packages = value.ToList(x => new CompatibilityPackageReference(x)); }
+	string IGenericPackageStatus.Class => nameof(GenericPackageStatus);
 
 	public override bool Equals(object? obj)
 	{

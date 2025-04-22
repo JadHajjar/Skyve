@@ -10,6 +10,7 @@ using Skyve.Domain.Systems;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 
 namespace Skyve.Systems;
 public static class SystemExtensions
@@ -57,7 +58,7 @@ public static class SystemExtensions
 
 	public static bool IsCodeMod(this IPackageIdentity identity)
 	{
-		if (!(GetPackageInfo(identity)?.Type is null or PackageType.GenericPackage or PackageType.SimulationMod))
+		if (GetPackageInfo(identity)?.Type is not (null or PackageType.GenericPackage or PackageType.SimulationMod))
 		{
 			return false;
 		}
@@ -177,7 +178,24 @@ public static class SystemExtensions
 
 	public static IWorkshopInfo? GetWorkshopInfo(this IPackageIdentity identity)
 	{
-		return identity is IWorkshopInfo workshopInfo ? WorkshopService.GetInfo(identity) ?? workshopInfo : WorkshopService.GetInfo(identity);
+		return identity is IWorkshopInfo workshopInfo
+			? WorkshopService.GetInfo(identity) ?? workshopInfo
+			: identity.Id <= 0 ? GetLocalModWorkshopInfo(identity) : WorkshopService.GetInfo(identity);
+	}
+
+	private static IWorkshopInfo? GetLocalModWorkshopInfo(IPackageIdentity identity)
+	{
+		if (GetLocalPackageIdentity(identity) is ILocalPackageIdentity localPackageIdentity)
+		{
+			var id = SkyveDataManager.GetIdFromModName(Path.GetFileName( localPackageIdentity.FilePath));
+
+			if (id > 0)
+			{
+				return WorkshopService.GetInfo(new GenericPackageIdentity(identity) { Id = id });
+			}
+		}
+
+		return null;
 	}
 
 	public static IPackage? GetWorkshopPackage(this IPackageIdentity identity)

@@ -79,6 +79,7 @@ public static class CompatibilityExtensions
 		return notification switch
 		{
 			NotificationType.Info => "Info",
+			NotificationType.LocalMod => "PC",
 			NotificationType.MissingDependency => "MissingMod",
 			NotificationType.Caution => "Remarks",
 			NotificationType.Warning => "Hazard",
@@ -89,6 +90,7 @@ public static class CompatibilityExtensions
 			NotificationType.ActionRequired => "Hammer",
 			//NotificationType.Exclude => "X",
 			NotificationType.RequiredItem => "Important",
+			NotificationType.Snoozed => "Snooze",
 			NotificationType.None or _ => status ? "Ok" : "Info",
 		};
 	}
@@ -99,6 +101,8 @@ public static class CompatibilityExtensions
 		{
 			NotificationType.Info => FormDesign.Design.InfoColor,
 
+			NotificationType.LocalMod => FormDesign.Design.ButtonColor,
+
 			NotificationType.Caution => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.GreenColor, 60),
 
 			NotificationType.MissingDependency => FormDesign.Design.YellowColor,
@@ -107,11 +111,11 @@ public static class CompatibilityExtensions
 			NotificationType.AttentionRequired => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor, 30),
 			NotificationType.ActionRequired => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor, 45),
 
-			NotificationType.Broken => FormDesign.Design.RedColor,
+			NotificationType.Obsolete => FormDesign.Design.RedColor,
 
-			NotificationType.Obsolete => FormDesign.Design.RedColor.Tint(FormDesign.Design.RedColor.GetHue() - 10),
+			NotificationType.Broken => FormDesign.Design.RedColor.Tint(FormDesign.Design.RedColor.GetHue() - 10),
 
-			//NotificationType.Switch => FormDesign.Design.RedColor.Tint(FormDesign.Design.RedColor.GetHue() - 10),
+			NotificationType.Snoozed => Color.FromArgb(100, 60, 220),
 
 			_ => FormDesign.Design.GreenColor
 		};

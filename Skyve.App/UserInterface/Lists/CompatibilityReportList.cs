@@ -186,7 +186,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
 	{
 		var workshopInfo = e.Item.GetWorkshopInfo();
-		var message = e.Item.ReportItems?.Any() == true ? e.Item.ReportItems.OrderBy(x => _compatibilityManager.IsSnoozed(x) ? 0 : x.Status.Notification).LastOrDefault() : null;
+		var message = e.Item.ReportItems?.Any() == true ? e.Item.ReportItems.OrderByDescending(x => x.Status.Notification).FirstOrAny(x => x.Status.Notification > NotificationType.Info && !_compatibilityManager.IsSnoozed(x)) : null;
 		var clip = e.ClipRectangle;
 
 		e.BackColor = BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 3f : -3f);
@@ -234,7 +234,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 		else if (e.Item.IsLocal())
 		{
-			using var unsatImg = new Bitmap(thumbnail, e.Rects.IconRect.Size).Tint(Sat: 0);
+			using var unsatImg = thumbnail.ToGrayscale();
 
 			drawThumbnail(unsatImg);
 		}
@@ -417,8 +417,11 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			if (isSnoozed && Enabled)
 			{
 				using var fadeBrush = new SolidBrush(Color.FromArgb(125, BackColor));
+				var clip = e.ClipRectangle;
 
-				e.Graphics.FillRectangle(fadeBrush, e.ClipRectangle);
+				e.Graphics.ResetClip();
+				e.Graphics.FillRectangle(fadeBrush, e.ClipRectangle.InvertPad(GridPadding));
+				e.Graphics.SetClip(clip);
 			}
 
 			e.Rects.snoozeRect = new Rectangle(rectangle.Location, e.Graphics.Measure(isSnoozed ? Locale.UnSnooze : Locale.Snooze, tinyFont).ToSize());
@@ -522,13 +525,22 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			thumbnail = package.GetThumbnail();
 		}
 
-		thumbnail ??= package.IsLocal()
-			? package is IAsset ? AssetThumbUnsat : package.IsCodeMod() ? ModThumbUnsat : package.IsLocal() ? PackageThumbUnsat : WorkshopThumbUnsat
-			: package is IAsset ? AssetThumb : package.IsCodeMod() ? ModThumb : package.IsLocal() ? PackageThumb : WorkshopThumb;
-
-		if (thumbnail is not null)
+		if (thumbnail is not null && !package.IsDlc && package.IsLocal())
 		{
-			e.Graphics.DrawRoundedImage(thumbnail, rectangle, UI.Scale(5), FormDesign.Design.BackColor);
+			using var unsatImg = thumbnail.ToGrayscale();
+
+			drawThumbnail(unsatImg);
+		}
+		else
+		{
+			thumbnail ??= package.IsLocal()
+				? package is IAsset ? AssetThumbUnsat : package.IsCodeMod() ? ModThumbUnsat : package.IsLocal() ? PackageThumbUnsat : WorkshopThumbUnsat
+				: package is IAsset ? AssetThumb : package.IsCodeMod() ? ModThumb : package.IsLocal() ? PackageThumb : WorkshopThumb;
+
+			if (thumbnail is not null)
+			{
+				drawThumbnail(thumbnail);
+			}
 		}
 
 		if (HoverState.HasFlag(HoverState.Hovered) && rectangle.Contains(cursor))
@@ -538,6 +550,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 
 		return rectangle.Height + UI.Scale(16);
+
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, rectangle, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
 	private int DrawTitleAndTags(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)
@@ -713,9 +727,9 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			return;
 		}
 
-		var Message = item.Item.ReportItems?.Any() == true ? item.Item.ReportItems.OrderBy(x => _compatibilityManager.IsSnoozed(x) ? 0 : x.Status.Notification).LastOrDefault() : null;
+		var message = item.Item.ReportItems?.Any() == true ? item.Item.ReportItems.OrderByDescending(x => x.Status.Notification).FirstOrAny(x => x.Status.Notification > NotificationType.Info && !_compatibilityManager.IsSnoozed(x)) : null;
 
-		if (Message is null)
+		if (message is null)
 		{
 			return;
 		}
@@ -726,7 +740,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			{
 				if (e.Button == MouseButtons.Left)
 				{
-					if (Message.Type is ReportType.DlcMissing)
+					if (message.Type is ReportType.DlcMissing)
 					{
 						PlatformUtil.OpenUrl(rect.Key.Url);
 					}
@@ -767,7 +781,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (e.Button == MouseButtons.Left && rects.snoozeRect.Contains(e.Location))
 		{
-			_compatibilityManager.ToggleSnoozed(Message);
+			_compatibilityManager.ToggleSnoozed(message);
 
 			return;
 		}
@@ -778,7 +792,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 			{
 				if (rect.Value.Rectangle.Contains(e.Location))
 				{
-					await Invoke(item, Message, rect.Value.Action, rect.Key);
+					await Invoke(item, message, rect.Value.Action, rect.Key);
 
 					return;
 				}
@@ -787,11 +801,11 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (e.Button == MouseButtons.Left && rects.recommendedActionRect.Contains(e.Location))
 		{
-			var action = _compatibilityActions.GetRecommendedAction(Message);
+			var action = _compatibilityActions.GetRecommendedAction(message);
 
 			if (action != null)
 			{
-				await Invoke(item, Message, action);
+				await Invoke(item, message, action);
 			}
 
 			return;
@@ -799,16 +813,16 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (e.Button == MouseButtons.Left && rects.bulkActionRect.Contains(e.Location))
 		{
-			if (Message.Status.Action is StatusAction.RequestReview)
+			if (message.Status.Action is StatusAction.RequestReview)
 			{
 				return;
 			}
 
-			var action = _compatibilityActions.GetBulkAction(Message);
+			var action = _compatibilityActions.GetBulkAction(message);
 
 			if (action != null)
 			{
-				await Invoke(item, Message, action);
+				await Invoke(item, message, action);
 			}
 		}
 	}

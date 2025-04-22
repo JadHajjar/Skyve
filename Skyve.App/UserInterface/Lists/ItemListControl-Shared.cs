@@ -23,13 +23,13 @@ public partial class ItemListControl
 	public static void LoadThumbnails()
 	{
 		WorkshopThumb = Properties.Resources.Thumb_Pdx;
-		WorkshopThumbUnsat = Properties.Resources.Thumb_Pdx.Tint(Sat: 0);
+		WorkshopThumbUnsat = Properties.Resources.Thumb_Pdx.ToGrayscale();
 		PackageThumb = Properties.Resources.Thumb_Package;
-		PackageThumbUnsat = Properties.Resources.Thumb_Package.Tint(Sat: 0);
+		PackageThumbUnsat = Properties.Resources.Thumb_Package.ToGrayscale();
 		AssetThumb = Properties.Resources.Thumb_Asset;
-		AssetThumbUnsat = Properties.Resources.Thumb_Asset.Tint(Sat: 0);
+		AssetThumbUnsat = Properties.Resources.Thumb_Asset.ToGrayscale();
 		ModThumb = Properties.Resources.Thumb_Mod;
-		ModThumbUnsat = Properties.Resources.Thumb_Mod.Tint(Sat: 0);
+		ModThumbUnsat = Properties.Resources.Thumb_Mod.ToGrayscale();
 	}
 
 	private int DrawScore(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo, int xdiff)
@@ -70,7 +70,7 @@ public partial class ItemListControl
 		}
 		else if (e.Item.IsLocal())
 		{
-			using var unsatImg = new Bitmap(thumbnail, e.Rects.IconRect.Size).Tint(Sat: 0);
+			using var unsatImg = thumbnail.ToGrayscale();
 
 			drawThumbnail(unsatImg);
 		}

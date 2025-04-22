@@ -76,8 +76,8 @@ public class NotificationFilterControl : SlickControl
 			return;
 		}
 
-		var compatibilityItems = items.GroupBy(x => x.GetNotification()).OrderByDescending(x => x.Key).ToList();
-		compatibilityItems.Insert(0, items.GroupBy(x => NotificationType.None).FirstOrDefault());
+		var compatibilityItems = items.GroupBy(x => x.GetNotification().If(x => x <= NotificationType.Info, NotificationType.Snoozed)).OrderByDescending(x => x.Key).ToList();
+		compatibilityItems.Insert(0, items.Where(x => x.GetNotification() > NotificationType.Info).GroupBy(x => NotificationType.None).FirstOrDefault());
 
 		if (Loading)
 		{

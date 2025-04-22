@@ -3,13 +3,15 @@
 public enum SavegameEffect
 {
 	[CRN(NotificationType.Info)]
-	None,
+	Unknown = 0,
+	[CRN(NotificationType.None)]
+	None = 1,
 	[CRN(NotificationType.Info)]
-	AssetsRemain,
+	AssetsRemain = 2,
 	[CRN(NotificationType.Caution)]
-	EffectsLinger,
+	EffectsLinger = 3,
 	[CRN(NotificationType.AttentionRequired)]
-	RequiresManualAction,
+	RequiresManualAction = 4,
 	[CRN(NotificationType.Warning)]
-	BreaksSave
+	BreaksSave = 5
 }

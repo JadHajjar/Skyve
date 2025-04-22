@@ -322,9 +322,9 @@ public class CompatibilityManager : ICompatibilityManager
 
 	internal CompatibilityInfo GenerateCompatibilityInfo(IPackageIdentity package)
 	{
-		var packageData = _skyveDataManager.GetPackageCompatibilityInfo(package);
-		var info = new CompatibilityInfo(package, packageData);
 		var workshopInfo = package.GetWorkshopInfo();
+		var packageData = _skyveDataManager.GetPackageCompatibilityInfo(workshopInfo ?? package);
+		var info = new CompatibilityInfo(package, packageData);
 		var localPackage = package.GetLocalPackage();
 		var isCodeMod = (workshopInfo?.IsCodeMod ?? localPackage?.IsCodeMod ?? false) && IsCodeMod(packageData?.Type);
 
@@ -354,7 +354,7 @@ public class CompatibilityManager : ICompatibilityManager
 			return info;
 		}
 
-		if (packageData.Id > 0 && !_compatibilityHelper.IsPackageEnabled(package, false))
+		if (packageData.Id > 0 && !_compatibilityHelper.IsPackageEnabled(package, workshopInfo, true))
 		{
 			var requiredFor = GetRequiredFor(packageData.Id);
 
@@ -376,7 +376,7 @@ public class CompatibilityManager : ICompatibilityManager
 		var author = _userService.TryGetUser(packageData.AuthorId);
 		var packageName = workshopInfo?.CleanName(true);
 
-		if (!isCompatible)
+		if (!isCompatible && CRNAttribute.GetNotification(stability) < NotificationType.Warning)
 		{
 			stability = isCodeMod ? PackageStability.Incompatible : PackageStability.AssetIncompatible;
 		}
@@ -390,7 +390,7 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 		else if (stability is PackageStability.BrokenFromPatch)
 		{
-			if (!_compatibilityHelper.IsPackageEnabled(package, false))
+			if (!_compatibilityHelper.IsPackageEnabled(package, workshopInfo, false))
 			{
 				stability = PackageStability.BrokenFromPatchSafe;
 			}
@@ -402,7 +402,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (stability is PackageStability.BrokenFromNewVersion)
 		{
-			if (!_compatibilityHelper.IsPackageEnabled(package, false))
+			if (!_compatibilityHelper.IsPackageEnabled(package, workshopInfo, false))
 			{
 				stability = PackageStability.BrokenFromNewVersionSafe;
 			}
@@ -429,7 +429,7 @@ public class CompatibilityManager : ICompatibilityManager
 			info.Add(ReportType.Info, new PackageTypeStatus(packageData.Type) { Note = stability is PackageStability.Stable ? packageData.Note : null }, packageName, []);
 		}
 
-		if (packageData.SavegameEffect != SavegameEffect.None)
+		if (packageData.SavegameEffect > SavegameEffect.None)
 		{
 			info.Add(ReportType.Info, new SavegameEffectStatus(packageData.SavegameEffect, packageData.RemovalSteps), packageName, []);
 		}
@@ -502,8 +502,7 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 
 		if (!packageData.IndexedInteractions.ContainsKey(InteractionType.RequiredPackages)
-			&& !packageData.IndexedInteractions.ContainsKey(InteractionType.OptionalPackages)
-			&& package.IsIncluded()
+			&& _compatibilityHelper.IsPackageEnabled(package, workshopInfo, false)
 			&& (workshopInfo?.Requirements.Any(x => x is not IDlcInfo) ?? false))
 		{
 			_compatibilityHelper.HandleInteraction(info, new PackageInteraction
@@ -514,7 +513,8 @@ public class CompatibilityManager : ICompatibilityManager
 			});
 		}
 
-		if (package.IsIncluded() && ((packageData.RequiredDLCs?.Any() ?? false) || (workshopInfo?.Requirements.Any(x => x is IDlcInfo) ?? false)))
+		if (_compatibilityHelper.IsPackageEnabled(package, workshopInfo, true)
+			&& ((packageData.RequiredDLCs?.Any() ?? false) || (workshopInfo?.Requirements.Any(x => x is IDlcInfo) ?? false)))
 		{
 			var missing = new List<CompatibilityPackageReference>();
 
@@ -565,7 +565,7 @@ public class CompatibilityManager : ICompatibilityManager
 		if (package.IsLocal())
 		{
 			info.Add(ReportType.Info,
-				new StabilityStatus(PackageStability.Local, null, false),
+				new StabilityStatus(PackageStability.Local, null, false) { Action = StatusAction.Switch },
 				_packageNameUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Id)), true),
 				[new CompatibilityPackageReference(packageData)]);
 		}
@@ -606,7 +606,7 @@ public class CompatibilityManager : ICompatibilityManager
 	{
 		var packages = withExcluded || _settings.UserSettings.ShowAllReferencedPackages
 			? _packageManager.Packages.ToList()
-			: _packageManager.Packages.AllWhere(x => x.IsIncluded());
+			: _packageManager.Packages.AllWhere(x => _compatibilityHelper.IsPackageEnabled(x, false));
 
 		foreach (var localPackage in packages)
 		{

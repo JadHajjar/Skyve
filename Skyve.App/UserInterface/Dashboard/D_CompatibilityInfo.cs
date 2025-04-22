@@ -107,7 +107,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 			var notif = mod.GetCompatibilityInfo(cacheOnly: true).GetNotification();
 
-			if (notif <= NotificationType.Info)
+			if (notif <= NotificationType.LocalMod)
 			{
 				continue;
 			}

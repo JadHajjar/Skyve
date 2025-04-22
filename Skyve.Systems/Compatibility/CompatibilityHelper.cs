@@ -10,8 +10,6 @@ using Skyve.Systems.Compatibility.Domain;
 using System.Collections.Generic;
 using System.Linq;
 
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
 namespace Skyve.Systems.Compatibility;
 public class CompatibilityHelper
 {
@@ -50,7 +48,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is StatusType.DependencyMod && (!_packageAvailabilityService.IsPackageEnabled(info, false) || _compatibilityManager.GetPackagesThatReference(info, true).Any()))
+		if (type is StatusType.DependencyMod && (!IsPackageEnabled(info, false) || _compatibilityManager.GetPackagesThatReference(info, true).Any()))
 		{
 			return;
 		}
@@ -70,7 +68,7 @@ public class CompatibilityHelper
 
 		if (status.Action is StatusAction.Switch && status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
 		{
-			packages = packages.Select(x => _compatibilityManager.GetFinalSuccessor(x)).Distinct().ToList();
+			packages = packages.Select(_compatibilityManager.GetFinalSuccessor).Distinct().ToList();
 		}
 
 		if (status.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
@@ -83,7 +81,7 @@ public class CompatibilityHelper
 			}
 		}
 
-		if (status.Action is StatusAction.UnsubscribeThis or StatusAction.ExcludeThis && !_packageAvailabilityService.IsPackageEnabled(info, false))
+		if (status.Action is StatusAction.UnsubscribeThis or StatusAction.ExcludeThis && !IsPackageEnabled(info, false))
 		{
 			status.Action = StatusAction.DoNotAdd;
 		}
@@ -121,7 +119,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && !_packageAvailabilityService.IsPackageEnabled(info, false))
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && !IsPackageEnabled(info, false))
 		{
 			return;
 		}
@@ -130,21 +128,21 @@ public class CompatibilityHelper
 
 		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Action is StatusAction.Switch)
 		{
-			packages = packages.Select(x => _compatibilityManager.GetFinalSuccessor(x)).Distinct().ToList();
+			packages = packages.Select(_compatibilityManager.GetFinalSuccessor).Distinct().ToList();
 		}
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
 		{
-			if (!_packageAvailabilityService.IsPackageEnabled(info, false))
+			if (!IsPackageEnabled(info, false))
 			{
 				return;
 			}
 
-			packages.RemoveAll(x => !_packageAvailabilityService.IsPackageEnabled(x, false));
+			packages.RemoveAll(x => !IsPackageEnabled(x, false));
 		}
 		else if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages)
 		{
-			packages.RemoveAll(x => _packageAvailabilityService.IsPackageEnabled(x, true));
+			packages.RemoveAll(x => IsPackageEnabled(x, true));
 		}
 
 		if (interaction.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
@@ -171,7 +169,7 @@ public class CompatibilityHelper
 			type = InteractionType.RequiredPackages;
 		}
 
-		if (interaction.Action is StatusAction.UnsubscribeThis or StatusAction.ExcludeThis && !_packageAvailabilityService.IsPackageEnabled(info, false))
+		if (interaction.Action is StatusAction.UnsubscribeThis or StatusAction.ExcludeThis && !IsPackageEnabled(info, false))
 		{
 			interaction.Action = StatusAction.DoNotAdd;
 		}
@@ -186,7 +184,7 @@ public class CompatibilityHelper
 			_ => ReportType.Compatibility
 		};
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && _packageAvailabilityService.IsPackageEnabled(info, false))
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && IsPackageEnabled(info, false))
 		{
 			lock (_missingItems)
 			{
@@ -216,9 +214,9 @@ public class CompatibilityHelper
 	{
 		foreach (var item in packages)
 		{
-			if (_packageAvailabilityService.IsPackageEnabled(item, true))
+			if (IsPackageEnabled(item, true))
 			{
-				if (_packageAvailabilityService.IsPackageEnabled(info, false))
+				if (IsPackageEnabled(info, false))
 				{
 					HandleStatus(info, new PackageStatus(StatusType.Succeeded, StatusAction.UnsubscribeThis) { Packages = [new(item)] });
 				}
@@ -251,7 +249,22 @@ public class CompatibilityHelper
 
 	internal bool IsPackageEnabled(IPackageIdentity id, bool withAlternativesAndSuccessors)
 	{
+		if (id.IsLocal())
+		{
+			return _packageUtil.IsIncludedAndEnabled(id);
+		}
+
 		return _packageAvailabilityService.IsPackageEnabled(id is ICompatibilityPackageIdentity cpi ? cpi : new CompatibilityPackageReference(id), withAlternativesAndSuccessors);
+	}
+
+	internal bool IsPackageEnabled(IPackageIdentity id, IWorkshopInfo? workshopInfo, bool withAlternativesAndSuccessors)
+	{
+		if (id.IsLocal())
+		{
+			return IsPackageEnabled(withAlternativesAndSuccessors && workshopInfo is not null ? workshopInfo : id, withAlternativesAndSuccessors);
+		}
+
+		return IsPackageEnabled(id, withAlternativesAndSuccessors);
 	}
 
 	internal List<ICompatibilityPackageIdentity>? GetRequiredFor(ulong id)

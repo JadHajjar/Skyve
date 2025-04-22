@@ -19,7 +19,7 @@ public enum PackageStability
 	[CRN(NotificationType.None, false)] ReiewRequest = 100,
 	[CRN(NotificationType.Warning, false)] Incompatible = 99,
 	[CRN(NotificationType.Info, false)] AssetNotReviewed = 98,
-	[CRN(NotificationType.Caution, false)] Local = 97,
+	[CRN(NotificationType.LocalMod, false)] Local = 97,
 	[CRN(NotificationType.Caution, false)] AuthorRetired = 96,
 	[CRN(NotificationType.Info, false)] BrokenFromPatchSafe = 95,
 	[CRN(NotificationType.Info, false)] AssetIncompatible = 94,

@@ -21,7 +21,7 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 	[JsonIgnore] public ILocalPackageData? LocalData { get; }
 
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data;
-	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast<ICompatibilityItem>();
+	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems;
 	string? IPackageIdentity.Version { get; set; }
 	bool ICompatibilityPackageIdentity.IsDlc { get; }
 

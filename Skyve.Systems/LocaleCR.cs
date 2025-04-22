@@ -542,6 +542,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation LoadAfter => _instance.GetText("LoadAfter");
 
 	/// <summary>
+	/// Local Mod
+	/// </summary>
+	public static Translation LocalMod => _instance.GetText("LocalMod");
+
+	/// <summary>
 	/// Compatibility Management
 	/// </summary>
 	public static Translation ManageCompatibilityData => _instance.GetText("ManageCompatibilityData");
@@ -956,7 +961,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityIncompatible => _instance.GetText("Stability_Incompatible");
 
 	/// <summary>
-	/// This is a local version of its original mod '{0}'.  Local versions are usually used for testing purposes.
+	/// This is a local version of its original mod '{0}'.  While local versions are usually used for testing purposes, don't forget to remove it after you're finished.
 	/// </summary>
 	public static Translation StabilityLocal => _instance.GetText("Stability_Local");
 
@@ -1134,6 +1139,11 @@ public class LocaleCR : LocaleHelper
 	/// Theme Mix
 	/// </summary>
 	public static Translation ThemeMix => _instance.GetText("ThemeMix");
+
+	/// <summary>
+	/// Unknown
+	/// </summary>
+	public static Translation Unknown => _instance.GetText("Unknown");
 
 	/// <summary>
 	/// Unsubscribe
