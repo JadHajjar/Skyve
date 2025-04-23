@@ -108,6 +108,16 @@ public class LocaleCR : LocaleHelper
 	public static Translation AddGlobalTag => _instance.GetText("AddGlobalTag");
 
 	/// <summary>
+	/// Add missing info
+	/// </summary>
+	public static Translation AddInfo => _instance.GetText("AddInfo");
+
+	/// <summary>
+	/// Add missing compatibility information and explain what the issue with this mod is.
+	/// </summary>
+	public static Translation AddInfoDesc => _instance.GetText("AddInfoDesc");
+
+	/// <summary>
 	/// Add Interaction
 	/// </summary>
 	public static Translation AddInteraction => _instance.GetText("AddInteraction");
@@ -253,6 +263,11 @@ public class LocaleCR : LocaleHelper
 	/// {0} {1} where caution is advised
 	/// </summary>
 	public static Translation CautionCount => _instance.GetText("CautionCount");
+
+	/// <summary>
+	/// Choose how to send your request
+	/// </summary>
+	public static Translation ChooseWhatToRequest => _instance.GetText("ChooseWhatToRequest");
 
 	/// <summary>
 	/// City-Building
@@ -670,7 +685,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation PackageType => _instance.GetText("PackageType");
 
 	/// <summary>
-	/// Content or asset package that does not include any code.
+	/// Content package that contains assets or files, such as models, textures, or prefabs, and does not include any code or scripts that modify game behavior.
 	/// </summary>
 	public static Translation PackageTypeContentPackage => _instance.GetText("PackageType_ContentPackage");
 
@@ -743,6 +758,16 @@ public class LocaleCR : LocaleHelper
 	/// Render it! Preset
 	/// </summary>
 	public static Translation RenderItPreset => _instance.GetText("RenderItPreset");
+
+	/// <summary>
+	/// Report an issue
+	/// </summary>
+	public static Translation ReportIssue => _instance.GetText("ReportIssue");
+
+	/// <summary>
+	/// Let us and other players know that there's an issue with this mod.
+	/// </summary>
+	public static Translation ReportIssueDesc => _instance.GetText("ReportIssueDesc");
 
 	/// <summary>
 	/// Request a review
@@ -906,7 +931,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityAssetIncompatible => _instance.GetText("Stability_AssetIncompatible");
 
 	/// <summary>
-	/// '{0}' has not been reviewed yet. The compatibility info may not be accurate; though assets are generally stable.
+	/// '{0}' has not been reviewed yet. The compatibility information may not be accurate; though assets are generally stable.
 	/// </summary>
 	public static Translation StabilityAssetNotReviewed => _instance.GetText("Stability_AssetNotReviewed");
 
@@ -971,7 +996,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityNotEnoughInformation => _instance.GetText("Stability_NotEnoughInformation");
 
 	/// <summary>
-	/// '{0}' has not been reviewed yet.  The compatibility info may not be accurate.
+	/// '{0}' has not been reviewed yet. The compatibility information may not be accurate.
 	/// </summary>
 	public static Translation StabilityNotReviewed => _instance.GetText("Stability_NotReviewed");
 

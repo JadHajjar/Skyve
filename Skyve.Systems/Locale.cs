@@ -331,6 +331,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Bio => _instance.GetText("Bio");
 
 	/// <summary>
+	/// Broken Update
+	/// </summary>
+	public static Translation BrokenUpdate => _instance.GetText("BrokenUpdate");
+
+	/// <summary>
 	/// Bulk Actions
 	/// </summary>
 	public static Translation BulkActions => _instance.GetText("BulkActions");
@@ -468,7 +473,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ContentToBackup => _instance.GetText("ContentToBackup");
 
 	/// <summary>
-	/// Clone your active playset
+	/// Clone your active playset's subscribed mods into a new playset.  This might take a moment.
 	/// </summary>
 	public static Translation ContinueFromCurrent => _instance.GetText("ContinueFromCurrent");
 
@@ -1132,6 +1137,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation GenericIncludedTotal => _instance.GetText("GenericIncludedTotal");
 
 	/// <summary>
+	/// Generic Issue
+	/// </summary>
+	public static Translation GenericIssue => _instance.GetText("GenericIssue");
+
+	/// <summary>
 	/// Generic Playset
 	/// </summary>
 	public static Translation GenericPlayset => _instance.GetText("GenericPlayset");
@@ -1247,6 +1257,16 @@ public class Locale : LocaleHelper, ILocale
 	/// Invalid Folder
 	/// </summary>
 	public static Translation InvalidFolder => _instance.GetText("InvalidFolder");
+
+	/// <summary>
+	/// Investigate only assets or content packages during the troubleshooting process.
+	/// </summary>
+	public static Translation InvestigateAssets => _instance.GetText("InvestigateAssets");
+
+	/// <summary>
+	/// Investigate only code mods during the troubleshooting process.
+	/// </summary>
+	public static Translation InvestigateMods => _instance.GetText("InvestigateMods");
 
 	/// <summary>
 	/// <para>{0} item</para>
@@ -1445,6 +1465,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Missing
 	/// </summary>
 	public static Translation Missing => _instance.GetText("Missing");
+
+	/// <summary>
+	/// Missing Package
+	/// </summary>
+	public static Translation MissingPackage => _instance.GetText("MissingPackage");
 
 	/// <summary>
 	/// Missing Packages
@@ -1897,21 +1922,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ReplyToRequester => _instance.GetText("ReplyToRequester");
 
 	/// <summary>
-	/// Report an issue or add missing information
-	/// </summary>
-	public static Translation RequestOption1 => _instance.GetText("RequestOption1");
-
-	/// <summary>
-	/// Add a missing status for the package
-	/// </summary>
-	public static Translation RequestOption2 => _instance.GetText("RequestOption2");
-
-	/// <summary>
-	/// Add a missing interaction with another package
-	/// </summary>
-	public static Translation RequestOption3 => _instance.GetText("RequestOption3");
-
-	/// <summary>
 	/// Reset Options
 	/// </summary>
 	public static Translation ResetButton => _instance.GetText("ResetButton");
@@ -2315,7 +2325,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation StartRestore => _instance.GetText("StartRestore");
 
 	/// <summary>
-	/// Start a playset from scratch
+	/// Start a new playset from scratch without any included package.
 	/// </summary>
 	public static Translation StartScratch => _instance.GetText("StartScratch");
 

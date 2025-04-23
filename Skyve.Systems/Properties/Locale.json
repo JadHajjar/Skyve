@@ -32,8 +32,8 @@
   "Preferences": "Preferences",
   "PlaysetName": "Playset Name",
   "RenamePlayset": "Rename this playset",
-  "StartScratch": "Start a playset from scratch",
-  "ContinueFromCurrent": "Clone your active playset",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Build Cities",
   "EditorPlay": "Make Assets",
   "PlaysetUsage": "Playset Usage",
@@ -412,9 +412,6 @@
     "One": "You have {0} package made by {1}",
     "Plural": "You have {0} packages made by {1}"
   },
-  "RequestOption1": "Report an issue or add missing information",
-  "RequestOption2": "Add a missing status for the package",
-  "RequestOption3": "Add a missing interaction with another package",
   "ActivePlayset": "Active Playset",
   "References": "References",
   "OpenLog": "Open Game Log",
@@ -691,5 +688,10 @@
   "RestoreBackup": "Restore this backup",
   "DeleteBackup": "Delete this backup",
   "Owned": "Owned",
-  "CreatorPackBy": "Creator pack by {0}"
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets or content packages during the troubleshooting process."
 }

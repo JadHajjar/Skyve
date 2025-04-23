@@ -452,7 +452,7 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 		else if (stability is not PackageStability.Stable)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(stability, null, false) { Note = packageData.Note }, packageName, []);
+			info.Add(stability is PackageStability.NotReviewed or PackageStability.AssetNotReviewed ? ReportType.Info : ReportType.Stability, new StabilityStatus(stability, null, false) { Note = packageData.Note }, packageName, []);
 		}
 		else if (!string.IsNullOrEmpty(packageData.Note) && packageData.Type == PackageType.GenericPackage)
 		{
@@ -566,7 +566,7 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			info.Add(ReportType.Info,
 				new StabilityStatus(PackageStability.Local, null, false) { Action = StatusAction.Switch },
-				_packageNameUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Id)), true),
+				_packageNameUtil.CleanName(workshopInfo, true),
 				[new CompatibilityPackageReference(packageData)]);
 		}
 

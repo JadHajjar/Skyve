@@ -7,36 +7,25 @@ namespace Skyve.App.UserInterface.Panels;
 public partial class PC_Troubleshoot : PanelContent
 {
 	private readonly TroubleshootSettings _settings = new();
-	private readonly IModLogicManager _modLogicManager;
-	private readonly IModUtil _modUtil;
-	private readonly ILogger _logger;
 
 	public PC_Troubleshoot()
 	{
-		ServiceCenter.Get(out _modLogicManager, out _modUtil, out _logger);
-
 		InitializeComponent();
 
 		L_Title.Text = Locale.TroubleshootSelection;
 		L_ModAssetTitle.Text = Locale.TroubleshootModOrAsset;
-		B_Mods.Text = Locale.Mod.Plural;
-		B_Assets.Text = Locale.Asset.Plural;
-	}
-
-	protected override void DesignChanged(FormDesign design)
-	{
-		base.DesignChanged(design);
-
-		L_Title.ForeColor = L_ModAssetTitle.ForeColor = design.ActiveColor;
-		L_CompInfo.ForeColor = design.RedColor;
+		B_Mods.Title = Locale.Mod.Plural;
+		B_Assets.Title = Locale.Asset.Plural;
 	}
 
 	protected override void UIChanged()
 	{
 		base.UIChanged();
 
-		L_CompInfo.Font = L_Title.Font = L_ModAssetTitle.Font = UI.Font(10.5F, System.Drawing.FontStyle.Bold);
-		B_Cancel.Font = UI.Font(9.75F);
+		L_CompInfo.Font = L_Title.Font = L_ModAssetTitle.Font = UI.Font(12.75F, System.Drawing.FontStyle.Bold);
+		L_CompInfo.Margin = L_Title.Margin = L_ModAssetTitle.Margin = UI.Scale(new Padding(6));
+		B_Cancel.Font = B_Cancel2.Font = B_Cancel3.Font = UI.Font(9.75F);
+		B_Cancel.Margin = B_Cancel2.Margin = B_Cancel3.Margin = UI.Scale(new Padding(10));
 	}
 
 	private void B_Cancel_Click(object sender, EventArgs e)
