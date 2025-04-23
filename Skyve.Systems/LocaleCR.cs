@@ -325,7 +325,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation CRTRequestReview => _instance.GetText("CRT_RequestReview");
 
 	/// <summary>
-	/// Required Item
+	/// Required Package
 	/// </summary>
 	public static Translation CRTRequiredItem => _instance.GetText("CRT_RequiredItem");
 
@@ -795,7 +795,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation RequiredDLCs => _instance.GetText("RequiredDLCs");
 
 	/// <summary>
-	/// Required Item
+	/// Required Package
 	/// </summary>
 	public static Translation RequiredItem => _instance.GetText("RequiredItem");
 

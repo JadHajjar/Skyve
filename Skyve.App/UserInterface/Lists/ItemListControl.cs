@@ -557,7 +557,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				}
 				else
 				{
-					Clipboard.SetText(tag.Key.Value);
+					Clipboard.SetText(tag.Key.ToString());
 				}
 
 				return;

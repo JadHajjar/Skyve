@@ -283,12 +283,14 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			yield return localPackage;
 		}
-
-		localPackage = _packageManager.GetModsByName(Path.GetFileName(package.FileName)).FirstOrDefault(x => x.IsLocal());
-
-		if (localPackage is not null)
+		else
 		{
-			yield return localPackage;
+			localPackage = _packageManager.GetModsByName(Path.GetFileName(package.FileName)).FirstOrDefault(x => x.IsLocal());
+
+			if (localPackage is not null)
+			{
+				yield return localPackage;
+			}
 		}
 
 		if (!withAlternativesAndSuccessors || package.SucceededBy is null)

@@ -463,9 +463,9 @@
   "TroubleshootIssues": "Troubleshoot Issues",
   "ViewTroubleshootOptions": "View troubleshooting options",
   "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
-  "TroubleshootCaused": "A mod or asset I'm using is causing issues",
-  "TroubleshootNew": "A recent mod update or new subscription is causing issues",
-  "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Which option best describes your situation?",
   "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?",
   "ApplyingSettings": "Applying settings...",
@@ -487,8 +487,8 @@
     "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
     "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
   },
-  "TroubleshootViewComp": "View my compatibility report",
-  "TroubleshootSkipComp": "Skip & continue troubleshooting",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
   "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
   "TroubleshootActionFailed": "Applying your action failed.",
   "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
@@ -693,5 +693,5 @@
   "MissingPackage": "Missing Package",
   "GenericIssue": "Generic Issue",
   "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
-  "InvestigateAssets": "Investigate only assets or content packages during the troubleshooting process."
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }

@@ -963,6 +963,16 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_CompatibilityReport_64 {
+            get {
+                object obj = ResourceManager.GetObject("I_CompatibilityReport_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Content_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Content_16", resourceCulture);
@@ -996,6 +1006,16 @@ namespace Skyve.App.Properties {
         internal static System.Drawing.Bitmap I_Content_48 {
             get {
                 object obj = ResourceManager.GetObject("I_Content_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Content_64 {
+            get {
+                object obj = ResourceManager.GetObject("I_Content_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2333,6 +2353,16 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_LinkChain_64 {
+            get {
+                object obj = ResourceManager.GetObject("I_LinkChain_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Log_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Log_16", resourceCulture);
@@ -2673,6 +2703,16 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_MissingMod_64 {
+            get {
+                object obj = ResourceManager.GetObject("I_MissingMod_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Mods_128 {
             get {
                 object obj = ResourceManager.GetObject("I_Mods_128", resourceCulture);
@@ -2923,6 +2963,16 @@ namespace Skyve.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_New_64 {
+            get {
+                object obj = ResourceManager.GetObject("I_New_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Note_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Note_16", resourceCulture);
@@ -3076,6 +3126,16 @@ namespace Skyve.App.Properties {
         internal static System.Drawing.Bitmap I_OutOfDate_48 {
             get {
                 object obj = ResourceManager.GetObject("I_OutOfDate_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_OutOfDate_64 {
+            get {
+                object obj = ResourceManager.GetObject("I_OutOfDate_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3766,6 +3826,16 @@ namespace Skyve.App.Properties {
         internal static System.Drawing.Bitmap I_Remarks_48 {
             get {
                 object obj = ResourceManager.GetObject("I_Remarks_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Remarks_64 {
+            get {
+                object obj = ResourceManager.GetObject("I_Remarks_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -5426,6 +5496,16 @@ namespace Skyve.App.Properties {
         internal static System.Drawing.Bitmap I_Wrench_48 {
             get {
                 object obj = ResourceManager.GetObject("I_Wrench_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Wrench_64 {
+            get {
+                object obj = ResourceManager.GetObject("I_Wrench_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

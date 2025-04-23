@@ -71,9 +71,9 @@ public class TagListControl : SlickControl
 				HoverState = HoverState & ~HoverState.Focused,
 				Font = font,
 				Icon = item.Icon,
-				Text = item.Value,
+				Text = item.ToString(),
 				Padding = padding,
-				Enabled = string.IsNullOrEmpty(CurrentSearch) || CurrentSearch.SearchCheck(item.Value),
+				Enabled = string.IsNullOrEmpty(CurrentSearch) || CurrentSearch.SearchCheck(item.ToString()),
 				ButtonType = Tags.Any(t => t.Value == item.Value) ? ButtonType.Active : ButtonType.Normal
 			};
 

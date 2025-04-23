@@ -1259,7 +1259,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation InvalidFolder => _instance.GetText("InvalidFolder");
 
 	/// <summary>
-	/// Investigate only assets or content packages during the troubleshooting process.
+	/// Investigate only assets and content packages during the troubleshooting process.
 	/// </summary>
 	public static Translation InvestigateAssets => _instance.GetText("InvestigateAssets");
 
@@ -2498,7 +2498,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootCancelTip => _instance.GetText("TroubleshootCancelTip");
 
 	/// <summary>
-	/// A mod or asset I'm using is causing issues
+	/// I'm having issues with a mod or asset, but I'm not so sure which one is causing it.
 	/// </summary>
 	public static Translation TroubleshootCaused => _instance.GetText("TroubleshootCaused");
 
@@ -2544,7 +2544,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootIssues => _instance.GetText("TroubleshootIssues");
 
 	/// <summary>
-	/// I'm missing a mod or asset, and that is causing issues
+	/// I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.
 	/// </summary>
 	public static Translation TroubleshootMissing => _instance.GetText("TroubleshootMissing");
 
@@ -2554,7 +2554,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootModOrAsset => _instance.GetText("TroubleshootModOrAsset");
 
 	/// <summary>
-	/// A recent mod update or new subscription is causing issues
+	/// I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.
 	/// </summary>
 	public static Translation TroubleshootNew => _instance.GetText("TroubleshootNew");
 
@@ -2579,12 +2579,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootSelection => _instance.GetText("TroubleshootSelection");
 
 	/// <summary>
-	/// Skip &amp; continue troubleshooting
+	/// Skip this step and continue with the troubleshooting steps.
 	/// </summary>
 	public static Translation TroubleshootSkipComp => _instance.GetText("TroubleshootSkipComp");
 
 	/// <summary>
-	/// View my compatibility report
+	/// Go back and view your compatibility report's page to make sure you're not using broken mods.
 	/// </summary>
 	public static Translation TroubleshootViewComp => _instance.GetText("TroubleshootViewComp");
 

@@ -7,6 +7,7 @@ using Skyve.Domain;
 using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility.Domain;
 
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,7 +22,7 @@ public class CompatibilityHelper
 	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly PackageAvailabilityService _packageAvailabilityService;
 
-	private readonly Dictionary<ulong, List<ICompatibilityPackageIdentity>> _missingItems = [];
+	private readonly ConcurrentDictionary<ulong, List<ICompatibilityPackageIdentity>> _missingItems = [];
 
 	public CompatibilityHelper(CompatibilityManager compatibilityManager, ISettings settings, IPackageManager contentManager, IPackageUtil packageUtil, IWorkshopService workshopService, ISkyveDataManager skyveDataManager, IDlcManager dlcManager)
 	{
@@ -184,20 +185,18 @@ public class CompatibilityHelper
 			_ => ReportType.Compatibility
 		};
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.Data is not null && IsPackageEnabled(info, false))
+		if ((type is InteractionType.RequiredPackages || (type is InteractionType.OptionalPackages && _settings.UserSettings.TreatOptionalAsRequired))
+			&& info.Data is not null && IsPackageEnabled(info, false))
 		{
-			lock (_missingItems)
+			foreach (var item in packages)
 			{
-				foreach (var item in packages)
+				if (_missingItems.ContainsKey(item.Id))
 				{
-					if (_missingItems.ContainsKey(item.Id))
-					{
-						_missingItems[item.Id].AddIfNotExist(new CompatibilityPackageReference(info));
-					}
-					else
-					{
-						_missingItems[item.Id] = [new CompatibilityPackageReference(info)];
-					}
+					_missingItems[item.Id].AddIfNotExist(new CompatibilityPackageReference(info));
+				}
+				else
+				{
+					_missingItems[item.Id] = [new CompatibilityPackageReference(info)];
 				}
 			}
 		}
@@ -261,7 +260,7 @@ public class CompatibilityHelper
 	{
 		if (id.IsLocal())
 		{
-			return IsPackageEnabled(withAlternativesAndSuccessors && workshopInfo is not null ? workshopInfo : id, withAlternativesAndSuccessors);
+			return _packageUtil.IsIncludedAndEnabled(id) || IsPackageEnabled(withAlternativesAndSuccessors && workshopInfo is not null ? workshopInfo : id, withAlternativesAndSuccessors);
 		}
 
 		return IsPackageEnabled(id, withAlternativesAndSuccessors);
@@ -269,10 +268,7 @@ public class CompatibilityHelper
 
 	internal List<ICompatibilityPackageIdentity>? GetRequiredFor(ulong id)
 	{
-		lock (_missingItems)
-		{
-			return _missingItems.TryGet(id);
-		}
+		return _missingItems.TryGetValue(id, out var packages) ? packages : null;
 	}
 
 	internal void RefreshCache()

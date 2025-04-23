@@ -43,7 +43,7 @@ public partial class ItemListControl
 		var padding = GridView ? GridPadding : Padding;
 		var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
 
-		e.Rects.ScoreRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X + xdiff + (xdiff == 0 ? 0 : padding.Left), e.Rects.IconRect.Bottom), score.ToMagnitudeString(), "VoteFilled", workshopInfo!.HasVoted ? FormDesign.Design.GreenColor : null, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
+		//e.Rects.ScoreRect = DrawLargeLabel(e.Graphics, new Point(e.Rects.TextRect.X + xdiff + (xdiff == 0 ? 0 : padding.Left), e.Rects.IconRect.Bottom), score.ToMagnitudeString(), "VoteFilled", workshopInfo!.HasVoted ? FormDesign.Design.GreenColor : null, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 
 		return 0;
 	}
@@ -649,5 +649,30 @@ public partial class ItemListControl
 		{
 			e.BackColor = e.BackColor.MergeColor(FormDesign.Design.ActiveColor, e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
 		}
+	}
+
+	public static Rectangle DrawLabel(
+		Graphics graphics, Rectangle container, string text, DynamicIcon icon, Color? color = null,
+		ContentAlignment alignment = ContentAlignment.TopLeft, Point? cursorLocation = null, bool large = false)
+	{
+		text = text.ToUpper();
+
+		using var font = large ? UI.Font(8.25F) : UI.Font(7F);
+		using var image = icon.Get(font.Height + UI.Scale(2));
+		var padding = UI.Scale(new Padding(2));
+		var textSize = Size.Ceiling(graphics.Measure(text.IfEmpty("A"), font)) + (large ? new Size(0, padding.Vertical):Size.Empty);
+		var size = string.IsNullOrEmpty(text) ? new Size(textSize.Height, textSize.Height) : new Size(textSize.Width + image.Width + padding.Left + padding.Horizontal, textSize.Height);
+		var rect = container.Align(size, alignment);
+
+		using var brush = new SolidBrush(color.HasValue ? Color.FromArgb(!cursorLocation.HasValue || rect.Contains(cursorLocation.Value) ? 255 : 160, color.Value) : Color.FromArgb(120, !cursorLocation.HasValue || rect.Contains(cursorLocation.Value) ? FormDesign.Design.ActiveColor : FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)));
+		using var textBrush = new SolidBrush(brush.Color.GetTextColor());
+		using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+		graphics.FillRoundedRectangle(brush, rect, (int)UI.Scale(2.5));
+		graphics.DrawString(text, font, textBrush, rect.Pad(image.Width + padding.Left * 2, padding.Top, padding.Right, padding.Bottom), stringFormat);
+
+		graphics.DrawImage(image.Color(textBrush.Color), string.IsNullOrEmpty(text) ? rect.CenterR(image.Size) : rect.Pad(padding.Horizontal).Align(image.Size, ContentAlignment.MiddleLeft));
+
+		return rect;
 	}
 }

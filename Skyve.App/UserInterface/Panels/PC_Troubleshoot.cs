@@ -74,6 +74,7 @@ public partial class PC_Troubleshoot : PanelContent
 			L_CompInfo.Text = Locale.TroubleshootCompAsk.FormatPlural(showComp);
 			TLP_Comp.Show();
 			TLP_New.Hide();
+			B_CompView.Focus();
 		}
 		else
 		{
@@ -154,6 +155,7 @@ public partial class PC_Troubleshoot : PanelContent
 		TLP_ModAsset.Show();
 		TLP_Comp.Hide();
 		TLP_New.Hide();
+		B_Mods.Focus();
 	}
 
 #if CS1

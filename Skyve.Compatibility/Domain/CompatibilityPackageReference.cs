@@ -24,15 +24,36 @@ public class CompatibilityPackageReference : ICompatibilityPackageIdentity, ILoc
 		Name = Folder = FilePath = string.Empty;
 	}
 
-	public CompatibilityPackageReference(ICompatibilityPackageIdentity package)
+	public CompatibilityPackageReference(ICompatibilityInfo package)
 	{
 		Id = package.Id;
 		Name = package.Name;
 		Url = package.Url;
 		Version = package.Version;
 		IsDlc = package.IsDlc;
-		Folder = FilePath = string.Empty;
+
+		if (package.LocalData is not null)
+		{
+			Folder = package.LocalData.Folder;
+			FilePath = package.LocalData.FilePath;
+			FileSize = package.LocalData.FileSize;
+			LocalTime = package.LocalData.LocalTime;
+		}
+		else
+		{
+			Folder = FilePath = string.Empty;
+		}
 	}
+
+	//public CompatibilityPackageReference(ICompatibilityPackageIdentity package)
+	//{
+	//	Id = package.Id;
+	//	Name = package.Name;
+	//	Url = package.Url;
+	//	Version = package.Version;
+	//	IsDlc = package.IsDlc;
+	//	Folder = FilePath = string.Empty;
+	//}
 
 	public CompatibilityPackageReference(IPackageIdentity package)
 	{

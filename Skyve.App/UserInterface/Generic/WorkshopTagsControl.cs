@@ -73,7 +73,7 @@ public class WorkshopTagsControl : SlickControl
 			{
 				Font = Font,
 				Icon = SelectedTags.Contains(tag) ? "Checked_ON" : "Checked_OFF",
-				Text = tag.Value,
+				Text = tag.ToString(),
 				ButtonType = ButtonType.Hidden,
 				HoverState = HoverState & ~HoverState.Focused,
 				LeftAlign = true,

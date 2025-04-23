@@ -76,6 +76,8 @@ public partial class PC_CompatibilityReport : PanelContent
 		OT_Workshop.Visible = _playsetManager.CurrentPlayset is not null && !(_playsetManager.GetCustomPlayset(_playsetManager.CurrentPlayset)?.DisableWorkshop ?? false);
 #endif
 
+		clearingFilters = false;
+
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
 			OT_Enabled.Hide();
@@ -99,8 +101,6 @@ public partial class PC_CompatibilityReport : PanelContent
 		_notifier.ContentLoaded += CompatibilityManager_ReportProcessed;
 		_notifier.CompatibilityReportProcessed += CompatibilityManager_ReportProcessed;
 		_notifier.SnoozeChanged += CompatibilityManager_ReportProcessed;
-
-		clearingFilters = false;
 
 		new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
 	}
@@ -166,6 +166,9 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			var packages = _contentManager.Packages.SelectWhereNotNull(x =>
 			{
+				if (x.IsLocal())
+					return null;
+
 				var info = x.GetCompatibilityInfo(cacheOnly: true);
 
 				return info.GetAction() is StatusAction.ExcludeThis or StatusAction.UnsubscribeThis or StatusAction.Switch && !_packageUtil.IsIncluded(x) ? null : info;
@@ -644,8 +647,6 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		RefreshCounts();
 
-		firstFilterPassed = true;
-
 		if (_settings.UserSettings.AlwaysOpenFiltersAndActions)
 		{
 			P_FiltersContainer.Visible = true;
@@ -740,11 +741,6 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private bool IsFilteredOut(ICompatibilityInfo item, bool withGrouping)
 	{
-		if (!firstFilterPassed)
-		{
-			return false;
-		}
-
 		if (withGrouping)
 		{
 			var valid = notificationFilterControl.CurrentGroup switch

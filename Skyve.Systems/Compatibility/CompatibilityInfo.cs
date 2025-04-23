@@ -24,6 +24,7 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems;
 	string? IPackageIdentity.Version { get; set; }
 	bool ICompatibilityPackageIdentity.IsDlc { get; }
+	bool ICompatibilityInfo.IsDlc { get; }
 
 	[Obsolete("Reserved for DTO", true)]
 	public CompatibilityInfo()
