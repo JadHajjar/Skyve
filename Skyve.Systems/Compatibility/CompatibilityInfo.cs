@@ -8,7 +8,6 @@ using Skyve.Domain;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Skyve.Systems.Compatibility.Domain;
 public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdentity
@@ -25,6 +24,10 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 	string? IPackageIdentity.Version { get; set; }
 	bool ICompatibilityPackageIdentity.IsDlc { get; }
 	bool ICompatibilityInfo.IsDlc { get; }
+	bool IPackage.IsCodeMod => LocalData?.Package?.IsCodeMod ?? false;
+	bool IPackage.IsLocal => LocalData?.Package?.IsLocal ?? false;
+	bool IPackage.IsBuiltIn => LocalData?.Package?.IsBuiltIn ?? false;
+	string? IPackage.VersionName => LocalData?.Package?.VersionName;
 
 	[Obsolete("Reserved for DTO", true)]
 	public CompatibilityInfo()
@@ -48,8 +51,8 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 	{
 		ReportItems.Add(new ReportItem
 		{
-			Package = this.GetPackage(),
-			PackageId = Data?.Id ?? 0,
+			Package = LocalData?.Package ?? this.GetPackage(),
+			PackageId = Id,
 			Type = type,
 			Status = status,
 			PackageName = packageName,
@@ -61,8 +64,8 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 	{
 		ReportItems.Add(new ReportItem
 		{
-			Package = this.GetPackage(),
-			PackageId = Data?.Id ?? 0,
+			Package = LocalData?.Package ?? this.GetPackage(),
+			PackageId = Id,
 			Type = type,
 			Status = status,
 			LocaleKey = localeKey,

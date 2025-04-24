@@ -31,16 +31,16 @@ partial class PC_Troubleshoot
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon41 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon42 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon43 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon44 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon45 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon46 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon47 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon48 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon49 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon50 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon8 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon9 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon10 = new SlickControls.DynamicIcon();
 			this.TLP_New = new System.Windows.Forms.TableLayoutPanel();
 			this.B_Caused = new Skyve.App.UserInterface.Generic.BigSelectionOptionControl();
 			this.B_Cancel = new SlickControls.SlickButton();
@@ -67,7 +67,7 @@ partial class PC_Troubleshoot
 			// 
 			// base_Text
 			// 
-			this.base_Text.Size = new System.Drawing.Size(188, 39);
+			this.base_Text.Size = new System.Drawing.Size(193, 39);
 			this.base_Text.Text = "TroubleshootIssues";
 			// 
 			// TLP_New
@@ -100,11 +100,10 @@ partial class PC_Troubleshoot
 			// B_Caused
 			// 
 			this.B_Caused.ButtonText = "Select";
-			this.B_Caused.ColorStyle = Extensions.ColorStyle.Active;
 			this.B_Caused.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Caused.Highlighted = true;
-			dynamicIcon41.Name = "Wrench";
-			this.B_Caused.ImageName = dynamicIcon41;
+			dynamicIcon1.Name = "Wrench";
+			this.B_Caused.ImageName = dynamicIcon1;
 			this.B_Caused.Location = new System.Drawing.Point(360, 204);
 			this.B_Caused.Name = "B_Caused";
 			this.B_Caused.Size = new System.Drawing.Size(150, 317);
@@ -119,8 +118,8 @@ partial class PC_Troubleshoot
 			this.B_Cancel.AutoSize = true;
 			this.B_Cancel.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_Cancel.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon42.Name = "Disposable";
-			this.B_Cancel.ImageName = dynamicIcon42;
+			dynamicIcon2.Name = "Disposable";
+			this.B_Cancel.ImageName = dynamicIcon2;
 			this.B_Cancel.Location = new System.Drawing.Point(1097, 757);
 			this.B_Cancel.Margin = new System.Windows.Forms.Padding(0);
 			this.B_Cancel.Name = "B_Cancel";
@@ -133,10 +132,10 @@ partial class PC_Troubleshoot
 			// B_Missing
 			// 
 			this.B_Missing.ButtonText = "Select";
-			this.B_Missing.ColorStyle = Extensions.ColorStyle.Active;
+			this.B_Missing.ColorStyle = Extensions.ColorStyle.Yellow;
 			this.B_Missing.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon43.Name = "MissingMod";
-			this.B_Missing.ImageName = dynamicIcon43;
+			dynamicIcon3.Name = "MissingMod";
+			this.B_Missing.ImageName = dynamicIcon3;
 			this.B_Missing.Location = new System.Drawing.Point(516, 204);
 			this.B_Missing.Name = "B_Missing";
 			this.B_Missing.Size = new System.Drawing.Size(150, 317);
@@ -148,10 +147,10 @@ partial class PC_Troubleshoot
 			// B_New
 			// 
 			this.B_New.ButtonText = "Select";
-			this.B_New.ColorStyle = Extensions.ColorStyle.Active;
+			this.B_New.ColorStyle = Extensions.ColorStyle.Orange;
 			this.B_New.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon44.Name = "OutOfDate";
-			this.B_New.ImageName = dynamicIcon44;
+			dynamicIcon4.Name = "OutOfDate";
+			this.B_New.ImageName = dynamicIcon4;
 			this.B_New.Location = new System.Drawing.Point(672, 204);
 			this.B_New.Name = "B_New";
 			this.B_New.Size = new System.Drawing.Size(150, 317);
@@ -212,11 +211,10 @@ partial class PC_Troubleshoot
 			// B_Mods
 			// 
 			this.B_Mods.ButtonText = "Select";
-			this.B_Mods.ColorStyle = Extensions.ColorStyle.Active;
 			this.B_Mods.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Mods.Highlighted = true;
-			dynamicIcon45.Name = "Mods";
-			this.B_Mods.ImageName = dynamicIcon45;
+			dynamicIcon5.Name = "Mods";
+			this.B_Mods.ImageName = dynamicIcon5;
 			this.B_Mods.Location = new System.Drawing.Point(438, 232);
 			this.B_Mods.Name = "B_Mods";
 			this.B_Mods.Size = new System.Drawing.Size(150, 247);
@@ -231,8 +229,8 @@ partial class PC_Troubleshoot
 			this.B_Cancel2.AutoSize = true;
 			this.B_Cancel2.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_Cancel2.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon46.Name = "Disposable";
-			this.B_Cancel2.ImageName = dynamicIcon46;
+			dynamicIcon6.Name = "Disposable";
+			this.B_Cancel2.ImageName = dynamicIcon6;
 			this.B_Cancel2.Location = new System.Drawing.Point(1097, 757);
 			this.B_Cancel2.Margin = new System.Windows.Forms.Padding(0);
 			this.B_Cancel2.Name = "B_Cancel2";
@@ -257,10 +255,9 @@ partial class PC_Troubleshoot
 			// B_Assets
 			// 
 			this.B_Assets.ButtonText = "Select";
-			this.B_Assets.ColorStyle = Extensions.ColorStyle.Active;
 			this.B_Assets.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon47.Name = "Assets";
-			this.B_Assets.ImageName = dynamicIcon47;
+			dynamicIcon7.Name = "Assets";
+			this.B_Assets.ImageName = dynamicIcon7;
 			this.B_Assets.Location = new System.Drawing.Point(594, 232);
 			this.B_Assets.Name = "B_Assets";
 			this.B_Assets.Size = new System.Drawing.Size(150, 247);
@@ -310,11 +307,10 @@ partial class PC_Troubleshoot
 			// B_CompView
 			// 
 			this.B_CompView.ButtonText = "Select";
-			this.B_CompView.ColorStyle = Extensions.ColorStyle.Active;
 			this.B_CompView.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_CompView.Highlighted = true;
-			dynamicIcon48.Name = "CompatibilityReport";
-			this.B_CompView.ImageName = dynamicIcon48;
+			dynamicIcon8.Name = "CompatibilityReport";
+			this.B_CompView.ImageName = dynamicIcon8;
 			this.B_CompView.Location = new System.Drawing.Point(438, 226);
 			this.B_CompView.Name = "B_CompView";
 			this.B_CompView.Size = new System.Drawing.Size(150, 265);
@@ -326,10 +322,10 @@ partial class PC_Troubleshoot
 			// B_CompSkip
 			// 
 			this.B_CompSkip.ButtonText = "Select";
-			this.B_CompSkip.ColorStyle = Extensions.ColorStyle.Active;
+			this.B_CompSkip.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_CompSkip.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon49.Name = "Skip";
-			this.B_CompSkip.ImageName = dynamicIcon49;
+			dynamicIcon9.Name = "Skip";
+			this.B_CompSkip.ImageName = dynamicIcon9;
 			this.B_CompSkip.Location = new System.Drawing.Point(594, 226);
 			this.B_CompSkip.Name = "B_CompSkip";
 			this.B_CompSkip.Size = new System.Drawing.Size(150, 265);
@@ -344,8 +340,8 @@ partial class PC_Troubleshoot
 			this.B_Cancel3.AutoSize = true;
 			this.B_Cancel3.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_Cancel3.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon50.Name = "Disposable";
-			this.B_Cancel3.ImageName = dynamicIcon50;
+			dynamicIcon10.Name = "Disposable";
+			this.B_Cancel3.ImageName = dynamicIcon10;
 			this.B_Cancel3.Location = new System.Drawing.Point(1097, 757);
 			this.B_Cancel3.Margin = new System.Windows.Forms.Padding(0);
 			this.B_Cancel3.Name = "B_Cancel3";
@@ -381,17 +377,17 @@ partial class PC_Troubleshoot
 			// PC_Troubleshoot
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.Controls.Add(this.TLP_Comp);
 			this.Controls.Add(this.TLP_New);
 			this.Controls.Add(this.TLP_ModAsset);
+			this.Controls.Add(this.TLP_Comp);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Name = "PC_Troubleshoot";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(1182, 819);
 			this.Text = "TroubleshootIssues";
+			this.Controls.SetChildIndex(this.TLP_Comp, 0);
 			this.Controls.SetChildIndex(this.TLP_ModAsset, 0);
 			this.Controls.SetChildIndex(this.TLP_New, 0);
-			this.Controls.SetChildIndex(this.TLP_Comp, 0);
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.TLP_New.ResumeLayout(false);
 			this.TLP_New.PerformLayout();

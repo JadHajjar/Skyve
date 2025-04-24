@@ -4,6 +4,7 @@ namespace Skyve.Compatibility.Domain.Enums;
 
 public enum NotificationType
 {
+	ReviewRequest = -2,
 	Snoozed = -1,
 
 	None = 0,

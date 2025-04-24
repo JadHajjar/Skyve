@@ -100,7 +100,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 				return Task.FromResult(false);
 			}
 
-			if (mod.GetCompatibilityInfo(cacheOnly: true).GetAction() is StatusAction.ExcludeThis or StatusAction.UnsubscribeThis or StatusAction.Switch && !_packageUtil.IsIncluded(mod))
+			if (mod.IsLocal() || (mod.GetCompatibilityInfo(cacheOnly: true).GetAction() is StatusAction.ExcludeThis or StatusAction.UnsubscribeThis or StatusAction.Switch && !_packageUtil.IsIncluded(mod)))
 			{
 				continue;
 			}

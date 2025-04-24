@@ -283,13 +283,12 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			yield return localPackage;
 		}
-		else
-		{
-			localPackage = _packageManager.GetModsByName(Path.GetFileName(package.FileName)).FirstOrDefault(x => x.IsLocal());
 
-			if (localPackage is not null)
+		if (localPackage is null || withAlternativesAndSuccessors)
+		{
+			foreach (var item in _packageManager.GetModsByName(Path.GetFileName(package.FileName)))
 			{
-				yield return localPackage;
+				yield return item;
 			}
 		}
 
@@ -567,7 +566,7 @@ public class CompatibilityManager : ICompatibilityManager
 		if (package.IsLocal())
 		{
 			info.Add(ReportType.Info,
-				new StabilityStatus(PackageStability.Local, null, false) { Action = StatusAction.Switch },
+				new StabilityStatus(PackageStability.Local, null, false) { Action = _compatibilityHelper.IsPackageEnabled(packageData, false) ? StatusAction.NoAction : StatusAction.Switch },
 				_packageNameUtil.CleanName(workshopInfo, true),
 				[new CompatibilityPackageReference(packageData)]);
 		}

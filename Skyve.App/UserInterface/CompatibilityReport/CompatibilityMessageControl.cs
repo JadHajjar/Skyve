@@ -1,5 +1,4 @@
 ﻿using Skyve.App.Interfaces;
-using Skyve.App.UserInterface.Panels;
 using Skyve.App.Utilities;
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
@@ -247,7 +246,7 @@ public class CompatibilityMessageControl : SlickControl
 			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
 			using var fadedBrush = new SolidBrush(Color.FromArgb(200, FormDesign.Design.ForeColor));
 			using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ForeColor, 85));
-			using var font = UI.Font(9F);
+			using var font = Message.Type is not ReportType.RequestReview ? UI.Font(9F) : UI.Font(10.5F);
 			using var smallFont = UI.Font(8.25F);
 			using var tinyFont = UI.Font(7.5F, FontStyle.Bold);
 			using var tinyUnderlineFont = UI.Font(7.5F, FontStyle.Bold | FontStyle.Underline);
@@ -256,7 +255,7 @@ public class CompatibilityMessageControl : SlickControl
 
 			e.Graphics.DrawImage(icon.Color(FormDesign.Design.ForeColor), new Rectangle(ClientRectangle.X + (Padding.Left * 2), 0, ClientRectangle.Width, Height).Align(icon.Size, ContentAlignment.MiddleLeft));
 
-			if (Message.Status.Action is StatusAction.RequestReview)
+			if (Message.Status.Action is StatusAction.RequestReview && Message.Type is not ReportType.RequestReview)
 			{
 				DrawPackageInfo(e, brush, fadedBrush, ref rectangle);
 			}
@@ -268,14 +267,11 @@ public class CompatibilityMessageControl : SlickControl
 			}
 			else
 			{
-				using var fontBold = UI.Font(9F, FontStyle.Bold);
-				using var tinyFontNotBold = UI.Font(7F);
+				e.Graphics.DrawString(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFont, brush, rectangle);
+				rectangle.Y += (int)e.Graphics.Measure(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFont, rectangle.Width).Height;
 
-				e.Graphics.DrawString(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFontNotBold, fadedBrush, rectangle);
-				rectangle.Y += (int)e.Graphics.Measure(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFontNotBold, rectangle.Width).Height;
-
-				e.Graphics.DrawString(text, fontBold, brush, rectangle);
-				rectangle.Y += Padding.Top + (int)e.Graphics.Measure(text, fontBold, rectangle.Width).Height;
+				e.Graphics.DrawString(text, font, brush, rectangle);
+				rectangle.Y += Padding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width).Height;
 			}
 
 			if (note is not null)
@@ -299,7 +295,7 @@ public class CompatibilityMessageControl : SlickControl
 					HoverState = HoverState & ~HoverState.Focused,
 				}).Rectangle;
 
-				buttonRectangle = buttonRectangle.Pad(linkActionRect.Width + Padding.Left, 0, 0, 0);
+				buttonRectangle = buttonRectangle.Pad(linkActionRect.Width + Padding.Horizontal, 0, 0, 0);
 				buttonHeight = linkActionRect.Height;
 			}
 
@@ -316,12 +312,13 @@ public class CompatibilityMessageControl : SlickControl
 					Text = isManager ? Locale.EditCompatibility : Message.Type is ReportType.RequestReview ? LocaleCR.RequestReviewUpdate : LocaleCR.RequestReview,
 					Icon = isManager ? "CompatibilityReport" : "RequestReview",
 					Font = font,
-					BackgroundColor = FormDesign.Design.BackColor,
+					BackgroundColor = Message.Type is ReportType.RequestReview ? default:FormDesign.Design.BackColor,
+					ButtonType = Message.Type is ReportType.RequestReview ? ButtonType.Active : ButtonType.Normal,
 					Cursor = cursor,
 					HoverState = HoverState & ~HoverState.Focused,
 				}).Rectangle;
 
-				buttonRectangle = buttonRectangle.Pad(bulkActionRect.Width + Padding.Left, 0, 0, 0);
+				buttonRectangle = buttonRectangle.Pad(bulkActionRect.Width + Padding.Horizontal, 0, 0, 0);
 				buttonHeight = bulkActionRect.Height;
 			}
 
@@ -338,7 +335,7 @@ public class CompatibilityMessageControl : SlickControl
 					HoverState = HoverState & ~HoverState.Focused,
 				}).Rectangle;
 
-				buttonRectangle = buttonRectangle.Pad(dismissActionRect.Width + Padding.Left, 0, 0, 0);
+				buttonRectangle = buttonRectangle.Pad(dismissActionRect.Width + Padding.Horizontal, 0, 0, 0);
 				buttonHeight = dismissActionRect.Height;
 			}
 
@@ -436,7 +433,7 @@ public class CompatibilityMessageControl : SlickControl
 		}
 
 		using var font = UI.Font(9F, FontStyle.Bold);
-		using var tinyFont = UI.Font(7F);
+		using var tinyFont = UI.Font(7.5F);
 
 		var startPos = rectangle.Location;
 

@@ -329,14 +329,11 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 		else
 		{
-			using var fontBold = UI.Font(9F, FontStyle.Bold);
-			using var tinyFontNotBold = UI.Font(7F);
+			e.Graphics.DrawString(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFont, brush, rectangle.Pad(GridPadding.Horizontal, 0, 0, 0));
+			rectangle.Y += (int)e.Graphics.Measure(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFont, rectangle.Width - GridPadding.Horizontal).Height;
 
-			e.Graphics.DrawString(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFontNotBold, fadedBrush, rectangle.Pad(GridPadding.Horizontal, 0, 0, 0));
-			rectangle.Y += (int)e.Graphics.Measure(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFontNotBold, rectangle.Width - GridPadding.Horizontal).Height;
-
-			e.Graphics.DrawString(text, fontBold, brush, rectangle.Pad(GridPadding.Horizontal, 0, 0, 0));
-			rectangle.Y += GridPadding.Top + (int)e.Graphics.Measure(text, fontBold, rectangle.Width - GridPadding.Horizontal).Height;
+			e.Graphics.DrawString(text, font, brush, rectangle.Pad(GridPadding.Horizontal, 0, 0, 0));
+			rectangle.Y += GridPadding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width - GridPadding.Horizontal).Height;
 		}
 
 		if (note is not null)

@@ -155,7 +155,7 @@
   "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
   "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
   "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nWhile local versions are usually used for testing purposes, don't forget to remove it after you're finished.",
+  "Stability_Local": "This is a local version of the '{0}' mod.\r\n\r\nWhile local versions are usually used for testing purposes, it is not recommended to stay on the local version of a mod.",
   "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
   "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
   "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
@@ -324,8 +324,10 @@
   "ChooseWhatToRequest": "Choose how to send your request",
   "ReportIssue": "Report an issue",
   "AddInfo": "Add missing info",
-  "ReportIssueDesc": "Let us and other players know that there's an issue with this mod.",
-  "AddInfoDesc": "Add missing compatibility information and explain what the issue with this mod is.",
-  "IssueFixed": "Issue is Fixed",
-  "RequestSavegame": "Request Savegame"
+  "ReportIssueDesc": "Let us and other players know that there's an issue with this mod.\r\n\r\nOr to let us know that you'd like a new review of this mod.",
+  "AddInfoDesc": "Add missing compatibility information to the mod.\r\n\r\nAnd explain any issue related to this mod.",
+  "Log Report": "Log Report",
+  "Proposed Changes": "Proposed Changes",
+  "SendSavegameInfo": "Optionally attach your savegame to help us investigate the issue better",
+  "YourLogReportInfo": "sent with your request"
 }

@@ -113,7 +113,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation AddInfo => _instance.GetText("AddInfo");
 
 	/// <summary>
-	/// Add missing compatibility information and explain what the issue with this mod is.
+	/// Add missing compatibility information to the mod.  And explain any issue related to this mod.
 	/// </summary>
 	public static Translation AddInfoDesc => _instance.GetText("AddInfoDesc");
 
@@ -532,11 +532,6 @@ public class LocaleCR : LocaleHelper
 	public static Translation InteractionType => _instance.GetText("InteractionType");
 
 	/// <summary>
-	/// Issue is Fixed
-	/// </summary>
-	public static Translation IssueFixed => _instance.GetText("IssueFixed");
-
-	/// <summary>
 	/// Last Review
 	/// </summary>
 	public static Translation LastReview => _instance.GetText("LastReview");
@@ -565,6 +560,11 @@ public class LocaleCR : LocaleHelper
 	/// Local Mod
 	/// </summary>
 	public static Translation LocalMod => _instance.GetText("LocalMod");
+
+	/// <summary>
+	/// Log Report
+	/// </summary>
+	public static Translation LogReport => _instance.GetText("Log Report");
 
 	/// <summary>
 	/// Compatibility Management
@@ -750,6 +750,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation Previous => _instance.GetText("Previous");
 
 	/// <summary>
+	/// Proposed Changes
+	/// </summary>
+	public static Translation ProposedChanges => _instance.GetText("Proposed Changes");
+
+	/// <summary>
 	/// Removal Note
 	/// </summary>
 	public static Translation RemovalNote => _instance.GetText("RemovalNote");
@@ -770,7 +775,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation ReportIssue => _instance.GetText("ReportIssue");
 
 	/// <summary>
-	/// Let us and other players know that there's an issue with this mod.
+	/// Let us and other players know that there's an issue with this mod.  Or to let us know that you'd like a new review of this mod.
 	/// </summary>
 	public static Translation ReportIssueDesc => _instance.GetText("ReportIssueDesc");
 
@@ -793,11 +798,6 @@ public class LocaleCR : LocaleHelper
 	/// Send a new request for review.
 	/// </summary>
 	public static Translation RequestReviewUpdate => _instance.GetText("RequestReviewUpdate");
-
-	/// <summary>
-	/// Request Savegame
-	/// </summary>
-	public static Translation RequestSavegame => _instance.GetText("RequestSavegame");
 
 	/// <summary>
 	/// Required DLCs / CCPs
@@ -901,6 +901,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation SelectOne => _instance.GetText("SelectOne");
 
 	/// <summary>
+	/// Optionally attach your savegame to help us investigate the issue better
+	/// </summary>
+	public static Translation SendSavegameInfo => _instance.GetText("SendSavegameInfo");
+
+	/// <summary>
 	/// Simulation Mod
 	/// </summary>
 	public static Translation SimulationMod => _instance.GetText("SimulationMod");
@@ -996,7 +1001,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityIncompatible => _instance.GetText("Stability_Incompatible");
 
 	/// <summary>
-	/// This is a local version of its original mod '{0}'.  While local versions are usually used for testing purposes, don't forget to remove it after you're finished.
+	/// This is a local version of the '{0}' mod.  While local versions are usually used for testing purposes, it is not recommended to stay on the local version of a mod.
 	/// </summary>
 	public static Translation StabilityLocal => _instance.GetText("Stability_Local");
 
@@ -1229,6 +1234,11 @@ public class LocaleCR : LocaleHelper
 	/// Website
 	/// </summary>
 	public static Translation Website => _instance.GetText("Website");
+
+	/// <summary>
+	/// sent with your request
+	/// </summary>
+	public static Translation YourLogReportInfo => _instance.GetText("YourLogReportInfo");
 
 	/// <summary>
 	/// Manage your mods

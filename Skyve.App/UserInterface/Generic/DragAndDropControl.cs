@@ -73,7 +73,6 @@ public class DragAndDropControl : SlickControl
 		{
 			Size = UI.Scale(new Size(300, 80));
 			Padding = UI.Scale(new Padding(10), UI.UIScale);
-			Font = UI.Font(9.75F);
 
 			if (Margin == new Padding(3))
 			{
@@ -195,25 +194,7 @@ public class DragAndDropControl : SlickControl
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
-			using var fileIcon = IconManager.GetLargeIcon(ImageName ?? "File").Color(FormDesign.Design.MenuForeColor);
-			using var removeIcon = IconManager.GetIcon("X").Color(FormDesign.Design.MenuForeColor);
-
-			var textSize = e.Graphics.Measure(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), Width - availableWidth - Padding.Horizontal);
-			var fileHeight = (int)textSize.Height + 3 + fileIcon.Height + Padding.Top;
-			var fileRect = new Rectangle(0, 0, Width - availableWidth, Height).Pad(Padding.Left);
-			var fileContentRect = fileRect.CenterR(Math.Max((int)textSize.Width + 3, fileIcon.Width), fileHeight);
-			var removeRect = fileRect.Align(new Size(removeIcon.Width + Padding.Left, removeIcon.Height + Padding.Top), ContentAlignment.TopRight);
-
-			e.Graphics.FillRoundedRectangle(new SolidBrush((fileHovered = HoverState.HasFlag(HoverState.Hovered) && fileRect.Contains(cursor)) && !removeRect.Contains(cursor) ? FormDesign.Design.MenuColor.MergeColor(FormDesign.Design.ActiveColor) : FormDesign.Design.MenuColor), fileRect, border);
-			e.Graphics.DrawImage(fileIcon, fileContentRect.Align(fileIcon.Size, ContentAlignment.TopCenter));
-			e.Graphics.DrawString(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), new SolidBrush(FormDesign.Design.MenuForeColor), fileContentRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Far });
-
-			if (HoverState.HasFlag(HoverState.Hovered) && removeRect.Contains(cursor))
-			{
-				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) ? 255 : 100, FormDesign.Design.RedColor)), removeRect, border);
-			}
-
-			e.Graphics.DrawImage(removeIcon, removeRect.CenterR(removeIcon.Size));
+			fileHovered = DrawFile(e, border, cursor, availableWidth);
 		}
 
 		var color = fileHovered ? FormDesign.Design.ForeColor : isDragActive ? FormDesign.Design.ActiveForeColor : HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveColor : HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ForeColor) : FormDesign.Design.ForeColor;
@@ -221,25 +202,26 @@ public class DragAndDropControl : SlickControl
 		if (isDragActive)
 		{
 			using var brush = new SolidBrush(isDragAvailable ? FormDesign.Design.ActiveColor : FormDesign.Design.RedColor);
-			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad((int)(1.5 * UI.FontScale)), border);
+			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad((int)UI.Scale(1.5)), border);
 		}
 		else if (HoverState.HasFlag(HoverState.Hovered) && !fileHovered)
 		{
 			using var brush = new SolidBrush(Color.FromArgb(25, color));
-			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad((int)(1.5 * UI.FontScale)), border);
+			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad((int)UI.Scale(1.5)), border);
 		}
 
-		using var pen = new Pen(Color.FromArgb(100, color), (float)(1.5 * UI.FontScale)) { DashStyle = DashStyle.Dash };
-		e.Graphics.DrawRoundedRectangle(pen, ClientRectangle.Pad((int)(1.5 * UI.FontScale)), border);
+		using var pen = new Pen(Color.FromArgb(100, color), UI.Scale(1.5F)) { DashStyle = DashStyle.Dash };
+		e.Graphics.DrawRoundedRectangle(pen, ClientRectangle.Pad((int)UI.Scale(1.5)), border);
 
 		var text = LocaleHelper.GetGlobalText(Text);
-		var size = e.Graphics.Measure(text, Font, availableWidth - (2 * Padding.Horizontal) - (UI.FontScale >= 2 ? 48 : 24));
-		var width = (int)size.Width + 3 + Padding.Left + (UI.FontScale >= 2 ? 48 : 24);
-		var rect = new Rectangle(Width - availableWidth, 0, availableWidth, Height).CenterR(width, Math.Max(UI.FontScale >= 2 ? 48 : 24, (int)size.Height + 3));
+		using var font = UI.Font(9.75F).FitTo(text, new Rectangle(0, 0, availableWidth - (2 * Padding.Horizontal) - IconManager.GetLargeScale(), Height-Padding.Vertical), e.Graphics);
+		var size = e.Graphics.Measure(text, font, availableWidth - (2 * Padding.Horizontal) - IconManager.GetLargeScale());
+		var width = (int)size.Width + UI.Scale( 3) + Padding.Left + (UI.FontScale >= 2 ? 48 : 24);
+		var rect = new Rectangle(Width - availableWidth, 0, availableWidth, Height).CenterR(width, Math.Max(IconManager.GetLargeScale(), (int)size.Height + UI.Scale(3)));
 
 		if (Loading)
 		{
-			DrawLoader(e.Graphics, rect.Align(new Size(UI.FontScale >= 2 ? 48 : 24, UI.FontScale >= 2 ? 48 : 24), ContentAlignment.MiddleLeft));
+			DrawLoader(e.Graphics, rect.Align(UI.Scale(new Size(32,32)), ContentAlignment.MiddleLeft));
 		}
 		else
 		{
@@ -251,11 +233,70 @@ public class DragAndDropControl : SlickControl
 			}
 		}
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(color), rect.Align(size.ToSize(), ContentAlignment.MiddleRight).Pad(-2));
+		using var brush1 = new SolidBrush(color);
+		e.Graphics.DrawString(text, font, brush1, rect.Align(size.ToSize(), ContentAlignment.MiddleRight).Pad(-2));
 
 		if (!Enabled)
 		{
-			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, BackColor)), ClientRectangle);
+			using var brush = new SolidBrush(Color.FromArgb(100, BackColor));
+			e.Graphics.FillRectangle(brush, ClientRectangle);
 		}
+	}
+
+	private bool DrawFile(PaintEventArgs e, int border, Point cursor, int availableWidth)
+	{
+		var fileRect = new Rectangle(0, 0, Width - availableWidth, Height).Pad(Padding.Left*3/2);
+		var backRect = new Rectangle(0, 0, Width - availableWidth, Height).Pad(Padding.Left);
+
+		SlickButton.GetColors(out var textColor, out var backColor, backRect.Contains(cursor)? HoverState:default, ColorStyle.Text, buttonType: ButtonType.Active);
+
+		e.Graphics.FillRoundedRectangleWithShadow(backRect, Padding.Left / 2, Padding.Left / 2, backColor, Color.FromArgb(10, backColor));
+
+		using var removeIcon = IconManager.GetIcon("X", backRect.Height/4).Color(textColor);
+		using var fileIcon = IconManager.GetLargeIcon(ImageName ?? "File").Color(textColor);
+		using var font = UI.Font(9.75F).FitTo(Path.GetFileNameWithoutExtension(SelectedFile), fileRect.Pad(0, fileIcon.Height + (Padding.Top / 2), 0, 0), e.Graphics);
+
+		var textSize = e.Graphics.Measure(Path.GetFileNameWithoutExtension(SelectedFile), font, fileRect.Width);
+		var fileHeight = (int)textSize.Height + fileIcon.Height + (Padding.Top / 2);
+		var removeRect = backRect.Align(new Size(removeIcon.Width + Padding.Left, removeIcon.Height + Padding.Top), ContentAlignment.TopRight);
+
+		fileRect = fileRect.CenterR(fileRect.Width, fileHeight);
+
+		var iconRect = fileRect.Align(fileIcon.Size, ContentAlignment.TopCenter);
+
+		if (Loading)
+		{
+			DrawLoader(e.Graphics, iconRect);
+		}
+		else
+		{
+			e.Graphics.DrawImage(fileIcon, iconRect);
+		}
+
+		using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Far };
+		using var brush = new SolidBrush(textColor);
+
+		e.Graphics.DrawString(Path.GetFileNameWithoutExtension(SelectedFile), font, brush, fileRect, format);
+
+
+		//using var fileIcon = IconManager.GetLargeIcon(ImageName ?? "File").Color(FormDesign.Design.MenuForeColor);
+		//using var removeIcon = IconManager.GetIcon("X").Color(FormDesign.Design.MenuForeColor);
+		//var textSize = e.Graphics.Measure(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), Width - availableWidth - Padding.Horizontal);
+		//var fileHeight = (int)textSize.Height + 3 + fileIcon.Height + Padding.Top;
+		//var fileRect = new Rectangle(0, 0, Width - availableWidth, Height).Pad(Padding.Left);
+		//var fileContentRect = fileRect.CenterR(Math.Max((int)textSize.Width + 3, fileIcon.Width), fileHeight);
+
+		//e.Graphics.FillRoundedRectangle(new SolidBrush((fileHovered = HoverState.HasFlag(HoverState.Hovered) && fileRect.Contains(cursor)) && !removeRect.Contains(cursor) ? FormDesign.Design.MenuColor.MergeColor(FormDesign.Design.ActiveColor) : FormDesign.Design.MenuColor), fileRect, border);
+		//e.Graphics.DrawImage(fileIcon, fileContentRect.Align(fileIcon.Size, ContentAlignment.TopCenter));
+		//e.Graphics.DrawString(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), new SolidBrush(FormDesign.Design.MenuForeColor), fileContentRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Far });
+
+		if (HoverState.HasFlag(HoverState.Hovered) && removeRect.Contains(cursor))
+		{
+			e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) ? 255 : 100, FormDesign.Design.RedColor)), removeRect, border);
+		}
+
+		e.Graphics.DrawImage(removeIcon, removeRect.CenterR(removeIcon.Size));
+
+		return backRect.Contains(cursor);
 	}
 }

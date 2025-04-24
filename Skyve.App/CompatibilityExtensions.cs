@@ -78,6 +78,7 @@ public static class CompatibilityExtensions
 	{
 		return notification switch
 		{
+			NotificationType.ReviewRequest => "RequestReview",
 			NotificationType.Info => "Info",
 			NotificationType.LocalMod => "PC",
 			NotificationType.MissingDependency => "MissingMod",
@@ -99,6 +100,8 @@ public static class CompatibilityExtensions
 	{
 		return notification switch
 		{
+			NotificationType.ReviewRequest => FormDesign.Design.ActiveColor,
+
 			NotificationType.Info => FormDesign.Design.InfoColor,
 
 			NotificationType.LocalMod => FormDesign.Design.ButtonColor,

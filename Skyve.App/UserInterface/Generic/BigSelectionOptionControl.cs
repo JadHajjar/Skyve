@@ -26,7 +26,7 @@ public class BigSelectionOptionControl : SlickImageControl
 	[DefaultValue(null), Category("Appearance")]
 	public string? ButtonText { get; set; }
 
-	[DefaultValue(ColorStyle.Text), Category("Appearance")]
+	[DefaultValue(ColorStyle.Active), Category("Appearance")]
 	public ColorStyle ColorStyle { get; set; } = ColorStyle.Active;
 
 	[DefaultValue(false), Category("Appearance")]
@@ -94,8 +94,9 @@ public class BigSelectionOptionControl : SlickImageControl
 		var margin = Padding.Left / 2;
 		var activeColor = ColorStyle.GetColor();
 		var rectangle = ClientRectangle.Pad(margin);
+		var cursor = PointToClient(Cursor.Position);
 		var titleRect = rectangle.Pad(margin).ClipTo(UI.Scale(32));
-		var iconRect = rectangle.Pad(margin, Title is not null ? 2 * margin + titleRect.Height : margin, margin, margin).Align(UI.Scale(new Size(40, 40)), ContentAlignment.TopCenter);
+		var iconRect = rectangle.Pad(margin, Title is not null ? (2 * margin) + titleRect.Height : margin, margin, margin).Align(UI.Scale(new Size(40, 40)), ContentAlignment.TopCenter);
 		var buttonRect = rectangle.Pad(margin, rectangle.Height - margin - UI.Scale(32), margin, margin);
 		var textRect = Rectangle.FromLTRB(titleRect.Left, iconRect.Bottom + margin, titleRect.Right, buttonRect.Top - margin);
 
@@ -138,14 +139,16 @@ public class BigSelectionOptionControl : SlickImageControl
 
 		if (ButtonText is not null)
 		{
+			using var font = UI.Font(9.75F);
 			using var buttonArgs = new ButtonDrawArgs
 			{
 				Text = ButtonText,
 				ColorStyle = ColorStyle,
 				Enabled = !Loading,
-				Cursor = PointToClient(Cursor.Position),
-				HoverState = HoverState,
+				Cursor = cursor,
+				HoverState = base.HoverState,
 				ButtonType = Highlighted ? ButtonType.Active : ButtonType.Normal,
+				Font = font,
 				Rectangle = buttonRect
 			};
 
@@ -154,7 +157,7 @@ public class BigSelectionOptionControl : SlickImageControl
 
 		if (!Loading && HoverState.HasFlag(HoverState.Focused))
 		{
-			using var pen = new Pen(Color.FromArgb(100, Highlighted ? FormDesign.Design.ActiveForeColor : activeColor), UI.Scale(2.5F)) { DashStyle = DashStyle.Dash, Alignment = PenAlignment.Inset };
+			using var pen = new Pen(Color.FromArgb(100, Highlighted == !(HoverState.HasFlag(HoverState.Pressed) && (ButtonText is not null ? buttonRect : rectangle).Contains(cursor)) ? FormDesign.Design.ActiveForeColor : activeColor), UI.Scale(2.5F)) { DashStyle = DashStyle.Dash, Alignment = PenAlignment.Inset };
 
 			e.Graphics.DrawRoundedRectangle(pen, ButtonText is not null ? buttonRect : rectangle, ButtonText is not null ? UI.Scale(4) : margin);
 		}

@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace Skyve.Systems.Compatibility.Domain;
 
-public class ReportItem : ICompatibilityItem
+public class ReportItem : ICompatibilityItem, IPackage
 {
 	public ulong PackageId { get; set; }
 	public string? PackageName { get; set; }
@@ -22,10 +22,11 @@ public class ReportItem : ICompatibilityItem
 	public string? LocaleKey { get; set; }
 	[JsonIgnore] public ICompatibilityPackageIdentity[]? Packages { get; set; }
 	public object[]? LocaleParams { get; set; }
-	[JsonProperty("PackageReferences")] public CompatibilityPackageReference[]? DtoPackages
+	[JsonProperty("PackageReferences")]
+	public CompatibilityPackageReference[]? DtoPackages
 	{
-		get => Packages?.Select(x => new CompatibilityPackageReference(x)).ToArray() ?? []; 
-		set => Packages = value.Cast<ICompatibilityPackageIdentity>().ToArray(); 
+		get => Packages?.Select(x => new CompatibilityPackageReference(x)).ToArray() ?? [];
+		set => Packages = value.Cast<ICompatibilityPackageIdentity>().ToArray();
 	}
 
 #nullable disable
@@ -39,6 +40,12 @@ public class ReportItem : ICompatibilityItem
 	string? IPackageIdentity.Url { get; }
 	IEnumerable<ICompatibilityPackageIdentity> ICompatibilityItem.Packages => Packages ?? [];
 	string? IPackageIdentity.Version { get; set; }
+
+	bool IPackage.IsCodeMod => Package?.IsCodeMod ?? false;
+	bool IPackage.IsLocal => Package?.IsLocal ?? false;
+	bool IPackage.IsBuiltIn => Package?.IsBuiltIn ?? false;
+	ILocalPackageData? IPackage.LocalData => Package?.LocalData;
+	string? IPackage.VersionName => Package?.VersionName;
 
 	public string GetMessage(IWorkshopService workshopService, IPackageNameUtil packageNameUtil)
 	{
