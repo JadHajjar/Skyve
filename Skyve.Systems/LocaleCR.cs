@@ -532,6 +532,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation InteractionType => _instance.GetText("InteractionType");
 
 	/// <summary>
+	/// Issue is Fixed
+	/// </summary>
+	public static Translation IssueFixed => _instance.GetText("IssueFixed");
+
+	/// <summary>
 	/// Last Review
 	/// </summary>
 	public static Translation LastReview => _instance.GetText("LastReview");
@@ -788,6 +793,11 @@ public class LocaleCR : LocaleHelper
 	/// Send a new request for review.
 	/// </summary>
 	public static Translation RequestReviewUpdate => _instance.GetText("RequestReviewUpdate");
+
+	/// <summary>
+	/// Request Savegame
+	/// </summary>
+	public static Translation RequestSavegame => _instance.GetText("RequestSavegame");
 
 	/// <summary>
 	/// Required DLCs / CCPs

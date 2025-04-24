@@ -325,5 +325,7 @@
   "ReportIssue": "Report an issue",
   "AddInfo": "Add missing info",
   "ReportIssueDesc": "Let us and other players know that there's an issue with this mod.",
-  "AddInfoDesc": "Add missing compatibility information and explain what the issue with this mod is."
+  "AddInfoDesc": "Add missing compatibility information and explain what the issue with this mod is.",
+  "IssueFixed": "Issue is Fixed",
+  "RequestSavegame": "Request Savegame"
 }

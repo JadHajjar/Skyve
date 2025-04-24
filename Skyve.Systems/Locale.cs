@@ -1311,12 +1311,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation LaunchTooltip => _instance.GetText("LaunchTooltip");
 
 	/// <summary>
-	/// Let the requester know that the issue was fixed
+	/// Let the requester know that the issue was fixed.
 	/// </summary>
 	public static Translation LetUserKnowIsFixed => _instance.GetText("LetUserKnowIsFixed");
 
 	/// <summary>
-	/// Let the requester know that you need a savegame to properly review
+	/// Let the requester know that you need a savegame to properly review this package.
 	/// </summary>
 	public static Translation LetUserKnowSaveFileNeeded => _instance.GetText("LetUserKnowSaveFileNeeded");
 
