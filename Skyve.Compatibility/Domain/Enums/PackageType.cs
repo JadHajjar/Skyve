@@ -8,8 +8,11 @@ public enum PackageType
 	IMTMarkings = 3,
 	RenderItPreset = 4,
 	POFont = 5,
-	NameList = 6,
 	CSM = 7,
 #endif
-	ContentPackage = 8
+	NameList = 6,
+	ContentPackage = 8,
+	VisualMod = 9,
+	SimulationMod = 10,
+	MapSavegame = 11
 }

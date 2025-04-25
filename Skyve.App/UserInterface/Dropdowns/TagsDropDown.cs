@@ -17,12 +17,12 @@ public class TagsDropDown : SlickMultiSelectionDropDown<ITag>
 
 	protected override bool SearchMatch(string searchText, ITag item)
 	{
-		return searchText.SearchCheck(item.Value);
+		return searchText.SearchCheck(item.ToString());
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, ITag item, bool selected)
 	{
-		var text = item.Value;
+		var text = item.ToString();
 
 		using var icon = IconManager.GetIcon(text == Locale.AnyTags ? "Slash" : item.Icon, rectangle.Height - 2).Color(foreColor);
 

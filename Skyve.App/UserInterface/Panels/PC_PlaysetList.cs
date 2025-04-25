@@ -102,7 +102,11 @@ public partial class PC_PlaysetList : PanelContent
 		if (L_Counts.Visible)
 		{
 			var favorites = _playsetManager.Playsets.Count(x => x.GetCustomPlayset().IsFavorite);
+#if CS1
 			var total = _playsetManager.Playsets.Count(x => !x.Temporary);
+#else
+			var total = _playsetManager.Playsets.Count();
+#endif
 			var text = string.Empty;
 
 			if (favorites == 0)
@@ -251,7 +255,7 @@ public partial class PC_PlaysetList : PanelContent
 		}
 	}
 
-	private async void B_Discover_Click(object sender, EventArgs e)
+	private void B_Discover_Click(object sender, EventArgs e)
 	{
 		//try
 		//{

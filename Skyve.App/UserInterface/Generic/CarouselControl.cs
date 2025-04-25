@@ -123,19 +123,18 @@ public partial class CarouselControl : SlickControl
 
 	private static Rectangle GetRectangle(Rectangle rectangle, Size imageSize)
 	{
+		if (imageSize.Width < rectangle.Width && imageSize.Height < rectangle.Height && imageSize.Width > rectangle.Width/2 && imageSize.Height > rectangle.Height / 2)
+		{
+			rectangle = rectangle.CenterR(imageSize.Width, imageSize.Height);
+		}
+
 		var widthRatio = (double)rectangle.Width / imageSize.Width;
 		var heightRatio = (double)rectangle.Height / imageSize.Height;
 
-		var maxRatio = Math.Max(widthRatio, heightRatio);
 		var minRatio = Math.Min(widthRatio, heightRatio);
 
-		if (minRatio < 1 || imageSize.Width <= imageSize.Height)
-		{
-			maxRatio = minRatio;
-		}
-
-		var newWidth = (int)(imageSize.Width * maxRatio);
-		var newHeight = (int)(imageSize.Height * maxRatio);
+		var newWidth = (int)(imageSize.Width * minRatio);
+		var newHeight = (int)(imageSize.Height * minRatio);
 
 		return rectangle.CenterR(newWidth, newHeight);
 	}
@@ -174,7 +173,7 @@ public partial class CarouselControl : SlickControl
 
 		var cursor = MainThumb.PointToClient(Cursor.Position);
 
-		if (!imageRect.Contains(cursor) || cursor.X.IsWithin(MainThumb.Width / 3, MainThumb.Width * 2 / 3))
+		if (!rectangle.Contains(cursor) || cursor.X.IsWithin(MainThumb.Width / 3, MainThumb.Width * 2 / 3))
 		{
 			return;
 		}

@@ -1,9 +1,9 @@
 ﻿using Extensions;
 
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
 using Skyve.Domain.Systems;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,16 +13,28 @@ public class PackageAvailabilityService
 	private readonly IPackageManager _packageManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly ISkyveDataManager _skyveDataManager;
+	private readonly IDlcManager _dlcManager;
 	private readonly CompatibilityManager _compatibilityManager;
 	private readonly Dictionary<ulong, (bool enabled, bool enabledWithAlternatives)> _cache;
 
-	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil packageUtil, ISkyveDataManager skyveDataManager, CompatibilityManager compatibilityManager)
+	public PackageAvailabilityService(IPackageManager packageManager, IPackageUtil packageUtil, ISkyveDataManager skyveDataManager, CompatibilityManager compatibilityManager, IDlcManager dlcManager)
 	{
 		_packageManager = packageManager;
 		_packageUtil = packageUtil;
 		_skyveDataManager = skyveDataManager;
 		_compatibilityManager = compatibilityManager;
+		_dlcManager = dlcManager;
 		_cache = [];
+	}
+
+	public bool IsPackageEnabled(ICompatibilityPackageIdentity id, bool withAlternativesAndSuccessors)
+	{
+		if (id.IsDlc)
+		{
+			return _dlcManager.IsAvailable(id.Id);
+		}
+
+		return IsPackageEnabled(id.Id, withAlternativesAndSuccessors);
 	}
 
 	public bool IsPackageEnabled(ulong id, bool withAlternativesAndSuccessors)
@@ -53,7 +65,7 @@ public class PackageAvailabilityService
 	{
 		var indexedPackage = _skyveDataManager.TryGetPackageInfo(id);
 
-		if (isEnabled(_packageManager.GetPackageById(new GenericPackageIdentity(id))?.LocalData))
+		if (isEnabled(_packageManager.GetPackageById(new GenericPackageIdentity(id))))
 		{
 			return true;
 		}

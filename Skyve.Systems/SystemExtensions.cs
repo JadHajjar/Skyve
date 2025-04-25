@@ -10,6 +10,7 @@ using Skyve.Domain.Systems;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 
 namespace Skyve.Systems;
 public static class SystemExtensions
@@ -57,8 +58,15 @@ public static class SystemExtensions
 
 	public static bool IsCodeMod(this IPackageIdentity identity)
 	{
+		if (GetPackageInfo(identity)?.Type is not (null or PackageType.GenericPackage or PackageType.SimulationMod))
+		{
+			return false;
+		}
+
 		if (identity.Id > 0 && identity.GetWorkshopInfo() is IWorkshopInfo workshopInfo)
+		{
 			return workshopInfo.IsCodeMod;
+		}
 
 		return identity.GetLocalPackage()?.IsCodeMod ?? false;
 	}
@@ -90,7 +98,7 @@ public static class SystemExtensions
 			return packageData.Package;
 		}
 
-		return PackageManager.GetPackageById(identity);
+		return PackageManager.GetPackageById(identity)?.Package;
 	}
 
 	public static bool IsInstalled(this IPackageIdentity identity)
@@ -110,7 +118,12 @@ public static class SystemExtensions
 			return package.LocalData;
 		}
 
-		return PackageManager.GetPackageById(identity)?.LocalData;
+		if (identity is ICompatibilityInfo compatibilityInfo && compatibilityInfo.LocalData is not null)
+		{
+			return compatibilityInfo.LocalData;
+		}
+
+		return PackageManager.GetPackageById(identity);
 	}
 
 	public static ILocalPackageIdentity? GetLocalPackageIdentity(this IPackageIdentity identity)
@@ -125,7 +138,7 @@ public static class SystemExtensions
 			return package.LocalData;
 		}
 
-		return PackageManager.GetPackageById(identity)?.LocalData;
+		return PackageManager.GetPackageById(identity);
 	}
 
 	public static Bitmap? GetThumbnail<T>(this T? identity) where T : IPackageIdentity
@@ -158,11 +171,6 @@ public static class SystemExtensions
 		return ImageService.GetImage(thumbnailUrl, true).Result;
 	}
 
-	public static Bitmap? GetThumbnail(this IDlcInfo? dlc)
-	{
-		return dlc?.ThumbnailUrl is null or "" ? null : ImageService.GetImage(dlc.ThumbnailUrl, true, $"{dlc.Id}.png", false).Result;
-	}
-
 	public static IEnumerable<ITag> GetTags(this IPackageIdentity package, bool ignoreParent = false)
 	{
 		return TagsService.GetTags(package, ignoreParent);
@@ -170,7 +178,24 @@ public static class SystemExtensions
 
 	public static IWorkshopInfo? GetWorkshopInfo(this IPackageIdentity identity)
 	{
-		return identity is IWorkshopInfo workshopInfo ? WorkshopService.GetInfo(identity) ?? workshopInfo : WorkshopService.GetInfo(identity);
+		return identity is IWorkshopInfo workshopInfo
+			? WorkshopService.GetInfo(identity) ?? workshopInfo
+			: identity.Id <= 0 ? GetLocalModWorkshopInfo(identity) : WorkshopService.GetInfo(identity);
+	}
+
+	private static IWorkshopInfo? GetLocalModWorkshopInfo(IPackageIdentity identity)
+	{
+		if (GetLocalPackageIdentity(identity) is ILocalPackageIdentity localPackageIdentity)
+		{
+			var id = SkyveDataManager.GetIdFromModName(Path.GetFileName( localPackageIdentity.FilePath));
+
+			if (id > 0)
+			{
+				return WorkshopService.GetInfo(new GenericPackageIdentity(identity) { Id = id });
+			}
+		}
+
+		return null;
 	}
 
 	public static IPackage? GetWorkshopPackage(this IPackageIdentity identity)
@@ -191,6 +216,11 @@ public static class SystemExtensions
 	public static NotificationType GetNotification(this ICompatibilityInfo compatibilityInfo)
 	{
 		return CompatibilityManager.GetNotification(compatibilityInfo);
+	}
+
+	public static StatusAction GetAction(this ICompatibilityInfo compatibilityInfo)
+	{
+		return CompatibilityManager.GetAction(compatibilityInfo);
 	}
 
 	public static ICustomPlayset GetCustomPlayset(this IPlayset playset)

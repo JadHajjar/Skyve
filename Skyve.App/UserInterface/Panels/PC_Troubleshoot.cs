@@ -7,36 +7,25 @@ namespace Skyve.App.UserInterface.Panels;
 public partial class PC_Troubleshoot : PanelContent
 {
 	private readonly TroubleshootSettings _settings = new();
-	private readonly IModLogicManager _modLogicManager;
-	private readonly IModUtil _modUtil;
-	private readonly ILogger _logger;
 
 	public PC_Troubleshoot()
 	{
-		ServiceCenter.Get(out _modLogicManager, out _modUtil, out _logger);
-
 		InitializeComponent();
 
 		L_Title.Text = Locale.TroubleshootSelection;
 		L_ModAssetTitle.Text = Locale.TroubleshootModOrAsset;
-		B_Mods.Text = Locale.Mod.Plural;
-		B_Assets.Text = Locale.Asset.Plural;
-	}
-
-	protected override void DesignChanged(FormDesign design)
-	{
-		base.DesignChanged(design);
-
-		L_Title.ForeColor = L_ModAssetTitle.ForeColor = design.ActiveColor;
-		L_CompInfo.ForeColor = design.RedColor;
+		B_Mods.Title = Locale.Mod.Plural;
+		B_Assets.Title = Locale.Asset.Plural;
 	}
 
 	protected override void UIChanged()
 	{
 		base.UIChanged();
 
-		L_CompInfo.Font = L_Title.Font = L_ModAssetTitle.Font = UI.Font(10.5F, System.Drawing.FontStyle.Bold);
-		B_Cancel.Font = UI.Font(9.75F);
+		L_CompInfo.Font = L_Title.Font = L_ModAssetTitle.Font = UI.Font(12.75F, System.Drawing.FontStyle.Bold);
+		L_CompInfo.Margin = L_Title.Margin = L_ModAssetTitle.Margin = UI.Scale(new Padding(6));
+		B_Cancel.Font = B_Cancel2.Font = B_Cancel3.Font = UI.Font(9.75F);
+		B_Cancel.Margin = B_Cancel2.Margin = B_Cancel3.Margin = UI.Scale(new Padding(10));
 	}
 
 	private void B_Cancel_Click(object sender, EventArgs e)
@@ -85,6 +74,7 @@ public partial class PC_Troubleshoot : PanelContent
 			L_CompInfo.Text = Locale.TroubleshootCompAsk.FormatPlural(showComp);
 			TLP_Comp.Show();
 			TLP_New.Hide();
+			B_CompView.Focus();
 		}
 		else
 		{
@@ -103,9 +93,7 @@ public partial class PC_Troubleshoot : PanelContent
 
 		_settings.Mods = true;
 
-		await Task.Run(() => ServiceCenter.Get<ITroubleshootSystem>().Start(_settings));
-
-		//Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
+		await StartTroubleshooting();
 	}
 
 	private async void B_Assets_Click(object sender, EventArgs e)
@@ -117,14 +105,26 @@ public partial class PC_Troubleshoot : PanelContent
 
 		B_Assets.Loading = true;
 
-		await Task.Run(() => ServiceCenter.Get<ITroubleshootSystem>().Start(_settings));
+		await StartTroubleshooting();
+	}
 
-		//Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
+	private async Task StartTroubleshooting()
+	{
+		var applyResult = await ServiceCenter.Get<ITroubleshootSystem>().Start(_settings);
+
+		if (applyResult >= TroubleshootResult.Error)
+		{
+			MessagePrompt.Show(Locale.TroubleshootActionFailed
+				+ "\r\n\r\n"
+				+ LocaleHelper.GetGlobalText($"Troubleshoot{applyResult}"), PromptButtons.OK, PromptIcons.Error, Program.MainForm);
+		}
+
+		PushBack();
 	}
 
 	private void B_CompView_Click(object sender, EventArgs e)
 	{
-		//Form.SetPanel<PC_CompatibilityReport>(Program.MainForm.PI_Compatibility);
+		Form.PushPanel<PC_CompatibilityReport>();
 	}
 
 	private void B_CompSkip_Click(object sender, EventArgs e)
@@ -134,6 +134,7 @@ public partial class PC_Troubleshoot : PanelContent
 
 	private void Next2()
 	{
+#if CS1
 		if (_settings.ItemIsCausingIssues || _settings.NewItemCausingIssues)
 		{
 			var faultyPackages = ServiceCenter.Get<IPackageManager>().Packages.AllWhere(x => x.IsIncluded() && CheckStrict(x));
@@ -149,17 +150,17 @@ public partial class PC_Troubleshoot : PanelContent
 				return;
 			}
 		}
+#endif
 
 		TLP_ModAsset.Show();
 		TLP_Comp.Hide();
 		TLP_New.Hide();
+		B_Mods.Focus();
 	}
 
+#if CS1
 	private bool CheckStrict(IPackage localPackage)
 	{
-#if CS2
-		return false;
-#endif
 		var workshopInfo = localPackage.GetWorkshopInfo();
 
 		if (localPackage.IsLocal)
@@ -195,6 +196,7 @@ public partial class PC_Troubleshoot : PanelContent
 
 		return false;
 	}
+#endif
 
 	private class TroubleshootSettings : ITroubleshootSettings
 	{

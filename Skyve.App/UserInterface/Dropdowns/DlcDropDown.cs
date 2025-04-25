@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
@@ -23,12 +24,31 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 
 	protected override IEnumerable<IDlcInfo> OrderItems(IEnumerable<IDlcInfo> items)
 	{
-		return items.OrderByDescending(x => SelectedItems.Contains(x)).ThenByDescending(x => x.ReleaseDate);
+		return items.OrderByDescending(x => SelectedItems.Contains(x)).ThenByDescending(x =>
+		{
+			if (x.ReleaseDate.Year > 1)
+			{
+				return x.ReleaseDate;
+			}
+
+			if (int.TryParse(x.ExpectedRelease, out var year))
+			{
+				return new DateTime(year, 12, 32);
+			}
+
+			var match = Regex.Match(x.ExpectedRelease ?? string.Empty, @"Q(\d) (\d+)");
+			if (match.Success)
+			{
+				return new DateTime(int.Parse(match.Groups[2].Value), int.Parse(match.Groups[1].Value) * 3, 1);
+			}
+
+			return DateTime.MaxValue;
+		});
 	}
 
 	protected override bool SearchMatch(string searchText, IDlcInfo item)
 	{
-		return searchText.SearchCheck(item.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP"));
+		return searchText.SearchCheck(item.Name.RegexRemove("^.+?- ").RegexRemove("(Content )?Creator Pack: "));
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IDlcInfo item, bool selected)
@@ -38,17 +58,19 @@ public class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 			return;
 		}
 
-		var text = item.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP");
-		var icon = item.GetThumbnail();
+		var text = item.Name.RegexRemove("^.+?- ").RegexRemove("(Content )?Creator Pack: ");
+		var icon = item is IThumbnailObject thumbnailObject ? thumbnailObject.GetThumbnail() : null;
 
 		if (icon != null)
 		{
-			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height * 460 / 215, rectangle.Height), ContentAlignment.MiddleLeft), UI.Scale(4));
+			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height * 460 / 215, rectangle.Height), ContentAlignment.MiddleLeft), UI.Scale(3), hoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveColor : BackColor);
 		}
 
 		rectangle = rectangle.Pad((rectangle.Height * 460 / 215) + Padding.Left, 0, 0, 0);
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter };
+		using var brush = new SolidBrush(foreColor);
+		e.Graphics.DrawString(text, base.Font, brush, rectangle.AlignToFontSize(base.Font), format);
 	}
 
 	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<IDlcInfo> items)

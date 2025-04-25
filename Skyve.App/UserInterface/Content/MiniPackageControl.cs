@@ -1,19 +1,23 @@
 ﻿using Skyve.App.Interfaces;
+using Skyve.App.Utilities;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
+using static Skyve.App.UserInterface.Lists.ItemListControl;
+
 namespace Skyve.App.UserInterface.Content;
 public class MiniPackageControl : SlickControl
 {
 	private readonly IPackageIdentity? _package;
-	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
-	private readonly ISubscriptionsManager _subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
-	private readonly IModLogicManager _modLogicManager = ServiceCenter.Get<IModLogicManager>();
-	private readonly IModUtil _modUtil = ServiceCenter.Get<IModUtil>();
+	private readonly IWorkshopService _workshopService;
+	private readonly ISubscriptionsManager _subscriptionsManager;
+	private readonly IModLogicManager _modLogicManager;
+	private readonly IModUtil _modUtil;
+	private readonly IDlcManager _dlcManager;
 
-	public IPackageIdentity? Package => _package ?? _workshopService.GetInfo(new GenericPackageIdentity(Id));
+	public IPackageIdentity Package => (_package ?? _workshopService.GetInfo(new GenericPackageIdentity(Id))) ?? new GenericPackageIdentity(Id);
 	public ulong Id { get; }
 
 	public bool ReadOnly { get; set; }
@@ -21,12 +25,17 @@ public class MiniPackageControl : SlickControl
 	public bool ShowIncluded { get; set; }
 	public bool IsDlc { get; set; }
 
-	public MiniPackageControl(ulong modId)
+	public MiniPackageControl()
+	{
+		ServiceCenter.Get(out _workshopService, out _subscriptionsManager, out _modLogicManager, out _modUtil, out _dlcManager);
+	}
+
+	public MiniPackageControl(ulong modId) : this()
 	{
 		Id = modId;
 	}
 
-	public MiniPackageControl(IPackageIdentity package)
+	public MiniPackageControl(IPackageIdentity package) : this()
 	{
 		_package = package;
 		Id = package.Id;
@@ -80,9 +89,9 @@ public class MiniPackageControl : SlickControl
 				{
 					Dispose();
 				}
-				else if (ShowIncluded &&!IsDlc && imageRect.Contains(e.Location))
+				else if (ShowIncluded && !IsDlc && imageRect.Contains(e.Location))
 				{
-					var isIncluded = Package.IsIncluded(out var partialIncluded) && !partialIncluded;
+					var isIncluded = Package.IsIncluded(out var partialIncluded, withVersion: false) && !partialIncluded;
 
 					Loading = true;
 
@@ -92,11 +101,11 @@ public class MiniPackageControl : SlickControl
 					}
 					else
 					{
-						var enable = !Package.IsEnabled();
+						var enable = !Package.IsEnabled(withVersion: false);
 
 						if (enable || !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil))
 						{
-							await _modUtil.SetEnabled(Package, enable, withVersion: false);
+							await _modUtil.SetEnabled(Package, enable);
 						}
 					}
 
@@ -104,14 +113,24 @@ public class MiniPackageControl : SlickControl
 				}
 				else if (ClientRectangle.Pad(1, 1, imageRect.Width + Padding.Horizontal, 1).Contains(e.Location))
 				{
-					ServiceCenter.Get<IInterfaceService>().OpenPackagePage(Package, false);
+					if (IsDlc)
+					{
+						PlatformUtil.OpenUrl(Package.Url);
+					}
+					else
+					{
+						ServiceCenter.Get<IInterfaceService>().OpenPackagePage(Package, false);
+					}
 				}
 
 				break;
 			case MouseButtons.Right:
-				var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(Package);
+				if (!IsDlc)
+				{
+					var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(Package);
 
-				this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
+					this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
+				}
 
 				break;
 			case MouseButtons.Middle:
@@ -133,25 +152,24 @@ public class MiniPackageControl : SlickControl
 		var image = Package?.GetThumbnail();
 		var textRect = ClientRectangle.Pad(1, 1, ReadOnly && !ShowIncluded ? 1 : (imageRect.Width + Padding.Horizontal), 1);
 
-		if (image is not null)
+		if (Package is IDlcInfo)
 		{
-			if (Package!.IsLocal())
-			{
-				using var unsatImg = new Bitmap(image, imageRect.Size).Tint(Sat: 0);
-				e.Graphics.DrawRoundedImage(unsatImg, imageRect, Padding.Left, BackColor);
-			}
-			else
-			{
-				e.Graphics.DrawRoundedImage(image, imageRect, Padding.Left, BackColor);
-			}
+			imageRect.Width = imageRect.Height * 460 / 215;
+		}
+		else if (Package is null)
+		{
+			image ??= PackageThumb;
 		}
 		else
 		{
-			using var generic = IconManager.GetIcon(IsDlc ? "Dlc" : "Package", imageRect.Height).Color(BackColor);
-			using var brush = new SolidBrush(FormDesign.Design.IconColor);
+			image ??= Package.IsLocal()
+				? Package is IAsset ? AssetThumbUnsat : Package.IsCodeMod() ? ModThumbUnsat : Package.IsLocal() ? PackageThumbUnsat : WorkshopThumbUnsat
+				: Package is IAsset ? AssetThumb : Package.IsCodeMod() ? ModThumb : Package.IsLocal() ? PackageThumb : WorkshopThumb;
+		}
 
-			e.Graphics.FillRoundedRectangle(brush, imageRect, UI.Scale(4));
-			e.Graphics.DrawImage(generic, imageRect.CenterR(generic.Size));
+		if (image is not null)
+		{
+			e.Graphics.DrawRoundedImage(image, imageRect, Padding.Left / 2, BackColor);
 		}
 
 		if (HoverState.HasFlag(HoverState.Hovered) && textRect.Contains(PointToClient(Cursor.Position)))
@@ -168,8 +186,7 @@ public class MiniPackageControl : SlickControl
 
 		if (ShowIncluded && Package is not null)
 		{
-			if (!IsDlc)
-			DrawIncludedButton(e, ClientRectangle.Pad(Padding).Align(imageRect.Size, ContentAlignment.MiddleRight));
+			DrawIncludedButton(e, ClientRectangle.Pad(Padding).Align(new(imageRect.Height, imageRect.Height), ContentAlignment.MiddleRight));
 		}
 
 		using var textBrush = new SolidBrush(ForeColor);
@@ -188,7 +205,7 @@ public class MiniPackageControl : SlickControl
 
 		if (!ReadOnly && HoverState.HasFlag(HoverState.Hovered))
 		{
-			imageRect = ClientRectangle.Pad(Padding).Align(imageRect.Size, ContentAlignment.MiddleRight);
+			imageRect = ClientRectangle.Pad(Padding).Align(new(imageRect.Height, imageRect.Height), ContentAlignment.MiddleRight);
 
 			using var img = IconManager.GetIcon("Trash", imageRect.Height * 3 / 4);
 
@@ -204,8 +221,9 @@ public class MiniPackageControl : SlickControl
 	private void DrawIncludedButton(PaintEventArgs e, Rectangle buttonRect)
 	{
 		var localIdentity = Package!.GetLocalPackageIdentity();
-		var isIncluded = Package!.IsIncluded(out var isPartialIncluded, false);
-		var isEnabled = Package!.IsEnabled(false);
+		var isPartialIncluded = false;
+		var isIncluded = IsDlc ? _dlcManager.IsAvailable(Package!.Id) : Package!.IsIncluded(out isPartialIncluded, withVersion: false);
+		var isEnabled = IsDlc ? isIncluded : Package!.IsEnabled(false);
 		Color activeColor = default;
 		string text;
 
@@ -214,8 +232,13 @@ public class MiniPackageControl : SlickControl
 			return; // missing local item
 		}
 
-		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
-		var isHovered = Loading || (HoverState.HasFlag(HoverState.Hovered) && buttonRect.Contains(PointToClient(Cursor.Position)));
+		if (IsDlc && !isIncluded)
+		{
+			return;
+		}
+
+		var required = !IsDlc && _modLogicManager.IsRequired(localIdentity, _modUtil);
+		var isHovered = !IsDlc && (Loading || (HoverState.HasFlag(HoverState.Hovered) && buttonRect.Contains(PointToClient(Cursor.Position))));
 
 		if (isHovered)
 		{
@@ -320,7 +343,7 @@ public class MiniPackageControl : SlickControl
 			var icon = new DynamicIcon(_subscriptionsManager.IsSubscribing(Package!) ? "Wait" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : (isHovered && ModifierKeys.HasFlag(Keys.Alt)) ? "X" : "Enabled");
 			using var includedIcon = icon.Get(buttonRect.Height * 3 / 4).Color(activeColor);
 
-			iconRect = buttonRect.CenterR( includedIcon.Size);
+			iconRect = buttonRect.CenterR(includedIcon.Size);
 			e.Graphics.DrawImage(includedIcon, iconRect);
 		}
 	}

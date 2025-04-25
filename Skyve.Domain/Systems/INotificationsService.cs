@@ -10,4 +10,5 @@ public interface INotificationsService
 	void SendNotification(INotificationInfo notification);
 	void RemoveNotificationsOfType<TNotificationInfo>() where TNotificationInfo : INotificationInfo;
 	void RemoveNotification(INotificationInfo notification);
+	void MarkNotificationAsRead(INotificationInfo notification);
 }

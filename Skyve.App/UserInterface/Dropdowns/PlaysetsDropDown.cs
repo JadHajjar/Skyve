@@ -18,19 +18,28 @@ public class PlaysetsDropDown : SlickSelectionDropDown<IPlayset?>
 
 	protected override IEnumerable<IPlayset?> OrderItems(IEnumerable<IPlayset?> items)
 	{
+#if CS1
 		return items.OrderByDescending(x => x?.Temporary ?? true).ThenByDescending(x => x?.DateUpdated);
+#else
+		return items.OrderByDescending(x => x?.DateUpdated);
+#endif
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IPlayset? item)
 	{
 		var text = item?.Name;
+#if CS1
+		var nullOrTemp = item?.Temporary ?? true;
+#else
+		var nullOrTemp = item is null;
+#endif
 
-		if (item?.Temporary ?? true)
+		if (nullOrTemp)
 		{
 			text = Locale.Unfiltered;
 		}
 
-		using var icon = (item?.Temporary ?? true ? new DynamicIcon("Slash") : item.GetCustomPlayset().GetIcon()).Get(rectangle.Height - 2).Color(foreColor);
+		using var icon = (nullOrTemp ? new DynamicIcon("Slash") : item!.GetCustomPlayset().GetIcon()).Get(rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

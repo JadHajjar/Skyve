@@ -5,31 +5,28 @@ public enum StatusAction
 	[CRN(NotificationType.None)]
 	NoAction = 0,
 
-	[CRN(NotificationType.None)]
-	SubscribeToPackages = 1,
-
 	[CRN(NotificationType.AttentionRequired)]
 	RequiresConfiguration = 2,
 
 	[CRN(NotificationType.None)]
 	SelectOne = 3,
 
-	[CRN(NotificationType.Unsubscribe)]
+	[CRN(NotificationType.ActionRequired)]
 	UnsubscribeThis = 4,
 
-	[CRN(NotificationType.Unsubscribe)]
+	[CRN(NotificationType.ActionRequired)]
 	UnsubscribeOther = 5,
 
-	[CRN(NotificationType.Switch)]
+	[CRN(NotificationType.Obsolete)]
 	Switch = 6,
 
-	[CRN(NotificationType.AttentionRequired)]
+	[CRN(NotificationType.ActionRequired)]
 	ExcludeThis = 7,
 
-	[CRN(NotificationType.AttentionRequired)]
+	[CRN(NotificationType.ActionRequired)]
 	ExcludeOther = 8,
 
-	[CRN(NotificationType.RequiredItem)]
+	[CRN(NotificationType.None)]
 	IncludeThis = 9,
 
 	[CRN(NotificationType.Info)]
@@ -37,6 +34,15 @@ public enum StatusAction
 
 	[CRN(NotificationType.Caution, false)]
 	UpdateVersion = 11,
+
+	[CRN(NotificationType.None)]
+	DisableThis = 12,
+
+	[CRN(NotificationType.Info)]
+	DisableOther = 13,
+
+	[CRN(NotificationType.None, false)]
+	DoNotAdd = 97,
 
 	[CRN(NotificationType.None, false)]
 	MarkAsRead = 98,

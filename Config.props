@@ -11,15 +11,15 @@
 		<BuildType>$([System.String]::Copy($(Configuration)).Substring(4))</BuildType>
 		<DefineConstants>$(DefineConstants);$(GameVersion)</DefineConstants>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<TargetFramework>net4.7.2</TargetFramework>
+		<TargetFramework>net4.8</TargetFramework>
 		<OutputPath>bin\$(BuildType)</OutputPath>
 		<OutDir>bin\$(BuildType)</OutDir>
 		<PublishDir>bin\Publish_$(BuildType)</PublishDir>
 	</PropertyGroup>
 	
 	<PropertyGroup Label="Versions">
-		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' == 'Stable'">0.12.2</Version> <!--CS2 STABLE-->
-		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">0.12.2</Version> <!--CS2 BETA-->
+		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' == 'Stable'">1.0.0</Version> <!--CS2 STABLE-->
+		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">0.16.0</Version> <!--CS2 BETA-->
 		
 		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' == 'Stable'">3.3.2.1</Version> <!--CS1 STABLE-->
 		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' != 'Stable'">3.3.2.1</Version> <!--CS1 BETA-->
@@ -46,4 +46,8 @@
 		<DebugType>none</DebugType>
 		<Optimize>true</Optimize>
 	</PropertyGroup>
+
+	<Target Name="ClearOutputFolder" BeforeTargets="BeforeBuild" Condition="'$(BuildType)' != 'Debug'">
+		<RemoveDir Directories="$(OutputPath)" />
+	</Target>
 </Project>

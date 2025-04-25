@@ -44,6 +44,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="UserInterface\CompatibilityReport\NotificationFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
       <Compile Update="UserInterface\Content\ContentList.cs" />
       <Compile Update="UserInterface\Content\IconTopButton.cs" />
       <Compile Update="UserInterface\Content\PlaysetIcon.cs" />

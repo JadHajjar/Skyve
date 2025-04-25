@@ -331,6 +331,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Bio => _instance.GetText("Bio");
 
 	/// <summary>
+	/// Broken Update
+	/// </summary>
+	public static Translation BrokenUpdate => _instance.GetText("BrokenUpdate");
+
+	/// <summary>
 	/// Bulk Actions
 	/// </summary>
 	public static Translation BulkActions => _instance.GetText("BulkActions");
@@ -468,7 +473,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ContentToBackup => _instance.GetText("ContentToBackup");
 
 	/// <summary>
-	/// Clone your active playset
+	/// Clone your active playset's subscribed mods into a new playset.  This might take a moment.
 	/// </summary>
 	public static Translation ContinueFromCurrent => _instance.GetText("ContinueFromCurrent");
 
@@ -569,6 +574,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Create a shortcut for it on your desktop
 	/// </summary>
 	public static Translation CreateShortcutPlayset => _instance.GetText("CreateShortcutPlayset");
+
+	/// <summary>
+	/// Creator pack by {0}
+	/// </summary>
+	public static Translation CreatorPackBy => _instance.GetText("CreatorPackBy");
 
 	/// <summary>
 	/// Custom Maps
@@ -684,6 +694,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DisableAllSelected => _instance.GetText("DisableAllSelected");
 
 	/// <summary>
+	/// Disable Content-Creator related warnings
+	/// </summary>
+	public static Translation DisableContentCreatorWarnings => _instance.GetText("DisableContentCreatorWarnings");
+
+	/// <summary>
+	/// Disables warnings related to creating content and copyright claims.
+	/// </summary>
+	public static Translation DisableContentCreatorWarningsTip => _instance.GetText("DisableContentCreatorWarnings_Tip");
+
+	/// <summary>
 	/// Disabled
 	/// </summary>
 	public static Translation Disabled => _instance.GetText("Disabled");
@@ -745,7 +765,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation DLCs => _instance.GetText("DLCs");
 
 	/// <summary>
-	/// If your DLCs are not showing here, make sure to open the game at least once
+	/// If your owned DLCs are not showing correctly, make sure to open the game at least once
 	/// </summary>
 	public static Translation DlcUpdateNotice => _instance.GetText("DlcUpdateNotice");
 
@@ -1102,19 +1122,24 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation GamePlay => _instance.GetText("GamePlay");
 
 	/// <summary>
-	/// {0} included &amp; enabled: {1}, Total: {2}
+	/// {0} included &amp; enabled: {1}, out of {2}
 	/// </summary>
 	public static Translation GenericIncludedAndEnabledTotal => _instance.GetText("GenericIncludedAndEnabledTotal");
 
 	/// <summary>
-	/// {0} included: {1}, of which are enabled: {2}, Total: {3}
+	/// {0} included: {1}, of which are enabled: {2}, out of {3}
 	/// </summary>
 	public static Translation GenericIncludedEnabledTotal => _instance.GetText("GenericIncludedEnabledTotal");
 
 	/// <summary>
-	/// {0} included: {1}, Total: {2}
+	/// {0} included: {1}, out of {2}
 	/// </summary>
 	public static Translation GenericIncludedTotal => _instance.GetText("GenericIncludedTotal");
+
+	/// <summary>
+	/// Generic Issue
+	/// </summary>
+	public static Translation GenericIssue => _instance.GetText("GenericIssue");
 
 	/// <summary>
 	/// Generic Playset
@@ -1234,6 +1259,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation InvalidFolder => _instance.GetText("InvalidFolder");
 
 	/// <summary>
+	/// Investigate only assets and content packages during the troubleshooting process.
+	/// </summary>
+	public static Translation InvestigateAssets => _instance.GetText("InvestigateAssets");
+
+	/// <summary>
+	/// Investigate only code mods during the troubleshooting process.
+	/// </summary>
+	public static Translation InvestigateMods => _instance.GetText("InvestigateMods");
+
+	/// <summary>
 	/// <para>{0} item</para>
 	/// <para>Plural: {0} items</para>
 	/// </summary>
@@ -1274,16 +1309,6 @@ public class Locale : LocaleHelper, ILocale
 	/// Click to launch/stop Cities: Skylines or use {0} anywhere in the app
 	/// </summary>
 	public static Translation LaunchTooltip => _instance.GetText("LaunchTooltip");
-
-	/// <summary>
-	/// Let the requester know that the issue was fixed
-	/// </summary>
-	public static Translation LetUserKnowIsFixed => _instance.GetText("LetUserKnowIsFixed");
-
-	/// <summary>
-	/// Let the requester know that you need a savegame to properly review
-	/// </summary>
-	public static Translation LetUserKnowSaveFileNeeded => _instance.GetText("LetUserKnowSaveFileNeeded");
 
 	/// <summary>
 	/// Left-Hand Traffic
@@ -1430,6 +1455,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Missing
 	/// </summary>
 	public static Translation Missing => _instance.GetText("Missing");
+
+	/// <summary>
+	/// Missing Package
+	/// </summary>
+	public static Translation MissingPackage => _instance.GetText("MissingPackage");
 
 	/// <summary>
 	/// Missing Packages
@@ -1677,6 +1707,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation OutOfDateItem => _instance.GetText("OutOfDateItem");
 
 	/// <summary>
+	/// Owned
+	/// </summary>
+	public static Translation Owned => _instance.GetText("Owned");
+
+	/// <summary>
 	/// <para>Package</para>
 	/// <para>Plural: Packages</para>
 	/// </summary>
@@ -1875,21 +1910,6 @@ public class Locale : LocaleHelper, ILocale
 	/// Reply to requester
 	/// </summary>
 	public static Translation ReplyToRequester => _instance.GetText("ReplyToRequester");
-
-	/// <summary>
-	/// Report an issue or add missing information
-	/// </summary>
-	public static Translation RequestOption1 => _instance.GetText("RequestOption1");
-
-	/// <summary>
-	/// Add a missing status for the package
-	/// </summary>
-	public static Translation RequestOption2 => _instance.GetText("RequestOption2");
-
-	/// <summary>
-	/// Add a missing interaction with another package
-	/// </summary>
-	public static Translation RequestOption3 => _instance.GetText("RequestOption3");
 
 	/// <summary>
 	/// Reset Options
@@ -2170,29 +2190,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ShowingCount => _instance.GetText("ShowingCount");
 
 	/// <summary>
-	/// <para>Showing {0} {1}, {3}</para>
-	/// <para>Plural: Showing {0} {1}, {3}</para>
-	/// </summary>
-	public static Translation ShowingCountWarning => _instance.GetText("ShowingCountWarning");
-
-	/// <summary>
-	/// Showing {0} out of {1} total items
-	/// </summary>
-	public static Translation ShowingFilteredItems => _instance.GetText("ShowingFilteredItems");
-
-	/// <summary>
-	/// <para>Showing {0} {1}, {2} selected</para>
-	/// <para>Plural: Showing {0} {1}, {2} selected</para>
-	/// </summary>
-	public static Translation ShowingSelectedCount => _instance.GetText("ShowingSelectedCount");
-
-	/// <summary>
-	/// <para>Showing {0} {1}, {2} selected, {3}</para>
-	/// <para>Plural: Showing {0} {1}, {2} selected, {3}</para>
-	/// </summary>
-	public static Translation ShowingSelectedCountWarning => _instance.GetText("ShowingSelectedCountWarning");
-
-	/// <summary>
 	/// Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?
 	/// </summary>
 	public static Translation SkyveDetectedFaultyPackages => _instance.GetText("SkyveDetectedFaultyPackages");
@@ -2318,7 +2315,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation StartRestore => _instance.GetText("StartRestore");
 
 	/// <summary>
-	/// Start a playset from scratch
+	/// Start a new playset from scratch without any included package.
 	/// </summary>
 	public static Translation StartScratch => _instance.GetText("StartScratch");
 
@@ -2427,6 +2424,30 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TotalAssetSize => _instance.GetText("TotalAssetSize");
 
 	/// <summary>
+	/// <para>{0} total {1}</para>
+	/// <para>Plural: {0} total {1}</para>
+	/// </summary>
+	public static Translation TotalCount => _instance.GetText("TotalCount");
+
+	/// <summary>
+	/// <para>{0} total {1}, {3}</para>
+	/// <para>Plural: {0} total {1}, {3}</para>
+	/// </summary>
+	public static Translation TotalCountWarning => _instance.GetText("TotalCountWarning");
+
+	/// <summary>
+	/// <para>{0} total {1}, {2} selected</para>
+	/// <para>Plural: {0} total {1}, {2} selected</para>
+	/// </summary>
+	public static Translation TotalSelectedCount => _instance.GetText("TotalSelectedCount");
+
+	/// <summary>
+	/// <para>{0} total {1}, {2} selected, {3}</para>
+	/// <para>Plural: {0} total {1}, {2} selected, {3}</para>
+	/// </summary>
+	public static Translation TotalSelectedCountWarning => _instance.GetText("TotalSelectedCountWarning");
+
+	/// <summary>
 	/// Treat optional packages as required
 	/// </summary>
 	public static Translation TreatOptionalAsRequired => _instance.GetText("TreatOptionalAsRequired");
@@ -2437,7 +2458,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TreatOptionalAsRequiredTip => _instance.GetText("TreatOptionalAsRequired_Tip");
 
 	/// <summary>
-	/// Did the last changes fix the issue that you're trying to solve?
+	/// Applying your action failed.
+	/// </summary>
+	public static Translation TroubleshootActionFailed => _instance.GetText("TroubleshootActionFailed");
+
+	/// <summary>
+	/// Did you still experience any issues with the current mod configuration?
 	/// </summary>
 	public static Translation TroubleshootAskIfFixed => _instance.GetText("TroubleshootAskIfFixed");
 
@@ -2452,17 +2478,22 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootBubbleTip => _instance.GetText("TroubleshootBubbleTip");
 
 	/// <summary>
+	/// Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.
+	/// </summary>
+	public static Translation TroubleshootBusy => _instance.GetText("TroubleshootBusy");
+
+	/// <summary>
 	/// Stop the troubleshooting process.
 	/// </summary>
 	public static Translation TroubleshootCancelTip => _instance.GetText("TroubleshootCancelTip");
 
 	/// <summary>
-	/// A mod or asset I'm using is causing issues
+	/// I'm having issues with a mod or asset, but I'm not so sure which one is causing it.
 	/// </summary>
 	public static Translation TroubleshootCaused => _instance.GetText("TroubleshootCaused");
 
 	/// <summary>
-	/// The following packages might be the cause of your issues
+	/// The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.
 	/// </summary>
 	public static Translation TroubleshootCauseResult => _instance.GetText("TroubleshootCauseResult");
 
@@ -2473,9 +2504,29 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootCompAsk => _instance.GetText("TroubleshootCompAsk");
 
 	/// <summary>
+	/// Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.
+	/// </summary>
+	public static Translation TroubleshootCouldNotCreatePlayset => _instance.GetText("TroubleshootCouldNotCreatePlayset");
+
+	/// <summary>
+	/// An error occurred, try again later, or check the logs for more information.
+	/// </summary>
+	public static Translation TroubleshootError => _instance.GetText("TroubleshootError");
+
+	/// <summary>
+	/// The troubleshooting was inconclusive. The issue might not be related to a specific mod, or it might be caused by multiple mods.
+	/// </summary>
+	public static Translation TroubleshootInconclusive => _instance.GetText("TroubleshootInconclusive");
+
+	/// <summary>
 	/// If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:
 	/// </summary>
 	public static Translation TroubleshootInfo => _instance.GetText("TroubleshootInfo");
+
+	/// <summary>
+	/// The troubleshooting state is no longer valid. Please start a new troubleshooting session.
+	/// </summary>
+	public static Translation TroubleshootInvalidState => _instance.GetText("TroubleshootInvalidState");
 
 	/// <summary>
 	/// Troubleshoot Issues
@@ -2483,7 +2534,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootIssues => _instance.GetText("TroubleshootIssues");
 
 	/// <summary>
-	/// I'm missing a mod or asset, and that is causing issues
+	/// I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.
 	/// </summary>
 	public static Translation TroubleshootMissing => _instance.GetText("TroubleshootMissing");
 
@@ -2493,7 +2544,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootModOrAsset => _instance.GetText("TroubleshootModOrAsset");
 
 	/// <summary>
-	/// A recent mod update or new subscription is causing issues
+	/// I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.
 	/// </summary>
 	public static Translation TroubleshootNew => _instance.GetText("TroubleshootNew");
 
@@ -2503,17 +2554,27 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootNextStageTip => _instance.GetText("TroubleshootNextStageTip");
 
 	/// <summary>
+	/// You need to have an active playset to troubleshoot.
+	/// </summary>
+	public static Translation TroubleshootNoActivePlayset => _instance.GetText("TroubleshootNoActivePlayset");
+
+	/// <summary>
+	/// No mods match what you're trying to troubleshoot.
+	/// </summary>
+	public static Translation TroubleshootNoPacakgesToProcess => _instance.GetText("TroubleshootNoPacakgesToProcess");
+
+	/// <summary>
 	/// Which option best describes your situation?
 	/// </summary>
 	public static Translation TroubleshootSelection => _instance.GetText("TroubleshootSelection");
 
 	/// <summary>
-	/// Skip &amp; continue troubleshooting
+	/// Skip this step and continue with the troubleshooting steps.
 	/// </summary>
 	public static Translation TroubleshootSkipComp => _instance.GetText("TroubleshootSkipComp");
 
 	/// <summary>
-	/// View my compatibility report
+	/// Go back and view your compatibility report's page to make sure you're not using broken mods.
 	/// </summary>
 	public static Translation TroubleshootViewComp => _instance.GetText("TroubleshootViewComp");
 

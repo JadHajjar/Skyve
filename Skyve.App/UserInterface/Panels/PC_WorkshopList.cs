@@ -9,11 +9,9 @@ public class PC_WorkshopList : PanelContent
 {
 	private readonly IWorkshopService _workshopService;
 	protected internal readonly WorkshopContentList LC_Items;
-	private int currentPage;
 	private bool listLoading;
-	private bool endOfPagesReached;
-	
-	private static List<ITag> lastSelectedTags = new();
+
+	private static List<ITag> lastSelectedTags = [];
 
 	public PC_WorkshopList() : base(false)
 	{
@@ -27,9 +25,9 @@ public class PC_WorkshopList : PanelContent
 			Dock = DockStyle.Fill
 		};
 
-		LC_Items.ListControl.ScrollUpdate += ListControl_ScrollUpdate;
-		LC_Items.DD_Tags.SelectedItems = lastSelectedTags;
-		LC_Items.DD_Tags.SelectedItemChanged += DD_Tags_SelectedItemChanged;
+		LC_Items.TagsControl!.SelectedTags.AddRange(lastSelectedTags);
+		LC_Items.TagsControl!.SelectedTagChanged += DD_Tags_SelectedItemChanged;
+		LC_Items.PaginationControl!.PageSelected += PageChanged;
 
 		Controls.Add(LC_Items);
 
@@ -42,7 +40,7 @@ public class PC_WorkshopList : PanelContent
 
 	private void DD_Tags_SelectedItemChanged(object sender, EventArgs e)
 	{
-		lastSelectedTags = LC_Items.DD_Tags.SelectedItems.ToList();
+		lastSelectedTags = LC_Items.TagsControl!.SelectedTags.ToList();
 	}
 
 	protected override async void OnCreateControl()
@@ -67,7 +65,7 @@ public class PC_WorkshopList : PanelContent
 
 	protected virtual async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
-		if (LC_Items.TB_Search.Text.Length is 5 or 6 && ulong.TryParse(LC_Items.TB_Search.Text, out var id))
+		if (LC_Items.TB_Search.Text.Length is 5 or 6 or 7 && ulong.TryParse(LC_Items.TB_Search.Text, out var id))
 		{
 			var package = await _workshopService.GetInfoAsync(new GenericPackageIdentity(id));
 
@@ -77,17 +75,14 @@ public class PC_WorkshopList : PanelContent
 			}
 		}
 
-		return await GetPackages(0);
+		return await GetPackages(LC_Items.PaginationControl!.Page);
 	}
 
-	private void ListControl_ScrollUpdate(object sender, double scrollIndex, double maxScroll)
+	private void PageChanged(object sender, int page)
 	{
-		if (scrollIndex > maxScroll - 4.5 && !listLoading && !endOfPagesReached)
-		{
-			LC_Items.I_Refresh.Loading = true;
+		LC_Items.I_Refresh.Loading = true;
 
-			Task.Run(async () => LC_Items.ListControl.AddRange(await GetPackages(currentPage + 1)));
-		}
+		Task.Run(LC_Items.RefreshItems);
 	}
 
 	private async Task<IEnumerable<IPackageIdentity>> GetPackages(int page)
@@ -96,7 +91,7 @@ public class PC_WorkshopList : PanelContent
 
 		try
 		{
-			IEnumerable<IWorkshopInfo> list;
+			(IEnumerable<IWorkshopInfo> Mods, int TotalCount) list;
 
 			if (LC_Items.TB_Search.Text.StartsWith("@"))
 			{
@@ -104,10 +99,9 @@ public class PC_WorkshopList : PanelContent
 				   LC_Items.TB_Search.Text.Substring(1),
 				   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
 				   null,
-				   LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray(),
+				   LC_Items.TagsControl?.SelectedTags.Select(x => x.Value).ToArray(),
 				   limit: 30,
-				   page: currentPage = page);
-
+				   page: page);
 			}
 			else
 			{
@@ -115,14 +109,14 @@ public class PC_WorkshopList : PanelContent
 				   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
 				   LC_Items.DD_SearchTime.SelectedItem,
 				   LC_Items.TB_Search.Text,
-				   LC_Items.DD_Tags.SelectedItems.Select(x => x.Value).ToArray(),
+				   LC_Items.TagsControl?.SelectedTags.Select(x => x.Value).ToArray(),
 				   limit: 30,
-				   page: currentPage = page);
+				   page: page);
 			}
 
-			endOfPagesReached = list.Count() < 30;
+			LC_Items.PaginationControl!.SetTotalCount(list.TotalCount);
 
-			return list;
+			return list.Mods;
 		}
 		finally
 		{
@@ -138,30 +132,8 @@ public class PC_WorkshopList : PanelContent
 	public void SetSettings(PackageSorting sorting, string[]? selectedTags, WorkshopSearchTime searchTime = WorkshopSearchTime.Month)
 	{
 		LC_Items.DD_Sorting.SelectedItem = sorting;
-		LC_Items.DD_Tags.SelectedItems = selectedTags?.Select(ServiceCenter.Get<ITagsService>().CreateWorkshopTag);
+		LC_Items.TagsControl!.SelectedTags.Clear();
+		LC_Items.TagsControl!.SelectedTags.AddRange(selectedTags?.Select(ServiceCenter.Get<ITagsService>().CreateWorkshopTag));
 		LC_Items.DD_SearchTime.SelectedItem = searchTime;
-	}
-
-	private class TagItem(string value, string icon, bool isCustom) : ITag
-	{
-		public string Value { get; } = value;
-		public string Icon { get; } = icon;
-		public bool IsCustom { get; } = isCustom;
-	}
-
-	private void InitializeComponent()
-	{
-			this.SuspendLayout();
-			// 
-			// base_Text
-			// 
-			this.base_Text.Size = new System.Drawing.Size(150, 39);
-			// 
-			// PC_WorkshopList
-			// 
-			this.Name = "PC_WorkshopList";
-			this.ResumeLayout(false);
-			this.PerformLayout();
-
 	}
 }

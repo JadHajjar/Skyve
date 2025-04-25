@@ -39,9 +39,9 @@ public class PackageTypeDropDown : SlickSelectionDropDown<PackageType>
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageType item)
 	{
-		var text = LocaleCR.Get($"{item}");
+		var text = LocaleCR.Get(item.ToString());
 
-		using var icon = IconManager.GetIcon("Cog", rectangle.Height - 2).Color(foreColor);
+		using var icon = item.GetIcon().Get(rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

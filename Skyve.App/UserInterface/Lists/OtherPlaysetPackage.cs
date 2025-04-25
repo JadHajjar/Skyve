@@ -243,7 +243,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		}
 	}
 
-	protected override IDrawableItemRectangles<IPlayset> GenerateRectangles(IPlayset item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<IPlayset> GenerateRectangles(IPlayset item, Rectangle rectangle, IDrawableItemRectangles<IPlayset> current)
 	{
 		var rects = new Rectangles(item)
 		{

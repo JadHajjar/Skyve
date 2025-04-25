@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Skyve.Systems;
 
@@ -37,7 +38,16 @@ internal class ImageService : IImageService
 		_logger = logger;
 		_saveHandler = saveHandler;
 
-		ThumbnailFolder = CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, ".Thumbs");
+		ThumbnailFolder = CrossIO.Combine(Application.StartupPath, "Thumbs");
+
+		var oldFolder = CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, ".Thumbs");
+
+		if (Directory.Exists(oldFolder) && !Directory.Exists(ThumbnailFolder))
+		{
+			new DirectoryInfo(oldFolder).CopyAll(new DirectoryInfo(ThumbnailFolder));
+
+			new DirectoryInfo(oldFolder).Delete(true);
+		}
 
 		new BackgroundAction(ClearOldImages).Run();
 	}

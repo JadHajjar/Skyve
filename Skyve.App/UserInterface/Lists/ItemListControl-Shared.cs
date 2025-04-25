@@ -23,13 +23,13 @@ public partial class ItemListControl
 	public static void LoadThumbnails()
 	{
 		WorkshopThumb = Properties.Resources.Thumb_Pdx;
-		WorkshopThumbUnsat = Properties.Resources.Thumb_Pdx.Tint(Sat: 0);
+		WorkshopThumbUnsat = Properties.Resources.Thumb_Pdx.ToGrayscale();
 		PackageThumb = Properties.Resources.Thumb_Package;
-		PackageThumbUnsat = Properties.Resources.Thumb_Package.Tint(Sat: 0);
+		PackageThumbUnsat = Properties.Resources.Thumb_Package.ToGrayscale();
 		AssetThumb = Properties.Resources.Thumb_Asset;
-		AssetThumbUnsat = Properties.Resources.Thumb_Asset.Tint(Sat: 0);
+		AssetThumbUnsat = Properties.Resources.Thumb_Asset.ToGrayscale();
 		ModThumb = Properties.Resources.Thumb_Mod;
-		ModThumbUnsat = Properties.Resources.Thumb_Mod.Tint(Sat: 0);
+		ModThumbUnsat = Properties.Resources.Thumb_Mod.ToGrayscale();
 	}
 
 	private int DrawScore(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, IWorkshopInfo? workshopInfo, int xdiff)
@@ -43,7 +43,7 @@ public partial class ItemListControl
 		var padding = GridView ? GridPadding : Padding;
 		var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
 
-		e.Rects.ScoreRect = e.Graphics.DrawLargeLabel(new Point(e.Rects.TextRect.X + xdiff + (xdiff == 0 ? 0 : padding.Left), e.Rects.IconRect.Bottom), score.ToMagnitudeString(), "VoteFilled", workshopInfo!.HasVoted ? FormDesign.Design.GreenColor : null, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
+		//e.Rects.ScoreRect = DrawLargeLabel(e.Graphics, new Point(e.Rects.TextRect.X + xdiff + (xdiff == 0 ? 0 : padding.Left), e.Rects.IconRect.Bottom), score.ToMagnitudeString(), "VoteFilled", workshopInfo!.HasVoted ? FormDesign.Design.GreenColor : null, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 
 		return 0;
 	}
@@ -70,7 +70,7 @@ public partial class ItemListControl
 		}
 		else if (e.Item.IsLocal())
 		{
-			using var unsatImg = new Bitmap(thumbnail, e.Rects.IconRect.Size).Tint(Sat: 0);
+			using var unsatImg = thumbnail.ToGrayscale();
 
 			drawThumbnail(unsatImg);
 		}
@@ -88,7 +88,7 @@ public partial class ItemListControl
 		var date = workshopInfo is null || workshopInfo.ServerTime == default ? (localIdentity?.LocalTime ?? default) : workshopInfo.ServerTime;
 		var isRecent = date > DateTime.UtcNow.AddDays(-7);
 
-		if (isRecent && !IsPackagePage)
+		if (isRecent && !IsPackagePage && _page is not SkyvePage.Workshop)
 		{
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(2 * UI.FontScale));
 
@@ -153,7 +153,8 @@ public partial class ItemListControl
 		{
 			var checkRect = rectangle.Align(new Size(rectangle.Height / 3, rectangle.Height / 3), ContentAlignment.BottomRight);
 
-			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-UI.Scale(2)));
+			using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor);
+			e.Graphics.FillEllipse(greenBrush, checkRect.Pad(-UI.Scale(2)));
 
 			using var img = IconManager.GetIcon("Check", checkRect.Height);
 			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
@@ -648,5 +649,30 @@ public partial class ItemListControl
 		{
 			e.BackColor = e.BackColor.MergeColor(FormDesign.Design.ActiveColor, e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
 		}
+	}
+
+	public static Rectangle DrawLabel(
+		Graphics graphics, Rectangle container, string text, DynamicIcon icon, Color? color = null,
+		ContentAlignment alignment = ContentAlignment.TopLeft, Point? cursorLocation = null, bool large = false)
+	{
+		text = text.ToUpper();
+
+		using var font = large ? UI.Font(8.25F) : UI.Font(7F);
+		using var image = icon.Get(font.Height + UI.Scale(2));
+		var padding = UI.Scale(new Padding(2));
+		var textSize = Size.Ceiling(graphics.Measure(text.IfEmpty("A"), font)) + (large ? new Size(0, padding.Vertical):Size.Empty);
+		var size = string.IsNullOrEmpty(text) ? new Size(textSize.Height, textSize.Height) : new Size(textSize.Width + image.Width + padding.Left + padding.Horizontal, textSize.Height);
+		var rect = container.Align(size, alignment);
+
+		using var brush = new SolidBrush(color.HasValue ? Color.FromArgb(cursorLocation.HasValue && rect.Contains(cursorLocation.Value) ? 160 : 255, color.Value) : Color.FromArgb(120, !cursorLocation.HasValue || rect.Contains(cursorLocation.Value) ? FormDesign.Design.ActiveColor : FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)));
+		using var textBrush = new SolidBrush(brush.Color.GetTextColor());
+		using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+		graphics.FillRoundedRectangle(brush, rect, (int)UI.Scale(2.5));
+		graphics.DrawString(text, font, textBrush, rect.Pad(image.Width + padding.Left * 2, padding.Top, padding.Right, padding.Bottom), stringFormat);
+
+		graphics.DrawImage(image.Color(textBrush.Color), string.IsNullOrEmpty(text) ? rect.CenterR(image.Size) : rect.Pad(padding.Horizontal).Align(image.Size, ContentAlignment.MiddleLeft));
+
+		return rect;
 	}
 }

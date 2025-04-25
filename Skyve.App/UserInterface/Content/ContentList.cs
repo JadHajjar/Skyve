@@ -8,6 +8,8 @@ using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
 using System.IO;
+using System.Net;
+using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,6 +32,8 @@ public partial class ContentList : SlickControl
 	private readonly List<string> searchTermsOr = [];
 	private readonly List<string> searchTermsAnd = [];
 	private readonly List<string> searchTermsExclude = [];
+	public WorkshopTagsControl? TagsControl;
+	public WorkshopPaginationControl? PaginationControl;
 	public readonly ItemListControl ListControl;
 
 	private readonly ISettings _settings;
@@ -81,7 +85,7 @@ public partial class ContentList : SlickControl
 #endif
 
 		TLP_Main.Controls.Add(ListControl, 0, TLP_Main.RowCount - 1);
-		TLP_Main.SetColumnSpan(ListControl, TLP_Main.ColumnCount);
+		TLP_Main.SetColumnSpan(ListControl, page is SkyvePage.Workshop ? TLP_Main.ColumnCount - 1 : TLP_Main.ColumnCount);
 		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
 #if CS2
@@ -148,8 +152,14 @@ public partial class ContentList : SlickControl
 	{
 		var items = new List<IPackageIdentity>(ListControl.Items);
 
-		DD_Author.SetItems(items);
-		DD_Tags.Items = Page is SkyvePage.Workshop ? (await _workshopService.GetAvailableTags()).ToArray() : _tagUtil.GetDistinctTags().ToArray();
+		DD_Author.RefreshItems();
+		DD_Tags.Items = _tagUtil.GetDistinctTags().ToArray();
+
+		if (TagsControl is not null)
+		{
+			TagsControl.Tags = (await _workshopService.GetAvailableTags()).ToArray();
+			TagsControl.Loading = false;
+		}
 	}
 
 	private void LC_Items_OpenWorkshopSearch()
@@ -157,7 +167,13 @@ public partial class ContentList : SlickControl
 		var panel = new PC_WorkshopList();
 
 		panel.LC_Items.TB_Search.Text = TB_Search.Text;
-		panel.LC_Items.OT_ModAsset.SelectedValue = Page is SkyvePage.Mods ? ThreeOptionToggle.Value.Option1 : Page is SkyvePage.Assets ? ThreeOptionToggle.Value.Option2 : ThreeOptionToggle.Value.None;
+		panel.LC_Items.TagsControl!.SelectedTags.AddRange(DD_Tags.SelectedItems.Where(x => x.IsWorkshop));
+
+		if (Page is SkyvePage.Mods)
+		{
+			panel.LC_Items.TagsControl!.SelectedTags.Clear();
+			panel.LC_Items.TagsControl!.SelectedTags.Add(_tagUtil.CreateWorkshopTag("Code Mod"));
+		}
 
 		Program.MainForm.PushPanel(panel);
 	}
@@ -165,7 +181,21 @@ public partial class ContentList : SlickControl
 	private void LC_Items_OpenWorkshopSearchInBrowser()
 	{
 #if CS2
-		PlatformUtil.OpenUrl("https://mods.paradoxplaza.com/games/cities_skylines_2");
+		const string url = "https://mods.paradoxplaza.com/games/cities_skylines_2";
+
+		var query = new List<string>();
+
+		if (TB_Search.Text.Length > 0)
+		{
+			query.Add($"search={WebUtility.UrlEncode(TB_Search.Text)}");
+		}
+
+		if (DD_Tags.SelectedItems.Any(x => x.IsWorkshop))
+		{
+			query.Add($"tags={DD_Tags.SelectedItems.Where(x => x.IsWorkshop).ListStrings(x => WebUtility.UrlEncode(x.Value), "%2C")}");
+		}
+
+		PlatformUtil.OpenUrl(url + (query.Any() ? $"?{string.Join("&", query)}" : ""));
 #else
 		PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/browse/?appid=255710&searchtext={WebUtility.UrlEncode(TB_Search.Text)}&browsesort=trend&section=readytouseitems&actualsort=trend&p=1&days=365" + (Page is SkyvePage.Mods ? "&requiredtags%5B0%5D=Mod" : ""));
 #endif
@@ -268,7 +298,7 @@ public partial class ContentList : SlickControl
 		DD_PackageStatus.Text = Locale.PackageStatus;
 		DD_ReportSeverity.Text = Locale.CompatibilityStatus;
 		DD_Tags.Text = LocaleSlickUI.Tags;
-		DD_Profile.Text = Locale.PlaysetFilter;
+		DD_Playset.Text = Locale.PlaysetFilter;
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
 		DR_ServerTime.Text = Locale.DateUpdated;
 		DD_Author.Text = Locale.Author;
@@ -303,7 +333,7 @@ public partial class ContentList : SlickControl
 	{
 		base.UIChanged();
 
-		I_SortOrder.Padding = I_Refresh.Padding = UI.Scale(new Padding(4));
+		I_SortOrder.Padding = I_Refresh.Padding = UI.Scale(new Padding(5));
 
 		P_FiltersContainer.Padding = TB_Search.Margin = B_Filters.Padding = DD_SearchTime.Margin
 			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5));
@@ -312,7 +342,7 @@ public partial class ContentList : SlickControl
 
 		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin = OT_ModAsset.Margin
 			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
-			= DD_Author.Margin = DD_PackageStatus.Margin = DD_PackageUsage.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2));
+			= DD_Author.Margin = DD_PackageStatus.Margin = DD_PackageUsage.Margin = DD_Playset.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2));
 
 		TLP_MiddleBar.Padding = UI.Scale(new Padding(3, 0, 3, 0));
 
@@ -323,8 +353,10 @@ public partial class ContentList : SlickControl
 
 		var size = UI.Scale(30) - 6;
 
-		TB_Search.MaximumSize = I_Refresh.MaximumSize = B_Filters.MaximumSize = I_SortOrder.MaximumSize = DD_Sorting.MaximumSize = DD_SearchTime.MaximumSize = new Size(9999, size);
-		TB_Search.MinimumSize = I_Refresh.MinimumSize = B_Filters.MinimumSize = I_SortOrder.MinimumSize = DD_Sorting.MinimumSize = DD_SearchTime.MinimumSize = new Size(0, size);
+		TB_Search.MaximumSize = B_Filters.MaximumSize = DD_Sorting.MaximumSize = DD_SearchTime.MaximumSize = new Size(9999, size);
+		TB_Search.MinimumSize = B_Filters.MinimumSize = DD_Sorting.MinimumSize = DD_SearchTime.MinimumSize = new Size(0, size);
+		
+		I_SortOrder.Size = I_Refresh.Size = new(size, size);
 	}
 
 	private void B_Filters_Click(object sender, MouseEventArgs? e)
@@ -394,7 +426,7 @@ public partial class ContentList : SlickControl
 
 	private async void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
 	{
-		DD_SearchTime.Visible = DD_Sorting.SelectedItem == PackageSorting.Best;
+		DD_SearchTime.Enabled = DD_Sorting.SelectedItem == PackageSorting.Best;
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.Sorting = (int)DD_Sorting.SelectedItem;
@@ -413,10 +445,13 @@ public partial class ContentList : SlickControl
 	private void DelayedSearch()
 	{
 		ListControl.DoFilterChanged();
+
 		this.TryInvoke(RefreshCounts);
+
+		I_Refresh.Loading = false;
 	}
 
-	private async void FilterChanged(object sender, EventArgs e)
+	protected async void FilterChanged(object sender, EventArgs e)
 	{
 		if (!clearingFilters && Live)
 		{
@@ -428,8 +463,10 @@ public partial class ContentList : SlickControl
 
 				await RefreshItems();
 			}
-			else if (Page is SkyvePage.Workshop && sender == DD_Tags)
+			else if (sender == TagsControl)
 			{
+				PaginationControl!.Page = 0;
+
 				await RefreshItems();
 			}
 			else
@@ -503,7 +540,9 @@ public partial class ContentList : SlickControl
 
 		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.GetPackage()?.IsCodeMod)
+			var isCodeMod = item.IsCodeMod();
+
+			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == isCodeMod)
 			{
 				return true;
 			}
@@ -582,7 +621,7 @@ public partial class ContentList : SlickControl
 			}
 		}
 
-		if (Page is not SkyvePage.Workshop && DD_Tags.SelectedItems.Any())
+		if (DD_Tags.SelectedItems.Any())
 		{
 			if (!_tagUtil.HasAllTags(item, DD_Tags.SelectedItems))
 			{
@@ -590,9 +629,13 @@ public partial class ContentList : SlickControl
 			}
 		}
 
-		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
+#if CS1
+		if (DD_Playset.SelectedItem is not null && !DD_Playset.SelectedItem.Temporary)
+#else
+		if (DD_Playset.SelectedItem is not null)
+#endif
 		{
-			return !_packageUtil.IsIncluded(item, DD_Profile.SelectedItem.Id);
+			return !_packageUtil.IsIncluded(item, DD_Playset.SelectedItem.Id);
 		}
 
 		if (!searchEmpty && Page is not SkyvePage.Workshop)
@@ -652,12 +695,12 @@ public partial class ContentList : SlickControl
 		if (ListControl.ItemCount > 0)
 		{
 			var countText = GetCountText();
-			var format = ListControl.SelectedItemsCount == 0 ? (ListControl.UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning) : (ListControl.UsageFilteredOut == 0 ? Locale.ShowingSelectedCount : Locale.ShowingSelectedCountWarning);
+			var format = ListControl.SelectedItemsCount == 0 ? (ListControl.UsageFilteredOut == 0 ? Locale.TotalCount : Locale.TotalCountWarning) : (ListControl.UsageFilteredOut == 0 ? Locale.TotalSelectedCount : Locale.TotalSelectedCountWarning);
 			var filteredText = format.FormatPlural(
-				ListControl.FilteredCount,
-				GetItemText().FormatPlural(ListControl.FilteredCount).ToLower(),
+				ListControl.ItemCount,
+				GetItemText().FormatPlural(ListControl.ItemCount).ToLower(),
 				ListControl.SelectedItemsCount,
-				Locale.ItemsHidden.FormatPlural(ListControl.UsageFilteredOut, GetItemText().FormatPlural(ListControl.FilteredCount).ToLower()));
+				Locale.ItemsHidden.FormatPlural(ListControl.UsageFilteredOut, GetItemText().FormatPlural(ListControl.UsageFilteredOut).ToLower()));
 
 			L_Counts.RightText = countText;
 			L_Counts.LeftText = filteredText;
@@ -680,10 +723,10 @@ public partial class ContentList : SlickControl
 
 	protected string GetCountText()
 	{
-		var mods = ListControl.Items.ToList();
+		var mods = ListControl.FilteredItems.ToList();
 		var modsIncluded = mods.Count(x => _packageUtil.IsIncluded(x, SelectedPlayset));
 		var modsEnabled = mods.Count(x => _packageUtil.IsIncludedAndEnabled(x, SelectedPlayset));
-		var count = ListControl.ItemCount;
+		var count = ListControl.FilteredCount;
 
 #if CS1
 		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)

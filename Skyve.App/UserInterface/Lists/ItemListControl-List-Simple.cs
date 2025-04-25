@@ -240,37 +240,31 @@ public abstract partial class ItemListControl
 			if (notificationType > NotificationType.Info)
 			{
 				var point = CompactList
-					? new Point(_columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2))
-					: new Point(e.ClipRectangle.Right - Padding.Right, e.ClipRectangle.Top + Padding.Top);
+					? new Rectangle(_columnSizes[Columns.Status].X, e.ClipRectangle.Y, _columnSizes[Columns.Status].Width, height)
+					: new Rectangle(e.ClipRectangle.Right - Padding.Right, e.ClipRectangle.Top + Padding.Top, 0, 0);
 
-				e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
+				e.Rects.CompatibilityRect = DrawLabel(e.Graphics,
 					point,
-					LocaleCR.Get($"{notificationType}"),
-					"CompatibilityReport",
+					LocaleCR.Get(notificationType.ToString()),
+					notificationType.Value.GetIcon(false),
 					notificationType.Value.GetColor(),
-					CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
-					Padding,
-					height,
-					CursorLocation,
-					CompactList);
+					CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopRight,
+					CursorLocation);
 			}
 
 			if (statusText is not null && statusIcon is not null)
 			{
 				var point = CompactList
-					? new Point(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.Right + Padding.Left) : _columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2))
-					: new Point(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - Padding.Left) : e.ClipRectangle.Right - Padding.Right, e.ClipRectangle.Top + Padding.Top);
+					? new Rectangle(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.Right + Padding.Left) : _columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2), _columnSizes[Columns.Status].Width, height)
+					: new Rectangle(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - Padding.Left) : e.ClipRectangle.Right - Padding.Right, e.ClipRectangle.Top + Padding.Top, 0, 0);
 
-				e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(
+				e.Rects.DownloadStatusRect = DrawLabel(e.Graphics,
 					point,
 					notificationType > NotificationType.Info ? "" : statusText,
 					statusIcon,
 					statusColor,
-					CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
-					Padding,
-					height,
-					null,
-					CompactList);
+					CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopRight,
+					null);
 			}
 
 			if (CompactList && Math.Max(e.Rects.CompatibilityRect.Right, e.Rects.DownloadStatusRect.Right) > (_columnSizes[Columns.Status].X + _columnSizes[Columns.Status].Width))
@@ -279,7 +273,7 @@ public abstract partial class ItemListControl
 			}
 		}
 
-		protected override IDrawableItemRectangles<IPackageIdentity> GenerateRectangles(IPackageIdentity item, Rectangle rectangle)
+		protected override IDrawableItemRectangles<IPackageIdentity> GenerateRectangles(IPackageIdentity item, Rectangle rectangle, IDrawableItemRectangles<IPackageIdentity> current)
 		{
 			return GridView ? GenerateGridRectangles(item, rectangle) : GenerateListRectangles(item, rectangle);
 		}

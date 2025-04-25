@@ -53,7 +53,7 @@ public class PackageCompatibilityReportControl : SmartPanel
 				Status = new GenericPackageStatus
 				{
 					Action = reviewStatus.RequestUpdate ? StatusAction.RequestReview : reviewStatus.Message is "ReviewPending" ? default : StatusAction.MarkAsRead,
-					Notification = NotificationType.Info
+					Notification = NotificationType.ReviewRequest
 				}
 			};
 
@@ -122,8 +122,8 @@ public class PackageCompatibilityReportControl : SmartPanel
 		var index = 0;
 
 		foreach (var panel in _panels
-			.OrderBy(x => x.Key is not ReportType.RequestReview)
-			.ThenBy(x => x.Key is not ReportType.Stability)
+			.OrderBy(x => x.Value.ReportItems.All(_compatibilityManager.IsSnoozed))
+			.ThenByDescending(x => x.Key == ReportType.RequestReview)
 			.ThenByDescending(x => x.Value.ReportItems.Max(y => y.Status?.Notification))
 			.ThenByDescending(x => x.Value.ReportItems.Sum(y => y.Packages.Count())))
 		{

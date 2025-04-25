@@ -7,6 +7,8 @@ namespace Skyve.App;
 
 public static class CompatibilityExtensions
 {
+	private static readonly ICompatibilityManager _manager = ServiceCenter.Get<ICompatibilityManager>();
+
 	public static DynamicIcon GetIcon(this ICustomPlayset profile)
 	{
 #if CS2
@@ -33,9 +35,7 @@ public static class CompatibilityExtensions
 
 	public static ICompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false, bool cacheOnly = false)
 	{
-		var manager = ServiceCenter.Get<ICompatibilityManager>();
-
-		return manager.GetCompatibilityInfo(package, noCache, cacheOnly);
+		return _manager.GetCompatibilityInfo(package, noCache, cacheOnly);
 	}
 
 	public static DynamicIcon GetIcon(this LinkType link)
@@ -60,19 +60,38 @@ public static class CompatibilityExtensions
 		};
 	}
 
+	public static DynamicIcon GetIcon(this PackageType type)
+	{
+		return type switch
+		{
+			PackageType.ContentPackage => "Assets",
+			PackageType.SimulationMod => "Processor",
+			PackageType.VisualMod => "Palette",
+			PackageType.MusicPack => "Music",
+			PackageType.NameList => "Translate",
+			PackageType.MapSavegame => "Map",
+			_ => "Cog",
+		};
+	}
+
 	public static DynamicIcon GetIcon(this NotificationType notification, bool status)
 	{
 		return notification switch
 		{
+			NotificationType.ReviewRequest => "RequestReview",
 			NotificationType.Info => "Info",
+			NotificationType.LocalMod => "PC",
 			NotificationType.MissingDependency => "MissingMod",
 			NotificationType.Caution => "Remarks",
-			NotificationType.Warning => "MinorIssues",
+			NotificationType.Warning => "Hazard",
 			NotificationType.AttentionRequired => "MajorIssues",
-			NotificationType.Switch => "Switch",
-			NotificationType.Unsubscribe => "Broken",
-			NotificationType.Exclude => "X",
+			//NotificationType.Switch => "Switch",
+			NotificationType.Broken => "Broken",
+			NotificationType.Obsolete => "Obsolete",
+			NotificationType.ActionRequired => "Hammer",
+			//NotificationType.Exclude => "X",
 			NotificationType.RequiredItem => "Important",
+			NotificationType.Snoozed => "Snooze",
 			NotificationType.None or _ => status ? "Ok" : "Info",
 		};
 	}
@@ -81,7 +100,11 @@ public static class CompatibilityExtensions
 	{
 		return notification switch
 		{
+			NotificationType.ReviewRequest => FormDesign.Design.ActiveColor,
+
 			NotificationType.Info => FormDesign.Design.InfoColor,
+
+			NotificationType.LocalMod => FormDesign.Design.ButtonColor,
 
 			NotificationType.Caution => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.GreenColor, 60),
 
@@ -89,11 +112,13 @@ public static class CompatibilityExtensions
 
 			NotificationType.Warning => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor, 60),
 			NotificationType.AttentionRequired => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor, 30),
+			NotificationType.ActionRequired => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor, 45),
 
-			NotificationType.Exclude or
-			NotificationType.Unsubscribe => FormDesign.Design.RedColor,
+			NotificationType.Obsolete => FormDesign.Design.RedColor,
 
-			NotificationType.Switch => FormDesign.Design.RedColor.Tint(FormDesign.Design.RedColor.GetHue() - 10),
+			NotificationType.Broken => FormDesign.Design.RedColor.Tint(FormDesign.Design.RedColor.GetHue() - 10),
+
+			NotificationType.Snoozed => Color.FromArgb(100, 60, 220),
 
 			_ => FormDesign.Design.GreenColor
 		};

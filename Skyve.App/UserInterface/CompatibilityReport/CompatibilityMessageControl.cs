@@ -7,14 +7,16 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using static Skyve.App.UserInterface.Lists.ItemListControl;
+
 namespace Skyve.App.UserInterface.CompatibilityReport;
 
 public class CompatibilityMessageControl : SlickControl
 {
-	private readonly Dictionary<IPackageIdentity, (Rectangle Rectangle, ICompatibilityActionInfo Action)> _actionRects = [];
-	private readonly Dictionary<IPackageIdentity, Rectangle> _modRects = [];
-	private readonly Dictionary<IPackageIdentity, Rectangle> _modDotsRects = [];
-	private readonly Dictionary<IPackageIdentity, int> _modHeights = [];
+	private readonly Dictionary<ICompatibilityPackageIdentity, (Rectangle Rectangle, ICompatibilityActionInfo Action)> _actionRects = [];
+	private readonly Dictionary<ICompatibilityPackageIdentity, Rectangle> _modRects = [];
+	private readonly Dictionary<ICompatibilityPackageIdentity, Rectangle> _modDotsRects = [];
+	private readonly Dictionary<ICompatibilityPackageIdentity, int> _modHeights = [];
 	private Rectangle bulkActionRect;
 	private Rectangle dismissActionRect;
 	private Rectangle linkActionRect;
@@ -25,7 +27,9 @@ public class CompatibilityMessageControl : SlickControl
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IWorkshopService _workshopService;
 	private readonly IPackageNameUtil _packageNameUtil;
+	private readonly IImageService _imageService;
 	private readonly ICompatibilityActionsHelper _compatibilityActions;
+	private readonly IDlcManager _dlcManager;
 
 	public ReportType Type { get; }
 	public ICompatibilityItem Message { get; }
@@ -34,7 +38,7 @@ public class CompatibilityMessageControl : SlickControl
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
-		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _compatibilityActions, out _workshopService, out _packageNameUtil);
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _compatibilityActions, out _workshopService, out _packageNameUtil, out _imageService, out _dlcManager);
 
 		Dock = DockStyle.Top;
 		Type = type;
@@ -99,7 +103,7 @@ public class CompatibilityMessageControl : SlickControl
 						ServiceCenter.Get<IInterfaceService>().OpenPackagePage(item.Key, false);
 					}
 				}
-				else if (e.Button == MouseButtons.Right)
+				else if (e.Button == MouseButtons.Right && !item.Key.IsDlc)
 				{
 					var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item.Key);
 
@@ -112,7 +116,7 @@ public class CompatibilityMessageControl : SlickControl
 
 		foreach (var item in _modDotsRects)
 		{
-			if (item.Value.Contains(e.Location))
+			if (item.Value.Contains(e.Location) && !item.Key.IsDlc)
 			{
 				var items = ServiceCenter.Get<IRightClickService>().GetRightClickMenuItems(item.Key);
 
@@ -158,11 +162,13 @@ public class CompatibilityMessageControl : SlickControl
 		{
 			if (Message.Status.Action is StatusAction.RequestReview)
 			{
+#if !DEBUG
 				if (ServiceCenter.Get<IUserService>().User.Manager)
 				{
 					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().CompatibilityManagementPanel(PackageCompatibilityReportControl.Package));
 				}
 				else
+#endif
 				{
 					Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().RequestReviewPanel(PackageCompatibilityReportControl.Package));
 				}
@@ -240,7 +246,7 @@ public class CompatibilityMessageControl : SlickControl
 			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
 			using var fadedBrush = new SolidBrush(Color.FromArgb(200, FormDesign.Design.ForeColor));
 			using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ForeColor, 85));
-			using var font = UI.Font(9F);
+			using var font = Message.Type is not ReportType.RequestReview ? UI.Font(9F) : UI.Font(10.5F);
 			using var smallFont = UI.Font(8.25F);
 			using var tinyFont = UI.Font(7.5F, FontStyle.Bold);
 			using var tinyUnderlineFont = UI.Font(7.5F, FontStyle.Bold | FontStyle.Underline);
@@ -249,12 +255,28 @@ public class CompatibilityMessageControl : SlickControl
 
 			e.Graphics.DrawImage(icon.Color(FormDesign.Design.ForeColor), new Rectangle(ClientRectangle.X + (Padding.Left * 2), 0, ClientRectangle.Width, Height).Align(icon.Size, ContentAlignment.MiddleLeft));
 
-			e.Graphics.DrawString(text, font, brush, rectangle);
-			rectangle.Y += Padding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width).Height;
+			if (Message.Status.Action is StatusAction.RequestReview && Message.Type is not ReportType.RequestReview)
+			{
+				DrawPackageInfo(e, brush, fadedBrush, ref rectangle);
+			}
+
+			if (string.IsNullOrEmpty(Message.Status.Header))
+			{
+				e.Graphics.DrawString(text, font, brush, rectangle);
+				rectangle.Y += Padding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width).Height;
+			}
+			else
+			{
+				e.Graphics.DrawString(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFont, brush, rectangle);
+				rectangle.Y += (int)e.Graphics.Measure(LocaleHelper.GetGlobalText(Message.Status.Header).ToUpper(), tinyFont, rectangle.Width).Height;
+
+				e.Graphics.DrawString(text, font, brush, rectangle);
+				rectangle.Y += Padding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width).Height;
+			}
 
 			if (note is not null)
 			{
-				e.Graphics.DrawString(note, smallFont, fadedBrush, rectangle.Pad(Padding.Top, -Margin.Left, 0, 0));
+				e.Graphics.DrawString(note, smallFont, fadedBrush, rectangle.Pad(Padding.Top, string.IsNullOrEmpty(text) ? -Padding.Left : -Margin.Left, 0, 0));
 				rectangle.Y += Padding.Top - Margin.Left + (int)e.Graphics.Measure(note, smallFont, rectangle.Width - Padding.Top).Height;
 			}
 
@@ -273,25 +295,30 @@ public class CompatibilityMessageControl : SlickControl
 					HoverState = HoverState & ~HoverState.Focused,
 				}).Rectangle;
 
-				buttonRectangle = buttonRectangle.Pad(linkActionRect.Width + Padding.Left, 0, 0, 0);
+				buttonRectangle = buttonRectangle.Pad(linkActionRect.Width + Padding.Horizontal, 0, 0, 0);
 				buttonHeight = linkActionRect.Height;
 			}
 
 			if (Message.Status.Action is StatusAction.RequestReview)
 			{
+#if !DEBUG
 				var isManager = ServiceCenter.Get<IUserService>().User.Manager;
+#else
+				var isManager = false;
+#endif
 
 				bulkActionRect = SlickButton.AlignAndDraw(e.Graphics, buttonRectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
 				{
 					Text = isManager ? Locale.EditCompatibility : Message.Type is ReportType.RequestReview ? LocaleCR.RequestReviewUpdate : LocaleCR.RequestReview,
 					Icon = isManager ? "CompatibilityReport" : "RequestReview",
 					Font = font,
-					BackgroundColor = FormDesign.Design.BackColor,
+					BackgroundColor = Message.Type is ReportType.RequestReview ? default:FormDesign.Design.BackColor,
+					ButtonType = Message.Type is ReportType.RequestReview ? ButtonType.Active : ButtonType.Normal,
 					Cursor = cursor,
 					HoverState = HoverState & ~HoverState.Focused,
 				}).Rectangle;
 
-				buttonRectangle = buttonRectangle.Pad(bulkActionRect.Width + Padding.Left, 0, 0, 0);
+				buttonRectangle = buttonRectangle.Pad(bulkActionRect.Width + Padding.Horizontal, 0, 0, 0);
 				buttonHeight = bulkActionRect.Height;
 			}
 
@@ -308,7 +335,7 @@ public class CompatibilityMessageControl : SlickControl
 					HoverState = HoverState & ~HoverState.Focused,
 				}).Rectangle;
 
-				buttonRectangle = buttonRectangle.Pad(dismissActionRect.Width + Padding.Left, 0, 0, 0);
+				buttonRectangle = buttonRectangle.Pad(dismissActionRect.Width + Padding.Horizontal, 0, 0, 0);
 				buttonHeight = dismissActionRect.Height;
 			}
 
@@ -396,16 +423,65 @@ public class CompatibilityMessageControl : SlickControl
 		catch { }
 	}
 
-	private int DrawPackage(PaintEventArgs e, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	private void DrawPackageInfo(PaintEventArgs e, SolidBrush brush, SolidBrush fadedBrush, ref Rectangle rectangle)
+	{
+		var packageData = Message.GetPackageInfo();
+
+		if (packageData is null)
+		{
+			return;
+		}
+
+		using var font = UI.Font(9F, FontStyle.Bold);
+		using var tinyFont = UI.Font(7.5F);
+
+		var startPos = rectangle.Location;
+
+		e.Graphics.DrawString(LocaleCR.LastReview.ToUpper(), tinyFont, fadedBrush, rectangle);
+		rectangle.Y += (int)e.Graphics.Measure(LocaleCR.LastReview.ToUpper(), tinyFont, rectangle.Width).Height;
+
+		var dateText = packageData.ReviewDate == DateTime.MinValue ? LocaleCR.NotReviewed.One : packageData.ReviewDate.ToReadableString(packageData.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.MDY);
+		e.Graphics.DrawString(dateText, font, brush, rectangle);
+		rectangle.Y += (int)e.Graphics.Measure(dateText, font, rectangle.Width).Height;
+
+		if (rectangle.Width > UI.Scale(250))
+		{
+			var rect = new Rectangle(rectangle.X + (rectangle.Width / 2), startPos.Y, rectangle.Width / 2, rectangle.Height);
+
+			e.Graphics.DrawString(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, fadedBrush, rect);
+			rect.Y += (int)e.Graphics.Measure(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, rect.Width).Height;
+
+			var text = LocaleCR.ActiveReportsCount.FormatPlural(packageData.ActiveReports);
+			e.Graphics.DrawString(text, font, brush, rect);
+			rect.Y += (int)e.Graphics.Measure(text, font, rect.Width).Height;
+
+			rectangle.Y = Math.Max(rectangle.Y, rect.Y);
+		}
+		else
+		{
+			rectangle.Y += Padding.Top;
+
+			e.Graphics.DrawString(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, fadedBrush, rectangle);
+			rectangle.Y += (int)e.Graphics.Measure(LocaleCR.ActiveReviewRequests.ToUpper(), tinyFont, rectangle.Width).Height;
+
+			var text = LocaleCR.ActiveReportsCount.FormatPlural(packageData.ActiveReports);
+			e.Graphics.DrawString(text, font, brush, rectangle);
+			rectangle.Y += (int)e.Graphics.Measure(text, font, rectangle.Width).Height;
+		}
+
+		rectangle.Y += Padding.Top;
+	}
+
+	private int DrawPackage(PaintEventArgs e, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
 		e.Graphics.FillRoundedRectangleWithShadow(rectangle.Pad(Padding.Left), UI.Scale(5), Padding.Left);
 
-		var thumbRect = rectangle.ClipTo(rectangle.Width).Pad(Padding.Left + Padding.Top);
+		var thumbRect = rectangle.ClipTo(package.IsDlc ? ((rectangle.Width * 215 / 460) + Padding.Left + Padding.Top) : rectangle.Width).Pad(Padding.Left + Padding.Top);
 		var textRect = rectangle.Pad(Padding.Left + Padding.Top, Padding.Vertical + thumbRect.Height, Padding.Left + Padding.Top, Padding.Bottom);
 
 		DrawThumbnail(e, package, thumbRect, cursor);
 
-		rectangle.Height = thumbRect.Width + Padding.Vertical;
+		rectangle.Height = thumbRect.Height + Padding.Vertical;
 
 		rectangle.Height += DrawTitleAndTags(e, package, textRect, cursor);
 
@@ -454,27 +530,35 @@ public class CompatibilityMessageControl : SlickControl
 		return rectangle.Height + (Padding.Left * 2);
 	}
 
-	private int DrawThumbnail(PaintEventArgs e, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	private int DrawThumbnail(PaintEventArgs e, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		var thumbnail = package.GetThumbnail();
+		Bitmap? thumbnail;
 
-		if (thumbnail is null)
+		if (package.IsDlc)
 		{
-			using var generic = IconManager.GetIcon(package.IsCodeMod() ? "Mods" : "Package", rectangle.Height).Color(BackColor);
-			using var brush = new SolidBrush(FormDesign.Design.IconColor);
-
-			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
-			e.Graphics.DrawImage(generic, rectangle.CenterR(generic.Size));
+			thumbnail = _dlcManager.TryGetDlc(package.Id) is IThumbnailObject thumbnailObject ? thumbnailObject.GetThumbnail() : null;
 		}
-		else if (package.IsLocal())
+		else
 		{
-			using var unsatImg = new Bitmap(thumbnail, rectangle.Size).Tint(Sat: 0);
+			thumbnail = package.GetThumbnail();
+		}
+
+		if (thumbnail is not null && !package.IsDlc && package.IsLocal())
+		{
+			using var unsatImg = thumbnail.ToGrayscale();
 
 			drawThumbnail(unsatImg);
 		}
 		else
 		{
-			drawThumbnail(thumbnail);
+			thumbnail ??= package.IsLocal()
+				? package is IAsset ? AssetThumbUnsat : package.IsCodeMod() ? ModThumbUnsat : package.IsLocal() ? PackageThumbUnsat : WorkshopThumbUnsat
+				: package is IAsset ? AssetThumb : package.IsCodeMod() ? ModThumb : package.IsLocal() ? PackageThumb : WorkshopThumb;
+
+			if (thumbnail is not null)
+			{
+				drawThumbnail(thumbnail);
+			}
 		}
 
 		if (HoverState.HasFlag(HoverState.Hovered) && rectangle.Contains(cursor))
@@ -488,15 +572,24 @@ public class CompatibilityMessageControl : SlickControl
 		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, rectangle, UI.Scale(5), FormDesign.Design.BackColor);
 	}
 
-	private int DrawTitleAndTags(PaintEventArgs e, IPackageIdentity package, Rectangle rectangle, Point cursor)
+	private int DrawTitleAndTags(PaintEventArgs e, ICompatibilityPackageIdentity package, Rectangle rectangle, Point cursor)
 	{
-		var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22)), ContentAlignment.TopRight);
-		_modDotsRects[package] = dotsRect;
-		DrawDots(e, dotsRect, cursor);
+		if (!package.IsDlc)
+		{
+			var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22)), ContentAlignment.TopRight);
+			_modDotsRects[package] = dotsRect;
+			DrawDots(e, dotsRect, cursor);
 
-		rectangle = rectangle.Pad(0, 0, dotsRect.Width, 0);
+			rectangle = rectangle.Pad(0, 0, dotsRect.Width, 0);
+		}
 
 		var text = package.CleanName(out var tags);
+
+		if (package.IsDlc)
+		{
+			tags.Clear();
+			text = text.RegexRemove("^.+?- ").RegexRemove("(Content )?Creator Pack: ");
+		}
 
 		using var font = UI.Font(8.25F, FontStyle.Bold);
 		var textRect = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);

@@ -95,7 +95,7 @@ public partial class ItemListControl
 			{
 				outerColor = notificationType.Value.GetColor();
 
-				e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(new(e.ClipRectangle.Right - GridPadding.Right, e.Rects.IconRect.Bottom), LocaleCR.Get($"{notificationType}"), "CompatibilityReport", outerColor, ContentAlignment.BottomRight, padding: GridPadding, height: height, cursorLocation: CursorLocation);
+				e.Rects.CompatibilityRect = DrawLabel(e.Graphics, new(e.ClipRectangle.Right - GridPadding.Right, e.Rects.IconRect.Bottom, 0, 0), LocaleCR.Get(notificationType.ToString()), notificationType.Value.GetIcon(false), outerColor, ContentAlignment.BottomRight, cursorLocation: CursorLocation, true);
 			}
 
 			if (GetStatusDescriptors(e.Item, out var text, out var icon, out var color))
@@ -105,7 +105,7 @@ public partial class ItemListControl
 					outerColor = color;
 				}
 
-				e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : (e.ClipRectangle.Right - GridPadding.Right), e.Rects.IconRect.Bottom), notificationType > NotificationType.Info ? "" : text, icon!, color, ContentAlignment.BottomRight, padding: GridPadding, height: height, cursorLocation: CursorLocation);
+				e.Rects.DownloadStatusRect = DrawLabel(e.Graphics, new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : (e.ClipRectangle.Right - GridPadding.Right), e.Rects.IconRect.Bottom, 0, 0), notificationType > NotificationType.Info ? "" : text, icon!, color, ContentAlignment.BottomRight, cursorLocation: CursorLocation, large: true);
 			}
 
 			if (e.IsSelected && outerColor == default)
@@ -205,7 +205,7 @@ public partial class ItemListControl
 		{
 			using var tagIcon = IconManager.GetSmallIcon(item.Icon);
 
-			var tagSize = e.Graphics.MeasureLabel(item.Value, tagIcon);
+			var tagSize = e.Graphics.MeasureLabel(item.ToString(), tagIcon);
 
 			if (!tagsRect.Contains(new Rectangle(location, tagSize)))
 			{
@@ -220,7 +220,7 @@ public partial class ItemListControl
 				}
 			}
 
-			var tagRect = e.Graphics.DrawLabel(item.Value, tagIcon, color ?? Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), new Rectangle(location.X, tagsRect.Y, tagsRect.Width, tagsRect.Height), CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopLeft, mousePosition: CursorLocation);
+			var tagRect = e.Graphics.DrawLabel(item.ToString(), tagIcon, color ?? Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), new Rectangle(location.X, tagsRect.Y, tagsRect.Width, tagsRect.Height), CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopLeft, mousePosition: CursorLocation);
 
 			location.X += (GridView ? GridPadding : Padding).Left + tagRect.Width;
 
@@ -286,10 +286,10 @@ public partial class ItemListControl
 				var avatarRect = authorRect.Pad(padding).Align(CompactList ? UI.Scale(new Size(18, 18)) : new(authorRect.Height * 3 / 4, authorRect.Height * 3 / 4), ContentAlignment.MiddleLeft);
 				var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
-				e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-UI.Scale(2)));
+				using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor);
+				e.Graphics.FillEllipse(greenBrush, checkRect.Pad(-UI.Scale(2)));
 
 				using var img = IconManager.GetIcon("Check", checkRect.Height);
-
 				e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 			}
 

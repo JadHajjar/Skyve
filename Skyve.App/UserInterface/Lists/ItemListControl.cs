@@ -6,6 +6,7 @@ using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
@@ -267,7 +268,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.OrderBy(x => _packageUtil.GetStatus(x.Item.GetLocalPackage(), out _)),
 
 			PackageSorting.UpdateTime => items
-				.OrderBy(x => (x.Item.GetWorkshopInfo()?.ServerTime).If(y => y is null || y.Value == DateTime.MinValue, _ => x.Item.GetLocalPackage()?.LocalTime ?? DateTime.Now, y => y ?? DateTime.Now)),
+				.OrderBy(x => (x.Item.GetWorkshopInfo()?.ServerTime).If(y => y is null || y.Value == DateTime.MinValue, _ => x.Item.GetLocalPackage()?.LocalTime ?? DateTime.UtcNow, y => y ?? DateTime.Now)),
 
 			PackageSorting.SubscribeTime => items
 				.OrderBy(x => x.Item.GetLocalPackage()?.LocalTime),
@@ -539,7 +540,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				}
 				else
 				{
-					Clipboard.SetText(date.Value.ToString("g"));
+					Clipboard.SetText(date.Value.ToLocalTime().ToString("g"));
 				}
 			}
 
@@ -556,7 +557,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				}
 				else
 				{
-					Clipboard.SetText(tag.Key.Value);
+					Clipboard.SetText(tag.Key.ToString());
 				}
 
 				return;
@@ -668,6 +669,24 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			if (Loading || AnyVisibleItems())
 			{
+				if (ItemCount > 5 && _page == SkyvePage.Workshop && scrollVisible)
+				{
+					var itemList = SafeGetItems();
+
+					var maxIndex = GetMaxScrollIndex(itemList);
+					var displayedRows = GetDisplayedRows();
+
+					if (ScrollIndex < maxIndex)
+					{
+						var size = (int)(UI.Scale(150) * Math.Min(1, (maxIndex - ScrollIndex) / (displayedRows / 3)));
+						var rect = new Rectangle(0, Height - size, Width, size + 1);
+
+						using var gradientBrush = new LinearGradientBrush(rect, Color.FromArgb(0, BackColor),  BackColor, 90f);
+
+						e.Graphics.FillRectangle(gradientBrush, rect);
+					}
+				}
+
 				return;
 			}
 
@@ -966,7 +985,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				var date = Item.GetWorkshopInfo()?.ServerTime ?? Item.GetLocalPackage()?.LocalTime;
 				if (date.HasValue)
 				{
-					text = getFilterTip(string.Format(Locale.CopyToClipboard, date.Value.ToString("g")), Locale.FilterSinceThisDate);
+					text = getFilterTip(string.Format(Locale.CopyToClipboard, date.Value.ToLocalTime().ToString("g")), Locale.FilterSinceThisDate);
 					point = DateRect.Location;
 					return true;
 				}

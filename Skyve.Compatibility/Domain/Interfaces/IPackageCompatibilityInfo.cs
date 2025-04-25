@@ -6,10 +6,8 @@ using System;
 using System.Collections.Generic;
 
 namespace Skyve.Compatibility.Domain.Interfaces;
-public interface IPackageCompatibilityInfo
+public interface IPackageCompatibilityInfo : IPackageIdentity
 {
-	ulong Id { get; }
-	string? Name { get; }
 	string? FileName { get; }
 	string? AuthorId { get; }
 	string? Note { get; }
@@ -18,7 +16,10 @@ public interface IPackageCompatibilityInfo
 	PackageStability Stability { get; }
 	PackageUsage Usage { get; }
 	PackageType Type { get; }
-	List<uint>? RequiredDLCs { get; }
+	SavegameEffect SavegameEffect { get; }
+	string? RemovalSteps { get; }
+	int ActiveReports { get; }
+	List<ulong>? RequiredDLCs { get; }
 	List<string>? Tags { get; }
 	List<ILink>? Links { get; }
 	List<IPackageStatus<InteractionType>> Interactions { get; }

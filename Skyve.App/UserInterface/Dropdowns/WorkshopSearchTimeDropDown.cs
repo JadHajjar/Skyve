@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
@@ -46,6 +41,18 @@ internal class WorkshopSearchTimeDropDown : SlickSelectionDropDown<WorkshopSearc
 	public override void ResetValue()
 	{
 		SelectedItem = WorkshopSearchTime.Month;
+	}
+
+	protected override void OnPaint(PaintEventArgs e)
+	{
+		if (!Enabled)
+		{
+			e.Graphics.Clear(BackColor);
+		}
+		else
+		{
+			base.OnPaint(e);
+		}
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, WorkshopSearchTime item)

@@ -15,8 +15,8 @@ public interface IPlayset : IThumbnailObject
 	DateTime DateUpdated { get; }
 	int ModCount { get; }
 	ulong ModSize { get; }
-	bool Temporary { get; }
 #if CS1
+	bool Temporary { get; }
 	int AssetCount { get; }
 #endif
 }

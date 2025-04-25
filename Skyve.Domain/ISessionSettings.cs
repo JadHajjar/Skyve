@@ -3,7 +3,9 @@
 namespace Skyve.Domain;
 public interface ISessionSettings
 {
+#if CS1
 	string? CurrentPlayset { get; set; }
+#endif
 	bool FirstTimeSetupCompleted { get; set; }
 	bool CleanupFirstTimeShown { get; set; }
 	bool FpsBoosterLogWarning { get; set; }

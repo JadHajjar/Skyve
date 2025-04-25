@@ -70,22 +70,22 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity>
 
 		if (thumbnail is null)
 		{
-			using var generic = IconManager.GetIcon(isUpToDate ? "Ok" : "Paradox", isUpToDate ? (imageRect.Height * 3 / 4) : imageRect.Height).Color(e.BackColor);
+			using var generic = IconManager.GetIcon(isUpToDate ? "Ok" : "Paradox", isUpToDate ? (imageRect.Height * 3 / 4) : imageRect.Height).Color(ForeColor);
 			using var backBrush = new SolidBrush(isUpToDate ? FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.IconColor, 35) : FormDesign.Design.IconColor);
 
-			e.Graphics.FillRoundedRectangle(backBrush, imageRect, UI.Scale(5));
+			e.Graphics.FillRoundedRectangle(backBrush, imageRect, UI.Scale(3));
 			e.Graphics.DrawImage(generic, imageRect.CenterR(generic.Size));
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(thumbnail, imageRect, UI.Scale(5), FormDesign.Design.BackColor);
+			e.Graphics.DrawRoundedImage(thumbnail, imageRect, UI.Scale(3), e.BackColor);
 
 			if (isUpToDate && !e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var greenBrush = new SolidBrush(Color.FromArgb(150, FormDesign.Design.GreenColor));
 				using var icon = IconManager.GetIcon("Ok", imageRect.Height * 3 / 4).Color(FormDesign.Design.GreenColor.GetTextColor());
 
-				e.Graphics.FillRoundedRectangle(greenBrush, imageRect, UI.Scale(5));
+				e.Graphics.FillRoundedRectangle(greenBrush, imageRect, UI.Scale(3));
 				e.Graphics.DrawImage(icon, imageRect.CenterR(icon.Size));
 			}
 		}

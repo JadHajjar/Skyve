@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Extensions;
+
+using Newtonsoft.Json;
 
 using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
@@ -20,7 +22,7 @@ public class GenericPackageStatus : IGenericPackageStatus
 		if (status is not null)
 		{
 			Action = status.Action;
-			Packages = status.Packages;
+			Packages = status.Packages.Cast<CompatibilityPackageReference>().ToList();
 			Note = status.Note;
 			IntType = status.IntType;
 			Type = status.GetType().Name;
@@ -28,12 +30,15 @@ public class GenericPackageStatus : IGenericPackageStatus
 	}
 
 	public StatusAction Action { get; set; }
-	public ulong[]? Packages { get; set; }
+	public List<CompatibilityPackageReference>? Packages { get; set; }
+	public string? Header { get; set; }
 	public string? Note { get; set; }
 	public int IntType { get; set; }
 	public string? Type { get; set; }
 	[JsonIgnore] public string LocaleKey => string.Empty;
 	[JsonIgnore] public NotificationType Notification { get; set; }
+	IEnumerable<ICompatibilityPackageIdentity> IGenericPackageStatus.Packages { get => Packages ?? []; set => Packages = value.ToList(x => new CompatibilityPackageReference(x)); }
+	string IGenericPackageStatus.Class => nameof(GenericPackageStatus);
 
 	public override bool Equals(object? obj)
 	{
@@ -45,7 +50,7 @@ public class GenericPackageStatus : IGenericPackageStatus
 	public override int GetHashCode()
 	{
 		var hashCode = 1386127205;
-		hashCode = hashCode * -1521134295 + EqualityComparer<ulong[]?>.Default.GetHashCode(Packages);
+		hashCode = hashCode * -1521134295 + EqualityComparer<IEnumerable<ulong>>.Default.GetHashCode(Packages?.Select(x => x.Id) ?? []);
 		hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(Type);
 		return hashCode;
 	}
@@ -56,14 +61,14 @@ public class GenericPackageStatus : IGenericPackageStatus
 
 		var instance = (IGenericPackageStatus)(type switch
 		{
-			nameof(PackageInteraction) => new PackageInteraction(),
-			nameof(PackageStatus) => new PackageStatus(),
-			nameof(StabilityStatus) => new StabilityStatus(),
-			_ => new GenericPackageStatus(),
+			nameof(PackageInteraction) => new PackageInteraction { Packages = [.. Packages] },
+			nameof(PackageStatus) => new PackageStatus { Packages = [.. Packages] },
+			nameof(StabilityStatus) => new StabilityStatus { Packages = [.. Packages] },
+			nameof(SavegameEffectStatus) => new SavegameEffectStatus { Packages = [.. Packages] },
+			_ => new GenericPackageStatus { Packages = [.. Packages] },
 		});
 
 		instance.Action = Action;
-		instance.Packages = Packages;
 		instance.Note = Note;
 		instance.IntType = IntType;
 

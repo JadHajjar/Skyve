@@ -15,19 +15,36 @@ public partial class PC_DLCs : PanelContent
 
 		LC_DLCs.SetItems(_dlcManager.Dlcs);
 
-		RefreshCounts();
+		if (LC_DLCs.ItemCount == 0)
+			LC_DLCs.Loading = true;
+
+		T_YourDlcs.Selected = true;
 
 		_dlcManager.DlcsLoaded += SteamUtil_DLCsLoaded;
 	}
 
+	protected override void DesignChanged(FormDesign design)
+	{
+		base.DesignChanged(design);
+
+		tableLayoutPanel3.BackColor = design.AccentBackColor;
+		L_Counts.ForeColor = design.InfoColor;
+		L_Duplicates.ForeColor = design.YellowColor.MergeColor(design.ForeColor, 90);
+	}
+
+	protected override void UIChanged()
+	{
+		base.UIChanged();
+
+		flowLayoutPanel1.Margin = 
+		TB_Search.Margin = L_Duplicates.Margin = L_Counts.Margin = UI.Scale(new Padding(5));
+		L_Duplicates.Font = L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
+		TB_Search.Width = UI.Scale(250);
+	}
+
 	private void SteamUtil_DLCsLoaded()
 	{
-		if (LC_DLCs.ItemCount != _dlcManager.Dlcs.Count())
-		{
-			LC_DLCs.SetItems(_dlcManager.Dlcs);
-		}
-
-		LC_DLCs.Loading = false;
+		LC_DLCs.SetItems(_dlcManager.Dlcs);
 
 		this.TryInvoke(RefreshCounts);
 	}
@@ -55,6 +72,7 @@ public partial class PC_DLCs : PanelContent
 	protected override void LocaleChanged()
 	{
 		Text = $"{Locale.DLCs} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
+
 		L_Duplicates.Text = Locale.DlcUpdateNotice;
 	}
 
@@ -63,25 +81,6 @@ public partial class PC_DLCs : PanelContent
 		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "Search" : "ClearSearch";
 		LC_DLCs.FilterChanged();
 		RefreshCounts();
-	}
-
-	protected override void DesignChanged(FormDesign design)
-	{
-		base.DesignChanged(design);
-
-		tableLayoutPanel3.BackColor = design.AccentBackColor;
-		L_Counts.ForeColor = design.InfoColor;
-		L_Duplicates.ForeColor = design.YellowColor.MergeColor(design.ForeColor, 90);
-	}
-
-	protected override void UIChanged()
-	{
-		base.UIChanged();
-
-		B_ExInclude.Size = UI.Scale(new Size(375, 26), UI.UIScale);
-		TB_Search.Margin = L_Duplicates.Margin = L_Counts.Margin = B_ExInclude.Margin = UI.Scale(new Padding(5));
-		L_Duplicates.Font = L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
-		TB_Search.Width = UI.Scale(250);
 	}
 
 	public override bool KeyPressed(ref Message msg, Keys keyData)

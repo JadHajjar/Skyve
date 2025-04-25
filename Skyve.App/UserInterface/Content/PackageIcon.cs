@@ -38,7 +38,7 @@ public class PackageIcon : SlickImageControl
 
 		if (Package?.IsLocal() ?? false)
 		{
-			using var unsatImg = new Bitmap(thumbnail, Size).Tint(Sat: 0);
+			using var unsatImg = thumbnail.ToGrayscale();
 			e.Graphics.DrawRoundedImage(unsatImg, ClientRectangle.Pad(1), UI.Scale(5), FormDesign.Design.AccentBackColor);
 		}
 		else

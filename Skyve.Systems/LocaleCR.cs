@@ -18,21 +18,37 @@ public class LocaleCR : LocaleHelper
 	/// <para>You should disable '{1}'.</para>
 	/// <para>Plural: You should disable the following packages.</para>
 	/// </summary>
-	public static Translation ActionExcludeOther => _instance.GetText("Action_ExcludeOther");
+	public static Translation ActionDisableOther => _instance.GetText("Action_DisableOther");
 
 	/// <summary>
 	/// You should disable '{0}'.
 	/// </summary>
+	public static Translation ActionDisableThis => _instance.GetText("Action_DisableThis");
+
+	/// <summary>
+	/// You should not use '{0}'
+	/// </summary>
+	public static Translation ActionDoNotAdd => _instance.GetText("Action_DoNotAdd");
+
+	/// <summary>
+	/// <para>You should remove '{1}' from your playset.</para>
+	/// <para>Plural: You should remove the following packages from your playset.</para>
+	/// </summary>
+	public static Translation ActionExcludeOther => _instance.GetText("Action_ExcludeOther");
+
+	/// <summary>
+	/// You should remove '{0}' from your playset.
+	/// </summary>
 	public static Translation ActionExcludeThis => _instance.GetText("Action_ExcludeThis");
 
 	/// <summary>
-	/// <para>You should add the following package to your playset.</para>
+	/// <para>You should add '{1}' to your playset.</para>
 	/// <para>Plural: You should add the following packages to your playset.</para>
 	/// </summary>
 	public static Translation ActionIncludeOther => _instance.GetText("Action_IncludeOther");
 
 	/// <summary>
-	/// You should include '{0}'
+	/// You should add '{0}' to your playset
 	/// </summary>
 	public static Translation ActionIncludeThis => _instance.GetText("Action_IncludeThis");
 
@@ -53,32 +69,58 @@ public class LocaleCR : LocaleHelper
 	public static Translation ActionSelectOne => _instance.GetText("Action_SelectOne");
 
 	/// <summary>
-	/// <para>You should add the following package to your playset.</para>
-	/// <para>Plural: You should add the following packages to your playset.</para>
-	/// </summary>
-	public static Translation ActionSubscribeToPackages => _instance.GetText("Action_SubscribeToPackages");
-
-	/// <summary>
 	/// <para>You should switch to '{1}'.</para>
 	/// <para>Plural: You should switch to one of the following packages.</para>
 	/// </summary>
 	public static Translation ActionSwitch => _instance.GetText("Action_Switch");
 
 	/// <summary>
-	/// <para>You should remove '{1}' from your playset.</para>
-	/// <para>Plural: You should remove the following packages from your playset.</para>
+	/// <para>You should completely remove '{1}' from all your playsets.</para>
+	/// <para>Plural: You should completely remove the following packages from all your playsets.</para>
 	/// </summary>
 	public static Translation ActionUnsubscribeOther => _instance.GetText("Action_UnsubscribeOther");
 
 	/// <summary>
-	/// You should remove '{0}' from your playset.
+	/// You should completely remove '{0}' from all your playsets.
 	/// </summary>
 	public static Translation ActionUnsubscribeThis => _instance.GetText("Action_UnsubscribeThis");
+
+	/// <summary>
+	/// Action Required
+	/// </summary>
+	public static Translation ActionRequired => _instance.GetText("ActionRequired");
+
+	/// <summary>
+	/// {0} {1} where your action is required
+	/// </summary>
+	public static Translation ActionRequiredCount => _instance.GetText("ActionRequiredCount");
+
+	/// <summary>
+	/// <para>One active report</para>
+	/// <para>Zero: No active reports</para>
+	/// <para>Plural: {0} active reports</para>
+	/// </summary>
+	public static Translation ActiveReportsCount => _instance.GetText("ActiveReportsCount");
+
+	/// <summary>
+	/// Active Review Requests
+	/// </summary>
+	public static Translation ActiveReviewRequests => _instance.GetText("ActiveReviewRequests");
 
 	/// <summary>
 	/// Add a global tag
 	/// </summary>
 	public static Translation AddGlobalTag => _instance.GetText("AddGlobalTag");
+
+	/// <summary>
+	/// Add missing info
+	/// </summary>
+	public static Translation AddInfo => _instance.GetText("AddInfo");
+
+	/// <summary>
+	/// Add missing compatibility information to the mod.  And explain any issue related to this mod.
+	/// </summary>
+	public static Translation AddInfoDesc => _instance.GetText("AddInfoDesc");
 
 	/// <summary>
 	/// Add Interaction
@@ -136,6 +178,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation AssetCreation => _instance.GetText("AssetCreation");
 
 	/// <summary>
+	/// Normal asset
+	/// </summary>
+	public static Translation AssetsRemain => _instance.GetText("AssetsRemain");
+
+	/// <summary>
 	/// Attention Required
 	/// </summary>
 	public static Translation AttentionRequired => _instance.GetText("AttentionRequired");
@@ -177,9 +224,30 @@ public class LocaleCR : LocaleHelper
 	public static Translation BreaksOnPatch => _instance.GetText("BreaksOnPatch");
 
 	/// <summary>
+	/// Breaks savegames when removed
+	/// </summary>
+	public static Translation BreaksSave => _instance.GetText("BreaksSave");
+
+	/// <summary>
 	/// Broken
 	/// </summary>
 	public static Translation Broken => _instance.GetText("Broken");
+
+	/// <summary>
+	/// <para>{0} {1} that is broken</para>
+	/// <para>Plural: {0} {1} that are broken</para>
+	/// </summary>
+	public static Translation BrokenCount => _instance.GetText("BrokenCount");
+
+	/// <summary>
+	/// Broken from its latest version
+	/// </summary>
+	public static Translation BrokenFromNewVersion => _instance.GetText("BrokenFromNewVersion");
+
+	/// <summary>
+	/// Broken from the lastest patch
+	/// </summary>
+	public static Translation BrokenFromPatch => _instance.GetText("BrokenFromPatch");
 
 	/// <summary>
 	/// Causes Issues
@@ -202,6 +270,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation CautionCount => _instance.GetText("CautionCount");
 
 	/// <summary>
+	/// Choose how to send your request
+	/// </summary>
+	public static Translation ChooseWhatToRequest => _instance.GetText("ChooseWhatToRequest");
+
+	/// <summary>
 	/// City-Building
 	/// </summary>
 	public static Translation CityBuilding => _instance.GetText("CityBuilding");
@@ -210,6 +283,11 @@ public class LocaleCR : LocaleHelper
 	/// Are you sure you want to conclude your session?
 	/// </summary>
 	public static Translation ConfirmEndSession => _instance.GetText("ConfirmEndSession");
+
+	/// <summary>
+	/// Content/Asset Package
+	/// </summary>
+	public static Translation ContentPackage => _instance.GetText("ContentPackage");
 
 	/// <summary>
 	/// Failed to load data, try again later
@@ -237,6 +315,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation CRTDlcMissing => _instance.GetText("CRT_DlcMissing");
 
 	/// <summary>
+	/// Information
+	/// </summary>
+	public static Translation CRTInfo => _instance.GetText("CRT_Info");
+
+	/// <summary>
 	/// Optional Packages
 	/// </summary>
 	public static Translation CRTOptionalPackages => _instance.GetText("CRT_OptionalPackages");
@@ -247,7 +330,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation CRTRequestReview => _instance.GetText("CRT_RequestReview");
 
 	/// <summary>
-	/// Required Item
+	/// Required Package
 	/// </summary>
 	public static Translation CRTRequiredItem => _instance.GetText("CRT_RequiredItem");
 
@@ -288,6 +371,16 @@ public class LocaleCR : LocaleHelper
 	public static Translation Deprecated => _instance.GetText("Deprecated");
 
 	/// <summary>
+	/// Disable linked packages
+	/// </summary>
+	public static Translation DisableOther => _instance.GetText("DisableOther");
+
+	/// <summary>
+	/// Disable this package
+	/// </summary>
+	public static Translation DisableThis => _instance.GetText("DisableThis");
+
+	/// <summary>
 	/// <para>{0} DLC selected</para>
 	/// <para>Plural: {0} DLCs selected</para>
 	/// </summary>
@@ -309,14 +402,14 @@ public class LocaleCR : LocaleHelper
 	public static Translation EditNote => _instance.GetText("EditNote");
 
 	/// <summary>
-	/// Leave a note for other managers to see in the future
+	/// Leave a note for other managers to see in the future.
 	/// </summary>
 	public static Translation EditNoteInfo => _instance.GetText("EditNoteInfo");
 
 	/// <summary>
-	/// Disable
+	/// Effects linger after removal
 	/// </summary>
-	public static Translation Exclude => _instance.GetText("Exclude");
+	public static Translation EffectsLinger => _instance.GetText("EffectsLinger");
 
 	/// <summary>
 	/// <para>{0} {1} should be excluded</para>
@@ -325,7 +418,12 @@ public class LocaleCR : LocaleHelper
 	public static Translation ExcludeCount => _instance.GetText("ExcludeCount");
 
 	/// <summary>
-	/// Disable this package
+	/// Exclude linked packages
+	/// </summary>
+	public static Translation ExcludeOther => _instance.GetText("ExcludeOther");
+
+	/// <summary>
+	/// Exclude this package
 	/// </summary>
 	public static Translation ExcludeThis => _instance.GetText("ExcludeThis");
 
@@ -363,6 +461,16 @@ public class LocaleCR : LocaleHelper
 	/// IMT Markings
 	/// </summary>
 	public static Translation IMTMarkings => _instance.GetText("IMTMarkings");
+
+	/// <summary>
+	/// Include linked packages
+	/// </summary>
+	public static Translation IncludeOther => _instance.GetText("IncludeOther");
+
+	/// <summary>
+	/// Include this package
+	/// </summary>
+	public static Translation IncludeThis => _instance.GetText("IncludeThis");
 
 	/// <summary>
 	/// Incompatible
@@ -449,6 +557,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation InteractionType => _instance.GetText("InteractionType");
 
 	/// <summary>
+	/// Last Review
+	/// </summary>
+	public static Translation LastReview => _instance.GetText("LastReview");
+
+	/// <summary>
 	/// It was last reviewed on {0}
 	/// </summary>
 	public static Translation LastReviewDate => _instance.GetText("LastReviewDate");
@@ -469,6 +582,16 @@ public class LocaleCR : LocaleHelper
 	public static Translation LoadAfter => _instance.GetText("LoadAfter");
 
 	/// <summary>
+	/// Local Mod
+	/// </summary>
+	public static Translation LocalMod => _instance.GetText("LocalMod");
+
+	/// <summary>
+	/// Log Report
+	/// </summary>
+	public static Translation LogReport => _instance.GetText("Log Report");
+
+	/// <summary>
 	/// Compatibility Management
 	/// </summary>
 	public static Translation ManageCompatibilityData => _instance.GetText("ManageCompatibilityData");
@@ -482,6 +605,11 @@ public class LocaleCR : LocaleHelper
 	/// Map Creation
 	/// </summary>
 	public static Translation MapCreation => _instance.GetText("MapCreation");
+
+	/// <summary>
+	/// Map / Savegame
+	/// </summary>
+	public static Translation MapSavegame => _instance.GetText("MapSavegame");
 
 	/// <summary>
 	/// Missing Dependency
@@ -505,7 +633,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation MusicPack => _instance.GetText("MusicPack");
 
 	/// <summary>
-	/// Name-List/Game Translations
+	/// Name-List / Game Translations
 	/// </summary>
 	public static Translation NameList => _instance.GetText("NameList");
 
@@ -555,6 +683,27 @@ public class LocaleCR : LocaleHelper
 	public static Translation NotReviewed => _instance.GetText("NotReviewed");
 
 	/// <summary>
+	/// Has multiple reports
+	/// </summary>
+	public static Translation NumerousReports => _instance.GetText("NumerousReports");
+
+	/// <summary>
+	/// Obsolete
+	/// </summary>
+	public static Translation Obsolete => _instance.GetText("Obsolete");
+
+	/// <summary>
+	/// <para>{0} {1} that is obsolete</para>
+	/// <para>Plural: {0} {1} that are obsolete</para>
+	/// </summary>
+	public static Translation ObsoleteCount => _instance.GetText("ObsoleteCount");
+
+	/// <summary>
+	/// Has optional packages ..
+	/// </summary>
+	public static Translation OptionalPackages => _instance.GetText("OptionalPackages");
+
+	/// <summary>
 	/// <para>This package has one other compatibility warning</para>
 	/// <para>Plural: This package has {0} other compatibility warnings</para>
 	/// </summary>
@@ -569,6 +718,36 @@ public class LocaleCR : LocaleHelper
 	/// Package Type
 	/// </summary>
 	public static Translation PackageType => _instance.GetText("PackageType");
+
+	/// <summary>
+	/// Content package that contains assets or files, such as models, textures, or prefabs, and does not include any code or scripts that modify game behavior.
+	/// </summary>
+	public static Translation PackageTypeContentPackage => _instance.GetText("PackageType_ContentPackage");
+
+	/// <summary>
+	/// Map, or Savegame.
+	/// </summary>
+	public static Translation PackageTypeMapSavegame => _instance.GetText("PackageType_MapSavegame");
+
+	/// <summary>
+	/// Music pack for the in-game radio.
+	/// </summary>
+	public static Translation PackageTypeMusicPack => _instance.GetText("PackageType_MusicPack");
+
+	/// <summary>
+	/// Extra game translations or name-list files.
+	/// </summary>
+	public static Translation PackageTypeNameList => _instance.GetText("PackageType_NameList");
+
+	/// <summary>
+	/// Simulation mod that directly alters the gameplay of the game.
+	/// </summary>
+	public static Translation PackageTypeSimulationMod => _instance.GetText("PackageType_SimulationMod");
+
+	/// <summary>
+	/// Visual modifications or map theme textures.
+	/// </summary>
+	public static Translation PackageTypeVisualMod => _instance.GetText("PackageType_VisualMod");
 
 	/// <summary>
 	/// Please review the interactions of this package before saving. Some have an invalid Interaction Type or don't have a linked package.
@@ -601,9 +780,34 @@ public class LocaleCR : LocaleHelper
 	public static Translation Previous => _instance.GetText("Previous");
 
 	/// <summary>
+	/// Proposed Changes
+	/// </summary>
+	public static Translation ProposedChanges => _instance.GetText("Proposed Changes");
+
+	/// <summary>
+	/// Removal Note
+	/// </summary>
+	public static Translation RemovalNote => _instance.GetText("RemovalNote");
+
+	/// <summary>
+	/// Describe the steps to safely remove the mod from a savegame...
+	/// </summary>
+	public static Translation RemovalNoteInfo => _instance.GetText("RemovalNoteInfo");
+
+	/// <summary>
 	/// Render it! Preset
 	/// </summary>
 	public static Translation RenderItPreset => _instance.GetText("RenderItPreset");
+
+	/// <summary>
+	/// Report an issue
+	/// </summary>
+	public static Translation ReportIssue => _instance.GetText("ReportIssue");
+
+	/// <summary>
+	/// Let us and other players know that there's an issue with this mod.  Or to let us know that you'd like a new review of this mod.
+	/// </summary>
+	public static Translation ReportIssueDesc => _instance.GetText("ReportIssueDesc");
 
 	/// <summary>
 	/// Request a review
@@ -621,7 +825,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation RequestReviewInfo => _instance.GetText("RequestReviewInfo");
 
 	/// <summary>
-	/// Send a new request to be reviewed
+	/// Send a new request for review.
 	/// </summary>
 	public static Translation RequestReviewUpdate => _instance.GetText("RequestReviewUpdate");
 
@@ -631,7 +835,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation RequiredDLCs => _instance.GetText("RequiredDLCs");
 
 	/// <summary>
-	/// Required Item
+	/// Required Package
 	/// </summary>
 	public static Translation RequiredItem => _instance.GetText("RequiredItem");
 
@@ -655,6 +859,11 @@ public class LocaleCR : LocaleHelper
 	/// Requires a specific configuration
 	/// </summary>
 	public static Translation RequiresConfiguration => _instance.GetText("RequiresConfiguration");
+
+	/// <summary>
+	/// Requires manual action to remove
+	/// </summary>
+	public static Translation RequiresManualAction => _instance.GetText("RequiresManualAction");
 
 	/// <summary>
 	/// Re-Upload
@@ -682,6 +891,31 @@ public class LocaleCR : LocaleHelper
 	public static Translation SameFunctionality => _instance.GetText("SameFunctionality");
 
 	/// <summary>
+	/// Effect on savegames after removal
+	/// </summary>
+	public static Translation SavegameEffect => _instance.GetText("SavegameEffect");
+
+	/// <summary>
+	/// Removing assets leaves a grey box where they were placed in your city. These obsolete objects should be cleared to prevent any side effects.
+	/// </summary>
+	public static Translation SavegameEffectAssetsRemain => _instance.GetText("SavegameEffect_AssetsRemain");
+
+	/// <summary>
+	/// Removing this mod will break any city it was used in. Make sure to create backups of your city before using it.
+	/// </summary>
+	public static Translation SavegameEffectBreaksSave => _instance.GetText("SavegameEffect_BreaksSave");
+
+	/// <summary>
+	/// Removing this mod will not remove its effects from your city.
+	/// </summary>
+	public static Translation SavegameEffectEffectsLinger => _instance.GetText("SavegameEffect_EffectsLinger");
+
+	/// <summary>
+	/// Removing this mod will require additional steps to properly remove it from your city.
+	/// </summary>
+	public static Translation SavegameEffectRequiresManualAction => _instance.GetText("SavegameEffect_RequiresManualAction");
+
+	/// <summary>
 	/// Saves can't load without it
 	/// </summary>
 	public static Translation SavesCantLoadWithoutIt => _instance.GetText("SavesCantLoadWithoutIt");
@@ -695,6 +929,16 @@ public class LocaleCR : LocaleHelper
 	/// Select either one
 	/// </summary>
 	public static Translation SelectOne => _instance.GetText("SelectOne");
+
+	/// <summary>
+	/// Optionally attach your savegame to help us investigate the issue better
+	/// </summary>
+	public static Translation SendSavegameInfo => _instance.GetText("SendSavegameInfo");
+
+	/// <summary>
+	/// Simulation Mod
+	/// </summary>
+	public static Translation SimulationMod => _instance.GetText("SimulationMod");
 
 	/// <summary>
 	/// Skip
@@ -732,7 +976,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityAssetIncompatible => _instance.GetText("Stability_AssetIncompatible");
 
 	/// <summary>
-	/// '{0}' has not been reviewed yet. The compatibility info may not be accurate; though assets are generally stable.
+	/// '{0}' has not been reviewed yet. The compatibility information may not be accurate; though assets are generally stable.
 	/// </summary>
 	public static Translation StabilityAssetNotReviewed => _instance.GetText("Stability_AssetNotReviewed");
 
@@ -787,7 +1031,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityIncompatible => _instance.GetText("Stability_Incompatible");
 
 	/// <summary>
-	/// This is a local version of its original mod '{0}'.  Local versions are usually used for testing purposes.
+	/// This is a local version of the '{0}' mod.  While local versions are usually used for testing purposes, it is not recommended to stay on the local version of a mod.
 	/// </summary>
 	public static Translation StabilityLocal => _instance.GetText("Stability_Local");
 
@@ -797,12 +1041,22 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityNotEnoughInformation => _instance.GetText("Stability_NotEnoughInformation");
 
 	/// <summary>
-	/// '{0}' has not been reviewed yet.  The compatibility info may not be accurate.
+	/// '{0}' has not been reviewed yet. The compatibility information may not be accurate.
 	/// </summary>
 	public static Translation StabilityNotReviewed => _instance.GetText("Stability_NotReviewed");
 
 	/// <summary>
-	/// '{0}' is stable. It's author is still actively working on it and updating it.
+	/// There are multiple active reports for '{0}' at the moment. Caution is advised while the issue is being investigated.
+	/// </summary>
+	public static Translation StabilityNumerousReports => _instance.GetText("Stability_NumerousReports");
+
+	/// <summary>
+	/// '{0}' is obsolete, its usage is no longer needed, or is redundant due to the game or other mods having the same functionality.
+	/// </summary>
+	public static Translation StabilityObsolete => _instance.GetText("Stability_Obsolete");
+
+	/// <summary>
+	/// '{0}' is stable. Its author is still actively working on it and updating it.
 	/// </summary>
 	public static Translation StabilityStable => _instance.GetText("Stability_Stable");
 
@@ -921,11 +1175,6 @@ public class LocaleCR : LocaleHelper
 	public static Translation StatusType => _instance.GetText("StatusType");
 
 	/// <summary>
-	/// Subscribe to linked packages
-	/// </summary>
-	public static Translation SubscribeToPackages => _instance.GetText("SubscribeToPackages");
-
-	/// <summary>
 	/// Successor of ..
 	/// </summary>
 	public static Translation Successor => _instance.GetText("Successor");
@@ -957,6 +1206,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation ThemeMix => _instance.GetText("ThemeMix");
 
 	/// <summary>
+	/// Unknown
+	/// </summary>
+	public static Translation Unknown => _instance.GetText("Unknown");
+
+	/// <summary>
 	/// Unsubscribe
 	/// </summary>
 	public static Translation Unsubscribe => _instance.GetText("Unsubscribe");
@@ -967,12 +1221,12 @@ public class LocaleCR : LocaleHelper
 	public static Translation UnsubscribeCount => _instance.GetText("UnsubscribeCount");
 
 	/// <summary>
-	/// Unsubscribe from linked packages
+	/// Completely unsubscribe from linked packages
 	/// </summary>
 	public static Translation UnsubscribeOther => _instance.GetText("UnsubscribeOther");
 
 	/// <summary>
-	/// Unsubscribe from this package
+	/// Completely unsubscribe from this package
 	/// </summary>
 	public static Translation UnsubscribeThis => _instance.GetText("UnsubscribeThis");
 
@@ -985,6 +1239,11 @@ public class LocaleCR : LocaleHelper
 	/// View Request
 	/// </summary>
 	public static Translation ViewRequest => _instance.GetText("ViewRequest");
+
+	/// <summary>
+	/// Visual Mod
+	/// </summary>
+	public static Translation VisualMod => _instance.GetText("VisualMod");
 
 	/// <summary>
 	/// Warning
@@ -1000,6 +1259,11 @@ public class LocaleCR : LocaleHelper
 	/// Website
 	/// </summary>
 	public static Translation Website => _instance.GetText("Website");
+
+	/// <summary>
+	/// sent with your request
+	/// </summary>
+	public static Translation YourLogReportInfo => _instance.GetText("YourLogReportInfo");
 
 	/// <summary>
 	/// Manage your mods
