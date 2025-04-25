@@ -685,7 +685,7 @@
   "ChooseDifferentBackupLocation": "Nie możesz utworzyć kopii zapasowej plików w tym folderze, Skyve nie ma dostępu do zapisywania plików w tej lokalizacji.\n\nWybierz inną lokalizację, która nie jest w tym samym folderze, najlepiej na innym dysku.",
   "RestoreBackup": "Przywróć tę kopię zapasową",
   "DeleteBackup": "Usuń tę kopię zapasową",
-  "Owned": "Owned",
+  "Owned": "Posiadasz",
   "CreatorPackBy": "Creator pack by {0}",
   "BrokenUpdate": "Broken Update",
   "MissingPackage": "Missing Package",
