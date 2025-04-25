@@ -32,8 +32,8 @@
   "Preferences": "Preferensi",
   "PlaysetName": "Nama Playset",
   "RenamePlayset": "Rename this playset",
-  "StartScratch": "Mulai playset dari awal",
-  "ContinueFromCurrent": "Clone your active playset",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Membangun kota",
   "EditorPlay": "Membuat aset",
   "PlaysetUsage": "Penggunaan profil",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Favorite playset ini",
   "NoDlcsNoInternet": "Tidak dapat memuat DLC, silakan terhubung ke internet",
   "NoDlcsOpenGame": "Tidak ada DLC yang cocok dengan pencarian Anda",
-  "DlcUpdateNotice": "Jika DLC Anda tidak ditampilkan di sini, pastikan untuk membuka permainan setidaknya sekali",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "{0} total DLCs dimiliki",
   "Unfiltered": "Tanpa filter",
   "AnyTags": "Tag apapun",
@@ -102,7 +102,6 @@
   "DLCs": "DLC & CCPS",
   "LaunchTooltip": "Klik untuk meluncurkan/menghentikan Cities: Skylines atau gunakan {0} di mana saja di aplikasi",
   "SelectedFileInvalid": "File yang Anda pilih tidak valid",
-  "ShowingFilteredItems": "Menampilkan {0} dari {1} total item",
   "ThemeUIScale": "Skala Tema & UI",
   "SearchPlaysets": "Cari melalui Playset ini..",
   "AdvancedSettings": "Pengaturan lanjutan",
@@ -112,6 +111,8 @@
   "OpenGuide": "Open the Wiki",
   "ResetFolderButton": "Reset semua pengaturan folder",
   "LinkModAssets": "Tautan aset dari mod ke status mod 'disertakan' mod",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Beberapa mod menyertakan aset yang diperlukan agar dapat berfungsi dengan baik. Mengaktifkan opsi ini menghubungkan aset tersebut ke mod itu sendiri dan menyembunyikan aset tersebut dari halaman aset sehingga anda tidak mengecualikannya secara tidak sengaja.",
   "ShowDatesRelatively_Tip": "Mengubah format tanggal yang ditampilkan dalam daftar konten menjadi waktu relatif. Misalnya; Kemarin jam 14.10",
   "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
@@ -156,9 +157,9 @@
   "CopyLogFile": "Salin file log game ke clipboard",
   "OpenLOTLogFolder": "Buka folder log Skyve",
   "CopyLOTLogFile": "Salin file log Skyve ke clipboard",
-  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Buat atau impor playset baru",
   "ViewPlaysets_Tip": "View & manage your playsets",
   "DeactivatePlayset_Tip": "Deactivate your current playset",
@@ -341,17 +342,21 @@
     "One": "Showing {0} {1}",
     "Plural": "Showing {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "Showing {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} is hidden because of your profile's usage",
@@ -407,9 +412,6 @@
     "One": "Anda memiliki paket {0} yang dibuat oleh {1}",
     "Plural": "Anda memiliki paket {0} yang dibuat oleh {1}"
   },
-  "RequestOption1": "Laporkan masalah atau tambahkan informasi yang hilang",
-  "RequestOption2": "Tambahkan status yang hilang untuk paket tersebut",
-  "RequestOption3": "Tambahkan interaksi yang hilang dengan paket lain",
   "ActivePlayset": "Active Playset",
   "References": "Referensi",
   "OpenLog": "Open Game Log",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "Custom Tags",
   "WorkshopAndGameTags": "Workshop & In-Game Tags",
+  "IDAndTags": "ID & Tags",
   "TroubleshootIssues": "Troubleshoot Issues",
   "ViewTroubleshootOptions": "View troubleshooting options",
   "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
-  "TroubleshootCaused": "A mod or asset I'm using is causing issues",
-  "TroubleshootNew": "A recent mod update or new subscription is causing issues",
-  "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Which option best describes your situation?",
   "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?",
-  "IDAndTags": "ID & Tags",
   "ApplyingSettings": "Applying settings...",
   "WaitingForGameLaunch": "Waiting for the game to be launched...",
   "WaitingForGameClose": "Waiting for the game to be closed...",
@@ -475,7 +477,7 @@
   "NextStage": "Next Stage",
   "CancelTroubleshootMessage": "Would you like to reset to the configuration you were using before starting the troubleshoot?\r\n\r\nSelect 'No' to keep the current configuration of packages.",
   "CancelTroubleshootTitle": "Cancel & Reset Troubleshooting?",
-  "TroubleshootAskIfFixed": "Did the last changes fix the issue that you're trying to solve?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "Would you like to stop the troubleshooting here and keep the current configuration of packages?\r\n\r\nSelect 'No' to continue troubleshooting.",
   "StopTroubleshootTitle": "Stop Troubleshooting?",
   "TroubleshootCancelTip": "Stop the troubleshooting process.",
@@ -485,12 +487,20 @@
     "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
     "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
   },
-  "TroubleshootViewComp": "View my compatibility report",
-  "TroubleshootSkipComp": "Skip & continue troubleshooting",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
   "FaultyPackagesTitle": "Faulty Packages Detected",
   "CleanupInfoTitle": "What is a cleanup?",
-  "TroubleshootCauseResult": "The following packages might be the cause of your issues",
   "VerifiedAuthor": "Verified Author",
   "EnableItem": "Enable this mod",
   "DisableItem": "Disable this mod",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "Could not upload your file at this time",
   "ReplyToRequester": "Reply to requester",
   "SendReply": "Send the reply",
-  "LetUserKnowIsFixed": "Let the requester know that the issue was fixed",
-  "LetUserKnowSaveFileNeeded": "Let the requester know that you need a savegame to properly review",
   "ReviewRequestNotification": "Review Request Update",
   "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
   "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
@@ -676,5 +684,12 @@
   "InvalidFolder": "Invalid Folder",
   "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "Restore this backup",
-  "DeleteBackup": "Delete this backup"
+  "DeleteBackup": "Delete this backup",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
