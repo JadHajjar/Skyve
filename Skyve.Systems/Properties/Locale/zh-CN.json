@@ -32,8 +32,8 @@
   "Preferences": "选项",
   "PlaysetName": "配组名称",
   "RenamePlayset": "重命名配组",
-  "StartScratch": "新建一个空白配组",
-  "ContinueFromCurrent": "复制当前配组",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "建设城市",
   "EditorPlay": "制作资产",
   "PlaysetUsage": "配组用途",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "收藏此配组",
   "NoDlcsNoInternet": "无法加载 DLC，请联网并检查加速器 / VPN",
   "NoDlcsOpenGame": "没有搜索到相关 DLC",
-  "DlcUpdateNotice": "如果您的DLC没有显示在此处，请确保至少打开过一次游戏",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "您拥有 {0} 个DLC",
   "Unfiltered": "未筛选",
   "AnyTags": "任意标签",
@@ -102,7 +102,6 @@
   "DLCs": "DLC 和 CCP",
   "LaunchTooltip": "点击以启动 / 关闭 Cities: Skylines，或在程序中任意位置按 [F5]",
   "SelectedFileInvalid": "您选择的文件无效",
-  "ShowingFilteredItems": "当前显示 {0} 项，共 {1} 项",
   "ThemeUIScale": "界面主题与UI缩放",
   "SearchPlaysets": "搜索配组…",
   "AdvancedSettings": "高级设置",
@@ -112,6 +111,8 @@
   "OpenGuide": "打开 Wiki 指南",
   "ResetFolderButton": "重置所有文件夹设置",
   "LinkModAssets": "将模组自带的前置资产，与模组本身的装载状态关联",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "有些模组自带其正常运行所需的前置资产（取订这些资产可能导致模组出错）。启用此选项，可以将模组与其所需的前置资产绑定，并在资产页面中隐藏这些前置资产，以避免意外地将这些资产移除。",
   "ShowDatesRelatively_Tip": "将内容列表中的日期显示格式更改为相对时间，例如：昨天下午 2:10",
   "DisableNewModsByDefault_Tip": "在您订阅或添加模组时，Skyve 将会根据此选项的设置，自动装载或卸下该模组。",
@@ -156,9 +157,9 @@
   "CopyLogFile": "将游戏日志文件复制到剪贴板",
   "OpenLOTLogFolder": "打开 Skyve 的日志文件夹",
   "CopyLOTLogFile": "将 Skyve 的日志文件复制到剪贴板",
-  "GenericIncludedTotal": "共 {2} 个 {0}，已装载 {1} 个",
-  "GenericIncludedAndEnabledTotal": "共 {2} 个 {0}，已装载并启用 {1} 个",
-  "GenericIncludedEnabledTotal": "共 {3} 个 {0}，已装载 {1} 个，其中已启用 {2} 个",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "新建或导入配组",
   "ViewPlaysets_Tip": "查看和管理配组",
   "DeactivatePlayset_Tip": "停用当前配组",
@@ -341,17 +342,21 @@
     "One": "当前显示 {0} 个{1}",
     "Plural": "当前显示 {0} 个{1}"
   },
-  "ShowingCountWarning": {
-    "One": "当前显示 {0} 个{1}，{3}",
-    "Plural": "当前显示 {0} 个{1}，{3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "当前显示 {0} 个{1}，已选择 {2} 个{1}",
-    "Plural": "当前显示 {0} 个{1}，已选中其中 {2} 个"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "当前显示 {0} 个{1}，已选择 {2} 个{1}，{3}",
-    "Plural": "当前显示 {0} 个{1}，已选中其中 {2} 个，{3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} 个{1} 由于当前配组的用途已被隐藏",
@@ -407,9 +412,6 @@
     "One": "您有 {0} 个由 {1} 制作的插件",
     "Plural": "您有 {0} 个由 {1} 制作的插件"
   },
-  "RequestOption1": "报告此插件的问题，或补充缺少的信息",
-  "RequestOption2": "为此插件补充状态信息",
-  "RequestOption3": "补充此插件与另一个插件的交互方式",
   "ActivePlayset": "使用中的配组",
   "References": "引用关系",
   "OpenLog": "打开游戏日志文件",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "自定义标签",
   "WorkshopAndGameTags": "创意工坊和游戏内标签",
+  "IDAndTags": "ID 与标签",
   "TroubleshootIssues": "故障修复",
   "ViewTroubleshootOptions": "查看故障修复选项",
   "TroubleshootInfo": "如果您发现有模组或资产引发问题或者丢失了，那么您可以在这里查找，并尝试修复遇到的问题：",
-  "TroubleshootCaused": "我使用的模组或资产出现了问题",
-  "TroubleshootNew": "最近模组的更新或新订阅的插件正在引发问题",
-  "TroubleshootMissing": "有模组或资产缺失了并引发了问题",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "以下哪个选项最能准确描述您遇到的问题？",
   "TroubleshootModOrAsset": "您想要进行哪种故障修复？",
-  "IDAndTags": "ID 与标签",
   "ApplyingSettings": "正在应用设置...",
   "WaitingForGameLaunch": "正在等待游戏启动...",
   "WaitingForGameClose": "正在等待游戏退出...",
@@ -475,7 +477,7 @@
   "NextStage": "下一步",
   "CancelTroubleshootMessage": "要恢复到故障修复之前的配组吗？\n\n选择“否”将保留当前所有插件的配置。",
   "CancelTroubleshootTitle": "取消故障修复并恢复",
-  "TroubleshootAskIfFixed": "故障修复是否解决了您遇到的问题？",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "你想要退出故障修复，并保留当前所有插件的配置吗？\n\n选择“否”以继续进行故障修复。",
   "StopTroubleshootTitle": "退出故障修复？",
   "TroubleshootCancelTip": "退出故障修复程序",
@@ -485,12 +487,20 @@
     "One": "您有一个兼容性问题比较严重的插件。\n在继续进行故障修复之前，是否要先处理此插件？",
     "Plural": "您有 {0} 个兼容性问题比较严重的插件。\n在继续进行故障修复之前，是否要先处理这些插件？"
   },
-  "TroubleshootViewComp": "查看我的兼容性报告",
-  "TroubleshootSkipComp": "跳过并继续进行故障修复",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Skyve 检测到有些插件没有完整下载，要先尝试修复吗？",
   "FaultyPackagesTitle": "检查到不完整的插件",
   "CleanupInfoTitle": "什么是清理程序？",
-  "TroubleshootCauseResult": "以下插件可能是出现问题的原因",
   "VerifiedAuthor": "已认证的作者",
   "EnableItem": "启用此模组",
   "DisableItem": "禁用此模组",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "目前无法上传您的文件",
   "ReplyToRequester": "回复给请求者",
   "SendReply": "发送回复",
-  "LetUserKnowIsFixed": "让请求者知道问题已经解决",
-  "LetUserKnowSaveFileNeeded": "让请求者知道需要存档才能正确地检查",
   "ReviewRequestNotification": "检查请求的更新",
   "ReviewRequestNotificationInfo": "您对“{0}”的检查请求有一个新的动态。",
   "ReviewIsFixed": "您报告的问题现已修复。您可以继续使用 {0}。",
@@ -676,5 +684,12 @@
   "InvalidFolder": "无效的文件夹",
   "ChooseDifferentBackupLocation": "您不能将文件备份到此文件夹，Skyve 在此处没有权限。 \n请选择另一个位置，最好是在另一个盘上。",
   "RestoreBackup": "用此备份进行恢复",
-  "DeleteBackup": "删除此备份"
+  "DeleteBackup": "删除此备份",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
