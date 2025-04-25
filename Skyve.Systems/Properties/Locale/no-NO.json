@@ -32,8 +32,8 @@
   "Preferences": "Preferanser",
   "PlaysetName": "Navn på spilleliste",
   "RenamePlayset": "Endre navn på dette spillesettet",
-  "StartScratch": "Start en profil fra bunnen av",
-  "ContinueFromCurrent": "Klon ditt aktive spillesett",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Bygg byer",
   "EditorPlay": "Lage eiendeler",
   "PlaysetUsage": "Spillebruk",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Favoritt denne spilletappen",
   "NoDlcsNoInternet": "Kunne ikke laste inn DLC -er, vennligst koble til Internett",
   "NoDlcsOpenGame": "Ingen DLC -er samsvarer med søket ditt",
-  "DlcUpdateNotice": "Hvis DLC -ene ikke vises her, må du åpne spillet minst en gang",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "{0} totalt DLC-er eid",
   "Unfiltered": "Ufiltrert",
   "AnyTags": "Eventuelle tagger",
@@ -102,7 +102,6 @@
   "DLCs": "DLCS & CCPS",
   "LaunchTooltip": "Klikk for å starte / stoppe Cities: Skylines eller bruk {0} hvor som helst i appen",
   "SelectedFileInvalid": "Filen du valgte er ikke gyldig",
-  "ShowingFilteredItems": "Viser {0} av {1} produkter totalt",
   "ThemeUIScale": "Tema & UI skala",
   "SearchPlaysets": "Søk gjennom disse Playsets..",
   "AdvancedSettings": "Avanserte innstillinger",
@@ -112,6 +111,8 @@
   "OpenGuide": "Åpne Wikien",
   "ResetFolderButton": "Tilbakestill alle mappeinnstillinger",
   "LinkModAssets": "Koble eiendeler fra mods til modens 'inkluderte' status",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Noen mods inkluderer eiendeler som er nødvendig for at de skal fungere riktig. Aktivering av dette alternativet kobler disse elementene til modden i seg selv og skjuler disse ressursene fra eiendelssiden slik at du ikke ekskluderer dem ved en feiltakelse.",
   "ShowDatesRelatively_Tip": "Endrer formatet på datoer som vises i innholdslister i relativ tid. For eksempel; i går kl. 2:10",
   "DisableNewModsByDefault_Tip": "Når du abonnerer eller legger til en modifikasjon, vil verktøyet automatisk utelukke eller inkludere den basert på denne innstillingen når verktøyet startes.",
@@ -156,9 +157,9 @@
   "CopyLogFile": "Kopier spillets loggfil til utklippstavlen",
   "OpenLOTLogFolder": "Åpne Skyve's loggmappe",
   "CopyLOTLogFile": "Kopier Skyves loggfil til utklippstavlen",
-  "GenericIncludedTotal": "{0} inkludert: {1}, Totalt: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} inkludert og aktivert: {1} Totalt: {2}",
-  "GenericIncludedEnabledTotal": "{0} inkludert: {1}, 4 av disse er aktivert: {2}, Totalt: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Opprett eller importer et nytt spillsett",
   "ViewPlaysets_Tip": "Se og administrer dine spillesett",
   "DeactivatePlayset_Tip": "Deaktiver ditt nåværende spillesett",
@@ -341,17 +342,21 @@
     "One": "Viser {0} {1}",
     "Plural": "Viser {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "Viser {0} {1}, {2}",
-    "Plural": "Viser {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "Viser {0} {1}, {2} valgte",
-    "Plural": "Viser {0} {1}, {2} utvalgte"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "Viser {0} {1}, {2} valgt, {3}",
-    "Plural": "Viser {0} {1}, {2} utvalgte, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} er skjult på grunn av din profils bruk",
@@ -407,9 +412,6 @@
     "One": "Du har {0} pakken laget av {1}",
     "Plural": "Du har {0} pakker laget av {1}"
   },
-  "RequestOption1": "Rapporter et problem eller legg til manglende informasjon",
-  "RequestOption2": "Legg til en manglende status for pakken",
-  "RequestOption3": "Legg til en manglende interaksjon med en annen pakke",
   "ActivePlayset": "Active Playset",
   "References": "Referanser",
   "OpenLog": "Open Game Log",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "Tilpassede merker",
   "WorkshopAndGameTags": "Workshop & In-Game Tags",
+  "IDAndTags": "ID & Etiketter",
   "TroubleshootIssues": "Søk etter feil",
   "ViewTroubleshootOptions": "Se alternativer for feilsøking",
   "TroubleshootInfo": "Hvis du har en mod eller en ressurs som forårsaker et problem, eller som mangler, og du ikke vet hvem det er; Prøv å feilsøking den her:",
-  "TroubleshootCaused": "En mod eller en ressurs jeg bruker forårsaker problemer",
-  "TroubleshootNew": "En nylig modifikasjonsoppdatering eller nytt abonnement forårsaker problemer",
-  "TroubleshootMissing": "Jeg mangler en modifikasjon eller en eiendel, og det forårsaker problemer",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Hvilket valg beskriver best din situasjon?",
   "TroubleshootModOrAsset": "Hva slags innhold vil du feilsøke med problemer?",
-  "IDAndTags": "ID & Etiketter",
   "ApplyingSettings": "Endrer innstillinger...",
   "WaitingForGameLaunch": "Venter på at spillet skal lanseres...",
   "WaitingForGameClose": "Venter på at spillet skal lukkes...",
@@ -475,7 +477,7 @@
   "NextStage": "Neste steg",
   "CancelTroubleshootMessage": "Vil du tilbakestille til konfigurasjonen du brukte før du startet feilsøkingen?\n\nVelg 'Nei' for å beholde gjeldende konfigurasjon av pakker.",
   "CancelTroubleshootTitle": "Avbryt og tilbakestille feilsøking?",
-  "TroubleshootAskIfFixed": "Har de siste endringene fikset problemet som du prøver å løse?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "Ønsker du å stoppe feilsøkingen her og beholde nåværende konfigurasjon av pakker?\n\nVelg 'Nei' for å fortsette feilsøking.",
   "StopTroubleshootTitle": "Stopp feilsøking?",
   "TroubleshootCancelTip": "Stopp feilsøkingsprosessen.",
@@ -485,12 +487,20 @@
     "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
     "Plural": "Du har {0} pakker med seriøse kompabilitetsadvarsler.\r\nDu vil kanskje prøve å gjøre noe med dem først før du feilsøker."
   },
-  "TroubleshootViewComp": "Vis min kompatibilitetsrapport",
-  "TroubleshootSkipComp": "Hopp over og fortsett feilsøking",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Skyve oppdaget at noen av pakkene dine ikke er helt nedlastet, vil du prøve å fikse dem først?",
   "FaultyPackagesTitle": "Defekte Pakker oppdaget",
   "CleanupInfoTitle": "Hva er en opprydding?",
-  "TroubleshootCauseResult": "Følgende pakker kan være årsaken til dine problemer",
   "VerifiedAuthor": "Bekreftet forfatter",
   "EnableItem": "Enable this mod",
   "DisableItem": "Disable this mod",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "Could not upload your file at this time",
   "ReplyToRequester": "Reply to requester",
   "SendReply": "Send the reply",
-  "LetUserKnowIsFixed": "Let the requester know that the issue was fixed",
-  "LetUserKnowSaveFileNeeded": "Let the requester know that you need a savegame to properly review",
   "ReviewRequestNotification": "Review Request Update",
   "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
   "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
@@ -676,5 +684,12 @@
   "InvalidFolder": "Invalid Folder",
   "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "Restore this backup",
-  "DeleteBackup": "Delete this backup"
+  "DeleteBackup": "Delete this backup",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
