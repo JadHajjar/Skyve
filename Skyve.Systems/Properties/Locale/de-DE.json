@@ -32,8 +32,8 @@
   "Preferences": "Präferenzen",
   "PlaysetName": "Spielset-Name",
   "RenamePlayset": "Dieses Spielset umbenennen",
-  "StartScratch": "Ein Profil von Grund auf neu anlegen",
-  "ContinueFromCurrent": "Klone dein aktives Spielset",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Städte bauen",
   "EditorPlay": "Gegenstände erstellen",
   "PlaysetUsage": "Spielset-Nutzung",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Spielset zu den Favoriten hinzufügen",
   "NoDlcsNoInternet": "DLCs konnten nicht geladen werden, bitte den Computer mit dem Internet verbinden",
   "NoDlcsOpenGame": "Keine DLCs für den Suchbegriff",
-  "DlcUpdateNotice": "Wenn deine DLCs hier nicht angezeigt werden, solltest du das Spiel mindestens einmal öffnen",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "{0} DLCs insgesamt im Besitz",
   "Unfiltered": "Ungefiltert",
   "AnyTags": "Alle Schlagworte",
@@ -102,7 +102,6 @@
   "DLCs": "DLCs & CCPs",
   "LaunchTooltip": "Klicken, um Cities: Skylines zu starten/stoppen oder drücke jederzeit {0} in der App",
   "SelectedFileInvalid": "Die ausgewählte Datei ist nicht gültig",
-  "ShowingFilteredItems": "Zeige {0} von insgesamt {1} Elementen",
   "ThemeUIScale": "Design & UI-Skalierung",
   "SearchPlaysets": "Durchsuche diese Spielsets...",
   "AdvancedSettings": "Erweiterte Einstellungen",
@@ -112,6 +111,8 @@
   "OpenGuide": "Wiki öffnen",
   "ResetFolderButton": "Alle Ordnereinstellungen zurücksetzen",
   "LinkModAssets": "Verknüpft Gegenstände die zu Mods gehören mit deren 'Inklusiv' Status",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Einige Mods enthalten Assets, die benötigt werden, damit sie richtig funktionieren. Wenn du diese Option aktivierst, werden diese Assets mit der Modifikation verknüpft und auf der Asset-Seite versteckt, damit sie nicht irrtümlich ausgeschlossen werden können.",
   "ShowDatesRelatively_Tip": "Ändert das Format des Datums, das in der Inhaltsliste angezeigt wird, auf relative Zeit. Zum Beispiel: Gestern um 14:10 Uhr",
   "DisableNewModsByDefault_Tip": "Wenn du eine Mod abonnierst oder hinzufügst, wird das Tool diese automatisch ausschließen oder einbeziehen, wenn das Tool gestartet wird.",
@@ -156,9 +157,9 @@
   "CopyLogFile": "Die Protokoll-Datei des Spiels in die Zwischenablage kopieren",
   "OpenLOTLogFolder": "Öffne Skyve's Log-Ordner",
   "CopyLOTLogFile": "Kopiere Skyve's Logdatei in die Zwischenablage",
-  "GenericIncludedTotal": "{0} enthalten: {1}, Gesamt: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} enthalten & aktiviert: {1}, Gesamt: {2}",
-  "GenericIncludedEnabledTotal": "{0} enthalten: {1}, von denen aktiviert sind: {2}, Gesamt: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Neues Spielset erstellen oder importieren",
   "ViewPlaysets_Tip": "Deine Spielsets anzeigen und verwalten",
   "DeactivatePlayset_Tip": "Deaktiviere dein aktuelles Spielset",
@@ -341,17 +342,21 @@
     "One": "Zeige {0} {1}",
     "Plural": "Zeige {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "Zeige {0} {1}, {2}",
-    "Plural": "Zeige {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "Zeige {0} {1}, {2} ausgewählt",
-    "Plural": "Zeige {0} {1}, {2} ausgewählt"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "Zeige {0} {1}, {2} ausgewählt, {3}",
-    "Plural": "Zeige {0} {1}, {2} ausgewählt, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} ist wegen der eingestellten Profilnutzung versteckt",
@@ -407,9 +412,6 @@
     "One": "Du hast {0} Paket, das von {1} erstellt wurde",
     "Plural": "Du hast {0} Pakete, die von {1} erstellt wurden"
   },
-  "RequestOption1": "Ein Problem melden oder fehlende Informationen hinzufügen",
-  "RequestOption2": "Fehlenden Status für das Paket hinzufügen",
-  "RequestOption3": "Fehlende Interaktion mit einem anderen Paket hinzufügen",
   "ActivePlayset": "Aktives Spielset",
   "References": "Bezüge",
   "OpenLog": "Spiel-Log öffnen",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "Benutzerdefinierte Tags",
   "WorkshopAndGameTags": "Workshop & In-Game Tags",
+  "IDAndTags": "ID & Tags",
   "TroubleshootIssues": "Fehlerbehebung",
   "ViewTroubleshootOptions": "Optionen zur Fehlerbehebung anzeigen",
   "TroubleshootInfo": "Wenn du eine Mod oder ein Asset hast, die ein Problem verursacht oder fehlt, und du nicht weißt, welche; Versuche die Fehlerbehebung hier:",
-  "TroubleshootCaused": "Eine Mod oder Asset, das ich verwende, verursacht Probleme",
-  "TroubleshootNew": "Ein aktuelles Mod-Update oder neues Abonnement verursacht Probleme",
-  "TroubleshootMissing": "Mir fehlt eine Mod oder ein Asset und das verursacht Probleme",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Welche Option beschreibt deine Situation am besten?",
   "TroubleshootModOrAsset": "Bei welcher Art von Inhalt möchtest du Fehler beheben?",
-  "IDAndTags": "ID & Tags",
   "ApplyingSettings": "Einstellungen werden übernommen...",
   "WaitingForGameLaunch": "Wartet darauf, dass das Spiel gestartet wird...",
   "WaitingForGameClose": "Wartet darauf, dass das Spiel gestoppt wird...",
@@ -475,7 +477,7 @@
   "NextStage": "Nächste Stufe",
   "CancelTroubleshootMessage": "Möchtest du vor dem Starten der Fehlersuche die Konfiguration zurücksetzen?\n\nWähle 'Nein', um die aktuelle Konfiguration der Pakete zu behalten.",
   "CancelTroubleshootTitle": "Fehlerbehebung abbrechen & zurücksetzen?",
-  "TroubleshootAskIfFixed": "Haben die letzten Änderungen das Problem behoben, das du zu lösen versuchst?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "Möchtest du die Fehlerbehebung hier stoppen und die aktuelle Konfiguration der Pakete beibehalten?\n\nWähle 'Nein', um die Fehlerbehebung fortzusetzen.",
   "StopTroubleshootTitle": "Fehlersuche stoppen?",
   "TroubleshootCancelTip": "Beendet die Fehlerbehebung.",
@@ -485,12 +487,20 @@
     "One": "Du hast ein Paket mit einer ernsthaften Kompatibilitätswarnung.\nDu solltest vielleicht erst versuchen, dies zu beheben, bevor du versuchst weitere Probleme zu beheben.",
     "Plural": "Du hast {0} Pakete mit ernsthaften Kompatibilitätswarnungen.\nDu solltest vielleicht erst versuchen, diese zu beheben, bevor du versuchst die Problemsuche zu nutzen."
   },
-  "TroubleshootViewComp": "Meinen Kompatibilitätsbericht anzeigen",
-  "TroubleshootSkipComp": "Fehlerbehebung überspringen und fortsetzen",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Skyve hat festgestellt, dass einige Pakete nicht perfekt heruntergeladen wurden, möchtest du versuchen dies zuerst zu beheben?",
   "FaultyPackagesTitle": "Fehlerhafte Pakete erkannt",
   "CleanupInfoTitle": "Was ist eine Bereinigung?",
-  "TroubleshootCauseResult": "Die folgenden Pakete könnten die Ursache für die Probleme sein",
   "VerifiedAuthor": "Verifizierter Autor",
   "EnableItem": "Diese Mod aktivieren",
   "DisableItem": "Diese Mod deaktivieren",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "Deine Datei konnte derzeit nicht hochgeladen werden",
   "ReplyToRequester": "Antwort an Anfrager",
   "SendReply": "Antwort senden",
-  "LetUserKnowIsFixed": "Lasse den Anfrager wissen, dass das Problem behoben wurde",
-  "LetUserKnowSaveFileNeeded": "Lasse den Anfrager wissen, dass du ein Spielstand für die Überprüfung benötigst",
   "ReviewRequestNotification": "Überprüfungsanfrage aktualisieren",
   "ReviewRequestNotificationInfo": "Deine Überprüfungsanfrage für '{0}' hat eine neue Benachrichtigung",
   "ReviewIsFixed": "Das von dir gemeldete Problem wurde behoben. Du kannst {0} wieder nutzen.",
@@ -676,5 +684,12 @@
   "InvalidFolder": "Ungültiger Ordner",
   "ChooseDifferentBackupLocation": "Du kannst deine Dateien in diesem Ordner nicht sichern, da Skyve keine Berechtigung für das Speichern von Dateien hier hat.\n\nWähle einen anderen Ort, der nicht im selben Ordner ist, vorzugsweise auf einem anderen Laufwerk.",
   "RestoreBackup": "Diese Sicherung wiederherstellen",
-  "DeleteBackup": "Diese Sicherung löschen"
+  "DeleteBackup": "Diese Sicherung löschen",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
