@@ -32,8 +32,8 @@
   "Preferences": "Preference",
   "PlaysetName": "Název sady přehrávání",
   "RenamePlayset": "Přejmenovat tento playset",
-  "StartScratch": "Začněte nový playset",
-  "ContinueFromCurrent": "Klonovat váš aktivní playset",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Stavět města",
   "EditorPlay": "Vytvořte assety",
   "PlaysetUsage": "Využití playsetů",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Oblíbit tento playset",
   "NoDlcsNoInternet": "Nelze načíst DLC, připojte se prosím k internetu",
   "NoDlcsOpenGame": "Žádné DLC neodpovídají vašemu hledání",
-  "DlcUpdateNotice": "Pokud se zde vaše DLC nezobrazují, ujistěte se, že jste alespoň jednou otevřeli hru",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "{0} celkem vlastněno DLC",
   "Unfiltered": "Nefiltrovaný",
   "AnyTags": "Jakékoliv štítky",
@@ -102,7 +102,6 @@
   "DLCs": "DLCS & CCPS",
   "LaunchTooltip": "Kliknutím spustíte/zastavíte Cities: Skylines nebo použijte {0} kdekoli v aplikaci",
   "SelectedFileInvalid": "Vybraný soubor je neplatný",
-  "ShowingFilteredItems": "Zobrazeno {0} z celkem {1} položek",
   "ThemeUIScale": "Motiv a měřítko uživatelského rozhraní",
   "SearchPlaysets": "Hledat v těchto playsetech..",
   "AdvancedSettings": "Pokročilá nastavení",
@@ -112,6 +111,8 @@
   "OpenGuide": "Otevřít Wiki",
   "ResetFolderButton": "Obnovit všechna nastavení složky",
   "LinkModAssets": "Propojení assetů z modů na stav „zahrnutý“",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Některé mody zahrnují assety, která jsou nezbytná pro jejich správné fungování. Povolením této možnosti odkazují tyto položky na samotný mód a skrývají tyto položky ze stránky Assetů, takže je nezahrnete omylem.",
   "ShowDatesRelatively_Tip": "Změní formát dat zobrazených v seznamech obsahu na relativní čas. Například; Včera v 14:10",
   "DisableNewModsByDefault_Tip": "Když začnete odebírat nebo přidáte mód, nástroj jej automaticky vyloučí nebo zahrne na základě tohoto nastavení, když je program spuštěn.",
@@ -156,9 +157,9 @@
   "CopyLogFile": "Zkopírovat log soubor do schránky",
   "OpenLOTLogFolder": "Otevřít složku logu pro aplikacio Skyve",
   "CopyLOTLogFile": "Kopírovat log soubor Skyve do schránky",
-  "GenericIncludedTotal": "{0} zahrnuto: {1}, Celkem: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} zahrnuto a povoleno: {1}, Celkem: {2}",
-  "GenericIncludedEnabledTotal": "{0} zahrnuto: {1}, z toho je povoleno: {2}, Celkem: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Vytvořit nebo importovat novou sadu přehrávání",
   "ViewPlaysets_Tip": "Zobrazit a spravovat vaše playsety",
   "DeactivatePlayset_Tip": "Deaktivovat aktuální playset",
@@ -341,17 +342,21 @@
     "One": "Zobrazuji {0} {1}",
     "Plural": "Zobrazeno {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "Zobrazuji {0} {1}, {2}",
-    "Plural": "Zobrazeno {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "Zobrazeno {0} {1}, {2} vybráno",
-    "Plural": "Zobrazeno {0} {1}, {2} vybráno"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "Zobrazeno {0} {1}, {2} vybráno, {3}",
-    "Plural": "Zobrazeno {0} {1}, {2} vybráno, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} je skryto kvůli využití vašeho playsetu",
@@ -407,9 +412,6 @@
     "One": "Máte balíček {0} vytvořený {1}",
     "Plural": "Máte balíčky {0} vytvořené {1}"
   },
-  "RequestOption1": "Nahlásit problém nebo přidat chybějící informace",
-  "RequestOption2": "Přidat chybějící stav pro balíček",
-  "RequestOption3": "Přidat chybějící interakci s jiným balíčkem",
   "ActivePlayset": "Aktivní playset",
   "References": "Odkazy",
   "OpenLog": "Otevřít herní log",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "Vlastní štítky",
   "WorkshopAndGameTags": "Štítky Workshopu a Hry",
+  "IDAndTags": "ID a štítky",
   "TroubleshootIssues": "Řešení problémů",
   "ViewTroubleshootOptions": "Zobrazit možnosti řešení problémů",
   "TroubleshootInfo": "Máte-li mód nebo asset, který způsobuje problém, nebo chybí, a nevíte který; Vyzkoušejte řešení problémů zde:",
-  "TroubleshootCaused": "Mód nebo asset, který používám, způsobuje problémy",
-  "TroubleshootNew": "Nedávná aktualizace modů nebo nové odběry způsobují problémy",
-  "TroubleshootMissing": "Chybí mi mód nebo asset, a způsobuje problémy",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Která možnost nejlépe popisuje vaši situaci?",
   "TroubleshootModOrAsset": "Jaký typ obsahu, potřebuje vyřešit problémy?",
-  "IDAndTags": "ID a štítky",
   "ApplyingSettings": "Aplikuji nastavení...",
   "WaitingForGameLaunch": "Čekání na spuštění hry...",
   "WaitingForGameClose": "Čekání na uzavření hry...",
@@ -475,7 +477,7 @@
   "NextStage": "Další fáze",
   "CancelTroubleshootMessage": "Chcete obnovit konfiguraci, kterou jste použili před spuštěním řešení problémů?\n\nZvolte 'Ne' pro zachování aktuální konfigurace balíčků.",
   "CancelTroubleshootTitle": "Zrušit a obnovit řešení problémů?",
-  "TroubleshootAskIfFixed": "Opravily poslední změny problém, který se snažíte vyřešit?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "Chcete zde zastavit řešení problémů a zachovat aktuální konfiguraci balíčků?\n\nZvolte 'Ne' pro další řešení problémů.",
   "StopTroubleshootTitle": "Zastavit řešení problémů?",
   "TroubleshootCancelTip": "Zastavit proces řešení problémů.",
@@ -485,12 +487,20 @@
     "One": "Máte balíček s vážným varováním kompatibility.\nPřed řešením problémů byste ho měli zakázat.",
     "Plural": "Máte balíčky {0} s vážnými upozorněními na kompatibilitu.\nPřed řešením problémů byste je měli zakázat."
   },
-  "TroubleshootViewComp": "Zobrazit moji zprávu o kompatibilitě",
-  "TroubleshootSkipComp": "Přeskočit a pokračovat v řešení problémů",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Skyve zjistil, že některé z vašich balíčků nejsou dokonale staženy, chcete je nejprve opravit?",
   "FaultyPackagesTitle": "Zjištěny chybné balíčky",
   "CleanupInfoTitle": "Co je to úklid?",
-  "TroubleshootCauseResult": "Následující balíčky mohou být příčinou vašich problémů",
   "VerifiedAuthor": "Ověřený autor",
   "EnableItem": "Povolit tento mód",
   "DisableItem": "Zakázat tento mód",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "V tuto chvíli nelze nahrát soubor",
   "ReplyToRequester": "Odpovědět žadateli",
   "SendReply": "Odeslat odpověď",
-  "LetUserKnowIsFixed": "Dejte žadateli vědět, že problém byl vyřešen",
-  "LetUserKnowSaveFileNeeded": "Dejte žadateli vědět, že potřebujete uloženou hru, abyste jim mohli řádně pomoct",
   "ReviewRequestNotification": "Aktualizace žádosti o přezkum",
   "ReviewRequestNotificationInfo": "Vaše žádost o přezkum pro '{0}' má novou aktualizaci",
   "ReviewIsFixed": "Problém, který jste nahlásili, byl opraven. Můžete znovu použít {0}.",
@@ -676,5 +684,12 @@
   "InvalidFolder": "Neplatná složka",
   "ChooseDifferentBackupLocation": "Nemůžete zálohovat své soubory uvnitř této složky, Skyve nemá přístup k ukládání souborů v této složce.\n\nVyberte jiné umístění, které není ve stejné složce, pokud možno na jiném disku.",
   "RestoreBackup": "Obnovit tuto zálohu",
-  "DeleteBackup": "Odstranit tuto zálohu"
+  "DeleteBackup": "Odstranit tuto zálohu",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
