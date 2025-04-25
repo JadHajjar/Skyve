@@ -509,7 +509,7 @@ public class CompatibilityManager : ICompatibilityManager
 			_compatibilityHelper.HandleInteraction(info, new PackageInteraction
 			{
 				Type = InteractionType.RequiredPackages,
-				Action = StatusAction.SubscribeToPackages,
+				Action = StatusAction.IncludeOther,
 				Packages = workshopInfo?.Requirements.Where(x => x is not IDlcInfo).ToList(x => new CompatibilityPackageReference(x))
 			});
 		}

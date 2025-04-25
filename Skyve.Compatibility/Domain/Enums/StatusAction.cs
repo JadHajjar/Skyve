@@ -5,9 +5,6 @@ public enum StatusAction
 	[CRN(NotificationType.None)]
 	NoAction = 0,
 
-	[CRN(NotificationType.None)]
-	SubscribeToPackages = 1,
-
 	[CRN(NotificationType.AttentionRequired)]
 	RequiresConfiguration = 2,
 
@@ -29,7 +26,7 @@ public enum StatusAction
 	[CRN(NotificationType.ActionRequired)]
 	ExcludeOther = 8,
 
-	[CRN(NotificationType.RequiredItem)]
+	[CRN(NotificationType.None)]
 	IncludeThis = 9,
 
 	[CRN(NotificationType.Info)]
@@ -37,6 +34,12 @@ public enum StatusAction
 
 	[CRN(NotificationType.Caution, false)]
 	UpdateVersion = 11,
+
+	[CRN(NotificationType.None)]
+	DisableThis = 12,
+
+	[CRN(NotificationType.Info)]
+	DisableOther = 13,
 
 	[CRN(NotificationType.None, false)]
 	DoNotAdd = 97,

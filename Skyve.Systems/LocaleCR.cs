@@ -15,29 +15,40 @@ public class LocaleCR : LocaleHelper
 	protected LocaleCR() : base($"Skyve.Systems.Properties.Compatibility.json") { }
 
 	/// <summary>
+	/// <para>You should disable '{1}'.</para>
+	/// <para>Plural: You should disable the following packages.</para>
+	/// </summary>
+	public static Translation ActionDisableOther => _instance.GetText("Action_DisableOther");
+
+	/// <summary>
+	/// You should disable '{0}'.
+	/// </summary>
+	public static Translation ActionDisableThis => _instance.GetText("Action_DisableThis");
+
+	/// <summary>
 	/// You should not use '{0}'
 	/// </summary>
 	public static Translation ActionDoNotAdd => _instance.GetText("Action_DoNotAdd");
 
 	/// <summary>
-	/// <para>You should disable '{1}'.</para>
-	/// <para>Plural: You should disable the following packages.</para>
+	/// <para>You should remove '{1}' from your playset.</para>
+	/// <para>Plural: You should remove the following packages from your playset.</para>
 	/// </summary>
 	public static Translation ActionExcludeOther => _instance.GetText("Action_ExcludeOther");
 
 	/// <summary>
-	/// You should disable '{0}'.
+	/// You should remove '{0}' from your playset.
 	/// </summary>
 	public static Translation ActionExcludeThis => _instance.GetText("Action_ExcludeThis");
 
 	/// <summary>
-	/// <para>You should add the following package to your playset.</para>
+	/// <para>You should add '{1}' to your playset.</para>
 	/// <para>Plural: You should add the following packages to your playset.</para>
 	/// </summary>
 	public static Translation ActionIncludeOther => _instance.GetText("Action_IncludeOther");
 
 	/// <summary>
-	/// You should include '{0}'
+	/// You should add '{0}' to your playset
 	/// </summary>
 	public static Translation ActionIncludeThis => _instance.GetText("Action_IncludeThis");
 
@@ -58,25 +69,19 @@ public class LocaleCR : LocaleHelper
 	public static Translation ActionSelectOne => _instance.GetText("Action_SelectOne");
 
 	/// <summary>
-	/// <para>You should add the following package to your playset.</para>
-	/// <para>Plural: You should add the following packages to your playset.</para>
-	/// </summary>
-	public static Translation ActionSubscribeToPackages => _instance.GetText("Action_SubscribeToPackages");
-
-	/// <summary>
 	/// <para>You should switch to '{1}'.</para>
 	/// <para>Plural: You should switch to one of the following packages.</para>
 	/// </summary>
 	public static Translation ActionSwitch => _instance.GetText("Action_Switch");
 
 	/// <summary>
-	/// <para>You should remove '{1}' from your playset.</para>
-	/// <para>Plural: You should remove the following packages from your playset.</para>
+	/// <para>You should completely remove '{1}' from all your playsets.</para>
+	/// <para>Plural: You should completely remove the following packages from all your playsets.</para>
 	/// </summary>
 	public static Translation ActionUnsubscribeOther => _instance.GetText("Action_UnsubscribeOther");
 
 	/// <summary>
-	/// You should remove '{0}' from your playset.
+	/// You should completely remove '{0}' from all your playsets.
 	/// </summary>
 	public static Translation ActionUnsubscribeThis => _instance.GetText("Action_UnsubscribeThis");
 
@@ -366,6 +371,16 @@ public class LocaleCR : LocaleHelper
 	public static Translation Deprecated => _instance.GetText("Deprecated");
 
 	/// <summary>
+	/// Disable linked packages
+	/// </summary>
+	public static Translation DisableOther => _instance.GetText("DisableOther");
+
+	/// <summary>
+	/// Disable this package
+	/// </summary>
+	public static Translation DisableThis => _instance.GetText("DisableThis");
+
+	/// <summary>
 	/// <para>{0} DLC selected</para>
 	/// <para>Plural: {0} DLCs selected</para>
 	/// </summary>
@@ -397,18 +412,18 @@ public class LocaleCR : LocaleHelper
 	public static Translation EffectsLinger => _instance.GetText("EffectsLinger");
 
 	/// <summary>
-	/// Disable
-	/// </summary>
-	public static Translation Exclude => _instance.GetText("Exclude");
-
-	/// <summary>
 	/// <para>{0} {1} should be excluded</para>
 	/// <para>Plural: {0} {1} should be excluded</para>
 	/// </summary>
 	public static Translation ExcludeCount => _instance.GetText("ExcludeCount");
 
 	/// <summary>
-	/// Disable this package
+	/// Exclude linked packages
+	/// </summary>
+	public static Translation ExcludeOther => _instance.GetText("ExcludeOther");
+
+	/// <summary>
+	/// Exclude this package
 	/// </summary>
 	public static Translation ExcludeThis => _instance.GetText("ExcludeThis");
 
@@ -446,6 +461,16 @@ public class LocaleCR : LocaleHelper
 	/// IMT Markings
 	/// </summary>
 	public static Translation IMTMarkings => _instance.GetText("IMTMarkings");
+
+	/// <summary>
+	/// Include linked packages
+	/// </summary>
+	public static Translation IncludeOther => _instance.GetText("IncludeOther");
+
+	/// <summary>
+	/// Include this package
+	/// </summary>
+	public static Translation IncludeThis => _instance.GetText("IncludeThis");
 
 	/// <summary>
 	/// Incompatible
@@ -672,6 +697,11 @@ public class LocaleCR : LocaleHelper
 	/// <para>Plural: {0} {1} that are obsolete</para>
 	/// </summary>
 	public static Translation ObsoleteCount => _instance.GetText("ObsoleteCount");
+
+	/// <summary>
+	/// Has optional packages ..
+	/// </summary>
+	public static Translation OptionalPackages => _instance.GetText("OptionalPackages");
 
 	/// <summary>
 	/// <para>This package has one other compatibility warning</para>
@@ -1145,11 +1175,6 @@ public class LocaleCR : LocaleHelper
 	public static Translation StatusType => _instance.GetText("StatusType");
 
 	/// <summary>
-	/// Subscribe to linked packages
-	/// </summary>
-	public static Translation SubscribeToPackages => _instance.GetText("SubscribeToPackages");
-
-	/// <summary>
 	/// Successor of ..
 	/// </summary>
 	public static Translation Successor => _instance.GetText("Successor");
@@ -1196,12 +1221,12 @@ public class LocaleCR : LocaleHelper
 	public static Translation UnsubscribeCount => _instance.GetText("UnsubscribeCount");
 
 	/// <summary>
-	/// Unsubscribe from linked packages
+	/// Completely unsubscribe from linked packages
 	/// </summary>
 	public static Translation UnsubscribeOther => _instance.GetText("UnsubscribeOther");
 
 	/// <summary>
-	/// Unsubscribe from this package
+	/// Completely unsubscribe from this package
 	/// </summary>
 	public static Translation UnsubscribeThis => _instance.GetText("UnsubscribeThis");
 

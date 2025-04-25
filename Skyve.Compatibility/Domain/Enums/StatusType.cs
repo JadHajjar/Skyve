@@ -5,22 +5,22 @@ public enum StatusType
 	[CRN(NotificationType.None, false)]
 	None = 0,
 
-	[CRN(NotificationType.Obsolete, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.SubscribeToPackages, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.Obsolete, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.IncludeOther, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	Deprecated = 1,
 
-	[CRN(NotificationType.Warning, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.SubscribeToPackages, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.Warning, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.IncludeOther, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	Reupload = 2,
 
-	[CRN(NotificationType.Warning, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.RequiresConfiguration, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.Warning, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.DisableThis, StatusAction.RequiresConfiguration, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	CausesIssues = 3,
 
-	[CRN(NotificationType.AttentionRequired, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.RequiresConfiguration, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.AttentionRequired, [StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.DisableThis, StatusAction.Switch, StatusAction.RequiresConfiguration, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	SavesCantLoadWithoutIt = 4,
 
-	[CRN(NotificationType.Info, [StatusAction.NoAction, StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.Info, [StatusAction.NoAction, StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.DisableThis, StatusAction.Switch], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	TestVersion = 5,
 
-	[CRN(NotificationType.None, [StatusAction.NoAction, StatusAction.ExcludeThis, StatusAction.UnsubscribeThis], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.None, [StatusAction.NoAction, StatusAction.ExcludeThis, StatusAction.DisableThis, StatusAction.UnsubscribeThis], AllowedChange = CRNAttribute.ChangeType.Deny)]
 	DependencyMod = 6,
 
 	[CRN(NotificationType.Caution, false)]

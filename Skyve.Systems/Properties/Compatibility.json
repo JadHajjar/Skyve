@@ -30,14 +30,6 @@
   "CityBuilding": "City-Building",
   "AssetCreation": "Asset Creation",
   "MapCreation": "Map Creation",
-  "NoAction": "Do Nothing",
-  "SubscribeToPackages": "Subscribe to linked packages",
-  "RequiresConfiguration": "Requires a specific configuration",
-  "SelectOne": "Select either one",
-  "UnsubscribeThis": "Unsubscribe from this package",
-  "UnsubscribeOther": "Unsubscribe from linked packages",
-  "Switch": "Switch to linked package",
-  "FlippedSwitch": "Switch to this package",
   "Deprecated": "Deprecated",
   "Reupload": "Re-Upload",
   "CausesIssues": "Causes Issues",
@@ -54,6 +46,7 @@
   "RequirementAlternative": "Requirement Alternative To ..",
   "IncompatibleWith": "Incompatible With ..",
   "CausesIssuesWith": "Causes Issues With ..",
+  "OptionalPackages": "Has optional packages ..",
   "RequiredPackages": "Requires ..",
   "StatusType": "Status Type",
   "InteractionType": "Interaction Type",
@@ -164,8 +157,9 @@
   "Stability_NumerousReports": "There are multiple active reports for '{0}' at the moment. Caution is advised while the issue is being investigated.",
   "Stability_Obsolete": "'{0}' is obsolete, its usage is no longer needed, or is redundant due to the game or other mods having the same functionality.",
   "Action_NoAction": "",
-  "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
+  "Action_IncludeThis": "You should add '{0}' to your playset",
+  "Action_IncludeOther": {
+    "One": "You should add '{1}' to your playset.",
     "Plural": "You should add the following packages to your playset."
   },
   "Action_RequiresConfiguration": "Please follow the following instructions:",
@@ -173,27 +167,38 @@
     "One": "Between '{0}' and '{1}', you should choose only one of them.",
     "Plural": "Between '{0}' and the following packages, you should only choose one."
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "You should completely remove '{0}' from all your playsets.",
   "Action_UnsubscribeOther": {
+    "One": "You should completely remove '{1}' from all your playsets.",
+    "Plural": "You should completely remove the following packages from all your playsets."
+  },
+  "Action_ExcludeThis": "You should remove '{0}' from your playset.",
+  "Action_ExcludeOther": {
     "One": "You should remove '{1}' from your playset.",
     "Plural": "You should remove the following packages from your playset."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
-  "Unsubscribe": "Unsubscribe",
-  "Action_ExcludeOther": {
+  "Action_DisableThis": "You should disable '{0}'.",
+  "Action_DisableOther": {
     "One": "You should disable '{1}'.",
     "Plural": "You should disable the following packages."
   },
+  "NoAction": "Do Nothing",
+  "RequiresConfiguration": "Requires a specific configuration",
+  "SelectOne": "Select either one",
+  "UnsubscribeThis": "Completely unsubscribe from this package",
+  "UnsubscribeOther": "Completely unsubscribe from linked packages",
+  "Switch": "Switch to linked package",
+  "FlippedSwitch": "Switch to this package",
+  "IncludeThis": "Include this package",
+  "IncludeOther": "Include linked packages",
+  "ExcludeThis": "Exclude this package",
+  "ExcludeOther": "Exclude linked packages",
+  "DisableThis": "Disable this package",
+  "DisableOther": "Disable linked packages",
+  "Unsubscribe": "Unsubscribe",
   "Action_Switch": {
     "One": "You should switch to '{1}'.",
     "Plural": "You should switch to one of the following packages."
-  },
-  "Action_IncludeThis": "You should include '{0}'",
-  "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
   },
   "Action_DoNotAdd": "You should not use '{0}'",
   "NoRequiredDlcs": "No Required DLCs",

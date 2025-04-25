@@ -13,7 +13,7 @@ public class WorkshopContentList : ContentList
 		DD_Sorting.WorkshopSort = true;
 		I_SortOrder.Parent = null;
 
-		TLP_Main.SetColumnSpan(DD_SearchTime, 2);
+		TLP_Main.SetColumn(DD_SearchTime, 3);
 		DD_SearchTime.Visible = true;
 
 		PaginationControl = new()

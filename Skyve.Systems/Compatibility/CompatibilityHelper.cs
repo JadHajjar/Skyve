@@ -72,7 +72,7 @@ public class CompatibilityHelper
 			packages = packages.Select(_compatibilityManager.GetFinalSuccessor).Distinct().ToList();
 		}
 
-		if (status.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
+		if (status.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.IncludeOther)
 		{
 			packages.RemoveAll(ShouldNotBeUsed);
 
@@ -82,7 +82,7 @@ public class CompatibilityHelper
 			}
 		}
 
-		if (status.Action is StatusAction.UnsubscribeThis or StatusAction.ExcludeThis && !IsPackageEnabled(info, false))
+		if (status.Action is StatusAction.UnsubscribeThis or StatusAction.ExcludeThis or StatusAction.DisableThis && !IsPackageEnabled(info, false))
 		{
 			status.Action = StatusAction.DoNotAdd;
 		}
@@ -146,7 +146,7 @@ public class CompatibilityHelper
 			packages.RemoveAll(x => IsPackageEnabled(x, true));
 		}
 
-		if (interaction.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
+		if (interaction.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.IncludeOther)
 		{
 			packages.RemoveAll(ShouldNotBeUsed);
 		}
@@ -170,7 +170,7 @@ public class CompatibilityHelper
 			type = InteractionType.RequiredPackages;
 		}
 
-		if (interaction.Action is StatusAction.UnsubscribeThis or StatusAction.ExcludeThis && !IsPackageEnabled(info, false))
+		if (interaction.Action is StatusAction.UnsubscribeThis or StatusAction.ExcludeThis or StatusAction.DisableThis && !IsPackageEnabled(info, false))
 		{
 			interaction.Action = StatusAction.DoNotAdd;
 		}
