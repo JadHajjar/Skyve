@@ -32,8 +32,8 @@
   "Preferences": "Preferințe",
   "PlaysetName": "Nume Playset",
   "RenamePlayset": "Rename this playset",
-  "StartScratch": "Începeți un profil de la zero",
-  "ContinueFromCurrent": "Clone your active playset",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Construiți orașe",
   "EditorPlay": "Creează active",
   "PlaysetUsage": "Utilizare Playset",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Favorită acest set de redare",
   "NoDlcsNoInternet": "Nu am putut încărca DLC -uri, vă rugăm să vă conectați la Internet",
   "NoDlcsOpenGame": "Niciun DLC -uri nu se potrivesc căutării",
-  "DlcUpdateNotice": "Dacă DLC -urile dvs. nu se afișează aici, asigurați -vă că deschideți jocul cel puțin o dată",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "{0} total de DLC-uri deținute",
   "Unfiltered": "Nefiltrat",
   "AnyTags": "Orice etichete",
@@ -102,7 +102,6 @@
   "DLCs": "DLCS & CCPS",
   "LaunchTooltip": "Click pentru a lansa/opri Cities: Skylines sau pentru a folosi {0} oriunde în aplicație",
   "SelectedFileInvalid": "Fișierul selectat nu este valid",
-  "ShowingFilteredItems": "Se afișează {0} din {1} total articole",
   "ThemeUIScale": "Temă și dimensiune interfață",
   "SearchPlaysets": "Caută prin aceste Playset-uri.",
   "AdvancedSettings": "Setări avansate",
@@ -112,6 +111,8 @@
   "OpenGuide": "Open the Wiki",
   "ResetFolderButton": "Resetează toate setările folderului",
   "LinkModAssets": "Link active de la mod -uri la starea „inclusă” a modului",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Unele moduri includ active care sunt necesare pentru a funcționa în mod corespunzător. Activarea acestei opțiuni leagă aceste active de modul în sine și ascunde acele active din pagina de active astfel încât să nu le excluzi din greșeală.",
   "ShowDatesRelatively_Tip": "Modifică formatul datelor care sunt afișate în listele de conținut în timp relativ. De exemplu: Ieri la 2:10 pm",
   "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
@@ -156,9 +157,9 @@
   "CopyLogFile": "Copiază fişierul de jurnal al jocului în clipboard",
   "OpenLOTLogFolder": "Deschide directorul de jurnal Skyve",
   "CopyLOTLogFile": "Copiază fişierul de jurnal Skyve în clipboard",
-  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Creează sau importă un nou set de redare",
   "ViewPlaysets_Tip": "View & manage your playsets",
   "DeactivatePlayset_Tip": "Deactivate your current playset",
@@ -341,17 +342,21 @@
     "One": "Se afișează {0} {1}",
     "Plural": "Showing {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "Se afișează {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "Afișare {0} {1}, {2} selectat",
-    "Plural": "Showing {0} {1}, {2} selected"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "Afișare {0} {1}, {2} selectat, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} este ascuns din cauza utilizării profilului dvs.",
@@ -407,9 +412,6 @@
     "One": "Ai un pachet {0} făcut de {1}",
     "Plural": "Ai {0} pachete făcute de {1}"
   },
-  "RequestOption1": "Raportează o problemă sau adaugă informații lipsă",
-  "RequestOption2": "Adaugă o stare lipsă pentru pachet",
-  "RequestOption3": "Adăugați o interacțiune lipsă cu un alt pachet",
   "ActivePlayset": "Active Playset",
   "References": "Referințe",
   "OpenLog": "Open Game Log",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "Etichete personalizate",
   "WorkshopAndGameTags": "Atelier & Etichete în joc",
+  "IDAndTags": "ID & etichete",
   "TroubleshootIssues": "Probleme depanare",
   "ViewTroubleshootOptions": "Vezi opţiunile de depanare",
   "TroubleshootInfo": "Dacă aveți un mod sau un activ care cauzează o problemă, sau asta lipsește, și nu știți care dintre ele; Încercați să-l depanați aici:",
-  "TroubleshootCaused": "Un mod sau o activă pe care o folosesc cauzează probleme",
-  "TroubleshootNew": "Un mod recent actualizat sau un abonament nou cauzează probleme",
-  "TroubleshootMissing": "Îmi lipsesc un mod sau un activ și asta cauzează probleme",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Care opțiune descrie cel mai bine situația ta?",
   "TroubleshootModOrAsset": "Ce fel de conținut ai vrea să depui problema?",
-  "IDAndTags": "ID & etichete",
   "ApplyingSettings": "Se aplică setările...",
   "WaitingForGameLaunch": "Se așteaptă lansarea jocului...",
   "WaitingForGameClose": "Se așteaptă închiderea jocului...",
@@ -475,7 +477,7 @@
   "NextStage": "Etapa următoare",
   "CancelTroubleshootMessage": "Doriți să resetați la configurația pe care o utilizați înainte de a începe depanarea?\r\n\r\nSelectați 'Nu' pentru a păstra configurația curentă a pachetelor.",
   "CancelTroubleshootTitle": "Anulați și resetați depanarea?",
-  "TroubleshootAskIfFixed": "Au rezolvat ultimele modificări problema pe care încercați să o rezolvați?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "Doriți să opriți depanarea aici și să păstrați configurația curentă a pachetelor?\r\n\r\nSelectați 'Nu' pentru a continua să depanați.",
   "StopTroubleshootTitle": "Opriți depanarea?",
   "TroubleshootCancelTip": "Opriți procesul de depanare.",
@@ -485,12 +487,20 @@
     "One": "Aveți un pachet cu un avertisment serios de compatibilitate.\r\nPoate doriți să încercați să-l rezolvați mai întâi înainte de a depana problema.",
     "Plural": "Aveți pachete {0} cu avertismente serioase de compatibilitate.\r\nPoate doriți să încercați să le rezolvați mai întâi înainte de a depana problema."
   },
-  "TroubleshootViewComp": "Vezi raportul meu de compatibilitate",
-  "TroubleshootSkipComp": "Omiteți & continuați depanarea",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Skyve a detectat că unele dintre pachetele tale nu sunt descărcate perfect, dorești să încerci să le repari mai întâi?",
   "FaultyPackagesTitle": "Pachete false detectate",
   "CleanupInfoTitle": "Ce este o curățare?",
-  "TroubleshootCauseResult": "Următoarele pachete ar putea fi cauza problemelor dumneavoastră",
   "VerifiedAuthor": "Autor verificat",
   "EnableItem": "Enable this mod",
   "DisableItem": "Disable this mod",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "Could not upload your file at this time",
   "ReplyToRequester": "Reply to requester",
   "SendReply": "Send the reply",
-  "LetUserKnowIsFixed": "Let the requester know that the issue was fixed",
-  "LetUserKnowSaveFileNeeded": "Let the requester know that you need a savegame to properly review",
   "ReviewRequestNotification": "Review Request Update",
   "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
   "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
@@ -676,5 +684,12 @@
   "InvalidFolder": "Invalid Folder",
   "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "Restore this backup",
-  "DeleteBackup": "Delete this backup"
+  "DeleteBackup": "Delete this backup",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
