@@ -32,8 +32,8 @@
   "Preferences": "Voorkeuren",
   "PlaysetName": "Afspeel naam",
   "RenamePlayset": "Hernoem deze speelset",
-  "StartScratch": "Start een profiel helemaal opnieuw",
-  "ContinueFromCurrent": "Kloon je actieve speelset",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Bouw steden",
   "EditorPlay": "Activa maken",
   "PlaysetUsage": "Playset gebruik",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Favoriet deze playset",
   "NoDlcsNoInternet": "Kon geen DLC's laden, maak verbinding met internet",
   "NoDlcsOpenGame": "Geen DLC's komen overeen met uw zoekopdracht",
-  "DlcUpdateNotice": "Als je DLC's hier niet worden weergegeven, zorg er dan voor dat je het spel minstens één keer opent",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "{0} in totaal DLCs eigendom van",
   "Unfiltered": "Ongefilterd",
   "AnyTags": "Alle tags",
@@ -102,7 +102,6 @@
   "DLCs": "DLCS & CCPS",
   "LaunchTooltip": "Klik om Cities: Skylines te starten/stoppen of gebruik {0} ergens in de app",
   "SelectedFileInvalid": "Het bestand dat je selecteerde is niet geldig",
-  "ShowingFilteredItems": "Toont {0} van de {1} totale items",
   "ThemeUIScale": "Thema & UI Schaal",
   "SearchPlaysets": "Zoek door deze Playsets..",
   "AdvancedSettings": "Geavanceerde instellingen",
@@ -112,6 +111,8 @@
   "OpenGuide": "Open de wiki",
   "ResetFolderButton": "Reset alle map-instellingen",
   "LinkModAssets": "Link Assets van mods naar de status 'opgenomen' van de mod",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Sommige mods bevatten assets die nodig zijn om ze goed te laten functioneren. Het inschakelen van deze optie koppelt die assets aan de mod zelf en verbergt die activa van de Assets pagina, zodat je ze niet per ongeluk uitsluit.",
   "ShowDatesRelatively_Tip": "Wijzigt de indeling van de datums die worden weergegeven in inhoudslijsten naar relatieve tijd. Bijvoorbeeld: gisteren om 2:10 uur",
   "DisableNewModsByDefault_Tip": "Wanneer u abonneert of een mod toevoegt, zal de tool automatisch uitsluiten of toevoegen op basis van deze instelling wanneer de tool is gelanceerd.",
@@ -156,9 +157,9 @@
   "CopyLogFile": "Kopieer het logbestand van het spel naar het klembord",
   "OpenLOTLogFolder": "Open Skyve's logmap",
   "CopyLOTLogFile": "Kopieer Skyve's logbestand naar klembord",
-  "GenericIncludedTotal": "{0} inbegrepen: {1}, Totaal: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} inbegrepen & ingeschakeld: {1}, Totaal: {2}",
-  "GenericIncludedEnabledTotal": "{0} inbegrepen: {1}, waarvan ingeschakeld: {2}, Totaal: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Nieuwe afspeelset maken of importeren",
   "ViewPlaysets_Tip": "Bekijk en beheer je playsets",
   "DeactivatePlayset_Tip": "Deactiveer je huidige playset",
@@ -341,17 +342,21 @@
     "One": "Toont {0} {1}",
     "Plural": "Showing {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "Toont {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "Weergeven {0} {1}, {2} geselecteerd",
-    "Plural": "Showing {0} {1}, {2} selected"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "Tonen {0} {1}, {2} geselecteerd, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} is verborgen vanwege het gebruik van je profiel",
@@ -407,9 +412,6 @@
     "One": "Je hebt {0} pakket gemaakt door {1}",
     "Plural": "Je hebt {0} pakketten gemaakt door {1}"
   },
-  "RequestOption1": "Rapporteer een probleem of voeg ontbrekende informatie toe",
-  "RequestOption2": "Voeg een ontbrekende status toe aan het pakket",
-  "RequestOption3": "Voeg ontbrekende interactie toe met een ander pakket",
   "ActivePlayset": "Active Playset",
   "References": "Referenties",
   "OpenLog": "Open Game Log",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "Aangepaste tags",
   "WorkshopAndGameTags": "Workshop & In-Game Tags",
+  "IDAndTags": "ID & tags",
   "TroubleshootIssues": "Problemen met Problemen oplossen",
   "ViewTroubleshootOptions": "Bekijk probleemoplossingsopties",
   "TroubleshootInfo": "Als je een mod of asset hebt die een probleem veroorzaakt of die ontbreekt, en je weet niet welke dat is; Probeer het hier op te lossen:",
-  "TroubleshootCaused": "Een mod of asset die ik gebruik veroorzaakt problemen",
-  "TroubleshootNew": "Een recente mod update of nieuw abonnement veroorzaakt problemen",
-  "TroubleshootMissing": "Ik mis een mod of activa, en dat veroorzaakt problemen",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Welke optie beschrijft het best uw situatie?",
   "TroubleshootModOrAsset": "Wat voor inhoud wil je graag probleemschieten?",
-  "IDAndTags": "ID & tags",
   "ApplyingSettings": "Instellingen toepassen...",
   "WaitingForGameLaunch": "Wachten tot het spel gestart wordt...",
   "WaitingForGameClose": "Wachten tot het spel is gesloten...",
@@ -475,7 +477,7 @@
   "NextStage": "Volgende Fase",
   "CancelTroubleshootMessage": "Wilt u terugzetten naar de configuratie die u gebruikte voordat u begint met de probleemoplossing?\r\n\r\nSelecteer 'Nee' om de huidige configuratie van pakketten te behouden.",
   "CancelTroubleshootTitle": "Annuleer & Reset Probleemoplossing?",
-  "TroubleshootAskIfFixed": "Heeft het probleem dat u probeert op te lossen door de laatste wijzigingen opgelost?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "Wil je hier stoppen met het oplossen van problemen en de huidige configuratie van pakketten behouden?\r\n\r\nSelecteer 'Nee' om door te gaan met het oplossen van problemen.",
   "StopTroubleshootTitle": "Stop Probleemoplossing?",
   "TroubleshootCancelTip": "Stop het probleemoplossingsproces.",
@@ -485,12 +487,20 @@
     "One": "Je hebt een pakket met een serieuze waarschuwing voor compatibiliteit.\r\nMisschien wil je het eerst proberen te verhelpen voordat er problemen ontstaan.",
     "Plural": "Je hebt {0} pakketten met serieuze waarschuwingen.\r\nMisschien wil je ze eerst proberen af te handelen voordat er problemen ontstaan."
   },
-  "TroubleshootViewComp": "Mijn compatibiliteitsrapport bekijken",
-  "TroubleshootSkipComp": "Overslaan & ga verder met het oplossen van problemen",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Skyve heeft gedetecteerd dat sommige pakketten niet perfect zijn gedownload, wil je ze eerst proberen te repareren?",
   "FaultyPackagesTitle": "Foute pakketten gedetecteerd",
   "CleanupInfoTitle": "Wat is een schoonmaak?",
-  "TroubleshootCauseResult": "De volgende pakketten zijn mogelijk de oorzaak van je problemen",
   "VerifiedAuthor": "Geverifieerde auteur",
   "EnableItem": "Enable this mod",
   "DisableItem": "Disable this mod",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "Could not upload your file at this time",
   "ReplyToRequester": "Reply to requester",
   "SendReply": "Send the reply",
-  "LetUserKnowIsFixed": "Let the requester know that the issue was fixed",
-  "LetUserKnowSaveFileNeeded": "Let the requester know that you need a savegame to properly review",
   "ReviewRequestNotification": "Review Request Update",
   "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
   "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
@@ -676,5 +684,12 @@
   "InvalidFolder": "Invalid Folder",
   "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "Restore this backup",
-  "DeleteBackup": "Delete this backup"
+  "DeleteBackup": "Delete this backup",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
