@@ -32,8 +32,8 @@
   "Preferences": "Tulajdonságok",
   "PlaysetName": "Playset név",
   "RenamePlayset": "Nevezze át ezt a játékkészletet",
-  "StartScratch": "Új profil nulláról",
-  "ContinueFromCurrent": "Klónozd az aktív játékkészletedet",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Építs városokat",
   "EditorPlay": "Készítsen asseteket",
   "PlaysetUsage": "Playset Használat",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Távolítsa el a profilt a kedvencek közül",
   "NoDlcsNoInternet": "Nem sikerült betölteni a DLC-ket, kérjük, csatlakozzon az internethez",
   "NoDlcsOpenGame": "Nincs a feltételeknek megfelelő DLC találat",
-  "DlcUpdateNotice": "Ha a DLC-k nem jelennek meg itt, mindenképpen nyissa meg a játékot legalább egyszer",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "Összesen {0} DLC-t birtokol",
   "Unfiltered": "Szűrés nélküli",
   "AnyTags": "Bármelyik címke",
@@ -102,7 +102,6 @@
   "DLCs": "DLC-k és CCP-k",
   "LaunchTooltip": "Kattintson a Cities: Skylines elindításához/leállításához, vagy használja a {0} alkalmazást bárhol az alkalmazásban",
   "SelectedFileInvalid": "A választott fájl érvénytelen",
-  "ShowingFilteredItems": "Összesen {1}/{0} elem látható",
   "ThemeUIScale": "Téma és felhasználói felület skála",
   "SearchPlaysets": "Keress a profilok között..",
   "AdvancedSettings": "Haladó beállítások",
@@ -112,6 +111,8 @@
   "OpenGuide": "Nyissa meg az útmutatót",
   "ResetFolderButton": "Állítsa vissza az összes mappabeállítást",
   "LinkModAssets": "Kapcsold össze a modok elemeit a mod „Included” állapotával",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Egyes modok olyan asseteket tartalmaznak, amelyek szükségesek a megfelelő működésükhöz. Ennek az opciónak az engedélyezése összekapcsolja ezeket az elemeket magával a moddal, és elrejti az asset oldalon, hogy véletlenül se zárja ki őket.",
   "ShowDatesRelatively_Tip": "A tartalomlistákban megjelenő dátumok formátumát relatív időre módosítja. Például; Tegnap 14:10-kor",
   "DisableNewModsByDefault_Tip": "Amikor előfizet vagy hozzáad egy modot, az eszköz automatikusan kizárja vagy felveszi azt a beállítás alapján a szoftver elindításakor.",
@@ -156,9 +157,9 @@
   "CopyLogFile": "Másolja a játék naplófájlját a vágólapra",
   "OpenLOTLogFolder": "Nyissa meg a Skyve naplómappáját",
   "CopyLOTLogFile": "Másolja a Skyve naplófájlját a vágólapra",
-  "GenericIncludedTotal": "{0} tartalmazza: {1}, összesen: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} tartalmazza és engedélyezve: {1}, összesen: {2}",
-  "GenericIncludedEnabledTotal": "{0} tartalmazza: {1}, ebből engedélyezett: {2}, összesen: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Hozzon létre vagy importáljon új profilt",
   "ViewPlaysets_Tip": "Megtekintheti és kezelheti mentett játékkészleteit",
   "DeactivatePlayset_Tip": "Inaktiválja az aktuális játékkészletet",
@@ -341,17 +342,21 @@
     "One": "{0} - {1} mutatása",
     "Plural": "{0} - {1} mutatása"
   },
-  "ShowingCountWarning": {
-    "One": "{0} {1}, {2} mutatása",
-    "Plural": "{0} {1}, {3} mutatása"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "{0} {1} megjelenítése, {2} kiválasztva",
-    "Plural": "{0} {1} megjelenítése, {2} kiválasztva"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "{0} {1}, {2} kiválasztott, {3} megjelenítése",
-    "Plural": "{0} {1}, {2} kiválasztott, {3} megjelenítése"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "A(z) {0} {1} el van rejtve a profilod használata miatt",
@@ -407,9 +412,6 @@
     "One": "{0} csomagja van a {1} által",
     "Plural": "{0} csomagjai vannak a {1} által"
   },
-  "RequestOption1": "Jelentse be a problémát, vagy adja meg a hiányzó információkat",
-  "RequestOption2": "Adjon hozzá egy hiányzó állapotot a csomaghoz",
-  "RequestOption3": "Adjon hozzá egy hiányzó interakciót egy másik csomaghoz",
   "ActivePlayset": "Aktív játékkészlet",
   "References": "Referenciák",
   "OpenLog": "Open Game Log",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "Egyéni címkék",
   "WorkshopAndGameTags": "Műhely és játékon belüli címkék",
+  "IDAndTags": "ID és címkék",
   "TroubleshootIssues": "Hibaelhárítás",
   "ViewTroubleshootOptions": "Tekintsd meg a hibaelhárítási lehetőségeket",
   "TroubleshootInfo": "Ha olyan modod vagy elemed van, amely problémát okoz, vagy hiányzik, és nem tudod, hogy melyik az, akkor itt próbáld meg elhárítani a hibát:",
-  "TroubleshootCaused": "Az általam használt mod vagy eszköz problémákat okoz",
-  "TroubleshootNew": "A legutóbbi modfrissítés vagy új előfizetés problémákat okoz",
-  "TroubleshootMissing": "Hiányzik egy mod vagy eszköz, és ez problémákat okoz",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Melyik lehetőség írja le legjobban a helyzetedet?",
   "TroubleshootModOrAsset": "Milyen tartalommal kapcsolatban szeretnél hibaelhárítást végezni?",
-  "IDAndTags": "ID és címkék",
   "ApplyingSettings": "Beállítások alkalmazása...",
   "WaitingForGameLaunch": "Várjuk a játék indulását...",
   "WaitingForGameClose": "Várom a játék lezárását...",
@@ -475,7 +477,7 @@
   "NextStage": "Következő szint",
   "CancelTroubleshootMessage": "Szeretné visszaállítani azt a konfigurációt, amelyet a hibaelhárítás megkezdése előtt használt?\n\nVálassza a „Nem” lehetőséget a csomagok jelenlegi konfigurációjának megtartásához.",
   "CancelTroubleshootTitle": "Megszakítja és visszaállítja a hibaelhárítást?",
-  "TroubleshootAskIfFixed": "Az utolsó módosítások megoldották a megoldani kívánt problémát?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "Szeretné itt leállítani a hibaelhárítást, és megtartani a csomagok jelenlegi konfigurációját?\n\nA hibaelhárítás folytatásához válassza a „Nem” lehetőséget.",
   "StopTroubleshootTitle": "Leállítja a hibaelhárítást?",
   "TroubleshootCancelTip": "Állítsa le a hibaelhárítási folyamatot.",
@@ -485,12 +487,20 @@
     "One": "Komoly kompatibilitási figyelmeztetést tartalmazó csomagod van.\nElőfordulhat, hogy a hibaelhárítás előtt próbálja meg kezelni.",
     "Plural": "{0} csomagja komoly kompatibilitási figyelmeztetéseket tartalmaz.\nElőfordulhat, hogy a hibaelhárítás előtt megpróbálja megbirkózni velük."
   },
-  "TroubleshootViewComp": "Tekintse meg a kompatibilitási jelentést",
-  "TroubleshootSkipComp": "Kihagyás és a hibaelhárítás folytatása",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "A Skyve észlelte, hogy egyes csomagjai nincsenek tökéletesen letöltve. Megpróbálná először kijavítani őket?",
   "FaultyPackagesTitle": "Hibás csomagok észlelve",
   "CleanupInfoTitle": "Mi az a takarítás?",
-  "TroubleshootCauseResult": "A következő csomagok okozhatják a problémákat",
   "VerifiedAuthor": "Ellenőrzött szerző",
   "EnableItem": "Engedélyezze ezt a modot",
   "DisableItem": "Mod tiltása",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "Jelenleg nem sikerült feltölteni a fájlt",
   "ReplyToRequester": "Válasz a kérelmezőnek",
   "SendReply": "Küldje el a választ",
-  "LetUserKnowIsFixed": "Tájékoztassa a kérelmezőt, hogy a probléma megoldódott",
-  "LetUserKnowSaveFileNeeded": "Tájékoztassa a kérelmezőt, hogy a megfelelő áttekintéshez játékmentésre van szükség",
   "ReviewRequestNotification": "Frissítés kérésének áttekintése",
   "ReviewRequestNotificationInfo": "A(z) „{0}” felülvizsgálati kérelme új frissítést kapott",
   "ReviewIsFixed": "Az általad jelentett probléma már megoldódott. A(z) {0} újra használható.",
@@ -676,5 +684,12 @@
   "InvalidFolder": "Érvénytelen mappa",
   "ChooseDifferentBackupLocation": "Ebben a mappában nem lehet biztonsági másolatot készíteni a fájlokról, a Skyve nem fér hozzá.\n\nVálassz egy másik helyet, amely nem ugyanabban a mappában található, lehetőleg egy másik meghajtón.",
   "RestoreBackup": "Állítsa vissza ezt a biztonsági másolatot",
-  "DeleteBackup": "Törölje ezt a biztonsági másolatot"
+  "DeleteBackup": "Törölje ezt a biztonsági másolatot",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
