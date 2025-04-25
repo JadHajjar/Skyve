@@ -32,8 +32,8 @@
   "Preferences": "กำหนดลักษณะ",
   "PlaysetName": "ชื่อเพลย์เซ็ต",
   "RenamePlayset": "เปลี่ยนชื่อเพลย์เซ็ตนี้",
-  "StartScratch": "เริ่มสร้างเพลย์เซ็ตใหม่ตั้งแต่ต้น",
-  "ContinueFromCurrent": "ทำสำเนาเพลย์เซ็ตที่ใช้งานอยู่",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "สร้างเมือง",
   "EditorPlay": "สร้างแอสเซท",
   "PlaysetUsage": "เพลย์เซ็ตที่ใช้งานอยู่",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "เพิ่มเพลย์เซ็นนี้ในรายการชื่นชอบ",
   "NoDlcsNoInternet": "ไม่สามารถโหลดข้อมูล DLC โปรดเชื่อมต่ออินเทอร์เน็ต",
   "NoDlcsOpenGame": "ไม่มี DLC ที่ตรงกับการค้นหาของคุณ",
-  "DlcUpdateNotice": "หาก DLC ของคุณไม่ปรากฏตรงนี้ ลองเปิดเกมอย่างน้อยครั้งหนึ่ง",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "{0} DLC ที่เป็นเจ้าของ",
   "Unfiltered": "ไม่มีการกรอง",
   "AnyTags": "ทุกแท็ก",
@@ -102,7 +102,6 @@
   "DLCs": "DLC และ CCP",
   "LaunchTooltip": "คลิกเพื่อเรียกเปิด/หยุดเกม Cities: Skylines หรือกด {0} ขณะยังอยู่ในหน้าแอป",
   "SelectedFileInvalid": "ไฟล์ที่คุณเลือกใช้ไม่ได้",
-  "ShowingFilteredItems": "แสดง {0} จาก {1} รายการทั้งหมด",
   "ThemeUIScale": "ธิมและขนาด UI",
   "SearchPlaysets": "ค้นหาไปตามเพลย์เซ็ตของคุณ..",
   "AdvancedSettings": "ตั้งค่าขั้นสูง",
@@ -112,6 +111,8 @@
   "OpenGuide": "เปิด Wiki",
   "ResetFolderButton": "รีเซ็ตการตั้งค่าโฟลเดอร์ทั้งหมด",
   "LinkModAssets": "แอสเซทที่เชื่อมโยงกันกับม็อด จากม็อดที่มีสถานะ 'รวมอยู่ในเกม'",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "ม็อดบางตัวประกอบไปด้วยแอสเซทที่จำเป็นต้องใช้เพื่อให้สามารถทำงานได้อย่างถูกต้อง การเปิดใช้งานตัวเลือกนี้จะเชื่อมโยงแอสเซทดังกล่าวเข้ากับตัวม็อดของมันเอง และจะไม่แสดงมันในหน้าแอสเซท เพื่อป้องกันไม่ให้คุณเผลอไปแยกมันออกจากกันโดยไม่ได้ตั้งใจ",
   "ShowDatesRelatively_Tip": "เปลี่ยนรูปแบบของวันที่ที่แสดงในรายการเนื้อหาให้สอดคล้องกับเวลาปัจจุบัน ยกตัวอย่างเช่น เมื่อวาน 14:10 น.",
   "DisableNewModsByDefault_Tip": "เมื่อคุณสมัครสามาชิกหรือเพิ่มม็อดแล้วเกมถูกเปิดขึ้นมา เครื่องมือจะทำการแยกหรือรวมม็อดเข้ากับตัวเกมโดยอัตโนมัติตามค่าที่ตั้งไว้ตรงนี้",
@@ -156,9 +157,9 @@
   "CopyLogFile": "คัดลอกไฟล์ Log ของเกมไปยังคลิปบอร์ด",
   "OpenLOTLogFolder": "เปิดโฟลเดอร์ Log ของ Skyve",
   "CopyLOTLogFile": "คัดลอกไฟล์ Log ของ Skyve ไปยังคลิปบอร์ด",
-  "GenericIncludedTotal": "{0} รวมเข้า: {1}, ทั้งหมด: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} รวมเข้า & เปิดใช้งาน: {1}, ทั้งหมด: {2}",
-  "GenericIncludedEnabledTotal": "{0} รวมเข้า: {1} ของที่เปิดใช้งาน: {2} ทั้งหมด: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "สร้างหรือนำเข้าเพลย์เซ็ตใหม่",
   "ViewPlaysets_Tip": "ดูและจัดการเพลย์เซ็ตของคุณ",
   "DeactivatePlayset_Tip": "ปิดการทำงานเพลย์เซ็ตปัจจุบันของคุณ",
@@ -341,17 +342,21 @@
     "One": "แสดง {0} {1}",
     "Plural": "กำลังแสดง {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "แสดง {0} {1}, {2}",
-    "Plural": "กำลังแสดง {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "แสดง {0} {1}, {2} ที่เลือก",
-    "Plural": "กำลังแสดง {0} {1}, {2} ที่เลือก"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "แสดง {0} {1}, {2} ที่เลือก, {3}",
-    "Plural": "กำลังแสดง {0} {1}, {2} ที่เลือก, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} ถูกซ่อนเนื่องจากถูกใช้งานในเพลย์เซ็ตของคุณ",
@@ -407,9 +412,6 @@
     "One": "คุณมี {0} แพ็กเกจที่สร้างโดย {1}",
     "Plural": "คุณมี {0} แพ็กเกจที่สร้างโดย {1}"
   },
-  "RequestOption1": "รายงานปัญหาหรือเพิ่มข้อมูลสิ่งที่ขาดหายไป",
-  "RequestOption2": "เพิ่มสถานะการขายหายไปของแพ็กเกจ",
-  "RequestOption3": "เพิ่มการขาดหายไปของแพ็กเกจอื่นที่โต้ตอบกับแพ็กเกจนี้",
   "ActivePlayset": "เพลย์เซ็ตที่ใช้งาน",
   "References": "รายการอ้างอิง",
   "OpenLog": "เปิดบันทึกของเกม",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "แท็กที่กำหนดเอง",
   "WorkshopAndGameTags": "เวิร์กชอป & แท็กในเกม",
+  "IDAndTags": "ID & Tags",
   "TroubleshootIssues": "แก้ไขปัญหา",
   "ViewTroubleshootOptions": "ดูทางเลือกการแก้ไขปัญหา",
   "TroubleshootInfo": "หากคุณมีม็อดหรือแอสเซทที่สูญหาย หรือเป็นสาเหตุที่ทำให้เกิดปัญหา แล้วไม่ทราบว่าเป็นเพราะตัวไหน ลองใช้ตรงนี้แก้ปัญหา",
-  "TroubleshootCaused": "ม็อดหรือแอสเซทที่ฉันใช้งานทำให้เกิดปัญหา",
-  "TroubleshootNew": "ม็อดที่อัปเดตล่าสุดหรือที่สมัครสมาชิกมาใหม่ทำให้เกิดปัญหา",
-  "TroubleshootMissing": "ม็อดหรือแอสเซทที่ขาดหายไปนั้นทำให้ฉันเกิดปัญหา",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "ตัวเลือกใดอธิบายสถานการณ์ของคุณได้ดีที่สุด?",
   "TroubleshootModOrAsset": "คอนเทนต์ประเภทใดที่คุณต้องการแก้ไขปัญหา?",
-  "IDAndTags": "ID & Tags",
   "ApplyingSettings": "กำลังปรับใช้การตั้งค่า...",
   "WaitingForGameLaunch": "กำลังรอให้เกมเริ่ม...",
   "WaitingForGameClose": "กำลังรอให้เกมปิด...",
@@ -475,7 +477,7 @@
   "NextStage": "ขั้นตอนถัดไป",
   "CancelTroubleshootMessage": "คุณต้องการรีเซ็ตการกำหนดค่าต่าง ๆ ที่คุณใช้ ก่อนเริ่มการแก้ไขปัญหาหรือไม่\n\nเลือก 'ไม่' เพื่อคงการกำหนดค่าปัจจุบันของแพ็กเกจไว้",
   "CancelTroubleshootTitle": "ยกเลิกและรีเซ็ตการแก้ไขปัญหา?",
-  "TroubleshootAskIfFixed": "การเปลี่ยนแปลงครั้งล่าสุดได้แก้ไขปัญหาที่คุณเคยพยายามแก้ไขหรือไม่?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "คุณต้องการหยุดการแก้ไขปัญหาไว้แค่นี้แล้วคงไว้ซึ่งการกำหนดค่าในปัจจุบันของแพ็กเกจใช่หรือไม่\n\nเลือก 'ไม่' เพื่อแก้ไขปัญหาต่อไป",
   "StopTroubleshootTitle": "หยุดการแก้ไขปัญหา?",
   "TroubleshootCancelTip": "หยุดกระบวนการแก้ไขปัญหา",
@@ -485,12 +487,20 @@
     "One": "คุณมีแพ็กเกจได้รับคำเตือนร้ายแรงเรื่องความเข้ากันได้\nคุณอาจต้องการลองจัดการกับมันก่อนที่จะแก้ไขปัญหา",
     "Plural": "คุณมีแพ็กเกจ {0} รายการที่มีคำเตือนร้ายแรงเรื่องความเข้ากันได้\nคุณอาจต้องการลองจัดการกับแพ็กเกจเหล่านี้ก่อนการแก้ไขปัญหา"
   },
-  "TroubleshootViewComp": "ดูรายงานความเข้ากันได้",
-  "TroubleshootSkipComp": "ข้ามแล้วดำเนินการแก้ไขปัญหาต่อ",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Skyve ตรวจพบว่ามีแพ็กเกจบางส่วนของคุณที่ไม่ได้รับการดาวน์โหลดอย่างครบถ้วนสมบูรณ์ ลองแก้ไขดูก่อนไหม?",
   "FaultyPackagesTitle": "ตรวจพบแพ็กเกจที่มีข้อบกพร่อง",
   "CleanupInfoTitle": "การทำความสะอาดคืออะไร?",
-  "TroubleshootCauseResult": "แพ็กเกจต่อไปนี้อาจเป็นสาเหตุที่ทำให้คุณประสบปัญหา",
   "VerifiedAuthor": "ผู้สร้างที่ได้รับการยืนยัน",
   "EnableItem": "เปิดใช้งานม็อดนี้",
   "DisableItem": "ปิดใช้งานม็อดนี้",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "ไม่สามารถอัปโหลดไฟล์ได้ในขณะนี้",
   "ReplyToRequester": "ตอบผู้ร้องขอ",
   "SendReply": "ส่งการตอบกลับ",
-  "LetUserKnowIsFixed": "แจ้งให้ผู้ร้องขอทราบว่าปัญหาได้รับการแก้ไขแล้ว",
-  "LetUserKnowSaveFileNeeded": "แจ้งให้ผู้ร้องขอทราบว่าคุณต้องการบันทึกของเกมเพื่อการตรวจสอบอย่างถูกต้อง",
   "ReviewRequestNotification": "อัปเดตคำร้องขอการตรวจสอบ",
   "ReviewRequestNotificationInfo": "มีการอัปเดตใหม่สำหรับคำร้องขอการตรวจสอบ '{0}' ของคุณ",
   "ReviewIsFixed": "ปัญหาที่คุณรายงานได้รับการแก้ไขแล้ว คุณสามารถใช้ {0} ได้อีกครั้ง",
@@ -676,5 +684,12 @@
   "InvalidFolder": "โฟลเดอร์ไม่ถูกต้อง",
   "ChooseDifferentBackupLocation": "คุณไม่สามารถสำรองไฟล์ภายในโฟลเดอร์นี้ได้ เนื่องจาก Skyve ไม่สามารถเข้าถึงเพื่อบันทึกไฟล์ที่นี่ได้\n\nเลือกตำแหน่งอื่นที่ไม่ได้อยู่ในโฟลเดอร์เดียวกัน โดยควรเลือกไปไดรฟ์อื่น",
   "RestoreBackup": "คืนค่าการสำรองข้อมูลนี้",
-  "DeleteBackup": "ลบข้อมูลสำรองนี้"
+  "DeleteBackup": "ลบข้อมูลสำรองนี้",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
