@@ -32,8 +32,8 @@
   "Preferences": "Предпочтения",
   "PlaysetName": "Название игрового набора",
   "RenamePlayset": "Переименовать этот игровой набор",
-  "StartScratch": "Создать игровой набор с нуля",
-  "ContinueFromCurrent": "Клонируйте ваш активный игровой набор",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Строить города",
   "EditorPlay": "Создавать ассеты",
   "PlaysetUsage": "Использование Плейсета",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Добавить в избранное этот игровой набор",
   "NoDlcsNoInternet": "Не удалось загрузить DLC, подключитесь к Интернету",
   "NoDlcsOpenGame": "Ни один DLC не соответствует поиску",
-  "DlcUpdateNotice": "Откройте игру как минимум один раз, чтобы ваши DLC отображались здесь",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "Всего DLC: {0}",
   "Unfiltered": "Не отфильтровано",
   "AnyTags": "Любые теги",
@@ -102,7 +102,6 @@
   "DLCs": "DLC & CCP",
   "LaunchTooltip": "Нажмите, чтобы запустить/остановить Cities: Skylines или используйте [F5] в любом месте приложения",
   "SelectedFileInvalid": "Выбранный файл поврежден",
-  "ShowingFilteredItems": "Показано {0} из {1} элементов",
   "ThemeUIScale": "Тема и масштаб интерфейса",
   "SearchPlaysets": "Искать в этих игровых наборах..",
   "AdvancedSettings": "Расширенные настройки",
@@ -112,6 +111,8 @@
   "OpenGuide": "Открыть Wiki",
   "ResetFolderButton": "Сбросить настройки всех папок",
   "LinkModAssets": "Связать ассет с состоянием мода \"Добавлен в игру\"",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Некоторые моды включают ассеты, которые необходимы им для правильного функционирования. Включение этой опции связывает эти ассеты с мод и скрывает эти активы со страницы ассетов, чтобы вы не исключили их по ошибке.",
   "ShowDatesRelatively_Tip": "Изменяет формат дат, которые отображаются в списках контента на относительное время. Например вчера в 14:10 вечера",
   "DisableNewModsByDefault_Tip": "При подписке или добавлении модов, инструмент будет автоматически добавлять или исключать его при запуске инструмента на основе этого параметра.",
@@ -156,9 +157,9 @@
   "CopyLogFile": "Копировать лог файл игры в буфер обмена",
   "OpenLOTLogFolder": "Открыть папку журнала Skyve",
   "CopyLOTLogFile": "Копировать журнал Skyve в буфер обмена",
-  "GenericIncludedTotal": "{0} Включено модификаций: {1}, Всего: {2}",
-  "GenericIncludedAndEnabledTotal": "",
-  "GenericIncludedEnabledTotal": "{0} Добавлено модификаций: {1}, из которых включено: {2}, Всего: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Создать или импортировать новый игровой набор",
   "ViewPlaysets_Tip": "Просмотр и управление вашими игровыми наборами",
   "DeactivatePlayset_Tip": "Выключить нынешний плейсет",
@@ -341,17 +342,21 @@
     "One": "Показано {0} {1}",
     "Plural": "Показан {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "Показаны {0} {1}, {2}",
-    "Plural": "Показаны {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "Показаны {0} {1}, {2} выбраны",
-    "Plural": "Показаны {0} {1}, {2} выбраны"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "Показаны {0} {1}, {2} выбрано, {3}",
-    "Plural": "Показаны {0} {1}, {2} выбраны, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} скрыт из-за использования вашего плейсета",
@@ -407,9 +412,6 @@
     "One": "У вас есть {0} пакет, созданный {1}",
     "Plural": "У вас есть {0} пакета(-ов), созданных {1}"
   },
-  "RequestOption1": "Сообщить о проблеме или добавить недостающую информацию",
-  "RequestOption2": "Добавить отсутствующий статус для пакета",
-  "RequestOption3": "Добавить недостающее взаимодействие с другим пакетом",
   "ActivePlayset": "Активный Плейсет",
   "References": "Ссылки",
   "OpenLog": "Открыть логи игры",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "Пользовательские теги",
   "WorkshopAndGameTags": "Мастерская и внутриигровые теги",
+  "IDAndTags": "ID & Теги",
   "TroubleshootIssues": "Проблемы устранения неполадок",
   "ViewTroubleshootOptions": "Показать параметры устранения неполадок",
   "TroubleshootInfo": "Если у вас есть мод или актив, вызывающий проблему, или который отсутствует, и вы не знаете, какой из них; Попробуйте устранить неполадки здесь:",
-  "TroubleshootCaused": "Мод или ассет, который я использую, вызывает проблемы",
-  "TroubleshootNew": "Недавнее обновление модов или новая подписка вызывает проблемы",
-  "TroubleshootMissing": "У меня отсутствует мод или ассет, что создает проблему",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Какой вариант лучше всего описывает вашу ситуацию?",
   "TroubleshootModOrAsset": "С каким контентом у вас возникла проблема?",
-  "IDAndTags": "ID & Теги",
   "ApplyingSettings": "Применение настроек...",
   "WaitingForGameLaunch": "Ожидание запуска игры...",
   "WaitingForGameClose": "Ожидание закрытия игры...",
@@ -475,7 +477,7 @@
   "NextStage": "Следующий этап",
   "CancelTroubleshootMessage": "Вы хотите перейти к конфигурации, которую вы использовали перед запуском диагностики?\n\nВыберите 'Нет', чтобы сохранить текущую конфигурацию пакетов.",
   "CancelTroubleshootTitle": "Отменить и Сбросить Устранение неполадок?",
-  "TroubleshootAskIfFixed": "Последние изменения устранили проблему, которую вы пытаетесь решить?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "Вы уверены, что хотите остановить поиск неполадок и оставить текущую конфигурацию пакетов?\n\nВыберите 'Нет', чтобы продолжить поиск неполадок.",
   "StopTroubleshootTitle": "Остановить устранение неполадок?",
   "TroubleshootCancelTip": "Остановить процесс устранения неполадок.",
@@ -485,12 +487,20 @@
     "One": "У вас есть пакет с серьёзными проблемами совместимости.\nВозможно, стоит разобраться самому перед тем, как начинать поиск неполадок.",
     "Plural": "У вас есть {0} с серьезными предупреждениями о совместимости.\r\nвы можете попробовать с ними сначала перед устранением неполадок."
   },
-  "TroubleshootViewComp": "Посмотреть мой отчет о совместимости",
-  "TroubleshootSkipComp": "Пропустить и продолжить устранение неполадок",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Skyve обнаружил, что некоторые из ваших пакетов не полностью загружены, вы хотели бы попытаться их исправить?",
   "FaultyPackagesTitle": "Обнаружены пакеты с ошибками",
   "CleanupInfoTitle": "Что такое очистка?",
-  "TroubleshootCauseResult": "Причиной проблем могут быть следующие пакеты",
   "VerifiedAuthor": "Проверенный автор",
   "EnableItem": "Активировать этот мод",
   "DisableItem": "Деактивировать этот мод",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "Не удалось загрузить ваш файл в этот раз",
   "ReplyToRequester": "Ответить на запрос",
   "SendReply": "Ответить",
-  "LetUserKnowIsFixed": "Сообщите инициатору о том, что проблема исправлена",
-  "LetUserKnowSaveFileNeeded": "Сообщите инициатору о необходимости сохранения для правильной проверки",
   "ReviewRequestNotification": "",
   "ReviewRequestNotificationInfo": "Ваш запрос на отзыв для '{0}' имеет новое обновление",
   "ReviewIsFixed": "Сообщенная вами проблема была исправлена. Вы можете использовать {0} снова.",
@@ -676,5 +684,12 @@
   "InvalidFolder": "Недействительная папка",
   "ChooseDifferentBackupLocation": "Вы не можете сделать резервную копию ваших файлов внутри этой папки, Skyve не имеет доступа для сохранения файлов здесь.\r\n\r\nВыберите другое местоположение, которое не находится в одной папке, предпочтительно на другом диске.",
   "RestoreBackup": "Восстановить эту резервную копию?",
-  "DeleteBackup": "Удалить резервную копию?"
+  "DeleteBackup": "Удалить резервную копию?",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
