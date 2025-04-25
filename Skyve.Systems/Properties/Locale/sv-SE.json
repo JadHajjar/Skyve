@@ -32,8 +32,8 @@
   "Preferences": "Inställningar",
   "PlaysetName": "Speluppsättningens namn",
   "RenamePlayset": "Rename this playset",
-  "StartScratch": "Starta en profil från grunden",
-  "ContinueFromCurrent": "Clone your active playset",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Bygga städer",
   "EditorPlay": "Göra tillgångar",
   "PlaysetUsage": "Speluppsättningens användning",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Lägg till denna speluppsättning till dina favoriter",
   "NoDlcsNoInternet": "Kunde inte ladda DLC: er, ansluta till Internet",
   "NoDlcsOpenGame": "Inga DLC: er matchar din sökning",
-  "DlcUpdateNotice": "Om dina DLC: er inte visas här, se till att öppna spelet minst en gång",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "{0} totala DLC:er som ägs",
   "Unfiltered": "Ofiltrerad",
   "AnyTags": "Alla taggar",
@@ -102,7 +102,6 @@
   "DLCs": "DLCS & CCPS",
   "LaunchTooltip": "Klicka för att starta/stoppa Cities: Skylines eller använd {0} var som helst i appen",
   "SelectedFileInvalid": "Filen du valde är inte giltig",
-  "ShowingFilteredItems": "Visar {0} av {1} totalt objekt",
   "ThemeUIScale": "Tema & UI skala",
   "SearchPlaysets": "Sök igenom dessa speluppsättningar..",
   "AdvancedSettings": "Avancerade inställningar",
@@ -112,6 +111,8 @@
   "OpenGuide": "Open the Wiki",
   "ResetFolderButton": "Återställ alla mappinställningar",
   "LinkModAssets": "Länkstillgångar från mods till modens \"inkluderade\" status",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Vissa moddar inkluderar tillgångar som krävs för att de ska fungera korrekt. Aktivera detta alternativ länkar dessa tillgångar till moderatorn själv och döljer dessa tillgångar från sidan Tillgångar så att du inte utesluter dem av misstag.",
   "ShowDatesRelatively_Tip": "Ändrar formatet för datum som visas i innehållslistor till relativ tid. Till exempel; Igår kl 02:10",
   "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
@@ -156,9 +157,9 @@
   "CopyLogFile": "Kopiera spelets loggfil till urklipp",
   "OpenLOTLogFolder": "Öppna Skyves loggmapp",
   "CopyLOTLogFile": "Kopiera Skyves loggfil till urklipp",
-  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Skapa eller importera en ny speluppsättning",
   "ViewPlaysets_Tip": "View & manage your playsets",
   "DeactivatePlayset_Tip": "Deactivate your current playset",
@@ -341,17 +342,21 @@
     "One": "Visar {0} {1}",
     "Plural": "Showing {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "Visar {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "Visar {0} {1}, {2} vald",
-    "Plural": "Showing {0} {1}, {2} selected"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "Visar {0} {1}, {2} vald, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} är dold på grund av din profils användning",
@@ -407,9 +412,6 @@
     "One": "Du har {0} paket skapade av {1}",
     "Plural": "Du har {0} paket skapade av {1}"
   },
-  "RequestOption1": "Rapportera ett problem eller lägg till saknad information",
-  "RequestOption2": "Lägg till en status som saknas för paketet",
-  "RequestOption3": "Lägg till en interaktion som saknas med ett annat paket",
   "ActivePlayset": "Active Playset",
   "References": "Referenser",
   "OpenLog": "Open Game Log",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "Anpassade taggar",
   "WorkshopAndGameTags": "Workshop & Spel Taggar",
+  "IDAndTags": "ID & Taggar",
   "TroubleshootIssues": "Felsök problem",
   "ViewTroubleshootOptions": "Visa alternativ för felsökning",
   "TroubleshootInfo": "Om du har en mod eller tillgång som orsakar ett problem, eller som saknas, och du inte vet vilken; Prova felsökning här:",
-  "TroubleshootCaused": "En mod eller tillgång jag använder orsakar problem",
-  "TroubleshootNew": "En nyligen uppdaterad mod eller ny prenumeration orsakar problem",
-  "TroubleshootMissing": "Jag saknar en mod eller tillgång, och det orsakar problem",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Vilket alternativ beskriver bäst din situation?",
   "TroubleshootModOrAsset": "Vilken typ av innehåll skulle du vilja felsöka?",
-  "IDAndTags": "ID & Taggar",
   "ApplyingSettings": "Tillämpa inställningar...",
   "WaitingForGameLaunch": "Väntar på att spelet ska startas...",
   "WaitingForGameClose": "Väntar på att spelet ska stängas...",
@@ -475,7 +477,7 @@
   "NextStage": "Nästa steg",
   "CancelTroubleshootMessage": "Vill du återställa till den konfiguration du använde innan du startade felsökningen?\n\nVälj 'Nej' för att behålla den aktuella konfigurationen av paket.",
   "CancelTroubleshootTitle": "Avbryt och återställ felsökning?",
-  "TroubleshootAskIfFixed": "Har de senaste ändringarna åtgärdat problemet som du försöker lösa?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "Vill du stoppa felsökningen här och behålla den aktuella konfigurationen av paket?\n\nVälj 'Nej' för att fortsätta felsökningen.",
   "StopTroubleshootTitle": "Stoppa felsökning?",
   "TroubleshootCancelTip": "Avsluta felsökningsprocessen.",
@@ -485,12 +487,20 @@
     "One": "Du har ett paket med en seriös kompatibilitetsvarning.\r\nDu kanske vill försöka hantera det först innan felsökning.",
     "Plural": "Du har {0} paket med seriösa kompatibilitetsvarningar.\r\nDu kanske vill försöka hantera dem först innan felsökning."
   },
-  "TroubleshootViewComp": "Visa min kompatibilitetsrapport",
-  "TroubleshootSkipComp": "Hoppa över och fortsätt felsökning",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Skyve upptäckte att några av dina paket inte är perfekt hämtade, vill du försöka rätta dem först?",
   "FaultyPackagesTitle": "Felpaket upptäckta",
   "CleanupInfoTitle": "Vad är en sanering?",
-  "TroubleshootCauseResult": "Följande paket kan vara orsaken till dina problem",
   "VerifiedAuthor": "Verifierad författare",
   "EnableItem": "Enable this mod",
   "DisableItem": "Disable this mod",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "Could not upload your file at this time",
   "ReplyToRequester": "Reply to requester",
   "SendReply": "Send the reply",
-  "LetUserKnowIsFixed": "Let the requester know that the issue was fixed",
-  "LetUserKnowSaveFileNeeded": "Let the requester know that you need a savegame to properly review",
   "ReviewRequestNotification": "Review Request Update",
   "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
   "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
@@ -676,5 +684,12 @@
   "InvalidFolder": "Invalid Folder",
   "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "Restore this backup",
-  "DeleteBackup": "Delete this backup"
+  "DeleteBackup": "Delete this backup",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
