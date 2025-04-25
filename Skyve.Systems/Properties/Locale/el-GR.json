@@ -32,8 +32,8 @@
   "Preferences": "Προτιμήσεις",
   "PlaysetName": "Όνομα Παιχνιδιού",
   "RenamePlayset": "Rename this playset",
-  "StartScratch": "Ξεκινήστε ένα σετ αναπαραγωγής από την αρχή",
-  "ContinueFromCurrent": "Clone your active playset",
+  "StartScratch": "Start a new playset from scratch without any included package.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Κατασκευή Πόλεων",
   "EditorPlay": "Δημιουργία Αντικειμένων",
   "PlaysetUsage": "Χρήση Αναπαραγωγής",
@@ -87,7 +87,7 @@
   "FavoriteThisPlayset": "Αγαπημένο αυτό το σετ αναπαραγωγής",
   "NoDlcsNoInternet": "Δεν ήταν δυνατή η φόρτωση DLCs, συνδεθείτε στο διαδίκτυο",
   "NoDlcsOpenGame": "Δεν υπάρχει αντιστοιχία DLC με την αναζήτησή σας",
-  "DlcUpdateNotice": "Αν τα DLC σας δεν εμφανίζονται εδώ, φροντίστε να ανοίξετε το παιχνίδι τουλάχιστον μία φορά",
+  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
   "DlcCount": "{0} συνολικοί DLC που ανήκουν",
   "Unfiltered": "Αφιλτράρισμα",
   "AnyTags": "Οποιεσδήποτε Ετικέτες",
@@ -102,7 +102,6 @@
   "DLCs": "DLCs & CCPs",
   "LaunchTooltip": "Κάντε κλικ για εκκίνηση/διακοπή πόλεις: Skylines ή χρησιμοποιήστε {0} οπουδήποτε στην εφαρμογή",
   "SelectedFileInvalid": "Το αρχείο που επιλέξατε δεν είναι έγκυρο",
-  "ShowingFilteredItems": "Εμφάνιση {0} από τα συνολικά στοιχεία {1}",
   "ThemeUIScale": "Κλίμακα Θέματος & Ui",
   "SearchPlaysets": "Αναζήτηση μέσω αυτών των Playsets..",
   "AdvancedSettings": "Ρυθμίσεις Για Προχωρημένους",
@@ -112,6 +111,8 @@
   "OpenGuide": "Open the Wiki",
   "ResetFolderButton": "Επαναφορά όλων των ρυθμίσεων φακέλου",
   "LinkModAssets": "Σύνδεση περιουσιακών στοιχείων από mods στην κατάσταση 'Συμπεριλαμβανόμενη' της λειτουργίας",
+  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
+  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
   "LinkModAssets_Tip": "Ορισμένα mods περιλαμβάνουν περιουσιακά στοιχεία που απαιτούνται για να λειτουργήσουν σωστά. Η ενεργοποίηση αυτής της επιλογής συνδέει αυτά τα περιουσιακά στοιχεία με το ίδιο το mod και αποκρύπτει αυτά τα περιουσιακά στοιχεία από τη σελίδα Περιουσιακών Στοιχείων έτσι ώστε να μην τα αποκλείσετε κατά λάθος.",
   "ShowDatesRelatively_Tip": "Αλλάζει τη μορφή των ημερομηνιών που εμφανίζονται σε λίστες περιεχομένου σε σχετικό χρόνο. Για παράδειγμα; Χθες στις 2:10 μμ",
   "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
@@ -156,9 +157,9 @@
   "CopyLogFile": "Αντιγραφή του αρχείου καταγραφής του παιχνιδιού στο πρόχειρο",
   "OpenLOTLogFolder": "Άνοιγμα φακέλου καταγραφής Skyve",
   "CopyLOTLogFile": "Αντιγραφή αρχείου καταγραφής του Skyve στο πρόχειρο",
-  "GenericIncludedTotal": "{0} included: {1}, Total: {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, Total: {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, Total: {3}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
+  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Δημιουργία ή εισαγωγή ενός νέου συνόλου αναπαραγωγής",
   "ViewPlaysets_Tip": "View & manage your playsets",
   "DeactivatePlayset_Tip": "Deactivate your current playset",
@@ -341,17 +342,21 @@
     "One": "Εμφάνιση {0} {1}",
     "Plural": "Showing {0} {1}"
   },
-  "ShowingCountWarning": {
-    "One": "Εμφάνιση {0} {1}, {3}",
-    "Plural": "Showing {0} {1}, {3}"
+  "TotalCount": {
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
-  "ShowingSelectedCount": {
-    "One": "Εμφάνιση {0} {1}, {2} επιλεγμένα",
-    "Plural": "Showing {0} {1}, {2} selected"
+  "TotalCountWarning": {
+    "One": "{0} total {1}, {3}",
+    "Plural": "{0} total {1}, {3}"
   },
-  "ShowingSelectedCountWarning": {
-    "One": "Εμφάνιση {0} {1}, {2} επιλέχθηκε, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+  "TotalSelectedCount": {
+    "One": "{0} total {1}, {2} selected",
+    "Plural": "{0} total {1}, {2} selected"
+  },
+  "TotalSelectedCountWarning": {
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "Το {0} {1} είναι κρυμμένο λόγω χρήσης του σετ αναπαραγωγής σας",
@@ -407,9 +412,6 @@
     "One": "Έχετε πακέτο {0} από {1}",
     "Plural": "Έχετε {0} πακέτα από τον {1}"
   },
-  "RequestOption1": "Αναφορά προβλήματος ή προσθήκη πληροφοριών που λείπουν",
-  "RequestOption2": "Προσθέστε μια κατάσταση που λείπει για το πακέτο",
-  "RequestOption3": "Προσθέστε μια αλληλεπίδραση που λείπει με ένα άλλο πακέτο",
   "ActivePlayset": "Active Playset",
   "References": "Αναφορές",
   "OpenLog": "Open Game Log",
@@ -457,15 +459,15 @@
   },
   "CustomTags": "Προσαρμοσμένες Ετικέτες",
   "WorkshopAndGameTags": "Ετικέτες Εργαστηρίου & Σε Παιχνίδι",
+  "IDAndTags": "Ετικέτες Αναγνωριστικού",
   "TroubleshootIssues": "Αντιμετώπιση Προβλημάτων",
   "ViewTroubleshootOptions": "Προβολή επιλογών αντιμετώπισης προβλημάτων",
   "TroubleshootInfo": "Εάν έχετε ένα mod ή ένα περιουσιακό στοιχείο που προκαλεί ένα θέμα ή που λείπει, και δεν ξέρετε ποιο Δοκιμάστε την αντιμετώπιση προβλημάτων εδώ:",
-  "TroubleshootCaused": "Ένα mod ή περιουσιακό στοιχείο που χρησιμοποιώ προκαλεί προβλήματα",
-  "TroubleshootNew": "Μια πρόσφατη ενημέρωση mod ή μια νέα συνδρομή προκαλεί προβλήματα",
-  "TroubleshootMissing": "Μου λείπει ένα mod ή περιουσιακό στοιχείο, και αυτό προκαλεί προβλήματα",
+  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
+  "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Ποια επιλογή περιγράφει καλύτερα την κατάστασή σας?",
   "TroubleshootModOrAsset": "Τι είδους περιεχόμενο θα θέλατε να αντιμετωπίσετε προβλήματα?",
-  "IDAndTags": "Ετικέτες Αναγνωριστικού",
   "ApplyingSettings": "Εφαρμογή ρυθμίσεων...",
   "WaitingForGameLaunch": "Αναμονή για έναρξη του παιχνιδιού...",
   "WaitingForGameClose": "Αναμονή για το κλείσιμο του παιχνιδιού...",
@@ -475,7 +477,7 @@
   "NextStage": "Επόμενο Στάδιο",
   "CancelTroubleshootMessage": "Θα θέλατε να επαναφέρετε στις ρυθμίσεις που χρησιμοποιούσατε πριν από την έναρξη της αντιμετώπισης προβλημάτων?\r\n\r\nΕπιλέξτε 'Όχι' για να διατηρήσετε την τρέχουσα διαμόρφωση των πακέτων.",
   "CancelTroubleshootTitle": "Ακύρωση & Επαναφορά Αντιμετώπισης Προβλημάτων?",
-  "TroubleshootAskIfFixed": "Έκανε τις τελευταίες αλλαγές διορθώστε το ζήτημα που προσπαθείτε να λύσετε?",
+  "TroubleshootAskIfFixed": "Did you still experience any issues with the current mod configuration?",
   "TroubleshootAskToStop": "Θα θέλατε να σταματήσετε την αντιμετώπιση προβλημάτων εδώ και να διατηρήσετε την τρέχουσα διαμόρφωση των πακέτων?\r\n\r\nΕπιλέξτε 'Όχι' για να συνεχίσετε την αντιμετώπιση προβλημάτων.",
   "StopTroubleshootTitle": "Σταματήστε Την Αντιμετώπιση Προβλημάτων?",
   "TroubleshootCancelTip": "Σταματήστε τη διεργασία αντιμετώπισης προβλημάτων.",
@@ -485,12 +487,20 @@
     "One": "Έχετε ένα πακέτο με μια σοβαρή προειδοποίηση συμβατότητας.\r\nΜπορεί να θέλετε να προσπαθήσετε να το αντιμετωπίσετε πρώτα πριν από την αντιμετώπιση προβλημάτων.",
     "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
   },
-  "TroubleshootViewComp": "Δείτε την αναφορά συμβατότητας",
-  "TroubleshootSkipComp": "Παράλειψη & συνέχιση αντιμετώπισης προβλημάτων",
+  "TroubleshootViewComp": "Go back and view your compatibility report's page to make sure you're not using broken mods.",
+  "TroubleshootSkipComp": "Skip this step and continue with the troubleshooting steps.",
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues, the current troubleshoot playset will be kept for you to use.",
+  "TroubleshootActionFailed": "Applying your action failed.",
+  "TroubleshootError": "An error occurred, try again later, or check the logs for more information.",
+  "TroubleshootBusy": "Another action is already ongoing. Wait for it, or restart Skyve if it seems stuck.",
+  "TroubleshootNoPacakgesToProcess": "No mods match what you're trying to troubleshoot.",
+  "TroubleshootCouldNotCreatePlayset": "Could not create a new playset for troubleshooting. Try again later or after restarting Skyve.",
+  "TroubleshootInvalidState": "The troubleshooting state is no longer valid. Please start a new troubleshooting session.",
+  "TroubleshootNoActivePlayset": "You need to have an active playset to troubleshoot.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "Το Skyve εντόπισε ότι κάποια από τα πακέτα σας δεν είναι τέλεια κατεβασμένα, θα θέλατε να προσπαθήσετε να τα διορθώσετε πρώτα?",
   "FaultyPackagesTitle": "Ανιχνεύθηκαν Ελαττωμένα Πακέτα",
   "CleanupInfoTitle": "Τι είναι ο καθαρισμός?",
-  "TroubleshootCauseResult": "Τα ακόλουθα πακέτα μπορεί να είναι η αιτία των προβλημάτων σας",
   "VerifiedAuthor": "Επαληθευμένος Συγγραφέας",
   "EnableItem": "Enable this mod",
   "DisableItem": "Disable this mod",
@@ -612,8 +622,6 @@
   "CouldNotUploadFile": "Could not upload your file at this time",
   "ReplyToRequester": "Reply to requester",
   "SendReply": "Send the reply",
-  "LetUserKnowIsFixed": "Let the requester know that the issue was fixed",
-  "LetUserKnowSaveFileNeeded": "Let the requester know that you need a savegame to properly review",
   "ReviewRequestNotification": "Review Request Update",
   "ReviewRequestNotificationInfo": "Your review request for '{0}' has a new update",
   "ReviewIsFixed": "The issue you've reported has now been fixed. You can use the {0} again.",
@@ -676,5 +684,12 @@
   "InvalidFolder": "Invalid Folder",
   "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "Restore this backup",
-  "DeleteBackup": "Delete this backup"
+  "DeleteBackup": "Delete this backup",
+  "Owned": "Owned",
+  "CreatorPackBy": "Creator pack by {0}",
+  "BrokenUpdate": "Broken Update",
+  "MissingPackage": "Missing Package",
+  "GenericIssue": "Generic Issue",
+  "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
+  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
 }
