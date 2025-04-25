@@ -161,5 +161,12 @@ public class BigSelectionOptionControl : SlickImageControl
 
 			e.Graphics.DrawRoundedRectangle(pen, ButtonText is not null ? buttonRect : rectangle, ButtonText is not null ? UI.Scale(4) : margin);
 		}
+
+		if (!Enabled)
+		{
+			using var brush = new SolidBrush(Color.FromArgb(125, BackColor));
+
+			e.Graphics.FillRectangle(brush, ClientRectangle);
+		}
 	}
 }

@@ -221,7 +221,7 @@ public class DragAndDropControl : SlickControl
 
 		if (Loading)
 		{
-			DrawLoader(e.Graphics, rect.Align(UI.Scale(new Size(32,32)), ContentAlignment.MiddleLeft));
+			DrawLoader(e.Graphics, rect.Align(new Size(IconManager.GetLargeScale(), IconManager.GetLargeScale()), ContentAlignment.MiddleLeft));
 		}
 		else
 		{
@@ -264,31 +264,12 @@ public class DragAndDropControl : SlickControl
 
 		var iconRect = fileRect.Align(fileIcon.Size, ContentAlignment.TopCenter);
 
-		if (Loading)
-		{
-			DrawLoader(e.Graphics, iconRect);
-		}
-		else
-		{
-			e.Graphics.DrawImage(fileIcon, iconRect);
-		}
+		e.Graphics.DrawImage(fileIcon, iconRect);
 
 		using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Far };
 		using var brush = new SolidBrush(textColor);
 
 		e.Graphics.DrawString(Path.GetFileNameWithoutExtension(SelectedFile), font, brush, fileRect, format);
-
-
-		//using var fileIcon = IconManager.GetLargeIcon(ImageName ?? "File").Color(FormDesign.Design.MenuForeColor);
-		//using var removeIcon = IconManager.GetIcon("X").Color(FormDesign.Design.MenuForeColor);
-		//var textSize = e.Graphics.Measure(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), Width - availableWidth - Padding.Horizontal);
-		//var fileHeight = (int)textSize.Height + 3 + fileIcon.Height + Padding.Top;
-		//var fileRect = new Rectangle(0, 0, Width - availableWidth, Height).Pad(Padding.Left);
-		//var fileContentRect = fileRect.CenterR(Math.Max((int)textSize.Width + 3, fileIcon.Width), fileHeight);
-
-		//e.Graphics.FillRoundedRectangle(new SolidBrush((fileHovered = HoverState.HasFlag(HoverState.Hovered) && fileRect.Contains(cursor)) && !removeRect.Contains(cursor) ? FormDesign.Design.MenuColor.MergeColor(FormDesign.Design.ActiveColor) : FormDesign.Design.MenuColor), fileRect, border);
-		//e.Graphics.DrawImage(fileIcon, fileContentRect.Align(fileIcon.Size, ContentAlignment.TopCenter));
-		//e.Graphics.DrawString(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), new SolidBrush(FormDesign.Design.MenuForeColor), fileContentRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Far });
 
 		if (HoverState.HasFlag(HoverState.Hovered) && removeRect.Contains(cursor))
 		{

@@ -91,7 +91,7 @@ public class MiniPackageControl : SlickControl
 				}
 				else if (ShowIncluded && !IsDlc && imageRect.Contains(e.Location))
 				{
-					var isIncluded = Package.IsIncluded(out var partialIncluded) && !partialIncluded;
+					var isIncluded = Package.IsIncluded(out var partialIncluded, withVersion: false) && !partialIncluded;
 
 					Loading = true;
 
@@ -101,7 +101,7 @@ public class MiniPackageControl : SlickControl
 					}
 					else
 					{
-						var enable = !Package.IsEnabled();
+						var enable = !Package.IsEnabled(withVersion: false);
 
 						if (enable || !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil))
 						{
@@ -222,7 +222,7 @@ public class MiniPackageControl : SlickControl
 	{
 		var localIdentity = Package!.GetLocalPackageIdentity();
 		var isPartialIncluded = false;
-		var isIncluded = IsDlc ? _dlcManager.IsAvailable(Package!.Id) : Package!.IsIncluded(out isPartialIncluded, false);
+		var isIncluded = IsDlc ? _dlcManager.IsAvailable(Package!.Id) : Package!.IsIncluded(out isPartialIncluded, withVersion: false);
 		var isEnabled = IsDlc ? isIncluded : Package!.IsEnabled(false);
 		Color activeColor = default;
 		string text;
