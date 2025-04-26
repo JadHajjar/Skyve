@@ -22,7 +22,7 @@
   "BreaksOnPatch": "Stable, peut potentiellement ne plus fonctionner après une mise à jour",
   "BrokenFromPatch": "Broken from the lastest patch",
   "BrokenFromNewVersion": "Broken from its latest version",
-  "NumerousReports": "Has multiple reports",
+  "NumerousReports": "A plusieurs signalements",
   "NotEnoughInformation": "Pas assez d'information",
   "HasIssues": "Possède des problèmes",
   "Broken": "Cassé",
@@ -54,8 +54,8 @@
   "Caution": "Attention",
   "Warning": "Avertissement",
   "AttentionRequired": "Attention requise",
-  "ActionRequired": "Action Required",
-  "Obsolete": "Obsolete",
+  "ActionRequired": "Action Nécessaire",
+  "Obsolete": "Obsolète",
   "Website": "Site Web",
   "Donation": "Faire un don",
   "ManageCompatibilityData": "Gestion de la compatibilité",
@@ -138,7 +138,7 @@
   "OutputText": "Résultat attendu",
   "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate; though assets are generally stable.",
   "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. Its author is still actively working on it and updating it.",
+  "Stability_Stable": "\"{0}\" est stable. Son auteur continue à travailler dessus et à le mettre à jour.",
   "Stability_StableNoNewFeatures": "'{0}' est stable, mais l'auteur ne publiera plus de mises à jour de fonctionnalités.\nIl le mettra cependant à jour en cas de nouveaux bugs.",
   "Stability_StableNoFutureUpdates": "'{0}' est stable, cependant son auteur ne le supporte plus, des mises à jour futures ou corrections de bug sont peu probable.",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' peut causer des problèmes, et son auteur ne le supporte plus, des mises à jour futures ou corrections de bug sont peu probables.",
@@ -157,9 +157,9 @@
   "Stability_NumerousReports": "There are multiple active reports for '{0}' at the moment. Caution is advised while the issue is being investigated.",
   "Stability_Obsolete": "'{0}' is obsolete, its usage is no longer needed, or is redundant due to the game or other mods having the same functionality.",
   "Action_NoAction": "",
-  "Action_IncludeThis": "You should add '{0}' to your playset",
+  "Action_IncludeThis": "Vous devriez ajouter \"{0}\" à votre playset",
   "Action_IncludeOther": {
-    "One": "You should add '{1}' to your playset.",
+    "One": "Vous devriez ajouter \"{1}\" à votre playset.",
     "Plural": "Vous devez ajouter les paquets suivants à votre playset."
   },
   "Action_RequiresConfiguration": "Veuillez suivre les instructions suivantes :",
@@ -167,20 +167,20 @@
     "One": "Entre '{0}' et '{1}', vous ne devriez en choisir qu'un seul.",
     "Plural": "Entre '{0}' et les paquets suivants, vous ne devriez en choisir qu'un seul."
   },
-  "Action_UnsubscribeThis": "You should completely remove '{0}' from all your playsets.",
+  "Action_UnsubscribeThis": "Vous devriez complètement retirer \"{0}\" de tous vos playsets.",
   "Action_UnsubscribeOther": {
-    "One": "You should completely remove '{1}' from all your playsets.",
-    "Plural": "You should completely remove the following packages from all your playsets."
+    "One": "Vous devriez complètement retirer \"{1}\" de tous vos playsets.",
+    "Plural": "Vous devriez retirer les paquets suivants de tous vos playsets."
   },
-  "Action_ExcludeThis": "You should remove '{0}' from your playset.",
+  "Action_ExcludeThis": "Vous devriez retirer \"{0}\" de votre playset.",
   "Action_ExcludeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "Vous devriez retirer \"{1}\" de votre playset.",
+    "Plural": "Vous devriez retirer les paquets suivants de votre playset."
   },
-  "Action_DisableThis": "You should disable '{0}'.",
+  "Action_DisableThis": "Vous devriez désactiver \"{0}\".",
   "Action_DisableOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "Vous devriez désactiver \"{1}\".",
+    "Plural": "Vous devriez désactiver les paquets suivants."
   },
   "NoAction": "Ne rien faire",
   "RequiresConfiguration": "Nécessite une configuration spécifique",
@@ -189,12 +189,12 @@
   "UnsubscribeOther": "Completely unsubscribe from linked packages",
   "Switch": "Basculer vers le paquet lié",
   "FlippedSwitch": "Utilisez ce paquet",
-  "IncludeThis": "Include this package",
-  "IncludeOther": "Include linked packages",
-  "ExcludeThis": "Exclude this package",
-  "ExcludeOther": "Exclude linked packages",
-  "DisableThis": "Disable this package",
-  "DisableOther": "Disable linked packages",
+  "IncludeThis": "Inclure ce paquet",
+  "IncludeOther": "Inclure les paquets liés",
+  "ExcludeThis": "Exclure ce paquet",
+  "ExcludeOther": "Exclure les paquets liés",
+  "DisableThis": "Désactiver ce paquet",
+  "DisableOther": "Désactiver les paquets liés",
   "Unsubscribe": "Se désabonner",
   "Action_Switch": {
     "One": "Vous devriez basculer vers '{1}'.",
