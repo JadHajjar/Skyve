@@ -691,5 +691,5 @@
   "MissingPackage": "Paquet manquant",
   "GenericIssue": "Generic Issue",
   "InvestigateMods": "Investigate only code mods during the troubleshooting process.",
-  "InvestigateAssets": "Investigate only assets and content packages during the troubleshooting process."
+  "InvestigateAssets": "Enquêtez uniquement sur les assets et les paquets de contenu pendant le processus de dépannage."
 }
