@@ -20,8 +20,8 @@
   "StableNoFutureUpdates": "Stable, plus aucune mise à jour",
   "HasIssuesNoFutureUpdates": "À des problèmes, plus aucune mise à jour",
   "BreaksOnPatch": "Stable, peut potentiellement ne plus fonctionner après une mise à jour",
-  "BrokenFromPatch": "Broken from the lastest patch",
-  "BrokenFromNewVersion": "Broken from its latest version",
+  "BrokenFromPatch": "Dysfonctionnel depuis le dernier patch",
+  "BrokenFromNewVersion": "Dysfonctionnel depuis sa dernière version",
   "NumerousReports": "A plusieurs signalements",
   "NotEnoughInformation": "Pas assez d'information",
   "HasIssues": "Possède des problèmes",
@@ -46,7 +46,7 @@
   "RequirementAlternative": "Exigence alternative à ..",
   "IncompatibleWith": "Incompatible avec..",
   "CausesIssuesWith": "Provoque des problèmes avec..",
-  "OptionalPackages": "Has optional packages ..",
+  "OptionalPackages": "A des paquets optionnels…",
   "RequiredPackages": "Requiert..",
   "StatusType": "Type de statut",
   "InteractionType": "Type d'interaction",
@@ -136,8 +136,8 @@
   "Status_SourceAvailable": "Ce paquet n'avertira pas en cas de code source manquant.",
   "Status_StandardMod": "Ce paquet sera ignoré lors de l'analyse des mods pour la résolution des problèmes.",
   "OutputText": "Résultat attendu",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate.",
+  "Stability_AssetNotReviewed": "'{0}' n’a pas encore été révisé.\nLes informations de compatibilité peuvent ne pas être exactes ; cependant, les assets sont généralement stables.",
+  "Stability_NotReviewed": "'{0}' n'a pas encore été révisé.\nLes informations de compatibilité peuvent ne pas être exactes.",
   "Stability_Stable": "\"{0}\" est stable. Son auteur continue à travailler dessus et à le mettre à jour.",
   "Stability_StableNoNewFeatures": "'{0}' est stable, mais l'auteur ne publiera plus de mises à jour de fonctionnalités.\nIl le mettra cependant à jour en cas de nouveaux bugs.",
   "Stability_StableNoFutureUpdates": "'{0}' est stable, cependant son auteur ne le supporte plus, des mises à jour futures ou corrections de bug sont peu probable.",
@@ -233,8 +233,8 @@
     "Plural": "{0} {1} that are obsolete"
   },
   "BrokenCount": {
-    "One": "{0} {1} that is broken",
-    "Plural": "{0} {1} that are broken"
+    "One": "{0} {1} qui est dysfonctionnel",
+    "Plural": "{0} {1} qui sont dysfonctionnels"
   },
   "ActionRequiredCount": "{0} {1} where your action is required",
   "AttentionRequiredCount": {
