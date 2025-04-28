@@ -465,7 +465,7 @@
   "TroubleshootInfo": "Si vous avez un mod ou un asset qui crée des problèmes, ou qui manque, sans savoir lequel, essayez de résoudre ces problèmes ici :",
   "TroubleshootCaused": "J’ai des problèmes avec un mod ou un asset, mais je ne suis pas sûr de savoir lequel est en cause.",
   "TroubleshootNew": "Je me suis récemment abonné à de nouveaux mods, ou certains mods ont été mis à jour récemment, et mon jeu a soudainement commencé à avoir des problèmes.",
-  "TroubleshootMissing": "Je pense qu’il me manque des mods ou des ressources/assets dans mon playset actuel, que j’ai utilisé précédemment dans d'autres playsets.",
+  "TroubleshootMissing": "Je pense que des assets et/ou mods que j'ai utilisé dans d'autres playsets sont absents de mon playset actuel.",
   "TroubleshootSelection": "Quelle option décrit le mieux votre situation ?",
   "TroubleshootModOrAsset": "Quel est le type de contenu pour lequel vous souhaitez résoudre les problèmes ?",
   "ApplyingSettings": "Application des paramètres...",
