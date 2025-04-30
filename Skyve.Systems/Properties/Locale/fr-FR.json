@@ -487,7 +487,7 @@
     "One": "Vous avez un paquet avec un avertissement de compatibilité sérieux.\nVous pourriez essayer de vous en occuper avant de résoudre les problèmes.",
     "Plural": "Vous avez {0} paquets avec avertissements de compatibilité sérieux.\nVous pourriez essayer de vous en occuper avant de résoudre les problèmes."
   },
-  "TroubleshootViewComp": "Retournez en arrière et consultez la page de rapports de compatibilité pour vous assurer que vous n'utilisez pas de mods dysfonctionnels.",
+  "TroubleshootViewComp": "Retournez en arrière et consultez la page du rapport de compatibilité pour vous assurer que vous n'utilisez pas de mods dysfonctionnels.",
   "TroubleshootSkipComp": "Sauter cette étape et continuer avec les étapes de dépannage.",
   "TroubleshootCauseResult": "Les paquets suivants pourraient être la cause de vos problèmes, le playset de dépannage actuel sera conservé pour vous.",
   "TroubleshootActionFailed": "L’application de votre action a échoué.",
@@ -497,7 +497,7 @@
   "TroubleshootCouldNotCreatePlayset": "Impossible de créer un nouveau playset pour le dépannage. Réessayez plus tard ou après avoir redémarré Skyve.",
   "TroubleshootInvalidState": "L’état du dépannage n'est plus valide. Veuillez démarrer une nouvelle session de dépannage.",
   "TroubleshootNoActivePlayset": "Vous devez avoir un playset actif pour démarrer le dépannage.",
-  "TroubleshootInconclusive": "Le dépannage n’était pas concluant.\nLe problème n’est peut-être pas lié à un mod spécifique, ou il peut être causé par plusieurs mods en interaction.",
+  "TroubleshootInconclusive": "Le dépannage n’était pas concluant.\nLe problème n’est peut-être pas lié à un mod spécifique, il est peut-être lié à plusieurs mods.",
   "SkyveDetectedFaultyPackages": "Skyve a détecté que certains de vos paquets ne sont pas complètement téléchargés, voulez-vous essayer de les réparer d'abord ?",
   "FaultyPackagesTitle": "Paquets défectueux détecté",
   "CleanupInfoTitle": "Qu'est-ce qu'un nettoyage ?",
