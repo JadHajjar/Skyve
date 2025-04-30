@@ -46,7 +46,7 @@
   "RequirementAlternative": "Exigence alternative à ..",
   "IncompatibleWith": "Incompatible avec..",
   "CausesIssuesWith": "Provoque des problèmes avec..",
-  "OptionalPackages": "A des paquets optionnels…",
+  "OptionalPackages": "A des paquets optionnels ..",
   "RequiredPackages": "Requiert..",
   "StatusType": "Type de statut",
   "InteractionType": "Type d'interaction",
@@ -136,8 +136,8 @@
   "Status_SourceAvailable": "Ce paquet n'avertira pas en cas de code source manquant.",
   "Status_StandardMod": "Ce paquet sera ignoré lors de l'analyse des mods pour la résolution des problèmes.",
   "OutputText": "Résultat attendu",
-  "Stability_AssetNotReviewed": "'{0}' n’a pas encore été révisé.\n\nLes informations de compatibilité peuvent ne pas être exactes ; cependant, les assets sont généralement stables.",
-  "Stability_NotReviewed": "'{0}' n'a pas encore été révisé.\n\nLes informations de compatibilité peuvent ne pas être exactes.",
+  "Stability_AssetNotReviewed": "'{0}' n’a pas encore été évalué.\n\nLes informations de compatibilité peuvent ne pas être exactes ; cependant, les assets sont généralement stables.",
+  "Stability_NotReviewed": "'{0}' n'a pas encore été évalué.\n\nLes informations de compatibilité peuvent ne pas être exactes.",
   "Stability_Stable": "\"{0}\" est stable. Son auteur continue à travailler dessus et à le mettre à jour.",
   "Stability_StableNoNewFeatures": "'{0}' est stable, mais l'auteur ne publiera plus de mises à jour de fonctionnalités.\nIl le mettra cependant à jour en cas de nouveaux bugs.",
   "Stability_StableNoFutureUpdates": "'{0}' est stable, cependant son auteur ne le supporte plus, des mises à jour futures ou corrections de bug sont peu probable.",
@@ -229,7 +229,7 @@
   "CautionCount": "{0} {1} où la prudence est conseillée",
   "WarningCount": "{0} {1} avec un avertissement",
   "ObsoleteCount": {
-    "One": "{0} {1} qui est dysfonctionnel",
+    "One": "{0} {1} qui est obsolète",
     "Plural": "{0} {1} qui sont obsolètes"
   },
   "BrokenCount": {
@@ -271,7 +271,7 @@
   "PackageType_VisualMod": "Modifications visuelles ou thèmes de textures pour la map.",
   "PackageType_SimulationMod": "Mod de simulation qui modifie directement le gameplay du jeu.",
   "PackageType_NameList": "Traductions supplémentaires pour le jeu ou liste de noms (de villes, de voies, de cims, etc).",
-  "PackageType_MapSavegame": "Map vierge ou sauvegarde.",
+  "PackageType_MapSavegame": "Map ou sauvegarde.",
   "ApplyChangedBeforeExit": "Vous avez des modifications non enregistrées.\n\nVoulez-vous appliquer ces modifications avant de continuer ?",
   "AuthorRetired": "L'auteur de {0}, {1}, a pris sa retraite ou est inactif depuis longtemps.\n\nLes mises à jour futures et la stabilité de leurs paquets ne sont pas garanties.",
   "AuthorMalicious": "L'auteur de {0}, {1} est connu pour être malveillant et/ou pour avoir inclus des contenus nuisibles comme des virus dans leurs paquets.",
@@ -305,7 +305,7 @@
   "EditHistory": "Éditer l’historique",
   "EditNote": "Éditer la note",
   "EditNoteInfo": "Laissez une note pour informer d’autres gestionnaires.",
-  "RequestReviewUpdate": "Envoyer la demande de révision.",
+  "RequestReviewUpdate": "Envoyer une demande de révision.",
   "LastReview": "Dernière révision",
   "ActiveReviewRequests": "Demandes de révision actives",
   "ActiveReportsCount": {
