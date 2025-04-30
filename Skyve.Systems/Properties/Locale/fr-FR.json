@@ -495,7 +495,7 @@
   "TroubleshootBusy": "Une autre action est déjà en cours. Attendez, ou redémarrez Skyve si elle semble bloquée.",
   "TroubleshootNoPacakgesToProcess": "Aucun mod ne correspond à ce que vous essayez de résoudre.",
   "TroubleshootCouldNotCreatePlayset": "Impossible de créer un nouveau playset pour le dépannage. Réessayez plus tard ou après avoir redémarré Skyve.",
-  "TroubleshootInvalidState": "L’état de la session de dépannage n'est plus valide. Veuillez démarrer une nouvelle session de dépannage.",
+  "TroubleshootInvalidState": "L’état du dépannage n'est plus valide. Veuillez démarrer une nouvelle session de dépannage.",
   "TroubleshootNoActivePlayset": "Vous devez avoir un playset actif pour démarrer le dépannage.",
   "TroubleshootInconclusive": "Le dépannage n’était pas concluant.\nLe problème n’est peut-être pas lié à un mod spécifique, ou il peut être causé par plusieurs mods en interaction.",
   "SkyveDetectedFaultyPackages": "Skyve a détecté que certains de vos paquets ne sont pas complètement téléchargés, voulez-vous essayer de les réparer d'abord ?",
