@@ -223,36 +223,36 @@
   "RequestReviewInfo": "使用此插件时遇到问题？",
   "RequestReview": "请求检查",
   "MissingDependencyCount": {
-    "One": "缺少前置的{1}",
-    "Plural": "缺少前置的{1}"
+    "One": "{0}缺少前置的{1}",
+    "Plural": "{0}缺少前置的{1}"
   },
-  "CautionCount": "{0} 个{1} 建议谨慎使用",
-  "WarningCount": "{0} 个{1} 带有警告",
+  "CautionCount": "{0}建议谨慎使用的{1}",
+  "WarningCount": "{0}带有警告的{1}",
   "ObsoleteCount": {
-    "One": "{0} 个{1} 已过时",
-    "Plural": "{0} 个{1} 已过时"
+    "One": "{0}已过时的{1}",
+    "Plural": "{0}已过时的{1}"
   },
   "BrokenCount": {
-    "One": "{0} 个{1} 已损坏",
-    "Plural": "{0} 个{1} 已损坏"
+    "One": "{0}已损坏的{1}",
+    "Plural": "{0}已损坏的{1}"
   },
-  "ActionRequiredCount": "{0} 个{1} 需要执行操作",
+  "ActionRequiredCount": "{0}需要执行操作的{1}",
   "AttentionRequiredCount": {
-    "One": "{0} 个{1} 需要注意",
-    "Plural": "{0} 个{1} 需要注意"
+    "One": "{0}需要注意的{1}",
+    "Plural": "{0}需要注意的{1}"
   },
   "ExcludeCount": {
-    "One": "{0} 个{1} 应当被卸下",
-    "Plural": "应当被卸下的{1}"
+    "One": "{0}应该被卸下的{1}",
+    "Plural": "{0}应当被卸下的{1}"
   },
-  "UnsubscribeCount": "{0} 个{1} 应当取消订阅",
+  "UnsubscribeCount": "{0}应该取消订阅的{1}",
   "SwitchCount": {
-    "One": "{0} 个{1} 需要替换",
-    "Plural": "{0} 个{1} 需要替换"
+    "One": "{0}需要替换的{1}",
+    "Plural": "{0}需要替换的{1}"
   },
   "RequiredItemCount": {
-    "One": "必需但未启用的{1}",
-    "Plural": "必需但未启用的{1}"
+    "One": "{0}必需但未启用的{1}",
+    "Plural": "{0}必需但未启用的{1}"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",
