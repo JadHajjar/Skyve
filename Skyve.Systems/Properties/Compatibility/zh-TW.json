@@ -52,6 +52,7 @@
   "InteractionType": "交互類型",
   "MissingDependency": "缺少前置模組",
   "Caution": "注意事項",
+  "CautionWhenUsing": "Caution when using it",
   "Warning": "警告",
   "AttentionRequired": "需要注意",
   "ActionRequired": "Action Required",
@@ -141,6 +142,7 @@
   "Stability_Stable": "'{0}' is stable. Its author is still actively working on it and updating it.",
   "Stability_StableNoNewFeatures": "「{0}」是穩定的，儘管作者將不再發布功能更新。 \n不過，作者仍會在出現新錯誤時進行更新。",
   "Stability_StableNoFutureUpdates": "「{0}」是穩定的，儘管作者不再支持它，未來的更新或錯誤修復不太可能發佈。",
+  "Stability_CautionWhenUsing": "",
   "Stability_HasIssuesNoFutureUpdates": "「{0}」可能會引發問題，且作者不再支持它，未來的更新或錯誤修復不太可能發佈。",
   "Stability_BreaksOnPatch": "「{0}」在新補丁發佈時很可能會損壞。",
   "Stability_NotEnoughInformation": "目前沒有足夠的資訊來正確審核「{0}」。",
@@ -265,10 +267,13 @@
   "RenderItPreset": "Render it! 的預設",
   "POFont": "Procedural Object 的字型/效果模組",
   "NameList": "Name-List / Game Translations",
-  "MapSavegame": "Map / Savegame",
+  "MapSavegame": {
+    "One": "Map / Savegame",
+    "Plural": "Maps & Savegames"
+  },
   "PackageType_MusicPack": "Music pack for the in-game radio.",
   "PackageType_ContentPackage": "Content package that contains assets or files, such as models, textures, or prefabs, and does not include any code or scripts that modify game behavior.",
-  "PackageType_VisualMod": "Visual modifications or map theme textures.",
+  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
   "PackageType_SimulationMod": "Simulation mod that directly alters the gameplay of the game.",
   "PackageType_NameList": "Extra game translations or name-list files.",
   "PackageType_MapSavegame": "Map, or Savegame.",
@@ -320,10 +325,13 @@
   "EffectsLinger": "Effects linger after removal",
   "RequiresManualAction": "Requires manual action to remove",
   "BreaksSave": "Breaks savegames when removed",
+  "HarmlessBut": "Harmless but ..",
+  "SavegameEffect_None": "This mod is safe to remove.",
   "SavegameEffect_AssetsRemain": "Removing assets leaves a grey box where they were placed in your city. These obsolete objects should be cleared to prevent any side effects.",
   "SavegameEffect_EffectsLinger": "Removing this mod will not remove its effects from your city.",
   "SavegameEffect_RequiresManualAction": "Removing this mod will require additional steps to properly remove it from your city.",
   "SavegameEffect_BreaksSave": "Removing this mod will break any city it was used in. Make sure to create backups of your city before using it.",
+  "SavegameEffect_HarmlessBut": "",
   "RemovalNote": "Removal Note",
   "RemovalNoteInfo": "Describe the steps to safely remove the mod from a savegame...",
   "ChooseWhatToRequest": "Choose how to send your request",
@@ -334,5 +342,9 @@
   "Log Report": "Log Report",
   "Proposed Changes": "Proposed Changes",
   "SendSavegameInfo": "Optionally attach your savegame to help us investigate the issue better",
-  "YourLogReportInfo": "sent with your request"
+  "YourLogReportInfo": "sent with your request",
+  "PackageActiveReviewRequest": {
+    "One": "'{0}' has active review requests.",
+    "Plural": "{0} {1} have active review requests."
+  }
 }
