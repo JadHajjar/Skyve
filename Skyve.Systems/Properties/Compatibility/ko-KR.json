@@ -52,6 +52,7 @@
   "InteractionType": "상호작용 유형",
   "MissingDependency": "의존성 누락",
   "Caution": "주의",
+  "CautionWhenUsing": "Caution when using it",
   "Warning": "경고",
   "AttentionRequired": "주목 필요",
   "ActionRequired": "Action Required",
@@ -141,6 +142,7 @@
   "Stability_Stable": "'{0}' is stable. Its author is still actively working on it and updating it.",
   "Stability_StableNoNewFeatures": "'{0}'은(는) 안정적입니다. 하지만 제작자는 더 이상 기능 업데이트를 출시하지 않습니다.\n그렇지만 새로운 버그가 생긴 경우에는 업데이트가 있을 것입니다.",
   "Stability_StableNoFutureUpdates": "'{0}'은(는) 안정적입니다. 하지만 제작자는 이를 지원하고 있지 않습니다. 향후 업데이트나 버그 수정이 있을 가능성은 거의 없습니다.",
+  "Stability_CautionWhenUsing": "",
   "Stability_HasIssuesNoFutureUpdates": "'{0}'은(는) 문제를 일으킬 수 있습니다. 제작자는 이를 지원하고 있지 않습니다. 향후 업데이트나 버그 수정이 있을 가능성은 거의 없습니다.",
   "Stability_BreaksOnPatch": "'{0}'은(는) 새로운 패치가 출시되면 손상될 가능성이 매우 높습니다.",
   "Stability_NotEnoughInformation": "'{0}'을(를) 제대로 검토할 만한 정보가 충분하지 않습니다.",
@@ -265,10 +267,13 @@
   "RenderItPreset": "Render it! 프리셋",
   "POFont": "Procedural Object 폰트/모듈",
   "NameList": "Name-List / Game Translations",
-  "MapSavegame": "Map / Savegame",
+  "MapSavegame": {
+    "One": "Map / Savegame",
+    "Plural": "Maps & Savegames"
+  },
   "PackageType_MusicPack": "Music pack for the in-game radio.",
   "PackageType_ContentPackage": "Content package that contains assets or files, such as models, textures, or prefabs, and does not include any code or scripts that modify game behavior.",
-  "PackageType_VisualMod": "Visual modifications or map theme textures.",
+  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
   "PackageType_SimulationMod": "Simulation mod that directly alters the gameplay of the game.",
   "PackageType_NameList": "Extra game translations or name-list files.",
   "PackageType_MapSavegame": "Map, or Savegame.",
@@ -320,10 +325,13 @@
   "EffectsLinger": "Effects linger after removal",
   "RequiresManualAction": "Requires manual action to remove",
   "BreaksSave": "Breaks savegames when removed",
+  "HarmlessBut": "Harmless but ..",
+  "SavegameEffect_None": "This mod is safe to remove.",
   "SavegameEffect_AssetsRemain": "Removing assets leaves a grey box where they were placed in your city. These obsolete objects should be cleared to prevent any side effects.",
   "SavegameEffect_EffectsLinger": "Removing this mod will not remove its effects from your city.",
   "SavegameEffect_RequiresManualAction": "Removing this mod will require additional steps to properly remove it from your city.",
   "SavegameEffect_BreaksSave": "Removing this mod will break any city it was used in. Make sure to create backups of your city before using it.",
+  "SavegameEffect_HarmlessBut": "",
   "RemovalNote": "Removal Note",
   "RemovalNoteInfo": "Describe the steps to safely remove the mod from a savegame...",
   "ChooseWhatToRequest": "Choose how to send your request",
@@ -334,5 +342,9 @@
   "Log Report": "Log Report",
   "Proposed Changes": "Proposed Changes",
   "SendSavegameInfo": "Optionally attach your savegame to help us investigate the issue better",
-  "YourLogReportInfo": "sent with your request"
+  "YourLogReportInfo": "sent with your request",
+  "PackageActiveReviewRequest": {
+    "One": "'{0}' has active review requests.",
+    "Plural": "{0} {1} have active review requests."
+  }
 }
