@@ -52,6 +52,7 @@
   "InteractionType": "Type d'interaction",
   "MissingDependency": "Dépendance manquante",
   "Caution": "Attention",
+  "CautionWhenUsing": "Caution when using it",
   "Warning": "Avertissement",
   "AttentionRequired": "Attention requise",
   "ActionRequired": "Action Nécessaire",
@@ -141,6 +142,7 @@
   "Stability_Stable": "\"{0}\" est stable. Son auteur continue à travailler dessus et à le mettre à jour.",
   "Stability_StableNoNewFeatures": "'{0}' est stable, mais l'auteur ne publiera plus de mises à jour de fonctionnalités.\nIl le mettra cependant à jour en cas de nouveaux bugs.",
   "Stability_StableNoFutureUpdates": "'{0}' est stable, cependant son auteur ne le supporte plus, des mises à jour futures ou corrections de bug sont peu probable.",
+  "Stability_CautionWhenUsing": "",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' peut causer des problèmes, et son auteur ne le supporte plus, des mises à jour futures ou corrections de bug sont peu probables.",
   "Stability_BreaksOnPatch": "'{0}' est très susceptible de ne plus fonctionner après la sortie d'une nouvelle mise à jour.",
   "Stability_NotEnoughInformation": "Il n'y a pas assez d'informations pour vérifier correctement '{0}'.",
@@ -265,10 +267,13 @@
   "RenderItPreset": "Préréglage de Render It!",
   "POFont": "Police / Module de Procedural Objects",
   "NameList": "Liste de noms / Traductions du jeu",
-  "MapSavegame": "Map / Sauvegarde",
+  "MapSavegame": {
+    "One": "Map / Savegame",
+    "Plural": "Maps & Savegames"
+  },
   "PackageType_MusicPack": "Pack pour la radio en jeu",
   "PackageType_ContentPackage": "Pack de contenu qui contient des ressources ou des fichiers, tels que des modèles, des textures ou des prefabs, et n’inclut pas de code ou de scripts qui modifient le comportement du jeu.",
-  "PackageType_VisualMod": "Modifications visuelles ou thèmes de textures pour la map.",
+  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
   "PackageType_SimulationMod": "Mod de simulation qui modifie directement le gameplay du jeu.",
   "PackageType_NameList": "Traductions supplémentaires pour le jeu ou liste de noms (de villes, de voies, de cims, etc).",
   "PackageType_MapSavegame": "Map ou sauvegarde.",
@@ -320,10 +325,13 @@
   "EffectsLinger": "Effets persistants après suppression",
   "RequiresManualAction": "Nécessite une action manuelle pour la suppression",
   "BreaksSave": "Corrompt les sauvegardes lorsqu’il est retiré",
+  "HarmlessBut": "Harmless but ..",
+  "SavegameEffect_None": "This mod is safe to remove.",
   "SavegameEffect_AssetsRemain": "La suppression des assets laissera une boîte grise là où ces assets étaient placés dans votre ville. Vous devrez vous débarasser de ces objets obsolètes pour éviter tout effet secondaire.",
   "SavegameEffect_EffectsLinger": "Supprimer ce mod ne supprimera pas ses effets de votre partie.",
   "SavegameEffect_RequiresManualAction": "La suppression de ce mod nécessite des étapes supplémentaires pour le retirer proprement de votre sauvegarde.",
   "SavegameEffect_BreaksSave": "Supprimer ce mod va corrompre toute partie dans laquelle il est utilisé. Assurez-vous de créer des sauvegardes de votre ville avant de l’utiliser.",
+  "SavegameEffect_HarmlessBut": "",
   "RemovalNote": "Notice de suppression",
   "RemovalNoteInfo": "Décrivez les étapes nécessaires pour supprimer proprement le mod d’une sauvegarde…",
   "ChooseWhatToRequest": "Choisissez comment envoyer votre demande",
@@ -334,5 +342,9 @@
   "Log Report": "Rapport de logs",
   "Proposed Changes": "Modifications proposées",
   "SendSavegameInfo": "Vous pouvez éventuellement attacher votre sauvegarde pour nous aider à mieux enquêter sur le problème",
-  "YourLogReportInfo": "envoyé avec votre demande"
+  "YourLogReportInfo": "envoyé avec votre demande",
+  "PackageActiveReviewRequest": {
+    "One": "'{0}' has active review requests.",
+    "Plural": "{0} {1} have active review requests."
+  }
 }
