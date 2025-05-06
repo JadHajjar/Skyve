@@ -52,6 +52,7 @@
   "InteractionType": "交互类型",
   "MissingDependency": "缺少前置",
   "Caution": "注意事项",
+  "CautionWhenUsing": "Caution when using it",
   "Warning": "警告",
   "AttentionRequired": "需要注意",
   "ActionRequired": "需要操作",
@@ -141,6 +142,7 @@
   "Stability_Stable": "'{0}' 能够稳定运行。作者仍在积极开发和更新它。",
   "Stability_StableNoNewFeatures": "'{0}' 能够稳定运行，不过作者不会再发布功能性更新。\n不过，如果出现了新的问题，作者仍会进行更新。",
   "Stability_StableNoFutureUpdates": "'{0}' 可以稳定运行，但作者已不再为其提供支持，因此，未来不太可能再进行更新或错误修复。",
+  "Stability_CautionWhenUsing": "",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' 可能存在问题，而且作者已不再提供支持，未来也不太可能更新或修复问题。",
   "Stability_BreaksOnPatch": "'{0}' 很可能在游戏更新后损坏。",
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查 '{0}' 的稳定性。",
@@ -265,10 +267,13 @@
   "RenderItPreset": "Render it! 的预设",
   "POFont": "Procedural Object 的字体/效果模块",
   "NameList": "名称列表/游戏翻译",
-  "MapSavegame": "地图/存档",
+  "MapSavegame": {
+    "One": "Map / Savegame",
+    "Plural": "Maps & Savegames"
+  },
   "PackageType_MusicPack": "游戏内电台的音乐包。",
   "PackageType_ContentPackage": "包含资产或模型、纹理、预制件等文件的内容包，并且不含任何修改游戏行为的代码或脚本。",
-  "PackageType_VisualMod": "视觉效果修改或地图主题纹理。",
+  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
   "PackageType_SimulationMod": "模拟模组，能够直接修改游戏的行为。",
   "PackageType_NameList": "额外的游戏翻译或名称列表文件。",
   "PackageType_MapSavegame": "地图或存档。",
@@ -320,10 +325,13 @@
   "EffectsLinger": "移除后仍有残留效果",
   "RequiresManualAction": "需要手动操作才能删除",
   "BreaksSave": "移除后将损坏存档",
+  "HarmlessBut": "Harmless but ..",
+  "SavegameEffect_None": "This mod is safe to remove.",
   "SavegameEffect_AssetsRemain": "移除资产，您城市中放置了该资产的位置将会留下一个灰色方盒，请清除这些残留物体以避免产生问题。",
   "SavegameEffect_EffectsLinger": "移除这个模组，不会从您的城市中移除它已造成的效果。",
   "SavegameEffect_RequiresManualAction": "移除这个模组，需要额外步骤才能正确地将它从你的城市移除。",
   "SavegameEffect_BreaksSave": "移除这个模组，会损坏所有使用过此模组的存档。在使用此模组前，请确保您已备份好城市。",
+  "SavegameEffect_HarmlessBut": "",
   "RemovalNote": "移除提示",
   "RemovalNoteInfo": "阐述如何安全从存档移除此模组的步骤…",
   "ChooseWhatToRequest": "选择如何发送您的请求",
@@ -334,5 +342,9 @@
   "Log Report": "日志报告",
   "Proposed Changes": "建议的更改",
   "SendSavegameInfo": "可以附带您的存档以帮助我们更好地调查问题",
-  "YourLogReportInfo": "与您的请求一起发送"
+  "YourLogReportInfo": "与您的请求一起发送",
+  "PackageActiveReviewRequest": {
+    "One": "'{0}' has active review requests.",
+    "Plural": "{0} {1} have active review requests."
+  }
 }
