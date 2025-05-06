@@ -52,6 +52,7 @@
   "InteractionType": "Tipo de interacción",
   "MissingDependency": "Faltan dependencias",
   "Caution": "Precaución",
+  "CautionWhenUsing": "Caution when using it",
   "Warning": "Advertencia",
   "AttentionRequired": "Atención requerida",
   "ActionRequired": "Acción requerida",
@@ -141,6 +142,7 @@
   "Stability_Stable": "'{0}' es estable. Su autor aún está trabajando activamente en él y continúa actualizándolo.",
   "Stability_StableNoNewFeatures": "'{0}' es estable, aunque el autor ya no publicará actualizaciones nuevas.\nSin embargo, lo actualizará en caso de nuevos errores.",
   "Stability_StableNoFutureUpdates": "'{0}' estable, aunque el autor ya no le está dando soporte, las futuras actualizaciones o correcciones de errores no son probables.",
+  "Stability_CautionWhenUsing": "",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' puede causar problemas, y el autor ya no lo soporta, futuras actualizaciones o correcciones de errores no son probables.",
   "Stability_BreaksOnPatch": "Es muy probable que '{0}' deje de funcionar al  actualizarse el juego.",
   "Stability_NotEnoughInformation": "No hay suficiente información para hacer una evaluación de '{0}'.",
@@ -265,10 +267,13 @@
   "RenderItPreset": "Ajustes de Render It!",
   "POFont": "Fuente/Módulo de Procedural Objects",
   "NameList": "Lista de nombres/Traducciones de juegos",
-  "MapSavegame": "Mapa / Partida Guardada",
+  "MapSavegame": {
+    "One": "Map / Savegame",
+    "Plural": "Maps & Savegames"
+  },
   "PackageType_MusicPack": "Pack de música para la radio del juego.",
   "PackageType_ContentPackage": "Paquete de contenido de recursos o archivos, como modelos, texturas o prefabs, y no incluye ningún código o scripts que modifiquen el comportamiento del juego.",
-  "PackageType_VisualMod": "Modificaciones visuales o texturas de tema para los mapas.",
+  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
   "PackageType_SimulationMod": "Mod de simulación que altera directamente la experiencia de juego.",
   "PackageType_NameList": "Traducciones adicionales del juego o archivos de la lista de nombres.",
   "PackageType_MapSavegame": "Mapa o partida guardada.",
@@ -320,10 +325,13 @@
   "EffectsLinger": "Efectos persisten luego de ser removido",
   "RequiresManualAction": "Requiere acción manual para remover",
   "BreaksSave": "Rompe las partidas guardadas al ser removido",
+  "HarmlessBut": "Harmless but ..",
+  "SavegameEffect_None": "This mod is safe to remove.",
   "SavegameEffect_AssetsRemain": "Quitar estos recursos, deja una caja gris donde hubieran sido colocados en tu ciudad. Estos objetos obsoletos deben ser limpiados para prevenir cualquier efecto secundario.",
   "SavegameEffect_EffectsLinger": "Remover este mod no eliminará sus efectos en tu ciudad.",
   "SavegameEffect_RequiresManualAction": "Remover este mod requerirá pasos adicionales para eliminarlo correctamente de tu ciudad.",
   "SavegameEffect_BreaksSave": "Al remover este mod, se romperá cualquier ciudad en la que se haya usado. Asegúrate de crear copias de seguridad de tu ciudad ANTES de usarlo.",
+  "SavegameEffect_HarmlessBut": "",
   "RemovalNote": "Nota de remoción",
   "RemovalNoteInfo": "Describe los pasos para eliminar el mod de forma segura de una partida guardada...",
   "ChooseWhatToRequest": "Elige cómo enviar tu solicitud",
@@ -334,5 +342,9 @@
   "Log Report": "Reporte de Logs",
   "Proposed Changes": "Cambios propuestos",
   "SendSavegameInfo": "Opcionalmente adjunta tu partida guardada para ayudarnos a investigar mejor el problema",
-  "YourLogReportInfo": "enviado con tu solicitud"
+  "YourLogReportInfo": "enviado con tu solicitud",
+  "PackageActiveReviewRequest": {
+    "One": "'{0}' has active review requests.",
+    "Plural": "{0} {1} have active review requests."
+  }
 }
