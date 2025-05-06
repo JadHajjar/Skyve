@@ -52,6 +52,7 @@
   "InteractionType": "Az interakció típusa",
   "MissingDependency": "A szükséges mod hiányzik",
   "Caution": "Vigyázat",
+  "CautionWhenUsing": "Caution when using it",
   "Warning": "Figyelmeztetés",
   "AttentionRequired": "Figyelem szükséges",
   "ActionRequired": "Beavatkozás szükséges",
@@ -141,6 +142,7 @@
   "Stability_Stable": "A '{0}' stabil. A szerzője még mindig aktívan dolgozik rajta és frissíti.",
   "Stability_StableNoNewFeatures": "A „{0}” stabil, bár a szerző többé nem ad ki frissítéseket.\nÚj hibák esetén azonban továbbra is frissítik.",
   "Stability_StableNoFutureUpdates": "A(z) „{0}” stabil, bár a szerző már nem támogatja, jövőbeli frissítések vagy hibajavítások nem valószínűek.",
+  "Stability_CautionWhenUsing": "",
   "Stability_HasIssuesNoFutureUpdates": "A(z) \"{0}\" problémákat okozhat, és a szerző már nem támogatja, a jövőbeni frissítések vagy hibajavítások nem valószínűek.",
   "Stability_BreaksOnPatch": "A(z) „{0}” nagy valószínűséggel tönkreteszi a játékot az új javítás megjelenésekor.",
   "Stability_NotEnoughInformation": "Nincs elég információ a(z) „{0}” megfelelő ellenőrzéséhez.",
@@ -265,10 +267,13 @@
   "RenderItPreset": "Render it! beállítások",
   "POFont": "Procedural Object Font/Modul",
   "NameList": "Névlista / Játék fordítások",
-  "MapSavegame": "Térkép / Savegame",
+  "MapSavegame": {
+    "One": "Map / Savegame",
+    "Plural": "Maps & Savegames"
+  },
   "PackageType_MusicPack": "Zenei csomag a játékon belüli rádióhoz.",
   "PackageType_ContentPackage": "Tartalmi csomag, amely eszközöket vagy fájlokat, például modelleket, textúrákat vagy előregyártott elemeket tartalmaz, és nem tartalmaz semmilyen kódot vagy szkriptet, amely módosítja a játék viselkedését.",
-  "PackageType_VisualMod": "Vizuális módosítások vagy térképtéma textúrák.",
+  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
   "PackageType_SimulationMod": "Szimulációs mod, amely közvetlenül megváltoztatja a játék menetét.",
   "PackageType_NameList": "Extra játékfordítások vagy névlista fájlok.",
   "PackageType_MapSavegame": "Térkép, vagy játékmentés.",
@@ -320,10 +325,13 @@
   "EffectsLinger": "A hatások az eltávolítás után is megmaradnak",
   "RequiresManualAction": "Az eltávolításhoz kézi művelet szükséges",
   "BreaksSave": "Eltávolításkor megszakítja a mentett játékokat",
+  "HarmlessBut": "Harmless but ..",
+  "SavegameEffect_None": "This mod is safe to remove.",
   "SavegameEffect_AssetsRemain": "Ha eltávolítod az asseteket, egy szürke doboz marad a helyén a városodban. Ezeket az elavult asseteket törölni kell a játékban is, a mellékhatások elkerülése érdekében.",
   "SavegameEffect_EffectsLinger": "A mod eltávolítása nem távolítja el a hatásait a városodból.",
   "SavegameEffect_RequiresManualAction": "A mod eltávolításához a városodban további lépésekre lesz szükség.",
   "SavegameEffect_BreaksSave": "A mod eltávolítása minden várost tönkretesz, amelyben használtad. Használat előtt mindenképpen készíts biztonsági másolatot a városról.",
+  "SavegameEffect_HarmlessBut": "",
   "RemovalNote": "Eltávolítási megjegyzés",
   "RemovalNoteInfo": "Ismerd meg a mod biztonságos eltávolításának lépéseit egy játékmentésből...",
   "ChooseWhatToRequest": "Válaszd ki a kérés elküldésének módját",
@@ -334,5 +342,9 @@
   "Log Report": "Naplófájl jelentés",
   "Proposed Changes": "Javasolt változtatások",
   "SendSavegameInfo": "Opcionálisan csatold a mentett játékot, hogy segíts nekünk a probléma jobb kivizsgálásában",
-  "YourLogReportInfo": "kéréséddel együtt elküldve"
+  "YourLogReportInfo": "kéréséddel együtt elküldve",
+  "PackageActiveReviewRequest": {
+    "One": "'{0}' has active review requests.",
+    "Plural": "{0} {1} have active review requests."
+  }
 }
