@@ -52,6 +52,7 @@
   "InteractionType": "نوع التفاعل",
   "MissingDependency": "الإعالة مفقودة",
   "Caution": "تحذير",
+  "CautionWhenUsing": "Caution when using it",
   "Warning": "تحذير",
   "AttentionRequired": "مطلوب الانتباه",
   "ActionRequired": "Action Required",
@@ -141,6 +142,7 @@
   "Stability_Stable": "'{0}' is stable. Its author is still actively working on it and updating it.",
   "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
   "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
+  "Stability_CautionWhenUsing": "",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
   "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
   "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
@@ -265,10 +267,13 @@
   "RenderItPreset": "عرضه! الإعداد المسبق",
   "POFont": "خط الكائن الإجرائي/موديل",
   "NameList": "Name-List / Game Translations",
-  "MapSavegame": "Map / Savegame",
+  "MapSavegame": {
+    "One": "Map / Savegame",
+    "Plural": "Maps & Savegames"
+  },
   "PackageType_MusicPack": "Music pack for the in-game radio.",
   "PackageType_ContentPackage": "Content package that contains assets or files, such as models, textures, or prefabs, and does not include any code or scripts that modify game behavior.",
-  "PackageType_VisualMod": "Visual modifications or map theme textures.",
+  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
   "PackageType_SimulationMod": "Simulation mod that directly alters the gameplay of the game.",
   "PackageType_NameList": "Extra game translations or name-list files.",
   "PackageType_MapSavegame": "Map, or Savegame.",
@@ -320,10 +325,13 @@
   "EffectsLinger": "Effects linger after removal",
   "RequiresManualAction": "Requires manual action to remove",
   "BreaksSave": "Breaks savegames when removed",
+  "HarmlessBut": "Harmless but ..",
+  "SavegameEffect_None": "This mod is safe to remove.",
   "SavegameEffect_AssetsRemain": "Removing assets leaves a grey box where they were placed in your city. These obsolete objects should be cleared to prevent any side effects.",
   "SavegameEffect_EffectsLinger": "Removing this mod will not remove its effects from your city.",
   "SavegameEffect_RequiresManualAction": "Removing this mod will require additional steps to properly remove it from your city.",
   "SavegameEffect_BreaksSave": "Removing this mod will break any city it was used in. Make sure to create backups of your city before using it.",
+  "SavegameEffect_HarmlessBut": "",
   "RemovalNote": "Removal Note",
   "RemovalNoteInfo": "Describe the steps to safely remove the mod from a savegame...",
   "ChooseWhatToRequest": "Choose how to send your request",
@@ -334,5 +342,9 @@
   "Log Report": "Log Report",
   "Proposed Changes": "Proposed Changes",
   "SendSavegameInfo": "Optionally attach your savegame to help us investigate the issue better",
-  "YourLogReportInfo": "sent with your request"
+  "YourLogReportInfo": "sent with your request",
+  "PackageActiveReviewRequest": {
+    "One": "'{0}' has active review requests.",
+    "Plural": "{0} {1} have active review requests."
+  }
 }
