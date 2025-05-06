@@ -19,7 +19,7 @@ public class SnoozedItem
 
 	public ulong PackageId { get; set; }
 	public int ReportType { get; set; }
-	public string StatusClass { get; }
+	public string StatusClass { get; set; } = null!;
 	public int StatusType { get; set; }
 	public int StatusAction { get; set; }
 

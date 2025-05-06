@@ -13,11 +13,17 @@ public partial class PC_PlaysetList : PanelContent
 
 	private readonly IPlaysetManager _playsetManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 
 	public PC_PlaysetList() : this(null) { }
 
-	public PC_PlaysetList(IEnumerable<IPlayset>? profiles)
+	public PC_PlaysetList(IEnumerable<IPlayset>? playsets)
 	{
+		if (!_settings.UserSettings.PageSettings.ContainsKey(SkyvePage.Playsets))
+		{
+			_settings.UserSettings.PageSettings[SkyvePage.Playsets] = new() { GridView = true };
+		}
+
 		InitializeComponent();
 
 		DD_Sorting.Height = TB_Search.Height = 0;
@@ -26,38 +32,31 @@ public partial class PC_PlaysetList : PanelContent
 		LC_Items.CanDrawItem += Ctrl_CanDrawItem;
 		panel1.Controls.Add(LC_Items);
 
-		if (profiles is null)
+		if (playsets is null)
 		{
 			LC_Items.LoadPlaysetStarted += LC_Items_LoadPlaysetStarted;
+			LC_Items.Loading = !_notifier.IsPlaysetsLoaded;
 
-			if (_notifier.IsPlaysetsLoaded)
-			{
-				LC_Items.SetItems(_playsetManager.Playsets);
-			}
-			else
-			{
-				LC_Items.Loading = true;
-			}
-
+			_notifier.PlaysetUpdated += LoadPlayset;
 			_notifier.PlaysetChanged += LoadPlayset;
 		}
 		else
 		{
-			L_Counts.Visible = TLP_PlaysetName.Visible = B_AddPlayset.Visible = B_DeactivatePlayset.Visible = B_Discover.Visible = false;
+			L_Counts.Visible = TLP_PlaysetName.Visible = B_AddPlayset.Visible = B_Edit.Visible = B_DeactivatePlayset.Visible = B_Discover.Visible = false;
 
 			DD_Sorting.Parent = null;
 			TLP_Main.SetColumn(DD_Usage, 2);
 			TLP_Main.SetColumnSpan(TB_Search, 2);
 
 			LC_Items.ReadOnly = true;
-			LC_Items.SetItems(profiles);
-			LC_Items.SetSorting(ProfileSorting.Downloads);
+			LC_Items.SetItems(playsets);
+			LC_Items.SetSorting(PlaysetSorting.Downloads);
 		}
 
-		C_ViewTypeControl.GridView = true;
+		C_ViewTypeControl.GridView = LC_Items.GridView = _settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Playsets).GridView;
 
-		SlickTip.SetTo(B_Add, "NewPlayset_Tip");
-		SlickTip.SetTo(B_Deactivate, "DeactivatePlayset_Tip");
+		SlickTip.SetTo(B_AddPlayset, "NewPlayset_Tip");
+		SlickTip.SetTo(B_DeactivatePlayset, "DeactivatePlayset_Tip");
 		SlickTip.SetTo(B_Edit, "ChangePlaysetSettings");
 
 		RefreshCounts();
@@ -65,7 +64,9 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void LC_Items_LoadPlaysetStarted()
 	{
-		B_Edit.Loading = B_Edit.Visible = true;
+		PB_ActivePlayset.Loading = true;
+
+		B_Edit.Visible = B_DeactivatePlayset.Visible = false;
 	}
 
 	private void Ctrl_CanDrawItem(object sender, CanDrawItemEventArgs<IPlayset> e)
@@ -132,19 +133,24 @@ public partial class PC_PlaysetList : PanelContent
 	protected override void LocaleChanged()
 	{
 		Text = LC_Items.ReadOnly ? Locale.DiscoverPlaysets : Locale.YourPlaysets;
+		L_CurrentPlaysetTitle.Text = Locale.ActivePlayset;
 	}
 
 	protected override void UIChanged()
 	{
 		base.UIChanged();
 
-		B_Deactivate.Size = B_Add.Size = B_Edit.Size = UI.Scale(new Size(24, 24));
+		PB_ActivePlayset.Size = B_Edit.Size = B_DeactivatePlayset.Size = UI.Scale(new Size(28, 28));
+		PB_ActivePlayset.Margin = B_Edit.Margin = B_DeactivatePlayset.Margin = L_CurrentPlaysetTitle.Margin = UI.Scale(new Padding(3, 0, 2, 0));
+		L_CurrentPlayset.Margin = UI.Scale(new Padding(0, 0, 2, 2));
 		L_CurrentPlayset.Font = UI.Font(11F, FontStyle.Bold);
+		B_AddPlayset.Font = UI.Font(9.75f);
+		L_CurrentPlaysetTitle.Font = UI.Font(7F);
+		TLP_PlaysetName.Padding = UI.Scale(new Padding(3));
 		roundedPanel.Margin = TB_Search.Margin = L_Counts.Margin = L_FilterCount.Margin = DD_Sorting.Margin = DD_Usage.Margin = UI.Scale(new Padding(6));
-		B_DeactivatePlayset.Padding = B_AddPlayset.Padding = TLP_PlaysetName.Padding = UI.Scale(new Padding(3));
 		L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		B_Discover.Font = UI.Font(9F, FontStyle.Bold);
-		B_Discover.Margin = TLP_PlaysetName.Margin = B_DeactivatePlayset.Margin = B_AddPlayset.Margin = UI.Scale(new Padding(5));
+		B_Discover.Margin = TLP_PlaysetName.Margin = B_AddPlayset.Margin = UI.Scale(new Padding(5));
 		DD_Usage.Width = DD_Sorting.Width = UI.Scale(180);
 		TB_Search.Width = UI.Scale(250);
 		roundedPanel.Padding = new Padding((int)(2.5 * UI.FontScale) + 1, UI.Scale(5), (int)(2.5 * UI.FontScale), UI.Scale(5));
@@ -161,7 +167,7 @@ public partial class PC_PlaysetList : PanelContent
 		base.DesignChanged(design);
 
 		TLP_PlaysetName.Invalidate();
-		B_DeactivatePlayset.BackColor = B_AddPlayset.BackColor = FormDesign.Design.ButtonColor;
+
 		tableLayoutPanel3.BackColor = design.AccentBackColor;
 		L_Counts.ForeColor = L_FilterCount.ForeColor = design.InfoColor;
 	}
@@ -181,22 +187,35 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void LoadPlayset()
 	{
+		PB_ActivePlayset.Loading = false;
+
+		if (LC_Items.Loading)
+		{
+			LC_Items.Loading = false;
+		}
+
+		if (!LC_Items.ReadOnly)
+		{
+			LC_Items.SetItems(_playsetManager.Playsets);
+		}
+
 		this.TryInvoke(() =>
 		{
 			var playset = _playsetManager.CurrentPlayset;
 			var customPlayset = _playsetManager.CurrentCustomPlayset;
 
-			TLP_PlaysetName.BackColor = customPlayset?.Color ?? FormDesign.Design.ButtonColor;
+			TLP_PlaysetName.BackColor = customPlayset?.Color?.MergeColor(FormDesign.Design.ButtonColor, 75) ?? FormDesign.Design.ButtonColor;
 			TLP_PlaysetName.ForeColor = TLP_PlaysetName.BackColor.GetTextColor();
 			L_CurrentPlayset.Text = playset?.Name ?? Locale.NoActivePlayset;
+			L_CurrentPlaysetTitle.ForeColor = TLP_PlaysetName.ForeColor.MergeColor(TLP_PlaysetName.BackColor, 70);
 
-			B_Edit.Visible = B_DeactivatePlayset.Visible = playset is not null;
-			TLP_Top.ColumnStyles[1] = playset is not null ? new() : new ColumnStyle(SizeType.Absolute, 0);
+			PB_ActivePlayset.Visible = B_Edit.Visible = B_DeactivatePlayset.Visible = playset is not null;
 
 			LC_Items.Invalidate();
-		});
+			PB_ActivePlayset.Invalidate();
 
-		B_Edit.Loading = false;
+			RefreshCounts();
+		});
 	}
 
 	private void FilterChanged(object sender, EventArgs e)
@@ -212,6 +231,9 @@ public partial class PC_PlaysetList : PanelContent
 		if (IsHandleCreated)
 		{
 			LC_Items.SetSorting(DD_Sorting.SelectedItem);
+
+			_settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Playsets).Sorting = (int)DD_Sorting.SelectedItem;
+			_settings.UserSettings.Save();
 		}
 	}
 
@@ -224,32 +246,36 @@ public partial class PC_PlaysetList : PanelContent
 	{
 		C_ViewTypeControl.GridView = false;
 		LC_Items.GridView = false;
+		_settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Playsets).GridView = false;
+		_settings.UserSettings.Save();
 	}
 
 	private void B_GridView_Click(object sender, EventArgs e)
 	{
 		C_ViewTypeControl.GridView = true;
 		LC_Items.GridView = true;
+		_settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Playsets).GridView = true;
+		_settings.UserSettings.Save();
 	}
 
-	private void B_AddProfile_Click(object sender, EventArgs e)
+	private void B_AddPlayset_Click(object sender, EventArgs e)
 	{
 		Form.PushPanel(ServiceCenter.Get<IAppInterfaceService>().NewPlaysetPanel());
 	}
 
 	private async void B_Deactivate_Click(object sender, EventArgs e)
 	{
-		if (!B_Edit.Loading)
+		if (!PB_ActivePlayset.Loading)
 		{
-			B_Edit.Loading = B_Edit.Visible = true;
+			PB_ActivePlayset.Loading = true;
 			await _playsetManager.DeactivateActivePlayset();
-			B_Edit.Loading = false;
+			PB_ActivePlayset.Loading = false;
 		}
 	}
 
 	private void B_Edit_Click(object sender, EventArgs e)
 	{
-		if (!B_Edit.Loading && _playsetManager.CurrentPlayset is not null)
+		if (!PB_ActivePlayset.Loading && _playsetManager.CurrentPlayset is not null)
 		{
 			ServiceCenter.Get<IAppInterfaceService>().OpenPlaysetPage(_playsetManager.CurrentPlayset);
 		}
@@ -332,6 +358,36 @@ public partial class PC_PlaysetList : PanelContent
 		catch (Exception ex)
 		{
 			ShowPrompt(ex, Locale.FailedToImportPlayset);
+		}
+	}
+
+	private void PB_ActivePlayset_Paint(object sender, PaintEventArgs e)
+	{
+		var customPlayset = _playsetManager.CurrentCustomPlayset;
+
+		if (customPlayset is null)
+		{
+			return;
+		}
+
+		var banner = customPlayset.GetThumbnail();
+		var backColor = customPlayset.Color ?? banner?.GetThemedAverageColor() ?? FormDesign.Design.AccentBackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 7 : -6, Sat: 3);
+		var onBannerColor = (banner?.GetThemedAverageColor() ?? FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 7 : -6, Sat: 3)).GetTextColor();
+		var borderRadius = UI.Scale(3);
+
+		if (banner is null)
+		{
+			using var brush = new SolidBrush(Color.FromArgb(40, onBannerColor));
+
+			e.Graphics.FillRoundedRectangle(brush, PB_ActivePlayset.ClientRectangle, borderRadius);
+
+			using var icon = customPlayset.Usage.GetIcon().Get(PB_ActivePlayset.ClientRectangle.Width * 3 / 4).Color(onBannerColor);
+
+			e.Graphics.DrawImage(icon, PB_ActivePlayset.ClientRectangle.CenterR(icon.Size));
+		}
+		else
+		{
+			e.Graphics.DrawRoundedImage(banner, PB_ActivePlayset.ClientRectangle, borderRadius, PB_ActivePlayset.BackColor);
 		}
 	}
 }

@@ -9,11 +9,12 @@ using Skyve.Compatibility.Domain.Interfaces;
 using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using Timer = System.Windows.Forms.Timer;
 
 namespace Skyve.App.UserInterface.Panels;
 public partial class ContentList : SlickControl
@@ -294,6 +295,7 @@ public partial class ContentList : SlickControl
 
 	protected override void LocaleChanged()
 	{
+		DD_PackageType.Text = LocaleCR.PackageType;
 		DD_PackageUsage.Text = Locale.PackageUsage;
 		DD_PackageStatus.Text = Locale.PackageStatus;
 		DD_ReportSeverity.Text = Locale.CompatibilityStatus;
@@ -341,7 +343,7 @@ public partial class ContentList : SlickControl
 		B_Filters.Size = B_Filters.GetAutoSize(true);
 
 		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin = OT_ModAsset.Margin
-			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
+			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin = DD_PackageType.Margin
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_PackageUsage.Margin = DD_Playset.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2));
 
 		TLP_MiddleBar.Padding = UI.Scale(new Padding(3, 0, 3, 0));
@@ -355,7 +357,7 @@ public partial class ContentList : SlickControl
 
 		TB_Search.MaximumSize = B_Filters.MaximumSize = DD_Sorting.MaximumSize = DD_SearchTime.MaximumSize = new Size(9999, size);
 		TB_Search.MinimumSize = B_Filters.MinimumSize = DD_Sorting.MinimumSize = DD_SearchTime.MinimumSize = new Size(0, size);
-		
+
 		I_SortOrder.Size = I_Refresh.Size = new(size, size);
 	}
 
@@ -364,14 +366,39 @@ public partial class ContentList : SlickControl
 		if (e is null || e.Button is MouseButtons.Left or MouseButtons.None)
 		{
 			B_Filters.Text = P_FiltersContainer.Height == 0 ? "HideFilters" : "ShowFilters";
-			//P_FiltersContainer.Size = P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty;
 			AnimationHandler.Animate(P_FiltersContainer, P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty, 4, AnimationOption.IgnoreWidth, ListControl.Invalidate);
 			P_FiltersContainer.AutoSize = false;
+
+			if (!_settings.UserSettings.ClearFilterTipShown && ExtensionClass.RNG.NextDouble() > 0.6)
+			{
+				new Timer
+				{
+					Interval = 2000,
+					Enabled = true,
+				}.Tick += (s, e) =>
+				{
+					((Timer)s).Enabled = false;
+					((Timer)s).Dispose();
+
+					if (Visible)
+					{
+						ShowClearFilterTip();
+					}
+				};
+			}
 		}
 		else if (e?.Button == MouseButtons.Middle)
 		{
 			I_ClearFilters_Click(sender, e);
 		}
+	}
+
+	private void ShowClearFilterTip()
+	{
+		_settings.UserSettings.ClearFilterTipShown = true;
+		_settings.UserSettings.Save();
+
+		Notification.Create(Locale.ClearFilterTutorialTitle, Locale.ClearFilterTutorialText, PromptIcons.Info, size: new Size(300, 140)).Show(Program.MainForm, 20);
 	}
 
 	private async void CentralManager_ContentLoaded()
@@ -406,6 +433,11 @@ public partial class ContentList : SlickControl
 		}
 
 		ListControl.SetItems(items);
+
+		if (Page == SkyvePage.Workshop)
+		{
+			ListControl.ResetScroll();
+		}
 
 		this.TryInvoke(RefreshCounts);
 
@@ -579,6 +611,16 @@ public partial class ContentList : SlickControl
 			var usage = item.GetPackageInfo()?.Usage ?? (PackageUsage)(-1);
 
 			if (!DD_PackageUsage.SelectedItems.Any(x => usage.HasFlag(x)))
+			{
+				return true;
+			}
+		}
+
+		if (DD_PackageType.SelectedItems.Count() != DD_PackageType.Items.Length)
+		{
+			var usage = item.GetPackageInfo()?.Type ?? (PackageType)(-1);
+
+			if (!DD_PackageType.SelectedItems.Contains(usage))
 			{
 				return true;
 			}

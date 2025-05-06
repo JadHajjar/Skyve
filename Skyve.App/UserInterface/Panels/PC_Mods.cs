@@ -25,7 +25,7 @@ public class PC_Mods : PC_ContentList
 
 	protected override async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
-		return await Task.FromResult(ServiceCenter.Get<IPackageManager>().Packages.Where(x => x.IsCodeMod));
+		return await Task.FromResult(ServiceCenter.Get<IPackageManager>().Packages.Where(SystemExtensions.IsCodeMod));
 	}
 
 	protected override LocaleHelper.Translation GetItemText()

@@ -216,7 +216,7 @@ public partial class ItemListControl
 
 			var includedSize = 28;
 
-			if (_settings.UserSettings.AdvancedIncludeEnable && item.GetPackage()?.IsCodeMod == true)
+			if (_settings.UserSettings.AdvancedIncludeEnable && item.IsCodeMod())
 			{
 				rects.EnabledRect = rects.IncludedRect = rectangle.Pad(Padding).Align(new Size((int)(includedSize * UI.FontScale), CompactList ? UI.Scale(22) : (rects.IconRect.Height / 2)), ContentAlignment.MiddleLeft);
 

@@ -11,9 +11,11 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Lists;
 public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListControl.Rectangles>
 {
-	private ProfileSorting sorting;
+	private PlaysetSorting sorting;
 	private static IPlayset? downloading;
 	private bool dragActive;
+	private Padding InnerPadding;
+	private bool activating;
 	private static readonly IPlayset? opening;
 	private readonly IOSelectionDialog imagePrompt;
 
@@ -37,10 +39,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		ItemHeight = 30;
 		GridItemSize = new Size(190, 295);
 
-		sorting = (ProfileSorting)_settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Profiles).Sorting;
-
-		_notifier.PlaysetUpdated += ProfileManager_ProfileUpdated;
-		_notifier.PlaysetChanged += ProfileManager_ProfileUpdated;
+		sorting = (PlaysetSorting)_settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Playsets).Sorting;
 
 		imagePrompt = new IOSelectionDialog()
 		{
@@ -48,7 +47,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		};
 	}
 
-	public void SetSorting(ProfileSorting selectedItem)
+	public void SetSorting(PlaysetSorting selectedItem)
 	{
 		if (sorting == selectedItem)
 		{
@@ -60,35 +59,11 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 		SortingChanged();
 
-		if (selectedItem != ProfileSorting.Downloads)
+		if (selectedItem != PlaysetSorting.Downloads)
 		{
-			var settings = _settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Profiles);
+			var settings = _settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Playsets);
 			settings.Sorting = (int)selectedItem;
 			_settings.SessionSettings.Save();
-		}
-	}
-
-	protected override void Dispose(bool disposing)
-	{
-		if (disposing)
-		{
-			_notifier.PlaysetUpdated -= ProfileManager_ProfileUpdated;
-			_notifier.PlaysetChanged -= ProfileManager_ProfileUpdated;
-		}
-
-		base.Dispose(disposing);
-	}
-
-	private void ProfileManager_ProfileUpdated()
-	{
-		if (Loading)
-		{
-			Loading = false;
-		}
-
-		if (!ReadOnly)
-		{
-			SetItems(_playsetManager.Playsets);
 		}
 	}
 
@@ -96,8 +71,8 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 	{
 		if (GridView)
 		{
-			Padding = UI.Scale(new Padding(7, 10, 7, 5), UI.UIScale);
-			GridPadding = UI.Scale(new Padding(4), UI.UIScale);
+			Padding = UI.Scale(new Padding(2, 5, 2, 0));
+			InnerPadding = UI.Scale(new Padding(4));
 		}
 		else
 		{
@@ -116,13 +91,13 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 	{
 		return sorting switch
 		{
-			ProfileSorting.Downloads => items.OrderByDescending(x => x.Item is IOnlinePlayset op ? op.Downloads : 0),
-			ProfileSorting.Color => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenBy(x => x.Item.GetCustomPlayset().Color?.GetHue() ?? float.MaxValue).ThenBy(x => x.Item.GetCustomPlayset().Color?.GetBrightness() ?? float.MaxValue).ThenBy(x => x.Item.GetCustomPlayset().Color?.GetSaturation() ?? float.MaxValue),
-			ProfileSorting.Name => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenBy(x => x.Item.Name),
-			ProfileSorting.DateCreated => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenByDescending(x => x.Item.GetCustomPlayset().DateCreated),
-			ProfileSorting.Usage => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenByDescending(x => x.Item.GetCustomPlayset().Usage).ThenBy(x => x.Item.DateUpdated),
-			ProfileSorting.LastEdit => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenByDescending(x => x.Item.DateUpdated),
-			ProfileSorting.LastUsed or _ => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenByDescending(x => x.Item.GetCustomPlayset().DateUsed),
+			PlaysetSorting.Downloads => items.OrderByDescending(x => x.Item is IOnlinePlayset op ? op.Downloads : 0),
+			PlaysetSorting.Color => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenBy(x => x.Item.GetCustomPlayset().Color?.GetHue() ?? float.MaxValue).ThenBy(x => x.Item.GetCustomPlayset().Color?.GetBrightness() ?? float.MaxValue).ThenBy(x => x.Item.GetCustomPlayset().Color?.GetSaturation() ?? float.MaxValue),
+			PlaysetSorting.Name => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenBy(x => x.Item.Name),
+			PlaysetSorting.DateCreated => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenByDescending(x => x.Item.GetCustomPlayset().DateCreated),
+			PlaysetSorting.Usage => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenByDescending(x => x.Item.GetCustomPlayset().Usage).ThenBy(x => x.Item.DateUpdated),
+			PlaysetSorting.LastEdit => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenByDescending(x => x.Item.DateUpdated),
+			PlaysetSorting.LastUsed or _ => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenByDescending(x => x.Item.GetCustomPlayset().DateUsed),
 		};
 	}
 
@@ -167,11 +142,26 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			{
 				DownloadProfile(item.Item);
 			}
-			else
+			else if (!activating)
 			{
-				LoadPlaysetStarted?.Invoke();
+				try
+				{
+					activating = true;
 
-				await _playsetManager.ActivatePlayset(item.Item);
+					LoadPlaysetStarted?.Invoke();
+
+					Invalidate();
+
+					await _playsetManager.ActivatePlayset(item.Item);
+				}
+				catch (Exception ex)
+				{
+					MessagePrompt.Show(ex, "Failed to activate playset");
+				}
+				finally
+				{
+					activating = false;
+				}
 			}
 
 			return;
@@ -210,7 +200,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		}
 	}
 
-	private async void DownloadProfile(IPlayset item)
+	private void DownloadProfile(IPlayset _)
 	{
 		try
 		{
@@ -291,47 +281,25 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 		var customPlayset = e.Item.GetCustomPlayset();
 		var banner = customPlayset.GetThumbnail();
-		var backColor = customPlayset.Color ?? banner?.GetThemedAverageColor() ?? FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 5 : -4, Sat: 5);
-		var onBannerColor = backColor.GetTextColor();
+		var backColor = customPlayset.Color ?? banner?.GetThemedAverageColor() ?? FormDesign.Design.AccentBackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 7 : -6, Sat: 3);
+		var onBannerColor = (banner?.GetThemedAverageColor() ?? FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 7 : -6, Sat: 3)).GetTextColor();
+		var backRect = e.ClipRectangle.Pad(UI.Scale(8));
 		using var onBannerBrush = new SolidBrush(Color.FromArgb(banner is null ? 125 : 50, onBannerColor));
 
 		e.BackColor = backColor;
 
-		using (var brush = Gradient(backColor, e.ClipRectangle.InvertPad(GridPadding), 3.5f))
+		using (var brush = Gradient(Color.FromArgb(FormDesign.Design.IsDarkTheme ? 100 : 70, backColor), backRect, 3.5f))
 		{
-			Rectangle rect;
+			e.Graphics.FillRoundedRectangleWithShadow(backRect, borderRadius, UI.Scale(8), BackColor, Color.FromArgb(10, isActive ? FormDesign.Design.GreenColor : backColor));
 
-			if (isActive)
-			{
-				using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor);
-				e.Graphics.FillRoundedRectangle(greenBrush, e.ClipRectangle.InvertPad(GridPadding), borderRadius);
-
-				e.Rects.ActivateButton = e.Rects.ActivateButton.Pad(0, Padding.Top, 0, 0);
-
-				e.Graphics.FillRoundedRectangle(greenBrush, e.Rects.ActivateButton.InvertPad(GridPadding).Pad(0, -borderRadius, 0, 0), borderRadius, false, false);
-
-				var text = Locale.ActivePlayset.One.ToUpper();
-				using var font = UI.Font(9F, FontStyle.Bold).FitTo(text, e.Rects.ActivateButton, e.Graphics);
-				using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
-				using var textBrush2 = new SolidBrush(FormDesign.Design.GreenColor.GetTextColor());
-
-				e.Graphics.DrawString(text, font, textBrush2, e.Rects.ActivateButton.Pad(0,-Padding.Top*3/4,0,0), format);
-
-				rect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.Rects.ActivateButton.InvertPad(GridPadding).Y - e.ClipRectangle.Y - Padding.Top);
-			}
-			else
-			{
-				rect = e.ClipRectangle.InvertPad(GridPadding);
-			}
-
-			e.Graphics.FillRoundedRectangle(brush, rect, borderRadius);
+			e.Graphics.FillRoundedRectangle(brush, backRect, borderRadius);
 		}
 
 		if (banner is null)
 		{
 			using var brush = new SolidBrush(Color.FromArgb(40, onBannerColor));
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail, borderRadius, botLeft: !isActive, botRight: !isActive);
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail, borderRadius, botLeft: false, botRight: false);
 
 			using var icon = customPlayset.Usage.GetIcon().Get(e.Rects.Thumbnail.Width * 3 / 4).Color(onBannerColor);
 
@@ -339,44 +307,62 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(banner, e.Rects.Thumbnail, borderRadius, botLeft: !isActive, botRight: !isActive);
+			e.Graphics.DrawRoundedImage(banner, e.Rects.Thumbnail, borderRadius, botLeft: false, botRight: false);
+		}
+
+		if (isActive)
+		{
+			e.Rects.ActivateButton = e.Rects.ActivateButton.Pad(0, Padding.Vertical, 0, 0);
+
+			using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor);
+			e.Graphics.FillRoundedRectangle(greenBrush, e.Rects.ActivateButton.Pad(-InnerPadding.Left - UI.Scale(2)), borderRadius, topLeft: false, topRight: false);
+
+			var text = Locale.ActivePlayset.One.ToUpper();
+			using var font = UI.Font(9F, FontStyle.Bold).FitTo(text, e.Rects.ActivateButton, e.Graphics);
+			using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+			using var textBrush2 = new SolidBrush(FormDesign.Design.GreenColor.GetTextColor());
+
+			e.Graphics.DrawString(text, font, textBrush2, e.Rects.ActivateButton, format);
 		}
 
 		if (HoverState.HasFlag(HoverState.Hovered) && e.Rects.Thumbnail.Contains(CursorLocation))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(40, onBannerColor));
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail, borderRadius, botLeft: !isActive, botRight: !isActive);
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail, borderRadius, botLeft: false, botRight: false);
 		}
 
 		DrawFavoriteButton(e, customPlayset, onBannerColor, onBannerBrush);
 
-		using var textBrush = new SolidBrush(onBannerColor);
-		using var fadedBrush = new SolidBrush(Color.FromArgb(175, onBannerColor));
+		using var textBrush = new SolidBrush(backColor.MergeColor(BackColor, (FormDesign.Design.IsDarkTheme ? 100 : 70) * 100 / 255).GetTextColor());
+		using var fadedBrush = new SolidBrush(Color.FromArgb(175, textBrush.Color));
 		using var textFont = UI.Font(9.5F, FontStyle.Bold).FitTo(e.Item.Name, e.Rects.Text, e.Graphics);
 		using var smallTextFont = UI.Font(7.25F);
 		using var centerFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
 		e.Graphics.DrawString(e.Item.Name, textFont, textBrush, e.Rects.Text);
 
-		e.Graphics.DrawString(customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, new Point(e.Rects.Text.X, e.Rects.Text.Y + (int)e.Graphics.Measure(e.Item.Name, textFont, e.Rects.Text.Width).Height));
+		var height = (int)e.Graphics.Measure(e.Item.Name, textFont, e.Rects.Text.Width).Height;
+		e.Graphics.DrawString(customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, new Point(e.Rects.Text.X, e.Rects.Text.Y + height));
 
-		SlickButton.AlignAndDraw(e.Graphics, e.Rects.Content, ContentAlignment.MiddleCenter, new ButtonDrawArgs
+		var contentText = $"{Locale.ContainCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower())} • {e.Item.ModSize.SizeString(0)}";
+		using (var contentBrush = new SolidBrush(Color.FromArgb(100, backColor.Tint(Lum: backColor.IsDark() ? -5 : 5))))
+		using (var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center })
 		{
-			Text = $"{Locale.ContainCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower())} • {e.Item.ModSize.SizeString(0)}",
-			BackColor = backColor.Tint(Lum: backColor.IsDark() ? 3 : -3),
-			Padding = UI.Scale(new Padding(4, 3, 4, 3)),
-			BorderRadius = borderRadius,
-			Font = smallTextFont
-		});
+			e.Graphics.FillRectangle(contentBrush, e.Rects.Content.Pad(0, 4 * (height - UI.Scale(18)) / 5, 0, 0).CenterR(backRect.Width, smallTextFont.Height * 5 / 3));
+			e.Graphics.DrawString(contentText, smallTextFont, textBrush, e.Rects.Content.Pad(0, 4 * (height - UI.Scale(18)) / 5, 0, 0), format);
+		}
+
+		using var pen = new Pen(isActive ? FormDesign.Design.GreenColor : customPlayset.IsFavorite ? FormDesign.Modern.ActiveColor : backColor, UI.Scale(2.5f)) { Alignment = PenAlignment.Center };
+		e.Graphics.DrawRoundedRectangle(pen, backRect, borderRadius);
 
 		var isHovered = e.Rects.DotsRect.Contains(CursorLocation);
-		using var img = IconManager.GetIcon("VertialMore", e.Rects.DotsRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : onBannerColor);
+		using var img = IconManager.GetIcon("VertialMore", e.Rects.DotsRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : textBrush.Color);
 
 		e.Graphics.DrawImage(img, e.Rects.DotsRect.CenterR(img.Size));
 
 #if CS1
-		labelRects.Y += e.Graphics.DrawLabel(Locale.ContainCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
+		labelRects.Y += e.Graphics.DrawLabel(Locale.ContainCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + InnerPadding.Top;
 #endif
 
 		if (customPlayset.OnlineInfo?.Author?.Name is not null and not "")
@@ -405,7 +391,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		if (downloading == e.Item)
 		{
 			using var brush = new SolidBrush(Color.FromArgb(100, FormDesign.Design.BackColor));
-			e.Graphics.FillRoundedRectangle(brush, e.ClipRectangle.InvertPad(GridPadding), borderRadius);
+			e.Graphics.FillRoundedRectangle(brush, e.ClipRectangle.InvertPad(InnerPadding), borderRadius);
 
 			DrawLoader(e.Graphics, e.ClipRectangle.CenterR(UI.Scale(new Size(24, 24))));
 		}
@@ -422,9 +408,15 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 				Padding = UI.Scale(new Padding(8, 4, 8, 4)),
 				HoverState = e.HoverState,
 				Cursor = CursorLocation,
-				BackgroundColor = backColor.MergeColor(onBannerColor, 65),
+				Enabled = !activating,
+				BackgroundColor = backColor.MergeColor(onBannerColor, 85).MergeColor(BackColor, 40).Tint(null, -6, 6),
 				ActiveColor = FormDesign.Design.GreenColor
 			});
+		}
+
+		if (isActive || activating)
+		{
+			e.Rects.ActivateButton = default;
 		}
 	}
 
@@ -433,14 +425,14 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		var borderRadius = UI.Scale(5);
 		var favViewRect = ReadOnly ? e.Rects.ViewContents : e.Rects.Favorite;
 
-		if (e.HoverState.HasFlag(HoverState.Hovered) && favViewRect.Contains(CursorLocation))
+		if (customPlayset.IsFavorite)
+		{
+			using var favBrush = new SolidBrush(FormDesign.Modern.ActiveColor);
+			e.Graphics.FillRoundedRectangle(favBrush, favViewRect, borderRadius);
+		}
+		else if (e.HoverState.HasFlag(HoverState.Hovered) && favViewRect.Contains(CursorLocation))
 		{
 			e.Graphics.FillRoundedRectangle(onBannerBrush, favViewRect, borderRadius);
-		}
-		else if (customPlayset.IsFavorite)
-		{
-			using var favBrush = new SolidBrush(Color.FromArgb(80, FormDesign.Modern.ActiveColor));
-			e.Graphics.FillRoundedRectangle(favBrush, favViewRect, borderRadius);
 		}
 
 		var fav = new DynamicIcon(ReadOnly ? "ViewFile" : customPlayset.IsFavorite != favViewRect.Contains(CursorLocation) ? "StarFilled" : "Star");
@@ -452,7 +444,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		}
 		else if (customPlayset.IsFavorite || !GridView || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.Thumbnail.Contains(CursorLocation)))
 		{
-			e.Graphics.DrawImage(favIcon.Color(favViewRect.Contains(CursorLocation) != customPlayset.IsFavorite ? FormDesign.Modern.ActiveColor : onBannerColor), favViewRect.CenterR(favIcon.Size));
+			e.Graphics.DrawImage(favIcon.Color(customPlayset.IsFavorite ? FormDesign.Modern.ActiveForeColor : favViewRect.Contains(CursorLocation) ? FormDesign.Modern.ActiveColor : onBannerColor), favViewRect.CenterR(favIcon.Size));
 		}
 	}
 
@@ -490,7 +482,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(banner, e.Rects.Thumbnail, borderRadius);
+			e.Graphics.DrawRoundedImage(banner, e.Rects.Thumbnail, borderRadius, e.BackColor);
 		}
 
 		SlickButton.Draw(e.Graphics, new ButtonDrawArgs
@@ -544,13 +536,14 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 				Cursor = CursorLocation,
 				HoverState = e.HoverState,
 				BackgroundColor = e.BackColor,
+				Enabled = !activating,
 				ActiveColor = FormDesign.Design.GreenColor
 			});
 
 			e.Rects.Content = new Rectangle(e.Rects.Text.Right, e.ClipRectangle.Y, e.Rects.ActivateButton.X - e.Rects.Text.Right, e.ClipRectangle.Height);
 		}
 
-		using var textBrush = new SolidBrush(FormDesign.Design.ForeColor);
+		using var textBrush = new SolidBrush(e.Rects.Thumbnail.Contains(CursorLocation) || e.Rects.Text.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.ForeColor);
 		using var fadedBrush = new SolidBrush(Color.FromArgb(175, FormDesign.Design.ForeColor));
 		using var textFont = UI.Font(8.25F, FontStyle.Bold).FitTo(e.Item.Name, e.Rects.Text, e.Graphics);
 		using var smallTextFont = UI.Font(7F);
@@ -558,9 +551,12 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 		e.Graphics.DrawString(e.Item.Name, textFont, textBrush, e.Rects.Text);
 
-		e.Graphics.DrawString(customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, new Point(e.Rects.Text.X, e.Rects.Text.Y + (int)e.Graphics.Measure(e.Item.Name, textFont, e.Rects.Text.Width).Height));
+		using var format = new StringFormat { LineAlignment = StringAlignment.Far };
+		e.Graphics.DrawString(customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, e.Rects.Text.Pad(0, 0, 0, -Padding.Vertical), format);
 
 		e.Graphics.DrawLabel($"{Locale.ContainCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower())} • {e.Item.ModSize.SizeString(0)}", null, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.MiddleLeft);
+
+		e.Rects.Thumbnail = Rectangle.Union(e.Rects.Thumbnail, e.Rects.Text);
 
 #if CS1
 		if (e.Item.IsMissingItems)
@@ -576,19 +572,24 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 
 		if (GridView)
 		{
+			rectangle = rectangle.Pad(InnerPadding.Left + UI.Scale(8));
+
 			var size = UI.Scale(new Size(32, 32));
 
+			rects.Thumbnail = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Width - InnerPadding.Top).InvertPad(InnerPadding);
+
+			rectangle = rectangle.Pad(UI.Scale(2));
+
 			rects.ActivateButton = new Rectangle(rectangle.X, rectangle.Bottom - UI.Scale(24), rectangle.Width, UI.Scale(24));
-			rects.Thumbnail = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Width - GridPadding.Top);
-			rects.Content = new Rectangle(rectangle.X, rectangle.Y + rects.Thumbnail.Height + GridPadding.Top, rectangle.Width, rectangle.Height - rects.Thumbnail.Height - GridPadding.Top);
+			rects.Content = new Rectangle(rectangle.X, rectangle.Y + rects.Thumbnail.Height + InnerPadding.Top, rectangle.Width, rectangle.Height - rects.Thumbnail.Height - InnerPadding.Top);
 
-			rects.Favorite = rects.Thumbnail.Pad(GridPadding).Pad(0, 0, 0, 0).Align(size, ContentAlignment.TopLeft);
+			rects.Favorite = rects.Thumbnail.Pad(InnerPadding).Pad(0, 0, 0, 0).Align(size, ContentAlignment.TopLeft);
 
-			rects.Text = new Rectangle(rects.Thumbnail.X + GridPadding.Left, rects.Thumbnail.Bottom + (GridPadding.Top * 2), rects.Thumbnail.Width, size.Height);
-			rects.Content = new Rectangle(rectangle.X, rects.Text.Bottom + GridPadding.Top, rectangle.Width, rects.ActivateButton.Y - rects.Text.Bottom - (GridPadding.Top * 2));
+			rects.Text = new Rectangle(rects.Thumbnail.X + InnerPadding.Left, rects.Thumbnail.Bottom + (InnerPadding.Top * 2), rects.Thumbnail.Width, size.Height);
+			rects.Content = new Rectangle(rectangle.X, rects.Text.Bottom + InnerPadding.Top, rectangle.Width, rects.ActivateButton.Y - rects.Text.Bottom - (InnerPadding.Top * 2));
 
-			rects.EditThumbnail = rects.Thumbnail.Pad(GridPadding).Align(size, ContentAlignment.TopRight);
-			rects.EditSettings = rects.Thumbnail.Pad(GridPadding).Align(size, ContentAlignment.BottomRight);
+			rects.EditThumbnail = rects.Thumbnail.Pad(InnerPadding).Align(size, ContentAlignment.TopRight);
+			rects.EditSettings = rects.Thumbnail.Pad(InnerPadding).Align(size, ContentAlignment.BottomRight);
 
 			rects.DotsRect = rects.Text.Align(UI.Scale(new Size(24, 24)), ContentAlignment.TopRight);
 			rects.Text.Width -= rects.DotsRect.Width;
@@ -727,6 +728,13 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			{
 				text = (instance as PlaysetListControl)!.ReadOnly ? ServiceCenter.Get<IPlaysetManager>().Playsets.Any(x => x.Name!.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlaysetTip : Locale.DownloadPlaysetTip : Locale.ActivatePlayset;
 				point = ActivateButton.Location;
+				return true;
+			}
+
+			if (Thumbnail.Contains(location))
+			{
+				text = Locale.OpenPlaysetPage;
+				point = Thumbnail.Location;
 				return true;
 			}
 

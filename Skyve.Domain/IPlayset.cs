@@ -24,8 +24,8 @@ public interface IPlayset : IThumbnailObject
 public interface ICustomPlayset : IThumbnailObject
 {
 	int Id { get; }
-	DateTime DateUsed { get; }
-	DateTime DateCreated { get; }
+	DateTime DateUsed { get; set; }
+	DateTime DateCreated { get; set; }
 	PackageUsage Usage { get; set; }
 	Color? Color { get; set; }
 	bool IsFavorite { get; set; }

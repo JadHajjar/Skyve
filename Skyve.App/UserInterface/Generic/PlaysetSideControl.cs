@@ -1,6 +1,7 @@
 ﻿using Skyve.App.Interfaces;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Generic;
@@ -12,7 +13,8 @@ public class PlaysetSideControl : SlickControl
 	private Rectangle Favorite;
 	private Rectangle TextRect;
 
-	private TextBox _textBox;
+	private readonly TextBox _textBox;
+	private Padding InnerPadding;
 
 	public IPlayset Playset { get; }
 
@@ -24,7 +26,7 @@ public class PlaysetSideControl : SlickControl
 
 		_textBox = new TextBox
 		{
-			Visible=false,
+			Visible = false,
 			BorderStyle = BorderStyle.None,
 		};
 
@@ -35,6 +37,7 @@ public class PlaysetSideControl : SlickControl
 
 	protected override void UIChanged()
 	{
+		InnerPadding = UI.Scale(new Padding(4));
 		Padding = UI.Scale(new Padding(10));
 		_textBox.Font = UI.Font(12.5F);
 	}
@@ -61,7 +64,9 @@ public class PlaysetSideControl : SlickControl
 
 		if (ActivateButton.Contains(e.Location))
 		{
+			Loading = true;
 			await _playsetManager.ActivatePlayset(Playset);
+			Loading = false;
 			return;
 		}
 
@@ -128,19 +133,21 @@ public class PlaysetSideControl : SlickControl
 
 		Height = Width * 300 / 190;
 
-		var rectangle = ClientRectangle.Pad(Padding);
+		var rectangle = ClientRectangle.Pad(InnerPadding.Left + UI.Scale(8));
 		var size = UI.Scale(new Size(32, 32));
 
-		ActivateButton = new Rectangle(rectangle.X, rectangle.Bottom - UI.Scale(36), rectangle.Width, UI.Scale(36));
-		var Thumbnail = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Width - Padding.Top).Pad(-Padding.Top/2);
+		ActivateButton = new Rectangle(rectangle.X, rectangle.Bottom - UI.Scale(36) - InnerPadding.Vertical, rectangle.Width, UI.Scale(36) + InnerPadding.Vertical).Pad(InnerPadding);
+		var Thumbnail = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Width - InnerPadding.Top).InvertPad(InnerPadding);
 
-		Favorite = Thumbnail.Pad(Padding).Pad(0, 0, 0, 0).Align(size, ContentAlignment.TopLeft);
+		rectangle = rectangle.Pad(UI.Scale(2));
+
+		Favorite = Thumbnail.Pad(Padding).Align(size, ContentAlignment.TopLeft);
 
 		TextRect = new Rectangle(Thumbnail.X + (Padding.Left / 2), Thumbnail.Bottom + (Padding.Top / 2), Thumbnail.Width, size.Height);
 		var Content = new Rectangle(rectangle.X, TextRect.Bottom + Padding.Vertical, rectangle.Width, ActivateButton.Y - TextRect.Bottom - Padding.Vertical);
 
-		var EditThumbnail = Thumbnail.Pad(Padding).Align(size, ContentAlignment.TopRight);
-		var EditSettings = Thumbnail.Pad(Padding).Align(size, ContentAlignment.BottomRight);
+		var EditThumbnail = Thumbnail.Align(size, ContentAlignment.TopRight);
+		var EditSettings = Thumbnail.Align(size, ContentAlignment.BottomRight);
 
 		DotsRect = TextRect.Align(UI.Scale(new Size(32, 32)), ContentAlignment.TopRight);
 		TextRect.Width -= DotsRect.Width;
@@ -150,45 +157,23 @@ public class PlaysetSideControl : SlickControl
 		var CursorLocation = PointToClient(Cursor.Position);
 		var customPlayset = Playset.GetCustomPlayset();
 		var banner = customPlayset.GetThumbnail();
-		var backColor = customPlayset.Color ?? banner?.GetThemedAverageColor() ?? FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 5 : -4, Sat: 5);
-		var onBannerColor = backColor.GetTextColor();
+		var backColor = customPlayset.Color ?? banner?.GetThemedAverageColor() ?? FormDesign.Design.AccentBackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 7 : -6, Sat: 3);
+		var onBannerColor = (banner?.GetThemedAverageColor() ?? FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme ? 7 : -6, Sat: 3)).GetTextColor();
+		var backRect = e.ClipRectangle.Pad(UI.Scale(8));
 		using var onBannerBrush = new SolidBrush(Color.FromArgb(banner is null ? 125 : 50, onBannerColor));
 
-		using (var brush = Gradient(backColor, rectangle.InvertPad(Padding), 3.5f))
+		using (var brush = Gradient(Color.FromArgb(FormDesign.Design.IsDarkTheme ? 100 : 70, backColor), backRect, 3.5f))
 		{
-			Rectangle rect;
+			e.Graphics.FillRoundedRectangleWithShadow(backRect, borderRadius, UI.Scale(8), BackColor, Color.FromArgb(10, isActive ? FormDesign.Design.GreenColor : backColor));
 
-			if (isActive)
-			{
-				using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor);
-				e.Graphics.FillRoundedRectangle(greenBrush, rectangle.InvertPad(Padding), borderRadius);
-
-				e.Graphics.FillRoundedRectangle(greenBrush, ActivateButton.InvertPad(Padding).Pad(0, -borderRadius + Padding.Horizontal, 0, 0), borderRadius, false, false);
-
-				ActivateButton = ActivateButton.Pad(0, Padding.Top, 0, -Padding.Bottom);
-
-				var text = Locale.ActivePlayset.One.ToUpper();
-				using var font = UI.Font(10.75F, FontStyle.Bold).FitTo(text, ActivateButton, e.Graphics);
-				using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
-				using var textBrush2 = new SolidBrush(FormDesign.Design.GreenColor.GetTextColor());
-
-				e.Graphics.DrawString(text, font, textBrush2, ActivateButton, format);
-
-				rect = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, ActivateButton.InvertPad(Padding).Y - rectangle.Y + (Padding.Top / 2)).Pad(-Padding.Left / 2);
-			}
-			else
-			{
-				rect = rectangle.InvertPad(Padding);
-			}
-
-			e.Graphics.FillRoundedRectangle(brush, rect, borderRadius);
+			e.Graphics.FillRoundedRectangle(brush, backRect, borderRadius);
 		}
 
 		if (banner is null)
 		{
 			using var brush = new SolidBrush(Color.FromArgb(40, onBannerColor));
 
-			e.Graphics.FillRoundedRectangle(brush, Thumbnail, borderRadius, botLeft: !isActive, botRight: !isActive);
+			e.Graphics.FillRoundedRectangle(brush, Thumbnail, borderRadius, botLeft: false, botRight: false);
 
 			using var icon = customPlayset.Usage.GetIcon().Get(Thumbnail.Width * 3 / 4).Color(onBannerColor);
 
@@ -196,19 +181,34 @@ public class PlaysetSideControl : SlickControl
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(banner, Thumbnail, borderRadius, botLeft: !isActive, botRight: !isActive);
+			e.Graphics.DrawRoundedImage(banner, Thumbnail, borderRadius, botLeft: false, botRight: false);
+		}
+
+		if (isActive)
+		{
+			ActivateButton = ActivateButton.InvertPad(InnerPadding).Pad(UI.Scale(2), Padding.Vertical, UI.Scale(2), UI.Scale(2));
+
+			using var greenBrush = new SolidBrush(FormDesign.Design.GreenColor);
+			e.Graphics.FillRoundedRectangle(greenBrush, ActivateButton.Pad(-InnerPadding.Left - UI.Scale(2)), borderRadius, topLeft: false, topRight: false);
+
+			var text = Locale.ActivePlayset.One.ToUpper();
+			using var font = UI.Font(10.5F, FontStyle.Bold).FitTo(text, ActivateButton, e.Graphics);
+			using var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+			using var textBrush2 = new SolidBrush(FormDesign.Design.GreenColor.GetTextColor());
+
+			e.Graphics.DrawString(text, font, textBrush2, ActivateButton, format);
 		}
 
 		DrawFavoriteButton(e, customPlayset, onBannerColor, onBannerBrush, Favorite, Thumbnail, CursorLocation);
 
-		using var textBrush = new SolidBrush(onBannerColor);
-		using var fadedBrush = new SolidBrush(Color.FromArgb(175, onBannerColor));
+		using var textBrush = new SolidBrush(backColor.MergeColor(BackColor, (FormDesign.Design.IsDarkTheme ? 100 : 70) * 100 / 255).GetTextColor());
+		using var fadedBrush = new SolidBrush(Color.FromArgb(175, textBrush.Color));
 		using var textFont = UI.Font(12.5F, FontStyle.Bold).FitTo(Playset.Name, TextRect, e.Graphics);
-		using var smallTextFont = UI.Font(9.5F);
+		using var smallTextFont = UI.Font(8.25F);
 
 		if (!_textBox.Visible)
 		{
-			e.Graphics.DrawString(Playset.Name, textFont, textBrush, TextRect);
+			e.Graphics.DrawHighResText(Playset.Name, textFont, textBrush, TextRect);
 
 			e.Graphics.DrawString(customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, new Point(TextRect.X, TextRect.Y + (int)e.Graphics.Measure(Playset.Name, textFont, TextRect.Width).Height));
 
@@ -218,7 +218,7 @@ public class PlaysetSideControl : SlickControl
 			{
 				using var brush = new SolidBrush(Color.FromArgb(35, onBannerColor));
 
-				e.Graphics.FillRoundedRectangle(brush, TextRect, Padding.Left);
+				e.Graphics.FillRoundedRectangle(brush, TextRect, borderRadius / 2);
 			}
 		}
 		else
@@ -227,16 +227,19 @@ public class PlaysetSideControl : SlickControl
 
 			using var brush = new SolidBrush(_textBox.BackColor);
 
-			e.Graphics.FillRoundedRectangle(brush, TextRect, Padding.Left);
+			e.Graphics.FillRoundedRectangle(brush, TextRect, borderRadius / 2);
 		}
 
-		SlickButton.AlignAndDraw(e.Graphics, Content, ContentAlignment.MiddleCenter, new ButtonDrawArgs
+		var contentText = $"{Locale.ContainCount.FormatPlural(Playset.ModCount, Locale.Mod.FormatPlural(Playset.ModCount).ToLower())} • {Playset.ModSize.SizeString(0)}";
+		using (var contentBrush = new SolidBrush(Color.FromArgb(100, backColor.Tint(Lum: backColor.IsDark() ? -5 : 5))))
+		using (var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center })
 		{
-			Text = $"{Locale.ContainCount.FormatPlural(Playset.ModCount, Locale.Mod.FormatPlural(Playset.ModCount).ToLower())} • {Playset.ModSize.SizeString(0)}",
-			BackColor = backColor.Tint(Lum: backColor.IsDark() ? 3 : -3),
-			BorderRadius = borderRadius / 2,
-			Font = smallTextFont
-		});
+			e.Graphics.FillRectangle(contentBrush, Content.CenterR(backRect.Width, smallTextFont.Height * 5 / 3));
+			e.Graphics.DrawString(contentText, smallTextFont, textBrush, Content, format);
+		}
+
+		using var pen = new Pen(isActive ? FormDesign.Design.GreenColor : customPlayset.IsFavorite ? FormDesign.Modern.ActiveColor : backColor, UI.Scale(2.5f)) { Alignment = PenAlignment.Center };
+		e.Graphics.DrawRoundedRectangle(pen, backRect, borderRadius);
 
 		var isHovered = DotsRect.Contains(CursorLocation);
 		using var img = IconManager.GetIcon("VertialMore", DotsRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : onBannerColor);
@@ -277,22 +280,27 @@ public class PlaysetSideControl : SlickControl
 				Padding = UI.Scale(new Padding(8, 4, 8, 4)),
 				HoverState = HoverState & ~HoverState.Focused,
 				Cursor = CursorLocation,
-				BackgroundColor = backColor.MergeColor(onBannerColor, 65),
+				Control = this,
+				BackgroundColor = backColor.MergeColor(onBannerColor, 85).MergeColor(BackColor, 45).Tint(null, -6, 6),
 				ActiveColor = FormDesign.Design.GreenColor
 			});
+		}
+		else
+		{
+			ActivateButton = default;
 		}
 	}
 
 	private void DrawFavoriteButton(PaintEventArgs e, ICustomPlayset customPlayset, Color onBannerColor, SolidBrush onBannerBrush, Rectangle Favorite, Rectangle Thumbnail, Point CursorLocation)
 	{
-		if (HoverState.HasFlag(HoverState.Hovered) && Favorite.Contains(CursorLocation))
+		if (customPlayset.IsFavorite)
+		{
+			using var favBrush = new SolidBrush(FormDesign.Modern.ActiveColor);
+			e.Graphics.FillRoundedRectangle(favBrush, Favorite, Padding.Left / 2);
+		}
+		else if (HoverState.HasFlag(HoverState.Hovered) && Favorite.Contains(CursorLocation))
 		{
 			e.Graphics.FillRoundedRectangle(onBannerBrush, Favorite, Padding.Left / 2);
-		}
-		else if (customPlayset.IsFavorite)
-		{
-			using var favBrush = new SolidBrush(Color.FromArgb(80, FormDesign.Modern.ActiveColor));
-			e.Graphics.FillRoundedRectangle(favBrush, Favorite, Padding.Left / 2);
 		}
 
 		var fav = new DynamicIcon(customPlayset.IsFavorite != Favorite.Contains(CursorLocation) ? "StarFilled" : "Star");
@@ -300,7 +308,7 @@ public class PlaysetSideControl : SlickControl
 
 		if (customPlayset.IsFavorite || (HoverState.HasFlag(HoverState.Hovered) && Thumbnail.Contains(CursorLocation)))
 		{
-			e.Graphics.DrawImage(favIcon.Color(Favorite.Contains(CursorLocation) != customPlayset.IsFavorite ? FormDesign.Modern.ActiveColor : onBannerColor), Favorite.CenterR(favIcon.Size));
+			e.Graphics.DrawImage(favIcon.Color(customPlayset.IsFavorite ? FormDesign.Modern.ActiveForeColor : Favorite.Contains(CursorLocation) ? FormDesign.Modern.ActiveColor : onBannerColor), Favorite.CenterR(favIcon.Size));
 		}
 	}
 }

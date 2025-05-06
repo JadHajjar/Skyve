@@ -1,6 +1,7 @@
 ﻿using Skyve.App.Interfaces;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
@@ -14,16 +15,24 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 	private readonly IModUtil _modUtil;
 	private readonly IWorkshopService _workshopService;
 	private readonly INotifier _notifier;
+	private readonly ISubscriptionsManager _subscriptionsManager;
 
 	public OtherPlaysetPackage(IPackageIdentity package)
 	{
-		ServiceCenter.Get(out _notifier, out _packageUtil, out _playsetManager, out _modLogicManager, out _modUtil, out _workshopService);
+		ServiceCenter.Get(out _notifier, out _packageUtil, out _playsetManager, out _modLogicManager, out _modUtil, out _workshopService, out _subscriptionsManager);
 		SeparateWithLines = true;
 		Package = package;
 		SetItems(_playsetManager.Playsets);
 
 		_notifier.PlaysetUpdated += Notifier_PlaysetUpdated;
 		_notifier.PlaysetChanged += Notifier_PlaysetUpdated;
+
+		AltStateChanged += AltKeyStateChanged;
+	}
+
+	private void AltKeyStateChanged(object sender, EventArgs e)
+	{
+		Invalidate();
 	}
 
 	private void Notifier_PlaysetUpdated()
@@ -35,6 +44,8 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 	{
 		if (disposing)
 		{
+			AltStateChanged -= AltKeyStateChanged;
+
 			_notifier.PlaysetUpdated -= Notifier_PlaysetUpdated;
 			_notifier.PlaysetChanged -= Notifier_PlaysetUpdated;
 		}
@@ -44,7 +55,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 	protected override void UIChanged()
 	{
-		ItemHeight = 28;
+		ItemHeight = 35;
 
 		base.UIChanged();
 
@@ -72,26 +83,6 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		return items.OrderByDescending(x => x.Item.DateUpdated);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<IPlayset, Rectangles> item, Point location)
-	{
-		var rects = item.Rectangles;
-
-		if (rects.IncludedRect.Contains(location))
-		{
-			setTip(string.Format(Locale.IncludeExcludeOtherPlayset, Package, item.Item), rects.IncludedRect);
-			return true;
-		}
-		else if (rects.LoadRect.Contains(location))
-		{
-			setTip(Locale.ActivatePlayset, rects.LoadRect);
-			return true;
-		}
-
-		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, offset: new Point(rectangle.X, item.Bounds.Y));
-
-		return false;
-	}
-
 	protected override async void OnItemMouseClick(DrawableItem<IPlayset, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
@@ -109,17 +100,17 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 		if (item.Rectangles.IncludedRect.Contains(e.Location))
 		{
-			var isIncluded = _packageUtil.IsIncluded(Package, out var partialIncluded, item.Item.Id) && !partialIncluded;
+			var isIncluded = _packageUtil.IsIncluded(Package, out var partialIncluded, item.Item.Id, false) && !partialIncluded;
 
 			Loading = item.Loading = true;
 
-			if (!isIncluded)
+			if (!isIncluded || (ModifierKeys.HasFlag(Keys.Alt) && !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil)))
 			{
-				await _packageUtil.SetIncluded(Package, !isIncluded, item.Item.Id);
+				await _packageUtil.SetIncluded(Package, !isIncluded, item.Item.Id, false);
 			}
 			else
 			{
-				var enable = !_packageUtil.IsEnabled(Package, item.Item.Id);
+				var enable = !_packageUtil.IsEnabled(Package, item.Item.Id, false);
 
 				if (enable || !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil))
 				{
@@ -129,27 +120,12 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 			item.Loading = false;
 			Invalidate(item.Item);
-
-			Loading = SafeGetItems().Any(x => x.Loading);
-		}
-
-		if (item.Rectangles.LoadRect.Contains(e.Location))
-		{
-			Loading = item.Loading = true;
-
-			await _packageUtil.SetIncluded(Package, false, item.Item.Id);
-
-			item.Loading = false;
-
-			Loading = SafeGetItems().Any(x => x.Loading);
 		}
 	}
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<IPlayset, Rectangles> e)
 	{
 		var customPlayset = e.Item.GetCustomPlayset();
-
-		base.OnPaintItemList(e);
 
 		if (e.Item == _playsetManager.CurrentPlayset)
 		{
@@ -160,16 +136,28 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		}
 		else if (e.HoverState.HasFlag(HoverState.Hovered))
 		{
-			e.BackColor = FormDesign.Design.AccentBackColor.MergeColor(customPlayset.Color ?? FormDesign.Design.ActiveColor, 85);
+			e.BackColor = FormDesign.Design.AccentBackColor.MergeColor(customPlayset.Color ?? FormDesign.Design.ActiveColor, 75);
 
 			using var brush = new SolidBrush(e.BackColor);
 			e.Graphics.FillRectangle(brush, e.ClipRectangle.Pad(Padding.Left, 0, Padding.Right, 0));
 		}
+		else if (customPlayset.Color.HasValue)
+		{
+			e.BackColor = BackColor.MergeColor(customPlayset.Color.Value, 95);
+
+			using var brush = new SolidBrush(e.BackColor);
+			e.Graphics.FillRectangle(brush, e.ClipRectangle.Pad(Padding.Left, 0, Padding.Right, 0));
+		}
+		else
+		{
+			e.BackColor = BackColor;
+		}
 
 		var localIdentity = Package.GetLocalPackageIdentity();
-		var isIncluded = _packageUtil.IsIncluded(Package, out var partialIncluded, e.Item.Id) || partialIncluded;
-		var isEnabled = _packageUtil.IsEnabled(Package, e.Item.Id);
-		var version = isIncluded ? Package.GetWorkshopInfo()?.Changelog.FirstOrDefault(x => x.VersionId == Package.Version)?.Version : null;
+		var isIncluded = _packageUtil.IsIncluded(Package, out var partialIncluded, e.Item.Id, false) || partialIncluded;
+		var isEnabled = _packageUtil.IsEnabled(Package, e.Item.Id, false);
+		var versionId = isIncluded ? _packageUtil.GetSelectedVersion(Package, e.Item.Id) : null;
+		var version = isIncluded ? Package.GetWorkshopInfo()?.Changelog.FirstOrDefault(x => x.VersionId == versionId)?.Version : null;
 
 		DrawIncludedButton(e, isIncluded, partialIncluded, isEnabled, localIdentity, out var activeColor);
 
@@ -201,24 +189,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 		if (!string.IsNullOrEmpty(version))
 		{
-			e.Graphics.DrawLabel("v" + version, null, Color.FromArgb(80, version == Package.GetWorkshopInfo()?.Changelog.LastOrDefault().Version ? FormDesign.Design.GreenColor : FormDesign.Design.OrangeColor), e.ClipRectangle.Pad(0, 0, (Padding.Right * 3) + e.ClipRectangle.Height, 0), ContentAlignment.MiddleRight);
-		}
-
-		if (isIncluded)
-		{
-			e.Rects.LoadRect = SlickButton.AlignAndDraw(e.Graphics, e.ClipRectangle.Pad(0, 0, Padding.Right * 2, 0), ContentAlignment.MiddleRight, new ButtonDrawArgs
-			{
-				Icon = "X",
-				HoverState = e.HoverState,
-				Cursor = CursorLocation,
-				Size = e.Rects.IncludedRect.Size,
-				ColorStyle = ColorStyle.Red,
-				ButtonType = ButtonType.Hidden
-			}).Rectangle;
-		}
-		else
-		{
-			e.Rects.LoadRect = default;
+			e.Graphics.DrawLabel("v" + version, null, Color.FromArgb(80, version == Package.GetWorkshopInfo()?.Changelog.LastOrDefault().Version ? FormDesign.Design.GreenColor : FormDesign.Design.OrangeColor), e.ClipRectangle.Pad(0, 0, Padding.Right * 2, 0), ContentAlignment.MiddleRight);
 		}
 	}
 
@@ -231,7 +202,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		{
 			using var brush = new SolidBrush(customPlayset.Color ?? FormDesign.Design.AccentColor);
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail, UI.Scale(5));
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail, UI.Scale(4));
 
 			using var icon = customPlayset.Usage.GetIcon().Get(e.Rects.Thumbnail.Width * 3 / 4).Color(onBannerColor);
 
@@ -239,7 +210,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(banner, e.Rects.Thumbnail, UI.Scale(5));
+			e.Graphics.DrawRoundedImage(banner, e.Rects.Thumbnail, UI.Scale(4), customPlayset.Color ?? e.BackColor);
 		}
 	}
 
@@ -248,12 +219,11 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		var rects = new Rectangles(item)
 		{
 			IncludedRect = rectangle.Pad(Padding + Padding).Align(UI.Scale(new Size(24, 24)), ContentAlignment.MiddleLeft),
-			LoadRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
 		};
 
 		rects.Thumbnail = rectangle.Pad(rects.IncludedRect.Right + (2 * Padding.Left)).Align(rects.IncludedRect.Size, ContentAlignment.MiddleLeft);
 
-		rects.TextRect = new Rectangle(rects.Thumbnail.Right + Padding.Left, rectangle.Y, rects.LoadRect.X - rects.Thumbnail.Right - (2 * Padding.Left), rectangle.Height);
+		rects.TextRect = new Rectangle(rects.Thumbnail.Right + Padding.Left, rectangle.Y, rectangle.Width - rects.Thumbnail.Right - (2 * Padding.Left), rectangle.Height);
 
 		return rects;
 	}
@@ -262,11 +232,6 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 	private void DrawIncludedButton(ItemPaintEventArgs<IPlayset, Rectangles> e, bool isIncluded, bool isPartialIncluded, bool isEnabled, ILocalPackageIdentity? localIdentity, out Color activeColor)
 	{
 		activeColor = default;
-
-		if (localIdentity is null && Package.IsLocal())
-		{
-			return; // missing local item
-		}
 
 		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
 		var isHovered = e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation));
@@ -277,9 +242,17 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 			isEnabled = !isEnabled;
 		}
 
-		if (isEnabled)
+		if (isIncluded && !required && isHovered && ModifierKeys.HasFlag(Keys.Alt))
+		{
+			activeColor = FormDesign.Design.RedColor;
+		}
+		else if (isEnabled)
 		{
 			activeColor = isPartialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
+		}
+		else if (required)
+		{
+			activeColor = Color.FromArgb(200, ForeColor.MergeColor(BackColor));
 		}
 
 		Color iconColor;
@@ -313,11 +286,28 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 		if (e.DrawableItem.Loading)
 		{
-			DrawLoader(e.Graphics, e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Height / 2, e.Rects.IncludedRect.Height / 2), iconColor);
+			var rectangle = e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Height * 3 / 5, e.Rects.IncludedRect.Height * 3 / 5);
+#if CS2
+			if (_subscriptionsManager.Status.ModId != Package.Id || _subscriptionsManager.Status.Progress == 0 || !_subscriptionsManager.Status.IsActive)
+			{
+				DrawLoader(e.Graphics, rectangle, iconColor);
+				return;
+			}
+
+			var width = Math.Min(Math.Min(rectangle.Width, rectangle.Height), (int)(32 * UI.UIScale));
+			var size = (float)Math.Max(2, width / (8D - (Math.Abs(100 - LoaderPercentage) / 50)));
+			var drawSize = new SizeF(width - size, width - size);
+			var rect = new RectangleF(new PointF(rectangle.X + ((rectangle.Width - drawSize.Width) / 2), rectangle.Y + ((rectangle.Height - drawSize.Height) / 2)), drawSize).Pad(size / 2);
+			using var pen = new Pen(iconColor, size) { StartCap = LineCap.Round, EndCap = LineCap.Round };
+
+			e.Graphics.DrawArc(pen, rect, -90, 360 * _subscriptionsManager.Status.Progress);
+#else
+			DrawLoader(e.Graphics, rectangle, iconColor);
+#endif
 			return;
 		}
 
-		var icon = new DynamicIcon(isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : "Enabled");
+		var icon = new DynamicIcon((isHovered && isIncluded && ModifierKeys.HasFlag(Keys.Alt)) ? "X" : isPartialIncluded ? "Slash" : isEnabled ? "Ok" : !isIncluded ? "Add" : "Enabled");
 		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
@@ -397,7 +387,6 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 	{
 		public Rectangle IncludedRect;
 		public Rectangle Thumbnail;
-		public Rectangle LoadRect;
 		public Rectangle TextRect;
 
 		public IPlayset Item { get; set; }
@@ -409,6 +398,49 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
 		{
+			if (IncludedRect.Contains(location))
+			{
+				var listControl = (instance as OtherPlaysetPackage)!;
+
+				var isIncluded = listControl._packageUtil.IsIncluded(listControl.Package, out var partialIncluded, Item.Id, false) && !partialIncluded;
+
+				if (!isIncluded || ModifierKeys.HasFlag(Keys.Alt))
+				{
+					if (!isIncluded)
+					{
+						text = Locale.IncludeItem;
+					}
+					else if (!listControl._modLogicManager.IsRequired(listControl.Package.GetLocalPackageIdentity(), listControl._modUtil))
+					{
+						text = Locale.ExcludeItem;
+					}
+					else
+					{
+						text = Locale.ThisModIsRequiredYouCantDisableIt;
+					}
+				}
+				else
+				{
+					var isEnabled = listControl._packageUtil.IsEnabled(listControl.Package, Item.Id, false);
+
+					if (!isEnabled)
+					{
+						text = Locale.EnableItem + "\r\n\r\n" + Locale.AltClickTo.Format(Locale.ExcludeItem.ToLower());
+					}
+					else if (!listControl._modLogicManager.IsRequired(listControl.Package.GetLocalPackageIdentity(), listControl._modUtil))
+					{
+						text = Locale.DisableItem + "\r\n\r\n" + Locale.AltClickTo.Format(Locale.ExcludeItem.ToLower());
+					}
+					else
+					{
+						text = Locale.ThisModIsRequiredYouCantDisableIt;
+					}
+				}
+
+				point = IncludedRect.Location;
+				return true;
+			}
+
 			text = string.Empty;
 			point = default;
 			return false;
@@ -416,9 +448,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 		public bool IsHovered(Control instance, Point location)
 		{
-			return
-				IncludedRect.Contains(location) ||
-				LoadRect.Contains(location);
+			return IncludedRect.Contains(location);
 		}
 	}
 }

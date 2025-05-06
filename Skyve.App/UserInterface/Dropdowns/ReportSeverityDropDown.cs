@@ -10,8 +10,9 @@ public enum CompatibilityNotificationFilter
 	Any = -2,
 	AnyIssue = -1,
 	NoIssues,
-	RequiredItem = 20,
 
+	LocalMod = 11,
+	RequiredItem = 20,
 	Caution = 30,
 	MissingDependency = 40,
 	AttentionRequired = 49,
@@ -34,7 +35,7 @@ public class ReportSeverityDropDown : SlickSelectionDropDown<CompatibilityNotifi
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(CompatibilityNotificationFilter)).Cast<CompatibilityNotificationFilter>().ToArray();
+			Items = Enum.GetValues(typeof(CompatibilityNotificationFilter)).Cast<CompatibilityNotificationFilter>().Where(x => x != CompatibilityNotificationFilter.LocalMod).ToArray();
 
 			selectedItem = CompatibilityNotificationFilter.Any;
 		}

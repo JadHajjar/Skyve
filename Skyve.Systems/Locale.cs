@@ -147,6 +147,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation AnyIssue => _instance.GetText("AnyIssue");
 
 	/// <summary>
+	/// Any State
+	/// </summary>
+	public static Translation AnyState => _instance.GetText("AnyState");
+
+	/// <summary>
 	/// Any Status
 	/// </summary>
 	public static Translation AnyStatus => _instance.GetText("AnyStatus");
@@ -401,6 +406,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CleanupTimeBased => _instance.GetText("CleanupTimeBased");
 
 	/// <summary>
+	/// If you want to quickly clear your filters, you can click on a filter using your middle-mouse-button to clear it.  You can also do that on the 'Show/Hide Filters' button to clear all filters at once.
+	/// </summary>
+	public static Translation ClearFilterTutorialText => _instance.GetText("ClearFilterTutorialText");
+
+	/// <summary>
+	/// Clearing Filters - Tutorial
+	/// </summary>
+	public static Translation ClearFilterTutorialTitle => _instance.GetText("ClearFilterTutorialTitle");
+
+	/// <summary>
 	/// <para>Code Mod</para>
 	/// <para>Plural: Code Mods</para>
 	/// </summary>
@@ -556,6 +571,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CouldNotUploadFile => _instance.GetText("CouldNotUploadFile");
 
 	/// <summary>
+	/// Create a new playset
+	/// </summary>
+	public static Translation CreatePlayset => _instance.GetText("CreatePlayset");
+
+	/// <summary>
 	/// Create a new playset or activate a previous one by clicking here
 	/// </summary>
 	public static Translation CreatePlaysetHere => _instance.GetText("CreatePlaysetHere");
@@ -624,6 +644,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Date Updated
 	/// </summary>
 	public static Translation DateUpdated => _instance.GetText("DateUpdated");
+
+	/// <summary>
+	/// Deactivate this playset
+	/// </summary>
+	public static Translation DeactivatePlayset => _instance.GetText("DeactivatePlayset");
 
 	/// <summary>
 	/// Deactivate your current playset
@@ -901,6 +926,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Excluded => _instance.GetText("Excluded");
 
 	/// <summary>
+	/// You can remove mods from your active playset by holding the ALT key and clicking on the checkbox of the mod.  You can also add or remove a mod from all your playsets using the right-click menu.
+	/// </summary>
+	public static Translation ExclusionTutorialText => _instance.GetText("ExclusionTutorialText");
+
+	/// <summary>
+	/// Removing Mods - Tutorial
+	/// </summary>
+	public static Translation ExclusionTutorialTitle => _instance.GetText("ExclusionTutorialTitle");
+
+	/// <summary>
 	/// EXPERIMENTAL
 	/// </summary>
 	public static Translation EXPERIMENTAL => _instance.GetText("EXPERIMENTAL");
@@ -1006,6 +1041,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FavoriteTotal => _instance.GetText("FavoriteTotal");
 
 	/// <summary>
+	/// Only show asset packages.
+	/// </summary>
+	public static Translation FilterByAssets => _instance.GetText("FilterByAssets");
+
+	/// <summary>
 	/// Only show disabled items.
 	/// </summary>
 	public static Translation FilterByDisabled => _instance.GetText("FilterByDisabled");
@@ -1026,6 +1066,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FilterByIncluded => _instance.GetText("FilterByIncluded");
 
 	/// <summary>
+	/// Only show local items.
+	/// </summary>
+	public static Translation FilterByLocal => _instance.GetText("FilterByLocal");
+
+	/// <summary>
+	/// Only show code mod packages.
+	/// </summary>
+	public static Translation FilterByMods => _instance.GetText("FilterByMods");
+
+	/// <summary>
 	/// Add '{0}' to your author filters
 	/// </summary>
 	public static Translation FilterByThisAuthor => _instance.GetText("FilterByThisAuthor");
@@ -1044,6 +1094,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Add '{0}' to the filtered tags
 	/// </summary>
 	public static Translation FilterByThisTag => _instance.GetText("FilterByThisTag");
+
+	/// <summary>
+	/// Only show workshop items.
+	/// </summary>
+	public static Translation FilterByWorkshop => _instance.GetText("FilterByWorkshop");
 
 	/// <summary>
 	/// Hide code mods in the packages page
@@ -2149,7 +2204,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SetupSettingsFirst => _instance.GetText("SetupSettingsFirst");
 
 	/// <summary>
-	/// Upload this playset
+	/// Share this playset
 	/// </summary>
 	public static Translation SharePlayset => _instance.GetText("SharePlayset");
 

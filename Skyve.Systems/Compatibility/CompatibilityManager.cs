@@ -251,26 +251,30 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public ICompatibilityPackageIdentity GetFinalSuccessor(ICompatibilityPackageIdentity package)
 	{
-		//if (!CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
-		//{
-		//	return package;
-		//}
+		var indexedPackage = _skyveDataManager.GetPackageCompatibilityInfo(package);
 
-		//if (indexedPackage.SucceededBy is not null)
-		//{
-		//	return new GenericPackageIdentity(indexedPackage.SucceededBy.Packages.First().Key);
-		//}
+		if (indexedPackage is null)
+		{
+			return package;
+		}
 
-		//if (_packageManager.GetPackageById(package) is null)
-		//{
-		//	foreach (var item in indexedPackage.RequirementAlternatives.Keys)
-		//	{
-		//		if (_packageManager.GetPackageById(new GenericPackageIdentity(item)) is IPackageIdentity identity)
-		//		{
-		//			return identity;
-		//		}
-		//	}
-		//}
+		if (indexedPackage.SucceededBy is not null)
+		{
+			return new CompatibilityPackageReference(indexedPackage.SucceededBy.Packages.First().Value);
+		}
+
+		if (indexedPackage.RequirementAlternatives.Count > 0 && _packageManager.GetPackageById(package) is null)
+		{
+			foreach (var item in indexedPackage.RequirementAlternatives.Values)
+			{
+				var localPackage = _packageManager.GetPackageById(item);
+
+				if (localPackage is not null)
+				{
+					return new CompatibilityPackageReference(localPackage);
+				}
+			}
+		}
 
 		return package;
 	}
@@ -430,7 +434,7 @@ public class CompatibilityManager : ICompatibilityManager
 			info.Add(ReportType.Info, new PackageTypeStatus(packageData.Type) { Note = stability is PackageStability.Stable ? packageData.Note : null }, packageName, []);
 		}
 
-		if (packageData.SavegameEffect > SavegameEffect.None)
+		if (packageData.SavegameEffect != SavegameEffect.Unknown)
 		{
 			info.Add(ReportType.Info, new SavegameEffectStatus(packageData.SavegameEffect, packageData.RemovalSteps), packageName, []);
 		}
