@@ -117,7 +117,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 				continue;
 			}
 
-			if (mod.IsCodeMod)
+			if (mod.IsCodeMod())
 			{
 				if (compatibilityModCounts.ContainsKey(notif))
 				{

@@ -69,6 +69,7 @@ partial class ContentList
 			this.DD_PackageUsage = new Skyve.App.UserInterface.Dropdowns.PackageUsageDropDown();
 			this.I_SortOrder = new SlickControls.SlickIcon();
 			this.DD_SearchTime = new Skyve.App.UserInterface.Dropdowns.WorkshopSearchTimeDropDown();
+			this.DD_PackageType = new Skyve.App.UserInterface.Dropdowns.PackageTypeDropDown();
 			this.TLP_Main.SuspendLayout();
 			this.FLP_Search.SuspendLayout();
 			this.TLP_MiddleBar.SuspendLayout();
@@ -120,7 +121,7 @@ partial class ContentList
 			this.FLP_Search.Margin = new System.Windows.Forms.Padding(0);
 			this.FLP_Search.Name = "FLP_Search";
 			this.TLP_Main.SetRowSpan(this.FLP_Search, 2);
-			this.FLP_Search.Size = new System.Drawing.Size(770, 56);
+			this.FLP_Search.Size = new System.Drawing.Size(851, 56);
 			this.FLP_Search.TabIndex = 0;
 			// 
 			// TB_Search
@@ -143,7 +144,6 @@ partial class ContentList
 			// 
 			// I_Refresh
 			// 
-			this.I_Refresh.ActiveColor = null;
 			this.I_Refresh.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon2.Name = "Refresh";
 			this.I_Refresh.ImageName = dynamicIcon2;
@@ -165,7 +165,7 @@ partial class ContentList
 			this.B_Filters.Location = new System.Drawing.Point(43, 3);
 			this.B_Filters.Name = "B_Filters";
 			this.B_Filters.Selected = false;
-			this.B_Filters.Size = new System.Drawing.Size(117, 28);
+			this.B_Filters.Size = new System.Drawing.Size(114, 28);
 			this.B_Filters.SpaceTriggersClick = true;
 			this.B_Filters.TabIndex = 1;
 			this.B_Filters.Text = "ShowFilters";
@@ -282,12 +282,13 @@ partial class ContentList
 			this.P_Filters.Controls.Add(this.I_ClearFilters, 3, 0);
 			this.P_Filters.Controls.Add(this.DR_SubscribeTime, 1, 1);
 			this.P_Filters.Controls.Add(this.DR_ServerTime, 1, 2);
-			this.P_Filters.Controls.Add(this.DD_PackageStatus, 2, 2);
 			this.P_Filters.Controls.Add(this.DD_Tags, 2, 1);
 			this.P_Filters.Controls.Add(this.DD_ReportSeverity, 3, 2);
 			this.P_Filters.Controls.Add(this.DD_Author, 3, 1);
 			this.P_Filters.Controls.Add(this.DD_Playset, 3, 3);
 			this.P_Filters.Controls.Add(this.DD_PackageUsage, 2, 3);
+			this.P_Filters.Controls.Add(this.DD_PackageStatus, 1, 3);
+			this.P_Filters.Controls.Add(this.DD_PackageType, 2, 2);
 			this.P_Filters.Dock = System.Windows.Forms.DockStyle.Top;
 			this.P_Filters.Location = new System.Drawing.Point(0, 0);
 			this.P_Filters.Name = "P_Filters";
@@ -317,7 +318,7 @@ partial class ContentList
 			this.OT_ModAsset.OptionStyle1 = Extensions.ColorStyle.Active;
 			this.OT_ModAsset.OptionStyle2 = Extensions.ColorStyle.Active;
 			this.OT_ModAsset.Size = new System.Drawing.Size(225, 20);
-			this.OT_ModAsset.TabIndex = 10;
+			this.OT_ModAsset.TabIndex = 3;
 			this.OT_ModAsset.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// OT_Workshop
@@ -369,7 +370,6 @@ partial class ContentList
 			// 
 			// I_ClearFilters
 			// 
-			this.I_ClearFilters.ActiveColor = null;
 			this.I_ClearFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.I_ClearFilters.ColorStyle = Extensions.ColorStyle.Red;
 			this.I_ClearFilters.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -389,7 +389,7 @@ partial class ContentList
 			this.DR_SubscribeTime.Location = new System.Drawing.Point(242, 38);
 			this.DR_SubscribeTime.Name = "DR_SubscribeTime";
 			this.DR_SubscribeTime.Size = new System.Drawing.Size(225, 20);
-			this.DR_SubscribeTime.TabIndex = 3;
+			this.DR_SubscribeTime.TabIndex = 4;
 			this.DR_SubscribeTime.RangeChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DR_ServerTime
@@ -400,7 +400,7 @@ partial class ContentList
 			this.DR_ServerTime.Location = new System.Drawing.Point(242, 64);
 			this.DR_ServerTime.Name = "DR_ServerTime";
 			this.DR_ServerTime.Size = new System.Drawing.Size(225, 20);
-			this.DR_ServerTime.TabIndex = 4;
+			this.DR_ServerTime.TabIndex = 5;
 			this.DR_ServerTime.RangeChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_PackageStatus
@@ -411,10 +411,10 @@ partial class ContentList
 			this.DD_PackageStatus.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_PackageStatus.Font = new System.Drawing.Font("Nirmala UI", 15F);
 			this.DD_PackageStatus.ItemHeight = 24;
-			this.DD_PackageStatus.Location = new System.Drawing.Point(473, 64);
+			this.DD_PackageStatus.Location = new System.Drawing.Point(242, 90);
 			this.DD_PackageStatus.Name = "DD_PackageStatus";
 			this.DD_PackageStatus.Size = new System.Drawing.Size(225, 20);
-			this.DD_PackageStatus.TabIndex = 7;
+			this.DD_PackageStatus.TabIndex = 6;
 			this.DD_PackageStatus.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_Tags
@@ -428,7 +428,7 @@ partial class ContentList
 			this.DD_Tags.Location = new System.Drawing.Point(473, 38);
 			this.DD_Tags.Name = "DD_Tags";
 			this.DD_Tags.Size = new System.Drawing.Size(225, 20);
-			this.DD_Tags.TabIndex = 5;
+			this.DD_Tags.TabIndex = 7;
 			this.DD_Tags.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_ReportSeverity
@@ -442,7 +442,7 @@ partial class ContentList
 			this.DD_ReportSeverity.Location = new System.Drawing.Point(704, 64);
 			this.DD_ReportSeverity.Name = "DD_ReportSeverity";
 			this.DD_ReportSeverity.Size = new System.Drawing.Size(228, 20);
-			this.DD_ReportSeverity.TabIndex = 8;
+			this.DD_ReportSeverity.TabIndex = 11;
 			this.DD_ReportSeverity.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_Author
@@ -455,7 +455,7 @@ partial class ContentList
 			this.DD_Author.Location = new System.Drawing.Point(704, 38);
 			this.DD_Author.Name = "DD_Author";
 			this.DD_Author.Size = new System.Drawing.Size(228, 20);
-			this.DD_Author.TabIndex = 6;
+			this.DD_Author.TabIndex = 10;
 			this.DD_Author.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_Playset
@@ -469,7 +469,7 @@ partial class ContentList
 			this.DD_Playset.Location = new System.Drawing.Point(704, 90);
 			this.DD_Playset.Name = "DD_Playset";
 			this.DD_Playset.Size = new System.Drawing.Size(228, 20);
-			this.DD_Playset.TabIndex = 10;
+			this.DD_Playset.TabIndex = 12;
 			this.DD_Playset.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_PackageUsage
@@ -487,7 +487,6 @@ partial class ContentList
 			// 
 			// I_SortOrder
 			// 
-			this.I_SortOrder.ActiveColor = null;
 			this.I_SortOrder.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_SortOrder.Location = new System.Drawing.Point(854, 3);
 			this.I_SortOrder.Name = "I_SortOrder";
@@ -502,17 +501,30 @@ partial class ContentList
 			this.DD_SearchTime.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_SearchTime.HideLabel = true;
 			this.DD_SearchTime.ItemHeight = 24;
-			this.DD_SearchTime.Location = new System.Drawing.Point(773, 3);
+			this.DD_SearchTime.Location = new System.Drawing.Point(854, 3);
 			this.DD_SearchTime.Name = "DD_SearchTime";
-			this.DD_SearchTime.Size = new System.Drawing.Size(75, 0);
+			this.DD_SearchTime.Size = new System.Drawing.Size(1, 0);
 			this.DD_SearchTime.TabIndex = 9;
 			this.DD_SearchTime.Text = "SearchTime";
 			this.DD_SearchTime.Visible = false;
 			this.DD_SearchTime.SelectedItemChanged += new System.EventHandler(this.DD_SearchTime_SelectedItemChanged);
 			// 
-			// ContentList
+			// DD_PackageType
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.DD_PackageType.AccentBackColor = true;
+			this.DD_PackageType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_PackageType.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_PackageType.ItemHeight = 24;
+			this.DD_PackageType.Location = new System.Drawing.Point(473, 64);
+			this.DD_PackageType.Name = "DD_PackageType";
+			this.DD_PackageType.Size = new System.Drawing.Size(225, 20);
+			this.DD_PackageType.TabIndex = 8;
+			this.DD_PackageType.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
+		// 
+		// ContentList
+		// 
+		this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.Controls.Add(this.TLP_Main);
 			this.Name = "ContentList";
 			this.Size = new System.Drawing.Size(943, 549);
@@ -557,4 +569,5 @@ partial class ContentList
 	private ItemCountControl L_Counts;
 	protected System.Windows.Forms.TableLayoutPanel TLP_Main;
 	internal WorkshopSearchTimeDropDown DD_SearchTime;
+	private PackageTypeDropDown DD_PackageType;
 }

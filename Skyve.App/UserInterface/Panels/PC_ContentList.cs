@@ -1,8 +1,11 @@
 ﻿using Skyve.App.UserInterface.Dropdowns;
 
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using Timer = System.Windows.Forms.Timer;
 
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_ContentList : PanelContent
@@ -46,7 +49,35 @@ public partial class PC_ContentList : PanelContent
 		if (_itemsReady)
 		{
 			await LC_Items.RefreshItems();
+
+			if (!ServiceCenter.Get<ISettings>().UserSettings.ExcludeTipShown && ExtensionClass.RNG.NextDouble() > 0.6)
+			{
+				new Timer
+				{
+					Interval = 4000,
+					Enabled = true,
+				}.Tick += (s, e) =>
+				{
+					((Timer)s).Enabled = false;
+					((Timer)s).Dispose();
+
+					if (Form.CurrentPanel == this)
+					{
+						ShowExcludedTip();
+					}
+				};
+			}
 		}
+	}
+
+	private void ShowExcludedTip()
+	{
+		var userSettings = ServiceCenter.Get<ISettings>().UserSettings;
+
+		userSettings.ExcludeTipShown = true;
+		userSettings.Save();
+
+		Notification.Create(Locale.ExclusionTutorialTitle, Locale.ExclusionTutorialText, PromptIcons.Info, size: new Size(300, 140)).Show(Form, 20);
 	}
 
 	public override bool KeyPressed(ref Message msg, Keys keyData)

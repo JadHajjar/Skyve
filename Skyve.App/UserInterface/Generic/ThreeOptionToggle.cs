@@ -26,6 +26,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 			SelectedValueChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
+
 	[Category("Appearance"), DefaultValue("")]
 	public string Option1 { get; set; } = string.Empty;
 	[Category("Appearance"), DefaultValue("")]
@@ -99,15 +100,15 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 		if (option1Hovered)
 		{
-			SlickTip.SetTo(this, Option1);
+			SlickTip.SetTo(this, "FilterBy" + Option1);
 		}
 		else if (option2Hovered)
 		{
-			SlickTip.SetTo(this, Option2, offset: new Point((Width + centerWidth) / 2, 0));
+			SlickTip.SetTo(this, "FilterBy" + Option2, offset: new Point((Width + centerWidth) / 2, 0));
 		}
 		else
 		{
-			SlickTip.SetTo(this, Locale.AnyStatus, offset: new Point((Width - centerWidth) / 2, 0));
+			SlickTip.SetTo(this, nameof(Locale.AnyState), offset: new Point((Width - centerWidth) / 2, 0));
 		}
 	}
 

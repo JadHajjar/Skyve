@@ -53,7 +53,10 @@
     <Compile Update="UserInterface\Content\TroubleshootInfoControl.cs" />
     <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\AuthorDropDown.cs" />
-    <Compile Update="UserInterface\Dropdowns\PackageTypeDropDown.cs" />
+    <Compile Update="UserInterface\Dropdowns\PackageTypeDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\Dropdowns\PackageTypeSingleDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageStatusTypeDropDown.cs" />
     <Compile Update="UserInterface\Forms\EditTagsForm.cs" />
     <Compile Update="UserInterface\Generic\BigSelectionOptionControl.cs" />
@@ -63,6 +66,9 @@
     <Compile Update="UserInterface\Dropdowns\PackageStatusDropDown.cs" />
     <Compile Update="UserInterface\Lists\CompatibilityReportList.cs" />
     <Compile Update="UserInterface\Lists\ReviewRequestList.cs" />
+    <Compile Update="UserInterface\Panels\PC_MapsSaves.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs" />
     <Compile Update="UserInterface\Panels\PC_PlaysetContents.cs" />

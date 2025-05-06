@@ -35,14 +35,14 @@ public class PackageUsageDropDown : SlickMultiSelectionDropDown<PackageUsage>
 
 	protected override bool SearchMatch(string searchText, PackageUsage item)
 	{
-		var text = LocaleCR.Get($"{item}");
+		var text = LocaleCR.Get(item.ToString());
 
 		return searchText.SearchCheck(text);
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageUsage item, bool selected)
 	{
-		var text = LocaleCR.Get($"{item}");
+		var text = LocaleCR.Get(item.ToString());
 
 		using var icon = item.GetIcon().Get(rectangle.Height - 2).Color(foreColor);
 
@@ -57,13 +57,15 @@ public class PackageUsageDropDown : SlickMultiSelectionDropDown<PackageUsage>
 
 	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<PackageUsage> items)
 	{
-		var text = !items.Any() ? Locale.Invalid : items.Count() == Items.Length ? Locale.AllUsages : items.ListStrings(x => LocaleCR.Get($"{x}"), ", ");
+		var text = !items.Any() ? Locale.Invalid : items.Count() == Items.Length ? Locale.AllUsages : items.ListStrings(x => LocaleCR.Get(x.ToString()), ", ");
 		var iconName = !items.Any() ? "X" : items.Count() == Items.Length ? "Slash" : items.First().GetIcon();
 
 		using var icon = iconName.Get(rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		using var brush = new SolidBrush(foreColor);
+		using var format = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center };
+		e.Graphics.DrawString(text, base.Font, brush, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(base.Font, ContentAlignment.MiddleLeft, e.Graphics), format);
 	}
 }

@@ -14,6 +14,7 @@ public enum PackageStability
 	[CRN(NotificationType.Caution)] BreaksOnPatch = 9,
 	[CRN(NotificationType.Caution)] NumerousReports = 11,
 	[CRN(NotificationType.Obsolete)] Obsolete = 12,
+	[CRN(NotificationType.Caution)] CautionWhenUsing = 13,
 
 	[CRN(NotificationType.Info, false)] NotReviewed = 0,
 	[CRN(NotificationType.None, false)] ReiewRequest = 100,

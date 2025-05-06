@@ -1,8 +1,6 @@
 ﻿using Skyve.Compatibility.Domain.Enums;
 using Skyve.Compatibility.Domain.Interfaces;
 
-using SlickControls;
-
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -16,7 +14,7 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity>
 
 	public bool ShowCompleted { get; set; } = true;
 
-    public PackageCrList()
+	public PackageCrList()
 	{
 		ServiceCenter.Get(out _workshopService, out _compatibilityManager);
 		HighlightOnHover = true;
@@ -44,13 +42,12 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity>
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<IPackageIdentity, GenericDrawableItemRectangles<IPackageIdentity>> e)
 	{
-		base.OnPaintItemList(e);
 
 		var cr = e.Item.GetPackageInfo();
 		var stability = cr?.Stability ?? PackageStability.NotReviewed;
 		var clipRectangle = e.ClipRectangle;
 		var imageRect = clipRectangle.Pad(Padding.Left);
-		var thumbnail = e.Item.GetThumbnail();
+		var thumbnail = e.Item.GetThumbnail() ?? ItemListControl.WorkshopThumb;
 		var isUpToDate = ShowCompleted && cr?.ReviewDate.ToLocalTime() > e.Item.GetWorkshopInfo()?.ServerTime.ToLocalTime();
 
 		imageRect.Width = imageRect.Height;
@@ -59,13 +56,18 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity>
 		{
 			var filledRect = e.ClipRectangle.Pad(0, -Padding.Top / 2, Padding.Right / 2, -Padding.Bottom / 2);
 
-			using var backBrush = new SolidBrush(e.BackColor.MergeColor(FormDesign.Design.ActiveColor, 75));
-			e.Graphics.FillRoundedRectangle(backBrush, filledRect, Padding.Left);
+			e.BackColor = BackColor.MergeColor(FormDesign.Design.ActiveColor, 75);
+
+			base.OnPaintItemList(e);
 
 			var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor);
 			e.Graphics.FillRoundedRectangle(activeBrush, clipRectangle.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleRight), Padding.Left);
 
 			clipRectangle.Width -= 3 * Padding.Left;
+		}
+		else
+		{
+			base.OnPaintItemList(e);
 		}
 
 		if (thumbnail is null)
@@ -90,39 +92,54 @@ public class PackageCrList : SlickStackedListControl<IPackageIdentity>
 			}
 		}
 
-		var text = e.Item.CleanName(out var tags);
-		var tagSizes = 0;
-
-		for (var i = 0; i < tags.Count; i++)
-		{
-			var size = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: true);
-
-			tagSizes += Padding.Left + size.Width;
-		}
-
-		var textRect = clipRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top / 2, tagSizes, clipRectangle.Height / 2 - Padding.Top);
+		var textRect = clipRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top / 2, Padding.Right, (clipRectangle.Height / 2) - Padding.Top);
 		using var brushTitle = new SolidBrush(e.BackColor.GetTextColor());
-		using var font = UI.Font(8F, FontStyle.Bold).FitTo(text, textRect.Pad(Padding.Left), e.Graphics);
 
-		e.Graphics.DrawString(text, font, brushTitle, textRect.Location);
+		DrawTextAndTags(e, e.Item, brushTitle, e.BackColor, textRect);
 
-		textRect = clipRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top / 2, 0, 0);
-		var textSize = e.Graphics.Measure(text, font, textRect.Width - tagSizes - Padding.Right);
-		var tagRect = new Rectangle(textRect.X + (int)textSize.Width, textRect.Y, 0, (int)textSize.Height);
+		textRect = clipRectangle.Pad(imageRect.Right + Padding.Left, (clipRectangle.Height / 2) - Padding.Top, Padding.Right, Padding.Top / 2);
 
-		for (var i = 0; i < tags.Count; i++)
-		{
-			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true);
-
-			tagRect.X += Padding.Left + rect.Width;
-		}
-
-		text = LocaleCR.Get(stability.ToString());
-		textRect = new Rectangle(textRect.X, textRect.Bottom - (textRect.Height / 2), textRect.Width, textRect.Height / 2 + Padding.Bottom);
-		using var font2 = UI.Font(7F, FontStyle.Bold).FitToWidth(text, textRect.Pad(Padding.Left), e.Graphics);
-		using var brush = new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? brushTitle.Color : Color.FromArgb(200, CRNAttribute.GetNotification(stability).GetColor()));
-		using var format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+		var text = ShowCompleted ? LocaleCR.Get(stability.ToString()).One : LocaleCR.ActiveReportsCount.FormatPlural((e.Item as ReviewRequest)?.Count ?? 0);
+		using var font2 = UI.Font(7F).FitToWidth(text, textRect.Pad(Padding.Left), e.Graphics);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Far };
+		using var brush = ShowCompleted
+			? new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? brushTitle.Color : Color.FromArgb(200, CRNAttribute.GetNotification(stability).GetColor()))
+			: new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? brushTitle.Color : Color.FromArgb(200, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.GreenColor, Math.Min(5, (e.Item as ReviewRequest)?.Count ?? 0) * 20)));
 
 		e.Graphics.DrawString(text, font2, brush, textRect, format);
+	}
+
+	private int DrawTextAndTags(PaintEventArgs e, IPackageIdentity package, SolidBrush textBrush, Color backColor, Rectangle rect)
+	{
+		var text = package.CleanName(out var tags) ?? Locale.UnknownPackage;
+		using var font = UI.Font(8F, FontStyle.Bold);
+		using var format = new StringFormat { LineAlignment = StringAlignment.Center };
+
+		using var highResBmp = new Bitmap(UI.Scale(500), rect.Height);
+		using var highResG = Graphics.FromImage(highResBmp);
+
+		highResG.SetUp(backColor);
+
+		var textSize = highResG.Measure(text, font);
+
+		highResG.DrawString(text, font, textBrush, new Rectangle(default, highResBmp.Size), format);
+
+		var tagRect = new Rectangle((int)textSize.Width + (Margin.Left / 4), 0, 0, rect.Height);
+
+		if (tags is not null)
+		{
+			foreach (var item in tags)
+			{
+				tagRect.X += (Margin.Left / 4) + highResG.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
+			}
+		}
+
+		var factor = Math.Min(1, (double)rect.Width / tagRect.X);
+
+		e.Graphics.SetClip(rect);
+		e.Graphics.DrawImage(highResBmp, new Rectangle(rect.X, rect.Y, (int)(highResBmp.Width * factor), (int)(rect.Height * factor)));
+		e.Graphics.ResetClip();
+
+		return (int)(rect.Height * factor);
 	}
 }

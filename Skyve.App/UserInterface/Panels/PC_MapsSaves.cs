@@ -1,15 +1,17 @@
-﻿using System.Threading;
+﻿using Skyve.Compatibility.Domain.Enums;
+
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Skyve.App.UserInterface.Panels;
-public class PC_Assets : PC_ContentList
+public class PC_MapsSaves : PC_ContentList
 {
 	private readonly IPlaysetManager _playsetManager;
 	private readonly ISettings _settings;
 	private readonly IPackageManager _contentManager;
 	private readonly IModLogicManager _modLogicManager;
 
-	public PC_Assets()
+	public PC_MapsSaves()
 	{
 		ServiceCenter.Get(out _settings, out _playsetManager, out _contentManager, out _modLogicManager);
 
@@ -25,12 +27,12 @@ public class PC_Assets : PC_ContentList
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Asset.Plural} - {_playsetManager.CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
+		Text = $"{LocaleCR.MapSavegame.Plural} - {_playsetManager.CurrentPlayset?.Name ?? Locale.NoActivePlayset}";
 	}
 
 	protected override async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
-		var assets = new List<IPackageIdentity>();
+		var assets = new List<IPackageIdentity>(_contentManager.SaveGames);
 
 		foreach (var package in _contentManager.Packages)
 		{
@@ -43,7 +45,7 @@ public class PC_Assets : PC_ContentList
 
 			foreach (var item in package.LocalData.Assets)
 			{
-				if (item.AssetType is not AssetType.SaveGame and not AssetType.Map)
+				if (item.AssetType is AssetType.SaveGame or AssetType.Map)
 				{
 					hasAssets = true;
 
@@ -51,7 +53,7 @@ public class PC_Assets : PC_ContentList
 				}
 			}
 
-			if (!hasAssets && !package.IsCodeMod())
+			if (!hasAssets && package.GetPackageInfo()?.Type is PackageType.MapSavegame)
 			{
 				assets.Add(package);
 			}

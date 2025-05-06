@@ -270,6 +270,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation CautionCount => _instance.GetText("CautionCount");
 
 	/// <summary>
+	/// Caution when using it
+	/// </summary>
+	public static Translation CautionWhenUsing => _instance.GetText("CautionWhenUsing");
+
+	/// <summary>
 	/// Choose how to send your request
 	/// </summary>
 	public static Translation ChooseWhatToRequest => _instance.GetText("ChooseWhatToRequest");
@@ -443,6 +448,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation GlobalTagsInfo => _instance.GetText("GlobalTagsInfo");
 
 	/// <summary>
+	/// Harmless but ..
+	/// </summary>
+	public static Translation HarmlessBut => _instance.GetText("HarmlessBut");
+
+	/// <summary>
 	/// Has issues
 	/// </summary>
 	public static Translation HasIssues => _instance.GetText("HasIssues");
@@ -607,7 +617,8 @@ public class LocaleCR : LocaleHelper
 	public static Translation MapCreation => _instance.GetText("MapCreation");
 
 	/// <summary>
-	/// Map / Savegame
+	/// <para>Map / Savegame</para>
+	/// <para>Plural: Maps &amp; Savegames</para>
 	/// </summary>
 	public static Translation MapSavegame => _instance.GetText("MapSavegame");
 
@@ -715,6 +726,12 @@ public class LocaleCR : LocaleHelper
 	public static Translation OutputText => _instance.GetText("OutputText");
 
 	/// <summary>
+	/// <para>'{0}' has active review requests.</para>
+	/// <para>Plural: {0} {1} have active review requests.</para>
+	/// </summary>
+	public static Translation PackageActiveReviewRequest => _instance.GetText("PackageActiveReviewRequest");
+
+	/// <summary>
 	/// Package Type
 	/// </summary>
 	public static Translation PackageType => _instance.GetText("PackageType");
@@ -745,7 +762,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation PackageTypeSimulationMod => _instance.GetText("PackageType_SimulationMod");
 
 	/// <summary>
-	/// Visual modifications or map theme textures.
+	/// Visual / UI modifications mod, or map &amp; theme textures.
 	/// </summary>
 	public static Translation PackageTypeVisualMod => _instance.GetText("PackageType_VisualMod");
 
@@ -911,6 +928,16 @@ public class LocaleCR : LocaleHelper
 	public static Translation SavegameEffectEffectsLinger => _instance.GetText("SavegameEffect_EffectsLinger");
 
 	/// <summary>
+	/// 
+	/// </summary>
+	public static Translation SavegameEffectHarmlessBut => _instance.GetText("SavegameEffect_HarmlessBut");
+
+	/// <summary>
+	/// This mod is safe to remove.
+	/// </summary>
+	public static Translation SavegameEffectNone => _instance.GetText("SavegameEffect_None");
+
+	/// <summary>
 	/// Removing this mod will require additional steps to properly remove it from your city.
 	/// </summary>
 	public static Translation SavegameEffectRequiresManualAction => _instance.GetText("SavegameEffect_RequiresManualAction");
@@ -1014,6 +1041,11 @@ public class LocaleCR : LocaleHelper
 	/// '{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.
 	/// </summary>
 	public static Translation StabilityBrokenFromPatchUpdated => _instance.GetText("Stability_BrokenFromPatchUpdated");
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public static Translation StabilityCautionWhenUsing => _instance.GetText("Stability_CautionWhenUsing");
 
 	/// <summary>
 	/// '{0}' can cause issues. Be careful while using it.

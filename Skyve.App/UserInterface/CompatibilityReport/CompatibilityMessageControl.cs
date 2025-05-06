@@ -276,8 +276,16 @@ public class CompatibilityMessageControl : SlickControl
 
 			if (note is not null)
 			{
-				e.Graphics.DrawString(note, smallFont, fadedBrush, rectangle.Pad(Padding.Top, string.IsNullOrEmpty(text) ? -Padding.Left : -Margin.Left, 0, 0));
-				rectangle.Y += Padding.Top - Margin.Left + (int)e.Graphics.Measure(note, smallFont, rectangle.Width - Padding.Top).Height;
+				if (string.IsNullOrEmpty(text))
+				{
+					e.Graphics.DrawString(note, font, brush, rectangle.Pad(0, -Padding.Left, 0, 0));
+					rectangle.Y += Padding.Top - Margin.Left + (int)e.Graphics.Measure(note, font, rectangle.Width).Height;
+				}
+				else
+				{
+					e.Graphics.DrawString(note, smallFont, fadedBrush, rectangle.Pad(Padding.Top, -Margin.Left, 0, 0));
+					rectangle.Y += Padding.Top - Margin.Left + (int)e.Graphics.Measure(note, smallFont, rectangle.Width - Padding.Top).Height;
+				}
 			}
 
 			var buttonRectangle = rectangle;
@@ -312,7 +320,7 @@ public class CompatibilityMessageControl : SlickControl
 					Text = isManager ? Locale.EditCompatibility : Message.Type is ReportType.RequestReview ? LocaleCR.RequestReviewUpdate : LocaleCR.RequestReview,
 					Icon = isManager ? "CompatibilityReport" : "RequestReview",
 					Font = font,
-					BackgroundColor = Message.Type is ReportType.RequestReview ? default:FormDesign.Design.BackColor,
+					BackgroundColor = Message.Type is ReportType.RequestReview ? default : FormDesign.Design.BackColor,
 					ButtonType = Message.Type is ReportType.RequestReview ? ButtonType.Active : ButtonType.Normal,
 					Cursor = cursor,
 					HoverState = HoverState & ~HoverState.Focused,

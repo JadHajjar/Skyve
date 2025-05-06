@@ -96,6 +96,8 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			CompactList = false;
 		}
+
+		AltStateChanged += AltKeyStateChanged;
 	}
 
 	public int UsageFilteredOut { get; set; }
@@ -296,11 +298,23 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				.OrderBy(x => !_packageUtil.IsIncluded(x.Item, out var partial) || partial)
 				.ThenBy(x => !_packageUtil.IsEnabled(x.Item, SelectedPlayset))
 				.ThenBy(x => x.Item.IsLocal())
-				.ThenBy(x => !x.Item.GetPackage()?.IsCodeMod)
+				.ThenBy(x => !x.Item.IsCodeMod())
 				.ThenBy(x => x.Item.CleanName())
 		};
 
 		return SortDescending ? items.Reverse() : items;
+	}
+
+	private void AltKeyStateChanged(object sender, EventArgs e)
+	{
+		Invalidate();
+	}
+
+	protected override void Dispose(bool disposing)
+	{
+		AltStateChanged -= AltKeyStateChanged;
+
+		base.Dispose(disposing);
 	}
 
 	protected override async void OnItemMouseClick(DrawableItem<IPackageIdentity, Rectangles> item, MouseEventArgs e)
@@ -334,7 +348,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			Loading = item.Loading = true;
 
-			if (!isIncluded || ModifierKeys.HasFlag(Keys.Alt))
+			if (!isIncluded || (ModifierKeys.HasFlag(Keys.Alt) && !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil)))
 			{
 				await _packageUtil.SetIncluded(item.Item, !isIncluded, SelectedPlayset);
 			}
@@ -394,7 +408,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 		if (rects.FolderRect.Contains(e.Location))
 		{
-			PlatformUtil.OpenFolder(item.Item.GetLocalPackage()?.FilePath);
+			PlatformUtil.OpenFolder(item.Item.GetLocalPackageIdentity()?.FilePath);
 			return;
 		}
 
@@ -681,7 +695,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 						var size = (int)(UI.Scale(150) * Math.Min(1, (maxIndex - ScrollIndex) / (displayedRows / 3)));
 						var rect = new Rectangle(0, Height - size, Width, size + 1);
 
-						using var gradientBrush = new LinearGradientBrush(rect, Color.FromArgb(0, BackColor),  BackColor, 90f);
+						using var gradientBrush = new LinearGradientBrush(rect, Color.FromArgb(0, BackColor), BackColor, 90f);
 
 						e.Graphics.FillRectangle(gradientBrush, rect);
 					}
@@ -843,7 +857,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				CompatibilityRect.Contains(location) ||
 				DateRect.Contains(location) ||
 				GithubRect.Contains(location) ||
-				(VersionRect.Contains(location) && Item?.GetPackage()?.IsCodeMod == true) ||
+				(VersionRect.Contains(location) && Item != null && Item.IsCodeMod()) ||
 				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);
 		}
@@ -852,29 +866,49 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			var listControl = (instance as ItemListControl)!;
 
-			if (!listControl.IsGenericPage && IncludedRect.Contains(location))
+			if (IncludedRect.Contains(location))
 			{
-				var required = ServiceCenter.Get<IModLogicManager>().IsRequired(Item.GetLocalPackageIdentity(), ServiceCenter.Get<IModUtil>());
-				var isIncluded = Item.IsIncluded(out var partialIncluded) && !partialIncluded;
+				point = IncludedRect.Location;
 
-				if (required)
+				var isIncluded = listControl._packageUtil.IsIncluded(Item, out var partialIncluded, listControl.SelectedPlayset) && !partialIncluded;
+
+				if (!isIncluded || ModifierKeys.HasFlag(Keys.Alt))
 				{
-					text = Locale.ThisModIsRequiredYouCantDisableIt;
+					if (!isIncluded)
+					{
+						text = Locale.IncludeItem;
+					}
+					else if (!listControl._modLogicManager.IsRequired(Item.GetLocalPackageIdentity(), listControl._modUtil))
+					{
+						text = Locale.ExcludeItem;
+					}
+					else
+					{
+						text = Locale.ThisModIsRequiredYouCantDisableIt;
+					}
 				}
 				else
 				{
-					text = !isIncluded
-						? (string)Locale.SubscribeToItem
-						: listControl._packageUtil.IsEnabled(Item, listControl.SelectedPlayset)
-							? $"{Locale.DisableItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}"
-							: $"{Locale.EnableItem.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByDisabled.ToString().ToLower())}";
+					var isEnabled = listControl._packageUtil.IsEnabled(Item, listControl.SelectedPlayset);
+
+					if (!isEnabled)
+					{
+						text = Locale.EnableItem + "\r\n\r\n" + Locale.AltClickTo.Format(Locale.ExcludeItem.ToLower());
+					}
+					else if (!listControl._modLogicManager.IsRequired(Item.GetLocalPackageIdentity(), listControl._modUtil))
+					{
+						text = Locale.DisableItem + "\r\n\r\n" + Locale.AltClickTo.Format(Locale.ExcludeItem.ToLower());
+					}
+					else
+					{
+						text = Locale.ThisModIsRequiredYouCantDisableIt;
+					}
 				}
 
-				point = IncludedRect.Location;
 				return true;
 			}
 #if CS1
-			if (EnabledRect.Contains(location) && Item.GetPackage()?.IsCodeMod == true)
+			if (EnabledRect.Contains(location) && Item.IsCodeMod())
 			{
 				text = Item.IsEnabled()
 					? $"{Locale.DisablePackage.Format(Item.CleanName())}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByEnabled.ToString().ToLower())}"
@@ -956,9 +990,10 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			if (ScoreRect.Contains(location))
 			{
 				var workshopInfo = Item.GetWorkshopInfo();
+
 				if (workshopInfo is not null)
 				{
-					text = "";//					string.Format(Locale.RatingCount, workshopInfo.VoteCount.ToString("N0"), $"({workshopInfo.VoteCount}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0"));
+					text = LocaleHelper.GetGlobalText(!workshopInfo.HasVoted ? "VoteMod" : "UnVoteMod");//					string.Format(Locale.RatingCount, workshopInfo.VoteCount.ToString("N0"), $"({workshopInfo.VoteCount}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0"));
 					point = ScoreRect.Location;
 					return true;
 				}
