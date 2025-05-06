@@ -1,6 +1,6 @@
 ﻿namespace Skyve.Domain.Enums;
 
-public enum ProfileSorting
+public enum PlaysetSorting
 {
 	LastUsed,
 	Name,

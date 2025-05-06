@@ -37,6 +37,8 @@ public interface IUserSettings
 	bool SyncBeforeLaunching { get; set; }
 	bool ColoredAuthorNames { get; set; }
 	bool DisableLogCleanup { get; set; }
+	bool ExcludeTipShown { get; set; }
+	bool ClearFilterTipShown { get; set; }
 #endif
 
 	void Save();

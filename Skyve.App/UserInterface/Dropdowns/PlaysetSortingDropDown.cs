@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Dropdowns;
-public class PlaysetSortingDropDown : SlickSelectionDropDown<ProfileSorting>
+public class PlaysetSortingDropDown : SlickSelectionDropDown<PlaysetSorting>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -10,22 +10,36 @@ public class PlaysetSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(ProfileSorting)).Cast<ProfileSorting>().Where(x => x != ProfileSorting.Downloads).ToArray();
+			Items = Enum.GetValues(typeof(PlaysetSorting)).Cast<PlaysetSorting>().Where(x => x != PlaysetSorting.Downloads).ToArray();
 
-			SelectedItem = (ProfileSorting)ServiceCenter.Get<ISettings>().UserSettings.PageSettings.GetOrAdd(SkyvePage.Profiles).Sorting;
+			SelectedItem = (PlaysetSorting)ServiceCenter.Get<ISettings>().UserSettings.PageSettings.GetOrAdd(SkyvePage.Playsets).Sorting;
 		}
 	}
 
-	protected override bool SearchMatch(string searchText, ProfileSorting item)
+	protected override bool SearchMatch(string searchText, PlaysetSorting item)
 	{
 		return searchText.SearchCheck(LocaleHelper.GetGlobalText($"Sorting_{item}"));
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, ProfileSorting item)
+	private string GetIcon(PlaysetSorting item)
+	{
+		return item switch
+		{
+			PlaysetSorting.Name => "FileName",
+			PlaysetSorting.LastUsed => "UpdateTime",
+			PlaysetSorting.LastEdit => "Edit",
+			PlaysetSorting.DateCreated => "Add",
+			PlaysetSorting.Usage => "Star",
+			PlaysetSorting.Color => "Paint",
+			_ => "Sort"
+		};
+	}
+
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PlaysetSorting item)
 	{
 		var text = LocaleHelper.GetGlobalText($"Sorting_{item}");
 
-		using var icon = IconManager.GetIcon("Sort", rectangle.Height - 2).Color(foreColor);
+		using var icon = IconManager.GetIcon(GetIcon(item), rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

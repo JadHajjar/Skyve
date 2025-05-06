@@ -13,5 +13,7 @@ public enum SavegameEffect
 	[CRN(NotificationType.AttentionRequired)]
 	RequiresManualAction = 4,
 	[CRN(NotificationType.Warning)]
-	BreaksSave = 5
+	BreaksSave = 5,
+	[CRN(NotificationType.Info)]
+	HarmlessBut = 6
 }

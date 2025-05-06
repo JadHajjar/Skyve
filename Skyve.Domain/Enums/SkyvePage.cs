@@ -3,7 +3,7 @@
 public enum SkyvePage
 {
 	None,
-	Profiles,
+	Playsets,
 	Packages,
 	Mods,
 	Assets,
@@ -12,5 +12,5 @@ public enum SkyvePage
 	Generic,
 	CompatibilityReport,
 	Workshop,
-	Playset
+	PlaysetPackages
 }

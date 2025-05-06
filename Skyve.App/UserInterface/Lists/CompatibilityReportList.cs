@@ -140,7 +140,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				.OrderByDescending(x => x.Item.GetNotification())
 				.ThenBy(x => !(x.Item.IsIncluded(out var partial) || partial))
 				.ThenBy(x => x.Item.IsLocal())
-				.ThenBy(x => !x.Item.GetLocalPackage()?.IsCodeMod)
+				.ThenBy(x => !x.Item.IsCodeMod())
 				.ThenBy(x => x.Item.CleanName() ?? x.Item.CleanName())
 		};
 

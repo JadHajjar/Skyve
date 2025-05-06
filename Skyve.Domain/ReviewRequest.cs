@@ -23,6 +23,8 @@ public class ReviewRequest : IPackageIdentity, IEquatable<ReviewRequest?>
 	string? IPackageIdentity.Url => string.Empty;
 	string? IPackageIdentity.Version { get; set; }
 
+	public int Count { get; set; }
+
 	public override bool Equals(object? obj)
 	{
 		return Equals(obj as ReviewRequest);

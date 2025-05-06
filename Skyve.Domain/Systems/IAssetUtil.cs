@@ -10,4 +10,5 @@ public interface IAssetUtil
 	void SaveChanges();
 	IAsset? GetAssetByFile(string? fileName);
 	IEnumerable<IAsset> GetAssets(string folder, bool withSubDirectories = true);
+	void DeleteAsset(IAsset asset);
 }
