@@ -52,7 +52,7 @@
   "InteractionType": "Tipo de interacción",
   "MissingDependency": "Faltan dependencias",
   "Caution": "Precaución",
-  "CautionWhenUsing": "Caution when using it",
+  "CautionWhenUsing": "Precaución al usarlo",
   "Warning": "Advertencia",
   "AttentionRequired": "Atención requerida",
   "ActionRequired": "Acción requerida",
@@ -268,12 +268,12 @@
   "POFont": "Fuente/Módulo de Procedural Objects",
   "NameList": "Lista de nombres/Traducciones de juegos",
   "MapSavegame": {
-    "One": "Map / Savegame",
-    "Plural": "Maps & Savegames"
+    "One": "Mapa / Partida Guardada",
+    "Plural": "Mapas y partidas guardadas"
   },
   "PackageType_MusicPack": "Pack de música para la radio del juego.",
-  "PackageType_ContentPackage": "Paquete de contenido de recursos o archivos, como modelos, texturas o prefabs, y no incluye ningún código o scripts que modifiquen el comportamiento del juego.",
-  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
+  "PackageType_ContentPackage": "Paquete de contenido de assets o archivos, como modelos, texturas o prefabs, y no incluye ningún código o scripts que modifiquen el comportamiento del juego.",
+  "PackageType_VisualMod": "Modificaciones visuales / de interfaz de usuario, o texturas de mapas y temas.",
   "PackageType_SimulationMod": "Mod de simulación que altera directamente la experiencia de juego.",
   "PackageType_NameList": "Traducciones adicionales del juego o archivos de la lista de nombres.",
   "PackageType_MapSavegame": "Mapa o partida guardada.",
@@ -321,13 +321,13 @@
   "SavegameEffect": "Efecto al ser removido de una partida guardada",
   "LocalMod": "Mod local",
   "Unknown": "Desconocido",
-  "AssetsRemain": "Recurso normal",
+  "AssetsRemain": "Asset normal",
   "EffectsLinger": "Efectos persisten luego de ser removido",
   "RequiresManualAction": "Requiere acción manual para remover",
   "BreaksSave": "Rompe las partidas guardadas al ser removido",
-  "HarmlessBut": "Harmless but ..",
-  "SavegameEffect_None": "This mod is safe to remove.",
-  "SavegameEffect_AssetsRemain": "Quitar estos recursos, deja una caja gris donde hubieran sido colocados en tu ciudad. Estos objetos obsoletos deben ser limpiados para prevenir cualquier efecto secundario.",
+  "HarmlessBut": "Inofensivo pero...",
+  "SavegameEffect_None": "Este mod es seguro de eliminar.",
+  "SavegameEffect_AssetsRemain": "Quitar estos assets, deja una caja gris donde hubieran sido colocados en tu ciudad. Estos objetos obsoletos deben ser limpiados para prevenir cualquier efecto secundario.",
   "SavegameEffect_EffectsLinger": "Remover este mod no eliminará sus efectos en tu ciudad.",
   "SavegameEffect_RequiresManualAction": "Remover este mod requerirá pasos adicionales para eliminarlo correctamente de tu ciudad.",
   "SavegameEffect_BreaksSave": "Al remover este mod, se romperá cualquier ciudad en la que se haya usado. Asegúrate de crear copias de seguridad de tu ciudad ANTES de usarlo.",
@@ -344,7 +344,7 @@
   "SendSavegameInfo": "Opcionalmente adjunta tu partida guardada para ayudarnos a investigar mejor el problema",
   "YourLogReportInfo": "enviado con tu solicitud",
   "PackageActiveReviewRequest": {
-    "One": "'{0}' has active review requests.",
-    "Plural": "{0} {1} have active review requests."
+    "One": "'{0}' tiene solicitudes de revisión activas.",
+    "Plural": "{0} {1} tienen solicitudes de revisión activas."
   }
 }
