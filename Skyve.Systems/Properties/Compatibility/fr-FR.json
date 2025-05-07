@@ -268,8 +268,8 @@
   "POFont": "Police / Module de Procedural Objects",
   "NameList": "Liste de noms / Traductions du jeu",
   "MapSavegame": {
-    "One": "Map / Savegame",
-    "Plural": "Maps & Savegames"
+    "One": "Carte / Sauvegarde",
+    "Plural": "Cartes et Sauvegardes"
   },
   "PackageType_MusicPack": "Pack pour la radio en jeu",
   "PackageType_ContentPackage": "Pack de contenu qui contient des ressources ou des fichiers, tels que des modèles, des textures ou des prefabs, et n’inclut pas de code ou de scripts qui modifient le comportement du jeu.",
@@ -326,7 +326,7 @@
   "RequiresManualAction": "Nécessite une action manuelle pour la suppression",
   "BreaksSave": "Corrompt les sauvegardes lorsqu’il est retiré",
   "HarmlessBut": "Harmless but ..",
-  "SavegameEffect_None": "This mod is safe to remove.",
+  "SavegameEffect_None": "Ce mod peut être retiré sans problème.",
   "SavegameEffect_AssetsRemain": "La suppression des assets laissera une boîte grise là où ces assets étaient placés dans votre ville. Vous devrez vous débarasser de ces objets obsolètes pour éviter tout effet secondaire.",
   "SavegameEffect_EffectsLinger": "Supprimer ce mod ne supprimera pas ses effets de votre partie.",
   "SavegameEffect_RequiresManualAction": "La suppression de ce mod nécessite des étapes supplémentaires pour le retirer proprement de votre sauvegarde.",
