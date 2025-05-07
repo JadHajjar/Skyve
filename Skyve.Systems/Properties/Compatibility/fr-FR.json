@@ -52,7 +52,7 @@
   "InteractionType": "Type d'interaction",
   "MissingDependency": "Dépendance manquante",
   "Caution": "Attention",
-  "CautionWhenUsing": "Caution when using it",
+  "CautionWhenUsing": "Attention lors de son utilisation",
   "Warning": "Avertissement",
   "AttentionRequired": "Attention requise",
   "ActionRequired": "Action Nécessaire",
@@ -273,7 +273,7 @@
   },
   "PackageType_MusicPack": "Pack pour la radio en jeu",
   "PackageType_ContentPackage": "Pack de contenu qui contient des ressources ou des fichiers, tels que des modèles, des textures ou des prefabs, et n’inclut pas de code ou de scripts qui modifient le comportement du jeu.",
-  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
+  "PackageType_VisualMod": "Modifications visuelles/UI ou thèmes de textures pour la map.",
   "PackageType_SimulationMod": "Mod de simulation qui modifie directement le gameplay du jeu.",
   "PackageType_NameList": "Traductions supplémentaires pour le jeu ou liste de noms (de villes, de voies, de cims, etc).",
   "PackageType_MapSavegame": "Map ou sauvegarde.",
@@ -325,7 +325,7 @@
   "EffectsLinger": "Effets persistants après suppression",
   "RequiresManualAction": "Nécessite une action manuelle pour la suppression",
   "BreaksSave": "Corrompt les sauvegardes lorsqu’il est retiré",
-  "HarmlessBut": "Harmless but ..",
+  "HarmlessBut": "Sans danger, mais…",
   "SavegameEffect_None": "Ce mod peut être retiré sans problème.",
   "SavegameEffect_AssetsRemain": "La suppression des assets laissera une boîte grise là où ces assets étaient placés dans votre ville. Vous devrez vous débarasser de ces objets obsolètes pour éviter tout effet secondaire.",
   "SavegameEffect_EffectsLinger": "Supprimer ce mod ne supprimera pas ses effets de votre partie.",
@@ -344,7 +344,7 @@
   "SendSavegameInfo": "Vous pouvez éventuellement attacher votre sauvegarde pour nous aider à mieux enquêter sur le problème",
   "YourLogReportInfo": "envoyé avec votre demande",
   "PackageActiveReviewRequest": {
-    "One": "'{0}' has active review requests.",
-    "Plural": "{0} {1} have active review requests."
+    "One": "'{0}' a des demandes de révision actives.",
+    "Plural": "{0} {1} a des demandes de révision actives."
   }
 }
