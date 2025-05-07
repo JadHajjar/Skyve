@@ -515,8 +515,8 @@
   "FilterByExcluded": "Afficher uniquement les éléments exclus.",
   "FilterByLocal": "Afficher uniquement les éléments locaux.",
   "FilterByWorkshop": "Afficher uniquement les éléments du Workshop.",
-  "FilterByAssets": "Only show asset packages.",
-  "FilterByMods": "Only show code mod packages.",
+  "FilterByAssets": "Afficher uniquement les paquets d’assets.",
+  "FilterByMods": "Afficher uniquement les paquets de mod de code.",
   "ViewOnGithub": "Voir le dépôt Github de ce paquet",
   "ViewXOnSteam": "Voir \"{0}\" sur Steam",
   "Free": "Gratuit",
@@ -699,8 +699,8 @@
   "GenericIssue": "Problème générique",
   "InvestigateMods": "Enquêter uniquement sur les mods de code pendant le processus de dépannage.",
   "InvestigateAssets": "Enquêter uniquement sur les paquets de contenu/assets pendant le processus de dépannage.",
-  "ExclusionTutorialTitle": "Removing Mods - Tutorial",
-  "ExclusionTutorialText": "You can remove mods from your active playset by holding the ALT key and clicking on the checkbox of the mod.\r\n\r\nYou can also add or remove a mod from all your playsets using the right-click menu.",
-  "ClearFilterTutorialTitle": "Clearing Filters - Tutorial",
-  "ClearFilterTutorialText": "If you want to quickly clear your filters, you can click on a filter using your middle-mouse-button to clear it.\r\n\r\nYou can also do that on the 'Show/Hide Filters' button to clear all filters at once."
+  "ExclusionTutorialTitle": "Supprimer des mods – Tutoriel",
+  "ExclusionTutorialText": "Vous pouvez supprimer des mods de votre playset actif en maintenant la touche Alt et en cliquant sur la case à cocher du mod.\n\n\nVous pouvez aussi ajouter ou supprimer un mod de tous vos playsets en utilisant le menu contextuel (clic droit).",
+  "ClearFilterTutorialTitle": "Effacer les filtres – Tutoriel",
+  "ClearFilterTutorialText": "Pour effacer rapidement un filtre, cliquez dessus avec un clic du milieu.\n\n\nVous pouvez aussi faire cela sur le bouton « Montrer/cacher les filtres » pour effacer tous les filtres."
 }
