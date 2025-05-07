@@ -52,7 +52,7 @@
   "InteractionType": "Typ interakcji",
   "MissingDependency": "Brakująca zależność",
   "Caution": "Ostrożność",
-  "CautionWhenUsing": "Caution when using it",
+  "CautionWhenUsing": "Zachowaj ostrożność podczas korzystania z tego",
   "Warning": "Ostrzeżenie",
   "AttentionRequired": "Wymagana uwaga",
   "ActionRequired": "Wymagane działanie",
@@ -268,12 +268,12 @@
   "POFont": "Czcionka/moduł obiektu proceduralnego",
   "NameList": "Lista nazw / Tłumaczenie gry",
   "MapSavegame": {
-    "One": "Map / Savegame",
-    "Plural": "Maps & Savegames"
+    "One": "Mapa / Zapis gry",
+    "Plural": "Mapy i Zapisy gry"
   },
   "PackageType_MusicPack": "Pakiet muzyczny dla radia w grze.",
   "PackageType_ContentPackage": "Pakiet zasobów zawierający obiekty lub pliki, takie jak modele, tekstury lub prefaby, nie zawiera kodów lub skryptów zmieniających działanie gry.",
-  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
+  "PackageType_VisualMod": "Mod modyfikujący wygląd gry / UI, lub zawierający tekstury map i motywów.",
   "PackageType_SimulationMod": "Mod symulacji, który bezpośrednio wpływa na rozgrywkę.",
   "PackageType_NameList": "Dodatkowe tłumaczenie gry lub plik z listą nazw.",
   "PackageType_MapSavegame": "Mapa lub Zapis gry.",
@@ -325,8 +325,8 @@
   "EffectsLinger": "Efekty utrzymują się po usunięciu",
   "RequiresManualAction": "Wymaga własnoręcznego usunięcia",
   "BreaksSave": "Psuje zapis po usunięciu",
-  "HarmlessBut": "Harmless but ..",
-  "SavegameEffect_None": "This mod is safe to remove.",
+  "HarmlessBut": "Nieszkodliwy, ale...",
+  "SavegameEffect_None": "Ten mod można bezpiecznie usunąć.",
   "SavegameEffect_AssetsRemain": "Usunięcie obiektów pozostawia szare bloki w miejscu, w którym zostały umieszczone w mieście. Zaleca się usunięcie nieaktualnych obiektów, aby zapobiec ewentualnym błędom lub skutkom ubocznym.",
   "SavegameEffect_EffectsLinger": "Usunięcie tego moda nie usunie jego efektów z miasta.",
   "SavegameEffect_RequiresManualAction": "Usunięcie tego moda będzie wymagało dodatkowych kroków, aby poprawnie usunąć go z miasta.",
@@ -344,7 +344,7 @@
   "SendSavegameInfo": "Opcjonalnie możesz dołączyć swój zapis gry, aby pomóc nam lepiej zbadać problem",
   "YourLogReportInfo": "wyślij razem z prośbą",
   "PackageActiveReviewRequest": {
-    "One": "'{0}' has active review requests.",
-    "Plural": "{0} {1} have active review requests."
+    "One": "'{0}' ma aktywne prośby o sprawdzenie.",
+    "Plural": "{0} {1} mają aktywne prośby o sprawdzenie."
   }
 }
