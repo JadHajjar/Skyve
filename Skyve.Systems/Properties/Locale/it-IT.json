@@ -32,8 +32,8 @@
   "Preferences": "Preferenze",
   "PlaysetName": "Nome Playset",
   "RenamePlayset": "Rinomina questo playset",
-  "StartScratch": "Start a new playset from scratch without any included package.",
-  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
+  "StartScratch": "Inizia un nuovo playset da zero senza alcun pacchetto incluso.",
+  "ContinueFromCurrent": "Clona le mod sottoscritte dal tuo playset attivo in un nuovo playset.\n\nPotrebbe volerci un po'.",
   "GamePlay": "Costruisci città",
   "EditorPlay": "Crea risorse",
   "PlaysetUsage": "Utilizzo Playset",
@@ -70,7 +70,7 @@
   "Sorting_LoadOrder": "Carica Ordine",
   "FolderSettings": "Impostazioni cartelle",
   "ShowDatesRelatively": "Mostra le date relative all'orario corrente",
-  "CreatePlayset": "Create a new playset",
+  "CreatePlayset": "Crea un nuovo playset",
   "CouldNotCreatePlayset": "Impossibile creare un nuovo playset.",
   "CreatePlaysetHere": "Crea un nuovo playset o attiva uno precedente cliccando qui",
   "Maintenance": "Manutenzione",
@@ -88,7 +88,7 @@
   "FavoriteThisPlayset": "Preferisci questo playset",
   "NoDlcsNoInternet": "Impossibile caricare i DLC, connettiti a Internet",
   "NoDlcsOpenGame": "Nessun DLC corrisponde alla tua ricerca",
-  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
+  "DlcUpdateNotice": "Se i tuoi DLC non vengono visualizzati correttamente, assicurati di aprire il gioco almeno una volta",
   "DlcCount": "Possiedi in totale {0} DLC",
   "Unfiltered": "Nessun filtro",
   "AnyTags": "Qualsiasi tag",
@@ -112,8 +112,8 @@
   "OpenGuide": "Apri la Wiki",
   "ResetFolderButton": "Reimposta tutte le impostazioni delle cartelle",
   "LinkModAssets": "Collega le risorse che vengono dalle mod allo stato 'Inclusa' delle mod stesse",
-  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
-  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
+  "DisableContentCreatorWarnings": "Disattiva gli avvisi relativi a Content-Creator",
+  "DisableContentCreatorWarnings_Tip": "Disabilita gli avvisi relativi alla creazione di contenuti e alle rivendicazioni di copyright.",
   "LinkModAssets_Tip": "Alcune mod includono risorse necessarie al loro corretto funzionamento. Abilitare questa opzione collega tali risorse alla mod stessa e nasconde tali risorse dalla pagina Risorse, in modo da non escluderle per errore.",
   "ShowDatesRelatively_Tip": "Cambia il formato delle date che vengono mostrate nelle liste dei contenuti in un formato relativo. Per esempio: Ieri alle 2:10 pm",
   "DisableNewModsByDefault_Tip": "Quando ti iscrivi o aggiungi una mod, lo strumento escluderà automaticamente o lo includerà in base a questa impostazione quando lo strumento viene lanciato.",
@@ -158,12 +158,12 @@
   "CopyLogFile": "Copia il file di log del gioco negli appunti",
   "OpenLOTLogFolder": "Apri la cartella dei log di Skyve",
   "CopyLOTLogFile": "Copia il file di log di Skyve negli appunti",
-  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
+  "GenericIncludedTotal": "{0} incluso: {1}, di {2}",
+  "GenericIncludedAndEnabledTotal": "{0} incluso & abilitato: {1}, di {2}",
+  "GenericIncludedEnabledTotal": "{0} inclusi: {1}, di cui sono abilitati: {2}, di {3}",
   "NewPlayset_Tip": "Crea o importa una nuova playset",
   "ViewPlaysets_Tip": "Visualizza e gestisci i tuoi playset",
-  "DeactivatePlayset": "Deactivate this playset",
+  "DeactivatePlayset": "Disattiva questo playset",
   "DeactivatePlayset_Tip": "Disattiva il tuo playset corrente",
   "NewGame_Tip": "Inizia una nuova partita quando si avvia Cities: Skylines. Puoi specificare la mappa con cui vuoi iniziare",
   "LoadSaveGame_Tip": "Carica una partita salvata all'avvio di Cities: Skylines. Se non selezioni un file di salvataggio, continuerà automaticamente l'ultimo salvataggio",
@@ -345,20 +345,20 @@
     "Plural": "Mostrati {0} {1}"
   },
   "TotalCount": {
-    "One": "{0} total {1}",
-    "Plural": "{0} total {1}"
+    "One": "{0} totale {1}",
+    "Plural": "{0} totali {1}"
   },
   "TotalCountWarning": {
-    "One": "{0} total {1}, {3}",
-    "Plural": "{0} total {1}, {3}"
+    "One": "{0} totale {1}, {3}",
+    "Plural": "{0} totali {1}, {3}"
   },
   "TotalSelectedCount": {
-    "One": "{0} total {1}, {2} selected",
-    "Plural": "{0} total {1}, {2} selected"
+    "One": "{0} totale {1}, {2} selezionato",
+    "Plural": "{0} totali {1}, {2} selezionati"
   },
   "TotalSelectedCountWarning": {
-    "One": "{0} total {1}, {2} selected, {3}",
-    "Plural": "{0} total {1}, {2} selected, {3}"
+    "One": "{0} totale {1}, {2} selezionato, {3}",
+    "Plural": "{0} totali {1}, {2} selezionati, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} è nascosto a causa dell'utilizzo del tuo playset",
@@ -370,7 +370,7 @@
   },
   "AnyIssue": "Qualsiasi Problema",
   "AnyUsage": "Qualsiasi Uso",
-  "AnyState": "Any State",
+  "AnyState": "Qualsiasi stato",
   "ExplainIssue": "Descrivete qui il vostro problema",
   "ExplainIssueInfo": "Includi qui il maggior numero di informazioni possobile su ciò che sta accadendo e su come replicarlo",
   "ReviewRequestSent": "La tua richiesta di recensione per '{0}' è stata inviata!\n\nGrazie per il tuo feedback.",
@@ -432,7 +432,7 @@
   "ResetModsCache": "Ripristina la cache delle mod",
   "ResetCompatibilityCache": "Ripristina la cache della compatibilità",
   "ResetImageCache": "Pulisci le immagini in cache",
-  "SharePlayset": "Share this playset",
+  "SharePlayset": "Condividi questo playset",
   "ResetInfo": "Attenzione! Il reset non può essere annullato.",
   "FailedToDownloadPlayset": "Impossibile scaricare questo playset.\r\n\r\nRiprova più tardi.",
   "UpdatePlaysetTip": "Aggiorna la tua versione locale di questo playset",
@@ -466,7 +466,7 @@
   "TroubleshootIssues": "Risoluzione dei problemi",
   "ViewTroubleshootOptions": "Visualizza opzioni di risoluzione dei problemi",
   "TroubleshootInfo": "Se hai una mod o una risorsa che sta causando un problema, o che è mancante, e non sai quale; prova a risolvere i problemi qui:",
-  "TroubleshootCaused": "I'm having issues with a mod or asset, but I'm not so sure which one is causing it.",
+  "TroubleshootCaused": "Sto avendo problemi con una mod o risorsa, ma non sono sicuro di quale sia la causa.",
   "TroubleshootNew": "I recently subscribed to new mods, or some mods recently updated, and my game suddenly started having issues.",
   "TroubleshootMissing": "I think I'm missing some mods or assets from my current playset that I've previously used in other playsets.",
   "TroubleshootSelection": "Quale opzione descrive meglio la tua situazione?",
