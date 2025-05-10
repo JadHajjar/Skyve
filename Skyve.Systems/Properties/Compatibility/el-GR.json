@@ -5,10 +5,10 @@
   "Previous": "Προηγούμενο",
   "Skip": "Παράλειψη",
   "Note": "Σημείωση",
-  "NoteInfo": "Additional information to be displayed for the mod",
+  "NoteInfo": "Πρόσθετες πληροφορίες που θα εμφανίζονται για το mod",
   "BlackListName": "Μαύρη λίστα με όνομα",
-  "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "BlackListId": "Μαύρη λίστα με ID",
+  "GlobalTagsInfo": "Ετικέτες όλοι οι παίκτες που θα δουν στο Skyve",
   "Links": "Σύνδεσμοι",
   "StatusesCount": "Statuses ({0})",
   "InteractionCount": "Αλληλεπιδράσεις ({0})",
@@ -16,10 +16,13 @@
   "AddInteraction": "Προσθήκη Αλληλεπίδρασης",
   "NotReviewed": "Δεν έχει αξιολογηθεί ακόμα",
   "Stable": "Σταθερό",
-  "StableNoNewFeatures": "Stable, only bug-fix updates",
-  "StableNoFutureUpdates": "Stable, no more updates",
-  "HasIssuesNoFutureUpdates": "Has issues, no more updates",
-  "BreaksOnPatch": "Stable, potentially breaks on patch",
+  "StableNoNewFeatures": "Σταθερές, μόνο ενημερώσεις διορθώσεων σφαλμάτων",
+  "StableNoFutureUpdates": "Σταθερή, όχι άλλες ενημερώσεις",
+  "HasIssuesNoFutureUpdates": "Έχει προβλήματα, όχι άλλες ενημερώσεις",
+  "BreaksOnPatch": "Σταθερό, δυνητικά διαλείμματα στο patch",
+  "BrokenFromPatch": "Σπασμένο από το τελευταίο έμπλαστρο",
+  "BrokenFromNewVersion": "Σπασμένο από την τελευταία του έκδοση",
+  "NumerousReports": "Έχει πολλαπλές αναφορές",
   "NotEnoughInformation": "Μη επαρκείς πληροφορίες",
   "HasIssues": "Έχει προβλήματα",
   "Broken": "Σπασμένο",
@@ -27,14 +30,6 @@
   "CityBuilding": "Πόλη-Κτήριο",
   "AssetCreation": "Δημιουργία Περιουσιακών Στοιχείων",
   "MapCreation": "Δημιουργία Χάρτη",
-  "NoAction": "Καμία Ενέργεια",
-  "SubscribeToPackages": "Εγγραφείτε σε συνδεδεμένα πακέτα",
-  "RequiresConfiguration": "Απαιτεί μια συγκεκριμένη διαμόρφωση",
-  "SelectOne": "Επιλέξτε είτε ένα",
-  "UnsubscribeThis": "Διαγραφή από αυτό το πακέτο",
-  "UnsubscribeOther": "Διαγραφή από συνδεδεμένα πακέτα",
-  "Switch": "Εναλλαγή σε συνδεδεμένο πακέτο",
-  "FlippedSwitch": "Εναλλαγή σε αυτό το πακέτο",
   "Deprecated": "Καταργημένο",
   "Reupload": "Επαναποστολή",
   "CausesIssues": "Προκαλεί Ζητήματα",
@@ -51,17 +46,21 @@
   "RequirementAlternative": "Εναλλακτική Απαίτηση Για ..",
   "IncompatibleWith": "Μη Συμβατό Με ..",
   "CausesIssuesWith": "Προκαλεί Ζητήματα Με ..",
+  "OptionalPackages": "Έχει προαιρετικά πακέτα ..",
   "RequiredPackages": "Απαιτεί ..",
   "StatusType": "Τύπος Κατάστασης",
   "InteractionType": "Τύπος Αλληλεπίδρασης",
   "MissingDependency": "Λείπει Εξάρτηση",
   "Caution": "Προσοχή",
+  "CautionWhenUsing": "Προσοχή όταν το χρησιμοποιείτε",
   "Warning": "Προειδοποίηση",
   "AttentionRequired": "Απαιτείται Προσοχή",
+  "ActionRequired": "Απαιτείται Ενέργεια",
+  "Obsolete": "Ξεπερασμένο",
   "Website": "Ιστοσελίδα",
   "Donation": "Δωρεά",
-  "ManageCompatibilityData": "Compatibility Management",
-  "YourPackages": "Manage your mods",
+  "ManageCompatibilityData": "Διαχείριση Συμβατότητας",
+  "YourPackages": "Διαχείριση των mods σας",
   "AddPackages": "Προσθήκη Πακέτων",
   "ConfirmEndSession": "Είστε βέβαιοι ότι θέλετε να ολοκληρώσετε τη συνεδρία σας?",
   "CrDataLoadFailed": "Αποτυχία φόρτωσης δεδομένων, προσπαθήστε ξανά αργότερα",
@@ -74,7 +73,7 @@
   "PleaseReviewPackageUsage": "Παρακαλώ επιλέξτε μια έγκυρη χρήση για αυτό το πακέτο.",
   "Interaction_Alternative": {
     "One": "'{1}' μπορεί να χρησιμοποιηθεί ως εναλλακτική λύση για το '{0}'.",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "Οποιοδήποτε από τα ακόλουθα πακέτα μπορεί να χρησιμοποιηθεί ως εναλλακτική λύση για το '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' και '{1}' έχουν τις ίδιες λειτουργίες.",
@@ -105,31 +104,31 @@
     "Plural": "'{0}' θα φορτώσει αμέσως μετά τα ακόλουθα πακέτα."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' απαιτείται για το '{1}'.",
+    "Plural": "'{0}' απαιτείται για τα ακόλουθα πακέτα."
   },
   "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Status_Succeeded": "'{0}' έχει πετύχει το '{1}', και χρησιμοποιείτε ήδη '{1}'. Δεν υπάρχει πλέον ανάγκη για '{0}'.",
   "Status_Deprecated": "'{0}' έχει καταργηθεί, δεν υποστηρίζεται πλέον από το συγγραφέα του.",
   "Status_AutoDeprecated": "'{0}' δεν έχει ενημερωθεί εδώ και πολύ καιρό.",
   "Status_Reupload": {
     "Zero": "'{0}' είναι μια εκ νέου αποστολή ενός αρχικού πακέτου.",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "'{0}' είναι μια επαναφόρτωση του '{1}'."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "'{0}' είναι γνωστό ότι προκαλεί προβλήματα με το παιχνίδι.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "Αφού αποθηκεύσετε την πόλη σας με ενεργοποιημένη την επιλογή '{0}', δεν θα μπορείτε πλέον να φορτώσετε αυτήν την αποθήκευση χωρίς ενεργοποιημένη την επιλογή '{0}'.",
+    "One": "Αφού αποθηκεύσετε την πόλη σας με ενεργοποιημένη την επιλογή '{0}', δεν θα μπορείτε πλέον να φορτώσετε αυτήν την αποθήκευση χωρίς ενεργοποιημένη την επιλογή '{0}'.\r\n\r\nΧρησιμοποίησε '{1}' για να ανακτήσεις το αποθηκευμένο σου αν χρειαστεί. Διάβασε την περιγραφή του Εργαστηρίου του για περισσότερες πληροφορίες."
   },
   "Status_TestVersion": {
     "Zero": "Αυτή είναι μια \"Δοκιμή\" έκδοση, γνωρίζετε ότι οι δοκιμαστικές εκδόσεις των mods μπορούν να προκαλέσουν προβλήματα και ότι οι ενημερώσεις σε αυτό μπορεί να προκαλέσουν απροσδόκητα σφάλματα.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Αυτή είναι μια 'Test' έκδοση του '{1}'.\r\nΝα γνωρίζετε ότι οι ενημερώσεις σε αυτό μπορεί να προκαλέσουν απροσδόκητα ζητήματα."
   },
   "Status_MissingDlc": {
     "One": "Σας λείπει ένα DLC για να χρησιμοποιήσετε αυτό το πακέτο.",
     "Plural": "Δεν έχετε τα ακόλουθα DLC για να χρησιμοποιήσετε αυτό το πακέτο."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "Αυτό είναι ένα mod εξάρτησης, αλλά δεν μοιάζει να χρησιμοποιείτε οποιοδήποτε πακέτο που το απαιτεί.",
   "Status_SourceCodeNotAvailable": "Ο πηγαίος κώδικας αυτού του mod δεν είναι διαθέσιμος. Δεν πρέπει να τον χρησιμοποιείτε, εκτός αν εμπιστεύεστε το συγγραφέα του.",
   "SourceAvailable": "Ο πηγαίος κώδικας είναι διαθέσιμος",
   "StandardMod": "Standard Mod",
@@ -138,63 +137,79 @@
   "Status_SourceAvailable": "Αυτό το πακέτο δεν θα προειδοποιήσει για τον πηγαίο κώδικα που λείπει.",
   "Status_StandardMod": "Αυτό το πακέτο θα αγνοηθεί κατά την επεξεργασία των mods για αντιμετώπιση προβλημάτων.",
   "OutputText": "Αναμενόμενη Έξοδος",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
+  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate; though assets are generally stable.",
+  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate.",
+  "Stability_Stable": "Το '{0}' είναι σταθερό. Ο συγγραφέας του εξακολουθεί να εργάζεται ενεργά και να το ενημερώνει.",
   "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_StableNoFutureUpdates": "'{0}' είναι σταθερό, αν και ο συγγραφέας δεν υποστηρίζει πλέον, μελλοντικές ενημερώσεις ή διορθώσεις σφαλμάτων δεν είναι πιθανές.",
+  "Stability_CautionWhenUsing": "",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' μπορεί να προκαλέσει προβλήματα και ο συγγραφέας δεν υποστηρίζει πλέον, μελλοντικές ενημερώσεις ή διορθώσεις σφαλμάτων δεν είναι πιθανές.",
+  "Stability_BreaksOnPatch": "'{0}' είναι πολύ πιθανό να σπάσει όταν απελευθερωθεί το νέο έμπλαστρο.",
+  "Stability_NotEnoughInformation": "Δεν υπάρχουν αρκετές πληροφορίες για να ελέγξετε σωστά το '{0}'.",
+  "Stability_HasIssues": "'{0}' μπορεί να προκαλέσει προβλήματα.\r\nΝα είστε προσεκτικοί ενώ το χρησιμοποιείτε.",
+  "Stability_Broken": "'{0}' είναι σπασμένο.\r\nΕίναι γνωστό ότι είτε θα σπάσει το παιχνίδι είτε απλά δεν λειτουργεί.",
   "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
-  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
-  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_AssetIncompatible": "'{0}' έχει επισημανθεί ως μη συμβατή με την τρέχουσα έκδοση του παιχνιδιού σας.\r\nΠεριουσιακά στοιχεία σπάνια σπάσει με νέες ενημερώσεις, οπότε θα πρέπει να είναι εντάξει η χρήση του.",
+  "Stability_Local": "Αυτή είναι μια τοπική έκδοση του mod '{0}'.\r\n\r\nΕνώ οι τοπικές εκδόσεις χρησιμοποιούνται συνήθως για δοκιμαστικούς σκοπούς, δεν συνιστάται να παραμείνετε στην τοπική έκδοση ενός mod.",
+  "Stability_BrokenFromNewVersion": "'{1}' έσπασε μετά την τελευταία του ενημέρωση{0}. Παρακαλώ περιμένετε μέχρι να ενημερωθεί πριν το χρησιμοποιήσετε.\r\nΕν τω μεταξύ, θα πρέπει να το απενεργοποιήσετε.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' έσπασε μετά την τελευταία του ενημέρωση{0}. Παρακαλώ περιμένετε μέχρι να ενημερωθεί πριν τη χρησιμοποιήσετε.",
+  "Stability_BrokenFromPatch": "'{1}' έσπασε μετά το patch {0} του παιχνιδιού. Παρακαλώ περιμένετε μέχρι να ενημερωθεί πριν το χρησιμοποιήσετε.\r\nΕν τω μεταξύ, θα πρέπει να το απενεργοποιήσετε.",
+  "Stability_BrokenFromPatchSafe": "'{1}' έσπασε μετά το patch {0} του παιχνιδιού. Παρακαλώ περιμένετε μέχρι να ενημερωθεί πριν το χρησιμοποιήσετε.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' έσπασε μετά το patch {0} του παιχνιδιού. Αλλά ενημερώθηκε πρόσφατα, μπορεί να είναι ασφαλές να χρησιμοποιήσετε.",
+  "Stability_NumerousReports": "Υπάρχουν πολλαπλές ενεργές αναφορές για το '{0}' αυτή τη στιγμή. Συνιστάται προσοχή ενώ το θέμα ερευνάται.",
+  "Stability_Obsolete": "Το '{0}' είναι ξεπερασμένο, η χρήση του δεν είναι πλέον απαραίτητη, ή είναι περιττή λόγω του ότι το παιχνίδι ή άλλα mods έχουν την ίδια λειτουργικότητα.",
   "Action_NoAction": "",
-  "Action_SubscribeToPackages": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
+  "Action_IncludeThis": "Θα πρέπει να προσθέσετε '{0}' στο σετ αναπαραγωγής σας",
+  "Action_IncludeOther": {
+    "One": "Θα πρέπει να προσθέσετε '{1}' στο σετ αναπαραγωγής.",
+    "Plural": "Θα πρέπει να προσθέσετε τα ακόλουθα πακέτα στο σύνολο αναπαραγωγής σας."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "Παρακαλούμε ακολουθήστε τις ακόλουθες οδηγίες:",
   "Action_SelectOne": {
     "One": "Μεταξύ '{0}' και '{1}', θα πρέπει να επιλέξετε μόνο ένα από αυτά.",
     "Plural": "Μεταξύ του '{0}' και των παρακάτω πακέτων, θα πρέπει να επιλέξετε μόνο ένα."
   },
-  "Action_UnsubscribeThis": "You should remove '{0}' from your playset.",
+  "Action_UnsubscribeThis": "Θα πρέπει να αφαιρέσετε εντελώς το '{0}' από όλες τις ομάδες αναπαραγωγής.",
   "Action_UnsubscribeOther": {
-    "One": "You should remove '{1}' from your playset.",
-    "Plural": "You should remove the following packages from your playset."
+    "One": "Θα πρέπει να αφαιρέσετε εντελώς το '{1}' από όλες τις ομάδες αναπαραγωγής.",
+    "Plural": "Θα πρέπει να αφαιρέσετε εντελώς τα ακόλουθα πακέτα από όλες τις ομάδες αναπαραγωγής."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
-  "Unsubscribe": "Διαγραφή",
+  "Action_ExcludeThis": "Θα πρέπει να αφαιρέσετε το '{0}' από το σετ αναπαραγωγής.",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "Θα πρέπει να αφαιρέσετε το '{1}' από το σετ αναπαραγωγής.",
+    "Plural": "Θα πρέπει να αφαιρέσετε τα ακόλουθα πακέτα από το σύνολο αναπαραγωγής σας."
   },
+  "Action_DisableThis": "Θα πρέπει να απενεργοποιήσετε το '{0}'.",
+  "Action_DisableOther": {
+    "One": "Θα πρέπει να απενεργοποιήσετε το '{1}'.",
+    "Plural": "Θα πρέπει να απενεργοποιήσετε τα ακόλουθα πακέτα."
+  },
+  "NoAction": "Καμία Ενέργεια",
+  "RequiresConfiguration": "Απαιτεί μια συγκεκριμένη διαμόρφωση",
+  "SelectOne": "Επιλέξτε είτε ένα",
+  "UnsubscribeThis": "Πλήρης διαγραφή από αυτό το πακέτο",
+  "UnsubscribeOther": "Πλήρης διαγραφή από τα συνδεδεμένα πακέτα",
+  "Switch": "Εναλλαγή σε συνδεδεμένο πακέτο",
+  "FlippedSwitch": "Εναλλαγή σε αυτό το πακέτο",
+  "IncludeThis": "Συμπεριλάβετε αυτό το πακέτο",
+  "IncludeOther": "Συμπερίληψη συνδεδεμένων πακέτων",
+  "ExcludeThis": "Εξαίρεση αυτού του πακέτου",
+  "ExcludeOther": "Εξαίρεση συνδεδεμένων πακέτων",
+  "DisableThis": "Απενεργοποιήστε αυτό το πακέτο",
+  "DisableOther": "Απενεργοποίηση συνδεδεμένων πακέτων",
+  "Unsubscribe": "Διαγραφή",
   "Action_Switch": {
     "One": "Θα πρέπει να μεταβείτε σε '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "Θα πρέπει να μεταβείτε σε ένα από τα ακόλουθα πακέτα."
   },
-  "Action_IncludeThis": "You should include '{0}'",
-  "Action_IncludeOther": {
-    "One": "You should add the following package to your playset.",
-    "Plural": "You should add the following packages to your playset."
-  },
+  "Action_DoNotAdd": "Δεν πρέπει να χρησιμοποιήσετε το '{0}'",
   "NoRequiredDlcs": "Δεν Απαιτούνται DLCs",
   "DlcsSelected": {
     "One": "{0} DLC επιλέχθηκε",
     "Plural": "{0} DLCs επιλεγμένα"
   },
   "RequiredDLCs": "Απαιτούμενοι DLCs / CCP",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "Σταθερότητα",
   "CRT_Successors": "Επιτυχής",
   "CRT_RequiredPackages": "Απαιτούμενα Πακέτα",
   "CRT_OptionalPackages": "Προαιρετικά Πακέτα",
@@ -203,8 +218,9 @@
   "CRT_Alternatives": "Εναλλακτικές",
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Αδιαφάνεια",
-  "CRT_RequiredItem": "Required Item",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequiredItem": "Απαιτούμενο Πακέτο",
+  "CRT_RequestReview": "Αναθεώρηση Κατάστασης Αιτήματος",
+  "CRT_Info": "Πληροφορίες",
   "LastReviewDate": "Αναθεωρήθηκε τελευταία στις {0}",
   "RequestReviewInfo": "Είσαι αντιμετωπίζετε προβλήματα με αυτό το πακέτο?",
   "RequestReview": "Ζητήστε μια αξιολόγηση",
@@ -214,13 +230,22 @@
   },
   "CautionCount": "{0} {1} όπου συνιστάται προσοχή",
   "WarningCount": "{0} {1} με προειδοποίηση",
+  "ObsoleteCount": {
+    "One": "{0} {1} που είναι παρωχημένο",
+    "Plural": "{0} {1} που είναι παρωχημένες"
+  },
+  "BrokenCount": {
+    "One": "{0} {1} που έχει χαλάσει",
+    "Plural": "{0} {1} που έχουν σπάσει"
+  },
+  "ActionRequiredCount": "{0} {1} όπου απαιτείται η ενέργειά σας",
   "AttentionRequiredCount": {
     "One": "{0} {1} απαιτεί την προσοχή σας",
     "Plural": "{0} {1} require your attention"
   },
   "ExcludeCount": {
     "One": "{0} {1} πρέπει να εξαιρεθούν",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} {1} πρέπει να εξαιρεθούν"
   },
   "UnsubscribeCount": "{0} {1} από το οποίο θα πρέπει να διαγραφείτε",
   "SwitchCount": {
@@ -228,49 +253,98 @@
     "Plural": "{0} {1} απαιτεί μετάβαση σε άλλο"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1} που απαιτείται αλλά δεν είναι ενεργοποιημένο",
+    "Plural": "{0} {1} που απαιτούνται αλλά δεν είναι ενεργοποιημένα"
   },
   "PackageType": "Τύπος Πακέτου",
   "GenericPackage": "Γενικό Πακέτο",
   "MusicPack": "Πακέτο Μουσικής",
   "ThemeMix": "Μείγμα Θέματος",
+  "ContentPackage": "Πακέτο Περιεχομένου/Περιουσιακών Στοιχείων",
+  "VisualMod": "Visual Mod",
+  "SimulationMod": "Simulation Mod",
   "IMTMarkings": "Σημάνσεις IMT",
   "RenderItPreset": "Αποτύπωσε το! Προεπιλογή",
   "POFont": "Γραμματοσειρά Διαδικαστικού Αντικειμένου/Ενότητα",
-  "NameList": "Ονομασία-Λίστα/Μεταφράσεις Παιχνιδιών",
+  "NameList": "Ονομασία-Λίστα / Μεταφράσεις Παιχνιδιών",
+  "MapSavegame": {
+    "One": "Χάρτης / Αποθήκευση",
+    "Plural": "Χάρτες & Αποθήκευση"
+  },
+  "PackageType_MusicPack": "Μουσικό πακέτο για το ραδιόφωνο του παιχνιδιού.",
+  "PackageType_ContentPackage": "Πακέτο περιεχομένου που περιέχει στοιχεία ή αρχεία, όπως μοντέλα, υφές ή prefab, και δεν περιλαμβάνει κανένα κώδικα ή σενάρια που τροποποιούν τη συμπεριφορά του παιχνιδιού.",
+  "PackageType_VisualMod": "Οπτικές / UI τροποποιήσεις mod, ή χάρτη & θέματος υφές.",
+  "PackageType_SimulationMod": "Προσομοίωση mod που αλλάζει άμεσα το gameplay του παιχνιδιού.",
+  "PackageType_NameList": "Επιπλέον μεταφράσεις παιχνιδιών ή αρχεία λίστας ονομάτων.",
+  "PackageType_MapSavegame": "Χάρτη, ή Savegame.",
   "ApplyChangedBeforeExit": "Έχετε μη αποθηκευμένες αλλαγές.\r\n\r\nΘα θέλατε να εφαρμόσετε αυτές τις αλλαγές πριν συνεχίσετε?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\n\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Ο συγγραφέας του {0}, {1}, είναι γνωστό ότι είναι κακόβουλο και/ή για τη συμπερίληψη επιβλαβούς περιεχομένου όπως οι ιοί στα πακέτα τους.",
-  "ReviewRequests": "Review Requests",
+  "ReviewRequests": "Αιτήσεις Αναθεώρησης",
   "ApplyRequestedChanges": "Εφαρμογή Αιτούμενων Αλλαγών",
   "ManagePackage": "Διαχείριση Πακέτου",
   "Banned": "Αποκλεισμένος",
   "NoIssues": "Δεν Υπάρχουν Θέματα",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "*Το ID και τα αρχεία καταγραφής του λογαριασμού σας αποστέλλονται με το αίτημά σας",
   "ScenarioMaking": "Δημιουργία Σεναρίου",
   "ThemeMaking": "Δημιουργία Θέματος",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "Αυτό το πακέτο έχει μια άλλη προειδοποίηση συμβατότητας",
+    "Plural": "Αυτό το πακέτο έχει άλλες προειδοποιήσεις συμβατότητας {0}"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "Διαγραφή αυτού του αιτήματος",
+    "Plural": "Διαγράψτε αυτά τα αιτήματα"
   },
-  "ViewRequest": "View Request",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
-  "SnoozeAllFiltered": "Snooze all filtered issues",
-  "LinkedPackages": "Linked Packages",
-  "NoTags": "No Tags",
-  "NoLinks": "No Links",
-  "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "ViewRequest": "Προβολή Αιτήματος",
+  "RequiredItem": "Απαιτούμενο Πακέτο",
+  "ApplyAllActions": "Εφαρμογή όλων των συνιστώμενων ενεργειών",
+  "SnoozeAll": "Αναβολή όλων των θεμάτων",
+  "SnoozeAllFiltered": "Αναβολή όλων των φιλτραρισμένων προβλημάτων",
+  "LinkedPackages": "Συνδεδεμένα Πακέτα",
+  "NoTags": "Χωρίς Ετικέτες",
+  "NoLinks": "Δεν Υπάρχουν Σύνδεσμοι",
+  "HideReviewedPackages": "Απόκρυψη αξιολογημένων mods",
+  "ApplyRecommendedAction": "Εφαρμογή συνιστώμενης ενέργειας",
+  "AddMeaningfulNote": "Παρακαλώ προσθέστε μια σημείωση που περιγράφει τι είναι λάθος με αυτό το πακέτο.",
+  "EditHistory": "Επεξεργασία Ιστορικού",
+  "EditNote": "Επεξεργασία Σημείωσης",
+  "EditNoteInfo": "Αφήστε μια σημείωση για άλλους διευθυντές για να δουν στο μέλλον.",
+  "RequestReviewUpdate": "Στείλτε ένα νέο αίτημα για αξιολόγηση.",
+  "LastReview": "Τελευταία Αναθεώρηση",
+  "ActiveReviewRequests": "Ενεργά Αιτήματα Κριτικής",
+  "ActiveReportsCount": {
+    "Zero": "Δεν υπάρχουν ενεργές αναφορές",
+    "One": "Μία ενεργή αναφορά",
+    "Plural": "Ενεργές αναφορές {0}"
+  },
+  "SavegameEffect": "Επίδραση στα savegames μετά την αφαίρεση",
+  "LocalMod": "Τοπικό Mod",
+  "Unknown": "Άγνωστο",
+  "AssetsRemain": "Κανονικό στοιχείο ενεργητικού",
+  "EffectsLinger": "Τα εφέ παραμένουν μετά την αφαίρεση",
+  "RequiresManualAction": "Απαιτεί χειροκίνητη ενέργεια για αφαίρεση",
+  "BreaksSave": "Διακοπή savegames όταν αφαιρεθεί",
+  "HarmlessBut": "Αβλαβής αλλά ..",
+  "SavegameEffect_None": "Αυτό το mod είναι ασφαλές για αφαίρεση.",
+  "SavegameEffect_AssetsRemain": "Η αφαίρεση των περιουσιακών στοιχείων αφήνει ένα γκρι κουτί όπου τοποθετήθηκαν στην πόλη σας. Αυτά τα απαρχαιωμένα αντικείμενα θα πρέπει να καθαριστούν για να αποφευχθούν τυχόν παρενέργειες.",
+  "SavegameEffect_EffectsLinger": "Η κατάργηση αυτού του mod δεν θα αφαιρέσει τα εφέ του από την πόλη σας.",
+  "SavegameEffect_RequiresManualAction": "Η κατάργηση αυτού του mod θα απαιτήσει πρόσθετα βήματα για να το αφαιρέσετε σωστά από την πόλη σας.",
+  "SavegameEffect_BreaksSave": "Αφαίρεση αυτού του mod θα σπάσει οποιαδήποτε πόλη χρησιμοποιήθηκε σε. Βεβαιωθείτε ότι δημιουργήσατε αντίγραφα ασφαλείας της πόλης σας πριν το χρησιμοποιήσετε.",
+  "SavegameEffect_HarmlessBut": "",
+  "RemovalNote": "Σημείωση Αφαίρεσης",
+  "RemovalNoteInfo": "Περιγράψτε τα βήματα για την ασφαλή αφαίρεση του mod από ένα savegame...",
+  "ChooseWhatToRequest": "Επιλέξτε πώς να στείλετε το αίτημά σας",
+  "ReportIssue": "Αναφορά προβλήματος",
+  "AddInfo": "Προσθήκη πληροφοριών που λείπουν",
+  "ReportIssueDesc": "Αφήστε μας και άλλους παίκτες να ξέρουν ότι υπάρχει ένα θέμα με αυτό το mod.\r\n\r\nΉ για να μας ενημερώσετε ότι θα θέλατε μια νέα αναθεώρηση αυτού του mod.",
+  "AddInfoDesc": "Προσθέστε πληροφορίες συμβατότητας που λείπουν στο mod.\r\n\r\nΚαι εξηγήστε οποιοδήποτε θέμα σχετίζεται με αυτό το mod.",
+  "Log Report": "Αναφορά Καταγραφής",
+  "Proposed Changes": "Προτεινόμενες Αλλαγές",
+  "SendSavegameInfo": "Προαιρετικά επισυνάψτε το savegame σας για να μας βοηθήσετε να διερευνήσουμε το θέμα καλύτερα",
+  "YourLogReportInfo": "στάλθηκε με το αίτημά σας",
+  "PackageActiveReviewRequest": {
+    "One": "'{0}' έχει ενεργά αιτήματα αξιολόγησης.",
+    "Plural": "{0} {1} έχουν ενεργά αιτήματα αξιολόγησης."
+  }
 }

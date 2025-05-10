@@ -20,6 +20,9 @@
   "StableNoFutureUpdates": "稳定，不再更新",
   "HasIssuesNoFutureUpdates": "存在问题，但不再更新",
   "BreaksOnPatch": "稳定，但游戏更新可能会损坏",
+  "BrokenFromPatch": "在上次游戏更新后损坏",
+  "BrokenFromNewVersion": "在该模组的上次更新后损坏",
+  "NumerousReports": "有多个报告",
   "NotEnoughInformation": "没有足够的信息",
   "HasIssues": "存在问题",
   "Broken": "已损坏",
@@ -27,14 +30,6 @@
   "CityBuilding": "城市建设",
   "AssetCreation": "制作资产",
   "MapCreation": "制作地图",
-  "NoAction": "无需采取任何操作",
-  "SubscribeToPackages": "订阅列出的插件",
-  "RequiresConfiguration": "需要特定的配置才能同时使用",
-  "SelectOne": "请选择…",
-  "UnsubscribeThis": "取消订阅此插件",
-  "UnsubscribeOther": "取消订阅列出的插件",
-  "Switch": "需要替换",
-  "FlippedSwitch": "替换为此插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传版本",
   "CausesIssues": "引发问题",
@@ -51,13 +46,17 @@
   "RequirementAlternative": "可用的备选方案",
   "IncompatibleWith": "与…不兼容",
   "CausesIssuesWith": "与…同时使用会引发问题",
+  "OptionalPackages": "有可选插件 ..",
   "RequiredPackages": "必需的前置",
   "StatusType": "状态类型",
   "InteractionType": "交互类型",
   "MissingDependency": "缺少前置",
   "Caution": "注意事项",
+  "CautionWhenUsing": "使用注意事项",
   "Warning": "警告",
   "AttentionRequired": "需要注意",
+  "ActionRequired": "需要操作",
+  "Obsolete": "过时的",
   "Website": "网站",
   "Donation": "赞助",
   "ManageCompatibilityData": "兼容性管理",
@@ -143,6 +142,7 @@
   "Stability_Stable": "'{0}' 能够稳定运行。作者仍在积极开发和更新它。",
   "Stability_StableNoNewFeatures": "'{0}' 能够稳定运行，不过作者不会再发布功能性更新。\n不过，如果出现了新的问题，作者仍会进行更新。",
   "Stability_StableNoFutureUpdates": "'{0}' 可以稳定运行，但作者已不再为其提供支持，因此，未来不太可能再进行更新或错误修复。",
+  "Stability_CautionWhenUsing": "",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' 可能存在问题，而且作者已不再提供支持，未来也不太可能更新或修复问题。",
   "Stability_BreaksOnPatch": "'{0}' 很可能在游戏更新后损坏。",
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查 '{0}' 的稳定性。",
@@ -150,15 +150,18 @@
   "Stability_Broken": "'{0}' 已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
   "Stability_Incompatible": "'{0}' 已被标记为与当前游戏版本不兼容。\n请务必谨慎使用，或等待它更新适配后再使用。",
   "Stability_AssetIncompatible": "'{0}' 个模组被标记为与你的当前游戏版本不兼容。\n资产很少被游戏更新所破坏，所有你应该可以继续使用。",
-  "Stability_Local": "这是模组 '{0}' 的本地版本。\n\n本地模组通常仅用于测试。",
+  "Stability_Local": "这是模组“{0}”的本地版本。\n本地版本的模组通常用于测试目的，但并不建议长期留在本地版本的模组。",
   "Stability_BrokenFromNewVersion": "'{1}' 在它最近的一次版本更新 {0} 中损坏。请等待其更新后再使用。\n目前，您应该禁用它。",
   "Stability_BrokenFromNewVersionSafe": "'{1}' 在它最近的版本更新 {0} 后损坏。请等待其更新后再使用。",
   "Stability_BrokenFromPatch": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。\n目前，您应该禁用它。",
   "Stability_BrokenFromPatchSafe": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。",
   "Stability_BrokenFromPatchUpdated": "'{1}' 在游戏更新 {0} 后损坏了。但是它最近进行了更新，也许能够安全地使用。",
+  "Stability_NumerousReports": "目前“{0}”有多个问题报告，在调查完成前请小心使用。",
+  "Stability_Obsolete": "“{0}”已过时，不再需要使用；或者是多余的，因为游戏本身或其它模组已有相同功能。",
   "Action_NoAction": "",
-  "Action_SubscribeToPackages": {
-    "One": "您应该将以下模组添加到配组中：",
+  "Action_IncludeThis": "您应该将 '{0}' 添加到您的配组",
+  "Action_IncludeOther": {
+    "One": "您应该将 '{1}' 添加到您的配组。",
     "Plural": "您应该将以下模组添加到配组中："
   },
   "Action_RequiresConfiguration": "请遵循以下使用说明：",
@@ -166,28 +169,40 @@
     "One": "对于 '{0}' 和 '{1}'，您应当只选择其中一个插件来使用：",
     "Plural": "对于 '{0}' 和下列插件，您应当只选择其中一个插件来使用："
   },
-  "Action_UnsubscribeThis": "您应该将 '{0}' 从配组中移除。",
+  "Action_UnsubscribeThis": "您应该将 '{0}' 从所有配组中都完全移除。",
   "Action_UnsubscribeOther": {
-    "One": "您应该将 '{1}' 从配组中移除。",
-    "Plural": "您应该将以下模组从配组中移除："
+    "One": "您应该将 '{1}' 从所有配组中都完全移除。",
+    "Plural": "您应该将下列插件从所有配组中都完全移除。"
   },
-  "Action_ExcludeThis": "您应该禁用 '{0}'。",
-  "ExcludeThis": "禁用此插件",
-  "Exclude": "禁用",
-  "Unsubscribe": "取消订阅",
+  "Action_ExcludeThis": "您应该将 '{0}' 从配组中移除。",
   "Action_ExcludeOther": {
-    "One": "您应该禁用 '{1}'。",
-    "Plural": "您应该禁用以下插件："
+    "One": "您应该将 '{1}' 从配组中移除。",
+    "Plural": "您应该将以下插件从配组中移除。"
   },
+  "Action_DisableThis": "您应该禁用 '{0}'。",
+  "Action_DisableOther": {
+    "One": "您应该禁用 '{1}'。",
+    "Plural": "您应该禁用以下插件。"
+  },
+  "NoAction": "无需采取任何操作",
+  "RequiresConfiguration": "需要特定的配置才能同时使用",
+  "SelectOne": "请选择…",
+  "UnsubscribeThis": "完全取消订阅此插件",
+  "UnsubscribeOther": "完全取消订阅链接中的插件",
+  "Switch": "需要替换",
+  "FlippedSwitch": "替换为此插件",
+  "IncludeThis": "装载此插件",
+  "IncludeOther": "装载链接中的插件",
+  "ExcludeThis": "卸下此插件",
+  "ExcludeOther": "卸下链接中的插件",
+  "DisableThis": "禁用此插件",
+  "DisableOther": "禁用链接中的插件",
+  "Unsubscribe": "取消订阅",
   "Action_Switch": {
     "One": "您应当将其替换为 '{1}'。",
     "Plural": "您应当改为使用下面的任意一个插件："
   },
-  "Action_IncludeThis": "您应当装载 '{0}'。",
-  "Action_IncludeOther": {
-    "One": "您应该将以下模组添加到配组中：",
-    "Plural": "您应该将以下模组添加到配组中："
-  },
+  "Action_DoNotAdd": "您不应该使用 '{0}'",
   "NoRequiredDlcs": "没有前置 DLC",
   "DlcsSelected": {
     "One": "已选择 {0} 个DLC",
@@ -203,42 +218,65 @@
   "CRT_Alternatives": "备选方案",
   "CRT_Status": "状态",
   "CRT_Ambiguous": "不明确性",
-  "CRT_RequiredItem": "前置项目",
+  "CRT_RequiredItem": "需要的插件",
   "CRT_RequestReview": "检查请求的状态",
+  "CRT_Info": "信息",
   "LastReviewDate": "最近一次检查于 {0}",
   "RequestReviewInfo": "使用此插件时遇到问题？",
   "RequestReview": "请求检查",
   "MissingDependencyCount": {
-    "One": "缺少前置的{1}",
-    "Plural": "缺少前置的{1}"
+    "One": "{0}缺少前置的{1}",
+    "Plural": "{0}缺少前置的{1}"
   },
-  "CautionCount": "{0} 个{1} 建议谨慎使用",
-  "WarningCount": "{0} 个{1} 带有警告",
+  "CautionCount": "{0}建议谨慎使用的{1}",
+  "WarningCount": "{0}带有警告的{1}",
+  "ObsoleteCount": {
+    "One": "{0}已过时的{1}",
+    "Plural": "{0}已过时的{1}"
+  },
+  "BrokenCount": {
+    "One": "{0}已损坏的{1}",
+    "Plural": "{0}已损坏的{1}"
+  },
+  "ActionRequiredCount": "{0}需要执行操作的{1}",
   "AttentionRequiredCount": {
-    "One": "{0} 个{1} 需要注意",
-    "Plural": "{0} 个{1} 需要注意"
+    "One": "{0}需要注意的{1}",
+    "Plural": "{0}需要注意的{1}"
   },
   "ExcludeCount": {
-    "One": "{0} 个{1} 应当被卸下",
-    "Plural": "应当被卸下的{1}"
+    "One": "{0}应该被卸下的{1}",
+    "Plural": "{0}应当被卸下的{1}"
   },
-  "UnsubscribeCount": "{0} 个{1} 应当取消订阅",
+  "UnsubscribeCount": "{0}应该取消订阅的{1}",
   "SwitchCount": {
-    "One": "{0} 个{1} 需要替换",
-    "Plural": "{0} 个{1} 需要替换"
+    "One": "{0}需要替换的{1}",
+    "Plural": "{0}需要替换的{1}"
   },
   "RequiredItemCount": {
-    "One": "必需但未启用的{1}",
-    "Plural": "必需但未启用的{1}"
+    "One": "{0}必需但未启用的{1}",
+    "Plural": "{0}必需但未启用的{1}"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",
   "MusicPack": "音乐包插件",
   "ThemeMix": "混合主题",
+  "ContentPackage": "内容/资产包",
+  "VisualMod": "视觉模组",
+  "SimulationMod": "模拟模组",
   "IMTMarkings": "Intersection Marking Tool 标线",
   "RenderItPreset": "Render it! 的预设",
   "POFont": "Procedural Object 的字体/效果模块",
   "NameList": "名称列表/游戏翻译",
+  "MapSavegame": {
+    "One": "地图/存档",
+    "Plural": "地图与存档"
+  },
+  "PackageType_MusicPack": "游戏内电台的音乐包。",
+  "PackageType_ContentPackage": "包含资产或模型、纹理、预制件等文件的内容包，并且不含任何修改游戏行为的代码或脚本。",
+  "PackageType_VisualMod": "视觉效果/UI界面修改模组，或地图与主题纹理。",
+  "PackageType_SimulationMod": "模拟模组，能够直接修改游戏的行为。",
+  "PackageType_NameList": "额外的游戏翻译或名称列表文件。",
+  "PackageType_MapSavegame": "地图或存档。",
   "ApplyChangedBeforeExit": "当前存在尚未保存的改动。\n\n在继续操作前，要保存并应用这些改动吗？",
   "AuthorRetired": "{0} 的作者 {1} 已经退坑，或者长期不活跃。\n对于该作者制作的插件，无法保证其将来是否能够稳定运行，以及是否更新。",
   "AuthorMalicious": "已知 {0} 的作者 {1} 存在恶意，并且其制作的插件中含有病毒等有害内容。",
@@ -259,7 +297,7 @@
     "Plural": "删除这些请求"
   },
   "ViewRequest": "查看请求",
-  "RequiredItem": "前置项目",
+  "RequiredItem": "需要的插件",
   "ApplyAllActions": "执行所有推荐的操作",
   "SnoozeAll": "关闭所有问题的提醒",
   "SnoozeAllFiltered": "关闭筛选出的问题的提醒",
@@ -271,6 +309,42 @@
   "AddMeaningfulNote": "请说明此插件的问题所在。",
   "EditHistory": "编辑历史记录",
   "EditNote": "编辑备注",
-  "EditNoteInfo": "留下说明以供其他管理人员之后查看",
-  "RequestReviewUpdate": "发送要检查的新请求"
+  "EditNoteInfo": "留下说明以供其他管理人员之后查看。",
+  "RequestReviewUpdate": "发送一条新的检查请求。",
+  "LastReview": "最新一次检查",
+  "ActiveReviewRequests": "活动中的检查请求",
+  "ActiveReportsCount": {
+    "Zero": "没有活动中的问题报告",
+    "One": "有 1 个活动中的问题报告",
+    "Plural": "有 {0} 个活动中的问题报告"
+  },
+  "SavegameEffect": "移除后对存档仍有残留效果",
+  "LocalMod": "本地模组",
+  "Unknown": "未知",
+  "AssetsRemain": "普通资产",
+  "EffectsLinger": "移除后仍有残留效果",
+  "RequiresManualAction": "需要手动操作才能删除",
+  "BreaksSave": "移除后将损坏存档",
+  "HarmlessBut": "无害，但...",
+  "SavegameEffect_None": "此模组可以安全移除。",
+  "SavegameEffect_AssetsRemain": "移除资产，您城市中放置了该资产的位置将会留下一个灰色方盒，请清除这些残留物体以避免产生问题。",
+  "SavegameEffect_EffectsLinger": "移除这个模组，不会从您的城市中移除它已造成的效果。",
+  "SavegameEffect_RequiresManualAction": "移除这个模组，需要额外步骤才能正确地将它从你的城市移除。",
+  "SavegameEffect_BreaksSave": "移除这个模组，会损坏所有使用过此模组的存档。在使用此模组前，请确保您已备份好城市。",
+  "SavegameEffect_HarmlessBut": "",
+  "RemovalNote": "移除提示",
+  "RemovalNoteInfo": "阐述如何安全从存档移除此模组的步骤…",
+  "ChooseWhatToRequest": "选择如何发送您的请求",
+  "ReportIssue": "报告问题",
+  "AddInfo": "添加缺少的信息",
+  "ReportIssueDesc": "让我们和其他玩家知道这个模组有问题。\n\n或者让我们知道你希望对这个模组进行新的检查。",
+  "AddInfoDesc": "为此模组添加缺少的兼容性信息。\n\n并说明任何与此模组相关的问题。",
+  "Log Report": "日志报告",
+  "Proposed Changes": "建议的更改",
+  "SendSavegameInfo": "可以附带您的存档以帮助我们更好地调查问题",
+  "YourLogReportInfo": "与您的请求一起发送",
+  "PackageActiveReviewRequest": {
+    "One": "'{0}' 有主动审核请求。",
+    "Plural": "{0} {1} 有主动审核请求。"
+  }
 }

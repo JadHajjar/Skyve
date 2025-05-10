@@ -5,10 +5,10 @@
   "Previous": "Edellinen",
   "Skip": "Ohita",
   "Note": "Huomautus",
-  "NoteInfo": "Additional information to be displayed for the mod",
+  "NoteInfo": "Lisätiedot, jotka on näytettävä modille",
   "BlackListName": "Lisää mustalle listalle nimen mukaan",
-  "BlackListId": "Black-list by ID",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "BlackListId": "Estä lista tunnisteella",
+  "GlobalTagsInfo": "Tunnisteet kaikki pelaajat näkevät Skyve",
   "Links": "Linkit",
   "StatusesCount": "Tilat ({0})",
   "InteractionCount": "Toiminnat ({0})",
@@ -18,8 +18,11 @@
   "Stable": "Vakaa",
   "StableNoNewFeatures": "Vakaa, vain viankorjauspäivitykset",
   "StableNoFutureUpdates": "Vakaa, ei enää päivityksiä",
-  "HasIssuesNoFutureUpdates": "Has issues, no more updates",
-  "BreaksOnPatch": "Stable, potentially breaks on patch",
+  "HasIssuesNoFutureUpdates": "Ei enää päivityksiä",
+  "BreaksOnPatch": "Vakaa ja mahdollisesti taukoja laastarilla",
+  "BrokenFromPatch": "Rikkinäinen viimeisimmästä laastarista",
+  "BrokenFromNewVersion": "Rikkinäinen sen uusin versio",
+  "NumerousReports": "On useita raportteja",
   "NotEnoughInformation": "Ei tarpeeksi tietoja",
   "HasIssues": "Ongelmia",
   "Broken": "Epäkunnossa",
@@ -27,14 +30,6 @@
   "CityBuilding": "Kaupunkirakennus",
   "AssetCreation": "Esineiden Luonti",
   "MapCreation": "Karttojen Luonti",
-  "NoAction": "Ei Tehtävää",
-  "SubscribeToPackages": "Tilaa linkitetyt paketit",
-  "RequiresConfiguration": "Vaatii tietyn konfiguraation",
-  "SelectOne": "Valitse yksi",
-  "UnsubscribeThis": "Poista tämän paketin tilaus",
-  "UnsubscribeOther": "Poista linkitettyjen pakettien tilaus",
-  "Switch": "Vaihda linkitettyyn pakettiin",
-  "FlippedSwitch": "Vaihda tähän pakettiin",
   "Deprecated": "Vanhentunut",
   "Reupload": "Uudelleenlataa",
   "CausesIssues": "Aiheuttaa Ongelmia",
@@ -51,17 +46,21 @@
   "RequirementAlternative": "Vaadittu vaihtoehto esineelle ..",
   "IncompatibleWith": "Yhteensopimaton esineen kanssa: ..",
   "CausesIssuesWith": "Aiheuttaa Ongelmia esineen kanssa: ..",
+  "OptionalPackages": "On valinnaisia paketteja ..",
   "RequiredPackages": "Vaatii esineen ..",
   "StatusType": "Tilatyyppi",
   "InteractionType": "Toiminnan Tyyppi",
   "MissingDependency": "Puuttuva Riippuvuus",
   "Caution": "Varoitus",
+  "CautionWhenUsing": "Varovaisuutta käytettäessä sitä",
   "Warning": "Varoitus",
   "AttentionRequired": "Vaaditaan Huomiota",
+  "ActionRequired": "Tarvitaan Toiminta",
+  "Obsolete": "Vanhentunut",
   "Website": "Verkkosivusto",
   "Donation": "Lahjoita",
-  "ManageCompatibilityData": "Compatibility Management",
-  "YourPackages": "Manage your mods",
+  "ManageCompatibilityData": "Yhteensopivuuden Hallinta",
+  "YourPackages": "Hallitse modeja",
   "AddPackages": "Lisää Paketteja",
   "ConfirmEndSession": "Haluatko varmasti päättää istuntosi?",
   "CrDataLoadFailed": "Tietojen lataaminen epäonnistui, yritä myöhemmin uudelleen",
@@ -74,7 +73,7 @@
   "PleaseReviewPackageUsage": "Ole hyvä ja valitse kelvollinen käyttö tälle paketille.",
   "Interaction_Alternative": {
     "One": "'{1}' voidaan käyttää vaihtoehtona '{0} ' '",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "Mikä tahansa seuraavista paketeista voidaan käyttää vaihtoehtona '{0}'."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' ja '{1}' on samat toiminnot.",
@@ -105,31 +104,31 @@
     "Plural": "'{0}' latautuu suoraan seuraavien pakettien jälkeen."
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' is required for '{1}'.",
-    "Plural": "'{0}' is required for the following packages."
+    "One": "'{0}' vaaditaan '{1}'.",
+    "Plural": "'{0}' vaaditaan seuraaviin paketteihin."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
+  "Interaction_Identical": "Seuraavat ovat useita versioita samasta moodista.\r\nNiiden käyttäminen samaan aikaan aiheuttaa ristiriitoja.",
+  "Status_Succeeded": "'{0}' on seuraaja '{1}' ja käytät jo '{1}'. Ei ole enää tarvetta '{0}' .",
   "Status_Deprecated": "'{0}' on vanhentunut, sen tekijä ei enää tue sitä.",
   "Status_AutoDeprecated": "'{0}' ei ole päivitetty pitkään aikaan, sen tekijä ei enää välttämättä tue sitä.",
   "Status_Reupload": {
     "Zero": "'{0}' on alkuperäisen paketin uudelleenlataus.",
-    "One": "'{0}' is a re-upload of '{1}'."
+    "One": "'{0}' on uudelleenlataus '{1}'."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "'{0}' on tiedetään aiheuttavan ongelmia pelin kanssa.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "Kun olet tallentanut kaupunkisi '{0}' käytössä, et voi enää ladata tätä tallennusta ilman '{0}' otettu käyttöön.",
+    "One": "Kun olet tallentanut kaupunkisi '{0}' käytössä, et voi enää ladata tätä tallennusta ilman '{0}' otettu käyttöön.\r\n\r\nKäytä{1}' palauttaaksesi tallennuksesi tarvittaessa. Lue sen työpajan kuvaus saadaksesi lisätietoja."
   },
   "Status_TestVersion": {
     "Zero": "Tämä on Testiversio, huomaa että testiversiot voivat aiheuttaa ongelmia, ja sen päivitykset voivat aiheuttaa odottamattomia virheitä.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Tämä on 'Test' versio '{1}'.\r\nHuomaa, että päivitykset saattavat aiheuttaa odottamattomia ongelmia."
   },
   "Status_MissingDlc": {
     "One": "Sinulta puuttuu '{0}' DLC käyttääksesi tätä pakettia.",
     "Plural": "Sinulta puuttuu seuraavat DLC:t käyttääksesi tätä pakettia."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not look like you are using any package that requires it.",
+  "Status_DependencyMod": "Tämä on riippuvuustila, mutta se ei näytä käyttävän mitä tahansa pakettia, joka vaatii sitä.",
   "Status_SourceCodeNotAvailable": "Tämän modin lähdekoodi ei ole saatavilla. Sinun ei pitäisi käyttää sitä ellet luota sen tekijään.",
   "SourceAvailable": "Lähdekoodi on saatavilla",
   "StandardMod": "Standard Mod",
@@ -138,63 +137,79 @@
   "Status_SourceAvailable": "Tämä paketti ei varoita puuttuvasta lähdekoodista.",
   "Status_StandardMod": "Tämä paketti jätetään huomiotta käsiteltäessä vianmääritykseen liittyviä modeja.",
   "OutputText": "Odotettu Ulostulo",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility info may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
-  "Stability_Stable": "'{0}' is stable. It's author is still actively working on it and updating it.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
-  "Stability_StableNoFutureUpdates": "'{0}' is stable, though the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' can cause issues, and the author is no longer supporting it, future updates or bug fixes are unlikely.",
-  "Stability_BreaksOnPatch": "'{0}' is very likely to break when the new patch is released.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review '{0}'.",
-  "Stability_HasIssues": "'{0}' can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "'{0}' is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
-  "Stability_AssetIncompatible": "'{0}' is marked as not compatible with your current game version.\r\nAssets rarely break with new updates, so you should be okay using it.",
-  "Stability_Local": "This is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes.",
-  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromPatchSafe": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatchUpdated": "'{1}' broke after patch {0} of the game. But was recently updated, it might be safe to use.",
+  "Stability_AssetNotReviewed": "'{0}' ei ole vielä tarkistettu.\r\nYhteensopivuuden tiedot eivät välttämättä ole tarkkoja; vaikka varat ovat yleensä vakaita.",
+  "Stability_NotReviewed": "'{0}' ei ole vielä tarkistettu.\r\nYhteensopivuuden tiedot eivät välttämättä ole tarkkoja.",
+  "Stability_Stable": "'{0}' on vakaa. Sen tekijä työskentelee edelleen aktiivisesti sen parissa ja päivittää sitä.",
+  "Stability_StableNoNewFeatures": "'{0}' on vakaa, vaikka tekijä ei enää julkaise päivityksiä.\r\nNe kuitenkin edelleen päivittää sen jos uusia vikoja.",
+  "Stability_StableNoFutureUpdates": "'{0}' on vakaa, vaikka tekijä ei enää tue sitä, tulevat päivitykset tai korjaukset ovat epätodennäköisiä.",
+  "Stability_CautionWhenUsing": "",
+  "Stability_HasIssuesNoFutureUpdates": "'{0}' voi aiheuttaa ongelmia, ja tekijä ei enää tue sitä, tulevat päivitykset tai korjaukset ovat epätodennäköisiä.",
+  "Stability_BreaksOnPatch": "'{0}' on erittäin todennäköistä kun uusi laastari on julkaistu.",
+  "Stability_NotEnoughInformation": "Tietoja ei ole riittävästi tarkistettavaksi '{0}'.",
+  "Stability_HasIssues": "'{0}' voi aiheuttaa ongelmia.\r\nOle varovainen käyttäessäsi sitä.",
+  "Stability_Broken": "'{0}' on rikki.\r\nTiedämme joko rikkovan pelin tai vain ei toimi.",
+  "Stability_Incompatible": "'{0}' on merkitty ei ole yhteensopiva nykyisen peliversion kanssa.\r\nKäytä sitä varovaisesti tai poista se käytöstä odottaessa päivitystä.",
+  "Stability_AssetIncompatible": "'{0}' on merkitty ei ole yhteensopiva nykyisen peliversion kanssa.\r\nAssets harvoin rikkoa uusia päivityksiä, joten sinun pitäisi olla kunnossa käyttää sitä.",
+  "Stability_Local": "Tämä on paikallinen versio{0}' moodista.\r\n\r\nVaikka paikallisia versioita käytetään yleensä testaustarkoituksiin, ei ole suositeltavaa pysyä moodin paikallisessa versiossa.",
+  "Stability_BrokenFromNewVersion": "'{1}' rikkoi viimeisimmän päivityksen jälkeen{0}. Odota, kunnes se on päivitetty ennen kuin käytät sitä.\r\nTällä välin sinun pitäisi poistaa se käytöstä.",
+  "Stability_BrokenFromNewVersionSafe": "'{1}' rikkoi viimeisimmän päivityksen jälkeen{0}. Odota, kunnes se on päivitetty ennen kuin käytät sitä.",
+  "Stability_BrokenFromPatch": "'{1}' rikkoi pelin laastarin {0} jälkeen. Odota, kunnes se on päivitetty ennen kuin käytät sitä.\r\nTällä välin sinun pitäisi poistaa se käytöstä.",
+  "Stability_BrokenFromPatchSafe": "'{1}' rikkoi laastarin {0} jälkeen. Odota, kunnes se on päivitetty ennen kuin käytät sitä.",
+  "Stability_BrokenFromPatchUpdated": "'{1}' rikkoi laastarin {0} jälkeen. Mutta se on äskettäin päivitetty, se voi olla turvallista käyttää.",
+  "Stability_NumerousReports": "On olemassa useita aktiivisia raportteja '{0}' tällä hetkellä. Varoitus on suositeltavaa kun ongelma tutkitaan.",
+  "Stability_Obsolete": "'{0}' on vanhentunut, sen käyttö ei ole enää tarpeen, tai on tarpeeton, koska peli tai muut modit joilla on sama toiminto.",
   "Action_NoAction": "",
-  "Action_SubscribeToPackages": {
-    "One": "Sinun tulisi lisätä seuraava paketti pelisettiisi.",
+  "Action_IncludeThis": "Sinun pitäisi lisätä '{0}' soittolaitteeseesi",
+  "Action_IncludeOther": {
+    "One": "Sinun pitäisi lisätä '{1}' peliisi.",
     "Plural": "Sinun tulisi lisätä seuraavat paketit pelisettiisi."
   },
-  "Action_RequiresConfiguration": "Please follow the following instructions:",
+  "Action_RequiresConfiguration": "Noudata seuraavia ohjeita:",
   "Action_SelectOne": {
     "One": "Sinun tulee valita vain '{0}' tai '{1}'.",
     "Plural": "Sinun tulee valita joko '{0}' tai yksi seuraavista paketeista."
   },
-  "Action_UnsubscribeThis": "Sinun pitäisi poistaa '{0}' pelisetistä.",
+  "Action_UnsubscribeThis": "Sinun pitäisi poistaa '{0}' kokonaan kaikista soittimistasi.",
   "Action_UnsubscribeOther": {
-    "One": "Sinun pitäisi poistaa '{1}' pelisetistä.",
-    "Plural": "Sinun tulisi poistaa seuraavat paketit pelisetistä."
+    "One": "Sinun pitäisi poistaa '{1}' kokonaan kaikista soittimistasi.",
+    "Plural": "Sinun pitäisi poistaa seuraavat paketit kokonaan kaikista pelaamistasi."
   },
-  "Action_ExcludeThis": "You should disable '{0}'.",
-  "ExcludeThis": "Disable this package",
-  "Exclude": "Disable",
-  "Unsubscribe": "Peruuta Tilaus",
+  "Action_ExcludeThis": "Sinun pitäisi poistaa '{0}' näytelmästäsi.",
   "Action_ExcludeOther": {
-    "One": "You should disable '{1}'.",
-    "Plural": "You should disable the following packages."
+    "One": "Sinun pitäisi poistaa '{1}' näytelmästäsi.",
+    "Plural": "Sinun pitäisi poistaa seuraavat paketit pelistä."
   },
+  "Action_DisableThis": "Sinun pitäisi poistaa käytöstä '{0}'.",
+  "Action_DisableOther": {
+    "One": "Sinun pitäisi poistaa käytöstä '{1}'.",
+    "Plural": "Sinun pitäisi poistaa seuraavat paketit käytöstä."
+  },
+  "NoAction": "Ei Tehtävää",
+  "RequiresConfiguration": "Vaatii tietyn konfiguraation",
+  "SelectOne": "Valitse yksi",
+  "UnsubscribeThis": "Peruuta kokonaan tämän paketin tilaus",
+  "UnsubscribeOther": "Peruuta täysin linkitettyjen pakettien tilaus",
+  "Switch": "Vaihda linkitettyyn pakettiin",
+  "FlippedSwitch": "Vaihda tähän pakettiin",
+  "IncludeThis": "Sisällytä tämä paketti",
+  "IncludeOther": "Sisällytä linkitetyt paketit",
+  "ExcludeThis": "Jätä pois tämä paketti",
+  "ExcludeOther": "Jätä pois linkitetyt paketit",
+  "DisableThis": "Poista tämä paketti käytöstä",
+  "DisableOther": "Poista linkitetyt paketit käytöstä",
+  "Unsubscribe": "Peruuta Tilaus",
   "Action_Switch": {
     "One": "Sinun pitäisi siirtyä käyttämään '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "Sinun pitäisi siirtyä johonkin seuraavista paketeista."
   },
-  "Action_IncludeThis": "You should include '{0}'",
-  "Action_IncludeOther": {
-    "One": "Sinun tulisi lisätä seuraava paketti pelisettiisi.",
-    "Plural": "Sinun tulisi lisätä seuraavat paketit pelisettiisi."
-  },
+  "Action_DoNotAdd": "Sinun ei pitäisi käyttää '{0}'",
   "NoRequiredDlcs": "Ei Vaadittuja DLC:itä",
   "DlcsSelected": {
     "One": "{0} DLC valittu",
     "Plural": "{0} DLC:tä valittu"
   },
   "RequiredDLCs": "Vaaditut DLC:t/CCP:t",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "Vakaus",
   "CRT_Successors": "Seuraajat",
   "CRT_RequiredPackages": "Vaaditut Paketit",
   "CRT_OptionalPackages": "Valinnaiset Paketit",
@@ -203,8 +218,9 @@
   "CRT_Alternatives": "Vaihtoehdot",
   "CRT_Status": "Tilat",
   "CRT_Ambiguous": "Epävarmuus",
-  "CRT_RequiredItem": "Required Item",
-  "CRT_RequestReview": "Review Request Status",
+  "CRT_RequiredItem": "Vaadittu Paketti",
+  "CRT_RequestReview": "Tarkista Pyynnön Tila",
+  "CRT_Info": "Tiedot",
   "LastReviewDate": "Se tarkistettiin viimeksi {0}",
   "RequestReviewInfo": "Onko sinulla ongelmia tämän paketin kanssa?",
   "RequestReview": "Pyydä katselmus",
@@ -214,13 +230,22 @@
   },
   "CautionCount": "{0} {1} , jossa suositellaan varovaisuutta",
   "WarningCount": "{0} {1} varoituksella",
+  "ObsoleteCount": {
+    "One": "{0} {1} , joka on vanhentunut",
+    "Plural": "{0} {1} , jotka ovat vanhentuneita"
+  },
+  "BrokenCount": {
+    "One": "{0} {1} , joka on rikki",
+    "Plural": "{0} {1} , jotka ovat rikki"
+  },
+  "ActionRequiredCount": "{0} {1} , jossa toiminto on pakollinen",
   "AttentionRequiredCount": {
     "One": "{0} {1} vaatii huomiotasi",
     "Plural": "{0} {1} vaatii huomiotasi"
   },
   "ExcludeCount": {
     "One": "{0} {1} pitäisi jättää pois",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} {1} ei tule sulkea pois"
   },
   "UnsubscribeCount": "{0} {1} , että sinun pitäisi peruuttaa tilaus",
   "SwitchCount": {
@@ -228,49 +253,98 @@
     "Plural": "{0} {1} vaatii vaihtamista toiseen"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0} {1} , joka on pakollinen, mutta ei ole käytössä",
+    "Plural": "{0} {1} , jotka ovat pakollisia, mutta eivät ole käytössä"
   },
   "PackageType": "Paketin Tyyppi",
   "GenericPackage": "Tavallinen Paketti",
   "MusicPack": "Musiikki Paketti",
   "ThemeMix": "Teeman Sekoitus",
+  "ContentPackage": "Sisältö/omaisuuspaketti",
+  "VisualMod": "Visual Mod",
+  "SimulationMod": "Simulation Mod",
   "IMTMarkings": "IMT Merkinnät",
   "RenderItPreset": "Renderöi se! Esiasetus",
   "POFont": "Menettelytavan Kohteen Kirjasin/Moduuli",
-  "NameList": "Nimi: Lista/Pelin Käännökset",
+  "NameList": "Nimilista / Pelin Käännökset",
+  "MapSavegame": {
+    "One": "Kartta / Tallennuspeli",
+    "Plural": "Kartat Ja Tallennuspelit"
+  },
+  "PackageType_MusicPack": "Musiikkipaketti pelin sisäiseen radioon.",
+  "PackageType_ContentPackage": "Sisältöpaketti, joka sisältää resursseja tai tiedostoja, kuten malleja, tekstuureja tai prefabs, eikä sisällä mitään koodia tai skriptejä jotka muuttavat pelin käyttäytymistä.",
+  "PackageType_VisualMod": "Visual / UI modifikaatiot mod, tai kartan & teeman tekstuurit",
+  "PackageType_SimulationMod": "Simulaatiotila, joka muuttaa suoraan pelin pelattavuutta.",
+  "PackageType_NameList": "Extra pelin käännökset tai nimi-listatiedostot.",
+  "PackageType_MapSavegame": "Kartta, tai Tallennepeli.",
   "ApplyChangedBeforeExit": "Sinulla on tallentamattomia muutoksia.\r\n\r\nHaluatko ottaa nämä muutokset käyttöön ennen jatkamista?",
   "AuthorRetired": "Modin {0} tekijä {1} on lopetttanut, tai ollut pitkään epäaktiivinen. \n\nPakettien päivityksiä ja vakautta ei voida taata.",
   "AuthorMalicious": "Tekijän {0}, {1}, tiedetään olevan pahansuopa ja/tai sisällyttää haitallista sisältöä, kuten viruksia paketteihinsa.",
-  "ReviewRequests": "Review Requests",
+  "ReviewRequests": "Tarkista Pyynnöt",
   "ApplyRequestedChanges": "Hyväksy pyydetyt muutokset",
   "ManagePackage": "Hallinnoi pakettia",
   "Banned": "Estetty",
   "NoIssues": "Ei ongelmia",
-  "RequestReviewDisclaimer": "*Your account's ID and logs are sent with your request",
+  "RequestReviewDisclaimer": "*Tilisi tunnus ja lokit lähetetään pyyntösi kanssa",
   "ScenarioMaking": "Skenaarion teko",
   "ThemeMaking": "Teeman teko",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "Tässä paketissa on toinen yhteensopivuusvaroitus",
+    "Plural": "Tässä paketissa on {0} muita yhteensopivuusvaroituksia"
   },
   "DeleteRequests": {
-    "One": "Delete this request",
-    "Plural": "Delete these requests"
+    "One": "Poista tämä pyyntö",
+    "Plural": "Poista nämä pyynnöt"
   },
-  "ViewRequest": "View Request",
-  "RequiredItem": "Required Item",
-  "ApplyAllActions": "Apply all recommended actions",
-  "SnoozeAll": "Snooze all issues",
-  "SnoozeAllFiltered": "Snooze all filtered issues",
-  "LinkedPackages": "Linked Packages",
-  "NoTags": "No Tags",
-  "NoLinks": "No Links",
-  "HideReviewedPackages": "Hide reviewed mods",
-  "ApplyRecommendedAction": "Apply recommended action",
-  "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
-  "EditHistory": "Edit History",
-  "EditNote": "Edit Note",
-  "EditNoteInfo": "Leave a note for other managers to see in the future",
-  "RequestReviewUpdate": "Send a new request to be reviewed"
+  "ViewRequest": "Näytä Pyyntö",
+  "RequiredItem": "Vaadittu Paketti",
+  "ApplyAllActions": "Ota käyttöön kaikki suositellut toiminnot",
+  "SnoozeAll": "Torkuta kaikki ongelmat",
+  "SnoozeAllFiltered": "Torkuta kaikki suodatetut ongelmat",
+  "LinkedPackages": "Linkitetyt Paketit",
+  "NoTags": "Ei Tunnisteita",
+  "NoLinks": "Ei Linkkejä",
+  "HideReviewedPackages": "Piilota tarkistetut modit",
+  "ApplyRecommendedAction": "Toteuta suositellut toimet",
+  "AddMeaningfulNote": "Ole hyvä ja lisää huomautus kuvata mikä on vialla tässä paketissa.",
+  "EditHistory": "Muokkaa Historiaa",
+  "EditNote": "Muokkaa Merkintää",
+  "EditNoteInfo": "Jätä muistiinpano, jotta muut johtajat voivat nähdä tulevaisuudessa.",
+  "RequestReviewUpdate": "Lähetä uusi pyyntö tarkasteluun.",
+  "LastReview": "Viimeisin Arvostelu",
+  "ActiveReviewRequests": "Aktiiviset Arvostelupyynnöt",
+  "ActiveReportsCount": {
+    "Zero": "Ei aktiivisia raportteja",
+    "One": "Yksi aktiivinen raportti",
+    "Plural": "{0} aktiivista raporttia"
+  },
+  "SavegameEffect": "Vaikutus savegames poiston jälkeen",
+  "LocalMod": "Paikallinen Modi",
+  "Unknown": "Tuntematon",
+  "AssetsRemain": "Normaali assetti",
+  "EffectsLinger": "Vaikutukset viipyvät poiston jälkeen",
+  "RequiresManualAction": "Vaatii manuaalisen toiminnon poistaaksesi",
+  "BreaksSave": "Breaks savegames poistettaessa",
+  "HarmlessBut": "Harmiton, mutta ..",
+  "SavegameEffect_None": "Tämä modi on turvallista poistaa.",
+  "SavegameEffect_AssetsRemain": "Resurssien poistaminen jättää harmaan laatikon, jossa ne on sijoitettu kaupunkiisi. Nämä vanhentuneet esineet on tyhjennettävä, jotta sivuvaikutukset voidaan estää.",
+  "SavegameEffect_EffectsLinger": "Tämän modin poistaminen ei poista sen vaikutuksia kaupungistasi.",
+  "SavegameEffect_RequiresManualAction": "Tämän modin poistaminen vaatii lisätoimenpiteitä poistaaksesi sen kunnolla kaupungistasi.",
+  "SavegameEffect_BreaksSave": "Tämän modin poistaminen rikkoo mitä tahansa sitä käyttävää kaupunkia. Varmista, että voit luoda varmuuskopioita kaupungistasi ennen kuin käytät sitä.",
+  "SavegameEffect_HarmlessBut": "",
+  "RemovalNote": "Poista Muistiinpano",
+  "RemovalNoteInfo": "Kuvaile vaiheet, joilla mod voidaan poistaa turvallisesti savegamista...",
+  "ChooseWhatToRequest": "Valitse, miten lähettää pyyntösi",
+  "ReportIssue": "Ilmoita ongelmasta",
+  "AddInfo": "Lisää puuttuvat tiedot",
+  "ReportIssueDesc": "Olkaamme ja muut pelaajat tietävät, että on ongelma tämän moodin.\r\n\r\nTai kertoa meille, että haluat uuden tarkastelun tämän moodin.",
+  "AddInfoDesc": "Lisää puuttuvat yhteensopivuustiedot moodiin.\r\n\r\nJa selitä kaikki tähän moodiin liittyvät ongelmat.",
+  "Log Report": "Loki Raportti",
+  "Proposed Changes": "Ehdotetut Muutokset",
+  "SendSavegameInfo": "Vaihtoehtoisesti liitä savegame auttaa meitä tutkimaan ongelman paremmin",
+  "YourLogReportInfo": "lähetetty pyyntösi kanssa",
+  "PackageActiveReviewRequest": {
+    "One": "'{0}' sisältää aktiivisia arvostelupyyntöjä.",
+    "Plural": "{0} {1} on aktiivisia arvostelupyyntöjä."
+  }
 }
