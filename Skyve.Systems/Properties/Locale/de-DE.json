@@ -70,7 +70,7 @@
   "Sorting_LoadOrder": "Ladereihenfolge",
   "FolderSettings": "Ordnereinstellungen",
   "ShowDatesRelatively": "Zeige die Daten relativ zur aktuellen Zeit an",
-  "CreatePlayset": "Create a new playset",
+  "CreatePlayset": "Ein neues Playset erstellen",
   "CouldNotCreatePlayset": "Es konnte kein neues Spielset erstellt werden.",
   "CreatePlaysetHere": "Hier klicken zum Erstellen eines neuen oder aktivieren eines vorherigen Spielsets",
   "Maintenance": "Wartung",
@@ -163,7 +163,7 @@
   "GenericIncludedEnabledTotal": "{0} enthalten: {1}, von denen aktiviert sind: {2}, Gesamt: {3}",
   "NewPlayset_Tip": "Neues Spielset erstellen oder importieren",
   "ViewPlaysets_Tip": "Deine Spielsets anzeigen und verwalten",
-  "DeactivatePlayset": "Deactivate this playset",
+  "DeactivatePlayset": "Diesen Playset deaktivieren",
   "DeactivatePlayset_Tip": "Deaktiviere dein aktuelles Spielset",
   "NewGame_Tip": "Startet einen neuen Spielstand beim Start von Cities: Skylines. Du kannst die Karte angeben, auf der du starten möchtest",
   "LoadSaveGame_Tip": "Lade einen Spielstand beim Starten von Cities: Skylines. Wenn du keine Speicherdatei auswählst, wird automatisch der aktuellste Spielstand geladen",
@@ -345,20 +345,20 @@
     "Plural": "Zeige {0} {1}"
   },
   "TotalCount": {
-    "One": "{0} total {1}",
-    "Plural": "{0} total {1}"
+    "One": "{0} Gesamt {1}",
+    "Plural": "{0} Gesamt {1}"
   },
   "TotalCountWarning": {
-    "One": "{0} total {1}, {3}",
-    "Plural": "{0} total {1}, {3}"
+    "One": "{0} Gesamt {1}, {3}",
+    "Plural": "{0} Gesamt {1}, {3}"
   },
   "TotalSelectedCount": {
-    "One": "{0} total {1}, {2} selected",
-    "Plural": "{0} total {1}, {2} selected"
+    "One": "{0} Gesamt {1}, {2} ausgewählt",
+    "Plural": "{0} Gesamt {1}, {2} ausgewählt"
   },
   "TotalSelectedCountWarning": {
-    "One": "{0} total {1}, {2} selected, {3}",
-    "Plural": "{0} total {1}, {2} selected, {3}"
+    "One": "{0} Gesamt {1}, {2} ausgewählt, {3}",
+    "Plural": "{0} Gesamt {1}, {2} ausgewählt, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} ist wegen der eingestellten Profilnutzung versteckt",
@@ -370,7 +370,7 @@
   },
   "AnyIssue": "Jedes Problem",
   "AnyUsage": "Jede Nutzung",
-  "AnyState": "Any State",
+  "AnyState": "Jeder Staat",
   "ExplainIssue": "Beschreibe dein Problem",
   "ExplainIssueInfo": "Füge so viele Informationen wie möglich darüber hinzu, was passiert und wie es repliziert werden kann",
   "ReviewRequestSent": "Deine Überprüfungsanfrage für '{0}' wurde gesendet!\n\nVielen Dank für das Feedback.",
@@ -432,7 +432,7 @@
   "ResetModsCache": "Mod-Cache zurücksetzen",
   "ResetCompatibilityCache": "Kompatibilitäts-Cache zurücksetzen",
   "ResetImageCache": "Bilder im Cache löschen",
-  "SharePlayset": "Share this playset",
+  "SharePlayset": "Dieses Playset teilen",
   "ResetInfo": "Achtung! Zurücksetzen kann nicht rückgängig gemacht werden.",
   "FailedToDownloadPlayset": "Herunterladen dieses Spielsets fehlgeschlagen.\n\nBitte versuche es später erneut.",
   "UpdatePlaysetTip": "Lokale Version dieses Spielsets aktualisieren",
@@ -513,10 +513,10 @@
   "FilterByDisabled": "Nur deaktivierte Elemente anzeigen.",
   "FilterByIncluded": "Nur eingeschlossene Elemente anzeigen.",
   "FilterByExcluded": "Nur ausgeschlossene Elemente anzeigen.",
-  "FilterByLocal": "Only show local items.",
-  "FilterByWorkshop": "Only show workshop items.",
-  "FilterByAssets": "Only show asset packages.",
-  "FilterByMods": "Only show code mod packages.",
+  "FilterByLocal": "Nur lokale Elemente anzeigen.",
+  "FilterByWorkshop": "Nur Werkstattartikel anzeigen.",
+  "FilterByAssets": "Nur Asset-Pakete anzeigen.",
+  "FilterByMods": "Nur Code-Mod-Pakete anzeigen.",
   "ViewOnGithub": "Github Repository dieses Paketes ansehen",
   "ViewXOnSteam": "'{0}' auf Steam ansehen",
   "Free": "Kostenlos",
@@ -699,8 +699,8 @@
   "GenericIssue": "Allgemeines Problem",
   "InvestigateMods": "Untersuche nur Code-Mods während des Fehlerbehebungsprozesses.",
   "InvestigateAssets": "Untersuche nur Assets und Inhaltspakete während des Fehlerbehebungsprozesses.",
-  "ExclusionTutorialTitle": "Removing Mods - Tutorial",
-  "ExclusionTutorialText": "You can remove mods from your active playset by holding the ALT key and clicking on the checkbox of the mod.\r\n\r\nYou can also add or remove a mod from all your playsets using the right-click menu.",
-  "ClearFilterTutorialTitle": "Clearing Filters - Tutorial",
-  "ClearFilterTutorialText": "If you want to quickly clear your filters, you can click on a filter using your middle-mouse-button to clear it.\r\n\r\nYou can also do that on the 'Show/Hide Filters' button to clear all filters at once."
+  "ExclusionTutorialTitle": "Mods entfernen - Tutorial",
+  "ExclusionTutorialText": "Du kannst Mods von deinem aktiven Playset entfernen, indem du die ALT-Taste gedrückt hälst und auf das Kontrollkästchen des Mods klickst.\r\n\r\nDu kannst auch einen Mod von allen Playsets hinzufügen oder entfernen indem du mit der rechten Maustaste klickst.",
+  "ClearFilterTutorialTitle": "Clearing-Filter - Tutorial",
+  "ClearFilterTutorialText": "Wenn Sie Ihre Filter schnell löschen möchten, können Sie mit der mittleren Maustaste auf einen Filter klicken, um ihn zu löschen.\r\n\r\nDu kannst das auch über den 'Filter anzeigen/ausblenden' Button tun, um alle Filter auf einmal zu löschen."
 }
