@@ -158,9 +158,9 @@
   "CopyLogFile": "Copiar el archivo de registro del juego al portapapeles",
   "OpenLOTLogFolder": "Abrir la carpeta del registro de Skyve",
   "CopyLOTLogFile": "Copiar el archivo del registro de Skyve al portapapeles",
-  "GenericIncludedTotal": "{0} incluido: {1}, de {2}",
-  "GenericIncludedAndEnabledTotal": "{0} incluido y habilitado: {1}, de {2}",
-  "GenericIncludedEnabledTotal": "{0} incluido: {1}, de los cuales están habilitados: {2}, de {3}",
+  "GenericIncludedTotal": "{0} incluidos: {1}, de {2}",
+  "GenericIncludedAndEnabledTotal": "{0} incluidos y habilitados: {1}, de {2}",
+  "GenericIncludedEnabledTotal": "{0} incluidos: {1}, de los cuales están habilitados: {2}, de {3}",
   "NewPlayset_Tip": "Crear o importar un playset nuevo",
   "ViewPlaysets_Tip": "Ver y administrar tus playsets",
   "DeactivatePlayset": "Desactivar este playset",
@@ -345,20 +345,20 @@
     "Plural": "Mostrando {0} {1}"
   },
   "TotalCount": {
-    "One": "{0} total {1}",
-    "Plural": "{0} total {1}"
+    "One": "{0} {1} en total",
+    "Plural": "{0} {1} en total"
   },
   "TotalCountWarning": {
-    "One": "{0} total {1}, {3}",
-    "Plural": "{0} total {1}, {3}"
+    "One": "{0} {1} en total, {3}",
+    "Plural": "{0} {1} en total, {3}"
   },
   "TotalSelectedCount": {
-    "One": "{0} total {1}, {2} seleccionados",
-    "Plural": "{0} total {1}, {2} seleccionados"
+    "One": "{0} {1} en total, {2} seleccionado",
+    "Plural": "{0} {1} en total, {2} seleccionados"
   },
   "TotalSelectedCountWarning": {
-    "One": "{0} total {1}, {2} seleccionados, {3}",
-    "Plural": "{0} total {1}, {2} seleccionados, {3}"
+    "One": "{0} {1} en total, {2} seleccionado, {3}",
+    "Plural": "{0} {1} en total, {2} seleccionados, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} está oculto debido al uso de tu perfil",
