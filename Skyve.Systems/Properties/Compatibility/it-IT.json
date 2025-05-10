@@ -138,7 +138,7 @@
   "Status_StandardMod": "Questo pacchetto verrà ignorato durante l'elaborazione delle mod per la risoluzione dei problemi.",
   "OutputText": "Output atteso",
   "Stability_AssetNotReviewed": "'{0}' non è stato ancora recensito.\nLe informazioni sulla compatibilità potrebbero non essere accurate, anche se in genere gli asset sono stabili.",
-  "Stability_NotReviewed": "'{0}' non è stato ancora recensito.\r\nLe informazioni di compatibilità potrebbero non essere accurate.",
+  "Stability_NotReviewed": "'{0}' non è stato ancora recensito.\nLe informazioni sulla compatibilità potrebbero non essere accurate.",
   "Stability_Stable": "'{0}' è stabile. Il suo autore sta ancora lavorando attivamente su di esso e lo aggiorna.",
   "Stability_StableNoNewFeatures": "'{0}' è stabile, anche se l'autore non rilascerà più gli aggiornamenti della funzionalità.\nLo aggiorneranno comunque in caso di nuovi bug.",
   "Stability_StableNoFutureUpdates": "'{0}' è stabile, anche se l'autore non lo supporta più, gli aggiornamenti futuri o le correzioni di bug sono improbabili.",
