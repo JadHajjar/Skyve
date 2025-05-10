@@ -513,10 +513,10 @@
   "FilterByDisabled": "Pokazuj tylko elementy wyłączone.",
   "FilterByIncluded": "Pokazuj tylko elementy dołączone.",
   "FilterByExcluded": "Pokazuj tylko elementy wykluczone.",
-  "FilterByLocal": "Only show local items.",
-  "FilterByWorkshop": "Only show workshop items.",
-  "FilterByAssets": "Only show asset packages.",
-  "FilterByMods": "Only show code mod packages.",
+  "FilterByLocal": "Pokazuj tylko lokalne elementy.",
+  "FilterByWorkshop": "Pokazuj tylko elementy z warsztatu.",
+  "FilterByAssets": "Pokazuj tylko pakiety obiektów.",
+  "FilterByMods": "Pokazuj tylko pakiety modów kodu.",
   "ViewOnGithub": "Zobacz repozytorium tego pakietu na Github",
   "ViewXOnSteam": "Pokaż '{0}' na Steamie",
   "Free": "Bezpłatne",
@@ -699,8 +699,8 @@
   "GenericIssue": "Ogólny problem",
   "InvestigateMods": "Zbadaj tylko mody kodu podczas procesu rozwiązywania problemów.",
   "InvestigateAssets": "Zbadaj tylko obiekty i pakiety zasobów podczas procesu rozwiązywania problemów.",
-  "ExclusionTutorialTitle": "Removing Mods - Tutorial",
-  "ExclusionTutorialText": "You can remove mods from your active playset by holding the ALT key and clicking on the checkbox of the mod.\r\n\r\nYou can also add or remove a mod from all your playsets using the right-click menu.",
-  "ClearFilterTutorialTitle": "Clearing Filters - Tutorial",
-  "ClearFilterTutorialText": "If you want to quickly clear your filters, you can click on a filter using your middle-mouse-button to clear it.\r\n\r\nYou can also do that on the 'Show/Hide Filters' button to clear all filters at once."
+  "ExclusionTutorialTitle": "Usuwanie modów — poradnik",
+  "ExclusionTutorialText": "Możesz usunąć mody z aktywnego zestawu, przytrzymując klawisz ALT i klikając pole wyboru przy modzie.\n\nMożesz też dodać lub usunąć mod ze wszystkich zestawów, korzystając z menu po kliknięciu prawym przyciskiem myszy.",
+  "ClearFilterTutorialTitle": "Czyszczenie filtrów — poradnik",
+  "ClearFilterTutorialText": "Jeśli chcesz szybko wyczyścić filtry, kliknij na filtr środkowym przyciskiem myszy.\n\nMożesz też kliknąć przycisk „Pokaż/Ukryj filtry” środkowym przyciskiem myszy, aby wyczyścić wszystkie filtry jednocześnie."
 }
