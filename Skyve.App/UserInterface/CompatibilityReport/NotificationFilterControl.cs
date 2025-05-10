@@ -91,6 +91,9 @@ public class NotificationFilterControl : SlickControl
 
 		foreach (var item in compatibilityItems)
 		{
+			if (item is null)
+				continue;
+
 			var rectangle = new Rectangle(Padding.Left, y, Width - Padding.Horizontal, UI.Scale(50)).Pad(Padding);
 
 			var text = (item.Key == NotificationType.None ? LocaleSlickUI.All : LocaleCR.Get(item.Key.ToString())).ToString();

@@ -16,7 +16,7 @@ public class PlaysetSideControl : SlickControl
 	private readonly TextBox _textBox;
 	private Padding InnerPadding;
 
-	public IPlayset Playset { get; }
+	public IPlayset Playset { get; set; }
 
 	public PlaysetSideControl(IPlayset playset)
 	{
@@ -231,7 +231,7 @@ public class PlaysetSideControl : SlickControl
 		}
 
 		var contentText = $"{Locale.ContainCount.FormatPlural(Playset.ModCount, Locale.Mod.FormatPlural(Playset.ModCount).ToLower())} • {Playset.ModSize.SizeString(0)}";
-		using (var contentBrush = new SolidBrush(Color.FromArgb(100, backColor.Tint(Lum: backColor.IsDark() ? -5 : 5))))
+		using (var contentBrush = Gradient(Color.FromArgb(FormDesign.Design.IsDarkTheme ? 100 : 70, backColor.Tint(Lum: backColor.IsDark() ? 6 : -6)), backRect, 3.5f))
 		using (var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center })
 		{
 			e.Graphics.FillRectangle(contentBrush, Content.CenterR(backRect.Width, smallTextFont.Height * 5 / 3));
@@ -239,7 +239,7 @@ public class PlaysetSideControl : SlickControl
 		}
 
 		using var pen = new Pen(isActive ? FormDesign.Design.GreenColor : customPlayset.IsFavorite ? FormDesign.Modern.ActiveColor : backColor, UI.Scale(2.5f)) { Alignment = PenAlignment.Center };
-		e.Graphics.DrawRoundedRectangle(pen, backRect, borderRadius);
+		e.Graphics.DrawRoundedRectangle(pen, backRect.Pad(-1), borderRadius);
 
 		var isHovered = DotsRect.Contains(CursorLocation);
 		using var img = IconManager.GetIcon("VertialMore", DotsRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : onBannerColor);

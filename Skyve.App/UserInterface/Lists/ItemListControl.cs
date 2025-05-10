@@ -348,7 +348,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			Loading = item.Loading = true;
 
-			if (!isIncluded || (ModifierKeys.HasFlag(Keys.Alt) && !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil)))
+			if (!isIncluded || (ModifierKeys.HasFlag(Keys.Alt) && !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil, SelectedPlayset)))
 			{
 				await _packageUtil.SetIncluded(item.Item, !isIncluded, SelectedPlayset);
 			}
@@ -356,7 +356,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			{
 				var enable = !_packageUtil.IsEnabled(item.Item, SelectedPlayset);
 
-				if (enable || !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil))
+				if (enable || !_modLogicManager.IsRequired(item.Item.GetLocalPackageIdentity(), _modUtil, SelectedPlayset))
 				{
 					await _packageUtil.SetEnabled(item.Item, enable, SelectedPlayset);
 				}
@@ -878,7 +878,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 					{
 						text = Locale.IncludeItem;
 					}
-					else if (!listControl._modLogicManager.IsRequired(Item.GetLocalPackageIdentity(), listControl._modUtil))
+					else if (!listControl._modLogicManager.IsRequired(Item.GetLocalPackageIdentity(), listControl._modUtil, listControl.SelectedPlayset))
 					{
 						text = Locale.ExcludeItem;
 					}
@@ -895,7 +895,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 					{
 						text = Locale.EnableItem + "\r\n\r\n" + Locale.AltClickTo.Format(Locale.ExcludeItem.ToLower());
 					}
-					else if (!listControl._modLogicManager.IsRequired(Item.GetLocalPackageIdentity(), listControl._modUtil))
+					else if (!listControl._modLogicManager.IsRequired(Item.GetLocalPackageIdentity(), listControl._modUtil, listControl.SelectedPlayset))
 					{
 						text = Locale.DisableItem + "\r\n\r\n" + Locale.AltClickTo.Format(Locale.ExcludeItem.ToLower());
 					}

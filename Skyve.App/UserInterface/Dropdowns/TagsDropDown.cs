@@ -7,9 +7,6 @@ public class TagsDropDown : SlickMultiSelectionDropDown<ITag>
 {
 	private readonly ITagsService _tagsService = ServiceCenter.Get<ITagsService>();
 
-	[DefaultValue(false)]
-	public bool HideUsage { get; set; }
-
 	protected override IEnumerable<ITag> OrderItems(IEnumerable<ITag> items)
 	{
 		return items.OrderByDescending(x => SelectedItems.Contains(x)).ThenBy(x => x.Value);
@@ -28,14 +25,14 @@ public class TagsDropDown : SlickMultiSelectionDropDown<ITag>
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		if (!HideUsage)
-		{
-			var text2 = Locale.ItemsCount.FormatPlural(_tagsService.GetTagUsage(item));
-			using var brush2 = new SolidBrush(Color.FromArgb(200, foreColor));
-			e.Graphics.DrawString(text2, Font, brush2, rectangle.Pad(0, 0, UI.Scale(5), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center });
+		//if (!HideUsage)
+		//{
+		//	var text2 = Locale.ItemsCount.FormatPlural(_tagsService.GetTagUsage(item));
+		//	using var brush2 = new SolidBrush(Color.FromArgb(200, foreColor));
+		//	e.Graphics.DrawString(text2, Font, brush2, rectangle.Pad(0, 0, UI.Scale(5), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center });
 
-			rectangle.Width -= (int)e.Graphics.Measure(text2, Font).Width;
-		}
+		//	rectangle.Width -= (int)e.Graphics.Measure(text2, Font).Width;
+		//}
 
 		using var brush = new SolidBrush(foreColor);
 		using var font = UI.Font(8.25F).FitTo(text, rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0), e.Graphics);

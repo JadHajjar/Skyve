@@ -13,8 +13,8 @@ public interface IPlayset : IThumbnailObject
 	int Id { get; }
 	string? Name { get; }
 	DateTime DateUpdated { get; }
-	int ModCount { get; }
-	ulong ModSize { get; }
+	int ModCount { get; set; }
+	ulong ModSize { get; set; }
 #if CS1
 	bool Temporary { get; }
 	int AssetCount { get; }

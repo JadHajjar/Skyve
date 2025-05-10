@@ -11,6 +11,6 @@ public interface IModLogicManager
 	IEnumerable<IPackage> GetCollection(string key);
 	bool IsForbidden(ILocalPackageIdentity? mod);
 	bool IsPseudoMod(IPackage package);
-	bool IsRequired(ILocalPackageIdentity? mod, IModUtil modUtil);
+	bool IsRequired(ILocalPackageIdentity? mod, IModUtil modUtil, int? playsetId = null);
 	void ModRemoved(IPackage mod);
 }

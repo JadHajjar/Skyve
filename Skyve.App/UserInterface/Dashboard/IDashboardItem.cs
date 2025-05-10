@@ -24,7 +24,7 @@ public abstract class IDashboardItem : SlickImageControl
 	public bool ResizeInProgress { get; internal set; }
 	public int MinimumWidth { get; protected set; } = 100;
 	internal bool DrawHeaderOnly { get; set; }
-	internal bool MovementBlocked { get; set; }
+	internal protected bool MovementBlocked { get; internal set; }
 	protected int BorderRadius { get; set; }
 
 	public IDashboardItem()
@@ -270,7 +270,7 @@ public abstract class IDashboardItem : SlickImageControl
 		}
 	}
 
-	private void DrawBackground(PaintEventArgs e, Rectangle clipRectangle)
+	protected virtual void DrawBackground(PaintEventArgs e, Rectangle clipRectangle)
 	{
 		e.Graphics.FillRoundedRectangleWithShadow(clipRectangle, BorderRadius, Padding.Right, addOutline: !MovementBlocked);
 	}

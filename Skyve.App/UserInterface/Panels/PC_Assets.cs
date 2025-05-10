@@ -40,6 +40,7 @@ public class PC_Assets : PC_ContentList
 			}
 
 			var hasAssets = false;
+			var hasMapsOrSavegames = false;
 
 			foreach (var item in package.LocalData.Assets)
 			{
@@ -49,9 +50,13 @@ public class PC_Assets : PC_ContentList
 
 					assets.Add(item);
 				}
+				else
+				{
+					hasMapsOrSavegames = true;
+				}
 			}
 
-			if (!hasAssets && !package.IsCodeMod())
+			if (!hasAssets && !hasMapsOrSavegames && !package.IsCodeMod())
 			{
 				assets.Add(package);
 			}

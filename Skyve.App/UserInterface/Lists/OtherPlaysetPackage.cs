@@ -80,7 +80,8 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 	protected override IEnumerable<IDrawableItem<IPlayset>> OrderItems(IEnumerable<IDrawableItem<IPlayset>> items)
 	{
-		return items.OrderByDescending(x => x.Item.DateUpdated);
+		return items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite)
+			.ThenByDescending(x => x.Item.GetCustomPlayset().DateUsed);
 	}
 
 	protected override async void OnItemMouseClick(DrawableItem<IPlayset, Rectangles> item, MouseEventArgs e)
@@ -104,7 +105,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 			Loading = item.Loading = true;
 
-			if (!isIncluded || (ModifierKeys.HasFlag(Keys.Alt) && !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil)))
+			if (!isIncluded || (ModifierKeys.HasFlag(Keys.Alt) && !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil, item.Item.Id)))
 			{
 				await _packageUtil.SetIncluded(Package, !isIncluded, item.Item.Id, false);
 			}
@@ -112,7 +113,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 			{
 				var enable = !_packageUtil.IsEnabled(Package, item.Item.Id, false);
 
-				if (enable || !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil))
+				if (enable || !_modLogicManager.IsRequired(Package.GetLocalPackageIdentity(), _modUtil, item.Item.Id))
 				{
 					await _packageUtil.SetEnabled(Package, enable, item.Item.Id);
 				}
@@ -233,7 +234,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 	{
 		activeColor = default;
 
-		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
+		var required = _modLogicManager.IsRequired(localIdentity, _modUtil, e.Item.Id);
 		var isHovered = e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation));
 
 		if (!required && isIncluded && isHovered)
@@ -410,7 +411,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 					{
 						text = Locale.IncludeItem;
 					}
-					else if (!listControl._modLogicManager.IsRequired(listControl.Package.GetLocalPackageIdentity(), listControl._modUtil))
+					else if (!listControl._modLogicManager.IsRequired(listControl.Package.GetLocalPackageIdentity(), listControl._modUtil, Item.Id))
 					{
 						text = Locale.ExcludeItem;
 					}
@@ -427,7 +428,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 					{
 						text = Locale.EnableItem + "\r\n\r\n" + Locale.AltClickTo.Format(Locale.ExcludeItem.ToLower());
 					}
-					else if (!listControl._modLogicManager.IsRequired(listControl.Package.GetLocalPackageIdentity(), listControl._modUtil))
+					else if (!listControl._modLogicManager.IsRequired(listControl.Package.GetLocalPackageIdentity(), listControl._modUtil, Item.Id))
 					{
 						text = Locale.DisableItem + "\r\n\r\n" + Locale.AltClickTo.Format(Locale.ExcludeItem.ToLower());
 					}

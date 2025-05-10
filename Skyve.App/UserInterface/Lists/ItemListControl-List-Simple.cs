@@ -15,7 +15,6 @@ public abstract partial class ItemListControl
 		public Simple(SkyvePage page, IPackageUtil? customPackageUtil = null) : base(page, customPackageUtil)
 		{
 			GridItemSize = new Size(190, 300);
-			//DynamicSizing = true;
 		}
 
 		private void OnPaintItemCompactList(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)

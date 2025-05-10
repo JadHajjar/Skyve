@@ -58,7 +58,7 @@ public static class SystemExtensions
 
 	public static bool IsCodeMod(this IPackageIdentity identity)
 	{
-		if (GetPackageInfo(identity)?.Type is not (null or PackageType.GenericPackage or PackageType.SimulationMod))
+		if (GetPackageInfo(identity)?.Type is not (null or PackageType.GenericPackage or PackageType.SimulationMod or PackageType.VisualMod))
 		{
 			return false;
 		}
@@ -98,6 +98,11 @@ public static class SystemExtensions
 			return packageData.Package;
 		}
 
+		if (identity is IAsset asset && asset.Package is not null)
+		{
+			return asset.Package;
+		}
+
 		return PackageManager.GetPackageById(identity)?.Package;
 	}
 
@@ -113,17 +118,17 @@ public static class SystemExtensions
 			return packageData;
 		}
 
-		if (identity is IPackage package && package.LocalData is not null)
-		{
-			return package.LocalData;
-		}
-
 		if (identity is ICompatibilityInfo compatibilityInfo && compatibilityInfo.LocalData is not null)
 		{
 			return compatibilityInfo.LocalData;
 		}
 
-		return PackageManager.GetPackageById(identity);
+		if (GetPackage(identity) is IPackage package && package.LocalData is not null)
+		{
+			return package.LocalData;
+		}
+
+		return null;
 	}
 
 	public static ILocalPackageIdentity? GetLocalPackageIdentity(this IPackageIdentity identity)
@@ -133,12 +138,12 @@ public static class SystemExtensions
 			return packageData;
 		}
 
-		if (identity is IPackage package && package.LocalData is not null)
+		if (GetPackage(identity) is IPackage package && package.LocalData is not null)
 		{
 			return package.LocalData;
 		}
 
-		return PackageManager.GetPackageById(identity);
+		return null;
 	}
 
 	public static Bitmap? GetThumbnail<T>(this T? identity) where T : IPackageIdentity

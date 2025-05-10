@@ -148,6 +148,8 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 				{
 					activating = true;
 
+					item.Loading = true;
+
 					LoadPlaysetStarted?.Invoke();
 
 					Invalidate();
@@ -160,6 +162,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 				}
 				finally
 				{
+					item.Loading = false;
 					activating = false;
 				}
 			}
@@ -346,7 +349,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		e.Graphics.DrawString(customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, new Point(e.Rects.Text.X, e.Rects.Text.Y + height));
 
 		var contentText = $"{Locale.ContainCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower())} • {e.Item.ModSize.SizeString(0)}";
-		using (var contentBrush = new SolidBrush(Color.FromArgb(100, backColor.Tint(Lum: backColor.IsDark() ? -5 : 5))))
+		using (var contentBrush = Gradient(Color.FromArgb(FormDesign.Design.IsDarkTheme ? 100 : 70, backColor.Tint(Lum: backColor.IsDark() ? 6 : -6)), backRect, 3.5f))
 		using (var format = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center })
 		{
 			e.Graphics.FillRectangle(contentBrush, e.Rects.Content.Pad(0, 4 * (height - UI.Scale(18)) / 5, 0, 0).CenterR(backRect.Width, smallTextFont.Height * 5 / 3));
@@ -354,7 +357,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		}
 
 		using var pen = new Pen(isActive ? FormDesign.Design.GreenColor : customPlayset.IsFavorite ? FormDesign.Modern.ActiveColor : backColor, UI.Scale(2.5f)) { Alignment = PenAlignment.Center };
-		e.Graphics.DrawRoundedRectangle(pen, backRect, borderRadius);
+		e.Graphics.DrawRoundedRectangle(pen, backRect.Pad(-1), borderRadius);
 
 		var isHovered = e.Rects.DotsRect.Contains(CursorLocation);
 		using var img = IconManager.GetIcon("VertialMore", e.Rects.DotsRect.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : textBrush.Color);
@@ -409,6 +412,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 				HoverState = e.HoverState,
 				Cursor = CursorLocation,
 				Enabled = !activating,
+				Control = e.DrawableItem.Loading ? this : null,
 				BackgroundColor = backColor.MergeColor(onBannerColor, 85).MergeColor(BackColor, 40).Tint(null, -6, 6),
 				ActiveColor = FormDesign.Design.GreenColor
 			});
@@ -536,6 +540,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 				Cursor = CursorLocation,
 				HoverState = e.HoverState,
 				BackgroundColor = e.BackColor,
+				Control = e.DrawableItem.Loading ? this : null,
 				Enabled = !activating,
 				ActiveColor = FormDesign.Design.GreenColor
 			});
