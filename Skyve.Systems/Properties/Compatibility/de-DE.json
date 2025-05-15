@@ -20,9 +20,9 @@
   "StableNoFutureUpdates": "Stabil, keine weiteren Updates",
   "HasIssuesNoFutureUpdates": "Hat Probleme, keine weiteren Updates",
   "BreaksOnPatch": "Stabil, kann beim Patch kaputtgehen",
-  "BrokenFromPatch": "Zerbrochen aus dem letzten Patch",
-  "BrokenFromNewVersion": "Defekt aus seiner neuesten Version",
-  "NumerousReports": "Hat mehrere Berichte",
+  "BrokenFromPatch": "Kaputt aus dem letzten Patch",
+  "BrokenFromNewVersion": "Kaputt aus der neuesten Version",
+  "NumerousReports": "Hat mehrere Meldungen",
   "NotEnoughInformation": "Nicht genügend Informationen",
   "HasIssues": "Hat Probleme",
   "Broken": "Defekt",
@@ -269,7 +269,7 @@
   "NameList": "Namensliste / Spielübersetzungen",
   "MapSavegame": {
     "One": "Karten- / Speichernspiel",
-    "Plural": "Karten & Speichernspiele"
+    "Plural": "Karten & Spielstände"
   },
   "PackageType_MusicPack": "Musikpaket für das Ingame-Radio.",
   "PackageType_ContentPackage": "Inhaltspaket, das Assets oder Dateien wie Modelle, Texturen oder Präfabs enthält und keinen Code oder Skripte enthält, die das Spielverhalten verändern.",
