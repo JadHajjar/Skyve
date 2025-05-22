@@ -150,7 +150,7 @@
   "Stability_Broken": "'{0}' está com problemas.\nÉ conhecido por quebrar o jogo ou simplesmente não funciona.",
   "Stability_Incompatible": "'{0}' está marcado como não compatível com a versão atual do seu jogo.\nUse-o cautelosamente, ou desative-o enquanto espera que seja atualizado.",
   "Stability_AssetIncompatible": "'{0}' está marcado como incompatível com a versão atual do seu jogo.\nRecursos raramente quebram com novas atualizações, então você deve conseguir usá-lo sem problemas.",
-  "Stability_Local": "This is a local version of the '{0}' mod.\r\n\r\nWhile local versions are usually used for testing purposes, it is not recommended to stay on the local version of a mod.",
+  "Stability_Local": "Esta é a versão local do mod '{0}'.\nA versão local é normalmente usada para propósitos de teste apenas, não é recomendado continuar com esta versão.",
   "Stability_BrokenFromNewVersion": "'{1}' quebrou após a última atualização {0}. Por favor, aguarde até que seja atualizado antes de usá-lo.\nEnquanto isso, você deve desativá-lo.",
   "Stability_BrokenFromNewVersionSafe": "'{1}' quebrou após a última atualização{0}. Por favor, aguarde até que seja atualizado antes de usá-lo.",
   "Stability_BrokenFromPatch": "'{1}' quebrou após a atualização {0} do jogo. Por favor, aguarde até que seja atualizado antes de usá-lo.\nEnquanto isso, você deve desativá-lo.",
@@ -159,9 +159,9 @@
   "Stability_NumerousReports": "Há vários relatórios ativos para '{0}' no momento. Recomenda-se cuidado enquanto o problema está sendo investigado.",
   "Stability_Obsolete": "'{0}' está obsoleto, seu uso não é mais necessário ou é redundante devido ao jogo ou a outros mods terem a mesma funcionalidade.",
   "Action_NoAction": "",
-  "Action_IncludeThis": "Você deve adicionar '{0}' ao seu conjunto",
+  "Action_IncludeThis": "Você deve adicionar '{0}' ao perfil",
   "Action_IncludeOther": {
-    "One": "Você deve adicionar '{1}' ao seu jogo de reprodução.",
+    "One": "Você deve adicionar '{1}' ao seu perfil.",
     "Plural": "Você deve adicionar os seguintes pacotes ao seu perfil."
   },
   "Action_RequiresConfiguration": "Por favor, siga as seguintes instruções:",
@@ -169,15 +169,15 @@
     "One": "Ou '{0}' ou '{1}', escolha apenas um dos dois.",
     "Plural": "Entre '{0}' e os seguintes pacotes, você deve escolher apenas um."
   },
-  "Action_UnsubscribeThis": "Você deve remover completamente '{0}' de todos os seus conjuntos de reprodução.",
+  "Action_UnsubscribeThis": "Você deve remover completamente '{0}' de todos os seus perfis.",
   "Action_UnsubscribeOther": {
-    "One": "Você deve remover completamente '{1}' de todos os seus conjuntos de reprodução.",
-    "Plural": "Você deve remover completamente os seguintes pacotes de todos os seus conjuntos de reprodução."
+    "One": "Você deve remover completamente '{1}' de todos os seus perfis.",
+    "Plural": "Você deve remover completamente os seguintes pacotes de todos os perfis."
   },
-  "Action_ExcludeThis": "Você deve remover '{0}' do seu jogo de reprodução.",
+  "Action_ExcludeThis": "Você deve remover '{0}' do seu perfil.",
   "Action_ExcludeOther": {
-    "One": "Você deve remover '{1}' do seu jogo de reprodução.",
-    "Plural": "Você deve remover os seguintes pacotes de seu conjunto."
+    "One": "Você deve remover '{1}' do seu perfil.",
+    "Plural": "Você deve remover os seguintes pacotes de seu perfil."
   },
   "Action_DisableThis": "Você deve desativar '{0}'.",
   "Action_DisableOther": {
