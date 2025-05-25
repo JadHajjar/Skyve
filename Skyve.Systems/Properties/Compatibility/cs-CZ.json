@@ -208,12 +208,12 @@
     "One": "{0} DLC vybráno",
     "Plural": "{0} DLC vybráno"
   },
-  "RequiredDLCs": "Required DLCs/CCPs",
+  "RequiredDLCs": "Požadovaná DLC/CCP",
   "CRT_Stability": "Stabilita",
-  "CRT_Successors": "Úspěšníci",
+  "CRT_Successors": "Nástupci",
   "CRT_RequiredPackages": "Požadované balíčky",
   "CRT_OptionalPackages": "Volitelné balíčky",
-  "CRT_DlcMissing": "Chybějící DLC/ústřední protistrany",
+  "CRT_DlcMissing": "Chybějící DLC/CCP",
   "CRT_Compatibility": "Problémy s kompatibilitou",
   "CRT_Alternatives": "Alternativní řešení",
   "CRT_Status": "Stavy",
@@ -268,8 +268,8 @@
   "POFont": "Font/modul procedurálního objektu",
   "NameList": "Seznam názvů / Překlady her",
   "MapSavegame": {
-    "One": "Mapa / Savegame",
-    "Plural": "Mapy a záchranné hry"
+    "One": "Mapa / Uložená hra",
+    "Plural": "Mapy a uložené hry"
   },
   "PackageType_MusicPack": "Hudební balíček pro herní rádio.",
   "PackageType_ContentPackage": "Balíček obsahu, který obsahuje aktiva nebo soubory, jako jsou modely, textury nebo prefaby a neobsahuje žádný kód ani skripty, které mění chování hry.",
