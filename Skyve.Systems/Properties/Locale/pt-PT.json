@@ -33,7 +33,7 @@
   "PlaysetName": "Nome do conjunto",
   "RenamePlayset": "Mudar o nome do conjunto",
   "StartScratch": "Começa um novo playset do zero sem nenhum pacote incluído.",
-  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
+  "ContinueFromCurrent": "Clona os teus playsets ativos subscritos num novo playset.",
   "GamePlay": "Construir cidades",
   "EditorPlay": "Criar Recursos",
   "PlaysetUsage": "Utilização do conjunto",
@@ -702,5 +702,5 @@
   "ExclusionTutorialTitle": "Removendo Mods - Tutorial",
   "ExclusionTutorialText": "Você pode remover mods da sua reprodução ativa segurando a tecla ALT e clicando na caixa de seleção do mod. U\r\n\r\nVocê também pode adicionar ou remover um mod de todos os seus playsets usando o botão direito.",
   "ClearFilterTutorialTitle": "Limpando filtros - Tutorial",
-  "ClearFilterTutorialText": "If you want to quickly clear your filters, you can click on a filter using your middle-mouse-button to clear it.\r\n\r\nYou can also do that on the 'Show/Hide Filters' button to clear all filters at once."
+  "ClearFilterTutorialText": "Se quiseres limpar os teus filtros rapidamente, clica num filtro usando o botão do meio do rato para o limpar."
 }
