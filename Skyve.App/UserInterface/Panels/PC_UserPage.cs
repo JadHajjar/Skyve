@@ -98,7 +98,7 @@ public partial class PC_UserPage : PanelContent
 		}
 		catch (Exception ex)
 		{
-			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load user data");
+			ServiceCenter.Get<ILogger>().Exception(ex, memberName: "Failed to load user data");
 			throw;
 		}
 
