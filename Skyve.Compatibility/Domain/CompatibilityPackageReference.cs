@@ -110,7 +110,7 @@ public class CompatibilityPackageReference : ICompatibilityPackageIdentity, ILoc
 	{
 		var hashCode = 1568141914;
 		hashCode = hashCode * -1521134295 + Id.GetHashCode();
-		hashCode = hashCode * -1521134295 + Name.GetHashCode();
+		hashCode = hashCode * -1521134295 + (Name?.GetHashCode()??0);
 		hashCode = hashCode * -1521134295 + IsDlc.GetHashCode();
 		return hashCode;
 	}
