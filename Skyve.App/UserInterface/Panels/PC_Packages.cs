@@ -35,7 +35,7 @@ public class PC_Packages : PC_ContentList
 					return false;
 				}
 
-				if (_settings.UserSettings.FilterOutPackagesWithMods && x.IsCodeMod)
+				if (_settings.UserSettings.FilterOutPackagesWithMods && x.IsCodeMod())
 				{
 					return false;
 				}

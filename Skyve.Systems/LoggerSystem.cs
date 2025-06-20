@@ -56,7 +56,7 @@ public class LoggerSystem : ILogger
 
 #if STABLE
 			Info($"Skyve Stable v{details.Version}");
-#elif Release
+#elif RELEASE
 			Info($"Skyve Beta v{details.Version}");
 #else
 			Info($"Skyve Debug v{details.Version}");
@@ -72,37 +72,37 @@ public class LoggerSystem : ILogger
 		}
 	}
 
-	public void Debug(object message)
+	public void Debug(object message, int? lineNumber = default, string? memberName = default)
 	{
-		ProcessLog("DEBUG", message);
+		ProcessLog("DEBUG", message, lineNumber, memberName);
 	}
 
-	public void Info(object message)
+	public void Info(object message, int? lineNumber = default, string? memberName = default)
 	{
-		ProcessLog("INFO ", message);
+		ProcessLog("INFO ", message, lineNumber, memberName);
 	}
 
-	public void Warning(object message)
+	public void Warning(object message, int? lineNumber = default, string? memberName = default)
 	{
-		ProcessLog("WARN ", message);
+		ProcessLog("WARN ", message, lineNumber, memberName);
 	}
 
-	public void Error(object message)
+	public void Error(object message, int? lineNumber = default, string? memberName = default)
 	{
-		ProcessLog("ERROR", message);
+		ProcessLog("ERROR", message, lineNumber, memberName);
 	}
 
-	public void Exception(Exception exception, object message)
+	public void Exception(Exception exception, object message, int? lineNumber = default, string? memberName = default)
 	{
-		ProcessLog("FATAL", $"{message}\r\n{exception}\r\n");
+		ProcessLog("FATAL", $"{message}\r\n{exception}\r\n", lineNumber, memberName);
 	}
 
-	public void Exception(object message)
+	public void Exception(object message, int? lineNumber = default, string? memberName = default)
 	{
-		ProcessLog("FATAL", message);
+		ProcessLog("FATAL", message, lineNumber, memberName);
 	}
 
-	protected void ProcessLog(string type, object content)
+	protected void ProcessLog(string type, object content, int? lineNumber = default, string? memberName = default)
 	{
 		if (_disabled)
 		{
@@ -123,6 +123,33 @@ public class LoggerSystem : ILogger
 		sb.Append(time);
 
 		sb.Append("] ");
+
+		if (memberName is not null)
+		{
+			sb.AppendFormat("[{0}", memberName);
+
+			if (memberName.Length < 12)
+			{
+				sb.Append(' ', 12 - memberName.Length);
+			}
+
+			if (lineNumber < 10)
+			{
+				sb.Append(' ', 3);
+			}
+			else if (lineNumber < 100)
+			{
+				sb.Append(' ', 2);
+			}
+			else if (lineNumber < 1000)
+			{
+				sb.Append(' ', 1);
+			}
+
+			sb.AppendFormat("@{0}", lineNumber);
+
+			sb.Append("] ");
+		}
 
 		sb.Append(content?.ToString().Replace("\n", "\n                      "));
 

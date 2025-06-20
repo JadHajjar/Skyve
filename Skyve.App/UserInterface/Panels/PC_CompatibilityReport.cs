@@ -195,7 +195,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		}
 		catch (Exception ex)
 		{
-			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report");
+			ServiceCenter.Get<ILogger>().Exception(ex, memberName: "Failed to load compatibility report");
 		}
 	}
 
@@ -273,7 +273,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		}
 		catch (Exception ex)
 		{
-			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report");
+			ServiceCenter.Get<ILogger>().Exception(ex, memberName: "Failed to load compatibility report");
 		}
 	}
 

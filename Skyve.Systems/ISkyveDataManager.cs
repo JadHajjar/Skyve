@@ -10,6 +10,7 @@ public interface ISkyveDataManager
 	Task DownloadData();
 	void Start(List<IPackage> packages);
 	void ResetCache();
+	bool IsBlacklisted(ulong packageId);
 	bool IsBlacklisted(IPackageIdentity package);
 	ulong GetIdFromModName(string fileName);
 	IIndexedPackageCompatibilityInfo? GetPackageCompatibilityInfo(IPackageIdentity identity);
