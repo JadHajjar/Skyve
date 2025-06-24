@@ -285,11 +285,11 @@
   "ManagePackage": "管理插件",
   "Banned": "已被封禁",
   "NoIssues": "没有问题",
-  "RequestReviewDisclaimer": "* 发送请求时，您的账号 ID 和日志文件也会一并发送",
+  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam账户 ID 和日志文件也会一并发送",
   "ScenarioMaking": "制作剧本",
   "ThemeMaking": "制作地图主题",
   "OtherCompatibilityWarnings": {
-    "One": "此插件还有另一个兼容性警告",
+    "One": "此插件还有另一个个兼容性警告",
     "Plural": "此插件还有 {0} 个兼容性警告"
   },
   "DeleteRequests": {
