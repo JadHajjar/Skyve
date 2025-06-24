@@ -318,7 +318,7 @@
     "One": "有 1 个活动中的问题报告",
     "Plural": "有 {0} 个活动中的问题报告"
   },
-  "SavegameEffect": "移除后对存档仍有残留效果",
+  "SavegameEffect": "移除后对存档的影响",
   "LocalMod": "本地模组",
   "Unknown": "未知",
   "AssetsRemain": "普通资产",
