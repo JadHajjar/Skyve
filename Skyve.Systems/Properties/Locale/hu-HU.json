@@ -513,10 +513,10 @@
   "FilterByDisabled": "Csak a letiltott elemek megjelenítése.",
   "FilterByIncluded": "Csak a benne foglalt elemek megjelenítése.",
   "FilterByExcluded": "Csak a kizárt elemek megjelenítése.",
-  "FilterByLocal": "Only show local items.",
-  "FilterByWorkshop": "Only show workshop items.",
-  "FilterByAssets": "Only show asset packages.",
-  "FilterByMods": "Only show code mod packages.",
+  "FilterByLocal": "Csak helyi tételek megjelenítése.",
+  "FilterByWorkshop": "Csak a műhelytárgyakat mutasd.",
+  "FilterByAssets": "Csak az eszközcsomagok megjelenítése.",
+  "FilterByMods": "Csak a kód mod csomagok megjelenítése.",
   "ViewOnGithub": "Tekintse meg a csomag Github tárházát",
   "ViewXOnSteam": "A(z) „{0}” megtekintése Steamen",
   "Free": "Ingyenes",
@@ -699,8 +699,8 @@
   "GenericIssue": "Általános probléma",
   "InvestigateMods": "A hibaelhárítási folyamat során csak a kódmódosításokat vizsgálja.",
   "InvestigateAssets": "A hibaelhárítási folyamat során csak az eszközöket és a tartalomcsomagokat vizsgálja meg.",
-  "ExclusionTutorialTitle": "Removing Mods - Tutorial",
-  "ExclusionTutorialText": "You can remove mods from your active playset by holding the ALT key and clicking on the checkbox of the mod.\r\n\r\nYou can also add or remove a mod from all your playsets using the right-click menu.",
-  "ClearFilterTutorialTitle": "Clearing Filters - Tutorial",
-  "ClearFilterTutorialText": "If you want to quickly clear your filters, you can click on a filter using your middle-mouse-button to clear it.\r\n\r\nYou can also do that on the 'Show/Hide Filters' button to clear all filters at once."
+  "ExclusionTutorialTitle": "Modok eltávolítása - Oktatóanyag",
+  "ExclusionTutorialText": "Modokat eltávolíthatsz az aktív játékkészletedből, ha lenyomva tartod az ALT billentyűt, és rákattintasz a mod jelölőnégyzetére.\n\nA jobb gombbal előhívható menü segítségével hozzáadhatsz vagy eltávolíthatsz egy modot az összes játékkészletedből.",
+  "ClearFilterTutorialTitle": "Szűrők törlése - Oktatóanyag",
+  "ClearFilterTutorialText": "Ha gyorsan szeretnéd törölni a szűrőket, kattints egy szűrőre a középső egérgombbal.\n\nEzt megteheted a „Szűrők megjelenítése/elrejtése” gombbal is, ha egyszerre szeretnéd törölni az összes szűrőt."
 }
