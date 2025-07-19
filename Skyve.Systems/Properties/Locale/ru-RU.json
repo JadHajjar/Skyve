@@ -500,7 +500,7 @@
   "TroubleshootCouldNotCreatePlayset": "Не удалось создать новый набор воспроизведения для устранения неполадок. Повторите попытку позже или после перезапуска Skyve.",
   "TroubleshootInvalidState": "Статус устранения неполадок более недействителен. Пожалуйста, начните новый сеанс устранения неполадок.",
   "TroubleshootNoActivePlayset": "Вам нужно иметь активный набор воспроизведения для устранения неполадок.",
-  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
+  "TroubleshootInconclusive": "Устранение неполадок не дало результатов.\nПроблема может быть не связана с конкретным модом или может быть вызвана несколькими модами.",
   "SkyveDetectedFaultyPackages": "Skyve обнаружил, что некоторые из ваших пакетов не полностью загружены, вы хотели бы попытаться их исправить?",
   "FaultyPackagesTitle": "Обнаружены пакеты с ошибками",
   "CleanupInfoTitle": "Что такое очистка?",
