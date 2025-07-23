@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using Skyve.Domain;
 using Skyve.Domain.Enums;
 using Skyve.Domain.Systems;
 
@@ -28,6 +29,7 @@ internal class NotifierSystem : INotifier
 	public event Action? SnoozeChanged;
 	public event Action? BackupEnded;
 	public event Action? BackupStarted;
+	public event Action<ISyncConflictInfo[]>? RequestSyncConflictPrompt;
 
 	private readonly DelayedAction _delayedPackageInformationUpdated;
 	private readonly DelayedAction _delayedPackageInclusionUpdated;
@@ -176,5 +178,10 @@ internal class NotifierSystem : INotifier
 	public void OnBackupStarted()
 	{
 		BackupStarted?.Invoke();
+	}
+
+	public void OnRequestSyncConflictPrompt(ISyncConflictInfo[] conflicts)
+	{
+		RequestSyncConflictPrompt?.Invoke(conflicts);
 	}
 }

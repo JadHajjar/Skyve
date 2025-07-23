@@ -30,6 +30,7 @@ public interface INotifier
 	event Action? SnoozeChanged;
 	event Action? BackupStarted;
 	event Action? BackupEnded;
+	event Action<ISyncConflictInfo[]>? RequestSyncConflictPrompt;
 	event Action<Exception>? LoggerFailed;
 
 	void OnLoggerFailed(Exception ex);
@@ -50,4 +51,5 @@ public interface INotifier
 	void OnSnoozeChanged();
 	void OnBackupStarted();
 	void OnBackupEnded();
+	void OnRequestSyncConflictPrompt(ISyncConflictInfo[] conflicts);
 }

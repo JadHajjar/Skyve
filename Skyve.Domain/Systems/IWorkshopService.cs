@@ -31,6 +31,8 @@ public interface IWorkshopService
 	Task<bool> Login();
 	Task<bool> Login(string email, string password, bool rememberMe);
 	Task RunSync();
+	Task RunDownSync();
+	Task RunUpSync();
 	Task<int> GetActivePlaysetId();
 	Task<List<IPlayset>> GetPlaysets(bool localOnly);
 	Task<IPlayset?> GetCurrentPlayset();
@@ -44,5 +46,6 @@ public interface IWorkshopService
 	bool IsLocal(IPackageIdentity identity);
 	Task Shutdown();
 	void RepairContext();
+	void CancelActions();
 #endif
 }
