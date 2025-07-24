@@ -345,6 +345,6 @@
   "YourLogReportInfo": "sent with your request",
   "PackageActiveReviewRequest": {
     "One": "'{0}' has active review requests.",
-    "Plural": "{0} {1} have active review requests."
+    "Plural": "{0} 個 {1} 有未處理的審核請求。"
   }
 }
