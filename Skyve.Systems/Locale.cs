@@ -2669,6 +2669,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Unsubscribe => _instance.GetText("Unsubscribe");
 
 	/// <summary>
+	/// Update Mod
+	/// </summary>
+	public static Translation UpdateMod => _instance.GetText("UpdateMod");
+
+	/// <summary>
 	/// Update Playset
 	/// </summary>
 	public static Translation UpdatePlayset => _instance.GetText("UpdatePlayset");

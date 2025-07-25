@@ -122,6 +122,16 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 			item.Loading = false;
 			Invalidate(item.Item);
 		}
+
+		if (item.Rectangles.UpdateRect.Contains(e.Location))
+		{
+			Loading = item.Loading = true;
+
+			await _packageUtil.SetIncluded(Package, true, item.Item.Id, false, false);
+
+			item.Loading = false;
+			Invalidate(item.Item);
+		}
 	}
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<IPlayset, Rectangles> e)
@@ -190,7 +200,22 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 		if (!string.IsNullOrEmpty(version))
 		{
-			e.Graphics.DrawLabel("v" + version, null, Color.FromArgb(80, version == Package.GetWorkshopInfo()?.Changelog.LastOrDefault().Version ? FormDesign.Design.GreenColor : FormDesign.Design.OrangeColor), e.ClipRectangle.Pad(0, 0, Padding.Right * 2, 0), ContentAlignment.MiddleRight);
+			var upToDate = version == Package.GetWorkshopInfo()?.Changelog.LastOrDefault().Version;
+			var labelRect = e.Graphics.DrawLabel("v" + version, null, Color.FromArgb(80, upToDate ? FormDesign.Design.GreenColor : FormDesign.Design.OrangeColor), e.ClipRectangle.Pad(0, 0, Padding.Right * 2, 0), ContentAlignment.MiddleRight);
+
+			if (!upToDate && !e.DrawableItem.Loading)
+			{
+				e.Rects.UpdateRect = SlickButton.AlignAndDraw(e.Graphics, e.ClipRectangle.Pad(0, 0, labelRect.Width + (Padding.Horizontal * 3), 0), ContentAlignment.MiddleRight, new ButtonDrawArgs
+				{
+					Cursor = CursorLocation,
+					HoverState = e.HoverState,
+					Icon = "ReDownload"
+				});
+			}
+			else
+			{
+				e.Rects.UpdateRect = default;
+			}
 		}
 	}
 
@@ -389,6 +414,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		public Rectangle IncludedRect;
 		public Rectangle Thumbnail;
 		public Rectangle TextRect;
+		public Rectangle UpdateRect;
 
 		public IPlayset Item { get; set; }
 
@@ -442,6 +468,13 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 				return true;
 			}
 
+			if (UpdateRect.Contains(location))
+			{
+				point = UpdateRect.Location;
+				text = Locale.UpdateMod;
+				return true;
+			}
+
 			text = string.Empty;
 			point = default;
 			return false;
@@ -449,7 +482,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 
 		public bool IsHovered(Control instance, Point location)
 		{
-			return IncludedRect.Contains(location);
+			return IncludedRect.Contains(location) || UpdateRect.Contains(location);
 		}
 	}
 }

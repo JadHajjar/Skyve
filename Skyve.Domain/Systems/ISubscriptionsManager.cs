@@ -29,6 +29,7 @@ public interface ISubscriptionsManager
 	void OnInstallProgress(PackageInstallProgress info);
 	void OnInstallStarted(PackageInstallProgress info);
 	void OnDownloadProgress(PackageDownloadProgress info);
+	void OnDownloadCancelled(PackageInstallProgress info);
 	void AddSubscribing(IEnumerable<IPackageIdentity> ids);
 	void RemoveSubscribing(IEnumerable<IPackageIdentity> ids);
 #endif

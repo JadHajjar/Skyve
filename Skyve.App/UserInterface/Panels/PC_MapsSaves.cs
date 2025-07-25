@@ -45,11 +45,16 @@ public class PC_MapsSaves : PC_ContentList
 
 			foreach (var item in package.LocalData.Assets)
 			{
-				if (item.AssetType is AssetType.SaveGame or AssetType.Map)
+				if (item.AssetType is AssetType.Map)
 				{
 					hasAssets = true;
 
 					assets.Add(item);
+				}
+
+				if (item.AssetType is AssetType.SaveGame)
+				{
+					hasAssets = true;
 				}
 			}
 
