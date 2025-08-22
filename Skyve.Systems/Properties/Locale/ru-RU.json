@@ -67,7 +67,7 @@
   "Sorting_Author": "Имя автора",
   "Sorting_Status": "Состояние пакета",
   "Sorting_CompatibilityReport": "Отчет о совместимости",
-  "Sorting_LoadOrder": "Загрузить заказ",
+  "Sorting_LoadOrder": "Порядок сортировки",
   "FolderSettings": "Настройки папки",
   "ShowDatesRelatively": "Показывать даты относительно текущего времени",
   "CreatePlayset": "Создать новый плейсет",
