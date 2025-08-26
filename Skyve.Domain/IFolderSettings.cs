@@ -14,6 +14,8 @@ namespace Skyve.Domain
 		GamingPlatform GamingPlatform { get; set; }
 		string UserIdentifier { get; set; }
 		string UserIdType { get; set; }
+
+		void Reload();
 #endif
 
 		void Save();
