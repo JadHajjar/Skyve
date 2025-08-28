@@ -9,7 +9,6 @@ public class PC_WorkshopList : PanelContent
 {
 	private readonly IWorkshopService _workshopService;
 	protected internal readonly WorkshopContentList LC_Items;
-	private bool listLoading;
 
 	private static List<ITag> lastSelectedTags = [];
 
@@ -87,41 +86,32 @@ public class PC_WorkshopList : PanelContent
 
 	private async Task<IEnumerable<IPackageIdentity>> GetPackages(int page)
 	{
-		listLoading = true;
+		(IEnumerable<IWorkshopInfo> Mods, int TotalCount) list;
 
-		try
+		if (LC_Items.TB_Search.Text.StartsWith("@"))
 		{
-			(IEnumerable<IWorkshopInfo> Mods, int TotalCount) list;
-
-			if (LC_Items.TB_Search.Text.StartsWith("@"))
-			{
-				list = await _workshopService.GetWorkshopItemsByUserAsync(
-				   LC_Items.TB_Search.Text.Substring(1),
-				   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
-				   null,
-				   LC_Items.TagsControl?.SelectedTags.Select(x => x.Value).ToArray(),
-				   limit: 30,
-				   page: page);
-			}
-			else
-			{
-				list = await _workshopService.QueryFilesAsync(
-				   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
-				   LC_Items.DD_SearchTime.SelectedItem,
-				   LC_Items.TB_Search.Text,
-				   LC_Items.TagsControl?.SelectedTags.Select(x => x.Value).ToArray(),
-				   limit: 30,
-				   page: page);
-			}
-
-			LC_Items.PaginationControl!.SetTotalCount(list.TotalCount);
-
-			return list.Mods;
+			list = await _workshopService.GetWorkshopItemsByUserAsync(
+			   LC_Items.TB_Search.Text.Substring(1),
+			   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
+			   null,
+			   LC_Items.TagsControl?.SelectedTags.Select(x => x.Value).ToArray(),
+			   limit: 30,
+			   page: page);
 		}
-		finally
+		else
 		{
-			listLoading = false;
+			list = await _workshopService.QueryFilesAsync(
+			   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
+			   LC_Items.DD_SearchTime.SelectedItem,
+			   LC_Items.TB_Search.Text,
+			   LC_Items.TagsControl?.SelectedTags.Select(x => x.Value).ToArray(),
+			   limit: 30,
+			   page: page);
 		}
+
+		LC_Items.PaginationControl!.SetTotalCount(list.TotalCount);
+
+		return list.Mods;
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()

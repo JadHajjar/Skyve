@@ -19,9 +19,8 @@ public partial class PC_CompatibilityReport : PanelContent
 	private bool customReportLoaded;
 	private bool searchEmpty = true;
 	private bool clearingFilters = true;
-	private bool firstFilterPassed;
 	private bool massSnoozeing;
-	private readonly int UsageFilteredOut;
+	private readonly int UsageFilteredOut = 0;
 	private readonly DelayedAction _delayedSearch;
 	private readonly List<string> searchTermsOr = [];
 	private readonly List<string> searchTermsAnd = [];

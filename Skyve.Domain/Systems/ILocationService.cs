@@ -29,5 +29,4 @@ public interface ILocationService
 	void RunFirstTimeSetup();
 	string ToLocalPath(string? relativePath);
 	string ToRelativePath(string? localPath);
-	void SetPaths(string gamePath, string appDataPath, string steamPath);
 }

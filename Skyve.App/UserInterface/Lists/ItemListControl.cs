@@ -26,8 +26,6 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	public event Action<DateTime>? DateSelected;
 	public event Action<ITag>? TagSelected;
 	public event Action<IUser>? AuthorSelected;
-	public event Action<bool>? FilterByIncluded;
-	public event Action<bool>? FilterByEnabled;
 	public event Action<string>? AddToSearch;
 	public event Action<IPackageIdentity>? PackageSelected;
 	public event Action<IPackageIdentity>? PackageUnSelected;

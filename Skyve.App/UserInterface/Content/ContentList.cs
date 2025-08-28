@@ -104,8 +104,8 @@ public partial class ContentList : SlickControl
 		ListControl.DateSelected += LC_Items_DateSelected;
 		ListControl.TagSelected += LC_Items_TagSelected;
 		ListControl.AuthorSelected += LC_Items_AuthorSelected;
-		ListControl.FilterByEnabled += LC_Items_FilterByEnabled;
-		ListControl.FilterByIncluded += LC_Items_FilterByIncluded;
+		//ListControl.FilterByEnabled += LC_Items_FilterByEnabled;
+		//ListControl.FilterByIncluded += LC_Items_FilterByIncluded;
 		ListControl.AddToSearch += LC_Items_AddToSearch;
 		ListControl.OpenWorkshopSearch += LC_Items_OpenWorkshopSearch;
 		ListControl.OpenWorkshopSearchInBrowser += LC_Items_OpenWorkshopSearchInBrowser;

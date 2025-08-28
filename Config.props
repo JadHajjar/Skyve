@@ -29,7 +29,7 @@
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(BuildType)' == 'Debug'">
-		<DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+		<DefineConstants>$(DefineConstants);DEBUG;STEAM</DefineConstants>
 		<DebugType>full</DebugType>
 		<Optimize>false</Optimize>
 		<DebugSymbols>true</DebugSymbols>

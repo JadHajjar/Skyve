@@ -16,7 +16,6 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 	private bool dragActive;
 	private Padding InnerPadding;
 	private bool activating;
-	private static readonly IPlayset? opening;
 	private readonly IOSelectionDialog imagePrompt;
 
 	public bool ReadOnly { get; set; }

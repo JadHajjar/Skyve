@@ -75,36 +75,6 @@ public partial class PC_UserPage : PanelContent
 		return Locale.Package;
 	}
 
-	protected override async Task<bool> LoadDataAsync()
-	{
-		try
-		{
-			//var profiles = await ServiceCenter.Get<ISkyveApiUtil>().GetUserPlaysets(User);
-
-			//if (profiles?.Any() ?? false)
-			//{
-			//	L_Profiles.SetItems(profiles);
-
-			//	this.TryInvoke(() =>
-			//	{
-
-			//		if (T_Profiles.Selected)
-			//		{
-			//			T_Profiles.Selected = true;
-			//		}
-			//	});
-			// T_Profiles.Visible = true;
-			//}
-		}
-		catch (Exception ex)
-		{
-			ServiceCenter.Get<ILogger>().Exception(ex, memberName: "Failed to load user data");
-			throw;
-		}
-
-		return true;
-	}
-
 	protected override void OnDataLoad()
 	{
 		if (L_Profiles.ItemCount > 0)

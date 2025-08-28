@@ -8,8 +8,6 @@ namespace Skyve.App.UserInterface.Generic;
 [DefaultEvent("Click")]
 public class BigSelectionOptionControl : SlickImageControl
 {
-	private readonly Font? LargeFont;
-
 	[Browsable(true)]
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 	[EditorBrowsable(EditorBrowsableState.Always)]
@@ -40,16 +38,6 @@ public class BigSelectionOptionControl : SlickImageControl
 			Padding = UI.Scale(new Padding(20));
 			Size = UI.Scale(new Size(180, 320));
 		}
-	}
-
-	protected override void Dispose(bool disposing)
-	{
-		if (disposing)
-		{
-			LargeFont?.Dispose();
-		}
-
-		base.Dispose(disposing);
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)
