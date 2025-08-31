@@ -3,6 +3,7 @@
 using Skyve.Domain.Systems;
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ internal class ImageProcessor : PeriodicProcessor<ImageProcessor.ImageRequest, I
 		return true;
 	}
 
-	protected override async Task<(Dictionary<ImageRequest, TimeStampedImage>, bool)> ProcessItems(List<ImageRequest> entities)
+	protected override async Task<(ConcurrentDictionary<ImageRequest, TimeStampedImage>, bool)> ProcessItems(List<ImageRequest> entities)
 	{
 		foreach (var img in entities)
 		{
@@ -35,7 +36,7 @@ internal class ImageProcessor : PeriodicProcessor<ImageProcessor.ImageRequest, I
 		return ([], false);
 	}
 
-	protected override void CacheItems(Dictionary<ImageRequest, TimeStampedImage> results)
+	protected override void CacheItems(ConcurrentDictionary<ImageRequest, TimeStampedImage> results)
 	{ }
 
 	internal readonly struct ImageRequest
