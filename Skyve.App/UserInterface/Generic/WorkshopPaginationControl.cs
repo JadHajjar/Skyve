@@ -51,7 +51,7 @@ public class WorkshopPaginationControl : SlickControl
 
 		const int range = 3;
 
-		var maxPages = (int)Math.Ceiling(TotalCount / 30f);
+		var maxPages = Math.Min(300, (int)Math.Ceiling(TotalCount / 30f));
 		var startPage = Page + 1 - range;
 		var endPage = Page + 1 + range;
 		var buttonSize = UI.Scale(new Size(26, 26));

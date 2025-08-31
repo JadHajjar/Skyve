@@ -83,6 +83,9 @@ public class IncludeAllButton : SlickControl
 
 	private void SetExpandedSize()
 	{
+		if (IsDisposed)
+			return;
+
 		var action = new DynamicIcon("Actions");
 		using var graphics = CreateGraphics();
 		using var font = UI.Font(8.25F);

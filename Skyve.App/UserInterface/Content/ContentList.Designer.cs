@@ -61,15 +61,15 @@ partial class ContentList
 			this.I_ClearFilters = new SlickControls.SlickIcon();
 			this.DR_SubscribeTime = new SlickControls.SlickDateRange();
 			this.DR_ServerTime = new SlickControls.SlickDateRange();
-			this.DD_PackageStatus = new Skyve.App.UserInterface.Dropdowns.PackageStatusDropDown();
 			this.DD_Tags = new Skyve.App.UserInterface.Dropdowns.TagsDropDown();
 			this.DD_ReportSeverity = new Skyve.App.UserInterface.Dropdowns.ReportSeverityDropDown();
 			this.DD_Author = new Skyve.App.UserInterface.Dropdowns.AuthorDropDown();
 			this.DD_Playset = new Skyve.App.UserInterface.Dropdowns.PlaysetsDropDown();
 			this.DD_PackageUsage = new Skyve.App.UserInterface.Dropdowns.PackageUsageDropDown();
+			this.DD_PackageStatus = new Skyve.App.UserInterface.Dropdowns.PackageStatusDropDown();
+			this.DD_PackageType = new Skyve.App.UserInterface.Dropdowns.PackageTypeDropDown();
 			this.I_SortOrder = new SlickControls.SlickIcon();
 			this.DD_SearchTime = new Skyve.App.UserInterface.Dropdowns.WorkshopSearchTimeDropDown();
-			this.DD_PackageType = new Skyve.App.UserInterface.Dropdowns.PackageTypeDropDown();
 			this.TLP_Main.SuspendLayout();
 			this.FLP_Search.SuspendLayout();
 			this.TLP_MiddleBar.SuspendLayout();
@@ -121,7 +121,7 @@ partial class ContentList
 			this.FLP_Search.Margin = new System.Windows.Forms.Padding(0);
 			this.FLP_Search.Name = "FLP_Search";
 			this.TLP_Main.SetRowSpan(this.FLP_Search, 2);
-			this.FLP_Search.Size = new System.Drawing.Size(851, 56);
+			this.FLP_Search.Size = new System.Drawing.Size(851, 57);
 			this.FLP_Search.TabIndex = 0;
 			// 
 			// TB_Search
@@ -131,13 +131,13 @@ partial class ContentList
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
-			this.TB_Search.Padding = new System.Windows.Forms.Padding(7, 7, 46, 7);
+			this.TB_Search.Padding = new System.Windows.Forms.Padding(7, 7, 85, 7);
 			this.TB_Search.Placeholder = "SearchGenericPackages";
 			this.TB_Search.SelectedText = "";
 			this.TB_Search.SelectionLength = 0;
 			this.TB_Search.SelectionStart = 0;
 			this.TB_Search.ShowLabel = false;
-			this.TB_Search.Size = new System.Drawing.Size(14, 50);
+			this.TB_Search.Size = new System.Drawing.Size(14, 51);
 			this.TB_Search.TabIndex = 0;
 			this.TB_Search.TextChanged += new System.EventHandler(this.TB_Search_TextChanged);
 			this.TB_Search.IconClicked += new System.EventHandler(this.TB_Search_IconClicked);
@@ -165,7 +165,7 @@ partial class ContentList
 			this.B_Filters.Location = new System.Drawing.Point(43, 3);
 			this.B_Filters.Name = "B_Filters";
 			this.B_Filters.Selected = false;
-			this.B_Filters.Size = new System.Drawing.Size(114, 28);
+			this.B_Filters.Size = new System.Drawing.Size(118, 30);
 			this.B_Filters.SpaceTriggersClick = true;
 			this.B_Filters.TabIndex = 1;
 			this.B_Filters.Text = "ShowFilters";
@@ -175,7 +175,7 @@ partial class ContentList
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer2, 5);
 			this.slickSpacer2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer2.Location = new System.Drawing.Point(0, 194);
+			this.slickSpacer2.Location = new System.Drawing.Point(0, 195);
 			this.slickSpacer2.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer2.Name = "slickSpacer2";
 			this.slickSpacer2.Size = new System.Drawing.Size(943, 2);
@@ -187,7 +187,7 @@ partial class ContentList
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer1, 5);
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 231);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 232);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(943, 2);
@@ -224,7 +224,7 @@ partial class ContentList
 			this.TLP_MiddleBar.Controls.Add(this.C_ViewTypeControl, 2, 0);
 			this.TLP_MiddleBar.Controls.Add(this.L_Counts, 1, 0);
 			this.TLP_MiddleBar.Dock = System.Windows.Forms.DockStyle.Top;
-			this.TLP_MiddleBar.Location = new System.Drawing.Point(0, 196);
+			this.TLP_MiddleBar.Location = new System.Drawing.Point(0, 197);
 			this.TLP_MiddleBar.Margin = new System.Windows.Forms.Padding(0);
 			this.TLP_MiddleBar.Name = "TLP_MiddleBar";
 			this.TLP_MiddleBar.RowCount = 1;
@@ -258,7 +258,7 @@ partial class ContentList
 			this.TLP_Main.SetColumnSpan(this.P_FiltersContainer, 5);
 			this.P_FiltersContainer.Controls.Add(this.P_Filters);
 			this.P_FiltersContainer.Dock = System.Windows.Forms.DockStyle.Top;
-			this.P_FiltersContainer.Location = new System.Drawing.Point(0, 56);
+			this.P_FiltersContainer.Location = new System.Drawing.Point(0, 57);
 			this.P_FiltersContainer.Margin = new System.Windows.Forms.Padding(0);
 			this.P_FiltersContainer.Name = "P_FiltersContainer";
 			this.P_FiltersContainer.Size = new System.Drawing.Size(943, 138);
@@ -292,14 +292,14 @@ partial class ContentList
 			this.P_Filters.Dock = System.Windows.Forms.DockStyle.Top;
 			this.P_Filters.Location = new System.Drawing.Point(0, 0);
 			this.P_Filters.Name = "P_Filters";
-			this.P_Filters.Padding = new System.Windows.Forms.Padding(8);
+			this.P_Filters.Padding = new System.Windows.Forms.Padding(9);
 			this.P_Filters.RowCount = 5;
 			this.P_Filters.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.P_Filters.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.P_Filters.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.P_Filters.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.P_Filters.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.P_Filters.Size = new System.Drawing.Size(943, 147);
+			this.P_Filters.Size = new System.Drawing.Size(943, 149);
 			this.P_Filters.TabIndex = 0;
 			this.P_Filters.Text = "Filters";
 			this.P_Filters.UseFirstRowForPadding = true;
@@ -311,7 +311,7 @@ partial class ContentList
 			this.OT_ModAsset.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.OT_ModAsset.Image1 = "Mods";
 			this.OT_ModAsset.Image2 = "Assets";
-			this.OT_ModAsset.Location = new System.Drawing.Point(11, 116);
+			this.OT_ModAsset.Location = new System.Drawing.Point(12, 117);
 			this.OT_ModAsset.Name = "OT_ModAsset";
 			this.OT_ModAsset.Option1 = "Mods";
 			this.OT_ModAsset.Option2 = "Assets";
@@ -328,7 +328,7 @@ partial class ContentList
 			this.OT_Workshop.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.OT_Workshop.Image1 = "PC";
 			this.OT_Workshop.Image2 = "Steam";
-			this.OT_Workshop.Location = new System.Drawing.Point(11, 90);
+			this.OT_Workshop.Location = new System.Drawing.Point(12, 91);
 			this.OT_Workshop.Name = "OT_Workshop";
 			this.OT_Workshop.Option1 = "Local";
 			this.OT_Workshop.Option2 = "Workshop";
@@ -345,7 +345,7 @@ partial class ContentList
 			this.OT_Enabled.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.OT_Enabled.Image1 = "Ok";
 			this.OT_Enabled.Image2 = "Enabled";
-			this.OT_Enabled.Location = new System.Drawing.Point(11, 64);
+			this.OT_Enabled.Location = new System.Drawing.Point(12, 65);
 			this.OT_Enabled.Name = "OT_Enabled";
 			this.OT_Enabled.Option1 = "Enabled";
 			this.OT_Enabled.Option2 = "Disabled";
@@ -360,7 +360,7 @@ partial class ContentList
 			this.OT_Included.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.OT_Included.Image1 = "Add";
 			this.OT_Included.Image2 = "X";
-			this.OT_Included.Location = new System.Drawing.Point(11, 38);
+			this.OT_Included.Location = new System.Drawing.Point(12, 39);
 			this.OT_Included.Name = "OT_Included";
 			this.OT_Included.Option1 = "Included";
 			this.OT_Included.Option2 = "Excluded";
@@ -375,7 +375,7 @@ partial class ContentList
 			this.I_ClearFilters.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon4.Name = "ClearFilter";
 			this.I_ClearFilters.ImageName = dynamicIcon4;
-			this.I_ClearFilters.Location = new System.Drawing.Point(902, 11);
+			this.I_ClearFilters.Location = new System.Drawing.Point(901, 12);
 			this.I_ClearFilters.Name = "I_ClearFilters";
 			this.I_ClearFilters.Size = new System.Drawing.Size(30, 21);
 			this.I_ClearFilters.TabIndex = 1;
@@ -386,7 +386,7 @@ partial class ContentList
 			this.DR_SubscribeTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DR_SubscribeTime.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DR_SubscribeTime.Location = new System.Drawing.Point(242, 38);
+			this.DR_SubscribeTime.Location = new System.Drawing.Point(243, 39);
 			this.DR_SubscribeTime.Name = "DR_SubscribeTime";
 			this.DR_SubscribeTime.Size = new System.Drawing.Size(225, 20);
 			this.DR_SubscribeTime.TabIndex = 4;
@@ -397,25 +397,11 @@ partial class ContentList
 			this.DR_ServerTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DR_ServerTime.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DR_ServerTime.Location = new System.Drawing.Point(242, 64);
+			this.DR_ServerTime.Location = new System.Drawing.Point(243, 65);
 			this.DR_ServerTime.Name = "DR_ServerTime";
 			this.DR_ServerTime.Size = new System.Drawing.Size(225, 20);
 			this.DR_ServerTime.TabIndex = 5;
 			this.DR_ServerTime.RangeChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// DD_PackageStatus
-			// 
-			this.DD_PackageStatus.AccentBackColor = true;
-			this.DD_PackageStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_PackageStatus.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_PackageStatus.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_PackageStatus.ItemHeight = 24;
-			this.DD_PackageStatus.Location = new System.Drawing.Point(242, 90);
-			this.DD_PackageStatus.Name = "DD_PackageStatus";
-			this.DD_PackageStatus.Size = new System.Drawing.Size(225, 20);
-			this.DD_PackageStatus.TabIndex = 6;
-			this.DD_PackageStatus.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_Tags
 			// 
@@ -425,7 +411,7 @@ partial class ContentList
 			this.DD_Tags.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_Tags.Font = new System.Drawing.Font("Nirmala UI", 15F);
 			this.DD_Tags.ItemHeight = 24;
-			this.DD_Tags.Location = new System.Drawing.Point(473, 38);
+			this.DD_Tags.Location = new System.Drawing.Point(474, 39);
 			this.DD_Tags.Name = "DD_Tags";
 			this.DD_Tags.Size = new System.Drawing.Size(225, 20);
 			this.DD_Tags.TabIndex = 7;
@@ -439,9 +425,9 @@ partial class ContentList
 			this.DD_ReportSeverity.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_ReportSeverity.Font = new System.Drawing.Font("Nirmala UI", 15F);
 			this.DD_ReportSeverity.ItemHeight = 24;
-			this.DD_ReportSeverity.Location = new System.Drawing.Point(704, 64);
+			this.DD_ReportSeverity.Location = new System.Drawing.Point(705, 65);
 			this.DD_ReportSeverity.Name = "DD_ReportSeverity";
-			this.DD_ReportSeverity.Size = new System.Drawing.Size(228, 20);
+			this.DD_ReportSeverity.Size = new System.Drawing.Size(226, 20);
 			this.DD_ReportSeverity.TabIndex = 11;
 			this.DD_ReportSeverity.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
@@ -452,9 +438,9 @@ partial class ContentList
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DD_Author.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_Author.ItemHeight = 24;
-			this.DD_Author.Location = new System.Drawing.Point(704, 38);
+			this.DD_Author.Location = new System.Drawing.Point(705, 39);
 			this.DD_Author.Name = "DD_Author";
-			this.DD_Author.Size = new System.Drawing.Size(228, 20);
+			this.DD_Author.Size = new System.Drawing.Size(226, 20);
 			this.DD_Author.TabIndex = 10;
 			this.DD_Author.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
@@ -466,9 +452,9 @@ partial class ContentList
 			this.DD_Playset.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_Playset.Font = new System.Drawing.Font("Nirmala UI", 15F);
 			this.DD_Playset.ItemHeight = 24;
-			this.DD_Playset.Location = new System.Drawing.Point(704, 90);
+			this.DD_Playset.Location = new System.Drawing.Point(705, 91);
 			this.DD_Playset.Name = "DD_Playset";
-			this.DD_Playset.Size = new System.Drawing.Size(228, 20);
+			this.DD_Playset.Size = new System.Drawing.Size(226, 20);
 			this.DD_Playset.TabIndex = 12;
 			this.DD_Playset.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
@@ -479,11 +465,38 @@ partial class ContentList
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DD_PackageUsage.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_PackageUsage.ItemHeight = 24;
-			this.DD_PackageUsage.Location = new System.Drawing.Point(473, 90);
+			this.DD_PackageUsage.Location = new System.Drawing.Point(474, 91);
 			this.DD_PackageUsage.Name = "DD_PackageUsage";
 			this.DD_PackageUsage.Size = new System.Drawing.Size(225, 20);
 			this.DD_PackageUsage.TabIndex = 9;
 			this.DD_PackageUsage.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// DD_PackageStatus
+			// 
+			this.DD_PackageStatus.AccentBackColor = true;
+			this.DD_PackageStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_PackageStatus.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_PackageStatus.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_PackageStatus.ItemHeight = 24;
+			this.DD_PackageStatus.Location = new System.Drawing.Point(243, 91);
+			this.DD_PackageStatus.Name = "DD_PackageStatus";
+			this.DD_PackageStatus.Size = new System.Drawing.Size(225, 20);
+			this.DD_PackageStatus.TabIndex = 6;
+			this.DD_PackageStatus.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// DD_PackageType
+			// 
+			this.DD_PackageType.AccentBackColor = true;
+			this.DD_PackageType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_PackageType.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_PackageType.ItemHeight = 24;
+			this.DD_PackageType.Location = new System.Drawing.Point(474, 65);
+			this.DD_PackageType.Name = "DD_PackageType";
+			this.DD_PackageType.Size = new System.Drawing.Size(225, 20);
+			this.DD_PackageType.TabIndex = 8;
+			this.DD_PackageType.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// I_SortOrder
 			// 
@@ -509,22 +522,9 @@ partial class ContentList
 			this.DD_SearchTime.Visible = false;
 			this.DD_SearchTime.SelectedItemChanged += new System.EventHandler(this.DD_SearchTime_SelectedItemChanged);
 			// 
-			// DD_PackageType
+			// ContentList
 			// 
-			this.DD_PackageType.AccentBackColor = true;
-			this.DD_PackageType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_PackageType.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_PackageType.ItemHeight = 24;
-			this.DD_PackageType.Location = new System.Drawing.Point(473, 64);
-			this.DD_PackageType.Name = "DD_PackageType";
-			this.DD_PackageType.Size = new System.Drawing.Size(225, 20);
-			this.DD_PackageType.TabIndex = 8;
-			this.DD_PackageType.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
-		// 
-		// ContentList
-		// 
-		this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.Controls.Add(this.TLP_Main);
 			this.Name = "ContentList";
 			this.Size = new System.Drawing.Size(943, 549);

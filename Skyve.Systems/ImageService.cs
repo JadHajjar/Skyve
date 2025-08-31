@@ -49,7 +49,9 @@ internal class ImageService : IImageService
 			new DirectoryInfo(oldFolder).Delete(true);
 		}
 
-		new BackgroundAction(ClearOldImages).Run();
+		Directory.CreateDirectory(ThumbnailFolder);
+
+		new BackgroundAction(ClearOldImages, true).Run();
 	}
 
 	private object LockObj(string path)
