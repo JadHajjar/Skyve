@@ -225,46 +225,46 @@
   "RequestReviewInfo": "Bu paket ile ilgili sorun yaşıyor musunuz?",
   "RequestReview": "İnceleme talep et",
   "MissingDependencyCount": {
-    "One": "{0} {1} bağımlılık eksik",
-    "Plural": ""
+    "One": "{0} {1} bağımlılığı eksik",
+    "Plural": "{0} {1} bağımlılıkları eksik"
   },
   "CautionCount": "{0} {1} dikkat edilmesi gerekiyor",
-  "WarningCount": "{0} {1} uyarıyla",
+  "WarningCount": "{0} {1} uyarılı",
   "ObsoleteCount": {
     "One": "{0} {1} kullanım dışı",
-    "Plural": "{0} {1} that are obsolete"
+    "Plural": "{0} {1} kullanım dışı olanlar"
   },
   "BrokenCount": {
     "One": "{0} {1} bozuk",
-    "Plural": "{0} {1} that are broken"
+    "Plural": "{0} {1} bozuk olanlar"
   },
-  "ActionRequiredCount": "{0} {1} where your action is required",
+  "ActionRequiredCount": "{0} {1} işlem yapılması gerekiyor",
   "AttentionRequiredCount": {
-    "One": "{0} {1} ilgilenmenizi gerektiriyor",
-    "Plural": "{0} {1} ilgilenmenizi gerektiriyor"
+    "One": "{0} {1} dikkatinizi gerektiriyor",
+    "Plural": "{0} {1} dikkatinizi gerektirenler"
   },
   "ExcludeCount": {
     "One": "{0} {1} hariç tutulmalı",
-    "Plural": "{0} {1} hariç tutulmalı"
+    "Plural": "{0} {1} hariç tutulmalılar"
   },
-  "UnsubscribeCount": "{0} {1} aboneliğinden çıklımalı",
+  "UnsubscribeCount": "{0} {1} aboneliğinden çıkmanız gerekiyor",
   "SwitchCount": {
-    "One": "{0} {1} başka birine geçmenizi gerektiriyor",
-    "Plural": "{0} {1} başka birine geçmenizi gerektiriyor"
+    "One": "{0} {1} başka birine geçiş gerektiriyor",
+    "Plural": "{0} {1} başka birine geçiş gerektirenler"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} lazım ancak etkinleştirilmemiş",
-    "Plural": "{0} {1} lazım ancak etkinleştirilmemiş"
+    "One": "{0} {1} gerekli ama etkin değil",
+    "Plural": "{0} {1} gerekli ama etkin değiller"
   },
   "PackageType": "Paket Türü",
   "GenericPackage": "Genel Paket",
   "MusicPack": "Müzik Paketi",
   "ThemeMix": "Tema Karışımı",
-  "ContentPackage": "Content/Asset Package",
-  "VisualMod": "Visual Mod",
-  "SimulationMod": "Simulation Mod",
-  "IMTMarkings": "IMT işaretlemeleri",
-  "RenderItPreset": "Render it! Ön ayarı",
+  "ContentPackage": "İçerik/Asset Paketi",
+  "VisualMod": "Görsel Mod",
+  "SimulationMod": "Simülasyon Modu",
+  "IMTMarkings": "IMT İşaretlemeleri",
+  "RenderItPreset": "'Render it!' Ön Ayarı",
   "POFont": "Yöntemsel Nesne Yazı Tipi/Modülü",
   "NameList": "Name-List / Game Translations",
   "MapSavegame": {
