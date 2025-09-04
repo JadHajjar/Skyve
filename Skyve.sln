@@ -55,6 +55,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyResolver", "Assembl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skyve.App.CS2.Installer", "..\Skyve-CS2\Skyve.App.CS2.Installer\Skyve.App.CS2.Installer.csproj", "{D53683FD-127F-40D9-9CCE-ACCFA981B180}"
 	ProjectSection(ProjectDependencies) = postProject
+		{F8A37FAA-86E0-4FB6-B034-36ACEA12EC19} = {F8A37FAA-86E0-4FB6-B034-36ACEA12EC19}
 		{FE5B456D-D146-4D5A-8C93-D46050C85F13} = {FE5B456D-D146-4D5A-8C93-D46050C85F13}
 	EndProjectSection
 EndProject
