@@ -42,7 +42,7 @@ public static class PlatformUtil
 		}
 		catch (Exception ex)
 		{
-			ServiceCenter.Get<ILogger>().Exception(ex, memberName: $"Failed to open the URL: '{url}'");
+			ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the URL: '{url}'");
 		}
 	}
 
@@ -92,7 +92,7 @@ public static class PlatformUtil
 		}
 		catch (Exception ex)
 		{
-			ServiceCenter.Get<ILogger>().Exception(ex, memberName: $"Failed to open the folder: '{folder}'");
+			ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the folder: '{folder}'");
 		}
 	}
 
@@ -109,7 +109,7 @@ public static class PlatformUtil
 		}
 		catch (Exception ex)
 		{
-			ServiceCenter.Get<ILogger>().Exception(ex, memberName: $"Failed to open the file: '{file}'");
+			ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the file: '{file}'");
 		}
 	}
 

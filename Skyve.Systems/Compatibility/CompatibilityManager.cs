@@ -108,7 +108,7 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, memberName: "Error while caching the Compatibility Report");
+			_logger.Exception(ex, "Error while caching the Compatibility Report");
 		}
 	}
 
@@ -176,7 +176,7 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, memberName: "Failed to clear Snoozes");
+			_logger.Exception(ex, "Failed to clear Snoozes");
 		}
 	}
 

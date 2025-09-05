@@ -65,7 +65,7 @@ internal class IOUtil : IIOUtil
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, memberName: $"Failed to run '{exeFile}'");
+			_logger.Exception(ex, $"Failed to run '{exeFile}'");
 			return null;
 		}
 	}
@@ -80,7 +80,7 @@ internal class IOUtil : IIOUtil
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, memberName: "Failed to start batch to restart the tool after update");
+			_logger.Exception(ex, "Failed to start batch to restart the tool after update");
 		}
 	}
 

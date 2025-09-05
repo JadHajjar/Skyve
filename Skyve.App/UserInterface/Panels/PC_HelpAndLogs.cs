@@ -136,7 +136,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, memberName: "Failed to get current logs trace");
+			_logger.Exception(ex, "Failed to get current logs trace");
 			return false;
 		}
 	}

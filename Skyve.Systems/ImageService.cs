@@ -111,7 +111,7 @@ internal class ImageService : IImageService
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, memberName: "Unexpected error in ImageService");
+			_logger.Exception(ex, "Unexpected error in ImageService");
 		}
 
 		return null;
