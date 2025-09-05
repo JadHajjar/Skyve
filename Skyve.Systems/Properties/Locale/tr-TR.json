@@ -155,18 +155,18 @@
   "DefaultLogViewInfo": "Son oturumunuzdaki hatalar burada otomatik olarak gösterilecek, sonuçlar canlı olarak güncellenecektir.",
   "ErrorsInLog": "Log'daki Hatalar",
   "OpenLogFolder": "Oyunun log klasörünü aç",
-  "CopyLogFile": "Oyunun günlük dosyasını panoya kopyala",
-  "OpenLOTLogFolder": "Skyve'nin günlük klasörünü açın",
-  "CopyLOTLogFile": "Skyve'nin günlük dosyasını panoya kopyala",
+  "CopyLogFile": "Oyunu log dosyasını panoya kopyala",
+  "OpenLOTLogFolder": "Skyve log klasörünü aç",
+  "CopyLOTLogFile": "Skyve log dosyasını panoya kopyala",
   "GenericIncludedTotal": "{0} dahil: {1}, toplam {2} içinden",
   "GenericIncludedAndEnabledTotal": "{0} dahil ve etkin: {1}, toplam {2} içinden",
   "GenericIncludedEnabledTotal": "{0} dahil: {1}, bunlardan {2} etkin, toplam {3} içinden",
   "NewPlayset_Tip": "Yeni bir oyun seti oluştur veya içe aktar",
   "ViewPlaysets_Tip": "Oyun setlerini görüntüle ve yönet",
   "DeactivatePlayset": "Bu oyun setini devre dışı bırak",
-  "DeactivatePlayset_Tip": "Mvcut oyun setini devre dışı bırak",
-  "NewGame_Tip": "Cities: Skylines'ı başlatırken yeni bir oyun başlatır. Başlamak istediğiniz haritayı belirtebilirsiniz",
-  "LoadSaveGame_Tip": "Cities: Skylines başlatılırken bir kayıtlı oyunu yükleyin. Bir kayıt dosyası seçmezseniz, en son kaydınızla devam edilir.",
+  "DeactivatePlayset_Tip": "Mevcut oyun setini devre dışı bırak",
+  "NewGame_Tip": "Cities: Skylines başlatıldığında yeni bir oyun başlatır. Başlamak isteğiniz haritayı belirtebilirsiniz.",
+  "LoadSaveGame_Tip": "Cities: Skylines başlatılırken bir oyun kaydı yükleyin. Kayıt dosyası seçilmezse en son kaydınıza devam edilir",
   "BETA": "BETA",
   "ALPHA": "ALFA",
   "TEST": "TEST",
@@ -174,53 +174,53 @@
   "STABLE": "STABİL",
   "EXPERIMENTAL": "DENEYSEL",
   "DEPRECATED": "KULLANIM DIŞI",
-  "OBSOLETE": "ESKİ",
+  "OBSOLETE": "KALDIRILMIŞ",
   "ABANDONED": "TERK EDİLMİŞ",
   "ActionUnreversible": {
-    "One": "Bu eylem geri alınamaz.",
-    "Plural": "Bu eylem geri alınamaz ve {0} tane paketi etkileyecek."
+    "One": "Bu işlem geri alınamaz.",
+    "Plural": "Bu işlem geri alınamaz. Ve {0} paketi etkileyecektir."
   },
   "AlwaysOpenFiltersAndActions": "Varsayılan olarak filtreler kısmını göster",
-  "AlwaysOpenFiltersAndActions_Tip": "Herhangi bir içerik sekmesine girdiğinde filtreler kısmını her zaman aç",
+  "AlwaysOpenFiltersAndActions_Tip": "Bir içerik sekmesine girerken filtreler bölümünü her zaman aç",
   "FavoritePlaysetTotal": "Favori oyun setleri: {0}, Toplam: {1}",
   "FavoriteTotal": "Toplam oyun setleri: {0}",
-  "PlaysetFilter": "Oyun seti filtresi",
-  "CheckDocumentsFolder": "Skyve'ın dokümanlar dosyanıza erişimi olduğuna emin olun. Bunu UI ve dil ayarlarınız için kullanır.",
-  "FailedToSaveLanguage": "Seçili dili kaydetme başarısız oldu",
+  "PlaysetFilter": "Oyun Seti Filtresi",
+  "CheckDocumentsFolder": "Belgeler klasörüne Skyve'ın erişimi olduğundan emin ol; UI ve dil ayarları burada saklanır.",
+  "FailedToSaveLanguage": "Seçilen dili kaydetme başarısız",
   "FailedToOpenTC": "Tema Değiştirici açılamadı",
-  "FailedToDeleteItem": "Öğe silinemedi",
-  "OpenChangelog": "Değişiklik Kaydını Göster",
-  "Changelog": "Değişiklik Kaydı",
+  "FailedToDeleteItem": "Öğe silme başarısız",
+  "OpenChangelog": "Change-log'u Aç",
+  "Changelog": "Change-log",
   "DeleteAsset": {
-    "One": "Bu varlığı sil",
-    "Plural": "Seçili varlıkları sil"
+    "One": "Bu asseti sil",
+    "Plural": "Seçilen assetleri sil"
   },
   "DeletePackage": {
     "One": "Bu paketi sil",
-    "Plural": "Seçili paketleri sil"
+    "Plural": "Seçilen paketleri sil"
   },
   "EnableThisItemInAllPlaysets": {
     "One": "Tüm oyun setlerinde etkinleştir",
-    "Plural": "Seçili ögeleri tüm oyun setlerinde etkinleştir"
+    "Plural": "Seçili öğeleri tüm oyun setlerinde etkinleştir"
   },
   "DisableThisItemInAllPlaysets": {
     "One": "Tüm oyun setlerinde devre dışı bırak",
-    "Plural": "Seçili ögeleri tüm oyun setlerinde devre dışı bırak"
+    "Plural": "Seçili öğeleri tüm oyun setlerinde devre dışı bırak"
   },
   "CopyPackageName": {
-    "One": "Paketin adını kopyala",
-    "Plural": "Seçili paketlerin adlarını kopyala"
+    "One": "Paketin ismini kopyala",
+    "Plural": "Seçili paketlerin isimlerini kopyala"
   },
   "CopyAuthorId": {
-    "One": "Yazarın kimliğini kopyala",
-    "Plural": "ŞEçili paketlerin yapımcılarının ID'lerini kopyala"
+    "One": "Yapımcının ID'sini kopyala",
+    "Plural": "Seçili paketlerin yapımcı ID'lerini kopyala"
   },
   "CopyAuthorName": {
-    "One": "Yapımcının adını kopyala",
-    "Plural": "Seçili paketlerin yapımcılarının adlarını kopyala"
+    "One": "Yapımcının ismini kopyala",
+    "Plural": "Seçili paketlerin yapımcı isimlerini kopyala"
   },
   "Sorting_LastUsed": "Son Kullanılan Zaman",
-  "PlaysetStillLoading": "Profiliniz hala yükleniyor, lütfen bu sayfayı kapatmadan önce bekleyiniz.",
+  "PlaysetStillLoading": "Oyun setiniz hala yükleniyor, lütfen bu sayfadan çıkmadan önce bekleyin.",
   "ApplyPlaysetNameBeforeExit": "Lütfen bu sayfayı kapatmadan önce profil adını düzenlemeyi bitirin.",
   "SteamNotOpenTo": "Steam şu anda çalışmıyor",
   "OpenSteamToContinue": "Lütfen önceki görevinizi bitirmek için Steam'ı açın.",
