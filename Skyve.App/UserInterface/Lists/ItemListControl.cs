@@ -805,6 +805,11 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 				icon = "ContentRemoved";
 				color = FormDesign.Design.RedColor;
 				return true;
+			case DownloadStatus.VersionLocked:
+				text = Locale.VersionLocked;
+				icon = "Lock";
+				color = FormDesign.Design.InfoColor;
+				return true;
 		}
 
 		icon = null;

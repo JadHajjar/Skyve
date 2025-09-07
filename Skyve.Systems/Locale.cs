@@ -2724,6 +2724,16 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Version => _instance.GetText("Version");
 
 	/// <summary>
+	/// Version Locked
+	/// </summary>
+	public static Translation VersionLocked => _instance.GetText("VersionLocked");
+
+	/// <summary>
+	/// '{0}' is locked to version '{1}' in this playset.
+	/// </summary>
+	public static Translation VersionLockedInfo => _instance.GetText("VersionLockedInfo");
+
+	/// <summary>
 	/// View all your {0}
 	/// </summary>
 	public static Translation ViewAllYourItems => _instance.GetText("ViewAllYourItems");

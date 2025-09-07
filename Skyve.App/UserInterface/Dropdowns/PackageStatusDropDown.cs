@@ -76,6 +76,11 @@ public class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilter
 				icon = new DynamicIcon("ContentRemoved");
 				color = FormDesign.Design.RedColor;
 				return;
+			case DownloadStatusFilter.VersionLocked:
+				text = Locale.VersionLocked;
+				icon = new DynamicIcon("Lock");
+				color = FormDesign.Design.InfoColor;
+				return;
 		}
 
 		text = Locale.Local;

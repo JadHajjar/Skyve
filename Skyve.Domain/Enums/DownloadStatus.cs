@@ -8,6 +8,7 @@ public enum DownloadStatus
 	OutOfDate,
 	PartiallyDownloaded,
 	Removed,
+	VersionLocked
 }
 
 public enum DownloadStatusFilter
@@ -20,4 +21,5 @@ public enum DownloadStatusFilter
 	OutOfDate,
 	PartiallyDownloaded,
 	Removed,
+	VersionLocked
 }

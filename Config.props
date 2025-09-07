@@ -49,8 +49,9 @@
 
 	<PropertyGroup Condition="'$(BuildType)' == 'Steam'">
 		<DefineConstants>$(DefineConstants);STABLE;STEAM</DefineConstants>
-		<DebugType>none</DebugType>
-		<Optimize>true</Optimize>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<DebugSymbols>true</DebugSymbols>
 	</PropertyGroup>
 
 	<Target Name="ClearOutputFolder" BeforeTargets="BeforeBuild" Condition="'$(BuildType)' != 'Debug'">

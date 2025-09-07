@@ -12,4 +12,5 @@ public interface IPlaysetPackage : IPackage
 {
 	bool IsEnabled { get; }
 	int LoadOrder { get; }
+	bool IsVersionLocked { get; }
 }

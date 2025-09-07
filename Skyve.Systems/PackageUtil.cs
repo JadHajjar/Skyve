@@ -147,6 +147,12 @@ public class PackageUtil : IPackageUtil
 			return DownloadStatus.OutOfDate;
 		}
 
+		if (mod is IPlaysetPackage playsetPackage && playsetPackage.IsVersionLocked)
+		{
+			reason = _locale.Get("VersionLockedInfo").Format(_packageUtil.CleanName(mod), playsetPackage.VersionName);
+			return DownloadStatus.VersionLocked;
+		}
+
 #if CS2
 		reason = string.Empty;
 		return DownloadStatus.OK;

@@ -447,6 +447,9 @@ public partial class ContentList : SlickControl
 
 	private void CentralManager_WorkshopInfoUpdated()
 	{
+		if (!IsHandleCreated)
+			return;
+
 		ListControl.Invalidate();
 		I_Actions.Invalidate();
 
