@@ -10,7 +10,7 @@ public interface IWorkshopService
 	bool IsReady { get; }
 
 	void ClearCache();
-	Task<IEnumerable<ITag>> GetAvailableTags();
+	IEnumerable<ITag> GetAvailableTags();
 	IWorkshopInfo? GetInfo(IPackageIdentity identity);
 	Task<IWorkshopInfo?> GetInfoAsync(IPackageIdentity identity);
 	IPackage GetPackage(IPackageIdentity identity);
