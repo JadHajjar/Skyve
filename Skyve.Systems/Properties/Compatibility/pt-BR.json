@@ -231,14 +231,14 @@
   "CautionCount": "{0} {1} onde é aconselhado cuidado",
   "WarningCount": "{0} {1} com um aviso",
   "ObsoleteCount": {
-    "One": "{0} {1} que é obsoleta",
+    "One": "{0} {1} que está obsoleto",
     "Plural": "{0} {1} que estão obsoletos"
   },
   "BrokenCount": {
     "One": "{0} {1} que está quebrado",
     "Plural": "{0} {1} que estão quebrados"
   },
-  "ActionRequiredCount": "{0} {1} onde sua ação é necessária",
+  "ActionRequiredCount": "{0} {1} onde a sua ação é necessária",
   "AttentionRequiredCount": {
     "One": "{0} {1} Requer sua atenção",
     "Plural": "{0} {1} Requerem sua atenção"
@@ -260,19 +260,19 @@
   "GenericPackage": "Pacote Genérico",
   "MusicPack": "Pacote de Música",
   "ThemeMix": "Mistura de Tema",
-  "ContentPackage": "Pacote de Conteúdo/Ativo",
-  "VisualMod": "Mod Visual",
-  "SimulationMod": "Mod de Simulação",
+  "ContentPackage": "Pacote de conteúdo/recurso",
+  "VisualMod": "Mod visual",
+  "SimulationMod": "Mod de simulação",
   "IMTMarkings": "Marcação IMT",
   "RenderItPreset": "Predefinição Render it!",
   "POFont": "Fonte/Módulo de Objeto Procedural",
-  "NameList": "Nome-Lista / Traduções de Jogos",
+  "NameList": "Lista de nomes / Traduções do jogo",
   "MapSavegame": {
     "One": "Mapa / Jogo salvo",
     "Plural": "Mapas e jogos salvos"
   },
   "PackageType_MusicPack": "Pacote de música para o rádio do jogo.",
-  "PackageType_ContentPackage": "Pacote de conteúdo que contém ativos ou arquivos, como modelos, texturas ou pré-fabes, e não inclui nenhum código ou scripts que modifiquem o comportamento do jogo.",
+  "PackageType_ContentPackage": "Pacote de conteúdo que contém recursos ou ficheiros, como modelos, texturas ou pré-fabricados, e não inclui nenhum código ou scripts que modifiquem o comportamento do jogo.",
   "PackageType_VisualMod": "Mods de modificações Visual / UI, ou texturas de mapa e temas.",
   "PackageType_SimulationMod": "Mod de simulação que altera diretamente a jogabilidade do jogo.",
   "PackageType_NameList": "Traduções extras de jogos ou arquivos de lista de nomes.",
