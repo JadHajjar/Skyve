@@ -14,7 +14,7 @@
   "AddPlayset": "Lisää Pelisetti",
   "LHT": "Vasemmanpuoleinen liikenne",
   "TotalAssetSize": "{0} mukana olevista esineistä",
-  "CompatibilityStatus": "Yhteensopivuustila",
+  "CompatibilityStatus": "Yhteensopivuuden Tila",
   "AnyStatus": "Mikä tahansa tila",
   "NoLocalPackagesFound": "Tietokoneeltasi ei löydy paketteja.",
   "NoPackagesMatchFilters": "Yksikään paketti ei vastaa etsimääsi.",

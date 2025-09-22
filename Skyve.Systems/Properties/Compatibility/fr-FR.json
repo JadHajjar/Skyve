@@ -70,7 +70,7 @@
   "PleaseReviewTheStability": "Veuillez vérifier la stabilité de ce paquet avant de sauvegarder.",
   "PleaseReviewPackageStatuses": "Veuillez vérifier les statuts de ce paquet avant de sauvegarder.\nCertains ont un type de statut invalide.",
   "PleaseReviewPackageInteractions": "Veuillez vérifier les Interactions de ce paquet avant de sauvegarder.\nCertains ont un type d'interaction invalide ou n'ont pas de paquet lié.",
-  "PleaseReviewPackageUsage": "Veuillez sélectionner un rôle valide pour ce paquet.",
+  "PleaseReviewPackageUsage": "Veuillez sélectionner une utilisation valide pour ce paquet.",
   "Interaction_Alternative": {
     "One": "'{1}' peut être utilisé comme alternative à '{0}'.",
     "Plural": "Un des paquets suivants peut être utilisé comme alternative à '{0}'."
@@ -206,14 +206,14 @@
   "NoRequiredDlcs": "Aucun DLC requis",
   "DlcsSelected": {
     "One": "{0} DLC sélectionné",
-    "Plural": "{0} DLCs sélectionnés"
+    "Plural": "{0} DLC sélectionnés"
   },
-  "RequiredDLCs": "DLCs / CCPs requis",
+  "RequiredDLCs": "DLC / CCP requis",
   "CRT_Stability": "Stabilité",
   "CRT_Successors": "Successeurs",
   "CRT_RequiredPackages": "Paquets requis",
   "CRT_OptionalPackages": "Paquets optionnels",
-  "CRT_DlcMissing": "DLCs/CCPs manquants",
+  "CRT_DlcMissing": "DLC/CCP manquants",
   "CRT_Compatibility": "Problèmes de compatibilité",
   "CRT_Alternatives": "Alternatives",
   "CRT_Status": "Statuts",
