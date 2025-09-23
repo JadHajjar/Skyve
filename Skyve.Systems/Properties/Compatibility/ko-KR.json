@@ -172,7 +172,7 @@
   "Action_UnsubscribeThis": "You should completely remove '{0}' from all your playsets.",
   "Action_UnsubscribeOther": {
     "One": "You should completely remove '{1}' from all your playsets.",
-    "Plural": "You should completely remove the following packages from all your playsets."
+    "Plural": "다음 패키지들을 모든 Playset에서 완전히 제거해야 합니다."
   },
   "Action_ExcludeThis": "You should remove '{0}' from your playset.",
   "Action_ExcludeOther": {
