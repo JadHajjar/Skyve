@@ -664,6 +664,11 @@ public class LocaleCR : LocaleHelper
 	public static Translation NoLinks => _instance.GetText("NoLinks");
 
 	/// <summary>
+	/// No Packages
+	/// </summary>
+	public static Translation NoPackages => _instance.GetText("NoPackages");
+
+	/// <summary>
 	/// No Required DLCs
 	/// </summary>
 	public static Translation NoRequiredDlcs => _instance.GetText("NoRequiredDlcs");

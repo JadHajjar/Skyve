@@ -15,11 +15,12 @@
 		<OutputPath>bin\$(BuildType)</OutputPath>
 		<OutDir>bin\$(BuildType)</OutDir>
 		<PublishDir>bin\Publish_$(BuildType)</PublishDir>
+		<Certificate>CFA31648D9F2CDC960F90E5B2A66F350A6F40168</Certificate>
 	</PropertyGroup>
 	
 	<PropertyGroup Label="Versions">
 		<Version Condition="'$(GameVersion)' == 'CS2' AND ('$(BuildType)' == 'Stable' OR '$(BuildType)' == 'Steam')">1.0.1</Version> <!--CS2 STABLE-->
-		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">1.0.1</Version> <!--CS2 BETA-->
+		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">1.1.0</Version> <!--CS2 BETA-->
 		
 		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' == 'Stable'">3.3.2.1</Version> <!--CS1 STABLE-->
 		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' != 'Stable'">3.3.2.1</Version> <!--CS1 BETA-->

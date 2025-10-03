@@ -41,6 +41,8 @@ public class MiniPackageControl : SlickControl
 		Id = package.Id;
 	}
 
+	public void RefreshHeight() => UIChanged();
+
 	protected override void UIChanged()
 	{
 		Height = (int)((Large ? 32 : 24) * UI.FontScale);

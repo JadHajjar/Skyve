@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Forms;
 public partial class AddLinkForm : BaseForm
 {
-	public event Action<IEnumerable<PackageLink>>? LinksReturned;
+	public event Action<IEnumerable<ILink>>? LinksReturned;
 
 	public AddLinkForm(List<ILink> links)
 	{
@@ -46,9 +46,9 @@ public partial class AddLinkForm : BaseForm
 		TLP.ResumeDrawing();
 	}
 
-	private IEnumerable<PackageLink> GetLinks()
+	private IEnumerable<ILink> GetLinks()
 	{
-		return TLP.Controls.OfType<LinkControl>().Select(x => x.Link);
+		return TLP.Controls.OfType<LinkControl>().Select(x => (ILink)x.Link);
 	}
 
 	private void B_Apply_Click(object sender, EventArgs e)
