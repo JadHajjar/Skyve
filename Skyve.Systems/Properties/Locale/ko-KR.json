@@ -32,7 +32,7 @@
   "Preferences": "환경설정",
   "PlaysetName": "플레이 세팅 이름",
   "RenamePlayset": "이 플레이 세팅 이름 바꾸기",
-  "StartScratch": "Start a new playset from scratch without any included package.",
+  "StartScratch": "",
   "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "도시 플레이용",
   "EditorPlay": "에셋 제작용",
