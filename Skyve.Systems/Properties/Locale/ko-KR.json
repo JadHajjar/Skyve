@@ -18,7 +18,7 @@
   "AnyStatus": "모든 상태",
   "NoLocalPackagesFound": "내 컴퓨터에 발견된 패키지가 없습니다.",
   "NoPackagesMatchFilters": "일치하는 패키지가 없습니다.",
-  "NoLogsMatchFilters": "No logs match what you're looking for.",
+  "NoLogsMatchFilters": "일치하는 로그가 없습니다.",
   "EnableAll": "모든 항목 활성화",
   "DisableAll": "모든 항목 비활성화",
   "EnableAllFiltered": "선택 항목 활성화",
@@ -26,14 +26,14 @@
   "EnableAllSelected": "선택 항목 활성화",
   "DisableAllSelected": "선택 항목 비활성화",
   "CopyAllIds": "모든 항목의 이름 및 ID 복사",
-  "CopyAllIdsFiltered": "Copy all filtered items' names & IDs",
-  "CopyAllIdsSelected": "Copy all selected items' names & IDs",
+  "CopyAllIdsFiltered": "필터 적용 항목의 이름 및 ID 복사",
+  "CopyAllIdsSelected": "선택된 모든 항목의 이름 및 ID 복사",
   "HelpLogs": "도움 & 로그",
   "Preferences": "환경설정",
   "PlaysetName": "플레이 세팅 이름",
   "RenamePlayset": "이 플레이 세팅 이름 바꾸기",
-  "StartScratch": "Start a new playset from scratch without any included package.",
-  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
+  "StartScratch": "패키지 없이 새로운 플레이세트로 처음부터 시작하세요.",
+  "ContinueFromCurrent": "현재 플레이세트의 구독된 모드를 새로운 플레이세트로 복사하세요.\n\n이 작업은 약간의 시간이 걸릴 수 있습니다.",
   "GamePlay": "도시 플레이용",
   "EditorPlay": "에셋 제작용",
   "PlaysetUsage": "플레이 세팅 용도",
@@ -41,7 +41,7 @@
   "AffectedPackagesAre": "영향을 받는 패키지:",
   "ConfirmDeletePlayset": "'{0}' 플레이 세팅을 정말 삭제하시겠습니까?",
   "ActivatePlayset": "이 플레이 세팅 활성화",
-  "PlaysetMerge": "Add all of this playset's mods to your active playset",
+  "PlaysetMerge": "이 플레이세트에 포함된 모든 모드를 현재 플레이세트에 추가",
   "PlaysetExclude": "이 플레이 세팅에 포함된 모드를 현재 플레이 세팅에서 모두 제거",
   "PlaysetDelete": "이 플레이 세팅 삭제",
   "MissingPackages": "누락된 패키지",
@@ -59,7 +59,7 @@
   "Sorting_Default": "기본 정렬",
   "Sorting_LastEdit": "마지막으로 수정한 시간",
   "Sorting_DateCreated": "만든 날짜",
-  "Sorting_Usage": "Playset Usage",
+  "Sorting_Usage": "플레이세트 용도",
   "Sorting_Name": "이름",
   "Sorting_FileSize": "파일 크기",
   "Sorting_UpdateTime": "업데이트된 시간",
@@ -70,12 +70,12 @@
   "Sorting_LoadOrder": "로드 순서",
   "FolderSettings": "폴더 설정",
   "ShowDatesRelatively": "현재 시간에 상대적인 날짜 표기 보기",
-  "CreatePlayset": "Create a new playset",
+  "CreatePlayset": "새 플레이세트 만들기",
   "CouldNotCreatePlayset": "새 플레이 세팅을 생성할 수 없습니다.",
   "CreatePlaysetHere": "새 플레이 세팅을 생성하거나 이전 플레이 세팅을 활성화 하려면 여기를 클릭하세요",
   "Maintenance": "유지보수",
-  "DisableNewModsByDefault": "Disable newly added mods by default",
-  "DisableNewAssetsByDefault": "Disable newly added assets by default",
+  "DisableNewModsByDefault": "기본적으로 새로 추가된 모드를 비활성화하기",
+  "DisableNewAssetsByDefault": "기본적으로 새로 추가된 에셋을 비활성화하기",
   "ShowFilters": "필터 보기",
   "HideFilters": "필터 숨기기",
   "DateSubscribed": "구독한 날짜",
@@ -88,7 +88,7 @@
   "FavoriteThisPlayset": "이 플레이 세팅을 즐겨찾기에 추가",
   "NoDlcsNoInternet": "DLC를 불러올 수 없습니다. 인터넷을 연결해 주세요.",
   "NoDlcsOpenGame": "검색과 일치하는 DLC가 없습니다",
-  "DlcUpdateNotice": "If your owned DLCs are not showing correctly, make sure to open the game at least once",
+  "DlcUpdateNotice": "만약 가진 DLC가 제대로 표시되지 않는다면 게임을 한 번이라도 실행했는지 확인하세요.",
   "DlcCount": "총 {0}개 DLC 보유",
   "Unfiltered": "필터링하지 않음",
   "AnyTags": "모든 태그",
@@ -112,11 +112,11 @@
   "OpenGuide": "위키 열기",
   "ResetFolderButton": "모든 폴더 설정 초기화",
   "LinkModAssets": "모드 안의 에셋을 모드의 '포함됨' 상태에 연결하기",
-  "DisableContentCreatorWarnings": "Disable Content-Creator related warnings",
-  "DisableContentCreatorWarnings_Tip": "Disables warnings related to creating content and copyright claims.",
+  "DisableContentCreatorWarnings": "콘텐츠 제작자 경고 비활성화하기",
+  "DisableContentCreatorWarnings_Tip": "콘텐츠 제작과 저작권 관련 경고를 비활성화합니다.",
   "LinkModAssets_Tip": "일부 모드에는 그 모드가 제대로 작동하는 데 필요한 에셋이 포함되어 있습니다. 이 옵션을 활성화하면 해당 에셋들을 모드 자체에 연결하고 에셋 페이지에서 해당 에셋들을 숨겨 해당 에셋들을 실수로 제외하지 않도록 합니다.",
   "ShowDatesRelatively_Tip": "콘텐츠 목록에 표시되는 날짜 형식을 상대 시간으로 변경합니다. 예: \"어제 오후 2시 10분\"",
-  "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
+  "DisableNewModsByDefault_Tip": "모드를 구독하거나 추가하면 시작할 때의 설정에 따라 자동적으로 모드를 포함시키거나 제거합니다. ",
   "DisableNewAssetsByDefault_Tip": "에셋을 구독하거나 추가하고 툴이 실행될 때 해당 에셋을 이 설정에 따라 자동으로 포함하거나 제외할 것입니다.",
   "FilterOutPackagesWithOneAsset_Tip": "하나의 에셋만을 포함하는 패키지를 패키지 페이지에 표시하지 않습니다. 에셋 페이지에는 계속 표시됩니다.",
   "FilterOutPackagesWithMods_Tip": "모드를 포함하는 패키지를 패키지 페이지에 표시하지 않습니다. 모드 페이지에는 계속 표시됩니다.",
@@ -128,9 +128,9 @@
   "OpenGuide_Tip": "Skyve를 시작하려면 온라인 가이드를 보십시오.",
   "ResetButton_Tip": "현재 설정을 기본값으로 되돌립니다. 이 것은 폴더 설정에 영향을 주지 않습니다.",
   "ComplexListUI": "고급 사용자 모드",
-  "ComplexListUI_Tip": "Adds more advanced information and adds extra actions to the user interface.",
+  "ComplexListUI_Tip": "UI에 추가적인 행동과 정보를 추가합니다.",
   "NewGame": "새 게임을 시작하기",
-  "LoadSaveGame": "Continue a previous savegame",
+  "LoadSaveGame": "이전 세이브 게임 이어하기",
   "DevOptions": "개발자 시작 옵션",
   "ResetButton": "옵션 초기화",
   "ResetFolderButton_Tip": "이 작업을 하고 난 뒤 도구를 다시 사용하기 전에 게임을 실행해야 합니다.",
@@ -152,21 +152,21 @@
   "LogZipFile": "로그를 파일에 저장하기",
   "LogFolders": "로그 폴더",
   "LogFileDrop": "단순화할 로그 파일을 끌어오거나 선택하여 로그 내부의 오류 목록을 표시하세요",
-  "DefaultLogViewInfo": "Your last session's errors will be automatically shown here, results are updated live.",
+  "DefaultLogViewInfo": "마지막 세션의 오류가 여기에 자동적으로 보여지고, 결과가 실시간으로 업데이트됩니다.",
   "ErrorsInLog": "로그 내 오류",
   "OpenLogFolder": "게임의 로그 폴더 열기",
   "CopyLogFile": "게임의 로그 파일을 클립보드에 복사하기",
   "OpenLOTLogFolder": "Skyve의 로그 폴더 열기",
   "CopyLOTLogFile": "Skyve의 로그 파일을 클립보드에 복사하기",
-  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
+  "GenericIncludedTotal": "포함된 {0}: 총 {2}개 중 {1}개",
+  "GenericIncludedAndEnabledTotal": "활성화된 {0}: 총 {2}개 중 {1}개",
+  "GenericIncludedEnabledTotal": "포함된 {0}: {1}개, 활성화된 {0}: 총 {3}개 중 {2}개",
   "NewPlayset_Tip": "새 프로필을 생성하거나 가져오기",
-  "ViewPlaysets_Tip": "View & manage your playsets",
-  "DeactivatePlayset": "Deactivate this playset",
-  "DeactivatePlayset_Tip": "Deactivate your current playset",
+  "ViewPlaysets_Tip": "내 플레이세트를 보고 관리합니다.",
+  "DeactivatePlayset": "이 플레이세트 비활성화",
+  "DeactivatePlayset_Tip": "현재 플레이세트를 비활성화합니다",
   "NewGame_Tip": "Cities: Skylines를 실행할 때 새 게임을 시작합니다. 시작하려는 맵을 정할 수 있습니다.",
-  "LoadSaveGame_Tip": "Load a savegame when launching Cities: Skylines. Not selecting a save-file will continue your latest save",
+  "LoadSaveGame_Tip": "Cities: Skylines를 실행할 때 저장된 게임을 불러옵니다. 선택한 게임이 없는 경우 마지막으로 저장된 게임을 불러옵니다.",
   "BETA": "베타",
   "ALPHA": "알파",
   "TEST": "테스트",
@@ -178,7 +178,7 @@
   "ABANDONED": "버려짐",
   "ActionUnreversible": {
     "One": "이 작업은 되돌릴 수 없습니다.",
-    "Plural": "This action can not be reversed. And will affect {0} packages."
+    "Plural": "이 행동은 되돌릴 수 없으며, {0} 개의 패키지에 영향을 미칠 것입니다."
   },
   "AlwaysOpenFiltersAndActions": "기본적으로 필터 섹션을 표시하기",
   "AlwaysOpenFiltersAndActions_Tip": "콘텐츠 탭을 열 때 필터 섹션을 항상 펼쳐둡니다",
@@ -186,7 +186,7 @@
   "FavoriteTotal": "총 프로필: {0}개",
   "PlaysetFilter": "프로필 필터",
   "CheckDocumentsFolder": "Skyve가 문서 폴더에 접근할 수 있는지 확인해주세요. UI 및 언어 설정을 저장하기 위해 사용합니다.",
-  "FailedToSaveLanguage": "Failed to save the selected language",
+  "FailedToSaveLanguage": "선택된 언어를 저장하는데 실패했습니다.",
   "FailedToOpenTC": "테마 체인저를 열지 못했습니다",
   "FailedToDeleteItem": "항목을 삭제 하지 못했습니다",
   "OpenChangelog": "변경사항 열기",
@@ -200,12 +200,12 @@
     "Plural": "선택된 패키지를 삭제"
   },
   "EnableThisItemInAllPlaysets": {
-    "One": "Enable in all your playsets",
-    "Plural": "Enable the selected items in all your playsets"
+    "One": "모든 플레이세트에서 활성화",
+    "Plural": "선택된 항목을 모든 플레이세트에서 활성화"
   },
   "DisableThisItemInAllPlaysets": {
-    "One": "Disable in all your playsets",
-    "Plural": "Disable the selected items in all your playsets"
+    "One": "모든 플레이세트에서 비활성화",
+    "Plural": "선택된 항목을 모든 플레이세트에서 비활성화"
   },
   "CopyPackageName": {
     "One": "패키지 이름 복사",
@@ -213,10 +213,10 @@
   },
   "CopyAuthorId": {
     "One": "제작자 ID 복사",
-    "Plural": "Copy the selected packages' author IDs"
+    "Plural": "선택된 패키지의 제작자 ID 복사"
   },
   "CopyAuthorName": {
-    "One": "Copy the author's name",
+    "One": "제작자 이름 복사",
     "Plural": "선택된 패키지들의 제작자 이름 복사"
   },
   "Sorting_LastUsed": "마지막으로 사용한 시간",
@@ -228,24 +228,24 @@
   "OpenPlaysetFolder": "이 프로필 파일을 컴퓨터에서 보기",
   "ChangePlaysetColor": "이 플레이 세팅의 색상 변경하기",
   "EditPlaysetName": "이 플레이 세팅의 이름 수정하기",
-  "ResetPlaysetImage": "Reset this playset's thumbnail",
-  "ResetPlaysetColor": "Reset this playset's color",
+  "ResetPlaysetImage": "플레이세트 썸네일 초기화",
+  "ResetPlaysetColor": "플레이세트 색상 초기화",
   "Sorting_Color": "플레이 세팅 색상",
   "CreateShortcutPlayset": "바탕화면에 플레이 세팅 바로 가기 생성하기",
   "AskToLaunchGameForShortcut": "바로가기를 사용하여 저장된 플레이 세팅으로 게임을 실행하시겠습니까?",
-  "TextImportMissingInfo": "Load a text file containing Workshop IDs to easily subscribe to or manage them",
+  "TextImportMissingInfo": "창작마당 ID가 포함된 텍스트 파일을 불러오고 간편하게 구독하거나 관리할 수 있습니다.",
   "ImportFromText": "텍스트에서 가져오기",
   "ImportFromClipboard": "클립보드에서 텍스트 불러오기",
   "ImportFromTextInfo": "모든 텍스트 형식을 지원합니다",
   "NoPlaysetsFound": "표시할 플레이 세팅 없음",
   "NoPlaysetsMatchFilters": "검색과 일치되는 플레이 세팅이 없습니다",
-  "Your Savegames": "Your Savegames",
+  "Your Savegames": "내 저장된 게임",
   "App Data": "App Data",
   "Custom Maps": "사용자 정의 지도",
   "Vanilla Maps": "바닐라 지도",
   "ResetScrollOnPackageClick": "패키지의 페이지를 열 때 스크롤 재설정하기",
   "ResetScrollOnPackageClick_Tip": "패키지의 페이지를 열 때 해당 패키지가 목록의 맨 위에 표시되도록 스크롤 위치를 재설정합니다.",
-  "Workshop Savegames": "Workshop Savegames",
+  "Workshop Savegames": "창작마당 저장된 게임",
   "Workshop Maps": "창작마당 맵",
   "AnyAuthor": "모든 제작자",
   "ItemsCount": {
@@ -260,7 +260,7 @@
   "FlipItemCopyFilterAction": "콘텐츠 목록에서 필터링하기 위한 Alt+클릭 동작 바꾸기",
   "FlipItemCopyFilterAction_Tip": "라벨을 클릭할 때의 기본 동작을 맞바꿔 일반적인 클릭이 필터링을 하게 하고 Alt+클릭은 기본 작업을 하도록 합니다.",
   "AltClickTo": "Alt + 클릭으로 {0}",
-  "FilterByThisAuthor": "Add '{0}' to your author filters",
+  "FilterByThisAuthor": "제작자 필터에 {0} 추가하기",
   "AddToSearch": "'{0}'을 추가하여 검색",
   "CopyToClipboard": "'{0}' 를 클립보드에 복사하기",
   "ViewPackageCR": "이 패키지의 호환성 정보 보기",
@@ -268,7 +268,7 @@
   "LaunchArgsInfo": "게임이 실행될 때의 추가 인수를 추가하세요",
   "SearchGenericPackages": "이 패키지들 중 검색..",
   "Sorting_Subscribers": "총 구독자 수",
-  "Sorting_Votes": "Total Likes",
+  "Sorting_Votes": "총 좋아요 수",
   "VotesCount": {
     "One": "좋아요 {1}개",
     "Plural": "좋아요 {1}개"
@@ -278,12 +278,12 @@
     "Plural": "{1}명 구독"
   },
   "FollowersCount": {
-    "One": "{1} follower",
-    "Plural": "{1} followers"
+    "One": "{1} 팔로워",
+    "Plural": "{1} 팔로워"
   },
-  "SearchWorkshop": "Search the workshop instead...",
-  "DiscoverWorkshop": "Look for mods on the workshop...",
-  "SearchWorkshopBrowser": "Search the workshop in your browser...",
+  "SearchWorkshop": "PDX Mods 탐색하기...",
+  "DiscoverWorkshop": "PDX Mods 찾아보기...",
+  "SearchWorkshopBrowser": "브라우저에서 PDX Mods 탐색하기...",
   "UnknownPackage": "알 수 없는 패키지",
   "Info": "정보",
   "SelectThisPackage": "이 패키지를 선택하기",
@@ -297,7 +297,7 @@
   "Included": "포함됨",
   "Excluded": "제외됨",
   "OutOfDate": "업데이트되지 않음",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "패키지 상태",
   "Author": "제작자",
   "Include": "포함",
   "Unsubscribe": "구독 취소",
@@ -321,8 +321,8 @@
     "Plural": "프로필"
   },
   "ContainCount": {
-    "One": "Contains {0} {1}",
-    "Plural": "Contains {0} {1}"
+    "One": "{0} {1}개 포함",
+    "Plural": "{0} {1}개 포함"
   },
   "IncludedCount": {
     "One": "{1} {0}개 포함됨",
@@ -330,7 +330,7 @@
   },
   "EnabledCount": {
     "One": "{1} {0}개 활성화됨",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0} {1}개 활성화됨"
   },
   "IncludedEnabledCount": {
     "One": "{1} {0}개 포함되고 활성화됨",
@@ -338,18 +338,18 @@
   },
   "LoadedCount": {
     "One": "{1} {0}개 불러옴",
-    "Plural": "{0} {1} loaded"
+    "Plural": "{0} {1}개 불러옴"
   },
   "ShowingCount": {
     "One": "{1} {0}개 표시 중",
     "Plural": "{1} {0}개 표시 중"
   },
   "TotalCount": {
-    "One": "{0} total {1}",
-    "Plural": "{0} total {1}"
+    "One": "{0} 총 {1}개",
+    "Plural": "{0} 총 {1}개"
   },
   "TotalCountWarning": {
-    "One": "{0} total {1}, {3}",
+    "One": "{0} 총 {1}개, {3}",
     "Plural": "{0} total {1}, {3}"
   },
   "TotalSelectedCount": {

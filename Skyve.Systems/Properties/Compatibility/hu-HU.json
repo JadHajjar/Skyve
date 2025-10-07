@@ -52,7 +52,7 @@
   "InteractionType": "Az interakció típusa",
   "MissingDependency": "A szükséges mod hiányzik",
   "Caution": "Vigyázat",
-  "CautionWhenUsing": "Caution when using it",
+  "CautionWhenUsing": "Használatakor legyen óvatos",
   "Warning": "Figyelmeztetés",
   "AttentionRequired": "Figyelem szükséges",
   "ActionRequired": "Beavatkozás szükséges",
@@ -268,12 +268,12 @@
   "POFont": "Procedural Object Font/Modul",
   "NameList": "Névlista / Játék fordítások",
   "MapSavegame": {
-    "One": "Map / Savegame",
-    "Plural": "Maps & Savegames"
+    "One": "Térkép / játékmentés",
+    "Plural": "Térképek és játékmentés."
   },
   "PackageType_MusicPack": "Zenei csomag a játékon belüli rádióhoz.",
   "PackageType_ContentPackage": "Tartalmi csomag, amely eszközöket vagy fájlokat, például modelleket, textúrákat vagy előregyártott elemeket tartalmaz, és nem tartalmaz semmilyen kódot vagy szkriptet, amely módosítja a játék viselkedését.",
-  "PackageType_VisualMod": "Visual / UI modifications mod, or map & theme textures.",
+  "PackageType_VisualMod": "Vizuális modok vagy térképtéma textúrák.",
   "PackageType_SimulationMod": "Szimulációs mod, amely közvetlenül megváltoztatja a játék menetét.",
   "PackageType_NameList": "Extra játékfordítások vagy névlista fájlok.",
   "PackageType_MapSavegame": "Térkép, vagy játékmentés.",
@@ -325,8 +325,8 @@
   "EffectsLinger": "A hatások az eltávolítás után is megmaradnak",
   "RequiresManualAction": "Az eltávolításhoz kézi művelet szükséges",
   "BreaksSave": "Eltávolításkor megszakítja a mentett játékokat",
-  "HarmlessBut": "Harmless but ..",
-  "SavegameEffect_None": "This mod is safe to remove.",
+  "HarmlessBut": "Ártalmatlan, de...",
+  "SavegameEffect_None": "Ez a mod biztonságosan eltávolítható.",
   "SavegameEffect_AssetsRemain": "Ha eltávolítod az asseteket, egy szürke doboz marad a helyén a városodban. Ezeket az elavult asseteket törölni kell a játékban is, a mellékhatások elkerülése érdekében.",
   "SavegameEffect_EffectsLinger": "A mod eltávolítása nem távolítja el a hatásait a városodból.",
   "SavegameEffect_RequiresManualAction": "A mod eltávolításához a városodban további lépésekre lesz szükség.",
@@ -344,7 +344,7 @@
   "SendSavegameInfo": "Opcionálisan csatold a mentett játékot, hogy segíts nekünk a probléma jobb kivizsgálásában",
   "YourLogReportInfo": "kéréséddel együtt elküldve",
   "PackageActiveReviewRequest": {
-    "One": "'{0}' has active review requests.",
-    "Plural": "{0} {1} have active review requests."
+    "One": "A(z) „{0}” aktív felülvizsgálati kérelmekkel rendelkezik.",
+    "Plural": "{0} {1} felhasználónak aktív felülvizsgálati kérése van."
   }
 }

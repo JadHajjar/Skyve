@@ -56,7 +56,7 @@
   "Warning": "경고",
   "AttentionRequired": "주목 필요",
   "ActionRequired": "Action Required",
-  "Obsolete": "Obsolete",
+  "Obsolete": "구식",
   "Website": "웹사이트",
   "Donation": "후원",
   "ManageCompatibilityData": "Compatibility Management",
@@ -172,7 +172,7 @@
   "Action_UnsubscribeThis": "You should completely remove '{0}' from all your playsets.",
   "Action_UnsubscribeOther": {
     "One": "You should completely remove '{1}' from all your playsets.",
-    "Plural": "You should completely remove the following packages from all your playsets."
+    "Plural": "다음 패키지들을 모든 Playset에서 완전히 제거해야 합니다."
   },
   "Action_ExcludeThis": "You should remove '{0}' from your playset.",
   "Action_ExcludeOther": {
@@ -220,7 +220,7 @@
   "CRT_Ambiguous": "모호성",
   "CRT_RequiredItem": "Required Package",
   "CRT_RequestReview": "Review Request Status",
-  "CRT_Info": "Information",
+  "CRT_Info": "정보",
   "LastReviewDate": "이것은 {0} 에 마지막으로 리뷰되었습니다.",
   "RequestReviewInfo": "이 패키지에서 이슈를 경험하고 있습니까?",
   "RequestReview": "검토 요청",
@@ -262,7 +262,7 @@
   "ThemeMix": "테마 믹스",
   "ContentPackage": "Content/Asset Package",
   "VisualMod": "Visual Mod",
-  "SimulationMod": "Simulation Mod",
+  "SimulationMod": "시뮬레이션 모드",
   "IMTMarkings": "IMT 마킹",
   "RenderItPreset": "Render it! 프리셋",
   "POFont": "Procedural Object 폰트/모듈",
@@ -339,8 +339,8 @@
   "AddInfo": "Add missing info",
   "ReportIssueDesc": "Let us and other players know that there's an issue with this mod.\r\n\r\nOr to let us know that you'd like a new review of this mod.",
   "AddInfoDesc": "Add missing compatibility information to the mod.\r\n\r\nAnd explain any issue related to this mod.",
-  "Log Report": "Log Report",
-  "Proposed Changes": "Proposed Changes",
+  "Log Report": "로그 보고서",
+  "Proposed Changes": "제안된 변경사항",
   "SendSavegameInfo": "Optionally attach your savegame to help us investigate the issue better",
   "YourLogReportInfo": "sent with your request",
   "PackageActiveReviewRequest": {
