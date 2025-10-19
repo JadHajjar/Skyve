@@ -33,7 +33,7 @@
   "PlaysetName": "Nombre del playset",
   "RenamePlayset": "Cambiar el nombre de este playset",
   "StartScratch": "Comienza un nuevo playset desde cero sin ningún paquete incluido.",
-  "ContinueFromCurrent": "Clona los mods suscritos de tu playset activo en un nuevo playset.\n\nEsto puede tomar un momento.",
+  "ContinueFromCurrent": "Clona los mods suscritos de tu juego activo en un nuevo juego.\n\nEsto puede tomar un momento.",
   "GamePlay": "Construir Ciudades",
   "EditorPlay": "Hacer Assets",
   "PlaysetUsage": "Propósito del playset",
