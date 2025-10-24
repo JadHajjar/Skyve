@@ -48,7 +48,7 @@ public partial class ContentList : SlickControl
 
 	public SkyvePage Page { get; }
 	public int ItemCount => ListControl.ItemCount;
-	public int? SelectedPlayset { get => ListControl.SelectedPlayset; set => ListControl.SelectedPlayset = value; }
+	public string? SelectedPlayset { get => ListControl.SelectedPlayset; set => ListControl.SelectedPlayset = value; }
 	public bool IsGenericPage { get => ListControl.IsGenericPage; set => ListControl.IsGenericPage = value; }
 	public IEnumerable<IPackageIdentity> Items => ListControl.Items;
 

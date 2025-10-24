@@ -18,7 +18,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private Rectangle PopupSearchRect2;
 	private bool _compactList;
 	private bool settingItems;
-	private int? _selectedPlayset;
+	private string? _selectedPlayset;
 	private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = [];
 	public readonly List<ulong> _selectionList = [];
 
@@ -100,7 +100,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	}
 
 	public int UsageFilteredOut { get; set; }
-	public int? SelectedPlayset { get => _selectedPlayset ?? _playsetManager.CurrentPlayset?.Id; set => _selectedPlayset = value; }
+	public string? SelectedPlayset { get => _selectedPlayset ?? _playsetManager.CurrentPlayset?.Id; set => _selectedPlayset = value; }
 	public bool SortDescending { get; private set; }
 	public bool IsPackagePage { get; set; }
 	public bool IsTextSearchNotEmpty { get; set; }
@@ -341,7 +341,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 
 #if CS2
-		if (rects.IncludedRect.Contains(e.Location))
+		if (rects.IncludedRect.Contains(e.Location) && SelectedPlayset is not null)
 		{
 			var isIncluded = _packageUtil.IsIncluded(item.Item, out var partialIncluded, SelectedPlayset) && !partialIncluded;
 

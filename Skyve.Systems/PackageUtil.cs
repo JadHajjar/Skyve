@@ -29,7 +29,7 @@ public class PackageUtil : IPackageUtil
 		_notifier = notifier;
 	}
 
-	public bool IsIncluded(IPackageIdentity identity, int? playsetId = null, bool withVersion = true)
+	public bool IsIncluded(IPackageIdentity identity, string? playsetId = null, bool withVersion = true)
 	{
 		//if (identity is IAsset asset)
 		//{
@@ -39,7 +39,7 @@ public class PackageUtil : IPackageUtil
 		return _modUtil.IsIncluded(identity, playsetId, withVersion);
 	}
 
-	public bool IsIncluded(IPackageIdentity identity, out bool partiallyIncluded, int? playsetId = null, bool withVersion = true)
+	public bool IsIncluded(IPackageIdentity identity, out bool partiallyIncluded, string? playsetId = null, bool withVersion = true)
 	{
 		//if (identity is IAsset asset)
 		//{
@@ -87,37 +87,37 @@ public class PackageUtil : IPackageUtil
 		return included;
 	}
 
-	public bool IsEnabled(IPackageIdentity package, int? playsetId = null, bool withVersion = true)
+	public bool IsEnabled(IPackageIdentity package, string? playsetId = null, bool withVersion = true)
 	{
 		return _modUtil.IsEnabled(package, playsetId, withVersion);
 	}
 
-	public bool IsIncludedAndEnabled(IPackageIdentity package, int? playsetId = null, bool withVersion = true)
+	public bool IsIncludedAndEnabled(IPackageIdentity package, string? playsetId = null, bool withVersion = true)
 	{
 		return IsEnabled(package, playsetId, withVersion);
 	}
 
-	public async Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
+	public async Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, string? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
 	{
 		await _modUtil.SetIncluded(packages, value, playsetId, withVersion, promptForDependencies);
 	}
 
-	public async Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null)
+	public async Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, string? playsetId = null)
 	{
 		await _modUtil.SetEnabled(packages, value, playsetId);
 	}
 
-	public async Task SetIncluded(IPackageIdentity package, bool value, int? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
+	public async Task SetIncluded(IPackageIdentity package, bool value, string? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
 	{
 		await _modUtil.SetIncluded(package, value, playsetId, withVersion, promptForDependencies);
 	}
 
-	public async Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null)
+	public async Task SetEnabled(IPackageIdentity package, bool value, string? playsetId = null)
 	{
 		await _modUtil.SetEnabled(package, value, playsetId);
 	}
 
-	public string? GetSelectedVersion(IPackageIdentity package, int? playsetId = null)
+	public string? GetSelectedVersion(IPackageIdentity package, string? playsetId = null)
 	{
 		return _modUtil.GetSelectedVersion(package, playsetId);
 	}

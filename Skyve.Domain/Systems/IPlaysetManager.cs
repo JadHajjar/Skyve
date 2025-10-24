@@ -28,7 +28,7 @@ public interface IPlaysetManager
 	Task SetEnabledForAll(IPackageIdentity package, bool value);
 	Task SetEnabledForAll(IEnumerable<IPackageIdentity> packages, bool value);
 	Task<IPlayset?> ClonePlayset(IPlayset playset);
-	IPlayset? GetPlayset(int id);
+	IPlayset? GetPlayset(string id);
 	ICustomPlayset GetCustomPlayset(IPlayset playset);
 	Task DeactivateActivePlayset();
 	void Save(ICustomPlayset customPlayset);
