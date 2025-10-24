@@ -2729,7 +2729,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation VersionLocked => _instance.GetText("VersionLocked");
 
 	/// <summary>
-	/// '{0}' is locked to version '{1}' in this playset.
+	/// '{0}' is locked to version {1} in this playset.
 	/// </summary>
 	public static Translation VersionLockedInfo => _instance.GetText("VersionLockedInfo");
 

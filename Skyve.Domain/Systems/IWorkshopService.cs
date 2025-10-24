@@ -33,7 +33,7 @@ public interface IWorkshopService
 	Task RunSync();
 	Task RunDownSync();
 	Task RunUpSync();
-	Task<int> GetActivePlaysetId();
+	Task<string?> GetActivePlaysetId();
 	Task<List<IPlayset>> GetPlaysets(bool localOnly);
 	Task<IPlayset?> GetCurrentPlayset();
 	Task<bool> ToggleVote(IPackageIdentity packageIdentity);

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Skyve.Domain;
 public interface IPlayset : IThumbnailObject
 {
-	int Id { get; }
+	string? Id { get; }
 	string? Name { get; }
 	DateTime DateUpdated { get; }
 	int ModCount { get; set; }
@@ -23,7 +23,7 @@ public interface IPlayset : IThumbnailObject
 
 public interface ICustomPlayset : IThumbnailObject
 {
-	int Id { get; }
+	string? Id { get; }
 	DateTime DateUsed { get; set; }
 	DateTime DateCreated { get; set; }
 	PackageUsage Usage { get; set; }

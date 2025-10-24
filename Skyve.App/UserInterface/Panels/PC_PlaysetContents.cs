@@ -36,7 +36,7 @@ public class PC_PlaysetContents : PC_ContentList
 
 	private class TemporaryPlaysetPackageUtil(IPackageUtil packageUtil) : IPackageUtil
 	{
-		public string? GetSelectedVersion(IPackageIdentity package, int? playsetId = null)
+		public string? GetSelectedVersion(IPackageIdentity package, string? playsetId = null)
 		{
 			return packageUtil.GetSelectedVersion(package, playsetId);
 		}
@@ -46,43 +46,43 @@ public class PC_PlaysetContents : PC_ContentList
 			return packageUtil.GetStatus(mod, out reason);
 		}
 
-		public bool IsEnabled(IPackageIdentity package, int? playsetId = null, bool withVersion = true)
+		public bool IsEnabled(IPackageIdentity package, string? playsetId = null, bool withVersion = true)
 		{
 			return (package as IPlaysetPackage)?.IsEnabled ?? false;
 		}
 
-		public bool IsIncluded(IPackageIdentity package, int? playsetId = null, bool withVersion = true)
+		public bool IsIncluded(IPackageIdentity package, string? playsetId = null, bool withVersion = true)
 		{
 			return true;
 		}
 
-		public bool IsIncluded(IPackageIdentity package, out bool partiallyIncluded, int? playsetId = null, bool withVersion = true)
+		public bool IsIncluded(IPackageIdentity package, out bool partiallyIncluded, string? playsetId = null, bool withVersion = true)
 		{
 			partiallyIncluded = false;
 			return true;
 		}
 
-		public bool IsIncludedAndEnabled(IPackageIdentity package, int? playsetId = null, bool withVersion = true)
+		public bool IsIncludedAndEnabled(IPackageIdentity package, string? playsetId = null, bool withVersion = true)
 		{
 			return (package as IPlaysetPackage)?.IsEnabled ?? false;
 		}
 
-		public Task SetEnabled(IPackageIdentity package, bool value, int? playsetId = null)
+		public Task SetEnabled(IPackageIdentity package, bool value, string? playsetId = null)
 		{
 			return Task.CompletedTask;
 		}
 
-		public Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null)
+		public Task SetEnabled(IEnumerable<IPackageIdentity> packages, bool value, string? playsetId = null)
 		{
 			return Task.CompletedTask;
 		}
 
-		public Task SetIncluded(IPackageIdentity package, bool value, int? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
+		public Task SetIncluded(IPackageIdentity package, bool value, string? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
 		{
 			return Task.CompletedTask;
 		}
 
-		public Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, int? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
+		public Task SetIncluded(IEnumerable<IPackageIdentity> packages, bool value, string? playsetId = null, bool withVersion = true, bool promptForDependencies = true)
 		{
 			return Task.CompletedTask;
 		}
