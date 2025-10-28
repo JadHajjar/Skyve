@@ -6,4 +6,5 @@ public class PackageDownloadProgress
 	public float Progress { get; set; }
 	public ulong ProcessedBytes { get; set; }
 	public ulong Size { get; set; }
+	public string? Status { get; set; }
 }
