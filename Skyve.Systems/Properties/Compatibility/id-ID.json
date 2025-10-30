@@ -107,7 +107,7 @@
     "One": "'{0}' is required for '{1}'.",
     "Plural": "'{0}' is required for the following packages."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Interaction_Identical": "Berikut adalah beberapa versi dari mod yang sama. Menggunakannya secara bersamaan akan menyebabkan konflik.",
   "Status_Succeeded": "'{0}' is succeeded by '{1}', and you are already using '{1}'. There is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
   "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",

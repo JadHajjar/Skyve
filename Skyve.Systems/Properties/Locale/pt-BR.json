@@ -516,7 +516,7 @@
   "FilterByLocal": "Mostrar apenas itens locais.",
   "FilterByWorkshop": "Mostrar apenas itens do workshop.",
   "FilterByAssets": "Mostrar apenas os pacotes de recursos.",
-  "FilterByMods": "Apenas mostrar pacotes de mods de código.",
+  "FilterByMods": "Apenas mostrar códigos de pacote de mods.",
   "ViewOnGithub": "Ver o repositório do GitHub deste pacote",
   "ViewXOnSteam": "Ver '{0}' na Steam",
   "Free": "Grátis",
@@ -700,7 +700,7 @@
   "InvestigateMods": "Investigar apenas mods de código durante o processo de solução de problemas.",
   "InvestigateAssets": "Investigar apenas recursos e pacotes de conteúdo durante o processo de solução de problemas.",
   "ExclusionTutorialTitle": "Removendo Mods - Tutorial",
-  "ExclusionTutorialText": "Você pode remover mods da sua reprodução ativa segurando a tecla ALT e clicando na caixa de seleção do mod.\n\nVocê também pode adicionar ou remover um mod de todos os seus perfis usando o botão direito.",
+  "ExclusionTutorialText": "Você pode remover mods do seu perfil ativo segurando a tecla ALT e clicando na caixa de seleção do mod.\n\nVocê também pode adicionar ou remover um mod de todos os seus perfis usando o botão direito.",
   "ClearFilterTutorialTitle": "Limpando filtros - Tutorial",
-  "ClearFilterTutorialText": "If you want to quickly clear your filters, you can click on a filter using your middle-mouse-button to clear it.\r\n\r\nYou can also do that on the 'Show/Hide Filters' button to clear all filters at once."
+  "ClearFilterTutorialText": "Se você quiser limpar rapidamente os filtros aplicados, pode clicar no filtro usando o botão do meio do mouse para limpar.\nVocê também pode usar o botão \"Mostrar/Esconder Filtros\" para limpar todos os filtros."
 }
