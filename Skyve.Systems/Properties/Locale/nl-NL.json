@@ -380,6 +380,10 @@
     "One": "Labels van dit pakket bewerken",
     "Plural": "Labels van geselecteerde items bewerken"
   },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
+  },
   "EditLinks": {
     "One": "Links van dit pakket bewerken",
     "Plural": "Bewerk geselecteerde itemlinks"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Mods verwijderen - Handleiding",
   "ExclusionTutorialText": "Je kunt mods uit je actieve afspeelset verwijderen door de ALT-toets ingedrukt te houden en op het selectievakje van de mod te klikken.\r\n\r\nJe kunt ook een mod toevoegen of verwijderen van al je afspeelsets met de rechtermuisknop menu.",
   "ClearFilterTutorialTitle": "Filters wissen - Handleiding",
-  "ClearFilterTutorialText": "Als je je filters snel wilt wissen, kun je op een filter klikken met je middel-muisknop om het te wissen.\r\n\r\nU kunt dat ook doen op de 'Toon/verberg filters' knop om alle filters tegelijk te wissen."
+  "ClearFilterTutorialText": "Als je je filters snel wilt wissen, kun je op een filter klikken met je middel-muisknop om het te wissen.\r\n\r\nU kunt dat ook doen op de 'Toon/verberg filters' knop om alle filters tegelijk te wissen.",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }

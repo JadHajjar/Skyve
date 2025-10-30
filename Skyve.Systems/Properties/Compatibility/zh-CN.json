@@ -304,6 +304,7 @@
   "LinkedPackages": "关联的插件",
   "NoTags": "没有标签",
   "NoLinks": "没有链接",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "隐藏已检查的模组",
   "ApplyRecommendedAction": "执行推荐的操作",
   "AddMeaningfulNote": "请说明此插件的问题所在。",

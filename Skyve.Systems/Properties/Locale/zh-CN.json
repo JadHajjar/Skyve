@@ -380,6 +380,10 @@
     "One": "编辑此插件的标签",
     "Plural": "编辑所有已选的插件的标签"
   },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
+  },
   "EditLinks": {
     "One": "编辑插件链接",
     "Plural": "编辑选中插件的链接"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "删除模组 - 教程",
   "ExclusionTutorialText": "您可以按住 ALT 键并点击模组的复选框，从您的配组中删除模组。\n\n您也可以使用右键菜单从您所有的配组中添加或删除模组。",
   "ClearFilterTutorialTitle": "清除筛选选项 - 教程",
-  "ClearFilterTutorialText": "如果您想要快速清除您的筛选选项，您可以使用鼠标中键点击筛选项来清除它。\n\n您也可以在“显示/隐藏筛选选项”按钮上这样做，以一次性清除所有筛选项。"
+  "ClearFilterTutorialText": "如果您想要快速清除您的筛选选项，您可以使用鼠标中键点击筛选项来清除它。\n\n您也可以在“显示/隐藏筛选选项”按钮上这样做，以一次性清除所有筛选项。",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }

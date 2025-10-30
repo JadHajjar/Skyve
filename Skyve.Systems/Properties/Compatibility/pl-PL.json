@@ -304,6 +304,7 @@
   "LinkedPackages": "Powiązane modyfikacje",
   "NoTags": "Brak tagów",
   "NoLinks": "Brak linków",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "Ukryj sprawdzone modyfikacje",
   "ApplyRecommendedAction": "Zastosuj zalecane działanie",
   "AddMeaningfulNote": "Dodaj notatkę opisującą to, co jest nie tak z tym pakietem.",

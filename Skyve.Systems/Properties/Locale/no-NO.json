@@ -380,6 +380,10 @@
     "One": "Rediger pakkens etiketter",
     "Plural": "Rediger de valgte elementenes tagger"
   },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
+  },
   "EditLinks": {
     "One": "Rediger denne pakkens lenker",
     "Plural": "Rediger utvalgte elementers lenker"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Fjerner Modifikasjoner - Opplæring",
   "ExclusionTutorialText": "Du kan fjerne modifikasjoner fra den aktive avspillingen ved å holde ALT-tasten og klikke på avmerkingsboksen til moden.\r\n\r\nDu kan også legge til eller fjerne en mod fra alle dine spillegrupper ved hjelp av høyreklikkmenyen.",
   "ClearFilterTutorialTitle": "Tømmer filtre - opplæring",
-  "ClearFilterTutorialText": "Hvis du ønsker å raskt rydde filtrene dine kan du klikke på et filter ved hjelp av mellomknappen for å slette det.\r\n\r\nDu kan også gjøre det på knappen 'Vis/Skjul Filter' for å fjerne alle filtre samtidig."
+  "ClearFilterTutorialText": "Hvis du ønsker å raskt rydde filtrene dine kan du klikke på et filter ved hjelp av mellomknappen for å slette det.\r\n\r\nDu kan også gjøre det på knappen 'Vis/Skjul Filter' for å fjerne alle filtre samtidig.",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }

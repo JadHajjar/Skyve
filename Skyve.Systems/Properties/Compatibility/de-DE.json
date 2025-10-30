@@ -304,6 +304,7 @@
   "LinkedPackages": "Verknüpfte Pakete",
   "NoTags": "Keine Schlagwörter",
   "NoLinks": "Keine Verbindung",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "Überprüfte Pakete ausblenden",
   "ApplyRecommendedAction": "Empfohlene Aktion anwenden",
   "AddMeaningfulNote": "Bitte füge eine Notiz hinzu, welche beschreibt was mit dem Paket nicht stimmt.",

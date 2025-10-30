@@ -380,6 +380,10 @@
     "One": "Tags dieses Pakets bearbeiten",
     "Plural": "Tags der ausgewählten Elemente bearbeiten"
   },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
+  },
   "EditLinks": {
     "One": "Links dieses Pakets bearbeiten",
     "Plural": "Links ausgewählter Elemente bearbeiten"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Mods entfernen - Tutorial",
   "ExclusionTutorialText": "Du kannst Mods von deinem aktiven Playset entfernen, indem du die ALT-Taste gedrückt hälst und auf das Kontrollkästchen des Mods klickst.\r\n\r\nDu kannst auch einen Mod von allen Playsets hinzufügen oder entfernen indem du mit der rechten Maustaste klickst.",
   "ClearFilterTutorialTitle": "Clearing-Filter - Tutorial",
-  "ClearFilterTutorialText": "Wenn Sie Ihre Filter schnell löschen möchten, können Sie mit der mittleren Maustaste auf einen Filter klicken, um ihn zu löschen.\r\n\r\nDu kannst das auch über den 'Filter anzeigen/ausblenden' Button tun, um alle Filter auf einmal zu löschen."
+  "ClearFilterTutorialText": "Wenn Sie Ihre Filter schnell löschen möchten, können Sie mit der mittleren Maustaste auf einen Filter klicken, um ihn zu löschen.\r\n\r\nDu kannst das auch über den 'Filter anzeigen/ausblenden' Button tun, um alle Filter auf einmal zu löschen.",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }

@@ -380,6 +380,10 @@
     "One": "Nyissa meg a csomag oldalát",
     "Plural": "Szerkeszd a kiválasztott elemek címkéit"
   },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
+  },
   "EditLinks": {
     "One": "Szerkessze a csomag hivatkozásait",
     "Plural": "A kiválasztott elemek hivatkozásainak szerkesztése"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Modok eltávolítása - Oktatóanyag",
   "ExclusionTutorialText": "Modokat eltávolíthatsz az aktív játékkészletedből, ha lenyomva tartod az ALT billentyűt, és rákattintasz a mod jelölőnégyzetére.\n\nA jobb gombbal előhívható menü segítségével hozzáadhatsz vagy eltávolíthatsz egy modot az összes játékkészletedből.",
   "ClearFilterTutorialTitle": "Szűrők törlése - Oktatóanyag",
-  "ClearFilterTutorialText": "Ha gyorsan szeretnéd törölni a szűrőket, kattints egy szűrőre a középső egérgombbal.\n\nEzt megteheted a „Szűrők megjelenítése/elrejtése” gombbal is, ha egyszerre szeretnéd törölni az összes szűrőt."
+  "ClearFilterTutorialText": "Ha gyorsan szeretnéd törölni a szűrőket, kattints egy szűrőre a középső egérgombbal.\n\nEzt megteheted a „Szűrők megjelenítése/elrejtése” gombbal is, ha egyszerre szeretnéd törölni az összes szűrőt.",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }
