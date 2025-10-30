@@ -46,7 +46,7 @@
   "RequirementAlternative": "可用的备选方案",
   "IncompatibleWith": "与…不兼容",
   "CausesIssuesWith": "与…同时使用会引发问题",
-  "OptionalPackages": "有可选插件 ..",
+  "OptionalPackages": "有可选插件...",
   "RequiredPackages": "必需的前置",
   "StatusType": "状态类型",
   "InteractionType": "交互类型",
@@ -285,11 +285,11 @@
   "ManagePackage": "管理插件",
   "Banned": "已被封禁",
   "NoIssues": "没有问题",
-  "RequestReviewDisclaimer": "* 发送请求时，您的账号 ID 和日志文件也会一并发送",
+  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam账户 ID 和日志文件也会一并发送",
   "ScenarioMaking": "制作剧本",
   "ThemeMaking": "制作地图主题",
   "OtherCompatibilityWarnings": {
-    "One": "此插件还有另一个兼容性警告",
+    "One": "此插件还有另一个个兼容性警告",
     "Plural": "此插件还有 {0} 个兼容性警告"
   },
   "DeleteRequests": {
@@ -318,7 +318,7 @@
     "One": "有 1 个活动中的问题报告",
     "Plural": "有 {0} 个活动中的问题报告"
   },
-  "SavegameEffect": "移除后对存档仍有残留效果",
+  "SavegameEffect": "移除后对存档的影响",
   "LocalMod": "本地模组",
   "Unknown": "未知",
   "AssetsRemain": "普通资产",

@@ -33,7 +33,7 @@
   "PlaysetName": "プレイセットの名前",
   "RenamePlayset": "このプレイセットの名前を変更",
   "StartScratch": "付属のパッケージなしで新しいプレイセットを最初から開始します。",
-  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
+  "ContinueFromCurrent": "アクティブなプレイセットに登録されているMODを、新しいプレイセットに複製します。",
   "GamePlay": "都市を建設",
   "EditorPlay": "アセットを作成",
   "PlaysetUsage": "プレイセットの用途",

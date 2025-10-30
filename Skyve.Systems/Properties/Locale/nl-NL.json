@@ -160,7 +160,7 @@
   "CopyLOTLogFile": "Kopieer Skyve's logbestand naar klembord",
   "GenericIncludedTotal": "Inclusief {0} : {1}, van {2}",
   "GenericIncludedAndEnabledTotal": "{0} inbegrepen & ingeschakeld: {1}, van {2}",
-  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
+  "GenericIncludedEnabledTotal": "{0} inbegrepen: {1}, waarvan ingeschakeld: {2}, van de: {3}",
   "NewPlayset_Tip": "Nieuwe afspeelset maken of importeren",
   "ViewPlaysets_Tip": "Bekijk en beheer je playsets",
   "DeactivatePlayset": "Deactiveer deze afspeelset",
@@ -270,7 +270,7 @@
   "Sorting_Subscribers": "Totaal aantal abonnees",
   "Sorting_Votes": "Totaal vind-ik-leuks",
   "VotesCount": {
-    "One": "{1} like",
+    "One": "{1} Vind ik leuk",
     "Plural": "{1} vindt u leuk"
   },
   "SubscribersCount": {

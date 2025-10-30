@@ -270,12 +270,12 @@
   "Sorting_Subscribers": "Total Subscribers",
   "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} like",
-    "Plural": "{1} likes"
+    "One": "{1} Like",
+    "Plural": "{1} Likes"
   },
   "SubscribersCount": {
-    "One": "{1} subscriber",
-    "Plural": "{1} subscribers"
+    "One": "{1} Subscriber",
+    "Plural": "{1} Subscribers"
   },
   "FollowersCount": {
     "One": "{1} follower",

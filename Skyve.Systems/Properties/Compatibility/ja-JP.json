@@ -137,8 +137,8 @@
   "Status_SourceAvailable": "このパッケージは、不足しているソースコードについて警告しません。",
   "Status_StandardMod": "MODのトラブルシューティングの際、このパッケージは無視されます。",
   "OutputText": "予想される結果",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate.",
+  "Stability_AssetNotReviewed": "「{0}」はまだレビューされていません。\n互換性情報は正確でない可能性がありますが、アセットは一般的に安定しています。",
+  "Stability_NotReviewed": "「{0}」はまだレビューされていません。\n互換性情報は正確でない可能性があります。",
   "Stability_Stable": "'{0}' は安定しています。その作者は今でも有効に作業を続けています。",
   "Stability_StableNoNewFeatures": "'{0}'は安定していますが、、新しい機能はもう追加されません。しかし、バグが発生した場合はアップデートされます。",
   "Stability_StableNoFutureUpdates": "'{0}'は安定していますが、サポートは終了していて、今後のアップデートやバグ修正は期待できません。",
@@ -150,7 +150,7 @@
   "Stability_Broken": "「{0}」は破損しています。\nゲームがプレイできない・既に動作しないことが判明しています。",
   "Stability_Incompatible": "「{0}」は、現在のゲーム バージョンと互換性がないとマークされています。\n注意して使用するか、更新されるまで無効にしてください。",
   "Stability_AssetIncompatible": "「{0}」 は、現在のゲーム バージョンと互換性がないとマークされています。\nアセットが新しいアップデートで壊れることはめったにないので、問題なく使用できるはずです。",
-  "Stability_Local": "This is a local version of the '{0}' mod.\r\n\r\nWhile local versions are usually used for testing purposes, it is not recommended to stay on the local version of a mod.",
+  "Stability_Local": "これは「{0}」Modのローカル版です。\n\nローカル版は通常テスト目的で使用されますが、Modのローカル版を使用し続けることは推奨されません。",
   "Stability_BrokenFromNewVersion": "'{1}'が最新のアップデートである{0} の後に壊れました。 更新されるまでは、無効にしてください。",
   "Stability_BrokenFromNewVersionSafe": "'{1}'が最新のアップデートである{0} の後に壊れました。 更新されるまでは、無効にしてください。",
   "Stability_BrokenFromPatch": "「{1}」 はゲームパッチ {0} 更新後に壊れました。使用する前に更新されるまでお待ちください。\nそれまでの間、無効にしてください。",
@@ -235,7 +235,7 @@
     "Plural": "廃止された {0} {1}"
   },
   "BrokenCount": {
-    "One": "{0} {1} that is broken",
+    "One": "壊れている {0} {1}",
     "Plural": "壊れた{0} {1}"
   },
   "ActionRequiredCount": "アクションが必要な{0} {1}",
@@ -344,7 +344,7 @@
   "SendSavegameInfo": "必要に応じてセーブデータを添付して問題をより良く調査することができます",
   "YourLogReportInfo": "リクエストを送信しました",
   "PackageActiveReviewRequest": {
-    "One": "'{0}' has active review requests.",
+    "One": "「{0}」には有効なレビューリクエストがあります。",
     "Plural": "{0} {1} に有効なレビューリクエストがあります。"
   }
 }
