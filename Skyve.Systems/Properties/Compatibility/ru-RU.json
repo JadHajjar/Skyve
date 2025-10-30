@@ -304,6 +304,7 @@
   "LinkedPackages": "Связанные пакеты",
   "NoTags": "Без тегов",
   "NoLinks": "Нет ссылок",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "Скрыть рецензированные моды",
   "ApplyRecommendedAction": "Применить рекомендуемое действие",
   "AddMeaningfulNote": "Пожалуйста, добавьте примечание с описанием того, что не так с этим пакетом.",
