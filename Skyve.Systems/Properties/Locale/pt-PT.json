@@ -380,6 +380,10 @@
     "One": "Editar as etiquetas deste pacote",
     "Plural": "Editar as etiquetas dos pacotes selecionados"
   },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
+  },
   "EditLinks": {
     "One": "Editar os links deste pacote",
     "Plural": "Editar os links dos pacotes selecionados"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Remover mods - tutorial",
   "ExclusionTutorialText": "Podes remover mods do teu conjunto de mods ativo mantendo a tecla ALT premida e clicando na caixa de seleção do mod.\n\nTambém podes adicionar ou remover um mod de todos os teus conjuntos de mods usando o menu do botão direito do rato.",
   "ClearFilterTutorialTitle": "Limpar filtros - tutorial",
-  "ClearFilterTutorialText": "Para limpar rapidamente os teus filtros, clica num filtro com o botão do meio do rato.\n\nTambém podes fazer isso no botão 'Mostrar/Esconder filtros' para limpar todos os filtros de uma vez."
+  "ClearFilterTutorialText": "Para limpar rapidamente os teus filtros, clica num filtro com o botão do meio do rato.\n\nTambém podes fazer isso no botão 'Mostrar/Esconder filtros' para limpar todos os filtros de uma vez.",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }
