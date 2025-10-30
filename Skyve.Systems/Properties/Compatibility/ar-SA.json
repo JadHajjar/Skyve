@@ -304,6 +304,7 @@
   "LinkedPackages": "الحزم المرتبطة",
   "NoTags": "لا توجد علامات",
   "NoLinks": "لا توجد روابط",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "إخفاء المودات المراجعة",
   "ApplyRecommendedAction": "تطبيق الإجراء الموصى به",
   "AddMeaningfulNote": "الرجاء إضافة ملاحظة تصف ما هو الخطأ في هذه الحزمة.",
