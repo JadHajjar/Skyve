@@ -1900,4 +1900,40 @@
   <data name="I_Chat_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Chat_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="I_Header1_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header1_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header1_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header1_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header1_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header1_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header2_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header2_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header2_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header2_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header2_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header2_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header2_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header3_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header3_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header3_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header3_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header3_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header3_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Header3_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Header3_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -32,8 +32,8 @@ public interface IPlaysetManager
 	ICustomPlayset GetCustomPlayset(IPlayset playset);
 	Task DeactivateActivePlayset();
 	void Save(ICustomPlayset customPlayset);
-	Task<IEnumerable<IPlaysetPackage>> GetPlaysetContents(IPlayset playset);
-	Task<object> GenerateImportPlayset(IPlayset? playset, bool sharing = false);
+	Task<IEnumerable<IPlaysetPackage>> GetPlaysetContents(IPlayset playset, bool includeOnline = true);
+	Task<object> GenerateImportPlayset(IPlayset? playset, bool sharing = false, bool includeOnline = true);
 
 #if CS1
 	IPlayset TemporaryPlayset { get; }

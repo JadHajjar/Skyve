@@ -47,5 +47,6 @@ public interface IWorkshopService
 	Task Shutdown();
 	void RepairContext();
 	void CancelActions();
+	Task<bool> Logout();
 #endif
 }

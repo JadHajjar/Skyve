@@ -599,7 +599,16 @@ public class CompatibilityManager : ICompatibilityManager
 			return true;
 		}
 
-		return ExtensionClass.IsPatternMatch(_citiesManager.GameVersion, version);
+		try
+		{
+			return ExtensionClass.IsPatternMatch(_citiesManager.GameVersion, version);
+		}
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, "Failed to pattern match suggested game version: " + version);
+
+			return false;
+		}
 	}
 
 	internal List<ICompatibilityPackageIdentity>? GetRequiredFor(ulong id)

@@ -183,6 +183,11 @@ public static class SystemExtensions
 
 	public static IWorkshopInfo? GetWorkshopInfo(this IPackageIdentity identity)
 	{
+		if (identity is IDlcInfo)
+		{
+			return null;
+		}
+
 		return identity is IWorkshopInfo workshopInfo
 			? WorkshopService.GetInfo(identity) ?? workshopInfo
 			: identity.Id <= 0 ? GetLocalModWorkshopInfo(identity) : WorkshopService.GetInfo(identity);
@@ -192,7 +197,7 @@ public static class SystemExtensions
 	{
 		if (GetLocalPackageIdentity(identity) is ILocalPackageIdentity localPackageIdentity)
 		{
-			var id = SkyveDataManager.GetIdFromModName(Path.GetFileName( localPackageIdentity.FilePath));
+			var id = SkyveDataManager.GetIdFromModName(Path.GetFileName(localPackageIdentity.FilePath));
 
 			if (id > 0)
 			{

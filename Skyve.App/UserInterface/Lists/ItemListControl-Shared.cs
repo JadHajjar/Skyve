@@ -172,7 +172,7 @@ public partial class ItemListControl
 		}
 
 		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
-		var isHovered = !IsGenericPage && (e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation)));
+		var isHovered = !(SelectedPlayset is null && !e.Item.IsLocal()) && !IsGenericPage && (e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation)));
 
 		if (!required && isIncluded && isHovered)
 		{
@@ -249,6 +249,12 @@ public partial class ItemListControl
 		using var includedIcon = icon.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
+
+		if (SelectedPlayset is null && !e.Item.IsLocal())
+		{
+			var dimBrush = new SolidBrush(Color.FromArgb(150, e.BackColor));
+			e.Graphics.FillRectangle(dimBrush, e.Rects.IncludedRect);
+		}
 	}
 #else
 		private void DrawIncludedButton(ItemPaintEventArgs<T, Rectangles> e, bool isIncluded, bool partialIncluded, ILocalPackageData? package, out Color activeColor)

@@ -15,7 +15,7 @@ public interface IDlcManager
 	bool IsIncluded(IDlcInfo dlc);
 	void SetIncluded(IDlcInfo dlc, bool value);
 	List<IDlcInfo> GetExcludedDlcs();
-	IDlcInfo TryGetDlc(string displayName);
-	IDlcInfo TryGetDlc(ulong dlc);
+	IDlcInfo TryGetDlc(string displayName, bool exact = false);
+	IDlcInfo TryGetDlc(ulong dlc, bool exact = false);
 	Task UpdateDLCs();
 }

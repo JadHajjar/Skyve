@@ -1957,6 +1957,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation RemovedByAuthor => _instance.GetText("RemovedByAuthor");
 
 	/// <summary>
+	/// <para>Remove this package's version lock</para>
+	/// <para>Plural: Remove selected items' version lock</para>
+	/// </summary>
+	public static Translation RemoveVersionLock => _instance.GetText("RemoveVersionLock");
+
+	/// <summary>
 	/// Rename this playset
 	/// </summary>
 	public static Translation RenamePlayset => _instance.GetText("RenamePlayset");

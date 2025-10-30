@@ -380,6 +380,10 @@
     "One": "Edit this package's Tags",
     "Plural": "Edit selected items' Tags"
   },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
+  },
   "EditLinks": {
     "One": "Edit this package's Links",
     "Plural": "Edit selected items' Links"

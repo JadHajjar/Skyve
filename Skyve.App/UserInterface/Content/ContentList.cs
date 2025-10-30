@@ -608,7 +608,7 @@ public partial class ContentList : SlickControl
 			}
 		}
 
-		if (DD_PackageUsage.SelectedItems.Count() != DD_PackageUsage.Items.Length)
+		if (DD_PackageUsage.SelectedItems.Count() != DD_PackageUsage.Items?.Length)
 		{
 			var usage = item.GetPackageInfo()?.Usage ?? (PackageUsage)(-1);
 
@@ -618,7 +618,7 @@ public partial class ContentList : SlickControl
 			}
 		}
 
-		if (DD_PackageType.SelectedItems.Count() != DD_PackageType.Items.Length)
+		if (DD_PackageType.SelectedItems.Count() != DD_PackageType.Items?.Length)
 		{
 			var usage = item.GetPackageInfo()?.Type ?? (PackageType)(-1);
 
