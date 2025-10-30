@@ -304,6 +304,7 @@
   "LinkedPackages": "Linked Packages",
   "NoTags": "No Tags",
   "NoLinks": "No Links",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "Hide reviewed mods",
   "ApplyRecommendedAction": "Apply recommended action",
   "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",
