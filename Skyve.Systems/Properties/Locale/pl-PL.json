@@ -381,8 +381,8 @@
     "Plural": "Edytuj tagi wybranych elementów"
   },
   "RemoveVersionLock": {
-    "One": "Remove this package's version lock",
-    "Plural": "Remove selected items' version lock"
+    "One": "Usuń blokadę wersji tego pakietu",
+    "Plural": "Usuń blokadę wersji wybranych elementów"
   },
   "EditLinks": {
     "One": "Edytuj linki tego pakietu",
@@ -707,7 +707,7 @@
   "ExclusionTutorialText": "Możesz usunąć mody z aktywnego zestawu, przytrzymując klawisz ALT i klikając pole wyboru przy modzie.\n\nMożesz też dodać lub usunąć mod ze wszystkich zestawów, korzystając z menu po kliknięciu prawym przyciskiem myszy.",
   "ClearFilterTutorialTitle": "Czyszczenie filtrów — poradnik",
   "ClearFilterTutorialText": "Jeśli chcesz szybko wyczyścić filtry, kliknij na filtr środkowym przyciskiem myszy.\n\nMożesz też kliknąć przycisk „Pokaż/Ukryj filtry” środkowym przyciskiem myszy, aby wyczyścić wszystkie filtry jednocześnie.",
-  "UpdateMod": "Update Mod",
-  "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "UpdateMod": "Zaktualizuj moda",
+  "VersionLocked": "Wersja zablokowana",
+  "VersionLockedInfo": "'{0}' jest zablokowany w wersji {1} w tym zestawie."
 }
