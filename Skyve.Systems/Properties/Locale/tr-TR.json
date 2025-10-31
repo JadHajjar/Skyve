@@ -381,8 +381,8 @@
     "Plural": "Seçili öğelerin etiketlerini düzenle"
   },
   "RemoveVersionLock": {
-    "One": "Remove this package's version lock",
-    "Plural": "Remove selected items' version lock"
+    "One": "Bu paketin sürüm kilidini kaldır",
+    "Plural": "Seçili öğelerin sürüm kilidini kaldır"
   },
   "EditLinks": {
     "One": "Bu paketin bağlantılarını düzenle",
@@ -707,7 +707,7 @@
   "ExclusionTutorialText": "Modları, aktif oyun setinizden kaldırmak için ALT tuşuna basılı tutarak modun onay kutusuna tıklayabilirsiniz.\n\nAyrıca bir modu, sağ tıklama menüsünü kullanarak tüm oyun setlerinize ekleyebilir veya kaldırabilirsiniz.",
   "ClearFilterTutorialTitle": "Filtreleri Temizleme - Eğitim",
   "ClearFilterTutorialText": "Filtrelerinizi hızlıca temizlemek istiyorsanız, orta fare tuşu ile bir filtrenin üzerine tıklayıp temizleyin.\n\nAyrıca tüm filtreleri bir kerede temizlemek için 'Filtreleri Göster/Gizle' düğmesini kullanabilirsiniz.",
-  "UpdateMod": "Update Mod",
-  "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "UpdateMod": "Modu Güncelle",
+  "VersionLocked": "Sürüm Kilitli",
+  "VersionLockedInfo": "'{0}', bu oyun setinde {1} sürümüne kilitlenmiş."
 }
