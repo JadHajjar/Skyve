@@ -50,7 +50,7 @@
   "RequiredPackages": "必需的前置",
   "StatusType": "状态类型",
   "InteractionType": "交互类型",
-  "MissingDependency": "缺少前置",
+  "MissingDependency": "缺少依赖项",
   "Caution": "注意事项",
   "CautionWhenUsing": "使用注意事项",
   "Warning": "警告",
@@ -88,7 +88,7 @@
     "Plural": "同时使用 '{0}' 和下列模组，可能会出现问题："
   },
   "Interaction_RequiredPackages": {
-    "One": "要使用“{0}”，您需要一个插件作为前置。",
+    "One": "您缺少“{0}”所需的依赖项。",
     "Plural": "要使用“{0}”，您需要以下插件作为前置。"
   },
   "Interaction_OptionalPackages": {
