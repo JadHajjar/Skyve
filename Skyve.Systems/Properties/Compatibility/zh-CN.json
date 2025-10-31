@@ -16,7 +16,7 @@
   "AddInteraction": "添加交互方式",
   "NotReviewed": "尚未被检查",
   "Stable": "稳定",
-  "StableNoNewFeatures": "稳定，仅修复更新",
+  "StableNoNewFeatures": "稳定，仅补丁更新",
   "StableNoFutureUpdates": "稳定，不再更新",
   "HasIssuesNoFutureUpdates": "存在问题，但不再更新",
   "BreaksOnPatch": "稳定，但游戏更新可能会损坏",
@@ -121,7 +121,7 @@
     "One": "在启用“{0}”的情况下保存城市后，若未启用“{0}”，将无法加载该存档。\n\n如有需要，可使用“{1}”来恢复你的存档。有关详细信息，请阅读其工坊说明。"
   },
   "Status_TestVersion": {
-    "Zero": "这是测试版模组。请注意，测试版模组有可能出现意外问题。",
+    "Zero": "这是一个测试版模组。请注意，模组的测试版本可能会导致问题，其后续更新也可能引发意外错误。",
     "One": "这是“{1}”的测试版。\n请注意，其更新可能会导致意外问题。"
   },
   "Status_MissingDlc": {
@@ -205,15 +205,15 @@
   "Action_DoNotAdd": "您不应该使用“{0}”",
   "NoRequiredDlcs": "没有前置 DLC",
   "DlcsSelected": {
-    "One": "已选择 {0} 个DLC",
-    "Plural": "已选择 {0} 个DLC"
+    "One": "已选择 {0} 个 DLC",
+    "Plural": "已选择 {0} 个 DLC"
   },
-  "RequiredDLCs": "前置 DLC/CCP",
+  "RequiredDLCs": "前置 DLC 和 CCP",
   "CRT_Stability": "稳定性",
   "CRT_Successors": "继任模组",
   "CRT_RequiredPackages": "前置插件",
   "CRT_OptionalPackages": "可选插件",
-  "CRT_DlcMissing": "缺少的 DLC/CCP",
+  "CRT_DlcMissing": "缺少的 DLC 和 CCP",
   "CRT_Compatibility": "兼容性问题",
   "CRT_Alternatives": "备选方案",
   "CRT_Status": "状态",
@@ -279,7 +279,7 @@
   "PackageType_MapSavegame": "地图或存档。",
   "ApplyChangedBeforeExit": "当前存在尚未保存的改动。\n\n在继续操作前，要保存并应用这些改动吗？",
   "AuthorRetired": "{0} 的作者 {1} 已经退坑，或者长期不活跃。\n对于该作者制作的插件，无法保证其将来是否能够稳定运行，以及是否更新。",
-  "AuthorMalicious": "已知 {0} 的作者 {1} 存在恶意，并且其制作的插件中含有病毒等有害内容。",
+  "AuthorMalicious": "{0} 的作者 {1} 已知存在恶意行为，且其作品中包含诸如病毒等有害内容。",
   "ReviewRequests": "检查请求",
   "ApplyRequestedChanges": "应用申请的改动",
   "ManagePackage": "管理插件",
@@ -334,7 +334,7 @@
   "SavegameEffect_BreaksSave": "移除这个模组，会损坏所有使用过此模组的存档。在使用此模组前，请确保您已备份好城市。",
   "SavegameEffect_HarmlessBut": "",
   "RemovalNote": "移除提示",
-  "RemovalNoteInfo": "阐述如何安全从存档移除此模组的步骤…",
+  "RemovalNoteInfo": "阐述如何安全地从存档中移除此模组的步骤…",
   "ChooseWhatToRequest": "选择如何发送您的请求",
   "ReportIssue": "报告问题",
   "AddInfo": "添加缺少的信息",
