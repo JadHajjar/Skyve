@@ -6,7 +6,7 @@
   "Vanilla": "原版",
   "UpToDate": "最新",
   "StatusUnknown": "未知状态",
-  "PartiallyDownloaded": "没有完整下载",
+  "PartiallyDownloaded": "没有下载完整",
   "LaunchSettings": "启动选项",
   "IncludesItemsYouDoNotHave": "包含未拥有的项目",
   "OtherPlaysets": "其他配组",
@@ -53,7 +53,7 @@
   "OpenLocalFolder": "打开此插件的文件夹",
   "ReDownloadPackage": {
     "One": "重新下载此插件",
-    "Plural": "重新下载所有已选的插件"
+    "Plural": "重新下载所有选中的插件"
   },
   "OpenAuthorPage": "打开作者的页面",
   "Sorting_Default": "默认排序",
