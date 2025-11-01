@@ -120,7 +120,7 @@
   "DisableNewAssetsByDefault_Tip": "在您订阅或添加资产时，Skyve 将会根据此选项的设置，自动装载或卸下该资产。",
   "FilterOutPackagesWithOneAsset_Tip": "插件页面不显示只含一个资产的插件。在资产页面，这些资产仍然会显示。",
   "FilterOutPackagesWithMods_Tip": "插件页面不显示模组。在模组页面，这些模组仍然会显示。",
-  "AdvancedLaunchOptions_Tip": "在配组的设定页面中，显示供开发者使用的高级启动选项。",
+  "AdvancedLaunchOptions_Tip": "在配组的设置页面中，显示供开发者使用的高级启动选项。",
   "ShowFolderSettings_Tip": "在选项页面显示 Skyve 的文件夹设置。",
   "HelpTranslate_Tip": "在 Crowdin 上为 Skyve 的本地化翻译提供帮助。",
   "ThemeUIScale_Tip": "更改 Skyve 显示的字体、颜色和主题风格，或调整 UI 界面的显示比例",
@@ -178,7 +178,7 @@
   "ABANDONED": "已停止维护",
   "ActionUnreversible": {
     "One": "此操作无法撤销！",
-    "Plural": "此操作无法撤销，并将影响 {0} 个插件。"
+    "Plural": "此操作无法撤销，并且会影响 {0} 个插件。"
   },
   "AlwaysOpenFiltersAndActions": "默认显示筛选选项",
   "AlwaysOpenFiltersAndActions_Tip": "进入“内容”选项卡时，始终显示筛选选项。",
@@ -186,7 +186,7 @@
   "FavoriteTotal": "共 {0} 个配组",
   "PlaysetFilter": "筛选配组",
   "CheckDocumentsFolder": "请检查 Skyve 是否可以访问您的“文档”文件夹，Skyve 的界面和语言设置信息存储在该文件夹内。",
-  "FailedToSaveLanguage": "保存当前选择的语言失败",
+  "FailedToSaveLanguage": "保存所选语言失败",
   "FailedToOpenTC": "打开主题编辑器失败",
   "FailedToDeleteItem": "删除项目失败",
   "OpenChangelog": "打开更新日志",
@@ -665,7 +665,7 @@
   "CleanupCountBased": "当备份总数超过以下时删除旧备份：",
   "DoBackupNow": "立即备份文件",
   "BackupDescriptionInfo": "手动备份游戏存档、设置和其他相关信息，以保护您的城市和模组。\n\n这样可以确保在系统出现问题或需要重新安装游戏时，您当前的城市和设置能够安全保存。",
-  "RestoreDescriptionInfo": "Select which backups you'd like to restore.\r\nA backup will be taken before the restore process begins to safeguard your current files.",
+  "RestoreDescriptionInfo": "请选择要恢复的备份。\n\n恢复程序开始前，系统会先进行备份，以保护您当前的文件。",
   "BackupFailed": "备份失败",
   "CheckLogsAndTryAgain": "检查日志中是否有错误，然后重试。",
   "RestorePoint": {
