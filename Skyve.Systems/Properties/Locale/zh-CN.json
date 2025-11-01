@@ -213,27 +213,27 @@
   },
   "CopyAuthorId": {
     "One": "复制作者 ID",
-    "Plural": "复制已选插件的作者 ID"
+    "Plural": "复制选中插件的作者 ID"
   },
   "CopyAuthorName": {
     "One": "复制作者名称",
-    "Plural": "复制已选插件的作者名称"
+    "Plural": "复制选中插件的作者名称"
   },
   "Sorting_LastUsed": "上次使用时间",
-  "PlaysetStillLoading": "您的配组还在加载中，请等待加载完毕，再退出此页面。",
+  "PlaysetStillLoading": "您的配组正在加载，请等待加载完毕，再退出此页面。",
   "ApplyPlaysetNameBeforeExit": "请先编辑好配组的名称，再退出此页面。",
   "SteamNotOpenTo": "Steam 客户端当前尚未运行（请确保已打开加速器 / VPN）",
   "OpenSteamToContinue": "请打开 Steam 客户端（请确保打开加速器 / VPN），以继续完成您之前的下载任务。",
   "IncludeExcludeOtherPlayset": "在配组“{1}”中装载或卸下 {0}",
-  "OpenPlaysetFolder": "查看配组文件",
+  "OpenPlaysetFolder": "打开此配组文件夹",
   "ChangePlaysetColor": "更改配组颜色",
   "EditPlaysetName": "编辑配组名称",
   "ResetPlaysetImage": "重置配组缩略图",
   "ResetPlaysetColor": "重置配组颜色",
-  "Sorting_Color": "配组图标颜色",
+  "Sorting_Color": "配组颜色",
   "CreateShortcutPlayset": "创建桌面快捷方式",
   "AskToLaunchGameForShortcut": "是否要在打开 Skyve 的快捷方式时，同时使用您的配组启动游戏？",
-  "TextImportMissingInfo": "导入含有工坊 ID 的文本文件，以方便订阅或管理插件",
+  "TextImportMissingInfo": "导入含有创意工坊 ID 的文本文件，以便订阅或管理插件",
   "ImportFromText": "导入文本文件",
   "ImportFromClipboard": "从剪贴板粘贴文本",
   "ImportFromTextInfo": "支持任何文本文件格式",
