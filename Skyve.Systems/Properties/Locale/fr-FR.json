@@ -709,5 +709,5 @@
   "ClearFilterTutorialText": "Pour effacer rapidement un filtre, cliquez dessus avec un clic du milieu.\n\n\nVous pouvez aussi faire cela sur le bouton « Montrer/cacher les filtres » pour effacer tous les filtres.",
   "UpdateMod": "Mettre à jour le Mod",
   "VersionLocked": "Version Verrouillée",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' est verrouillé à la version {1} dans ce playset."
 }
