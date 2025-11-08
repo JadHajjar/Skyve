@@ -11,12 +11,12 @@
   "GlobalTagsInfo": "所有玩家都会在 Skyve 中看到的标签",
   "Links": "链接",
   "StatusesCount": "状态 ({0})",
-  "InteractionCount": "交互方式 ({0})",
+  "InteractionCount": "交互方式（{0}）",
   "AddStatus": "添加状态",
   "AddInteraction": "添加交互方式",
   "NotReviewed": "尚未被检查",
   "Stable": "稳定",
-  "StableNoNewFeatures": "稳定，只有修复 Bug 的更新",
+  "StableNoNewFeatures": "稳定，仅补丁更新",
   "StableNoFutureUpdates": "稳定，不再更新",
   "HasIssuesNoFutureUpdates": "存在问题，但不再更新",
   "BreaksOnPatch": "稳定，但游戏更新可能会损坏",
@@ -33,7 +33,7 @@
   "Deprecated": "已废弃",
   "Reupload": "重新上传版本",
   "CausesIssues": "引发问题",
-  "SavesCantLoadWithoutIt": "是否启用会影响存档能否加载",
+  "SavesCantLoadWithoutIt": "影响存档能否被加载",
   "TestVersion": "测试版",
   "DependencyMod": "前置模组",
   "SourceCodeNotAvailable": "源代码不可用",
@@ -50,7 +50,7 @@
   "RequiredPackages": "必需的前置",
   "StatusType": "状态类型",
   "InteractionType": "交互类型",
-  "MissingDependency": "缺少前置",
+  "MissingDependency": "缺少依赖项",
   "Caution": "注意事项",
   "CautionWhenUsing": "使用注意事项",
   "Warning": "警告",
@@ -69,11 +69,11 @@
   "ReuseData_Tip": "将上次保存的兼容性数据重新用于此插件。\n按住 Shift 键应用并继续",
   "PleaseReviewTheStability": "请在保存之前检查此插件的稳定性。",
   "PleaseReviewPackageStatuses": "请在保存之前检查此插件的状态。\n您选择的部分状态类型是无效的。",
-  "PleaseReviewPackageInteractions": "请在保存之前检查此插件的交互方式。\n部分交互方式是无效的。",
+  "PleaseReviewPackageInteractions": "请在保存之前检查此插件的交互内容。  \n有部分交互类型无效，或未关联到任何插件。",
   "PleaseReviewPackageUsage": "请为此插件选择一个有效的用途。",
   "Interaction_Alternative": {
     "One": "'{1}' 可以作为 '{0}' 的备选方案。",
-    "Plural": "下列任意一个插件可以作为 '{0}' 的备选方案："
+    "Plural": "下列任意一个插件可以作为“{0}”的备选方案。"
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' 和 '{1}' 都含有相同的功能。",
@@ -88,8 +88,8 @@
     "Plural": "同时使用 '{0}' 和下列模组，可能会出现问题："
   },
   "Interaction_RequiredPackages": {
-    "One": "要使用 '{0}'，您需要一个插件作为前置。",
-    "Plural": "要使用 '{0}'，您需要以下插件作为前置："
+    "One": "您缺少“{0}”所需的依赖项。",
+    "Plural": "要使用“{0}”，您需要以下插件作为前置。"
   },
   "Interaction_OptionalPackages": {
     "One": "对于插件 '{0}'，您缺少以下可选插件：",
@@ -100,29 +100,29 @@
     "Plural": "'{0}' 的功能已被下列任意一个插件继承："
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}'将在'{1}'加载完成后直接加载。",
-    "Plural": "'{0}'将在以下插件加载完成后直接加载。"
+    "One": "“{0}”将在“{1}”加载完成后直接加载。",
+    "Plural": "“{0}”将在以下插件加载完成后直接加载。"
   },
   "Interaction_RequiredItem": {
-    "One": "'{0}' 是 '{1}' 的前置。",
-    "Plural": "'{0}' 是以下插件的前置："
+    "One": "“{0}”是“{1}”的前置。",
+    "Plural": "“{0}”是以下插件的前置。"
   },
-  "Interaction_Identical": "以下是同个模组的多个版本。\n同时使用将会引发模组冲突。",
-  "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
+  "Interaction_Identical": "以下是同个模组的不同版本。\n同时使用将会引发冲突。",
+  "Status_Succeeded": "“{0}”的功能已被“{1}”继承，且您已经使用了“{1}”。“{0}”已不再需要。",
   "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
   "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行更新了。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某个插件的重新上传版本。",
-    "One": "'{0}' 是 '{1}' 的二次上传版本。"
+    "One": "“{0}”是“{1}”的重新上传版本。"
   },
-  "Status_CausesIssues": "目前已知 '{0}' 会导致游戏出现问题。",
+  "Status_CausesIssues": "目前已知“{0}”会导致游戏出现问题。",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "一旦存档中使用了 '{0}' ，此后，如果不启用 '{0}'，这个存档将无法加载。",
-    "One": "一旦在存档中使用了 '{0}' ，此后，如果不启用 '{0}' 被禁用时，这个存档将无法加载。\n\n您可以使用 '{1}' 来恢复无法加载的存档。请阅读其工坊页面描述，以了解更多信息。"
+    "Zero": "在启用“{0}”的情况下保存存档后，若未启用“{0}”，将无法再加载该存档。",
+    "One": "在启用“{0}”的情况下保存城市后，若未启用“{0}”，将无法加载该存档。\n\n如有需要，可使用“{1}”来恢复你的存档。有关详细信息，请阅读其工坊说明。"
   },
   "Status_TestVersion": {
-    "Zero": "这是测试版模组。请注意，测试版模组有可能出现意外问题。",
-    "One": "这是 '{1}' 的测试版。\n请注意，测试版模组可能会出现意外问题。"
+    "Zero": "这是一个测试版模组。请注意，模组的测试版本可能会导致问题，其后续更新也可能引发意外错误。",
+    "One": "这是“{1}”的测试版。\n请注意，其更新可能会导致意外问题。"
   },
   "Status_MissingDlc": {
     "One": "要使用这个插件，您需要购买一个 DLC。",
@@ -137,51 +137,51 @@
   "Status_SourceAvailable": "您不会收到关于此插件源代码不可用的警告。",
   "Status_StandardMod": "在进行故障修复期间，此插件将被忽略。",
   "OutputText": "预期显示文本",
-  "Stability_AssetNotReviewed": "'{0}' 尚未被检查。\n\n兼容性信息可能不准确；不过资产一般都是稳定的。",
-  "Stability_NotReviewed": "'{0}' 尚未被检查。\n\n兼容性信息可能不准确。",
-  "Stability_Stable": "'{0}' 能够稳定运行。作者仍在积极开发和更新它。",
-  "Stability_StableNoNewFeatures": "'{0}' 能够稳定运行，不过作者不会再发布功能性更新。\n不过，如果出现了新的问题，作者仍会进行更新。",
-  "Stability_StableNoFutureUpdates": "'{0}' 可以稳定运行，但作者已不再为其提供支持，因此，未来不太可能再进行更新或错误修复。",
+  "Stability_AssetNotReviewed": "“{0}”尚未被检查。\n\n兼容性信息可能不准确，不过资产一般都是稳定的。",
+  "Stability_NotReviewed": "“{0}”尚未被检查。\n\n兼容性信息可能不准确。",
+  "Stability_Stable": "“{0}”能够稳定运行。作者仍在积极开发和更新它。",
+  "Stability_StableNoNewFeatures": "“{0}”能够稳定运行，不过作者不会再发布功能性更新。\n不过，如果出现了新的问题，作者仍会进行更新。",
+  "Stability_StableNoFutureUpdates": "“{0}”可以稳定运行，但作者已不再为其提供支持。因此，未来不太可能再进行更新或错误修复。",
   "Stability_CautionWhenUsing": "",
-  "Stability_HasIssuesNoFutureUpdates": "'{0}' 可能存在问题，而且作者已不再提供支持，未来也不太可能更新或修复问题。",
-  "Stability_BreaksOnPatch": "'{0}' 很可能在游戏更新后损坏。",
-  "Stability_NotEnoughInformation": "没有足够的信息来正确地检查 '{0}' 的稳定性。",
-  "Stability_HasIssues": "'{0}' 可能存在问题。\n请小心使用。",
-  "Stability_Broken": "'{0}' 已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
-  "Stability_Incompatible": "'{0}' 已被标记为与当前游戏版本不兼容。\n请务必谨慎使用，或等待它更新适配后再使用。",
-  "Stability_AssetIncompatible": "'{0}' 个模组被标记为与你的当前游戏版本不兼容。\n资产很少被游戏更新所破坏，所有你应该可以继续使用。",
-  "Stability_Local": "这是模组“{0}”的本地版本。\n本地版本的模组通常用于测试目的，但并不建议长期留在本地版本的模组。",
-  "Stability_BrokenFromNewVersion": "'{1}' 在它最近的一次版本更新 {0} 中损坏。请等待其更新后再使用。\n目前，您应该禁用它。",
-  "Stability_BrokenFromNewVersionSafe": "'{1}' 在它最近的版本更新 {0} 后损坏。请等待其更新后再使用。",
-  "Stability_BrokenFromPatch": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。\n目前，您应该禁用它。",
-  "Stability_BrokenFromPatchSafe": "'{1}' 在游戏的 {0} 版本更新后损坏。请等待其更新后再使用。",
-  "Stability_BrokenFromPatchUpdated": "'{1}' 在游戏更新 {0} 后损坏了。但是它最近进行了更新，也许能够安全地使用。",
+  "Stability_HasIssuesNoFutureUpdates": "“{0}”可能存在问题，而且作者已不再提供支持，未来也不太可能更新或修复问题。",
+  "Stability_BreaksOnPatch": "“{0}”很可能在游戏更新后损坏。",
+  "Stability_NotEnoughInformation": "没有足够的信息来正确地检查“{0}”的稳定性。",
+  "Stability_HasIssues": "“{0}”可能存在问题。\n请小心使用。",
+  "Stability_Broken": "“{0}”已经损坏。\n目前已知此插件可能会导致游戏崩溃，或根本无法正常运行。",
+  "Stability_Incompatible": "“{0}”已被标记为与当前游戏版本不兼容。\n请务必谨慎使用，或等待它更新适配后再使用。",
+  "Stability_AssetIncompatible": "“{0}”个模组被标记为与你的当前游戏版本不兼容。\n资产很少被游戏更新所破坏，所有你应该可以继续使用。",
+  "Stability_Local": "这是模组“{0}”的本地版本。\n\n虽然本地版本通常用于测试目的，但不建议长期使用模组的本地版本。",
+  "Stability_BrokenFromNewVersion": "“{1}”在它最近的一次版本更新 {0} 中损坏，请等待其更新后再使用。\n目前，您应该禁用它。",
+  "Stability_BrokenFromNewVersionSafe": "“{1}”在它最近的版本更新 {0} 后损坏，请等待其更新后再使用。",
+  "Stability_BrokenFromPatch": "“{1}”在游戏的 {0} 版本更新后损坏，请等待其更新后再使用。\n目前，您应该禁用它。",
+  "Stability_BrokenFromPatchSafe": "“{1}”在游戏的 {0} 版本更新后损坏，请等待其更新后再使用。",
+  "Stability_BrokenFromPatchUpdated": "“{1}”在游戏更新 {0} 后损坏了，但最近已更新，现在可能可以安全使用。",
   "Stability_NumerousReports": "目前“{0}”有多个问题报告，在调查完成前请小心使用。",
-  "Stability_Obsolete": "“{0}”已过时，不再需要使用；或者是多余的，因为游戏本身或其它模组已有相同功能。",
+  "Stability_Obsolete": "“{0}”已过时，其功能已不再需要，或因游戏本体或其他模组已具备相同功能。",
   "Action_NoAction": "",
-  "Action_IncludeThis": "您应该将 '{0}' 添加到您的配组",
+  "Action_IncludeThis": "您应该将“{0}”添加到您的配组",
   "Action_IncludeOther": {
-    "One": "您应该将 '{1}' 添加到您的配组。",
-    "Plural": "您应该将以下模组添加到配组中："
+    "One": "您应该将“{1}”添加到您的配组。",
+    "Plural": "您应该将以下模组添加到配组中。"
   },
   "Action_RequiresConfiguration": "请遵循以下使用说明：",
   "Action_SelectOne": {
     "One": "对于 '{0}' 和 '{1}'，您应当只选择其中一个插件来使用：",
     "Plural": "对于 '{0}' 和下列插件，您应当只选择其中一个插件来使用："
   },
-  "Action_UnsubscribeThis": "您应该将 '{0}' 从所有配组中都完全移除。",
+  "Action_UnsubscribeThis": "您应该将“{0}”从所有配组中都完全移除。",
   "Action_UnsubscribeOther": {
-    "One": "您应该将 '{1}' 从所有配组中都完全移除。",
+    "One": "您应该将“{1}”从所有配组中都完全移除。",
     "Plural": "您应该将下列插件从所有配组中都完全移除。"
   },
-  "Action_ExcludeThis": "您应该将 '{0}' 从配组中移除。",
+  "Action_ExcludeThis": "您应该将“{0}”从配组中移除。",
   "Action_ExcludeOther": {
-    "One": "您应该将 '{1}' 从配组中移除。",
+    "One": "您应该将“{1}”从配组中移除。",
     "Plural": "您应该将以下插件从配组中移除。"
   },
-  "Action_DisableThis": "您应该禁用 '{0}'。",
+  "Action_DisableThis": "您应该禁用“{0}”。",
   "Action_DisableOther": {
-    "One": "您应该禁用 '{1}'。",
+    "One": "您应该禁用“{1}”。",
     "Plural": "您应该禁用以下插件。"
   },
   "NoAction": "无需采取任何操作",
@@ -202,18 +202,18 @@
     "One": "您应当将其替换为 '{1}'。",
     "Plural": "您应当改为使用下面的任意一个插件："
   },
-  "Action_DoNotAdd": "您不应该使用 '{0}'",
+  "Action_DoNotAdd": "您不应该使用“{0}”",
   "NoRequiredDlcs": "没有前置 DLC",
   "DlcsSelected": {
-    "One": "已选择 {0} 个DLC",
-    "Plural": "已选择 {0} 个DLC"
+    "One": "已选择 {0} 个 DLC",
+    "Plural": "已选择 {0} 个 DLC"
   },
-  "RequiredDLCs": "前置 DLC/CCP",
+  "RequiredDLCs": "前置 DLC 和 CCP",
   "CRT_Stability": "稳定性",
   "CRT_Successors": "继任模组",
   "CRT_RequiredPackages": "前置插件",
   "CRT_OptionalPackages": "可选插件",
-  "CRT_DlcMissing": "缺少的 DLC/CCP",
+  "CRT_DlcMissing": "缺少的 DLC 和 CCP",
   "CRT_Compatibility": "兼容性问题",
   "CRT_Alternatives": "备选方案",
   "CRT_Status": "状态",
@@ -260,36 +260,36 @@
   "GenericPackage": "普通插件",
   "MusicPack": "音乐包插件",
   "ThemeMix": "混合主题",
-  "ContentPackage": "内容/资产包",
+  "ContentPackage": "内容和资产包",
   "VisualMod": "视觉模组",
   "SimulationMod": "模拟模组",
   "IMTMarkings": "Intersection Marking Tool 标线",
   "RenderItPreset": "Render it! 的预设",
   "POFont": "Procedural Object 的字体/效果模块",
-  "NameList": "名称列表/游戏翻译",
+  "NameList": "名称列表和游戏翻译",
   "MapSavegame": {
-    "One": "地图/存档",
-    "Plural": "地图与存档"
+    "One": "地图和存档",
+    "Plural": "地图和存档"
   },
   "PackageType_MusicPack": "游戏内电台的音乐包。",
   "PackageType_ContentPackage": "包含资产或模型、纹理、预制件等文件的内容包，并且不含任何修改游戏行为的代码或脚本。",
-  "PackageType_VisualMod": "视觉效果/UI界面修改模组，或地图与主题纹理。",
+  "PackageType_VisualMod": "视觉效果或UI界面修改模组，或地图与主题纹理。",
   "PackageType_SimulationMod": "模拟模组，能够直接修改游戏的行为。",
   "PackageType_NameList": "额外的游戏翻译或名称列表文件。",
   "PackageType_MapSavegame": "地图或存档。",
   "ApplyChangedBeforeExit": "当前存在尚未保存的改动。\n\n在继续操作前，要保存并应用这些改动吗？",
   "AuthorRetired": "{0} 的作者 {1} 已经退坑，或者长期不活跃。\n对于该作者制作的插件，无法保证其将来是否能够稳定运行，以及是否更新。",
-  "AuthorMalicious": "已知 {0} 的作者 {1} 存在恶意，并且其制作的插件中含有病毒等有害内容。",
+  "AuthorMalicious": "{0} 的作者 {1} 已知存在恶意行为，且其作品中包含诸如病毒等有害内容。",
   "ReviewRequests": "检查请求",
   "ApplyRequestedChanges": "应用申请的改动",
   "ManagePackage": "管理插件",
   "Banned": "已被封禁",
   "NoIssues": "没有问题",
-  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam账户 ID 和日志文件也会一并发送",
+  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam 账户 ID 和日志文件也会一并发送",
   "ScenarioMaking": "制作剧本",
   "ThemeMaking": "制作地图主题",
   "OtherCompatibilityWarnings": {
-    "One": "此插件还有另一个个兼容性警告",
+    "One": "此插件还有另一个兼容性警告",
     "Plural": "此插件还有 {0} 个兼容性警告"
   },
   "DeleteRequests": {
@@ -304,6 +304,7 @@
   "LinkedPackages": "关联的插件",
   "NoTags": "没有标签",
   "NoLinks": "没有链接",
+  "NoPackages": "无数据包",
   "HideReviewedPackages": "隐藏已检查的模组",
   "ApplyRecommendedAction": "执行推荐的操作",
   "AddMeaningfulNote": "请说明此插件的问题所在。",
@@ -327,13 +328,13 @@
   "BreaksSave": "移除后将损坏存档",
   "HarmlessBut": "无害，但...",
   "SavegameEffect_None": "此模组可以安全移除。",
-  "SavegameEffect_AssetsRemain": "移除资产，您城市中放置了该资产的位置将会留下一个灰色方盒，请清除这些残留物体以避免产生问题。",
-  "SavegameEffect_EffectsLinger": "移除这个模组，不会从您的城市中移除它已造成的效果。",
-  "SavegameEffect_RequiresManualAction": "移除这个模组，需要额外步骤才能正确地将它从你的城市移除。",
+  "SavegameEffect_AssetsRemain": "移除资产后，城市中原先放置它们的位置会替换为灰色方块，请清除这些残留物体以避免产生问题。",
+  "SavegameEffect_EffectsLinger": "移除此模组不会清除其在城市中产生的效果。",
+  "SavegameEffect_RequiresManualAction": "要彻底从城市中移除此模组，需要执行额外的步骤。",
   "SavegameEffect_BreaksSave": "移除这个模组，会损坏所有使用过此模组的存档。在使用此模组前，请确保您已备份好城市。",
   "SavegameEffect_HarmlessBut": "",
   "RemovalNote": "移除提示",
-  "RemovalNoteInfo": "阐述如何安全从存档移除此模组的步骤…",
+  "RemovalNoteInfo": "阐述如何安全地从存档中移除此模组的步骤…",
   "ChooseWhatToRequest": "选择如何发送您的请求",
   "ReportIssue": "报告问题",
   "AddInfo": "添加缺少的信息",
@@ -344,7 +345,7 @@
   "SendSavegameInfo": "可以附带您的存档以帮助我们更好地调查问题",
   "YourLogReportInfo": "与您的请求一起发送",
   "PackageActiveReviewRequest": {
-    "One": "'{0}' 有主动审核请求。",
-    "Plural": "{0} {1} 有主动审核请求。"
+    "One": "“{0}”有主动检查请求。",
+    "Plural": "{0} {1} 有主动检查请求。"
   }
 }

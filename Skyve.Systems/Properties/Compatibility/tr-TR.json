@@ -304,6 +304,7 @@
   "LinkedPackages": "Bağlı Paketler",
   "NoTags": "Etiket Yok",
   "NoLinks": "Bağlantı Yok",
+  "NoPackages": "Paketler Yok",
   "HideReviewedPackages": "İncelenen modları gizle",
   "ApplyRecommendedAction": "Önerilen işlemi uygula",
   "AddMeaningfulNote": "Lütfen bu paketle ilgili sorunun ne olduğunu açıklayan bir not ekleyin.",

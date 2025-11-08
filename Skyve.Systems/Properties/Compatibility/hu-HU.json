@@ -304,6 +304,7 @@
   "LinkedPackages": "Kapcsolt csomagok",
   "NoTags": "Nincsenek címkék",
   "NoLinks": "Nincs link",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "Ellenőrzött modok elrejtése",
   "ApplyRecommendedAction": "Alkalmazza a javasolt műveletet",
   "AddMeaningfulNote": "Kérjük, adj hozzá egy megjegyzést, amely leírja, hogy mi a probléma ezzel a csomaggal.",

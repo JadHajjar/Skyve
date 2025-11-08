@@ -304,6 +304,7 @@
   "LinkedPackages": "Linked Packages",
   "NoTags": "태그 없음",
   "NoLinks": "링크 없음",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "리뷰된 모드 숨기기",
   "ApplyRecommendedAction": "권장 조치 적용",
   "AddMeaningfulNote": "Please add a note describing what is wrong with this package.",

@@ -304,6 +304,7 @@
   "LinkedPackages": "Länkade paket",
   "NoTags": "Inga taggar",
   "NoLinks": "Inga länkar",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "Dölj granskade moddar",
   "ApplyRecommendedAction": "Tillämpa rekommenderade åtgärder",
   "AddMeaningfulNote": "Lägg till en kommentar som beskriver vad som är fel med det här paketet.",

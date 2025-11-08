@@ -380,6 +380,10 @@
     "One": "Upravit štítky tohoto balíčku",
     "Plural": "Upravit štítky vybraných položek"
   },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
+  },
   "EditLinks": {
     "One": "Upravit odkazy tohoto balíčku",
     "Plural": "Upravit odkazy vybraných položek"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Odstraňování módů - Návod",
   "ExclusionTutorialText": "Můžete odstranit mody z vaší aktivní sady přehrávačů podržením klávesy ALT a kliknutím na zaškrtávací políčko módu.\r\n\r\nMůžete také přidat nebo odebrat mód ze všech vašich sad přehrávačů pomocí nabídky pravým tlačítkem myši.",
   "ClearFilterTutorialTitle": "Čištění filtrů - Návod",
-  "ClearFilterTutorialText": "Pokud chcete rychle vymazat filtry, můžete kliknout na filtr pomocí svého středního tlačítka myši pro jeho vymazání.\r\n\r\nMůžete to také udělat na tlačítku 'Zobrazit/skrýt filtry' pro vymazání všech filtrů najednou."
+  "ClearFilterTutorialText": "Pokud chcete rychle vymazat filtry, můžete kliknout na filtr pomocí svého středního tlačítka myši pro jeho vymazání.\r\n\r\nMůžete to také udělat na tlačítku 'Zobrazit/skrýt filtry' pro vymazání všech filtrů najednou.",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }

@@ -304,6 +304,7 @@
   "LinkedPackages": "Paquets liés",
   "NoTags": "Aucun tag",
   "NoLinks": "Aucun lien",
+  "NoPackages": "Aucun paquet",
   "HideReviewedPackages": "Masquer les mods révisés",
   "ApplyRecommendedAction": "Appliquer toutes les actions recommandées",
   "AddMeaningfulNote": "Ajoutez une description de ce qui pose problème avec ce paquet.",

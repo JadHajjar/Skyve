@@ -380,6 +380,10 @@
     "One": "Redigera paketets taggar",
     "Plural": "Redigera markerade objekts taggar"
   },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
+  },
   "EditLinks": {
     "One": "Redigera det här paketets länkar",
     "Plural": "Redigera markerade objekts länkar"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Tar bort Mods - Handledning",
   "ExclusionTutorialText": "Du kan ta bort moddar från din aktiva playset genom att hålla ALT-tangenten och klicka på kryssrutan i modden.\r\n\r\nDu kan också lägga till eller ta bort en mod från alla dina speluppsättningar med hjälp av högerklicksmenyn.",
   "ClearFilterTutorialTitle": "Clearing Filter - Handledning",
-  "ClearFilterTutorialText": "Om du snabbt vill rensa dina filter, kan du klicka på ett filter med medel-musknappen för att rensa det.\r\n\r\nDu kan också göra det på knappen 'Visa/Dölj filter' för att rensa alla filter samtidigt."
+  "ClearFilterTutorialText": "Om du snabbt vill rensa dina filter, kan du klicka på ett filter med medel-musknappen för att rensa det.\r\n\r\nDu kan också göra det på knappen 'Visa/Dölj filter' för att rensa alla filter samtidigt.",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }

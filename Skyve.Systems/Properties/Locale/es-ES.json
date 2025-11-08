@@ -380,6 +380,10 @@
     "One": "Editar las etiquetas de este paquete",
     "Plural": "Editar etiquetas de elementos seleccionados"
   },
+  "RemoveVersionLock": {
+    "One": "Eliminar bloqueo de versión de este paquete",
+    "Plural": "Eliminar bloqueo de versión de elementos seleccionados"
+  },
   "EditLinks": {
     "One": "Editar los enlaces de este paquete",
     "Plural": "Editar enlaces de elementos seleccionados"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Eliminación de Mods - Tutorial",
   "ExclusionTutorialText": "Puedes eliminar mods de tu playset activo, mientras mantienes presionada la tecla ALT y haces clic en las casillas de selección del mod.\n\nPuedes, además, agregar o quitar un mod de todos los playsets usando el menú del clic derecho.",
   "ClearFilterTutorialTitle": "Limpieza de filtros - Tutorial",
-  "ClearFilterTutorialText": "Si quieres limpiar todos los filtros aplicados rápidamente, puedes hacer clic en un filtro usando el botón central del mouse para limpiarlo.\n\nPuede hacerlo también desde el botón \"Mostrar/Ocultar Filtros\" para quitarlos todos de una vez."
+  "ClearFilterTutorialText": "Si quieres limpiar todos los filtros aplicados rápidamente, puedes hacer clic en un filtro usando el botón central del mouse para limpiarlo.\n\nPuede hacerlo también desde el botón \"Mostrar/Ocultar Filtros\" para quitarlos todos de una vez.",
+  "UpdateMod": "Actualizar Mod",
+  "VersionLocked": "Versión bloqueada",
+  "VersionLockedInfo": "'{0}' está bloqueada a la versión {1} en este playset."
 }
