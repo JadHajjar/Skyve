@@ -271,11 +271,11 @@
   "Sorting_Votes": "Усього вподобань",
   "VotesCount": {
     "One": "{1} like",
-    "Plural": "{1} подобається"
+    "Plural": "{1} вподобайки"
   },
   "SubscribersCount": {
-    "One": "Передплатник {1}",
-    "Plural": "Передплатники {1}"
+    "One": "Підписник {1}",
+    "Plural": "Підписники {1}"
   },
   "FollowersCount": {
     "One": "Спрямувач {1}",
