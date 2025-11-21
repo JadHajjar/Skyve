@@ -29,6 +29,7 @@ internal class NotifierSystem : INotifier
 	public event Action? SnoozeChanged;
 	public event Action? BackupEnded;
 	public event Action? BackupStarted;
+	public event Action? VersionObsolete;
 
 	private readonly DelayedAction _delayedPackageInformationUpdated;
 	private readonly DelayedAction _delayedPackageInclusionUpdated;
@@ -177,5 +178,10 @@ internal class NotifierSystem : INotifier
 	public void OnBackupStarted()
 	{
 		BackupStarted?.Invoke();
+	}
+
+	public void OnVersionObsolete()
+	{
+		VersionObsolete?.Invoke();
 	}
 }

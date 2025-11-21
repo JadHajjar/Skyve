@@ -464,6 +464,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		rectangle.Height += DrawTitleAndTags(e, package, textRect, cursor) + GridPadding.Top;
 
+		if (!package.IsDlc)
 		rectangle.Height += DrawAuthor(e, package, new Rectangle(textRect.X, rectangle.Bottom, textRect.Width, textRect.Height), default).Height + (GridPadding.Top / 3);
 
 		e.Rects._modRects[package] = thumbRect;

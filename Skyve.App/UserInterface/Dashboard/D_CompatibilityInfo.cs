@@ -156,7 +156,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 	protected override DrawingDelegate GetDrawingMethod(int width)
 	{
-		if (!_compatibilityManager.FirstLoadComplete)
+		if (!_compatibilityManager.FirstLoadComplete && Loading)
 		{
 			return DrawLoading;
 		}

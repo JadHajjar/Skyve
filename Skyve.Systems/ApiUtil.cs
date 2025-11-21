@@ -95,6 +95,13 @@ public class ApiUtil(ILogger logger)
 
 		if (httpResponse.IsSuccessStatusCode)
 		{
+			if (httpResponse.Content.Headers.ContentType?.MediaType != "application/json")
+			{
+				return typeof(T) == typeof(ApiResponse)
+					? (T)(object)new ApiResponse { Success = true }
+					: default;
+			}
+
 			if (typeof(T) == typeof(byte[]))
 			{
 				return (T)(object)await httpResponse.Content.ReadAsByteArrayAsync();
@@ -108,10 +115,7 @@ public class ApiUtil(ILogger logger)
 		_logger.Error($"[API] ({baseUrl}) failed: {httpResponse.ReasonPhrase}");
 
 		return typeof(T) == typeof(ApiResponse)
-			? (T)(object)new ApiResponse
-			{
-				Message = httpResponse.ReasonPhrase
-			}
+			? (T)(object)new ApiResponse { Message = httpResponse.ReasonPhrase }
 			: default;
 	}
 

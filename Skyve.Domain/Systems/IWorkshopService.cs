@@ -24,7 +24,7 @@ public interface IWorkshopService
 	event Action? OnLogout;
 
 	bool IsLoggedIn { get; }
-	bool IsLoginPending { get; }
+	bool IsLoginPending { get; set; }
 	bool IsAvailable { get; }
 
 	Task Initialize();

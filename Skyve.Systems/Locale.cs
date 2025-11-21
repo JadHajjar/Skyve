@@ -416,6 +416,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ClearFilterTutorialTitle => _instance.GetText("ClearFilterTutorialTitle");
 
 	/// <summary>
+	/// Close Skyve
+	/// </summary>
+	public static Translation CloseSkyve => _instance.GetText("CloseSkyve");
+
+	/// <summary>
 	/// <para>Code Mod</para>
 	/// <para>Plural: Code Mods</para>
 	/// </summary>
