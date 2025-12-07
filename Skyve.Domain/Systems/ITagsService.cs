@@ -8,7 +8,7 @@ public interface ITagsService
 	int GetTagUsage(ITag tag);
 	bool HasAllTags(IPackageIdentity package, IEnumerable<ITag> tags);
 	void SetTags(IPackageIdentity package, IEnumerable<string> value);
-	ITag CreateWorkshopTag(string text);
+	IWorkshopTag CreateWorkshopTag(string text, string? key = null);
 	ITag CreateGlobalTag(string text);
 	ITag CreateCustomTag(string text);
 	ITag CreateIdTag(string text);

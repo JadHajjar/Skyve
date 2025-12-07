@@ -461,6 +461,11 @@
     "One": "Edit all of this package's assets' Tags",
     "Plural": "Edit all of the selected packages' assets' Tags"
   },
+  "TagCount": {
+    "Zero": "Tags",
+    "One": "Tags: {0} selected",
+    "Plural": "Tags: {0} selected"
+  },
   "TagsTitle": {
     "One": "Custom Tags: {0}",
     "Plural": "Custom Tags: {0} packages"

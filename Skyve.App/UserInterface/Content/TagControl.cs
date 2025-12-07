@@ -1,4 +1,5 @@
-﻿using Skyve.App.UserInterface.Panels;
+﻿using Skyve.App.UserInterface.Generic;
+using Skyve.App.UserInterface.Panels;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -38,9 +39,18 @@ public class TagControl : SlickButton
 			}
 			else
 			{
+				if (TagInfo.IsWorkshop)
+				{
+					WorkshopTagsControl.SelectedTags.Clear();
+					WorkshopTagsControl.SelectedTags.Add(TagInfo.Key);
+				}
+
 				var workshopPanel = new PC_WorkshopList();
 
-				workshopPanel.LC_Items.DD_Tags.SelectedItems = [TagInfo];
+				if (!TagInfo.IsWorkshop)
+				{
+					workshopPanel.LC_Items.DD_Tags.SelectedItems = [TagInfo];
+				}
 
 				Program.MainForm.PushPanel(workshopPanel);
 			}
