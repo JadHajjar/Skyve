@@ -304,7 +304,7 @@
   "LinkedPackages": "Linkitetyt Paketit",
   "NoTags": "Ei Tunnisteita",
   "NoLinks": "Ei Linkkejä",
-  "NoPackages": "No Packages",
+  "NoPackages": "Ei paketteja",
   "HideReviewedPackages": "Piilota tarkistetut modit",
   "ApplyRecommendedAction": "Toteuta suositellut toimet",
   "AddMeaningfulNote": "Ole hyvä ja lisää huomautus kuvata mikä on vialla tässä paketissa.",
