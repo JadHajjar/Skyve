@@ -381,8 +381,8 @@
     "Plural": "Muokkaa valittujen kohteiden tageja"
   },
   "RemoveVersionLock": {
-    "One": "Remove this package's version lock",
-    "Plural": "Remove selected items' version lock"
+    "One": "Poista tämän paketin version lukitus",
+    "Plural": "Poista valittujen kohteiden version lukitus"
   },
   "EditLinks": {
     "One": "Muokkaa tämän paketin linkkejä",
@@ -707,7 +707,7 @@
   "ExclusionTutorialText": "Voit poistaa modeja aktiivisesta soittimestasi pitämällä ALT-näppäintä pohjassa ja klikkaamalla moodin valintaruutua.\r\n\r\nVoit myös lisätä tai poistaa modin kaikista soittajistasi käyttämällä hiiren kakkospainikkeella valikkoa.",
   "ClearFilterTutorialTitle": "Suodattimien Tyhjennys - Opastus",
   "ClearFilterTutorialText": "Jos haluat poistaa suodattimet nopeasti, voit klikata suodatinta käyttämällä keski-hiiri-painiketta tyhjentääksesi suodattimesi.\r\n\r\nVoit myös tehdä sen 'Näytä/piilota suodattimet' -painikkeella tyhjentääksesi kaikki suodattimet kerralla.",
-  "UpdateMod": "Update Mod",
-  "VersionLocked": "Version Locked",
+  "UpdateMod": "Päivitä modi",
+  "VersionLocked": "Versio lukittu",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }
