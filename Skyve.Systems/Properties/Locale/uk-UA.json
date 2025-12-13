@@ -271,15 +271,15 @@
   "Sorting_Votes": "Усього вподобань",
   "VotesCount": {
     "One": "{1} like",
-    "Plural": "{1} подобається"
+    "Plural": "{1} вподобайки"
   },
   "SubscribersCount": {
-    "One": "Передплатник {1}",
-    "Plural": "Передплатники {1}"
+    "One": "Підписник {1}",
+    "Plural": "Підписники {1}"
   },
   "FollowersCount": {
-    "One": "Спрямувач {1}",
-    "Plural": "{1} послідовників"
+    "One": "Підписник {1}",
+    "Plural": "{1} підписники"
   },
   "SearchWorkshop": "Шукати у майстерні замість цього...",
   "DiscoverWorkshop": "Пошук модифікацій на майстерні...",
@@ -379,6 +379,10 @@
   "EditTags": {
     "One": "Редагувати Мітки даного пакунку",
     "Plural": "Редагувати Мітки вибраних елементів"
+  },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
   },
   "EditLinks": {
     "One": "Редагувати посилання цього пакету",
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Видалення модів - Підручник",
   "ExclusionTutorialText": "Ви можете видалити моди зі свого активного відтворення, утримуючи клавішу ALT та натискаючи на прапорці моду.\r\n\r\nВи також можете додати або видалити мод з усіх своїх ігрових наборів за допомогою меню правого кліку.",
   "ClearFilterTutorialTitle": "Очищення фільтрів - Підручник",
-  "ClearFilterTutorialText": "If you want to quickly clear your filters, you can click on a filter using your middle-mouse-button to clear it.\r\n\r\nYou can also do that on the 'Show/Hide Filters' button to clear all filters at once."
+  "ClearFilterTutorialText": "If you want to quickly clear your filters, you can click on a filter using your middle-mouse-button to clear it.\r\n\r\nYou can also do that on the 'Show/Hide Filters' button to clear all filters at once.",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }

@@ -380,6 +380,10 @@
     "One": "パッケージのタグを編集",
     "Plural": "選択したアイテムのタグを編集"
   },
+  "RemoveVersionLock": {
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
+  },
   "EditLinks": {
     "One": "パッケージのリンクを編集",
     "Plural": "選択したアイテムのリンクを編集"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Modを削除する - チュートリアル",
   "ExclusionTutorialText": "ALTキーを押しながらMODのチェックボックスをクリックすると、アクティブなプレイセットからMODを削除できます。\r\n\r\n右クリックメニューを使用して、すべてのプレイセットからModを追加または削除することもできます。",
   "ClearFilterTutorialTitle": "クリアリングフィルタ - チュートリアル",
-  "ClearFilterTutorialText": "フィルターをすばやくクリアしたい場合は、マウスの中ボタンを使ってフィルターをクリックしてクリアできます。\r\n\r\n「フィルターの表示/非表示」ボタンで一度にすべてのフィルターをクリアすることもできます。"
+  "ClearFilterTutorialText": "フィルターをすばやくクリアしたい場合は、マウスの中ボタンを使ってフィルターをクリックしてクリアできます。\r\n\r\n「フィルターの表示/非表示」ボタンで一度にすべてのフィルターをクリアすることもできます。",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
 }

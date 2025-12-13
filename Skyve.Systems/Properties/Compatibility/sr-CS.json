@@ -304,6 +304,7 @@
   "LinkedPackages": "Povezani paketi",
   "NoTags": "Nema oznaka",
   "NoLinks": "Nema linkova",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "Sakrij pregledane modove",
   "ApplyRecommendedAction": "Primeni preporučenu akciju",
   "AddMeaningfulNote": "Molimo dodajte napomenu koja opisuje šta nije uredu sa ovim paketom.",
