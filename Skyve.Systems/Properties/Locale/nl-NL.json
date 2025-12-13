@@ -1,4 +1,5 @@
 {
+  "CloseSkyve": "Close Skyve",
   "CompatibilityInfo": "Compatibiliteitsinformatie",
   "Dashboard": "Dashboard",
   "SearchDlcs": "Doorzoek je uitbreidingen..",
@@ -459,6 +460,11 @@
   "EditTagsOfPackage": {
     "One": "Bewerk alle tags van dit pakket",
     "Plural": "Bewerk alle van de geselecteerde pakketten assets' Tags"
+  },
+  "TagCount": {
+    "Zero": "Tags",
+    "One": "Tags: {0} selected",
+    "Plural": "Tags: {0} selected"
   },
   "TagsTitle": {
     "One": "Aangepaste tags: {0}",
