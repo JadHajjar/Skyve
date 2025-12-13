@@ -142,7 +142,7 @@ public partial class ItemListControl
 
 		private void DrawTags(ItemPaintEventArgs<IPackageIdentity, Rectangles> e)
 		{
-			var packageTags = e.Item.GetTags(IsPackagePage).ToList();
+			var packageTags = e.Item.GetTags( true, true).ToList();
 
 			if (packageTags.Count == 0)
 			{
@@ -190,7 +190,7 @@ public partial class ItemListControl
 			versionText = versionText is not null ? $"v{versionText}" : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
 #endif
 
-			var packageTags = e.Item.GetTags(IsPackagePage).ToList();
+			var packageTags = e.Item.GetTags( true, true).ToList();
 
 			if (packageTags.Count > 0)
 			{

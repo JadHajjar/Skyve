@@ -176,9 +176,9 @@ public static class SystemExtensions
 		return ImageService.GetImage(thumbnailUrl, true).Result;
 	}
 
-	public static IEnumerable<ITag> GetTags(this IPackageIdentity package, bool ignoreParent = false)
+	public static IEnumerable<ITag> GetTags(this IPackageIdentity package, bool ignoreParent = false, bool ignoreSubTags = false)
 	{
-		return TagsService.GetTags(package, ignoreParent);
+		return TagsService.GetTags(package, ignoreParent, ignoreSubTags);
 	}
 
 	public static IWorkshopInfo? GetWorkshopInfo(this IPackageIdentity identity)

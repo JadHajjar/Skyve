@@ -9,6 +9,6 @@ public interface IAssetUtil
 	Task SetIncluded(IAsset asset, bool value, int? playsetId = null);
 	void SaveChanges();
 	IAsset? GetAssetByFile(string? fileName);
-	IEnumerable<IAsset> GetAssets(string folder, bool withSubDirectories = true);
+	IEnumerable<IAsset> GetAssets(string folder, out int assetCount, bool withSubDirectories = true);
 	void DeleteAsset(IAsset asset);
 }

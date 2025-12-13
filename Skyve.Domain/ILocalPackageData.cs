@@ -8,5 +8,6 @@ public interface ILocalPackageData : ILocalPackageIdentity
 	IThumbnailObject[] Images { get; }
 #if CS2
 	string? SuggestedGameVersion { get; }
+	int AssetCount { get; }
 #endif
 }

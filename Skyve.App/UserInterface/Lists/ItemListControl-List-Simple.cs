@@ -46,17 +46,17 @@ public abstract partial class ItemListControl
 			DrawCompactVersionAndDate(e, package, localIdentity, workshopInfo);
 			DrawButtons(e, localIdentity, workshopInfo);
 
-			if (Width / UI.FontScale >= 600)
+			if (Width / UI.FontScale >= 600 )
 			{
 				DrawCompactAuthorOrFolder(e, localIdentity, workshopInfo);
 			}
 
-			if (Width / UI.FontScale >= 500)
+			if (Width / UI.FontScale >= 500 )
 			{
 				DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
 			}
 
-			if (Width / UI.FontScale >= 965)
+			if (Width / UI.FontScale >= 965 )
 			{
 				DrawTags(e);
 			}
@@ -132,7 +132,7 @@ public abstract partial class ItemListControl
 
 		private void DrawCenterInfo(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
 		{
-			if ((e.ClipRectangle.Width - Padding.Horizontal) / UI.FontScale <= 500)
+			if ((e.ClipRectangle.Width - Padding.Horizontal) / UI.FontScale <= 500 || IsPackagePage)
 			{
 				return;
 			}

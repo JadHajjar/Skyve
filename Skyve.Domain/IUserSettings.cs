@@ -39,6 +39,7 @@ public interface IUserSettings
 	bool DisableLogCleanup { get; set; }
 	bool ExcludeTipShown { get; set; }
 	bool ClearFilterTipShown { get; set; }
+	Dictionary<string, string> DashboardSelectedTag { get; }
 #endif
 
 	void Save();
