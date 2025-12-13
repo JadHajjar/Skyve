@@ -1,4 +1,5 @@
 {
+  "CloseSkyve": "Close Skyve",
   "CompatibilityInfo": "Compatibility Info",
   "Dashboard": "Dashboard",
   "SearchDlcs": "Search through your DLCs..",
@@ -36,8 +37,8 @@
   "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "Build Cities",
   "EditorPlay": "Make Assets",
-  "PlaysetUsage": "Profile Usage",
-  "SomePackagesWillBeDisabled": "Some packages will be removed by changing the usage of this profile.",
+  "PlaysetUsage": "Playset Usage",
+  "SomePackagesWillBeDisabled": "Some packages will be removed by changing the usage of this playset.",
   "AffectedPackagesAre": "Affected packages are:",
   "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
   "ActivatePlayset": "Activate this playset",
@@ -120,10 +121,10 @@
   "DisableNewAssetsByDefault_Tip": "When you subscribe or add an asset, the tool will automatically exclude or include it based on this setting when the tool is launched.",
   "FilterOutPackagesWithOneAsset_Tip": "Packages that only have a single asset in them will not show on the Packages page. They will still show on the Assets page.",
   "FilterOutPackagesWithMods_Tip": "Packages that include a mod will not show on the Packages page. They will still show on the Mods page.",
-  "AdvancedLaunchOptions_Tip": "Displays extra launch options used by developers in the profile's settings.",
+  "AdvancedLaunchOptions_Tip": "Displays extra launch options used by developers in the playset's settings.",
   "ShowFolderSettings_Tip": "Shows the folder settings used by the tool in the options page.",
   "HelpTranslate_Tip": "Help translate this tool into your native language on Crowdin.",
-  "ThemeUIScale_Tip": "Change the app's colour & theme or increase the scale of the UI.",
+  "ThemeUIScale_Tip": "Change the app's color & theme or increase the scale of the UI.",
   "JoinDiscord_Tip": "Ask for help & receive updates about the tool on the Discord server.",
   "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Reset your settings to the default ones. This does not affect folder settings.",
@@ -182,7 +183,7 @@
   },
   "AlwaysOpenFiltersAndActions": "Show the Filters section by default",
   "AlwaysOpenFiltersAndActions_Tip": "Always have the filters section open when entering a content tab",
-  "FavoritePlaysetTotal": "Playsets favourited: {0}, Total: {1}",
+  "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
   "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
@@ -226,13 +227,13 @@
   "OpenSteamToContinue": "Please open Steam in order to continue your previous task.",
   "IncludeExcludeOtherPlayset": "Include / Exclude {0} from the '{1}' playset",
   "OpenPlaysetFolder": "View this playset's file on your computer",
-  "ChangePlaysetColor": "Change this playset's colour",
+  "ChangePlaysetColor": "Change this playset's color",
   "EditPlaysetName": "Edit this playset's name",
   "ResetPlaysetImage": "Reset this playset's thumbnail",
-  "ResetPlaysetColor": "Reset this playset's colour",
-  "Sorting_Color": "Profile Colour",
+  "ResetPlaysetColor": "Reset this playset's color",
+  "Sorting_Color": "Playset Color",
   "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
-  "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
+  "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your playset?",
   "TextImportMissingInfo": "Load a text file containing Workshop IDs to easily subscribe to or manage them",
   "ImportFromText": "Import From Text",
   "ImportFromClipboard": "Load text from your clipboard",
@@ -257,8 +258,8 @@
     "Plural": "{0} authors selected"
   },
   "Donate": "Donate",
-  "FlipItemCopyFilterAction": "Swap Ctrl+Click behaviour for filtering in the content lists",
-  "FlipItemCopyFilterAction_Tip": "Swaps the default behaviour of clicking on labels so that normal clicking filters and Ctrl+Clicking performs the default action.",
+  "FlipItemCopyFilterAction": "Swap Alt+Click behavior for filtering in the content lists",
+  "FlipItemCopyFilterAction_Tip": "Swaps the default behavior of clicking on labels so that normal clicking filters and Alt+Clicking performs the default action.",
   "AltClickTo": "Alt+Click to {0}",
   "FilterByThisAuthor": "Add '{0}' to your author filters",
   "AddToSearch": "Add '{0}' to your search",
@@ -270,12 +271,12 @@
   "Sorting_Subscribers": "Total Subscribers",
   "Sorting_Votes": "Total Likes",
   "VotesCount": {
-    "One": "{1} Like",
-    "Plural": "{1} Likes"
+    "One": "{1} like",
+    "Plural": "{1} likes"
   },
   "SubscribersCount": {
-    "One": "{1} Subscriber",
-    "Plural": "{1} Subscribers"
+    "One": "{1} subscriber",
+    "Plural": "{1} subscribers"
   },
   "FollowersCount": {
     "One": "{1} follower",
@@ -318,7 +319,7 @@
   },
   "Playset": {
     "One": "Playset",
-    "Plural": "Profiles"
+    "Plural": "Playsets"
   },
   "ContainCount": {
     "One": "Contains {0} {1}",
@@ -361,8 +362,8 @@
     "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} is hidden because of your profile's usage",
-    "Plural": "{0} {1} are hidden because of your profile's usage"
+    "One": "{0} {1} is hidden because of your playset's usage",
+    "Plural": "{0} {1} are hidden because of your playset's usage"
   },
   "EditCompatibility": {
     "One": "Edit this package's compatibility",
@@ -372,7 +373,7 @@
   "AnyUsage": "Any Usage",
   "AnyState": "Any State",
   "ExplainIssue": "Describe your issue here",
-  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ExplainIssueInfo": "Include as much information as you can about what is happening and how to replicate it here",
   "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
   "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
   "SendReview": "Send the request for review",
@@ -411,8 +412,8 @@
     "Plural": "You will be subscribing to {0} packages in this process."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package during this process.",
-    "Plural": "You will be unsubscribing from {0} packages during this process."
+    "One": "You will be unsubscribing from {0} package in this process.",
+    "Plural": "You will be unsubscribing from {0} packages in this process."
   },
   "ViewThisPlaysetsPackages": "View the mods in this playset",
   "YouHavePackagesUser": {
@@ -442,13 +443,13 @@
   "UpdatePlaysetTip": "Update your local version of this playset",
   "DownloadPlaysetTip": "Download this playset to your local computer",
   "EditPlaysetThumbnail": "Edit this playset's thumbnail",
-  "MakePublic": "Make this profile Public",
-  "MakePrivate": "Make this profile Private",
+  "MakePublic": "Make this playset Public",
+  "MakePrivate": "Make this playset Private",
   "CopyPlaysetLink": "Copy this playset's ID",
   "FailedToUploadPlayset": "Failed to upload your playset",
   "FailedToDeletePlayset": "Failed to delete your playset",
   "FailedToUpdatePlayset": "Failed to update your playset",
-  "ImportFromLink": "Import a profile using a profile ID",
+  "ImportFromLink": "Import a playset using a playset ID",
   "PastePlaysetId": "Paste the ID of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignore Internet connection checks",
   "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected.",
@@ -459,6 +460,11 @@
   "EditTagsOfPackage": {
     "One": "Edit all of this package's assets' Tags",
     "Plural": "Edit all of the selected packages' assets' Tags"
+  },
+  "TagCount": {
+    "Zero": "Tags",
+    "One": "Tags: {0} selected",
+    "Plural": "Tags: {0} selected"
   },
   "TagsTitle": {
     "One": "Custom Tags: {0}",
@@ -587,19 +593,19 @@
   "Links": "Links",
   "NoAssets": "Disable All Assets",
   "NoMods": "Disable All Code-Mods",
-  "FavoritePlaysets": "Favourite Playsets",
+  "FavoritePlaysets": "Favorite Playsets",
   "OnlyShowErrors": "Only show warnings and errors",
   "RestartRequired": "Restart Required",
   "FailedToApplyChanges": "Failed to apply the requested changes.",
   "ConfirmSelection": "Confirm Selection",
   "PackagesSelected": "Packages Selected ({0})",
   "PackagesSelectionInfo": "Click on a package to select it, click on 'Confirm Selection' once you're finished.",
-  "CustomColor": "Custom Colour",
+  "CustomColor": "Custom Color",
   "CustomThumbnail": "Custom Thumbnail",
   "NoThumbnail": "Disable Thumbnail",
   "PlaysetUsageInfo": "Selecting a dedicated usage for your playset allows Skyve to automatically hide mods that either do not match, or are not compatible with, your selected usage.",
-  "PlaysetColorSet": "Custom colour enabled",
-  "PlaysetColorNotSet": "No custom colour selected",
+  "PlaysetColorSet": "Custom color enabled",
+  "PlaysetColorNotSet": "No custom color selected",
   "PlaysetThumbnailSet": "Custom thumbnail enabled",
   "PlaysetThumbnailNotSet": "No custom thumbnail selected",
   "OpenPlaysetPage": "Open this playset's page",
@@ -620,8 +626,8 @@
   "DropImportFile": "Release to import the {0} from this report",
   "OutOfDateItem": "Out of date {0}",
   "Bio": "Bio",
-  "ColoredAuthorNames": "Colour authors & users' name and avatar",
-  "ColoredAuthorNames_Tip": "Adds a unique colour for each author/user, the user's name and avatar will use that colour so it's easier to keep track of specific users.",
+  "ColoredAuthorNames": "Color authors & users' name and avatar",
+  "ColoredAuthorNames_Tip": "Adds a unique color for each author/user, the user's name and avatar will use that color so it's easier to keep track of specific users.",
   "DetectedIssues": "Detected Issues",
   "FixAllIssues": "Fix All Issues",
   "MarkAllAsRead": "Mark all as read",
