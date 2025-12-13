@@ -1,4 +1,5 @@
 {
+  "CloseSkyve": "スカイブを閉じる",
   "CompatibilityInfo": "互換性情報",
   "Dashboard": "ダッシュボード",
   "SearchDlcs": "DLCを検索...",
@@ -459,6 +460,11 @@
   "EditTagsOfPackage": {
     "One": "パッケージ内のアセットタグを全て編集",
     "Plural": "選択したパッケージのアセットタグを全て編集"
+  },
+  "TagCount": {
+    "Zero": "タグ",
+    "One": "タグ: {0} が選択されました",
+    "Plural": "タグ: {0} が選択されました"
   },
   "TagsTitle": {
     "One": "カスタムタグ: {0}",

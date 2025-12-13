@@ -1,4 +1,5 @@
 {
+  "CloseSkyve": "Închide Skyve",
   "CompatibilityInfo": "Informații despre compatibilitate",
   "Dashboard": "Panou de bord",
   "SearchDlcs": "Căutați prin DLC -urile dvs.",
@@ -459,6 +460,11 @@
   "EditTagsOfPackage": {
     "One": "Editează toate etichetele activelor acestui pachet",
     "Plural": "Editați toate etichetele activelor pachetelor selectate"
+  },
+  "TagCount": {
+    "Zero": "Etichete",
+    "One": "Etichete: {0} selectat",
+    "Plural": "Etichete: {0} selectat"
   },
   "TagsTitle": {
     "One": "Etichete personalizate: {0}",

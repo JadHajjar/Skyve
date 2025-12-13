@@ -1,4 +1,5 @@
 {
+  "CloseSkyve": "Stäng Skyve",
   "CompatibilityInfo": "Kompatibilitetsinformation",
   "Dashboard": "Instrumentbräda",
   "SearchDlcs": "Sök igenom dina DLC..",
@@ -459,6 +460,11 @@
   "EditTagsOfPackage": {
     "One": "Redigera alla taggar för paketets tillgångar",
     "Plural": "Redigera alla valda pakets taggar"
+  },
+  "TagCount": {
+    "Zero": "Taggar",
+    "One": "Taggar: {0} har valts",
+    "Plural": "Taggar: {0} har valts"
   },
   "TagsTitle": {
     "One": "Anpassade Taggar: {0}",

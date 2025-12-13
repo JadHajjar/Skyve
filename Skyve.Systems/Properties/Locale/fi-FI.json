@@ -1,4 +1,5 @@
 {
+  "CloseSkyve": "Sulje Taivas",
   "CompatibilityInfo": "Yhteensopivuustiedot",
   "Dashboard": "Kojelauta",
   "SearchDlcs": "Etsi lisäosista..",
@@ -459,6 +460,11 @@
   "EditTagsOfPackage": {
     "One": "Muokkaa kaikkia tämän paketin omaisuutta",
     "Plural": "Muokkaa kaikkia valittujen pakettien sisältöjä"
+  },
+  "TagCount": {
+    "Zero": "Tunnisteet",
+    "One": "Tunnisteet: {0} valittu",
+    "Plural": "Tunnisteet: {0} valittu"
   },
   "TagsTitle": {
     "One": "Mukautetut Tunnisteet: {0}",

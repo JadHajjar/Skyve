@@ -1,4 +1,5 @@
 {
+  "CloseSkyve": "Fermer Skyve",
   "CompatibilityInfo": "Infos de compatibilité",
   "Dashboard": "Tableau de bord",
   "SearchDlcs": "Recherchez dans vos DLC..",
@@ -459,6 +460,11 @@
   "EditTagsOfPackage": {
     "One": "Modifier tous les tags des assets de ce paquet",
     "Plural": "Modifier tous les tags des assets sélectionnés de ce paquet"
+  },
+  "TagCount": {
+    "Zero": "Tags",
+    "One": "Tags : {0} sélectionné",
+    "Plural": "Tags : {0} sélectionné"
   },
   "TagsTitle": {
     "One": "Tags personnalisés : {0}",

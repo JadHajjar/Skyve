@@ -1,4 +1,5 @@
 {
+  "CloseSkyve": "关闭 Skyve",
   "CompatibilityInfo": "兼容性信息",
   "Dashboard": "统计面板",
   "SearchDlcs": "搜索您的 DLC…",
@@ -459,6 +460,11 @@
   "EditTagsOfPackage": {
     "One": "编辑此插件中所有资产的标签",
     "Plural": "编辑所有选中插件里的资产的标签"
+  },
+  "TagCount": {
+    "Zero": "标签",
+    "One": "标签：已选择 {0}",
+    "Plural": "标签：已选择 {0}"
   },
   "TagsTitle": {
     "One": "自定义标签：{0}",

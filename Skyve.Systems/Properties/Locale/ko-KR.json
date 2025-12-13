@@ -1,4 +1,5 @@
 {
+  "CloseSkyve": "Close Skyve",
   "CompatibilityInfo": "호환성 정보",
   "Dashboard": "대시보드",
   "SearchDlcs": "내 DLC에서 검색..",
@@ -459,6 +460,11 @@
   "EditTagsOfPackage": {
     "One": "이 패키지의 모든 에셋의 태그를 편집",
     "Plural": "선택된 모든 패키지의 에셋의 태그를 편집"
+  },
+  "TagCount": {
+    "Zero": "태그",
+    "One": "Tags: {0} selected",
+    "Plural": "Tags: {0} selected"
   },
   "TagsTitle": {
     "One": "커스텀 태그: {0}",

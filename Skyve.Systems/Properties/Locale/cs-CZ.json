@@ -1,4 +1,5 @@
 {
+  "CloseSkyve": "Zavřít Skyve",
   "CompatibilityInfo": "Informace o kompatibilitě",
   "Dashboard": "Přehled",
   "SearchDlcs": "Prohledejte své DLC ..",
@@ -459,6 +460,11 @@
   "EditTagsOfPackage": {
     "One": "Upravit všechny štítky položek tohoto balíčku",
     "Plural": "Upravit všechny štítky vybraných balíčků"
+  },
+  "TagCount": {
+    "Zero": "Štítky",
+    "One": "Štítky: vybráno {0}",
+    "Plural": "Štítky: vybráno {0}"
   },
   "TagsTitle": {
     "One": "Vlastní štítky: {0}",
