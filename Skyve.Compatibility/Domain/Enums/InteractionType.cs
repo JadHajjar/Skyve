@@ -5,7 +5,7 @@ public enum InteractionType
 	[CRN(NotificationType.None, false)]
 	None = 0,
 
-	[CRN(NotificationType.Obsolete, [StatusAction.Switch, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]
+	[CRN(NotificationType.Obsolete, [StatusAction.Switch, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.CanAdd)]
 	Successor = 1,
 
 	[CRN(NotificationType.None, [StatusAction.SelectOne, StatusAction.Switch, StatusAction.NoAction], AllowedChange = CRNAttribute.ChangeType.Deny)]

@@ -97,7 +97,12 @@ internal class D_NotificationCenter : IDashboardItem
 
 	private string GetDateGroup(INotificationInfo info)
 	{
-		if (info.Time.Date == DateTime.Today)
+		if (info.Time == DateTime.MaxValue)
+		{
+			return LocaleSlickUI.Important;
+		}
+
+		if (info.Time.Date == DateTime.Today || info.Time.Date == DateTime.MinValue)
 		{
 			return LocaleSlickUI.Today;
 		}
@@ -139,7 +144,7 @@ internal class D_NotificationCenter : IDashboardItem
 	{
 		using var icon = IconManager.GetIcon(notification.Icon);
 		var maxWidth = e.ClipRectangle.Width - Margin.Horizontal - icon.Width - Margin.Left;
-		var timeText = notification.Time.Date >= DateTime.Today.AddDays(-1) ? notification.Time.ToString("t") : notification.Time >= DateTime.Now.AddDays(-7) ? notification.Time.ToString("dddd") : notification.Time.ToReadableString(false, fullMonth: false);
+		var timeText = (notification.Time == DateTime.MaxValue || notification.Time == DateTime.MinValue) ? string.Empty : notification.Time.Date >= DateTime.Today.AddDays(-1) ? notification.Time.ToString("t") : notification.Time >= DateTime.Now.AddDays(-7) ? notification.Time.ToString("dddd") : notification.Time.ToReadableString(false, fullMonth: false);
 		using var timeFont = UI.Font(6.25F);
 		var timeWidth = (int)e.Graphics.Measure(timeText, timeFont).Width;
 		using var titleFont = UI.Font(8.75F, FontStyle.Bold).FitTo(notification.Title, new Rectangle(0, 0, maxWidth - timeWidth, UI.Scale(32)), e.Graphics);

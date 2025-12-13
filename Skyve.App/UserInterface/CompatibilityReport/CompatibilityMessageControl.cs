@@ -45,7 +45,7 @@ public class CompatibilityMessageControl : SlickControl
 		Message = message;
 		PackageCompatibilityReportControl = packageCompatibilityReportControl;
 
-		if (message.Packages?.Count() != 0 && !message.Packages.All(x => x.GetWorkshopInfo() is not null))
+		if (message.Packages?.Count() != 0 && !message.Packages.All(x => x.IsDlc || x.GetWorkshopInfo() is not null))
 		{
 			_notifier.WorkshopInfoUpdated += Invalidate;
 		}
@@ -493,7 +493,10 @@ public class CompatibilityMessageControl : SlickControl
 
 		rectangle.Height += DrawTitleAndTags(e, package, textRect, cursor);
 
-		rectangle.Height += DrawAuthor(e, package, new Rectangle(textRect.X, rectangle.Bottom, textRect.Width, textRect.Height), cursor);
+		if (!package.IsDlc)
+		{
+			rectangle.Height += DrawAuthor(e, package, new Rectangle(textRect.X, rectangle.Bottom, textRect.Width, textRect.Height), cursor);
+		}
 
 		_modRects[package] = thumbRect;
 

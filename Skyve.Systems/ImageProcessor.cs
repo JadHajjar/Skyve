@@ -13,7 +13,7 @@ internal class ImageProcessor : PeriodicProcessor<ImageProcessor.ImageRequest, I
 {
 	private readonly IImageService _imageManager;
 
-	public ImageProcessor(IImageService imageManager) : base(10, 150, null)
+	public ImageProcessor(IImageService imageManager) : base(10, 150, 0, null)
 	{
 		_imageManager = imageManager;
 	}

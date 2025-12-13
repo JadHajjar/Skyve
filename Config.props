@@ -19,8 +19,8 @@
 	</PropertyGroup>
 	
 	<PropertyGroup Label="Versions">
-		<Version Condition="'$(GameVersion)' == 'CS2' AND ('$(BuildType)' == 'Stable' OR '$(BuildType)' == 'Steam')">1.1.1</Version> <!--CS2 STABLE-->
-		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">1.1.1</Version> <!--CS2 BETA-->
+		<Version Condition="'$(GameVersion)' == 'CS2' AND ('$(BuildType)' == 'Stable' OR '$(BuildType)' == 'Steam')">1.1.7</Version> <!--CS2 STABLE-->
+		<Version Condition="'$(GameVersion)' == 'CS2' AND '$(BuildType)' != 'Stable'">1.1.7</Version> <!--CS2 BETA-->
 		
 		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' == 'Stable'">3.3.2.1</Version> <!--CS1 STABLE-->
 		<Version Condition="'$(GameVersion)' == 'CS1' AND '$(BuildType)' != 'Stable'">3.3.2.1</Version> <!--CS1 BETA-->

@@ -416,6 +416,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ClearFilterTutorialTitle => _instance.GetText("ClearFilterTutorialTitle");
 
 	/// <summary>
+	/// Close Skyve
+	/// </summary>
+	public static Translation CloseSkyve => _instance.GetText("CloseSkyve");
+
+	/// <summary>
 	/// <para>Code Mod</para>
 	/// <para>Plural: Code Mods</para>
 	/// </summary>
@@ -2430,6 +2435,13 @@ public class Locale : LocaleHelper, ILocale
 	/// Switch to this mod
 	/// </summary>
 	public static Translation SwitchToItem => _instance.GetText("SwitchToItem");
+
+	/// <summary>
+	/// <para>Tags: {0} selected</para>
+	/// <para>Zero: Tags</para>
+	/// <para>Plural: Tags: {0} selected</para>
+	/// </summary>
+	public static Translation TagCount => _instance.GetText("TagCount");
 
 	/// <summary>
 	/// <para>Custom Tags: {0}</para>

@@ -17,7 +17,7 @@ public class MiniPackageControl : SlickControl
 	private readonly IModUtil _modUtil;
 	private readonly IDlcManager _dlcManager;
 
-	public IPackageIdentity Package => (_package ?? _workshopService.GetInfo(new GenericPackageIdentity(Id))) ?? new GenericPackageIdentity(Id);
+	public IPackageIdentity Package => (_package ?? (IsDlc ? null : _workshopService.GetInfo(new GenericPackageIdentity(Id)))) ?? new GenericPackageIdentity(Id);
 	public ulong Id { get; }
 
 	public bool ReadOnly { get; set; }

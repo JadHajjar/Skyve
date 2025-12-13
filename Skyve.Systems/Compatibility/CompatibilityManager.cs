@@ -395,11 +395,11 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 		else if (stability is PackageStability.BrokenFromPatch)
 		{
-			if (!_compatibilityHelper.IsPackageEnabled(package, workshopInfo, false))
+			/*if (!_compatibilityHelper.IsPackageEnabled(package, workshopInfo, false))
 			{
 				stability = PackageStability.BrokenFromPatchSafe;
 			}
-			else if (workshopInfo?.ServerTime > packageData.ReviewDate)
+			else */if (workshopInfo?.ServerTime > packageData.ReviewDate)
 			{
 				stability = PackageStability.BrokenFromPatchUpdated;
 			}
@@ -442,7 +442,7 @@ public class CompatibilityManager : ICompatibilityManager
 		if (stability is PackageStability.BrokenFromPatch or PackageStability.BrokenFromPatchSafe or PackageStability.BrokenFromPatchUpdated)
 		{
 			info.AddWithLocale(ReportType.Stability,
-				new StabilityStatus(stability, null, false) { Note = packageData.Note },
+				new StabilityStatus(stability, null, false) { Note = packageData.Note, Action = StatusAction.DisableThis },
 				packageName,
 				$"Stability_{stability}",
 				[_citiesManager.GameVersion ?? packageData.ReviewedGameVersion ?? string.Empty, packageName ?? package.Name]);

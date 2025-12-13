@@ -1023,7 +1023,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityBroken => _instance.GetText("Stability_Broken");
 
 	/// <summary>
-	/// '{1}' broke after its latest update{0}. Please wait until it is updated before using it. In the meantime, you should disable it.
+	/// '{1}' broke after its latest update{0}. Please wait until it is updated before using it. In the meantime, you should not use it.
 	/// </summary>
 	public static Translation StabilityBrokenFromNewVersion => _instance.GetText("Stability_BrokenFromNewVersion");
 
@@ -1033,7 +1033,7 @@ public class LocaleCR : LocaleHelper
 	public static Translation StabilityBrokenFromNewVersionSafe => _instance.GetText("Stability_BrokenFromNewVersionSafe");
 
 	/// <summary>
-	/// '{1}' broke after patch {0} of the game. Please wait until it is updated before using it. In the meantime, you should disable it.
+	/// '{1}' broke after patch {0} of the game. Please wait until it is updated before using it. In the meantime, you should not use it.
 	/// </summary>
 	public static Translation StabilityBrokenFromPatch => _instance.GetText("Stability_BrokenFromPatch");
 

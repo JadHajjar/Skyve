@@ -1,4 +1,5 @@
 ﻿using Skyve.App.UserInterface.Content;
+using Skyve.App.UserInterface.Generic;
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,8 +10,6 @@ public class PC_WorkshopList : PanelContent
 {
 	private readonly IWorkshopService _workshopService;
 	protected internal readonly WorkshopContentList LC_Items;
-
-	private static List<ITag> lastSelectedTags = [];
 
 	public PC_WorkshopList() : base(false)
 	{
@@ -24,8 +23,6 @@ public class PC_WorkshopList : PanelContent
 			Dock = DockStyle.Fill
 		};
 
-		LC_Items.TagsControl!.SelectedTags.AddRange(lastSelectedTags);
-		LC_Items.TagsControl!.SelectedTagChanged += DD_Tags_SelectedItemChanged;
 		LC_Items.PaginationControl!.PageSelected += PageChanged;
 
 		Controls.Add(LC_Items);
@@ -35,11 +32,6 @@ public class PC_WorkshopList : PanelContent
 #else
 		Text = "Steam Workshop";
 #endif
-	}
-
-	private void DD_Tags_SelectedItemChanged(object sender, EventArgs e)
-	{
-		lastSelectedTags = LC_Items.TagsControl!.SelectedTags.ToList();
 	}
 
 	protected override async void OnCreateControl()
@@ -94,7 +86,7 @@ public class PC_WorkshopList : PanelContent
 			   LC_Items.TB_Search.Text.Substring(1),
 			   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
 			   null,
-			   LC_Items.TagsControl?.SelectedTags.Select(x => x.Value).ToArray(),
+			   WorkshopTagsControl.SelectedTags.ToArray(),
 			   limit: 30,
 			   page: page);
 		}
@@ -104,7 +96,7 @@ public class PC_WorkshopList : PanelContent
 			   (WorkshopQuerySorting)(LC_Items.DD_Sorting.SelectedItem - (int)PackageSorting.WorkshopSorting),
 			   LC_Items.DD_SearchTime.SelectedItem,
 			   LC_Items.TB_Search.Text,
-			   LC_Items.TagsControl?.SelectedTags.Select(x => x.Value).ToArray(),
+			   WorkshopTagsControl.SelectedTags.ToArray(),
 			   limit: 30,
 			   page: page);
 		}
@@ -122,8 +114,8 @@ public class PC_WorkshopList : PanelContent
 	public void SetSettings(PackageSorting sorting, string[]? selectedTags, WorkshopSearchTime searchTime = WorkshopSearchTime.Month)
 	{
 		LC_Items.DD_Sorting.SelectedItem = sorting;
-		LC_Items.TagsControl!.SelectedTags.Clear();
-		LC_Items.TagsControl!.SelectedTags.AddRange(selectedTags?.Select(ServiceCenter.Get<ITagsService>().CreateWorkshopTag));
+		WorkshopTagsControl.SelectedTags.Clear();
+		WorkshopTagsControl.SelectedTags.AddRange(selectedTags);
 		LC_Items.DD_SearchTime.SelectedItem = searchTime;
 	}
 }

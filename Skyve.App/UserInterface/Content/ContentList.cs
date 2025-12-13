@@ -33,7 +33,7 @@ public partial class ContentList : SlickControl
 	private readonly List<string> searchTermsOr = [];
 	private readonly List<string> searchTermsAnd = [];
 	private readonly List<string> searchTermsExclude = [];
-	public WorkshopTagsControl? TagsControl;
+	public WorkshopTagsContainer? TagsControl;
 	public WorkshopPaginationControl? PaginationControl;
 	public readonly ItemListControl ListControl;
 
@@ -148,17 +148,16 @@ public partial class ContentList : SlickControl
 		I_Actions.IsSelected = ListControl.SelectedItemsCount > 0;
 	}
 
-	protected void RefreshAuthorAndTags()
+	protected virtual void RefreshAuthorAndTags()
 	{
 		var items = new List<IPackageIdentity>(ListControl.Items);
 
 		DD_Author.RefreshItems();
 		DD_Tags.Items = _tagUtil.GetDistinctTags().ToArray();
 
-		if (TagsControl is not null)
+		if (TagsControl is not null && WorkshopTagsControl.Tags.Count == 0)
 		{
-			TagsControl.Tags = _workshopService.GetAvailableTags().ToArray();
-			TagsControl.Loading = false;
+			TagsControl.SetTags(_workshopService.GetAvailableTags());
 		}
 	}
 
@@ -167,12 +166,12 @@ public partial class ContentList : SlickControl
 		var panel = new PC_WorkshopList();
 
 		panel.LC_Items.TB_Search.Text = TB_Search.Text;
-		panel.LC_Items.TagsControl!.SelectedTags.AddRange(DD_Tags.SelectedItems.Where(x => x.IsWorkshop));
+		WorkshopTagsControl.SelectedTags.AddRange(DD_Tags.SelectedItems.Where(x => x.IsWorkshop).Select(x => x.Key));
 
 		if (Page is SkyvePage.Mods)
 		{
-			panel.LC_Items.TagsControl!.SelectedTags.Clear();
-			panel.LC_Items.TagsControl!.SelectedTags.Add(_tagUtil.CreateWorkshopTag("Code Mod"));
+			WorkshopTagsControl.SelectedTags.Clear();
+			WorkshopTagsControl.SelectedTags.Add("Code Mod");
 		}
 
 		Program.MainForm.PushPanel(panel);
@@ -345,7 +344,7 @@ public partial class ContentList : SlickControl
 			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin = DD_PackageType.Margin
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_PackageUsage.Margin = DD_Playset.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2));
 
-		TLP_MiddleBar.Padding = UI.Scale(new Padding(3, 0, 3, 0));
+		TLP_MiddleBar.Padding = UI.Scale(new Padding(0, 0, 3, 0));
 
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16));
 		DD_SearchTime.Width = UI.Scale(100);
@@ -497,7 +496,7 @@ public partial class ContentList : SlickControl
 
 				await RefreshItems();
 			}
-			else if (sender == TagsControl)
+			else if (sender is WorkshopTagsControl)
 			{
 				PaginationControl!.Page = 0;
 
