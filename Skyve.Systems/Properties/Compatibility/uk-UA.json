@@ -304,6 +304,7 @@
   "LinkedPackages": "Зв'язані пакети",
   "NoTags": "Немає міток",
   "NoLinks": "Немає посилань",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "Приховати модифікації, які переглянуті",
   "ApplyRecommendedAction": "Застосувати рекомендовану дію",
   "AddMeaningfulNote": "Додайте нотатку, описуючи, що не так з цим пакетом.",

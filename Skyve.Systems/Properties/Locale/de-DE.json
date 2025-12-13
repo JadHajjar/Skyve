@@ -70,7 +70,7 @@
   "Sorting_LoadOrder": "Ladereihenfolge",
   "FolderSettings": "Ordnereinstellungen",
   "ShowDatesRelatively": "Zeige die Daten relativ zur aktuellen Zeit an",
-  "CreatePlayset": "Ein neues Playset erstellen",
+  "CreatePlayset": "Ein neues Spielset erstellen",
   "CouldNotCreatePlayset": "Es konnte kein neues Spielset erstellt werden.",
   "CreatePlaysetHere": "Hier klicken zum Erstellen eines neuen oder aktivieren eines vorherigen Spielsets",
   "Maintenance": "Wartung",
@@ -379,6 +379,10 @@
   "EditTags": {
     "One": "Tags dieses Pakets bearbeiten",
     "Plural": "Tags der ausgewählten Elemente bearbeiten"
+  },
+  "RemoveVersionLock": {
+    "One": "Entferne die Versionssperre dieses Pakets",
+    "Plural": "Entferne die Versionssperre der ausgewählten Pakete"
   },
   "EditLinks": {
     "One": "Links dieses Pakets bearbeiten",
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Mods entfernen - Tutorial",
   "ExclusionTutorialText": "Du kannst Mods von deinem aktiven Playset entfernen, indem du die ALT-Taste gedrückt hälst und auf das Kontrollkästchen des Mods klickst.\r\n\r\nDu kannst auch einen Mod von allen Playsets hinzufügen oder entfernen indem du mit der rechten Maustaste klickst.",
   "ClearFilterTutorialTitle": "Clearing-Filter - Tutorial",
-  "ClearFilterTutorialText": "Wenn Sie Ihre Filter schnell löschen möchten, können Sie mit der mittleren Maustaste auf einen Filter klicken, um ihn zu löschen.\r\n\r\nDu kannst das auch über den 'Filter anzeigen/ausblenden' Button tun, um alle Filter auf einmal zu löschen."
+  "ClearFilterTutorialText": "Wenn Sie Ihre Filter schnell löschen möchten, können Sie mit der mittleren Maustaste auf einen Filter klicken, um ihn zu löschen.\r\n\r\nDu kannst das auch über den 'Filter anzeigen/ausblenden' Button tun, um alle Filter auf einmal zu löschen.",
+  "UpdateMod": "Mod aktualisieren",
+  "VersionLocked": "Version gesperrt",
+  "VersionLockedInfo": "'{0}' ist auf Version {1} in diesem Spielset gesperrt."
 }

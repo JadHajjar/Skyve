@@ -304,6 +304,7 @@
   "LinkedPackages": "リンクされたパッケージ",
   "NoTags": "タグなし",
   "NoLinks": "リンクなし",
+  "NoPackages": "No Packages",
   "HideReviewedPackages": "レビューしたModを隠す",
   "ApplyRecommendedAction": "推奨されるアクションを適用",
   "AddMeaningfulNote": "このパッケージの何が間違っているかを説明するメモを追加してください。",

@@ -380,6 +380,10 @@
     "One": "Edytuj tagi tego pakietu",
     "Plural": "Edytuj tagi wybranych elementów"
   },
+  "RemoveVersionLock": {
+    "One": "Usuń blokadę wersji tego pakietu",
+    "Plural": "Usuń blokadę wersji wybranych elementów"
+  },
   "EditLinks": {
     "One": "Edytuj linki tego pakietu",
     "Plural": "Edytuj linki wybranych elementów"
@@ -702,5 +706,8 @@
   "ExclusionTutorialTitle": "Usuwanie modów — poradnik",
   "ExclusionTutorialText": "Możesz usunąć mody z aktywnego zestawu, przytrzymując klawisz ALT i klikając pole wyboru przy modzie.\n\nMożesz też dodać lub usunąć mod ze wszystkich zestawów, korzystając z menu po kliknięciu prawym przyciskiem myszy.",
   "ClearFilterTutorialTitle": "Czyszczenie filtrów — poradnik",
-  "ClearFilterTutorialText": "Jeśli chcesz szybko wyczyścić filtry, kliknij na filtr środkowym przyciskiem myszy.\n\nMożesz też kliknąć przycisk „Pokaż/Ukryj filtry” środkowym przyciskiem myszy, aby wyczyścić wszystkie filtry jednocześnie."
+  "ClearFilterTutorialText": "Jeśli chcesz szybko wyczyścić filtry, kliknij na filtr środkowym przyciskiem myszy.\n\nMożesz też kliknąć przycisk „Pokaż/Ukryj filtry” środkowym przyciskiem myszy, aby wyczyścić wszystkie filtry jednocześnie.",
+  "UpdateMod": "Zaktualizuj moda",
+  "VersionLocked": "Wersja zablokowana",
+  "VersionLockedInfo": "'{0}' jest zablokowany w wersji {1} w tym zestawie."
 }
