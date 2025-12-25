@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Pokud chcete rychle vymazat filtry, můžete kliknout na filtr pomocí svého středního tlačítka myši pro jeho vymazání.\r\n\r\nMůžete to také udělat na tlačítku 'Zobrazit/skrýt filtry' pro vymazání všech filtrů najednou.",
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data.."
 }
