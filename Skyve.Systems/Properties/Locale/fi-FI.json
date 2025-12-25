@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Jos haluat poistaa suodattimet nopeasti, voit klikata suodatinta käyttämällä keski-hiiri-painiketta tyhjentääksesi suodattimesi.\r\n\r\nVoit myös tehdä sen 'Näytä/piilota suodattimet' -painikkeella tyhjentääksesi kaikki suodattimet kerralla.",
   "UpdateMod": "Päivitä modi",
   "VersionLocked": "Versio lukittu",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data.."
 }
