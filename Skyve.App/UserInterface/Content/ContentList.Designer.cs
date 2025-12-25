@@ -48,19 +48,20 @@ partial class ContentList
 			this.B_Filters = new SlickControls.SlickLabel();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
-			this.DD_Sorting = new Skyve.App.UserInterface.Dropdowns.SortingDropDown();
 			this.TLP_MiddleBar = new System.Windows.Forms.TableLayoutPanel();
-			this.C_ViewTypeControl = new Skyve.App.UserInterface.Generic.ViewTypeControl();
-			this.L_Counts = new Skyve.App.UserInterface.Generic.ItemCountControl();
 			this.P_FiltersContainer = new System.Windows.Forms.Panel();
 			this.P_Filters = new SlickControls.RoundedGroupTableLayoutPanel();
+			this.I_ClearFilters = new SlickControls.SlickIcon();
+			this.DR_SubscribeTime = new SlickControls.SlickDateRange();
+			this.DR_ServerTime = new SlickControls.SlickDateRange();
+			this.I_SortOrder = new SlickControls.SlickIcon();
+			this.DD_Sorting = new Skyve.App.UserInterface.Dropdowns.SortingDropDown();
+			this.C_ViewTypeControl = new Skyve.App.UserInterface.Generic.ViewTypeControl();
+			this.L_Counts = new Skyve.App.UserInterface.Generic.ItemCountControl();
 			this.OT_ModAsset = new Skyve.App.UserInterface.Generic.ThreeOptionToggle();
 			this.OT_Workshop = new Skyve.App.UserInterface.Generic.ThreeOptionToggle();
 			this.OT_Enabled = new Skyve.App.UserInterface.Generic.ThreeOptionToggle();
 			this.OT_Included = new Skyve.App.UserInterface.Generic.ThreeOptionToggle();
-			this.I_ClearFilters = new SlickControls.SlickIcon();
-			this.DR_SubscribeTime = new SlickControls.SlickDateRange();
-			this.DR_ServerTime = new SlickControls.SlickDateRange();
 			this.DD_Tags = new Skyve.App.UserInterface.Dropdowns.TagsDropDown();
 			this.DD_ReportSeverity = new Skyve.App.UserInterface.Dropdowns.ReportSeverityDropDown();
 			this.DD_Author = new Skyve.App.UserInterface.Dropdowns.AuthorDropDown();
@@ -68,7 +69,6 @@ partial class ContentList
 			this.DD_PackageUsage = new Skyve.App.UserInterface.Dropdowns.PackageUsageDropDown();
 			this.DD_PackageStatus = new Skyve.App.UserInterface.Dropdowns.PackageStatusDropDown();
 			this.DD_PackageType = new Skyve.App.UserInterface.Dropdowns.PackageTypeDropDown();
-			this.I_SortOrder = new SlickControls.SlickIcon();
 			this.DD_SearchTime = new Skyve.App.UserInterface.Dropdowns.WorkshopSearchTimeDropDown();
 			this.TLP_Main.SuspendLayout();
 			this.FLP_Search.SuspendLayout();
@@ -131,11 +131,12 @@ partial class ContentList
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
-			this.TB_Search.Padding = new System.Windows.Forms.Padding(7, 7, 85, 7);
+			this.TB_Search.Padding = new System.Windows.Forms.Padding(7, 7, 46, 7);
 			this.TB_Search.Placeholder = "SearchGenericPackages";
 			this.TB_Search.SelectedText = "";
 			this.TB_Search.SelectionLength = 0;
 			this.TB_Search.SelectionStart = 0;
+			this.TB_Search.MaxLength = 120;
 			this.TB_Search.ShowLabel = false;
 			this.TB_Search.Size = new System.Drawing.Size(14, 51);
 			this.TB_Search.TabIndex = 0;
@@ -165,7 +166,7 @@ partial class ContentList
 			this.B_Filters.Location = new System.Drawing.Point(43, 3);
 			this.B_Filters.Name = "B_Filters";
 			this.B_Filters.Selected = false;
-			this.B_Filters.Size = new System.Drawing.Size(118, 30);
+			this.B_Filters.Size = new System.Drawing.Size(121, 30);
 			this.B_Filters.SpaceTriggersClick = true;
 			this.B_Filters.TabIndex = 1;
 			this.B_Filters.Text = "ShowFilters";
@@ -195,21 +196,6 @@ partial class ContentList
 			this.slickSpacer1.TabStop = false;
 			this.slickSpacer1.Text = "slickSpacer1";
 			// 
-			// DD_Sorting
-			// 
-			this.DD_Sorting.AccentBackColor = true;
-			this.DD_Sorting.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Sorting.HideLabel = true;
-			this.DD_Sorting.ItemHeight = 24;
-			this.DD_Sorting.Location = new System.Drawing.Point(890, 3);
-			this.DD_Sorting.Name = "DD_Sorting";
-			this.DD_Sorting.Size = new System.Drawing.Size(50, 0);
-			this.DD_Sorting.SkyvePage = Skyve.Domain.Enums.SkyvePage.None;
-			this.DD_Sorting.TabIndex = 2;
-			this.DD_Sorting.Text = "Sort By";
-			this.DD_Sorting.WorkshopSort = false;
-			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
-			// 
 			// TLP_MiddleBar
 			// 
 			this.TLP_MiddleBar.AutoSize = true;
@@ -231,27 +217,6 @@ partial class ContentList
 			this.TLP_MiddleBar.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_MiddleBar.Size = new System.Drawing.Size(943, 35);
 			this.TLP_MiddleBar.TabIndex = 6;
-			// 
-			// C_ViewTypeControl
-			// 
-			this.C_ViewTypeControl.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.C_ViewTypeControl.Location = new System.Drawing.Point(790, 3);
-			this.C_ViewTypeControl.Name = "C_ViewTypeControl";
-			this.C_ViewTypeControl.Size = new System.Drawing.Size(150, 29);
-			this.C_ViewTypeControl.TabIndex = 3;
-			this.C_ViewTypeControl.CompactClicked += new System.EventHandler(this.B_CompactList_Click);
-			this.C_ViewTypeControl.ListClicked += new System.EventHandler(this.B_ListView_Click);
-			this.C_ViewTypeControl.GridClicked += new System.EventHandler(this.B_GridView_Click);
-			// 
-			// L_Counts
-			// 
-			this.L_Counts.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.L_Counts.Location = new System.Drawing.Point(0, 0);
-			this.L_Counts.Margin = new System.Windows.Forms.Padding(0);
-			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(787, 35);
-			this.L_Counts.TabIndex = 4;
-			this.L_Counts.Text = "itemCountControl1";
 			// 
 			// P_FiltersContainer
 			// 
@@ -303,6 +268,87 @@ partial class ContentList
 			this.P_Filters.TabIndex = 0;
 			this.P_Filters.Text = "Filters";
 			this.P_Filters.UseFirstRowForPadding = true;
+			// 
+			// I_ClearFilters
+			// 
+			this.I_ClearFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.I_ClearFilters.ColorStyle = Extensions.ColorStyle.Red;
+			this.I_ClearFilters.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon4.Name = "ClearFilter";
+			this.I_ClearFilters.ImageName = dynamicIcon4;
+			this.I_ClearFilters.Location = new System.Drawing.Point(901, 12);
+			this.I_ClearFilters.Name = "I_ClearFilters";
+			this.I_ClearFilters.Size = new System.Drawing.Size(30, 21);
+			this.I_ClearFilters.TabIndex = 1;
+			this.I_ClearFilters.Click += new System.EventHandler(this.I_ClearFilters_Click);
+			// 
+			// DR_SubscribeTime
+			// 
+			this.DR_SubscribeTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DR_SubscribeTime.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DR_SubscribeTime.Location = new System.Drawing.Point(243, 39);
+			this.DR_SubscribeTime.Name = "DR_SubscribeTime";
+			this.DR_SubscribeTime.Size = new System.Drawing.Size(225, 20);
+			this.DR_SubscribeTime.TabIndex = 4;
+			this.DR_SubscribeTime.RangeChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// DR_ServerTime
+			// 
+			this.DR_ServerTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DR_ServerTime.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DR_ServerTime.Location = new System.Drawing.Point(243, 65);
+			this.DR_ServerTime.Name = "DR_ServerTime";
+			this.DR_ServerTime.Size = new System.Drawing.Size(225, 20);
+			this.DR_ServerTime.TabIndex = 5;
+			this.DR_ServerTime.RangeChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// I_SortOrder
+			// 
+			this.I_SortOrder.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.I_SortOrder.Location = new System.Drawing.Point(854, 3);
+			this.I_SortOrder.Name = "I_SortOrder";
+			this.I_SortOrder.Size = new System.Drawing.Size(30, 33);
+			this.I_SortOrder.TabIndex = 1;
+			this.I_SortOrder.SizeChanged += new System.EventHandler(this.Icon_SizeChanged);
+			this.I_SortOrder.Click += new System.EventHandler(this.I_SortOrder_Click);
+			// 
+			// DD_Sorting
+			// 
+			this.DD_Sorting.AccentBackColor = true;
+			this.DD_Sorting.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Sorting.HideLabel = true;
+			this.DD_Sorting.ItemHeight = 24;
+			this.DD_Sorting.Location = new System.Drawing.Point(890, 3);
+			this.DD_Sorting.Name = "DD_Sorting";
+			this.DD_Sorting.Size = new System.Drawing.Size(50, 0);
+			this.DD_Sorting.SkyvePage = Skyve.Domain.Enums.SkyvePage.None;
+			this.DD_Sorting.TabIndex = 2;
+			this.DD_Sorting.Text = "Sort By";
+			this.DD_Sorting.WorkshopSort = false;
+			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
+			// 
+			// C_ViewTypeControl
+			// 
+			this.C_ViewTypeControl.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.C_ViewTypeControl.Location = new System.Drawing.Point(790, 3);
+			this.C_ViewTypeControl.Name = "C_ViewTypeControl";
+			this.C_ViewTypeControl.Size = new System.Drawing.Size(150, 29);
+			this.C_ViewTypeControl.TabIndex = 3;
+			this.C_ViewTypeControl.CompactClicked += new System.EventHandler(this.B_CompactList_Click);
+			this.C_ViewTypeControl.ListClicked += new System.EventHandler(this.B_ListView_Click);
+			this.C_ViewTypeControl.GridClicked += new System.EventHandler(this.B_GridView_Click);
+			// 
+			// L_Counts
+			// 
+			this.L_Counts.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.L_Counts.Location = new System.Drawing.Point(0, 0);
+			this.L_Counts.Margin = new System.Windows.Forms.Padding(0);
+			this.L_Counts.Name = "L_Counts";
+			this.L_Counts.Size = new System.Drawing.Size(787, 35);
+			this.L_Counts.TabIndex = 4;
+			this.L_Counts.Text = "itemCountControl1";
 			// 
 			// OT_ModAsset
 			// 
@@ -367,41 +413,6 @@ partial class ContentList
 			this.OT_Included.Size = new System.Drawing.Size(225, 20);
 			this.OT_Included.TabIndex = 0;
 			this.OT_Included.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// I_ClearFilters
-			// 
-			this.I_ClearFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.I_ClearFilters.ColorStyle = Extensions.ColorStyle.Red;
-			this.I_ClearFilters.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "ClearFilter";
-			this.I_ClearFilters.ImageName = dynamicIcon4;
-			this.I_ClearFilters.Location = new System.Drawing.Point(901, 12);
-			this.I_ClearFilters.Name = "I_ClearFilters";
-			this.I_ClearFilters.Size = new System.Drawing.Size(30, 21);
-			this.I_ClearFilters.TabIndex = 1;
-			this.I_ClearFilters.Click += new System.EventHandler(this.I_ClearFilters_Click);
-			// 
-			// DR_SubscribeTime
-			// 
-			this.DR_SubscribeTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DR_SubscribeTime.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DR_SubscribeTime.Location = new System.Drawing.Point(243, 39);
-			this.DR_SubscribeTime.Name = "DR_SubscribeTime";
-			this.DR_SubscribeTime.Size = new System.Drawing.Size(225, 20);
-			this.DR_SubscribeTime.TabIndex = 4;
-			this.DR_SubscribeTime.RangeChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// DR_ServerTime
-			// 
-			this.DR_ServerTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DR_ServerTime.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DR_ServerTime.Location = new System.Drawing.Point(243, 65);
-			this.DR_ServerTime.Name = "DR_ServerTime";
-			this.DR_ServerTime.Size = new System.Drawing.Size(225, 20);
-			this.DR_ServerTime.TabIndex = 5;
-			this.DR_ServerTime.RangeChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_Tags
 			// 
@@ -497,16 +508,6 @@ partial class ContentList
 			this.DD_PackageType.Size = new System.Drawing.Size(225, 20);
 			this.DD_PackageType.TabIndex = 8;
 			this.DD_PackageType.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// I_SortOrder
-			// 
-			this.I_SortOrder.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.I_SortOrder.Location = new System.Drawing.Point(854, 3);
-			this.I_SortOrder.Name = "I_SortOrder";
-			this.I_SortOrder.Size = new System.Drawing.Size(30, 33);
-			this.I_SortOrder.TabIndex = 1;
-			this.I_SortOrder.SizeChanged += new System.EventHandler(this.Icon_SizeChanged);
-			this.I_SortOrder.Click += new System.EventHandler(this.I_SortOrder_Click);
 			// 
 			// DD_SearchTime
 			// 

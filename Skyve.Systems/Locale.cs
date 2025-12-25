@@ -1397,6 +1397,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation LoadedCount => _instance.GetText("LoadedCount");
 
 	/// <summary>
+	/// Loading Mod Data..
+	/// </summary>
+	public static Translation LoadingModData => _instance.GetText("LoadingModData");
+
+	/// <summary>
 	/// Starts with the editor's 'Load' screen on launch
 	/// </summary>
 	public static Translation LoadsAssetOnLaunch => _instance.GetText("LoadsAssetOnLaunch");

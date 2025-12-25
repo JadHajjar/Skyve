@@ -38,6 +38,8 @@ public class WorkshopContentList : ContentList
 
 		TLP_Main.SetRowSpan(TagsControl, 2);
 
+		DD_Sorting.Dock = DockStyle.Top;
+
 //#if CS2
 //		var tagService = ServiceCenter.Get<ITagsService>();
 //		_workshopTags = [

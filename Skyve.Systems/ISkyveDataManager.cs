@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 namespace Skyve.Systems;
 public interface ISkyveDataManager
 {
+	ReviewRequest[]? ReviewRequests { get; }
+
 	Task DownloadData();
 	void Start(List<IPackage> packages);
 	void ResetCache();

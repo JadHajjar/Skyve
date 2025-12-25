@@ -48,5 +48,6 @@ public interface IWorkshopService
 	void RepairContext();
 	void CancelActions();
 	Task<bool> Logout();
+	bool IsInfoQueued(IPackageIdentity identity);
 #endif
 }
