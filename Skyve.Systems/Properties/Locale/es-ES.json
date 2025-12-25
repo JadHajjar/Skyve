@@ -1,5 +1,5 @@
 {
-  "CloseSkyve": "Cerrar cielo",
+  "CloseSkyve": "Cerrar Skyve",
   "CompatibilityInfo": "Informe de Compatibilidad",
   "Dashboard": "Consola",
   "SearchDlcs": "Buscar en la lista de DLC...",
@@ -716,5 +716,5 @@
   "UpdateMod": "Actualizar Mod",
   "VersionLocked": "Versión bloqueada",
   "VersionLockedInfo": "'{0}' está bloqueada a la versión {1} en este playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Cargando datos de mods..."
 }
