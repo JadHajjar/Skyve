@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "如果你想快速清除篩選條件，可以使用滑鼠中鍵點擊篩選器，即可清除該篩選條件。\n\n你也可以在「顯示/隱藏篩選器」按鈕上使用中鍵點擊，一次清除所有篩選條件。",
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data.."
 }
