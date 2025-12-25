@@ -716,5 +716,5 @@
   "UpdateMod": "Mettre à jour le Mod",
   "VersionLocked": "Version Verrouillée",
   "VersionLockedInfo": "'{0}' est verrouillé à la version {1} dans ce playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Chargement des données du mod.."
 }
