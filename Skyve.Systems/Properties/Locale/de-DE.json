@@ -716,5 +716,5 @@
   "UpdateMod": "Mod aktualisieren",
   "VersionLocked": "Version gesperrt",
   "VersionLockedInfo": "'{0}' ist auf Version {1} in diesem Spielset gesperrt.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Lade Mod-daten.."
 }
