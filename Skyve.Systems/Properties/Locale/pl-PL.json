@@ -716,5 +716,5 @@
   "UpdateMod": "Zaktualizuj moda",
   "VersionLocked": "Wersja zablokowana",
   "VersionLockedInfo": "'{0}' jest zablokowany w wersji {1} w tym zestawie.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Wczytywanie danych moda.."
 }
