@@ -463,8 +463,8 @@
   },
   "TagCount": {
     "Zero": "Tags",
-    "One": "Tags : {0} sélectionné",
-    "Plural": "Tags : {0} sélectionné"
+    "One": "Tags : {0} sélectionné(s)",
+    "Plural": "Tags : {0} sélectionné(s)"
   },
   "TagsTitle": {
     "One": "Tags personnalisés : {0}",
