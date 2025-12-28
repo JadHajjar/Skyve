@@ -716,5 +716,5 @@
   "UpdateMod": "更新模组",
   "VersionLocked": "版本已锁定",
   "VersionLockedInfo": "“{0}”在此配组中被锁定在版本 {1}。",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "正在加载模组数据..."
 }
