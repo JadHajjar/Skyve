@@ -716,5 +716,5 @@
   "UpdateMod": "Atualizar Mod",
   "VersionLocked": "Versão bloqueada",
   "VersionLockedInfo": "O '{0}' está bloqueado à versão {1} neste conjunto de jogo.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "A carregar dados do Mod.."
 }
