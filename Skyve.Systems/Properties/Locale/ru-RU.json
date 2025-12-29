@@ -716,5 +716,5 @@
   "UpdateMod": "Обновить модификацию",
   "VersionLocked": "Версия заблокирована",
   "VersionLockedInfo": "'{0}' заблокировано в версии {1}  из этого игрового набора",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Загрузка данных модификаций.."
 }
