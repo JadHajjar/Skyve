@@ -314,7 +314,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		{
 			var rectangle = e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Height * 3 / 5, e.Rects.IncludedRect.Height * 3 / 5);
 #if CS2
-			if (_subscriptionsManager.Status.ModId != Package.Id || _subscriptionsManager.Status.Progress == 0 || !_subscriptionsManager.Status.IsActive)
+			if (!_subscriptionsManager.TryGetDownloadStatus(Package.Id, out var status) || status.Stage > ModDownloadStage.Started)
 			{
 				DrawLoader(e.Graphics, rectangle, iconColor);
 				return;
@@ -326,7 +326,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 			var rect = new RectangleF(new PointF(rectangle.X + ((rectangle.Width - drawSize.Width) / 2), rectangle.Y + ((rectangle.Height - drawSize.Height) / 2)), drawSize).Pad(size / 2);
 			using var pen = new Pen(iconColor, size) { StartCap = LineCap.Round, EndCap = LineCap.Round };
 
-			e.Graphics.DrawArc(pen, rect, -90, 360 * _subscriptionsManager.Status.Progress);
+			e.Graphics.DrawArc(pen, rect, -90, 360 * status.TotalProgress);
 #else
 			DrawLoader(e.Graphics, rectangle, iconColor);
 #endif

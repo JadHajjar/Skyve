@@ -325,7 +325,7 @@ public class MiniPackageControl : SlickControl
 		{
 			iconRect = buttonRect.CenterR(buttonRect.Height * 3 / 5, buttonRect.Height * 3 / 5);
 
-			if (_subscriptionsManager.Status.ModId != Package!.Id || _subscriptionsManager.Status.Progress == 0 || !_subscriptionsManager.Status.IsActive)
+			if (!_subscriptionsManager.TryGetDownloadStatus(Package!.Id, out var status) || status.Stage > ModDownloadStage.Started)
 			{
 				DrawLoader(e.Graphics, iconRect, activeColor);
 			}
@@ -337,7 +337,7 @@ public class MiniPackageControl : SlickControl
 				var rect = new RectangleF(new PointF(iconRect.X + ((iconRect.Width - drawSize.Width) / 2), iconRect.Y + ((iconRect.Height - drawSize.Height) / 2)), drawSize).Pad(size / 2);
 				using var pen = new Pen(activeColor, size) { StartCap = LineCap.Round, EndCap = LineCap.Round };
 
-				e.Graphics.DrawArc(pen, rect, -90, 360 * _subscriptionsManager.Status.Progress);
+				e.Graphics.DrawArc(pen, rect, -90, 360 * status.TotalProgress);
 			}
 		}
 		else

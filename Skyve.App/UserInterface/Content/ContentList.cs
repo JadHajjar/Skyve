@@ -148,7 +148,7 @@ public partial class ContentList : SlickControl
 		I_Actions.IsSelected = ListControl.SelectedItemsCount > 0;
 	}
 
-	protected virtual void RefreshAuthorAndTags()
+	protected virtual async void RefreshAuthorAndTags()
 	{
 		var items = new List<IPackageIdentity>(ListControl.Items);
 
@@ -157,7 +157,7 @@ public partial class ContentList : SlickControl
 
 		if (TagsControl is not null && WorkshopTagsControl.Tags.Count == 0)
 		{
-			TagsControl.SetTags(_workshopService.GetAvailableTags());
+			TagsControl.SetTags(await _workshopService.GetAvailableTags());
 		}
 	}
 

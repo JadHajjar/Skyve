@@ -21,12 +21,11 @@ public interface ISubscriptionsManager
 	void Start();
 	void CancelPendingItems();
 #else
-	SubscriptionStatus Status { get; }
-
 	event Action UpdateDisplayNotification;
 
-	void OnDownloadProgress(PackageDownloadProgress info);
 	void AddSubscribing(IEnumerable<IPackageIdentity> ids);
 	void RemoveSubscribing(IEnumerable<IPackageIdentity> ids);
+	IEnumerable<SubscriptionStatus> GetDownloads();
+	bool TryGetDownloadStatus(ulong id, out SubscriptionStatus status);
 #endif
 }
