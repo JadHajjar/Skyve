@@ -1,5 +1,5 @@
 {
-  "CloseSkyve": "Sulje Taivas",
+  "CloseSkyve": "Sulje Skyve",
   "CompatibilityInfo": "Yhteensopivuustiedot",
   "Dashboard": "Kojelauta",
   "SearchDlcs": "Etsi lisäosista..",
@@ -716,5 +716,5 @@
   "UpdateMod": "Päivitä modi",
   "VersionLocked": "Versio lukittu",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Ladataan modien dataa.."
 }
