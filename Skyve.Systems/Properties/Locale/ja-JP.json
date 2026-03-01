@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "フィルターをすばやくクリアしたい場合は、マウスの中ボタンを使ってフィルターをクリックしてクリアできます。\r\n\r\n「フィルターの表示/非表示」ボタンで一度にすべてのフィルターをクリアすることもできます。",
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data.."
 }

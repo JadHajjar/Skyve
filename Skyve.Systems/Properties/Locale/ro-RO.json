@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Dacă doriţi să ştergeţi rapid filtrele, puteţi face clic pe un filtru folosind butonul mijlociu pentru a-l şterge.\r\n\r\nPoți, de asemenea, să faci asta pe butonul 'Arată/Ascunde Filtre' pentru a șterge toate filtrele deodată.",
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data.."
 }

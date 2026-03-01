@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Wenn Sie Ihre Filter schnell löschen möchten, können Sie mit der mittleren Maustaste auf einen Filter klicken, um ihn zu löschen.\r\n\r\nDu kannst das auch über den 'Filter anzeigen/ausblenden' Button tun, um alle Filter auf einmal zu löschen.",
   "UpdateMod": "Mod aktualisieren",
   "VersionLocked": "Version gesperrt",
-  "VersionLockedInfo": "'{0}' ist auf Version {1} in diesem Spielset gesperrt."
+  "VersionLockedInfo": "'{0}' ist auf Version {1} in diesem Spielset gesperrt.",
+  "LoadingModData": "Lade Mod-daten.."
 }

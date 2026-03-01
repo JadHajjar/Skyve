@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Αν θέλετε να καθαρίσετε γρήγορα τα φίλτρα σας, μπορείτε να κάνετε κλικ σε ένα φίλτρο χρησιμοποιώντας το μεσαίο κουμπί του ποντικιού σας για να το καθαρίσετε.\r\n\r\nΜπορείτε επίσης να το κάνετε αυτό στο κουμπί 'Εμφάνιση/Απόκρυψη φίλτρων' για να καθαρίσετε όλα τα φίλτρα ταυτόχρονα.",
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data.."
 }

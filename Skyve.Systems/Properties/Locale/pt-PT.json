@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Para limpar rapidamente os teus filtros, clica num filtro com o botão do meio do rato.\n\nTambém podes fazer isso no botão 'Mostrar/Esconder filtros' para limpar todos os filtros de uma vez.",
   "UpdateMod": "Atualizar Mod",
   "VersionLocked": "Versão bloqueada",
-  "VersionLockedInfo": "O '{0}' está bloqueado à versão {1} neste conjunto de jogo."
+  "VersionLockedInfo": "O '{0}' está bloqueado à versão {1} neste conjunto de jogo.",
+  "LoadingModData": "A carregar dados do Mod.."
 }

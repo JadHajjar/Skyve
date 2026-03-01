@@ -1,5 +1,5 @@
 {
-  "CloseSkyve": "Close Skyve",
+  "CloseSkyve": "Skyve'ı Kapat",
   "CompatibilityInfo": "Uyumluluk Bilgisi",
   "Dashboard": "Kontrol Paneli",
   "SearchDlcs": "DLC'leriniz arasından arayın..",
@@ -463,8 +463,8 @@
   },
   "TagCount": {
     "Zero": "Etiketler",
-    "One": "Tags: {0} selected",
-    "Plural": "Tags: {0} selected"
+    "One": "Etiketler: {0} seçildi",
+    "Plural": "Etiketler: {0} seçildi"
   },
   "TagsTitle": {
     "One": "Özel Etiketler: {0}",
@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Filtrelerinizi hızlıca temizlemek istiyorsanız, orta fare tuşu ile bir filtrenin üzerine tıklayıp temizleyin.\n\nAyrıca tüm filtreleri bir kerede temizlemek için 'Filtreleri Göster/Gizle' düğmesini kullanabilirsiniz.",
   "UpdateMod": "Modu Güncelle",
   "VersionLocked": "Sürüm Kilitli",
-  "VersionLockedInfo": "'{0}', bu oyun setinde {1} sürümüne kilitlenmiş."
+  "VersionLockedInfo": "'{0}', bu oyun setinde {1} sürümüne kilitlenmiş.",
+  "LoadingModData": "Mod Verileri Yükleniyor.."
 }

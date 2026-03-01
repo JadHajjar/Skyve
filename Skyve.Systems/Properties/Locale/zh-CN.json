@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "如果您想要快速清除您的筛选选项，您可以使用鼠标中键点击筛选项来清除它。\n\n您也可以在“显示/隐藏筛选选项”按钮上这样做，以一次性清除所有筛选项。",
   "UpdateMod": "更新模组",
   "VersionLocked": "版本已锁定",
-  "VersionLockedInfo": "“{0}”在此配组中被锁定在版本 {1}。"
+  "VersionLockedInfo": "“{0}”在此配组中被锁定在版本 {1}。",
+  "LoadingModData": "正在加载模组数据..."
 }
