@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Hvis du ønsker å raskt rydde filtrene dine kan du klikke på et filter ved hjelp av mellomknappen for å slette det.\r\n\r\nDu kan også gjøre det på knappen 'Vis/Skjul Filter' for å fjerne alle filtre samtidig.",
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data.."
 }

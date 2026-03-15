@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Se vuoi cancellare rapidamente i tuoi filtri, puoi fare clic su un filtro con il tasto centrale del mouse per rimuoverlo.\n\nPuoi anche fare lo stesso sul pulsante \"Mostra/Nascondi filtri\" per cancellare tutti i filtri in una volta sola.",
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Caricamento Dati Mod.."
 }

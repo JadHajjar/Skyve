@@ -463,8 +463,8 @@
   },
   "TagCount": {
     "Zero": "Tags",
-    "One": "Tags : {0} sélectionné",
-    "Plural": "Tags : {0} sélectionné"
+    "One": "Tags : {0} sélectionné(s)",
+    "Plural": "Tags : {0} sélectionné(s)"
   },
   "TagsTitle": {
     "One": "Tags personnalisés : {0}",
@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Pour effacer rapidement un filtre, cliquez dessus avec un clic du milieu.\n\n\nVous pouvez aussi faire cela sur le bouton « Montrer/cacher les filtres » pour effacer tous les filtres.",
   "UpdateMod": "Mettre à jour le Mod",
   "VersionLocked": "Version Verrouillée",
-  "VersionLockedInfo": "'{0}' est verrouillé à la version {1} dans ce playset."
+  "VersionLockedInfo": "'{0}' est verrouillé à la version {1} dans ce playset.",
+  "LoadingModData": "Chargement des données du mod.."
 }

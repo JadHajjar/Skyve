@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Se você quiser limpar rapidamente os filtros aplicados, pode clicar no filtro usando o botão do meio do mouse para limpar.\nVocê também pode usar o botão \"Mostrar/Esconder Filtros\" para limpar todos os filtros.",
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data.."
 }

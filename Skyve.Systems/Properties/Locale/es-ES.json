@@ -1,5 +1,5 @@
 {
-  "CloseSkyve": "Cerrar cielo",
+  "CloseSkyve": "Cerrar Skyve",
   "CompatibilityInfo": "Informe de Compatibilidad",
   "Dashboard": "Consola",
   "SearchDlcs": "Buscar en la lista de DLC...",
@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Si quieres limpiar todos los filtros aplicados rápidamente, puedes hacer clic en un filtro usando el botón central del mouse para limpiarlo.\n\nPuede hacerlo también desde el botón \"Mostrar/Ocultar Filtros\" para quitarlos todos de una vez.",
   "UpdateMod": "Actualizar Mod",
   "VersionLocked": "Versión bloqueada",
-  "VersionLockedInfo": "'{0}' está bloqueada a la versión {1} en este playset."
+  "VersionLockedInfo": "'{0}' está bloqueada a la versión {1} en este playset.",
+  "LoadingModData": "Cargando datos de mods..."
 }
