@@ -134,7 +134,7 @@ partial class PC_CompatibilityManagement
 			this.T_Info.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Info.FillTab = true;
 			this.T_Info.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon1.Name = "I_Content";
+			dynamicIcon1.Name = "Content";
 			this.T_Info.IconName = dynamicIcon1;
 			this.T_Info.LinkedControl = this.TLP_MainInfo;
 			this.T_Info.Location = new System.Drawing.Point(0, 5);
@@ -214,7 +214,7 @@ partial class PC_CompatibilityManagement
 			this.P_Links.AutoSize = true;
 			this.P_Links.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.P_Links.Controls.Add(this.T_NewLink);
-			dynamicIcon3.Name = "I_Link";
+			dynamicIcon3.Name = "Link";
 			this.P_Links.ImageName = dynamicIcon3;
 			this.P_Links.Location = new System.Drawing.Point(3, 154);
 			this.P_Links.Name = "P_Links";
@@ -226,7 +226,7 @@ partial class PC_CompatibilityManagement
 			// T_NewLink
 			// 
 			this.T_NewLink.Display = false;
-			dynamicIcon2.Name = "I_Add";
+			dynamicIcon2.Name = "Add";
 			this.T_NewLink.ImageName = dynamicIcon2;
 			this.T_NewLink.Location = new System.Drawing.Point(12, 57);
 			this.T_NewLink.Name = "T_NewLink";
@@ -241,7 +241,7 @@ partial class PC_CompatibilityManagement
 			this.P_Tags.AutoSize = true;
 			this.P_Tags.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.P_Tags.Controls.Add(this.T_NewTag);
-			dynamicIcon5.Name = "I_Tag";
+			dynamicIcon5.Name = "Tag";
 			this.P_Tags.ImageName = dynamicIcon5;
 			this.P_Tags.Info = "";
 			this.P_Tags.Location = new System.Drawing.Point(3, 3);
@@ -254,7 +254,7 @@ partial class PC_CompatibilityManagement
 			// T_NewTag
 			// 
 			this.T_NewTag.Display = false;
-			dynamicIcon4.Name = "I_Add";
+			dynamicIcon4.Name = "Add";
 			this.T_NewTag.ImageName = dynamicIcon4;
 			this.T_NewTag.Location = new System.Drawing.Point(12, 90);
 			this.T_NewTag.Name = "T_NewTag";
@@ -345,7 +345,7 @@ partial class PC_CompatibilityManagement
 			this.T_Statuses.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_Statuses.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Statuses.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon6.Name = "I_Statuses";
+			dynamicIcon6.Name = "Statuses";
 			this.T_Statuses.IconName = dynamicIcon6;
 			this.T_Statuses.LinkedControl = this.FLP_Statuses;
 			this.T_Statuses.Location = new System.Drawing.Point(258, 5);
@@ -372,7 +372,7 @@ partial class PC_CompatibilityManagement
 			// 
 			this.B_AddStatus.ColorShade = null;
 			this.B_AddStatus.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon7.Name = "I_Add";
+			dynamicIcon7.Name = "Add";
 			this.B_AddStatus.ImageName = dynamicIcon7;
 			this.B_AddStatus.LargeImage = true;
 			this.B_AddStatus.Location = new System.Drawing.Point(3, 3);
@@ -388,7 +388,7 @@ partial class PC_CompatibilityManagement
 			this.T_Interactions.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_Interactions.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Interactions.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon8.Name = "I_Switch";
+			dynamicIcon8.Name = "Switch";
 			this.T_Interactions.IconName = dynamicIcon8;
 			this.T_Interactions.LinkedControl = this.FLP_Interactions;
 			this.T_Interactions.Location = new System.Drawing.Point(516, 5);
@@ -415,7 +415,7 @@ partial class PC_CompatibilityManagement
 			// 
 			this.B_AddInteraction.ColorShade = null;
 			this.B_AddInteraction.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon9.Name = "I_Add";
+			dynamicIcon9.Name = "Add";
 			this.B_AddInteraction.ImageName = dynamicIcon9;
 			this.B_AddInteraction.LargeImage = true;
 			this.B_AddInteraction.Location = new System.Drawing.Point(3, 3);
@@ -550,7 +550,7 @@ partial class PC_CompatibilityManagement
 			this.B_ReuseData.AutoSize = true;
 			this.B_ReuseData.ColorShade = null;
 			this.B_ReuseData.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon10.Name = "I_Refresh";
+			dynamicIcon10.Name = "Refresh";
 			this.B_ReuseData.ImageName = dynamicIcon10;
 			this.B_ReuseData.Location = new System.Drawing.Point(620, 637);
 			this.B_ReuseData.Name = "B_ReuseData";
@@ -567,7 +567,7 @@ partial class PC_CompatibilityManagement
 			this.B_Previous.AutoSize = true;
 			this.B_Previous.ColorShade = null;
 			this.B_Previous.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon11.Name = "I_ArrowLeft";
+			dynamicIcon11.Name = "ArrowLeft";
 			this.B_Previous.ImageName = dynamicIcon11;
 			this.B_Previous.Location = new System.Drawing.Point(331, 637);
 			this.B_Previous.Name = "B_Previous";
@@ -582,7 +582,7 @@ partial class PC_CompatibilityManagement
 			this.B_Skip.AutoSize = true;
 			this.B_Skip.ColorShade = null;
 			this.B_Skip.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon12.Name = "I_ArrowRight";
+			dynamicIcon12.Name = "ArrowRight";
 			this.B_Skip.ImageName = dynamicIcon12;
 			this.B_Skip.Location = new System.Drawing.Point(443, 637);
 			this.B_Skip.Name = "B_Skip";
@@ -597,7 +597,7 @@ partial class PC_CompatibilityManagement
 			this.B_Apply.AutoSize = true;
 			this.B_Apply.ColorShade = null;
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon13.Name = "I_Ok";
+			dynamicIcon13.Name = "Ok";
 			this.B_Apply.ImageName = dynamicIcon13;
 			this.B_Apply.Location = new System.Drawing.Point(842, 637);
 			this.B_Apply.Name = "B_Apply";
@@ -650,7 +650,7 @@ partial class PC_CompatibilityManagement
 			// TB_Search
 			// 
 			this.TB_Search.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon14.Name = "I_Search";
+			dynamicIcon14.Name = "Search";
 			this.TB_Search.ImageName = dynamicIcon14;
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
@@ -669,10 +669,10 @@ partial class PC_CompatibilityManagement
 			this.I_List.ActiveColor = null;
 			this.I_List.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_List.Dock = System.Windows.Forms.DockStyle.Left;
-			dynamicIcon15.Name = "I_List";
+			dynamicIcon15.Name = "List";
 			this.I_List.ImageName = dynamicIcon15;
 			this.I_List.Location = new System.Drawing.Point(283, 634);
-			this.I_List.Name = "I_List";
+			this.I_List.Name = "List";
 			this.I_List.Size = new System.Drawing.Size(42, 33);
 			this.I_List.TabIndex = 19;
 			this.I_List.SizeChanged += new System.EventHandler(this.I_List_SizeChanged);

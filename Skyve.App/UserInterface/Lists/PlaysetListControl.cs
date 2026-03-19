@@ -247,24 +247,24 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 		var items = new SlickStripItem[]
 		{
-			  new (Locale.DownloadPlayset, "I_Import", () => DownloadProfile(item), !local)
-			, new (Locale.ViewThisPlaysetsPackages, "I_ViewFile", () => ShowProfileContents(item))
-			, new (item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset, "I_Star",() => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item); }, local)
-			, new (Locale.ChangePlaysetColor, "I_Paint", () => this.TryBeginInvoke(() => ChangeColor(item)), local)
-			, new (Locale.CreateShortcutPlayset, "I_Link", () => _profileManager.CreateShortcut(item !), local && CrossIO.CurrentPlatform is Platform.Windows)
-			, new (Locale.OpenPlaysetFolder, "I_Folder", () => PlatformUtil.OpenFolder(_profileManager.GetFileName(item !)), local)
+			  new (Locale.DownloadPlayset, "Import", () => DownloadProfile(item), !local)
+			, new (Locale.ViewThisPlaysetsPackages, "ViewFile", () => ShowProfileContents(item))
+			, new (item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset, "Star",() => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item); }, local)
+			, new (Locale.ChangePlaysetColor, "Paint", () => this.TryBeginInvoke(() => ChangeColor(item)), local)
+			, new (Locale.CreateShortcutPlayset, "Link", () => _profileManager.CreateShortcut(item !), local && CrossIO.CurrentPlatform is Platform.Windows)
+			, new (Locale.OpenPlaysetFolder, "Folder", () => PlatformUtil.OpenFolder(_profileManager.GetFileName(item !)), local)
 			, new ( local)
-			, new (Locale.SharePlayset, "I_Share", async() => await ShareProfile(item), local && item.ProfileId == 0 && _userService.User.Id is not null && downloading != item)
-			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People",  async () => await ServiceCenter.Get<IOnlinePlaysetUtil>().SetVisibility((item as ICustomPlayset)!, !item.Public), local && item.ProfileId != 0 && _userService.User.Equals(item.Author))
-			, new (Locale.UpdatePlayset, "I_Share", async() => await ShareProfile(item), local && item.ProfileId != 0 && _userService.User.Equals(item.Author))
-			, new (Locale.DownloadPlayset, "I_Refresh", () => DownloadProfile(item), local && item.ProfileId != 0 && item.Author != _userService.User.Id)
-			, new (Locale.CopyPlaysetLink, "I_LinkChain", () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)), local && item.ProfileId != 0)
+			, new (Locale.SharePlayset, "Share", async() => await ShareProfile(item), local && item.ProfileId == 0 && _userService.User.Id is not null && downloading != item)
+			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "UserSecure" : "People",  async () => await ServiceCenter.Get<IOnlinePlaysetUtil>().SetVisibility((item as ICustomPlayset)!, !item.Public), local && item.ProfileId != 0 && _userService.User.Equals(item.Author))
+			, new (Locale.UpdatePlayset, "Share", async() => await ShareProfile(item), local && item.ProfileId != 0 && _userService.User.Equals(item.Author))
+			, new (Locale.DownloadPlayset, "Refresh", () => DownloadProfile(item), local && item.ProfileId != 0 && item.Author != _userService.User.Id)
+			, new (Locale.CopyPlaysetLink, "LinkChain", () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)), local && item.ProfileId != 0)
 			, new ( local)
-			, new (Locale.PlaysetReplace, "I_Import", () => LoadProfile ?.Invoke(item !), local)
-			, new (Locale.PlaysetMerge, "I_Merge", () => MergeProfile ?.Invoke(item !), local)
-			, new (Locale.PlaysetExclude, "I_Exclude", () => ExcludeProfile ?.Invoke(item !), local)
+			, new (Locale.PlaysetReplace, "Import", () => LoadProfile ?.Invoke(item !), local)
+			, new (Locale.PlaysetMerge, "Merge", () => MergeProfile ?.Invoke(item !), local)
+			, new (Locale.PlaysetExclude, "Exclude", () => ExcludeProfile ?.Invoke(item !), local)
 			, new ()
-			, new (Locale.PlaysetDelete, "I_Disposable", async() => { if(local) { DisposeProfile ?.Invoke(item !); } else if(await ServiceCenter.Get < IOnlinePlaysetUtil >().DeleteOnlinePlayset((item as IOnlinePlayset) !)) { base.Remove(item); } }, local || _userService.User.Equals(item.Author))
+			, new (Locale.PlaysetDelete, "Disposable", async() => { if(local) { DisposeProfile ?.Invoke(item !); } else if(await ServiceCenter.Get < IOnlinePlaysetUtil >().DeleteOnlinePlayset((item as IOnlinePlayset) !)) { base.Remove(item); } }, local || _userService.User.Equals(item.Author))
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
@@ -372,7 +372,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 			e.Graphics.FillRoundedRectangle(favViewRect.Gradient(Color.FromArgb(40, textColor), 1.5F), favViewRect, 4);
 		}
 
-		var fav = new DynamicIcon(ReadOnly ? "I_ViewFile" : e.Item.IsFavorite ? "I_StarFilled" : "I_Star");
+		var fav = new DynamicIcon(ReadOnly ? "ViewFile" : e.Item.IsFavorite ? "StarFilled" : "Star");
 		using var favIcon = fav.Get(favViewRect.Height * 3 / 4);
 
 		if (opening == e.Item)
@@ -397,21 +397,21 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 		var labelRects = e.Rects.Content;
 
-		labelRects.Y += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
-		labelRects.Y += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
+		labelRects.Y += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
+		labelRects.Y += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
 
 		if (e.Item.Author is not null)
 		{
 			var name = e.Item.Author?.Name;
 
-			using var userIcon = IconManager.GetSmallIcon("I_User");
+			using var userIcon = IconManager.GetSmallIcon("User");
 
 			e.Rects.Author = e.Graphics.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), labelRects, ContentAlignment.TopLeft);
 		}
 
 		if (e.Item == _profileManager.CurrentPlayset)
 		{
-			using var okIcon = IconManager.GetSmallIcon("I_Ok");
+			using var okIcon = IconManager.GetSmallIcon("Ok");
 			e.Graphics.DrawLabel(Locale.CurrentPlayset, okIcon, FormDesign.Design.ActiveColor, e.Rects.Content, ContentAlignment.TopRight);
 
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale));
@@ -420,12 +420,12 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 		}
 		else if (e.Item.IsMissingItems)
 		{
-			using var icon = IconManager.GetSmallIcon("I_MinorIssues");
+			using var icon = IconManager.GetSmallIcon("MinorIssues");
 			e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, icon, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.TopRight);
 		}
 
 		var loadText = ReadOnly ? _profileManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlayset : Locale.DownloadPlayset : Locale.LoadPlayset;
-		var loadIcon = new DynamicIcon(downloading == e.Item && ReadOnly ? "I_Wait" : ReadOnly && _profileManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? "I_Refresh" : "I_Import");
+		var loadIcon = new DynamicIcon(downloading == e.Item && ReadOnly ? "Wait" : ReadOnly && _profileManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? "Refresh" : "Import");
 		using var importIcon = ReadOnly ? loadIcon.Default : loadIcon.Get(e.Rects.Folder.Height * 3 / 4);
 		var loadSize = SlickButton.GetSize(e.Graphics, importIcon, loadText, Font, null);
 
@@ -443,7 +443,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 			return;
 		}
 
-		using var folderIcon = IconManager.GetIcon("I_Folder", e.Rects.Folder.Height * 3 / 4);
+		using var folderIcon = IconManager.GetIcon("Folder", e.Rects.Folder.Height * 3 / 4);
 
 		if (e.Item.Banner is not null)
 		{
@@ -454,13 +454,13 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 				e.Graphics.FillRoundedRectangle(e.Rects.EditThumbnail.Gradient(Color.FromArgb(40, textColor), 1.5F), e.Rects.EditThumbnail, 4);
 			}
 
-			using var editIcon = IconManager.GetIcon("I_EditImage", e.Rects.Favorite.Height * 3 / 4);
+			using var editIcon = IconManager.GetIcon("EditImage", e.Rects.Favorite.Height * 3 / 4);
 
 			e.Graphics.DrawImage(editIcon.Color(e.Rects.EditThumbnail.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : textColor), e.Rects.EditThumbnail.CenterR(editIcon.Size));
 		}
 		else
 		{
-			using var editIcon = IconManager.GetIcon("I_EditImage", e.Rects.Folder.Height * 3 / 4);
+			using var editIcon = IconManager.GetIcon("EditImage", e.Rects.Folder.Height * 3 / 4);
 			SlickButton.DrawButton(e, e.Rects.EditThumbnail, string.Empty, Font, editIcon, null, e.Rects.EditThumbnail.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 		}
 
@@ -471,8 +471,8 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 			e.Rects.Merge.X = e.Rects.Load.X - e.Rects.Merge.Width - GridPadding.Left;
 			e.Rects.Exclude.X = e.Rects.Merge.X - e.Rects.Exclude.Width - GridPadding.Left;
 
-			using var i_Merge = IconManager.GetIcon("I_Merge", e.Rects.Folder.Height * 3 / 4);
-			using var i_Exclude = IconManager.GetIcon("I_Exclude", e.Rects.Folder.Height * 3 / 4);
+			using var i_Merge = IconManager.GetIcon("Merge", e.Rects.Folder.Height * 3 / 4);
+			using var i_Exclude = IconManager.GetIcon("Exclude", e.Rects.Folder.Height * 3 / 4);
 			SlickButton.DrawButton(e, e.Rects.Merge, string.Empty, Font, i_Merge, null, e.Rects.Merge.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 			SlickButton.DrawButton(e, e.Rects.Exclude, string.Empty, Font, i_Exclude, null, e.Rects.Exclude.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 		}
@@ -506,7 +506,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 			e.Graphics.FillRoundedRectangle(e.Rects.Favorite.Gradient(Color.FromArgb(40, ForeColor), 1.5F), e.Rects.Favorite.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		var incl = new DynamicIcon(isIncluded ? "I_StarFilled" : "I_Star");
+		var incl = new DynamicIcon(isIncluded ? "StarFilled" : "Star");
 		using var icon = large ? incl.Large : incl.Get(e.Rects.Favorite.Height / 2);
 
 		e.Graphics.DrawImage(icon.Color(e.Rects.Favorite.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), e.Rects.Favorite.CenterR(icon.Size));
@@ -540,12 +540,12 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 		if (e.Item == _profileManager.CurrentPlayset)
 		{
-			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.CurrentPlayset, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
+			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.CurrentPlayset, IconManager.GetSmallIcon("Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
 
 		if (e.Item.IsMissingItems)
 		{
-			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, IconManager.GetSmallIcon("I_MinorIssues"), FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
+			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, IconManager.GetSmallIcon("MinorIssues"), FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
 
 		if (large)
@@ -553,20 +553,20 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 			e.Rects.Text.X = x;
 		}
 
-		e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
-		e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
+		e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
+		e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
 
-		SlickButton.DrawButton(e, e.Rects.Folder, string.Empty, Font, IconManager.GetIcon("I_Folder"), null, e.Rects.Folder.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		SlickButton.DrawButton(e, e.Rects.Folder, string.Empty, Font, IconManager.GetIcon("Folder"), null, e.Rects.Folder.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
-		var loadSize = SlickButton.GetSize(e.Graphics, IconManager.GetIcon("I_Folder"), Locale.LoadPlayset, Font, null);
+		var loadSize = SlickButton.GetSize(e.Graphics, IconManager.GetIcon("Folder"), Locale.LoadPlayset, Font, null);
 		e.Rects.Load = new Rectangle(e.Rects.Folder.X - Padding.Left - loadSize.Width, e.Rects.Folder.Y, loadSize.Width, e.Rects.Folder.Height);
 
-		SlickButton.DrawButton(e, e.Rects.Load, Locale.LoadPlayset, Font, IconManager.GetIcon("I_Import"), null, e.Rects.Load.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		SlickButton.DrawButton(e, e.Rects.Load, Locale.LoadPlayset, Font, IconManager.GetIcon("Import"), null, e.Rects.Load.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
 		if (large)
 		{
-			SlickButton.DrawButton(e, e.Rects.Merge, string.Empty, Font, IconManager.GetIcon("I_Merge"), null, e.Rects.Merge.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
-			SlickButton.DrawButton(e, e.Rects.Exclude, string.Empty, Font, IconManager.GetIcon("I_Exclude"), null, e.Rects.Exclude.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+			SlickButton.DrawButton(e, e.Rects.Merge, string.Empty, Font, IconManager.GetIcon("Merge"), null, e.Rects.Merge.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+			SlickButton.DrawButton(e, e.Rects.Exclude, string.Empty, Font, IconManager.GetIcon("Exclude"), null, e.Rects.Exclude.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 		}
 	}
 

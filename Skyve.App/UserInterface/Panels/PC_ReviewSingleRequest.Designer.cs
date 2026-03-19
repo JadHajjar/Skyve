@@ -92,7 +92,7 @@ partial class PC_ReviewSingleRequest
 			// 
 			this.slickIcon1.ActiveColor = null;
 			this.slickIcon1.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_Copy";
+			dynamicIcon1.Name = "Copy";
 			this.slickIcon1.ImageName = dynamicIcon1;
 			this.slickIcon1.Location = new System.Drawing.Point(556, 3);
 			this.slickIcon1.Name = "slickIcon1";
@@ -225,7 +225,7 @@ partial class PC_ReviewSingleRequest
 			this.roundedGroupTableLayoutPanel1.Controls.Add(this.B_ApplyChanges, 0, 1);
 			this.roundedGroupTableLayoutPanel1.Controls.Add(this.B_ManagePackage, 0, 0);
 			this.roundedGroupTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon5.Name = "I_Actions";
+			dynamicIcon5.Name = "Actions";
 			this.roundedGroupTableLayoutPanel1.ImageName = dynamicIcon5;
 			this.roundedGroupTableLayoutPanel1.Location = new System.Drawing.Point(3, 58);
 			this.roundedGroupTableLayoutPanel1.Name = "roundedGroupTableLayoutPanel1";
@@ -245,7 +245,7 @@ partial class PC_ReviewSingleRequest
 			this.B_DeleteRequest.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_DeleteRequest.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_DeleteRequest.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon2.Name = "I_Disposable";
+			dynamicIcon2.Name = "Disposable";
 			this.B_DeleteRequest.ImageName = dynamicIcon2;
 			this.B_DeleteRequest.Location = new System.Drawing.Point(10, 131);
 			this.B_DeleteRequest.Name = "B_DeleteRequest";
@@ -261,7 +261,7 @@ partial class PC_ReviewSingleRequest
 			this.B_ApplyChanges.ColorShade = null;
 			this.B_ApplyChanges.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_ApplyChanges.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon3.Name = "I_Link";
+			dynamicIcon3.Name = "Link";
 			this.B_ApplyChanges.ImageName = dynamicIcon3;
 			this.B_ApplyChanges.Location = new System.Drawing.Point(10, 77);
 			this.B_ApplyChanges.Name = "B_ApplyChanges";
@@ -277,7 +277,7 @@ partial class PC_ReviewSingleRequest
 			this.B_ManagePackage.ColorShade = null;
 			this.B_ManagePackage.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_ManagePackage.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon4.Name = "I_Link";
+			dynamicIcon4.Name = "Link";
 			this.B_ManagePackage.ImageName = dynamicIcon4;
 			this.B_ManagePackage.Location = new System.Drawing.Point(10, 45);
 			this.B_ManagePackage.Name = "B_ManagePackage";
@@ -296,7 +296,7 @@ partial class PC_ReviewSingleRequest
 			this.TLP_Info.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_Info.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_Info.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon6.Name = "I_Info";
+			dynamicIcon6.Name = "Info";
 			this.TLP_Info.ImageName = dynamicIcon6;
 			this.TLP_Info.Location = new System.Drawing.Point(3, 3);
 			this.TLP_Info.Name = "TLP_Info";

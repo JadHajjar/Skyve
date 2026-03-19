@@ -463,8 +463,8 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 
 				e.Graphics.DrawString(Locale.NoPackagesMatchFilters, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(FormDesign.Design.LabelColor), ClientRectangle.Pad(0, 0, 0, Height / 3), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
-				using var icon1 = IconManager.GetIcon("I_Steam");
-				using var icon2 = IconManager.GetIcon("I_Link");
+				using var icon1 = IconManager.GetIcon("Steam");
+				using var icon2 = IconManager.GetIcon("Link");
 
 				var buttonSize1 = SlickButton.GetSize(e.Graphics, icon1, Locale.SearchWorkshop, UI.Font(9.75F));
 				var buttonSize2 = SlickButton.GetSize(e.Graphics, icon2, Locale.SearchWorkshopBrowser, UI.Font(9.75F));
@@ -533,22 +533,22 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		{
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
-				icon = "I_Question";
+				icon = "Question";
 				color = FormDesign.Design.YellowColor;
 				return true;
 			case DownloadStatus.OutOfDate:
 				text = Locale.OutOfDate;
-				icon = "I_OutOfDate";
+				icon = "OutOfDate";
 				color = FormDesign.Design.YellowColor;
 				return true;
 			case DownloadStatus.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
-				icon = "I_Broken";
+				icon = "Broken";
 				color = FormDesign.Design.RedColor;
 				return true;
 			case DownloadStatus.Removed:
 				text = Locale.RemovedByAuthor;
-				icon = "I_ContentRemoved";
+				icon = "ContentRemoved";
 				color = FormDesign.Design.RedColor;
 				return true;
 		}

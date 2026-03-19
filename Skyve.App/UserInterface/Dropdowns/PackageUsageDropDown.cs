@@ -56,7 +56,7 @@ public class PackageUsageDropDown : SlickMultiSelectionDropDown<PackageUsage>
 	{
 		var text = !items.Any() ? Locale.Invalid : items.Count() == Items.Length ? Locale.AllUsages : items.ListStrings(x => LocaleCR.Get($"{x}"), ", ");
 
-		using var icon = IconManager.GetIcon("I_City", rectangle.Height - 2).Color(foreColor);
+		using var icon = IconManager.GetIcon("City", rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

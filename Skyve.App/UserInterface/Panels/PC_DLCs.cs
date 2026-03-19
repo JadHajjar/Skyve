@@ -60,7 +60,7 @@ public partial class PC_DLCs : PanelContent
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
-		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "Search" : "ClearSearch";
 		LC_DLCs.FilterChanged();
 		RefreshCounts();
 	}

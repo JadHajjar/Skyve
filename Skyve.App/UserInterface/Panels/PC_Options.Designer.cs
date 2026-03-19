@@ -146,7 +146,7 @@ partial class PC_Options
 			this.TLP_HelpLogs.Controls.Add(this.B_Discord, 0, 0);
 			this.TLP_HelpLogs.Controls.Add(this.B_Guide, 0, 1);
 			this.TLP_HelpLogs.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon6.Name = "I_AskHelp";
+			dynamicIcon6.Name = "AskHelp";
 			this.TLP_HelpLogs.ImageName = dynamicIcon6;
 			this.TLP_HelpLogs.Location = new System.Drawing.Point(828, 3);
 			this.TLP_HelpLogs.Name = "TLP_HelpLogs";
@@ -169,7 +169,7 @@ partial class PC_Options
 			this.B_ChangeLog.ColorShade = null;
 			this.B_ChangeLog.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_ChangeLog.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon2.Name = "I_Versions";
+			dynamicIcon2.Name = "Versions";
 			this.B_ChangeLog.ImageName = dynamicIcon2;
 			this.B_ChangeLog.Location = new System.Drawing.Point(12, 132);
 			this.B_ChangeLog.Name = "B_ChangeLog";
@@ -197,7 +197,7 @@ partial class PC_Options
 			this.B_Reset.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_Reset.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Reset.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon3.Name = "I_Undo";
+			dynamicIcon3.Name = "Undo";
 			this.B_Reset.ImageName = dynamicIcon3;
 			this.B_Reset.Location = new System.Drawing.Point(12, 237);
 			this.B_Reset.Name = "B_Reset";
@@ -213,7 +213,7 @@ partial class PC_Options
 			this.B_Discord.ColorShade = null;
 			this.B_Discord.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Discord.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon4.Name = "I_Discord";
+			dynamicIcon4.Name = "Discord";
 			this.B_Discord.ImageName = dynamicIcon4;
 			this.B_Discord.Location = new System.Drawing.Point(12, 56);
 			this.B_Discord.Name = "B_Discord";
@@ -229,7 +229,7 @@ partial class PC_Options
 			this.B_Guide.ColorShade = null;
 			this.B_Guide.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Guide.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon5.Name = "I_Guide";
+			dynamicIcon5.Name = "Guide";
 			this.B_Guide.ImageName = dynamicIcon5;
 			this.B_Guide.Location = new System.Drawing.Point(12, 94);
 			this.B_Guide.Name = "B_Guide";
@@ -254,7 +254,7 @@ partial class PC_Options
 			this.TLP_Advanced.Controls.Add(this.CB_ShowFolderSettings, 0, 4);
 			this.TLP_Advanced.Controls.Add(this.slickCheckbox18, 0, 1);
 			this.TLP_Advanced.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon7.Name = "I_Hazard";
+			dynamicIcon7.Name = "Hazard";
 			this.TLP_Advanced.ImageName = dynamicIcon7;
 			this.TLP_Advanced.Location = new System.Drawing.Point(553, 467);
 			this.TLP_Advanced.Name = "TLP_Advanced";
@@ -381,7 +381,7 @@ partial class PC_Options
 			this.TLP_Settings.Controls.Add(this.slickCheckbox5, 0, 4);
 			this.TLP_Settings.Controls.Add(this.slickCheckbox17, 0, 1);
 			this.TLP_Settings.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon8.Name = "I_Cog";
+			dynamicIcon8.Name = "Cog";
 			this.TLP_Settings.ImageName = dynamicIcon8;
 			this.TLP_Settings.Location = new System.Drawing.Point(3, 467);
 			this.TLP_Settings.Name = "TLP_Settings";
@@ -548,7 +548,7 @@ partial class PC_Options
 			this.TLP_Folders.Controls.Add(this.TB_SteamPath, 0, 2);
 			this.TLP_Folders.Controls.Add(this.B_ClearFolders, 0, 3);
 			this.TLP_Folders.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon10.Name = "I_Folder";
+			dynamicIcon10.Name = "Folder";
 			this.TLP_Folders.ImageName = dynamicIcon10;
 			this.TLP_Folders.Location = new System.Drawing.Point(3, 843);
 			this.TLP_Folders.Name = "TLP_Folders";
@@ -623,7 +623,7 @@ partial class PC_Options
 			this.B_ClearFolders.ColorShade = null;
 			this.B_ClearFolders.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_ClearFolders.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon9.Name = "I_ClearFolders";
+			dynamicIcon9.Name = "ClearFolders";
 			this.B_ClearFolders.ImageName = dynamicIcon9;
 			this.B_ClearFolders.Location = new System.Drawing.Point(895, 191);
 			this.B_ClearFolders.Name = "B_ClearFolders";
@@ -651,7 +651,7 @@ partial class PC_Options
 			this.TLP_Preferences.Controls.Add(this.slickCheckbox14, 0, 5);
 			this.TLP_Preferences.Controls.Add(this.slickCheckbox16, 0, 9);
 			this.TLP_Preferences.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon11.Name = "I_Preferences";
+			dynamicIcon11.Name = "Preferences";
 			this.TLP_Preferences.ImageName = dynamicIcon11;
 			this.TLP_Preferences.Location = new System.Drawing.Point(3, 3);
 			this.TLP_Preferences.Name = "TLP_Preferences";
@@ -846,7 +846,7 @@ partial class PC_Options
 			this.TLP_UI.Controls.Add(this.B_Theme, 0, 3);
 			this.TLP_UI.Controls.Add(this.slickSpacer1, 0, 2);
 			this.TLP_UI.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon14.Name = "I_UserInterface";
+			dynamicIcon14.Name = "UserInterface";
 			this.TLP_UI.ImageName = dynamicIcon14;
 			this.TLP_UI.Location = new System.Drawing.Point(553, 3);
 			this.TLP_UI.Name = "TLP_UI";
@@ -866,7 +866,7 @@ partial class PC_Options
 			this.B_HelpTranslate.ColorShade = null;
 			this.B_HelpTranslate.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_HelpTranslate.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon12.Name = "I_Translate";
+			dynamicIcon12.Name = "Translate";
 			this.B_HelpTranslate.ImageName = dynamicIcon12;
 			this.B_HelpTranslate.Location = new System.Drawing.Point(12, 145);
 			this.B_HelpTranslate.Name = "B_HelpTranslate";
@@ -895,7 +895,7 @@ partial class PC_Options
 			this.B_Theme.ColorShade = null;
 			this.B_Theme.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Theme.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon13.Name = "I_Paint";
+			dynamicIcon13.Name = "Paint";
 			this.B_Theme.ImageName = dynamicIcon13;
 			this.B_Theme.Location = new System.Drawing.Point(12, 212);
 			this.B_Theme.Name = "B_Theme";
@@ -954,7 +954,7 @@ partial class PC_Options
 			this.B_CreateShortcut.ColorShade = null;
 			this.B_CreateShortcut.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_CreateShortcut.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon1.Name = "I_Link";
+			dynamicIcon1.Name = "Link";
 			this.B_CreateShortcut.ImageName = dynamicIcon1;
 			this.B_CreateShortcut.Location = new System.Drawing.Point(12, 170);
 			this.B_CreateShortcut.Name = "B_CreateShortcut";

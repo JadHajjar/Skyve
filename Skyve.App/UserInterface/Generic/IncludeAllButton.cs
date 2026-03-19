@@ -171,7 +171,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			}
 		}
 
-		var incl = new DynamicIcon(subscribe ? "I_Add" : include ? "I_Ok" : "I_Enabled");
+		var incl = new DynamicIcon(subscribe ? "Add" : include ? "Ok" : "Enabled");
 		var inclIcon = incl.Get(width * 3 / 4);
 
 		if (HoverState.HasFlag(HoverState.Hovered) && IncludedRect.Contains(CursorLocation))
@@ -184,7 +184,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 
 		if (_doubleButtons && EnabledRect != default)
 		{
-			var enl = new DynamicIcon(enable ? "I_Checked" : "I_Checked_OFF");
+			var enl = new DynamicIcon(enable ? "Checked" : "Checked_OFF");
 			var enlIcon = enl.Get(width * 3 / 4);
 
 			if (HoverState.HasFlag(HoverState.Hovered) && EnabledRect.Contains(CursorLocation))
@@ -195,7 +195,7 @@ public class IncludeAllButton<T> : SlickControl where T : IPackage
 			e.Graphics.DrawImage(enlIcon.Color(!EnabledRect.Contains(CursorLocation) ? ForeColor : HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : color), EnabledRect.CenterR(enlIcon.Size));
 		}
 
-		var action = new DynamicIcon("I_Actions");
+		var action = new DynamicIcon("Actions");
 		var actionIcon = action.Get(width * 3 / 4);
 
 		if (HoverState.HasFlag(HoverState.Hovered) && ActionRect.Contains(CursorLocation))

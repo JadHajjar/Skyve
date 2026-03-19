@@ -236,7 +236,7 @@ public partial class PC_PackagePage : PanelContent
 
 		if (Package.LocalPackage is not null)
 		{
-			addTagControl = new TagControl { ImageName = "I_Add" };
+			addTagControl = new TagControl { ImageName = "Add" };
 			addTagControl.MouseClick += AddTagControl_MouseClick;
 			FLP_Tags.Controls.Add(addTagControl);
 		}

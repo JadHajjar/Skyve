@@ -78,7 +78,7 @@ partial class PC_ManageCompatibilitySelection
 			// 
 			this.B_Manage.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Manage.FromScratch = false;
-			dynamicIcon1.Name = "I_Cog";
+			dynamicIcon1.Name = "Cog";
 			this.B_Manage.ImageName = dynamicIcon1;
 			this.B_Manage.Location = new System.Drawing.Point(516, 528);
 			this.B_Manage.Name = "B_Manage";
@@ -91,7 +91,7 @@ partial class PC_ManageCompatibilitySelection
 			// 
 			this.B_YourPackages.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_YourPackages.FromScratch = false;
-			dynamicIcon2.Name = "I_User";
+			dynamicIcon2.Name = "User";
 			this.B_YourPackages.ImageName = dynamicIcon2;
 			this.B_YourPackages.Location = new System.Drawing.Point(516, 60);
 			this.B_YourPackages.Name = "B_YourPackages";
@@ -104,7 +104,7 @@ partial class PC_ManageCompatibilitySelection
 			// 
 			this.B_ManageSingle.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_ManageSingle.FromScratch = false;
-			dynamicIcon3.Name = "I_Edit";
+			dynamicIcon3.Name = "Edit";
 			this.B_ManageSingle.ImageName = dynamicIcon3;
 			this.B_ManageSingle.Location = new System.Drawing.Point(516, 216);
 			this.B_ManageSingle.Name = "B_ManageSingle";
@@ -117,7 +117,7 @@ partial class PC_ManageCompatibilitySelection
 			// 
 			this.B_Requests.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Requests.FromScratch = false;
-			dynamicIcon4.Name = "I_RequestReview";
+			dynamicIcon4.Name = "RequestReview";
 			this.B_Requests.ImageName = dynamicIcon4;
 			this.B_Requests.Location = new System.Drawing.Point(516, 372);
 			this.B_Requests.Name = "B_Requests";

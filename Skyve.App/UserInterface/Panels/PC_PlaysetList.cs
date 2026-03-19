@@ -207,7 +207,7 @@ public partial class PC_PlaysetList : PanelContent
 		TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
 		I_ProfileIcon.ImageName = profile.GetIcon();
-		I_Favorite.ImageName = profile.IsFavorite ? "I_StarFilled" : "I_Star";
+		I_Favorite.ImageName = profile.IsFavorite ? "StarFilled" : "Star";
 		B_TempProfile.Visible = !profile.Temporary;
 		I_ProfileIcon.Enabled = !profile.Temporary;
 
@@ -227,7 +227,7 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void FilterChanged(object sender, EventArgs e)
 	{
-		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "Search" : "ClearSearch";
 
 		LC_Items.FilterChanged();
 		RefreshCounts();
@@ -274,11 +274,11 @@ public partial class PC_PlaysetList : PanelContent
 	{
 		if (_profileManager.CurrentPlayset.Save())
 		{
-			B_Save.ImageName = "I_Check";
+			B_Save.ImageName = "Check";
 
 			await Task.Delay(1500);
 
-			B_Save.ImageName = "I_Save";
+			B_Save.ImageName = "Save";
 		}
 		else
 		{
@@ -321,7 +321,7 @@ public partial class PC_PlaysetList : PanelContent
 		_profileManager.CurrentPlayset.IsFavorite = !_profileManager.CurrentPlayset.IsFavorite;
 		_profileManager.Save(_profileManager.CurrentPlayset);
 
-		I_Favorite.ImageName = _profileManager.CurrentPlayset.IsFavorite ? "I_StarFilled" : "I_Star";
+		I_Favorite.ImageName = _profileManager.CurrentPlayset.IsFavorite ? "StarFilled" : "Star";
 		SlickTip.SetTo(I_Favorite, _profileManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
 	}
 

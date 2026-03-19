@@ -217,7 +217,7 @@ public partial class MainForm : BasePanelForm
 		var backBrightness = FormDesign.Design.MenuColor.GetBrightness();
 		var foreBrightness = FormDesign.Design.ForeColor.GetBrightness();
 
-		using var icon = new Bitmap(IconManager.GetIcons("I_AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(base_PB_Icon.HoverState.HasFlag(HoverState.Hovered) && !base_PB_Icon.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.MenuForeColor : Math.Abs(backBrightness - foreBrightness) < 0.4F ? FormDesign.Design.BackColor : FormDesign.Design.ForeColor);
+		using var icon = new Bitmap(IconManager.GetIcons("AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(base_PB_Icon.HoverState.HasFlag(HoverState.Hovered) && !base_PB_Icon.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.MenuForeColor : Math.Abs(backBrightness - foreBrightness) < 0.4F ? FormDesign.Design.BackColor : FormDesign.Design.ForeColor);
 
 		var useGlow = !ConnectionHandler.IsConnected
 			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
@@ -230,7 +230,7 @@ public partial class MainForm : BasePanelForm
 
 		if (useGlow)
 		{
-			using var glowIcon = new Bitmap(IconManager.GetIcons("I_GlowAppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value);
+			using var glowIcon = new Bitmap(IconManager.GetIcons("GlowAppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value);
 
 			var color = FormDesign.Modern.ActiveColor;
 			var minimum = 0;

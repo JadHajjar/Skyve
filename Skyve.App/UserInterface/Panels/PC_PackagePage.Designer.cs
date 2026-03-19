@@ -104,7 +104,7 @@ partial class PC_PackagePage
 			this.T_Info.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Info.FillTab = true;
 			this.T_Info.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon1.Name = "I_Content";
+			dynamicIcon1.Name = "Content";
 			this.T_Info.IconName = dynamicIcon1;
 			this.T_Info.LinkedControl = this.TLP_Info;
 			this.T_Info.Location = new System.Drawing.Point(0, 5);
@@ -280,7 +280,7 @@ partial class PC_PackagePage
 			this.T_CR.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_CR.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_CR.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon2.Name = "I_CompatibilityReport";
+			dynamicIcon2.Name = "CompatibilityReport";
 			this.T_CR.IconName = dynamicIcon2;
 			this.T_CR.LinkedControl = null;
 			this.T_CR.Location = new System.Drawing.Point(195, 5);
@@ -296,7 +296,7 @@ partial class PC_PackagePage
 			this.T_References.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_References.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_References.FillTab = true;
-			dynamicIcon3.Name = "I_Share";
+			dynamicIcon3.Name = "Share";
 			this.T_References.IconName = dynamicIcon3;
 			this.T_References.LinkedControl = null;
 			this.T_References.Location = new System.Drawing.Point(390, 5);
@@ -312,7 +312,7 @@ partial class PC_PackagePage
 			this.T_Profiles.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_Profiles.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Profiles.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon4.Name = "I_ProfileSettings";
+			dynamicIcon4.Name = "ProfileSettings";
 			this.T_Profiles.IconName = dynamicIcon4;
 			this.T_Profiles.LinkedControl = this.TLP_Profiles;
 			this.T_Profiles.Location = new System.Drawing.Point(585, 5);

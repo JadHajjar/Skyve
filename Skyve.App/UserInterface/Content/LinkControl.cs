@@ -42,7 +42,7 @@ public class LinkControl : SlickImageControl
 		}
 		else if (Display && e.Button == MouseButtons.Right)
 		{
-			SlickToolStrip.Show(Program.MainForm, PointToScreen(e.Location), new SlickStripItem(Locale.Copy, "I_Copy", action: () => Clipboard.SetText(Link.Url)));
+			SlickToolStrip.Show(Program.MainForm, PointToScreen(e.Location), new SlickStripItem(Locale.Copy, "Copy", action: () => Clipboard.SetText(Link.Url)));
 		}
 	}
 
@@ -63,7 +63,7 @@ public class LinkControl : SlickImageControl
 
 		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), Padding.Left);
 
-		using (var img = (HoverState.HasFlag(HoverState.Hovered) ? Display ? "I_Link" : "I_Edit" : Link.Type.GetIcon()).Default)
+		using (var img = (HoverState.HasFlag(HoverState.Hovered) ? Display ? "Link" : "Edit" : Link.Type.GetIcon()).Default)
 		{
 			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.Pad(Padding).Align(img.Size, ContentAlignment.MiddleLeft));
 

@@ -92,7 +92,7 @@ partial class PC_Troubleshoot
 			// 
 			this.B_Caused.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Caused.FromScratch = false;
-			dynamicIcon1.Name = "I_Wrench";
+			dynamicIcon1.Name = "Wrench";
 			this.B_Caused.ImageName = dynamicIcon1;
 			this.B_Caused.Location = new System.Drawing.Point(516, 115);
 			this.B_Caused.Name = "B_Caused";
@@ -105,7 +105,7 @@ partial class PC_Troubleshoot
 			// 
 			this.B_Missing.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Missing.FromScratch = false;
-			dynamicIcon2.Name = "I_Search";
+			dynamicIcon2.Name = "Search";
 			this.B_Missing.ImageName = dynamicIcon2;
 			this.B_Missing.Location = new System.Drawing.Point(516, 271);
 			this.B_Missing.Name = "B_Missing";
@@ -118,7 +118,7 @@ partial class PC_Troubleshoot
 			// 
 			this.B_New.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_New.FromScratch = false;
-			dynamicIcon3.Name = "I_UpdateTime";
+			dynamicIcon3.Name = "UpdateTime";
 			this.B_New.ImageName = dynamicIcon3;
 			this.B_New.Location = new System.Drawing.Point(516, 427);
 			this.B_New.Name = "B_New";
@@ -184,7 +184,7 @@ partial class PC_Troubleshoot
 			// 
 			this.B_Mods.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Mods.FromScratch = false;
-			dynamicIcon4.Name = "I_Mods";
+			dynamicIcon4.Name = "Mods";
 			this.B_Mods.ImageName = dynamicIcon4;
 			this.B_Mods.Location = new System.Drawing.Point(516, 169);
 			this.B_Mods.Name = "B_Mods";
@@ -197,7 +197,7 @@ partial class PC_Troubleshoot
 			// 
 			this.B_Assets.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Assets.FromScratch = false;
-			dynamicIcon5.Name = "I_Assets";
+			dynamicIcon5.Name = "Assets";
 			this.B_Assets.ImageName = dynamicIcon5;
 			this.B_Assets.Location = new System.Drawing.Point(516, 325);
 			this.B_Assets.Name = "B_Assets";
@@ -263,7 +263,7 @@ partial class PC_Troubleshoot
 			// 
 			this.B_CompView.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_CompView.FromScratch = false;
-			dynamicIcon6.Name = "I_CompatibilityReport";
+			dynamicIcon6.Name = "CompatibilityReport";
 			this.B_CompView.ImageName = dynamicIcon6;
 			this.B_CompView.Location = new System.Drawing.Point(516, 169);
 			this.B_CompView.Name = "B_CompView";
@@ -276,7 +276,7 @@ partial class PC_Troubleshoot
 			// 
 			this.B_CompSkip.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_CompSkip.FromScratch = false;
-			dynamicIcon7.Name = "I_Skip";
+			dynamicIcon7.Name = "Skip";
 			this.B_CompSkip.ImageName = dynamicIcon7;
 			this.B_CompSkip.Location = new System.Drawing.Point(516, 325);
 			this.B_CompSkip.Name = "B_CompSkip";

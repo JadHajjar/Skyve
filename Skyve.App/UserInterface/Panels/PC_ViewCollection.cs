@@ -34,7 +34,7 @@ public class PC_ViewCollection : PC_GenericPackageList
 
 		B_Steam = new SlickButton
 		{
-			ImageName = "I_Steam",
+			ImageName = "Steam",
 			AutoSize = true,
 			Anchor = AnchorStyles.Right
 		};

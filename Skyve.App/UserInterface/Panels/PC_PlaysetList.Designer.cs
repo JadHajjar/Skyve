@@ -133,7 +133,7 @@ partial class PC_PlaysetList
 			// TB_Search
 			// 
 			this.TB_Search.EnterTriggersClick = false;
-			dynamicIcon1.Name = "I_Search";
+			dynamicIcon1.Name = "Search";
 			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
@@ -191,7 +191,7 @@ partial class PC_PlaysetList
 			this.B_ListView.ActiveColor = null;
 			this.B_ListView.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.B_ListView.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_List";
+			dynamicIcon2.Name = "List";
 			this.B_ListView.ImageName = dynamicIcon2;
 			this.B_ListView.Location = new System.Drawing.Point(1120, 1);
 			this.B_ListView.Margin = new System.Windows.Forms.Padding(1);
@@ -206,7 +206,7 @@ partial class PC_PlaysetList
 			this.B_GridView.ActiveColor = null;
 			this.B_GridView.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.B_GridView.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon3.Name = "I_Grid";
+			dynamicIcon3.Name = "Grid";
 			this.B_GridView.ImageName = dynamicIcon3;
 			this.B_GridView.Location = new System.Drawing.Point(1156, 1);
 			this.B_GridView.Margin = new System.Windows.Forms.Padding(1);
@@ -333,7 +333,7 @@ partial class PC_PlaysetList
 			// 
 			this.slickIcon2.ActiveColor = null;
 			this.slickIcon2.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "I_Add";
+			dynamicIcon4.Name = "Add";
 			this.slickIcon2.ImageName = dynamicIcon4;
 			this.slickIcon2.Location = new System.Drawing.Point(0, 0);
 			this.slickIcon2.Margin = new System.Windows.Forms.Padding(0);
@@ -361,7 +361,7 @@ partial class PC_PlaysetList
 			// 
 			this.slickIcon1.ActiveColor = null;
 			this.slickIcon1.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon5.Name = "I_TempProfile";
+			dynamicIcon5.Name = "TempProfile";
 			this.slickIcon1.ImageName = dynamicIcon5;
 			this.slickIcon1.Location = new System.Drawing.Point(0, 0);
 			this.slickIcon1.Margin = new System.Windows.Forms.Padding(0);
@@ -378,7 +378,7 @@ partial class PC_PlaysetList
 			this.B_Discover.ColorShade = null;
 			this.B_Discover.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Discover.Dock = System.Windows.Forms.DockStyle.Right;
-			dynamicIcon6.Name = "I_Discover";
+			dynamicIcon6.Name = "Discover";
 			this.B_Discover.ImageName = dynamicIcon6;
 			this.B_Discover.LargeImage = true;
 			this.B_Discover.Location = new System.Drawing.Point(1086, 10);
@@ -422,7 +422,7 @@ partial class PC_PlaysetList
 			this.I_ProfileIcon.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_ProfileIcon.Location = new System.Drawing.Point(32, 0);
 			this.I_ProfileIcon.Margin = new System.Windows.Forms.Padding(0);
-			this.I_ProfileIcon.Name = "I_ProfileIcon";
+			this.I_ProfileIcon.Name = "ProfileIcon";
 			this.I_ProfileIcon.Padding = new System.Windows.Forms.Padding(5);
 			this.I_ProfileIcon.Size = new System.Drawing.Size(32, 32);
 			this.I_ProfileIcon.TabIndex = 0;
@@ -434,7 +434,7 @@ partial class PC_PlaysetList
 			this.B_Save.ActiveColor = null;
 			this.B_Save.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_Save.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon7.Name = "I_Save";
+			dynamicIcon7.Name = "Save";
 			this.B_Save.ImageName = dynamicIcon7;
 			this.B_Save.Location = new System.Drawing.Point(173, 0);
 			this.B_Save.Margin = new System.Windows.Forms.Padding(0);
@@ -452,7 +452,7 @@ partial class PC_PlaysetList
 			this.I_Favorite.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_Favorite.Location = new System.Drawing.Point(0, 0);
 			this.I_Favorite.Margin = new System.Windows.Forms.Padding(0);
-			this.I_Favorite.Name = "I_Favorite";
+			this.I_Favorite.Name = "Favorite";
 			this.I_Favorite.Padding = new System.Windows.Forms.Padding(5);
 			this.I_Favorite.Size = new System.Drawing.Size(32, 32);
 			this.I_Favorite.TabIndex = 0;
@@ -474,7 +474,7 @@ partial class PC_PlaysetList
 			this.B_EditName.ActiveColor = null;
 			this.B_EditName.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_EditName.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon8.Name = "I_Cog";
+			dynamicIcon8.Name = "Cog";
 			this.B_EditName.ImageName = dynamicIcon8;
 			this.B_EditName.Location = new System.Drawing.Point(64, 0);
 			this.B_EditName.Margin = new System.Windows.Forms.Padding(0);

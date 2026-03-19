@@ -111,7 +111,7 @@ partial class RatingInfoForm
 			this.slickIcon1.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.slickIcon1.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.slickIcon1.Enabled = false;
-			dynamicIcon1.Name = "I_VoteFilled";
+			dynamicIcon1.Name = "VoteFilled";
 			this.slickIcon1.ImageName = dynamicIcon1;
 			this.slickIcon1.Location = new System.Drawing.Point(133, 47);
 			this.slickIcon1.Name = "slickIcon1";
@@ -125,7 +125,7 @@ partial class RatingInfoForm
 			this.B_Ok.AutoSize = true;
 			this.B_Ok.ColorShade = null;
 			this.B_Ok.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_Ok";
+			dynamicIcon2.Name = "Ok";
 			this.B_Ok.ImageName = dynamicIcon2;
 			this.B_Ok.LargeImage = true;
 			this.B_Ok.Location = new System.Drawing.Point(571, 377);

@@ -85,7 +85,7 @@ public partial class ItemListControl<T>
 		{
 			outerColor = notificationType.Value.GetColor();
 
-			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(new(e.ClipRectangle.Right, e.Rects.IconRect.Bottom), LocaleCR.Get($"{notificationType}"), "I_CompatibilityReport", outerColor, ContentAlignment.BottomRight, padding: GridPadding, height: height, cursorLocation: CursorLocation);
+			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(new(e.ClipRectangle.Right, e.Rects.IconRect.Bottom), LocaleCR.Get($"{notificationType}"), "CompatibilityReport", outerColor, ContentAlignment.BottomRight, padding: GridPadding, height: height, cursorLocation: CursorLocation);
 		}
 
 		if (GetStatusDescriptors(e.Item, out var text, out var icon, out var color))
@@ -203,7 +203,7 @@ public partial class ItemListControl<T>
 
 		if (parentPackage is not null)
 		{
-			using var icon = IconManager.GetIcon("I_Folder", size.Height * 3 / 4);
+			using var icon = IconManager.GetIcon("Folder", size.Height * 3 / 4);
 
 			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
@@ -214,7 +214,7 @@ public partial class ItemListControl<T>
 
 		if (!IsPackagePage && workshopInfo?.Url is not null)
 		{
-			using var icon = IconManager.GetIcon("I_Steam", rect.Height * 3 / 4);
+			using var icon = IconManager.GetIcon("Steam", rect.Height * 3 / 4);
 
 			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
@@ -225,7 +225,7 @@ public partial class ItemListControl<T>
 
 		if (!IsPackagePage && _compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
-			using var icon = IconManager.GetIcon("I_Github", rect.Height * 3 / 4);
+			using var icon = IconManager.GetIcon("Github", rect.Height * 3 / 4);
 
 			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
@@ -246,7 +246,7 @@ public partial class ItemListControl<T>
 
 		if (CompactList)
 		{
-			e.Rects.FolderNameRect = DrawCell(e, Columns.Author, Path.GetFileName(package.Folder), "I_Folder", font: UI.Font(8.25F, FontStyle.Bold));
+			e.Rects.FolderNameRect = DrawCell(e, Columns.Author, Path.GetFileName(package.Folder), "Folder", font: UI.Font(8.25F, FontStyle.Bold));
 			return;
 		}
 
@@ -254,7 +254,7 @@ public partial class ItemListControl<T>
 		var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
 		var folderPoint = CompactList ? new Point(_columnSizes[Columns.Author].X, e.ClipRectangle.Y) : new Point(e.Rects.TextRect.X + scoreX, e.Rects.IconRect.Bottom);
 
-		e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "I_Folder", alignment: ContentAlignment.BottomLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
+		e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "Folder", alignment: ContentAlignment.BottomLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
 	}
 
 	private void DrawAuthor(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, IUser author, int scoreX)
@@ -269,7 +269,7 @@ public partial class ItemListControl<T>
 		{
 			if (authorImg is null)
 			{
-				authorRect = DrawCell(e, Columns.Author, author.Name, "I_Developer", font: UI.Font(8.25F, FontStyle.Bold));
+				authorRect = DrawCell(e, Columns.Author, author.Name, "Developer", font: UI.Font(8.25F, FontStyle.Bold));
 			}
 			else
 			{
@@ -296,7 +296,7 @@ public partial class ItemListControl<T>
 
 			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
 
-			using var img = IconManager.GetIcon("I_Check", checkRect.Height);
+			using var img = IconManager.GetIcon("Check", checkRect.Height);
 
 			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 		}
@@ -375,7 +375,7 @@ public partial class ItemListControl<T>
 		{
 			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
 
-			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: CursorLocation);
+			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: CursorLocation);
 		}
 	}
 
@@ -468,7 +468,7 @@ public partial class ItemListControl<T>
 		{
 			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
 
-			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: CursorLocation);
+			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: CursorLocation);
 		}
 	}
 

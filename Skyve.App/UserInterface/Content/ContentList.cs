@@ -108,7 +108,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 
 		clearingFilters = false;
 
-		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
+		I_SortOrder.ImageName = ListControl.SortDescending ? "SortDesc" : "SortAsc";
 		B_GridView.Selected = ListControl.GridView;
 		B_ListView.Selected = !ListControl.GridView && !ListControl.CompactList;
 		B_CompactList.Selected = !ListControl.GridView && ListControl.CompactList;
@@ -629,7 +629,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 			return;
 		}
 
-		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "Search" : "ClearSearch";
 
 		var searchText = TB_Search.Text.Trim();
 
@@ -683,28 +683,28 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		settings.DescendingSort = ListControl.SortDescending;
 		_settings.SessionSettings.Save();
 
-		I_SortOrder.ImageName = ListControl.SortDescending ? "I_SortDesc" : "I_SortAsc";
+		I_SortOrder.ImageName = ListControl.SortDescending ? "SortDesc" : "SortAsc";
 	}
 
 	private void I_Actions_Click(object sender, EventArgs e)
 	{
 		var items = new SlickStripItem[]
 		{
-			  new (Locale.IncludeAll, "I_Check", action: () => IncludeAll(this, EventArgs.Empty))
-			, new (Locale.ExcludeAll, "I_X", action: () =>ExcludeAll(this, EventArgs.Empty))
+			  new (Locale.IncludeAll, "Check", action: () => IncludeAll(this, EventArgs.Empty))
+			, new (Locale.ExcludeAll, "X", action: () =>ExcludeAll(this, EventArgs.Empty))
 			, new ()
-			, new (Locale.EnableAll, "I_Enabled", () => EnableAll(this, EventArgs.Empty), _settings.UserSettings.AdvancedIncludeEnable)
-			, new (Locale.DisableAll, "I_Disabled", () => DisableAll(this, EventArgs.Empty), _settings.UserSettings.AdvancedIncludeEnable)
+			, new (Locale.EnableAll, "Enabled", () => EnableAll(this, EventArgs.Empty), _settings.UserSettings.AdvancedIncludeEnable)
+			, new (Locale.DisableAll, "Disabled", () => DisableAll(this, EventArgs.Empty), _settings.UserSettings.AdvancedIncludeEnable)
 			, new ()
-			, new (Locale.SelectAll, "I_DragDrop", ListControl.SelectAll, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count())
-			, new (Locale.DeselectAll, "I_Select", ListControl.DeselectAll, ListControl.SelectedItemsCount > 0)
-			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
-			, new (Locale.SubscribeAll, "I_Steam", () => SubscribeAll(this, EventArgs.Empty), this is PC_GenericPackageList)
-			, new (Locale.DownloadAll, "I_Install", () => DownloadAll(this, EventArgs.Empty), ListControl.FilteredItems.Any(x => x.LocalPackage is null))
-			, new (Locale.ReDownloadAll, "I_ReDownload", () => ReDownloadAll(this, EventArgs.Empty), ListControl.FilteredItems.Any(x => x.LocalPackage is not null))
+			, new (Locale.SelectAll, "DragDrop", ListControl.SelectAll, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count())
+			, new (Locale.DeselectAll, "Select", ListControl.DeselectAll, ListControl.SelectedItemsCount > 0)
+			, new (Locale.CopyAllIds, "Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
+			, new (Locale.SubscribeAll, "Steam", () => SubscribeAll(this, EventArgs.Empty), this is PC_GenericPackageList)
+			, new (Locale.DownloadAll, "Install", () => DownloadAll(this, EventArgs.Empty), ListControl.FilteredItems.Any(x => x.LocalPackage is null))
+			, new (Locale.ReDownloadAll, "ReDownload", () => ReDownloadAll(this, EventArgs.Empty), ListControl.FilteredItems.Any(x => x.LocalPackage is not null))
 			, new ()
-			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
-			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
+			, new (Locale.UnsubscribeAll, "RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
+			, new (Locale.DeleteAll, "Disposable", action: () => DeleteAll(this, EventArgs.Empty))
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));

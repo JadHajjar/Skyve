@@ -105,11 +105,11 @@ public partial class RatingInfoForm : SlickForm
 		{
 			scoreRect.Y--;
 		}
-		var scoreFilled = IconManager.GetSmallIcon("I_VoteFilled");
+		var scoreFilled = IconManager.GetSmallIcon("VoteFilled");
 
 		if (score < 75)
 		{
-			using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
+			using var scoreIcon = IconManager.GetSmallIcon("Vote");
 
 			e.Graphics.DrawImage(scoreIcon.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
 
@@ -126,7 +126,7 @@ public partial class RatingInfoForm : SlickForm
 		{
 			if (small)
 			{
-				using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
+				using var scoreIcon = IconManager.GetSmallIcon("Vote");
 
 				e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - (scoreIcon.Height * subscriptions / 15000), 0, 0));
 				e.Graphics.DrawImage(scoreIcon.Color(FormDesign.Modern.ActiveColor), scoreRect.CenterR(scoreIcon.Size));

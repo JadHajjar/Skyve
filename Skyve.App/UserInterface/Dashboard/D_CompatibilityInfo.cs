@@ -180,12 +180,12 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawLoadingSection(e, applyDrawing, Locale.CompatibilityReport, "I_CompatibilityReport", ref preferredHeight);
+		DrawLoadingSection(e, applyDrawing, Locale.CompatibilityReport, "CompatibilityReport", ref preferredHeight);
 	}
 
 	private void DrawNoIssues(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "CompatibilityReport", out var fore, ref preferredHeight);
 
 		e.Graphics.DrawStringItem(Locale.NoCompatibilityIssues
 			, Font
@@ -203,7 +203,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, ViewCompatibilityReport, new()
 		{
 			Text = Locale.ViewCompatibilityReport,
-			Icon = "I_ViewFile",
+			Icon = "ViewFile",
 			Rectangle = e.ClipRectangle
 		});
 
@@ -212,13 +212,13 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 	private void DrawSplit(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "CompatibilityReport", out var fore, ref preferredHeight);
 
 		var rect = new Rectangle(e.ClipRectangle.X, preferredHeight, (e.ClipRectangle.Width / 2) - (Padding.Left / 2), mainSectionHeight - preferredHeight + e.ClipRectangle.Y);
 
 		if (applyDrawing)
 		{
-			using var modIcon = IconManager.GetIcon("I_Mods", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
+			using var modIcon = IconManager.GetIcon("Mods", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
 			e.Graphics.DrawImage(modIcon, rect.CenterR(modIcon.Size));
 		}
 
@@ -230,7 +230,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 			, rect.Pad(Margin)
 			, ref preferredHeight
 			, applyDrawing
-			, "I_Check");
+			, "Check");
 		}
 		else
 		{
@@ -262,7 +262,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 		if (applyDrawing)
 		{
-			using var assetIcon = IconManager.GetIcon("I_Assets", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
+			using var assetIcon = IconManager.GetIcon("Assets", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
 			e.Graphics.DrawImage(assetIcon, rect.CenterR(assetIcon.Size));
 		}
 
@@ -274,7 +274,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 				, rect.Pad(Margin)
 				, ref preferredHeight
 				, applyDrawing
-				, "I_Check");
+				, "Check");
 		}
 		else
 		{
@@ -301,7 +301,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, ViewModsWithIssues, new()
 		{
 			Text = Locale.ViewModsWithIssues,
-			Icon = "I_Mods",
+			Icon = "Mods",
 			Rectangle = buttonRect.Pad(0,0,Margin.Right,0)
 		});
 
@@ -313,7 +313,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, ViewCompatibilityReport, new()
 		{
 			Text = Locale.ViewCompatibilityReport,
-			Icon = "I_ViewFile",
+			Icon = "ViewFile",
 			Rectangle = buttonRect.Pad(Margin.Left, 0, Margin.Right, 0)
 		});
 
@@ -325,7 +325,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, ViewAssetsWithIssues, new()
 		{
 			Text = Locale.ViewAssetsWithIssues,
-			Icon = "I_Assets",
+			Icon = "Assets",
 			Rectangle = buttonRect.Pad(Margin.Left, 0, 0, 0)
 		});
 
@@ -334,7 +334,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "I_CompatibilityReport", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.CompatibilityReport, "CompatibilityReport", out var fore, ref preferredHeight);
 		
 		var rect = new Rectangle(e.ClipRectangle.X, preferredHeight, e.ClipRectangle.Width, modsSectionHeight - preferredHeight);
 
@@ -346,13 +346,13 @@ internal class D_CompatibilityInfo : IDashboardItem
 			, e.ClipRectangle.Pad(Margin)
 			, ref preferredHeight
 			, applyDrawing
-			, "I_Check");
+			, "Check");
 		}
 		else
 		{
 			if (applyDrawing)
 			{
-				using var modIcon = IconManager.GetIcon("I_Mods", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
+				using var modIcon = IconManager.GetIcon("Mods", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
 				e.Graphics.DrawImage(modIcon, rect.CenterR(modIcon.Size));
 			}
 
@@ -391,13 +391,13 @@ internal class D_CompatibilityInfo : IDashboardItem
 				, e.ClipRectangle.Pad(Margin)
 				, ref preferredHeight
 				, applyDrawing
-				, "I_Check");
+				, "Check");
 		}
 		else
 		{
 			if (applyDrawing)
 			{
-				using var assetIcon = IconManager.GetIcon("I_Assets", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
+				using var assetIcon = IconManager.GetIcon("Assets", Math.Min(rect.Width / 4, rect.Height - Padding.Left)).Color(FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.MenuColor, 20));
 				e.Graphics.DrawImage(assetIcon, rect.CenterR(assetIcon.Size));
 			}
 
@@ -422,7 +422,7 @@ internal class D_CompatibilityInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, ViewCompatibilityReport, new()
 		{
 			Text = Locale.ViewCompatibilityReport,
-			Icon = "I_ViewFile",
+			Icon = "ViewFile",
 			Rectangle = e.ClipRectangle
 		});
 

@@ -158,7 +158,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 			return;
 		}
 
-		using var fileIcon = IconManager.GetLargeIcon("I_File").Color(FormDesign.Design.MenuForeColor);
+		using var fileIcon = IconManager.GetLargeIcon("File").Color(FormDesign.Design.MenuForeColor);
 
 		var Padding = ctrl.Margin;
 		var textSize = e.Graphics.Measure(ctrl.Text, new Font(Font, FontStyle.Bold), ctrl.Width - Padding.Left);

@@ -27,7 +27,7 @@ public class AssetsBubble : StatusBubbleBase
 			return;
 		}
 
-		ImageName = "I_Assets";
+		ImageName = "Assets";
 		Text = Locale.AssetsBubble;
 
 		if (!_notifier.IsContentLoaded)

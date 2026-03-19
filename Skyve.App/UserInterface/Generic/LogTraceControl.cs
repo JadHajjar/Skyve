@@ -83,7 +83,7 @@ public class LogTraceControl : SlickListControl<ILogTrace>
 			itemHovered = e.Item;
 		}
 
-		SlickButton.DrawButton(e, buttonRect, null, Font, IconManager.GetIcon("I_Copy"), null, buttonRect.Contains(CursorLocation) ? HoverState : HoverState.Normal);
+		SlickButton.DrawButton(e, buttonRect, null, Font, IconManager.GetIcon("Copy"), null, buttonRect.Contains(CursorLocation) ? HoverState : HoverState.Normal);
 
 		using var yellowBrush = new SolidBrush(FormDesign.Design.MenuColor);
 		using var activeBrush = new SolidBrush(FormDesign.Design.MenuForeColor);

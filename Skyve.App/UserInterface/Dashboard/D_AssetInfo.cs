@@ -170,12 +170,12 @@ internal class D_AssetsInfo : IDashboardItem
 
 	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawLoadingSection(e, applyDrawing, Locale.AssetsBubble, "I_Assets", ref preferredHeight);
+		DrawLoadingSection(e, applyDrawing, Locale.AssetsBubble, "Assets", ref preferredHeight);
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.AssetsBubble, "I_Assets", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.AssetsBubble, "Assets", out var fore, ref preferredHeight);
 
 		var textRect = e.ClipRectangle.Pad(Margin);
 
@@ -238,14 +238,14 @@ internal class D_AssetsInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, OpenAssetsPanel, new()
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Asset.Plural.ToLower()),
-			Icon = "I_ViewFile",
+			Icon = "ViewFile",
 			Rectangle = e.ClipRectangle
 		});
 
 		DrawButton(e, applyDrawing, ref preferredHeight, OpenRecentAssetsPanel, new()
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Asset.Plural.ToLower()),
-			Icon = "I_UpdateTime",
+			Icon = "UpdateTime",
 			Rectangle = e.ClipRectangle
 		});
 		preferredHeight -= Margin.Top;
@@ -255,7 +255,7 @@ internal class D_AssetsInfo : IDashboardItem
 	{
 		var mainRect = e.ClipRectangle.Pad(0, 0, e.ClipRectangle.Width / 2, 0);
 
-		DrawSection(e, applyDrawing, mainRect.ClipTo(mainSectionHeight), Locale.AssetsBubble, "I_Assets", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, mainRect.ClipTo(mainSectionHeight), Locale.AssetsBubble, "Assets", out var fore, ref preferredHeight);
 
 		var textRect = mainRect.Pad(Margin);
 
@@ -321,14 +321,14 @@ internal class D_AssetsInfo : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, OpenAssetsPanel, new()
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Asset.Plural.ToLower()),
-			Icon = "I_ViewFile",
+			Icon = "ViewFile",
 			Rectangle = mainRect
 		});
 
 		DrawButton(e, applyDrawing, ref preferredHeight, OpenRecentAssetsPanel, new()
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Asset.Plural.ToLower()),
-			Icon = "I_UpdateTime",
+			Icon = "UpdateTime",
 			Rectangle = mainRect
 		});
 

@@ -90,7 +90,7 @@ public class DownloadsInfoControl : SlickControl
 
 		var c = (_subscriptionsManager.PendingSubscribingTo.Count > 0 ? 1 : 0) + (_subscriptionsManager.PendingUnsubscribingFrom.Count > 0 ? 2 : 0);
 
-		using var buttonIcon = IconManager.GetSmallIcon(c switch { 3 => "I_AppIcon", 2 => "I_Disposable", _ => "I_Install" });
+		using var buttonIcon = IconManager.GetSmallIcon(c switch { 3 => "AppIcon", 2 => "Disposable", _ => "Install" });
 		using var font = UI.Font(6.75F);
 		var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, c switch { 3 => LocaleSlickUI.Apply, 2 => LocaleSlickUI.Remove, _ => LocaleSlickUI.Download }, font, new(4, 2, 2, 2));
 		buttonRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomRight);
@@ -107,7 +107,7 @@ public class DownloadsInfoControl : SlickControl
 			Control = this
 		});
 
-		using var cancelButtonIcon = IconManager.GetSmallIcon("I_Cancel");
+		using var cancelButtonIcon = IconManager.GetSmallIcon("Cancel");
 		buttonSize = SlickButton.GetSize(e.Graphics, cancelButtonIcon, LocaleSlickUI.Cancel, font, new(4, 2, 2, 2));
 		cancelRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomLeft);
 

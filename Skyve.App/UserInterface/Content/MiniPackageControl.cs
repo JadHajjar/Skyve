@@ -136,7 +136,7 @@ public class MiniPackageControl : SlickControl
 				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) ? 50 : 20, FormDesign.Design.RedColor.MergeColor(ForeColor, 65))), imageRect.Pad(1), (int)(4 * UI.FontScale));
 			}
 
-			using var img = IconManager.GetIcon("I_Disposable");
+			using var img = IconManager.GetIcon("Disposable");
 
 			e.Graphics.DrawImage(img.Color(FormDesign.Design.RedColor, (byte)(HoverState.HasFlag(HoverState.Pressed) ? 255 : 175)), imageRect.CenterR(img.Size));
 		}

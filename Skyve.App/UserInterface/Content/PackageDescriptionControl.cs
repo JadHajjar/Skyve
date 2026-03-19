@@ -289,22 +289,22 @@ public class PackageDescriptionControl : SlickImageControl
 		{
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
-				icon = "I_Question";
+				icon = "Question";
 				color = FormDesign.Design.YellowColor;
 				return true;
 			case DownloadStatus.OutOfDate:
 				text = Locale.OutOfDate;
-				icon = "I_OutOfDate";
+				icon = "OutOfDate";
 				color = FormDesign.Design.YellowColor;
 				return true;
 			case DownloadStatus.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
-				icon = "I_Broken";
+				icon = "Broken";
 				color = FormDesign.Design.RedColor;
 				return true;
 			case DownloadStatus.Removed:
 				text = Locale.RemovedByAuthor;
-				icon = "I_ContentRemoved";
+				icon = "ContentRemoved";
 				color = FormDesign.Design.RedColor;
 				return true;
 		}
@@ -348,7 +348,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (e.Item.Id > 0)
 		{
-			using var icon = IconManager.GetSmallIcon("I_Steam");
+			using var icon = IconManager.GetSmallIcon("Steam");
 
 			e.Rects.SteamIdRect = e.Graphics.DrawLabel(e.Item.Id.ToString(), icon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor), tagRect, ContentAlignment.BottomLeft, large: true, mousePosition: CursorLocation);
 
@@ -365,7 +365,7 @@ public class PackageDescriptionControl : SlickImageControl
 		if (date.HasValue && !IsPackagePage)
 		{
 			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
-			using var icon = IconManager.GetSmallIcon("I_UpdateTime");
+			using var icon = IconManager.GetSmallIcon("UpdateTime");
 
 			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, icon, FormDesign.Design.AccentColor, tagRect, ContentAlignment.BottomLeft, large: true, mousePosition: CursorLocation);
 		}
@@ -381,14 +381,14 @@ public class PackageDescriptionControl : SlickImageControl
 		}
 
 		var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
-		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
+		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : partialIncluded ? "Slash" : isIncluded ? "Ok" : package is null ? "Add" : "Enabled");
 		var mod = package?.Mod;
 		var required = mod is not null && _modLogicManager.IsRequired(mod, _modUtil);
 
 		DynamicIcon? enabl = null;
 		if (_settings.UserSettings.AdvancedIncludeEnable && mod is not null)
 		{
-			enabl = new DynamicIcon(mod.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
+			enabl = new DynamicIcon(mod.IsEnabled() ? "Checked" : "Checked_OFF");
 
 			if (isIncluded)
 			{
@@ -459,11 +459,11 @@ public class PackageDescriptionControl : SlickImageControl
 				scoreRect.Y--;
 			}
 
-			using var scoreFilled = IconManager.GetIcon("I_VoteFilled", scoreRect.Width * 3 / 4);
+			using var scoreFilled = IconManager.GetIcon("VoteFilled", scoreRect.Width * 3 / 4);
 
 			if (score < 75)
 			{
-				using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
+				using var scoreIcon = IconManager.GetIcon("Vote", scoreRect.Width * 3 / 4);
 
 				e.Graphics.DrawImage(scoreIcon.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
 
@@ -480,7 +480,7 @@ public class PackageDescriptionControl : SlickImageControl
 			{
 				if (small)
 				{
-					using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
+					using var scoreIcon = IconManager.GetIcon("Vote", scoreRect.Width * 3 / 4);
 
 					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - scoreIcon.Height * workshopInfo!.Subscribers / 15000, 0, 0));
 					e.Graphics.DrawImage(scoreIcon.Color(FormDesign.Modern.ActiveColor), scoreRect.CenterR(scoreIcon.Size));
@@ -510,7 +510,7 @@ public class PackageDescriptionControl : SlickImageControl
 		var height = (int)(24 * UI.FontScale);
 		var folderPoint = new Point(scoreX == 0 ? e.Rects.BotRect.X + padding.Horizontal : scoreX + padding.Left * 3, e.Rects.BotRect.Y + padding.Vertical);
 
-		e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "I_Folder", alignment: ContentAlignment.TopLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
+		e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "Folder", alignment: ContentAlignment.TopLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
 	}
 
 	private void DrawAuthor(ItemPaintEventArgs<IPackage, Rectangles> e, IUser author, int scoreX)
@@ -539,7 +539,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
 
-			using var img = IconManager.GetIcon("I_Check", checkRect.Height);
+			using var img = IconManager.GetIcon("Check", checkRect.Height);
 
 			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 		}
@@ -555,7 +555,7 @@ public class PackageDescriptionControl : SlickImageControl
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 
 		{
-			using var icon = IconManager.GetIcon("I_More", size.Height * 3 / 4);
+			using var icon = IconManager.GetIcon("More", size.Height * 3 / 4);
 
 			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
@@ -566,7 +566,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (parentPackage is not null)
 		{
-			using var icon = IconManager.GetIcon("I_Folder", size.Height * 3 / 4);
+			using var icon = IconManager.GetIcon("Folder", size.Height * 3 / 4);
 
 			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
@@ -577,7 +577,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (workshopInfo?.Url is not null)
 		{
-			using var icon = IconManager.GetIcon("I_Steam", rect.Height * 3 / 4);
+			using var icon = IconManager.GetIcon("Steam", rect.Height * 3 / 4);
 
 			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
@@ -588,7 +588,7 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (_compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
-			using var icon = IconManager.GetIcon("I_Github", rect.Height * 3 / 4);
+			using var icon = IconManager.GetIcon("Github", rect.Height * 3 / 4);
 
 			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
@@ -611,7 +611,7 @@ public class PackageDescriptionControl : SlickImageControl
 			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
 				point,
 				LocaleCR.Get($"{notificationType}"),
-				"I_CompatibilityReport",
+				"CompatibilityReport",
 				notificationType.Value.GetColor(),
 				CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
 				Padding,

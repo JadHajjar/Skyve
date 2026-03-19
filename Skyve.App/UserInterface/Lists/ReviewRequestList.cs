@@ -92,7 +92,7 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 		e.Rects.ViewRectangle = SlickButton.AlignAndDraw(e.Graphics, e.ClipRectangle.Pad(Padding), ContentAlignment.TopRight, new ButtonDrawArgs
 		{
 			Text = LocaleCR.ViewRequest,
-			Icon = "I_Link"
+			Icon = "Link"
 		}).Rectangle;
 
 		if (image is not null)
@@ -118,14 +118,14 @@ public class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRe
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.UserRectangle, Padding.Left);
 		}
 
-		using var typeIcon = IconManager.GetSmallIcon(e.Item.IsInteraction ? "I_Switch" : e.Item.IsStatus ? "I_Statuses" : "I_Content");
-		using var dateIcon = IconManager.GetSmallIcon("I_UpdateTime");
+		using var typeIcon = IconManager.GetSmallIcon(e.Item.IsInteraction ? "Switch" : e.Item.IsStatus ? "Statuses" : "Content");
+		using var dateIcon = IconManager.GetSmallIcon("UpdateTime");
 		var r = e.Graphics.DrawLabel(e.Item.Timestamp.ToLocalTime().ToString("g"), dateIcon, FormDesign.Design.AccentColor, e.ClipRectangle, ContentAlignment.BottomLeft, true);
 		e.Graphics.DrawLabel(LocaleHelper.GetGlobalText(e.Item.IsInteraction ? "Interaction" : e.Item.IsStatus ? "Status" : "Other"), typeIcon, FormDesign.Design.AccentColor, e.ClipRectangle.Pad(0, 0, 0, r.Height + Padding.Top), ContentAlignment.BottomLeft, true);
 
 		e.Rects.TextRectangle = SlickButton.AlignAndDraw(e.Graphics, e.ClipRectangle.Pad(0, e.Rects.ViewRectangle.Height + Padding.Vertical, Padding.Right, 0), ContentAlignment.MiddleRight, new ButtonDrawArgs
 		{
-			Icon = "I_Copy"
+			Icon = "Copy"
 		}).Rectangle;
 
 		using var smallfont = UI.Font(8.25F);

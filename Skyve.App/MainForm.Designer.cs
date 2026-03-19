@@ -102,7 +102,7 @@ namespace Skyve.App
 			this.PI_Dashboard.Data = null;
 			this.PI_Dashboard.Group = "";
 			this.PI_Dashboard.Highlighted = false;
-			dynamicIcon1.Name = "I_Dashboard";
+			dynamicIcon1.Name = "Dashboard";
 			this.PI_Dashboard.IconName = dynamicIcon1;
 			this.PI_Dashboard.Loading = false;
 			this.PI_Dashboard.Selected = false;
@@ -115,7 +115,7 @@ namespace Skyve.App
 			this.PI_Mods.Data = null;
 			this.PI_Mods.Group = "Content";
 			this.PI_Mods.Highlighted = false;
-			dynamicIcon2.Name = "I_Mods";
+			dynamicIcon2.Name = "Mods";
 			this.PI_Mods.IconName = dynamicIcon2;
 			this.PI_Mods.Loading = false;
 			this.PI_Mods.Selected = false;
@@ -128,7 +128,7 @@ namespace Skyve.App
 			this.PI_Assets.Data = null;
 			this.PI_Assets.Group = "Content";
 			this.PI_Assets.Highlighted = false;
-			dynamicIcon3.Name = "I_Assets";
+			dynamicIcon3.Name = "Assets";
 			this.PI_Assets.IconName = dynamicIcon3;
 			this.PI_Assets.Loading = false;
 			this.PI_Assets.Selected = false;
@@ -141,7 +141,7 @@ namespace Skyve.App
 			this.PI_Playsets.Data = null;
 			this.PI_Playsets.Group = "";
 			this.PI_Playsets.Highlighted = false;
-			dynamicIcon4.Name = "I_ProfileSettings";
+			dynamicIcon4.Name = "ProfileSettings";
 			this.PI_Playsets.IconName = dynamicIcon4;
 			this.PI_Playsets.Loading = false;
 			this.PI_Playsets.Selected = false;
@@ -155,7 +155,7 @@ namespace Skyve.App
 			// 
 			this.PI_CurrentPlayset.Data = null;
 			this.PI_CurrentPlayset.Highlighted = false;
-			dynamicIcon5.Name = "I_ProfileSettings";
+			dynamicIcon5.Name = "ProfileSettings";
 			this.PI_CurrentPlayset.IconName = dynamicIcon5;
 			this.PI_CurrentPlayset.Loading = false;
 			this.PI_CurrentPlayset.Selected = false;
@@ -167,7 +167,7 @@ namespace Skyve.App
 			// 
 			this.PI_ViewPlaysets.Data = null;
 			this.PI_ViewPlaysets.Highlighted = false;
-			dynamicIcon6.Name = "I_Pages";
+			dynamicIcon6.Name = "Pages";
 			this.PI_ViewPlaysets.IconName = dynamicIcon6;
 			this.PI_ViewPlaysets.Loading = false;
 			this.PI_ViewPlaysets.Selected = false;
@@ -179,7 +179,7 @@ namespace Skyve.App
 			// 
 			this.PI_AddPlayset.Data = null;
 			this.PI_AddPlayset.Highlighted = false;
-			dynamicIcon7.Name = "I_Add";
+			dynamicIcon7.Name = "Add";
 			this.PI_AddPlayset.IconName = dynamicIcon7;
 			this.PI_AddPlayset.Loading = false;
 			this.PI_AddPlayset.Selected = false;
@@ -192,7 +192,7 @@ namespace Skyve.App
 			this.PI_Options.Data = null;
 			this.PI_Options.Group = "Other";
 			this.PI_Options.Highlighted = false;
-			dynamicIcon8.Name = "I_UserOptions";
+			dynamicIcon8.Name = "UserOptions";
 			this.PI_Options.IconName = dynamicIcon8;
 			this.PI_Options.Loading = false;
 			this.PI_Options.Selected = false;
@@ -205,7 +205,7 @@ namespace Skyve.App
 			this.PI_Compatibility.Data = null;
 			this.PI_Compatibility.Group = "Maintenance";
 			this.PI_Compatibility.Highlighted = false;
-			dynamicIcon9.Name = "I_CompatibilityReport";
+			dynamicIcon9.Name = "CompatibilityReport";
 			this.PI_Compatibility.IconName = dynamicIcon9;
 			this.PI_Compatibility.Loading = false;
 			this.PI_Compatibility.Selected = false;
@@ -218,7 +218,7 @@ namespace Skyve.App
 			this.PI_ModUtilities.Data = null;
 			this.PI_ModUtilities.Group = "Maintenance";
 			this.PI_ModUtilities.Highlighted = false;
-			dynamicIcon10.Name = "I_Wrench";
+			dynamicIcon10.Name = "Wrench";
 			this.PI_ModUtilities.IconName = dynamicIcon10;
 			this.PI_ModUtilities.Loading = false;
 			this.PI_ModUtilities.Selected = false;
@@ -231,7 +231,7 @@ namespace Skyve.App
 			this.PI_Troubleshoot.Data = null;
 			this.PI_Troubleshoot.Group = "Maintenance";
 			this.PI_Troubleshoot.Highlighted = false;
-			dynamicIcon11.Name = "I_AskHelp";
+			dynamicIcon11.Name = "AskHelp";
 			this.PI_Troubleshoot.IconName = dynamicIcon11;
 			this.PI_Troubleshoot.Loading = false;
 			this.PI_Troubleshoot.Selected = false;
@@ -244,7 +244,7 @@ namespace Skyve.App
 			this.PI_Packages.Data = null;
 			this.PI_Packages.Group = "Content";
 			this.PI_Packages.Highlighted = false;
-			dynamicIcon12.Name = "I_Package";
+			dynamicIcon12.Name = "Package";
 			this.PI_Packages.IconName = dynamicIcon12;
 			this.PI_Packages.Loading = false;
 			this.PI_Packages.Selected = false;
@@ -301,7 +301,7 @@ namespace Skyve.App
 			this.PI_DLCs.Data = null;
 			this.PI_DLCs.Group = "Content";
 			this.PI_DLCs.Highlighted = false;
-			dynamicIcon13.Name = "I_Dlc";
+			dynamicIcon13.Name = "Dlc";
 			this.PI_DLCs.IconName = dynamicIcon13;
 			this.PI_DLCs.Loading = false;
 			this.PI_DLCs.Selected = false;
@@ -315,7 +315,7 @@ namespace Skyve.App
 			this.PI_CompatibilityManagement.Group = "Maintenance";
 			this.PI_CompatibilityManagement.Hidden = true;
 			this.PI_CompatibilityManagement.Highlighted = false;
-			dynamicIcon14.Name = "I_Cog";
+			dynamicIcon14.Name = "Cog";
 			this.PI_CompatibilityManagement.IconName = dynamicIcon14;
 			this.PI_CompatibilityManagement.Loading = false;
 			this.PI_CompatibilityManagement.Selected = false;
@@ -331,7 +331,7 @@ namespace Skyve.App
 			this.PI_ManageYourPackages.Data = null;
 			this.PI_ManageYourPackages.Hidden = true;
 			this.PI_ManageYourPackages.Highlighted = false;
-			dynamicIcon15.Name = "I_User";
+			dynamicIcon15.Name = "User";
 			this.PI_ManageYourPackages.IconName = dynamicIcon15;
 			this.PI_ManageYourPackages.Loading = false;
 			this.PI_ManageYourPackages.Selected = false;
@@ -344,7 +344,7 @@ namespace Skyve.App
 			this.PI_ManageSinglePackage.Data = null;
 			this.PI_ManageSinglePackage.Hidden = true;
 			this.PI_ManageSinglePackage.Highlighted = false;
-			dynamicIcon16.Name = "I_Edit";
+			dynamicIcon16.Name = "Edit";
 			this.PI_ManageSinglePackage.IconName = dynamicIcon16;
 			this.PI_ManageSinglePackage.Loading = false;
 			this.PI_ManageSinglePackage.Selected = false;
@@ -357,7 +357,7 @@ namespace Skyve.App
 			this.PI_ReviewRequests.Data = null;
 			this.PI_ReviewRequests.Hidden = true;
 			this.PI_ReviewRequests.Highlighted = false;
-			dynamicIcon17.Name = "I_RequestReview";
+			dynamicIcon17.Name = "RequestReview";
 			this.PI_ReviewRequests.IconName = dynamicIcon17;
 			this.PI_ReviewRequests.Loading = false;
 			this.PI_ReviewRequests.Selected = false;
@@ -370,7 +370,7 @@ namespace Skyve.App
 			this.PI_ManageAllCompatibility.Data = null;
 			this.PI_ManageAllCompatibility.Hidden = true;
 			this.PI_ManageAllCompatibility.Highlighted = false;
-			dynamicIcon18.Name = "I_Cog";
+			dynamicIcon18.Name = "Cog";
 			this.PI_ManageAllCompatibility.IconName = dynamicIcon18;
 			this.PI_ManageAllCompatibility.Loading = false;
 			this.PI_ManageAllCompatibility.Selected = false;

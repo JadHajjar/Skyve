@@ -96,7 +96,7 @@ partial class PC_RequestReview
 			this.B_ReportIssue.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_ReportIssue.Font = new System.Drawing.Font("Segoe UI", 19.5F, System.Drawing.FontStyle.Bold);
 			this.B_ReportIssue.FromScratch = false;
-			dynamicIcon1.Name = "I_Remarks";
+			dynamicIcon1.Name = "Remarks";
 			this.B_ReportIssue.ImageName = dynamicIcon1;
 			this.B_ReportIssue.Location = new System.Drawing.Point(203, 16);
 			this.B_ReportIssue.Margin = new System.Windows.Forms.Padding(0, 30, 150, 30);
@@ -112,7 +112,7 @@ partial class PC_RequestReview
 			this.B_AddStatus.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_AddStatus.Font = new System.Drawing.Font("Segoe UI", 19.5F, System.Drawing.FontStyle.Bold);
 			this.B_AddStatus.FromScratch = false;
-			dynamicIcon2.Name = "I_Content";
+			dynamicIcon2.Name = "Content";
 			this.B_AddStatus.ImageName = dynamicIcon2;
 			this.B_AddStatus.Location = new System.Drawing.Point(353, 211);
 			this.B_AddStatus.Margin = new System.Windows.Forms.Padding(150, 30, 0, 30);
@@ -128,7 +128,7 @@ partial class PC_RequestReview
 			this.B_AddInteraction.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_AddInteraction.Font = new System.Drawing.Font("Segoe UI", 19.5F, System.Drawing.FontStyle.Bold);
 			this.B_AddInteraction.FromScratch = false;
-			dynamicIcon3.Name = "I_Switch";
+			dynamicIcon3.Name = "Switch";
 			this.B_AddInteraction.ImageName = dynamicIcon3;
 			this.B_AddInteraction.Location = new System.Drawing.Point(203, 406);
 			this.B_AddInteraction.Margin = new System.Windows.Forms.Padding(0, 30, 150, 30);
@@ -355,7 +355,7 @@ partial class PC_RequestReview
 			this.B_Apply.AutoSize = true;
 			this.B_Apply.ColorShade = null;
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "I_Link";
+			dynamicIcon4.Name = "Link";
 			this.B_Apply.ImageName = dynamicIcon4;
 			this.B_Apply.Location = new System.Drawing.Point(713, 3);
 			this.B_Apply.Name = "B_Apply";

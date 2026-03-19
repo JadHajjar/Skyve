@@ -138,7 +138,7 @@ partial class PC_HelpAndLogs
 			this.P_Troubleshoot.Controls.Add(this.B_Troubleshoot, 1, 0);
 			this.P_Troubleshoot.Controls.Add(this.L_Troubleshoot, 0, 1);
 			this.P_Troubleshoot.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon2.Name = "I_Wrench";
+			dynamicIcon2.Name = "Wrench";
 			this.P_Troubleshoot.ImageName = dynamicIcon2;
 			this.P_Troubleshoot.Location = new System.Drawing.Point(333, 3);
 			this.P_Troubleshoot.Name = "P_Troubleshoot";
@@ -157,7 +157,7 @@ partial class PC_HelpAndLogs
 			this.B_Troubleshoot.AutoSize = true;
 			this.B_Troubleshoot.ColorShade = null;
 			this.B_Troubleshoot.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_ArrowRight";
+			dynamicIcon1.Name = "ArrowRight";
 			this.B_Troubleshoot.ImageName = dynamicIcon1;
 			this.B_Troubleshoot.Location = new System.Drawing.Point(489, 57);
 			this.B_Troubleshoot.Name = "B_Troubleshoot";
@@ -184,7 +184,7 @@ partial class PC_HelpAndLogs
 			this.B_OpenLog.AutoSize = true;
 			this.B_OpenLog.ColorShade = null;
 			this.B_OpenLog.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon3.Name = "I_Link";
+			dynamicIcon3.Name = "Link";
 			this.B_OpenLog.ImageName = dynamicIcon3;
 			this.B_OpenLog.Location = new System.Drawing.Point(993, 272);
 			this.B_OpenLog.Name = "B_OpenLog";
@@ -228,7 +228,7 @@ partial class PC_HelpAndLogs
 			this.TLP_HelpLogs.Controls.Add(this.B_Guide, 0, 1);
 			this.TLP_HelpLogs.Controls.Add(this.slickSpacer1, 0, 4);
 			this.TLP_HelpLogs.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon10.Name = "I_AskHelp";
+			dynamicIcon10.Name = "AskHelp";
 			this.TLP_HelpLogs.ImageName = dynamicIcon10;
 			this.TLP_HelpLogs.Location = new System.Drawing.Point(3, 3);
 			this.TLP_HelpLogs.Name = "TLP_HelpLogs";
@@ -252,7 +252,7 @@ partial class PC_HelpAndLogs
 			this.B_Donate.ColorShade = null;
 			this.B_Donate.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Donate.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon4.Name = "I_Donate";
+			dynamicIcon4.Name = "Donate";
 			this.B_Donate.ImageName = dynamicIcon4;
 			this.B_Donate.Location = new System.Drawing.Point(12, 173);
 			this.B_Donate.Name = "B_Donate";
@@ -268,7 +268,7 @@ partial class PC_HelpAndLogs
 			this.B_ChangeLog.ColorShade = null;
 			this.B_ChangeLog.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_ChangeLog.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon5.Name = "I_Versions";
+			dynamicIcon5.Name = "Versions";
 			this.B_ChangeLog.ImageName = dynamicIcon5;
 			this.B_ChangeLog.Location = new System.Drawing.Point(12, 134);
 			this.B_ChangeLog.Name = "B_ChangeLog";
@@ -284,7 +284,7 @@ partial class PC_HelpAndLogs
 			this.B_SaveZip.ColorShade = null;
 			this.B_SaveZip.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_SaveZip.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon6.Name = "I_Log";
+			dynamicIcon6.Name = "Log";
 			this.B_SaveZip.ImageName = dynamicIcon6;
 			this.B_SaveZip.Location = new System.Drawing.Point(12, 241);
 			this.B_SaveZip.Name = "B_SaveZip";
@@ -301,7 +301,7 @@ partial class PC_HelpAndLogs
 			this.B_CopyZip.ColorShade = null;
 			this.B_CopyZip.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_CopyZip.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon7.Name = "I_CopyFile";
+			dynamicIcon7.Name = "CopyFile";
 			this.B_CopyZip.ImageName = dynamicIcon7;
 			this.B_CopyZip.Location = new System.Drawing.Point(12, 280);
 			this.B_CopyZip.Name = "B_CopyZip";
@@ -317,7 +317,7 @@ partial class PC_HelpAndLogs
 			this.B_Discord.ColorShade = null;
 			this.B_Discord.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Discord.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon8.Name = "I_Discord";
+			dynamicIcon8.Name = "Discord";
 			this.B_Discord.ImageName = dynamicIcon8;
 			this.B_Discord.Location = new System.Drawing.Point(12, 56);
 			this.B_Discord.Name = "B_Discord";
@@ -333,7 +333,7 @@ partial class PC_HelpAndLogs
 			this.B_Guide.ColorShade = null;
 			this.B_Guide.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Guide.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon9.Name = "I_Guide";
+			dynamicIcon9.Name = "Guide";
 			this.B_Guide.ImageName = dynamicIcon9;
 			this.B_Guide.Location = new System.Drawing.Point(12, 95);
 			this.B_Guide.Name = "B_Guide";
@@ -390,7 +390,7 @@ partial class PC_HelpAndLogs
 			this.B_OpenAppData.ColorShade = null;
 			this.B_OpenAppData.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_OpenAppData.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon11.Name = "I_Folder";
+			dynamicIcon11.Name = "Folder";
 			this.B_OpenAppData.ImageName = dynamicIcon11;
 			this.B_OpenAppData.Location = new System.Drawing.Point(12, 270);
 			this.B_OpenAppData.Name = "B_OpenAppData";
@@ -431,7 +431,7 @@ partial class PC_HelpAndLogs
 			this.B_LotLog.ColorShade = null;
 			this.B_LotLog.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_LotLog.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon12.Name = "I_Folder";
+			dynamicIcon12.Name = "Folder";
 			this.B_LotLog.ImageName = dynamicIcon12;
 			this.B_LotLog.Location = new System.Drawing.Point(12, 163);
 			this.B_LotLog.Name = "B_LotLog";
@@ -509,7 +509,7 @@ partial class PC_HelpAndLogs
 			this.TLP_Errors.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_Errors.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_Errors.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon13.Name = "I_Errors";
+			dynamicIcon13.Name = "Errors";
 			this.TLP_Errors.ImageName = dynamicIcon13;
 			this.TLP_Errors.Location = new System.Drawing.Point(333, 317);
 			this.TLP_Errors.Name = "TLP_Errors";
@@ -529,11 +529,11 @@ partial class PC_HelpAndLogs
 			this.I_Info.ColorStyle = Extensions.ColorStyle.Icon;
 			this.I_Info.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_Info.Enabled = false;
-			dynamicIcon14.Name = "I_Info";
+			dynamicIcon14.Name = "Info";
 			this.I_Info.ImageName = dynamicIcon14;
 			this.I_Info.Location = new System.Drawing.Point(340, 273);
 			this.I_Info.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
-			this.I_Info.Name = "I_Info";
+			this.I_Info.Name = "Info";
 			this.I_Info.Selected = true;
 			this.I_Info.Size = new System.Drawing.Size(32, 32);
 			this.I_Info.TabIndex = 18;

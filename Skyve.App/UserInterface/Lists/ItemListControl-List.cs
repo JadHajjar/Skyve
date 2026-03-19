@@ -191,7 +191,7 @@ public partial class ItemListControl<T>
 			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
 				point,
 				LocaleCR.Get($"{notificationType}"),
-				"I_CompatibilityReport",
+				"CompatibilityReport",
 				notificationType.Value.GetColor(),
 				CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
 				Padding,
@@ -300,11 +300,11 @@ public partial class ItemListControl<T>
 				scoreRect.Y--;
 			}
 
-			using var scoreFilled = IconManager.GetIcon("I_VoteFilled", scoreRect.Width * 3 / 4);
+			using var scoreFilled = IconManager.GetIcon("VoteFilled", scoreRect.Width * 3 / 4);
 
 			if (score < 75)
 			{
-				using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
+				using var scoreIcon = IconManager.GetIcon("Vote", scoreRect.Width * 3 / 4);
 
 				e.Graphics.DrawImage(scoreIcon.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
 
@@ -321,7 +321,7 @@ public partial class ItemListControl<T>
 			{
 				if (small)
 				{
-					using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
+					using var scoreIcon = IconManager.GetIcon("Vote", scoreRect.Width * 3 / 4);
 
 					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - (scoreIcon.Height * workshopInfo!.Subscribers / 15000), 0, 0));
 					e.Graphics.DrawImage(scoreIcon.Color(FormDesign.Modern.ActiveColor), scoreRect.CenterR(scoreIcon.Size));
@@ -350,14 +350,14 @@ public partial class ItemListControl<T>
 		}
 
 		var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
-		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
+		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : partialIncluded ? "Slash" : isIncluded ? "Ok" : package is null ? "Add" : "Enabled");
 		var mod = package?.Mod;
 		var required = mod is not null && _modLogicManager.IsRequired(mod, _modUtil);
 
 		DynamicIcon? enabl = null;
 		if (_settings.UserSettings.AdvancedIncludeEnable && mod is not null)
 		{
-			enabl = new DynamicIcon(mod.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
+			enabl = new DynamicIcon(mod.IsEnabled() ? "Checked" : "Checked_OFF");
 
 			if (isIncluded)
 			{

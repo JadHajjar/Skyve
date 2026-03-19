@@ -116,9 +116,9 @@ public partial class PC_HelpAndLogs : PanelContent
 		});
 		B_CopyZip.Loading = false;
 
-		B_CopyZip.ImageName = "I_Check";
+		B_CopyZip.ImageName = "Check";
 		await Task.Delay(1500);
-		B_CopyZip.ImageName = "I_CopyFile";
+		B_CopyZip.ImageName = "CopyFile";
 	}
 
 	private async void B_SaveZip_Click(object sender, EventArgs e)
@@ -142,9 +142,9 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		B_SaveZip.Loading = false;
 
-		B_SaveZip.ImageName = "I_Check";
+		B_SaveZip.ImageName = "Check";
 		await Task.Delay(1500);
-		B_SaveZip.ImageName = "I_Log";
+		B_SaveZip.ImageName = "Log";
 	}
 
 	private void DD_LogFile_FileSelected(string file)

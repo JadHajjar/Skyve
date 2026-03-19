@@ -75,7 +75,7 @@ partial class PC_ReviewRequests
 			// TB_Search
 			// 
 			this.TB_Search.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon1.Name = "I_Search";
+			dynamicIcon1.Name = "Search";
 			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
@@ -122,7 +122,7 @@ partial class PC_ReviewRequests
 			this.B_DeleteRequests.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.B_DeleteRequests.ColorShade = null;
 			this.B_DeleteRequests.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_Disposable";
+			dynamicIcon2.Name = "Disposable";
 			this.B_DeleteRequests.ImageName = dynamicIcon2;
 			this.B_DeleteRequests.Location = new System.Drawing.Point(470, 370);
 			this.B_DeleteRequests.Name = "B_DeleteRequests";

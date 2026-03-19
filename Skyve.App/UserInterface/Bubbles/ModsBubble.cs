@@ -26,7 +26,7 @@ public class ModsBubble : StatusBubbleBase
 			return;
 		}
 
-		ImageName = "I_Mods";
+		ImageName = "Mods";
 		Text = Locale.ModsBubble;
 
 		if (!_notifier.IsContentLoaded)
