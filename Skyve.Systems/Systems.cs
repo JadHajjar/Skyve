@@ -14,7 +14,7 @@ public static class SystemsProgram
 	{
 		services.AddSingleton<IBulkUtil, BulkUtil>();
 		services.AddSingleton<ILocale, Locale>();
-		services.AddSingleton<IImageService, ImageSystem>();
+		services.AddSingleton<IImageService, ImageService>();
 		services.AddSingleton<IIOUtil, IOUtil>();
 		services.AddSingleton<ILogger, LoggerSystem>();
 		services.AddSingleton<INotifier, NotifierSystem>();

@@ -70,19 +70,20 @@ public abstract class ConfigFile
 
 	private void SerializeJson()
 	{
-		ISave.Write(FilePath, JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented), false);
+		//ISave.Write(FilePath, JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented), false);
 	}
 
 	private static T DeserializeJson<T>(string filePath) where T : ConfigFile
 	{
-		var fileContents = ISave.Read(filePath);
+		return default;
+		//var fileContents = ISave.Read(filePath);
 
-		if (string.IsNullOrEmpty(fileContents))
-		{
-			throw new Exception("File contents empty");
-		}
+		//if (string.IsNullOrEmpty(fileContents))
+		//{
+		//	throw new Exception("File contents empty");
+		//}
 
-		return JsonConvert.DeserializeObject<T>(fileContents);
+		//return JsonConvert.DeserializeObject<T>(fileContents);
 	}
 
 	private void SerializeXml()

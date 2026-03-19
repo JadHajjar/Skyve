@@ -10,6 +10,7 @@ public partial class PC_MainPage : PanelContent
 	private readonly Control _control = new();
 	private readonly Dictionary<string, Rectangle> _dashItemSizes;
 	private readonly ISettings _settings;
+	private readonly SaveHandler _saveHandler;
 	private Point CursorStart;
 	private Rectangle initialRect;
 	private bool layoutInProgress;
@@ -19,13 +20,13 @@ public partial class PC_MainPage : PanelContent
 
 	public PC_MainPage()
 	{
-		ServiceCenter.Get(out _settings);
+		ServiceCenter.Get(out _settings, out _saveHandler);
 
 		InitializeComponent();
 
 		TLP_FirstTime.Visible = !_settings.SessionSettings.DashboardFirstTimeShown;
 
-		ISave.Load(out _dashItemSizes, "DashboardLayout.json");
+		_saveHandler.Load(out _dashItemSizes, "DashboardLayout.json");
 		_dashItemSizes ??= GetDefaultLayout();
 
 		P_Board.SuspendLayout();
@@ -496,7 +497,7 @@ public partial class PC_MainPage : PanelContent
 
 	private void SaveLayout()
 	{
-		ISave.Save(_dashItemSizes, "DashboardLayout.json");
+		_saveHandler.Save(_dashItemSizes, "DashboardLayout.json");
 	}
 	private class DashItemRect
 	{

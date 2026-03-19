@@ -113,7 +113,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 		OnViewChanged();
 	}
 
-	protected override IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> OrderItems(IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<ICustomPlayset>> OrderItems(IEnumerable<IDrawableItem<ICustomPlayset>> items)
 	{
 		return sorting switch
 		{
@@ -247,24 +247,24 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 
 		var items = new SlickStripItem[]
 		{
-			  new (Locale.DownloadPlayset, "I_Import", !local, action: () => DownloadProfile(item))
-			, new (Locale.ViewThisPlaysetsPackages, "I_ViewFile", action: () => ShowProfileContents(item))
-			, new (item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item); })
-			, new (Locale.ChangePlaysetColor, "I_Paint", local, action: () => this.TryBeginInvoke(() => ChangeColor(item)))
-			, new (Locale.CreateShortcutPlayset, "I_Link", local && CrossIO.CurrentPlatform is Platform.Windows, action: () => _profileManager.CreateShortcut(item!))
-			, new (Locale.OpenPlaysetFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(_profileManager.GetFileName(item!)))
-			, new (string.Empty, show: local)
-			, new (Locale.SharePlayset, "I_Share", local && item.ProfileId == 0 && _userService.User.Id is not null && downloading != item, action: async () => await ShareProfile(item))
-			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && _userService.User.Equals(item.Author), action: async () => await ServiceCenter.Get<IOnlinePlaysetUtil>().SetVisibility((item as ICustomPlayset)!, !item.Public))
-			, new (Locale.UpdatePlayset, "I_Share", local && item.ProfileId != 0 && _userService.User.Equals(item.Author), action: async () => await ShareProfile(item))
-			, new (Locale.DownloadPlayset, "I_Refresh", local && item.ProfileId != 0 && item.Author != _userService.User.Id, action: () => DownloadProfile(item))
-			, new (Locale.CopyPlaysetLink, "I_LinkChain", local && item.ProfileId != 0, action: () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)))
-			, new (string.Empty, show: local)
-			, new (Locale.PlaysetReplace, "I_Import", local, action: () => LoadProfile?.Invoke(item!))
-			, new (Locale.PlaysetMerge, "I_Merge", local, action: () => MergeProfile?.Invoke(item!))
-			, new (Locale.PlaysetExclude, "I_Exclude", local, action: () => ExcludeProfile?.Invoke(item!))
-			, new (string.Empty)
-			, new (Locale.PlaysetDelete, "I_Disposable", local || _userService.User.Equals(item.Author), action: async () => { if(local) { DisposeProfile?.Invoke(item!); } else if(await ServiceCenter.Get<IOnlinePlaysetUtil>().DeleteOnlinePlayset((item as IOnlinePlayset)!)) { base.Remove(item); } })
+			  new (Locale.DownloadPlayset, "I_Import", () => DownloadProfile(item), !local)
+			, new (Locale.ViewThisPlaysetsPackages, "I_ViewFile", () => ShowProfileContents(item))
+			, new (item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset, "I_Star",() => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item); }, local)
+			, new (Locale.ChangePlaysetColor, "I_Paint", () => this.TryBeginInvoke(() => ChangeColor(item)), local)
+			, new (Locale.CreateShortcutPlayset, "I_Link", () => _profileManager.CreateShortcut(item !), local && CrossIO.CurrentPlatform is Platform.Windows)
+			, new (Locale.OpenPlaysetFolder, "I_Folder", () => PlatformUtil.OpenFolder(_profileManager.GetFileName(item !)), local)
+			, new ( local)
+			, new (Locale.SharePlayset, "I_Share", async() => await ShareProfile(item), local && item.ProfileId == 0 && _userService.User.Id is not null && downloading != item)
+			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People",  async () => await ServiceCenter.Get<IOnlinePlaysetUtil>().SetVisibility((item as ICustomPlayset)!, !item.Public), local && item.ProfileId != 0 && _userService.User.Equals(item.Author))
+			, new (Locale.UpdatePlayset, "I_Share", async() => await ShareProfile(item), local && item.ProfileId != 0 && _userService.User.Equals(item.Author))
+			, new (Locale.DownloadPlayset, "I_Refresh", () => DownloadProfile(item), local && item.ProfileId != 0 && item.Author != _userService.User.Id)
+			, new (Locale.CopyPlaysetLink, "I_LinkChain", () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)), local && item.ProfileId != 0)
+			, new ( local)
+			, new (Locale.PlaysetReplace, "I_Import", () => LoadProfile ?.Invoke(item !), local)
+			, new (Locale.PlaysetMerge, "I_Merge", () => MergeProfile ?.Invoke(item !), local)
+			, new (Locale.PlaysetExclude, "I_Exclude", () => ExcludeProfile ?.Invoke(item !), local)
+			, new ()
+			, new (Locale.PlaysetDelete, "I_Disposable", async() => { if(local) { DisposeProfile ?.Invoke(item !); } else if(await ServiceCenter.Get < IOnlinePlaysetUtil >().DeleteOnlinePlayset((item as IOnlinePlayset) !)) { base.Remove(item); } }, local || _userService.User.Equals(item.Author))
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
@@ -570,7 +570,7 @@ public class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Playse
 		}
 	}
 
-	protected override Rectangles GenerateRectangles(ICustomPlayset item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<ICustomPlayset> GenerateRectangles(ICustomPlayset item, Rectangle rectangle, IDrawableItemRectangles<ICustomPlayset> current)
 	{
 		var rects = new Rectangles(item);
 

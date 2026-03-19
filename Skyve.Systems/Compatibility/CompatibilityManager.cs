@@ -35,6 +35,7 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly IPackageNameUtil _packageUtil;
 	private readonly IWorkshopService _workshopService;
 	private readonly IDlcManager _dlcManager;
+	private readonly SaveHandler _saveHandler;
 	private readonly SkyveApiUtil _skyveApiUtil;
 
 	private CompatibilityService? compatibilityService;
@@ -45,7 +46,7 @@ public class CompatibilityManager : ICompatibilityManager
 	public IndexedCompatibilityData CompatibilityData { get; private set; }
 	public bool FirstLoadComplete { get; private set; }
 
-	public CompatibilityManager(IPackageManager contentManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, SkyveApiUtil skyveApiUtil, IDlcManager dlcManager)
+	public CompatibilityManager(IPackageManager contentManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, SkyveApiUtil skyveApiUtil, IDlcManager dlcManager, SaveHandler saveHandler)
 	{
 		_packageManager = contentManager;
 		_logger = logger;
@@ -57,6 +58,7 @@ public class CompatibilityManager : ICompatibilityManager
 		_workshopService = workshopService;
 		_skyveApiUtil = skyveApiUtil;
 		_dlcManager = dlcManager;
+		_saveHandler = saveHandler;
 
 		CompatibilityData = new(null);
 
@@ -163,9 +165,9 @@ public class CompatibilityManager : ICompatibilityManager
 	{
 		try
 		{
-			var path = ISave.GetPath(SNOOZE_FILE);
+			var path = _saveHandler.GetPath(SNOOZE_FILE);
 
-			ISave.Load(out List<SnoozedItem>? data, SNOOZE_FILE);
+			_saveHandler.Load(out List<SnoozedItem>? data, SNOOZE_FILE);
 
 			if (data is not null)
 			{
@@ -179,9 +181,9 @@ public class CompatibilityManager : ICompatibilityManager
 	{
 		try
 		{
-			var path = ISave.GetPath(DATA_CACHE_FILE);
+			var path = _saveHandler.GetPath(DATA_CACHE_FILE);
 
-			ISave.Load(out CompatibilityData? data, DATA_CACHE_FILE);
+			_saveHandler.Load(out CompatibilityData? data, DATA_CACHE_FILE);
 
 			CompatibilityData = new IndexedCompatibilityData(data);
 		}
@@ -201,7 +203,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 			if (data is not null)
 			{
-				ISave.Save(data, DATA_CACHE_FILE);
+				_saveHandler.Save(data, DATA_CACHE_FILE);
 
 				CompatibilityData = new IndexedCompatibilityData(data);
 
@@ -237,7 +239,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		try
 		{
-			CrossIO.DeleteFile(ISave.GetPath(SNOOZE_FILE));
+			CrossIO.DeleteFile(_saveHandler.GetPath(SNOOZE_FILE));
 		}
 		catch (Exception ex)
 		{
@@ -263,7 +265,7 @@ public class CompatibilityManager : ICompatibilityManager
 				_snoozedItems.Add(new SnoozedItem(compatibilityItem));
 			}
 
-			ISave.Save(_snoozedItems, SNOOZE_FILE);
+			_saveHandler.Save(_snoozedItems, SNOOZE_FILE);
 		}
 
 		if (compatibilityItem is ReportItem reportItem && reportItem.Package is not null && compatibilityService is not null)
@@ -386,7 +388,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		try
 		{
-			CrossIO.DeleteFile(ISave.GetPath(DATA_CACHE_FILE));
+			CrossIO.DeleteFile(_saveHandler.GetPath(DATA_CACHE_FILE));
 		}
 		catch (Exception ex)
 		{

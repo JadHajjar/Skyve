@@ -78,7 +78,7 @@ public class MiniPackageControl : SlickControl
 	{
 		e.Graphics.SetUp(BackColor);
 
-		using var backBrush = new SolidBrush(Color.FromArgb(10, FormDesign.Design.Type is FormDesignType.Light ? Color.Black : Color.White));
+		using var backBrush = new SolidBrush(Color.FromArgb(10, !FormDesign.Design.IsDarkTheme ? Color.Black : Color.White));
 		e.Graphics.FillRoundedRectangle(backBrush, ClientRectangle.Pad(Padding), Padding.Left);
 
 		if (HoverState.HasFlag(HoverState.Hovered))

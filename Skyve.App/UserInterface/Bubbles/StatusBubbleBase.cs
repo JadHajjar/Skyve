@@ -41,7 +41,7 @@ public abstract class StatusBubbleBase : SlickImageControl
 			fore = Color.FromArgb(220, back.GetTextColor());
 		}
 
-		if (!HoverState.HasFlag(HoverState.Pressed) && FormDesign.Design.Type == FormDesignType.Light)
+		if (!HoverState.HasFlag(HoverState.Pressed) && !FormDesign.Design.IsDarkTheme)
 		{
 			back = back.Tint(Lum: 1.5F);
 		}

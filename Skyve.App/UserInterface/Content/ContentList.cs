@@ -255,7 +255,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		base.DesignChanged(design);
 
 		TLP_MiddleBar.BackColor = design.AccentBackColor;
-		P_Filters.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
+		P_Filters.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme.If(-1, 1));
 		ListControl.BackColor = design.BackColor;
 		L_Counts.ForeColor = L_FilterCount.ForeColor = design.InfoColor;
 	}
@@ -692,17 +692,17 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 		{
 			  new (Locale.IncludeAll, "I_Check", action: () => IncludeAll(this, EventArgs.Empty))
 			, new (Locale.ExcludeAll, "I_X", action: () =>ExcludeAll(this, EventArgs.Empty))
-			, new (string.Empty)
-			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
-			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: () => DisableAll(this, EventArgs.Empty))
-			, new (string.Empty)
-			, new (Locale.SelectAll, "I_DragDrop", ListControl.SelectedItemsCount < ListControl.FilteredItems.Count(), action: ListControl.SelectAll)
-			, new (Locale.DeselectAll, "I_Select", ListControl.SelectedItemsCount > 0, action: ListControl.DeselectAll)
+			, new ()
+			, new (Locale.EnableAll, "I_Enabled", () => EnableAll(this, EventArgs.Empty), _settings.UserSettings.AdvancedIncludeEnable)
+			, new (Locale.DisableAll, "I_Disabled", () => DisableAll(this, EventArgs.Empty), _settings.UserSettings.AdvancedIncludeEnable)
+			, new ()
+			, new (Locale.SelectAll, "I_DragDrop", ListControl.SelectAll, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count())
+			, new (Locale.DeselectAll, "I_Select", ListControl.DeselectAll, ListControl.SelectedItemsCount > 0)
 			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
-			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
-			, new (Locale.DownloadAll, "I_Install", ListControl.FilteredItems.Any(x => x.LocalPackage is null), action: () => DownloadAll(this, EventArgs.Empty))
-			, new (Locale.ReDownloadAll, "I_ReDownload", ListControl.FilteredItems.Any(x => x.LocalPackage is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
-			, new (string.Empty)
+			, new (Locale.SubscribeAll, "I_Steam", () => SubscribeAll(this, EventArgs.Empty), this is PC_GenericPackageList)
+			, new (Locale.DownloadAll, "I_Install", () => DownloadAll(this, EventArgs.Empty), ListControl.FilteredItems.Any(x => x.LocalPackage is null))
+			, new (Locale.ReDownloadAll, "I_ReDownload", () => ReDownloadAll(this, EventArgs.Empty), ListControl.FilteredItems.Any(x => x.LocalPackage is not null))
+			, new ()
 			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
 		};

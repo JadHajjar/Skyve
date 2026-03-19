@@ -39,7 +39,6 @@ partial class PC_ContentList<T>
 			// 
 			// PC_ContentList
 			// 
-			this.LabelBounds = new System.Drawing.Point(-2, 3);
 			this.Name = "PC_ContentList";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.ResumeLayout(false);

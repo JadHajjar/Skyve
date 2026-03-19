@@ -971,7 +971,6 @@ partial class PC_Options
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.slickSpacer3);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
-			this.LabelBounds = new System.Drawing.Point(-2, 3);
 			this.Name = "PC_Options";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(1106, 1223);

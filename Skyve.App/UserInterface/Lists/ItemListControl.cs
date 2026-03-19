@@ -8,6 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
+
 public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T>.Rectangles> where T : IPackage
 {
 	private PackageSorting sorting;
@@ -148,7 +149,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		StartHeight = _compactList ? (int)(24 * UI.FontScale) : 0;
 	}
 
-	protected override IEnumerable<DrawableItem<T, Rectangles>> OrderItems(IEnumerable<DrawableItem<T, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<T>> OrderItems(IEnumerable<IDrawableItem<T>> items)
 	{
 		items = sorting switch
 		{
@@ -476,7 +477,17 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 					back = Color.Empty;
 				}
 
-				SlickButton.DrawButton(e, PopupSearchRect1.Location, PopupSearchRect1.Size, Locale.SearchWorkshop, UI.Font(9.75F), back, fore, icon1, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
+				SlickButton.DrawButton(e.Graphics, new ButtonDrawArgs
+				{
+					Rectangle = PopupSearchRect1,
+					Text = Locale.SearchWorkshop,
+					BackColor = back,
+					ForeColor = fore,
+					Image = icon1,
+					Padding = UI.Scale(new Padding(7), UI.UIScale),
+					Cursor = CursorLocation,
+					HoverState = HoverState
+				});
 
 				PopupSearchRect2 = new Rectangle(PopupSearchRect1.X, PopupSearchRect1.Bottom + (Padding.Vertical * 2), buttonSize2.Width, buttonSize2.Height);
 
@@ -487,7 +498,17 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 					back = Color.Empty;
 				}
 
-				SlickButton.DrawButton(e, PopupSearchRect2.Location, PopupSearchRect2.Size, Locale.SearchWorkshopBrowser, UI.Font(9.75F), back, fore, icon2, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
+				SlickButton.DrawButton(e.Graphics, new ButtonDrawArgs
+				{
+					Rectangle = PopupSearchRect2,
+					Text = Locale.SearchWorkshopBrowser,
+					BackColor = back,
+					ForeColor = fore,
+					Image = icon2,
+					Padding = UI.Scale(new Padding(7), UI.UIScale),
+					Cursor = CursorLocation,
+					HoverState = HoverState
+				});
 
 				Cursor = PopupSearchRect1.Contains(CursorLocation) || PopupSearchRect2.Contains(CursorLocation) ? Cursors.Hand : Cursors.Default;
 			}
@@ -537,7 +558,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		return false;
 	}
 
-	protected override ItemListControl<T>.Rectangles GenerateRectangles(T item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<T> GenerateRectangles(T item, Rectangle rectangle, IDrawableItemRectangles<T> current)
 	{
 		if (GridView)
 		{

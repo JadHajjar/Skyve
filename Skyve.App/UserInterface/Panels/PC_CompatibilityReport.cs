@@ -98,7 +98,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		base.DesignChanged(design);
 
 		TLP_MiddleBar.BackColor = design.AccentBackColor;
-		P_Filters.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
+		P_Filters.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme.If(-1, 1));
 		ListControl.BackColor = design.BackColor;
 		L_FilterCount.ForeColor = design.InfoColor;
 	}
@@ -435,13 +435,13 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			  new (Locale.IncludeAll, "I_Check", action: () => IncludeAll(this, EventArgs.Empty))
 			, new (Locale.ExcludeAll, "I_X", action: () =>ExcludeAll(this, EventArgs.Empty))
-			, new (string.Empty)
-			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
-			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: () => DisableAll(this, EventArgs.Empty))
-			, new (string.Empty)
-			, new (LocaleCR.ApplyAllActions, "I_CompatibilityReport", ListControl.FilteredItems.Any(x => GetAction(x) is not null), action: ApplyAll)
+			, new ()
+			, new (Locale.EnableAll, "I_Enabled",() => EnableAll(this, EventArgs.Empty), _settings.UserSettings.AdvancedIncludeEnable)
+			, new (Locale.DisableAll, "I_Disabled", () => DisableAll(this, EventArgs.Empty),_settings.UserSettings.AdvancedIncludeEnable)
+			, new ()
+			, new (LocaleCR.ApplyAllActions, "I_CompatibilityReport",ApplyAll, ListControl.FilteredItems.Any(x => GetAction(x) is not null))
 			, new (LocaleCR.SnoozeAll, "I_Snooze", action: SnoozeAll)
-			, new (string.Empty)
+			, new ()
 			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
 		};

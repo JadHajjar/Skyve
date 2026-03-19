@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
-public class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectangles>
+public class PackageCrList : SlickStackedListControl<ulong>
 {
 	private readonly IWorkshopService _workshopService;
 	private readonly ICompatibilityManager _compatibilityManager;
@@ -24,17 +24,17 @@ public class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectan
 		Font = UI.Font(7F, FontStyle.Bold);
 	}
 
-	protected override IEnumerable<DrawableItem<ulong, Rectangles>> OrderItems(IEnumerable<DrawableItem<ulong, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<ulong>> OrderItems(IEnumerable<IDrawableItem<ulong>> items)
 	{
 		return items.OrderByDescending(x => _workshopService.GetInfo(new GenericPackageIdentity(x.Item))?.ServerTime);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<ulong, Rectangles> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<ulong, GenericDrawableItemRectangles<ulong>> item, Point location)
 	{
 		return true;
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<ulong, Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<ulong, GenericDrawableItemRectangles<ulong>> e)
 	{
 		base.OnPaintItemList(e);
 
@@ -95,23 +95,6 @@ public class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectan
 		if (cr.ReviewDate > Package.ServerTime)
 		{
 			e.Graphics.DrawLabel(Locale.UpToDate, null, FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomRight, smaller: true);
-		}
-	}
-
-	public class Rectangles : IDrawableItemRectangles<ulong>
-	{
-		public ulong Item { get; set; }
-
-		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
-		{
-			text = string.Empty;
-			point = default;
-			return false;
-		}
-
-		public bool IsHovered(Control instance, Point location)
-		{
-			return true;
 		}
 	}
 }

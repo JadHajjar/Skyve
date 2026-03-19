@@ -1,37 +1,57 @@
 ﻿using Extensions;
 
-using Skyve.Domain;
 using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Skyve.Systems;
 
-internal class ImageSystem : IImageService
+internal class ImageService : IImageService
 {
-	private readonly Dictionary<string, object> _lockObjects = new();
+	private readonly Dictionary<string, object> _lockObjects = [];
 	private readonly System.Timers.Timer _cacheClearTimer;
-	private readonly Dictionary<string, (Bitmap image, DateTime lastAccessed)> _cache = new();
-	private readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(1);
+	private readonly Dictionary<string, (Bitmap image, DateTime lastAccessed, Size? downscale)> _cache = [];
+	private readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(60);
 	private readonly HttpClient _httpClient = new();
 	private readonly ImageProcessor _imageProcessor;
 	private readonly INotifier _notifier;
+	private readonly ILogger _logger;
+	private readonly SaveHandler _saveHandler;
 
-	public ImageSystem(INotifier notifier)
+	public string ThumbnailFolder { get; }
+
+	public ImageService(INotifier notifier, ILogger logger, SaveHandler saveHandler)
 	{
 		_imageProcessor = new(this);
-		_cacheClearTimer = new System.Timers.Timer(_expirationTime.TotalMilliseconds);
+		_cacheClearTimer = new(TimeSpan.FromMinutes(20).TotalMilliseconds);
 		_cacheClearTimer.Elapsed += CacheClearTimer_Elapsed;
 		_cacheClearTimer.Start();
 		_notifier = notifier;
+		_logger = logger;
+		_saveHandler = saveHandler;
+
+		ThumbnailFolder = CrossIO.Combine(Application.StartupPath, "Thumbs");
+
+		var oldFolder = CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, ".Thumbs");
+
+		if (Directory.Exists(oldFolder) && !Directory.Exists(ThumbnailFolder))
+		{
+			new DirectoryInfo(oldFolder).CopyAll(new DirectoryInfo(ThumbnailFolder));
+
+			new DirectoryInfo(oldFolder).Delete(true);
+		}
+
+		Directory.CreateDirectory(ThumbnailFolder);
+
+		new BackgroundAction(ClearOldImages, true).Run();
 	}
 
 	private object LockObj(string path)
@@ -49,7 +69,7 @@ internal class ImageSystem : IImageService
 
 	public FileInfo File(string url, string? fileName = null)
 	{
-		var filePath = CrossIO.Combine(ISave.DocsFolder, "Thumbs", fileName ?? Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
+		var filePath = CrossIO.Combine(ThumbnailFolder, fileName ?? Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
 
 		return new FileInfo(filePath);
 	}
@@ -67,38 +87,37 @@ internal class ImageSystem : IImageService
 		return image is not null ? new(image) : null;
 	}
 
-	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true)
+	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true, bool isFilePath = false, Size? downscaleTo = null)
 	{
-		if (url is null || !await Ensure(url, localOnly, fileName, square))
+		try
 		{
-			return null;
-		}
-
-		var cache = GetCache(url);
-
-		if (cache != null)
-		{
-			return cache;
-		}
-
-		var filePath = File(url, fileName);
-
-		if (filePath.Exists)
-		{
-			lock (LockObj(url))
+			if (url is null)
 			{
-				try
-				{
-					return AddCache(url, (Bitmap)Image.FromFile(filePath.FullName));
-				}
-				catch { }
+				return null;
 			}
+
+			var filePath = File(url, fileName);
+			var cache = GetCache(filePath.Name, downscaleTo);
+
+			if (cache != null)
+			{
+				return cache;
+			}
+
+			if (await Ensure(url, localOnly, fileName, square, isFilePath, downscaleTo))
+			{
+				return GetCache(filePath.Name, downscaleTo);
+			}
+		}
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, "Unexpected error in ImageService");
 		}
 
 		return null;
 	}
 
-	public async Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true)
+	public async Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true, bool isFilePath = false, Size? downscaleTo = null)
 	{
 		if (url is null or "")
 		{
@@ -107,23 +126,47 @@ internal class ImageSystem : IImageService
 
 		var filePath = File(url, fileName);
 
-		lock (LockObj(url))
+		lock (LockObj(filePath.Name))
 		{
-			if (filePath.Exists)
+			if (_cache.TryGetValue(filePath.Name, out var data) && data.downscale == downscaleTo)
 			{
 				return true;
 			}
 
 			if (localOnly)
 			{
-				_imageProcessor.Add(new(url, fileName, square));
+				_imageProcessor.Add(new(url, fileName, square, isFilePath, downscaleTo));
 
 				return false;
+			}
+
+			if (filePath.Exists)
+			{
+				AddCache(filePath.Name, (Bitmap)Image.FromFile(filePath.FullName), downscaleTo);
+
+				_notifier.OnRefreshUI();
+
+				return true;
 			}
 		}
 
 		var tries = 1;
 		start:
+
+		if (isFilePath)
+		{
+			if (CrossIO.FileExists(url))
+			{
+				if (!filePath.Exists || new FileInfo(url).Length != filePath.Length)
+				{
+					filePath.Directory.Create();
+
+					System.IO.File.Copy(url, filePath.FullName, true);
+				}
+
+				return true;
+			}
+		}
 
 		if (!ConnectionHandler.IsConnected)
 		{
@@ -185,33 +228,41 @@ internal class ImageSystem : IImageService
 		}
 	}
 
-	private Bitmap AddCache(string key, Bitmap image)
+	private Bitmap AddCache(string key, Bitmap image, Size? downscaleTo)
 	{
 		if (key is null or "")
 		{
 			return image;
 		}
 
+		if (downscaleTo.HasValue)
+		{
+			using var img = image;
+
+			image = new Bitmap(image, WinExtensionClass.CalculateNewSize(image.Size, downscaleTo.Value));
+		}
+
 		if (_cache.ContainsKey(key))
 		{
-			_cache[key] = (image, DateTime.Now);
+			_cache[key].image.Dispose();
+			_cache[key] = (image, DateTime.Now, downscaleTo);
 		}
 		else
 		{
-			_cache.Add(key, (image, DateTime.Now));
+			_cache.Add(key, (image, DateTime.Now, downscaleTo));
 		}
 
 		return image;
 	}
 
-	public Bitmap? GetCache(string key)
+	public Bitmap? GetCache(string key, Size? downscaleTo)
 	{
-		if (_cache.TryGetValue(key, out var value))
+		if (_cache.TryGetValue(key, out var value) && value.downscale == downscaleTo)
 		{
 			if (DateTime.Now - value.lastAccessed > _expirationTime)
 			{
 				value.image.Dispose();
-				_ = _cache.Remove(key);
+				_cache.Remove(key);
 				return null;
 			}
 
@@ -224,8 +275,6 @@ internal class ImageSystem : IImageService
 
 	private void CacheClearTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
-		var sw = Stopwatch.StartNew();
-
 		try
 		{
 			var keys = _cache.Keys.ToList();
@@ -243,34 +292,82 @@ internal class ImageSystem : IImageService
 			}
 		}
 		catch { }
-
-		sw.Stop();
-
-		if (sw.ElapsedMilliseconds > 5000)
-		{
-			ServiceCenter.Get<ILogger>().Info("[Auto] [Timer] Cleared Image Cache");
-		}
 	}
 
-	public void ClearCache()
+	public void ClearCache(bool deleteFiles)
 	{
 		lock (_lockObjects)
 		{
-			foreach (var (image, lastAccessed) in _cache.Values)
+			foreach (var (image, lastAccessed, downscale) in _cache.Values)
 			{
 				image?.Dispose();
 			}
 
 			_cache.Clear();
 
-			foreach (var item in Directory.EnumerateFiles(CrossIO.Combine(ISave.DocsFolder, "Thumbs")))
+			if (deleteFiles)
 			{
-				try
+				foreach (var item in Directory.EnumerateFiles(ThumbnailFolder))
 				{
-					CrossIO.DeleteFile(item);
+					try
+					{
+						CrossIO.DeleteFile(item, true);
+					}
+					catch { }
 				}
-				catch { }
 			}
 		}
+	}
+
+	private void ClearOldImages()
+	{
+		UpdateFolderLocation();
+
+		foreach (var item in new DirectoryInfo(ThumbnailFolder).EnumerateFiles())
+		{
+			try
+			{
+				if (item.LastAccessTimeUtc < DateTime.Now.AddDays(-30))
+				{
+					CrossIO.DeleteFile(item.FullName, true);
+				}
+			}
+			catch { }
+		}
+	}
+
+	private void UpdateFolderLocation()
+	{
+		var oldThumbnailFolder = CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, "Thumbs");
+
+		try
+		{
+			if (!Directory.Exists(oldThumbnailFolder))
+			{
+				return;
+			}
+
+			if (Directory.Exists(ThumbnailFolder))
+			{
+				new DirectoryInfo(oldThumbnailFolder).Delete(true);
+			}
+			else
+			{
+				Directory.Move(CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, "Thumbs"), CrossIO.Combine(_saveHandler.SaveDirectory, SaveHandler.AppName, ".Thumbs"));
+			}
+		}
+		catch { }
+	}
+
+	public string? FindImage(string pattern)
+	{
+		if (!Directory.Exists(ThumbnailFolder))
+		{
+			return null;
+		}
+
+		var file = Directory.EnumerateFiles(ThumbnailFolder, pattern).OrderByDescending(System.IO.File.GetCreationTime).FirstOrDefault();
+
+		return !string.IsNullOrEmpty(file) ? Path.GetFileName(file) : null;
 	}
 }

@@ -236,7 +236,7 @@ public class PackageDescriptionControl : SlickImageControl
 		{
 			_drawablePackage.Rectangles = GenerateListRectangles(_drawablePackage.Item, ClientRectangle);
 
-			OnPaintItemList(new ItemPaintEventArgs<IPackage, Rectangles>(_drawablePackage, e.Graphics, ClientRectangle, HoverState, false));
+			OnPaintItemList(new ItemPaintEventArgs<IPackage, Rectangles>(_drawablePackage, e.Graphics, [ClientRectangle], ClientRectangle, HoverState, false));
 		}
 	}
 
@@ -408,8 +408,8 @@ public class PackageDescriptionControl : SlickImageControl
 
 		if (required && activeColor != default)
 		{
-			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
-			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
+			iconColor = !FormDesign.Design.IsDarkTheme ? activeColor.MergeColor(ForeColor, 75) : activeColor;
+			activeColor = activeColor.MergeColor(BackColor, !FormDesign.Design.IsDarkTheme ? 35 : 20);
 		}
 		else if (activeColor == default && inclEnableRect.Contains(CursorLocation))
 		{

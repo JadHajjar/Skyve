@@ -59,7 +59,7 @@ public partial class ItemListControl<T>
 		{
 			if (outerColor == default)
 			{
-				outerColor = Color.FromArgb(FormDesign.Design.Type == FormDesignType.Dark ? 65 : 100, activeColor);
+				outerColor = Color.FromArgb(FormDesign.Design.IsDarkTheme ? 65 : 100, activeColor);
 			}
 
 			using var pen = new Pen(outerColor, (float)(1.5 * UI.FontScale));

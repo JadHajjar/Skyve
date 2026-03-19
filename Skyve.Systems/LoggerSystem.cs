@@ -21,9 +21,9 @@ public class LoggerSystem : ILogger
 	public string LogFilePath { get; }
 	public string PreviousLogFilePath { get; }
 
-	public LoggerSystem(ISettings _)
+	public LoggerSystem(ISettings _, SaveHandler saveHandler)
 	{
-		var folder = CrossIO.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
+		var folder = CrossIO.Combine(saveHandler.SaveDirectory, "Logs");
 
 		PreviousLogFilePath = CrossIO.Combine(folder, $"SkyveApp_Previous.log");
 		LogFilePath = CrossIO.Combine(folder, $"SkyveApp.log");

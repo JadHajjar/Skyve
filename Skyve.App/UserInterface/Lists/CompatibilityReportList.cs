@@ -105,7 +105,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 	}
 
-	protected override IEnumerable<DrawableItem<ICompatibilityInfo, Rectangles>> OrderItems(IEnumerable<DrawableItem<ICompatibilityInfo, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<ICompatibilityInfo>> OrderItems(IEnumerable<IDrawableItem<ICompatibilityInfo>> items)
 	{
 		items = sorting switch
 		{
@@ -309,7 +309,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		}
 		else
 		{
-			e.BackColor = BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 5, -5));
+			e.BackColor = BackColor.Tint(Lum: FormDesign.Design.IsDarkTheme.If(5, -5));
 		}
 
 		if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
@@ -781,8 +781,8 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		if (required && activeColor != default)
 		{
-			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
-			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
+			iconColor = !FormDesign.Design.IsDarkTheme ? activeColor.MergeColor(ForeColor, 75) : activeColor;
+			activeColor = activeColor.MergeColor(BackColor, !FormDesign.Design.IsDarkTheme ? 35 : 20);
 		}
 		else if (activeColor == default && inclEnableRect.Contains(CursorLocation))
 		{
@@ -1148,7 +1148,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 		_compatibilityManager.QuickUpdate(Message);
 	}
 
-	protected override Rectangles GenerateRectangles(ICompatibilityInfo item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<ICompatibilityInfo> GenerateRectangles(ICompatibilityInfo item, Rectangle rectangle, IDrawableItemRectangles<ICompatibilityInfo> current)
 	{
 		var rects = new Rectangles(item)
 		{

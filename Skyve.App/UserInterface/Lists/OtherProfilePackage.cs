@@ -47,7 +47,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 		Padding = UI.Scale(new Padding(3, 1, 3, 1), UI.FontScale);
 	}
 
-	protected override IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> OrderItems(IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> items)
+	protected override IEnumerable<IDrawableItem<ICustomPlayset>> OrderItems(IEnumerable<IDrawableItem<ICustomPlayset>> items)
 	{
 		return items.OrderByDescending(x => x.Item.DateUpdated);
 	}
@@ -202,7 +202,7 @@ public class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Other
 		return rectangle;
 	}
 
-	protected override Rectangles GenerateRectangles(ICustomPlayset item, Rectangle rectangle)
+	protected override IDrawableItemRectangles<ICustomPlayset> GenerateRectangles(ICustomPlayset item, Rectangle rectangle, IDrawableItemRectangles<ICustomPlayset> current)
 	{
 		var rects = new Rectangles(item)
 		{
