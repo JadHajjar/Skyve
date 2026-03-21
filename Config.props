@@ -1,13 +1,26 @@
 <Project>
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+		<DefineConstants>$(DefineConstants);DEBUG;</DefineConstants>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
-		<DefineConstants>$(DefineConstants);Stable</DefineConstants>
+		<DefineConstants>$(DefineConstants);STABLE</DefineConstants>
 		<DebugType>none</DebugType>
 		<Optimize>true</Optimize>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<Company>T. D. W.</Company>
-		<Copyright>@2023 MIT license</Copyright>
+		<Copyright>@2026 MIT license</Copyright>
 		<Product>Skyve App</Product>
 	</PropertyGroup>
 </Project>

@@ -170,14 +170,20 @@ internal class D_AssetsInfo : IDashboardItem
 
 	private void DrawLoading(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawLoadingSection(e, applyDrawing, Locale.AssetsBubble, "Assets", ref preferredHeight);
+		DrawLoadingSection(e, applyDrawing,  ref preferredHeight, Locale.AssetsBubble, "Assets");
+	}
+
+	protected override void DrawHeader(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
+	{
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.AssetsBubble, "Assets");
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), Locale.AssetsBubble, "Assets", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.AssetsBubble, "Assets");
 
 		var textRect = e.ClipRectangle.Pad(Margin);
+		var fore = FormDesign.Design.ForeColor;
 
 		e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower())
 			, Font
@@ -239,25 +245,27 @@ internal class D_AssetsInfo : IDashboardItem
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "ViewFile",
-			Rectangle = e.ClipRectangle
+			Rectangle = e.ClipRectangle.Pad(Margin)
 		});
 
 		DrawButton(e, applyDrawing, ref preferredHeight, OpenRecentAssetsPanel, new()
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "UpdateTime",
-			Rectangle = e.ClipRectangle
+			Rectangle = e.ClipRectangle.Pad(Margin)
 		});
-		preferredHeight -= Margin.Top;
+
+		preferredHeight += BorderRadius / 2;
 	}
 
 	private void DrawLandscape(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
 		var mainRect = e.ClipRectangle.Pad(0, 0, e.ClipRectangle.Width / 2, 0);
 
-		DrawSection(e, applyDrawing, mainRect.ClipTo(mainSectionHeight), Locale.AssetsBubble, "Assets", out var fore, ref preferredHeight);
+		DrawSection(e, applyDrawing, ref preferredHeight, Locale.AssetsBubble, "Assets");
 
 		var textRect = mainRect.Pad(Margin);
+		var fore = FormDesign.Design.ForeColor;
 
 		e.Graphics.DrawStringItem(Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower())
 			, Font
@@ -322,18 +330,17 @@ internal class D_AssetsInfo : IDashboardItem
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "ViewFile",
-			Rectangle = mainRect
+			Rectangle = mainRect.Pad(Margin)
 		});
 
 		DrawButton(e, applyDrawing, ref preferredHeight, OpenRecentAssetsPanel, new()
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "UpdateTime",
-			Rectangle = mainRect
+			Rectangle = mainRect.Pad(Margin)
 		});
 
-		preferredHeight -= Margin.Top;
-		//preferredHeight += (int)(16 * UI.FontScale);
+		preferredHeight += BorderRadius / 2;
 
 		preferredHeight = Math.Max(mainSectionHeight + mainRect.Y, preferredHeight);
 	}
