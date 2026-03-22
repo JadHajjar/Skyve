@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Jeśli chcesz szybko wyczyścić filtry, kliknij na filtr środkowym przyciskiem myszy.\n\nMożesz też kliknąć przycisk „Pokaż/Ukryj filtry” środkowym przyciskiem myszy, aby wyczyścić wszystkie filtry jednocześnie.",
   "UpdateMod": "Zaktualizuj moda",
   "VersionLocked": "Wersja zablokowana",
-  "VersionLockedInfo": "'{0}' jest zablokowany w wersji {1} w tym zestawie."
+  "VersionLockedInfo": "'{0}' jest zablokowany w wersji {1} w tym zestawie.",
+  "LoadingModData": "Wczytywanie danych moda.."
 }

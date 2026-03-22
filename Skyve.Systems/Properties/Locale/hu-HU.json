@@ -715,5 +715,6 @@
   "ClearFilterTutorialText": "Ha gyorsan szeretnéd törölni a szűrőket, kattints egy szűrőre a középső egérgombbal.\n\nEzt megteheted a „Szűrők megjelenítése/elrejtése” gombbal is, ha egyszerre szeretnéd törölni az összes szűrőt.",
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset."
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data.."
 }
