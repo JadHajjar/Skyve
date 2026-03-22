@@ -245,6 +245,7 @@ internal class D_AssetsInfo : IDashboardItem
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "ViewFile",
+			ButtonType = ButtonType.Dimmed,
 			Rectangle = e.ClipRectangle.Pad(Margin)
 		});
 
@@ -252,6 +253,7 @@ internal class D_AssetsInfo : IDashboardItem
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "UpdateTime",
+			ButtonType = ButtonType.Dimmed,
 			Rectangle = e.ClipRectangle.Pad(Margin)
 		});
 
@@ -330,6 +332,7 @@ internal class D_AssetsInfo : IDashboardItem
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "ViewFile",
+			ButtonType = ButtonType.Dimmed,
 			Rectangle = mainRect.Pad(Margin)
 		});
 
@@ -337,6 +340,7 @@ internal class D_AssetsInfo : IDashboardItem
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Asset.Plural.ToLower()),
 			Icon = "UpdateTime",
+			ButtonType = ButtonType.Dimmed,
 			Rectangle = mainRect.Pad(Margin)
 		});
 

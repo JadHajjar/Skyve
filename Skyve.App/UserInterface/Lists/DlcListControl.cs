@@ -61,22 +61,18 @@ public class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl.R
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
-		if (Loading)
+		if (!Loading && !AnyVisibleItems())
 		{
-			base.OnPaint(e);
+			e.Graphics.ResetClip();
+
+			using var font = UI.Font(9.75F, FontStyle.Italic);
+			using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+			using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+			e.Graphics.DrawString(ItemCount == 0 ? Locale.NoDlcsNoInternet : Locale.NoDlcsOpenGame, font, brush, ClientRectangle, stringFormat);
 		}
-		else if (!Items.Any())
-		{
-			e.Graphics.DrawString(Locale.NoDlcsNoInternet, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-		}
-		else if (!SafeGetItems().Any())
-		{
-			e.Graphics.DrawString(Locale.NoDlcsOpenGame, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-		}
-		else
-		{
-			base.OnPaint(e);
-		}
+
+		base.OnPaint(e);
 	}
 
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<IDlcInfo, Rectangles> e)

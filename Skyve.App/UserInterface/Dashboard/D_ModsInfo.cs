@@ -261,6 +261,7 @@ internal class D_ModsInfo : IDashboardItem
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Mod.Plural.ToLower()),
 			Icon = "ViewFile",
+			ButtonType = ButtonType.Dimmed,
 			Rectangle = e.ClipRectangle.Pad(Margin)
 		});
 
@@ -268,6 +269,7 @@ internal class D_ModsInfo : IDashboardItem
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Mod.Plural.ToLower()),
 			Icon = "UpdateTime",
+			ButtonType = ButtonType.Dimmed,
 			Rectangle = e.ClipRectangle.Pad(Margin)
 		});
 
@@ -365,6 +367,7 @@ internal class D_ModsInfo : IDashboardItem
 		{
 			Text = Locale.ViewAllYourItems.Format(Locale.Mod.Plural.ToLower()),
 			Icon = "ViewFile",
+			ButtonType = ButtonType.Dimmed,
 			Rectangle = mainRect.Pad(Margin)
 		});
 
@@ -372,6 +375,7 @@ internal class D_ModsInfo : IDashboardItem
 		{
 			Text = Locale.ViewRecentlyUpdatedItems.Format(Locale.Mod.Plural.ToLower()),
 			Icon = "UpdateTime",
+			ButtonType = ButtonType.Dimmed,
 			Rectangle = mainRect.Pad(Margin)
 		});
 

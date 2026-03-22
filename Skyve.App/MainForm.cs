@@ -561,4 +561,9 @@ public partial class MainForm : BasePanelForm
 	{
 		PushPanel<PC_CompatibilityManagement>(PI_ManageAllCompatibility);
 	}
+
+	private void base_P_PanelContent_Paint(object sender, PaintEventArgs e)
+	{
+
+	}
 }
