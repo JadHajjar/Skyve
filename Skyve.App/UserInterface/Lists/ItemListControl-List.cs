@@ -6,6 +6,7 @@ namespace Skyve.App.UserInterface.Lists;
 
 public partial class ItemListControl<T>
 {
+	private List<(string text, int width)?> headers = [];
 	private void OnPaintItemCompactList(ItemPaintEventArgs<T, Rectangles> e)
 	{
 		var localPackage = e.Item.LocalPackage;
@@ -51,23 +52,32 @@ public partial class ItemListControl<T>
 
 		e.Graphics.SetClip(new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y - Padding.Top + 1, e.ClipRectangle.Width, e.ClipRectangle.Height + Padding.Vertical - 2));
 
-		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
+		DrawTitleAndTagsAndVersion(e, localParentPackage, workshopInfo, isPressed);
 		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
-
-		if (workshopInfo?.Author is not null)
-		{
-			DrawAuthor(e, workshopInfo.Author, 0);
-		}
-		else if (e.Item.IsLocal)
-		{
-			DrawFolderName(e, localParentPackage!, 0);
-		}
-
 		DrawButtons(e, isPressed, localParentPackage, workshopInfo);
 
-		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
+		if (Width / UI.FontScale >= 600)
+		{
+			if (workshopInfo?.Author is not null)
+			{
+				DrawAuthor(e, workshopInfo.Author, 0);
+			}
+			else if (e.Item.IsLocal)
+			{
+				DrawFolderName(e, localParentPackage!, 0);
+			}
 
-		DrawTags(e, _columnSizes[Columns.Tags].X + _columnSizes[Columns.Tags].Width);
+		}
+
+		if (Width / UI.FontScale >= 500)
+		{
+			DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
+		}
+
+		if (Width / UI.FontScale >= 965)
+		{
+			DrawTags(e, _columnSizes[Columns.Tags].X + _columnSizes[Columns.Tags].Width);
+		}
 
 		e.Graphics.ResetClip();
 
@@ -129,7 +139,7 @@ public partial class ItemListControl<T>
 		base.OnPaintItemList(e);
 
 		DrawThumbnail(e);
-		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
+		DrawTitleAndTagsAndVersion(e, localParentPackage, workshopInfo, isPressed);
 		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
 
 		var scoreX = IsPackagePage ? 0 : DrawScore(e, workshopInfo);
@@ -180,42 +190,36 @@ public partial class ItemListControl<T>
 
 	private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor)
 	{
-		var height = CompactList ? ((int)(24 * UI.FontScale) - 4) : (Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
+		var height = CompactList ? (UI.Scale(18)) : (Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
 
 		if (notificationType > NotificationType.Info)
 		{
 			var point = CompactList
-				? new Point(_columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2))
-				: new Point(e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top);
+				? new Rectangle(_columnSizes[Columns.Status].X, e.ClipRectangle.Y, _columnSizes[Columns.Status].Width, height)
+				: new Rectangle(e.ClipRectangle.Right - Padding.Right, e.ClipRectangle.Top + Padding.Top, 0, 0);
 
-			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
+			e.Rects.CompatibilityRect = DrawLabel(e.Graphics,
 				point,
-				LocaleCR.Get($"{notificationType}"),
-				"CompatibilityReport",
+				LocaleCR.Get(notificationType.ToString()),
+				notificationType.Value.GetIcon(false),
 				notificationType.Value.GetColor(),
-				CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
-				Padding,
-				height,
-				CursorLocation,
-				CompactList);
+				CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopRight,
+				CursorLocation);
 		}
 
 		if (statusText is not null && statusIcon is not null)
 		{
 			var point = CompactList
-				? new Point(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.Right + Padding.Left) : _columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2))
-				: new Point(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - Padding.Left) : e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top);
+				? new Rectangle(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.Right + Padding.Left) : _columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2), _columnSizes[Columns.Status].Width, height)
+				: new Rectangle(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - Padding.Left) : e.ClipRectangle.Right - Padding.Right, e.ClipRectangle.Top + Padding.Top, 0, 0);
 
-			e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(
+			e.Rects.DownloadStatusRect = DrawLabel(e.Graphics,
 				point,
 				notificationType > NotificationType.Info ? "" : statusText,
 				statusIcon,
 				statusColor,
-				CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
-				Padding,
-				height,
-				CursorLocation,
-				CompactList);
+				CompactList ? ContentAlignment.MiddleLeft : ContentAlignment.TopRight,
+				null);
 		}
 
 		if (CompactList && Math.Max(e.Rects.CompatibilityRect.Right, e.Rects.DownloadStatusRect.Right) > (_columnSizes[Columns.Status].X + _columnSizes[Columns.Status].Width))
@@ -237,10 +241,11 @@ public partial class ItemListControl<T>
 
 	private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = new();
 
-	protected override void DrawHeader(PaintEventArgs e)
+
+	protected override void OnPrePaint(PaintEventArgs e)
 	{
-		var headers = new (string text, int width)[]
-		{
+		headers =
+		[
 			(Locale.Package, 0),
 			(Locale.Version, 65),
 			(Locale.UpdateTime, 120),
@@ -248,10 +253,53 @@ public partial class ItemListControl<T>
 			(Locale.IDAndTags, 0),
 			(Locale.Status, 160),
 			("", 80)
-		};
+		];
 
-		var remainingWidth = Width - (int)(headers.Sum(x => x.width) * UI.FontScale);
-		var autoColumns = headers.Count(x => x.width == 0);
+		if (Width / UI.FontScale < 500)
+		{
+			headers[5] = null;
+		}
+
+		if (Width / UI.FontScale < 965)
+		{
+			headers[4] = null;
+		}
+
+		if (Width / UI.FontScale < 600)
+		{
+			headers[3] = null;
+		}
+
+		if (Width / UI.FontScale < 800)
+		{
+			headers[2] = null;
+		}
+
+		var remainingWidth = Width - (int)(headers.Sum(x => x?.width ?? 0) * UI.FontScale);
+		var autoColumns = headers.Count(x => x?.width == 0);
+		var xPos = 0;
+
+		for (var i = 0; i < headers.Count; i++)
+		{
+			var header = headers[i];
+
+			if (header == null)
+			{
+				continue;
+			}
+
+			var width = header.Value.width == 0 ? (remainingWidth / autoColumns) : (int)(header.Value.width * UI.FontScale);
+
+			_columnSizes[(Columns)i] = (xPos, width);
+
+			xPos += width;
+		}
+	}
+
+	protected override void DrawHeader(PaintEventArgs e)
+	{
+		var remainingWidth = Width - (int)(headers.Sum(x => x?.width ?? 0) * UI.FontScale);
+		var autoColumns = headers.Count(x => x?.width == 0);
 		var xPos = 0;
 
 		using var font = UI.Font(7.5F, FontStyle.Bold);
@@ -262,15 +310,18 @@ public partial class ItemListControl<T>
 
 		e.Graphics.FillRectangle(lineBrush, new Rectangle(0, StartHeight - 2, Width, 2));
 
-		for (var i = 0; i < headers.Length; i++)
+		for (var i = 0; i < headers.Count; i++)
 		{
 			var header = headers[i];
 
-			var width = header.width == 0 ? (remainingWidth / autoColumns) : (int)(header.width * UI.FontScale);
+			if (header == null)
+			{
+				continue;
+			}
 
-			e.Graphics.DrawString(header.text.ToUpper(), font, brush, new Rectangle(xPos, 1, width, StartHeight).Pad(Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+			var width = header.Value.width == 0 ? (remainingWidth / autoColumns) : (int)(header.Value.width * UI.FontScale);
 
-			_columnSizes[(Columns)i] = (xPos, width);
+			e.Graphics.DrawString(header.Value.text.ToUpper(), font, brush, new Rectangle(xPos, 1, width, StartHeight).Pad(Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 
 			xPos += width;
 		}
@@ -284,16 +335,16 @@ public partial class ItemListControl<T>
 		{
 			var clip = e.Graphics.ClipBounds;
 			var padding = GridView ? GridPadding : Padding;
-			var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
-			var labelH = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Horizontal;
-			var scoreRect = new Rectangle(e.Rects.TextRect.X + (GridView ? 0 : padding.Left), e.Rects.IconRect.Bottom - height + (height / 2) - (labelH / 2) + 1, labelH, labelH);
+			var height = UI.Scale(GridView ? 22 : 16) - padding.Bottom;
+			var labelH = height - padding.Top;
+			var scoreRect = new Rectangle(e.Rects.TextRect.X + padding.Left, e.Rects.IconRect.Bottom - (GridView ? height - 2 : labelH), labelH, labelH);
 			var small = UI.FontScale < 1.25;
 			var backColor = score > 90 && workshopInfo!.Subscribers >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
 			e.Rects.ScoreRect = scoreRect;
 
 			if (!small)
 			{
-				e.Graphics.FillEllipse(new SolidBrush(backColor), scoreRect);
+				e.Graphics.FillEllipse(new SolidBrush(backColor), scoreRect.Pad(score > 90 && workshopInfo!.Subscribers >= 50000 ? (int)UI.Scale(-1.5f) : 0));
 			}
 			else
 			{
@@ -334,7 +385,7 @@ public partial class ItemListControl<T>
 				}
 			}
 
-			return labelH + Padding.Left;
+			return scoreRect.Right - e.Rects.TextRect.X + Padding.Left;
 		}
 
 		return 0;
@@ -353,6 +404,7 @@ public partial class ItemListControl<T>
 		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "Wait" : partialIncluded ? "Slash" : isIncluded ? "Ok" : package is null ? "Add" : "Enabled");
 		var mod = package?.Mod;
 		var required = mod is not null && _modLogicManager.IsRequired(mod, _modUtil);
+		var isHovered = !IsGenericPage && !required && isIncluded && (e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation)));
 
 		DynamicIcon? enabl = null;
 		if (_settings.UserSettings.AdvancedIncludeEnable && mod is not null)
@@ -390,12 +442,15 @@ public partial class ItemListControl<T>
 			iconColor = activeColor.GetTextColor();
 		}
 
+		if (isHovered)
+			activeColor = activeColor.MergeColor(e.BackColor);
+
 		using var brush = inclEnableRect.Gradient(activeColor);
 
 		e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(4 * UI.FontScale));
 
-		using var includedIcon = incl.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
-		using var enabledIcon = enabl?.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
+		using var includedIcon = incl.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
+		using var enabledIcon = enabl?.Get(e.Rects.IncludedRect.Height * 3 / 4).Color(iconColor);
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
 		if (enabledIcon is not null)
@@ -417,7 +472,7 @@ public partial class ItemListControl<T>
 
 		if (_settings.UserSettings.AdvancedIncludeEnable && item.LocalParentPackage?.Mod is not null)
 		{
-			rects.EnabledRect = rects.IncludedRect = rectangle.Pad(Padding).Align(new Size((int)(includedSize * UI.FontScale), CompactList ? (int)(22 * UI.FontScale) : (rects.IconRect.Height / 2)), ContentAlignment.MiddleLeft);
+			rects.EnabledRect = rects.IncludedRect = rectangle.Pad(Padding).Align(new Size((int)(includedSize * UI.FontScale), CompactList ? (int)(18 * UI.FontScale) : (rects.IconRect.Height / 2)), ContentAlignment.MiddleLeft);
 
 			if (CompactList)
 			{
@@ -431,7 +486,7 @@ public partial class ItemListControl<T>
 		}
 		else
 		{
-			rects.IncludedRect = rectangle.Pad(Padding).Align(UI.Scale(new Size(includedSize, CompactList ? 22 : includedSize), UI.FontScale), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(Padding).Align(UI.Scale(new Size(includedSize, CompactList ? 18 : includedSize), UI.FontScale), ContentAlignment.MiddleLeft);
 		}
 
 		if (CompactList)
@@ -448,5 +503,30 @@ public partial class ItemListControl<T>
 		rects.CenterRect = rects.TextRect.Pad(-Padding.Horizontal, 0, 0, 0);
 
 		return rects;
+	}
+
+	public static Rectangle DrawLabel(
+		Graphics graphics, Rectangle container, string text, DynamicIcon icon, Color? color = null,
+		ContentAlignment alignment = ContentAlignment.TopLeft, Point? cursorLocation = null, bool large = false)
+	{
+		text = text.ToUpper();
+
+		using var font = large ? UI.Font(8.25F) : UI.Font(7F);
+		using var image = icon.Get(font.Height + UI.Scale(2));
+		var padding = UI.Scale(new Padding(2));
+		var textSize = Size.Ceiling(graphics.Measure(text.IfEmpty("A"), font)) + (large ? new Size(0, padding.Vertical) : Size.Empty);
+		var size = string.IsNullOrEmpty(text) ? new Size(textSize.Height, textSize.Height) : new Size(textSize.Width + image.Width + padding.Left + padding.Horizontal, textSize.Height);
+		var rect = container.Align(size, alignment);
+
+		using var brush = new SolidBrush(color.HasValue ? Color.FromArgb(cursorLocation.HasValue && rect.Contains(cursorLocation.Value) ? 160 : 255, color.Value) : Color.FromArgb(120, !cursorLocation.HasValue || rect.Contains(cursorLocation.Value) ? FormDesign.Design.ActiveColor : FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)));
+		using var textBrush = new SolidBrush(brush.Color.GetTextColor());
+		using var stringFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+
+		graphics.FillRoundedRectangle(brush, rect, (int)UI.Scale(2.5));
+		graphics.DrawString(text, font, textBrush, rect.Pad(image.Width + padding.Left * 2, padding.Top, padding.Right, padding.Bottom), stringFormat);
+
+		graphics.DrawImage(image.Color(textBrush.Color), string.IsNullOrEmpty(text) ? rect.CenterR(image.Size) : rect.Pad(padding.Horizontal).Align(image.Size, ContentAlignment.MiddleLeft));
+
+		return rect;
 	}
 }

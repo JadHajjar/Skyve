@@ -77,7 +77,7 @@ public partial class ItemListControl<T> : SlickStackedListControl<T, ItemListCon
 		get => _compactList; set
 		{
 			_compactList = value;
-			baseHeight = _compactList ? 24 : 54;
+			baseHeight = _compactList ? 20 : 52;
 
 			if (Live)
 			{

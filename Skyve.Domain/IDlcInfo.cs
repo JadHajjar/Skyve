@@ -10,4 +10,7 @@ public interface IDlcInfo
 	string Description { get; }
 	string? Price { get; set; }
 	float Discount { get; set; }
+	string? ExpectedRelease { get; set; }
+	string[]? Creators { get; set; }
+	bool IsFree { get; set; }
 }

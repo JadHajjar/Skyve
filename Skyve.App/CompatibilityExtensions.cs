@@ -18,7 +18,7 @@ public static class CompatibilityExtensions
 			PackageUsage.MapCreation => "Map",
 			PackageUsage.ScenarioMaking => "ScenarioMaking",
 			PackageUsage.ThemeMaking => "Paint",
-			_ => "ProfileSettings"
+			_ => "PlaysetSettings"
 		};
 	}
 

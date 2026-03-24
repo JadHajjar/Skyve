@@ -364,7 +364,7 @@ public partial class PC_PlaysetList : PanelContent
 				file = Path.Combine(Path.GetTempPath(), $"{Path.GetFileNameWithoutExtension(file)}.json");
 
 				try
-				{ CrossIO.DeleteFile(file, true); }
+				{ CrossIO.DeleteFile(file, false); }
 				catch { }
 
 				entry.ExtractToFile(file);

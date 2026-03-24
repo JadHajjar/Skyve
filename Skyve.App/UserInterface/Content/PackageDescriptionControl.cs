@@ -8,6 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Content;
+
 public class PackageDescriptionControl : SlickImageControl
 {
 #pragma warning disable IDE1006
@@ -508,9 +509,9 @@ public class PackageDescriptionControl : SlickImageControl
 
 		var padding = GridView ? GridPadding : Padding;
 		var height = (int)(24 * UI.FontScale);
-		var folderPoint = new Point(scoreX == 0 ? e.Rects.BotRect.X + padding.Horizontal : scoreX + padding.Left * 3, e.Rects.BotRect.Y + padding.Vertical);
+		var folderPoint = new Rectangle(scoreX == 0 ? e.Rects.BotRect.X + padding.Horizontal : scoreX + padding.Left * 3, e.Rects.BotRect.Y + padding.Vertical, 0, 0);
 
-		e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "Folder", alignment: ContentAlignment.TopLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
+		e.Rects.FolderNameRect = e.Graphics.DrawLabel(Path.GetFileName(package.Folder), "Folder", default, folderPoint, alignment: ContentAlignment.TopLeft, mousePosition: CursorLocation);
 	}
 
 	private void DrawAuthor(ItemPaintEventArgs<IPackage, Rectangles> e, IUser author, int scoreX)

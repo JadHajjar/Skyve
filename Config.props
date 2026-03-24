@@ -1,4 +1,20 @@
 <Project>
+	<PropertyGroup>
+		<Company>T. D. W.</Company>
+		<Copyright>@2026 MIT license</Copyright>
+		<Product>Skyve App</Product>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Configurations>Debug;Release;Stable</Configurations>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<TargetFramework>net4.7.2</TargetFramework>
+		<OutputPath>bin\$(Configuration)</OutputPath>
+		<OutDir>bin\$(Configuration)</OutDir>
+		<PublishDir>bin\Publish_$(Configuration)</PublishDir>
+		<Certificate>CFA31648D9F2CDC960F90E5B2A66F350A6F40168</Certificate>
+	</PropertyGroup>
+	
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
 		<DefineConstants>$(DefineConstants);DEBUG;</DefineConstants>
 		<DebugType>full</DebugType>
@@ -16,11 +32,5 @@
 		<DefineConstants>$(DefineConstants);STABLE</DefineConstants>
 		<DebugType>none</DebugType>
 		<Optimize>true</Optimize>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<Company>T. D. W.</Company>
-		<Copyright>@2026 MIT license</Copyright>
-		<Product>Skyve App</Product>
 	</PropertyGroup>
 </Project>

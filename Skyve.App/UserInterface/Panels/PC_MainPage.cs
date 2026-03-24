@@ -35,8 +35,8 @@ public partial class PC_MainPage : PanelContent
 		  { "D_CompatibilityInfo", new (new(0, 0, 5000, 100),false) },
 		  { "D_ModsInfo", new (new(0, 100, 2500, 100) ,false)},
 		  { "D_Playsets", new (new(5250, 0, 2250, 100),false) },
-		  { "D_LaunchGame", new (new(7750, 0, 2250, 100),false) },
-		  { "D_NotificationCenter", new (new(7750, 100, 2250, 100),false) },
+		  { "D_NotificationCenter", new (new(7750, 0, 2250, 100),false) },
+		  { "D_DiskInfo", new (new(7750, 100, 2250, 100),false) },
 		};
 	}
 }

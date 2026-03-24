@@ -88,8 +88,6 @@ public partial class MainForm : BasePanelForm
 
 		var timer = new System.Timers.Timer(1000);
 
-		timer.Elapsed += Timer_Elapsed;
-
 		timer.Start();
 
 		var citiesManager = ServiceCenter.Get<ICitiesManager>();
@@ -286,23 +284,6 @@ public partial class MainForm : BasePanelForm
 		}
 	}
 
-	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-	{
-		if (!CrossIO.FileExists(CrossIO.Combine(Program.CurrentDirectory, "Wake")))
-		{
-			return;
-		}
-
-		CrossIO.DeleteFile(CrossIO.Combine(Program.CurrentDirectory, "Wake"));
-
-		if (isGameRunning)
-		{
-			SendKeys.SendWait("%{TAB}");
-		}
-
-		this.TryInvoke(this.ShowUp);
-	}
-
 	protected override void UIChanged()
 	{
 		base.UIChanged();
@@ -477,7 +458,7 @@ public partial class MainForm : BasePanelForm
 
 	private void PI_ViewPlaysets_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel<PC_PlaysetList>(PI_ViewPlaysets);
+		SetPanel<PC_PlaysetList>(PI_Playsets);
 	}
 
 	private void PI_AddPlayset_OnClick(object sender, MouseEventArgs e)

@@ -26,6 +26,7 @@ public partial class PC_UserPage : PanelContent
 
 		PB_Icon.LoadImage(User.AvatarUrl, ServiceCenter.Get<IImageService>().GetImage);
 		P_Info.SetUser(User, this);
+		T_Profiles.Text = Locale.Playset.Plural;
 
 		L_Profiles = new(true)
 		{

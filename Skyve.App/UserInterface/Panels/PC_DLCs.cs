@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Panels;
+
 public partial class PC_DLCs : PanelContent
 {
 	private readonly IDlcManager _dlcManager;
@@ -10,6 +11,8 @@ public partial class PC_DLCs : PanelContent
 		ServiceCenter.Get(out _dlcManager);
 
 		InitializeComponent();
+
+		T_YourDlcs.Selected = true;
 
 		LC_DLCs.CanDrawItem += LC_DLCs_CanDrawItem;
 
@@ -79,7 +82,7 @@ public partial class PC_DLCs : PanelContent
 		base.UIChanged();
 
 		B_ExInclude.Size = UI.Scale(new Size(375, 26), UI.UIScale);
-		TB_Search.Margin = L_Duplicates.Margin = L_Counts.Margin = B_ExInclude.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		TB_Search.Margin = L_Duplicates.Margin = L_Counts.Margin = B_ExInclude.Margin = tableLayoutPanel1.Padding = UI.Scale(new Padding(5), UI.FontScale);
 		L_Duplicates.Font = L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
 		TB_Search.Width = (int)(250 * UI.FontScale);
 	}

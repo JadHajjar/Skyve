@@ -693,15 +693,15 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 			  new (Locale.IncludeAll, "Check", action: () => IncludeAll(this, EventArgs.Empty))
 			, new (Locale.ExcludeAll, "X", action: () =>ExcludeAll(this, EventArgs.Empty))
 			, new ()
-			, new (Locale.EnableAll, "Enabled", () => EnableAll(this, EventArgs.Empty), _settings.UserSettings.AdvancedIncludeEnable)
-			, new (Locale.DisableAll, "Disabled", () => DisableAll(this, EventArgs.Empty), _settings.UserSettings.AdvancedIncludeEnable)
+			, new (Locale.EnableAll, "Enabled", () => EnableAll(this, EventArgs.Empty), visible: _settings.UserSettings.AdvancedIncludeEnable)
+			, new (Locale.DisableAll, "Disabled", () => DisableAll(this, EventArgs.Empty), visible:_settings.UserSettings.AdvancedIncludeEnable)
 			, new ()
-			, new (Locale.SelectAll, "DragDrop", ListControl.SelectAll, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count())
-			, new (Locale.DeselectAll, "Select", ListControl.DeselectAll, ListControl.SelectedItemsCount > 0)
+			, new (Locale.SelectAll, "DragDrop", ListControl.SelectAll, visible:ListControl.SelectedItemsCount < ListControl.FilteredItems.Count())
+			, new (Locale.DeselectAll, "Select", ListControl.DeselectAll, visible:ListControl.SelectedItemsCount > 0)
 			, new (Locale.CopyAllIds, "Copy", action: () => Clipboard.SetText(ListControl.FilteredItems.ListStrings(x => x.IsLocal ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
-			, new (Locale.SubscribeAll, "Steam", () => SubscribeAll(this, EventArgs.Empty), this is PC_GenericPackageList)
-			, new (Locale.DownloadAll, "Install", () => DownloadAll(this, EventArgs.Empty), ListControl.FilteredItems.Any(x => x.LocalPackage is null))
-			, new (Locale.ReDownloadAll, "ReDownload", () => ReDownloadAll(this, EventArgs.Empty), ListControl.FilteredItems.Any(x => x.LocalPackage is not null))
+			, new (Locale.SubscribeAll, "Steam", () => SubscribeAll(this, EventArgs.Empty),visible: this is PC_GenericPackageList)
+			, new (Locale.DownloadAll, "Install", () => DownloadAll(this, EventArgs.Empty),visible: ListControl.FilteredItems.Any(x => x.LocalPackage is null))
+			, new (Locale.ReDownloadAll, "ReDownload", () => ReDownloadAll(this, EventArgs.Empty),visible: ListControl.FilteredItems.Any(x => x.LocalPackage is not null))
 			, new ()
 			, new (Locale.UnsubscribeAll, "RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DeleteAll, "Disposable", action: () => DeleteAll(this, EventArgs.Empty))
@@ -816,7 +816,7 @@ public partial class ContentList<T> : SlickControl where T : IPackage
 			{
 				if (item.IsLocal && item is IAsset asset)
 				{
-					CrossIO.DeleteFile(asset.FilePath);
+					CrossIO.DeleteFile(asset.FilePath, false);
 				}
 				else if (item is ILocalPackage package)
 				{

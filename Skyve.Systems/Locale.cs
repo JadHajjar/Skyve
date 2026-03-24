@@ -360,6 +360,9 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation NewPackagesSinceSession => _instance.GetText(nameof(NewPackagesSinceSession));
 	public static Translation IncorrectFolderSettings => _instance.GetText(nameof(IncorrectFolderSettings));
 	public static Translation IncorrectFolderSettingsInfo => _instance.GetText(nameof(IncorrectFolderSettingsInfo));
+	public static Translation CreatorPackBy => _instance.GetText(nameof(CreatorPackBy));
+	public static Translation Owned => _instance.GetText(nameof(Owned));
+	public static Translation FavoritePlaysets => _instance.GetText(nameof(FavoritePlaysets));
 
 	public static void Load() { _ = _instance; }
 

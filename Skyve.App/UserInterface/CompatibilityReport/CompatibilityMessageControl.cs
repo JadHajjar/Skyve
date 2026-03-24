@@ -12,6 +12,8 @@ public class CompatibilityMessageControl : SlickControl
 	private readonly List<ulong> _subscribingTo = new();
 	private readonly Dictionary<IPackage, Rectangle> _buttonRects = new();
 	private readonly Dictionary<IPackage, Rectangle> _modRects = new();
+	private readonly Dictionary<IPackage, Rectangle> _modDotsRects = [];
+	private readonly Dictionary<IPackage, int> _modHeights = [];
 	private Rectangle allButtonRect;
 	private Rectangle snoozeRect;
 
@@ -22,6 +24,10 @@ public class CompatibilityMessageControl : SlickControl
 	private readonly IPackageUtil _packageUtil;
 	private readonly INotifier _notifier;
 	private readonly IDlcManager _dlcManager;
+
+	public ReportType Type { get; }
+	public ICompatibilityItem Message { get; }
+	public PackageCompatibilityReportControl PackageCompatibilityReportControl { get; }
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
@@ -48,9 +54,26 @@ public class CompatibilityMessageControl : SlickControl
 		base.Dispose(disposing);
 	}
 
-	public ReportType Type { get; }
-	public ICompatibilityItem Message { get; }
-	public PackageCompatibilityReportControl PackageCompatibilityReportControl { get; }
+	protected override void UIChanged()
+	{
+		base.UIChanged();
+
+		Padding = UI.Scale(new Padding(5, 8, 5, 8));
+	}
+
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		base.OnMouseMove(e);
+
+		var hovered = snoozeRect.Contains(e.Location)
+			|| snoozeRect.Contains(e.Location)
+			|| allButtonRect.Contains(e.Location)
+			|| _buttonRects.Any(x => x.Value.Contains(e.Location))
+			|| _modRects.Any(x => x.Value.Contains(e.Location))
+			|| _modDotsRects.Any(x => x.Value.Contains(e.Location));
+
+		Cursor = hovered ? Cursors.Hand : Cursors.Default;
+	}
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
@@ -58,192 +81,337 @@ public class CompatibilityMessageControl : SlickControl
 		{
 			e.Graphics.SetUp(BackColor);
 
-			using var icon = Message.Status.Notification.GetIcon(false).Default;
-			using var font = UI.Font(9F);
-			using var smallFont = UI.Font(8.25F);
-			var actionHovered = false;
-			var cursor = PointToClient(Cursor.Position);
-			var pad = (int)(6 * UI.FontScale);
+			var color = Message.Status.Notification.GetColor().Tint(Lum: FormDesign.Design.IsDarkTheme ? 6 : -6);
+			var isSnoozed = _compatibilityManager.IsSnoozed(Message);
+			var text = Message.Message;
 			var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
-			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
-			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
-			var messageSize = e.Graphics.Measure(Message.Message, font, Width - (iconRect.Width * 2) - pad);
-			var noteSize = e.Graphics.Measure(note, smallFont, Width - (iconRect.Width * 2) - pad);
-			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
-			using var brush = new SolidBrush(color);
+			var rectangle = ClientRectangle.Pad(Padding.Vertical + IconManager.GetNormalScale(), Padding.Top, Padding.Right, Padding.Bottom);
+			var cursor = PointToClient(Cursor.Position);
 
+			using var barBrush = Gradient(color, 1.25f);
+			using var icon = Message.Status.Notification.GetIcon(false).Default;
+			using var brush = new SolidBrush(FormDesign.Design.ForeColor);
+			using var fadedBrush = new SolidBrush(Color.FromArgb(200, FormDesign.Design.ForeColor));
+			using var activeBrush = new SolidBrush(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ForeColor, 85));
+			using var font = Message.Status.Action is not StatusAction.RequestReview ? UI.Font(9F) : UI.Font(10.5F);
+			using var smallFont = UI.Font(8.25F);
+			using var tinyFont = UI.Font(7.5F, FontStyle.Bold);
+			using var tinyUnderlineFont = UI.Font(7.5F, FontStyle.Bold | FontStyle.Underline);
+		
 			GetAllButton(out var allText, out var allIcon, out var colorStyle);
 
-			e.Graphics.FillRoundedRectangle(brush, iconRect, pad);
-			e.Graphics.FillRoundedRectangle(brush, new Rectangle(iconRect.Width - (2 * pad), 0, 2 * pad, Height - pad), pad);
+			e.Graphics.FillRoundedRectangle(barBrush, ClientRectangle.Align(new Size(Padding.Left, Height - Padding.Horizontal), ContentAlignment.MiddleLeft), Padding.Left / 2);
 
-			e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
+			e.Graphics.DrawImage(icon.Color(FormDesign.Design.ForeColor), new Rectangle(ClientRectangle.X + (Padding.Left * 2), 0, ClientRectangle.Width, Height).Align(icon.Size, ContentAlignment.MiddleLeft));
 
-			if (Message.Status.Notification > NotificationType.Info && Message.PackageId != 0)
-			{
-				snoozeRect = ClientRectangle.Align(iconRect.Size, ContentAlignment.TopRight);
-				actionHovered |= snoozeRect.Contains(cursor);
-				var purple = Color.FromArgb(100, 60, 220);
-				var isSnoozed = _compatibilityManager.IsSnoozed(Message);
-
-				SlickTip.SetTo(this, !actionHovered ? string.Empty : isSnoozed ? Locale.UnSnooze : Locale.Snooze, false, snoozeRect.Location);
-
-				if (HoverState.HasFlag(HoverState.Hovered) && !HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor))
-				{
-					e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(125, purple)), snoozeRect, pad);
-				}
-				else if (isSnoozed || HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor))
-				{
-					e.Graphics.FillRoundedRectangle(new SolidBrush(purple), snoozeRect, pad);
-				}
-
-				using var snoozeIcon = IconManager.GetLargeIcon("Snooze");
-				e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed || HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor) ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
-			}
-
-			e.Graphics.DrawString(Message.Message, font, new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
+				e.Graphics.DrawString(text, font, brush, rectangle);
+				rectangle.Y += Padding.Top + (int)e.Graphics.Measure(text, font, rectangle.Width).Height;
 
 			if (note is not null)
 			{
-				e.Graphics.DrawString(note, smallFont, new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : (int)messageSize.Height + pad, iconRect.Width, 0), new StringFormat { LineAlignment = y <= Height && string.IsNullOrWhiteSpace(Message.Message) && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
-			}
-
-			if (allText is not null)
-			{
-				var buttonIcon = IconManager.GetIcon(allIcon);
-				var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, allText, smallFont, UI.Scale(new Padding(4), UI.FontScale));
-
-				allButtonRect = new Rectangle(0, y, Width, 0).Pad(iconRect.Width + pad, pad, 0, 0).Align(buttonSize, Message.Packages.Length > 0 ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
-
-				SlickButton.DrawButton(e, allButtonRect, allText, smallFont, buttonIcon, UI.Scale(new Padding(4), UI.FontScale), allButtonRect.Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, colorStyle);
-
-				actionHovered |= allButtonRect.Contains(cursor);
-
-				y += allButtonRect.Height + (pad * 2);
-			}
-
-			if (Message.Packages.Length > 0)
-			{
-				var isDlc = Message.Type == ReportType.DlcMissing;
-				var rect = ClientRectangle.Pad(iconRect.Width + pad, y + pad, 0, 0);
-
-				rect.Height = (int)(40 * UI.FontScale);
-
-				foreach (var packageID in Message.Packages)
+				if (string.IsNullOrEmpty(text))
 				{
-					var fore = ForeColor;
+					e.Graphics.DrawString(note, font, brush, rectangle.Pad(0, -Padding.Left, 0, 0));
+					rectangle.Y += Padding.Top - Margin.Left + (int)e.Graphics.Measure(note, font, rectangle.Width).Height;
+				}
+				else
+				{
+					e.Graphics.DrawString(note, smallFont, fadedBrush, rectangle.Pad(Padding.Top, -Margin.Left, 0, 0));
+					rectangle.Y += Padding.Top - Margin.Left + (int)e.Graphics.Measure(note, smallFont, rectangle.Width - Padding.Top).Height;
+				}
+			}
 
-					actionHovered |= rect.Contains(cursor);
+			if (Message.Status.Action is StatusAction.RequestReview)
+			{
+#if !DEBUG
+				var isManager = ServiceCenter.Get<IUserService>().User.Manager;
+#else
+				var isManager = false;
+#endif
 
-					_modRects[packageID] = rect;
+				allButtonRect = SlickButton.AlignAndDraw(e.Graphics, rectangle, ContentAlignment.TopLeft, new ButtonDrawArgs
+				{
+					Text = isManager ? Locale.EditCompatibility : LocaleCR.RequestReview,
+					Icon = isManager ? "CompatibilityReport" : "RequestReview",
+					Font = font,
+					Cursor = cursor,
+					HoverState = HoverState & ~HoverState.Focused,
+				}).Rectangle;
 
-					if (rect.Contains(cursor) && (!_buttonRects.ContainsKey(packageID) || !_buttonRects[packageID].Contains(cursor)))
-					{
-						if (HoverState.HasFlag(HoverState.Pressed))
-						{
-							fore = FormDesign.Design.ActiveColor;
-						}
+				rectangle.Y += allButtonRect.Height + Padding.Vertical;
+			}
+			else if (allText is not null)
+			{
+				allButtonRect = SlickButton.AlignAndDraw(e.Graphics, rectangle.Pad(Padding.Top), ContentAlignment.TopCenter, new ButtonDrawArgs
+				{
+					Text = allText,
+					Icon = allIcon,
+					Font = font,
+					ColorStyle = colorStyle,
+					ButtonType = ButtonType.Active,
+					Cursor = cursor,
+					HoverState = HoverState & ~HoverState.Focused,
+				}).Rectangle;
 
-						using var gradientbrush = new LinearGradientBrush(ClientRectangle.Pad(rect.Height / 2, 0, 0, 0), Color.FromArgb(50, fore), Color.Empty, LinearGradientMode.Horizontal);
+				rectangle.Y += allButtonRect.Height + Padding.Vertical;
+			}
 
-						e.Graphics.FillRectangle(gradientbrush, rect.Pad(rect.Height / 2, 0, 0, 0));
-					}
+			var preferredSize = Message.Packages.Count() > 3 ? 125 : 150;
+			var columns = (int)Math.Max(1, Math.Floor(rectangle.Width / (preferredSize * UI.FontScale)));
+			var columnWidth = Math.Min(rectangle.Width, (int)(preferredSize * UI.FontScale));//rectangle.Width / columns;
+			var currentY = new int[columns];
+			var index = 0;
 
-					var dlc = isDlc ? _dlcManager.Dlcs.FirstOrDefault(x => x.Id == packageID.Id) : null;
-					var package = dlc is null ? packageID : null;
-					var packageThumbnail = dlc?.GetThumbnail() ?? package.GetThumbnail();
+			foreach (var item in Message.Packages)
+			{
+				var bounds = new Rectangle(rectangle.X + (index * columnWidth), rectangle.Y + currentY[index], columnWidth, _modHeights.TryGet(item).If(0, columnWidth * 10 / 8));
 
-					if ((package?.IsLocal ?? false) && packageThumbnail is not null)
-					{
-						using var unsatImg = new Bitmap(packageThumbnail, UI.Scale(new Size(40, 40), UI.FontScale)).Tint(Sat: 0);
-						e.Graphics.DrawRoundedImage(unsatImg, rect.Align(UI.Scale(new Size(40, 40), UI.FontScale), ContentAlignment.TopLeft), (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
-					}
-					else
-					{
-						e.Graphics.DrawRoundedImage(packageThumbnail ?? (dlc is null ? Properties.Resources.I_ModIcon : Properties.Resources.I_DlcIcon).Color(fore), rect.Align(UI.Scale(new Size(isDlc ? 40 * 460 / 215 : 40, 40), UI.FontScale), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
-					}
+				currentY[index] += (_modHeights[item] = DrawPackage(e, item, bounds, cursor)) + Padding.Top;
 
-					List<(Color Color, string Text)>? tags = null;
+				index = (index + 1) % columns;
+			}
 
-					var textRect = rect.Pad((int)(((isDlc ? 40 * 460 / 215 : 40) + 3) * UI.FontScale), 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
+			rectangle.Y += currentY.Max();
 
-					e.Graphics.DrawString(dlc?.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP") ?? package?.CleanName(out tags) ?? Locale.UnknownPackage, UI.Font(7.5F, FontStyle.Bold), new SolidBrush(fore), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+			var bottomText = 0;
 
-					var tagRect = new Rectangle(textRect.Left, textRect.Y, 0, textRect.Height);
+			if (Message.Status.Notification > NotificationType.Info && Message.PackageId != 0)
+			{
+				if (isSnoozed && Enabled)
+				{
+					using var fadeBrush = new SolidBrush(Color.FromArgb(125, BackColor));
 
-					if (tags is not null)
-					{
-						foreach (var item in tags)
-						{
-							tagRect.X += Padding.Left + e.Graphics.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
-						}
-					}
-
-					string? buttonText = null;
-					string? iconName = null;
-
-					switch (Message.Status.Action)
-					{
-						case StatusAction.SubscribeToPackages:
-							var p = package?.LocalParentPackage;
-
-							if (p is null)
-							{
-								buttonText = Locale.Subscribe;
-								iconName = "Add";
-							}
-							else if (!p.IsIncluded())
-							{
-								buttonText = Locale.Include;
-								iconName = "Check";
-							}
-							else if (!(p.Mod?.IsEnabled() ?? true))
-							{
-								buttonText = Locale.Enable;
-								iconName = "Enabled";
-							}
-							break;
-						case StatusAction.SelectOne:
-							buttonText = Locale.SelectThisPackage;
-							iconName = "Ok";
-							break;
-						case StatusAction.Switch:
-							buttonText = Locale.Switch;
-							iconName = "Switch";
-							break;
-					}
-
-					if (buttonText is null || package?.GetWorkshopInfo()?.IsCollection == true)
-					{
-						rect.Y += _modRects[packageID].Height + pad;
-						continue;
-					}
-
-					var buttonIcon = IconManager.GetIcon(iconName);
-					var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, buttonText, UI.Font(7.5F), UI.Scale(new Padding(3), UI.FontScale));
-
-					if (_subscribingTo.Contains(packageID.Id))
-					{
-						_buttonRects[packageID] = Rectangle.Empty;
-						DrawLoader(e.Graphics, rect.Align(new Size(24, 24), ContentAlignment.BottomRight));
-					}
-					else
-					{
-						_buttonRects[packageID] = _modRects[packageID].Align(buttonSize, ContentAlignment.BottomRight);
-
-						SlickButton.DrawButton(e, _buttonRects[packageID], buttonText, UI.Font(7.5F), buttonIcon, UI.Scale(new Padding(3), UI.FontScale), _buttonRects[packageID].Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, Message.Status.Action is StatusAction.SelectOne ? ColorStyle.Active : ColorStyle.Green);
-					}
-
-					rect.Y += _modRects[packageID].Height + pad;
+					e.Graphics.FillRectangle(fadeBrush, ClientRectangle);
 				}
 
-				y = rect.Y;
+				snoozeRect = new Rectangle(rectangle.Location, e.Graphics.Measure(isSnoozed ? Locale.UnSnooze : Locale.Snooze, tinyFont).ToSize());
+
+				bottomText = Math.Max(bottomText, snoozeRect.Height);
+
+				using var purpleBrush = new SolidBrush(Color.FromArgb(isSnoozed ? 255 : 200, 100, 60, 220));
+				e.Graphics.DrawString(isSnoozed ? Locale.UnSnooze : Locale.Snooze, snoozeRect.Contains(cursor) ? tinyUnderlineFont : tinyFont, purpleBrush, snoozeRect.X, snoozeRect.Y - (Padding.Top / 2));
 			}
 
-			Cursor = actionHovered ? Cursors.Hand : Cursors.Default;
-			Height = Math.Max(iconRect.Height, y);
+			if (!Enabled)
+			{
+				using var fadeBrush = new SolidBrush(Color.FromArgb(125, BackColor));
+
+				e.Graphics.FillRectangle(fadeBrush, ClientRectangle);
+			}
+
+			if (Loading)
+			{
+				DrawLoader(e.Graphics, ClientRectangle);
+			}
+
+			Height = rectangle.Y + bottomText;
 		}
 		catch { }
+	}
+
+	private int DrawPackage(PaintEventArgs e, IPackage package, Rectangle rectangle, Point cursor)
+	{
+		e.Graphics.FillRoundedRectangleWithShadow(rectangle.Pad(Padding.Left), UI.Scale(5), Padding.Left);
+
+		var thumbRect = rectangle.ClipTo(rectangle.Width).Pad(Padding.Left + Padding.Top);
+		var textRect = rectangle.Pad(Padding.Left + Padding.Top, Padding.Vertical + thumbRect.Height, Padding.Left + Padding.Top, Padding.Bottom);
+
+		DrawThumbnail(e, package, thumbRect, cursor);
+
+		rectangle.Height = thumbRect.Height + Padding.Vertical;
+
+		rectangle.Height += DrawTitleAndTags(e, package, textRect, cursor);
+
+			rectangle.Height += DrawAuthor(e, package, new Rectangle(textRect.X, rectangle.Bottom, textRect.Width, textRect.Height), cursor);
+
+		_modRects[package] = thumbRect;
+
+
+		string? buttonText = null;
+		string? iconName = null;
+
+		switch (Message.Status.Action)
+		{
+			case StatusAction.SubscribeToPackages:
+				var p = package.LocalParentPackage;
+
+				if (p is null)
+				{
+					buttonText = Locale.Subscribe;
+					iconName = "Add";
+				}
+				else if (!p.IsIncluded())
+				{
+					buttonText = Locale.Include;
+					iconName = "Check";
+				}
+				else if (!(p.Mod?.IsEnabled() ?? true))
+				{
+					buttonText = Locale.Enable;
+					iconName = "Enabled";
+				}
+				break;
+			case StatusAction.SelectOne:
+				buttonText = Locale.SelectThisPackage;
+				iconName = "Ok";
+				break;
+			case StatusAction.Switch:
+				buttonText = Locale.Switch;
+				iconName = "Switch";
+				break;
+		}
+
+		if (buttonText is not null && (package.GetWorkshopInfo()?.IsCollection) != true)
+		{
+			using var buttonArgs = new ButtonDrawArgs
+			{
+				Cursor = cursor,
+				BorderRadius = Padding.Left,
+				Padding = UI.Scale(new Padding(4, 2, 4, 2)),
+				Rectangle = new Rectangle(0, 0, textRect.Width, UI.Scale(24)),
+				HoverState = HoverState & ~HoverState.Focused,
+				Text = buttonText,
+				Icon = iconName,
+			};
+
+			if (Message.Status.Action is StatusAction.ExcludeOther or StatusAction.UnsubscribeOther)
+			{
+				buttonArgs.ButtonType = ButtonType.Active;
+			}
+			else
+			{
+				buttonArgs.BackgroundColor = BackColor;
+				buttonArgs.ButtonType = ButtonType.Dimmed;
+			}
+
+			SlickButton.PrepareLayout(e.Graphics, buttonArgs);
+
+			buttonArgs.Rectangle = new Rectangle(textRect.X, rectangle.Bottom + Padding.Top, textRect.Width, buttonArgs.Rectangle.Height);
+
+			_buttonRects[package] = buttonArgs.Rectangle;
+
+			SlickButton.SetUpColors(buttonArgs);
+
+			SlickButton.DrawButton(e.Graphics, buttonArgs);
+
+			return rectangle.Height + buttonArgs.Rectangle.Height + Padding.Vertical + Padding.Left;
+		}
+
+		return rectangle.Height + (Padding.Left * 2);
+	}
+
+	private int DrawThumbnail(PaintEventArgs e, IPackage package, Rectangle rectangle, Point cursor)
+	{
+		Bitmap?thumbnail = package.GetThumbnail();
+
+		if (thumbnail is not null &&  package.IsLocal)
+		{
+			using var unsatImg = thumbnail.ToGrayscale();
+
+			drawThumbnail(unsatImg);
+		}
+		else
+		{
+			if (thumbnail is not null)
+			{
+				drawThumbnail(thumbnail);
+			}
+		}
+
+		if (HoverState.HasFlag(HoverState.Hovered) && rectangle.Contains(cursor))
+		{
+			using var brush = new SolidBrush(Color.FromArgb(75, FormDesign.Design.ForeColor));
+			e.Graphics.FillRoundedRectangle(brush, rectangle, UI.Scale(5));
+		}
+
+		return rectangle.Height + UI.Scale(16);
+
+		void drawThumbnail(Bitmap generic) => e.Graphics.DrawRoundedImage(generic, rectangle, UI.Scale(5), FormDesign.Design.BackColor);
+	}
+
+	private int DrawTitleAndTags(PaintEventArgs e, IPackage package, Rectangle rectangle, Point cursor)
+	{
+			var dotsRect = rectangle.Align(UI.Scale(new Size(16, 22)), ContentAlignment.TopRight);
+			_modDotsRects[package] = dotsRect;
+			DrawDots(e, dotsRect, cursor);
+
+			rectangle = rectangle.Pad(0, 0, dotsRect.Width, 0);
+
+		var text = package.CleanName(out var tags);
+
+		using var font = UI.Font(8.25F, FontStyle.Bold);
+		var textRect = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
+
+		var textSize = e.Graphics.Measure(text, font, textRect.Width);
+		var oneLineSize = e.Graphics.Measure(text, font);
+		var oneLine = textSize.Height == oneLineSize.Height;
+		var tagRect = new Rectangle(rectangle.X + (oneLine ? (int)textSize.Width : 0), textRect.Y + (oneLine ? 0 : (int)textSize.Height), 0, (int)oneLineSize.Height);
+
+		textRect.Height = rectangle.Height = (int)textSize.Height + (Margin.Top / 3);
+		var finalY = rectangle.Height;
+
+		using var brushTitle = new SolidBrush(FormDesign.Design.ForeColor);
+
+		e.Graphics.DrawString(text, font, brushTitle, textRect);
+
+		for (var i = 0; i < tags.Count; i++)
+		{
+			var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: true);
+
+			if (tagRect.X + tagSize.Width > rectangle.Right)
+			{
+				tagRect.Y += tagRect.Height;
+				tagRect.X = rectangle.X;
+				finalY += tagRect.Height;
+			}
+
+			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true);
+
+			tagRect.X += Margin.Left + rect.Width;
+		}
+
+		if (!oneLine && tags.Count > 0)
+		{
+			finalY += tagRect.Height;
+		}
+
+		return finalY;
+	}
+
+	private int DrawAuthor(PaintEventArgs e, IPackageIdentity package, Rectangle rect, Point cursor)
+	{
+		var author = package.GetWorkshopInfo()?.Author;
+
+		if (author is null)
+		{
+			return 0;
+		}
+
+		using var authorFont = UI.Font(6.75F, FontStyle.Regular);
+		using var authorFontUnderline = UI.Font(6.75F, FontStyle.Underline);
+		using var stringFormat = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center };
+
+		var size = e.Graphics.Measure(author.Name, authorFont).ToSize();
+
+		using var authorIcon = IconManager.GetIcon("Author", size.Height);
+
+		var authorRect = rect.Align(size + new Size(authorIcon.Width, 0), ContentAlignment.TopLeft);
+
+		var isHovered = false && authorRect.Contains(cursor);
+		using var brush = new SolidBrush(isHovered ? FormDesign.Design.ActiveColor : Color.FromArgb(200, ForeColor));
+
+		e.Graphics.DrawImage(authorIcon.Color(brush.Color, brush.Color.A), authorRect.Align(authorIcon.Size, ContentAlignment.MiddleLeft));
+		e.Graphics.DrawString(author.Name, isHovered ? authorFontUnderline : authorFont, brush, authorRect, stringFormat);
+
+		return authorRect.Height + (Margin.Top / 3);
+	}
+
+	private void DrawDots(PaintEventArgs e, Rectangle rectangle, Point cursor)
+	{
+		var isHovered = rectangle.Contains(cursor);
+		using var img = IconManager.GetIcon("VertialMore", rectangle.Height * 3 / 4).Color(isHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.IconColor);
+
+		e.Graphics.DrawImage(img, rectangle.CenterR(img.Size));
 	}
 
 	private void GetAllButton(out string? allText, out string? allIcon, out ColorStyle colorStyle)
@@ -323,6 +491,18 @@ public class CompatibilityMessageControl : SlickControl
 				{
 					Clicked(item.Key, true);
 				}
+
+				return;
+			}
+		}
+
+		foreach (var item in _modDotsRects)
+		{
+			if (item.Value.Contains(e.Location))
+			{
+				var items = ServiceCenter.Get<ICustomPackageService>().GetRightClickMenuItems(item.Key);
+
+				SlickToolStrip.Show(Program.MainForm, items);
 
 				return;
 			}

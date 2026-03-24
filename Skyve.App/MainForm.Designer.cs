@@ -47,13 +47,11 @@ namespace Skyve.App
 			SlickControls.DynamicIcon dynamicIcon15 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon16 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon17 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon18 = new SlickControls.DynamicIcon();
 			this.PI_Dashboard = new SlickControls.PanelItem();
 			this.PI_Mods = new SlickControls.PanelItem();
 			this.PI_Assets = new SlickControls.PanelItem();
 			this.PI_Playsets = new SlickControls.PanelItem();
 			this.PI_CurrentPlayset = new SlickControls.PanelItem();
-			this.PI_ViewPlaysets = new SlickControls.PanelItem();
 			this.PI_AddPlayset = new SlickControls.PanelItem();
 			this.PI_Options = new SlickControls.PanelItem();
 			this.PI_Compatibility = new SlickControls.PanelItem();
@@ -146,9 +144,9 @@ namespace Skyve.App
 			this.PI_Playsets.IconName = dynamicIcon4;
 			this.PI_Playsets.SubItems = new SlickControls.PanelItem[] {
         this.PI_CurrentPlayset,
-        this.PI_ViewPlaysets,
         this.PI_AddPlayset};
 			this.PI_Playsets.Text = "Playsets";
+			this.PI_Playsets.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ViewPlaysets_OnClick);
 			// 
 			// PI_CurrentPlayset
 			// 
@@ -158,18 +156,10 @@ namespace Skyve.App
 			this.PI_CurrentPlayset.Text = "CurrentPlayset";
 			this.PI_CurrentPlayset.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_CurrentPlayset_OnClick);
 			// 
-			// PI_ViewPlaysets
-			// 
-			dynamicIcon6.Name = "Pages";
-			this.PI_ViewPlaysets.IconName = dynamicIcon6;
-			this.PI_ViewPlaysets.SubItems = new SlickControls.PanelItem[0];
-			this.PI_ViewPlaysets.Text = "YourPlaysets";
-			this.PI_ViewPlaysets.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ViewPlaysets_OnClick);
-			// 
 			// PI_AddPlayset
 			// 
-			dynamicIcon7.Name = "Add";
-			this.PI_AddPlayset.IconName = dynamicIcon7;
+			dynamicIcon6.Name = "Add";
+			this.PI_AddPlayset.IconName = dynamicIcon6;
 			this.PI_AddPlayset.SubItems = new SlickControls.PanelItem[0];
 			this.PI_AddPlayset.Text = "AddPlayset";
 			this.PI_AddPlayset.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_AddPlayset_OnClick);
@@ -177,8 +167,8 @@ namespace Skyve.App
 			// PI_Options
 			// 
 			this.PI_Options.Group = "Other";
-			dynamicIcon8.Name = "UserOptions";
-			this.PI_Options.IconName = dynamicIcon8;
+			dynamicIcon7.Name = "UserOptions";
+			this.PI_Options.IconName = dynamicIcon7;
 			this.PI_Options.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Options.Text = "Options";
 			this.PI_Options.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Options_OnClick);
@@ -186,8 +176,8 @@ namespace Skyve.App
 			// PI_Compatibility
 			// 
 			this.PI_Compatibility.Group = "Maintenance";
-			dynamicIcon9.Name = "CompatibilityReport";
-			this.PI_Compatibility.IconName = dynamicIcon9;
+			dynamicIcon8.Name = "CompatibilityReport";
+			this.PI_Compatibility.IconName = dynamicIcon8;
 			this.PI_Compatibility.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Compatibility.Text = "CompatibilityReport";
 			this.PI_Compatibility.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Compatibility_OnClick);
@@ -195,8 +185,8 @@ namespace Skyve.App
 			// PI_ModUtilities
 			// 
 			this.PI_ModUtilities.Group = "Maintenance";
-			dynamicIcon10.Name = "Wrench";
-			this.PI_ModUtilities.IconName = dynamicIcon10;
+			dynamicIcon9.Name = "Wrench";
+			this.PI_ModUtilities.IconName = dynamicIcon9;
 			this.PI_ModUtilities.SubItems = new SlickControls.PanelItem[0];
 			this.PI_ModUtilities.Text = "Utilities";
 			this.PI_ModUtilities.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ModReview_OnClick);
@@ -204,8 +194,8 @@ namespace Skyve.App
 			// PI_Troubleshoot
 			// 
 			this.PI_Troubleshoot.Group = "Maintenance";
-			dynamicIcon11.Name = "AskHelp";
-			this.PI_Troubleshoot.IconName = dynamicIcon11;
+			dynamicIcon10.Name = "AskHelp";
+			this.PI_Troubleshoot.IconName = dynamicIcon10;
 			this.PI_Troubleshoot.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Troubleshoot.Text = "HelpLogs";
 			this.PI_Troubleshoot.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Troubleshoot_OnClick);
@@ -213,8 +203,8 @@ namespace Skyve.App
 			// PI_Packages
 			// 
 			this.PI_Packages.Group = "Content";
-			dynamicIcon12.Name = "Package";
-			this.PI_Packages.IconName = dynamicIcon12;
+			dynamicIcon11.Name = "Package";
+			this.PI_Packages.IconName = dynamicIcon11;
 			this.PI_Packages.SubItems = new SlickControls.PanelItem[0];
 			this.PI_Packages.Text = "Packages";
 			this.PI_Packages.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Packages_OnClick);
@@ -266,8 +256,8 @@ namespace Skyve.App
 			// PI_DLCs
 			// 
 			this.PI_DLCs.Group = "Content";
-			dynamicIcon13.Name = "Dlc";
-			this.PI_DLCs.IconName = dynamicIcon13;
+			dynamicIcon12.Name = "Dlc";
+			this.PI_DLCs.IconName = dynamicIcon12;
 			this.PI_DLCs.SubItems = new SlickControls.PanelItem[0];
 			this.PI_DLCs.Text = "DLCs";
 			this.PI_DLCs.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_DLCs_OnClick);
@@ -276,8 +266,8 @@ namespace Skyve.App
 			// 
 			this.PI_CompatibilityManagement.Group = "Maintenance";
 			this.PI_CompatibilityManagement.Hidden = true;
-			dynamicIcon14.Name = "Cog";
-			this.PI_CompatibilityManagement.IconName = dynamicIcon14;
+			dynamicIcon13.Name = "Cog";
+			this.PI_CompatibilityManagement.IconName = dynamicIcon13;
 			this.PI_CompatibilityManagement.SubItems = new SlickControls.PanelItem[] {
         this.PI_ManageYourPackages,
         this.PI_ManageSinglePackage,
@@ -288,8 +278,8 @@ namespace Skyve.App
 			// PI_ManageYourPackages
 			// 
 			this.PI_ManageYourPackages.Hidden = true;
-			dynamicIcon15.Name = "User";
-			this.PI_ManageYourPackages.IconName = dynamicIcon15;
+			dynamicIcon14.Name = "User";
+			this.PI_ManageYourPackages.IconName = dynamicIcon14;
 			this.PI_ManageYourPackages.SubItems = new SlickControls.PanelItem[0];
 			this.PI_ManageYourPackages.Text = "YourPackages";
 			this.PI_ManageYourPackages.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ManageYourPackages_OnClick);
@@ -297,8 +287,8 @@ namespace Skyve.App
 			// PI_ManageSinglePackage
 			// 
 			this.PI_ManageSinglePackage.Hidden = true;
-			dynamicIcon16.Name = "Edit";
-			this.PI_ManageSinglePackage.IconName = dynamicIcon16;
+			dynamicIcon15.Name = "Edit";
+			this.PI_ManageSinglePackage.IconName = dynamicIcon15;
 			this.PI_ManageSinglePackage.SubItems = new SlickControls.PanelItem[0];
 			this.PI_ManageSinglePackage.Text = "ManageSinglePackage";
 			this.PI_ManageSinglePackage.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ManageSinglePackage_OnClick);
@@ -306,8 +296,8 @@ namespace Skyve.App
 			// PI_ReviewRequests
 			// 
 			this.PI_ReviewRequests.Hidden = true;
-			dynamicIcon17.Name = "RequestReview";
-			this.PI_ReviewRequests.IconName = dynamicIcon17;
+			dynamicIcon16.Name = "RequestReview";
+			this.PI_ReviewRequests.IconName = dynamicIcon16;
 			this.PI_ReviewRequests.SubItems = new SlickControls.PanelItem[0];
 			this.PI_ReviewRequests.Text = "ReviewRequests";
 			this.PI_ReviewRequests.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ReviewRequests_OnClick);
@@ -315,8 +305,8 @@ namespace Skyve.App
 			// PI_ManageAllCompatibility
 			// 
 			this.PI_ManageAllCompatibility.Hidden = true;
-			dynamicIcon18.Name = "Cog";
-			this.PI_ManageAllCompatibility.IconName = dynamicIcon18;
+			dynamicIcon17.Name = "Cog";
+			this.PI_ManageAllCompatibility.IconName = dynamicIcon17;
 			this.PI_ManageAllCompatibility.SubItems = new SlickControls.PanelItem[0];
 			this.PI_ManageAllCompatibility.Text = "ManageCompatibilityData";
 			this.PI_ManageAllCompatibility.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ManageAllCompatibility_OnClick);
@@ -371,7 +361,6 @@ namespace Skyve.App
 		private System.Windows.Forms.Label L_Text;
 		private System.Windows.Forms.Label L_Version;
 		public SlickControls.PanelItem PI_DLCs;
-		private PanelItem PI_ViewPlaysets;
 		private PanelItem PI_CurrentPlayset;
 		private PanelItem PI_AddPlayset;
 		private PanelItem PI_CompatibilityManagement;

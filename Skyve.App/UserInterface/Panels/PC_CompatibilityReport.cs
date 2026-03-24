@@ -436,10 +436,10 @@ public partial class PC_CompatibilityReport : PanelContent
 			  new (Locale.IncludeAll, "Check", action: () => IncludeAll(this, EventArgs.Empty))
 			, new (Locale.ExcludeAll, "X", action: () =>ExcludeAll(this, EventArgs.Empty))
 			, new ()
-			, new (Locale.EnableAll, "Enabled",() => EnableAll(this, EventArgs.Empty), _settings.UserSettings.AdvancedIncludeEnable)
-			, new (Locale.DisableAll, "Disabled", () => DisableAll(this, EventArgs.Empty),_settings.UserSettings.AdvancedIncludeEnable)
+			, new (Locale.EnableAll, "Enabled",() => EnableAll(this, EventArgs.Empty),visible: _settings.UserSettings.AdvancedIncludeEnable)
+			, new (Locale.DisableAll, "Disabled", () => DisableAll(this, EventArgs.Empty),visible:_settings.UserSettings.AdvancedIncludeEnable)
 			, new ()
-			, new (LocaleCR.ApplyAllActions, "CompatibilityReport",ApplyAll, ListControl.FilteredItems.Any(x => GetAction(x) is not null))
+			, new (LocaleCR.ApplyAllActions, "CompatibilityReport",ApplyAll, visible:ListControl.FilteredItems.Any(x => GetAction(x) is not null))
 			, new (LocaleCR.SnoozeAll, "Snooze", action: SnoozeAll)
 			, new ()
 			, new (Locale.UnsubscribeAll, "RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
@@ -555,7 +555,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			{
 				if (item.Package?.IsLocal == true && item is IAsset asset)
 				{
-					CrossIO.DeleteFile(asset.FilePath);
+					CrossIO.DeleteFile(asset.FilePath, false);
 				}
 				else if (item is ILocalPackage package)
 				{
