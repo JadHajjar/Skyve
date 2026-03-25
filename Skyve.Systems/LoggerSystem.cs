@@ -51,7 +51,7 @@ public class LoggerSystem : ILogger
 			var assembly = Assembly.GetEntryAssembly();
 			var details = assembly.GetName();
 
-#if Stable
+#if STABLE
 			Info($"Skyve Stable v{details.Version}");
 #else
 			Info($"Skyve Beta v{details.Version}");
