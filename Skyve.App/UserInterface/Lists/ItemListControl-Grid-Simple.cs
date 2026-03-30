@@ -211,10 +211,10 @@ public partial class ItemListControl
 				using var fadedBrush = new SolidBrush(Color.FromArgb(GridView ? 150 : 200, e.BackColor.GetTextColor()));
 
 				var rect = GridView
-					? new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, Height)
+					? new Rectangle(e.Rects.TextRect.X, e.DrawableItem.CachedHeight, e.Rects.TextRect.Width, UI.Scale(150))
 					: new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom, e.Rects.TextRect.Width, e.Rects.IconRect.Bottom - e.Rects.TextRect.Bottom - Padding.Bottom);
 
-				using var versionFont = GridView ? UI.Font(7.5F) : UI.Font(8.25F).FitToHeight(versionText, rect, e.Graphics);
+				using var versionFont = GridView ? UI.Font(7F) : UI.Font(8.25F).FitToHeight(versionText, rect, e.Graphics);
 				using var format = GridView ? new() : new StringFormat { LineAlignment = StringAlignment.Far };
 
 				e.Graphics.DrawString(versionText, versionFont, fadedBrush, rect, format);
@@ -236,7 +236,7 @@ public partial class ItemListControl
 
 			rects.DotsRect = new Rectangle(rectangle.X, rects.IncludedRect.Y, rectangle.Width, rects.IncludedRect.Height).Align(UI.Scale(new Size(16, 24)), ContentAlignment.MiddleRight);
 
-			using var titleFont = UI.Font(CompactList ? 8.25F : 10.5F, FontStyle.Bold);
+			using var titleFont = UI.Font(9.75F, FontStyle.Bold);
 			rects.TextRect = new Rectangle(rectangle.X + rects.IncludedRect.Width + GridPadding.Left, rectangle.Y + rectangle.Width + GridPadding.Top, rectangle.Width - rects.IncludedRect.Width - GridPadding.Horizontal - rects.DotsRect.Width, 0).AlignToFontSize(titleFont, ContentAlignment.TopLeft);
 			rects.CenterRect = rects.TextRect.Pad(0, -GridPadding.Vertical, 0, 0);
 

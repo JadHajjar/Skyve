@@ -334,7 +334,7 @@ public partial class ItemListControl
 
 		if (GridView && !_settings.UserSettings.ComplexListUI)
 		{
-			using var font = UI.Font(9F, FontStyle.Bold);
+			using var font = UI.Font(8.25F, FontStyle.Bold);
 			var textRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Y, e.Rects.TextRect.Width, Height);
 
 			var textSize = e.Graphics.Measure(text, font, textRect.Width);

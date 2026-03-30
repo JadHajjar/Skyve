@@ -11,6 +11,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
+
 public partial class ItemListControl : SlickStackedListControl<IPackageIdentity, ItemListControl.Rectangles>
 {
 	private PackageSorting sorting;
@@ -113,7 +114,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			_compactList = value;
 
-			baseHeight = _settings.UserSettings.ComplexListUI ? _compactList ? 24 : 60 : _compactList ? 20 : 48;
+			baseHeight = _settings.UserSettings.ComplexListUI ? (_compactList ? 24 : 60) : _compactList ? 20 : 48;
 
 			if (Live)
 			{
@@ -691,7 +692,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 					if (ScrollIndex < maxIndex)
 					{
-						var size = (int)(UI.Scale(150) * Math.Min(1, (maxIndex - ScrollIndex) / (displayedRows / 3)));
+						var size = (int)(UI.Scale(32) * Math.Min(1, ((maxIndex - ScrollIndex))));
 						var rect = new Rectangle(0, Height - size, Width, size + 1);
 
 						using var gradientBrush = new LinearGradientBrush(rect, Color.FromArgb(0, BackColor), BackColor, 90f);

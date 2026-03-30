@@ -1,27 +1,15 @@
-﻿namespace Skyve.Domain;
-public class SubscriptionStatus
+﻿using System;
+
+namespace Skyve.Domain;
+public interface ISubscriptionStatus
 {
-	public ModDownloadStage Stage { get; }
-
-	public ulong DownloadedBytes { get; }
-
-	public ulong TotalBytesToDownload { get; }
-
-	public float TotalProgress { get; }
-
-	public float StageProgress { get; }
-
-	public IWorkshopInfo Mod { get; }
-
-	public SubscriptionStatus(ModDownloadStage stage, ulong downloadedBytes, ulong totalBytesToDownload, float totalProgress, float stageProgress, IWorkshopInfo mod)
-	{
-		Stage = stage;
-		DownloadedBytes = downloadedBytes;
-		TotalBytesToDownload = totalBytesToDownload;
-		TotalProgress = totalProgress;
-		StageProgress = stageProgress;
-		Mod = mod;
-	}
+	Guid Id { get; }
+	ModDownloadStage Stage { get; }
+	ulong DownloadedBytes { get; }
+	ulong TotalBytesToDownload { get; }
+	float TotalProgress { get; }
+	float StageProgress { get; }
+	IWorkshopInfo Mod { get; }
 }
 
 public enum ModDownloadStage
