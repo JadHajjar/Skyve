@@ -5,7 +5,7 @@ public class SnoozedItem
 {
 	public SnoozedItem()
 	{
-
+		Source= PackageId = string.Empty;
 	}
 
 	public SnoozedItem(ICompatibilityItem report) : this()
@@ -17,7 +17,8 @@ public class SnoozedItem
 		StatusAction = (int)report.Status.Action;
 	}
 
-	public ulong PackageId { get; set; }
+	public string Source { get; set; }
+	public string PackageId { get; set; }
 	public int ReportType { get; set; }
 	public string StatusClass { get; set; } = null!;
 	public int StatusType { get; set; }

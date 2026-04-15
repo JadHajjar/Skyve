@@ -50,7 +50,7 @@ public class GenericPackageStatus : IGenericPackageStatus
 	public override int GetHashCode()
 	{
 		var hashCode = 1386127205;
-		hashCode = (hashCode * -1521134295) + EqualityComparer<IEnumerable<ulong>>.Default.GetHashCode(Packages?.Select(x => x.Id) ?? []);
+		hashCode = (hashCode * -1521134295) + EqualityComparer<IEnumerable<string>>.Default.GetHashCode(Packages?.Select(x => x.Id) ?? []);
 		hashCode = (hashCode * -1521134295) + EqualityComparer<string?>.Default.GetHashCode(Type);
 		return hashCode;
 	}

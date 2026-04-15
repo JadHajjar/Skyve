@@ -9,7 +9,8 @@ namespace Skyve.Compatibility.Domain;
 
 public class CompatibilityPackageReference : ICompatibilityPackageIdentity, ILocalPackageIdentity, IEquatable<CompatibilityPackageReference?>, IEquatable<ICompatibilityPackageIdentity?>
 {
-	public ulong Id { get; set; }
+	public string Source { get; set; }
+	public string Id { get; set; }
 	public bool IsDlc { get; set; }
 	public string Name { get; set; }
 	public string? Url { get; set; }
@@ -21,11 +22,12 @@ public class CompatibilityPackageReference : ICompatibilityPackageIdentity, ILoc
 
 	public CompatibilityPackageReference()
 	{
-		Name = Folder = FilePath = string.Empty;
+		Source=Id=Name = Folder = FilePath = string.Empty;
 	}
 
 	public CompatibilityPackageReference(ICompatibilityInfo package)
 	{
+		Source = package.Source;
 		Id = package.Id;
 		Name = package.Name;
 		Url = package.Url;
@@ -57,6 +59,7 @@ public class CompatibilityPackageReference : ICompatibilityPackageIdentity, ILoc
 
 	public CompatibilityPackageReference(IPackageIdentity package)
 	{
+		Source = package.Source;
 		Id = package.Id;
 		Name = package.Name;
 		Url = package.Url;
@@ -66,6 +69,7 @@ public class CompatibilityPackageReference : ICompatibilityPackageIdentity, ILoc
 
 	public CompatibilityPackageReference(ILocalPackageIdentity package)
 	{
+		Source = package.Source;
 		Id = package.Id;
 		Name = package.Name;
 		Url = package.Url;
@@ -78,7 +82,8 @@ public class CompatibilityPackageReference : ICompatibilityPackageIdentity, ILoc
 
 	public CompatibilityPackageReference(IDlcInfo dlc)
 	{
-		Id = dlc.Id;
+		Source = string.Empty;
+		Id = dlc.Id.ToString();
 		Name = dlc.Name;
 		Url = dlc.Url;
 		IsDlc = true;

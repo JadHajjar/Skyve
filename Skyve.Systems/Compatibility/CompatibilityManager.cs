@@ -281,7 +281,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	internal IEnumerable<ILocalPackageIdentity> FindPackage(IIndexedPackageCompatibilityInfo package, bool withAlternativesAndSuccessors)
 	{
-		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Id));
+		var localPackage = _packageManager.GetPackageById(new GenericPackageIdentity(package.Source, package.Id));
 
 		if (localPackage is not null)
 		{
@@ -359,7 +359,7 @@ public class CompatibilityManager : ICompatibilityManager
 			return info;
 		}
 
-		if (packageData.Id > 0 && !_compatibilityHelper.IsPackageEnabled(package, workshopInfo, true))
+		if (!string.IsNullOrEmpty(packageData.Id) && !_compatibilityHelper.IsPackageEnabled(package, workshopInfo, true))
 		{
 			var requiredFor = GetRequiredFor(packageData.Id);
 
@@ -399,7 +399,8 @@ public class CompatibilityManager : ICompatibilityManager
 			{
 				stability = PackageStability.BrokenFromPatchSafe;
 			}
-			else */if (workshopInfo?.ServerTime > packageData.ReviewDate)
+			else */
+			if (workshopInfo?.ServerTime > packageData.ReviewDate)
 			{
 				stability = PackageStability.BrokenFromPatchUpdated;
 			}
@@ -525,9 +526,11 @@ public class CompatibilityManager : ICompatibilityManager
 
 			foreach (var dlc in packageData.RequiredDLCs ?? [])
 			{
-				if (dlc > 10 && !_dlcManager.IsAvailable(dlc))
+				if (dlc > 10
+					&& !_dlcManager.IsAvailable(dlc)
+					&& _dlcManager.TryGetDlc(dlc) is IDlcInfo dlcInfo)
 				{
-					missing.Add(new CompatibilityPackageReference(_dlcManager.TryGetDlc(dlc)));
+					missing.Add(new CompatibilityPackageReference(dlcInfo));
 				}
 			}
 
@@ -611,7 +614,7 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 	}
 
-	internal List<ICompatibilityPackageIdentity>? GetRequiredFor(ulong id)
+	internal List<ICompatibilityPackageIdentity>? GetRequiredFor(string id)
 	{
 		return _compatibilityHelper.GetRequiredFor(id);
 	}

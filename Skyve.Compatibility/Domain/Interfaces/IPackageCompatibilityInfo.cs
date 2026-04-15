@@ -31,12 +31,12 @@ public interface IIndexedPackageCompatibilityInfo : IPackageCompatibilityInfo
 	Dictionary<StatusType, IList<IIndexedPackageStatus<StatusType>>> IndexedStatuses { get; }
 	Dictionary<InteractionType, IList<IIndexedPackageStatus<InteractionType>>> IndexedInteractions { get; }
 	IIndexedPackageStatus<InteractionType>? SucceededBy { get; }
-	Dictionary<ulong, IIndexedPackageCompatibilityInfo> RequirementAlternatives { get; }
-	Dictionary<ulong, IIndexedPackageCompatibilityInfo> Group { get; }
+	Dictionary<string, IIndexedPackageCompatibilityInfo> RequirementAlternatives { get; }
+	Dictionary<string, IIndexedPackageCompatibilityInfo> Group { get; }
 }
 
 public interface IIndexedPackageStatus<TType> where TType : struct, Enum
 {
 	IPackageStatus<TType> Status { get; }
-	Dictionary<ulong, IIndexedPackageCompatibilityInfo> Packages { get; }
+	Dictionary<string, IIndexedPackageCompatibilityInfo> Packages { get; }
 }

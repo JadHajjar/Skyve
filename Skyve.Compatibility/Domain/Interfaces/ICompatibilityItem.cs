@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Skyve.Compatibility.Domain.Interfaces;
 public interface ICompatibilityItem : IPackageIdentity
 {
-	ulong PackageId { get; }
+	string PackageId { get; }
 	IGenericPackageStatus Status { get; }
 	ReportType Type { get; }
 	IEnumerable<ICompatibilityPackageIdentity> Packages { get; }

@@ -34,7 +34,7 @@ public interface ISubscriptionsManager
 	void AddSubscribing(IEnumerable<IPackageIdentity> ids);
 	void RemoveSubscribing(IEnumerable<IPackageIdentity> ids);
 	IEnumerable<ISubscriptionStatus> GetDownloads();
-	bool TryGetDownloadStatus(ulong id, out ISubscriptionStatus status);
+	bool TryGetDownloadStatus(IPackageIdentity package, out ISubscriptionStatus status);
 	void TogglePause();
 	void CancelDownloads();
 	Task RetryDownload(ISubscriptionStatus item);

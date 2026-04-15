@@ -22,7 +22,7 @@ public class CompatibilityHelper
 	private readonly ISkyveDataManager _skyveDataManager;
 	private readonly PackageAvailabilityService _packageAvailabilityService;
 
-	private readonly ConcurrentDictionary<ulong, List<ICompatibilityPackageIdentity>> _missingItems = [];
+	private readonly ConcurrentDictionary<string, List<ICompatibilityPackageIdentity>> _missingItems = [];
 
 	public CompatibilityHelper(CompatibilityManager compatibilityManager, ISettings settings, IPackageManager contentManager, IPackageUtil packageUtil, IWorkshopService workshopService, ISkyveDataManager skyveDataManager, IDlcManager dlcManager)
 	{
@@ -266,7 +266,7 @@ public class CompatibilityHelper
 		return IsPackageEnabled(id, withAlternativesAndSuccessors);
 	}
 
-	internal List<ICompatibilityPackageIdentity>? GetRequiredFor(ulong id)
+	internal List<ICompatibilityPackageIdentity>? GetRequiredFor(string id)
 	{
 		return _missingItems.TryGetValue(id, out var packages) ? packages : null;
 	}

@@ -17,7 +17,7 @@ public interface IModUtil
 	int GetLoadOrder(IPackage package);
 	Task Initialize();
 	bool IsEnabling(IPackageIdentity package);
-	Task UndoChanges();
-	Task RedoChanges();
+	//Task UndoChanges();
+	//Task RedoChanges();
 	bool IsIncludedInOtherPlaysets(ILocalPackageIdentity mod, string? playsetId = null, bool withVersion = true, bool andEnabled = false);
 }

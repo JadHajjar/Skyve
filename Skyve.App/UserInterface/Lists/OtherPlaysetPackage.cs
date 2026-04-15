@@ -314,7 +314,7 @@ public class OtherPlaysetPackage : SlickStackedListControl<IPlayset, OtherPlayse
 		{
 			var rectangle = e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Height * 3 / 5, e.Rects.IncludedRect.Height * 3 / 5);
 #if CS2
-			if (!_subscriptionsManager.TryGetDownloadStatus(Package.Id, out var status) || status.Stage > ModDownloadStage.Started)
+			if (!_subscriptionsManager.TryGetDownloadStatus(Package, out var status) || status.Stage == ModDownloadStage.Pending)
 			{
 				DrawLoader(e.Graphics, rectangle, iconColor);
 				return;

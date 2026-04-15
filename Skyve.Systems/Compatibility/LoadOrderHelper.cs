@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Skyve.Systems.Compatibility;
+
 internal class LoadOrderHelper : ILoadOrderHelper
 {
 	private readonly CompatibilityManager _compatibilityManager;
@@ -63,7 +64,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 			{
 				if (entity.LoadAfterMods.Length > 0)
 				{
-					var loadAfter = entity.LoadAfterMods.SelectMany(x => GetEntity(x.Id, entities, entity.Mod)).AllWhere(x => x is not null);
+					var loadAfter = entity.LoadAfterMods.SelectMany(x => GetEntity(x, entities, entity.Mod)).AllWhere(x => x is not null);
 
 					if (loadAfter.Count > 0)
 					{
@@ -90,7 +91,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 			return;
 		}
 
-		foreach (var entity in GetEntity(identity.Id, modEntityMap, original))
+		foreach (var entity in GetEntity(identity, modEntityMap, original))
 		{
 			entity.Order += 100;
 
@@ -101,11 +102,11 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		}
 	}
 
-	private IEnumerable<ModInfo> GetEntity(ulong id, List<ModInfo> modEntityMap, IPackageIdentity original)
+	private IEnumerable<ModInfo> GetEntity(IPackageIdentity identity, List<ModInfo> modEntityMap, IPackageIdentity original)
 	{
-		var indexedPackage = _skyveDataManager.TryGetPackageInfo(id);
+		var indexedPackage = _skyveDataManager.TryGetPackageInfo(identity.Id);
 
-		foreach (var item in modEntityMap.Where(x => x.Mod.Id == id))
+		foreach (var item in modEntityMap.Where(x => identity.Is(x.Mod)))
 		{
 			yield return item;
 		}
@@ -117,7 +118,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 
 		foreach (var item in indexedPackage.Group)
 		{
-			if (item.Key != id)
+			if (item.Key != identity.Id)
 			{
 				foreach (var package in _compatibilityManager.FindPackage(item.Value, true))
 				{

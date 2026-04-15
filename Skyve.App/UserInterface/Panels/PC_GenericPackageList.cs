@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 
 namespace Skyve.App.UserInterface.Panels;
+
 public class PC_GenericPackageList : PC_ContentList
 {
 	private readonly List<IPackageIdentity> _items = [];
-	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
 	public override SkyvePage Page => SkyvePage.Generic;
 
@@ -22,31 +22,24 @@ public class PC_GenericPackageList : PC_ContentList
 		}
 		else
 		{
-			foreach (var packages in items.GroupBy(x => x.Id))
+			foreach (var packages in items.GroupBy(x => x.GetKey()))
 			{
-				if (packages.Key != 0)
+				var package = packages.Last();
+
+				if (package.Source == Defaults.WORKSHOP_SOURCE)
 				{
-					if (skyveDataManager.IsBlacklisted(packages.First()))
+					if (skyveDataManager.IsBlacklisted(package))
 					{
 						continue;
 					}
-
-					var package = packages.Last();
 
 					if (package.GetWorkshopInfo()?.IsRemoved == true)
 					{
 						continue;
 					}
+				}
 
-					_items.Add(package);
-				}
-				else
-				{
-					foreach (var item in packages)
-					{
-						_items.Add(item);
-					}
-				}
+				_items.Add(package);
 			}
 		}
 	}

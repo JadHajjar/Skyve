@@ -23,7 +23,7 @@ partial class ContentList
 			_notifier.ContentLoaded -= CentralManager_WorkshopInfoUpdated;
 			_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
 			_notifier.PackageInformationUpdated -= CentralManager_WorkshopInfoUpdated;
-			Program.MainForm.HandleKeyPress -= MainForm_HandleKeyPress;
+			//Program.MainForm.HandleKeyPress -= MainForm_HandleKeyPress;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

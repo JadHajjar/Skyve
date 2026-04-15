@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.CompatibilityReport;
+
 public partial class IPackageStatusControl<T, TBase> : SlickControl where T : struct, Enum where TBase : IPackageStatus<T>, new()
 {
 	public readonly PackageStatusTypeDropDown<T> typeDropDown;
@@ -135,18 +136,18 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 
 	private void I_AddPackage_Click(object sender, EventArgs e)
 	{
-		var form = new PC_WorkshopPackageSelection(P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Id));
+		var form = new PC_WorkshopPackageSelection(P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Package));
 
 		form.PackageSelected += Form_PackageSelected;
 
 		Program.MainForm.PushPanel(form);
 	}
 
-	private void Form_PackageSelected(IEnumerable<ulong> packages)
+	private void Form_PackageSelected(IEnumerable<IPackageIdentity> packages)
 	{
 		foreach (var item in packages)
 		{
-			if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Id == item))
+			if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Package.Is(item)))
 			{
 				P_Packages.Controls.Add(new MiniPackageControl(item) { Dock = DockStyle.Top });
 			}
@@ -174,19 +175,16 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		}
 
 #if CS2
-		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{5,6})");
+		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{5,8})");
 #else
 		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{8,20})");
 #endif
 
 		foreach (Match item in matches)
 		{
-			if (ulong.TryParse(item.Value, out var id))
+			if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Id == item.Value))
 			{
-				if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Id == id))
-				{
-					P_Packages.Controls.Add(new MiniPackageControl(id) { Dock = DockStyle.Top });
-				}
+				P_Packages.Controls.Add(new MiniPackageControl(item.Value) { Dock = DockStyle.Top });
 			}
 		}
 	}

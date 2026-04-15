@@ -16,9 +16,9 @@ using System.Windows.Forms;
 namespace Skyve.App.UserInterface.Panels;
 public partial class PC_WorkshopPackageSelection : PC_WorkshopList
 {
-	public event Action<IEnumerable<ulong>>? PackageSelected;
+	public event Action<IEnumerable<IPackageIdentity>>? PackageSelected;
 
-	public PC_WorkshopPackageSelection(IEnumerable<ulong>? selectedItems = null)
+	public PC_WorkshopPackageSelection(IEnumerable<IPackageIdentity>? selectedItems = null)
 	{
 		InitializeComponent();
 
@@ -124,6 +124,6 @@ public partial class PC_WorkshopPackageSelection : PC_WorkshopList
 	private void B_Confirm_Click(object sender, EventArgs e)
 	{
 		PushBack();
-		PackageSelected?.Invoke(P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Id));
+		PackageSelected?.Invoke(P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Package));
 	}
 }

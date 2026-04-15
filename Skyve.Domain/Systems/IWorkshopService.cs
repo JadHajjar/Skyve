@@ -30,6 +30,7 @@ public interface IWorkshopService
 	Task Initialize();
 	Task<bool> Login();
 	Task<bool> Login(string email, string password, bool rememberMe);
+	Task VerifyIntegrity();
 	Task RunSync();
 	Task RunDownSync();
 	Task RunUpSync();
@@ -49,5 +50,6 @@ public interface IWorkshopService
 	void CancelActions();
 	Task<bool> Logout();
 	bool IsInfoQueued(IPackageIdentity identity);
+	Task<IPlayset?> GetPlayset(string playsetId, string? playsetVersion = null);
 #endif
 }

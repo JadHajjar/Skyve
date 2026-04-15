@@ -16,7 +16,8 @@ namespace Skyve.Systems.Compatibility.Domain;
 
 public class ReportItem : ICompatibilityItem, IPackage
 {
-	public ulong PackageId { get; set; }
+	public string Source { get; set; } = string.Empty;
+	public string PackageId { get; set; } = string.Empty;
 	public string? PackageName { get; set; }
 	public ReportType Type { get; set; }
 	public string? LocaleKey { get; set; }
@@ -35,7 +36,7 @@ public class ReportItem : ICompatibilityItem, IPackage
 	public GenericPackageStatus StatusDTO { get => Status is null ? null : new GenericPackageStatus(Status); set => Status = value?.ToGenericPackage(); }
 #nullable enable
 
-	ulong IPackageIdentity.Id => PackageId;
+	string IPackageIdentity.Id => PackageId;
 	string IPackageIdentity.Name => PackageName ?? PackageId.ToString();
 	string? IPackageIdentity.Url { get; }
 	IEnumerable<ICompatibilityPackageIdentity> ICompatibilityItem.Packages => Packages ?? [];

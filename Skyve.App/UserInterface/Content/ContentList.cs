@@ -65,9 +65,7 @@ public partial class ContentList : SlickControl
 			_packageUtil = customPackageUtil;
 		}
 
-		ListControl = _settings.UserSettings.ComplexListUI
-			? new ItemListControl.Complex(Page, customPackageUtil) { Dock = DockStyle.Fill, Margin = new() }
-			: new ItemListControl.Simple(Page, customPackageUtil) { Dock = DockStyle.Fill, Margin = new() };
+		ListControl = new ItemListControl.Simple(Page, customPackageUtil) { Dock = DockStyle.Fill, Margin = default };
 
 		InitializeComponent();
 
@@ -326,7 +324,7 @@ public partial class ContentList : SlickControl
 			P_FiltersContainer.Visible = true;
 		}
 
-		Program.MainForm.HandleKeyPress += MainForm_HandleKeyPress;
+		//Program.MainForm.HandleKeyPress += MainForm_HandleKeyPress;
 	}
 
 	protected override void UIChanged()
@@ -1096,22 +1094,22 @@ public partial class ContentList : SlickControl
 		_settings.UserSettings.Save();
 	}
 
-	private bool MainForm_HandleKeyPress(Message arg1, Keys arg2)
-	{
-		if (arg2 == (Keys.Control | Keys.Z))
-		{
-			ServiceCenter.Get<IModUtil>().UndoChanges();
-			return true;
-		}
+	//private bool MainForm_HandleKeyPress(Message arg1, Keys arg2)
+	//{
+	//	if (arg2 == (Keys.Control | Keys.Z))
+	//	{
+	//		ServiceCenter.Get<IModUtil>().UndoChanges();
+	//		return true;
+	//	}
 
-		if (arg2 == (Keys.Control | Keys.Y))
-		{
-			ServiceCenter.Get<IModUtil>().RedoChanges();
-			return true;
-		}
+	//	if (arg2 == (Keys.Control | Keys.Y))
+	//	{
+	//		ServiceCenter.Get<IModUtil>().RedoChanges();
+	//		return true;
+	//	}
 
-		return false;
-	}
+	//	return false;
+	//}
 
 	private async void DD_SearchTime_SelectedItemChanged(object sender, EventArgs e)
 	{

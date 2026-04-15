@@ -47,7 +47,7 @@ public class PackageCompatibilityReportControl : SmartPanel
 			{
 				LocaleKey = reviewStatus.Message,
 				LocaleParams = [Package.CleanName()],
-				PackageId = reviewStatus.PackageId,
+				PackageId = reviewStatus.PackageId!,
 				PackageName = Package.CleanName(),
 				Type = ReportType.RequestReview,
 				Status = new GenericPackageStatus

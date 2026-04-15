@@ -21,7 +21,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private bool settingItems;
 	private string? _selectedPlayset;
 	private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = [];
-	public readonly List<ulong> _selectionList = [];
+	public readonly List<IPackageIdentity> _selectionList = [];
 
 	public event Action<NotificationType>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
@@ -114,7 +114,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			_compactList = value;
 
-			baseHeight = _settings.UserSettings.ComplexListUI ? (_compactList ? 24 : 60) : _compactList ? 20 : 48;
+			baseHeight = _compactList ? 20 : 48;
 
 			if (Live)
 			{
@@ -517,14 +517,14 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			if (IsSelection)
 			{
-				if (_selectionList.Contains(item.Item.Id))
+				if (_selectionList.Contains(item.Item))
 				{
-					_selectionList.Remove(item.Item.Id);
+					_selectionList.Remove(item.Item);
 					PackageUnSelected?.Invoke(item.Item);
 				}
 				else
 				{
-					_selectionList.Add(item.Item.Id);
+					_selectionList.Add(item.Item);
 					PackageSelected?.Invoke(item.Item);
 				}
 
@@ -667,7 +667,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	{
 		if (IsSelection)
 		{
-			e.IsSelected = _selectionList.Contains(e.Item.Id);
+			e.IsSelected = _selectionList.Contains(e.Item);
 		}
 
 		base.OnPaintItem(e);
