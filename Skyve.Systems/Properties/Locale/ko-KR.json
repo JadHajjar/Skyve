@@ -463,8 +463,8 @@
   },
   "TagCount": {
     "Zero": "태그",
-    "One": "Tags: {0} selected",
-    "Plural": "Tags: {0} selected"
+    "One": "태그: {0}개 선택됨",
+    "Plural": "태그: {0}개 선택됨"
   },
   "TagsTitle": {
     "One": "커스텀 태그: {0}",
@@ -716,5 +716,5 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "모드 데이터를 불러오는 중.."
 }
