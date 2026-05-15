@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "選択したすべてのアイテムの名前とIDをコピー",
   "HelpLogs": "ヘルプ & ログ",
   "Preferences": "環境設定",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "プレイセットの名前",
   "RenamePlayset": "このプレイセットの名前を変更",
   "StartScratch": "付属のパッケージなしで新しいプレイセットを最初から開始します。",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "プレイセットの削除に失敗！",
   "FailedToUpdatePlayset": "プレイセットの更新に失敗！",
   "ImportFromLink": "プレイセットIDを使用してプレイセットをインポート",
-  "PastePlaysetId": "インポートしたいプレイセットIDを貼り付け",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "インターネットの接続確認を無視",
   "AssumeInternetConnectivity_Tip": "インターネットの接続確認をスキップして、自動的に接続済みと判断します。",
   "SelectAll": "すべて選択",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Modデータを読み込み中.."
+  "LoadingModData": "Modデータを読み込み中..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
