@@ -8,6 +8,7 @@ public interface ICitiesManager
 	event MonitorTickDelegate MonitorTick;
 	event Action<bool> LaunchingStatusChanged;
 	event Action? GameClosed;
+	event Action? GameOpened;
 
 	bool IsAvailable();
 	bool IsRunning();

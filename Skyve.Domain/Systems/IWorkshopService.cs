@@ -10,7 +10,7 @@ public interface IWorkshopService
 	bool IsReady { get; }
 
 	void ClearCache();
-	IEnumerable<IWorkshopTag> GetAvailableTags();
+	Task<IEnumerable<IWorkshopTag>> GetAvailableTags();
 	IWorkshopInfo? GetInfo(IPackageIdentity identity);
 	Task<IWorkshopInfo?> GetInfoAsync(IPackageIdentity identity);
 	IPackage GetPackage(IPackageIdentity identity);
@@ -30,10 +30,11 @@ public interface IWorkshopService
 	Task Initialize();
 	Task<bool> Login();
 	Task<bool> Login(string email, string password, bool rememberMe);
+	Task VerifyIntegrity();
 	Task RunSync();
 	Task RunDownSync();
 	Task RunUpSync();
-	Task<int> GetActivePlaysetId();
+	Task<string?> GetActivePlaysetId();
 	Task<List<IPlayset>> GetPlaysets(bool localOnly);
 	Task<IPlayset?> GetCurrentPlayset();
 	Task<bool> ToggleVote(IPackageIdentity packageIdentity);
@@ -49,5 +50,7 @@ public interface IWorkshopService
 	void CancelActions();
 	Task<bool> Logout();
 	bool IsInfoQueued(IPackageIdentity identity);
+	Task<IPlayset?> GetPlayset(string playsetId, string? playsetVersion = null);
+	Task ReleaseLock();
 #endif
 }

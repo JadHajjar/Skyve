@@ -28,12 +28,15 @@ public interface IPlaysetManager
 	Task SetEnabledForAll(IPackageIdentity package, bool value);
 	Task SetEnabledForAll(IEnumerable<IPackageIdentity> packages, bool value);
 	Task<IPlayset?> ClonePlayset(IPlayset playset);
-	IPlayset? GetPlayset(int id);
+	IPlayset? GetPlayset(string id);
 	ICustomPlayset GetCustomPlayset(IPlayset playset);
 	Task DeactivateActivePlayset();
 	void Save(ICustomPlayset customPlayset);
 	Task<IEnumerable<IPlaysetPackage>> GetPlaysetContents(IPlayset playset, bool includeOnline = true);
 	Task<object> GenerateImportPlayset(IPlayset? playset, bool sharing = false, bool includeOnline = true);
+	Task<bool> SharePlayset(IPlayset playset, string name, string description);
+	Task<bool> SetPlaysetThumbnail(IPlayset playset, string selectedPath);
+	Task MigratePlaysetThumbnails();
 
 #if CS1
 	IPlayset TemporaryPlayset { get; }

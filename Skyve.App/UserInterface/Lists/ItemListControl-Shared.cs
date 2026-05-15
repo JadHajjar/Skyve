@@ -92,7 +92,7 @@ public partial class ItemListControl
 		{
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(2 * UI.FontScale));
 
-			if (!GridView || _settings.UserSettings.ComplexListUI)
+			if (!GridView)
 			{
 				e.Graphics.DrawRoundedRectangle(pen, e.Rects.IconRect, UI.Scale(5));
 
@@ -172,7 +172,9 @@ public partial class ItemListControl
 		}
 
 		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
-		var isHovered = !(SelectedPlayset is null && !e.Item.IsLocal()) && !IsGenericPage && (e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation)));
+		var isHovered = !(SelectedPlayset is null && !string.IsNullOrEmpty(e.Item.Source))
+			&& !IsGenericPage
+			&& (e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation)));
 
 		if (!required && isIncluded && isHovered)
 		{
@@ -226,19 +228,25 @@ public partial class ItemListControl
 		{
 			var rectangle = e.Rects.IncludedRect.CenterR(e.Rects.IncludedRect.Height * 3 / 5, e.Rects.IncludedRect.Height * 3 / 5);
 #if CS2
-			if (_subscriptionsManager.Status.ModId != e.Item.Id || _subscriptionsManager.Status.Progress == 0 || !_subscriptionsManager.Status.IsActive)
+			if (!_subscriptionsManager.TryGetDownloadStatus(e.Item, out var download) || download.Stage == ModDownloadStage.Pending)
 			{
 				DrawLoader(e.Graphics, rectangle, iconColor);
 				return;
 			}
 
-			var width = Math.Min(Math.Min(rectangle.Width, rectangle.Height), (int)(32 * UI.UIScale));
-			var size = (float)Math.Max(2, width / (8D - (Math.Abs(100 - LoaderPercentage) / 50)));
-			var drawSize = new SizeF(width - size, width - size);
-			var rect = new RectangleF(new PointF(rectangle.X + ((rectangle.Width - drawSize.Width) / 2), rectangle.Y + ((rectangle.Height - drawSize.Height) / 2)), drawSize).Pad(size / 2);
-			using var pen = new Pen(iconColor, size) { StartCap = LineCap.Round, EndCap = LineCap.Round };
+			using var backPen = new Pen(Color.FromArgb(40, BackColor.GetTextColor()), UI.Scale(2F)) { EndCap = System.Drawing.Drawing2D.LineCap.Round, StartCap = System.Drawing.Drawing2D.LineCap.Round };
+			using var currentPen = new Pen(BackColor.GetTextColor(), UI.Scale(2)) { EndCap = System.Drawing.Drawing2D.LineCap.Round, StartCap = System.Drawing.Drawing2D.LineCap.Round };
+			using var totalPen = new Pen(FormDesign.Design.ActiveColor, UI.Scale(2)) { EndCap = System.Drawing.Drawing2D.LineCap.Round, StartCap = System.Drawing.Drawing2D.LineCap.Round };
 
-			e.Graphics.DrawArc(pen, rect, -90, 360 * _subscriptionsManager.Status.Progress);
+			var totalRect = rectangle;
+			var currentRect = rectangle.Pad(UI.Scale(3));
+			var invertCurrent = (int)download.Stage % 2 != 0;
+			var currentArc = (int)(360 * Math.Min(download.StageProgress, 1F));
+
+			e.Graphics.DrawEllipse(backPen, currentRect);
+			e.Graphics.DrawEllipse(backPen, totalRect);
+			e.Graphics.DrawArc(currentPen, currentRect, -90 + (invertCurrent ? currentArc : 0), invertCurrent ? (360 - currentArc) : currentArc);
+			e.Graphics.DrawArc(totalPen, totalRect, -90, 360 * download.TotalProgress);
 #else
 			DrawLoader(e.Graphics, rectangle, iconColor);
 #endif
@@ -250,7 +258,7 @@ public partial class ItemListControl
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
 
-		if (SelectedPlayset is null && !e.Item.IsLocal())
+		if (SelectedPlayset is null && !string.IsNullOrEmpty(e.Item.Source))
 		{
 			var dimBrush = new SolidBrush(Color.FromArgb(150, e.BackColor));
 			e.Graphics.FillRectangle(dimBrush, e.Rects.IncludedRect);
@@ -332,9 +340,9 @@ public partial class ItemListControl
 		var text = e.Item.CleanName(out var tags);
 		using var stringFormat = CompactList ? new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center } : new();
 
-		if (GridView && !_settings.UserSettings.ComplexListUI)
+		if (GridView)
 		{
-			using var font = UI.Font(9F, FontStyle.Bold);
+			using var font = UI.Font(8.25F, FontStyle.Bold);
 			var textRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Y, e.Rects.TextRect.Width, Height);
 
 			var textSize = e.Graphics.Measure(text, font, textRect.Width);
@@ -352,7 +360,7 @@ public partial class ItemListControl
 
 			for (var i = 0; i < tags.Count; i++)
 			{
-				var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ComplexListUI);
+				var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: true);
 
 				if (tagRect.X + tagSize.Width > e.Rects.TextRect.Right)
 				{
@@ -361,7 +369,7 @@ public partial class ItemListControl
 					e.DrawableItem.CachedHeight += tagRect.Height;
 				}
 
-				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ComplexListUI);
+				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true);
 
 				tagRect.X += padding.Left + rect.Width;
 			}
@@ -377,7 +385,7 @@ public partial class ItemListControl
 
 			for (var i = 0; i < tags.Count; i++)
 			{
-				var size = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ComplexListUI);
+				var size = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: true);
 
 				tagSizes += padding.Left + size.Width;
 			}
@@ -393,7 +401,7 @@ public partial class ItemListControl
 
 			for (var i = 0; i < tags.Count; i++)
 			{
-				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ComplexListUI);
+				var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true);
 
 				tagRect.X += padding.Left + rect.Width;
 			}
@@ -577,9 +585,7 @@ public partial class ItemListControl
 	private int DrawButtons(ItemPaintEventArgs<IPackageIdentity, Rectangles> e, ILocalPackageIdentity? localIdentity, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : Padding;
-		var size = _settings.UserSettings.ComplexListUI ?
-			UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28)) :
-			UI.Scale(CompactList ? new Size(18, 18) : new Size(22, 22));
+		var size = UI.Scale(CompactList ? new Size(18, 18) : new Size(22, 22));
 		var rect = new Rectangle(e.ClipRectangle.Right, e.ClipRectangle.Y, 0, e.ClipRectangle.Height).Pad(padding);
 
 		if (localIdentity is not null)
@@ -614,21 +620,6 @@ public partial class ItemListControl
 			}).Rectangle;
 
 			rect.X -= e.Rects.WorkshopRect.Width + padding.Left;
-		}
-
-		if (!IsPackagePage && _settings.UserSettings.ComplexListUI && e.Item.GetPackageInfo()?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
-		{
-			e.Rects.GithubRect = SlickButton.AlignAndDraw(e.Graphics, rect, CompactList ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, new ButtonDrawArgs
-			{
-				Size = size,
-				Icon = "Github",
-				Font = Font,
-				HoverState = e.HoverState,
-				Cursor = CursorLocation,
-				BackgroundColor = e.BackColor
-			}).Rectangle;
-
-			rect.X -= e.Rects.GithubRect.Width + padding.Left;
 		}
 
 		return rect.X + rect.Width;
@@ -666,7 +657,7 @@ public partial class ItemListControl
 		using var font = large ? UI.Font(8.25F) : UI.Font(7F);
 		using var image = icon.Get(font.Height + UI.Scale(2));
 		var padding = UI.Scale(new Padding(2));
-		var textSize = Size.Ceiling(graphics.Measure(text.IfEmpty("A"), font)) + (large ? new Size(0, padding.Vertical):Size.Empty);
+		var textSize = Size.Ceiling(graphics.Measure(text.IfEmpty("A"), font)) + (large ? new Size(0, padding.Vertical) : Size.Empty);
 		var size = string.IsNullOrEmpty(text) ? new Size(textSize.Height, textSize.Height) : new Size(textSize.Width + image.Width + padding.Left + padding.Horizontal, textSize.Height);
 		var rect = container.Align(size, alignment);
 

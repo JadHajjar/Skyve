@@ -11,6 +11,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
+
 public partial class ItemListControl : SlickStackedListControl<IPackageIdentity, ItemListControl.Rectangles>
 {
 	private PackageSorting sorting;
@@ -18,9 +19,9 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	private Rectangle PopupSearchRect2;
 	private bool _compactList;
 	private bool settingItems;
-	private int? _selectedPlayset;
+	private string? _selectedPlayset;
 	private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = [];
-	public readonly List<ulong> _selectionList = [];
+	public readonly List<IPackageIdentity> _selectionList = [];
 
 	public event Action<NotificationType>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
@@ -100,7 +101,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	}
 
 	public int UsageFilteredOut { get; set; }
-	public int? SelectedPlayset { get => _selectedPlayset ?? _playsetManager.CurrentPlayset?.Id; set => _selectedPlayset = value; }
+	public string? SelectedPlayset { get => _selectedPlayset ?? _playsetManager.CurrentPlayset?.Id; set => _selectedPlayset = value; }
 	public bool SortDescending { get; private set; }
 	public bool IsPackagePage { get; set; }
 	public bool IsTextSearchNotEmpty { get; set; }
@@ -113,7 +114,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		{
 			_compactList = value;
 
-			baseHeight = _settings.UserSettings.ComplexListUI ? _compactList ? 24 : 60 : _compactList ? 20 : 48;
+			baseHeight = _compactList ? 20 : 48;
 
 			if (Live)
 			{
@@ -341,7 +342,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 
 #if CS2
-		if (rects.IncludedRect.Contains(e.Location))
+		if (rects.IncludedRect.Contains(e.Location) && !(SelectedPlayset is null && !string.IsNullOrEmpty(item.Item.Source)))
 		{
 			var isIncluded = _packageUtil.IsIncluded(item.Item, out var partialIncluded, SelectedPlayset) && !partialIncluded;
 
@@ -446,7 +447,6 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			else
 			{
 				Clipboard.SetText(Path.GetFileName(item.Item.GetLocalPackage()?.Folder ?? string.Empty));
-
 			}
 
 			return;
@@ -516,14 +516,14 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 			if (IsSelection)
 			{
-				if (_selectionList.Contains(item.Item.Id))
+				if (_selectionList.Contains(item.Item))
 				{
-					_selectionList.Remove(item.Item.Id);
+					_selectionList.Remove(item.Item);
 					PackageUnSelected?.Invoke(item.Item);
 				}
 				else
 				{
-					_selectionList.Add(item.Item.Id);
+					_selectionList.Add(item.Item);
 					PackageSelected?.Invoke(item.Item);
 				}
 
@@ -666,7 +666,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 	{
 		if (IsSelection)
 		{
-			e.IsSelected = _selectionList.Contains(e.Item.Id);
+			e.IsSelected = _selectionList.Contains(e.Item);
 		}
 
 		base.OnPaintItem(e);
@@ -691,7 +691,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 
 					if (ScrollIndex < maxIndex)
 					{
-						var size = (int)(UI.Scale(150) * Math.Min(1, (maxIndex - ScrollIndex) / (displayedRows / 3)));
+						var size = (int)(UI.Scale(32) * Math.Min(1, ((maxIndex - ScrollIndex))));
 						var rect = new Rectangle(0, Height - size, Width, size + 1);
 
 						using var gradientBrush = new LinearGradientBrush(rect, Color.FromArgb(0, BackColor), BackColor, 90f);
@@ -849,7 +849,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		public bool IsHovered(Control instance, Point location)
 		{
 			return
-				(IncludedRect.Contains(location) && !(instance as ItemListControl)!.IsGenericPage && !((instance as ItemListControl)!.SelectedPlayset is null && !Item.IsLocal())) ||
+				(IncludedRect.Contains(location) && !(instance as ItemListControl)!.IsGenericPage && !((instance as ItemListControl)!.SelectedPlayset is null && !string.IsNullOrEmpty(Item.Source))) ||
 				EnabledRect.Contains(location) ||
 				FolderRect.Contains(location) ||
 				WorkshopRect.Contains(location) ||
@@ -874,7 +874,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			{
 				point = IncludedRect.Location;
 
-				if (listControl.SelectedPlayset is null && !Item.IsLocal())
+				if (listControl.SelectedPlayset is null && !string.IsNullOrEmpty(Item.Source))
 				{
 					text = Locale.NoActivePlayset;
 					return true;

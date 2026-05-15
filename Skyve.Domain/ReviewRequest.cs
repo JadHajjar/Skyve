@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace Skyve.Domain;
 
-public class ReviewRequest : IPackageIdentity, IEquatable<ReviewRequest?>
+public class ReviewRequest(string id) : IPackageIdentity, IEquatable<ReviewRequest?>
 {
 	public byte[]? LogFile { get; set; }
-	public ulong PackageId { get; set; }
+	public string Source { get; } = Defaults.WORKSHOP_SOURCE;
+	public string PackageId { get; set; } = id;
 	public string? UserId { get; set; }
 	public int PackageStability { get; set; }
 	public int PackageUsage { get; set; }
@@ -17,13 +18,12 @@ public class ReviewRequest : IPackageIdentity, IEquatable<ReviewRequest?>
 	public DateTime Timestamp { get; set; }
 	public string? SaveUrl { get; set; }
 	public bool IsMissingInfo { get; set; }
+	public int Count { get; set; }
 
-	ulong IPackageIdentity.Id => PackageId;
+	string IPackageIdentity.Id => PackageId!;
 	string IPackageIdentity.Name => string.Empty;
 	string? IPackageIdentity.Url => string.Empty;
 	string? IPackageIdentity.Version { get; set; }
-
-	public int Count { get; set; }
 
 	public override bool Equals(object? obj)
 	{

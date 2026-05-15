@@ -1,6 +1,7 @@
 ﻿using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Generic;
 
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -56,9 +57,10 @@ public class PC_WorkshopList : PanelContent
 
 	protected virtual async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
-		if (LC_Items.TB_Search.Text.Length is 5 or 6 or 7 && ulong.TryParse(LC_Items.TB_Search.Text, out var id))
+		var match = Regex.Match(LC_Items.TB_Search.Text, @"^#(\d{5,})$");
+		if (match.Success)
 		{
-			var package = await _workshopService.GetInfoAsync(new GenericPackageIdentity(id));
+			var package = await _workshopService.GetInfoAsync(new GenericPackageIdentity(Defaults.WORKSHOP_SOURCE, match.Groups[1].Value));
 
 			if (package != null)
 			{

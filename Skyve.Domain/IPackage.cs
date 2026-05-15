@@ -10,7 +10,7 @@ public interface IPackage : IPackageIdentity
 
 public interface IPlaysetPackage : IPackage
 {
-	int PlaysetId { get; }
+	string PlaysetId { get; }
 	bool IsEnabled { get; }
 	int LoadOrder { get; }
 	bool IsVersionLocked { get; set; }

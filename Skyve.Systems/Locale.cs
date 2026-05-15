@@ -956,6 +956,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ExplainIssueInfo => _instance.GetText("ExplainIssueInfo");
 
 	/// <summary>
+	/// Export Playset
+	/// </summary>
+	public static Translation ExportPlayset => _instance.GetText("ExportPlayset");
+
+	/// <summary>
 	/// Fade out disabled mods &amp; assets
 	/// </summary>
 	public static Translation FadeDisabledItems => _instance.GetText("FadeDisabledItems");
@@ -1009,6 +1014,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Failed to save the selected language
 	/// </summary>
 	public static Translation FailedToSaveLanguage => _instance.GetText("FailedToSaveLanguage");
+
+	/// <summary>
+	/// Failed to share your playset. Please try again later.
+	/// </summary>
+	public static Translation FailedToSharePlayset => _instance.GetText("FailedToSharePlayset");
 
 	/// <summary>
 	/// Failed to update your playset
@@ -1855,7 +1865,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PartiallyIncluded => _instance.GetText("PartiallyIncluded");
 
 	/// <summary>
-	/// Paste the ID of the playset you'd like to import
+	/// Enter the ID or Link of the playset you'd like to import
 	/// </summary>
 	public static Translation PastePlaysetId => _instance.GetText("PastePlaysetId");
 
@@ -1901,6 +1911,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PlaysetName => _instance.GetText("PlaysetName");
 
 	/// <summary>
+	/// Your playset has been shared successfully.
+	/// </summary>
+	public static Translation PlaysetSharedSuccessfully => _instance.GetText("PlaysetSharedSuccessfully");
+
+	/// <summary>
 	/// Your playset is still loading, please wait before exiting this page.
 	/// </summary>
 	public static Translation PlaysetStillLoading => _instance.GetText("PlaysetStillLoading");
@@ -1929,6 +1944,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Preferences
 	/// </summary>
 	public static Translation Preferences => _instance.GetText("Preferences");
+
+	/// <summary>
+	/// Private
+	/// </summary>
+	public static Translation Private => _instance.GetText("Private");
 
 	/// <summary>
 	/// Ready
@@ -2220,6 +2240,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SetupSettingsFirst => _instance.GetText("SetupSettingsFirst");
 
 	/// <summary>
+	/// Shared Playset
+	/// </summary>
+	public static Translation SharedPlayset => _instance.GetText("SharedPlayset");
+
+	/// <summary>
 	/// Share this playset
 	/// </summary>
 	public static Translation SharePlayset => _instance.GetText("SharePlayset");
@@ -2424,6 +2449,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Stop Troubleshooting?
 	/// </summary>
 	public static Translation StopTroubleshootTitle => _instance.GetText("StopTroubleshootTitle");
+
+	/// <summary>
+	/// Subscribed Playset
+	/// </summary>
+	public static Translation SubscribedPlayset => _instance.GetText("SubscribedPlayset");
 
 	/// <summary>
 	/// Subscribers
@@ -2675,6 +2705,11 @@ public class Locale : LocaleHelper, ILocale
 	/// Unknown User
 	/// </summary>
 	public static Translation UnknownUser => _instance.GetText("UnknownUser");
+
+	/// <summary>
+	/// Unlisted
+	/// </summary>
+	public static Translation Unlisted => _instance.GetText("Unlisted");
 
 	/// <summary>
 	/// There are un-saved changes to the packages of this playset

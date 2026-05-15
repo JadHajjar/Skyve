@@ -13,6 +13,7 @@ using System.Drawing;
 using System.IO;
 
 namespace Skyve.Systems;
+
 public static class SystemExtensions
 {
 	private static IServiceProvider? serviceProvider;
@@ -53,7 +54,7 @@ public static class SystemExtensions
 
 	public static bool IsLocal(this IPackageIdentity identity)
 	{
-		return identity.Id <= 0;
+		return identity.Source is "" or "local";
 	}
 
 	public static bool IsCodeMod(this IPackageIdentity identity)
@@ -63,7 +64,7 @@ public static class SystemExtensions
 			return false;
 		}
 
-		if (identity.Id > 0 && identity.GetWorkshopInfo() is IWorkshopInfo workshopInfo)
+		if (!IsLocal(identity) && identity.GetWorkshopInfo() is IWorkshopInfo workshopInfo)
 		{
 			return workshopInfo.IsCodeMod;
 		}
@@ -190,7 +191,7 @@ public static class SystemExtensions
 
 		return identity is IWorkshopInfo workshopInfo
 			? WorkshopService.GetInfo(identity) ?? workshopInfo
-			: identity.Id <= 0 ? GetLocalModWorkshopInfo(identity) : WorkshopService.GetInfo(identity);
+			: !int.TryParse(identity.Id, out _) ? GetLocalModWorkshopInfo(identity) : WorkshopService.GetInfo(identity);
 	}
 
 	private static IWorkshopInfo? GetLocalModWorkshopInfo(IPackageIdentity identity)
@@ -199,7 +200,7 @@ public static class SystemExtensions
 		{
 			var id = SkyveDataManager.GetIdFromModName(Path.GetFileName(localPackageIdentity.FilePath));
 
-			if (id > 0)
+			if (!string.IsNullOrEmpty(id))
 			{
 				return WorkshopService.GetInfo(new GenericPackageIdentity(identity) { Id = id });
 			}
@@ -236,6 +237,27 @@ public static class SystemExtensions
 	public static ICustomPlayset GetCustomPlayset(this IPlayset playset)
 	{
 		return PlaysetManager.GetCustomPlayset(playset);
+	}
+
+	public static bool Is(this IPackageIdentity? identity, IPackageIdentity? package)
+	{
+		return identity is not null && package is not null
+			&& identity.Source == package.Source
+			&& identity.Id == package.Id
+			&& identity.Version == package.Version;
+	}
+
+	public static int GetKey(this IPackageIdentity? identity)
+	{
+		if (identity is null)
+			return 0;
+
+		var hashCode = -781363793;
+		hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(identity.Source);
+		hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(identity.Id);
+		hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(identity.Version);
+
+		return hashCode;
 	}
 
 	public static LocaleHelper.Translation GetTypeTranslation(this IBackupMetaData meta)

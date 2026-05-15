@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Skyve.Systems;
 
-public class GenericLocalPackageIdentity : ILocalPackageIdentity, IEquatable<GenericLocalPackageIdentity?>
+public class GenericLocalPackageIdentity : ILocalPackageIdentity
 {
 	private string? _name;
 	private string? _url;
@@ -15,11 +15,12 @@ public class GenericLocalPackageIdentity : ILocalPackageIdentity, IEquatable<Gen
 	[Obsolete("Reserved for DTO", true)]
 	public GenericLocalPackageIdentity()
 	{
-
+		Source = Id = string.Empty;
 	}
 
 	public GenericLocalPackageIdentity(ILocalPackageIdentity localPackageIdentity)
 	{
+		Source = localPackageIdentity.Source;
 		Id = localPackageIdentity.Id;
 		Name = localPackageIdentity.Name;
 		Url = localPackageIdentity.Url;
@@ -30,8 +31,9 @@ public class GenericLocalPackageIdentity : ILocalPackageIdentity, IEquatable<Gen
 		Version = localPackageIdentity.Version;
 	}
 
-	public GenericLocalPackageIdentity(ulong id, string? name = null, string? url = null, string? folder = null, string? filePath = null, long fileSize = default, DateTime localTime = default, string? version = null)
+	public GenericLocalPackageIdentity(string source, string id, string? name = null, string? url = null, string? folder = null, string? filePath = null, long fileSize = default, DateTime localTime = default, string? version = null)
 	{
+		Source = source;
 		Id = id;
 		_name = name;
 		_url = url;
@@ -42,7 +44,8 @@ public class GenericLocalPackageIdentity : ILocalPackageIdentity, IEquatable<Gen
 		Version = version;
 	}
 
-	public ulong Id { get; set; }
+	public string Source { get; set; }
+	public string Id { get; set; }
 	public string Name { get => _name ?? this.GetWorkshopInfo()?.Name ?? string.Empty; set => _name = value; }
 	public string? Url { get => _url ?? this.GetWorkshopInfo()?.Url; set => _url = value; }
 	public string Folder { get => _folder ?? string.Empty; set => _folder = value; }
@@ -53,23 +56,18 @@ public class GenericLocalPackageIdentity : ILocalPackageIdentity, IEquatable<Gen
 
 	public override bool Equals(object? obj)
 	{
-		return obj is ILocalPackageIdentity localPackageIdentity &&
-			   Id == localPackageIdentity.Id &&
-			   FilePath == localPackageIdentity.FilePath;
-	}
-
-	public bool Equals(GenericLocalPackageIdentity? other)
-	{
-		return other is not null &&
-			   Id == other.Id &&
-			   FilePath == other.FilePath;
+		return obj is IPackageIdentity identity &&
+			   Source == identity.Source &&
+			   Id == identity.Id &&
+			   Version == identity.Version;
 	}
 
 	public override int GetHashCode()
 	{
-		var hashCode = 329219044;
-		hashCode = (hashCode * -1521134295) + Id.GetHashCode();
-		hashCode = (hashCode * -1521134295) + EqualityComparer<string>.Default.GetHashCode(FilePath);
+		var hashCode = -781363793;
+		hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Source);
+		hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Id);
+		hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(Version);
 		return hashCode;
 	}
 }

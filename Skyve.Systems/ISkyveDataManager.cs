@@ -12,11 +12,11 @@ public interface ISkyveDataManager
 	Task DownloadData();
 	void Start(List<IPackage> packages);
 	void ResetCache();
-	bool IsBlacklisted(ulong packageId);
+	bool IsBlacklisted(string packageId);
 	bool IsBlacklisted(IPackageIdentity package);
-	ulong GetIdFromModName(string fileName);
+	string GetIdFromModName(string fileName);
 	IIndexedPackageCompatibilityInfo? GetPackageCompatibilityInfo(IPackageIdentity identity);
-	IIndexedPackageCompatibilityInfo TryGetPackageInfo(ulong id);
-	IEnumerable<ulong> GetPackagesKeys();
+	IIndexedPackageCompatibilityInfo TryGetPackageInfo(string id);
+	IEnumerable<string> GetPackagesKeys();
 	Task<ReviewReply?> GetReviewStatus(IPackageIdentity package);
 }

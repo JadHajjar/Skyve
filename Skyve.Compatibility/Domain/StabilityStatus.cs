@@ -45,7 +45,7 @@ public class StabilityStatus : IPackageStatus<PackageStability>
 	{
 		var hashCode = 498602157;
 		hashCode = hashCode * -1521134295 + Type.GetHashCode();
-		hashCode = hashCode * -1521134295 + EqualityComparer<IEnumerable<ulong>>.Default.GetHashCode(Packages?.Select(x => x.Id) ?? []);
+		hashCode = hashCode * -1521134295 + EqualityComparer<IEnumerable<string>>.Default.GetHashCode(Packages?.Select(x => x.Id) ?? []);
 		return hashCode;
 	}
 

@@ -275,7 +275,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 
 		for (var i = 0; i < tags.Count; i++)
 		{
-			var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: !_settings.UserSettings.ComplexListUI);
+			var tagSize = e.Graphics.MeasureLabel(tags[i].Text, null, smaller: true);
 
 			if (tagRect.X + tagSize.Width > e.Rects.TextRect.Right)
 			{
@@ -285,7 +285,7 @@ public class CompatibilityReportList : SlickStackedListControl<ICompatibilityInf
 				e.DrawableItem.CachedHeight += tagRect.Height;
 			}
 
-			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: !_settings.UserSettings.ComplexListUI);
+			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true);
 
 			tagRect.X += padding.Left + rect.Width;
 		}

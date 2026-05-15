@@ -27,7 +27,6 @@ public interface IUserSettings
 	bool ShowFolderSettings { get; set; }
 	bool TreatOptionalAsRequired { get; set; }
 	bool SnapDashToGrid { get; set; }
-	bool ComplexListUI { get; set; }
 	bool FadeDisabledItems { get; set; }
 	bool DisableContentCreatorWarnings { get; set; }
 	DependencyResolveBehavior DependencyResolution { get; set; }

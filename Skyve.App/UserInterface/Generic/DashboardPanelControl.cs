@@ -438,7 +438,7 @@ public partial class DashboardPanelControl : SlickControl
 
 	private void DoDashboardLayout()
 	{
-		if (layoutInProgress || !Live)
+		if (layoutInProgress || !Live || _control.IsDisposed)
 		{
 			return;
 		}

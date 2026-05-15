@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
 public interface ISubscriptionsManager
 {
+	bool IsPaused { get; }
+	ulong DownloadSpeed { get; }
+	double TotalProgress { get; }
+	bool IsRunning { get; }
+
 	bool IsSubscribing(IPackageIdentity package);
 
 #if CS1
@@ -21,16 +27,16 @@ public interface ISubscriptionsManager
 	void Start();
 	void CancelPendingItems();
 #else
-	SubscriptionStatus Status { get; }
-
 	event Action UpdateDisplayNotification;
+	event Action DownloadProgressChanged;
+	event Action DownloadAddedOrRemoved;
 
-	void OnInstallFinished(PackageInstallProgress info);
-	void OnInstallProgress(PackageInstallProgress info);
-	void OnInstallStarted(PackageInstallProgress info);
-	void OnDownloadProgress(PackageDownloadProgress info);
-	void OnDownloadCancelled(PackageInstallProgress info);
 	void AddSubscribing(IEnumerable<IPackageIdentity> ids);
 	void RemoveSubscribing(IEnumerable<IPackageIdentity> ids);
+	IEnumerable<ISubscriptionStatus> GetDownloads();
+	bool TryGetDownloadStatus(IPackageIdentity package, out ISubscriptionStatus status);
+	void TogglePause();
+	void CancelDownloads();
+	Task RetryDownload(ISubscriptionStatus item);
 #endif
 }

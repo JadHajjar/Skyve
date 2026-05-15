@@ -1,6 +1,4 @@
-﻿using Extensions;
-
-using Skyve.Domain.Enums;
+﻿using Skyve.Domain.Enums;
 
 using System;
 using System.Collections.Generic;
@@ -8,13 +6,16 @@ using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Skyve.Domain;
+
 public interface IPlayset : IThumbnailObject
 {
-	int Id { get; }
+	string? Id { get; }
 	string? Name { get; }
 	DateTime DateUpdated { get; }
 	int ModCount { get; set; }
 	ulong ModSize { get; set; }
+	IOnlinePlayset? OnlineInfo { get; }
+	PlaysetOwnership Ownership { get; }
 #if CS1
 	bool Temporary { get; }
 	int AssetCount { get; }
@@ -23,14 +24,13 @@ public interface IPlayset : IThumbnailObject
 
 public interface ICustomPlayset : IThumbnailObject
 {
-	int Id { get; }
+	string? Id { get; }
 	DateTime DateUsed { get; set; }
 	DateTime DateCreated { get; set; }
 	PackageUsage Usage { get; set; }
 	Color? Color { get; set; }
 	bool IsFavorite { get; set; }
 
-	IOnlinePlayset? OnlineInfo { get; }
 	bool IsCustomThumbnailSet { get; }
 	bool NoBanner { get; set; }
 
@@ -45,15 +45,36 @@ public interface ICustomPlayset : IThumbnailObject
 #endif
 }
 
-public interface IOnlinePlayset : IThumbnailObject
+public interface IOnlinePlayset
 {
-	int Id { get; }
-	bool Public { get; set; }
-	int Downloads { get; }
-	[CloneIgnore] IUser? Author { get; }
+	IUser Author { get; }
+	string? Version { get; }
+	string? PreferredVersion { get; }
+	string LatestPublicVersion { get; }
+	int SubscriptionsTotal { get; }
+	int Rating { get; }
+	int RatingsTotal { get; }
+	IPlaysetVersion[]? PublicVersions { get; }
+	IPlaysetVersion? LatestPublicVersionData { get; }
+}
+
+public interface IPlaysetVersion
+{
+	string Version { get; }
+	string DisplayName { get; }
+	DateTime? Created { get; }
+	int ModsCount { get; }
 }
 
 public interface ITemporaryPlayset : IPlayset
 {
 	Task<IEnumerable<IPackageIdentity>> GetPackages();
+}
+
+public enum PlaysetOwnership
+{
+	Other,
+	OwnedByCurrentUser,
+	OwnedByOtherLocalUser,
+	SubscribedByCurrentUser
 }

@@ -10,9 +10,11 @@ using System;
 using System.Collections.Generic;
 
 namespace Skyve.Systems.Compatibility.Domain;
+
 public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdentity
 {
-	public ulong Id { get; set; }
+	public string Source { get; set; }
+	public string Id { get; set; }
 	public string Name { get; set; }
 	public string Url { get; set; }
 	public List<ReportItem> ReportItems { get; set; }
@@ -21,7 +23,7 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 
 	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data;
 	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems;
-	string? IPackageIdentity.Version { get; set; }
+	public string? Version { get; set; }
 	bool ICompatibilityPackageIdentity.IsDlc { get; }
 	bool ICompatibilityInfo.IsDlc { get; }
 	bool IPackage.IsCodeMod => LocalData?.Package?.IsCodeMod ?? false;
@@ -32,14 +34,15 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 	[Obsolete("Reserved for DTO", true)]
 	public CompatibilityInfo()
 	{
-		Name = string.Empty;
-		Url = string.Empty;
+		Source = Id = Name = Url = string.Empty;
 		ReportItems = [];
 	}
 
 	public CompatibilityInfo(IPackageIdentity package, IIndexedPackageCompatibilityInfo? packageData)
 	{
+		Source = package.Source;
 		Id = package.Id;
+		Version = package.Version;
 		Name = package.Name;
 		Url = package.Url ?? string.Empty;
 		Data = packageData;
@@ -76,5 +79,22 @@ public class CompatibilityInfo : ICompatibilityInfo, ICompatibilityPackageIdenti
 	public override string ToString()
 	{
 		return Name;
+	}
+
+	public override bool Equals(object? obj)
+	{
+		return obj is IPackageIdentity identity &&
+			   Source == identity.Source &&
+			   Id == identity.Id &&
+			   Version == identity.Version;
+	}
+
+	public override int GetHashCode()
+	{
+		var hashCode = -781363793;
+		hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Source);
+		hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Id);
+		hashCode = hashCode * -1521134295 + EqualityComparer<string?>.Default.GetHashCode(Version);
+		return hashCode;
 	}
 }

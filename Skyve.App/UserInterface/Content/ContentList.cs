@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
 namespace Skyve.App.UserInterface.Panels;
+
 public partial class ContentList : SlickControl
 {
 	public delegate Task<IEnumerable<IPackageIdentity>> GetAllItems(CancellationToken token);
@@ -48,7 +49,7 @@ public partial class ContentList : SlickControl
 
 	public SkyvePage Page { get; }
 	public int ItemCount => ListControl.ItemCount;
-	public int? SelectedPlayset { get => ListControl.SelectedPlayset; set => ListControl.SelectedPlayset = value; }
+	public string? SelectedPlayset { get => ListControl.SelectedPlayset; set => ListControl.SelectedPlayset = value; }
 	public bool IsGenericPage { get => ListControl.IsGenericPage; set => ListControl.IsGenericPage = value; }
 	public IEnumerable<IPackageIdentity> Items => ListControl.Items;
 
@@ -65,9 +66,7 @@ public partial class ContentList : SlickControl
 			_packageUtil = customPackageUtil;
 		}
 
-		ListControl = _settings.UserSettings.ComplexListUI
-			? new ItemListControl.Complex(Page, customPackageUtil) { Dock = DockStyle.Fill, Margin = new() }
-			: new ItemListControl.Simple(Page, customPackageUtil) { Dock = DockStyle.Fill, Margin = new() };
+		ListControl = new ItemListControl.Simple(Page, customPackageUtil) { Dock = DockStyle.Fill, Margin = default };
 
 		InitializeComponent();
 
@@ -148,7 +147,7 @@ public partial class ContentList : SlickControl
 		I_Actions.IsSelected = ListControl.SelectedItemsCount > 0;
 	}
 
-	protected virtual void RefreshAuthorAndTags()
+	protected virtual async void RefreshAuthorAndTags()
 	{
 		var items = new List<IPackageIdentity>(ListControl.Items);
 
@@ -157,7 +156,7 @@ public partial class ContentList : SlickControl
 
 		if (TagsControl is not null && WorkshopTagsControl.Tags.Count == 0)
 		{
-			TagsControl.SetTags(_workshopService.GetAvailableTags());
+			TagsControl.SetTags(await _workshopService.GetAvailableTags());
 		}
 	}
 
@@ -326,7 +325,7 @@ public partial class ContentList : SlickControl
 			P_FiltersContainer.Visible = true;
 		}
 
-		Program.MainForm.HandleKeyPress += MainForm_HandleKeyPress;
+		//Program.MainForm.HandleKeyPress += MainForm_HandleKeyPress;
 	}
 
 	protected override void UIChanged()
@@ -796,7 +795,7 @@ public partial class ContentList : SlickControl
 #if CS2
 		if (Regex.IsMatch(TB_Search.Text, @"/mods/(\d+)"))
 		{
-			TB_Search.Text = Regex.Match(TB_Search.Text, @"/mods/(\d+)").Groups[1].Value;
+			TB_Search.Text = "#" + Regex.Match(TB_Search.Text, @"/mods/(\d+)").Groups[1].Value;
 			return;
 		}
 #else
@@ -892,7 +891,7 @@ public partial class ContentList : SlickControl
 			, new ()
 			, ListControl.SelectedItemsCount < ListControl.FilteredItems.Count() ? new (Locale.SelectAll, "DragDrop",  ListControl.SelectAll) : null
 			, ListControl.SelectedItemsCount > 0 ? new (Locale.DeselectAll, "Select", ListControl.DeselectAll) : null
-			, new (isSelected ? Locale.CopyAllIdsSelected : isFiltered ? Locale.CopyAllIdsFiltered : Locale.CopyAllIds, "Copy", () => Clipboard.SetText(items.ListStrings(x => x.IsLocal() ? $"Local: {x.Name} {x.GetPackage()?.VersionName}" : $"{x.Id}: {x.Name} {x.GetPackage()?.VersionName}", CrossIO.NewLine)))
+			, new (isSelected ? Locale.CopyAllIdsSelected : isFiltered ? Locale.CopyAllIdsFiltered : Locale.CopyAllIds, "Copy", () => Clipboard.SetText(items.ListStrings(getPackageName, CrossIO.NewLine)))
 #if CS1
 			, new (Locale.SubscribeAll, "Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DownloadAll, "Install", ListControl.FilteredItems.Any(x => x.GetLocalPackage() is null), action: () => DownloadAll(this, EventArgs.Empty))
@@ -904,6 +903,30 @@ public partial class ContentList : SlickControl
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), stripItems));
+
+		static string getPackageName(IPackageIdentity x)
+		{
+			var name = x.CleanName(true);
+			var package = x.GetPackage();
+
+			if (x.IsLocal())
+			{
+				return $"Local: {name} {x.Version}";
+			}
+
+			var workshopInfo = x.GetWorkshopInfo();
+			var localPackageIdentity = x.GetLocalPackageIdentity();
+#if CS1
+			var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
+			var text = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : e.Item is ILocalPackageData lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString();
+#else
+			var isVersion = package?.IsCodeMod() ?? false;
+			var versionText = isVersion ? package?.VersionName ?? (workshopInfo?.Changelog.FirstOrDefault(x => x.VersionId == package?.Version)?.Version) : null;
+			versionText = versionText is not null ? $"v{versionText}" : localPackageIdentity != null ? localPackageIdentity.FileSize.SizeString(0) : workshopInfo?.ServerSize.SizeString(0);
+#endif
+
+			return $"{x.Id}: {name} {versionText}";
+		}
 	}
 
 	private async Task DisableAll()
@@ -946,7 +969,7 @@ public partial class ContentList : SlickControl
 
 	private async Task IncludeAll()
 	{
-		var count = ListControl.SortedAndFilteredItems.Count();
+		var count = ListControl.SelectedOrFilteredItems.Count();
 
 		if (count > 20)
 		{
@@ -1096,22 +1119,22 @@ public partial class ContentList : SlickControl
 		_settings.UserSettings.Save();
 	}
 
-	private bool MainForm_HandleKeyPress(Message arg1, Keys arg2)
-	{
-		if (arg2 == (Keys.Control | Keys.Z))
-		{
-			ServiceCenter.Get<IModUtil>().UndoChanges();
-			return true;
-		}
+	//private bool MainForm_HandleKeyPress(Message arg1, Keys arg2)
+	//{
+	//	if (arg2 == (Keys.Control | Keys.Z))
+	//	{
+	//		ServiceCenter.Get<IModUtil>().UndoChanges();
+	//		return true;
+	//	}
 
-		if (arg2 == (Keys.Control | Keys.Y))
-		{
-			ServiceCenter.Get<IModUtil>().RedoChanges();
-			return true;
-		}
+	//	if (arg2 == (Keys.Control | Keys.Y))
+	//	{
+	//		ServiceCenter.Get<IModUtil>().RedoChanges();
+	//		return true;
+	//	}
 
-		return false;
-	}
+	//	return false;
+	//}
 
 	private async void DD_SearchTime_SelectedItemChanged(object sender, EventArgs e)
 	{

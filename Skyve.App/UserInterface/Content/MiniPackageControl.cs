@@ -17,8 +17,8 @@ public class MiniPackageControl : SlickControl
 	private readonly IModUtil _modUtil;
 	private readonly IDlcManager _dlcManager;
 
-	public IPackageIdentity Package => (_package ?? (IsDlc ? null : _workshopService.GetInfo(new GenericPackageIdentity(Id)))) ?? new GenericPackageIdentity(Id);
-	public ulong Id { get; }
+	public IPackageIdentity Package => (_package ?? (IsDlc ? null : _workshopService.GetInfo(new GenericPackageIdentity(Defaults.WORKSHOP_SOURCE, Id)))) ?? new GenericPackageIdentity(Defaults.WORKSHOP_SOURCE, Id);
+	public string Id { get; }
 
 	public bool ReadOnly { get; set; }
 	public bool Large { get; set; }
@@ -27,10 +27,11 @@ public class MiniPackageControl : SlickControl
 
 	public MiniPackageControl()
 	{
+		Id = string.Empty;
 		ServiceCenter.Get(out _workshopService, out _subscriptionsManager, out _modLogicManager, out _modUtil, out _dlcManager);
 	}
 
-	public MiniPackageControl(ulong modId) : this()
+	public MiniPackageControl(string modId) : this()
 	{
 		Id = modId;
 	}
@@ -224,7 +225,7 @@ public class MiniPackageControl : SlickControl
 	{
 		var localIdentity = Package!.GetLocalPackageIdentity();
 		var isPartialIncluded = false;
-		var isIncluded = IsDlc ? _dlcManager.IsAvailable(Package!.Id) : Package!.IsIncluded(out isPartialIncluded, withVersion: false);
+		var isIncluded = IsDlc ? _dlcManager.IsAvailable((ulong)Package!.Id.SmartParse()) : Package!.IsIncluded(out isPartialIncluded, withVersion: false);
 		var isEnabled = IsDlc ? isIncluded : Package!.IsEnabled(false);
 		Color activeColor = default;
 		string text;
@@ -325,7 +326,7 @@ public class MiniPackageControl : SlickControl
 		{
 			iconRect = buttonRect.CenterR(buttonRect.Height * 3 / 5, buttonRect.Height * 3 / 5);
 
-			if (_subscriptionsManager.Status.ModId != Package!.Id || _subscriptionsManager.Status.Progress == 0 || !_subscriptionsManager.Status.IsActive)
+			if (!_subscriptionsManager.TryGetDownloadStatus(Package, out var status) || status.Stage > ModDownloadStage.Started)
 			{
 				DrawLoader(e.Graphics, iconRect, activeColor);
 			}
@@ -337,7 +338,7 @@ public class MiniPackageControl : SlickControl
 				var rect = new RectangleF(new PointF(iconRect.X + ((iconRect.Width - drawSize.Width) / 2), iconRect.Y + ((iconRect.Height - drawSize.Height) / 2)), drawSize).Pad(size / 2);
 				using var pen = new Pen(activeColor, size) { StartCap = LineCap.Round, EndCap = LineCap.Round };
 
-				e.Graphics.DrawArc(pen, rect, -90, 360 * _subscriptionsManager.Status.Progress);
+				e.Graphics.DrawArc(pen, rect, -90, 360 * status.TotalProgress);
 			}
 		}
 		else
