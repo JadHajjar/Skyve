@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Copiați numele și ID-urile tuturor elementelor selectate",
   "HelpLogs": "Ajutor și jurnale",
   "Preferences": "Preferințe",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Nume Playset",
   "RenamePlayset": "Redenumește acest set de redare",
   "StartScratch": "Începe un nou set de redare de la zero fără niciun pachet inclus.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Nu am reușit să ștergem playset",
   "FailedToUpdatePlayset": "Actualizarea setului de redare a eșuat",
   "ImportFromLink": "Import a profile using a profile ID",
-  "PastePlaysetId": "Lipiți ID-ul playset-ului pe care doriți să îl importați",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignoră verificarea conexiunii la internet",
   "AssumeInternetConnectivity_Tip": "Sari verifică internetul și presupune automat că ești conectat.",
   "SelectAll": "Selectează toate elementele",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
