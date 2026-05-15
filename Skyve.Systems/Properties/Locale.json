@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Copy all selected items' names & IDs",
   "HelpLogs": "Help & Logs",
   "Preferences": "Preferences",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Playset Name",
   "RenamePlayset": "Rename this playset",
   "StartScratch": "Start a new playset from scratch without any included package.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Failed to delete your playset",
   "FailedToUpdatePlayset": "Failed to update your playset",
   "ImportFromLink": "Import a playset using a playset ID",
-  "PastePlaysetId": "Paste the ID of the playset you'd like to import",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignore Internet connection checks",
   "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected.",
   "SelectAll": "Select all items",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

@@ -210,7 +210,7 @@ public class PlaysetSideControl : SlickControl
 		{
 			e.Graphics.DrawHighResText(Playset.Name, textFont, textBrush, TextRect);
 
-			e.Graphics.DrawString(customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, new Point(TextRect.X, TextRect.Y + (int)e.Graphics.Measure(Playset.Name, textFont, TextRect.Width).Height));
+			e.Graphics.DrawString(Playset.OnlineInfo != null ? (Playset.Ownership == PlaysetOwnership.OwnedByCurrentUser ? Locale.SharedPlayset : Locale.SubscribedPlayset) : customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, new Point(TextRect.X, TextRect.Y + (int)e.Graphics.Measure(Playset.Name, textFont, TextRect.Width).Height));
 
 			TextRect = TextRect.Pad(0, 0, Padding.Left / -2, Padding.Bottom * 3 / -2);
 
@@ -250,16 +250,16 @@ public class PlaysetSideControl : SlickControl
 		labelRects.Y += e.Graphics.DrawLabel(Locale.ContainCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
 #endif
 
-		if (customPlayset.OnlineInfo?.Author?.Name is not null and not "")
-		{
-			var name = customPlayset.OnlineInfo.Author.Name;
+		//if (Playset.OnlineInfo?.Author?.Name is not null and not "")
+		//{
+		//	var name = Playset.OnlineInfo.Author.Name;
 
-			using var userIcon = IconManager.GetSmallIcon("User");
+		//	using var userIcon = IconManager.GetSmallIcon("User");
 
-			var Author = e.Graphics.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), default, ContentAlignment.TopLeft);
+		//	var Author = e.Graphics.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), default, ContentAlignment.TopLeft);
 
-			throw new NotImplementedException();
-		}
+		//	throw new NotImplementedException();
+		//}
 
 #if CS1
 		else if (e.Item.IsMissingItems)

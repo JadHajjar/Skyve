@@ -34,6 +34,9 @@ public interface IPlaysetManager
 	void Save(ICustomPlayset customPlayset);
 	Task<IEnumerable<IPlaysetPackage>> GetPlaysetContents(IPlayset playset, bool includeOnline = true);
 	Task<object> GenerateImportPlayset(IPlayset? playset, bool sharing = false, bool includeOnline = true);
+	Task<bool> SharePlayset(IPlayset playset, string name, string description);
+	Task<bool> SetPlaysetThumbnail(IPlayset playset, string selectedPath);
+	Task MigratePlaysetThumbnails();
 
 #if CS1
 	IPlayset TemporaryPlayset { get; }

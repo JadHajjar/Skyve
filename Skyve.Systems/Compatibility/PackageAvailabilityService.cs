@@ -66,7 +66,7 @@ public class PackageAvailabilityService
 	{
 		var indexedPackage = _skyveDataManager.TryGetPackageInfo(id);
 
-		if (isEnabled(_packageManager.GetPackageById(new GenericPackageIdentity(Defaults.WORKSHOP_SOURCE, id))))
+		if (isEnabled(new GenericPackageIdentity(Defaults.WORKSHOP_SOURCE, id)))
 		{
 			return true;
 		}

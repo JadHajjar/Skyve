@@ -342,7 +342,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		}
 
 #if CS2
-		if (rects.IncludedRect.Contains(e.Location) && SelectedPlayset is not null)
+		if (rects.IncludedRect.Contains(e.Location) && !(SelectedPlayset is null && !string.IsNullOrEmpty(item.Item.Source)))
 		{
 			var isIncluded = _packageUtil.IsIncluded(item.Item, out var partialIncluded, SelectedPlayset) && !partialIncluded;
 
@@ -447,7 +447,6 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			else
 			{
 				Clipboard.SetText(Path.GetFileName(item.Item.GetLocalPackage()?.Folder ?? string.Empty));
-
 			}
 
 			return;
@@ -850,7 +849,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 		public bool IsHovered(Control instance, Point location)
 		{
 			return
-				(IncludedRect.Contains(location) && !(instance as ItemListControl)!.IsGenericPage && !((instance as ItemListControl)!.SelectedPlayset is null && !Item.IsLocal())) ||
+				(IncludedRect.Contains(location) && !(instance as ItemListControl)!.IsGenericPage && !((instance as ItemListControl)!.SelectedPlayset is null && !string.IsNullOrEmpty(Item.Source))) ||
 				EnabledRect.Contains(location) ||
 				FolderRect.Contains(location) ||
 				WorkshopRect.Contains(location) ||
@@ -875,7 +874,7 @@ public partial class ItemListControl : SlickStackedListControl<IPackageIdentity,
 			{
 				point = IncludedRect.Location;
 
-				if (listControl.SelectedPlayset is null && !Item.IsLocal())
+				if (listControl.SelectedPlayset is null && !string.IsNullOrEmpty(Item.Source))
 				{
 					text = Locale.NoActivePlayset;
 					return true;

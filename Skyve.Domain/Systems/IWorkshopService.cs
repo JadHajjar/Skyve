@@ -51,5 +51,6 @@ public interface IWorkshopService
 	Task<bool> Logout();
 	bool IsInfoQueued(IPackageIdentity identity);
 	Task<IPlayset?> GetPlayset(string playsetId, string? playsetVersion = null);
+	Task ReleaseLock();
 #endif
 }

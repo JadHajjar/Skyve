@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Skyve.Domain.Enums;
+
+using System;
 using System.Collections.Generic;
 
 namespace Skyve.Domain;
@@ -21,6 +23,7 @@ public interface IWorkshopInfo : IPackageIdentity, IThumbnailObject
 	bool IsBanned { get; }
 	bool IsCollection { get; }
 	bool IsInvalid { get; }
+	AccessLevel AccessLevel { get; }
 	Dictionary<string, string> Tags { get; }
 	IEnumerable<IPackageRequirement> Requirements { get; }
 	IEnumerable<IModChangelog> Changelog { get; }

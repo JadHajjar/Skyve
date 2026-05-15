@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.UserInterface.Lists;
+
 public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListControl.Rectangles>
 {
 	private PlaysetSorting sorting;
@@ -90,7 +91,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 	{
 		return sorting switch
 		{
-			PlaysetSorting.Downloads => items.OrderByDescending(x => x.Item is IOnlinePlayset op ? op.Downloads : 0),
+			PlaysetSorting.Downloads => items.OrderByDescending(x => x.Item.OnlineInfo?.SubscriptionsTotal ?? 0),
 			PlaysetSorting.Color => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenBy(x => x.Item.GetCustomPlayset().Color?.GetHue() ?? float.MaxValue).ThenBy(x => x.Item.GetCustomPlayset().Color?.GetBrightness() ?? float.MaxValue).ThenBy(x => x.Item.GetCustomPlayset().Color?.GetSaturation() ?? float.MaxValue),
 			PlaysetSorting.Name => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenBy(x => x.Item.Name),
 			PlaysetSorting.DateCreated => items.OrderByDescending(x => x.Item.GetCustomPlayset().IsFavorite).ThenByDescending(x => x.Item.GetCustomPlayset().DateCreated),
@@ -169,7 +170,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 			return;
 		}
 
-		if (item.Rectangles.Author.Contains(e.Location) && item.Item.GetCustomPlayset().OnlineInfo?.Author is IUser author)
+		if (item.Rectangles.Author.Contains(e.Location) && item.Item.OnlineInfo?.Author is IUser author)
 		{
 			Program.MainForm.PushPanel(new PC_UserPage(author));
 
@@ -345,7 +346,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		e.Graphics.DrawString(e.Item.Name, textFont, textBrush, e.Rects.Text);
 
 		var height = (int)e.Graphics.Measure(e.Item.Name, textFont, e.Rects.Text.Width).Height;
-		e.Graphics.DrawString(customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, new Point(e.Rects.Text.X, e.Rects.Text.Y + height));
+		e.Graphics.DrawString(e.Item.OnlineInfo != null ? (e.Item.Ownership == PlaysetOwnership.OwnedByCurrentUser ? Locale.SharedPlayset : Locale.SubscribedPlayset) : customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, new Point(e.Rects.Text.X, e.Rects.Text.Y + height));
 
 		var contentText = $"{Locale.ContainCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower())} • {e.Item.ModSize.SizeString(0)}";
 		using (var contentBrush = Gradient(Color.FromArgb(FormDesign.Design.IsDarkTheme ? 100 : 70, backColor.Tint(Lum: backColor.IsDark() ? 6 : -6)), backRect, 3.5f))
@@ -367,16 +368,14 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		labelRects.Y += e.Graphics.DrawLabel(Locale.ContainCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + InnerPadding.Top;
 #endif
 
-		if (customPlayset.OnlineInfo?.Author?.Name is not null and not "")
-		{
-			var name = customPlayset.OnlineInfo.Author.Name;
+		//if (e.Item.OnlineInfo?.Author?.Name is not null and not "")
+		//{
+		//	var name = e.Item.OnlineInfo.Author.Name;
 
-			using var userIcon = IconManager.GetSmallIcon("User");
+		//	using var userIcon = IconManager.GetSmallIcon("User");
 
-			e.Rects.Author = e.Graphics.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), default, ContentAlignment.TopLeft);
-
-			throw new NotImplementedException();
-		}
+		//	e.Rects.Author = e.Graphics.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), default, ContentAlignment.TopLeft);
+		//}
 
 #if CS1
 		else if (e.Item.IsMissingItems)
@@ -556,7 +555,7 @@ public class PlaysetListControl : SlickStackedListControl<IPlayset, PlaysetListC
 		e.Graphics.DrawString(e.Item.Name, textFont, textBrush, e.Rects.Text);
 
 		using var format = new StringFormat { LineAlignment = StringAlignment.Far };
-		e.Graphics.DrawString(customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, e.Rects.Text.Pad(0, 0, 0, -Padding.Vertical), format);
+		e.Graphics.DrawString(e.Item.OnlineInfo != null ? (e.Item.Ownership == PlaysetOwnership.OwnedByCurrentUser ? Locale.SharedPlayset : Locale.SubscribedPlayset) : customPlayset.Usage > 0 ? Locale.UsagePlayset.Format(LocaleHelper.GetGlobalText(customPlayset.Usage.ToString())) : Locale.GenericPlayset, smallTextFont, fadedBrush, e.Rects.Text.Pad(0, 0, 0, -Padding.Vertical), format);
 
 		e.Graphics.DrawLabel($"{Locale.ContainCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower())} • {e.Item.ModSize.SizeString(0)}", null, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.MiddleLeft);
 

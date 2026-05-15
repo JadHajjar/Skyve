@@ -172,7 +172,9 @@ public partial class ItemListControl
 		}
 
 		var required = _modLogicManager.IsRequired(localIdentity, _modUtil);
-		var isHovered = !(SelectedPlayset is null && !e.Item.IsLocal()) && !IsGenericPage && (e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation)));
+		var isHovered = !(SelectedPlayset is null && !string.IsNullOrEmpty(e.Item.Source))
+			&& !IsGenericPage
+			&& (e.DrawableItem.Loading || (e.HoverState.HasFlag(HoverState.Hovered) && e.Rects.IncludedRect.Contains(CursorLocation)));
 
 		if (!required && isIncluded && isHovered)
 		{
@@ -256,7 +258,7 @@ public partial class ItemListControl
 
 		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
 
-		if (SelectedPlayset is null && !e.Item.IsLocal())
+		if (SelectedPlayset is null && !string.IsNullOrEmpty(e.Item.Source))
 		{
 			var dimBrush = new SolidBrush(Color.FromArgb(150, e.BackColor));
 			e.Graphics.FillRectangle(dimBrush, e.Rects.IncludedRect);

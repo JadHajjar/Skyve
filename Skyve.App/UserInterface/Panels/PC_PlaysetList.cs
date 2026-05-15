@@ -80,7 +80,7 @@ public partial class PC_PlaysetList : PanelContent
 
 		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
 		{
-			var author = e.Item.GetCustomPlayset().OnlineInfo?.Author;
+			var author = e.Item.OnlineInfo?.Author;
 
 			valid &= TB_Search.Text.SearchCheck(e.Item.Name) || (author is not null && TB_Search.Text.SearchCheck(author.Name));
 		}

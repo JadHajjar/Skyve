@@ -159,6 +159,15 @@ public class PackageNameUtil : IPackageNameUtil
 			return text;
 		}
 
+		if (workshopInfo.AccessLevel == Domain.Enums.AccessLevel.Unlisted)
+		{
+			tags.Add((Color.FromArgb(100, 100, 100), _locale.Get("Unlisted").One.ToUpper()));
+		}
+		else if (workshopInfo.AccessLevel == Domain.Enums.AccessLevel.Private)
+		{
+			tags.Add((Color.FromArgb(100, 100, 100), _locale.Get("Private").One.ToUpper()));
+		}
+
 		if (workshopInfo.IsBanned)
 		{
 			tags.Add((FormDesign.Design.RedColor, _locale.Get("Banned").One.ToUpper()));

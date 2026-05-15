@@ -57,7 +57,7 @@ public class PC_WorkshopList : PanelContent
 
 	protected virtual async Task<IEnumerable<IPackageIdentity>> GetItems(CancellationToken cancellationToken)
 	{
-		var match = Regex.Match(LC_Items.TB_Search.Text, @"$\#(\d{5,8})^");
+		var match = Regex.Match(LC_Items.TB_Search.Text, @"^#(\d{5,})$");
 		if (match.Success)
 		{
 			var package = await _workshopService.GetInfoAsync(new GenericPackageIdentity(Defaults.WORKSHOP_SOURCE, match.Groups[1].Value));
