@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Skopiuj wszystkie wybrane nazwy i ID przedmiotów",
   "HelpLogs": "Pomoc i Logi",
   "Preferences": "Preferencje",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Nazwa zestawu",
   "RenamePlayset": "Zmień nazwę tego zestawu",
   "StartScratch": "Stwórz nowy zestaw od zera, bez żadnych dołączonych pakietów.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Nie udało się usunąć zestawu",
   "FailedToUpdatePlayset": "Nie udało się zaktualizować zestawu",
   "ImportFromLink": "Importuj zestaw używając ID zestawu",
-  "PastePlaysetId": "Wklej ID zestawu, który chcesz zaimportować",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignoruj sprawdzanie połączenia z Internetem",
   "AssumeInternetConnectivity_Tip": "Pomija sprawdzanie połączenia z internetem i automatycznie zakłada, że jesteś połączony.",
   "SelectAll": "Zaznacz wszystkie elementy",
@@ -716,5 +718,10 @@
   "UpdateMod": "Zaktualizuj moda",
   "VersionLocked": "Wersja zablokowana",
   "VersionLockedInfo": "'{0}' jest zablokowany w wersji {1} w tym zestawie.",
-  "LoadingModData": "Wczytywanie danych moda.."
+  "LoadingModData": "Wczytywanie danych moda..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
