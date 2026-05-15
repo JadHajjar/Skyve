@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "複製所有選定項目的名稱和ID",
   "HelpLogs": "獲取説明和日誌",
   "Preferences": "選項",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "設定檔名稱",
   "RenamePlayset": "將此遊戲設定檔重新命名",
   "StartScratch": "建立一個全新的設定檔，其中不含任何外掛程式。",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "無法刪除您的遊戲設定集",
   "FailedToUpdatePlayset": "無法更新您的遊戲設定集",
   "ImportFromLink": "Import a profile using a profile ID",
-  "PastePlaysetId": "請貼上您想要匯入的遊戲設定集 ID",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "忽略網路連線檢查",
   "AssumeInternetConnectivity_Tip": "跳過網路連線檢查，程序將預設您有可用的網路連線（請務必打開加速器 / VPN）。",
   "SelectAll": "全選所有項目",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "正在載入模組資料。。"
+  "LoadingModData": "正在載入模組資料。。",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
