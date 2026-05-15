@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Zkopírovat názvy a ID všech vybraných položek",
   "HelpLogs": "Nápověda a protokoly",
   "Preferences": "Preference",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Název sady přehrávání",
   "RenamePlayset": "Přejmenovat tento playset",
   "StartScratch": "Spustit novou sadu přehrávání od začátku bez jakéhokoliv zahrnutého balíčku.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Nepodařilo se odstranit playset",
   "FailedToUpdatePlayset": "Nepodařilo se aktualizovat playset",
   "ImportFromLink": "Importovat playset pomocí ID playsetu",
-  "PastePlaysetId": "Vložte ID přehrávače, které chcete importovat",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignorovat kontrolu připojení k Internetu",
   "AssumeInternetConnectivity_Tip": "Přeskočí kontrolu internetu a automaticky předpokládá, že jste připojeni.",
   "SelectAll": "Vybrat všechny položky",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
