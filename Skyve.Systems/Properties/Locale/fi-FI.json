@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Kopioi kaikki valittujen kohteiden nimet ja ID:t",
   "HelpLogs": "Apu ja lokit",
   "Preferences": "Asetukset",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Pelisetin Nimi",
   "RenamePlayset": "Nimeä tämä pelisetti uudelleen",
   "StartScratch": "Aloita uusi soittosarja tyhjästä ilman mukana olevaa pakettia.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Pelisetin poistaminen epäonnistui",
   "FailedToUpdatePlayset": "Pelisetin päivitys epäonnistui",
   "ImportFromLink": "Import a profile using a profile ID",
-  "PastePlaysetId": "Liitä pelisetin ID, jonka haluat tuoda",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Älä huomioi Internet-yhteystarkastuksia",
   "AssumeInternetConnectivity_Tip": "Ohittaa internet-yhteyden tarkastuksen ja olettaa että olet yhteydessä.",
   "SelectAll": "Valitse kaikki kohteet",
@@ -716,5 +718,10 @@
   "UpdateMod": "Päivitä modi",
   "VersionLocked": "Versio lukittu",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Ladataan modien dataa.."
+  "LoadingModData": "Ladataan modien dataa..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
