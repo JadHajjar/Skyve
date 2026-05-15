@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Kopiraj nazive i ID-ove svih izabranih stavki",
   "HelpLogs": "Pomoć i zapisi",
   "Preferences": "Postavke",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Ime seta",
   "RenamePlayset": "Preimenuj ovaj set",
   "StartScratch": "Start a new playset from scratch without any included package.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Nije uspelo brisanje vašeg seta",
   "FailedToUpdatePlayset": "Nije uspelo ažuriranje vašeg seta",
   "ImportFromLink": "Uvezi set koristeći ID seta",
-  "PastePlaysetId": "Nalepite ID seta koji želite da uvezete",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignoriši proveru internet konekcije",
   "AssumeInternetConnectivity_Tip": "Preskače proveru interneta i automatski pretpostavlja da ste povezani.",
   "SelectAll": "Izaberi sve stavke",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Učitavanje podataka o modovima.."
+  "LoadingModData": "Učitavanje podataka o modovima..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
