@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Kopier alle markerte gjenstanders Workshop-ID-er",
   "HelpLogs": "Hjelp og logger",
   "Preferences": "Preferanser",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Navn på spilleliste",
   "RenamePlayset": "Endre navn på dette spillesettet",
   "StartScratch": "Start et nytt spillesett fra bunnen av uten en inkludert pakke.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Kan ikke slette spillsettet ditt",
   "FailedToUpdatePlayset": "Kan ikke oppdatere spillsettet ditt",
   "ImportFromLink": "Import a profile using a profile ID",
-  "PastePlaysetId": "Lim inn ID til spillesettet du ønsker å importere",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignorer Internett-tilkoblingskontroller",
   "AssumeInternetConnectivity_Tip": "Hoppesjekking av internett og automatisk forutsetter at du er tilkoblet.",
   "SelectAll": "Velg alle elementer",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Laster modifikasjonsdata.."
+  "LoadingModData": "Laster modifikasjonsdata..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
