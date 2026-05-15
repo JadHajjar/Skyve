@@ -254,7 +254,7 @@
   },
   "RequiredItemCount": {
     "One": "{0} {1} é necessário, mas não está ativado",
-    "Plural": "{0} {1} são necessários, mas não estão ativados"
+    "Plural": "{0} {1} que são necessários, mas não estão ativados"
   },
   "PackageType": "Tipo de pacote",
   "GenericPackage": "Pacote genérico",
