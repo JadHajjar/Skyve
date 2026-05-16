@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "复制所有选中项目的名称和 ID",
   "HelpLogs": "获取帮助和日志",
   "Preferences": "选项",
+  "Private": "私有的",
+  "Unlisted": "未列出的",
   "PlaysetName": "配组名称",
   "RenamePlayset": "重命名配组",
   "StartScratch": "创建一个不包含任何插件的新配组。",
@@ -420,7 +422,7 @@
     "One": "您有 {0} 个由 {1} 制作的插件",
     "Plural": "您有 {0} 个由 {1} 制作的插件"
   },
-  "ActivePlayset": "激活配组",
+  "ActivePlayset": "已激活的配组",
   "References": "引用关系",
   "OpenLog": "打开游戏日志文件",
   "OpenSkyveLog": "打开 Skyve 日志文件",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "删除配组失败",
   "FailedToUpdatePlayset": "更新配组失败",
   "ImportFromLink": "输入配组 ID 导入配组",
-  "PastePlaysetId": "粘贴要导入的配组的 ID",
+  "PastePlaysetId": "请输入您要导入的配组的 ID 或链接",
   "AssumeInternetConnectivity": "跳过网络连接检查",
   "AssumeInternetConnectivity_Tip": "跳过网络连接检查，程序将默认您有可用的网络连接（请务必打开加速器 / VPN）。",
   "SelectAll": "选择所有项目",
@@ -716,5 +718,10 @@
   "UpdateMod": "更新模组",
   "VersionLocked": "版本已锁定",
   "VersionLockedInfo": "“{0}”在此配组中被锁定在版本 {1}。",
-  "LoadingModData": "正在加载模组数据..."
+  "LoadingModData": "正在加载模组数据...",
+  "SharedPlayset": "已分享的配组",
+  "SubscribedPlayset": "已订阅的配组",
+  "ExportPlayset": "导出配组",
+  "PlaysetSharedSuccessfully": "您已成功分享配组。",
+  "FailedToSharePlayset": "分享配组失败，请稍后再试。"
 }

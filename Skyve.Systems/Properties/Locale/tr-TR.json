@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Seçilen tüm öğelerin isimlerini ve ID'lerini kopyala",
   "HelpLogs": "Yardım & Loglar",
   "Preferences": "Tercihler",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Oyun Seti İsmi",
   "RenamePlayset": "Bu oyun setinin ismini değiştir",
   "StartScratch": "Hiçbir paket dahil etmeden, sıfırdan bir oyun seti başlatın.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Oyun setinizin silinmesi başarısız oldu",
   "FailedToUpdatePlayset": "Oyun setinizin güncellemesi başarısız oldu",
   "ImportFromLink": "Bir oyun setini, oyun seti ID'sini kullarak içe aktar",
-  "PastePlaysetId": "İçe akarmak istediğiniz oyun setinin ID'sini yapıştırın",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "İnternet bağlantısı denetlemelerini görmezden gel",
   "AssumeInternetConnectivity_Tip": "İnternet bağlantısını kontrol etmeyi atlar ve otomatik olarak bağlı olduğunuzu varsayar.",
   "SelectAll": "Tüm öğeleri seç",
@@ -716,5 +718,10 @@
   "UpdateMod": "Modu Güncelle",
   "VersionLocked": "Sürüm Kilitli",
   "VersionLockedInfo": "'{0}', bu oyun setinde {1} sürümüne kilitlenmiş.",
-  "LoadingModData": "Mod Verileri Yükleniyor.."
+  "LoadingModData": "Mod Verileri Yükleniyor..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

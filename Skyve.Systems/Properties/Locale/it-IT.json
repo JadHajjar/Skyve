@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Copia tutti i nomi e gli ID degli elementi selezionati",
   "HelpLogs": "Aiuto e registro",
   "Preferences": "Preferenze",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Nome Playset",
   "RenamePlayset": "Rinomina questo playset",
   "StartScratch": "Inizia un nuovo playset da zero senza alcun pacchetto incluso.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Impossibile eliminare il tuo playset",
   "FailedToUpdatePlayset": "Impossibile aggiornare il tuo playset",
   "ImportFromLink": "Importare un profilo utilizzando un ID profilo",
-  "PastePlaysetId": "Incolla l'ID del playset che vuoi importare",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Non controllare la presenza di una connessione Internet",
   "AssumeInternetConnectivity_Tip": "Non viene verificata la presenza di una connessione a Internet, viene assunto che tu sia già connesso.",
   "SelectAll": "Seleziona tutti gli elementi",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Caricamento Dati Mod.."
+  "LoadingModData": "Caricamento Dati Mod..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

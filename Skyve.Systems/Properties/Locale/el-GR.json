@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Αντιγραφή ονομάτων και αναγνωριστικών όλων των επιλεγμένων αντικειμένων",
   "HelpLogs": "Βοήθεια & Αρχείο καταγραφής",
   "Preferences": "Προτιμήσεις",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Όνομα Παιχνιδιού",
   "RenamePlayset": "Μετονομασία αυτού του συνόλου αναπαραγωγής",
   "StartScratch": "Ξεκινήστε ένα νέο σετ αναπαραγωγής από το μηδέν χωρίς κανένα συμπεριλαμβανόμενο πακέτο.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Αποτυχία διαγραφής του συνόλου αναπαραγωγής",
   "FailedToUpdatePlayset": "Αποτυχία ενημέρωσης του συνόλου αναπαραγωγής",
   "ImportFromLink": "Εισαγωγή συνόλου αναπαραγωγής με τη χρήση αναγνωριστικού συνόλου αναπαραγωγής",
-  "PastePlaysetId": "Επικολλήστε το ID του συνόλου αναπαραγωγής που θα θέλατε να εισαγάγετε",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Παράβλεψη ελέγχων σύνδεσης στο διαδίκτυο",
   "AssumeInternetConnectivity_Tip": "Παράλειψη ελέγχου για το διαδίκτυο και αυτόματα υποθέτει ότι είστε συνδεδεμένοι.",
   "SelectAll": "Επιλογή όλων των στοιχείων",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

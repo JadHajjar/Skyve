@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "선택된 모든 항목의 이름 및 ID 복사",
   "HelpLogs": "도움 & 로그",
   "Preferences": "환경설정",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "플레이 세팅 이름",
   "RenamePlayset": "이 플레이 세팅 이름 바꾸기",
   "StartScratch": "패키지 없이 새로운 플레이세트로 처음부터 시작하세요.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "플레이 세팅 삭제에 실패했습니다",
   "FailedToUpdatePlayset": "플레이 세팅 업데이트에 실패했습니다",
   "ImportFromLink": "플레이 세팅 ID로 플레이 세팅 가져오기",
-  "PastePlaysetId": "가져오고자 하는 플레이 세팅의 ID를 붙여넣으세요",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "인터넷 연결 확인 무시하기",
   "AssumeInternetConnectivity_Tip": "인터넷 확인을 건너뛰고 연결되어 있다고 가정합니다.",
   "SelectAll": "모두 선택",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "모드 데이터를 불러오는 중.."
+  "LoadingModData": "모드 데이터를 불러오는 중..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Kopieer alle geselecteerde namen en ID's",
   "HelpLogs": "Help en logboeken",
   "Preferences": "Voorkeuren",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Speelset naam",
   "RenamePlayset": "Hernoem deze speelset",
   "StartScratch": "Start een nieuwe speelset zonder een pakket op te slaan.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Verwijderen van de afspeelset is mislukt",
   "FailedToUpdatePlayset": "Update van je afspeelset mislukt",
   "ImportFromLink": "Import a profile using a profile ID",
-  "PastePlaysetId": "Plak de ID van de afspeelset die u wilt importeren",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Negeer internetverbinding controles",
   "AssumeInternetConnectivity_Tip": "Slaat het checken voor een internetverbinding over en neemt automatisch aan dat je verbonden bent.",
   "SelectAll": "Selecteer alle items",
@@ -716,5 +718,10 @@
   "UpdateMod": "Mod bijwerken",
   "VersionLocked": "Versie vergrendeld",
   "VersionLockedInfo": "'{0}' is vergrendeld tot versie {1} in deze speelset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
