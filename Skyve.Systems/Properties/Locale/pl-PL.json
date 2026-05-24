@@ -719,9 +719,9 @@
   "VersionLocked": "Wersja zablokowana",
   "VersionLockedInfo": "'{0}' jest zablokowany w wersji {1} w tym zestawie.",
   "LoadingModData": "Wczytywanie danych moda..",
-  "SharedPlayset": "Shared Playset",
-  "SubscribedPlayset": "Subscribed Playset",
-  "ExportPlayset": "Export Playset",
-  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
-  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
+  "SharedPlayset": "Współdzielony zestaw",
+  "SubscribedPlayset": "Subskrybowany zestaw",
+  "ExportPlayset": "Eksportuj zestaw",
+  "PlaysetSharedSuccessfully": "Twój zestaw został pomyślnie udostępniony.",
+  "FailedToSharePlayset": "Nie udało się udostępnić tego zestawu. Spróbuj ponownie później."
 }
