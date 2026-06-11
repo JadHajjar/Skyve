@@ -5,6 +5,7 @@ public interface IInterfaceService
 {
 	void OpenParadoxLogin();
 	void OpenSyncConflictPrompt(ISyncConflictInfo[] conflicts);
+	void OpenConfgLockPrompt(string lockHolder);
 	void OpenOptionsPage();
 	void ViewSpecificPackages(List<IPackageIdentity> packages, string title);
 	void OpenPackagePage(IPackageIdentity package, bool openCompatibilityPage = false, bool openCommentsPage = false);

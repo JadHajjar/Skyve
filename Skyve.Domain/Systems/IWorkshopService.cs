@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Skyve.Domain.Systems;
+
 public interface IWorkshopService
 {
 	bool IsReady { get; }
 
-	void ClearCache();
+	Task ClearCache();
 	Task<IEnumerable<IWorkshopTag>> GetAvailableTags();
 	IWorkshopInfo? GetInfo(IPackageIdentity identity);
 	Task<IWorkshopInfo?> GetInfoAsync(IPackageIdentity identity);
