@@ -464,6 +464,7 @@
     "Plural": "Szerkeszd a kiválasztott csomagok összes eszközének címkéjét"
   },
   "TagCount": {
+    "Zero": "Cimke",
     "One": "Címkék: {0} kijelölve",
     "Plural": "Címkék: {0} kijelölve"
   },
