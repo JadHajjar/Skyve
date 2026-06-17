@@ -131,7 +131,7 @@
   "Status_DependencyMod": "Este é um mod de dependência, mas não parece que estejas a usar qualquer pacote que o requeira.",
   "Status_SourceCodeNotAvailable": "O código-fonte deste mod não está disponível. Não o deves usar a não ser que confies no seu autor.",
   "SourceAvailable": "O código fonte está disponível",
-  "StandardMod": "Standard Mod",
+  "StandardMod": "Mod padrão",
   "Status_MusicCanBeCopyrighted": "A música dentro deste pacote pode ter direitos autorais. É melhor não usá-la durante a transmissão.",
   "Status_IncompleteDescription": "A descrição do Workshop deste mod é demasiado curta. Não o deves usar a menos que confies no seu autor.",
   "Status_SourceAvailable": "Este pacote não vai avisar sobre falta do código-fonte.",

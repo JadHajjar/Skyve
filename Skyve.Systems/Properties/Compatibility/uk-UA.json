@@ -73,7 +73,7 @@
   "PleaseReviewPackageUsage": "Будь ласка, оберіть дійсне використання для цього пакету.",
   "Interaction_Alternative": {
     "One": "'{1}' можна використовувати як альтернативу '{0}'.",
-    "Plural": "Any one of the following packages can be used as an alternative to '{0}'."
+    "Plural": "Будь-який із наведених нижче пакетів можна використати як альтернативу для «{0}»."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' та '{1}' мають такі ж функціональності.",
@@ -107,7 +107,7 @@
     "One": "'{0}' є обов'язковим для '{1}'.",
     "Plural": "'{0}' є необхідним для наступних пакунків."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Interaction_Identical": "Нижче наведено кілька версій того самого моду.\r\nОдночасне їх використання спричинить конфлікти.",
   "Status_Succeeded": "'{0}' це вдача '{1}', а ви вже використовуєте '{1}'. Немає потреби в '{0}'.",
   "Status_Deprecated": "'{0}' є застарілим, він більше не підтримується автором '{0}'.",
   "Status_AutoDeprecated": "'{0}' не був оновлений упродовж довгого часу, та, ймовірно, більше не підтримується його автором.",
@@ -115,14 +115,14 @@
     "Zero": "'{0}' є повторним завантаженням оригінального пакету.",
     "One": "'{0}' є повторним завантаженням '{1}'."
   },
-  "Status_CausesIssues": "'{0}' is known to cause issues with the game.",
+  "Status_CausesIssues": "Відомо, що «{0}» спричиняє проблеми з грою.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.",
-    "One": "After saving your city with '{0}' enabled, you will no longer be able to load that save without '{0}' enabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "Після збереження міста з увімкненим «{0}» ви більше не зможете завантажити це збереження без увімкненого «{0}».",
+    "One": "Після збереження міста з увімкненим «{0}» ви більше не зможете завантажити це збереження без увімкненого «{0}».\r\n\r\nЗа потреби скористайтеся «{1}», щоб відновити збереження. Докладніше читайте в його описі у Workshop."
   },
   "Status_TestVersion": {
     "Zero": "Це бета-версія. Будьте усвідомлені, що тестові версії модів можуть призводити до проблем, а оновлення до них можуть спричиняти непередбачувані помилки.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Це «тестова» версія «{1}».\r\nЗважайте, що її оновлення можуть спричиняти неочікувані проблеми."
   },
   "Status_MissingDlc": {
     "One": "Вам не вистачає DLC для використання цього пакету.",
@@ -138,9 +138,9 @@
   "Status_StandardMod": "Пакунок буде проігнорований під час аналізу модів при усуненні неполадок.",
   "OutputText": "Очікуваний результат",
   "Stability_AssetNotReviewed": "'{0}' ще не розглянуто.\r\nІнформація про сумісність може бути неточною; хоча активи загалом стабільні.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate.",
+  "Stability_NotReviewed": "«{0}» ще не перевірено.\r\nІнформація про сумісність може бути неточною.",
   "Stability_Stable": "'{0}' є стабільною. Автор все ще активно працює над ним і оновлює його.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
+  "Stability_StableNoNewFeatures": "«{0}» стабільний, проте автор більше не випускатиме оновлення з новими функціями.\r\nОднак він і надалі оновлюватиме його в разі появи нових помилок.",
   "Stability_StableNoFutureUpdates": "'{0}' є стабільним, хоча автор більше не підтримує його, майбутні оновлення або виправлення помилок малоймовірні.",
   "Stability_CautionWhenUsing": "",
   "Stability_HasIssuesNoFutureUpdates": "'{0}може викликати проблеми, і автор більше не підтримує його, майбутні оновлення чи виправлення помилок малоймовірні.",
@@ -150,10 +150,10 @@
   "Stability_Broken": "'{0}' пошкоджено.\r\nвідомо, що він або зламає гру, або просто не працює.",
   "Stability_Incompatible": "'{0}' позначено як несумісну з поточною версією гри.\r\nВикористайте його обережно, або вимкніть під час очікування, що він буде оновлений.",
   "Stability_AssetIncompatible": "'{0}' позначено як несумісну з поточною версією гри.\r\nАктиви рідко ламаються з новими оновленнями, тому вам завжди потрібно його використовувати.",
-  "Stability_Local": "This is a local version of the '{0}' mod.\r\n\r\nWhile local versions are usually used for testing purposes, it is not recommended to stay on the local version of a mod.",
-  "Stability_BrokenFromNewVersion": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
-  "Stability_BrokenFromNewVersionSafe": "'{1}' broke after its latest update{0}. Please wait until it is updated before using it.",
-  "Stability_BrokenFromPatch": "'{1}' broke after patch {0} of the game. Please wait until it is updated before using it.\r\nIn the meantime, you should disable it.",
+  "Stability_Local": "Це локальна версія моду «{0}».\r\n\r\nХоча локальні версії зазвичай використовують для тестування, не рекомендується залишатися на локальній версії моду.",
+  "Stability_BrokenFromNewVersion": "«{1}» зламався після останнього оновлення{0}. Зачекайте, доки його не оновлять, перш ніж використовувати.\r\nТим часом вам слід його вимкнути.",
+  "Stability_BrokenFromNewVersionSafe": "«{1}» зламався після останнього оновлення{0}. Зачекайте, доки його не оновлять, перш ніж використовувати.",
+  "Stability_BrokenFromPatch": "«{1}» зламався після патча {0} гри. Зачекайте, доки його не оновлять, перш ніж використовувати.\r\nТим часом вам слід його вимкнути.",
   "Stability_BrokenFromPatchSafe": "'{1}' зламався після виправлення {0} гри. Будь ласка, почекайте поки він буде оновлений перед використанням гри.",
   "Stability_BrokenFromPatchUpdated": "'{1}' зламався після того, як було порушено патч {0} гри. Але недавно було оновлено, для використання він може бути безпечним.",
   "Stability_NumerousReports": "На даний момент є кілька активних звітів для '{0}. Обсяг рекомендується при розслідуванні проблеми.",
@@ -235,8 +235,8 @@
     "Plural": "{0} {1} застарілі"
   },
   "BrokenCount": {
-    "One": "{0} {1} that is broken",
-    "Plural": "{0} {1} that are broken"
+    "One": "{0} {1}, що зламаний",
+    "Plural": "{0} {1}, що зламані"
   },
   "ActionRequiredCount": "{0} {1} де потрібна ваша дія",
   "AttentionRequiredCount": {
@@ -261,8 +261,8 @@
   "MusicPack": "Музичний пакунок",
   "ThemeMix": "Мікс тем",
   "ContentPackage": "Вміст/Пакет активів",
-  "VisualMod": "Visual Mod",
-  "SimulationMod": "Simulation Mod",
+  "VisualMod": "Візуальний мод",
+  "SimulationMod": "Мод симуляції",
   "IMTMarkings": "Розмітки IMT",
   "RenderItPreset": "Шаблон Render it!",
   "POFont": "Шрифт/модуль для Procedural Object",
@@ -304,7 +304,7 @@
   "LinkedPackages": "Зв'язані пакети",
   "NoTags": "Немає міток",
   "NoLinks": "Немає посилань",
-  "NoPackages": "No Packages",
+  "NoPackages": "Немає пакетів",
   "HideReviewedPackages": "Приховати модифікації, які переглянуті",
   "ApplyRecommendedAction": "Застосувати рекомендовану дію",
   "AddMeaningfulNote": "Додайте нотатку, описуючи, що не так з цим пакетом.",
@@ -338,7 +338,7 @@
   "ChooseWhatToRequest": "Виберіть спосіб надсилання запиту",
   "ReportIssue": "Повідомити про проблему",
   "AddInfo": "Додати відсутні дані",
-  "ReportIssueDesc": "Let us and other players know that there's an issue with this mod.\r\n\r\nOr to let us know that you'd like a new review of this mod.",
+  "ReportIssueDesc": "Повідомте нам та іншим гравцям, що з цим модом є проблема.\r\n\r\nАбо дайте нам знати, що ви хотіли б нову перевірку цього моду.",
   "AddInfoDesc": "Додати відсутню інформацію про сумісність з модом.\r\n\r\nІ поясніть будь-яку проблему, пов'язану з цим модом.",
   "Log Report": "Звіт журналу",
   "Proposed Changes": "Запропоновані зміни",

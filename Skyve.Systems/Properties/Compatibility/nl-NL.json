@@ -69,7 +69,7 @@
   "ReuseData_Tip": "Gebruikt opnieuw de compatibiliteitsgegevens van uw laatste opgeslagen pakket voor deze.\r\nHoud Shift ingedrukt om ook toe te passen en ga door",
   "PleaseReviewTheStability": "Controleer de stabiliteit van dit pakket voordat u bezuinigt.",
   "PleaseReviewPackageStatuses": "Controleer de statussen van dit pakket voor het opslaan.\r\nSommige hebben een ongeldig statustype.",
-  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageInteractions": "Controleer de interacties van dit pakket voordat je opslaat.\r\nSommige hebben een ongeldig interactietype.",
   "PleaseReviewPackageUsage": "Selecteer een geldig gebruik voor dit pakket.",
   "Interaction_Alternative": {
     "One": "'{1}' kan gebruikt worden als alternatief voor '{0}'.",
@@ -121,19 +121,19 @@
     "One": "Na het opslaan van uw stad met '{0}' ingeschakeld, kunt u niet langer de save laden zonder '{0}' ingeschakeld te hebben.\n\nGebruik '{1}' om uw save te herstellen indien nodig. Lees de Workshop omschrijving voor meer informatie."
   },
   "Status_TestVersion": {
-    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "Zero": "Dit is een 'test'-versie van de originele mod. Houd er rekening mee dat updates onverwachte problemen kunnen veroorzaken.",
     "One": "Dit is een 'Test' versie van '{1}'.\nHoud er rekening mee dat updates hiernaar onverwachte problemen kunnen veroorzaken."
   },
   "Status_MissingDlc": {
-    "One": "You're missing the '{0}' DLC to use this package.",
-    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Je mist de '{0}'-DLC om dit pakket te gebruiken.",
+    "Plural": "Dit is een 'test'-versie van '{1}'.\r\nHoud er rekening mee dat updates onverwachte problemen kunnen veroorzaken."
   },
   "Status_DependencyMod": "Dit is een afhankelijkheids mod, maar het lijkt er op dat geen een pakket deze gebruikt.",
   "Status_SourceCodeNotAvailable": "De broncode van deze mod is niet beschikbaar. Gebruik deze niet, tenzij je de auteur vertrouwt.",
   "SourceAvailable": "Broncode is beschikbaar",
-  "StandardMod": "Standard Mod",
+  "StandardMod": "Standaardmod",
   "Status_MusicCanBeCopyrighted": "De muziek in dit pakket kan worden gekopieerd. Het is het beste om het niet te gebruiken tijdens het streamen.",
-  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_IncompleteDescription": "De workshopbeschrijving van deze mod is te kort. Gebruik hem niet tenzij je de maker vertrouwt.",
   "Status_SourceAvailable": "Dit pakket waarschuwt niet voor ontbrekende broncode.",
   "Status_StandardMod": "Dit pakket zal genegeerd worden bij het verwerken van de mods om problemen te krijgen.",
   "OutputText": "Verwachte uitgang",
@@ -166,8 +166,8 @@
   },
   "Action_RequiresConfiguration": "Volg de volgende instructies:",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "Je zou maar één van '{0}' en '{1}' moeten gebruiken.",
+    "Plural": "Je zou maar één van '{0}' en de volgende pakketten moeten gebruiken."
   },
   "Action_UnsubscribeThis": "Je zou '{0}' volledig uit alle afspeelsets moeten verwijderen.",
   "Action_UnsubscribeOther": {
@@ -208,7 +208,7 @@
     "One": "{0} DLC geselecteerd",
     "Plural": "{0} DLCs geselecteerd"
   },
-  "RequiredDLCs": "Required DLCs/CCPs",
+  "RequiredDLCs": "Vereiste DLC's/CCP's",
   "CRT_Stability": "Stabiliteit",
   "CRT_Successors": "Succes",
   "CRT_RequiredPackages": "Verplichte pakketten",
@@ -216,14 +216,14 @@
   "CRT_DlcMissing": "DLCs/CCPs ontbreekt",
   "CRT_Compatibility": "Compatibiliteitsproblemen",
   "CRT_Alternatives": "Alternatieven",
-  "CRT_Status": "Statuses",
+  "CRT_Status": "Statussen",
   "CRT_Ambiguous": "Ambigïteit",
   "CRT_RequiredItem": "Vereist pakket",
   "CRT_RequestReview": "Herzie verzoek status",
   "CRT_Info": "Informatie",
   "LastReviewDate": "Het werd voor het laatst beoordeeld op {0}",
-  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
-  "RequestReview": "Request Review",
+  "RequestReviewInfo": "Ondervind je problemen met dit pakket?\r\nVraag hier een nieuwe beoordeling aan:",
+  "RequestReview": "Beoordeling aanvragen",
   "MissingDependencyCount": {
     "One": "{0} {1} mist afhankelijkheden",
     "Plural": "{0} {1} ontbrekende afhankelijkheden"
@@ -261,8 +261,8 @@
   "MusicPack": "Muziek Pakket",
   "ThemeMix": "Thema mixen",
   "ContentPackage": "Inhoud/assetpakket",
-  "VisualMod": "Visual Mod",
-  "SimulationMod": "Simulation Mod",
+  "VisualMod": "Visuele mod",
+  "SimulationMod": "Simulatiemod",
   "IMTMarkings": "IMT markeringen",
   "RenderItPreset": "Render het! Voorinstelling",
   "POFont": "Procedureel object lettertype/module",
@@ -278,7 +278,7 @@
   "PackageType_NameList": "Extra spel vertalingen of naamlijst bestanden.",
   "PackageType_MapSavegame": "Kaart of Savegame.",
   "ApplyChangedBeforeExit": "U hebt niet-opgeslagen wijzigingen.\r\n\r\nWilt u deze wijzigingen toepassen voordat u doorgaat?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorRetired": "De maker van {0}, {1}, is gestopt of is al lange tijd inactief.\r\nToekomstige updates en stabiliteit van hun pakketten zijn niet gegarandeerd.",
   "AuthorMalicious": "De auteur van {0}, {1}, is bekend als kwaadaardig en/of voor het opnemen van schadelijke inhoud zoals virussen in hun pakketten.",
   "ReviewRequests": "Controleer verzoeken",
   "ApplyRequestedChanges": "Aangevraagde wijzigingen toepassen",

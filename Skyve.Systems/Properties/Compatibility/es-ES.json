@@ -121,7 +121,7 @@
     "One": "Al guardar la ciudad con '{0}' habilitados, ya no vas a poder cargar esa partida sin '{0}' habilitados\n\nUsa '{1}' para recuperar tu partida guardada si es necesario. Lee la descripción del Workshop para más información."
   },
   "Status_TestVersion": {
-    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "Zero": "Esta es una versión de 'prueba' del mod original. Ten en cuenta que sus actualizaciones podrían causar problemas inesperados.",
     "One": "Esta es una versión 'Prueba' de '{1}'. Ten en cuenta que las actualizaciones pueden causar problemas inesperados."
   },
   "Status_MissingDlc": {
@@ -133,7 +133,7 @@
   "SourceAvailable": "El código fuente está disponible ",
   "StandardMod": "Mod standard",
   "Status_MusicCanBeCopyrighted": "La música dentro de este paquete puede tener derechos de autor. Es mejor no usarla en streaming.",
-  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_IncompleteDescription": "La descripción de este mod en el taller es demasiado breve. No deberías usarlo a menos que confíes en su autor.",
   "Status_SourceAvailable": "Este paquete no avisará sobre la falta de código fuente.",
   "Status_StandardMod": "Este paquete será ignorado mientras se procesan los mods para solucionar.",
   "OutputText": "Salida esperada",
@@ -166,8 +166,8 @@
   },
   "Action_RequiresConfiguration": "Recomendamos que sigas las siguientes instrucciones:",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "Solo deberías usar uno entre '{0}' y '{1}'.",
+    "Plural": "Solo deberías usar uno entre '{0}' y los siguientes paquetes."
   },
   "Action_UnsubscribeThis": "Deberías eliminar por completo '{0}' de todos tus playsets.",
   "Action_UnsubscribeOther": {

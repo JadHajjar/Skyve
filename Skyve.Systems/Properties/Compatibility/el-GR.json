@@ -10,7 +10,7 @@
   "BlackListId": "Μαύρη λίστα με ID",
   "GlobalTagsInfo": "Ετικέτες όλοι οι παίκτες που θα δουν στο Skyve",
   "Links": "Σύνδεσμοι",
-  "StatusesCount": "Statuses ({0})",
+  "StatusesCount": "Καταστάσεις ({0})",
   "InteractionCount": "Αλληλεπιδράσεις ({0})",
   "AddStatus": "Προσθήκη Κατάστασης",
   "AddInteraction": "Προσθήκη Αλληλεπίδρασης",
@@ -66,9 +66,9 @@
   "CrDataLoadFailed": "Αποτυχία φόρτωσης δεδομένων, προσπαθήστε ξανά αργότερα",
   "AddGlobalTag": "Προσθήκη καθολικής ετικέτας",
   "ReuseData": "Επαναχρησιμοποίηση Προηγούμενων Δεδομένων",
-  "ReuseData_Tip": "Re-uses the compatibility data from your last saved package for this one.\r\nHold Shift to also apply & continue",
+  "ReuseData_Tip": "Επαναχρησιμοποιεί τα δεδομένα συμβατότητας από το τελευταίο αποθηκευμένο πακέτο σας για αυτό.\r\nΚρατήστε το Shift για εφαρμογή και συνέχεια",
   "PleaseReviewTheStability": "Παρακαλούμε εξετάστε τη σταθερότητα αυτού του πακέτου πριν την αποθήκευση.",
-  "PleaseReviewPackageStatuses": "Please review the statuses of this package before saving.\r\nSome have an invalid Status Type.",
+  "PleaseReviewPackageStatuses": "Ελέγξτε τις καταστάσεις αυτού του πακέτου πριν την αποθήκευση.\r\nΟρισμένες έχουν μη έγκυρο Τύπο Κατάστασης.",
   "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type or don't have a linked package.",
   "PleaseReviewPackageUsage": "Παρακαλώ επιλέξτε μια έγκυρη χρήση για αυτό το πακέτο.",
   "Interaction_Alternative": {
@@ -88,11 +88,11 @@
     "Plural": "'{0}' μπορεί να προκαλέσει προβλήματα όταν χρησιμοποιείται με τα ακόλουθα mods."
   },
   "Interaction_RequiredPackages": {
-    "One": "You're missing a required package for '{0}'.",
+    "One": "Σας λείπει ένα απαιτούμενο πακέτο για το '{0}'.",
     "Plural": "Λείπει τα ακόλουθα απαιτούμενα πακέτα για το '{0}'."
   },
   "Interaction_OptionalPackages": {
-    "One": "You're missing an optional package for '{0}'.",
+    "One": "Σας λείπει ένα προαιρετικό πακέτο για το '{0}'.",
     "Plural": "Λείπει τα ακόλουθα προαιρετικά πακέτα για το '{0}'."
   },
   "Interaction_SucceededBy": {
@@ -107,7 +107,7 @@
     "One": "'{0}' απαιτείται για το '{1}'.",
     "Plural": "'{0}' απαιτείται για τα ακόλουθα πακέτα."
   },
-  "Interaction_Identical": "The following are multiple versions of the same mod.\r\nUsing them at the same time will cause conflicts.",
+  "Interaction_Identical": "Τα παρακάτω είναι πολλαπλές εκδόσεις του ίδιου mod.\r\nΗ ταυτόχρονη χρήση τους θα προκαλέσει διενέξεις.",
   "Status_Succeeded": "'{0}' έχει πετύχει το '{1}', και χρησιμοποιείτε ήδη '{1}'. Δεν υπάρχει πλέον ανάγκη για '{0}'.",
   "Status_Deprecated": "'{0}' έχει καταργηθεί, δεν υποστηρίζεται πλέον από το συγγραφέα του.",
   "Status_AutoDeprecated": "'{0}' δεν έχει ενημερωθεί εδώ και πολύ καιρό.",
@@ -131,16 +131,16 @@
   "Status_DependencyMod": "Αυτό είναι ένα mod εξάρτησης, αλλά δεν μοιάζει να χρησιμοποιείτε οποιοδήποτε πακέτο που το απαιτεί.",
   "Status_SourceCodeNotAvailable": "Ο πηγαίος κώδικας αυτού του mod δεν είναι διαθέσιμος. Δεν πρέπει να τον χρησιμοποιείτε, εκτός αν εμπιστεύεστε το συγγραφέα του.",
   "SourceAvailable": "Ο πηγαίος κώδικας είναι διαθέσιμος",
-  "StandardMod": "Standard Mod",
+  "StandardMod": "Τυπικό Mod",
   "Status_MusicCanBeCopyrighted": "Η μουσική μέσα σε αυτό το πακέτο μπορεί να είναι πνευματικά δικαιώματα. Είναι καλύτερο να μην το χρησιμοποιήσετε κατά τη ροή.",
   "Status_IncompleteDescription": "Η περιγραφή του εργαστηρίου αυτού του mod είναι πολύ μικρή. Δεν πρέπει να το χρησιμοποιήσετε εκτός αν εμπιστεύεστε τον συντάκτη του.",
   "Status_SourceAvailable": "Αυτό το πακέτο δεν θα προειδοποιήσει για τον πηγαίο κώδικα που λείπει.",
   "Status_StandardMod": "Αυτό το πακέτο θα αγνοηθεί κατά την επεξεργασία των mods για αντιμετώπιση προβλημάτων.",
   "OutputText": "Αναμενόμενη Έξοδος",
-  "Stability_AssetNotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate; though assets are generally stable.",
-  "Stability_NotReviewed": "'{0}' has not been reviewed yet.\r\nThe compatibility information may not be accurate.",
+  "Stability_AssetNotReviewed": "Το '{0}' δεν έχει ελεγχθεί ακόμα.\r\nΟι πληροφορίες συμβατότητας ίσως να μην είναι ακριβείς· αν και τα στοιχεία είναι γενικά σταθερά.",
+  "Stability_NotReviewed": "Το '{0}' δεν έχει ελεγχθεί ακόμα.\r\nΟι πληροφορίες συμβατότητας ίσως να μην είναι ακριβείς.",
   "Stability_Stable": "Το '{0}' είναι σταθερό. Ο συγγραφέας του εξακολουθεί να εργάζεται ενεργά και να το ενημερώνει.",
-  "Stability_StableNoNewFeatures": "'{0}' is stable, though the author will no longer release feature updates.\r\nThey will however still update it in case of new bugs.",
+  "Stability_StableNoNewFeatures": "Το '{0}' είναι σταθερό, αν και ο δημιουργός δεν θα κυκλοφορεί πλέον ενημερώσεις λειτουργιών.\r\nΘα το ενημερώνει ωστόσο σε περίπτωση νέων σφαλμάτων.",
   "Stability_StableNoFutureUpdates": "'{0}' είναι σταθερό, αν και ο συγγραφέας δεν υποστηρίζει πλέον, μελλοντικές ενημερώσεις ή διορθώσεις σφαλμάτων δεν είναι πιθανές.",
   "Stability_CautionWhenUsing": "",
   "Stability_HasIssuesNoFutureUpdates": "'{0}' μπορεί να προκαλέσει προβλήματα και ο συγγραφέας δεν υποστηρίζει πλέον, μελλοντικές ενημερώσεις ή διορθώσεις σφαλμάτων δεν είναι πιθανές.",
@@ -148,7 +148,7 @@
   "Stability_NotEnoughInformation": "Δεν υπάρχουν αρκετές πληροφορίες για να ελέγξετε σωστά το '{0}'.",
   "Stability_HasIssues": "'{0}' μπορεί να προκαλέσει προβλήματα.\r\nΝα είστε προσεκτικοί ενώ το χρησιμοποιείτε.",
   "Stability_Broken": "'{0}' είναι σπασμένο.\r\nΕίναι γνωστό ότι είτε θα σπάσει το παιχνίδι είτε απλά δεν λειτουργεί.",
-  "Stability_Incompatible": "'{0}' is marked as not compatible with your current game version.\r\nUse it cautiously, or disable it while waiting for it to be updated.",
+  "Stability_Incompatible": "Το '{0}' έχει επισημανθεί ως μη συμβατό με την τρέχουσα έκδοση του παιχνιδιού σας.\r\nΧρησιμοποιήστε το με προσοχή ή απενεργοποιήστε το ενώ περιμένετε να ενημερωθεί.",
   "Stability_AssetIncompatible": "'{0}' έχει επισημανθεί ως μη συμβατή με την τρέχουσα έκδοση του παιχνιδιού σας.\r\nΠεριουσιακά στοιχεία σπάνια σπάσει με νέες ενημερώσεις, οπότε θα πρέπει να είναι εντάξει η χρήση του.",
   "Stability_Local": "Αυτή είναι μια τοπική έκδοση του mod '{0}'.\r\n\r\nΕνώ οι τοπικές εκδόσεις χρησιμοποιούνται συνήθως για δοκιμαστικούς σκοπούς, δεν συνιστάται να παραμείνετε στην τοπική έκδοση ενός mod.",
   "Stability_BrokenFromNewVersion": "'{1}' έσπασε μετά την τελευταία του ενημέρωση{0}. Παρακαλώ περιμένετε μέχρι να ενημερωθεί πριν το χρησιμοποιήσετε.\r\nΕν τω μεταξύ, θα πρέπει να το απενεργοποιήσετε.",
@@ -216,7 +216,7 @@
   "CRT_DlcMissing": "Λείπουν DLC/CCP",
   "CRT_Compatibility": "Ζητήματα Συμβατότητας",
   "CRT_Alternatives": "Εναλλακτικές",
-  "CRT_Status": "Statuses",
+  "CRT_Status": "Καταστάσεις",
   "CRT_Ambiguous": "Αδιαφάνεια",
   "CRT_RequiredItem": "Απαιτούμενο Πακέτο",
   "CRT_RequestReview": "Αναθεώρηση Κατάστασης Αιτήματος",
@@ -241,7 +241,7 @@
   "ActionRequiredCount": "{0} {1} όπου απαιτείται η ενέργειά σας",
   "AttentionRequiredCount": {
     "One": "{0} {1} απαιτεί την προσοχή σας",
-    "Plural": "{0} {1} require your attention"
+    "Plural": "{0} {1} χρειάζονται την προσοχή σας"
   },
   "ExcludeCount": {
     "One": "{0} {1} πρέπει να εξαιρεθούν",
@@ -261,8 +261,8 @@
   "MusicPack": "Πακέτο Μουσικής",
   "ThemeMix": "Μείγμα Θέματος",
   "ContentPackage": "Πακέτο Περιεχομένου/Περιουσιακών Στοιχείων",
-  "VisualMod": "Visual Mod",
-  "SimulationMod": "Simulation Mod",
+  "VisualMod": "Οπτικό Mod",
+  "SimulationMod": "Mod Προσομοίωσης",
   "IMTMarkings": "Σημάνσεις IMT",
   "RenderItPreset": "Αποτύπωσε το! Προεπιλογή",
   "POFont": "Γραμματοσειρά Διαδικαστικού Αντικειμένου/Ενότητα",
@@ -304,7 +304,7 @@
   "LinkedPackages": "Συνδεδεμένα Πακέτα",
   "NoTags": "Χωρίς Ετικέτες",
   "NoLinks": "Δεν Υπάρχουν Σύνδεσμοι",
-  "NoPackages": "No Packages",
+  "NoPackages": "Κανένα πακέτο",
   "HideReviewedPackages": "Απόκρυψη αξιολογημένων mods",
   "ApplyRecommendedAction": "Εφαρμογή συνιστώμενης ενέργειας",
   "AddMeaningfulNote": "Παρακαλώ προσθέστε μια σημείωση που περιγράφει τι είναι λάθος με αυτό το πακέτο.",

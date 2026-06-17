@@ -322,7 +322,7 @@
   "SavegameEffect": "Kaldırıldıktan sonra kayıt dosyalarına etkisi",
   "LocalMod": "Yerel Mod",
   "Unknown": "Bilinmiyor",
-  "AssetsRemain": "Normal asset",
+  "AssetsRemain": "Normal varlık",
   "EffectsLinger": "Kaldırıldıktan sonra etkiler devam eder",
   "RequiresManualAction": "Kaldırılması için manuel işlem gerekir",
   "BreaksSave": "Kaldırıldığında kayıt dosyalarını bozabilir",

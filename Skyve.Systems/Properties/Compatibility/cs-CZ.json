@@ -69,7 +69,7 @@
   "ReuseData_Tip": "Znovu použije data o kompatibilitě z posledního uloženého balíku pro tento balíček.\nPodržte Shift pro uplatnění a pokračování",
   "PleaseReviewTheStability": "Před uložením si prosím zkontrolujte stabilitu tohoto balíčku.",
   "PleaseReviewPackageStatuses": "Před uložením si prosím zkontrolujte stav tohoto balíčku.\r\nNěkteré mají neplatný typ stavu.",
-  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageInteractions": "Před uložením zkontrolujte interakce tohoto balíčku.\r\nNěkteré mají neplatný typ interakce.",
   "PleaseReviewPackageUsage": "Vyberte prosím platné použití tohoto balíčku.",
   "Interaction_Alternative": {
     "One": "'{1}' může být použito jako alternativa k '{0}'.",
@@ -110,7 +110,7 @@
   "Interaction_Identical": "Následující mód má více nainstalovaných verzí.\nJejich použití zároveň způsobí konflikty.",
   "Status_Succeeded": "'{0}' je nahrazen '{1}' a již používáte '{1}'. '{0}' již není potřeba.",
   "Status_Deprecated": "'{0}' je zastaralé, není již podporováno jeho autorem.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' nebyl dlouho aktualizován, pravděpodobně jej jeho autor již nepodporuje.",
   "Status_Reupload": {
     "Zero": "'{0}' je opětovné nahrání původního balíčku.",
     "One": "'{0}' je stejný soubor jako '{1}'."
@@ -166,8 +166,8 @@
   },
   "Action_RequiresConfiguration": "Postupujte podle následujících pokynů:",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "Měli byste používat jen jeden z balíčků '{0}' a '{1}'.",
+    "Plural": "Měli byste používat jen jeden z balíčku '{0}' a následujících balíčků."
   },
   "Action_UnsubscribeThis": "Měli byste úplně odstranit '{0}' ze všech vašich her.",
   "Action_UnsubscribeOther": {
@@ -261,8 +261,8 @@
   "MusicPack": "Hudební balíček",
   "ThemeMix": "Smíchání motivů",
   "ContentPackage": "Balíček obsahu/majetku",
-  "VisualMod": "Visual Mod",
-  "SimulationMod": "Simulation Mod",
+  "VisualMod": "Vizuální mod",
+  "SimulationMod": "Simulační mod",
   "IMTMarkings": "IMT označení",
   "RenderItPreset": "Render it! Předvolba",
   "POFont": "Procedurální objekt Font/Modul",
@@ -304,7 +304,7 @@
   "LinkedPackages": "Propojené balíčky",
   "NoTags": "Žádné štítky",
   "NoLinks": "Žádné odkazy",
-  "NoPackages": "No Packages",
+  "NoPackages": "Žádné balíčky",
   "HideReviewedPackages": "Skrýt přezkoumané mody",
   "ApplyRecommendedAction": "Aplikovat doporučenou akci",
   "AddMeaningfulNote": "Přidejte poznámku, která popisuje, co je špatně s tímto balíčkem.",
