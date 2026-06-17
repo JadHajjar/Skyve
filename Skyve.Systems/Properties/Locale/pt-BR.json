@@ -464,6 +464,7 @@
     "Plural": "Editar todas as etiquetas dos recursos dos pacotes selecionados"
   },
   "TagCount": {
+    "Zero": "Tag",
     "One": "Tags: {0} selecionado",
     "Plural": "Tags: {0} selecionado"
   },
