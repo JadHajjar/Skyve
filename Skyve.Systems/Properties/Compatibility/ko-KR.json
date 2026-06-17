@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "제외되어야 하는 {1} {0}개가 있습니다",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "제외되어야 하는 {1} {0}개가 있습니다"
   },
   "UnsubscribeCount": "구독을 취소해야 하는 {1} {0}개가 있습니다",
   "SwitchCount": {
@@ -297,7 +297,7 @@
     "Plural": "이 요청들을 삭제"
   },
   "ViewRequest": "요청 보기",
-  "RequiredItem": "Required Package",
+  "RequiredItem": "필수 패키지",
   "ApplyAllActions": "권장 조치 모두 적용",
   "SnoozeAll": "모든 문제 미루기",
   "SnoozeAllFiltered": "필터링된 모든 문제 미루기",
