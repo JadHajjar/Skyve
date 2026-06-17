@@ -209,7 +209,7 @@
     "Plural": "{0} DLC dipilih"
   },
   "RequiredDLCs": "DLC/CCP yang Diperlukan",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "Stabilitas",
   "CRT_Successors": "Penerus",
   "CRT_RequiredPackages": "Paket yang Diperlukan",
   "CRT_OptionalPackages": "Paket Opsional",
@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} sebaiknya dikecualikan",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} {1} sebaiknya dikecualikan"
   },
   "UnsubscribeCount": "{0} {1} yang sebaiknya Anda berhenti berlangganan",
   "SwitchCount": {
@@ -297,7 +297,7 @@
     "Plural": "Hapus permintaan ini"
   },
   "ViewRequest": "Lihat Permintaan",
-  "RequiredItem": "Required Package",
+  "RequiredItem": "Paket yang Diperlukan",
   "ApplyAllActions": "Terapkan semua tindakan yang direkomendasikan",
   "SnoozeAll": "Tunda semua masalah",
   "SnoozeAllFiltered": "Tunda semua masalah yang difilter",
