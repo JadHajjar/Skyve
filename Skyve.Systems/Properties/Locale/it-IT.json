@@ -61,8 +61,8 @@
   "OpenAuthorPage": "Apri pagina dell'autore",
   "Sorting_Default": "Ordinamento predefinito",
   "Sorting_LastEdit": "Data Ultima Modifica",
-  "Sorting_DateCreated": "Data Creazione",
-  "Sorting_Usage": "Uso Playset",
+  "Sorting_DateCreated": "Data di creazione",
+  "Sorting_Usage": "Utilizzo Playset",
   "Sorting_Name": "Nome",
   "Sorting_FileSize": "Dimensione File",
   "Sorting_UpdateTime": "Data di aggiornamento",
@@ -259,7 +259,7 @@
     "One": "{0} autore selezionato",
     "Plural": "{0} autori selezionati"
   },
-  "Donate": "Fai una donazione",
+  "Donate": "Dona",
   "FlipItemCopyFilterAction": "Inverti il comportamento di Ctrl+Clic per filtrare nelle liste dei contenuti",
   "FlipItemCopyFilterAction_Tip": "Scambia il comportamento predefinito del clic sulle etichette in modo che un Clic normale filtri, e Ctrl+Clic esegua l'azione predefinita.",
   "AltClickTo": "Alt+Clic per {0}",
@@ -329,39 +329,39 @@
   },
   "IncludedCount": {
     "One": "{0} {1} incluso",
-    "Plural": "{0} {1} inclusi"
+    "Plural": "{0} {1} incluso"
   },
   "EnabledCount": {
     "One": "{0} {1} abilitato",
-    "Plural": "{0} {1} abilitati"
+    "Plural": "{0} {1} abilitato"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} incluso e abilitato",
-    "Plural": "{0} {1} inclusi e abilitati"
+    "Plural": "{0} {1} incluso e abilitato"
   },
   "LoadedCount": {
     "One": "{0} {1} caricato",
-    "Plural": "{0} {1} caricati"
+    "Plural": "{0} {1} caricato"
   },
   "ShowingCount": {
     "One": "Mostrate {0} {1}",
-    "Plural": "Mostrati {0} {1}"
+    "Plural": "Mostrate {0} {1}"
   },
   "TotalCount": {
     "One": "{0} totale {1}",
-    "Plural": "{0} totali {1}"
+    "Plural": "{0} totale {1}"
   },
   "TotalCountWarning": {
     "One": "{0} totale {1}, {3}",
-    "Plural": "{0} totali {1}, {3}"
+    "Plural": "{0} totale {1}, {3}"
   },
   "TotalSelectedCount": {
     "One": "{0} totale {1}, {2} selezionato",
-    "Plural": "{0} totali {1}, {2} selezionati"
+    "Plural": "{0} totale {1}, {2} selezionato"
   },
   "TotalSelectedCountWarning": {
     "One": "{0} totale {1}, {2} selezionato, {3}",
-    "Plural": "{0} totali {1}, {2} selezionati, {3}"
+    "Plural": "{0} totale {1}, {2} selezionato, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} è nascosto a causa dell'utilizzo del tuo playset",
@@ -464,7 +464,6 @@
     "Plural": "Modifica tutti i tag degli asset dei pacchetti selezionati"
   },
   "TagCount": {
-    "Zero": "Tag",
     "One": "Etichette: {0} selezionato",
     "Plural": "Etichette: {0} selezionato"
   },
@@ -571,7 +570,7 @@
   "RecentlyUpdated": "Aggiornati di recente",
   "Manage": "Gestisci",
   "Version": "Versione",
-  "UpdateTime": "Data di Aggiornamento",
+  "UpdateTime": "Data di aggiornamento",
   "Status": "Stato",
   "PackageUsage": "Utilizzo Pacchetto",
   "CodeMod": {
