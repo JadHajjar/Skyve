@@ -209,7 +209,7 @@
     "Plural": "เลือก DLC แล้ว {0} รายการ"
   },
   "RequiredDLCs": "DLC/CCP ที่จำเป็น",
-  "CRT_Stability": "ความเสถียร",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "รับช่วงต่อ",
   "CRT_RequiredPackages": "แพ็กเกจที่จำเป็น",
   "CRT_OptionalPackages": "แพ็กเกจทางเลือก",
@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} ควรถูกยกเว้น",
-    "Plural": "ควรยกเว้น {0} {1}"
+    "Plural": "{0} {1} should be excluded"
   },
   "UnsubscribeCount": "{0} {1} ที่คุณควรยกเลิกการติดตาม",
   "SwitchCount": {
@@ -297,7 +297,7 @@
     "Plural": "ลบคำร้องขอเหล่านี้"
   },
   "ViewRequest": "ดูคำขอ",
-  "RequiredItem": "แพ็กเกจที่จำเป็น",
+  "RequiredItem": "Required Package",
   "ApplyAllActions": "ปรับใช้ตามคำแนะนำทั้งหมด",
   "SnoozeAll": "เลื่อนปัญหาทั้งหมด",
   "SnoozeAllFiltered": "เลื่อนปัญหาที่กรองทั้งหมด",
