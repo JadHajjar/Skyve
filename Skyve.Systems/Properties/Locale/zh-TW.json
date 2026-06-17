@@ -50,7 +50,7 @@
   "MissingPackages": "缺失的外掛程式",
   "OpenPackagePage": "打開此外掛程式的詳情頁面",
   "OpenPackageFolder": {
-    "One": "打開檔案位置",
+    "One": "開啟檔案所在位置",
     "Plural": "打開所有選取外掛程式的檔案位置"
   },
   "OpenLocalFolder": "打開包含此外掛程式的資料夾",
@@ -464,6 +464,7 @@
     "Plural": "編輯所有選取封包中資產的標籤"
   },
   "TagCount": {
+    "Zero": "標籤",
     "One": "標籤：{0} 已選取",
     "Plural": "標籤：{0} 已選取"
   },
