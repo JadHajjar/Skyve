@@ -50,7 +50,7 @@
   "MissingPackages": "लापता पैकेज",
   "OpenPackagePage": "इस पैकेज का पेज खोलें",
   "OpenPackageFolder": {
-    "One": "Open file location",
+    "One": "फ़ाइल स्थान खोलें",
     "Plural": "सभी चयनित पैकेज के फ़ाइल स्थान खोलें"
   },
   "OpenLocalFolder": "इस पैकेज वाला फ़ोल्डर खोलें",
@@ -464,6 +464,7 @@
     "Plural": "चयनित सभी पैकेज के एसेट के टैग संपादित करें"
   },
   "TagCount": {
+    "Zero": "टैग",
     "One": "टैग: {0} चयनित",
     "Plural": "टैग: {0} चयनित"
   },
