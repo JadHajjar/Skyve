@@ -464,6 +464,7 @@
     "Plural": "Bewerk alle van de geselecteerde pakketten assets' Tags"
   },
   "TagCount": {
+    "Zero": "Labels",
     "One": "Labels: {0} geselecteerd",
     "Plural": "Labels: {0} geselecteerd"
   },
