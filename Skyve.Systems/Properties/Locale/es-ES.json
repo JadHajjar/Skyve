@@ -464,6 +464,7 @@
     "Plural": "Editar todas las etiquetas de los assets de los paquetes seleccionados"
   },
   "TagCount": {
+    "Zero": "Etiquetas",
     "One": "Etiquetas: {0} seleccionados",
     "Plural": "Etiquetas: {0} seleccionados"
   },
