@@ -62,7 +62,7 @@
   "Sorting_Default": "Domyślne sortowanie",
   "Sorting_LastEdit": "Ostatnia modyfikacja",
   "Sorting_DateCreated": "Data utworzenia",
-  "Sorting_Usage": "Zastosowanie zestawu",
+  "Sorting_Usage": "Wykorzystanie zestawu",
   "Sorting_Name": "Nazwa",
   "Sorting_FileSize": "Rozmiar pliku",
   "Sorting_UpdateTime": "Czas aktualizacji",
@@ -303,7 +303,7 @@
   "PackageStatus": "Status pakietu",
   "Author": "Autor",
   "Include": "Dołącz",
-  "Unsubscribe": "Anuluj subskrypcje",
+  "Unsubscribe": "Anuluj subskrypcję",
   "Exclude": "Wyklucz",
   "Snooze": "Odłóż",
   "UnSnooze": "Przywróć",
@@ -329,19 +329,19 @@
   },
   "IncludedCount": {
     "One": "{0} {1} uwzględniony",
-    "Plural": "{0} {1} uwzględnione"
+    "Plural": "{0} {1} uwzględniony"
   },
   "EnabledCount": {
     "One": "{0} {1} włączony",
-    "Plural": "{0} {1} włączone"
+    "Plural": "{0} {1} włączony"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} uwzględniony i włączony",
-    "Plural": "{0} {1} uwzględnione i włączone"
+    "Plural": "{0} {1} uwzględniony i włączony"
   },
   "LoadedCount": {
     "One": "{0} {1} załadowany",
-    "Plural": "{0} {1} załadowano"
+    "Plural": "{0} {1} załadowany"
   },
   "ShowingCount": {
     "One": "Wyświetlono {0} {1}",
@@ -464,7 +464,6 @@
     "Plural": "Edytuj wszystkie tagi zasobów wybranych pakietów"
   },
   "TagCount": {
-    "Zero": "Znaczniki",
     "One": "Znaczniki: Wybrano {0}",
     "Plural": "Znaczniki: Wybrano {0}"
   },
@@ -571,7 +570,7 @@
   "RecentlyUpdated": "Ostatnio zaktualizowane",
   "Manage": "Zarządzaj",
   "Version": "Wersja",
-  "UpdateTime": "Ostatnia aktualizacja",
+  "UpdateTime": "Czas aktualizacji",
   "Status": "Status",
   "PackageUsage": "Użycie pakietu",
   "CodeMod": {
@@ -592,7 +591,7 @@
   "Subscribers": "Subskrybentów",
   "Votes": "Polubienia",
   "PartiallyIncluded": "Częściowo uwzględnione",
-  "Links": "Linki",
+  "Links": "Łącza",
   "NoAssets": "Wyłącz wszystkie obiekty",
   "NoMods": "Wyłącz wszystkie mody kodu",
   "FavoritePlaysets": "Ulubione zestawy",
