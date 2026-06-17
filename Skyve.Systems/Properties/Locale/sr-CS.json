@@ -464,6 +464,7 @@
     "Plural": "Uredite oznake svih resursa izabranih paketa"
   },
   "TagCount": {
+    "Zero": "Oznake",
     "One": "Oznake: {0} izabrano",
     "Plural": "Oznake: {0} izabrano"
   },
