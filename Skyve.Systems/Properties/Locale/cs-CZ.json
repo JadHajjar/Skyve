@@ -464,6 +464,7 @@
     "Plural": "Upravit všechny štítky vybraných balíčků"
   },
   "TagCount": {
+    "Zero": "Štítky",
     "One": "Štítky: vybráno {0}",
     "Plural": "Štítky: vybráno {0}"
   },
