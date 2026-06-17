@@ -300,7 +300,7 @@
   "Included": "وشملت",
   "Excluded": "مستبعد",
   "OutOfDate": "انتهت صلاحيته",
-  "PackageStatus": "حالة الحزمة",
+  "PackageStatus": "وضع رزمة",
   "Author": "المؤلف",
   "Include": "تضمين",
   "Unsubscribe": "إلغاء الاشتراك",
@@ -337,11 +337,11 @@
   },
   "IncludedEnabledCount": {
     "One": "تم تضمين و تمكين {0} {1}",
-    "Plural": "{0} {1} مضمن ومفعّل"
+    "Plural": "تم تضمين و تمكين {0} {1}"
   },
   "LoadedCount": {
     "One": "{0} {1} تم تحميله",
-    "Plural": "تم تحميل {0} {1}"
+    "Plural": "{0} {1} تم تحميله"
   },
   "ShowingCount": {
     "One": "عرض {0} {1}",
@@ -464,7 +464,6 @@
     "Plural": "تعديل جميع علامات الأصول المحددة للحزم"
   },
   "TagCount": {
-    "Zero": "العلامات",
     "One": "العلامات: تم اختيار {0}",
     "Plural": "العلامات: تم اختيار {0}"
   },
@@ -571,7 +570,7 @@
   "RecentlyUpdated": "تم التحديث مؤخرا",
   "Manage": "إدارة",
   "Version": "الإصدار",
-  "UpdateTime": "وقت التحديث",
+  "UpdateTime": "تحديث الوقت",
   "Status": "الحالة",
   "PackageUsage": "استخدام الحزمة",
   "CodeMod": {
