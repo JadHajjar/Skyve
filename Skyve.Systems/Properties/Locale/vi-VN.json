@@ -464,6 +464,7 @@
     "Plural": "Chỉnh sửa Thẻ của tất cả tài nguyên trong các gói đã chọn"
   },
   "TagCount": {
+    "Zero": "Thẻ",
     "One": "Thẻ: đã chọn {0}",
     "Plural": "Thẻ: đã chọn {0}"
   },
