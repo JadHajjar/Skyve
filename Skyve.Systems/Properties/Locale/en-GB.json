@@ -62,7 +62,7 @@
   "Sorting_Default": "Default Sorting",
   "Sorting_LastEdit": "Last Edit Time",
   "Sorting_DateCreated": "Date Created",
-  "Sorting_Usage": "Playset Usage",
+  "Sorting_Usage": "Profile Usage",
   "Sorting_Name": "Name",
   "Sorting_FileSize": "File Size",
   "Sorting_UpdateTime": "Update Time",
@@ -464,7 +464,6 @@
     "Plural": "Edit all of the selected packages' assets' Tags"
   },
   "TagCount": {
-    "Zero": "Tags",
     "One": "Tags: {0} selected",
     "Plural": "Tags: {0} selected"
   },
