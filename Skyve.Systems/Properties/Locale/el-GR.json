@@ -14,7 +14,7 @@
   "ViewPlaysets": "Προβολή Των Αναπαραγωγών Σας",
   "AddPlayset": "Προσθήκη Σετ Αναπαραγωγής",
   "LHT": "Κυκλοφορία στην αριστερή πλευρά",
-  "TotalAssetSize": "{0} of included assets",
+  "TotalAssetSize": "{0} συμπεριλαμβανόμενων στοιχείων",
   "CompatibilityStatus": "Κατάσταση Συμβατότητας",
   "AnyStatus": "Οποιαδήποτε Κατάσταση",
   "NoLocalPackagesFound": "Δεν βρέθηκαν πακέτα στον υπολογιστή σας.",
@@ -31,8 +31,8 @@
   "CopyAllIdsSelected": "Αντιγραφή ονομάτων και αναγνωριστικών όλων των επιλεγμένων αντικειμένων",
   "HelpLogs": "Βοήθεια & Αρχείο καταγραφής",
   "Preferences": "Προτιμήσεις",
-  "Private": "Private",
-  "Unlisted": "Unlisted",
+  "Private": "Ιδιωτικό",
+  "Unlisted": "Μη καταχωρημένο",
   "PlaysetName": "Όνομα Παιχνιδιού",
   "RenamePlayset": "Μετονομασία αυτού του συνόλου αναπαραγωγής",
   "StartScratch": "Ξεκινήστε ένα νέο σετ αναπαραγωγής από το μηδέν χωρίς κανένα συμπεριλαμβανόμενο πακέτο.",
@@ -110,7 +110,7 @@
   "SearchPlaysets": "Αναζήτηση μέσω αυτών των Playsets..",
   "AdvancedSettings": "Ρυθμίσεις Για Προχωρημένους",
   "HelpTranslate": "Βελτίωση Μεταφράσεων",
-  "HelpReset": "Help & Reset",
+  "HelpReset": "Βοήθεια & Επαναφορά",
   "JoinDiscord": "Λάβετε βοήθεια για το Discord",
   "OpenGuide": "Άνοιγμα του Wiki",
   "ResetFolderButton": "Επαναφορά όλων των ρυθμίσεων φακέλου",
@@ -161,8 +161,8 @@
   "CopyLogFile": "Αντιγραφή του αρχείου καταγραφής του παιχνιδιού στο πρόχειρο",
   "OpenLOTLogFolder": "Άνοιγμα φακέλου καταγραφής Skyve",
   "CopyLOTLogFile": "Αντιγραφή αρχείου καταγραφής του Skyve στο πρόχειρο",
-  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
-  "GenericIncludedAndEnabledTotal": "{0} included & enabled: {1}, out of {2}",
+  "GenericIncludedTotal": "{0} συμπεριλαμβάνεται: {1}, από {2}",
+  "GenericIncludedAndEnabledTotal": "{0} συμπεριλαμβάνεται & ενεργοποιήθηκε: {1}, από {2}",
   "GenericIncludedEnabledTotal": "{0} συμπεριλήφθηκε: {1}, εκ των οποίων είναι ενεργοποιημένο: {2}, από {3}",
   "NewPlayset_Tip": "Δημιουργία ή εισαγωγή ενός νέου συνόλου αναπαραγωγής",
   "ViewPlaysets_Tip": "Προβολή & διαχείριση των αναπαραγωγών σας",
@@ -256,7 +256,7 @@
     "Plural": "{0} αντικείμενα"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
+    "One": "Επιλέχθηκε {0} δημιουργός",
     "Plural": "Επιλέχθηκε {0} συγγραφέας"
   },
   "Donate": "Δωρεά",
@@ -282,7 +282,7 @@
   },
   "FollowersCount": {
     "One": "{1} ακόλουθος",
-    "Plural": "{1} followers"
+    "Plural": "{1} ακόλουθοι"
   },
   "SearchWorkshop": "Αναζήτηση του εργαστηρίου...",
   "DiscoverWorkshop": "Αναζήτηση για mods στο εργαστήριο...",
@@ -312,7 +312,7 @@
     "Plural": "Mods"
   },
   "Asset": {
-    "One": "Asset",
+    "One": "Στοιχείο",
     "Plural": "Ενεργητικό"
   },
   "Package": {
@@ -332,8 +332,8 @@
     "Plural": "{0} {1} συμπεριλαμβάνονται"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} ενεργοποιήθηκε",
+    "Plural": "{0} {1} ενεργοποιήθηκαν"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} συμπεριλαμβανόμενα & ενεργοποιημένα",
@@ -376,7 +376,7 @@
   "AnyState": "Οποιαδήποτε Κατάσταση",
   "ExplainIssue": "Περιγράψτε το πρόβλημά σας εδώ",
   "ExplainIssueInfo": "Συμπεριλάβετε όσες περισσότερες πληροφορίες μπορείτε για το τι συμβαίνει και πώς να το αναπαράγετε εδώ",
-  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "ReviewRequestSent": "Το αίτημα αξιολόγησής σας για το '{0}' στάλθηκε!\r\n\r\nΣας ευχαριστούμε για τα σχόλιά σας.",
   "ReviewRequestFailed": "Αποτυχία αποστολής του αιτήματος αξιολόγησης για '{0}'.\r\n\r\n{1}",
   "SendReview": "Στείλτε το αίτημα αξιολόγησης",
   "EditTags": {
@@ -384,8 +384,8 @@
     "Plural": "Επεξεργασία ετικετών επιλεγμένων αντικειμένων"
   },
   "RemoveVersionLock": {
-    "One": "Remove this package's version lock",
-    "Plural": "Remove selected items' version lock"
+    "One": "Αφαίρεση κλειδώματος έκδοσης αυτού του πακέτου",
+    "Plural": "Αφαίρεση κλειδώματος έκδοσης των επιλεγμένων στοιχείων"
   },
   "EditLinks": {
     "One": "Επεξεργαστείτε τους συνδέσμους αυτού του πακέτου",
@@ -436,7 +436,7 @@
   "DownloadPlayset": "Λήψη Παιχνιδιού",
   "ReloadAllData": "Επαναφόρτωση όλων των δεδομένων",
   "ResetSnoozes": "Επαναφορά όλων των αναβολών",
-  "ResetModsCache": "Reset mods' cache",
+  "ResetModsCache": "Επαναφορά προσωρινής μνήμης των mods",
   "ResetCompatibilityCache": "Επαναφορά λανθάνουσας μνήμης συμβατότητας",
   "ResetImageCache": "Καθαρισμός προσωρινά αποθηκευμένων εικόνων",
   "SharePlayset": "Μοιραστείτε αυτό το σύνολο αναπαραγωγής",
@@ -452,7 +452,7 @@
   "FailedToDeletePlayset": "Αποτυχία διαγραφής του συνόλου αναπαραγωγής",
   "FailedToUpdatePlayset": "Αποτυχία ενημέρωσης του συνόλου αναπαραγωγής",
   "ImportFromLink": "Εισαγωγή συνόλου αναπαραγωγής με τη χρήση αναγνωριστικού συνόλου αναπαραγωγής",
-  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
+  "PastePlaysetId": "Εισαγάγετε το ID ή τον σύνδεσμο του playset που θέλετε να εισαγάγετε",
   "AssumeInternetConnectivity": "Παράβλεψη ελέγχων σύνδεσης στο διαδίκτυο",
   "AssumeInternetConnectivity_Tip": "Παράλειψη ελέγχου για το διαδίκτυο και αυτόματα υποθέτει ότι είστε συνδεδεμένοι.",
   "SelectAll": "Επιλογή όλων των στοιχείων",
@@ -500,7 +500,7 @@
   "TroubleshootBubbleTip": "Αυτό είναι το μενού αντιμετώπισης προβλημάτων, θα σας καθοδηγήσει σε όλη τη διαδικασία.\r\nΜπορείτε να κλείσετε το Skyve και να συνεχίσετε αργότερα, θα θυμάστε την πρόοδό σας.",
   "TroubleshootCompAsk": {
     "One": "Έχετε ένα πακέτο με μια σοβαρή προειδοποίηση συμβατότητας.\r\nΜπορεί να θέλετε να προσπαθήσετε να το αντιμετωπίσετε πρώτα πριν από την αντιμετώπιση προβλημάτων.",
-    "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
+    "Plural": "Έχετε {0} πακέτα με σοβαρές προειδοποιήσεις συμβατότητας.\r\nΊσως θελήσετε να τα αντιμετωπίσετε πρώτα πριν από την αντιμετώπιση προβλημάτων."
   },
   "TroubleshootViewComp": "Πηγαίνετε πίσω και δείτε τη σελίδα της αναφοράς συμβατότητας για να βεβαιωθείτε ότι δεν χρησιμοποιείτε κατεστραμμένα mods.",
   "TroubleshootSkipComp": "Παραλείψτε αυτό το βήμα και συνεχίστε με τα βήματα αντιμετώπισης προβλημάτων.",
@@ -512,7 +512,7 @@
   "TroubleshootCouldNotCreatePlayset": "Δεν ήταν δυνατή η δημιουργία ενός νέου συνόλου αναπαραγωγής για την αντιμετώπιση προβλημάτων. Δοκιμάστε ξανά αργότερα ή μετά την επανεκκίνηση του Skyve.",
   "TroubleshootInvalidState": "Η κατάσταση αντιμετώπισης προβλημάτων δεν είναι πλέον έγκυρη. Παρακαλώ ξεκινήστε μια νέα συνεδρία αντιμετώπισης προβλημάτων.",
   "TroubleshootNoActivePlayset": "Πρέπει να έχετε ένα ενεργό σετ αναπαραγωγής για την αντιμετώπιση προβλημάτων.",
-  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
+  "TroubleshootInconclusive": "Η αντιμετώπιση προβλημάτων ήταν ασαφής.\r\nΤο πρόβλημα ίσως να μη σχετίζεται με συγκεκριμένο mod, ή ίσως να προκαλείται από πολλά mods.",
   "SkyveDetectedFaultyPackages": "Το Skyve εντόπισε ότι κάποια από τα πακέτα σας δεν είναι τέλεια κατεβασμένα, θα θέλατε να προσπαθήσετε να τα διορθώσετε πρώτα?",
   "FaultyPackagesTitle": "Ανιχνεύθηκαν Ελαττωμένα Πακέτα",
   "CleanupInfoTitle": "Τι είναι ο καθαρισμός?",
@@ -588,7 +588,7 @@
     "One": "Εξάρτηση",
     "Plural": "Εξαρτήσεις"
   },
-  "ModID": "Mod ID",
+  "ModID": "ID του Mod",
   "Subscribers": "Συνδρομητές",
   "Votes": "Αρέσει",
   "PartiallyIncluded": "Μερικώς Συμπεριλαμβανόμενο",
@@ -603,7 +603,7 @@
   "PackagesSelected": "Πακέτα Που Επιλέχθηκαν ({0})",
   "PackagesSelectionInfo": "Κάντε κλικ σε ένα πακέτο για να το επιλέξετε, κάντε κλικ στο 'Επιβεβαίωση Επιλογής' μόλις τελειώσετε.",
   "CustomColor": "Προσαρμοσμένο Χρώμα",
-  "CustomThumbnail": "Custom Thumbnail",
+  "CustomThumbnail": "Προσαρμοσμένη μικρογραφία",
   "NoThumbnail": "Απενεργοποίηση Μικρογραφίας",
   "PlaysetUsageInfo": "Η επιλογή μιας αποκλειστικής χρήσης για το σύνολο αναπαραγωγής σας επιτρέπει στο Skyve να αποκρύπτει αυτόματα mods που είτε δεν ταιριάζουν, ή δεν είναι συμβατές με την επιλεγμένη χρήση.",
   "PlaysetColorSet": "Προσαρμοσμένο χρώμα ενεργοποιημένο",
@@ -614,9 +614,9 @@
   "Ready": "Έτοιμο",
   "EditDashboard": "Επεξεργασία Πίνακα Ελέγχου",
   "AvailableWidgets": "Διαθέσιμα Widgets",
-  "HideExtraWidgets": "Hide Extra Widgets",
+  "HideExtraWidgets": "Απόκρυψη επιπλέον widgets",
   "ResetLayout": "Επαναφορά Διάταξης",
-  "ContentSummary": "Content Summary",
+  "ContentSummary": "Σύνοψη περιεχομένου",
   "PackagesEnabled": "Ενεργά Πακέτα",
   "ModsEnabled": "Λειτουργίες Ενεργοποιημένες",
   "AssetsEnabled": "Ενεργά Στοιχεία",
@@ -673,7 +673,7 @@
   "CleanupCountBased": "Διαγραφή παλαιών αντιγράφων ασφαλείας μόλις υπερβεί το συνολικό ποσό των αντιγράφων ασφαλείας:",
   "DoBackupNow": "Αντίγραφα Ασφαλείας Αρχείων Τώρα",
   "BackupDescriptionInfo": "Χειροκίνητα αντίγραφα ασφαλείας αρχείων savegame, ρυθμίσεις, και άλλες σχετικές πληροφορίες για τη διαφύλαξη των πόλεων και των λειτουργιών σας.\r\n\r\nΑυτό εξασφαλίζει ότι οι τρέχουσες πόλεις και προτιμήσεις σας αποθηκεύονται με ασφάλεια σε περίπτωση προβλημάτων συστήματος ή επανεγκατάστασης.",
-  "RestoreDescriptionInfo": "Select which backups you'd like to restore.\r\nA backup will be taken before the restore process begins to safeguard your current files.",
+  "RestoreDescriptionInfo": "Επιλέξτε ποια αντίγραφα ασφαλείας θέλετε να επαναφέρετε.\r\nΘα δημιουργηθεί ένα αντίγραφο ασφαλείας πριν ξεκινήσει η διαδικασία επαναφοράς, για την προστασία των τρεχόντων αρχείων σας.",
   "BackupFailed": "Αποτυχία Αντιγράφου Ασφαλείας",
   "CheckLogsAndTryAgain": "Ελέγξτε τα αρχεία καταγραφής για τυχόν σφάλματα και προσπαθήστε ξανά.",
   "RestorePoint": {
@@ -715,13 +715,13 @@
   "ExclusionTutorialText": "Μπορείτε να αφαιρέσετε mods από το ενεργό σετ αναπαραγωγής κρατώντας πατημένο το πλήκτρο ALT και κάνοντας κλικ στο πλαίσιο ελέγχου του mod.\r\n\r\nΜπορείτε επίσης να προσθέσετε ή να αφαιρέσετε ένα mod από όλες τις ομάδες αναπαραγωγής χρησιμοποιώντας το μενού δεξιού κλικ .",
   "ClearFilterTutorialTitle": "Φίλτρα Εκκαθάρισης - Εκμάθηση",
   "ClearFilterTutorialText": "Αν θέλετε να καθαρίσετε γρήγορα τα φίλτρα σας, μπορείτε να κάνετε κλικ σε ένα φίλτρο χρησιμοποιώντας το μεσαίο κουμπί του ποντικιού σας για να το καθαρίσετε.\r\n\r\nΜπορείτε επίσης να το κάνετε αυτό στο κουμπί 'Εμφάνιση/Απόκρυψη φίλτρων' για να καθαρίσετε όλα τα φίλτρα ταυτόχρονα.",
-  "UpdateMod": "Update Mod",
-  "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data..",
-  "SharedPlayset": "Shared Playset",
-  "SubscribedPlayset": "Subscribed Playset",
-  "ExportPlayset": "Export Playset",
-  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
-  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
+  "UpdateMod": "Ενημέρωση Mod",
+  "VersionLocked": "Κλειδωμένη έκδοση",
+  "VersionLockedInfo": "Το '{0}' είναι κλειδωμένο στην έκδοση {1} σε αυτό το playset.",
+  "LoadingModData": "Φόρτωση δεδομένων Mod..",
+  "SharedPlayset": "Κοινόχρηστο Playset",
+  "SubscribedPlayset": "Εγγεγραμμένο Playset",
+  "ExportPlayset": "Εξαγωγή Playset",
+  "PlaysetSharedSuccessfully": "Το playset σας κοινοποιήθηκε με επιτυχία.",
+  "FailedToSharePlayset": "Η κοινοποίηση του playset σας απέτυχε. Παρακαλώ δοκιμάστε ξανά αργότερα."
 }

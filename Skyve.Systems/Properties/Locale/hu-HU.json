@@ -1,5 +1,5 @@
 {
-  "CloseSkyve": "Close Skyve",
+  "CloseSkyve": "Skyve bezárása",
   "CompatibilityInfo": "Kompatibilitási Infó",
   "Dashboard": "Irányítópult",
   "SearchDlcs": "Keress a DLC-k között..",
@@ -31,8 +31,8 @@
   "CopyAllIdsSelected": "Másolja ki az összes megjelenített elem nevét és műhelyazonosítóját",
   "HelpLogs": "Súgó és naplók",
   "Preferences": "Tulajdonságok",
-  "Private": "Private",
-  "Unlisted": "Unlisted",
+  "Private": "Privát",
+  "Unlisted": "Nem listázott",
   "PlaysetName": "Playset név",
   "RenamePlayset": "Nevezze át ezt a játékkészletet",
   "StartScratch": "Kezdj el egy új játékkészletet a semmiből, a mellékelt csomag nélkül.",
@@ -70,7 +70,7 @@
   "Sorting_Author": "Készítő neve",
   "Sorting_Status": "Csomag státusza",
   "Sorting_CompatibilityReport": "Kompatibilitási Infó",
-  "Sorting_LoadOrder": "Load Order",
+  "Sorting_LoadOrder": "Betöltési sorrend",
   "FolderSettings": "Mappa beállításai",
   "ShowDatesRelatively": "Dátumok megjelenítése az aktuális időhöz képest",
   "CreatePlayset": "Új játékkészlet létrehozása",
@@ -377,15 +377,15 @@
   "ExplainIssue": "Írj visszajelzést itt",
   "ExplainIssueInfo": "Adjon meg annyi információt, amennyit csak tud arról, hogy mi történik, és hogyan reprodukálja azt itt",
   "ReviewRequestSent": "'{0}' felülvizsgálati kérelmét elküldtük!",
-  "ReviewRequestFailed": "Nem sikerült elküldeni a(z) '{0}' felülvizsgálati kérelmét",
+  "ReviewRequestFailed": "Nem sikerült elküldeni a(z) '{0}' felülvizsgálati kérelmét.\r\n\r\n{1}",
   "SendReview": "Küld el a felülvizsgálati kérelmet",
   "EditTags": {
     "One": "Nyissa meg a csomag oldalát",
     "Plural": "Szerkeszd a kiválasztott elemek címkéit"
   },
   "RemoveVersionLock": {
-    "One": "Remove this package's version lock",
-    "Plural": "Remove selected items' version lock"
+    "One": "A csomag verziózárolásának eltávolítása",
+    "Plural": "A kijelölt elemek verziózárolásának eltávolítása"
   },
   "EditLinks": {
     "One": "Szerkessze a csomag hivatkozásait",
@@ -424,7 +424,7 @@
   },
   "ActivePlayset": "Aktív játékkészlet",
   "References": "Referenciák",
-  "OpenLog": "Open Game Log",
+  "OpenLog": "Játéknapló megnyitása",
   "OpenSkyveLog": "Nyissa meg a Skyve Log-ot",
   "Sort By": "Sorbarendezés",
   "FailedToFetchLogs": "Nem sikerült lekérni a naplókat",
@@ -452,7 +452,7 @@
   "FailedToDeletePlayset": "Nem sikerült törölni a profilodat",
   "FailedToUpdatePlayset": "Nem sikerült frissíteni a profilodat",
   "ImportFromLink": "Profil importálása profilazonosító használatával",
-  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
+  "PastePlaysetId": "Add meg az importálni kívánt playset azonosítóját vagy hivatkozását",
   "AssumeInternetConnectivity": "Az internetkapcsolat ellenőrzésének figyelmen kívül hagyása",
   "AssumeInternetConnectivity_Tip": "Kihagyja az internetkeresést, és automatikusan feltételezi, hogy csatlakozik.",
   "SelectAll": "Válassza ki az összes elemet",
@@ -465,8 +465,8 @@
   },
   "TagCount": {
     "Zero": "Cimke",
-    "One": "Tags: {0} selected",
-    "Plural": "Tags: {0} selected"
+    "One": "Címkék: {0} kijelölve",
+    "Plural": "Címkék: {0} kijelölve"
   },
   "TagsTitle": {
     "One": "Egyéni címkék: {0}",
@@ -486,7 +486,7 @@
   "ApplyingSettings": "Beállítások alkalmazása...",
   "WaitingForGameLaunch": "Várjuk a játék indulását...",
   "WaitingForGameClose": "Várom a játék lezárását...",
-  "WaitingForConfirmation": "Waiting for your response...",
+  "WaitingForConfirmation": "Várakozás a válaszodra...",
   "UseEnglishPlease": "* Kérjük, próbáljon angolul használni a leírást.",
   "StageCounter": "Hibaelhárítási lépés: {0}/{1}",
   "NextStage": "Következő szint",
@@ -581,14 +581,14 @@
   "ThisModIsRequiredYouCantDisableIt": "Ez a mod szükséges, nem lehet letiltani.",
   "FadeDisabledItems": "Halványítsd el a letiltott modokat és eszközöket",
   "FadeDisabledItems_Tip": "A helyi tartalomlistákban a letiltott modok és eszközök elhalványulnak.",
-  "UsagePlayset": "Playset hozzáadása",
+  "UsagePlayset": "{0} Playset",
   "GenericPlayset": "Általános játékkészlet",
   "CompatibilityCenter": "Kompatibilitási Infó",
   "Dependency": {
     "One": "Szükséges Mod",
     "Plural": "Szükséges összetevők"
   },
-  "ModID": "Mod ID",
+  "ModID": "Mod-azonosító",
   "Subscribers": "Feliratkozók",
   "Votes": "Kedvelések",
   "PartiallyIncluded": "Részlegesen letöltöttek",
@@ -652,7 +652,7 @@
     "Plural": "Biztonsági mentések"
   },
   "BackupHistory": "Biztonsági mentés történet",
-  "BackupCenter": "Backup Center",
+  "BackupCenter": "Biztonsági mentési központ",
   "BackupRestore": "Mentés és Visszaállítás",
   "BasicSettings": "Alap beállítások",
   "BackupCleanup": "Tisztítás beállításai",
@@ -715,13 +715,13 @@
   "ExclusionTutorialText": "Modokat eltávolíthatsz az aktív játékkészletedből, ha lenyomva tartod az ALT billentyűt, és rákattintasz a mod jelölőnégyzetére.\n\nA jobb gombbal előhívható menü segítségével hozzáadhatsz vagy eltávolíthatsz egy modot az összes játékkészletedből.",
   "ClearFilterTutorialTitle": "Szűrők törlése - Oktatóanyag",
   "ClearFilterTutorialText": "Ha gyorsan szeretnéd törölni a szűrőket, kattints egy szűrőre a középső egérgombbal.\n\nEzt megteheted a „Szűrők megjelenítése/elrejtése” gombbal is, ha egyszerre szeretnéd törölni az összes szűrőt.",
-  "UpdateMod": "Update Mod",
-  "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data..",
-  "SharedPlayset": "Shared Playset",
-  "SubscribedPlayset": "Subscribed Playset",
-  "ExportPlayset": "Export Playset",
-  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
-  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
+  "UpdateMod": "Mod frissítése",
+  "VersionLocked": "Verzió zárolva",
+  "VersionLockedInfo": "A(z) '{0}' a(z) {1} verzióra van zárolva ebben a playsetben.",
+  "LoadingModData": "Mod-adatok betöltése..",
+  "SharedPlayset": "Megosztott playset",
+  "SubscribedPlayset": "Feliratkozott playset",
+  "ExportPlayset": "Playset exportálása",
+  "PlaysetSharedSuccessfully": "A playseted sikeresen megosztva.",
+  "FailedToSharePlayset": "A playset megosztása nem sikerült. Kérjük, próbáld újra később."
 }

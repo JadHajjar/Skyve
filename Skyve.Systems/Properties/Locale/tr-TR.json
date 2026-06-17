@@ -193,7 +193,7 @@
   "FailedToOpenTC": "Tema Değiştirici açılamadı",
   "FailedToDeleteItem": "Öğe silme başarısız",
   "OpenChangelog": "Change-log'u Aç",
-  "Changelog": "Change-log",
+  "Changelog": "Değişiklik günlüğü",
   "DeleteAsset": {
     "One": "Bu asseti sil",
     "Plural": "Seçilen assetleri sil"
@@ -312,7 +312,7 @@
     "Plural": "Modlar"
   },
   "Asset": {
-    "One": "Asset",
+    "One": "Varlık",
     "Plural": "Asset'ler"
   },
   "Package": {

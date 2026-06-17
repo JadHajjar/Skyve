@@ -31,8 +31,8 @@
   "CopyAllIdsSelected": "選択したすべてのアイテムの名前とIDをコピー",
   "HelpLogs": "ヘルプ & ログ",
   "Preferences": "環境設定",
-  "Private": "Private",
-  "Unlisted": "Unlisted",
+  "Private": "非公開",
+  "Unlisted": "限定公開",
   "PlaysetName": "プレイセットの名前",
   "RenamePlayset": "このプレイセットの名前を変更",
   "StartScratch": "付属のパッケージなしで新しいプレイセットを最初から開始します。",
@@ -243,7 +243,7 @@
   "NoPlaysetsFound": "使用可能なプレイセットがありません！",
   "NoPlaysetsMatchFilters": "検索に一致するプレイセットがありません！",
   "Your Savegames": "セーブデータ",
-  "App Data": "App Data",
+  "App Data": "アプリデータ",
   "Custom Maps": "カスタムマップ",
   "Vanilla Maps": "バニラマップ",
   "ResetScrollOnPackageClick": "パッケージのページを開いたときにスクロールをリセット",
@@ -384,8 +384,8 @@
     "Plural": "選択したアイテムのタグを編集"
   },
   "RemoveVersionLock": {
-    "One": "Remove this package's version lock",
-    "Plural": "Remove selected items' version lock"
+    "One": "このパッケージのバージョンロックを解除",
+    "Plural": "選択した項目のバージョンロックを解除"
   },
   "EditLinks": {
     "One": "パッケージのリンクを編集",
@@ -452,7 +452,7 @@
   "FailedToDeletePlayset": "プレイセットの削除に失敗！",
   "FailedToUpdatePlayset": "プレイセットの更新に失敗！",
   "ImportFromLink": "プレイセットIDを使用してプレイセットをインポート",
-  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
+  "PastePlaysetId": "インポートしたいプレイセットのIDまたはリンクを入力してください",
   "AssumeInternetConnectivity": "インターネットの接続確認を無視",
   "AssumeInternetConnectivity_Tip": "インターネットの接続確認をスキップして、自動的に接続済みと判断します。",
   "SelectAll": "すべて選択",
@@ -588,7 +588,7 @@
     "One": "依存関係",
     "Plural": "依存関係"
   },
-  "ModID": "Mod ID",
+  "ModID": "MOD ID",
   "Subscribers": "サブスク数",
   "Votes": "いいね",
   "PartiallyIncluded": "一部含まれています",
@@ -715,13 +715,13 @@
   "ExclusionTutorialText": "ALTキーを押しながらMODのチェックボックスをクリックすると、アクティブなプレイセットからMODを削除できます。\r\n\r\n右クリックメニューを使用して、すべてのプレイセットからModを追加または削除することもできます。",
   "ClearFilterTutorialTitle": "クリアリングフィルタ - チュートリアル",
   "ClearFilterTutorialText": "フィルターをすばやくクリアしたい場合は、マウスの中ボタンを使ってフィルターをクリックしてクリアできます。\r\n\r\n「フィルターの表示/非表示」ボタンで一度にすべてのフィルターをクリアすることもできます。",
-  "UpdateMod": "Update Mod",
-  "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "UpdateMod": "MODを更新",
+  "VersionLocked": "バージョンロック中",
+  "VersionLockedInfo": "'{0}' はこのプレイセットでバージョン {1} にロックされています。",
   "LoadingModData": "Modデータを読み込み中..",
-  "SharedPlayset": "Shared Playset",
-  "SubscribedPlayset": "Subscribed Playset",
-  "ExportPlayset": "Export Playset",
-  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
-  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
+  "SharedPlayset": "共有プレイセット",
+  "SubscribedPlayset": "購読済みプレイセット",
+  "ExportPlayset": "プレイセットをエクスポート",
+  "PlaysetSharedSuccessfully": "プレイセットが正常に共有されました。",
+  "FailedToSharePlayset": "プレイセットの共有に失敗しました。後でもう一度お試しください。"
 }

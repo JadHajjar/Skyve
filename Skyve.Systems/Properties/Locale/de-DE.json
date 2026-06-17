@@ -473,7 +473,7 @@
     "Plural": "Benutzerdefinierte Tags: {0} Pakete"
   },
   "CustomTags": "Benutzerdefinierte Tags",
-  "WorkshopAndGameTags": "Workshop & In-Game Tags",
+  "WorkshopAndGameTags": "Workshop- & Ingame-Tags",
   "IDAndTags": "ID & Tags",
   "TroubleshootIssues": "Fehlerbehebung",
   "ViewTroubleshootOptions": "Optionen zur Fehlerbehebung anzeigen",
@@ -575,8 +575,8 @@
   "Status": "Status",
   "PackageUsage": "Paketnutzung",
   "CodeMod": {
-    "One": "Code Mod",
-    "Plural": "Code Mods"
+    "One": "Code-Mod",
+    "Plural": "Code-Mods"
   },
   "ThisModIsRequiredYouCantDisableIt": "Diese Mod ist erforderlich, du kannst sie nicht deaktivieren.",
   "FadeDisabledItems": "Ausblenden deaktivierter Mods & Assets",
@@ -588,7 +588,7 @@
     "One": "Abhängigkeit",
     "Plural": "Abhängigkeiten"
   },
-  "ModID": "Mod ID",
+  "ModID": "Mod-ID",
   "Subscribers": "Abonnenten",
   "Votes": "Likes",
   "PartiallyIncluded": "Teilweise enthalten",
@@ -721,7 +721,7 @@
   "LoadingModData": "Lade Mod-Daten..",
   "SharedPlayset": "Freigegebene Playset",
   "SubscribedPlayset": "Abonniertes Playset",
-  "ExportPlayset": "Export Playset",
+  "ExportPlayset": "Playset exportieren",
   "PlaysetSharedSuccessfully": "Dein Playset wurde erfolgreich freigegeben.",
-  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
+  "FailedToSharePlayset": "Das Teilen deines Playsets ist fehlgeschlagen. Bitte versuche es später erneut."
 }

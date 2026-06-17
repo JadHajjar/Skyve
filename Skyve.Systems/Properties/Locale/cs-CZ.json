@@ -31,8 +31,8 @@
   "CopyAllIdsSelected": "Zkopírovat názvy a ID všech vybraných položek",
   "HelpLogs": "Nápověda a protokoly",
   "Preferences": "Preference",
-  "Private": "Private",
-  "Unlisted": "Unlisted",
+  "Private": "Soukromé",
+  "Unlisted": "Neuvedené",
   "PlaysetName": "Název sady přehrávání",
   "RenamePlayset": "Přejmenovat tento playset",
   "StartScratch": "Spustit novou sadu přehrávání od začátku bez jakéhokoliv zahrnutého balíčku.",
@@ -243,7 +243,7 @@
   "NoPlaysetsFound": "Žádný playset k zobrazení",
   "NoPlaysetsMatchFilters": "Žádný playset neodpovídá vašemu hledání",
   "Your Savegames": "Vaše uložené hry",
-  "App Data": "App Data",
+  "App Data": "Data aplikace",
   "Custom Maps": "Vlastní mapy",
   "Vanilla Maps": "Vanilla Mapy",
   "ResetScrollOnPackageClick": "Obnovit posouvání při otevření stránky balíčku",
@@ -288,12 +288,12 @@
   "DiscoverWorkshop": "Hledat módy na workshopu...",
   "SearchWorkshopBrowser": "Prohledat workshop ve vašem prohlížeči...",
   "UnknownPackage": "Neznámý balíček",
-  "Info": "Info",
+  "Info": "Informace",
   "SelectThisPackage": "Vyberte tento balíček",
   "SelectPackage": "Vyberte balíček",
   "ControlToSelectMultiplePackages": "Ctrl + Klepnutím vyberte více balíčků najednou.",
   "Local": "Místní",
-  "Workshop": "Workshop",
+  "Workshop": "Dílna",
   "CompatibilityReport": "Zpráva o kompatibilitě",
   "Enabled": "Povoleno",
   "Disabled": "Deaktivované",
@@ -312,7 +312,7 @@
     "Plural": "Módy"
   },
   "Asset": {
-    "One": "Asset",
+    "One": "Doplněk",
     "Plural": "Assety"
   },
   "Package": {
@@ -320,7 +320,7 @@
     "Plural": "Balíky"
   },
   "Playset": {
-    "One": "Playset",
+    "One": "Sada",
     "Plural": "Playsety"
   },
   "ContainCount": {
@@ -384,8 +384,8 @@
     "Plural": "Upravit štítky vybraných položek"
   },
   "RemoveVersionLock": {
-    "One": "Remove this package's version lock",
-    "Plural": "Remove selected items' version lock"
+    "One": "Odebrat zámek verze tohoto balíčku",
+    "Plural": "Odebrat zámek verze vybraných položek"
   },
   "EditLinks": {
     "One": "Upravit odkazy tohoto balíčku",
@@ -452,7 +452,7 @@
   "FailedToDeletePlayset": "Nepodařilo se odstranit playset",
   "FailedToUpdatePlayset": "Nepodařilo se aktualizovat playset",
   "ImportFromLink": "Importovat playset pomocí ID playsetu",
-  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
+  "PastePlaysetId": "Zadejte ID nebo odkaz sady, kterou chcete importovat",
   "AssumeInternetConnectivity": "Ignorovat kontrolu připojení k Internetu",
   "AssumeInternetConnectivity_Tip": "Přeskočí kontrolu internetu a automaticky předpokládá, že jste připojeni.",
   "SelectAll": "Vybrat všechny položky",
@@ -715,13 +715,13 @@
   "ExclusionTutorialText": "Můžete odstranit mody z vaší aktivní sady přehrávačů podržením klávesy ALT a kliknutím na zaškrtávací políčko módu.\r\n\r\nMůžete také přidat nebo odebrat mód ze všech vašich sad přehrávačů pomocí nabídky pravým tlačítkem myši.",
   "ClearFilterTutorialTitle": "Čištění filtrů - Návod",
   "ClearFilterTutorialText": "Pokud chcete rychle vymazat filtry, můžete kliknout na filtr pomocí svého středního tlačítka myši pro jeho vymazání.\r\n\r\nMůžete to také udělat na tlačítku 'Zobrazit/skrýt filtry' pro vymazání všech filtrů najednou.",
-  "UpdateMod": "Update Mod",
-  "VersionLocked": "Version Locked",
-  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data..",
-  "SharedPlayset": "Shared Playset",
-  "SubscribedPlayset": "Subscribed Playset",
-  "ExportPlayset": "Export Playset",
-  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
-  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
+  "UpdateMod": "Aktualizovat mod",
+  "VersionLocked": "Verze uzamčena",
+  "VersionLockedInfo": "'{0}' je v této sadě uzamčen na verzi {1}.",
+  "LoadingModData": "Načítání dat modu..",
+  "SharedPlayset": "Sdílená sada",
+  "SubscribedPlayset": "Odebíraná sada",
+  "ExportPlayset": "Exportovat sadu",
+  "PlaysetSharedSuccessfully": "Vaše sada byla úspěšně sdílena.",
+  "FailedToSharePlayset": "Sdílení vaší sady se nezdařilo. Zkuste to prosím znovu později."
 }
