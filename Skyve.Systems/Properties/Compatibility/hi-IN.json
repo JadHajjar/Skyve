@@ -209,7 +209,7 @@
     "Plural": "{0} DLC चयनित"
   },
   "RequiredDLCs": "आवश्यक DLC/CCP",
-  "CRT_Stability": "स्थिरता",
+  "CRT_Stability": "Stability",
   "CRT_Successors": "उत्तराधिकारियों",
   "CRT_RequiredPackages": "आवश्यक पैकेज",
   "CRT_OptionalPackages": "वैकल्पिक पैकेज",
@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} को बाहर रखा जाना चाहिए",
-    "Plural": "{0} {1} को हटा दिया जाना चाहिए"
+    "Plural": "{0} {1} should be excluded"
   },
   "UnsubscribeCount": "{0} {1} जिनसे आपको सदस्यता रद्द करनी चाहिए",
   "SwitchCount": {
@@ -297,7 +297,7 @@
     "Plural": "इन अनुरोधों को हटाएँ"
   },
   "ViewRequest": "अनुरोध देखें",
-  "RequiredItem": "आवश्यक पैकेज",
+  "RequiredItem": "Required Package",
   "ApplyAllActions": "सभी अनुशंसित कार्रवाइयाँ लागू करें",
   "SnoozeAll": "सभी समस्याओं को स्थगित करें",
   "SnoozeAllFiltered": "सभी फ़िल्टर की गई समस्याओं को स्थगित करें",
