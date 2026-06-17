@@ -50,7 +50,7 @@
   "MissingPackages": "დაკარგული პაკეტები",
   "OpenPackagePage": "გახსენით ამ პაკეტის გვერდი",
   "OpenPackageFolder": {
-    "One": "ფაილის მდებარეობის გახსნა",
+    "One": "Open file location",
     "Plural": "ყველა მონიშნული პაკეტის ფაილის მდებარეობის გახსნა"
   },
   "OpenLocalFolder": "ამ პაკეტის შემცველი საქაღალდის გახსნა",
@@ -61,9 +61,9 @@
   "OpenAuthorPage": "გახსენით ავტორის გვერდი",
   "Sorting_Default": "ნაგულისხმევი დახარისხება",
   "Sorting_LastEdit": "ბოლო რედაქტირების დრო",
-  "Sorting_DateCreated": "შექმნის თარიღი",
-  "Sorting_Usage": "Playset-ის გამოყენება",
-  "Sorting_Name": "სახელი",
+  "Sorting_DateCreated": "Date Created",
+  "Sorting_Usage": "Playset Usage",
+  "Sorting_Name": "Name",
   "Sorting_FileSize": "ფაილის ზომა",
   "Sorting_UpdateTime": "განაახლეთ დრო",
   "Sorting_SubscribeTime": "გამოიწერეთ დრო",
@@ -259,7 +259,7 @@
     "One": "{0} ავტორი მონიშნულია",
     "Plural": "{0} ავტორი მონიშნულია"
   },
-  "Donate": "შემოწირულობა",
+  "Donate": "Donate",
   "FlipItemCopyFilterAction": "Swap Ctrl+Click behavior for filtering in the content lists",
   "FlipItemCopyFilterAction_Tip": "Swaps the default behavior of clicking on labels so that normal clicking filters and Ctrl+Clicking performs the default action.",
   "AltClickTo": "Alt+დაჭერა, რომ {0}",
@@ -294,16 +294,16 @@
   "ControlToSelectMultiplePackages": "Ctrl + დაჭერა ერთდროულად რამდენიმე პაკეტის მოსანიშნად.",
   "Local": "ადგილობრივი",
   "Workshop": "სახელოსნო",
-  "CompatibilityReport": "თავსებადობის ანგარიში",
+  "CompatibilityReport": "Compatibility Report",
   "Enabled": "ჩართული",
   "Disabled": "გამორთული",
   "Included": "შედის",
   "Excluded": "გამორიცხულია",
   "OutOfDate": "Ვადა გასული",
-  "PackageStatus": "პაკეტის სტატუსი",
+  "PackageStatus": "Package Status",
   "Author": "ავტორი",
   "Include": "ჩართვა",
-  "Unsubscribe": "გამოწერის გაუქმება",
+  "Unsubscribe": "Unsubscribe",
   "Exclude": "ამოშლა",
   "Snooze": "გადადება",
   "UnSnooze": "გადადების გაუქმება",
@@ -325,43 +325,43 @@
   },
   "ContainCount": {
     "One": "შეიცავს {0} {1}",
-    "Plural": "შეიცავს {0} {1}"
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} ჩართულია",
-    "Plural": "{0} {1} ჩართულია სიაში"
+    "Plural": "{0} {1} included"
   },
   "EnabledCount": {
     "One": "{0} {1} გააქტიურებულია",
-    "Plural": "{0} {1} ჩართულია"
+    "Plural": "{0} {1} enabled"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} ჩართული და გააქტიურებული",
-    "Plural": "{0} {1} ჩართულია სიაში და გააქტიურებულია"
+    "Plural": "{0} {1} included & enabled"
   },
   "LoadedCount": {
     "One": "{0} {1} ჩატვირთული",
-    "Plural": "{0} {1} ჩაიტვირთა"
+    "Plural": "{0} {1} loaded"
   },
   "ShowingCount": {
     "One": "ნაჩვენებია {0} {1}",
-    "Plural": "ნაჩვენებია {0} {1}"
+    "Plural": "Showing {0} {1}"
   },
   "TotalCount": {
     "One": "სულ {0} {1}",
-    "Plural": "სულ {0} {1}"
+    "Plural": "{0} total {1}"
   },
   "TotalCountWarning": {
     "One": "სულ {0} {1}, {3}",
-    "Plural": "სულ {0} {1}, {3}"
+    "Plural": "{0} total {1}, {3}"
   },
   "TotalSelectedCount": {
     "One": "სულ {0} {1}, {2} მონიშნული",
-    "Plural": "სულ {0} {1}, არჩეულია {2}"
+    "Plural": "{0} total {1}, {2} selected"
   },
   "TotalSelectedCountWarning": {
     "One": "სულ {0} {1}, {2} მონიშნული, {3}",
-    "Plural": "სულ {0} {1}, არჩეულია {2}, {3}"
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} დამალულია თქვენი პროფილის გამოყენების გამო",
@@ -571,7 +571,7 @@
   "RecentlyUpdated": "ცოტა ხნის წინ განახლებული",
   "Manage": "მართვა",
   "Version": "ვერსია",
-  "UpdateTime": "განახლების დრო",
+  "UpdateTime": "Update Time",
   "Status": "სტატუსი",
   "PackageUsage": "პაკეტის გამოყენება",
   "CodeMod": {
@@ -592,7 +592,7 @@
   "Subscribers": "გამომწერები",
   "Votes": "მოწონებები",
   "PartiallyIncluded": "ნაწილობრივ ჩართული",
-  "Links": "ბმულები",
+  "Links": "Links",
   "NoAssets": "ყველა ასეტის გამორთვა",
   "NoMods": "ყველა კოდის მოდის გამორთვა",
   "FavoritePlaysets": "Favorite Playsets",
