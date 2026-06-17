@@ -349,19 +349,19 @@
   },
   "TotalCount": {
     "One": "{0} ukupno {1}",
-    "Plural": "{0} ukupno {1}"
+    "Plural": "{0} total {1}"
   },
   "TotalCountWarning": {
     "One": "{0} ukupno {1}, {3}",
-    "Plural": "{0} ukupno {1}, {3}"
+    "Plural": "{0} total {1}, {3}"
   },
   "TotalSelectedCount": {
     "One": "{0} ukupno {1}, {2} izabrano",
-    "Plural": "{0} ukupno {1}, {2} izabrano"
+    "Plural": "{0} total {1}, {2} selected"
   },
   "TotalSelectedCountWarning": {
     "One": "{0} ukupno {1}, {2} izabrano, {3}",
-    "Plural": "{0} ukupno {1}, {2} izabrano, {3}"
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} je skriven zbog upotrebe vašeg seta",
