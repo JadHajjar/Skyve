@@ -464,6 +464,7 @@
     "Plural": "Modifier tous les tags des assets sélectionnés de ce paquet"
   },
   "TagCount": {
+    "Zero": "Étiquettes",
     "One": "Tags : {0} sélectionné(s)",
     "Plural": "Tags : {0} sélectionné(s)"
   },
