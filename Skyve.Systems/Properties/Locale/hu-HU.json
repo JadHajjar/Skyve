@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Másolja ki az összes megjelenített elem nevét és műhelyazonosítóját",
   "HelpLogs": "Súgó és naplók",
   "Preferences": "Tulajdonságok",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Playset név",
   "RenamePlayset": "Nevezze át ezt a játékkészletet",
   "StartScratch": "Kezdj el egy új játékkészletet a semmiből, a mellékelt csomag nélkül.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Nem sikerült törölni a profilodat",
   "FailedToUpdatePlayset": "Nem sikerült frissíteni a profilodat",
   "ImportFromLink": "Profil importálása profilazonosító használatával",
-  "PastePlaysetId": "Illessze be az importálni kívánt profil azonosítóját",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Az internetkapcsolat ellenőrzésének figyelmen kívül hagyása",
   "AssumeInternetConnectivity_Tip": "Kihagyja az internetkeresést, és automatikusan feltételezi, hogy csatlakozik.",
   "SelectAll": "Válassza ki az összes elemet",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Kopiera alla markerade objekts namn och ID",
   "HelpLogs": "Hjälp & loggar",
   "Preferences": "Inställningar",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Speluppsättningens namn",
   "RenamePlayset": "Döp om den här uppspelningen",
   "StartScratch": "Starta en ny playset från början utan något inkluderat paket.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Det gick inte att ta bort din speluppsättning",
   "FailedToUpdatePlayset": "Det gick inte att uppdatera din speluppställning",
   "ImportFromLink": "Importera en profil med hjälp av profil-ID",
-  "PastePlaysetId": "Klistra in ID för speluppsättningen du vill importera",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignorera kontroll av Internetanslutning",
   "AssumeInternetConnectivity_Tip": "Hoppar över kontroll av internetanslutning och antar att du är ansluten.",
   "SelectAll": "Markera alla objekt",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Copy all selected items' names & IDs",
   "HelpLogs": "Bantuan & Log",
   "Preferences": "Preferensi",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Nama Playset",
   "RenamePlayset": "Rename this playset",
   "StartScratch": "Start a new playset from scratch without any included package.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Gagal menghapus playset anda",
   "FailedToUpdatePlayset": "Gagal update playset anda",
   "ImportFromLink": "Import a profile using a profile ID",
-  "PastePlaysetId": "Paste ID playset yang ingin anda impor",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Abaikan pemeriksaan koneksi Internet",
   "AssumeInternetConnectivity_Tip": "Skip pemeriksaan internet dan secara otomatis menganggap anda terhubung.",
   "SelectAll": "Select all items",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

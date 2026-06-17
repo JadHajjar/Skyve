@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Copiar todos os IDs selecionados dos recursos mostrados",
   "HelpLogs": "Ajuda e logs",
   "Preferences": "Preferências",
+  "Private": "Privado",
+  "Unlisted": "Não listado",
   "PlaysetName": "Nome do conjunto",
   "RenamePlayset": "Mudar o nome do conjunto",
   "StartScratch": "Começa um novo conjunto do zero sem nenhum pacote incluído.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Falha ao apagar o teu conjunto",
   "FailedToUpdatePlayset": "Falha ao atualizar o teu conjunto",
   "ImportFromLink": "Importar um conjunto usando um ID de conjunto",
-  "PastePlaysetId": "Cola o ID do conjunto que queres importar",
+  "PastePlaysetId": "Introduz o ID ou o link do conjunto de brinquedos que pretendes importar",
   "AssumeInternetConnectivity": "Ignorar verificações de ligação à Internet",
   "AssumeInternetConnectivity_Tip": "Ignora a verificação de internet e assume automaticamente que estás ligado.",
   "SelectAll": "Selecionar todos os elementos",
@@ -716,5 +718,10 @@
   "UpdateMod": "Atualizar Mod",
   "VersionLocked": "Versão bloqueada",
   "VersionLockedInfo": "O '{0}' está bloqueado à versão {1} neste conjunto de jogo.",
-  "LoadingModData": "A carregar dados do Mod.."
+  "LoadingModData": "A carregar dados do Mod..",
+  "SharedPlayset": "Conjunto partilhado",
+  "SubscribedPlayset": "Conjunto subscrito",
+  "ExportPlayset": "Exportar conjunto",
+  "PlaysetSharedSuccessfully": "O teu conjunto foi partilhado com sucesso.",
+  "FailedToSharePlayset": "Falha ao partilhar o teu conjunto. Tenta novamente mais tarde."
 }

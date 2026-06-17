@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Копировать названия и ID всех выбранных элементов",
   "HelpLogs": "Помощь и логи",
   "Preferences": "Предпочтения",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Название игрового набора",
   "RenamePlayset": "Переименовать этот игровой набор",
   "StartScratch": "Запустить новый игровой набор с нуля без включённого пакета.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Не удалось удалить игровой набор",
   "FailedToUpdatePlayset": "Не удалось обновить игровой набор",
   "ImportFromLink": "Импортировать игровой набор, используя ID игрового набора",
-  "PastePlaysetId": "Вставьте ID игрового набора, который вы хотите импортировать",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Игнорировать проверку Интернет-соединения",
   "AssumeInternetConnectivity_Tip": "Пропускает проверку Интернета и автоматически предполагает, что вы подключены.",
   "SelectAll": "Выбрать все элементы",
@@ -716,5 +718,10 @@
   "UpdateMod": "Обновить модификацию",
   "VersionLocked": "Версия заблокирована",
   "VersionLockedInfo": "'{0}' заблокировано в версии {1}  из этого игрового набора",
-  "LoadingModData": "Загрузка данных модификаций.."
+  "LoadingModData": "Загрузка данных модификаций..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

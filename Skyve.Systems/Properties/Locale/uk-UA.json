@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Скопіювати ID та назви усіх обраних предметів",
   "HelpLogs": "Довідка та журнали",
   "Preferences": "Налаштування",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Назва ігрового набору",
   "RenamePlayset": "Перейменувати цей ігровий набір",
   "StartScratch": "Почніть новий набір відтворення з нуля без жодного включеного пакету.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "Не вдалося видалити ваш ігровий набір",
   "FailedToUpdatePlayset": "Не вдалося оновити ваш ігровий набір",
   "ImportFromLink": "Імпортувати ігровий набір за допомогою ID ігрового набору",
-  "PastePlaysetId": "Вставити ID ігрового набору, який ви хотіли б імпортувати",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ігнорувати перевірку підключення до Інтернету",
   "AssumeInternetConnectivity_Tip": "Пропускає перевірку підключення до інтернету та автоматично припускає, що ви є підключеним.",
   "SelectAll": "Вибрати всі елементи",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

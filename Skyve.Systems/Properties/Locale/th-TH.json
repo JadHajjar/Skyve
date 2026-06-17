@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "คัดลอกชื่อและ ID ของไอเท็มที่เลือก",
   "HelpLogs": "บันทึกและการช่วยเหลือ",
   "Preferences": "กำหนดลักษณะ",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "ชื่อเพลย์เซ็ต",
   "RenamePlayset": "เปลี่ยนชื่อเพลย์เซ็ตนี้",
   "StartScratch": "Start a new playset from scratch without any included package.",
@@ -450,7 +452,7 @@
   "FailedToDeletePlayset": "ล้มเหลวในการลบเพลย์เซ็ตของคุณ",
   "FailedToUpdatePlayset": "ล้มเหลวในการอัปเดตเพลย์เซ็ตของคุณ",
   "ImportFromLink": "นำเข้าเพลย์เซ็ตโดยใช้ ID ของเพลย์เซ็ต",
-  "PastePlaysetId": "วาง ID ของเพลย์เซ็ตที่คุณต้องการนำเข้า",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "ละเว้นการตรวจสอบการเชื่อมต่ออินเทอร์เน็ต",
   "AssumeInternetConnectivity_Tip": "ข้ามการตรวจสอบอินเทอร์เน็ตแล้วสมมติว่าคุณได้มีการเชื่อมต่อแล้วโดยอัตโนมัติ",
   "SelectAll": "เลือกไอเทมทั้งหมด",
@@ -716,5 +718,10 @@
   "UpdateMod": "Update Mod",
   "VersionLocked": "Version Locked",
   "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
-  "LoadingModData": "Loading Mod Data.."
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }

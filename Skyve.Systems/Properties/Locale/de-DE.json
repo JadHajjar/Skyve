@@ -31,6 +31,8 @@
   "CopyAllIdsSelected": "Namen und IDs aller ausgewählten Elemente kopieren",
   "HelpLogs": "Hilfe & Protokolle",
   "Preferences": "Präferenzen",
+  "Private": "privat",
+  "Unlisted": "Nicht aufgelistet",
   "PlaysetName": "Spielset-Name",
   "RenamePlayset": "Dieses Spielset umbenennen",
   "StartScratch": "Starte ein neues Spielset von Grund auf ohne enthaltene Pakete.",
@@ -716,5 +718,10 @@
   "UpdateMod": "Mod aktualisieren",
   "VersionLocked": "Version gesperrt",
   "VersionLockedInfo": "'{0}' ist auf Version {1} in diesem Spielset gesperrt.",
-  "LoadingModData": "Lade Mod-Daten.."
+  "LoadingModData": "Lade Mod-Daten..",
+  "SharedPlayset": "Freigegebene Playset",
+  "SubscribedPlayset": "Abonniertes Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Dein Playset wurde erfolgreich freigegeben.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
