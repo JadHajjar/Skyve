@@ -31,8 +31,8 @@
   "CopyAllIdsSelected": "Kopier alle markerte gjenstanders Workshop-ID-er",
   "HelpLogs": "Hjelp og logger",
   "Preferences": "Preferanser",
-  "Private": "Privat",
-  "Unlisted": "Uoppført",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Navn på spilleliste",
   "RenamePlayset": "Endre navn på dette spillesettet",
   "StartScratch": "Start et nytt spillesett fra bunnen av uten en inkludert pakke.",
@@ -110,7 +110,7 @@
   "SearchPlaysets": "Søk gjennom disse Playsets..",
   "AdvancedSettings": "Avanserte innstillinger",
   "HelpTranslate": "Forbedre oversettelser",
-  "HelpReset": "Hjelp og tilbakestilling",
+  "HelpReset": "Help & Reset",
   "JoinDiscord": "Få hjelp på Discord",
   "OpenGuide": "Åpne Wikien",
   "ResetFolderButton": "Tilbakestill alle mappeinnstillinger",
@@ -161,9 +161,9 @@
   "CopyLogFile": "Kopier spillets loggfil til utklippstavlen",
   "OpenLOTLogFolder": "Åpne Skyve's loggmappe",
   "CopyLOTLogFile": "Kopier Skyves loggfil til utklippstavlen",
-  "GenericIncludedTotal": "{0} inkludert: {1}, av {2}",
+  "GenericIncludedTotal": "{0} included: {1}, out of {2}",
   "GenericIncludedAndEnabledTotal": "{0} inkludert og aktivert: {1}, utenfor {2}",
-  "GenericIncludedEnabledTotal": "{0} inkludert: {1}, hvorav aktivert: {2}, av {3}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "Opprett eller importer et nytt spillsett",
   "ViewPlaysets_Tip": "Se og administrer dine spillesett",
   "DeactivatePlayset": "Deaktiver dette spillsettet",
@@ -262,7 +262,7 @@
   "Donate": "Donere",
   "FlipItemCopyFilterAction": "Bytt om Ctrl+klikk oppførsel for filtrering i innholdslisten",
   "FlipItemCopyFilterAction_Tip": "Bytter standard virkemåte for å klikke på etiketter slik at normale klikk på filtre og Ctrl+klikking utfører standardhandlingen.",
-  "AltClickTo": "Alt+klikk for å {0}",
+  "AltClickTo": "Alt+Click to {0}",
   "FilterByThisAuthor": "Legg til '{0}' på dine forfatterfiltre",
   "AddToSearch": "Legg til '{0}til ditt søk",
   "CopyToClipboard": "Kopier '{0}' til utklippstavlen",
@@ -321,7 +321,7 @@
   },
   "Playset": {
     "One": "Profil",
-    "Plural": "Profiler"
+    "Plural": "Profiles"
   },
   "ContainCount": {
     "One": "Inneholder {0} {1}",
@@ -348,8 +348,8 @@
     "Plural": "Viser {0} {1}"
   },
   "TotalCount": {
-    "One": "{0} totalt {1}",
-    "Plural": "{0} totalt {1}"
+    "One": "{0} total {1}",
+    "Plural": "{0} total {1}"
   },
   "TotalCountWarning": {
     "One": "{0} total {1} {3}",
@@ -360,8 +360,8 @@
     "Plural": "{0} totalt sett {1}og {2} valgt"
   },
   "TotalSelectedCountWarning": {
-    "One": "{0} totalt {1}, {2} valgt, {3}",
-    "Plural": "{0} totalt {1}, {2} valgt, {3}"
+    "One": "{0} total {1}, {2} selected, {3}",
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} er skjult på grunn av din profils bruk",
@@ -375,7 +375,7 @@
   "AnyUsage": "Eventuell bruk",
   "AnyState": "Alle stater",
   "ExplainIssue": "Beskriv problemet ditt her",
-  "ExplainIssueInfo": "Inkluder så mye informasjon som mulig om hva som skjer og hvordan det kan reproduseres her",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "Din anmeldelse forespørsel for '{0}' har blitt sendt!\r\n\r\nTakk for din tilbakemelding.",
   "ReviewRequestFailed": "Klarte ikke å sende din anmeldelse forespørsel for '{0}'.\r\n\r\n{1}",
   "SendReview": "Send forespørsel om gjennomsyn",
@@ -384,8 +384,8 @@
     "Plural": "Rediger de valgte elementenes tagger"
   },
   "RemoveVersionLock": {
-    "One": "Fjern denne pakkens versjonslås",
-    "Plural": "Fjern versjonslåsen for de valgte elementene"
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
   },
   "EditLinks": {
     "One": "Rediger denne pakkens lenker",
@@ -436,7 +436,7 @@
   "DownloadPlayset": "Last ned Playset",
   "ReloadAllData": "Oppdater alle data",
   "ResetSnoozes": "Tilbakestill alle utsettelser",
-  "ResetModsCache": "Tilbakestill mods-buffer",
+  "ResetModsCache": "Reset mods' cache",
   "ResetCompatibilityCache": "Tilbakestill kompatibilitetens cache",
   "ResetImageCache": "Tøm mellomlagrede bilder",
   "SharePlayset": "Del dette spillet",
@@ -445,14 +445,14 @@
   "UpdatePlaysetTip": "Oppdater din lokale versjon av dette spillsettet",
   "DownloadPlaysetTip": "Last ned denne spilletappen på din lokale datamaskin",
   "EditPlaysetThumbnail": "Rediger miniatyrbildet for denne spillelisten",
-  "MakePublic": "Gjør denne profilen offentlig",
-  "MakePrivate": "Gjør denne profilen privat",
+  "MakePublic": "Make this profile Public",
+  "MakePrivate": "Make this profile Private",
   "CopyPlaysetLink": "Kopier spillerens ID",
   "FailedToUploadPlayset": "Kan ikke laste opp spillsettet ditt",
   "FailedToDeletePlayset": "Kan ikke slette spillsettet ditt",
   "FailedToUpdatePlayset": "Kan ikke oppdatere spillsettet ditt",
-  "ImportFromLink": "Importer en profil ved hjelp av en profil-ID",
-  "PastePlaysetId": "Skriv inn ID-en eller lenken til playsettet du vil importere",
+  "ImportFromLink": "Import a profile using a profile ID",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignorer Internett-tilkoblingskontroller",
   "AssumeInternetConnectivity_Tip": "Hoppesjekking av internett og automatisk forutsetter at du er tilkoblet.",
   "SelectAll": "Velg alle elementer",
@@ -473,7 +473,7 @@
     "Plural": "Egendefinerte merker: {0} pakker"
   },
   "CustomTags": "Tilpassede merker",
-  "WorkshopAndGameTags": "Workshop- og spillinterne tagger",
+  "WorkshopAndGameTags": "Workshop & In-Game Tags",
   "IDAndTags": "ID & Etiketter",
   "TroubleshootIssues": "Søk etter feil",
   "ViewTroubleshootOptions": "Se alternativer for feilsøking",
@@ -488,7 +488,7 @@
   "WaitingForGameClose": "Venter på at spillet skal lukkes...",
   "WaitingForConfirmation": "Venter på svar...",
   "UseEnglishPlease": "* Prøv å bruke engelsk i beskrivelsen din.",
-  "StageCounter": "Feilsøkingstrinn {0} / {1}",
+  "StageCounter": "Troubleshooting step {0} / {1}",
   "NextStage": "Neste steg",
   "CancelTroubleshootMessage": "Vil du tilbakestille til konfigurasjonen du brukte før du startet feilsøkingen?\n\nVelg 'Nei' for å beholde gjeldende konfigurasjon av pakker.",
   "CancelTroubleshootTitle": "Avbryt og tilbakestille feilsøking?",
@@ -499,7 +499,7 @@
   "TroubleshootNextStageTip": "Hopp over gjeldende nivå. Bruk den hvis du allerede har fullført og vil fortsette.",
   "TroubleshootBubbleTip": "Dette er feilsøkingsmenyen som vil lede deg gjennom hele prosessen.\r\nDu kan lukke Skyve og fortsette senere, så vil det huske fremgangen din.",
   "TroubleshootCompAsk": {
-    "One": "Du har en pakke med en alvorlig kompatibilitetsadvarsel.\r\nDu vil kanskje prøve å håndtere den først før feilsøking.",
+    "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
     "Plural": "Du har {0} pakker med seriøse kompabilitetsadvarsler.\r\nDu vil kanskje prøve å gjøre noe med dem først før du feilsøker."
   },
   "TroubleshootViewComp": "Gå tilbake og se på siden til kompatibilitetsrapporten for å sikre at du ikke bruker ødelagte mods.",
@@ -621,7 +621,7 @@
   "ModsEnabled": "Modifikasjoner aktivert",
   "AssetsEnabled": "Eiendeler aktivert",
   "PackagesIncludedDisabled": "Pakker inkludert og deaktivert",
-  "OutOf": "{0} av {1}",
+  "OutOf": "{0} out of {1}",
   "RecentlyUpdatedItem": "Nylig oppdaterte {0}",
   "MassSubscribeWarningTitle": "Advarsel for masseabonnement",
   "MassSubscribeWarningInfo": "Du er i ferd med å abonnere på {0} modifikasjoner. Er du sikker på at du vil fortsette?",
@@ -715,13 +715,13 @@
   "ExclusionTutorialText": "Du kan fjerne modifikasjoner fra den aktive avspillingen ved å holde ALT-tasten og klikke på avmerkingsboksen til moden.\r\n\r\nDu kan også legge til eller fjerne en mod fra alle dine spillegrupper ved hjelp av høyreklikkmenyen.",
   "ClearFilterTutorialTitle": "Tømmer filtre - opplæring",
   "ClearFilterTutorialText": "Hvis du ønsker å raskt rydde filtrene dine kan du klikke på et filter ved hjelp av mellomknappen for å slette det.\r\n\r\nDu kan også gjøre det på knappen 'Vis/Skjul Filter' for å fjerne alle filtre samtidig.",
-  "UpdateMod": "Oppdater mod",
-  "VersionLocked": "Versjon låst",
-  "VersionLockedInfo": "'{0}' er låst til versjon {1} i dette playsettet.",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
   "LoadingModData": "Laster modifikasjonsdata..",
-  "SharedPlayset": "Delt playset",
-  "SubscribedPlayset": "Abonnert playset",
-  "ExportPlayset": "Eksporter playset",
-  "PlaysetSharedSuccessfully": "Playsettet ditt er delt.",
-  "FailedToSharePlayset": "Kunne ikke dele playsettet ditt. Prøv igjen senere."
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
