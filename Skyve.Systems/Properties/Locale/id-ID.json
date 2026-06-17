@@ -50,7 +50,7 @@
   "MissingPackages": "Paket yang hilang",
   "OpenPackagePage": "Buka halaman paket ini",
   "OpenPackageFolder": {
-    "One": "Open file location",
+    "One": "Buka lokasi file",
     "Plural": "Buka lokasi file semua paket yang dipilih"
   },
   "OpenLocalFolder": "Buka folder yang berisi paket ini",
@@ -61,9 +61,9 @@
   "OpenAuthorPage": "Buka halaman penulis",
   "Sorting_Default": "Penyortiran default",
   "Sorting_LastEdit": "Waktu edit terakhir",
-  "Sorting_DateCreated": "Date Created",
-  "Sorting_Usage": "Playset Usage",
-  "Sorting_Name": "Name",
+  "Sorting_DateCreated": "Tanggal Dibuat",
+  "Sorting_Usage": "Penggunaan Playset",
+  "Sorting_Name": "Nama",
   "Sorting_FileSize": "Ukuran File",
   "Sorting_UpdateTime": "Perbarui waktu",
   "Sorting_SubscribeTime": "Berlangganan waktu",
@@ -172,13 +172,13 @@
   "LoadSaveGame_Tip": "Muat savegame saat meluncurkan Cities: Skylines. Tidak memilih file simpanan akan melanjutkan simpanan terbaru Anda",
   "BETA": "BETA",
   "ALPHA": "ALPHA",
-  "TEST": "TEST",
-  "TESTING": "TESTING",
-  "STABLE": "STABLE",
-  "EXPERIMENTAL": "EXPERIMENTAL",
-  "DEPRECATED": "DEPRECATED",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "TEST": "TES",
+  "TESTING": "PENGUJIAN",
+  "STABLE": "STABIL",
+  "EXPERIMENTAL": "EKSPERIMENTAL",
+  "DEPRECATED": "USANG",
+  "OBSOLETE": "KEDALUWARSA",
+  "ABANDONED": "DITINGGALKAN",
   "ActionUnreversible": {
     "One": "Tindakan ini tidak dapat dibatalkan.",
     "Plural": "Tindakan ini tidak dapat dibatalkan. Dan akan memengaruhi {0} paket."
@@ -259,7 +259,7 @@
     "One": "{0} author dipilih",
     "Plural": "{0} authors dipilih"
   },
-  "Donate": "Donate",
+  "Donate": "Donasi",
   "FlipItemCopyFilterAction": "Swap Ctrl+Click behavior for filtering in the content lists",
   "FlipItemCopyFilterAction_Tip": "Swaps the default behavior of clicking on labels so that normal clicking filters and Ctrl+Clicking performs the default action.",
   "AltClickTo": "Alt+Click untuk {0}",
@@ -294,16 +294,16 @@
   "ControlToSelectMultiplePackages": "Ctrl + Klik untuk memilih beberapa paket sekaligus.",
   "Local": "Lokal",
   "Workshop": "Bengkel",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "Laporan Kompatibilitas",
   "Enabled": "Diaktifkan",
   "Disabled": "Dengan disabilitas",
   "Included": "Termasuk",
   "Excluded": "Pengecualian",
   "OutOfDate": "Kadaluarsa",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "Status Paket",
   "Author": "Pembuat",
   "Include": "Termasuk",
-  "Unsubscribe": "Unsubscribe",
+  "Unsubscribe": "Berhenti Berlangganan",
   "Exclude": "Kecualikan",
   "Snooze": "Tunda",
   "UnSnooze": "Batalkan Tunda",
@@ -325,43 +325,43 @@
   },
   "ContainCount": {
     "One": "Berisi {0} {1}",
-    "Plural": "Contains {0} {1}"
+    "Plural": "Berisi {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} disertakan",
-    "Plural": "{0} {1} included"
+    "Plural": "{0} {1} disertakan"
   },
   "EnabledCount": {
     "One": "{0} {1} diaktifkan",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0} {1} diaktifkan"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} disertakan & diaktifkan",
-    "Plural": "{0} {1} included & enabled"
+    "Plural": "{0} {1} disertakan & diaktifkan"
   },
   "LoadedCount": {
     "One": "{0} {1} dimuat",
-    "Plural": "{0} {1} loaded"
+    "Plural": "{0} {1} dimuat"
   },
   "ShowingCount": {
     "One": "Menampilkan {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "Plural": "Menampilkan {0} {1}"
   },
   "TotalCount": {
-    "One": "{0} total {1}",
-    "Plural": "{0} total {1}"
+    "One": "total {0} {1}",
+    "Plural": "total {0} {1}"
   },
   "TotalCountWarning": {
-    "One": "{0} total {1}, {3}",
-    "Plural": "{0} total {1}, {3}"
+    "One": "total {0} {1}, {3}",
+    "Plural": "total {0} {1}, {3}"
   },
   "TotalSelectedCount": {
     "One": "{0} total {1}, {2} dipilih",
-    "Plural": "{0} total {1}, {2} selected"
+    "Plural": "{0} total {1}, {2} dipilih"
   },
   "TotalSelectedCountWarning": {
     "One": "{0} total {1}, {2} dipilih, {3}",
-    "Plural": "{0} total {1}, {2} selected, {3}"
+    "Plural": "{0} total {1}, {2} dipilih, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} disembunyikan karena penggunaan profil Anda",
@@ -556,7 +556,7 @@
   "LoadsAssetOnLaunch": "Memulai dengan layar 'Muat' editor saat peluncuran",
   "Notifications": "Notifikasi",
   "NoNotifications": "Tidak ada notifikasi",
-  "MultipleSkyvesDetected": "Multiple Skyves Detected",
+  "MultipleSkyvesDetected": "Beberapa Skyve Terdeteksi",
   "PackageUpdates": "Pembaruan Paket",
   "PackagesUpdatedSinceSession": {
     "One": "'{1}' telah diperbarui sejak sesi terakhir Anda",
@@ -571,7 +571,7 @@
   "RecentlyUpdated": "Baru Diperbarui",
   "Manage": "Kelola",
   "Version": "Versi",
-  "UpdateTime": "Update Time",
+  "UpdateTime": "Waktu Pembaruan",
   "Status": "Status",
   "PackageUsage": "Penggunaan Paket",
   "CodeMod": {
@@ -592,7 +592,7 @@
   "Subscribers": "Pelanggan",
   "Votes": "Suka",
   "PartiallyIncluded": "Sebagian Disertakan",
-  "Links": "Links",
+  "Links": "Tautan",
   "NoAssets": "Nonaktifkan Semua Aset",
   "NoMods": "Nonaktifkan Semua Mod Kode",
   "FavoritePlaysets": "Favorite Playsets",

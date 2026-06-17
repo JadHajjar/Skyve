@@ -627,7 +627,7 @@
   "MassSubscribeWarningInfo": "Olet tilaamassa {0} modeja. Oletko varma, että haluat jatkaa?",
   "DropImportFile": "Vapauta tuodaksesi {0} tästä raportista",
   "OutOfDateItem": "Päivämäärän loppu {0}",
-  "Bio": "Bio",
+  "Bio": "Esittely",
   "ColoredAuthorNames": "Käyttäjien & värien nimi ja profiilikuva",
   "ColoredAuthorNames_Tip": "Lisää yksilöllisen värin jokaiselle kirjoittajalle/käyttäjälle, käyttäjän nimi ja avatar käyttävät tätä väriä, jotta on helpompi seurata tiettyjä käyttäjiä.",
   "DetectedIssues": "Havaitut Ongelmat",

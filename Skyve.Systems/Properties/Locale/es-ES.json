@@ -174,9 +174,9 @@
   "ALPHA": "ALPHA",
   "TEST": "PRUEBA",
   "TESTING": "PRUEBA",
-  "STABLE": "STABLE",
+  "STABLE": "ESTABLE",
   "EXPERIMENTAL": "EXPERIMENTAL",
-  "DEPRECATED": "DEPRECATED",
+  "DEPRECATED": "OBSOLETO",
   "OBSOLETE": "OBSOLETO",
   "ABANDONED": "ABANDONADO",
   "ActionUnreversible": {
@@ -312,8 +312,8 @@
     "Plural": "Mods"
   },
   "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
+    "One": "Recurso",
+    "Plural": "Recursos"
   },
   "Package": {
     "One": "Paquete",
@@ -581,7 +581,7 @@
   "ThisModIsRequiredYouCantDisableIt": "Este mod es requerido, no puede desactivarlo.",
   "FadeDisabledItems": "Desvanecer mods y assets desactivados",
   "FadeDisabledItems_Tip": "Los mods y assets desactivados en sus listas de contenido local se desvanecerán.",
-  "UsagePlayset": "{0} Playset",
+  "UsagePlayset": "Conjunto de mods de {0}",
   "GenericPlayset": "Playset genérico",
   "CompatibilityCenter": "Centro de compatibilidad",
   "Dependency": {
@@ -627,7 +627,7 @@
   "MassSubscribeWarningInfo": "Estás a punto de suscribirte a {0} mods. ¿Estás seguro de que quieres continuar?",
   "DropImportFile": "Soltar para importar el {0} de este informe",
   "OutOfDateItem": "{0} desactualizado",
-  "Bio": "Bio",
+  "Bio": "Biografía",
   "ColoredAuthorNames": "Colorear autores y nombres de usuario y avatar",
   "ColoredAuthorNames_Tip": "Agregar un color único a cada usuario, el nombre del usuario y su avatar utilizará ese color para identificarlo de manera más fácil.",
   "DetectedIssues": "Problemas detectados",

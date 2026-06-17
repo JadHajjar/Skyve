@@ -50,7 +50,7 @@
   "MissingPackages": "დაკარგული პაკეტები",
   "OpenPackagePage": "გახსენით ამ პაკეტის გვერდი",
   "OpenPackageFolder": {
-    "One": "Open file location",
+    "One": "ფაილის მდებარეობის გახსნა",
     "Plural": "ყველა მონიშნული პაკეტის ფაილის მდებარეობის გახსნა"
   },
   "OpenLocalFolder": "ამ პაკეტის შემცველი საქაღალდის გახსნა",
@@ -61,9 +61,9 @@
   "OpenAuthorPage": "გახსენით ავტორის გვერდი",
   "Sorting_Default": "ნაგულისხმევი დახარისხება",
   "Sorting_LastEdit": "ბოლო რედაქტირების დრო",
-  "Sorting_DateCreated": "Date Created",
-  "Sorting_Usage": "Playset Usage",
-  "Sorting_Name": "Name",
+  "Sorting_DateCreated": "შექმნის თარიღი",
+  "Sorting_Usage": "Playset-ის გამოყენება",
+  "Sorting_Name": "სახელი",
   "Sorting_FileSize": "ფაილის ზომა",
   "Sorting_UpdateTime": "განაახლეთ დრო",
   "Sorting_SubscribeTime": "გამოიწერეთ დრო",
@@ -170,15 +170,15 @@
   "DeactivatePlayset_Tip": "თქვენი მიმდინარე Playset-ის დეაქტივაცია",
   "NewGame_Tip": "იწყებს ახალ თამაშს Cities: Skylines-ის გაშვებისას. შეგიძლიათ მიუთითოთ რუკა, რომელზეც გსურთ დაწყება",
   "LoadSaveGame_Tip": "ტვირთავს შენახულ თამაშს Cities: Skylines-ის გაშვებისას. ფაილის არ არჩევა გააგრძელებს თქვენს ბოლო შენახულ თამაშს",
-  "BETA": "BETA",
-  "ALPHA": "ALPHA",
-  "TEST": "TEST",
-  "TESTING": "TESTING",
-  "STABLE": "STABLE",
-  "EXPERIMENTAL": "EXPERIMENTAL",
-  "DEPRECATED": "DEPRECATED",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "BETA": "ბეტა",
+  "ALPHA": "ალფა",
+  "TEST": "ტესტი",
+  "TESTING": "ტესტირება",
+  "STABLE": "სტაბილური",
+  "EXPERIMENTAL": "ექსპერიმენტული",
+  "DEPRECATED": "მოძველებული",
+  "OBSOLETE": "გაუქმებული",
+  "ABANDONED": "მიტოვებული",
   "ActionUnreversible": {
     "One": "ამ მოქმედების გაუქმება შეუძლებელია.",
     "Plural": "ამ მოქმედების გაუქმება შეუძლებელია. და ის შეეხება {0} პაკეტს."
@@ -259,7 +259,7 @@
     "One": "{0} ავტორი მონიშნულია",
     "Plural": "{0} ავტორი მონიშნულია"
   },
-  "Donate": "Donate",
+  "Donate": "შემოწირულობა",
   "FlipItemCopyFilterAction": "Swap Ctrl+Click behavior for filtering in the content lists",
   "FlipItemCopyFilterAction_Tip": "Swaps the default behavior of clicking on labels so that normal clicking filters and Ctrl+Clicking performs the default action.",
   "AltClickTo": "Alt+დაჭერა, რომ {0}",
@@ -294,16 +294,16 @@
   "ControlToSelectMultiplePackages": "Ctrl + დაჭერა ერთდროულად რამდენიმე პაკეტის მოსანიშნად.",
   "Local": "ადგილობრივი",
   "Workshop": "სახელოსნო",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "თავსებადობის ანგარიში",
   "Enabled": "ჩართული",
   "Disabled": "გამორთული",
   "Included": "შედის",
   "Excluded": "გამორიცხულია",
   "OutOfDate": "Ვადა გასული",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "პაკეტის სტატუსი",
   "Author": "ავტორი",
   "Include": "ჩართვა",
-  "Unsubscribe": "Unsubscribe",
+  "Unsubscribe": "გამოწერის გაუქმება",
   "Exclude": "ამოშლა",
   "Snooze": "გადადება",
   "UnSnooze": "გადადების გაუქმება",
@@ -325,43 +325,43 @@
   },
   "ContainCount": {
     "One": "შეიცავს {0} {1}",
-    "Plural": "Contains {0} {1}"
+    "Plural": "შეიცავს {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} ჩართულია",
-    "Plural": "{0} {1} included"
+    "Plural": "{0} {1} ჩართულია სიაში"
   },
   "EnabledCount": {
     "One": "{0} {1} გააქტიურებულია",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0} {1} ჩართულია"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} ჩართული და გააქტიურებული",
-    "Plural": "{0} {1} included & enabled"
+    "Plural": "{0} {1} ჩართულია სიაში და გააქტიურებულია"
   },
   "LoadedCount": {
     "One": "{0} {1} ჩატვირთული",
-    "Plural": "{0} {1} loaded"
+    "Plural": "{0} {1} ჩაიტვირთა"
   },
   "ShowingCount": {
     "One": "ნაჩვენებია {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "Plural": "ნაჩვენებია {0} {1}"
   },
   "TotalCount": {
     "One": "სულ {0} {1}",
-    "Plural": "{0} total {1}"
+    "Plural": "სულ {0} {1}"
   },
   "TotalCountWarning": {
     "One": "სულ {0} {1}, {3}",
-    "Plural": "{0} total {1}, {3}"
+    "Plural": "სულ {0} {1}, {3}"
   },
   "TotalSelectedCount": {
     "One": "სულ {0} {1}, {2} მონიშნული",
-    "Plural": "{0} total {1}, {2} selected"
+    "Plural": "სულ {0} {1}, არჩეულია {2}"
   },
   "TotalSelectedCountWarning": {
     "One": "სულ {0} {1}, {2} მონიშნული, {3}",
-    "Plural": "{0} total {1}, {2} selected, {3}"
+    "Plural": "სულ {0} {1}, არჩეულია {2}, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} დამალულია თქვენი პროფილის გამოყენების გამო",
@@ -571,7 +571,7 @@
   "RecentlyUpdated": "ცოტა ხნის წინ განახლებული",
   "Manage": "მართვა",
   "Version": "ვერსია",
-  "UpdateTime": "Update Time",
+  "UpdateTime": "განახლების დრო",
   "Status": "სტატუსი",
   "PackageUsage": "პაკეტის გამოყენება",
   "CodeMod": {
@@ -592,7 +592,7 @@
   "Subscribers": "გამომწერები",
   "Votes": "მოწონებები",
   "PartiallyIncluded": "ნაწილობრივ ჩართული",
-  "Links": "Links",
+  "Links": "ბმულები",
   "NoAssets": "ყველა ასეტის გამორთვა",
   "NoMods": "ყველა კოდის მოდის გამორთვა",
   "FavoritePlaysets": "Favorite Playsets",

@@ -627,7 +627,7 @@
   "MassSubscribeWarningInfo": "Du är på väg att prenumerera på {0} mods. Är du säker på att du vill fortsätta?",
   "DropImportFile": "Släpp för att importera {0} från denna rapport",
   "OutOfDateItem": "Förfallodatum {0}",
-  "Bio": "Bio",
+  "Bio": "Presentation",
   "ColoredAuthorNames": "Färglägg författares och användares användarnamn och avatarer",
   "ColoredAuthorNames_Tip": "Varje författare/användare får en unik färg, som används för att färgsätta namn och avatar. Det gör det enklare att urskilja och följa specifika användare.",
   "DetectedIssues": "Upptäckta ärenden",

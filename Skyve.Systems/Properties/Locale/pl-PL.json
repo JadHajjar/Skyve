@@ -627,7 +627,7 @@
   "MassSubscribeWarningInfo": "Za moment zasubskrybujesz {0} modów. Czy na pewno chcesz kontynuować?",
   "DropImportFile": "Upuść, aby zaimportować {0} z tego raportu",
   "OutOfDateItem": "Nieaktualny {0}",
-  "Bio": "Bio",
+  "Bio": "Biografia",
   "ColoredAuthorNames": "Pokoloruj nazwy i awatary użytkowników i autorów",
   "ColoredAuthorNames_Tip": "Przydziela unikalny kolor dla każdego autora/użytkownika, nazwa użytkownika i jego awatar będą używać tego koloru, aby łatwiej śledzić poszczególnych użytkowników.",
   "DetectedIssues": "Wykryte problemy",
@@ -723,5 +723,5 @@
   "SubscribedPlayset": "Subskrybowany zestaw",
   "ExportPlayset": "Eksportuj zestaw",
   "PlaysetSharedSuccessfully": "Twój zestaw został pomyślnie udostępniony.",
-  "FailedToSharePlayset": "Nie udało się udostępnić tego zestawu. Spróbuj ponownie później."
+  "FailedToSharePlayset": "Nie udało się udostępnić Twojego zestawu. Spróbuj ponownie później."
 }

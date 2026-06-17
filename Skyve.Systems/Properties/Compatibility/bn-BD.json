@@ -8,7 +8,7 @@
   "NoteInfo": "মডের জন্য প্রদর্শিত অতিরিক্ত তথ্য",
   "BlackListName": "নাম অনুযায়ী কালো-তালিকাভুক্ত করুন",
   "BlackListId": "আইডি অনুযায়ী কালো-তালিকাভুক্ত করুন",
-  "GlobalTagsInfo": "Tags all players will see in Skyve",
+  "GlobalTagsInfo": "সব খেলোয়াড় Skyve-তে যে ট্যাগগুলো দেখবে",
   "Links": "লিঙ্ক",
   "StatusesCount": "স্ট্যাটাস ({0})",
   "InteractionCount": "ইন্টারঅ্যাকশন ({0})",
@@ -209,7 +209,7 @@
     "Plural": "{0}টি DLC নির্বাচিত"
   },
   "RequiredDLCs": "প্রয়োজনীয় DLC/CCP",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "স্থিতিশীলতা",
   "CRT_Successors": "উত্তরসূরি",
   "CRT_RequiredPackages": "প্রয়োজনীয় প্যাকেজ",
   "CRT_OptionalPackages": "ঐচ্ছিক প্যাকেজ",
@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0}টি {1} বাদ দেওয়া উচিত",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} {1} বাদ দেওয়া উচিত"
   },
   "UnsubscribeCount": "{0}টি {1} যা থেকে আপনার আনসাবস্ক্রাইব করা উচিত",
   "SwitchCount": {
@@ -264,7 +264,7 @@
   "VisualMod": "ভিজ্যুয়াল মড",
   "SimulationMod": "সিমুলেশন মড",
   "IMTMarkings": "IMT মার্কিং",
-  "RenderItPreset": "Render it! Preset",
+  "RenderItPreset": "Render it! প্রিসেট",
   "POFont": "Procedural Object ফন্ট/মডিউল",
   "NameList": "নাম-তালিকা / গেম অনুবাদ",
   "MapSavegame": {
@@ -297,7 +297,7 @@
     "Plural": "এই অনুরোধগুলো মুছুন"
   },
   "ViewRequest": "অনুরোধ দেখুন",
-  "RequiredItem": "Required Package",
+  "RequiredItem": "প্রয়োজনীয় প্যাকেজ",
   "ApplyAllActions": "সমস্ত প্রস্তাবিত পদক্ষেপ প্রয়োগ করুন",
   "SnoozeAll": "সমস্ত সমস্যা স্নুজ করুন",
   "SnoozeAllFiltered": "সমস্ত ফিল্টার করা সমস্যা স্নুজ করুন",

@@ -273,8 +273,8 @@
   "Sorting_Subscribers": "Abonnenten insgesamt",
   "Sorting_Votes": "Likes gesamt",
   "VotesCount": {
-    "One": "{1} Like",
-    "Plural": "{1} Likes"
+    "One": "{1} Gefällt mir",
+    "Plural": "{1} Gefällt mir"
   },
   "SubscribersCount": {
     "One": "{1} Abonnent",
@@ -590,7 +590,7 @@
   },
   "ModID": "Mod-ID",
   "Subscribers": "Abonnenten",
-  "Votes": "Likes",
+  "Votes": "Gefällt mir",
   "PartiallyIncluded": "Teilweise enthalten",
   "Links": "Links",
   "NoAssets": "Alle Assets deaktivieren",

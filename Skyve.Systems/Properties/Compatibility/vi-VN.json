@@ -209,7 +209,7 @@
     "Plural": "Đã chọn {0} DLC"
   },
   "RequiredDLCs": "DLC/CCP bắt buộc",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "Độ ổn định",
   "CRT_Successors": "Người kế thừa",
   "CRT_RequiredPackages": "Gói bắt buộc",
   "CRT_OptionalPackages": "Gói tùy chọn",
@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} nên được loại bỏ",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "Nên loại trừ {0} {1}"
   },
   "UnsubscribeCount": "{0} {1} mà bạn nên hủy đăng ký",
   "SwitchCount": {
@@ -264,7 +264,7 @@
   "VisualMod": "Mod hình ảnh",
   "SimulationMod": "Mod mô phỏng",
   "IMTMarkings": "Vạch kẻ IMT",
-  "RenderItPreset": "Render it! Preset",
+  "RenderItPreset": "Cài đặt sẵn Render it!",
   "POFont": "Phông/Mô-đun Procedural Object",
   "NameList": "Danh sách tên / Bản dịch trò chơi",
   "MapSavegame": {
@@ -297,7 +297,7 @@
     "Plural": "Xóa các yêu cầu này"
   },
   "ViewRequest": "Xem Yêu cầu",
-  "RequiredItem": "Required Package",
+  "RequiredItem": "Gói bắt buộc",
   "ApplyAllActions": "Áp dụng tất cả các hành động được đề xuất",
   "SnoozeAll": "Tạm ẩn tất cả các vấn đề",
   "SnoozeAllFiltered": "Tạm ẩn tất cả các vấn đề đã lọc",

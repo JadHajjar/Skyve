@@ -345,7 +345,7 @@
   },
   "ShowingCount": {
     "One": "Показано {0} з {1}",
-    "Plural": "Showing {0} {1}"
+    "Plural": "Показано {0} {1}"
   },
   "TotalCount": {
     "One": "Всього {0} {1}",

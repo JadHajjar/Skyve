@@ -103,7 +103,7 @@
   "ModIsPrivate": "Το στοιχείο είναι ιδιωτικό",
   "YourDlcs": "Τα Dlcs Σας",
   "AllDlcs": "Όλα Τα DLC",
-  "DLCs": "DLCs & CCPs",
+  "DLCs": "DLC & CCP",
   "LaunchTooltip": "Κάντε κλικ για εκκίνηση/διακοπή πόλεις: Skylines ή χρησιμοποιήστε {0} οπουδήποτε στην εφαρμογή",
   "SelectedFileInvalid": "Το αρχείο που επιλέξατε δεν είναι έγκυρο",
   "ThemeUIScale": "Κλίμακα Θέματος & Ui",
@@ -174,10 +174,10 @@
   "ALPHA": "ΑΛΦΑ",
   "TEST": "ΔΟΚΙΜΗ",
   "TESTING": "ΔΟΚΙΜΗ",
-  "STABLE": "STABLE",
+  "STABLE": "ΣΤΑΘΕΡΟ",
   "EXPERIMENTAL": "ΕΜΠΕΙΡΟΓΝΩΣΗ",
   "DEPRECATED": "ΑΝΑΦΕΡΟΜΕΝΑ",
-  "OBSOLETE": "OBSOLETE",
+  "OBSOLETE": "ΠΑΡΩΧΗΜΕΝΟ",
   "ABANDONED": "ΑΠΑΝΤΟΥΜΕΝΟ",
   "ActionUnreversible": {
     "One": "Αυτή η ενέργεια δεν μπορεί να αντιστραφεί.",
@@ -333,7 +333,7 @@
   },
   "EnabledCount": {
     "One": "{0} {1} ενεργοποιήθηκε",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0} {1} ενεργοποιημένα"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} συμπεριλαμβανόμενα & ενεργοποιημένα",
@@ -575,13 +575,13 @@
   "Status": "Κατάσταση",
   "PackageUsage": "Χρήση Πακέτου",
   "CodeMod": {
-    "One": "Code Mod",
+    "One": "Mod Κώδικα",
     "Plural": "Λειτουργίες Κώδικα"
   },
   "ThisModIsRequiredYouCantDisableIt": "Αυτό το mod απαιτείται, δεν μπορείτε να το απενεργοποιήσετε.",
   "FadeDisabledItems": "Fade out απενεργοποιημένων mods & assets",
   "FadeDisabledItems_Tip": "Απενεργοποιημένα mods & στοιχεία ενεργητικού στις τοπικές λίστες περιεχομένου σας θα εξαφανιστούν.",
-  "UsagePlayset": "{0} Playset",
+  "UsagePlayset": "Playset {0}",
   "GenericPlayset": "Γενική Αναπαραγωγή",
   "CompatibilityCenter": "Κέντρο Συμβατότητας",
   "Dependency": {

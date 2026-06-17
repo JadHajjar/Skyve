@@ -175,7 +175,7 @@
   "TEST": "TESTE",
   "TESTING": "TESTAGE",
   "STABLE": "STABLE",
-  "EXPERIMENTAL": "EXPERIMENTAL",
+  "EXPERIMENTAL": "EXPÉRIMENTAL",
   "DEPRECATED": "OBSOLÈTE",
   "OBSOLETE": "OBSOLÈTE",
   "ABANDONED": "ABANDONNÉ",
@@ -243,7 +243,7 @@
   "NoPlaysetsFound": "Aucun playset à afficher",
   "NoPlaysetsMatchFilters": "Aucun playset ne correspond à votre recherche",
   "Your Savegames": "Vos Sauvegardes",
-  "App Data": "App Data",
+  "App Data": "Données de l'application",
   "Custom Maps": "Cartes personnalisées",
   "Vanilla Maps": "Cartes vanilla",
   "ResetScrollOnPackageClick": "Réinitialiser le défilement lors de l'ouverture de la page d'un paquet",
@@ -288,7 +288,7 @@
   "DiscoverWorkshop": "Rechercher des mods sur le Workshop...",
   "SearchWorkshopBrowser": "Rechercher sur le Workshop dans votre navigateur...",
   "UnknownPackage": "Paquet inconnu",
-  "Info": "Info",
+  "Info": "Infos",
   "SelectThisPackage": "Sélectionner ce paquet",
   "SelectPackage": "Sélectionner un paquet",
   "ControlToSelectMultiplePackages": "Ctrl + Clic pour sélectionner plusieurs paquets à la fois.",
@@ -312,8 +312,8 @@
     "Plural": "Mods"
   },
   "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
+    "One": "Élément",
+    "Plural": "Éléments"
   },
   "Package": {
     "One": "Paquet",
@@ -348,12 +348,12 @@
     "Plural": "Affichage de {0} {1}"
   },
   "TotalCount": {
-    "One": "{0} total {1}",
-    "Plural": "{0} total {1}"
+    "One": "{0} {1} au total",
+    "Plural": "{0} {1} au total"
   },
   "TotalCountWarning": {
-    "One": "{0} total {1}, {3}",
-    "Plural": "{0} total {1}, {3}"
+    "One": "{0} {1} au total, {3}",
+    "Plural": "{0} {1} au total, {3}"
   },
   "TotalSelectedCount": {
     "One": "{0} total {1}, {2} sélectionné",
@@ -464,7 +464,7 @@
     "Plural": "Modifier tous les tags des assets sélectionnés de ce paquet"
   },
   "TagCount": {
-    "Zero": "Tags",
+    "Zero": "Étiquettes",
     "One": "Tags : {0} sélectionné(s)",
     "Plural": "Tags : {0} sélectionné(s)"
   },
@@ -581,7 +581,7 @@
   "ThisModIsRequiredYouCantDisableIt": "Ce mod est requis, vous ne pouvez pas le désactiver.",
   "FadeDisabledItems": "Rendre semi-transparent les mods et assets désactivés",
   "FadeDisabledItems_Tip": "Les mods et assets désactivés dans votre liste de contenu local seront semi-transparents.",
-  "UsagePlayset": "{0} Playset",
+  "UsagePlayset": "Playset {0}",
   "GenericPlayset": "Playset générique",
   "CompatibilityCenter": "Centre de compatibilité",
   "Dependency": {
