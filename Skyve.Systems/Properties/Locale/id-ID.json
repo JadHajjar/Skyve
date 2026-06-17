@@ -50,7 +50,7 @@
   "MissingPackages": "Paket yang hilang",
   "OpenPackagePage": "Buka halaman paket ini",
   "OpenPackageFolder": {
-    "One": "Open file location",
+    "One": "Buka Lokasi File",
     "Plural": "Buka lokasi file semua paket yang dipilih"
   },
   "OpenLocalFolder": "Buka folder yang berisi paket ini",
@@ -464,6 +464,7 @@
     "Plural": "Edit Tag semua aset paket yang dipilih"
   },
   "TagCount": {
+    "Zero": "Tag",
     "One": "Tag: {0} dipilih",
     "Plural": "Tag: {0} dipilih"
   },
