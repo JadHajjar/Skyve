@@ -464,6 +464,7 @@
     "Plural": "Editați toate etichetele activelor pachetelor selectate"
   },
   "TagCount": {
+    "Zero": "Etichete",
     "One": "Etichete: {0} selectat",
     "Plural": "Etichete: {0} selectat"
   },
