@@ -61,8 +61,8 @@
   "OpenAuthorPage": "제작자의 페이지 열기",
   "Sorting_Default": "기본 정렬",
   "Sorting_LastEdit": "마지막으로 수정한 시간",
-  "Sorting_DateCreated": "만든 날짜",
-  "Sorting_Usage": "플레이세트 용도",
+  "Sorting_DateCreated": "생성된 날짜",
+  "Sorting_Usage": "플레이 세팅 용도",
   "Sorting_Name": "이름",
   "Sorting_FileSize": "파일 크기",
   "Sorting_UpdateTime": "업데이트된 시간",
@@ -259,7 +259,7 @@
     "One": "제작자 {0}명 선택됨",
     "Plural": "제작자 {0}명 선택됨"
   },
-  "Donate": "후원하기",
+  "Donate": "후원",
   "FlipItemCopyFilterAction": "콘텐츠 목록에서 필터링하기 위한 Alt+클릭 동작 바꾸기",
   "FlipItemCopyFilterAction_Tip": "라벨을 클릭할 때의 기본 동작을 맞바꿔 일반적인 클릭이 필터링을 하게 하고 Alt+클릭은 기본 작업을 하도록 합니다.",
   "AltClickTo": "Alt + 클릭으로 {0}",
@@ -303,7 +303,7 @@
   "PackageStatus": "패키지 상태",
   "Author": "제작자",
   "Include": "포함",
-  "Unsubscribe": "구독 취소",
+  "Unsubscribe": "구독 취소 필요",
   "Exclude": "제외",
   "Snooze": "나중에 다시 알림",
   "UnSnooze": "다시 알림 해제",
@@ -329,19 +329,19 @@
   },
   "IncludedCount": {
     "One": "{1} {0}개 포함됨",
-    "Plural": "{0} {1}개가 포함되었습니다"
+    "Plural": "{1} {0}개 포함됨"
   },
   "EnabledCount": {
     "One": "{1} {0}개 활성화됨",
-    "Plural": "{0} {1}개 활성화됨"
+    "Plural": "{1} {0}개 활성화됨"
   },
   "IncludedEnabledCount": {
     "One": "{1} {0}개 포함되고 활성화됨",
-    "Plural": "{0} {1}개가 포함 및 활성화 되었습니다"
+    "Plural": "{1} {0}개 포함되고 활성화됨"
   },
   "LoadedCount": {
     "One": "{1} {0}개 불러옴",
-    "Plural": "{0} {1}개 불러옴"
+    "Plural": "{1} {0}개 불러옴"
   },
   "ShowingCount": {
     "One": "{1} {0}개 표시 중",
@@ -353,15 +353,15 @@
   },
   "TotalCountWarning": {
     "One": "{0} 총 {1}개, {3}",
-    "Plural": "{0} total {1}, {3}"
+    "Plural": "{0} 총 {1}개, {3}"
   },
   "TotalSelectedCount": {
     "One": "총 {0}개 {1}, {2}개 선택됨",
-    "Plural": "{0} total {1}, {2} selected"
+    "Plural": "총 {0}개 {1}, {2}개 선택됨"
   },
   "TotalSelectedCountWarning": {
     "One": "총 {0}개 {1}, {2}개 선택됨, {3}",
-    "Plural": "{0} total {1}, {2} selected, {3}"
+    "Plural": "총 {0}개 {1}, {2}개 선택됨, {3}"
   },
   "ItemsHidden": {
     "One": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다",
@@ -464,7 +464,6 @@
     "Plural": "선택된 모든 패키지의 에셋의 태그를 편집"
   },
   "TagCount": {
-    "Zero": "태그",
     "One": "태그: {0}개 선택됨",
     "Plural": "태그: {0}개 선택됨"
   },
@@ -571,7 +570,7 @@
   "RecentlyUpdated": "최근에 업데이트된",
   "Manage": "관리",
   "Version": "버전",
-  "UpdateTime": "업데이트 날짜",
+  "UpdateTime": "업데이트된 시간",
   "Status": "상태",
   "PackageUsage": "패키지 사용",
   "CodeMod": {
