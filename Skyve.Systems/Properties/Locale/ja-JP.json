@@ -50,7 +50,7 @@
   "MissingPackages": "パッケージが不足中",
   "OpenPackagePage": "パッケージのページを開く",
   "OpenPackageFolder": {
-    "One": "ファイルの場所を開く",
+    "One": "ファイルを開く",
     "Plural": "選択したパッケージのファイルの場所をすべて開く"
   },
   "OpenLocalFolder": "このパッケージを含むフォルダを開く",
@@ -464,6 +464,7 @@
     "Plural": "選択したパッケージのアセットタグを全て編集"
   },
   "TagCount": {
+    "Zero": "タグ",
     "One": "タグ: {0} が選択されました",
     "Plural": "タグ: {0} が選択されました"
   },
