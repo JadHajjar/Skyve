@@ -62,7 +62,7 @@
   "Sorting_Default": "Sortering",
   "Sorting_LastEdit": "Senaste redigeringstid",
   "Sorting_DateCreated": "Skapad datum",
-  "Sorting_Usage": "Playset användning",
+  "Sorting_Usage": "Speluppsättningens användning",
   "Sorting_Name": "Namn",
   "Sorting_FileSize": "Filstorlek",
   "Sorting_UpdateTime": "Uppdateringstid",
@@ -294,13 +294,13 @@
   "ControlToSelectMultiplePackages": "Ctrl + Klicka för att välja flera paket samtidigt.",
   "Local": "Lokal",
   "Workshop": "Verkstad",
-  "CompatibilityReport": "Rapport om kompatibilitet",
+  "CompatibilityReport": "Kompatibilitetsrapport",
   "Enabled": "Aktiverad",
   "Disabled": "Inaktiverad",
   "Included": "Ingick",
   "Excluded": "Utesluten",
   "OutOfDate": "Förfallen",
-  "PackageStatus": "Paketets status",
+  "PackageStatus": "Förpackningsstatus",
   "Author": "Författare",
   "Include": "Inkludera",
   "Unsubscribe": "Avprenumerera",
@@ -329,7 +329,7 @@
   },
   "IncludedCount": {
     "One": "{0} {1} inkluderade",
-    "Plural": "{0} {1} inkluderad"
+    "Plural": "{0} {1} inkluderade"
   },
   "EnabledCount": {
     "One": "{0} {1} aktiverad",
@@ -337,7 +337,7 @@
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} inkluderade & aktiverade",
-    "Plural": "{0} {1} inkluderad och aktiverad"
+    "Plural": "{0} {1} inkluderade & aktiverade"
   },
   "LoadedCount": {
     "One": "{0} {1} laddad",
@@ -464,7 +464,6 @@
     "Plural": "Redigera alla valda pakets taggar"
   },
   "TagCount": {
-    "Zero": "Taggar",
     "One": "Taggar: {0} har valts",
     "Plural": "Taggar: {0} har valts"
   },
@@ -571,7 +570,7 @@
   "RecentlyUpdated": "Nyligen uppdaterade",
   "Manage": "Hantera",
   "Version": "Version",
-  "UpdateTime": "Uppdatera tid",
+  "UpdateTime": "Uppdateringstid",
   "Status": "Status",
   "PackageUsage": "Paketets användning",
   "CodeMod": {
