@@ -581,7 +581,7 @@
   "ThisModIsRequiredYouCantDisableIt": "Ez a mod szükséges, nem lehet letiltani.",
   "FadeDisabledItems": "Halványítsd el a letiltott modokat és eszközöket",
   "FadeDisabledItems_Tip": "A helyi tartalomlistákban a letiltott modok és eszközök elhalványulnak.",
-  "UsagePlayset": "{0} Playset",
+  "UsagePlayset": "Playset hozzáadása",
   "GenericPlayset": "Általános játékkészlet",
   "CompatibilityCenter": "Kompatibilitási Infó",
   "Dependency": {
