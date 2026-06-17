@@ -31,8 +31,8 @@
   "CopyAllIdsSelected": "Kopiera alla markerade objekts namn och ID",
   "HelpLogs": "Hjälp & loggar",
   "Preferences": "Inställningar",
-  "Private": "Privat",
-  "Unlisted": "Olistad",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "Speluppsättningens namn",
   "RenamePlayset": "Döp om den här uppspelningen",
   "StartScratch": "Starta en ny playset från början utan något inkluderat paket.",
@@ -110,7 +110,7 @@
   "SearchPlaysets": "Sök igenom dessa speluppsättningar..",
   "AdvancedSettings": "Avancerade inställningar",
   "HelpTranslate": "Förbättra översättningar",
-  "HelpReset": "Hjälp och återställning",
+  "HelpReset": "Help & Reset",
   "JoinDiscord": "Få hjälp med Discord",
   "OpenGuide": "Öppna wiki",
   "ResetFolderButton": "Återställ alla mappinställningar",
@@ -176,9 +176,9 @@
   "TESTING": "TESTERAR",
   "STABLE": "STABELL",
   "EXPERIMENTAL": "ERFARENHET",
-  "DEPRECATED": "FÖRÅLDRAD",
+  "DEPRECATED": "DEPRECATED",
   "OBSOLETE": "OBSOLÅT",
-  "ABANDONED": "ÖVERGIVEN",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": {
     "One": "Åtgärden kan inte ångras.",
     "Plural": "Denna åtgärd kan inte vändas. Och kommer att påverka {0} paket."
@@ -309,7 +309,7 @@
   "UnSnooze": "O-Snooza",
   "Mod": {
     "One": "Mod",
-    "Plural": "Moddar"
+    "Plural": "Mods"
   },
   "Asset": {
     "One": "Tillgång",
@@ -321,7 +321,7 @@
   },
   "Playset": {
     "One": "Profil",
-    "Plural": "Profiler"
+    "Plural": "Profiles"
   },
   "ContainCount": {
     "One": "Innehåller {0} {1}",
@@ -375,7 +375,7 @@
   "AnyUsage": "Valfri användning",
   "AnyState": "Valfritt tillstånd",
   "ExplainIssue": "Beskriv ditt ärende här",
-  "ExplainIssueInfo": "Inkludera så mycket information som möjligt om vad som händer och hur det kan återskapas här",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "Din granskningsbegäran för '{0}' har skickats!\r\n\r\nTack för din feedback.",
   "ReviewRequestFailed": "Det gick inte att skicka din granskningsbegäran för '{0}'.\r\n\r\n{1}",
   "SendReview": "Skicka begäran om granskning",
@@ -384,8 +384,8 @@
     "Plural": "Redigera markerade objekts taggar"
   },
   "RemoveVersionLock": {
-    "One": "Ta bort det här paketets versionslås",
-    "Plural": "Ta bort versionslås för markerade objekt"
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
   },
   "EditLinks": {
     "One": "Redigera det här paketets länkar",
@@ -452,7 +452,7 @@
   "FailedToDeletePlayset": "Det gick inte att ta bort din speluppsättning",
   "FailedToUpdatePlayset": "Det gick inte att uppdatera din speluppställning",
   "ImportFromLink": "Importera en profil med hjälp av profil-ID",
-  "PastePlaysetId": "Ange ID:t eller länken till den speluppsättning du vill importera",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignorera kontroll av Internetanslutning",
   "AssumeInternetConnectivity_Tip": "Hoppar över kontroll av internetanslutning och antar att du är ansluten.",
   "SelectAll": "Markera alla objekt",
@@ -575,20 +575,20 @@
   "Status": "Status",
   "PackageUsage": "Paketets användning",
   "CodeMod": {
-    "One": "Kodmodd",
+    "One": "Code Mod",
     "Plural": "Kod Mods"
   },
   "ThisModIsRequiredYouCantDisableIt": "Denna mod krävs, du kan inte inaktivera den.",
   "FadeDisabledItems": "Tona bort inaktiverade moddar och tillgångar",
   "FadeDisabledItems_Tip": "Inaktiverade mods och tillgångar i dina lokala innehållslistor kommer att försvinna.",
-  "UsagePlayset": "{0} speluppsättning",
+  "UsagePlayset": "{0} Playset",
   "GenericPlayset": "Generisk Playset",
   "CompatibilityCenter": "Kompatibilitetscenter",
   "Dependency": {
     "One": "Beroende",
     "Plural": "Beroenden"
   },
-  "ModID": "Modd-ID",
+  "ModID": "Mod ID",
   "Subscribers": "Prenumeranter",
   "Votes": "Gillar",
   "PartiallyIncluded": "Delvis inkluderad",
@@ -603,7 +603,7 @@
   "PackagesSelected": "Paket valda ({0})",
   "PackagesSelectionInfo": "Klicka på ett paket för att välja det, klicka på \"Bekräfta val\" när du är klar.",
   "CustomColor": "Anpassad färg",
-  "CustomThumbnail": "Anpassad miniatyr",
+  "CustomThumbnail": "Custom Thumbnail",
   "NoThumbnail": "Inaktivera miniatyrbild",
   "PlaysetUsageInfo": "Genom att välja en dedikerad användning för din playset kan Skyve automatiskt dölja moddar som antingen inte matchar, eller är inte kompatibla med din valda användning.",
   "PlaysetColorSet": "Anpassad färg aktiverad",
@@ -614,9 +614,9 @@
   "Ready": "Redo",
   "EditDashboard": "Redigera instrumentpanel",
   "AvailableWidgets": "Tillgängliga widgetar",
-  "HideExtraWidgets": "Dölj extra widgetar",
+  "HideExtraWidgets": "Hide Extra Widgets",
   "ResetLayout": "Återställ layout",
-  "ContentSummary": "Innehållssammanfattning",
+  "ContentSummary": "Content Summary",
   "PackagesEnabled": "Paket aktiverat",
   "ModsEnabled": "Mods aktiverat",
   "AssetsEnabled": "Tillgångar Aktiverade",
@@ -715,13 +715,13 @@
   "ExclusionTutorialText": "Du kan ta bort moddar från din aktiva playset genom att hålla ALT-tangenten och klicka på kryssrutan i modden.\r\n\r\nDu kan också lägga till eller ta bort en mod från alla dina speluppsättningar med hjälp av högerklicksmenyn.",
   "ClearFilterTutorialTitle": "Clearing Filter - Handledning",
   "ClearFilterTutorialText": "Om du snabbt vill rensa dina filter, kan du klicka på ett filter med medel-musknappen för att rensa det.\r\n\r\nDu kan också göra det på knappen 'Visa/Dölj filter' för att rensa alla filter samtidigt.",
-  "UpdateMod": "Uppdatera modd",
-  "VersionLocked": "Versionslåst",
-  "VersionLockedInfo": "'{0}' är låst till version {1} i den här speluppsättningen.",
-  "LoadingModData": "Laddar modddata..",
-  "SharedPlayset": "Delad speluppsättning",
-  "SubscribedPlayset": "Prenumererad speluppsättning",
-  "ExportPlayset": "Exportera speluppsättning",
-  "PlaysetSharedSuccessfully": "Din speluppsättning har delats.",
-  "FailedToSharePlayset": "Det gick inte att dela din speluppsättning. Försök igen senare."
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
