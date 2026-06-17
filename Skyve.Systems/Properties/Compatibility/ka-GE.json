@@ -209,7 +209,7 @@
     "Plural": "{0} DLC არჩეულია"
   },
   "RequiredDLCs": "საჭირო DLC-ები/CCP-ები",
-  "CRT_Stability": "Stability",
+  "CRT_Stability": "სტაბილურობა",
   "CRT_Successors": "მემკვიდრეები",
   "CRT_RequiredPackages": "საჭირო პაკეტები",
   "CRT_OptionalPackages": "არასავალდებულო პაკეტები",
@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} უნდა გამოირიცხოს",
-    "Plural": "{0} {1} should be excluded"
+    "Plural": "{0} {1} უნდა გამოირიცხოს"
   },
   "UnsubscribeCount": "{0} {1}, რომლის გამოწერაც უნდა გააუქმოთ",
   "SwitchCount": {
@@ -297,7 +297,7 @@
     "Plural": "ამ მოთხოვნების წაშლა"
   },
   "ViewRequest": "მოთხოვნის ნახვა",
-  "RequiredItem": "Required Package",
+  "RequiredItem": "საჭირო პაკეტი",
   "ApplyAllActions": "ყველა რეკომენდებული ქმედების გამოყენება",
   "SnoozeAll": "ყველა პრობლემის დროებით გათიშვა",
   "SnoozeAllFiltered": "ყველა გაფილტრული პრობლემის დროებით გათიშვა",
