@@ -464,6 +464,7 @@
     "Plural": "Edytuj wszystkie tagi zasobów wybranych pakietów"
   },
   "TagCount": {
+    "Zero": "Znaczniki",
     "One": "Znaczniki: Wybrano {0}",
     "Plural": "Znaczniki: Wybrano {0}"
   },
