@@ -31,12 +31,12 @@
   "CopyAllIdsSelected": "نسخ جميع أسماء العناصر المحددة والمعرفات",
   "HelpLogs": "المساعدة والسجلات",
   "Preferences": "التفضيلات",
-  "Private": "خاص",
-  "Unlisted": "غير مدرج",
+  "Private": "Private",
+  "Unlisted": "Unlisted",
   "PlaysetName": "اسم مجموعة التشغيل",
   "RenamePlayset": "إعادة تسمية هذا المشغل",
   "StartScratch": "بدء تشغيل مجموعة جديدة من الصفر دون أي حزمة مضمنة.",
-  "ContinueFromCurrent": "انسخ التعديلات المشترك بها في مجموعتك النشطة إلى مجموعة جديدة.\r\n\r\nقد يستغرق هذا بعض الوقت.",
+  "ContinueFromCurrent": "Clone your active playset's subscribed mods into a new playset.\r\n\r\nThis might take a moment.",
   "GamePlay": "بناء المدن",
   "EditorPlay": "جعل الأصول",
   "PlaysetUsage": "تشغيل الاستخدام",
@@ -110,7 +110,7 @@
   "SearchPlaysets": "البحث من خلال هذه اللعبة..",
   "AdvancedSettings": "الإعدادات المتقدمة",
   "HelpTranslate": "تحسين الترجمات",
-  "HelpReset": "المساعدة وإعادة التعيين",
+  "HelpReset": "Help & Reset",
   "JoinDiscord": "الحصول على المساعدة في ديسكورد",
   "OpenGuide": "فتح ويكي",
   "ResetFolderButton": "إعادة تعيين كافة إعدادات المجلد",
@@ -163,7 +163,7 @@
   "CopyLOTLogFile": "نسخ ملف سجل Skyve إلى الحافظة",
   "GenericIncludedTotal": "{0} اشملت: {1}من {2}",
   "GenericIncludedAndEnabledTotal": "{0} متضمنة ومفعلة: {1}من {2}",
-  "GenericIncludedEnabledTotal": "{0} مُضمَّن: {1}، منها مُفعَّل: {2}، من أصل {3}",
+  "GenericIncludedEnabledTotal": "{0} included: {1}, of which are enabled: {2}, out of {3}",
   "NewPlayset_Tip": "إنشاء أو استيراد مجموعة تشغيل جديدة",
   "ViewPlaysets_Tip": "عرض وإدارة مجموعات التشغيل الخاصة بك",
   "DeactivatePlayset": "إلغاء تنشيط هذا التشغيل",
@@ -282,7 +282,7 @@
   },
   "FollowersCount": {
     "One": "متبقي {1}",
-    "Plural": "{1} متابع"
+    "Plural": "{1} followers"
   },
   "SearchWorkshop": "البحث في ورشة العمل بدلاً من ذلك...",
   "DiscoverWorkshop": "ابحث عن الموديلات في ورشة العمل...",
@@ -308,11 +308,11 @@
   "Snooze": "غفوة",
   "UnSnooze": "إلغاء الغفوة",
   "Mod": {
-    "One": "تعديل",
+    "One": "Mod",
     "Plural": "المودات"
   },
   "Asset": {
-    "One": "أصل",
+    "One": "Asset",
     "Plural": "الأصول"
   },
   "Package": {
@@ -321,7 +321,7 @@
   },
   "Playset": {
     "One": "الملف الشخصي",
-    "Plural": "ملفات التعريف"
+    "Plural": "Profiles"
   },
   "ContainCount": {
     "One": "تحتوي على {0} {1}",
@@ -375,7 +375,7 @@
   "AnyUsage": "أي استخدام",
   "AnyState": "أي دولة",
   "ExplainIssue": "صف مشكلتك هنا",
-  "ExplainIssueInfo": "أدرج هنا أكبر قدر ممكن من المعلومات حول ما يحدث وكيفية إعادة إنتاجه",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "تم إرسال طلب المراجعة الخاص بك لـ '{0}' !\r\n\r\nشكرا لك على ملاحظاتك.",
   "ReviewRequestFailed": "فشل في إرسال طلب المراجعة ل '{0}'.\r\n\r\n{1}",
   "SendReview": "إرسال طلب المراجعة",
@@ -384,8 +384,8 @@
     "Plural": "تعديل وسوم العناصر المحددة"
   },
   "RemoveVersionLock": {
-    "One": "إزالة قفل إصدار هذه الحزمة",
-    "Plural": "إزالة قفل إصدار العناصر المحددة"
+    "One": "Remove this package's version lock",
+    "Plural": "Remove selected items' version lock"
   },
   "EditLinks": {
     "One": "تعديل روابط هذه الحزمة",
@@ -436,23 +436,23 @@
   "DownloadPlayset": "تحميل Playset",
   "ReloadAllData": "إعادة تحميل جميع البيانات",
   "ResetSnoozes": "إعادة تعيين جميع الغفوات",
-  "ResetModsCache": "إعادة تعيين ذاكرة التخزين المؤقت للتعديلات",
+  "ResetModsCache": "Reset mods' cache",
   "ResetCompatibilityCache": "إعادة تعيين ذاكرة التخزين المؤقت للتوافق",
   "ResetImageCache": "مسح الصور المخزنة مؤقتاً",
   "SharePlayset": "مشاركة مجموعة التشغيل هذه",
   "ResetInfo": "تحذير! لا يمكن التراجع عن إعادة تعيين أي شيء.",
-  "FailedToDownloadPlayset": "فشل تنزيل هذه المجموعة.\r\n\r\nالرجاء المحاولة مرة أخرى لاحقاً.",
+  "FailedToDownloadPlayset": "Failed to download this playset.\r\n\r\nPlease try again later.",
   "UpdatePlaysetTip": "تحديث الإصدار المحلي من هذا المشغل",
   "DownloadPlaysetTip": "قم بتنزيل مجموعة التشغيل هذه إلى جهاز الكمبيوتر المحلي الخاص بك",
   "EditPlaysetThumbnail": "تعديل الصورة المصغرة لهذا المشغل",
-  "MakePublic": "اجعل ملف التعريف هذا عاماً",
-  "MakePrivate": "اجعل ملف التعريف هذا خاصاً",
+  "MakePublic": "Make this profile Public",
+  "MakePrivate": "Make this profile Private",
   "CopyPlaysetLink": "نسخ معرف هذا المشغل",
   "FailedToUploadPlayset": "فشل تحميل مجموعة التشغيل الخاصة بك",
   "FailedToDeletePlayset": "فشل حذف مجموعة التشغيل الخاصة بك",
   "FailedToUpdatePlayset": "فشل تحديث مجموعة التشغيل الخاصة بك",
-  "ImportFromLink": "استيراد ملف تعريف باستخدام معرّف ملف التعريف",
-  "PastePlaysetId": "أدخل المعرّف أو الرابط الخاص بالمجموعة التي تريد استيرادها",
+  "ImportFromLink": "Import a profile using a profile ID",
+  "PastePlaysetId": "Enter the ID or Link of the playset you'd like to import",
   "AssumeInternetConnectivity": "تجاهل عمليات التحقق من الاتصال بالإنترنت",
   "AssumeInternetConnectivity_Tip": "تخطي التحقق من الإنترنت وتفترض تلقائياً أنك متصل.",
   "SelectAll": "حدد جميع العناصر",
@@ -497,9 +497,9 @@
   "StopTroubleshootTitle": "إيقاف استكشاف الأخطاء؟",
   "TroubleshootCancelTip": "إيقاف عملية استكشاف الأخطاء وإصلاحها.",
   "TroubleshootNextStageTip": "تخطي المرحلة الحالية. استخدمه إذا كنت قد أكملت بالفعل وترغب في المتابعة.",
-  "TroubleshootBubbleTip": "هذه قائمة استكشاف الأخطاء وإصلاحها، وستوجّهك خلال العملية.\r\nيمكنك إغلاق Skyve والمتابعة لاحقاً، وسيتذكّر تقدّمك.",
+  "TroubleshootBubbleTip": "This is the troubleshooting menu, it will guide you throughout the process.\r\nYou can close Skyve and continue later, it will remember your progress.",
   "TroubleshootCompAsk": {
-    "One": "لديك حزمة تحمل تحذير توافق خطير.\r\nقد ترغب في معالجتها أولاً قبل استكشاف الأخطاء وإصلاحها.",
+    "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
     "Plural": "لديك حزم {0} مع تحذيرات جدية بشأن التوافق.\r\nقد ترغب في محاولة التعامل معها أولاً قبل استكشاف الأخطاء وإصلاحها."
   },
   "TroubleshootViewComp": "العودة وعرض صفحة تقرير التوافق الخاص بك للتأكد من أنك لا تستخدم المودات المكسورة.",
@@ -512,7 +512,7 @@
   "TroubleshootCouldNotCreatePlayset": "تعذر إنشاء مجموعة تشغيل جديدة لاستكشاف الأخطاء وإصلاحها. حاول مرة أخرى في وقت لاحق أو بعد إعادة تشغيل السماء.",
   "TroubleshootInvalidState": "حالة استكشاف الأخطاء لم تعد صالحة. الرجاء بدء جلسة جديدة لاستكشاف الأخطاء وإصلاحها.",
   "TroubleshootNoActivePlayset": "تحتاج إلى مجموعة تشغيل نشطة لاستكشاف الأخطاء وإصلاحها.",
-  "TroubleshootInconclusive": "كان استكشاف الأخطاء غير حاسم.\r\nقد لا تكون المشكلة متعلقة بتعديل محدد، أو قد تكون ناتجة عن عدة تعديلات.",
+  "TroubleshootInconclusive": "The troubleshooting was inconclusive.\r\nThe issue might not be related to a specific mod, or it might be caused by multiple mods.",
   "SkyveDetectedFaultyPackages": "اكتشف السماء أن بعض الحزم الخاصة بك لم يتم تحميلها بشكل كامل، هل ترغب في محاولة إصلاحها أولاً؟",
   "FaultyPackagesTitle": "تم اكتشاف الحزم الخاطئة",
   "CleanupInfoTitle": "ما هو تنظيف؟",
@@ -543,7 +543,7 @@
   "UnsavedChangesPlayset": "هناك تغييرات غير محفوظة لحزم هذا التشغيل",
   "ChangePlaysetSettings": "تغيير إعدادات هذا المشغل",
   "ViewCompatibilityReport": "عرض التقرير الكامل",
-  "DashboardCustomizationInfo": "خصّص لوحة التحكم عن طريق سحب كل قسم من عنوانه.\r\nيمكنك أيضاً تغيير حجم القسم باستخدام المثلث المنقّط في زاويته السفلية اليمنى.",
+  "DashboardCustomizationInfo": "Customize your dashboard by dragging each section from its title.\r\nYou can also resize a section using the dotted triangle on its bottom-right corner.",
   "ViewAssetsWithIssues": "عرض الأصول مع المشكلات",
   "ViewModsWithIssues": "عرض المشكلات مع المشكلات",
   "CreateShortcut": "إنشاء اختصار",
@@ -565,7 +565,7 @@
   "NewPackages": "حزم جديدة",
   "NewPackagesSinceSession": {
     "One": "تم تثبيت{1}' منذ آخر جلسة لك",
-    "Plural": "تم تثبيت {0} حزمة جديدة منذ جلستك الأخيرة"
+    "Plural": "{0} new packages got installed since your last session"
   },
   "NoActivePlayset": "لا يوجد تشغيل نشط",
   "RecentlyUpdated": "تم التحديث مؤخرا",
@@ -575,7 +575,7 @@
   "Status": "الحالة",
   "PackageUsage": "استخدام الحزمة",
   "CodeMod": {
-    "One": "تعديل برمجي",
+    "One": "Code Mod",
     "Plural": "التعليمات البرمجية"
   },
   "ThisModIsRequiredYouCantDisableIt": "هذا التعديل مطلوب، لا يمكنك تعطيله.",
@@ -588,7 +588,7 @@
     "One": "التبعية",
     "Plural": "التبعيات"
   },
-  "ModID": "معرّف التعديل",
+  "ModID": "Mod ID",
   "Subscribers": "المشتركون",
   "Votes": "إعجاب",
   "PartiallyIncluded": "متضمنة جزئيا",
@@ -603,7 +603,7 @@
   "PackagesSelected": "الحزم المختارة ({0})",
   "PackagesSelectionInfo": "انقر على حزمة لتحديدها، انقر فوق 'تأكيد الاختيار' بمجرد الانتهاء منها.",
   "CustomColor": "لون مخصص",
-  "CustomThumbnail": "صورة مصغّرة مخصّصة",
+  "CustomThumbnail": "Custom Thumbnail",
   "NoThumbnail": "تعطيل الصورة المصغرة",
   "PlaysetUsageInfo": "اختيار استخدام مخصص لمجموعة التشغيل الخاصة بك يسمح لـ Skyve بإخفاء المودات التي إما غير متطابقة، تلقائيًا أو أنها غير متوافقة مع استخدامك المحدد.",
   "PlaysetColorSet": "لون مخصص مفعل",
@@ -614,9 +614,9 @@
   "Ready": "مستعد",
   "EditDashboard": "تحرير لوحة التحكم",
   "AvailableWidgets": "الأدوات المتاحة",
-  "HideExtraWidgets": "إخفاء الأدوات الإضافية",
+  "HideExtraWidgets": "Hide Extra Widgets",
   "ResetLayout": "إعادة تعيين التخطيط",
-  "ContentSummary": "ملخّص المحتوى",
+  "ContentSummary": "Content Summary",
   "PackagesEnabled": "تم تمكين الحزم",
   "ModsEnabled": "تمكين المودات",
   "AssetsEnabled": "تم تمكين الأصول",
@@ -673,7 +673,7 @@
   "CleanupCountBased": "حذف النسخ الاحتياطية القديمة بمجرد تجاوز إجمالي قيمة النسخ الاحتياطية:",
   "DoBackupNow": "النسخ الاحتياطي للملفات الآن",
   "BackupDescriptionInfo": "النسخ الاحتياطي يدوياً لملفات اللعبة والإعدادات وغيرها من المعلومات ذات الصلة لحماية مدنك وأموالك.\r\n\r\nهذا يضمن تخزين المدن والتفضيلات الحالية الخاصة بك بأمان في حالة مشاكل النظام أو إعادة التثبيت.",
-  "RestoreDescriptionInfo": "حدّد النسخ الاحتياطية التي ترغب في استعادتها.\r\nسيتم أخذ نسخة احتياطية قبل بدء عملية الاستعادة لحماية ملفاتك الحالية.",
+  "RestoreDescriptionInfo": "Select which backups you'd like to restore.\r\nA backup will be taken before the restore process begins to safeguard your current files.",
   "BackupFailed": "فشل النسخ الاحتياطي",
   "CheckLogsAndTryAgain": "تحقق من السجلات لأي أخطاء وحاول مرة أخرى.",
   "RestorePoint": {
@@ -701,7 +701,7 @@
   "FirstBackup": "أول نسخة احتياطية",
   "FirstBackupDescription": "أنت تقوم بأول نسخة احتياطية لك على الإطلاق. قد يستغرق هذا بعض الوقت اعتماداً على عدد ألعاب الحفظ والملفات التي لديك.\r\n\r\nسوف تستغرق النسخ الاحتياطي في المستقبل وقتاً أقل، حيث أنها سوف تقوم فقط بالنسخ الاحتياطي للملفات الجديدة أو المحدثة.",
   "InvalidFolder": "مجلد غير صالح",
-  "ChooseDifferentBackupLocation": "لا يمكنك أخذ نسخة احتياطية من ملفاتك داخل هذا المجلد، إذ لا يملك Skyve صلاحية الوصول لحفظ الملفات هنا.\r\n\r\nاختر موقعاً مختلفاً ليس في المجلد نفسه، ويُفضّل أن يكون على قرص آخر.",
+  "ChooseDifferentBackupLocation": "You can not backup your files inside the this folder, Skyve does not have access to save files here.\r\n\r\nChoose a different location that is not in the same folder, preferably on another drive.",
   "RestoreBackup": "استعادة هذه النسخة الاحتياطية",
   "DeleteBackup": "حذف هذه النسخة الاحتياطية",
   "Owned": "مملوك",
@@ -714,14 +714,14 @@
   "ExclusionTutorialTitle": "إزالة الإضافات - البرنامج التعليمي",
   "ExclusionTutorialText": "يمكنك إزالة المودات من مجموعة التشغيل النشطة الخاصة بك بالضغط على مفتاح ALT والنقر على مربع الاختيار من المود.\r\n\r\nيمكنك أيضًا إضافة أو إزالة تعديل من جميع مجموعات التشغيل الخاصة بك باستخدام القائمة انقر بالزر الأيمن.",
   "ClearFilterTutorialTitle": "مسح الفلاتر - البرنامج التعليمي",
-  "ClearFilterTutorialText": "إذا أردت مسح عوامل التصفية بسرعة، يمكنك النقر على عامل تصفية باستخدام زر الفأرة الأوسط لمسحه.\r\n\r\nيمكنك أيضاً فعل ذلك على زر 'إظهار/إخفاء عوامل التصفية' لمسح جميع عوامل التصفية دفعة واحدة.",
-  "UpdateMod": "تحديث التعديل",
-  "VersionLocked": "الإصدار مقفل",
-  "VersionLockedInfo": "'{0}' مقفل على الإصدار {1} في هذه المجموعة.",
-  "LoadingModData": "جارٍ تحميل بيانات التعديل..",
-  "SharedPlayset": "مجموعة مشتركة",
-  "SubscribedPlayset": "مجموعة مشترَك بها",
-  "ExportPlayset": "تصدير المجموعة",
-  "PlaysetSharedSuccessfully": "تمت مشاركة مجموعتك بنجاح.",
-  "FailedToSharePlayset": "فشلت مشاركة مجموعتك. الرجاء المحاولة مرة أخرى لاحقاً."
+  "ClearFilterTutorialText": "If you want to quickly clear your filters, you can click on a filter using your middle-mouse-button to clear it.\r\n\r\nYou can also do that on the 'Show/Hide Filters' button to clear all filters at once.",
+  "UpdateMod": "Update Mod",
+  "VersionLocked": "Version Locked",
+  "VersionLockedInfo": "'{0}' is locked to version {1} in this playset.",
+  "LoadingModData": "Loading Mod Data..",
+  "SharedPlayset": "Shared Playset",
+  "SubscribedPlayset": "Subscribed Playset",
+  "ExportPlayset": "Export Playset",
+  "PlaysetSharedSuccessfully": "Your playset has been shared successfully.",
+  "FailedToSharePlayset": "Failed to share your playset. Please try again later."
 }
