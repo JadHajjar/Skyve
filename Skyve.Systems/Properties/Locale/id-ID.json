@@ -50,7 +50,7 @@
   "MissingPackages": "Paket yang hilang",
   "OpenPackagePage": "Buka halaman paket ini",
   "OpenPackageFolder": {
-    "One": "Buka lokasi file",
+    "One": "Open file location",
     "Plural": "Buka lokasi file semua paket yang dipilih"
   },
   "OpenLocalFolder": "Buka folder yang berisi paket ini",
@@ -61,9 +61,9 @@
   "OpenAuthorPage": "Buka halaman penulis",
   "Sorting_Default": "Penyortiran default",
   "Sorting_LastEdit": "Waktu edit terakhir",
-  "Sorting_DateCreated": "Tanggal Dibuat",
-  "Sorting_Usage": "Penggunaan Playset",
-  "Sorting_Name": "Nama",
+  "Sorting_DateCreated": "Date Created",
+  "Sorting_Usage": "Playset Usage",
+  "Sorting_Name": "Name",
   "Sorting_FileSize": "Ukuran File",
   "Sorting_UpdateTime": "Perbarui waktu",
   "Sorting_SubscribeTime": "Berlangganan waktu",
@@ -259,7 +259,7 @@
     "One": "{0} author dipilih",
     "Plural": "{0} authors dipilih"
   },
-  "Donate": "Donasi",
+  "Donate": "Donate",
   "FlipItemCopyFilterAction": "Swap Ctrl+Click behavior for filtering in the content lists",
   "FlipItemCopyFilterAction_Tip": "Swaps the default behavior of clicking on labels so that normal clicking filters and Ctrl+Clicking performs the default action.",
   "AltClickTo": "Alt+Click untuk {0}",
@@ -294,16 +294,16 @@
   "ControlToSelectMultiplePackages": "Ctrl + Klik untuk memilih beberapa paket sekaligus.",
   "Local": "Lokal",
   "Workshop": "Bengkel",
-  "CompatibilityReport": "Laporan Kompatibilitas",
+  "CompatibilityReport": "Compatibility Report",
   "Enabled": "Diaktifkan",
   "Disabled": "Dengan disabilitas",
   "Included": "Termasuk",
   "Excluded": "Pengecualian",
   "OutOfDate": "Kadaluarsa",
-  "PackageStatus": "Status Paket",
+  "PackageStatus": "Package Status",
   "Author": "Pembuat",
   "Include": "Termasuk",
-  "Unsubscribe": "Berhenti Berlangganan",
+  "Unsubscribe": "Unsubscribe",
   "Exclude": "Kecualikan",
   "Snooze": "Tunda",
   "UnSnooze": "Batalkan Tunda",
@@ -325,43 +325,43 @@
   },
   "ContainCount": {
     "One": "Berisi {0} {1}",
-    "Plural": "Berisi {0} {1}"
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} disertakan",
-    "Plural": "{0} {1} disertakan"
+    "Plural": "{0} {1} included"
   },
   "EnabledCount": {
     "One": "{0} {1} diaktifkan",
-    "Plural": "{0} {1} diaktifkan"
+    "Plural": "{0} {1} enabled"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} disertakan & diaktifkan",
-    "Plural": "{0} {1} disertakan & diaktifkan"
+    "Plural": "{0} {1} included & enabled"
   },
   "LoadedCount": {
     "One": "{0} {1} dimuat",
-    "Plural": "{0} {1} dimuat"
+    "Plural": "{0} {1} loaded"
   },
   "ShowingCount": {
     "One": "Menampilkan {0} {1}",
-    "Plural": "Menampilkan {0} {1}"
+    "Plural": "Showing {0} {1}"
   },
   "TotalCount": {
     "One": "total {0} {1}",
-    "Plural": "total {0} {1}"
+    "Plural": "{0} total {1}"
   },
   "TotalCountWarning": {
     "One": "total {0} {1}, {3}",
-    "Plural": "total {0} {1}, {3}"
+    "Plural": "{0} total {1}, {3}"
   },
   "TotalSelectedCount": {
     "One": "{0} total {1}, {2} dipilih",
-    "Plural": "{0} total {1}, {2} dipilih"
+    "Plural": "{0} total {1}, {2} selected"
   },
   "TotalSelectedCountWarning": {
     "One": "{0} total {1}, {2} dipilih, {3}",
-    "Plural": "{0} total {1}, {2} dipilih, {3}"
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} disembunyikan karena penggunaan profil Anda",
@@ -571,7 +571,7 @@
   "RecentlyUpdated": "Baru Diperbarui",
   "Manage": "Kelola",
   "Version": "Versi",
-  "UpdateTime": "Waktu Pembaruan",
+  "UpdateTime": "Update Time",
   "Status": "Status",
   "PackageUsage": "Penggunaan Paket",
   "CodeMod": {
@@ -592,7 +592,7 @@
   "Subscribers": "Pelanggan",
   "Votes": "Suka",
   "PartiallyIncluded": "Sebagian Disertakan",
-  "Links": "Tautan",
+  "Links": "Links",
   "NoAssets": "Nonaktifkan Semua Aset",
   "NoMods": "Nonaktifkan Semua Mod Kode",
   "FavoritePlaysets": "Favorite Playsets",
