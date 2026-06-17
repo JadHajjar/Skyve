@@ -464,6 +464,7 @@
     "Plural": "Seçili paketlerin tüm assetlerinin etiketlerini düzenle"
   },
   "TagCount": {
+    "Zero": "Etiketler",
     "One": "Etiketler: {0} seçildi",
     "Plural": "Etiketler: {0} seçildi"
   },
