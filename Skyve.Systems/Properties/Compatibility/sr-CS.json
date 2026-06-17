@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} bi trebao biti isključen",
-    "Plural": "{0} {1} bi trebalo biti isključeno"
+    "Plural": "{0} {1} bi trebao biti isključen"
   },
   "UnsubscribeCount": "{0} {1} od kojih bi se trebali otkazati pretplatu",
   "SwitchCount": {
@@ -297,7 +297,7 @@
     "Plural": "Obriši ove zahteve"
   },
   "ViewRequest": "Pogledaj zahtev",
-  "RequiredItem": "Required Package",
+  "RequiredItem": "Potreban paket",
   "ApplyAllActions": "Primeni sve preporučene akcije",
   "SnoozeAll": "Odloži sve probleme",
   "SnoozeAllFiltered": "Odloži sve filterovane probleme",
