@@ -61,9 +61,9 @@
   "OpenAuthorPage": "লেখকের পৃষ্ঠা খুলুন",
   "Sorting_Default": "ডিফল্ট শ্রেণীবিভাজন",
   "Sorting_LastEdit": "শেষ সম্পাদনা সময়",
-  "Sorting_DateCreated": "Date Created",
-  "Sorting_Usage": "Playset Usage",
-  "Sorting_Name": "Name",
+  "Sorting_DateCreated": "তারিখ তৈরী",
+  "Sorting_Usage": "প্রোফাইল ব্যবহার",
+  "Sorting_Name": "নাম",
   "Sorting_FileSize": "ফাইলের আকার",
   "Sorting_UpdateTime": "আপডেটের সময়",
   "Sorting_SubscribeTime": "সময় সাবস্ক্রাইব করুন",
@@ -259,7 +259,7 @@
     "One": "{0} জন লেখক নির্বাচিত",
     "Plural": "{0} জন লেখক নির্বাচিত"
   },
-  "Donate": "Donate",
+  "Donate": "দান করুন",
   "FlipItemCopyFilterAction": "Swap Ctrl+Click behavior for filtering in the content lists",
   "FlipItemCopyFilterAction_Tip": "Swaps the default behavior of clicking on labels so that normal clicking filters and Ctrl+Clicking performs the default action.",
   "AltClickTo": "{0} করতে Alt+ক্লিক করুন",
@@ -294,16 +294,16 @@
   "ControlToSelectMultiplePackages": "একসাথে একাধিক প্যাকেজ নির্বাচন করতে Ctrl + ক্লিক করুন।",
   "Local": "স্থানীয়",
   "Workshop": "কর্মশালা",
-  "CompatibilityReport": "Compatibility Report",
+  "CompatibilityReport": "সামঞ্জস্যতা প্রতিবেদন",
   "Enabled": "সক্ষম",
   "Disabled": "অক্ষম",
   "Included": "অন্তর্ভুক্ত",
   "Excluded": "ছাঁটা",
   "OutOfDate": "তারিখের বাইরে",
-  "PackageStatus": "Package Status",
+  "PackageStatus": "প্যাকেজ স্থিতি",
   "Author": "লেখক",
   "Include": "অন্তর্ভুক্ত করুন",
-  "Unsubscribe": "Unsubscribe",
+  "Unsubscribe": "আনসাবস্ক্রাইব করুন",
   "Exclude": "বাদ দিন",
   "Snooze": "স্নুজ করুন",
   "UnSnooze": "স্নুজ বাতিল করুন",
@@ -325,43 +325,43 @@
   },
   "ContainCount": {
     "One": "{0}টি {1} ধারণ করে",
-    "Plural": "Contains {0} {1}"
+    "Plural": "{0}টি {1} ধারণ করে"
   },
   "IncludedCount": {
     "One": "{0}টি {1} অন্তর্ভুক্ত",
-    "Plural": "{0} {1} included"
+    "Plural": "{0}টি {1} অন্তর্ভুক্ত"
   },
   "EnabledCount": {
     "One": "{0}টি {1} সক্রিয়",
-    "Plural": "{0} {1} enabled"
+    "Plural": "{0}টি {1} সক্রিয়"
   },
   "IncludedEnabledCount": {
     "One": "{0}টি {1} অন্তর্ভুক্ত ও সক্রিয়",
-    "Plural": "{0} {1} included & enabled"
+    "Plural": "{0}টি {1} অন্তর্ভুক্ত ও সক্রিয়"
   },
   "LoadedCount": {
     "One": "{0}টি {1} লোড হয়েছে",
-    "Plural": "{0} {1} loaded"
+    "Plural": "{0}টি {1} লোড হয়েছে"
   },
   "ShowingCount": {
     "One": "{0}টি {1} দেখানো হচ্ছে",
-    "Plural": "Showing {0} {1}"
+    "Plural": "{0}টি {1} দেখানো হচ্ছে"
   },
   "TotalCount": {
     "One": "মোট {0}টি {1}",
-    "Plural": "{0} total {1}"
+    "Plural": "মোট {0}টি {1}"
   },
   "TotalCountWarning": {
     "One": "মোট {0}টি {1}, {3}",
-    "Plural": "{0} total {1}, {3}"
+    "Plural": "মোট {0}টি {1}, {3}"
   },
   "TotalSelectedCount": {
     "One": "মোট {0}টি {1}, {2}টি নির্বাচিত",
-    "Plural": "{0} total {1}, {2} selected"
+    "Plural": "মোট {0}টি {1}, {2}টি নির্বাচিত"
   },
   "TotalSelectedCountWarning": {
     "One": "মোট {0}টি {1}, {2}টি নির্বাচিত, {3}",
-    "Plural": "{0} total {1}, {2} selected, {3}"
+    "Plural": "মোট {0}টি {1}, {2}টি নির্বাচিত, {3}"
   },
   "ItemsHidden": {
     "One": "আপনার প্রোফাইলের ব্যবহারের কারণে {0}টি {1} লুকানো আছে",
@@ -464,7 +464,6 @@
     "Plural": "নির্বাচিত সব প্যাকেজের অ্যাসেটের ট্যাগ সম্পাদনা করুন"
   },
   "TagCount": {
-    "Zero": "ট্যাগ",
     "One": "ট্যাগ: {0}টি নির্বাচিত",
     "Plural": "ট্যাগ: {0}টি নির্বাচিত"
   },
@@ -571,7 +570,7 @@
   "RecentlyUpdated": "সম্প্রতি আপডেট হয়েছে",
   "Manage": "পরিচালনা করুন",
   "Version": "সংস্করণ",
-  "UpdateTime": "Update Time",
+  "UpdateTime": "আপডেটের সময়",
   "Status": "অবস্থা",
   "PackageUsage": "প্যাকেজ ব্যবহার",
   "CodeMod": {
@@ -592,7 +591,7 @@
   "Subscribers": "সাবস্ক্রাইবার",
   "Votes": "পছন্দ",
   "PartiallyIncluded": "আংশিক অন্তর্ভুক্ত",
-  "Links": "Links",
+  "Links": "লিঙ্ক",
   "NoAssets": "সব অ্যাসেট নিষ্ক্রিয় করুন",
   "NoMods": "সব কোড-মড নিষ্ক্রিয় করুন",
   "FavoritePlaysets": "Favorite Playsets",
