@@ -50,7 +50,7 @@
   "MissingPackages": "लापता पैकेज",
   "OpenPackagePage": "इस पैकेज का पेज खोलें",
   "OpenPackageFolder": {
-    "One": "फ़ाइल स्थान खोलें",
+    "One": "Open file location",
     "Plural": "सभी चयनित पैकेज के फ़ाइल स्थान खोलें"
   },
   "OpenLocalFolder": "इस पैकेज वाला फ़ोल्डर खोलें",
@@ -61,9 +61,9 @@
   "OpenAuthorPage": "लेखक का पृष्ठ खोलें",
   "Sorting_Default": "डिफ़ॉल्ट सॉर्टिंग",
   "Sorting_LastEdit": "अंतिम समय संपादित करें",
-  "Sorting_DateCreated": "बनाने की तारीख",
-  "Sorting_Usage": "प्लेसेट उपयोग",
-  "Sorting_Name": "नाम",
+  "Sorting_DateCreated": "Date Created",
+  "Sorting_Usage": "Playset Usage",
+  "Sorting_Name": "Name",
   "Sorting_FileSize": "फ़ाइल आकार",
   "Sorting_UpdateTime": "समय सुधारें",
   "Sorting_SubscribeTime": "सदस्यता समय",
@@ -259,7 +259,7 @@
     "One": "{0} लेखक चयनित",
     "Plural": "{0} लेखक चयनित"
   },
-  "Donate": "दान करें",
+  "Donate": "Donate",
   "FlipItemCopyFilterAction": "Swap Ctrl+Click behavior for filtering in the content lists",
   "FlipItemCopyFilterAction_Tip": "Swaps the default behavior of clicking on labels so that normal clicking filters and Ctrl+Clicking performs the default action.",
   "AltClickTo": "{0} के लिए Alt+क्लिक करें",
@@ -294,16 +294,16 @@
   "ControlToSelectMultiplePackages": "एक साथ कई पैकेज चुनने के लिए Ctrl + क्लिक करें।",
   "Local": "स्थानीय",
   "Workshop": "कार्यशाला",
-  "CompatibilityReport": "संगतता रिपोर्ट",
+  "CompatibilityReport": "Compatibility Report",
   "Enabled": "सक्रिय",
   "Disabled": "अक्षम",
   "Included": "शामिल",
   "Excluded": "छोड़ा गया",
   "OutOfDate": "अप्रचलित",
-  "PackageStatus": "पैकेज स्थिति",
+  "PackageStatus": "Package Status",
   "Author": "लेखक",
   "Include": "शामिल करें",
-  "Unsubscribe": "सदस्यता रद्द करें",
+  "Unsubscribe": "Unsubscribe",
   "Exclude": "बाहर करें",
   "Snooze": "स्थगित करें",
   "UnSnooze": "स्थगन हटाएँ",
@@ -320,48 +320,48 @@
     "Plural": "संकुल"
   },
   "Playset": {
-    "One": "प्लेसेट",
+    "One": "Playset",
     "Plural": "प्रोफ़ाइल"
   },
   "ContainCount": {
     "One": "{0} {1} शामिल है",
-    "Plural": "{0} {1} शामिल हैं"
+    "Plural": "Contains {0} {1}"
   },
   "IncludedCount": {
     "One": "{0} {1} शामिल",
-    "Plural": "{0} {1} शामिल"
+    "Plural": "{0} {1} included"
   },
   "EnabledCount": {
     "One": "{0} {1} सक्षम",
-    "Plural": "{0} {1} सक्षम"
+    "Plural": "{0} {1} enabled"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} शामिल और सक्षम",
-    "Plural": "{0} {1} शामिल और सक्षम"
+    "Plural": "{0} {1} included & enabled"
   },
   "LoadedCount": {
     "One": "{0} {1} लोड किया गया",
-    "Plural": "{0} {1} लोड किए गए"
+    "Plural": "{0} {1} loaded"
   },
   "ShowingCount": {
     "One": "{0} {1} दिखा रहे हैं",
-    "Plural": "{0} {1} दिखाए जा रहे हैं"
+    "Plural": "Showing {0} {1}"
   },
   "TotalCount": {
     "One": "कुल {0} {1}",
-    "Plural": "कुल {0} {1}"
+    "Plural": "{0} total {1}"
   },
   "TotalCountWarning": {
     "One": "कुल {0} {1}, {3}",
-    "Plural": "कुल {0} {1}, {3}"
+    "Plural": "{0} total {1}, {3}"
   },
   "TotalSelectedCount": {
     "One": "कुल {0} {1}, {2} चयनित",
-    "Plural": "कुल {0} {1}, {2} चयनित"
+    "Plural": "{0} total {1}, {2} selected"
   },
   "TotalSelectedCountWarning": {
     "One": "कुल {0} {1}, {2} चयनित, {3}",
-    "Plural": "कुल {0} {1}, {2} चयनित, {3}"
+    "Plural": "{0} total {1}, {2} selected, {3}"
   },
   "ItemsHidden": {
     "One": "आपकी प्रोफ़ाइल के उपयोग के कारण {0} {1} छिपा हुआ है",
@@ -571,7 +571,7 @@
   "RecentlyUpdated": "हाल ही में अपडेट किया गया",
   "Manage": "प्रबंधित करें",
   "Version": "संस्करण",
-  "UpdateTime": "अद्यतन समय",
+  "UpdateTime": "Update Time",
   "Status": "स्थिति",
   "PackageUsage": "पैकेज उपयोग",
   "CodeMod": {
@@ -592,7 +592,7 @@
   "Subscribers": "सब्सक्राइबर",
   "Votes": "लाइक",
   "PartiallyIncluded": "आंशिक रूप से शामिल",
-  "Links": "लिंक",
+  "Links": "Links",
   "NoAssets": "सभी एसेट अक्षम करें",
   "NoMods": "सभी कोड-मॉड अक्षम करें",
   "FavoritePlaysets": "Favorite Playsets",
