@@ -464,6 +464,7 @@
     "Plural": "Rediger alle pakkenes ressurser etiketter"
   },
   "TagCount": {
+    "Zero": "Tagger",
     "One": "Emneord: {0} valgt",
     "Plural": "Emneord: {0} valgt"
   },
