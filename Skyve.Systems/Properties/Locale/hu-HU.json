@@ -62,7 +62,7 @@
   "Sorting_Default": "Alapértelmezett rendezés",
   "Sorting_LastEdit": "Utolsó szerkesztés ideje",
   "Sorting_DateCreated": "Létrehozás dátuma",
-  "Sorting_Usage": "Használt profil",
+  "Sorting_Usage": "Playset Használat",
   "Sorting_Name": "Név",
   "Sorting_FileSize": "Fájlméret",
   "Sorting_UpdateTime": "Frissítés ideje",
@@ -294,7 +294,7 @@
   "ControlToSelectMultiplePackages": "Ctrl + kattintás egyszerre több csomag kiválasztásához.",
   "Local": "Helyi",
   "Workshop": "Műhely",
-  "CompatibilityReport": "Kompabilitási Infó Compatibility Report",
+  "CompatibilityReport": "Kompatibilitási Infó",
   "Enabled": "Engedélyezve",
   "Disabled": "Kikapcsolva",
   "Included": "Tartalmazza",
@@ -337,7 +337,7 @@
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} alkalmazott és engedélyezett",
-    "Plural": "{0} {1} alkalmazott & engedélyezett"
+    "Plural": "{0} {1} alkalmazott és engedélyezett"
   },
   "LoadedCount": {
     "One": "{0} {1} betöltött",
@@ -464,7 +464,6 @@
     "Plural": "Szerkeszd a kiválasztott csomagok összes eszközének címkéjét"
   },
   "TagCount": {
-    "Zero": "Cimke",
     "One": "Címkék: {0} kijelölve",
     "Plural": "Címkék: {0} kijelölve"
   },
