@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} dovrebbe essere esclusa",
-    "Plural": "{0} {1} dovrebbe essere escluso"
+    "Plural": "{0} {1} dovrebbe essere esclusa"
   },
   "UnsubscribeCount": "{0} {1} da cui dovreste annullare la sottoscrizione",
   "SwitchCount": {
@@ -297,7 +297,7 @@
     "Plural": "Elimina queste richieste"
   },
   "ViewRequest": "Mostra richiesta",
-  "RequiredItem": "Pacchetto richiesto",
+  "RequiredItem": "Pacchetto Richiesto",
   "ApplyAllActions": "Applica tutte le azioni consigliate",
   "SnoozeAll": "Posponi tutti i problemi",
   "SnoozeAllFiltered": "Posponi tutti i problemi filtrati",

@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} bör exkluderas",
-    "Plural": "{0} {1} bör uteslutas"
+    "Plural": "{0} {1} bör exkluderas"
   },
   "UnsubscribeCount": "{0} {1} som du bör avregistrera dig från",
   "SwitchCount": {

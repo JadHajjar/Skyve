@@ -300,10 +300,10 @@
   "Included": "Inclus",
   "Excluded": "Exclus",
   "OutOfDate": "Expirat",
-  "PackageStatus": "Starea Pachetului",
+  "PackageStatus": "Starea pachetului",
   "Author": "Autor",
   "Include": "Includere",
-  "Unsubscribe": "Dezabonare",
+  "Unsubscribe": "Dezabonați-vă",
   "Exclude": "Excludere",
   "Snooze": "Amână",
   "UnSnooze": "Dezamânare",
@@ -337,7 +337,7 @@
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} inclus & activat",
-    "Plural": "{0} {1} inclus și activat"
+    "Plural": "{0} {1} inclus & activat"
   },
   "LoadedCount": {
     "One": "{0} {1} încărcat",
@@ -571,7 +571,7 @@
   "RecentlyUpdated": "Recent actualizate",
   "Manage": "Gestionează",
   "Version": "Versiune",
-  "UpdateTime": "Timp actualizare",
+  "UpdateTime": "Timpul de actualizare",
   "Status": "Stare",
   "PackageUsage": "Utilizare pachet",
   "CodeMod": {

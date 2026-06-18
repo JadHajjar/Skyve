@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} sebaiknya dikecualikan",
-    "Plural": "{0} {1} harus dikecualikan"
+    "Plural": "{0} {1} sebaiknya dikecualikan"
   },
   "UnsubscribeCount": "{0} {1} yang sebaiknya Anda berhenti berlangganan",
   "SwitchCount": {

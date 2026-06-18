@@ -50,7 +50,7 @@
   "MissingPackages": "パッケージが不足中",
   "OpenPackagePage": "パッケージのページを開く",
   "OpenPackageFolder": {
-    "One": "ファイルの場所を開く",
+    "One": "ファイルを開く",
     "Plural": "選択したパッケージのファイルの場所をすべて開く"
   },
   "OpenLocalFolder": "このパッケージを含むフォルダを開く",
@@ -341,7 +341,7 @@
   },
   "LoadedCount": {
     "One": "{0} {1} をロード済み",
-    "Plural": "{0} {1} を読み込みました。"
+    "Plural": "{0} {1} をロード済み"
   },
   "ShowingCount": {
     "One": "表示中: {0} {1}",

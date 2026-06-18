@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} devrait être exclu",
-    "Plural": "{0} {1} devraient être exclus"
+    "Plural": "{0} {1} devrait être exclu"
   },
   "UnsubscribeCount": "{0} {1} dont vous devriez vous désabonner",
   "SwitchCount": {
@@ -297,7 +297,7 @@
     "Plural": "Supprimer ces demandes"
   },
   "ViewRequest": "Voir la demande",
-  "RequiredItem": "Paquet requis",
+  "RequiredItem": "Paquets requis",
   "ApplyAllActions": "Appliquer toutes les actions recommandées",
   "SnoozeAll": "Ignorer tous les problèmes",
   "SnoozeAllFiltered": "Répéter tous les tickets filtrés",

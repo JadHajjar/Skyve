@@ -61,7 +61,7 @@
   "OpenAuthorPage": "Open de auteurspagina",
   "Sorting_Default": "Standaard sortering",
   "Sorting_LastEdit": "Laatst bijgewerkt",
-  "Sorting_DateCreated": "Datum gecreeërd",
+  "Sorting_DateCreated": "Aanmaakdatum",
   "Sorting_Usage": "Speelset gebruik",
   "Sorting_Name": "Naam",
   "Sorting_FileSize": "Bestandsgrootte",
@@ -300,10 +300,10 @@
   "Included": "Opgenomen",
   "Excluded": "Uitgesloten",
   "OutOfDate": "Verouderd",
-  "PackageStatus": "Pakket Status",
+  "PackageStatus": "Pakketstatus",
   "Author": "Auteur",
   "Include": "Inclusief",
-  "Unsubscribe": "Afmelden",
+  "Unsubscribe": "Uitschrijven",
   "Exclude": "Uitsluiten",
   "Snooze": "Uitstellen",
   "UnSnooze": "Uitstellen",
@@ -345,7 +345,7 @@
   },
   "ShowingCount": {
     "One": "Toont {0} {1}",
-    "Plural": "Tonen {0} {1}"
+    "Plural": "Toont {0} {1}"
   },
   "TotalCount": {
     "One": "{0} totaal {1}",
@@ -571,7 +571,7 @@
   "RecentlyUpdated": "Recent bijgewerkt",
   "Manage": "Beheren",
   "Version": "Versie",
-  "UpdateTime": "Update Tijd",
+  "UpdateTime": "Update tijd",
   "Status": "status",
   "PackageUsage": "Pakket gebruik",
   "CodeMod": {

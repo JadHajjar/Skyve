@@ -63,7 +63,7 @@
   "Sorting_LastEdit": "Vreme poslednje izmene",
   "Sorting_DateCreated": "Datum kreiranja",
   "Sorting_Usage": "Upotreba seta",
-  "Sorting_Name": "Naziv",
+  "Sorting_Name": "Ime",
   "Sorting_FileSize": "Veličina datoteke",
   "Sorting_UpdateTime": "Vreme ažuriranja",
   "Sorting_SubscribeTime": "Vreme pretplate",
@@ -349,19 +349,19 @@
   },
   "TotalCount": {
     "One": "{0} ukupno {1}",
-    "Plural": "ukupno {0} {1}"
+    "Plural": "{0} ukupno {1}"
   },
   "TotalCountWarning": {
     "One": "{0} ukupno {1}, {3}",
-    "Plural": "ukupno {0} {1}, {3}"
+    "Plural": "{0} ukupno {1}, {3}"
   },
   "TotalSelectedCount": {
     "One": "{0} ukupno {1}, {2} izabrano",
-    "Plural": "ukupno {0} {1}, {2} izabrano"
+    "Plural": "{0} ukupno {1}, {2} izabrano"
   },
   "TotalSelectedCountWarning": {
     "One": "{0} ukupno {1}, {2} izabrano, {3}",
-    "Plural": "ukupno {0} {1}, {2} izabrano, {3}"
+    "Plural": "{0} ukupno {1}, {2} izabrano, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} je skriven zbog upotrebe vašeg seta",
@@ -592,7 +592,7 @@
   "Subscribers": "Pretplatnici",
   "Votes": "Sviđanja",
   "PartiallyIncluded": "Delimično uključeno",
-  "Links": "Veze",
+  "Links": "Linkovi",
   "NoAssets": "Onemogući sve resurse",
   "NoMods": "Onemogući sve kod modove",
   "FavoritePlaysets": "Omiljeni setovi",

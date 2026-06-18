@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} hariç tutulmalı",
-    "Plural": "{0} {1} hariç tutulmalılar"
+    "Plural": "{0} {1} hariç tutulmalı"
   },
   "UnsubscribeCount": "{0} {1} aboneliğinden çıkmanız gerekiyor",
   "SwitchCount": {

@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} powinien zostać dezaktywowany",
-    "Plural": "{0} {1} powinny zostać dezaktywowane"
+    "Plural": "{0} {1} powinien zostać dezaktywowany"
   },
   "UnsubscribeCount": "{0} {1}, których subskrypcję powinieneś anulować",
   "SwitchCount": {

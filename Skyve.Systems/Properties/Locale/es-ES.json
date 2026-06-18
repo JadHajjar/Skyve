@@ -294,7 +294,7 @@
   "ControlToSelectMultiplePackages": "Ctrl + Clic para seleccionar varios paquetes a la vez.",
   "Local": "Local",
   "Workshop": "Workshop",
-  "CompatibilityReport": "Informe de Compatibilidad",
+  "CompatibilityReport": "Informe de compatibilidad",
   "Enabled": "Activo",
   "Disabled": "Desactivado",
   "Included": "Incluido",
@@ -329,19 +329,19 @@
   },
   "IncludedCount": {
     "One": "{0} {1} incluido",
-    "Plural": "{0} {1} incluidos"
+    "Plural": "{0} {1} incluido"
   },
   "EnabledCount": {
     "One": "{0} {1} activos",
-    "Plural": "{0} {1} activados"
+    "Plural": "{0} {1} activos"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} incluido y activo",
-    "Plural": "{0} {1} incluidos y activos"
+    "Plural": "{0} {1} incluido y activo"
   },
   "LoadedCount": {
     "One": "{0} {1} cargado",
-    "Plural": "{0} {1} cargados"
+    "Plural": "{0} {1} cargado"
   },
   "ShowingCount": {
     "One": "Mostrando {0} {1}",
@@ -357,11 +357,11 @@
   },
   "TotalSelectedCount": {
     "One": "{0} {1} en total, {2} seleccionado",
-    "Plural": "{0} {1} en total, {2} seleccionados"
+    "Plural": "{0} {1} en total, {2} seleccionado"
   },
   "TotalSelectedCountWarning": {
     "One": "{0} {1} en total, {2} seleccionado, {3}",
-    "Plural": "{0} {1} en total, {2} seleccionados, {3}"
+    "Plural": "{0} {1} en total, {2} seleccionado, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} está oculto debido al uso de tu perfil",

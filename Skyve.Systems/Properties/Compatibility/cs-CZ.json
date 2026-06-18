@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} by mělo být vyloučeno",
-    "Plural": "{0} {1} by měly být vyloučeny"
+    "Plural": "{0} {1} by mělo být vyloučeno"
   },
   "UnsubscribeCount": "{0} {1} , ze kterého byste se měli odhlásit",
   "SwitchCount": {

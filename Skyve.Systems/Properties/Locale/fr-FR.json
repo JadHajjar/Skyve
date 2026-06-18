@@ -300,7 +300,7 @@
   "Included": "Inclus",
   "Excluded": "Exclu",
   "OutOfDate": "Obsolète",
-  "PackageStatus": "Statut du paquet",
+  "PackageStatus": "État du paquet",
   "Author": "Auteur",
   "Include": "Inclure",
   "Unsubscribe": "Se désabonner",
@@ -333,15 +333,15 @@
   },
   "EnabledCount": {
     "One": "{0} {1} activé",
-    "Plural": "{0} {1} activés"
+    "Plural": "{0} {1} activé"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} inclus et activé",
-    "Plural": "{0} {1} inclus et activés"
+    "Plural": "{0} {1} inclus et activé"
   },
   "LoadedCount": {
     "One": "{0} {1} chargé",
-    "Plural": "{0} {1} chargés"
+    "Plural": "{0} {1} chargé"
   },
   "ShowingCount": {
     "One": "Affichage de {0} {1}",
@@ -357,11 +357,11 @@
   },
   "TotalSelectedCount": {
     "One": "{0} total {1}, {2} sélectionné",
-    "Plural": "{0} total {1}, {2} sélectionnés"
+    "Plural": "{0} total {1}, {2} sélectionné"
   },
   "TotalSelectedCountWarning": {
     "One": "{0} total {1}, {2} sélectionné, {3}",
-    "Plural": "{0} total {1}, {2} sélectionnés, {3}"
+    "Plural": "{0} total {1}, {2} sélectionné, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} est masqué à cause de l'utilisation de votre playset",
@@ -571,7 +571,7 @@
   "RecentlyUpdated": "Mis à jour récemment",
   "Manage": "Gérer",
   "Version": "Version",
-  "UpdateTime": "Date de mise à jour",
+  "UpdateTime": "Temps de mise à jour",
   "Status": "Statut",
   "PackageUsage": "Utilisation du paquet",
   "CodeMod": {

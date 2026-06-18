@@ -61,8 +61,8 @@
   "OpenAuthorPage": "लेखक का पृष्ठ खोलें",
   "Sorting_Default": "डिफ़ॉल्ट सॉर्टिंग",
   "Sorting_LastEdit": "अंतिम समय संपादित करें",
-  "Sorting_DateCreated": "बनाने की तारीख",
-  "Sorting_Usage": "प्लेसेट उपयोग",
+  "Sorting_DateCreated": "बनाया गया दिनांक",
+  "Sorting_Usage": "प्रोफ़ाइल उपयोग",
   "Sorting_Name": "नाम",
   "Sorting_FileSize": "फ़ाइल आकार",
   "Sorting_UpdateTime": "समय सुधारें",
@@ -320,12 +320,12 @@
     "Plural": "संकुल"
   },
   "Playset": {
-    "One": "प्लेसेट",
+    "One": "Playset",
     "Plural": "प्रोफ़ाइल"
   },
   "ContainCount": {
     "One": "{0} {1} शामिल है",
-    "Plural": "{0} {1} शामिल हैं"
+    "Plural": "{0} {1} शामिल है"
   },
   "IncludedCount": {
     "One": "{0} {1} शामिल",
@@ -341,11 +341,11 @@
   },
   "LoadedCount": {
     "One": "{0} {1} लोड किया गया",
-    "Plural": "{0} {1} लोड किए गए"
+    "Plural": "{0} {1} लोड किया गया"
   },
   "ShowingCount": {
     "One": "{0} {1} दिखा रहे हैं",
-    "Plural": "{0} {1} दिखाए जा रहे हैं"
+    "Plural": "{0} {1} दिखा रहे हैं"
   },
   "TotalCount": {
     "One": "कुल {0} {1}",
@@ -571,7 +571,7 @@
   "RecentlyUpdated": "हाल ही में अपडेट किया गया",
   "Manage": "प्रबंधित करें",
   "Version": "संस्करण",
-  "UpdateTime": "अद्यतन समय",
+  "UpdateTime": "समय सुधारें",
   "Status": "स्थिति",
   "PackageUsage": "पैकेज उपयोग",
   "CodeMod": {

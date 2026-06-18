@@ -62,7 +62,7 @@
   "Sorting_Default": "Classificação padrão",
   "Sorting_LastEdit": "Última edição",
   "Sorting_DateCreated": "Data de criação",
-  "Sorting_Usage": "Uso do conjunto",
+  "Sorting_Usage": "Utilização do conjunto",
   "Sorting_Name": "Nome",
   "Sorting_FileSize": "Tamanho do ficheiro",
   "Sorting_UpdateTime": "Hora de atualização",
@@ -329,19 +329,19 @@
   },
   "IncludedCount": {
     "One": "{0} {1} incluído",
-    "Plural": "{0} {1} incluídos"
+    "Plural": "{0} {1} incluído"
   },
   "EnabledCount": {
     "One": "{0} {1} ativado",
-    "Plural": "{0} {1} ativados"
+    "Plural": "{0} {1} ativado"
   },
   "IncludedEnabledCount": {
     "One": "{0} {1} incluído e ativado",
-    "Plural": "{0} {1} incluídos e ativados"
+    "Plural": "{0} {1} incluído e ativado"
   },
   "LoadedCount": {
     "One": "{0} {1} carregado",
-    "Plural": "{0} {1} carregados"
+    "Plural": "{0} {1} carregado"
   },
   "ShowingCount": {
     "One": "A mostrar {0} {1}",

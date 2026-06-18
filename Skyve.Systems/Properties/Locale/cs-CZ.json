@@ -62,7 +62,7 @@
   "Sorting_Default": "Výchozí seřazení",
   "Sorting_LastEdit": "Čas poslední úpravy",
   "Sorting_DateCreated": "Datum vytvoření",
-  "Sorting_Usage": "Využití playsetu",
+  "Sorting_Usage": "Využití playsetů",
   "Sorting_Name": "Název",
   "Sorting_FileSize": "Velikost souboru",
   "Sorting_UpdateTime": "Čas aktualizace",
@@ -259,7 +259,7 @@
     "One": "Vybrán autor {0}",
     "Plural": "{0} autorů vybráno"
   },
-  "Donate": "Podpořit",
+  "Donate": "Přispět",
   "FlipItemCopyFilterAction": "Prohodit chování Alt+Click pro filtrování v seznamech obsahu",
   "FlipItemCopyFilterAction_Tip": "Prohodí výchozí chování kliknutí na štítky tak, aby normální klepací filtry a Ctrl+Kliknutí provedly výchozí akci.",
   "AltClickTo": "Alt+kliknutí na {0}",
@@ -294,7 +294,7 @@
   "ControlToSelectMultiplePackages": "Ctrl + Klepnutím vyberte více balíčků najednou.",
   "Local": "Místní",
   "Workshop": "Dílna",
-  "CompatibilityReport": "Zpráva o kompatibilitě",
+  "CompatibilityReport": "Zpráva kompatibility",
   "Enabled": "Povoleno",
   "Disabled": "Deaktivované",
   "Included": "Zahrnuta",
@@ -303,7 +303,7 @@
   "PackageStatus": "Stav balíčku",
   "Author": "Autor",
   "Include": "Zahrnout",
-  "Unsubscribe": "Přestat odebírat",
+  "Unsubscribe": "Odhlásit odběr",
   "Exclude": "Vyloučit",
   "Snooze": "Odložit",
   "UnSnooze": "Zrušit odložení",
@@ -320,7 +320,7 @@
     "Plural": "Balíky"
   },
   "Playset": {
-    "One": "Sada modů",
+    "One": "Playset",
     "Plural": "Playsety"
   },
   "ContainCount": {
@@ -345,7 +345,7 @@
   },
   "ShowingCount": {
     "One": "Zobrazuji {0} {1}",
-    "Plural": "Zobrazeno {0} {1}"
+    "Plural": "Zobrazuji {0} {1}"
   },
   "TotalCount": {
     "One": "{0} celkem {1}",

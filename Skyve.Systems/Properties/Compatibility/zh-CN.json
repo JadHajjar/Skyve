@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0}应该被卸下的{1}",
-    "Plural": "{0}应当被卸下的{1}"
+    "Plural": "{0}应该被卸下的{1}"
   },
   "UnsubscribeCount": "{0}应该取消订阅的{1}",
   "SwitchCount": {

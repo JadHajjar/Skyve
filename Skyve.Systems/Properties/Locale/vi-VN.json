@@ -62,7 +62,7 @@
   "Sorting_Default": "Mặc định phân loại",
   "Sorting_LastEdit": "Thời gian chỉnh sửa lần cuối",
   "Sorting_DateCreated": "Ngày tạo",
-  "Sorting_Usage": "Mức sử dụng bộ chơi",
+  "Sorting_Usage": "Sử dụng hồ sơ",
   "Sorting_Name": "Tên",
   "Sorting_FileSize": "Kích thước tệp",
   "Sorting_UpdateTime": "Cập nhật thời gian",
@@ -320,7 +320,7 @@
     "Plural": "Gói"
   },
   "Playset": {
-    "One": "Bộ chơi",
+    "One": "Playset",
     "Plural": "Hồ sơ"
   },
   "ContainCount": {
@@ -329,19 +329,19 @@
   },
   "IncludedCount": {
     "One": "Đã bao gồm {0} {1}",
-    "Plural": "{0} {1} đã được thêm"
+    "Plural": "Đã bao gồm {0} {1}"
   },
   "EnabledCount": {
     "One": "Đã bật {0} {1}",
-    "Plural": "{0} {1} đã bật"
+    "Plural": "Đã bật {0} {1}"
   },
   "IncludedEnabledCount": {
     "One": "Đã bao gồm và bật {0} {1}",
-    "Plural": "{0} {1} đã thêm và đã bật"
+    "Plural": "Đã bao gồm và bật {0} {1}"
   },
   "LoadedCount": {
     "One": "Đã tải {0} {1}",
-    "Plural": "{0} {1} đã tải"
+    "Plural": "Đã tải {0} {1}"
   },
   "ShowingCount": {
     "One": "Đang hiển thị {0} {1}",
@@ -571,7 +571,7 @@
   "RecentlyUpdated": "Cập nhật gần đây",
   "Manage": "Quản lý",
   "Version": "Phiên bản:",
-  "UpdateTime": "Thời gian cập nhật",
+  "UpdateTime": "Cập nhật thời gian",
   "Status": "Trạng thái",
   "PackageUsage": "Mục đích sử dụng gói",
   "CodeMod": {

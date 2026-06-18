@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} debe ser excluido",
-    "Plural": "{0} {1} que deben ser excluidos"
+    "Plural": "{0} {1} debe ser excluido"
   },
   "UnsubscribeCount": "{0} {1} que debes anular suscripción",
   "SwitchCount": {

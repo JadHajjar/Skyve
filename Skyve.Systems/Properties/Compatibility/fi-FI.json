@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} pitäisi jättää pois",
-    "Plural": "{0} {1} ei tule sulkea pois"
+    "Plural": "{0} {1} pitäisi jättää pois"
   },
   "UnsubscribeCount": "{0} {1} , että sinun pitäisi peruuttaa tilaus",
   "SwitchCount": {

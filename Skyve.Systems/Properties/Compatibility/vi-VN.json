@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} nên được loại bỏ",
-    "Plural": "Nên loại trừ {0} {1}"
+    "Plural": "{0} {1} nên được loại bỏ"
   },
   "UnsubscribeCount": "{0} {1} mà bạn nên hủy đăng ký",
   "SwitchCount": {

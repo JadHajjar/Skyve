@@ -245,7 +245,7 @@
   },
   "ExcludeCount": {
     "One": "{0} {1} deve ser apagado",
-    "Plural": "{0} {1} devem ser apagados"
+    "Plural": "{0} {1} deve ser apagado"
   },
   "UnsubscribeCount": "{0} {1} que deves cancelar a assinatura",
   "SwitchCount": {
@@ -297,7 +297,7 @@
     "Plural": "Eliminar estas solicitações"
   },
   "ViewRequest": "Ver solicitação",
-  "RequiredItem": "Pacote obrigatório",
+  "RequiredItem": "Pacote necessário",
   "ApplyAllActions": "Aplicar todas as ações recomendadas",
   "SnoozeAll": "Ignorar todos os problemas",
   "SnoozeAllFiltered": "Colocar em espera todos os problemas filtrados",
