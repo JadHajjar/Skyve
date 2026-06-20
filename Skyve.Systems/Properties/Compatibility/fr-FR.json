@@ -48,7 +48,7 @@
   "CausesIssuesWith": "Provoque des problèmes avec..",
   "OptionalPackages": "A des paquets optionnels ..",
   "RequiredPackages": "Requiert..",
-  "StatusType": "Type de statut",
+  "StatusType": "Statut type",
   "InteractionType": "Type d'interaction",
   "MissingDependency": "Dépendance manquante",
   "Caution": "Attention",
@@ -269,7 +269,7 @@
   "NameList": "Liste de noms / Traductions du jeu",
   "MapSavegame": {
     "One": "Carte / Sauvegarde",
-    "Plural": "Cartes et Sauvegardes"
+    "Plural": "Cartes et sauvegardes"
   },
   "PackageType_MusicPack": "Pack pour la radio en jeu",
   "PackageType_ContentPackage": "Pack de contenu qui contient des ressources ou des fichiers, tels que des modèles, des textures ou des prefabs, et n’inclut pas de code ou de scripts qui modifient le comportement du jeu.",
