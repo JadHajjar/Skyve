@@ -312,8 +312,8 @@
     "Plural": "Mods"
   },
   "Asset": {
-    "One": "Élément",
-    "Plural": "Éléments"
+    "One": "Asset",
+    "Plural": "Assets"
   },
   "Package": {
     "One": "Paquet",
