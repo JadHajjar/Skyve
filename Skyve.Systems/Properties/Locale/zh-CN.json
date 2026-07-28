@@ -567,7 +567,7 @@
     "One": "在您上次使用 Skyve 后，新增的“{1}”已安装完毕",
     "Plural": "在您上次使用 Skyve 后，新增的 {0} 个插件已安装完毕"
   },
-  "NoActivePlayset": "没有激活中的配组",
+  "NoActivePlayset": "没有激活配组",
   "RecentlyUpdated": "最近更新",
   "Manage": "管理",
   "Version": "版本",
