@@ -410,12 +410,12 @@
   "UnknownUser": "未知用户",
   "AddMeaningfulDescription": "发送请求前，请提供有效的描述信息。",
   "ThisSubscribesTo": {
-    "One": "在此进程中，您将订阅 {0} 个插件。",
-    "Plural": "在此进程中，您将订阅 {0} 个插件。"
+    "One": "在此过程中，您将订阅 {0} 个插件。",
+    "Plural": "在此过程中，您将订阅 {0} 个插件。"
   },
   "ThisUnsubscribesFrom": {
-    "One": "在此进程中，您将取消订阅 {0} 个插件。",
-    "Plural": "在此进程中，您将取消订阅 {0} 个插件。"
+    "One": "在此过程中，您将取消订阅 {0} 个插件。",
+    "Plural": "在此过程中，您将取消订阅 {0} 个插件。"
   },
   "ViewThisPlaysetsPackages": "查看此配组中的插件",
   "YouHavePackagesUser": {
