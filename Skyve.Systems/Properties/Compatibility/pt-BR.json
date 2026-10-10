@@ -20,7 +20,7 @@
   "StableNoFutureUpdates": "Estável, sem novas atualizações",
   "HasIssuesNoFutureUpdates": "Tem problemas, sem mais atualizações",
   "BreaksOnPatch": "Estável, potencialmente quebrará no patch",
-  "BrokenFromPatch": "Quebrado deste a última atualização",
+  "BrokenFromPatch": "Quebrado desde a última atualização",
   "BrokenFromNewVersion": "Quebrado desde a sua última versão",
   "NumerousReports": "Tem vários relatórios",
   "NotEnoughInformation": "Não há informação suficiente",
