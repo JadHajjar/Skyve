@@ -12,7 +12,7 @@
   "IncludesItemsYouDoNotHave": "Zahrnuje položky, které nemáte",
   "OtherPlaysets": "Ostatní playsety",
   "ViewPlaysets": "Zobrazit vaše playsety",
-  "AddPlayset": "Přidat playsety",
+  "AddPlayset": "Přidat playset",
   "LHT": "Jízda vlevo",
   "TotalAssetSize": "{0} zahrnutých assetů",
   "CompatibilityStatus": "Stav kompatibility",
@@ -103,7 +103,7 @@
   "ModIsPrivate": "Položka je soukromá",
   "YourDlcs": "Vaše DLC",
   "AllDlcs": "Všechny DLC",
-  "DLCs": "DLCS & CCPS",
+  "DLCs": "DLC & CCP",
   "LaunchTooltip": "Kliknutím spustíte/zastavíte Cities: Skylines nebo použijte {0} kdekoli v aplikaci",
   "SelectedFileInvalid": "Vybraný soubor je neplatný",
   "ThemeUIScale": "Motiv a měřítko uživatelského rozhraní",
@@ -295,9 +295,9 @@
   "Local": "Místní",
   "Workshop": "Dílna",
   "CompatibilityReport": "Zpráva kompatibility",
-  "Enabled": "Povoleno",
-  "Disabled": "Deaktivované",
-  "Included": "Zahrnuta",
+  "Enabled": "Povolen",
+  "Disabled": "Deaktivován",
+  "Included": "Zahrnut",
   "Excluded": "Vyloučen",
   "OutOfDate": "Zastaralý",
   "PackageStatus": "Stav balíčku",
@@ -313,7 +313,7 @@
   },
   "Asset": {
     "One": "Doplněk",
-    "Plural": "Assety"
+    "Plural": "Doplňky"
   },
   "Package": {
     "One": "Balík",
