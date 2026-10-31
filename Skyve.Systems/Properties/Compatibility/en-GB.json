@@ -225,36 +225,36 @@
   "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
   "RequestReview": "Request Review",
   "MissingDependencyCount": {
-    "One": "{0} {1} is missing dependencies",
-    "Plural": "{0} {1} are missing dependencies"
+    "One": "{0}{1} is missing dependencies",
+    "Plural": "{0}{1} are missing dependencies"
   },
-  "CautionCount": "{0} {1} where caution is advised",
-  "WarningCount": "{0} {1} with a warning",
+  "CautionCount": "{0}{1} where caution is advised",
+  "WarningCount": "{0}{1} with a warning",
   "ObsoleteCount": {
-    "One": "{0} {1} that is obsolete",
-    "Plural": "{0} {1} that are obsolete"
+    "One": "{0}{1} that is obsolete",
+    "Plural": "{0}{1} that are obsolete"
   },
   "BrokenCount": {
-    "One": "{0} {1} that is broken",
-    "Plural": "{0} {1} that are broken"
+    "One": "{0}{1} that is broken",
+    "Plural": "{0}{1} that are broken"
   },
-  "ActionRequiredCount": "{0} {1} where your action is required",
+  "ActionRequiredCount": "{0}{1} where your action is required",
   "AttentionRequiredCount": {
-    "One": "{0} {1} requires your attention",
-    "Plural": "{0} {1} require your attention"
+    "One": "{0}{1} requires your attention",
+    "Plural": "{0}{1} require your attention"
   },
   "ExcludeCount": {
-    "One": "{0} {1} should be excluded",
-    "Plural": "{0} {1} should be excluded"
+    "One": "{0}{1} should be excluded",
+    "Plural": "{0}{1} should be excluded"
   },
-  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "UnsubscribeCount": "{0}{1} that you should unsubscribe from",
   "SwitchCount": {
-    "One": "{0} {1} requires switching to another",
-    "Plural": "{0} {1} require switching to another"
+    "One": "{0}{1} requires switching to another",
+    "Plural": "{0}{1} require switching to another"
   },
   "RequiredItemCount": {
-    "One": "{0} {1} that is required but is not enabled",
-    "Plural": "{0} {1} that are required but are not enabled"
+    "One": "{0}{1} that is required but is not enabled",
+    "Plural": "{0}{1} that are required but are not enabled"
   },
   "PackageType": "Package Type",
   "GenericPackage": "Generic Package",

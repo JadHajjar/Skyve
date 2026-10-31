@@ -5,10 +5,10 @@
   "Previous": "前へ",
   "Skip": "スキップ",
   "Note": "補足",
-  "NoteInfo": "Modに表示される詳細情報",
+  "NoteInfo": "Mod に表示される詳細情報",
   "BlackListName": "名前でブラックリスト",
-  "BlackListId": "IDによるブラックリスト",
-  "GlobalTagsInfo": "Skyveですべてのプレーヤーに表示されるタグ",
+  "BlackListId": "ID によるブラックリスト",
+  "GlobalTagsInfo": "Skyve ですべてのプレーヤーに表示されるタグ",
   "Links": "リンク",
   "StatusesCount": "ステータス ({0})",
   "InteractionCount": "依存関係 ({0})",
@@ -35,7 +35,7 @@
   "CausesIssues": "問題の原因",
   "SavesCantLoadWithoutIt": "セーブデータのロードが不可能",
   "TestVersion": "テスト版",
-  "DependencyMod": "依存関係のMOD",
+  "DependencyMod": "依存関係の Mod",
   "SourceCodeNotAvailable": "ソースコードが未確認・存在しません",
   "MusicCanBeCopyrighted": "収録された音楽は、著作権で保護されている場合があります",
   "IncompleteDescription": "説明が無い・不完全です",
@@ -60,7 +60,7 @@
   "Website": "ウェブサイト",
   "Donation": "寄付",
   "ManageCompatibilityData": "互換性の管理",
-  "YourPackages": "Modを管理する",
+  "YourPackages": "Mod を管理",
   "AddPackages": "パッケージの追加",
   "ConfirmEndSession": "セッションを終了してもよろしいのですか？",
   "CrDataLoadFailed": "データのロードに失敗しました、後でやり直して下さい",
@@ -85,7 +85,7 @@
   },
   "Interaction_CausesIssuesWith": {
     "One": "「{0}」は「{1}」と併用すると、問題が発生する可能性があります。",
-    "Plural": "「{0}」は以下のMODと併用すると、問題が発生する可能性があります。"
+    "Plural": "「{0}」は以下の mod と併用すると、問題が発生する可能性があります。"
   },
   "Interaction_RequiredPackages": {
     "One": "「{0}」で必要なパッケージが不足しています。",
@@ -107,7 +107,7 @@
     "One": "「{1}」には「{0}」が必要です。",
     "Plural": "「{0}」 は以下のパッケージに必要です。"
   },
-  "Interaction_Identical": "以下は同じModの複数のバージョンです。\n同時に使用すると競合が発生します。",
+  "Interaction_Identical": "以下は同じ mod の複数のバージョンです。\n同時に使用すると競合が発生します。",
   "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要です。",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
   "Status_AutoDeprecated": "「{0}」は長期間で更新されていません。",
@@ -121,19 +121,19 @@
     "One": "「{0}」を有効にして新規でセーブを作成すると、「{0}」が無効の場合は該当するセーブデータのロードができません。\n\n必要に応じて、「{1}」を使ってセーブデータの復元を試して下さい。詳しくはワークショップの説明を確認して下さい。"
   },
   "Status_TestVersion": {
-    "Zero": "これは「テスト」バージョンです。MODのテスト版は問題が発生する可能性や、更新すると想定外のエラーが発生する可能性があるので注意して下さい。",
+    "Zero": "これは「テスト」バージョンです。テスト版の mod は問題が発生する可能性や、更新すると想定外のエラーが発生する可能性があることにご注意ください。",
     "One": "これは'{1}'のテストバージョンです。アップデートで動作しなくなる可能性があります。"
   },
   "Status_MissingDlc": {
     "One": "パッケージを使用するには、DLCが未購入・有効ではありません。",
     "Plural": "パッケージを使用するには、以下のDLCがありません。"
   },
-  "Status_DependencyMod": "このModに依存しているModを使用していません。",
-  "Status_SourceCodeNotAvailable": "MODのソースコードは公開されていません。作者を信頼できない場合は使用しないで下さい。",
+  "Status_DependencyMod": "これは依存関係のある mod ですが、この mod を必要とするパッケージは使用されていないようです。",
+  "Status_SourceCodeNotAvailable": "この mod のソースコードは公開されていません。作者を信頼できない場合は使用しないでください。",
   "SourceAvailable": "ソースコードは公開中",
-  "StandardMod": "標準のMOD",
+  "StandardMod": "標準の Mod",
   "Status_MusicCanBeCopyrighted": "パック内に収録されている音楽は著作権で保護されている可能性があります。ストリーミングでの使用は避けた方が無難です。",
-  "Status_IncompleteDescription": "MODのワークショップ内の説明文が少ない・曖昧です。作者を信頼できない場合は使用しないで下さい。",
+  "Status_IncompleteDescription": "この mod のワークショップ内の説明文は少ない、もしくは曖昧です。作者を信頼できない場合は使用しないでください。",
   "Status_SourceAvailable": "このパッケージは、不足しているソースコードについて警告しません。",
   "Status_StandardMod": "MODのトラブルシューティングの際、このパッケージは無視されます。",
   "OutputText": "予想される結果",
@@ -261,11 +261,11 @@
   "MusicPack": "ミュージックパック",
   "ThemeMix": "テーマミックス",
   "ContentPackage": "コンテンツ/アセットパッケージ",
-  "VisualMod": "ビジュアルMod",
-  "SimulationMod": "シミュレーションMod",
+  "VisualMod": "ビジュアル Mod",
+  "SimulationMod": "シミュレーション Mod",
   "IMTMarkings": "IMTマーキング",
   "RenderItPreset": "Render it!のプリセット",
-  "POFont": "Procedural Objectのアドオン",
+  "POFont": "Procedural Object のアドオン",
   "NameList": "名前リスト/ゲーム翻訳",
   "MapSavegame": {
     "One": "マップ/セーブゲーム",
@@ -273,7 +273,7 @@
   },
   "PackageType_MusicPack": "ゲーム内ラジオ用のミュージックパック。",
   "PackageType_ContentPackage": "モデル、テクスチャ、プレハブなどのアセットまたはファイルが含まれ、ゲームの動作を変更するコードやスクリプトは含まれません。",
-  "PackageType_VisualMod": "ビジュアル/UIの変更 mod、またはマップとテーマのテクスチャ。",
+  "PackageType_VisualMod": "ビジュアル / UI の変更 mod、またはマップとテーマのテクスチャ。",
   "PackageType_SimulationMod": "直接ゲームのゲームプレイを変更するシミュレーションMod。",
   "PackageType_NameList": "追加のゲームの翻訳や名前リストファイル。",
   "PackageType_MapSavegame": "マップ、またはセーブゲーム。",
