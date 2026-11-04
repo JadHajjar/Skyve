@@ -348,20 +348,20 @@
     "Plural": "{1} {0}개 표시 중"
   },
   "TotalCount": {
-    "One": "{0} 총 {1}개",
-    "Plural": "{0} 총 {1}개"
+    "One": "{1} 총 {0}개",
+    "Plural": "{1} 총 {0}개"
   },
   "TotalCountWarning": {
-    "One": "{0} 총 {1}개, {3}",
-    "Plural": "{0} 총 {1}개, {3}"
+    "One": "{1} 총 {0}개, {3}",
+    "Plural": "{1} 총 {0}개, {3}"
   },
   "TotalSelectedCount": {
-    "One": "총 {0}개 {1}, {2}개 선택됨",
-    "Plural": "총 {0}개 {1}, {2}개 선택됨"
+    "One": "{1} 총 {0}개, {2}개 선택됨",
+    "Plural": "{1} 총 {0}개, {2}개 선택됨"
   },
   "TotalSelectedCountWarning": {
-    "One": "총 {0}개 {1}, {2}개 선택됨, {3}",
-    "Plural": "총 {0}개 {1}, {2}개 선택됨, {3}"
+    "One": "{1} 총 {0}개, {2}개 선택됨, {3}",
+    "Plural": "{1} 총 {0}개, {2}개 선택됨, {3}"
   },
   "ItemsHidden": {
     "One": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다",
@@ -579,7 +579,7 @@
     "Plural": "코드 모드"
   },
   "ThisModIsRequiredYouCantDisableIt": "이 모드가 필요하지만 비활성화 할 수 없습니다.",
-  "FadeDisabledItems": "비활성화된 모드 및 에셋 흐리게 표시",
+  "FadeDisabledItems": "비활성화된 모드와 에셋을 흐리게 표시하기",
   "FadeDisabledItems_Tip": "",
   "UsagePlayset": "{0} PLAYSET",
   "GenericPlayset": "일반 PLAYSET",
