@@ -229,7 +229,7 @@
     "Plural": "의존성을 누락한 {1} {0}개가 있습니다"
   },
   "CautionCount": "주의가 권고되는 {1} {0}개가 있습니다",
-  "WarningCount": "경고가 있는 {1} {0}개가 있습니다",
+  "WarningCount": "경고가 있는 {1} {0}",
   "ObsoleteCount": {
     "One": "구식인 {0} {1}",
     "Plural": "구식인 {0} {1}"
