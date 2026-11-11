@@ -228,7 +228,7 @@
     "One": "{0} {1} está com dependências em falta",
     "Plural": "{0} {1} têm dependências em falta"
   },
-  "CautionCount": "{0} {1} onde é aconselhado cuidado",
+  "CautionCount": "{0} {1} onde é aconselhado ter cuidado",
   "WarningCount": "{0} {1} com um aviso",
   "ObsoleteCount": {
     "One": "{0} {1} que está obsoleto",
@@ -241,7 +241,7 @@
   "ActionRequiredCount": "{0} {1} que requer a tua ação",
   "AttentionRequiredCount": {
     "One": "{0} {1} requer a tua atenção",
-    "Plural": "{0} {1} requerem a tua atenção"
+    "Plural": "{0} {1} que requerem a tua atenção"
   },
   "ExcludeCount": {
     "One": "{0} {1} deve ser apagado",
@@ -250,7 +250,7 @@
   "UnsubscribeCount": "{0} {1} que deves cancelar a assinatura",
   "SwitchCount": {
     "One": "{0} {1} requer mudança para outro",
-    "Plural": "{0} {1} requerem mudança para outro"
+    "Plural": "{0} {1} que requerem mudança para outro"
   },
   "RequiredItemCount": {
     "One": "{0} {1} é necessário, mas não está ativado",
