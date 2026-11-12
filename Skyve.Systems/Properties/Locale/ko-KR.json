@@ -58,7 +58,7 @@
     "One": "이 패키지를 다시 다운로드",
     "Plural": "선택된 모든 패키지를 다시 다운로드"
   },
-  "OpenAuthorPage": "제작자의 페이지 열기",
+  "OpenAuthorPage": "제작자 페이지 열기",
   "Sorting_Default": "기본 정렬",
   "Sorting_LastEdit": "마지막으로 수정한 시간",
   "Sorting_DateCreated": "생성된 날짜",
@@ -263,7 +263,7 @@
   "FlipItemCopyFilterAction": "콘텐츠 목록에서 필터링하기 위한 Alt+클릭 동작 바꾸기",
   "FlipItemCopyFilterAction_Tip": "라벨을 클릭할 때의 기본 동작을 맞바꿔 일반적인 클릭이 필터링을 하게 하고 Alt+클릭은 기본 작업을 하도록 합니다.",
   "AltClickTo": "Alt + 클릭으로 {0}",
-  "FilterByThisAuthor": "제작자 필터에 {0} 추가하기",
+  "FilterByThisAuthor": "제작자 필터에 '{0}' 추가하기",
   "AddToSearch": "'{0}'을 추가하여 검색",
   "CopyToClipboard": "'{0}' 를 클립보드에 복사하기",
   "ViewPackageCR": "이 패키지의 호환성 정보 보기",
@@ -277,8 +277,8 @@
     "Plural": "좋아요 {1}개"
   },
   "SubscribersCount": {
-    "One": "{1}명 구독",
-    "Plural": "{1}명 구독"
+    "One": "구독자 {1}명",
+    "Plural": "구독자 {1}명"
   },
   "FollowersCount": {
     "One": "{1} 팔로워",
